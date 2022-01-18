@@ -164,6 +164,8 @@ function Sel_cmp_process()
       $tab_ger_campos['cliente'] = "on";
       $tab_ger_campos['fecha_inicio'] = "on";
       $tab_ger_campos['zona'] = "on";
+      $tab_ger_campos['barrio2'] = "on";
+      $tab_blk_campos[] = "barrio2";
       $tab_ger_campos['estado'] = "on";
       $tab_ger_campos['mensualidad'] = "on";
       $tab_ger_campos['detalle'] = "on";

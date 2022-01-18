@@ -106,6 +106,9 @@ function Ord_cmp_init()
    $tab_ger_campos['zona'] = "on";
    $tab_def_campos['zona'] = "zona";
    $tab_labels["zona"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_contratos_generar_fv']['labels']["zona"])) ? $_SESSION['sc_session'][$sc_init]['grid_terceros_contratos_generar_fv']['labels']["zona"] : "Zona";
+   $tab_ger_campos['barrio2'] = "on";
+   $tab_def_campos['barrio2'] = "barrio2";
+   $tab_labels["barrio2"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_contratos_generar_fv']['labels']["barrio2"])) ? $_SESSION['sc_session'][$sc_init]['grid_terceros_contratos_generar_fv']['labels']["barrio2"] : "Barrio";
    $tab_ger_campos['estado'] = "on";
    $tab_def_campos['estado'] = "estado";
    $tab_labels["estado"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_contratos_generar_fv']['labels']["estado"])) ? $_SESSION['sc_session'][$sc_init]['grid_terceros_contratos_generar_fv']['labels']["estado"] : "Estado";

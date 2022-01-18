@@ -6,6 +6,8 @@
 .css_fecha_inicio_grid_line {vertical-align: top;text-align: center;}
 .css_zona_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_zona_grid_line {vertical-align: top;text-align: left;}
+.css_barrio2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_barrio2_grid_line {vertical-align: top;text-align: left;}
 .css_estado_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_estado_grid_line {vertical-align: top;text-align: left;}
 .css_mensualidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}

@@ -596,6 +596,10 @@ class grid_terceros_contratos_generar_fv_resumo
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['labels']['zona'] = "Zona"; 
        }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['labels']['barrio2']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['labels']['barrio2'] = "Barrio"; 
+       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['labels']['estado']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['labels']['estado'] = "Estado"; 
@@ -5027,19 +5031,19 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_gener
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ""; 
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
      { 
-         $nmgp_select = "SELECT numero_contrato, cliente, str_replace (convert(char(10),fecha_inicio,102), '.', '-') + ' ' + convert(char(8),fecha_inicio,20), zona, estado, mensualidad, str_replace (convert(char(10),fecha_factura,102), '.', '-') + ' ' + convert(char(8),fecha_factura,20), id_ter_cont, str_replace (convert(char(10),fecha_contrato,102), '.', '-') + ' ' + convert(char(8),fecha_contrato,20), str_replace (convert(char(10),fecha_corte,102), '.', '-') + ' ' + convert(char(8),fecha_corte,20), activo, barrio, direccion, telefono, motivo, str_replace (convert(char(10),fecha_limitepago,102), '.', '-') + ' ' + convert(char(8),fecha_limitepago,20), str_replace (convert(char(10),fecha_ultimopago,102), '.', '-') + ' ' + convert(char(8),fecha_ultimopago,20), valorpagado, saldoanterior, saldoactual, mesultimafactura, observaciones, valor_ultimafactura, precinto, correo from (SELECT      id_ter_cont,     numero_contrato,     cliente,     fecha_contrato,     fecha_inicio,     fecha_corte,     creado,     editado,     usuario_crea,     usuario_edita,     estado,     activo,     zona,     barrio,     direccion,     telefono,     motivo,     fecha_limitepago,     fecha_ultimopago,     valorpagado,     saldoanterior,     saldoactual,     mesultimafactura,     observaciones,     valor_ultimafactura,     mensualidad,     precinto,     correo,     fecha_factura,     YEAR(fecha_contrato) as anio,     month(fecha_contrato) as periodo,     (select b.descripcion from barrios b where b.idbarrio=barrio) as barrio FROM      terceros_contratos WHERE activo='SI' ORDER BY      (select b.descripcion from barrios b where b.idbarrio=barrio) ASC) nm_sel_esp"; 
+         $nmgp_select = "SELECT numero_contrato, cliente, str_replace (convert(char(10),fecha_inicio,102), '.', '-') + ' ' + convert(char(8),fecha_inicio,20), zona, barrio2, estado, mensualidad, str_replace (convert(char(10),fecha_factura,102), '.', '-') + ' ' + convert(char(8),fecha_factura,20), id_ter_cont, str_replace (convert(char(10),fecha_contrato,102), '.', '-') + ' ' + convert(char(8),fecha_contrato,20), str_replace (convert(char(10),fecha_corte,102), '.', '-') + ' ' + convert(char(8),fecha_corte,20), activo, barrio, direccion, telefono, motivo, str_replace (convert(char(10),fecha_limitepago,102), '.', '-') + ' ' + convert(char(8),fecha_limitepago,20), str_replace (convert(char(10),fecha_ultimopago,102), '.', '-') + ' ' + convert(char(8),fecha_ultimopago,20), valorpagado, saldoanterior, saldoactual, mesultimafactura, observaciones, valor_ultimafactura, precinto, correo from (SELECT      id_ter_cont,     numero_contrato,     cliente,     fecha_contrato,     fecha_inicio,     fecha_corte,     creado,     editado,     usuario_crea,     usuario_edita,     estado,     activo,     zona,     barrio,     direccion,     telefono,     motivo,     fecha_limitepago,     fecha_ultimopago,     valorpagado,     saldoanterior,     saldoactual,     mesultimafactura,     observaciones,     valor_ultimafactura,     mensualidad,     precinto,     correo,     fecha_factura,     YEAR(fecha_contrato) as anio,     month(fecha_contrato) as periodo,     (select b.descripcion from barrios b where b.idbarrio=barrio) as barrio2 FROM      terceros_contratos WHERE activo='SI' ORDER BY      (select b.descripcion from barrios b where b.idbarrio=barrio) ASC) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
      { 
-         $nmgp_select = "SELECT numero_contrato, cliente, fecha_inicio, zona, estado, mensualidad, fecha_factura, id_ter_cont, fecha_contrato, fecha_corte, activo, barrio, direccion, telefono, motivo, fecha_limitepago, fecha_ultimopago, valorpagado, saldoanterior, saldoactual, mesultimafactura, observaciones, valor_ultimafactura, precinto, correo from (SELECT      id_ter_cont,     numero_contrato,     cliente,     fecha_contrato,     fecha_inicio,     fecha_corte,     creado,     editado,     usuario_crea,     usuario_edita,     estado,     activo,     zona,     barrio,     direccion,     telefono,     motivo,     fecha_limitepago,     fecha_ultimopago,     valorpagado,     saldoanterior,     saldoactual,     mesultimafactura,     observaciones,     valor_ultimafactura,     mensualidad,     precinto,     correo,     fecha_factura,     YEAR(fecha_contrato) as anio,     month(fecha_contrato) as periodo,     (select b.descripcion from barrios b where b.idbarrio=barrio) as barrio FROM      terceros_contratos WHERE activo='SI' ORDER BY      (select b.descripcion from barrios b where b.idbarrio=barrio) ASC) nm_sel_esp"; 
+         $nmgp_select = "SELECT numero_contrato, cliente, fecha_inicio, zona, barrio2, estado, mensualidad, fecha_factura, id_ter_cont, fecha_contrato, fecha_corte, activo, barrio, direccion, telefono, motivo, fecha_limitepago, fecha_ultimopago, valorpagado, saldoanterior, saldoactual, mesultimafactura, observaciones, valor_ultimafactura, precinto, correo from (SELECT      id_ter_cont,     numero_contrato,     cliente,     fecha_contrato,     fecha_inicio,     fecha_corte,     creado,     editado,     usuario_crea,     usuario_edita,     estado,     activo,     zona,     barrio,     direccion,     telefono,     motivo,     fecha_limitepago,     fecha_ultimopago,     valorpagado,     saldoanterior,     saldoactual,     mesultimafactura,     observaciones,     valor_ultimafactura,     mensualidad,     precinto,     correo,     fecha_factura,     YEAR(fecha_contrato) as anio,     month(fecha_contrato) as periodo,     (select b.descripcion from barrios b where b.idbarrio=barrio) as barrio2 FROM      terceros_contratos WHERE activo='SI' ORDER BY      (select b.descripcion from barrios b where b.idbarrio=barrio) ASC) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      { 
-         $nmgp_select = "SELECT numero_contrato, cliente, convert(char(23),fecha_inicio,121), zona, estado, mensualidad, convert(char(23),fecha_factura,121), id_ter_cont, convert(char(23),fecha_contrato,121), convert(char(23),fecha_corte,121), activo, barrio, direccion, telefono, motivo, convert(char(23),fecha_limitepago,121), convert(char(23),fecha_ultimopago,121), valorpagado, saldoanterior, saldoactual, mesultimafactura, observaciones, valor_ultimafactura, precinto, correo from (SELECT      id_ter_cont,     numero_contrato,     cliente,     fecha_contrato,     fecha_inicio,     fecha_corte,     creado,     editado,     usuario_crea,     usuario_edita,     estado,     activo,     zona,     barrio,     direccion,     telefono,     motivo,     fecha_limitepago,     fecha_ultimopago,     valorpagado,     saldoanterior,     saldoactual,     mesultimafactura,     observaciones,     valor_ultimafactura,     mensualidad,     precinto,     correo,     fecha_factura,     YEAR(fecha_contrato) as anio,     month(fecha_contrato) as periodo,     (select b.descripcion from barrios b where b.idbarrio=barrio) as barrio FROM      terceros_contratos WHERE activo='SI' ORDER BY      (select b.descripcion from barrios b where b.idbarrio=barrio) ASC) nm_sel_esp"; 
+         $nmgp_select = "SELECT numero_contrato, cliente, convert(char(23),fecha_inicio,121), zona, barrio2, estado, mensualidad, convert(char(23),fecha_factura,121), id_ter_cont, convert(char(23),fecha_contrato,121), convert(char(23),fecha_corte,121), activo, barrio, direccion, telefono, motivo, convert(char(23),fecha_limitepago,121), convert(char(23),fecha_ultimopago,121), valorpagado, saldoanterior, saldoactual, mesultimafactura, observaciones, valor_ultimafactura, precinto, correo from (SELECT      id_ter_cont,     numero_contrato,     cliente,     fecha_contrato,     fecha_inicio,     fecha_corte,     creado,     editado,     usuario_crea,     usuario_edita,     estado,     activo,     zona,     barrio,     direccion,     telefono,     motivo,     fecha_limitepago,     fecha_ultimopago,     valorpagado,     saldoanterior,     saldoactual,     mesultimafactura,     observaciones,     valor_ultimafactura,     mensualidad,     precinto,     correo,     fecha_factura,     YEAR(fecha_contrato) as anio,     month(fecha_contrato) as periodo,     (select b.descripcion from barrios b where b.idbarrio=barrio) as barrio2 FROM      terceros_contratos WHERE activo='SI' ORDER BY      (select b.descripcion from barrios b where b.idbarrio=barrio) ASC) nm_sel_esp"; 
      } 
      else 
      { 
-         $nmgp_select = "SELECT numero_contrato, cliente, fecha_inicio, zona, estado, mensualidad, fecha_factura, id_ter_cont, fecha_contrato, fecha_corte, activo, barrio, direccion, telefono, motivo, fecha_limitepago, fecha_ultimopago, valorpagado, saldoanterior, saldoactual, mesultimafactura, observaciones, valor_ultimafactura, precinto, correo from (SELECT      id_ter_cont,     numero_contrato,     cliente,     fecha_contrato,     fecha_inicio,     fecha_corte,     creado,     editado,     usuario_crea,     usuario_edita,     estado,     activo,     zona,     barrio,     direccion,     telefono,     motivo,     fecha_limitepago,     fecha_ultimopago,     valorpagado,     saldoanterior,     saldoactual,     mesultimafactura,     observaciones,     valor_ultimafactura,     mensualidad,     precinto,     correo,     fecha_factura,     YEAR(fecha_contrato) as anio,     month(fecha_contrato) as periodo,     (select b.descripcion from barrios b where b.idbarrio=barrio) as barrio FROM      terceros_contratos WHERE activo='SI' ORDER BY      (select b.descripcion from barrios b where b.idbarrio=barrio) ASC) nm_sel_esp"; 
+         $nmgp_select = "SELECT numero_contrato, cliente, fecha_inicio, zona, barrio2, estado, mensualidad, fecha_factura, id_ter_cont, fecha_contrato, fecha_corte, activo, barrio, direccion, telefono, motivo, fecha_limitepago, fecha_ultimopago, valorpagado, saldoanterior, saldoactual, mesultimafactura, observaciones, valor_ultimafactura, precinto, correo from (SELECT      id_ter_cont,     numero_contrato,     cliente,     fecha_contrato,     fecha_inicio,     fecha_corte,     creado,     editado,     usuario_crea,     usuario_edita,     estado,     activo,     zona,     barrio,     direccion,     telefono,     motivo,     fecha_limitepago,     fecha_ultimopago,     valorpagado,     saldoanterior,     saldoactual,     mesultimafactura,     observaciones,     valor_ultimafactura,     mensualidad,     precinto,     correo,     fecha_factura,     YEAR(fecha_contrato) as anio,     month(fecha_contrato) as periodo,     (select b.descripcion from barrios b where b.idbarrio=barrio) as barrio2 FROM      terceros_contratos WHERE activo='SI' ORDER BY      (select b.descripcion from barrios b where b.idbarrio=barrio) ASC) nm_sel_esp"; 
      } 
      $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_generar_fv']['where_pesq']; 
      $campos_order = "";
@@ -5114,32 +5118,33 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_gener
             $this->cliente = $rs_res->fields[1] ;  
             $this->fecha_inicio = $rs_res->fields[2] ;  
             $this->zona = $rs_res->fields[3] ;  
-            $this->estado = $rs_res->fields[4] ;  
-            $this->mensualidad = $rs_res->fields[5] ;  
+            $this->barrio2 = $rs_res->fields[4] ;  
+            $this->estado = $rs_res->fields[5] ;  
+            $this->mensualidad = $rs_res->fields[6] ;  
             $this->mensualidad =  str_replace(",", ".", $this->mensualidad);
-            $this->fecha_factura = $rs_res->fields[6] ;  
-            $this->id_ter_cont = $rs_res->fields[7] ;  
-            $this->fecha_contrato = $rs_res->fields[8] ;  
-            $this->fecha_corte = $rs_res->fields[9] ;  
-            $this->activo = $rs_res->fields[10] ;  
-            $this->barrio = $rs_res->fields[11] ;  
-            $this->direccion = $rs_res->fields[12] ;  
-            $this->telefono = $rs_res->fields[13] ;  
-            $this->motivo = $rs_res->fields[14] ;  
-            $this->fecha_limitepago = $rs_res->fields[15] ;  
-            $this->fecha_ultimopago = $rs_res->fields[16] ;  
-            $this->valorpagado = $rs_res->fields[17] ;  
+            $this->fecha_factura = $rs_res->fields[7] ;  
+            $this->id_ter_cont = $rs_res->fields[8] ;  
+            $this->fecha_contrato = $rs_res->fields[9] ;  
+            $this->fecha_corte = $rs_res->fields[10] ;  
+            $this->activo = $rs_res->fields[11] ;  
+            $this->barrio = $rs_res->fields[12] ;  
+            $this->direccion = $rs_res->fields[13] ;  
+            $this->telefono = $rs_res->fields[14] ;  
+            $this->motivo = $rs_res->fields[15] ;  
+            $this->fecha_limitepago = $rs_res->fields[16] ;  
+            $this->fecha_ultimopago = $rs_res->fields[17] ;  
+            $this->valorpagado = $rs_res->fields[18] ;  
             $this->valorpagado =  str_replace(",", ".", $this->valorpagado);
-            $this->saldoanterior = $rs_res->fields[18] ;  
+            $this->saldoanterior = $rs_res->fields[19] ;  
             $this->saldoanterior =  str_replace(",", ".", $this->saldoanterior);
-            $this->saldoactual = $rs_res->fields[19] ;  
+            $this->saldoactual = $rs_res->fields[20] ;  
             $this->saldoactual =  str_replace(",", ".", $this->saldoactual);
-            $this->mesultimafactura = $rs_res->fields[20] ;  
-            $this->observaciones = $rs_res->fields[21] ;  
-            $this->valor_ultimafactura = $rs_res->fields[22] ;  
+            $this->mesultimafactura = $rs_res->fields[21] ;  
+            $this->observaciones = $rs_res->fields[22] ;  
+            $this->valor_ultimafactura = $rs_res->fields[23] ;  
             $this->valor_ultimafactura =  str_replace(",", ".", $this->valor_ultimafactura);
-            $this->precinto = $rs_res->fields[23] ;  
-            $this->correo = $rs_res->fields[24] ;  
+            $this->precinto = $rs_res->fields[24] ;  
+            $this->correo = $rs_res->fields[25] ;  
             $this->cliente_orig = $this->cliente;
             $this->fecha_contrato_orig = $this->fecha_contrato;
             $this->fecha_inicio_orig = $this->fecha_inicio;
