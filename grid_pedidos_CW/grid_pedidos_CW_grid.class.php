@@ -619,7 +619,7 @@ if(isset($this->vsimodificainv[0][0]))
 	}
 }
 $this->nmgp_botoes["new"] = "off";;
-$this->nmgp_botoes["edit"] = "off";;
+$this->nmgp_botoes["update"] = "off";;
 $_SESSION['scriptcase']['grid_pedidos_CW']['contr_erro'] = 'off'; 
        $this->SC_Buf_onInit = ob_get_clean();; 
 
