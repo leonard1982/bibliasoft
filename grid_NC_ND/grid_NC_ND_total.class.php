@@ -550,7 +550,7 @@ class grid_NC_ND_total
    //----- 
    function Calc_resumo_fecha($destino_resumo)
    {
-      global $nm_lang, $factura, $pdf2, $enviar_propio, $imprimir, $print, $enviarfe, $estadofe, $imprmirtirilla, $pdf, $idcli, $vendedor, $resolucion;
+      global $nm_lang, $factura, $pdf2, $enviar_propio, $reenviar, $imprimir, $print, $enviarfe, $estadofe, $imprmirtirilla, $pdf, $idcli, $vendedor, $resolucion;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['campos_busca']))
@@ -1049,7 +1049,7 @@ class grid_NC_ND_total
    //----- 
    function Calc_resumo_vencimiento($destino_resumo)
    {
-      global $nm_lang, $factura, $pdf2, $enviar_propio, $imprimir, $print, $enviarfe, $estadofe, $imprmirtirilla, $pdf, $idcli, $vendedor, $resolucion;
+      global $nm_lang, $factura, $pdf2, $enviar_propio, $reenviar, $imprimir, $print, $enviarfe, $estadofe, $imprmirtirilla, $pdf, $idcli, $vendedor, $resolucion;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['campos_busca']))
@@ -1548,7 +1548,7 @@ class grid_NC_ND_total
    //----- 
    function Calc_resumo_credito($destino_resumo)
    {
-      global $nm_lang, $factura, $pdf2, $enviar_propio, $imprimir, $print, $enviarfe, $estadofe, $imprmirtirilla, $pdf, $idcli, $vendedor, $resolucion;
+      global $nm_lang, $factura, $pdf2, $enviar_propio, $reenviar, $imprimir, $print, $enviarfe, $estadofe, $imprmirtirilla, $pdf, $idcli, $vendedor, $resolucion;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['campos_busca']))
@@ -2050,7 +2050,7 @@ class grid_NC_ND_total
    //----- 
    function Calc_resumo_vendedor($destino_resumo)
    {
-      global $nm_lang, $factura, $pdf2, $enviar_propio, $imprimir, $print, $enviarfe, $estadofe, $imprmirtirilla, $pdf, $idcli, $vendedor, $resolucion;
+      global $nm_lang, $factura, $pdf2, $enviar_propio, $reenviar, $imprimir, $print, $enviarfe, $estadofe, $imprmirtirilla, $pdf, $idcli, $vendedor, $resolucion;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['campos_busca']))

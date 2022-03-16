@@ -145,9 +145,20 @@ function Ord_cmp_init()
        $tab_def_campos['enviar_propio'] = "";
    }
    $tab_labels["enviar_propio"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["enviar_propio"])) ? $_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["enviar_propio"] : "Enviar";
+   $tab_ger_campos['reenviar'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['reenviar'] = "reenviar";
+   }
+   else
+   {
+       $tab_def_campos['reenviar'] = "";
+   }
+   $tab_labels["reenviar"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["reenviar"])) ? $_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["reenviar"] : "Reenviar";
    $tab_ger_campos['factura'] = "none";
    $tab_ger_campos['pdf2'] = "none";
    $tab_ger_campos['enviar_propio'] = "none";
+   $tab_ger_campos['reenviar'] = "none";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_NC_ND']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_NC_ND']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_NC_ND']['field_display'] as $NM_cada_field => $NM_cada_opc)

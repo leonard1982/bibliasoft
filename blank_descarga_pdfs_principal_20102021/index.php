@@ -217,8 +217,8 @@ class blank_descarga_pdfs_principal_20102021_ini
       $this->nm_dt_criacao   = "20180904"; 
       $this->nm_hr_criacao   = "084030"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211223"; 
-      $this->nm_hr_ult_alt   = "110934"; 
+      $this->nm_dt_ult_alt   = "20220114"; 
+      $this->nm_hr_ult_alt   = "172519"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_descarga_pdfs_principal_20102021_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_descarga_pdfs_principal_20102021']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwZSX7HArYVWJeHuBYDkBsDWFaDoraD9JmZ1FaDSrYD5XGDEBeVkXeDuFYHIFGHQNmDuFaZ1N7HuBiHgvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuNOVcBOH5FqVEraHQBiZSB/HArYHuB/HgNKZSJqDWX7ZuFaHQNmZ9XGDSBYV5BqDMzGVcFeHEFYHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHgvsVcBOV5F/DoFUDcNwH9B/D1rKV5FaDErKZSXeH5FYDoraD9NwH9X7HIrwV5FUHgrYDkFCDWXCDoNUDcJUZSFaD1rwD5BiDErKHEBUDWr/VoXGD9XsH9X7D1BeD5BqHuzGVcFKDWFaDoJeDcNwVIJsHAvCD5BqHgveHArsDWBmDoJeHQBiDQBqHAvmV5XGDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBiDuFaZ1rwD5JsDMzGVcFKDWFYVEFGD9XGZ1rqD1rKZMBqDMveHEFiV5XKZuBOHQBiDQX7HAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqHAvOV5XGDMrYVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDEBOZSJqDuJeHMJsDcBiDQB/HArYD5B/DMNOVcBUH5B7VENUHQNmVINUD1rKV5JeDEvsHArsDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmH9FUDSN7D5B/HgvsZSJqDWFaVENUHQNmZ1FaDSrYHuJwDErKZSJqH5F/VoXGDcXGH9FGHIrwD5FaDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKVWJsHgrKDkFCDWJeVENUHQXOVINUD1rwV5XGDENOHENiH5FYVoB/HQJeDQFaD1veV5FaDMBOZSJqDWFaHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHgvsVcBOV5F/DoFUDcNwH9B/D1rKV5FaDErKZSXeH5FYDoraD9NwH9X7HIrwV5FUHgrYDkFCDWXCDoNUDcJUZSFaD1rwD5BiDErKHEBUDWr/VoXGD9XsH9X7D1BeD5BqHuzGVcFKDWFaDoJeDcNwVIJsHAvCD5BqHgveHArsDWBmDoJeHQBiDQBqHAvmV5XGDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQBiDQFUHIrKV5FUHuvmDkBODuFqHIFUHQBqZ1FGDSBeV5XGHgvCHEXeDWX7HMXGHQFYH9X7D1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqD1BOV5XGDMrYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNKHEBUH5F/VoJeDcBiDuBqDSBYHuJwHuzGV9BUH5XCDoraHQNwVINUHIveD5BqHgBOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2255,15 +2255,15 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] 
 		 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20), str_replace (convert(char(10),coalesce(f.creado,NOW()),102), '.', '-') + ' ' + convert(char(8),coalesce(f.creado,NOW()),20) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida, f.pedido from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(23),f.fechaven,121), convert(char(23),coalesce(f.creado,NOW()),121) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total, f.resolucion, f.numfacven, f.vendedor, f.banco, convert(char(23),f.fechaven,121), convert(char(23),coalesce(f.creado,NOW()),121) as sc_alias_0, f.tipo, r.prefijo, f.idcli, t.porcentaje_propina_sugerida, f.pedido from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       else
       { 
-          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
+          $nm_select = "select f.total,f.resolucion,f.numfacven,f.vendedor,f.banco,f.fechaven,coalesce(f.creado,NOW()),f.tipo,r.prefijo,f.idcli,t.porcentaje_propina_sugerida,f.pedido from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros t on f.idcli=t.idtercero where f.idfacven='".$idfactura."'"; 
       }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2282,6 +2282,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] 
                  $SCrx->fields[4] = str_replace(',', '.', $SCrx->fields[4]);
                  $SCrx->fields[9] = str_replace(',', '.', $SCrx->fields[9]);
                  $SCrx->fields[10] = str_replace(',', '.', $SCrx->fields[10]);
+                 $SCrx->fields[11] = str_replace(',', '.', $SCrx->fields[11]);
                  $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
                  $SCrx->fields[0] = (string)$SCrx->fields[0];
                  $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
@@ -2296,6 +2297,8 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] 
                  $SCrx->fields[9] = (string)$SCrx->fields[9];
                  $SCrx->fields[10] = (strpos(strtolower($SCrx->fields[10]), "e")) ? (float)$SCrx->fields[10] : $SCrx->fields[10];
                  $SCrx->fields[10] = (string)$SCrx->fields[10];
+                 $SCrx->fields[11] = (strpos(strtolower($SCrx->fields[11]), "e")) ? (float)$SCrx->fields[11] : $SCrx->fields[11];
+                 $SCrx->fields[11] = (string)$SCrx->fields[11];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
                         $vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
@@ -2330,6 +2333,8 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] 
 			$vpj        = $vdatos[0][8];
 			$vidcli     = $vdatos[0][9];
 			$vporcentaje_propina_tercero = $vdatos[0][10];
+			$vidpedido  = $vdatos[0][11];
+			$vinsertarencaja = true;
 			
 			$vdoc       = $vpj."/".$numero;
 			$vsql1      = "";
@@ -2350,9 +2355,56 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] 
 						$vsqlrc   = " ,idrc='".$vidrecibo."'";
 					}
 
-					$vsql1 = "insert into caja  set fecha='".$vfecha."', detalle='".$vdetalle."',  nota='".$vnota."', documento='".$numero."', cantidad='".$tot."',  cierredia='NO', resolucion='".$res."', banco='".$vbanco."',creado='".$vcreado."', usuario='".$vvendedor."',tipodoc='".$vtipo."',doc='".$vdoc."',id_tercero='".$vidcli."' ".$vsqlrc;
+					if($vidpedido>0)
+					{
+						$vsql = "select total, saldo from pedidos where idpedido='".$vidpedido."'";
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $vDatosPedido = array();
+      $vdatospedido = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $vDatosPedido[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $vdatospedido[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $vDatosPedido = false;
+          $vDatosPedido_erro = $this->Db->ErrorMsg();
+          $vdatospedido = false;
+          $vdatospedido_erro = $this->Db->ErrorMsg();
+      } 
+;
+						if(isset($vdatospedido[0][0]))
+						{
+							$vtp = $vdatospedido[0][0];
+							$vsp = $vdatospedido[0][1];
+							
+							if(intval($vtp)>0 and intval($vsp)==0)
+							{
+								$vinsertarencaja = false;
+							}
+						}
+					}
 					
-					
+					if($vinsertarencaja)
+					{
+						$vsql1 = "insert into caja  set fecha='".$vfecha."', detalle='".$vdetalle."',  nota='".$vnota."', documento='".$numero."', cantidad='".$tot."',  cierredia='NO', resolucion='".$res."', banco='".$vbanco."',creado='".$vcreado."', usuario='".$vvendedor."',tipodoc='".$vtipo."',doc='".$vdoc."',id_tercero='".$vidcli."' ".$vsqlrc;
+
+						
      $nm_select = $vsql1; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2369,6 +2421,7 @@ $_SESSION['scriptcase']['blank_descarga_pdfs_principal_20102021']['contr_erro'] 
          }
          $rf->Close();
       ;
+					}
 					
 					$vsql2 = "update facturaven set pagada='SI', saldo='0',valor_propina='0',porcentaje_propina_sugerida='0',aplica_propina='NO' where idfacven='".$idfactura."'";
 					

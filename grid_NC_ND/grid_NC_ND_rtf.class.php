@@ -297,7 +297,174 @@ class grid_NC_ND_rtf
       $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'on';
 if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
 if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
-  ;
+  ?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+<?php
+
+
+$vsql = "SELECT proveedor, if(modo='PRUEBAS',servidor_prueba1,servidor1) as server1, if(modo='PRUEBAS',servidor_prueba2,servidor2) as server2, if(modo='PRUEBAS',token_prueba,tokenempresa) as tk_empresa, if(modo='PRUEBAS',password_prueba,tokenpassword) as tk_password, modo, enviar_dian, enviar_cliente FROM webservicefe where idwebservicefe='1'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vWS = array();
+      $this->vws = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vWS[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vws[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vWS = false;
+          $this->vWS_erro = $this->Db->ErrorMsg();
+          $this->vws = false;
+          $this->vws_erro = $this->Db->ErrorMsg();
+      } 
+;	
+if(isset($this->vws[0][0]))
+{
+	$this->sc_temp_gproveedor = $this->vws[0][0];
+}
+
+?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+<script>
+	
+	$(document).ajaxStart(function(){
+	
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+
+	}).ajaxStop(function(){
+
+			$.unblockUI();
+
+	});
+	
+		
+		function fEstadoFE(nfactura)
+		{
+			$.post("../cEstadoFacturaElectronica/index.php",{
+			
+				nfactura:nfactura
+	
+			},function(r){
+				
+				var obj = JSON.parse(r);
+	
+				switch(obj.codigo)
+				{
+					case 200:
+						alert("Esta factura ya fue enviada satisfactoriamente.");
+					break;
+					case 101:
+						alert("El token del emisor no es válido.");
+					break;
+					case 105:
+						alert("Error al extraer los datos, verifique que la información enviada sea correcta.");
+					break;
+					case 102:
+						alert("Error en validaciones.");
+					break;
+					case 103:
+						alert("Ha ocurrido un error en la ejecución del servicio, por favor intente mas tarde.");
+					break;
+				}
+			});
+		}
+	
+		function fEnviarFE(idfacven)
+		{
+			$.post("../cEnviarFactura/index.php",{
+			
+				idfacven:idfacven
+	
+			},function(r){
+				
+				console.log(r);
+				
+				var obj = JSON.parse(r);
+	
+				$.post("../cGuardarRespuesta/index.php",{
+	
+					datos:obj.factura,
+					idfacven:idfacven
+	
+				},function(r2){
+				
+					console.log("Log data fEnviarFE: ");
+					console.log(r2);
+				});
+	
+				alert(obj.codigo+' '+obj.mensaje);
+			});
+		}
+	
+		function fPDFFactura(documento)
+		{
+			console.log("fPDFFactura documento: ");
+			console.log(documento);
+
+			$.post("../blank_generar_pdf_fe/index.php",{
+
+				documento:documento
+
+			},function(r){
+
+				console.log("Data fPDFFactura: ");
+				console.log(r)
+				var obj = JSON.parse(r);
+
+				if(obj.pdfcreado=="NO")
+				{
+					alertify.alert('Mensaje', 'No se puede generar el pdf de una factura no enviada.', function(){ });
+				}
+				if(obj.pdfcreado=="SI")
+				{
+					window.open('../blank_generar_pdf_fe/'+documento+'.pdf','PDF','fullscreen=yes');
+				}
+			});
+		}
+	
+		function fFoliosRestantes()
+		{
+			$.post("../cFoliosFE/index.php",{ok:""},function(r){
+
+				var obj = JSON.parse(r);
+
+				if(!$.isEmptyObject(obj.foliosRestantes))
+				{
+					alert("Folios Restantes: "+obj.foliosRestantes);
+				}
+			});
+		}
+</script>
+<?php
+
+;
 
 ;
 ;
@@ -388,6 +555,57 @@ function fEnviarPropio(idfacven)
 			
 		});
 	}
+}
+	
+function fReenviarPropio(idfacven)
+{
+
+	$.post("../blank_correo_reenvio/index.php",{
+
+		idfacven:idfacven
+
+	},function(r){
+
+		console.log(r);
+		var correo = "";
+		
+		if(correo = prompt("Correo Electrónico",r))
+		{
+			if(correo == null || correo == "")
+			{
+			   alert("Debe digitar un correo.");
+			}
+			else
+			{
+				$.blockUI({ 
+					message: 'Espere por favor...', 
+					css: { 
+						border: 'none', 
+						padding: '15px', 
+						backgroundColor: '#000', 
+						'-webkit-border-radius': '10px', 
+						'-moz-border-radius': '10px', 
+						opacity: .5, 
+						color: '#fff'
+					}
+				});
+				
+				$.post("../blank_correo_reenvio2/index.php",{
+
+					idfacven:idfacven,
+					correo:correo
+
+				},function(r2){
+
+					$.unblockUI();
+					
+					console.log(r2);
+					alert(r2);
+				});
+			}
+		}
+
+	});
 }
 </script>
 <?php
@@ -488,6 +706,14 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
           }
           $SC_Label = (isset($this->New_label['enviar_propio'])) ? $this->New_label['enviar_propio'] : "Enviar"; 
           if ($Cada_col == "enviar_propio" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              $SC_Label = str_replace('<', '&lt;', $SC_Label);
+              $SC_Label = str_replace('>', '&gt;', $SC_Label);
+              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
+          }
+          $SC_Label = (isset($this->New_label['reenviar'])) ? $this->New_label['reenviar'] : "Reenviar"; 
+          if ($Cada_col == "reenviar" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $SC_Label = NM_charset_to_utf8($SC_Label);
               $SC_Label = str_replace('<', '&lt;', $SC_Label);
@@ -1005,6 +1231,7 @@ if($this->asentada ==1)
 			if(!empty($this->cufe ))
 			{
 				$this->enviar_propio  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png'   id=pdf_".$this->idfacven ."' name='pdf_".$this->idfacven ."' /></a>";
+				$this->reenviar  = "<a style='cursor:pointer;' onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /></a>";
 			}
 			else
 			{
@@ -1262,6 +1489,16 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
          $this->enviar_propio = str_replace('<', '&lt;', $this->enviar_propio);
          $this->enviar_propio = str_replace('>', '&gt;', $this->enviar_propio);
          $this->Texto_tag .= "<td>" . $this->enviar_propio . "</td>\r\n";
+   }
+   //----- reenviar
+   function NM_export_reenviar()
+   {
+         $this->reenviar = html_entity_decode($this->reenviar, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->reenviar = strip_tags($this->reenviar);
+         $this->reenviar = NM_charset_to_utf8($this->reenviar);
+         $this->reenviar = str_replace('<', '&lt;', $this->reenviar);
+         $this->reenviar = str_replace('>', '&gt;', $this->reenviar);
+         $this->Texto_tag .= "<td>" . $this->reenviar . "</td>\r\n";
    }
    //----- idfacven
    function NM_export_idfacven()

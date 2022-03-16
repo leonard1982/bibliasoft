@@ -174,6 +174,8 @@ function Sel_cmp_process()
       $tab_blk_campos[] = "pdf2";
       $tab_ger_campos['enviar_propio'] = "on";
       $tab_blk_campos[] = "enviar_propio";
+      $tab_ger_campos['reenviar'] = "on";
+      $tab_blk_campos[] = "reenviar";
       $tab_ger_campos['idfacven'] = "on";
       $tab_ger_campos['numfacven'] = "on";
       $tab_ger_campos['credito'] = "on";

@@ -230,8 +230,8 @@ class grid_NC_ND_ini
       $this->nm_dt_criacao   = "20171228"; 
       $this->nm_hr_criacao   = "114401"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211223"; 
-      $this->nm_hr_ult_alt   = "110934"; 
+      $this->nm_dt_ult_alt   = "20220315"; 
+      $this->nm_hr_ult_alt   = "092739"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1068,185 +1068,8 @@ class grid_NC_ND_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQX7D1veHuraDMBYDkBsHEX/VENUD9XGZ1FaHAvsZMBODErKHEBUDuJeVoBqHQNwDQJsZ1BYHQJsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BOHgrKV9BUDWBmVENUHQNmH9BqZ1BeHuJwDEvsHArsDurmDoJeHQJKZ9XGD1vOVWJsDMvmDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwZSFGHANOD5BqHgrKVcXKV5X7HIX7HQJmH9BOZ1BeHuXGHgBOHEFKV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1NOHQFUHgBOVkJ3V5FqHMJwHQJeDuBqD1veVWJwHuzGV9FeHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VoF7HQNmZkBiD1rKHQJwDEBODkFeH5FYVoFGHQJKDQB/DSN7HuB/HgrKVcB/V5X7DoXGD9JmH9FaHAN7HuFaHgNOHEBUDWX7DoraDcXGZSX7HINaVWJwDMrYVIBOHEFYHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDQJwD1vOV5BqHuNOZSNiDWFYVEX7DcFYZ1F7HABYHQNUHgBOHENiV5FaZuJeHQNmZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcXGH9BiZ1N7VWXGHuNOZSNiHEFYHIF7HQNmZSBOD1rwHuFaHgBOHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaHMJeHQJKZSFUZ1rwHQBODMNOVcFiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsZ1N7D5rqHgrKV9FeHEX7HMJsHQJmZSB/HArYHQBOHgrKHEJGH5F/VoBiD9FYDQFGHIvsVWBqDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKV5BqDMvOV9BUDWFYHMBiD9BsVIraD1rwV5X7HgBeHENiHEFqHIBqD9JKH9FUD1BOVWBOHgrwVIFCDWFaHMFaDcFYH9BqZ1BeHuX7DMBYVkJqDuJeHIraD9FYDQFUD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
-      if (isset($_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['initialize'])  
-      { 
-          $this->conectDB();
-          $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'on';
-if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
-if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
-  ?>
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
-<?php
-
-
-$vsql = "SELECT proveedor, if(modo='PRUEBAS',servidor_prueba1,servidor1) as server1, if(modo='PRUEBAS',servidor_prueba2,servidor2) as server2, if(modo='PRUEBAS',token_prueba,tokenempresa) as tk_empresa, if(modo='PRUEBAS',password_prueba,tokenpassword) as tk_password, modo, enviar_dian, enviar_cliente FROM webservicefe where idwebservicefe='1'";
- 
-      $nm_select = $vsql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vWS = array();
-      $this->vws = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $this->vWS[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $this->vws[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->vWS = false;
-          $this->vWS_erro = $this->Db->ErrorMsg();
-          $this->vws = false;
-          $this->vws_erro = $this->Db->ErrorMsg();
-      } 
-;	
-if(isset($this->vws[0][0]))
-{
-	$this->sc_temp_gproveedor = $this->vws[0][0];
-}
-
-?>
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
-<script>
-	
-	$(document).ajaxStart(function(){
-	
-		$.blockUI({ 
-			message: 'Espere por favor...', 
-			css: { 
-				border: 'none', 
-				padding: '15px', 
-				backgroundColor: '#000', 
-				'-webkit-border-radius': '10px', 
-				'-moz-border-radius': '10px', 
-				opacity: .5, 
-				color: '#fff'
-			}
-		});
-
-	}).ajaxStop(function(){
-
-			$.unblockUI();
-
-	});
-	
-		
-		function fEstadoFE(nfactura)
-		{
-			$.post("../cEstadoFacturaElectronica/index.php",{
-			
-				nfactura:nfactura
-	
-			},function(r){
-				
-				var obj = JSON.parse(r);
-	
-				switch(obj.codigo)
-				{
-					case 200:
-						alert("Esta factura ya fue enviada satisfactoriamente.");
-					break;
-					case 101:
-						alert("El token del emisor no es válido.");
-					break;
-					case 105:
-						alert("Error al extraer los datos, verifique que la información enviada sea correcta.");
-					break;
-					case 102:
-						alert("Error en validaciones.");
-					break;
-					case 103:
-						alert("Ha ocurrido un error en la ejecución del servicio, por favor intente mas tarde.");
-					break;
-				}
-			});
-		}
-	
-		function fEnviarFE(idfacven)
-		{
-			$.post("../cEnviarFactura/index.php",{
-			
-				idfacven:idfacven
-	
-			},function(r){
-				
-				console.log(r);
-				
-				var obj = JSON.parse(r);
-	
-				$.post("../cGuardarRespuesta/index.php",{
-	
-					datos:obj.factura,
-					idfacven:idfacven
-	
-				},function(r2){
-				
-					console.log("Log data fEnviarFE: ");
-					console.log(r2);
-				});
-	
-				alert(obj.codigo+' '+obj.mensaje);
-			});
-		}
-	
-		function fPDFFactura(documento)
-		{
-			console.log("fPDFFactura documento: ");
-			console.log(documento);
-
-			$.post("../blank_generar_pdf_fe/index.php",{
-
-				documento:documento
-
-			},function(r){
-
-				console.log("Data fPDFFactura: ");
-				console.log(r)
-				var obj = JSON.parse(r);
-
-				if(obj.pdfcreado=="NO")
-				{
-					alertify.alert('Mensaje', 'No se puede generar el pdf de una factura no enviada.', function(){ });
-				}
-				if(obj.pdfcreado=="SI")
-				{
-					window.open('../blank_generar_pdf_fe/'+documento+'.pdf','PDF','fullscreen=yes');
-				}
-			});
-		}
-	
-		function fFoliosRestantes()
-		{
-			$.post("../cFoliosFE/index.php",{ok:""},function(r){
-
-				var obj = JSON.parse(r);
-
-				if(!$.isEmptyObject(obj.foliosRestantes))
-				{
-					alert("Folios Restantes: "+obj.foliosRestantes);
-				}
-			});
-		}
-</script>
-<?php
-if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
-$_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off'; 
-          $_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['initialize'] = false;
-          $this->Db->Close(); 
-      } 
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
       {
@@ -5251,6 +5074,7 @@ class grid_NC_ND_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "asentada";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "pdf2";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "enviar_propio";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "reenviar";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "idfacven";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "numfacven";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "credito";

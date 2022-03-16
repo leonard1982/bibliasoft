@@ -232,8 +232,8 @@ class grid_pedidos_CW_ini
       $this->nm_dt_criacao   = "20180531"; 
       $this->nm_hr_criacao   = "085154"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20211223"; 
-      $this->nm_hr_ult_alt   = "110934"; 
+      $this->nm_dt_ult_alt   = "20220114"; 
+      $this->nm_hr_ult_alt   = "172519"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1061,7 +1061,7 @@ class grid_pedidos_CW_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_pedidos_CW']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_pedidos_CW']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDQFaD1veHuX7DMNODkFCDWBmDoXGHQXOZkBiHABYV5JsDMvCHEJqDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHENiDWr/HIFGHQJKH9X7DSBYHuFGHgvOVcrsDWBmVEFGHQBqZ1rqD1rKV5JwHgveDkXKDWXCVoBqD9XsDQFGHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDuFaDoJeD9JKDQX7D1veV5raHuzGVcFKDWFYDoNUD9JmZ1B/D1rKD5FaDErKZSJqV5FaHIFGDcXGZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCHEFaDorqHQXGDQFGD1BeD5BqDMBOVIB/DWF/DoBiD9JmH9BOHArYD5NUDEBeHErCH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDWFGDoBqHQXODQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHIBeV5JwDMvCZSXeDuFaHMBiDcBwDQJsZ1N7HuNUHgrYDkBsDWF/HIFGD9BsZ1B/HIBeD5JeDEBOVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsH9FGD1vOVWXGHuvmZSrCV5FYHIFUHQBiZSBqHANOHQFGDErKHArCDWXCHIBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1X7DSNOHQBiHgBOHEFiHEB7DoBqD9NmDQJsDSN7HuBqDMvOVIBODuX7VEX7DcNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwD9XOZ1F7HArYV5B/DEBeHEXeH5F/DoB/D9NwZSFUZ1rwHuF7HgrwZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiDcNwVIJsHANOZMFaDEBeDkB/DuJeHIBOHQJKDuFaZ1rwV5JeHuNOVIFCH5XCHMJeHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNmVIJsHAzGZMBqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BqDMBODkBsHEX/VErqHQBiH9BqZ1rYD5BiDErKHErCDWFqZuFaDcBwDQX7HIrKHQNUDMrwV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_pedidos_CW']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_pedidos_CW']['initialize'])  
       { 
@@ -4400,6 +4400,10 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
   $vUsuario=$this->sc_temp_gidtercero;
+if(empty($vUsuario))
+{
+	$vUsuario = 1;
+}
 $vIdped=0;
 $hoy= date('d-m-Y');
 $fechven= date("Y-m-d", strtotime($hoy));
@@ -4434,7 +4438,7 @@ if(isset($dt[0][0]))
 	{
 	$nup=$dt[0][1]+1;
 	
-     $nm_select = "insert pedidos set credito=2, fechaven='".$fechven."', fechavenc='".$fechven."', idcli=1, subtotal=0.00, 				 valoriva=0.00, total=0.00, facturado='NO', asentada=0, observaciones='00', dircliente=8, numpedido=$nup, prefijo_ped=4,tipo_doc='PV', usuario=$vUsuario"; 
+     $nm_select = "insert pedidos set credito=2, fechaven='".$fechven."', fechavenc='".$fechven."', idcli=1, subtotal=0.00, 				 valoriva=0.00, total=0.00, facturado='NO', asentada=0, observaciones='00', dircliente=8, numpedido=$nup, prefijo_ped=4,tipo_doc='PV', usuario=$vUsuario,vendedor=$vUsuario"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -4457,7 +4461,7 @@ else
 	{
 	$nup=1;
 	
-     $nm_select = "insert pedidos set credito=2, fechaven='$fechven', fechavenc='$fechven', idcli=1, subtotal=0.00, 				 valoriva=0.00, total=0.00, facturado='NO', asentada=0, observaciones='00', dircliente=8, numpedido=$nup, prefijo_ped=4, tipo_doc='PV', usuario=$vUsuario"; 
+     $nm_select = "insert pedidos set credito=2, fechaven='$fechven', fechavenc='$fechven', idcli=1, subtotal=0.00, 				 valoriva=0.00, total=0.00, facturado='NO', asentada=0, observaciones='00', dircliente=8, numpedido=$nup, prefijo_ped=4, tipo_doc='PV', usuario=$vUsuario,vendedor=$vUsuario"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);

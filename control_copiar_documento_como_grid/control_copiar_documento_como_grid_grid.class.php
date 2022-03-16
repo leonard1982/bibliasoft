@@ -633,7 +633,7 @@ class control_copiar_documento_como_grid_grid
    if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['where_orig']) || $_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['prim_cons'] || !empty($nmgp_parms))  
    { 
        $_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['prim_cons'] = false;  
-       $_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['where_orig'] = " where p.tipo_doc='PV' and (p.facturado ='NO' or p.facturado is null or p.facturado='') and ((p.creado_en_movil='SI' and p.disponible_en_movil='NO') or (p.creado_en_movil='NO'))";  
+       $_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['where_orig'] = " where p.tipo_doc='PV' and (p.facturado ='NO' or p.facturado is null or p.facturado='') and ((p.creado_en_movil='SI' and p.disponible_en_movil='NO') or (p.creado_en_movil='NO')) and p.asentada='1'";  
        $_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['where_orig'];  
        $_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['where_orig'];  
        $_SESSION['sc_session'][$this->Ini->sc_page]['control_copiar_documento_como_grid']['cond_pesq']         = ""; 
