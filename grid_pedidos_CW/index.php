@@ -108,7 +108,6 @@ class grid_pedidos_CW_ini
    var $path_atual;
    var $Gd_missing;
    var $sc_site_ssl;
-   var $link_form_pedido;
    var $link_pdfreport_pedidos_cti_proforma_cons;
    var $link_grid_detallepedido_cons_emb;
    var $link_form_pagar_pedido_edit;
@@ -233,7 +232,7 @@ class grid_pedidos_CW_ini
       $this->nm_hr_criacao   = "085154"; 
       $this->nm_autor_alt    = "admin"; 
       $this->nm_dt_ult_alt   = "20220316"; 
-      $this->nm_hr_ult_alt   = "101425"; 
+      $this->nm_hr_ult_alt   = "110454"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -499,25 +498,6 @@ class grid_pedidos_CW_ini
       {
           $_SESSION['sc_session'][$this->sc_page]['grid_pedidos_CW']['dashboard_info']['maximized'] = 1 == $_GET['maximized'];
       }
-      $Tmp_apl_lig = "form_pedido";
-      if (is_file($this->root . $this->path_link . "_lib/friendly_url/form_pedido_ini.txt"))
-      {
-          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/form_pedido_ini.txt");
-          if (isset($Friendly[0]) && !empty($Friendly[0]))
-          {
-              $Tmp_apl_lig = trim($Friendly[0]);
-          }
-      }
-      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/form_pedido_ini.txt"))
-      {
-          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/form_pedido_ini.txt");
-          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
-          {
-              $this->sc_lig_md5["form_pedido"] = 'S';
-          }
-      }
-      $this->sc_lig_target["A_@scinf_"] = '_self';
-      $this->sc_lig_target["A_@scinf__@scinf_form_pedido"] = '_self';
       $Tmp_apl_lig = "pdfreport_pedidos_cti_proforma";
       if (is_file($this->root . $this->path_link . "_lib/friendly_url/pdfreport_pedidos_cti_proforma_ini.txt"))
       {
@@ -608,7 +588,6 @@ class grid_pedidos_CW_ini
               }
           }
       }
-      $this->link_form_pedido =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('form_pedido') . "/" ; 
       $this->link_pdfreport_pedidos_cti_proforma_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('pdfreport_pedidos_cti_proforma') . "/" ; 
       $this->link_grid_detallepedido_cons_emb =  $this->root . $this->path_link  . "" . SC_dir_app_name('grid_detallepedido') . "/index.php" ; 
       $this->link_form_pagar_pedido_edit =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('form_pagar_pedido') . "/" ; 
@@ -1061,7 +1040,7 @@ class grid_pedidos_CW_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_pedidos_CW']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_pedidos_CW']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiDQX7HANOVWBOHuvmDkBOV5BmVorqHQBsH9BqHAN7HQraDMvCDkB/HEB7ZuFaHQNmZ9F7HAN7HQXGHuNOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMNOVcXKDWFYVEX7D9BsZkBiHIveD5BODEBOVkJ3V5XCDoXGD9JKDuBqDSBYD5NUDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBqD9NwH9X7DSBYD5JsHgrYDkFCDWXCDoraDcJUZ1F7DSrYV5B/DEBOZSJGH5FYDoFUHQJKZSFUHINaD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuBqHQNmZSBiDSN7HuJwDMBYDkBODWFaVorqDcJUZ1X7HIBeV5JsHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsD5JeHgveHArsDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcXKDWF/VENUD9BiZ1B/DSrYHuXGHgNKVkJ3HEXCHIB/HQFYDQB/HANOD5F7HgrwVcFCH5XCHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQFaHAN7V5BqDMNOVcB/DWFaVoBOD9XGZkFGHAN7HQF7DErKZSXeDWXCHIX7DcJeZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5BqDEvsHEFiDuFYVoBqD9XsDQFGHAN7VWJsHuBOVcFeHEX7HIXGD9XOZ1BOHIveHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9FaHArKV5FaDMzGHEFiHEFqVoFaD9XsZSFGD1BeV5raDMvmDkB/DuFGDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHANOHQBODEvsHENiDWr/VoBqDcBwDQFGHAvmVWXGHgrKVcFiV5FYHIX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNmVIJsHAzGZMBqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JeDMBYZSNiDWrmDoXGHQXOH9BOZ1BeHuJsDEBeDkXKDWXCVoJeHQNmDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_pedidos_CW']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_pedidos_CW']['initialize'])  
       { 
@@ -7130,10 +7109,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW'][$path_doc_md5][1
        if (!isset($_SESSION["gidtercero"])) 
        {
            $_SESSION["gidtercero"] = "";
-       }
-       if (!isset($_SESSION['sc_session'][$script_case_init]['grid_pedidos_CW']['mostra_edit'])) 
-       {
-           $_SESSION['sc_session'][$script_case_init]['grid_pedidos_CW']['mostra_edit'] = "S";
        }
        if (isset($nmgp_lig_edit_lapis)) 
        {

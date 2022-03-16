@@ -72,7 +72,6 @@
       unset($_SESSION['session_sec_aplicacao']);
       unset($_SESSION['session_sec_usuario']);
    }
-   $_SESSION['sc_session'][$script_case_init]['form_pedido'] = array();
    $fecha_janela = false;
    if (isset($_SESSION['sc_session'][$script_case_init]['grid_pedidos_CW']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['grid_pedidos_CW']['sc_outra_jan'])
    {

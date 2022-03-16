@@ -458,8 +458,6 @@ class grid_pedidos_CW_grid
    $this->nmgp_botoes['navpage'] = "on";
    $this->nmgp_botoes['rows'] = "on";
    $this->nmgp_botoes['summary'] = "on";
-   $this->nmgp_botoes['new']    = "on";
-   $this->nmgp_botoes['insert'] = "on";
    $this->nmgp_botoes['sel_col'] = "on";
    $this->nmgp_botoes['sort_col'] = "on";
    $this->nmgp_botoes['qsearch'] = "on";
@@ -657,19 +655,6 @@ $_SESSION['scriptcase']['grid_pedidos_CW']['contr_erro'] = 'off';
        }
    }
 
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['insert']) && $_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['insert'] != '')
-   {
-       $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['insert'];
-       $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['insert'];
-   }
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['update'] != '')
-   {
-       $this->nmgp_botoes['update'] = $_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['update'];
-   }
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['delete']) && $_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['delete'] != '')
-   {
-       $this->nmgp_botoes['delete'] = $_SESSION['scriptcase']['sc_apl_conf']['form_pedido']['delete'];
-   }
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['sc_sql_btn_run'] = array(); 
    $this->NM_btn_run_show = ($this->Ini->SC_Link_View || $this->grid_emb_form || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida']) ? false : true;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['opc_psq']) 
@@ -4180,53 +4165,11 @@ $_SESSION['scriptcase']['grid_pedidos_CW']['contr_erro'] = 'off';
           $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  style=\"" . $this->Css_Cmp['css_credito_grid_line'] . "\" NOWRAP align=\"left\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\"> <input type=\"checkbox\" id=\"NM_ck_run" . $this->SC_seq_btn_run . "\" class=\"sc-ui-check-run\" name=\"NM_ck_grid[]\" value=\"" . NM_encode_input($this->SC_seq_btn_run) . "\" style=\"align:left;vertical-align:middle;font-weight:bold;\" /></TD>\r\n");
  } 
  if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['opcao'] != "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['mostra_edit'] != "N"){ 
-              $Sc_parent = ($this->grid_emb_form_full) ? "S" : "";
-              $linkTarget = isset($this->Ini->sc_lig_target['A_@scinf__@scinf_form_pedido']) ? $this->Ini->sc_lig_target['A_@scinf__@scinf_form_pedido'] : (isset($this->Ini->sc_lig_target['A_@scinf_']) ? $this->Ini->sc_lig_target['A_@scinf_'] : null);
-              if (isset($this->Ini->sc_lig_md5["form_pedido"]) && $this->Ini->sc_lig_md5["form_pedido"] == "S")
-              {
-                  $Parms_Edt  = "idpedido?#?" . str_replace('"', "@aspasd@", $this->idpedido) . "?@?SC_glo_par_gidtercero?#?gidtercero?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
-                  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['under_dashboard'] && isset($linkTarget))
-                  {
-                      if ('' != $Parms_Edt && '?@?' != substr($Parms_Edt, -3) && '*scout' != substr($Parms_Edt, -6))
-                      {
-                          $Parms_Edt .= '*scout';
-                      }
-                      $Parms_Edt .= 'under_dashboard*scin1*scoutdashboard_app*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['dashboard_app'] . '*scoutown_widget*scin' . $linkTarget . '*scoutparent_widget*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['own_widget'] . '*scoutcompact_mode*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['compact_mode'] ? '1' : '0') . '*scoutremove_margin*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['remove_margin'] ? '1' : '0') . '*scoutremove_border*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['remove_border'] ? '1' : '0');
-                  }
-                  $Md5_Edt    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_pedidos_CW@SC_par@" . md5($Parms_Edt);
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['Lig_Md5'][md5($Parms_Edt)] = $Parms_Edt;
-              }
-              else
-              {
-                  $Md5_Edt  = "idpedido?#?" . str_replace('"', "@aspasd@", $this->idpedido) . "?@?SC_glo_par_gidtercero?#?gidtercero?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
-              }
-              $Link_Edit = nmButtonOutput($this->arr_buttons, "bform_editar", "nm_gp_submit4('" .  $this->Ini->link_form_pedido . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'form_pedido', '" . $this->SC_ancora . "')", "nm_gp_submit4('" .  $this->Ini->link_form_pedido . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'form_pedido', '" . $this->SC_ancora . "')", "bedit", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\"><table style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\"><tr><td style=\"padding: 0px\"><img id=\"b_open_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:''\" onclick=\"document.getElementById('b_open_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_close_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_exp . "\">\r\n");
           $nm_saida->saida("<img id=\"b_close_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:none\" onclick=\"document.getElementById('b_close_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_open_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_col . "\">\r\n");
-          $nm_saida->saida("</td><td style=\"padding: 0px\">" . $Link_Edit . "</td></tr></table></TD>\r\n");
+          $nm_saida->saida("</td></tr></table></TD>\r\n");
  } 
  if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['opcao'] != "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['mostra_edit'] == "N"){ 
-              $Sc_parent = ($this->grid_emb_form_full) ? "S" : "";
-              $linkTarget = isset($this->Ini->sc_lig_target['A_@scinf__@scinf_form_pedido']) ? $this->Ini->sc_lig_target['A_@scinf__@scinf_form_pedido'] : (isset($this->Ini->sc_lig_target['A_@scinf_']) ? $this->Ini->sc_lig_target['A_@scinf_'] : null);
-              if (isset($this->Ini->sc_lig_md5["form_pedido"]) && $this->Ini->sc_lig_md5["form_pedido"] == "S")
-              {
-                  $Parms_Edt  = "idpedido?#?" . str_replace('"', "@aspasd@", $this->idpedido) . "?@?SC_glo_par_gidtercero?#?gidtercero?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
-                  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['under_dashboard'] && isset($linkTarget))
-                  {
-                      if ('' != $Parms_Edt && '?@?' != substr($Parms_Edt, -3) && '*scout' != substr($Parms_Edt, -6))
-                      {
-                          $Parms_Edt .= '*scout';
-                      }
-                      $Parms_Edt .= 'under_dashboard*scin1*scoutdashboard_app*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['dashboard_app'] . '*scoutown_widget*scin' . $linkTarget . '*scoutparent_widget*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['own_widget'] . '*scoutcompact_mode*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['compact_mode'] ? '1' : '0') . '*scoutremove_margin*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['remove_margin'] ? '1' : '0') . '*scoutremove_border*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['remove_border'] ? '1' : '0');
-                  }
-                  $Md5_Edt    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_pedidos_CW@SC_par@" . md5($Parms_Edt);
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['Lig_Md5'][md5($Parms_Edt)] = $Parms_Edt;
-              }
-              else
-              {
-                  $Md5_Edt  = "idpedido?#?" . str_replace('"', "@aspasd@", $this->idpedido) . "?@?SC_glo_par_gidtercero?#?gidtercero?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
-              }
-              $Link_Edit = nmButtonOutput($this->arr_buttons, "bform_editar", "nm_gp_submit4('" .  $this->Ini->link_form_pedido . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'form_pedido', '" . $this->SC_ancora . "')", "nm_gp_submit4('" .  $this->Ini->link_form_pedido . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'form_pedido', '" . $this->SC_ancora . "')", "bedit", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\"><table style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\"><tr><td style=\"padding: 0px\"><img id=\"b_open_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:''\" onclick=\"document.getElementById('b_open_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_close_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_exp . "\">\r\n");
           $nm_saida->saida("<img id=\"b_close_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:none\" onclick=\"document.getElementById('b_close_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_open_emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_pedidos_CW_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_col . "\">\r\n");
           $nm_saida->saida("</td></tr></table></TD>\r\n");
@@ -6537,21 +6480,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
               $nm_saida->saida("          <img id=\"NM_sep_2\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
-        if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['new'] == "on" && $this->nmgp_botoes['insert'] == "on" && !$this->grid_emb_form)
-        {
-           $Sc_parent = ($this->grid_emb_form_full) ? "S" : "";
-           if (isset($this->Ini->sc_lig_md5["form_pedido"]) && $this->Ini->sc_lig_md5["form_pedido"] == "S") {
-               $Parms_Lig  = "idpedido*scin" . str_replace('"', "@aspasd@", $this->idpedido) . "*scoutSC_glo_par_gidtercero*scingidtercero*scoutNM_cancel_insert_new*scin1*scoutNM_cancel_return_new*scin1*scoutnmgp_opcao*scinnovo*scoutNM_btn_insert*scinS*scoutNM_btn_new*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
-               $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_pedidos_CW@SC_par@" . md5($Parms_Lig);
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
-           } else {
-               $Md5_Lig  = "idpedido*scin" . str_replace('"', "@aspasd@", $this->idpedido) . "*scoutSC_glo_par_gidtercero*scingidtercero*scoutNM_cancel_insert_new*scin1*scoutNM_cancel_return_new*scin1*scoutnmgp_opcao*scinnovo*scoutNM_btn_insert*scinS*scoutNM_btn_new*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
-           }
-         $this->nm_btn_exist['new'][] = "sc_b_new_top";
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bnovo", "nm_gp_submit1('" .  $this->Ini->link_form_pedido . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_pedido'); return false;;", "nm_gp_submit1('" .  $this->Ini->link_form_pedido . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_pedido'); return false;;", "sc_b_new_top", "", "Nuevo Documento", "", "absmiddle", "N", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-         $nm_saida->saida("           $Cod_Btn \r\n");
-         $NM_btn = true;
-        }
         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['SC_Ind_Groupby'] != "_NM_SC_")
         {
           if ($this->nmgp_botoes['summary'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
@@ -7274,21 +7202,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
       }
-        if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['new'] == "on" && $this->nmgp_botoes['insert'] == "on" && !$this->grid_emb_form)
-        {
-           $Sc_parent = ($this->grid_emb_form_full) ? "S" : "";
-           if (isset($this->Ini->sc_lig_md5["form_pedido"]) && $this->Ini->sc_lig_md5["form_pedido"] == "S") {
-               $Parms_Lig  = "idpedido*scin" . str_replace('"', "@aspasd@", $this->idpedido) . "*scoutSC_glo_par_gidtercero*scingidtercero*scoutNM_cancel_insert_new*scin1*scoutNM_cancel_return_new*scin1*scoutnmgp_opcao*scinnovo*scoutNM_btn_insert*scinS*scoutNM_btn_new*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
-               $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_pedidos_CW@SC_par@" . md5($Parms_Lig);
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
-           } else {
-               $Md5_Lig  = "idpedido*scin" . str_replace('"', "@aspasd@", $this->idpedido) . "*scoutSC_glo_par_gidtercero*scingidtercero*scoutNM_cancel_insert_new*scin1*scoutNM_cancel_return_new*scin1*scoutnmgp_opcao*scinnovo*scoutNM_btn_insert*scinS*scoutNM_btn_new*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
-           }
-         $this->nm_btn_exist['new'][] = "sc_b_new_top";
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bnovo", "nm_gp_submit1('" .  $this->Ini->link_form_pedido . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_pedido'); return false;;", "nm_gp_submit1('" .  $this->Ini->link_form_pedido . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_pedido'); return false;;", "sc_b_new_top", "", "Nuevo Documento", "", "absmiddle", "N", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-         $nm_saida->saida("           $Cod_Btn \r\n");
-         $NM_btn = true;
-        }
       }
       $nm_saida->saida("         </td> \r\n");
       $nm_saida->saida("        </tr> \r\n");
@@ -8699,52 +8612,6 @@ if ($_SESSION['scriptcase']['proc_mobile'])
    $nm_saida->saida("   function nm_gp_submit_ajax(opc, parm) \r\n");
    $nm_saida->saida("   { \r\n");
    $nm_saida->saida("      return ajax_navigate(opc, parm); \r\n");
-   $nm_saida->saida("   } \r\n");
-   $nm_saida->saida("   function nm_gp_submit1(apl_lig, apl_saida, parms, target, apl_name) \r\n");
-   $nm_saida->saida("   { \r\n");
-   $nm_saida->saida("      var sob_iframe = '';\r\n");
-   if ((isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['sc_modal']) || (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_pedidos_CW']['dashboard_info']['under_dashboard'])) {
-       $nm_saida->saida("      sob_iframe += 'parent.';\r\n");
-       $nm_saida->saida("      eval (\"var func_menu_aba = \" + sob_iframe + \"parent.createIframe\"); \r\n");
-       $nm_saida->saida("      if (typeof func_menu_aba !== 'function') \r\n");
-       $nm_saida->saida("      { \r\n");
-       $nm_saida->saida("          sob_iframe += 'parent.';\r\n");
-       $nm_saida->saida("      } \r\n");
-   }
-   $nm_saida->saida("      eval (\"var func_menu_aba = \" + sob_iframe + \"parent.createIframe\"); \r\n");
-   $nm_saida->saida("      eval (\"var aba_atual = \" + sob_iframe + \"parent.Aba_atual\"); \r\n");
-   $nm_saida->saida("      if (apl_name != null && apl_name != '' && typeof func_menu_aba === 'function') \r\n");
-   $nm_saida->saida("      { \r\n");
-   $nm_saida->saida("          for (i = 0; i < Tab_lig_apls.length; i++)\r\n");
-   $nm_saida->saida("          {\r\n");
-   $nm_saida->saida("              if (Tab_lig_apls[i] == apl_name)\r\n");
-   $nm_saida->saida("              {\r\n");
-   $nm_saida->saida("                  parms = parms.replace(/\\?#\\?/g, \"*scin\"); \r\n");
-   $nm_saida->saida("                  parms = parms.replace(/\\?@\\?/g, \"*scout\"); \r\n");
-   $nm_saida->saida("                  apl_lig += '?nmgp_parms=' + parms + '&nm_run_menu=1&NM_btn_cancel=N' + Tab_lig_init[apl_name];\r\n");
-   $nm_saida->saida("                  apl_lig += '&Refresh_aba_menu=' + aba_atual;\r\n");
-   $nm_saida->saida("                  func_menu_aba(apl_name, Tab_lig_lab[apl_name], Tab_lig_hint[apl_name], Tab_lig_img_on[apl_name], Tab_lig_img_off[apl_name], apl_lig, Tab_lig_Type[apl_name]);\r\n");
-   $nm_saida->saida("                  return;\r\n");
-   $nm_saida->saida("              }\r\n");
-   $nm_saida->saida("          }\r\n");
-   $nm_saida->saida("      }\r\n");
-   $nm_saida->saida("      document.F3.target               = \"_self\"; \r\n");
-   $nm_saida->saida("      if (target != null) \r\n");
-   $nm_saida->saida("      {\r\n");
-   $nm_saida->saida("          document.F3.target = target; \r\n");
-   $nm_saida->saida("      }\r\n");
-   $nm_saida->saida("      document.F3.action               = apl_lig  ;\r\n");
-   $nm_saida->saida("      document.F3.nmgp_url_saida.value = apl_saida ;\r\n");
-   $nm_saida->saida("      document.F3.nmgp_chave.value     = \"\" ;\r\n");
-   $nm_saida->saida("      document.F3.nmgp_opcao.value     = \"edit_novo\" ;\r\n");
-   $nm_saida->saida("      document.F3.nmgp_parms.value     = parms ;\r\n");
-   $nm_saida->saida("      if (target == '_blank') \r\n");
-   $nm_saida->saida("      {\r\n");
-   $nm_saida->saida("          document.F3.nmgp_outra_jan.value = \"true\" ;\r\n");
-   $nm_saida->saida("         window.open('','jan_sc','location=no,menubar=no,resizable,scrollbars,status=no,toolbar=no');\r\n");
-   $nm_saida->saida("          document.F3.target = \"jan_sc\"; \r\n");
-   $nm_saida->saida("      }\r\n");
-   $nm_saida->saida("      document.F3.submit() ;\r\n");
    $nm_saida->saida("   } \r\n");
    $nm_saida->saida("   function nm_gp_submit2(campo) \r\n");
    $nm_saida->saida("   { \r\n");
