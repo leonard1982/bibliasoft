@@ -8811,11 +8811,66 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_asentado = $this->asentado;
     $original_monto = $this->monto;
+    $original_nufac = $this->nufac;
+    $original_resolucion = $this->resolucion;
 }
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
   $this->monto =0;
 $this->sc_field_readonly("asentado", 'off');
 $this->usuario =$this->sc_temp_gidtercero;
+
+if($this->resolucion >0 and !empty($this->nufac ))
+{	
+	$vsql = "select * from recibocaja where nufac='".$this->nufac ."' and resolucion='".$this->resolucion ."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiYa = array();
+      $this->vsiya = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiYa[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsiya[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiYa = false;
+          $this->vSiYa_erro = $this->Db->ErrorMsg();
+          $this->vsiya = false;
+          $this->vsiya_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vsiya[0][0]))
+	{
+		
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "La cuenta o factura ya está en otro recibo.";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_reciboingreso';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_reciboingreso';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "La cuenta o factura ya está en otro recibo.";
+ }
+;
+	}
+}
 if (isset($this->sc_temp_gidtercero)) { $_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
@@ -8827,14 +8882,95 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     {
         $this->ajax_return_values_monto(true);
     }
+    if (($original_nufac != $this->nufac || (isset($bFlagRead_nufac) && $bFlagRead_nufac)))
+    {
+        $this->ajax_return_values_nufac(true);
+    }
+    if (($original_resolucion != $this->resolucion || (isset($bFlagRead_resolucion) && $bFlagRead_resolucion)))
+    {
+        $this->ajax_return_values_resolucion(true);
+    }
 }
 $_SESSION['scriptcase']['form_reciboingreso']['contr_erro'] = 'off'; 
     }
     if ("alterar" == $this->nmgp_opcao) {
       $this->sc_evento = $this->nmgp_opcao;
       $_SESSION['scriptcase']['form_reciboingreso']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_idrecibo = $this->idrecibo;
+    $original_nufac = $this->nufac;
+    $original_resolucion = $this->resolucion;
+}
   
 
+if($this->resolucion >0 and !empty($this->nufac ))
+{	
+	$vsql = "select * from recibocaja where nufac='".$this->nufac ."' and resolucion='".$this->resolucion ."' and idrecibo<>'".$this->idrecibo ."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiYa = array();
+      $this->vsiya = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiYa[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsiya[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiYa = false;
+          $this->vSiYa_erro = $this->Db->ErrorMsg();
+          $this->vsiya = false;
+          $this->vsiya_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vsiya[0][0]))
+	{
+		
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "La cuenta o factura ya está en otro recibo.";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_reciboingreso';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_reciboingreso';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "La cuenta o factura ya está en otro recibo.";
+ }
+;
+	}
+}
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_idrecibo != $this->idrecibo || (isset($bFlagRead_idrecibo) && $bFlagRead_idrecibo)))
+    {
+        $this->ajax_return_values_idrecibo(true);
+    }
+    if (($original_nufac != $this->nufac || (isset($bFlagRead_nufac) && $bFlagRead_nufac)))
+    {
+        $this->ajax_return_values_nufac(true);
+    }
+    if (($original_resolucion != $this->resolucion || (isset($bFlagRead_resolucion) && $bFlagRead_resolucion)))
+    {
+        $this->ajax_return_values_resolucion(true);
+    }
+}
 $_SESSION['scriptcase']['form_reciboingreso']['contr_erro'] = 'off'; 
     }
     if ("excluir" == $this->nmgp_opcao) {
