@@ -8854,7 +8854,10 @@ if($this->resolucion >0 and !empty($this->nufac ))
 ;
 	if(isset($this->vsiya[0][0]))
 	{
-		
+		$vsql = "select * from facturaven where numfacven='".$this->nufac ."' and resolucion='".$this->resolucion ."' and saldo>0";
+		if(!isset($vsiya2[0][0]))
+		{
+			
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "La cuenta o factura ya está en otro recibo.";
  if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
@@ -8869,6 +8872,7 @@ if($this->resolucion >0 and !empty($this->nufac ))
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "La cuenta o factura ya está en otro recibo.";
  }
 ;
+		}
 	}
 }
 if (isset($this->sc_temp_gidtercero)) { $_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
@@ -8939,7 +8943,10 @@ if($this->resolucion >0 and !empty($this->nufac ))
 ;
 	if(isset($this->vsiya[0][0]))
 	{
-		
+		$vsql = "select * from facturaven where numfacven='".$this->nufac ."' and resolucion='".$this->resolucion ."' and saldo>0";
+		if(!isset($vsiya2[0][0]))
+		{
+			
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
  if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "La cuenta o factura ya está en otro recibo.";
  if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
@@ -8954,6 +8961,7 @@ if($this->resolucion >0 and !empty($this->nufac ))
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "La cuenta o factura ya está en otro recibo.";
  }
 ;
+		}
 	}
 }
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
