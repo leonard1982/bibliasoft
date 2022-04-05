@@ -3051,7 +3051,7 @@ if(isset($this->dt_ri[0][0]))
 		else
 			{
 			$this->asentado ='NO';
-			echo "EL MONTO EXCEDE EL VALOR DEL SALDO DE LA VENTA";
+			echo "EL MONTO EXCEDE EL VALOR DEL SALDO DE LA VENTA ".$sal;
 			goto ap;
 			}
 		

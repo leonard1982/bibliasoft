@@ -324,8 +324,13 @@ class form_reciboingreso_seleccionar_cuenta_grid
    $this->nmgp_botoes['groupby'] = "on";
    $this->nmgp_botoes['gridsave'] = "on";
    $this->nmgp_botoes['gridsavesession'] = "on";
+   $this->Cmps_ord_def['nro'] = " asc";
    $this->Cmps_ord_def['fecha'] = " desc";
    $this->Cmps_ord_def['tercero'] = " desc";
+   $this->Cmps_ord_def['tipo'] = " asc";
+   $this->Cmps_ord_def['numero_documento'] = " asc";
+   $this->Cmps_ord_def['valor_total'] = " desc";
+   $this->Cmps_ord_def['saldo3'] = " desc";
    $this->Cmps_ord_def['idtercero_cuenta'] = " desc";
    $this->Cmps_ord_def['prefijo'] = " asc";
    $this->Cmps_ord_def['numero'] = " desc";
@@ -524,6 +529,8 @@ class form_reciboingreso_seleccionar_cuenta_grid
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_select']))  
        { 
            $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_select'] = array(); 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_select']['fecha'] = 'DESC'; 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_select']['cod_cuenta'] = 'DESC'; 
        } 
    }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['SC_Ind_Groupby'] == "sc_free_total") 
@@ -749,27 +756,27 @@ class form_reciboingreso_seleccionar_cuenta_grid
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT nro, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null) nm_sel_esp"; 
+       $nmgp_select = "SELECT nro, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null  ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT nro, fecha, tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null) nm_sel_esp"; 
+       $nmgp_select = "SELECT nro, fecha, tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null  ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT nro, convert(char(23),fecha,121), tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null) nm_sel_esp"; 
+       $nmgp_select = "SELECT nro, convert(char(23),fecha,121), tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null  ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT nro, fecha, tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null) nm_sel_esp"; 
+       $nmgp_select = "SELECT nro, fecha, tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null  ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT nro, EXTEND(fecha, YEAR TO DAY), tercero, tipo, numero_documento, valor_total, saldo3, LOTOFILE(observaciones, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null) nm_sel_esp"; 
+       $nmgp_select = "SELECT nro, EXTEND(fecha, YEAR TO DAY), tercero, tipo, numero_documento, valor_total, saldo3, LOTOFILE(observaciones, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null  ) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT nro, fecha, tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null) nm_sel_esp"; 
+       $nmgp_select = "SELECT nro, fecha, tercero, tipo, numero_documento, valor_total, saldo3, observaciones, idtercero_cuenta, prefijo, numero, ie, saldo from (SELECT      idtercero_cuenta,     prefijo,     numero,     fecha,     tercero,     ie,     tipo,     numero_documento,     valor_total,     saldo,     observaciones,     abonos,     usuario,     ultimo_abono,     fecha_uabono,     creado,     editado,     automatico,    concat (prefijo,'/',numero) as nro,    (select sum(tc.saldo) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as sal,    cod_cuenta,    (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) as saldo3 FROM      terceros_cuentas c WHERE c.ie='INGRESO' and c.saldo<0 and c.tipo <> 'RC' and c.saldo is not null and (select sum(tc.valor_total) from terceros_cuentas tc where tc.cod_cuenta=c.cod_cuenta) is not null  ) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['where_pesq']; 
    $nmgp_order_by = ""; 
@@ -2356,7 +2363,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['nro'])) ? $this->New_label['nro'] : "N Cuenta"; 
    if (!isset($this->NM_cmp_hidden['nro']) || $this->NM_cmp_hidden['nro'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nro_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nro_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nro_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nro_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_cmp'] == 'nro')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('nro')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_fecha()
@@ -2476,7 +2531,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['tipo'])) ? $this->New_label['tipo'] : "Tipo"; 
    if (!isset($this->NM_cmp_hidden['tipo']) || $this->NM_cmp_hidden['tipo'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tipo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tipo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tipo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tipo_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_cmp'] == 'tipo')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('tipo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_numero_documento()
@@ -2484,7 +2587,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['numero_documento'])) ? $this->New_label['numero_documento'] : "No Documento"; 
    if (!isset($this->NM_cmp_hidden['numero_documento']) || $this->NM_cmp_hidden['numero_documento'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numero_documento_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numero_documento_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numero_documento_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numero_documento_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_cmp'] == 'numero_documento')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('numero_documento')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_valor_total()
@@ -2492,7 +2643,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['valor_total'])) ? $this->New_label['valor_total'] : "Total"; 
    if (!isset($this->NM_cmp_hidden['valor_total']) || $this->NM_cmp_hidden['valor_total'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_valor_total_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_valor_total_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_valor_total_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_valor_total_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_cmp'] == 'valor_total')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('valor_total')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_saldo3()
@@ -2500,7 +2699,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['saldo3'])) ? $this->New_label['saldo3'] : "Saldo"; 
    if (!isset($this->NM_cmp_hidden['saldo3']) || $this->NM_cmp_hidden['saldo3'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_saldo3_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_saldo3_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_saldo3_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_saldo3_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_cmp'] == 'saldo3')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_reciboingreso_seleccionar_cuenta']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('saldo3')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_observaciones()
