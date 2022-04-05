@@ -3042,7 +3042,7 @@ if(isset($this->dt_ri[0][0]))
          $rf->Close();
       ;
 			}
-		elseif($sal == 0)
+		elseif($sal <= 0)
 			{
 			
      $nm_select ="update facturaven set pagada='SI', saldo=0.00, asentada=1 where numfacven=$vNufac and resolucion=$vRes"; 
