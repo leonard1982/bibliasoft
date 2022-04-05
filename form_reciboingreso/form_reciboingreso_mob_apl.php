@@ -2891,15 +2891,95 @@ $vsql = "select iddetall from detallepagos where idrc='".$this->idrecibo ."'";
 if(isset($this->vsidetalle[0][0]))
 {
 	
-$vTotDesc=$this->rete +$this->descu +$this->val_ica +$this->val_retiva ;
-$vNufac=0;
-$val=0;
-$el_sald=0;
-$nsalcli=0;
-$vMonto=0;
-$vRes=0;
+	$vTotDesc=$this->rete +$this->descu +$this->val_ica +$this->val_retiva ;
+	$vNufac=0;
+	$val=0;
+	$el_sald=0;
+	$nsalcli=0;
+	$vMonto=0;
+	$vRes=0;
+	$v_saldo = 0;
+	
+	 
+      $nm_select = "select nufac,resolucion from recibocaja where idrecibo=$this->idrecibo "; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dest = array();
+     if ($this->idrecibo != "")
+     { 
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dest[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dest = false;
+          $this->dest_erro = $this->Db->ErrorMsg();
+      } 
+     } 
+;
+	if(isset($this->dest[0][0]))
+	{
+		
+		$vNufac = $this->dest[0][0];
+		$vRes   = $this->dest[0][1];
 
- 
+		$vsql = "select saldo from facturaven where numfacven='".$vNufac."' and resolucion='".$vRes."'";
+		 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->v_sal = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->v_sal[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->v_sal = false;
+          $this->v_sal_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->v_sal[0][0]))
+		{
+			$v_saldo = $this->v_sal[0][0];
+		}
+
+		if(intval($v_saldo)==0)
+		{
+			echo "No se puede asentar el recibo porque la factura/cuenta a pagar no tiene saldo.";
+		}
+		else
+		{
+			 
       $nm_select = "select monto, resolucion from recibocaja where idrecibo=$this->idrecibo "; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2934,83 +3014,42 @@ $vRes=0;
       } 
      } 
 ;
-	
-if(isset($this->dt_ri[0][0]))
-	{
-	$vMonto=$vMontoTotal;
-	$vRes=$this->dt_ri[0][1];
 
-	if ($vMontoTotal>0)
-	{
-	 
-      $nm_select = "select nufac from recibocaja where idrecibo=$this->idrecibo "; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->dest = array();
-     if ($this->idrecibo != "")
-     { 
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                      $this->dest[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->dest = false;
-          $this->dest_erro = $this->Db->ErrorMsg();
-      } 
-     } 
-;
-	if(isset($this->dest[0][0]))
-		{
-		$vNufac=$this->dest[0][0];
-		}
-	else
-		{
-		 echo "NO HAY NUMERO DE DOCUMENTO";
-		}
-		
-	if($vRes>0 and $vNufac==0)
-		{
-		$this->asentado ='NO';
-		echo "SELECCIONE UN DOCUMENTO O CUENTA A COBRAR, NO SE PUEDE PROCEDER";
-		goto ap;
-		}
-	$this->sc_field_readonly("cliente", 'on');
-	
-	if($this->dt_ri[0][1]>0 and $vNufac>0)
-		{
-		$this->sc_field_readonly("resolucion", 'on');
-		$this->sc_field_readonly("nufac", 'on');
-		
-		$val=$vMonto+$vTotDesc;
-		$sal=$this->saldofac -$val;
-		$vMcre=$this->fEs_Credito();
-		$el_sald=$this->saldo_cliente();
-		$nsalcli=$el_sald-$val;
-		
-		if($vMcre==2 and $sal<>0)
-			{
-			echo "EL DOCUMENTO ES DE CONTADO, NO SE PUEDE HACER PAGOS PARCIALES";
-			goto ap;
-			}
-		
-		if($sal >0)
-			{
-			
+			if(isset($this->dt_ri[0][0]))
+				{
+				$vMonto=$vMontoTotal;
+
+				if ($vMontoTotal>0)
+				{
+
+				if($vRes>0 and $vNufac==0)
+					{
+					$this->asentado ='NO';
+					echo "SELECCIONE UN DOCUMENTO O CUENTA A COBRAR, NO SE PUEDE PROCEDER";
+					goto ap;
+					}
+				$this->sc_field_readonly("cliente", 'on');
+
+				if($this->dt_ri[0][1]>0 and $vNufac>0)
+					{
+					$this->sc_field_readonly("resolucion", 'on');
+					$this->sc_field_readonly("nufac", 'on');
+
+					$val=$vMonto+$vTotDesc;
+					$sal=$this->saldofac -$val;
+					$vMcre=$this->fEs_Credito();
+					$el_sald=$this->saldo_cliente();
+					$nsalcli=$el_sald-$val;
+
+					if($vMcre==2 and $sal<>0)
+						{
+						echo "EL DOCUMENTO ES DE CONTADO, NO SE PUEDE HACER PAGOS PARCIALES";
+						goto ap;
+						}
+
+					if($sal >0)
+						{
+						
      $nm_select ="update facturaven set pagada='AB', saldo=$sal where numfacven=$vNufac and resolucion=$vRes"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3027,10 +3066,10 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-			}
-		elseif($sal <= 0)
-			{
-			
+						}
+					elseif($sal <= 0)
+						{
+						
      $nm_select ="update facturaven set pagada='SI', saldo=0.00, asentada=1 where numfacven=$vNufac and resolucion=$vRes"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3047,25 +3086,25 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-			}
-		else
-			{
-			$this->asentado ='NO';
-			echo "EL MONTO EXCEDE EL VALOR DEL SALDO DE LA VENTA ".$sal;
-			goto ap;
-			}
-		
-		$hoy= date('d-m-Y');
-		$fecha_del=date("Y-m-d", strtotime($hoy));
-		
-		$Escre=$this->fEs_Credito();
-		$asen=$this->fSiAsentada();
-		
-		$vtipofac  = "";
-		$vsicroco  = "";
-		$vnot      = "FACTURA VENTA CONTADO";
+						}
+					else
+						{
+						$this->asentado ='NO';
+						echo "EL MONTO EXCEDE EL VALOR DEL SALDO DE LA VENTA ".$sal;
+						goto ap;
+						}
 
-		 
+					$hoy= date('d-m-Y');
+					$fecha_del=date("Y-m-d", strtotime($hoy));
+
+					$Escre=$this->fEs_Credito();
+					$asen=$this->fSiAsentada();
+
+					$vtipofac  = "";
+					$vsicroco  = "";
+					$vnot      = "FACTURA VENTA CONTADO";
+
+					 
       $nm_select = "select f.tipo,f.credito from facturaven f inner join resdian r on f.resolucion=r.Idres where f.numfacven='".$vNufac."' and f.resolucion='".$vRes."' and f.idcli='".$this->cliente ."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3098,38 +3137,38 @@ if(isset($this->dt_ri[0][0]))
      } 
 ;
 
-		if(isset($this->vndoc[0][0]))
-		{
-			$vtipofac  = $this->vndoc[0][0];
-			$vsicroco  = $this->vndoc[0][1];
-			
-			if($vtipofac=='RS' and $vsicroco==1)
-			{
-				$vnot = "REMISION SALIDA CREDITO";
-			}
-			
-			if($vtipofac=='RS' and $vsicroco==2)
-			{
-				$vnot = "REMISION SALIDA CONTADO";
-			}
-			
-			if($vtipofac=='FV' and $vsicroco==1)
-			{
-				$vnot = "FACTURA VENTA CREDITO";
-			}
-			
-			if($vtipofac=='FV' and $vsicroco==2)
-			{
-				$vnot = "FACTURA VENTA CONTADO";
-			}
-		}
-		
-		
-		if($asen==0)
-			{
-			if($Escre==2)
-				{
-				
+					if(isset($this->vndoc[0][0]))
+					{
+						$vtipofac  = $this->vndoc[0][0];
+						$vsicroco  = $this->vndoc[0][1];
+
+						if($vtipofac=='RS' and $vsicroco==1)
+						{
+							$vnot = "REMISION SALIDA CREDITO";
+						}
+
+						if($vtipofac=='RS' and $vsicroco==2)
+						{
+							$vnot = "REMISION SALIDA CONTADO";
+						}
+
+						if($vtipofac=='FV' and $vsicroco==1)
+						{
+							$vnot = "FACTURA VENTA CREDITO";
+						}
+
+						if($vtipofac=='FV' and $vsicroco==2)
+						{
+							$vnot = "FACTURA VENTA CONTADO";
+						}
+					}
+
+
+					if($asen==0)
+						{
+						if($Escre==2)
+							{
+							
      $nm_select ="insert caja set fecha='$fecha_del', detalle='R. CAJA', nota='".$vnot."', documento='$vNufac', cantidad=$vMonto, cierredia='NO', resolucion=$vRes, idrc=$this->idrecibo , banco=$this->banco_id , usuario=$this->usuario "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3146,11 +3185,11 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-				}
-			else
-				{
-				
-				
+							}
+						else
+							{
+
+							
      $nm_select ="insert caja set fecha='$fecha_del', detalle='R. CAJA', nota='".$vnot."', documento='$vNufac', cantidad=$vMonto, cierredia='NO', resolucion=$vRes, idrc=$this->idrecibo , banco=$this->banco_id , usuario=$this->usuario "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3167,7 +3206,7 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-				
+							
      $nm_select ="update terceros set saldo=$nsalcli where idtercero=$this->cliente "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3184,14 +3223,14 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-				}
-			}
-			
-		else
-			{
-			if($Escre==2)
-				{
-				
+							}
+						}
+
+					else
+						{
+						if($Escre==2)
+							{
+							
      $nm_select ="update caja set  detalle='R. CAJA', nota='".$vnot."', cantidad=$vMonto, documento='$vNufac', cierredia='NO', resolucion=$vRes, idrc=$this->idrecibo  where idrc=$this->idrecibo , banco=$this->banco_id , usuario=$this->usuario "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3208,7 +3247,7 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-				
+							
      $nm_select ="update terceros set saldo=$nsalcli where idtercero=$this->cliente "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3225,11 +3264,11 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-				}
-			else
-				{
-				
-				
+							}
+						else
+							{
+
+							
      $nm_select ="update caja set  detalle='R. CAJA', nota='".$vnot."', cantidad=$vMonto, documento='$vNufac', cierredia='NO', resolucion=$vRes, idrc=$this->idrecibo , banco=$this->banco_id , usuario=$this->usuario  where idrc=$this->idrecibo "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3246,8 +3285,8 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-				
-				 
+
+							 
      $nm_select ="update terceros set saldo=$nsalcli where idtercero=$this->cliente "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3264,22 +3303,22 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-				}
-			}
-		
-		}
-	
-	else
-		{		
-		$hoy= date('d-m-Y');
-		$fecha_del=date("Y-m-d", strtotime($hoy));
-		$val=$this->monto +$vTotDesc;
-		$el_sald=$this->saldo_cliente();
-		$nsalcli=$el_sald-$val;
-		$asen=$this->fSiAsentada();
-		if($asen==0)
-			{
-			
+							}
+						}
+
+					}
+
+				else
+					{		
+					$hoy= date('d-m-Y');
+					$fecha_del=date("Y-m-d", strtotime($hoy));
+					$val=$this->monto +$vTotDesc;
+					$el_sald=$this->saldo_cliente();
+					$nsalcli=$el_sald-$val;
+					$asen=$this->fSiAsentada();
+					if($asen==0)
+						{
+						
      $nm_select ="insert caja set fecha='$fecha_del', detalle='R. CAJA', nota='OTROS INGRESOS', documento='SIN', cantidad=$vMonto, cierredia='NO', resolucion=0, idrc=$this->idrecibo , banco=$this->banco_id , usuario=$this->usuario "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3296,7 +3335,7 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-			
+						
      $nm_select ="update terceros set saldo=$nsalcli where idtercero=$this->cliente "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3313,10 +3352,10 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-			}
-		else
-			{
-			
+						}
+					else
+						{
+						
      $nm_select ="update caja set detalle='R. CAJA', nota='OTROS INGRESOS', documento='SIN', cantidad=$vMonto  where idrc=$this->idrecibo "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3333,7 +3372,7 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-			
+						
      $nm_select ="update terceros set saldo=$nsalcli where idtercero=$this->cliente "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3350,10 +3389,10 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-			}
-		
-		}
-	
+						}
+
+					}
+				
      $nm_select ="update recibocaja set asentado='SI' where idrecibo=$this->idrecibo "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3370,21 +3409,27 @@ if(isset($this->dt_ri[0][0]))
          }
          $rf->Close();
       ;
-	$this->NM_ajax_info['buttonDisplay']['delete'] = $this->nmgp_botoes["delete"] = "off";;
-		
-	
-	echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;' >DOCUMENTO ASENTADO CON ÉXITO!!!</div>";
-	$this->NM_ajax_info['buttonDisplay']['btn_asentar'] = $this->nmgp_botoes["btn_asentar"] = "on";;
-	$this->NM_ajax_info['buttonDisplay']['btn_reversar'] = $this->nmgp_botoes["btn_reversar"] = "off";;
-	}
-}
-ap:;
+				$this->NM_ajax_info['buttonDisplay']['delete'] = $this->nmgp_botoes["delete"] = "off";;
 
+
+				echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#5877b9;padding:8px;' >DOCUMENTO ASENTADO CON ÉXITO!!!</div>";
+				$this->NM_ajax_info['buttonDisplay']['btn_asentar'] = $this->nmgp_botoes["btn_asentar"] = "on";;
+				$this->NM_ajax_info['buttonDisplay']['btn_reversar'] = $this->nmgp_botoes["btn_reversar"] = "off";;
+				}
+			}
+			ap:;
+		}
+
+	}
+	else
+	{
+		$this->asentado  = "NO";
+		echo "El recibo no tiene detalle.";
+	}
 }
 else
 {
-	$this->asentado  = "NO";
-	echo "El recibo no tiene detalle.";
+ 	echo "NO HAY NUMERO DE DOCUMENTO";
 }
 $_SESSION['scriptcase']['form_reciboingreso_mob']['contr_erro'] = 'off'; 
     echo ob_get_clean();
