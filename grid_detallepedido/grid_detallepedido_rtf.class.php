@@ -288,24 +288,8 @@ $_SESSION['scriptcase']['grid_detallepedido']['contr_erro'] = 'off';
               $SC_Label = str_replace('>', '&gt;', $SC_Label);
               $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
           }
-          $SC_Label = (isset($this->New_label['colores'])) ? $this->New_label['colores'] : "Color"; 
-          if ($Cada_col == "colores" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              $SC_Label = str_replace('<', '&lt;', $SC_Label);
-              $SC_Label = str_replace('>', '&gt;', $SC_Label);
-              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
-          }
-          $SC_Label = (isset($this->New_label['tallas'])) ? $this->New_label['tallas'] : "Talla"; 
-          if ($Cada_col == "tallas" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              $SC_Label = str_replace('<', '&lt;', $SC_Label);
-              $SC_Label = str_replace('>', '&gt;', $SC_Label);
-              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
-          }
-          $SC_Label = (isset($this->New_label['sabor'])) ? $this->New_label['sabor'] : "Sabor"; 
-          if ($Cada_col == "sabor" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          $SC_Label = (isset($this->New_label['idbod'])) ? $this->New_label['idbod'] : "Ubicación"; 
+          if ($Cada_col == "idbod" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $SC_Label = NM_charset_to_utf8($SC_Label);
               $SC_Label = str_replace('<', '&lt;', $SC_Label);
@@ -455,27 +439,27 @@ $_SESSION['scriptcase']['grid_detallepedido']['contr_erro'] = 'off';
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, colores, tallas, sabor, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, idbod, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, colores, tallas, sabor, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, idbod, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, colores, tallas, sabor, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, idbod, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, colores, tallas, sabor, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, TO_DATE(TO_CHAR(hora_inicio, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(hora_final, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, idbod, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, TO_DATE(TO_CHAR(hora_inicio, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(hora_final, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, colores, tallas, sabor, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, idbod, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, colores, tallas, sabor, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro as codigoprod, idpro as codigobar, idpro, idbod, cantidad, valorunit, descuento, valorpar, iva, estado_comanda, hora_inicio, hora_final, observ, cerrado, iddet, idpedid, numfac, remision, unidadmayor, costop, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallepedido']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallepedido']['where_pesq'];
@@ -514,48 +498,50 @@ $_SESSION['scriptcase']['grid_detallepedido']['contr_erro'] = 'off';
          $this->codigobar = (string)$this->codigobar;
          $this->idpro = $rs->fields[2] ;  
          $this->idpro = (string)$this->idpro;
-         $this->colores = $rs->fields[3] ;  
-         $this->colores = (string)$this->colores;
-         $this->tallas = $rs->fields[4] ;  
-         $this->tallas = (string)$this->tallas;
-         $this->sabor = $rs->fields[5] ;  
-         $this->sabor = (string)$this->sabor;
-         $this->cantidad = $rs->fields[6] ;  
+         $this->idbod = $rs->fields[3] ;  
+         $this->idbod = (string)$this->idbod;
+         $this->cantidad = $rs->fields[4] ;  
          $this->cantidad = (strpos(strtolower($this->cantidad), "e")) ? (float)$this->cantidad : $this->cantidad; 
          $this->cantidad = (string)$this->cantidad;
-         $this->valorunit = $rs->fields[7] ;  
+         $this->valorunit = $rs->fields[5] ;  
          $this->valorunit =  str_replace(",", ".", $this->valorunit);
          $this->valorunit = (strpos(strtolower($this->valorunit), "e")) ? (float)$this->valorunit : $this->valorunit; 
          $this->valorunit = (string)$this->valorunit;
-         $this->descuento = $rs->fields[8] ;  
+         $this->descuento = $rs->fields[6] ;  
          $this->descuento =  str_replace(",", ".", $this->descuento);
          $this->descuento = (strpos(strtolower($this->descuento), "e")) ? (float)$this->descuento : $this->descuento; 
          $this->descuento = (string)$this->descuento;
-         $this->valorpar = $rs->fields[9] ;  
+         $this->valorpar = $rs->fields[7] ;  
          $this->valorpar =  str_replace(",", ".", $this->valorpar);
          $this->valorpar = (strpos(strtolower($this->valorpar), "e")) ? (float)$this->valorpar : $this->valorpar; 
          $this->valorpar = (string)$this->valorpar;
-         $this->iva = $rs->fields[10] ;  
+         $this->iva = $rs->fields[8] ;  
          $this->iva =  str_replace(",", ".", $this->iva);
          $this->iva = (strpos(strtolower($this->iva), "e")) ? (float)$this->iva : $this->iva; 
          $this->iva = (string)$this->iva;
-         $this->estado_comanda = $rs->fields[11] ;  
-         $this->hora_inicio = $rs->fields[12] ;  
-         $this->hora_final = $rs->fields[13] ;  
-         $this->observ = $rs->fields[14] ;  
-         $this->cerrado = $rs->fields[15] ;  
-         $this->iddet = $rs->fields[16] ;  
+         $this->estado_comanda = $rs->fields[9] ;  
+         $this->hora_inicio = $rs->fields[10] ;  
+         $this->hora_final = $rs->fields[11] ;  
+         $this->observ = $rs->fields[12] ;  
+         $this->cerrado = $rs->fields[13] ;  
+         $this->iddet = $rs->fields[14] ;  
          $this->iddet = (string)$this->iddet;
-         $this->idpedid = $rs->fields[17] ;  
+         $this->idpedid = $rs->fields[15] ;  
          $this->idpedid = (string)$this->idpedid;
-         $this->numfac = $rs->fields[18] ;  
+         $this->numfac = $rs->fields[16] ;  
          $this->numfac = (string)$this->numfac;
-         $this->remision = $rs->fields[19] ;  
+         $this->remision = $rs->fields[17] ;  
          $this->remision = (string)$this->remision;
-         $this->unidadmayor = $rs->fields[20] ;  
-         $this->costop = $rs->fields[21] ;  
+         $this->unidadmayor = $rs->fields[18] ;  
+         $this->costop = $rs->fields[19] ;  
          $this->costop = (strpos(strtolower($this->costop), "e")) ? (float)$this->costop : $this->costop; 
          $this->costop = (string)$this->costop;
+         $this->colores = $rs->fields[20] ;  
+         $this->colores = (string)$this->colores;
+         $this->tallas = $rs->fields[21] ;  
+         $this->tallas = (string)$this->tallas;
+         $this->sabor = $rs->fields[22] ;  
+         $this->sabor = (string)$this->sabor;
          //----- lookup - codigoprod
          $this->look_codigoprod = $this->codigoprod; 
          $this->Lookup->lookup_codigoprod($this->look_codigoprod, $this->codigoprod) ; 
@@ -568,6 +554,10 @@ $_SESSION['scriptcase']['grid_detallepedido']['contr_erro'] = 'off';
          $this->look_idpro = $this->idpro; 
          $this->Lookup->lookup_idpro($this->look_idpro, $this->idpro) ; 
          $this->look_idpro = ($this->look_idpro == "&nbsp;") ? "" : $this->look_idpro; 
+         //----- lookup - idbod
+         $this->look_idbod = $this->idbod; 
+         $this->Lookup->lookup_idbod($this->look_idbod, $this->idbod) ; 
+         $this->look_idbod = ($this->look_idbod == "&nbsp;") ? "" : $this->look_idbod; 
          //----- lookup - estado_comanda
          $this->look_estado_comanda = $this->estado_comanda; 
          $this->Lookup->lookup_estado_comanda($this->look_estado_comanda); 
@@ -728,32 +718,14 @@ $_SESSION['scriptcase']['grid_detallepedido']['contr_erro'] = 'off';
          $this->look_idpro = str_replace('>', '&gt;', $this->look_idpro);
          $this->Texto_tag .= "<td>" . $this->look_idpro . "</td>\r\n";
    }
-   //----- colores
-   function NM_export_colores()
+   //----- idbod
+   function NM_export_idbod()
    {
-             nmgp_Form_Num_Val($this->colores, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         $this->colores = NM_charset_to_utf8($this->colores);
-         $this->colores = str_replace('<', '&lt;', $this->colores);
-         $this->colores = str_replace('>', '&gt;', $this->colores);
-         $this->Texto_tag .= "<td>" . $this->colores . "</td>\r\n";
-   }
-   //----- tallas
-   function NM_export_tallas()
-   {
-             nmgp_Form_Num_Val($this->tallas, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         $this->tallas = NM_charset_to_utf8($this->tallas);
-         $this->tallas = str_replace('<', '&lt;', $this->tallas);
-         $this->tallas = str_replace('>', '&gt;', $this->tallas);
-         $this->Texto_tag .= "<td>" . $this->tallas . "</td>\r\n";
-   }
-   //----- sabor
-   function NM_export_sabor()
-   {
-             nmgp_Form_Num_Val($this->sabor, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         $this->sabor = NM_charset_to_utf8($this->sabor);
-         $this->sabor = str_replace('<', '&lt;', $this->sabor);
-         $this->sabor = str_replace('>', '&gt;', $this->sabor);
-         $this->Texto_tag .= "<td>" . $this->sabor . "</td>\r\n";
+         nmgp_Form_Num_Val($this->look_idbod, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         $this->look_idbod = NM_charset_to_utf8($this->look_idbod);
+         $this->look_idbod = str_replace('<', '&lt;', $this->look_idbod);
+         $this->look_idbod = str_replace('>', '&gt;', $this->look_idbod);
+         $this->Texto_tag .= "<td>" . $this->look_idbod . "</td>\r\n";
    }
    //----- cantidad
    function NM_export_cantidad()

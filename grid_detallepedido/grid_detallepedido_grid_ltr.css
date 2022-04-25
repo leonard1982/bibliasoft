@@ -4,12 +4,8 @@
 .css_codigobar_grid_line {vertical-align: top;text-align: center;}
 .css_idpro_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_idpro_grid_line {vertical-align: middle;text-align: left;}
-.css_colores_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_colores_grid_line {vertical-align: middle;text-align: center;}
-.css_tallas_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_tallas_grid_line {vertical-align: middle;text-align: center;}
-.css_sabor_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_sabor_grid_line {vertical-align: middle;text-align: center;}
+.css_idbod_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idbod_grid_line {vertical-align: top;text-align: right;}
 .css_cantidad_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_cantidad_grid_line {vertical-align: middle;text-align: right;}
 .css_cantidad_tot_ger {text-align: right;}

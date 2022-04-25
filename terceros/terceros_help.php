@@ -55,7 +55,7 @@ class terceros_help
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
 <body class="scFormHelpPage">
-<?php echo "<b>Teléfono o celular</b><br>" . nl2br("PARA MANEJO DE FACTURA ELECTRÓNICA SE REQUIERE QUE LOS CLIENTES TENGAN MÍNIMO CORREO ELECTRÓNICO"); ?>
+<?php echo "<b>Teléfono o celular**</b><br>" . nl2br("PARA MANEJO DE FACTURA ELECTRÓNICA SE REQUIERE QUE LOS CLIENTES TENGAN TELÉFONO Y CORREO ELECTRÓNICO VÁLIDOS"); ?>
 </body>
 </html>
 <?php
@@ -230,35 +230,6 @@ class terceros_help
 </head>
 <body class="scFormHelpPage">
 <?php echo "<b>Primer Apellido **</b><br>" . nl2br("REQUERIDO SI ES CLIENTE Y PERSONA NATURAL"); ?>
-</body>
-</html>
-<?php
-        }
-        if ($nm_cod_campo ==  "imagenter")
-        {
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
-
-<html>
-<head>
- <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
-<?php
-
-    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
-    {
-?>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<?php
-    }
-
-?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
- <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
- <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
-</head>
-<body class="scFormHelpPage">
-<?php echo "<b>Foto</b><br>" . nl2br("La imágen debe cumplir las siguiente especificaciones:  altura 150px, ancho 150 px como máximo. La imagen puede ser jpg, png ogif."); ?>
 </body>
 </html>
 <?php

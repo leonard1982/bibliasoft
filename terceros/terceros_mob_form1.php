@@ -2,18 +2,22 @@
 <?php $sc_hidden_no = 1; $sc_hidden_yes = 0; ?>
    <a name="bloco_0"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_7"><!-- bloco_c -->
+<div id="div_hidden_bloco_6"><!-- bloco_c -->
 <?php
    if (!isset($this->nmgp_cmp_hidden['idtercero']))
    {
        $this->nmgp_cmp_hidden['idtercero'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['imagenter']))
+   {
+       $this->nmgp_cmp_hidden['imagenter'] = 'off';
    }
    if (!isset($this->nmgp_cmp_hidden['relleno2']))
    {
        $this->nmgp_cmp_hidden['relleno2'] = 'off';
    }
 ?>
-<TABLE align="center" id="hidden_bloco_7" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
+<TABLE align="center" id="hidden_bloco_6" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
            if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['idtercero']))
            {
                $this->nmgp_cmp_readonly['idtercero'] = 'on';
@@ -25,7 +29,7 @@
     <TD colspan="1" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf7\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos Crédito Cliente<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf6\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos Crédito Cliente<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>
@@ -956,16 +960,16 @@ $autorizado_look = "";
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_8"></a>
+   <a name="bloco_7"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_8"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_8" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+<div id="div_hidden_bloco_7"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_7" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
     <TD colspan="1" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf8\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos contacto y cumpleaños<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf7\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_exp . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Agregar Sucursales<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>
@@ -975,8 +979,513 @@ $autorizado_look = "";
 
 
    </tr>
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['direcciones']))
+    {
+        $this->nm_new_label['direcciones'] = "direcciones";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $direcciones = $this->direcciones;
+   $sStyleHidden_direcciones = '';
+   if (isset($this->nmgp_cmp_hidden['direcciones']) && $this->nmgp_cmp_hidden['direcciones'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['direcciones']);
+       $sStyleHidden_direcciones = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_direcciones = 'display: none;';
+   $sStyleReadInp_direcciones = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['direcciones']) && $this->nmgp_cmp_readonly['direcciones'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['direcciones']);
+       $sStyleReadLab_direcciones = '';
+       $sStyleReadInp_direcciones = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['direcciones']) && $this->nmgp_cmp_hidden['direcciones'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="direcciones" value="<?php echo $this->form_encode_input($direcciones) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_direcciones_line" id="hidden_field_data_direcciones" style="<?php echo $sStyleHidden_direcciones; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td width="100%" class="scFormDataFontOdd css_direcciones_line" style="vertical-align: top;padding: 0px">
+<?php
+ if (isset($_SESSION['scriptcase']['dashboard_scinit'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dashboard_info']['dashboard_app'] ][ $this->Ini->sc_lig_target['C_@scinf_direcciones'] ]) && '' != $_SESSION['scriptcase']['dashboard_scinit'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dashboard_info']['dashboard_app'] ][ $this->Ini->sc_lig_target['C_@scinf_direcciones'] ]) {
+     $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] = $_SESSION['scriptcase']['dashboard_scinit'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dashboard_info']['dashboard_app'] ][ $this->Ini->sc_lig_target['C_@scinf_direcciones'] ];
+ }
+ else {
+     $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] = $this->Ini->sc_page;
+ }
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_proc']  = false;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_form']  = true;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_call']  = true;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_multi'] = false;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_liga_form_insert'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_liga_form_update'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_liga_form_delete'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_liga_form_btn_nav'] = 'off';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_liga_grid_edit'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_liga_grid_edit_link'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_liga_qtd_reg'] = '';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_liga_tp_pag'] = 'total';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_parms'] = "cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['foreign_key']['idter'] = $this->nmgp_dados_form['idtercero'];
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['where_filter'] = "idter = " . $this->nmgp_dados_form['idtercero'] . "";
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['where_detal']  = "idter = " . $this->nmgp_dados_form['idtercero'] . "";
+ if ($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['terceros_mob']['total'] < 0)
+ {
+     $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['where_filter'] = "1 <> 1";
+ }
+ $sDetailSrc = ('novo' == $this->nmgp_opcao) ? 'terceros_mob_empty.htm' : $this->Ini->link_form_direccion_mob_edit . '?script_case_init=' . $this->form_encode_input($this->Ini->sc_page) . '&script_case_detail=Y&sc_ifr_height=500';
+ foreach ($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob'] as $i => $v)
+ {
+     $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion'][$i] = $v;
+ }
+if (isset($this->Ini->sc_lig_target['C_@scinf_direcciones']) && 'nmsc_iframe_liga_form_direccion_mob' != $this->Ini->sc_lig_target['C_@scinf_direcciones'])
+{
+    if ('novo' != $this->nmgp_opcao)
+    {
+        $sDetailSrc .= '&under_dashboard=1&dashboard_app=' . $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dashboard_info']['dashboard_app'] . '&own_widget=' . $this->Ini->sc_lig_target['C_@scinf_direcciones'] . '&parent_widget=' . $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dashboard_info']['own_widget'];
+        $sDetailSrc  = $this->addUrlParam($sDetailSrc, 'script_case_init', $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init']);
+    }
+?>
+<script type="text/javascript">
+$(function() {
+    scOpenMasterDetail("<?php echo $this->Ini->sc_lig_target['C_@scinf_direcciones'] ?>", "<?php echo $sDetailSrc; ?>");
+});
+</script>
+<?php
+}
+else
+{
+?>
+<iframe border="0" id="nmsc_iframe_liga_form_direccion_mob"  marginWidth="0" marginHeight="0" frameborder="0" valign="top" height="500" width="1200" name="nmsc_iframe_liga_form_direccion_mob"  scrolling="auto" src="<?php echo $sDetailSrc; ?>"></iframe>
+<?php
+}
+?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_direcciones_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_direcciones_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['sucur_cliente']))
+   {
+       $this->nm_new_label['sucur_cliente'] = "Sucursales";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $sucur_cliente = $this->sucur_cliente;
+   $sStyleHidden_sucur_cliente = '';
+   if (isset($this->nmgp_cmp_hidden['sucur_cliente']) && $this->nmgp_cmp_hidden['sucur_cliente'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['sucur_cliente']);
+       $sStyleHidden_sucur_cliente = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_sucur_cliente = 'display: none;';
+   $sStyleReadInp_sucur_cliente = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['sucur_cliente']) && $this->nmgp_cmp_readonly['sucur_cliente'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['sucur_cliente']);
+       $sStyleReadLab_sucur_cliente = '';
+       $sStyleReadInp_sucur_cliente = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['sucur_cliente']) && $this->nmgp_cmp_hidden['sucur_cliente'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="sucur_cliente" value="<?php echo $this->form_encode_input($this->sucur_cliente) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->sucur_cliente_1 = explode(";", trim($this->sucur_cliente));
+  } 
+  else
+  {
+      if (empty($this->sucur_cliente))
+      {
+          $this->sucur_cliente_1= array(); 
+          $this->sucur_cliente= "NO";
+      } 
+      else
+      {
+          $this->sucur_cliente_1= $this->sucur_cliente; 
+          $this->sucur_cliente= ""; 
+          foreach ($this->sucur_cliente_1 as $cada_sucur_cliente)
+          {
+             if (!empty($sucur_cliente))
+             {
+                 $this->sucur_cliente.= ";"; 
+             } 
+             $this->sucur_cliente.= $cada_sucur_cliente; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_sucur_cliente_line" id="hidden_field_data_sucur_cliente" style="<?php echo $sStyleHidden_sucur_cliente; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_sucur_cliente_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["sucur_cliente"]) &&  $this->nmgp_cmp_readonly["sucur_cliente"] == "on") { 
+
+$sucur_cliente_look = "";
+ if ($this->sucur_cliente == "SI") { $sucur_cliente_look .= "SI" ;} 
+ if (empty($sucur_cliente_look)) { $sucur_cliente_look = $this->sucur_cliente; }
+?>
+<input type="hidden" name="sucur_cliente" value="<?php echo $this->form_encode_input($sucur_cliente) . "\">" . $sucur_cliente_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$sucur_cliente_look = "";
+ if ($this->sucur_cliente == "SI") { $sucur_cliente_look .= "SI" ;} 
+ if (empty($sucur_cliente_look)) { $sucur_cliente_look = $this->sucur_cliente; }
+?>
+<span id="id_read_on_sucur_cliente" class="css_sucur_cliente_line" style="<?php echo $sStyleReadLab_sucur_cliente; ?>"><?php echo $this->form_format_readonly("sucur_cliente", $this->form_encode_input($sucur_cliente_look)); ?></span><span id="id_read_off_sucur_cliente" class="css_read_off_sucur_cliente css_sucur_cliente_line" style="<?php echo $sStyleReadInp_sucur_cliente; ?>"><?php echo "<div id=\"idAjaxCheckbox_sucur_cliente\" style=\"display: inline-block\" class=\"css_sucur_cliente_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_sucur_cliente_line"><?php $tempOptionId = "id-opt-sucur_cliente" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-sucur_cliente sc-ui-checkbox-sucur_cliente sc-js-input" name="sucur_cliente[]" value="SI"
+ alt="{type: 'checkbox', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_sucur_cliente'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->sucur_cliente_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_sucur_cliente_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_sucur_cliente_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+
+
+
+
+
+
+<?php $sStyleHidden_sucur_cliente_dumb = ('' == $sStyleHidden_sucur_cliente) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_sucur_cliente_dumb" style="<?php echo $sStyleHidden_sucur_cliente_dumb; ?>"></TD>
+   </tr>
+<?php $sc_hidden_no = 1; ?>
+</TABLE></div><!-- bloco_f -->
+   </td>
+   </tr></table>
+   <a name="bloco_8"></a>
+   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
+<div id="div_hidden_bloco_8"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_8" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+
+
+    <TD colspan="1" height="20" class="scFormBlock">
+     <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
+      <TR>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf8\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_exp . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>REQUERIDOS DIAN<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       
+      </TR>
+     </TABLE>
+    </TD>
+
+
+
+
+   </tr>
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['detalle_tributario']))
+    {
+        $this->nm_new_label['detalle_tributario'] = "DETALLE TRIBUTARIO";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $detalle_tributario = $this->detalle_tributario;
+   $sStyleHidden_detalle_tributario = '';
+   if (isset($this->nmgp_cmp_hidden['detalle_tributario']) && $this->nmgp_cmp_hidden['detalle_tributario'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['detalle_tributario']);
+       $sStyleHidden_detalle_tributario = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_detalle_tributario = 'display: none;';
+   $sStyleReadInp_detalle_tributario = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['detalle_tributario']) && $this->nmgp_cmp_readonly['detalle_tributario'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['detalle_tributario']);
+       $sStyleReadLab_detalle_tributario = '';
+       $sStyleReadInp_detalle_tributario = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['detalle_tributario']) && $this->nmgp_cmp_hidden['detalle_tributario'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="detalle_tributario" value="<?php echo $this->form_encode_input($detalle_tributario) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_detalle_tributario_line" id="hidden_field_data_detalle_tributario" style="<?php echo $sStyleHidden_detalle_tributario; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_detalle_tributario_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_detalle_tributario_label" style=""><span id="id_label_detalle_tributario"><?php echo $this->nm_new_label['detalle_tributario']; ?></span></span><br><?php
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png"))
+          { 
+              $detalle_tributario = "&nbsp;" ;  
+          } 
+          else 
+          { 
+              if ($this->Ini->Export_img_zip) {
+                  $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png";
+                  $detalle_tributario = "<img border=\"0\" src=\"grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
+              }
+              else {
+                  $detalle_tributario = "<img border=\"0\" src=\"" . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
+              }
+          } 
+?>
+<span id="id_imghtml_detalle_tributario"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_form_det_trib_x_tercero_edit . "', '$this->nm_location', 'terc_cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutNMSC_modal*scinok*scout', '', 'modal', '400', '600', 'form_det_trib_x_tercero')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $detalle_tributario ; ?></font></a></span>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["detalle_tributario"]) &&  $this->nmgp_cmp_readonly["detalle_tributario"] == "on") { 
+
+ ?>
+<input type="hidden" name="detalle_tributario" value="<?php echo $this->form_encode_input($detalle_tributario) . "\">" . $detalle_tributario . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_detalle_tributario" class="sc-ui-readonly-detalle_tributario css_detalle_tributario_line" style="<?php echo $sStyleReadLab_detalle_tributario; ?>"><?php echo $this->form_format_readonly("detalle_tributario", $this->form_encode_input($this->detalle_tributario)); ?></span><span id="id_read_off_detalle_tributario" class="css_read_off_detalle_tributario<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_detalle_tributario; ?>"></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_detalle_tributario_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_detalle_tributario_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['responsabilidad_fiscal']))
+    {
+        $this->nm_new_label['responsabilidad_fiscal'] = "RESPONSABILIDADES FISCALES";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $responsabilidad_fiscal = $this->responsabilidad_fiscal;
+   $sStyleHidden_responsabilidad_fiscal = '';
+   if (isset($this->nmgp_cmp_hidden['responsabilidad_fiscal']) && $this->nmgp_cmp_hidden['responsabilidad_fiscal'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['responsabilidad_fiscal']);
+       $sStyleHidden_responsabilidad_fiscal = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_responsabilidad_fiscal = 'display: none;';
+   $sStyleReadInp_responsabilidad_fiscal = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['responsabilidad_fiscal']) && $this->nmgp_cmp_readonly['responsabilidad_fiscal'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['responsabilidad_fiscal']);
+       $sStyleReadLab_responsabilidad_fiscal = '';
+       $sStyleReadInp_responsabilidad_fiscal = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['responsabilidad_fiscal']) && $this->nmgp_cmp_hidden['responsabilidad_fiscal'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="responsabilidad_fiscal" value="<?php echo $this->form_encode_input($responsabilidad_fiscal) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_responsabilidad_fiscal_line" id="hidden_field_data_responsabilidad_fiscal" style="<?php echo $sStyleHidden_responsabilidad_fiscal; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_responsabilidad_fiscal_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_responsabilidad_fiscal_label" style=""><span id="id_label_responsabilidad_fiscal"><?php echo $this->nm_new_label['responsabilidad_fiscal']; ?></span></span><br><?php
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png"))
+          { 
+              $responsabilidad_fiscal = "&nbsp;" ;  
+          } 
+          else 
+          { 
+              if ($this->Ini->Export_img_zip) {
+                  $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png";
+                  $responsabilidad_fiscal = "<img border=\"0\" src=\"grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
+              }
+              else {
+                  $responsabilidad_fiscal = "<img border=\"0\" src=\"" . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
+              }
+          } 
+?>
+<span id="id_imghtml_responsabilidad_fiscal"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_form_resp_trib_x_tercero_edit . "', '$this->nm_location', 'terc_cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutNMSC_modal*scinok*scout', '', 'modal', '400', '700', 'form_resp_trib_x_tercero')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $responsabilidad_fiscal ; ?></font></a></span>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["responsabilidad_fiscal"]) &&  $this->nmgp_cmp_readonly["responsabilidad_fiscal"] == "on") { 
+
+ ?>
+<input type="hidden" name="responsabilidad_fiscal" value="<?php echo $this->form_encode_input($responsabilidad_fiscal) . "\">" . $responsabilidad_fiscal . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_responsabilidad_fiscal" class="sc-ui-readonly-responsabilidad_fiscal css_responsabilidad_fiscal_line" style="<?php echo $sStyleReadLab_responsabilidad_fiscal; ?>"><?php echo $this->form_format_readonly("responsabilidad_fiscal", $this->form_encode_input($this->responsabilidad_fiscal)); ?></span><span id="id_read_off_responsabilidad_fiscal" class="css_read_off_responsabilidad_fiscal<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_responsabilidad_fiscal; ?>"></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_responsabilidad_fiscal_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_responsabilidad_fiscal_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['ciiu']))
+    {
+        $this->nm_new_label['ciiu'] = "ACTIVIDAD ECONÓMICA (CIIU)";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $ciiu = $this->ciiu;
+   $sStyleHidden_ciiu = '';
+   if (isset($this->nmgp_cmp_hidden['ciiu']) && $this->nmgp_cmp_hidden['ciiu'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['ciiu']);
+       $sStyleHidden_ciiu = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_ciiu = 'display: none;';
+   $sStyleReadInp_ciiu = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ciiu']) && $this->nmgp_cmp_readonly['ciiu'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['ciiu']);
+       $sStyleReadLab_ciiu = '';
+       $sStyleReadInp_ciiu = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['ciiu']) && $this->nmgp_cmp_hidden['ciiu'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="ciiu" value="<?php echo $this->form_encode_input($ciiu) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_ciiu_line" id="hidden_field_data_ciiu" style="<?php echo $sStyleHidden_ciiu; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ciiu_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ciiu_label" style=""><span id="id_label_ciiu"><?php echo $this->nm_new_label['ciiu']; ?></span></span><br><?php
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png"))
+          { 
+              $ciiu = "&nbsp;" ;  
+          } 
+          else 
+          { 
+              if ($this->Ini->Export_img_zip) {
+                  $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png";
+                  $ciiu = "<img border=\"0\" src=\"grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
+              }
+              else {
+                  $ciiu = "<img border=\"0\" src=\"" . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
+              }
+          } 
+?>
+<span id="id_imghtml_ciiu"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_form_ciiu_tercero_edit . "', '$this->nm_location', 'terc_cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutNMSC_modal*scinok*scout', '', 'modal', '400', '800', 'form_ciiu_tercero')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $ciiu ; ?></font></a></span>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ciiu"]) &&  $this->nmgp_cmp_readonly["ciiu"] == "on") { 
+
+ ?>
+<input type="hidden" name="ciiu" value="<?php echo $this->form_encode_input($ciiu) . "\">" . $ciiu . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_ciiu" class="sc-ui-readonly-ciiu css_ciiu_line" style="<?php echo $sStyleReadLab_ciiu; ?>"><?php echo $this->form_format_readonly("ciiu", $this->form_encode_input($this->ciiu)); ?></span><span id="id_read_off_ciiu" class="css_read_off_ciiu<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_ciiu; ?>"></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ciiu_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ciiu_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+
+
+
+
+
+
+<?php $sStyleHidden_ciiu_dumb = ('' == $sStyleHidden_ciiu) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_ciiu_dumb" style="<?php echo $sStyleHidden_ciiu_dumb; ?>"></TD>
+   </tr>
+<?php $sc_hidden_no = 1; ?>
+</TABLE></div><!-- bloco_f -->
+   </td>
+   </tr></table>
+   <a name="bloco_9"></a>
+   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
+<div id="div_hidden_bloco_9"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_9" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+
+
+    <TD colspan="1" height="20" class="scFormBlock">
+     <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
+      <TR>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf9\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_exp . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos contacto y cumpleaños<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       
+      </TR>
+     </TABLE>
+    </TD>
+
+
+
+
+   </tr>
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+<?php
+           if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['fechault']))
+           {
+               $this->nmgp_cmp_readonly['fechault'] = 'on';
+           }
+?>
 
 
    <?php
@@ -1068,489 +1577,16 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_9"></a>
-   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_9"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_9" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
-
-
-    <TD colspan="1" height="20" class="scFormBlock">
-     <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
-      <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf9\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>REQUERIDOS DIAN<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
-       
-      </TR>
-     </TABLE>
-    </TD>
-
-
-
-
-   </tr>
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['detalle_tributario']))
-    {
-        $this->nm_new_label['detalle_tributario'] = "DETALLE TRIBUTARIO";
-    }
-?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $detalle_tributario = $this->detalle_tributario;
-   $sStyleHidden_detalle_tributario = '';
-   if (isset($this->nmgp_cmp_hidden['detalle_tributario']) && $this->nmgp_cmp_hidden['detalle_tributario'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['detalle_tributario']);
-       $sStyleHidden_detalle_tributario = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_detalle_tributario = 'display: none;';
-   $sStyleReadInp_detalle_tributario = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['detalle_tributario']) && $this->nmgp_cmp_readonly['detalle_tributario'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['detalle_tributario']);
-       $sStyleReadLab_detalle_tributario = '';
-       $sStyleReadInp_detalle_tributario = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['detalle_tributario']) && $this->nmgp_cmp_hidden['detalle_tributario'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="detalle_tributario" value="<?php echo $this->form_encode_input($detalle_tributario) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_detalle_tributario_line" id="hidden_field_data_detalle_tributario" style="<?php echo $sStyleHidden_detalle_tributario; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_detalle_tributario_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_detalle_tributario_label" style=""><span id="id_label_detalle_tributario"><?php echo $this->nm_new_label['detalle_tributario']; ?></span></span><br><?php
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png"))
-          { 
-              $detalle_tributario = "&nbsp;" ;  
-          } 
-          else 
-          { 
-              if ($this->Ini->Export_img_zip) {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png";
-                  $detalle_tributario = "<img border=\"0\" src=\"grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
-              }
-              else {
-                  $detalle_tributario = "<img border=\"0\" src=\"" . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
-              }
-          } 
-?>
-<span id="id_imghtml_detalle_tributario"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_form_det_trib_x_tercero_edit . "', '$this->nm_location', 'terc_cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutNMSC_modal*scinok*scout', '', 'modal', '400', '600', 'form_det_trib_x_tercero')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $detalle_tributario ; ?></font></a></span>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["detalle_tributario"]) &&  $this->nmgp_cmp_readonly["detalle_tributario"] == "on") { 
-
- ?>
-<input type="hidden" name="detalle_tributario" value="<?php echo $this->form_encode_input($detalle_tributario) . "\">" . $detalle_tributario . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_detalle_tributario" class="sc-ui-readonly-detalle_tributario css_detalle_tributario_line" style="<?php echo $sStyleReadLab_detalle_tributario; ?>"><?php echo $this->form_format_readonly("detalle_tributario", $this->form_encode_input($this->detalle_tributario)); ?></span><span id="id_read_off_detalle_tributario" class="css_read_off_detalle_tributario<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_detalle_tributario; ?>"></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_detalle_tributario_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_detalle_tributario_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['responsabilidad_fiscal']))
-    {
-        $this->nm_new_label['responsabilidad_fiscal'] = "RESPONSABILIDADES FISCALES";
-    }
-?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $responsabilidad_fiscal = $this->responsabilidad_fiscal;
-   $sStyleHidden_responsabilidad_fiscal = '';
-   if (isset($this->nmgp_cmp_hidden['responsabilidad_fiscal']) && $this->nmgp_cmp_hidden['responsabilidad_fiscal'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['responsabilidad_fiscal']);
-       $sStyleHidden_responsabilidad_fiscal = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_responsabilidad_fiscal = 'display: none;';
-   $sStyleReadInp_responsabilidad_fiscal = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['responsabilidad_fiscal']) && $this->nmgp_cmp_readonly['responsabilidad_fiscal'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['responsabilidad_fiscal']);
-       $sStyleReadLab_responsabilidad_fiscal = '';
-       $sStyleReadInp_responsabilidad_fiscal = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['responsabilidad_fiscal']) && $this->nmgp_cmp_hidden['responsabilidad_fiscal'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="responsabilidad_fiscal" value="<?php echo $this->form_encode_input($responsabilidad_fiscal) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_responsabilidad_fiscal_line" id="hidden_field_data_responsabilidad_fiscal" style="<?php echo $sStyleHidden_responsabilidad_fiscal; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_responsabilidad_fiscal_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_responsabilidad_fiscal_label" style=""><span id="id_label_responsabilidad_fiscal"><?php echo $this->nm_new_label['responsabilidad_fiscal']; ?></span></span><br><?php
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png"))
-          { 
-              $responsabilidad_fiscal = "&nbsp;" ;  
-          } 
-          else 
-          { 
-              if ($this->Ini->Export_img_zip) {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png";
-                  $responsabilidad_fiscal = "<img border=\"0\" src=\"grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
-              }
-              else {
-                  $responsabilidad_fiscal = "<img border=\"0\" src=\"" . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
-              }
-          } 
-?>
-<span id="id_imghtml_responsabilidad_fiscal"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_form_resp_trib_x_tercero_edit . "', '$this->nm_location', 'terc_cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutNMSC_modal*scinok*scout', '', 'modal', '400', '700', 'form_resp_trib_x_tercero')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $responsabilidad_fiscal ; ?></font></a></span>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["responsabilidad_fiscal"]) &&  $this->nmgp_cmp_readonly["responsabilidad_fiscal"] == "on") { 
-
- ?>
-<input type="hidden" name="responsabilidad_fiscal" value="<?php echo $this->form_encode_input($responsabilidad_fiscal) . "\">" . $responsabilidad_fiscal . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_responsabilidad_fiscal" class="sc-ui-readonly-responsabilidad_fiscal css_responsabilidad_fiscal_line" style="<?php echo $sStyleReadLab_responsabilidad_fiscal; ?>"><?php echo $this->form_format_readonly("responsabilidad_fiscal", $this->form_encode_input($this->responsabilidad_fiscal)); ?></span><span id="id_read_off_responsabilidad_fiscal" class="css_read_off_responsabilidad_fiscal<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_responsabilidad_fiscal; ?>"></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_responsabilidad_fiscal_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_responsabilidad_fiscal_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['ciiu']))
-    {
-        $this->nm_new_label['ciiu'] = "ACTIVIDAD ECONÓMICA (CIIU)";
-    }
-?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $ciiu = $this->ciiu;
-   $sStyleHidden_ciiu = '';
-   if (isset($this->nmgp_cmp_hidden['ciiu']) && $this->nmgp_cmp_hidden['ciiu'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['ciiu']);
-       $sStyleHidden_ciiu = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_ciiu = 'display: none;';
-   $sStyleReadInp_ciiu = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['ciiu']) && $this->nmgp_cmp_readonly['ciiu'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['ciiu']);
-       $sStyleReadLab_ciiu = '';
-       $sStyleReadInp_ciiu = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['ciiu']) && $this->nmgp_cmp_hidden['ciiu'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="ciiu" value="<?php echo $this->form_encode_input($ciiu) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_ciiu_line" id="hidden_field_data_ciiu" style="<?php echo $sStyleHidden_ciiu; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_ciiu_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_ciiu_label" style=""><span id="id_label_ciiu"><?php echo $this->nm_new_label['ciiu']; ?></span></span><br><?php
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png"))
-          { 
-              $ciiu = "&nbsp;" ;  
-          } 
-          else 
-          { 
-              if ($this->Ini->Export_img_zip) {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png";
-                  $ciiu = "<img border=\"0\" src=\"grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
-              }
-              else {
-                  $ciiu = "<img border=\"0\" src=\"" . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__1486564168-finance-bank-check_81495.png\"/>" ; 
-              }
-          } 
-?>
-<span id="id_imghtml_ciiu"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_form_ciiu_tercero_edit . "', '$this->nm_location', 'terc_cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutNMSC_modal*scinok*scout', '', 'modal', '400', '800', 'form_ciiu_tercero')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $ciiu ; ?></font></a></span>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["ciiu"]) &&  $this->nmgp_cmp_readonly["ciiu"] == "on") { 
-
- ?>
-<input type="hidden" name="ciiu" value="<?php echo $this->form_encode_input($ciiu) . "\">" . $ciiu . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_ciiu" class="sc-ui-readonly-ciiu css_ciiu_line" style="<?php echo $sStyleReadLab_ciiu; ?>"><?php echo $this->form_format_readonly("ciiu", $this->form_encode_input($this->ciiu)); ?></span><span id="id_read_off_ciiu" class="css_read_off_ciiu<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_ciiu; ?>"></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_ciiu_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_ciiu_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-
-
-
-
-
-
-<?php $sStyleHidden_ciiu_dumb = ('' == $sStyleHidden_ciiu) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_ciiu_dumb" style="<?php echo $sStyleHidden_ciiu_dumb; ?>"></TD>
-   </tr>
-<?php $sc_hidden_no = 1; ?>
-</TABLE></div><!-- bloco_f -->
-   </td>
-   </tr></table>
    <a name="bloco_10"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
 <div id="div_hidden_bloco_10"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_10" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['sucur_cliente']))
-   {
-       $this->nm_new_label['sucur_cliente'] = "Sucursales";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $sucur_cliente = $this->sucur_cliente;
-   $sStyleHidden_sucur_cliente = '';
-   if (isset($this->nmgp_cmp_hidden['sucur_cliente']) && $this->nmgp_cmp_hidden['sucur_cliente'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['sucur_cliente']);
-       $sStyleHidden_sucur_cliente = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_sucur_cliente = 'display: none;';
-   $sStyleReadInp_sucur_cliente = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['sucur_cliente']) && $this->nmgp_cmp_readonly['sucur_cliente'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['sucur_cliente']);
-       $sStyleReadLab_sucur_cliente = '';
-       $sStyleReadInp_sucur_cliente = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['sucur_cliente']) && $this->nmgp_cmp_hidden['sucur_cliente'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="sucur_cliente" value="<?php echo $this->form_encode_input($this->sucur_cliente) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->sucur_cliente_1 = explode(";", trim($this->sucur_cliente));
-  } 
-  else
-  {
-      if (empty($this->sucur_cliente))
-      {
-          $this->sucur_cliente_1= array(); 
-          $this->sucur_cliente= "NO";
-      } 
-      else
-      {
-          $this->sucur_cliente_1= $this->sucur_cliente; 
-          $this->sucur_cliente= ""; 
-          foreach ($this->sucur_cliente_1 as $cada_sucur_cliente)
-          {
-             if (!empty($sucur_cliente))
-             {
-                 $this->sucur_cliente.= ";"; 
-             } 
-             $this->sucur_cliente.= $cada_sucur_cliente; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormDataOdd css_sucur_cliente_line" id="hidden_field_data_sucur_cliente" style="<?php echo $sStyleHidden_sucur_cliente; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_sucur_cliente_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_sucur_cliente_label" style=""><span id="id_label_sucur_cliente"><?php echo $this->nm_new_label['sucur_cliente']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["sucur_cliente"]) &&  $this->nmgp_cmp_readonly["sucur_cliente"] == "on") { 
-
-$sucur_cliente_look = "";
- if ($this->sucur_cliente == "SI") { $sucur_cliente_look .= "SI" ;} 
- if (empty($sucur_cliente_look)) { $sucur_cliente_look = $this->sucur_cliente; }
-?>
-<input type="hidden" name="sucur_cliente" value="<?php echo $this->form_encode_input($sucur_cliente) . "\">" . $sucur_cliente_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$sucur_cliente_look = "";
- if ($this->sucur_cliente == "SI") { $sucur_cliente_look .= "SI" ;} 
- if (empty($sucur_cliente_look)) { $sucur_cliente_look = $this->sucur_cliente; }
-?>
-<span id="id_read_on_sucur_cliente" class="css_sucur_cliente_line" style="<?php echo $sStyleReadLab_sucur_cliente; ?>"><?php echo $this->form_format_readonly("sucur_cliente", $this->form_encode_input($sucur_cliente_look)); ?></span><span id="id_read_off_sucur_cliente" class="css_read_off_sucur_cliente css_sucur_cliente_line" style="<?php echo $sStyleReadInp_sucur_cliente; ?>"><?php echo "<div id=\"idAjaxCheckbox_sucur_cliente\" style=\"display: inline-block\" class=\"css_sucur_cliente_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_sucur_cliente_line"><?php $tempOptionId = "id-opt-sucur_cliente" . $sc_seq_vert . "-1"; ?>
- <div class="sc switch">
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-sucur_cliente sc-ui-checkbox-sucur_cliente sc-js-input" name="sucur_cliente[]" value="SI"
- alt="{type: 'checkbox', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_sucur_cliente'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->sucur_cliente_1))  { echo " checked" ;} ?> onClick="" ><span></span>
-<label for="<?php echo $tempOptionId ?>">SI</label> </div>
-</TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_sucur_cliente_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_sucur_cliente_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-
-
-
-
-
-
-<?php $sStyleHidden_sucur_cliente_dumb = ('' == $sStyleHidden_sucur_cliente) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_sucur_cliente_dumb" style="<?php echo $sStyleHidden_sucur_cliente_dumb; ?>"></TD>
-   </tr>
-<?php $sc_hidden_no = 1; ?>
-</TABLE></div><!-- bloco_f -->
-   </td>
-   </tr></table>
-   <a name="bloco_11"></a>
-   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_11"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_11" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-<?php
-           if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['fechault']))
-           {
-               $this->nmgp_cmp_readonly['fechault'] = 'on';
-           }
-?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['sucursales']))
-    {
-        $this->nm_new_label['sucursales'] = "Ingresar/Editar";
-    }
-?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $sucursales = $this->sucursales;
-   $sStyleHidden_sucursales = '';
-   if (isset($this->nmgp_cmp_hidden['sucursales']) && $this->nmgp_cmp_hidden['sucursales'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['sucursales']);
-       $sStyleHidden_sucursales = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_sucursales = 'display: none;';
-   $sStyleReadInp_sucursales = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['sucursales']) && $this->nmgp_cmp_readonly['sucursales'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['sucursales']);
-       $sStyleReadLab_sucursales = '';
-       $sStyleReadInp_sucursales = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['sucursales']) && $this->nmgp_cmp_hidden['sucursales'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="sucursales" value="<?php echo $this->form_encode_input($sucursales) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_sucursales_line" id="hidden_field_data_sucursales" style="<?php echo $sStyleHidden_sucursales; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_sucursales_line" style="padding: 0px"><span class="scFormLabelOddFormat css_sucursales_label" style=""><span id="id_label_sucursales"><?php echo $this->nm_new_label['sucursales']; ?></span></span><br><?php
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/usr__NM__ico__NM__shop_cafe_22672.png"))
-          { 
-              $sucursales = "&nbsp;" ;  
-          } 
-          else 
-          { 
-              if ($this->Ini->Export_img_zip) {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/usr__NM__ico__NM__shop_cafe_22672.png";
-                  $sucursales = "<img border=\"0\" src=\"usr__NM__ico__NM__shop_cafe_22672.png\"/>" ; 
-              }
-              else {
-                  $sucursales = "<img border=\"0\" src=\"" . $this->Ini->path_imag_cab . "/usr__NM__ico__NM__shop_cafe_22672.png\"/>" ; 
-              }
-          } 
-?>
-<span id="id_imghtml_sucursales"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_form_direccion_edit . "', '$this->nm_location', 'cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutNMSC_modal*scinok*scoutsc_redir_atualiz*scinok*scoutsc_redir_insert*scinok*scout', '', 'modal', '550', '1400', 'form_direccion')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $sucursales ; ?></font></a></span>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["sucursales"]) &&  $this->nmgp_cmp_readonly["sucursales"] == "on") { 
-
- ?>
-<input type="hidden" name="sucursales" value="<?php echo $this->form_encode_input($sucursales) . "\">" . $sucursales . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_sucursales" class="sc-ui-readonly-sucursales css_sucursales_line" style="<?php echo $sStyleReadLab_sucursales; ?>"><?php echo $this->form_format_readonly("sucursales", $this->form_encode_input($this->sucursales)); ?></span><span id="id_read_off_sucursales" class="css_read_off_sucursales<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_sucursales; ?>"></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_sucursales_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_sucursales_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-
-
-
-
-
-
-<?php $sStyleHidden_sucursales_dumb = ('' == $sStyleHidden_sucursales) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_sucursales_dumb" style="<?php echo $sStyleHidden_sucursales_dumb; ?>"></TD>
-   </tr>
-<?php $sc_hidden_no = 1; ?>
-</TABLE></div><!-- bloco_f -->
-   </td>
-   </tr></table>
-   <a name="bloco_12"></a>
-   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_12"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_12" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+<TABLE align="center" id="hidden_bloco_10" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
     <TD colspan="1" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf12\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos Fidelización<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf10\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_exp . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos Fidelización<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>
@@ -1560,7 +1596,7 @@ $sucur_cliente_look = "";
 
 
    </tr>
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 <?php
            if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['saldo']))
@@ -1646,7 +1682,7 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
 
 <?php } 
 ?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -1707,7 +1743,7 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
 
 <?php } 
 ?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 

@@ -232,8 +232,8 @@ class grid_terceros_todos_ini
       $this->nm_dt_criacao   = "20171205"; 
       $this->nm_hr_criacao   = "171843"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220114"; 
-      $this->nm_hr_ult_alt   = "172519"; 
+      $this->nm_dt_ult_alt   = "20220405"; 
+      $this->nm_hr_ult_alt   = "093120"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -994,7 +994,7 @@ class grid_terceros_todos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_todos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_todos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQBqHAN7D5JwDMvmVIB/H5XCVoFGHQXOH9BqZ1BOD5XGDMvCHEBUH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9BsZSBqDSNOD5XGHgvsZSXeHEB7ZuFaDcJeH9FGHABYHQB/HuNODkFCH5FqVoBiHQBiZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwD9BiZ1F7HArYD5XGDMBYZSXeDWFqDoJeD9XsZSFGD1BeV5raHuBYVcFKV5X7DoNUD9BsH9FaD1NaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHEBUDuJeVoBOD9NmDQFGD1veHuBiHuNOVcrsDWJeVoBOD9BsZ1BiHINKD5BODEvsZSJGHEFqZuBqDcXGDQB/HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKV5BqDMvOV9BUDWFYHMBiD9BsVIraD1rwV5X7HgBeHEFiHEFqVoBOHQXOZSBiZ1NaV5JeHuzGVcB/H5XCVoBiD9BsVIraZ1vOZMFaHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQJsHAN7HuBODMvOV9BUDuX7HMrqHQXGH9B/D1rwV5B/HgBOZSXeHEB7ZuBqHQXsDuBqHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQB/D1NKVWBqHuNOVIBsDWFaHMB/D9XOZkFGHIveHQFaHgBeHArsDWX7HMBiHQXODQFaHAN7D5B/HuBYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwZSFGHANOD5BqHgrKVcXKV5X7VENUDcJUZ1FaHAN7D5rqDMzGHEJGDWr/DoB/D9NwZSFUZ1rwVWJsHuNODkBOH5XCVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKHEFGVEX7D9BsZkFGZ1NOV5X7DMvCHEJGH5FYHIraHQNwDQB/D1BeHuJeHuBYDkB/DWF/HMrqDcNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1vsD5XGHgNKHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKDkFCH5XCHMX7D9XOZSB/HArYZMFaHgBOVkJGDuFaHMFGD9NmDuBqD1BeV5FUHgvsDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -3216,19 +3216,7 @@ class grid_terceros_todos_apl
               unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['tot_geral']);
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] = 'pesq';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['orig_pesq'] = 'grid';
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_refresh'] = true;
           } 
-      } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] == "interativ_search")
-      { 
-          $this->SC_proc_interativ_search($_POST['parm']);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'];
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['contr_array_resumo'] = "NAO";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['contr_total_geral']  = "NAO";
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['tot_geral']);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] = 'inicio';
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opc_int_search'] = true;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_refresh'] = true;
       } 
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] == 'pesq' && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['orig_pesq']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['orig_pesq']))  
       { 
@@ -3258,7 +3246,6 @@ class grid_terceros_todos_apl
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['grid_pesq']         = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['Grid_search']       = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_fast']   = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['tot_geral']);
@@ -4754,17 +4741,6 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
                   $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_filtro'] . ")"; 
               }
           }
-          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'])) 
-          {
-              if (!empty($tmp_cmd)) 
-              {
-                  $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] . ")"; 
-              }
-              else
-              {
-                  $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] . ")"; 
-              }
-          }
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'] = $tmp_cmd;
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['fast_search']);
           return;
@@ -4813,10 +4789,6 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
       else
       {
           $comando = " where (" . $comando . ")"; 
-      }
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'])) 
-      {
-          $comando .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] . ")";
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'] = $comando;
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['fast_search'][0] = $in_fields;
@@ -5019,190 +4991,6 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
                $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " <= " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
             break;
          }
-   }
-   function SC_proc_interativ_search($Parms)
-   {
-       $Parms = str_replace("__NM_PLUS__", "+", $Parms);
-       $Parms = str_replace("__NM_AMP__", "&", $Parms);
-       $Parms = str_replace("__NM_PRC__", "%", $Parms);
-       $range_bw = array();
-       if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($Parms))
-       {
-           $Parms = NM_conv_charset($Parms, $_SESSION['scriptcase']['charset'], "UTF-8");
-       }
-       $tmp     = explode("__DL__", $Parms);
-       $cmd_sql = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_sql'][$tmp[0]];
-       $vls     = "";
-       $bol_numeric = false;
-       if ($tmp[3] == "clear_interativ_all") {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'] = array();
-       }
-       else {
-           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$tmp[0]]);
-           if ($tmp[3] != "clear_interativ")
-           {
-               $vls  = explode("_VLS_", $tmp[3]);
-               if($tmp[2] == "nn" || $tmp[2] == "bw")
-               {
-                   $bol_numeric = true;
-                   $delim  = "";
-                   $delim1 = "";
-               }
-               else
-               {
-                   $delim  = "'";
-                   $delim1 = "'";
-               }
-               if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
-               {
-                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-                   {
-                       $delim  = "#";
-                       $delim1 = "#";
-                   }
-                   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['SC_sep_date']))
-                   {
-                       $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['SC_sep_date'];
-                       $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['SC_sep_date1'];
-                   }
-               }
-           }
-       }
-       if (!empty($vls))
-       {
-           $prep = "";
-           $bol_has_empty = false;
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$tmp[0]]['tp_obj'] = $tmp[2];
-           foreach ($vls as $cada_val)
-           {
-               $cada_val = NM_charset_decode($cada_val);
-               $descr = $cada_val;
-               $tmp_pos = strpos($cada_val, "##@@");
-               if ($tmp_pos !== false)
-               {
-                   $descr    = substr($cada_val, $tmp_pos + 4);
-                   $cada_val = substr($cada_val, 0, $tmp_pos);
-               }
-               $cada_val = substr($this->Db->qstr($cada_val), 1, -1);
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$tmp[0]]['lab'][$tmp[1]][] = $descr;
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$tmp[0]]['val_sel'][] = $cada_val;
-               if ($cada_val == "")
-               {
-                   $bol_has_empty = true;
-               }
-               $prep .= ($prep != "") ? "," : "";
-               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access) && $cada_val == "")
-               {
-                   $prep .= 'null';
-               }
-               else
-               $prep .= $delim . $cada_val . $delim1;
-               $range_bw[] = $cada_val;
-           }
-               $str_add_null    = '';
-               $str_add_null_or = '';
-               if($bol_has_empty)
-               {
-                   $str_add_null    = ' ' . $cmd_sql . ' is null ';
-                   $str_add_null_or = ' OR ' . $cmd_sql . ' is null ';
-               }
-           if ($prep == "" && $bol_numeric)
-           {
-               if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
-               {
-                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " is null";
-               }
-               else
-               {
-                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " = '' or " . $cmd_sql . " is null";
-               }
-           }
-           elseif ($prep == "" && $delim != "")
-           {
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " = '' or " . $cmd_sql . " is null";
-           }
-           elseif ( $tmp[2] == "bw")
-           {
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " between " . $delim . $range_bw[0] .  $delim1 . " and " . $delim . $range_bw[1] .  $delim1 . $str_add_null_or;
-           }
-           else
-           {
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " IN (" . $prep . ")" . $str_add_null_or;
-           }
-       }
-      $tmp_cmd = "";
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_orig'])) 
-      {
-          $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_orig']; 
-      }
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_filtro'])) 
-      {
-          if (!empty($tmp_cmd)) 
-          {
-              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_filtro'] . ")"; 
-          }
-          else
-          {
-              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_filtro'] . ")"; 
-          }
-      }
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_fast'])) 
-      {
-          if (!empty($tmp_cmd)) 
-          {
-              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_fast'] . ")";
-          }
-          else 
-          {
-              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_fast'] . ")";
-          }
-      }
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo'])) 
-      { 
-          if (empty($tmp_where)) 
-          { 
-              $tmp_cmd = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo']; 
-          } 
-          else
-          { 
-              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo'] . ")"; 
-          } 
-      } 
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] = "";
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_sem_interativ']  = $tmp_cmd;
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'])) 
-      {
-          $prim = true;
-          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'] as $cmp => $val) 
-          {
-              if (!$prim)
-              {
-                 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] .= " AND ";
-              }
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] .= "(" . $val['val'] . ")";
-              $prim = false;
-          }
-      }
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'])) 
-      {
-          if (!empty($tmp_cmd)) 
-          {
-              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] . ")"; 
-          }
-          else
-          {
-              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] . ")"; 
-          }
-      }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'] = $tmp_cmd;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['refresh_interativ'] = (isset($tmp[5])) ? $tmp[5] : "S";
-      if(isset($tmp[4]) && $tmp[4] == 'N')
-      {
-          $this->Arr_result['interativ_search'] = array();
-          $oJson = new Services_JSON();
-          echo $oJson->encode( $this->Arr_result );
-          exit;
-      }
    }
   function html_doc_word($nm_arquivo_doc_word, $nmgp_password)
   {

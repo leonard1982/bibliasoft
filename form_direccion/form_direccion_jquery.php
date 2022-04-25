@@ -63,6 +63,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["correo_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["correo_notificafe_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["celular_notificafe_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["iddireccion_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -138,6 +139,12 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["celular_notificafe_" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["iddireccion_" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["iddireccion_" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -193,7 +200,9 @@ function scEventControl_onAutocomp(sFieldName) {
 var scEventControl_data = {};
 
 function scJQEventsAdd(iSeqRow) {
-  $('#id_sc_field_iddireccion_' + iSeqRow).bind('change', function() { sc_form_direccion_iddireccion__onchange(this, iSeqRow) });
+  $('#id_sc_field_iddireccion_' + iSeqRow).bind('blur', function() { sc_form_direccion_iddireccion__onblur(this, iSeqRow) })
+                                          .bind('change', function() { sc_form_direccion_iddireccion__onchange(this, iSeqRow) })
+                                          .bind('focus', function() { sc_form_direccion_iddireccion__onfocus(this, iSeqRow) });
   $('#id_sc_field_idter_' + iSeqRow).bind('blur', function() { sc_form_direccion_idter__onblur(this, iSeqRow) })
                                     .bind('change', function() { sc_form_direccion_idter__onchange(this, iSeqRow) })
                                     .bind('focus', function() { sc_form_direccion_idter__onfocus(this, iSeqRow) });
@@ -232,8 +241,19 @@ function scJQEventsAdd(iSeqRow) {
                                                  .bind('focus', function() { sc_form_direccion_celular_notificafe__onfocus(this, iSeqRow) });
 } // scJQEventsAdd
 
+function sc_form_direccion_iddireccion__onblur(oThis, iSeqRow) {
+  do_ajax_form_direccion_validate_iddireccion_(iSeqRow);
+  scCssBlur(oThis, iSeqRow);
+}
+
 function sc_form_direccion_iddireccion__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
+  nm_check_insert(iSeqRow);
+}
+
+function sc_form_direccion_iddireccion__onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis, iSeqRow);
 }
 
 function sc_form_direccion_idter__onblur(oThis, iSeqRow) {
@@ -452,6 +472,7 @@ function displayChange_row(row, status) {
 	displayChange_field_correo_(row, status);
 	displayChange_field_correo_notificafe_(row, status);
 	displayChange_field_celular_notificafe_(row, status);
+	displayChange_field_iddireccion_(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -490,6 +511,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("celular_notificafe_" == field) {
 		displayChange_field_celular_notificafe_(row, status);
+	}
+	if ("iddireccion_" == field) {
+		displayChange_field_iddireccion_(row, status);
 	}
 }
 
@@ -587,6 +611,9 @@ function displayChange_field_correo_notificafe_(row, status) {
 }
 
 function displayChange_field_celular_notificafe_(row, status) {
+}
+
+function displayChange_field_iddireccion_(row, status) {
 }
 
 function scRecreateSelect2() {

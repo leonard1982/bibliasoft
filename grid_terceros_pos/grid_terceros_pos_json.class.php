@@ -216,6 +216,14 @@ class grid_terceros_pos_json
               $this->docnom = substr($this->docnom, 0, $tmp_pos);
           }
       } 
+      $this->nm_where_dinamico = "";
+      $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'on';
+ ;
+$_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off'; 
+      if  (!empty($this->nm_where_dinamico)) 
+      {   
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['where_pesq'] .= $this->nm_where_dinamico;
+      }   
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['json_name']))
       {
           $Pos = strrpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['json_name'], ".");
@@ -307,7 +315,7 @@ class grid_terceros_pos_json
          $this->idtercero = (string)$this->idtercero;
          $this->sc_proc_grid = true; 
          $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'on';
- $this->seleccionar  = "<input type='button' doc='".$this->documento ."' value='Seleccionar' onclick='window.opener.document.getElementById(\"cliente\").value=\"".$this->documento ."\";window.opener.document.getElementById(\"cliente\").click();window.opener.document.getElementById(\"txt_articulo\").focus();window.close();' />";
+ $this->seleccionar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__nav_down_right_blue_32.png' doc='".$this->documento ."' onclick='window.opener.document.getElementById(\"cliente\").value=\"".$this->documento ."\";window.opener.document.getElementById(\"cliente\").click();window.opener.document.getElementById(\"txt_articulo\").focus();window.close();' />";
 $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off'; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['field_order'] as $Cada_col)
          { 

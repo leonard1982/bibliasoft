@@ -331,6 +331,24 @@ $vfactura = sc_url_library("prj", "factura", "index.php");
 <link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
 <script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
 <link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
+
+<style>
+body
+{
+	
+	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_punto_venta_supermercado.jpg'); ?>) !important;
+	
+	background-position: center center !important;
+	
+	background-repeat: no-repeat !important;
+	
+	background-attachment: fixed !important;
+	
+	background-size: cover !important;
+	
+	background-color: #1175bb !important;
+}
+</style>
 <?php
 
 $this->NM_cmp_hidden["pedido"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["pedido"] = "off"; }
@@ -1935,7 +1953,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
          $this->numero2 = NM_charset_to_utf8($this->numero2);
          if ($this->Json_use_label)
          {
-             $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "#"; 
+             $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Número"; 
          }
          else
          {
@@ -2149,7 +2167,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
          $this->opciones = NM_charset_to_utf8($this->opciones);
          if ($this->Json_use_label)
          {
-             $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+             $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : ""; 
          }
          else
          {

@@ -217,8 +217,8 @@ class blank_devcompras_ini
       $this->nm_dt_criacao   = "20190322"; 
       $this->nm_hr_criacao   = "082839"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220114"; 
-      $this->nm_hr_ult_alt   = "172519"; 
+      $this->nm_dt_ult_alt   = "20220405"; 
+      $this->nm_hr_ult_alt   = "093120"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_devcompras_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_devcompras']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_devcompras']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKZSX7Z1zGV5JeDMvmVIFCH5FqVEX7HQBiZSBOHIveV5XGDMveVkJqDWF/HIBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmVoFGHQNwZSFGHAN7D5BqDMBOV9BUDWFaHMFUDcFYZkFGHABYD5rqDErKHEJqV5FaVoFGHQXODuFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYDoraD9XsH9X7DSrwV5raHgrKVcFKDWFYVErqDcBqH9B/Z1BeV5X7DErKHEBUDWr/DoraD9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCV5FaDoBqHQNwDQBqHABYVWBqHuzGVcFeHEFYVorqD9XOH9BqHINKD5BODMNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgveDkB/DWFGZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVEF7HQNwVINUHANOZMBqHgrKVkJGDWXCDoJeHQJKDuBqHAveV5JeHuNOVcBODWFaDoNUHQXOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDQJsDSN7D5rqHgrwVcFKHEFGVEF7HQXOH9B/Z1BOD5XGHgNKHErsDWX7HIrqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIF7HQXODQX7DSNaVWJeDMBYVcFKV5X7VorqD9BsZkFGZ1rYZMXGDEvsZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwDQJsHABYVWJeHgvsDkBOV5X7DoXGD9XOZ1rqHAN7D5NUDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1X7HArYHuXGHgBOVkXeDWrGZuJeD9NwDQJwHANOHQF7DMvmVIBsDWFYHMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUH5B3VoX7HQNwZkFGHArKV5FUDMrYZSXeV5FqHIJsD9XsH9FUHIrKHuBqDMNOVcFKHEX7HMraD9BsVIJsHIveD5rqDErKHEXeDWX7HIFGD9JKDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1986,6 +1986,8 @@ $vND='';
                  $SCrx->fields[20] = str_replace(',', '.', $SCrx->fields[20]);
                  $SCrx->fields[21] = str_replace(',', '.', $SCrx->fields[21]);
                  $SCrx->fields[22] = str_replace(',', '.', $SCrx->fields[22]);
+                 $SCrx->fields[27] = str_replace(',', '.', $SCrx->fields[27]);
+                 $SCrx->fields[29] = str_replace(',', '.', $SCrx->fields[29]);
                  $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
                  $SCrx->fields[0] = (string)$SCrx->fields[0];
                  $SCrx->fields[5] = (strpos(strtolower($SCrx->fields[5]), "e")) ? (float)$SCrx->fields[5] : $SCrx->fields[5];
@@ -2016,6 +2018,10 @@ $vND='';
                  $SCrx->fields[21] = (string)$SCrx->fields[21];
                  $SCrx->fields[22] = (strpos(strtolower($SCrx->fields[22]), "e")) ? (float)$SCrx->fields[22] : $SCrx->fields[22];
                  $SCrx->fields[22] = (string)$SCrx->fields[22];
+                 $SCrx->fields[27] = (strpos(strtolower($SCrx->fields[27]), "e")) ? (float)$SCrx->fields[27] : $SCrx->fields[27];
+                 $SCrx->fields[27] = (string)$SCrx->fields[27];
+                 $SCrx->fields[29] = (strpos(strtolower($SCrx->fields[29]), "e")) ? (float)$SCrx->fields[29] : $SCrx->fields[29];
+                 $SCrx->fields[29] = (string)$SCrx->fields[29];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
                         $this->ds_fc[$SCy] [$SCx] = $SCrx->fields[$SCx];

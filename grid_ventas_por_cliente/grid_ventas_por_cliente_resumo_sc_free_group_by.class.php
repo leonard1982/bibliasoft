@@ -550,6 +550,10 @@ class grid_ventas_por_cliente_resumo
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['cliente'] = "Cliente"; 
        }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['direcciones']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['direcciones'] = "Dirección(es)"; 
+       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['fecha']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['fecha'] = "Fecha"; 
@@ -569,6 +573,10 @@ class grid_ventas_por_cliente_resumo
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['f_total']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['f_total'] = "Neto"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['f_dircliente']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['f_dircliente'] = "Dircliente"; 
        }
        //-----
        $ix = 0;
@@ -5688,68 +5696,21 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['do
      else {
           $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\">\r\n");
      }
-      $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
-      $nm_saida->saida("    <TR align=\"center\">\r\n");
-      $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
-      $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
-      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
-      $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          \r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          Ventas por Cliente\r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          \r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          \r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("       </TR>\r\n");
-      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
-      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          \r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          \r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          \r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("       </TR>\r\n");
-      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
-      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          \r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          \r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-      $nm_saida->saida("          \r\n");
-      $nm_saida->saida("        </TD>\r\n");
-      $nm_saida->saida("       </TR>\r\n");
-      $nm_saida->saida("      </TABLE>\r\n");
-      $nm_saida->saida("     </TD>\r\n");
-      $nm_saida->saida("    </TR>\r\n");
-      $nm_saida->saida("   </TABLE>\r\n");
+      $nm_saida->saida("<style>\r\n");
+      $nm_saida->saida("#lin1_col1 { font-size:22px; width:500px; color: #FFFFFF; }\r\n");
+      $nm_saida->saida("#lin1_col2 { font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align:right; color: #FFFFFF;  }\r\n");
+      $nm_saida->saida("#lin2_col1 { font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:15px; }\r\n");
+      $nm_saida->saida("#lin2_col2 { font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align:right; color: #FFFFFF;  }\r\n");
+      $nm_saida->saida("</style>\r\n");
+      $nm_saida->saida("<table width=\"100%\" height=\"67px\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+      $nm_saida->saida("        <tr>\r\n");
+      $nm_saida->saida("                <td width=\"5px\"></td>\r\n");
+      $nm_saida->saida("        <td width=\"67px\" class=\"" . $this->css_scGridHeaderFont . "\"></td>\r\n");
+      $nm_saida->saida("               <td class=\"" . $this->css_scGridHeaderFont . "\"><span id=\"lin1_col1\">Ventas por Cliente</span><br /><span id=\"lin2_col1\"></span></td>\r\n");
+      $nm_saida->saida("               <td align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\"><span  id=\"lin1_col2\"></span><br /><span id=\"lin2_col2\"></span></td>\r\n");
+      $nm_saida->saida("        <td width=\"5px\"></td>\r\n");
+      $nm_saida->saida("    </tr>\r\n");
+      $nm_saida->saida("</table>\r\n");
       $nm_saida->saida("  </TD>\r\n");
       $nm_saida->saida(" </TR>\r\n");
    }
@@ -5867,19 +5828,19 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['do
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ""; 
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
      { 
-         $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
      { 
-         $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      { 
-         $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, convert(char(23),f.fechaven,121) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, convert(char(23),f.fechaven,121) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
      } 
      else 
      { 
-         $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
      } 
      $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq']; 
      $campos_order = "";
@@ -5948,6 +5909,7 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['do
             $this->f_valoriva =  str_replace(",", ".", $this->f_valoriva);
             $this->f_total = $rs_res->fields[6] ;  
             $this->f_total =  str_replace(",", ".", $this->f_total);
+            $this->f_dircliente = $rs_res->fields[7] ;  
             $this->t_documento_orig = $this->t_documento;
             $this->cliente_orig = $this->cliente;
             $this->fecha_orig = $this->fecha;

@@ -271,7 +271,7 @@ class grid_ventas_por_cliente_total
    //----- 
    function Calc_resumo_sc_free_group_by($destino_resumo)
    {
-      global $nm_lang;
+      global $nm_lang, $direcciones;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['campos_busca']))
@@ -402,7 +402,7 @@ class grid_ventas_por_cliente_total
       $sc_having = ((isset($parms_sub_sel['having']))) ? "  having " . $parms_sub_sel['having'] : "";
       $Tem_estat_manual = false;
       $where_ok = $this->sc_where_atual;
-      $cmp_sql_tp_num = array('f_subtotal' => 'N','f_valoriva' => 'N','f_total' => 'N');
+      $cmp_sql_tp_num = array('f_subtotal' => 'N','f_valoriva' => 'N','f_total' => 'N','f_dircliente' => 'N');
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
       { 
          $cmd_simp = "select count(*), sum(f.subtotal), sum(f.valoriva), sum(f.total)#@#cmps_quebras#@# from " . $this->Ini->nm_tabela . " " . $where_ok;

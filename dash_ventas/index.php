@@ -348,8 +348,8 @@ class dash_ventas_ini {
         $this->nm_dt_criacao   = "20210115";
         $this->nm_hr_criacao   = "101406";
         $this->nm_autor_alt    = "admin";
-        $this->nm_dt_ult_alt   = "20220114";
-        $this->nm_hr_ult_alt   = "172519";
+        $this->nm_dt_ult_alt   = "20220405";
+        $this->nm_hr_ult_alt   = "093120";
         list($NM_usec, $NM_sec) = explode(" ", microtime());
         $this->nm_timestamp  = (float) $NM_sec;
 

@@ -111,7 +111,7 @@ class grid_terceros_pos_grid
             else
             {
        $nm_saida->saida("                  <TR>\r\n");
-       $nm_saida->saida("                  <TD id='sc_grid_content' style='padding: 0px;' colspan=3>\r\n");
+       $nm_saida->saida("                  <TD id='sc_grid_content' style='padding: 0px;' colspan=1>\r\n");
             } 
        $nm_saida->saida("    <table width='100%' cellspacing=0 cellpadding=0>\r\n");
        $nmgrp_apl_opcao= (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_terceros_pos'])) ? "pdf" : $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'];
@@ -360,6 +360,11 @@ class grid_terceros_pos_grid
    { 
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] = "muda_qt_linhas";
    } 
+       ob_start(); 
+   $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'on';
+ ;
+$_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off'; 
+       $this->SC_Buf_onInit = ob_get_clean();; 
 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['under_dashboard'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['maximized']) {
        $tmpDashboardApp = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['dashboard_app'];
@@ -395,19 +400,6 @@ class grid_terceros_pos_grid
        }
    }
 
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['insert']) && $_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['insert'] != '')
-   {
-       $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['insert'];
-       $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['insert'];
-   }
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['update'] != '')
-   {
-       $this->nmgp_botoes['update'] = $_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['update'];
-   }
-   if (isset($_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['delete']) && $_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['delete'] != '')
-   {
-       $this->nmgp_botoes['delete'] = $_SESSION['scriptcase']['sc_apl_conf']['terceros_cliente']['delete'];
-   }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'])
    {
        $nmgp_ordem = ""; 
@@ -1751,14 +1743,6 @@ $nm_saida->saida("}\r\n");
        }
        $str_iframe_body = ($this->aba_iframe) ? 'marginwidth="0px" marginheight="0px" topmargin="0px" leftmargin="0px"' : '';
        $nm_saida->saida("  <style type=\"text/css\">\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida_pdf'] != "pdf")
-       {
-           $nm_saida->saida("  .css_iframes   { margin-bottom: 0px; margin-left: 0px;  margin-right: 0px;  margin-top: 0px; }\r\n");
-       }
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'])
-       { 
-           $nm_saida->saida("       .ttip {border:1px solid black;font-size:12px;layer-background-color:lightyellow;background-color:lightyellow;color:black;}\r\n");
-       } 
        $nm_saida->saida("  </style>\r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" href=\"../_lib/css/" . $this->Ini->str_schema_all . "_btngrp.css\" type=\"text/css\" media=\"screen\" />\r\n");
            $nm_saida->saida("   <link rel=\"stylesheet\" href=\"../_lib/css/" . $this->Ini->str_schema_all . "_btngrp" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\" type=\"text/css\" media=\"screen\" />\r\n");
@@ -1783,6 +1767,10 @@ $nm_saida->saida("}\r\n");
   }
            $nm_saida->saida("  </style>\r\n");
        }
+       if (!empty($this->SC_Buf_onInit))
+       { 
+       $nm_saida->saida("" . $this->SC_Buf_onInit . "\r\n");
+       } 
        $nm_saida->saida("  </HEAD>\r\n");
    } 
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $this->Ini->nm_ger_css_emb)
@@ -1819,10 +1807,6 @@ $nm_saida->saida("}\r\n");
            $nm_saida->saida("          <div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\"></H1></div>\r\n");
            }
        } 
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['doc_word'])
-       { 
-           $nm_saida->saida("      <div id=\"tooltip\" style=\"position:absolute;visibility:hidden;border:1px solid black;font-size:12px;layer-background-color:lightyellow;background-color:lightyellow;padding:1px;color:black;\"></div>\r\n");
-       } 
        $this->Tab_align  = "center";
        $this->Tab_valign = "top";
        $this->Tab_width = "";
@@ -1848,24 +1832,6 @@ $nm_saida->saida("}\r\n");
        } 
        $nm_saida->saida("       <TABLE width='100%' cellspacing=0 cellpadding=0>\r\n");
    }
-       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" && 
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao_print'] != "print") 
-       { 
-           $nm_saida->saida("    <TR>\r\n");
-           $nm_saida->saida("    <TD  colspan=3 style=\"padding: 0px; border-width: 0px; vertical-align: top;\">\r\n");
-           $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_A_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_A_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-           $nm_saida->saida("    </TD>\r\n");
-           $nm_saida->saida("    </TR>\r\n");
-           $nm_saida->saida("    <TR>\r\n");
-           $nm_saida->saida("    <TD style=\"padding: 0px; border-width: 0px; vertical-align: top;\">\r\n");
-           $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_E_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_E_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-           $nm_saida->saida("    </TD>\r\n");
-           $nm_saida->saida("    <td style=\"padding: 0px;  vertical-align: top;\"><table style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top;\" width=\"100%\"><tr>\r\n");
-           $nm_saida->saida("    <TD colspan=3 style=\"padding: 0px; border-width: 0px; vertical-align: top;\" width=1>\r\n");
-      $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_AL_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_AL_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-           $nm_saida->saida("    </TD>\r\n");
-           $nm_saida->saida("    </TR>\r\n");
-        } 
    }  
  }  
  function NM_cor_embutida()
@@ -2059,7 +2025,7 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida(" <TR id=\"sc_grid_head\">\r\n");
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf")
    { 
-       $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\" colspan=3 style=\"vertical-align: top\">\r\n");
+       $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top\">\r\n");
    } 
    else 
    { 
@@ -2099,21 +2065,68 @@ $nm_saida->saida("}\r\n");
    {
        $img_LIN1_COL2 = $this->NM_raiz_img . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__users2_32.png";
    }
-   $nm_saida->saida("<style>\r\n");
-   $nm_saida->saida("#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 \r\n");
-   $nm_saida->saida("#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}\r\n");
-   $nm_saida->saida("</style>\r\n");
-   $nm_saida->saida("<div style=\"width: 100%\">\r\n");
-   $nm_saida->saida(" <div class=\"" . $this->css_scGridHeader . "\" style=\"height:11px; display: block; border-width:0px; \"></div>\r\n");
-   $nm_saida->saida(" <div style=\"height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block\">\r\n");
-   $nm_saida->saida(" 	<table style=\"width:100%; border-collapse:collapse; padding:0;\">\r\n");
-   $nm_saida->saida("    	<tr>\r\n");
-   $nm_saida->saida("        	<td id=\"lin1_col1\" class=\"" . $this->css_scGridHeaderFont . "\"><span>Seleccionar Cliente</span></td>\r\n");
-   $nm_saida->saida("            <td id=\"lin1_col2\" class=\"" . $this->css_scGridHeaderFont . "\"><span>   <IMG SRC=\"" . $img_LIN1_COL2 . "\" BORDER=\"0\"/></span></td>\r\n");
-   $nm_saida->saida("        </tr>\r\n");
-   $nm_saida->saida("    </table>		 \r\n");
-   $nm_saida->saida(" </div>\r\n");
-   $nm_saida->saida("</div>\r\n");
+   $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+   $nm_saida->saida("    <TR align=\"center\">\r\n");
+   $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+   $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          Seleccionar Cliente\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("             <IMG SRC=\"" . $img_LIN1_COL2 . "\" BORDER=\"0\"/>\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("      </TABLE>\r\n");
+   $nm_saida->saida("     </TD>\r\n");
+   $nm_saida->saida("    </TR>\r\n");
+   $nm_saida->saida("   </TABLE>\r\n");
    $nm_saida->saida("  </TD>\r\n");
    $nm_saida->saida(" </TR>\r\n");
  }
@@ -2155,9 +2168,6 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nombres_label'] . "\" >&nbsp;</TD>\r\n");
    } 
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opc_psq']) { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nombres_label'] . "\" >&nbsp;</TD>\r\n");
-   } 
-   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf") { 
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nombres_label'] . "\" >&nbsp;</TD>\r\n");
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['field_order'] as $Cada_label)
@@ -2417,16 +2427,6 @@ $nm_saida->saida("}\r\n");
        else
        {
            $nm_saida->saida(" <TR> \r\n");
-           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" && 
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao_print'] != "print") 
-           { 
-           $nm_saida->saida("    <TD >\r\n");
-           $nm_saida->saida("    <TABLE cellspacing=0 cellpadding=0 width='100%'>\r\n");
-               $nm_saida->saida("    <TD style=\"padding: 0px; border-width: 0px; vertical-align: top;\" width=1>\r\n");
-      $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_EL_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_EL_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-               $nm_saida->saida("    </TD>\r\n");
-               $nm_saida->saida("    <TD style=\"padding: 0px; border-width: 0px; vertical-align: top;\"><TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\"><TR>\r\n");
-           } 
            $nm_saida->saida("  <td " . $this->Grid_body . " class=\"" . $this->css_scGridTabelaTd . " " . $this->css_scGridFieldOdd . "\" align=\"center\" style=\"vertical-align: top;font-family:" . $this->Ini->texto_fonte_tipo_impar . ";font-size:12px;color:#000000;\">\r\n");
            if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['force_toolbar']))
            { 
@@ -2441,25 +2441,9 @@ $nm_saida->saida("}\r\n");
            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['ajax_nav'])
            { 
                $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_grid_body', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
-               $this->Ini->Arr_result['setSrc'][] = array('field' => 'nmsc_iframe_liga_A_grid_terceros_pos', 'value' => 'NM_Blank_Page.htm');
-               $this->Ini->Arr_result['setSrc'][] = array('field' => 'nmsc_iframe_liga_D_grid_terceros_pos', 'value' => 'NM_Blank_Page.htm');
-               $this->Ini->Arr_result['setSrc'][] = array('field' => 'nmsc_iframe_liga_E_grid_terceros_pos', 'value' => 'NM_Blank_Page.htm');
                $_SESSION['scriptcase']['saida_html'] = "";
            } 
            $nm_saida->saida("  </td></tr>\r\n");
-           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" &&
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao_print'] != "print") 
-           { 
-               $nm_saida->saida("</TABLE></TD>\r\n");
-               $nm_saida->saida("<TD style=\"padding: 0px; border-width: 0px;\" valign=\"top\" width=1>\r\n");
-      $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_DL_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_DL_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-               $nm_saida->saida("</TD>\r\n");
-               $nm_saida->saida("    <TD style=\"padding: 0px; border-width: 0px; vertical-align: top;\">\r\n");
-               $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_D_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_D_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-               $nm_saida->saida("    </TD>\r\n");
-               $nm_saida->saida("    </TR>\r\n");
-           } 
-       $nm_saida->saida("</TABLE>\r\n");
        }
        return;
    }
@@ -2478,16 +2462,6 @@ else
 {
        $nm_saida->saida("    <TR> \r\n");
 }
-       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" && 
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao_print'] != "print") 
-       { 
-           $nm_saida->saida("    <TD  colspan=3>\r\n");
-           $nm_saida->saida("    <TABLE cellspacing=0 cellpadding=0 width='100%'>\r\n");
-           $nm_saida->saida("    <TD style=\"padding: 0px; border-width: 0px; vertical-align: top;\" width=1>\r\n");
-      $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_EL_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_EL_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-           $nm_saida->saida("    </TD>\r\n");
-           $nm_saida->saida("    <TD style=\"padding: 0px; border-width: 0px; vertical-align: top;\"><TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\"><TR>\r\n");
-       } 
        $nm_id_aplicacao = " id=\"apl_grid_terceros_pos#?#1\"";
    } 
    $TD_padding = (!$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] == "pdf") ? "padding: 0px !important;" : "";
@@ -2633,7 +2607,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['proc_pdf'
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['rows_emb']++;
           $this->sc_proc_grid = true;
           $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'on';
- $this->seleccionar  = "<input type='button' doc='".$this->documento ."' value='Seleccionar' onclick='window.opener.document.getElementById(\"cliente\").value=\"".$this->documento ."\";window.opener.document.getElementById(\"cliente\").click();window.opener.document.getElementById(\"txt_articulo\").focus();window.close();' />";
+ $this->seleccionar  = "<img style='cursor:pointer;' src='../_lib/img/scriptcase__NM__ico__NM__nav_down_right_blue_32.png' doc='".$this->documento ."' onclick='window.opener.document.getElementById(\"cliente\").value=\"".$this->documento ."\";window.opener.document.getElementById(\"cliente\").click();window.opener.document.getElementById(\"txt_articulo\").focus();window.close();' />";
 $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['proc_pdf'])
           {
@@ -2682,54 +2656,6 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
           $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  style=\"" . $this->Css_Cmp['css_nombres_grid_line'] . "\" NOWRAP align=\"left\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\">\r\n");
  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcapture", "document.Fpesq.nm_ret_psq.value='" . $teste . "'; nm_escreve_window();", "document.Fpesq.nm_ret_psq.value='" . $teste . "'; nm_escreve_window();", "", "Rad_psq", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida(" $Cod_Btn</TD>\r\n");
- } 
- if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['mostra_edit'] != "N"){ 
-              $Sc_parent = ($this->grid_emb_form_full) ? "S" : "";
-              $linkTarget = isset($this->Ini->sc_lig_target['A_@scinf__@scinf_terceros_cliente']) ? $this->Ini->sc_lig_target['A_@scinf__@scinf_terceros_cliente'] : (isset($this->Ini->sc_lig_target['A_@scinf_']) ? $this->Ini->sc_lig_target['A_@scinf_'] : null);
-              if (isset($this->Ini->sc_lig_md5["terceros_cliente"]) && $this->Ini->sc_lig_md5["terceros_cliente"] == "S")
-              {
-                  $Parms_Edt  = "idtercero?#?" . str_replace('"', "@aspasd@", $this->idtercero) . "?@?id_tercero?#?" . str_replace('"', "@aspasd@", $this->idtercero) . "?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
-                  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['under_dashboard'] && isset($linkTarget))
-                  {
-                      if ('' != $Parms_Edt && '?@?' != substr($Parms_Edt, -3) && '*scout' != substr($Parms_Edt, -6))
-                      {
-                          $Parms_Edt .= '*scout';
-                      }
-                      $Parms_Edt .= 'under_dashboard*scin1*scoutdashboard_app*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['dashboard_app'] . '*scoutown_widget*scin' . $linkTarget . '*scoutparent_widget*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['own_widget'] . '*scoutcompact_mode*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['compact_mode'] ? '1' : '0') . '*scoutremove_margin*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['remove_margin'] ? '1' : '0') . '*scoutremove_border*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['remove_border'] ? '1' : '0');
-                  }
-                  $Md5_Edt    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_terceros_pos@SC_par@" . md5($Parms_Edt);
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['Lig_Md5'][md5($Parms_Edt)] = $Parms_Edt;
-              }
-              else
-              {
-                  $Md5_Edt  = "idtercero?#?" . str_replace('"', "@aspasd@", $this->idtercero) . "?@?id_tercero?#?" . str_replace('"', "@aspasd@", $this->idtercero) . "?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
-              }
-              $Link_Edit = nmButtonOutput($this->arr_buttons, "bform_editar", "nm_gp_submit4('" .  $this->Ini->link_terceros_cliente . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'terceros_cliente', '" . $this->SC_ancora . "')", "nm_gp_submit4('" .  $this->Ini->link_terceros_cliente . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'terceros_cliente', '" . $this->SC_ancora . "')", "bedit", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\"><table style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\"><tr><td style=\"padding: 0px\">" . $Link_Edit . "</td></tr></table></TD>\r\n");
- } 
- if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['mostra_edit'] == "N"){ 
-              $Sc_parent = ($this->grid_emb_form_full) ? "S" : "";
-              $linkTarget = isset($this->Ini->sc_lig_target['A_@scinf__@scinf_terceros_cliente']) ? $this->Ini->sc_lig_target['A_@scinf__@scinf_terceros_cliente'] : (isset($this->Ini->sc_lig_target['A_@scinf_']) ? $this->Ini->sc_lig_target['A_@scinf_'] : null);
-              if (isset($this->Ini->sc_lig_md5["terceros_cliente"]) && $this->Ini->sc_lig_md5["terceros_cliente"] == "S")
-              {
-                  $Parms_Edt  = "idtercero?#?" . str_replace('"', "@aspasd@", $this->idtercero) . "?@?id_tercero?#?" . str_replace('"', "@aspasd@", $this->idtercero) . "?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
-                  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['under_dashboard'] && isset($linkTarget))
-                  {
-                      if ('' != $Parms_Edt && '?@?' != substr($Parms_Edt, -3) && '*scout' != substr($Parms_Edt, -6))
-                      {
-                          $Parms_Edt .= '*scout';
-                      }
-                      $Parms_Edt .= 'under_dashboard*scin1*scoutdashboard_app*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['dashboard_app'] . '*scoutown_widget*scin' . $linkTarget . '*scoutparent_widget*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['own_widget'] . '*scoutcompact_mode*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['compact_mode'] ? '1' : '0') . '*scoutremove_margin*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['remove_margin'] ? '1' : '0') . '*scoutremove_border*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['dashboard_info']['remove_border'] ? '1' : '0');
-                  }
-                  $Md5_Edt    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_terceros_pos@SC_par@" . md5($Parms_Edt);
-                  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['Lig_Md5'][md5($Parms_Edt)] = $Parms_Edt;
-              }
-              else
-              {
-                  $Md5_Edt  = "idtercero?#?" . str_replace('"', "@aspasd@", $this->idtercero) . "?@?id_tercero?#?" . str_replace('"', "@aspasd@", $this->idtercero) . "?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
-              }
-              $Link_Edit = nmButtonOutput($this->arr_buttons, "bform_editar", "nm_gp_submit4('" .  $this->Ini->link_terceros_cliente . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'terceros_cliente', '" . $this->SC_ancora . "')", "nm_gp_submit4('" .  $this->Ini->link_terceros_cliente . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'terceros_cliente', '" . $this->SC_ancora . "')", "bedit", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\"><table style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\"><tr></tr></table></TD>\r\n");
  } 
           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['field_order'] as $Cada_col)
           { 
@@ -2794,20 +2720,6 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'])
    { 
        $_SESSION['scriptcase']['contr_link_emb'] = "";   
-   } 
-   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" && empty($this->nm_grid_sem_reg) && 
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao_print'] != "print") 
-   { 
-       $nm_saida->saida("</TABLE></TD>\r\n");
-       $nm_saida->saida("<TD style=\"padding: 0px; border-width: 0px;\" valign=\"top\" width=1>\r\n");
-      $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_DL_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_DL_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-       $nm_saida->saida("</TD>\r\n");
-           $nm_saida->saida("    <TD style=\"padding: 0px; border-width: 0px; vertical-align: top;\">\r\n");
-           $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_D_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_D_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-           $nm_saida->saida("    </TD>\r\n");
-           $nm_saida->saida("    </TR>\r\n");
-           $nm_saida->saida("    </TABLE>\r\n");
-           $nm_saida->saida("    </TD>\r\n");
    } 
            $nm_saida->saida("    </TR>\r\n");
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'])
@@ -2905,15 +2817,11 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 5;
+   $this->NM_colspan  = 4;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opc_psq'])
    {
        $this->NM_colspan++;
    }
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] == "pdf" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida_pdf'] == "pdf")
-   {
-       $this->NM_colspan--;
-   } 
    foreach ($this->NM_cmp_hidden as $Cmp => $Hidden)
    {
        if ($Hidden == "off")
@@ -3046,7 +2954,7 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
       $nm_saida->saida("      <input type=\"hidden\" id=\"script_init_f0_top\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
       $nm_saida->saida("      <input type=\"hidden\" id=\"opcao_f0_top\" name=\"nmgp_opcao\" value=\"muda_qt_linhas\"/> \r\n");
       $nm_saida->saida("      </td></tr><tr>\r\n");
-      $nm_saida->saida("       <td id=\"sc_grid_toobar_top\"  colspan=3 class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
+      $nm_saida->saida("       <td id=\"sc_grid_toobar_top\"  class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['ajax_nav'])
       { 
           $_SESSION['scriptcase']['saida_html'] = "";
@@ -3160,7 +3068,7 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
       $nm_saida->saida("      <input type=\"hidden\" id=\"script_init_f0_bot\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
       $nm_saida->saida("      <input type=\"hidden\" id=\"opcao_f0_bot\" name=\"nmgp_opcao\" value=\"muda_qt_linhas\"/> \r\n");
       $nm_saida->saida("      </td></tr><tr>\r\n");
-      $nm_saida->saida("       <td id=\"sc_grid_toobar_bot\"  colspan=3 class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
+      $nm_saida->saida("       <td id=\"sc_grid_toobar_bot\"  class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['ajax_nav'])
       { 
           $_SESSION['scriptcase']['saida_html'] = "";
@@ -3357,7 +3265,7 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
       $nm_saida->saida("      <input type=\"hidden\" id=\"script_init_f0_top\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
       $nm_saida->saida("      <input type=\"hidden\" id=\"opcao_f0_top\" name=\"nmgp_opcao\" value=\"muda_qt_linhas\"/> \r\n");
       $nm_saida->saida("      </td></tr><tr>\r\n");
-      $nm_saida->saida("       <td id=\"sc_grid_toobar_top\"  colspan=3 class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
+      $nm_saida->saida("       <td id=\"sc_grid_toobar_top\"  class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['ajax_nav'])
       { 
           $_SESSION['scriptcase']['saida_html'] = "";
@@ -3504,7 +3412,7 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
       $nm_saida->saida("      <input type=\"hidden\" id=\"script_init_f0_bot\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
       $nm_saida->saida("      <input type=\"hidden\" id=\"opcao_f0_bot\" name=\"nmgp_opcao\" value=\"muda_qt_linhas\"/> \r\n");
       $nm_saida->saida("      </td></tr><tr>\r\n");
-      $nm_saida->saida("       <td id=\"sc_grid_toobar_bot\"  colspan=3 class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
+      $nm_saida->saida("       <td id=\"sc_grid_toobar_bot\"  class=\"" . $this->css_scGridTabelaTd . "\" valign=\"top\"> \r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['ajax_nav'])
       { 
           $_SESSION['scriptcase']['saida_html'] = "";
@@ -3718,23 +3626,23 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
    {
       global $nm_saida;
       $nm_saida->saida("     <tr id=\"sc_id_save_grid_placeholder_top\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
       $nm_saida->saida("     <tr id=\"sc_id_groupby_placeholder_top\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
       $nm_saida->saida("     <tr id=\"sc_id_sel_campos_placeholder_top\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
       $nm_saida->saida("     <tr id=\"sc_id_export_email_placeholder_top\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
       $nm_saida->saida("     <tr id=\"sc_id_order_campos_placeholder_top\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
    }
@@ -3742,23 +3650,23 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
    {
       global $nm_saida;
       $nm_saida->saida("     <tr id=\"sc_id_save_grid_placeholder_bot\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
       $nm_saida->saida("     <tr id=\"sc_id_groupby_placeholder_bot\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
       $nm_saida->saida("     <tr id=\"sc_id_sel_campos_placeholder_bot\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
       $nm_saida->saida("     <tr id=\"sc_id_export_email_placeholder_bot\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
       $nm_saida->saida("     <tr id=\"sc_id_order_campos_placeholder_bot\" style=\"display: none\">\r\n");
-      $nm_saida->saida("      <td colspan=3>\r\n");
+      $nm_saida->saida("      <td>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
    }
@@ -3990,13 +3898,6 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'])
    { 
         return;
-   } 
-   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "pdf" &&
-        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos']['opcao_print'] != "print" && !$this->Print_All) 
-   { 
-      $nm_saida->saida("     <tr><td colspan=3  class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top\"> \r\n");
-      $nm_saida->saida("     <iframe class=\"css_iframes\" id=\"nmsc_iframe_liga_B_grid_terceros_pos\" marginWidth=\"0px\" marginHeight=\"0px\" frameborder=\"0\" valign=\"top\" height=\"0px\" width=\"0px\" name=\"nm_iframe_liga_B_grid_terceros_pos\" scrolling=\"auto\" src=\"NM_Blank_Page.htm\"></iframe>\r\n");
-      $nm_saida->saida("     </td></tr> \r\n");
    } 
    $nm_saida->saida("   </TABLE>\r\n");
    $nm_saida->saida("   </div>\r\n");
@@ -4391,65 +4292,6 @@ $_SESSION['scriptcase']['grid_terceros_pos']['contr_erro'] = 'off';
    $nm_saida->saida("   { \r\n");
    $nm_saida->saida("       \r\n");
    $nm_saida->saida("   } \r\n");
-   $nm_saida->saida("   var tem_hint;\r\n");
-   $nm_saida->saida("   function nm_mostra_hint(nm_obj, nm_evt, nm_mens)\r\n");
-   $nm_saida->saida("   {\r\n");
-   $nm_saida->saida("       if (nm_mens == \"\")\r\n");
-   $nm_saida->saida("       {\r\n");
-   $nm_saida->saida("           return;\r\n");
-   $nm_saida->saida("       }\r\n");
-   $nm_saida->saida("       tem_hint = true;\r\n");
-   $nm_saida->saida("       if (document.layers)\r\n");
-   $nm_saida->saida("       {\r\n");
-   $nm_saida->saida("           theString=\"<DIV CLASS='ttip'>\" + nm_mens + \"</DIV>\";\r\n");
-   $nm_saida->saida("           document.tooltip.document.write(theString);\r\n");
-   $nm_saida->saida("           document.tooltip.document.close();\r\n");
-   $nm_saida->saida("           document.tooltip.left = nm_evt.pageX + 14;\r\n");
-   $nm_saida->saida("           document.tooltip.top = nm_evt.pageY + 2;\r\n");
-   $nm_saida->saida("           document.tooltip.visibility = \"show\";\r\n");
-   $nm_saida->saida("       }\r\n");
-   $nm_saida->saida("       else\r\n");
-   $nm_saida->saida("       {\r\n");
-   $nm_saida->saida("           if(document.getElementById)\r\n");
-   $nm_saida->saida("           {\r\n");
-   $nm_saida->saida("              nmdg_nav = navigator.appName;\r\n");
-   $nm_saida->saida("              elm = document.getElementById(\"tooltip\");\r\n");
-   $nm_saida->saida("              elml = nm_obj;\r\n");
-   $nm_saida->saida("              elm.innerHTML = nm_mens;\r\n");
-   $nm_saida->saida("              if (nmdg_nav == \"Netscape\")\r\n");
-   $nm_saida->saida("              {\r\n");
-   $nm_saida->saida("                  elm.style.height = elml.style.height;\r\n");
-   $nm_saida->saida("                  elm.style.top = nm_evt.pageY + 2 + 'px';\r\n");
-   $nm_saida->saida("                  elm.style.left = nm_evt.pageX + 14 + 'px';\r\n");
-   $nm_saida->saida("              }\r\n");
-   $nm_saida->saida("              else\r\n");
-   $nm_saida->saida("              {\r\n");
-   $nm_saida->saida("                  elm.style.top = nm_evt.y + document.body.scrollTop + 10 + 'px';\r\n");
-   $nm_saida->saida("                  elm.style.left = nm_evt.x + document.body.scrollLeft + 10 + 'px';\r\n");
-   $nm_saida->saida("              }\r\n");
-   $nm_saida->saida("              elm.style.visibility = \"visible\";\r\n");
-   $nm_saida->saida("           }\r\n");
-   $nm_saida->saida("       }\r\n");
-   $nm_saida->saida("   }\r\n");
-   $nm_saida->saida("   function nm_apaga_hint()\r\n");
-   $nm_saida->saida("   {\r\n");
-   $nm_saida->saida("       if (!tem_hint)\r\n");
-   $nm_saida->saida("       {\r\n");
-   $nm_saida->saida("           return;\r\n");
-   $nm_saida->saida("       }\r\n");
-   $nm_saida->saida("       tem_hint = false;\r\n");
-   $nm_saida->saida("       if (document.layers)\r\n");
-   $nm_saida->saida("       {\r\n");
-   $nm_saida->saida("           document.tooltip.visibility = \"hidden\";\r\n");
-   $nm_saida->saida("       }\r\n");
-   $nm_saida->saida("       else\r\n");
-   $nm_saida->saida("       {\r\n");
-   $nm_saida->saida("           if(document.getElementById)\r\n");
-   $nm_saida->saida("           {\r\n");
-   $nm_saida->saida("              elm.style.visibility = \"hidden\";\r\n");
-   $nm_saida->saida("           }\r\n");
-   $nm_saida->saida("       }\r\n");
-   $nm_saida->saida("   }\r\n");
    if ($this->Rec_ini == 0)
    {
        $nm_saida->saida("   nm_gp_ini = \"ini\";\r\n");

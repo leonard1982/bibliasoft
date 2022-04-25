@@ -2,18 +2,22 @@
 <?php $sc_hidden_no = 1; $sc_hidden_yes = 0; ?>
    <a name="bloco_0"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_13"><!-- bloco_c -->
+<div id="div_hidden_bloco_11"><!-- bloco_c -->
 <?php
    if (!isset($this->nmgp_cmp_hidden['idtercero']))
    {
        $this->nmgp_cmp_hidden['idtercero'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['imagenter']))
+   {
+       $this->nmgp_cmp_hidden['imagenter'] = 'off';
    }
    if (!isset($this->nmgp_cmp_hidden['relleno2']))
    {
        $this->nmgp_cmp_hidden['relleno2'] = 'off';
    }
 ?>
-<TABLE align="center" id="hidden_bloco_13" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
+<TABLE align="center" id="hidden_bloco_11" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
            if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['idtercero']))
            {
                $this->nmgp_cmp_readonly['idtercero'] = 'on';
@@ -37,7 +41,7 @@
     <TD colspan="3" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf13\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Empleados<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf11\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Empleados<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>

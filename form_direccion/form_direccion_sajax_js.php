@@ -3486,6 +3486,53 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_form_direccion_validate_celular_notificafe__cb
 
+  // ---------- Validate iddireccion_
+  function do_ajax_form_direccion_validate_iddireccion_(iNumLinha)
+  {
+    var nomeCampo_iddireccion_ = "iddireccion_" + iNumLinha;
+    var var_iddireccion_ = scAjaxGetFieldHidden(nomeCampo_iddireccion_);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_direccion_validate_iddireccion_(var_iddireccion_, iNumLinha, var_script_case_init, do_ajax_form_direccion_validate_iddireccion__cb);
+  } // do_ajax_form_direccion_validate_iddireccion_
+
+  function do_ajax_form_direccion_validate_iddireccion__cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    iLineNumber = scAjaxGetLineNumber();
+    if ("" != iLineNumber)
+    {
+      sFieldValid = "iddireccion_" + iLineNumber;
+    }
+    else
+    {
+      sFieldValid = "iddireccion_";
+    }
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+      scErrorLineOff(iLineNumber, "iddireccion_");
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+      scErrorLineOn(iLineNumber, "iddireccion_");
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_direccion_validate_iddireccion__cb
+
   // ---------- Refresh iddepar_
   function do_ajax_form_direccion_refresh_iddepar_(iSeqForm)
   {
@@ -3602,7 +3649,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   // ---------- backup_line
   function do_ajax_form_direccion_backup_line(iNumLinha)
   {
-    var var_iddireccion_ = scAjaxGetFieldText("iddireccion_" + iNumLinha);
+    var var_iddireccion_ = scAjaxGetFieldHidden("iddireccion_" + iNumLinha);
     var var_nmgp_refresh_row = iNumLinha;
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_script_case_init = document.F1.script_case_init.value;
@@ -4065,6 +4112,7 @@ function scJs_sweetalert_params(params) {
     var var_correo_ = scAjaxGetFieldText("correo_" + iNumLinha);
     var var_correo_notificafe_ = scAjaxGetFieldText("correo_notificafe_" + iNumLinha);
     var var_celular_notificafe_ = scAjaxGetFieldText("celular_notificafe_" + iNumLinha);
+    var var_iddireccion_ = scAjaxGetFieldHidden("iddireccion_" + iNumLinha);
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -4097,7 +4145,7 @@ function scJs_sweetalert_params(params) {
 <?php
     }
 ?>
-    x_ajax_form_direccion_submit_form(var_idter_, var_iddepar_, var_idmuni_, var_ciudad_, var_direc_, var_codigo_postal_, var_telefono_, var_lenguaje_, var_obs_, var_correo_, var_correo_notificafe_, var_celular_notificafe_, var_nmgp_refresh_row, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_direccion_submit_form_cb);
+    x_ajax_form_direccion_submit_form(var_idter_, var_iddepar_, var_idmuni_, var_ciudad_, var_direc_, var_codigo_postal_, var_telefono_, var_lenguaje_, var_obs_, var_correo_, var_correo_notificafe_, var_celular_notificafe_, var_iddireccion_, var_nmgp_refresh_row, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_direccion_submit_form_cb);
   } // do_ajax_form_direccion_submit_form
 
   function do_ajax_form_direccion_submit_form_cb(sResp)
@@ -4204,6 +4252,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("correo_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("correo_notificafe_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("celular_notificafe_" + sc_num_ult_line);
+      scAjaxHideErrorDisplay("iddireccion_" + sc_num_ult_line);
 <?php
 if (isset($this->Embutida_form) && $this->Embutida_form) {
 ?>
@@ -4274,6 +4323,10 @@ if (isset($this->Embutida_form) && $this->Embutida_form) {
     {
       return;
     }
+    if (sc_insert_open)
+    {
+        do_ajax_form_direccion_cancel_insert(sc_num_ult_line);
+    }
     nm_uncheck_delete();
     scAjaxHideMessage();
     scAjaxHideErrorDisplay("table");
@@ -4291,6 +4344,7 @@ if (isset($this->Embutida_form) && $this->Embutida_form) {
       scAjaxHideErrorDisplay("correo_" + iNavForm);
       scAjaxHideErrorDisplay("correo_notificafe_" + iNavForm);
       scAjaxHideErrorDisplay("celular_notificafe_" + iNavForm);
+      scAjaxHideErrorDisplay("iddireccion_" + iNavForm);
     }
     var var_iddireccion_ = document.F2.iddireccion_.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
@@ -4421,18 +4475,21 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     iTotCampos++;
     ajax_field_list[iTotCampos] = "celular_notificafe_" + iNumLinha;
     iTotCampos++;
+    ajax_field_list[iTotCampos] = "iddireccion_" + iNumLinha;
+    iTotCampos++;
     ajax_error_list["idter_" + iNumLinha] = {"label": "Idter<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["iddepar_" + iNumLinha] = {"label": "Departamento<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["idmuni_" + iNumLinha] = {"label": "Ciudad o Municipio<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["ciudad_" + iNumLinha] = {"label": "Ciudad<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["direc_" + iNumLinha] = {"label": "Dirección<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["codigo_postal_" + iNumLinha] = {"label": "Codigo Postal<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["codigo_postal_" + iNumLinha] = {"label": "Código Postal<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["telefono_" + iNumLinha] = {"label": "Teléfono<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["lenguaje_" + iNumLinha] = {"label": "Lenguaje<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["obs_" + iNumLinha] = {"label": "Sucursal/Observ.:<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["correo_" + iNumLinha] = {"label": "Correo<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["correo_notificafe_" + iNumLinha] = {"label": "Correo Notificación<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["celular_notificafe_" + iNumLinha] = {"label": "Celular Notificación<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["iddireccion_" + iNumLinha] = {"label": "Iddireccion<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_field_mult["idter_"][iNumLinha] = "idter_" + iNumLinha;
     ajax_field_mult["iddepar_"][iNumLinha] = "iddepar_" + iNumLinha;
     ajax_field_mult["idmuni_"][iNumLinha] = "idmuni_" + iNumLinha;
@@ -4445,6 +4502,7 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_field_mult["correo_"][iNumLinha] = "correo_" + iNumLinha;
     ajax_field_mult["correo_notificafe_"][iNumLinha] = "correo_notificafe_" + iNumLinha;
     ajax_field_mult["celular_notificafe_"][iNumLinha] = "celular_notificafe_" + iNumLinha;
+    ajax_field_mult["iddireccion_"][iNumLinha] = "iddireccion_" + iNumLinha;
     ajax_field_id["iddepar_" + iNumLinha] = new Array("hidden_field_label_iddepar_", "hidden_field_data_iddepar_" + iNumLinha);
     ajax_field_id["idmuni_" + iNumLinha] = new Array("hidden_field_label_idmuni_", "hidden_field_data_idmuni_" + iNumLinha);
     ajax_field_id["ciudad_" + iNumLinha] = new Array("hidden_field_label_ciudad_", "hidden_field_data_ciudad_" + iNumLinha);
@@ -4467,6 +4525,7 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_error_count["correo_" + iNumLinha] = "off";
     ajax_error_count["correo_notificafe_" + iNumLinha] = "off";
     ajax_error_count["celular_notificafe_" + iNumLinha] = "off";
+    ajax_error_count["iddireccion_" + iNumLinha] = "off";
 <?php
 if (!$this->Grid_editavel)
 {
@@ -4483,6 +4542,7 @@ if (!$this->Grid_editavel)
     ajax_read_only["correo_" + iNumLinha] = "off";
     ajax_read_only["correo_notificafe_" + iNumLinha] = "off";
     ajax_read_only["celular_notificafe_" + iNumLinha] = "off";
+    ajax_read_only["iddireccion_" + iNumLinha] = "on";
 <?php
 }
 else
@@ -4500,6 +4560,7 @@ else
     ajax_read_only["correo_" + iNumLinha] = "on";
     ajax_read_only["correo_notificafe_" + iNumLinha] = "on";
     ajax_read_only["celular_notificafe_" + iNumLinha] = "on";
+    ajax_read_only["iddireccion_" + iNumLinha] = "on";
 <?php
 }
 ?>
@@ -4518,6 +4579,7 @@ else
     ajax_error_list["correo_" + iNumLinha] = null;
     ajax_error_list["correo_notificafe_" + iNumLinha] = null;
     ajax_error_list["celular_notificafe_" + iNumLinha] = null;
+    ajax_error_list["iddireccion_" + iNumLinha] = null;
   }
 
   var ajax_error_geral = "";
@@ -4555,7 +4617,8 @@ else
     "obs_": new Array(),
     "correo_": new Array(),
     "correo_notificafe_": new Array(),
-    "celular_notificafe_": new Array()
+    "celular_notificafe_": new Array(),
+    "iddireccion_": new Array()
   };
 
   var ajax_field_id = {};
@@ -4634,6 +4697,11 @@ else
       ajax_error_list["celular_notificafe_" + iNumLinha]["onchange"] = new Array();
       ajax_error_list["celular_notificafe_" + iNumLinha]["onclick"] = new Array();
       ajax_error_list["celular_notificafe_" + iNumLinha]["onfocus"] = new Array();
+      ajax_error_list["iddireccion_" + iNumLinha]["valid"] = new Array();
+      ajax_error_list["iddireccion_" + iNumLinha]["onblur"] = new Array();
+      ajax_error_list["iddireccion_" + iNumLinha]["onchange"] = new Array();
+      ajax_error_list["iddireccion_" + iNumLinha]["onclick"] = new Array();
+      ajax_error_list["iddireccion_" + iNumLinha]["onfocus"] = new Array();
     }
   }
 
@@ -4663,6 +4731,11 @@ else
       document.getElementById("sc_cancelu_line_" + iSeq).style.display = "";
     }
     mdOpenObjects(iSeq);
+    Obj_Focus = eval("document.getElementById('id_sc_field_iddepar_" + iSeq + "')");
+    if (Obj_Focus)
+    {
+        Obj_Focus.focus();
+    }
     displayChange_row(iSeq, "on");
   }
 
@@ -4716,6 +4789,10 @@ else
   $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['celular_notificafe_'])) ? $this->nmgp_cmp_readonly['celular_notificafe_'] : 'off';
 ?>
     scAjaxFieldRead("celular_notificafe_" + iSeq, "<?php echo $NM_contr_readonly ?>");
+<?php
+  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['iddireccion_'])) ? $this->nmgp_cmp_readonly['iddireccion_'] : 'on';
+?>
+    scAjaxFieldRead("iddireccion_" + iSeq, "<?php echo $NM_contr_readonly ?>");
   }
 
   function mdCloseObjects(iSeq)
@@ -4732,6 +4809,7 @@ else
     scAjaxFieldRead("correo_" + iSeq, "on");
     scAjaxFieldRead("correo_notificafe_" + iSeq, "on");
     scAjaxFieldRead("celular_notificafe_" + iSeq, "on");
+    scAjaxFieldRead("iddireccion_" + iSeq, "on");
   }
 
   function mdCloseLine()
@@ -4797,7 +4875,7 @@ else
     {
       ajax_error_count[sIdError + iRow] = "on";
     }
-    if (bErrorRow || ("on" == ajax_error_count["idter_" + iRow] || "on" == ajax_error_count["iddepar_" + iRow] || "on" == ajax_error_count["idmuni_" + iRow] || "on" == ajax_error_count["ciudad_" + iRow] || "on" == ajax_error_count["direc_" + iRow] || "on" == ajax_error_count["codigo_postal_" + iRow] || "on" == ajax_error_count["telefono_" + iRow] || "on" == ajax_error_count["lenguaje_" + iRow] || "on" == ajax_error_count["obs_" + iRow] || "on" == ajax_error_count["correo_" + iRow] || "on" == ajax_error_count["correo_notificafe_" + iRow] || "on" == ajax_error_count["celular_notificafe_" + iRow]))
+    if (bErrorRow || ("on" == ajax_error_count["idter_" + iRow] || "on" == ajax_error_count["iddepar_" + iRow] || "on" == ajax_error_count["idmuni_" + iRow] || "on" == ajax_error_count["ciudad_" + iRow] || "on" == ajax_error_count["direc_" + iRow] || "on" == ajax_error_count["codigo_postal_" + iRow] || "on" == ajax_error_count["telefono_" + iRow] || "on" == ajax_error_count["lenguaje_" + iRow] || "on" == ajax_error_count["obs_" + iRow] || "on" == ajax_error_count["correo_" + iRow] || "on" == ajax_error_count["correo_notificafe_" + iRow] || "on" == ajax_error_count["celular_notificafe_" + iRow] || "on" == ajax_error_count["iddireccion_" + iRow]))
     {
       $("#hidden_field_data_sc_seq" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_sc_actions" + iRow).addClass("scFormErrorLine");
@@ -4813,6 +4891,7 @@ else
       $("#hidden_field_data_correo_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_correo_notificafe_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_celular_notificafe_" + iRow).addClass("scFormErrorLine");
+      $("#hidden_field_data_iddireccion_" + iRow).addClass("scFormErrorLine");
     }
   }
 
@@ -4827,7 +4906,7 @@ else
     {
       ajax_error_count[sIdError + iRow] = "off";
     }
-    if (bErrorRow || ("off" == ajax_error_count["idter_" + iRow] && "off" == ajax_error_count["iddepar_" + iRow] && "off" == ajax_error_count["idmuni_" + iRow] && "off" == ajax_error_count["ciudad_" + iRow] && "off" == ajax_error_count["direc_" + iRow] && "off" == ajax_error_count["codigo_postal_" + iRow] && "off" == ajax_error_count["telefono_" + iRow] && "off" == ajax_error_count["lenguaje_" + iRow] && "off" == ajax_error_count["obs_" + iRow] && "off" == ajax_error_count["correo_" + iRow] && "off" == ajax_error_count["correo_notificafe_" + iRow] && "off" == ajax_error_count["celular_notificafe_" + iRow]))
+    if (bErrorRow || ("off" == ajax_error_count["idter_" + iRow] && "off" == ajax_error_count["iddepar_" + iRow] && "off" == ajax_error_count["idmuni_" + iRow] && "off" == ajax_error_count["ciudad_" + iRow] && "off" == ajax_error_count["direc_" + iRow] && "off" == ajax_error_count["codigo_postal_" + iRow] && "off" == ajax_error_count["telefono_" + iRow] && "off" == ajax_error_count["lenguaje_" + iRow] && "off" == ajax_error_count["obs_" + iRow] && "off" == ajax_error_count["correo_" + iRow] && "off" == ajax_error_count["correo_notificafe_" + iRow] && "off" == ajax_error_count["celular_notificafe_" + iRow] && "off" == ajax_error_count["iddireccion_" + iRow]))
     {
       if (bErrorRow)
       {
@@ -4843,6 +4922,7 @@ else
         ajax_error_count["correo_" + iRow] = "off";
         ajax_error_count["correo_notificafe_" + iRow] = "off";
         ajax_error_count["celular_notificafe_" + iRow] = "off";
+        ajax_error_count["iddireccion_" + iRow] = "off";
       }
       var sCssLine = scErrorLineCss(iRow);
       $("#hidden_field_data_sc_seq" + iRow).removeClass("scFormErrorLine");
@@ -4859,6 +4939,7 @@ else
       $("#hidden_field_data_correo_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_correo_notificafe_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_celular_notificafe_" + iRow).removeClass("scFormErrorLine");
+      $("#hidden_field_data_iddireccion_" + iRow).removeClass("scFormErrorLine");
     }
   }
 
@@ -5080,6 +5161,23 @@ else
     if ("celular_notificafe_" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("iddireccion_" == sIndex)
+    {
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

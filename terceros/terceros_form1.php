@@ -2,18 +2,22 @@
 <?php $sc_hidden_no = 1; $sc_hidden_yes = 0; ?>
    <a name="bloco_0"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_7"><!-- bloco_c -->
+<div id="div_hidden_bloco_6"><!-- bloco_c -->
 <?php
    if (!isset($this->nmgp_cmp_hidden['idtercero']))
    {
        $this->nmgp_cmp_hidden['idtercero'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['imagenter']))
+   {
+       $this->nmgp_cmp_hidden['imagenter'] = 'off';
    }
    if (!isset($this->nmgp_cmp_hidden['relleno2']))
    {
        $this->nmgp_cmp_hidden['relleno2'] = 'off';
    }
 ?>
-<TABLE align="center" id="hidden_bloco_7" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
+<TABLE align="center" id="hidden_bloco_6" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
            if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['idtercero']))
            {
                $this->nmgp_cmp_readonly['idtercero'] = 'on';
@@ -25,7 +29,7 @@
     <TD colspan="4" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf7\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos Crédito Cliente<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf6\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos Crédito Cliente<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>
@@ -852,16 +856,16 @@ $autorizado_look = "";
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_8"></a>
+   <a name="bloco_7"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_8"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_8" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+<div id="div_hidden_bloco_7"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_7" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
-    <TD colspan="2" height="20" class="scFormBlock">
+    <TD colspan="1" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf8\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos contacto y cumpleaños<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf7\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_exp . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Agregar Sucursales<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>
@@ -871,78 +875,100 @@ $autorizado_look = "";
 
 
    </tr>
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
    <?php
-    if (!isset($this->nm_new_label['nacimiento']))
+    if (!isset($this->nm_new_label['direcciones']))
     {
-        $this->nm_new_label['nacimiento'] = "Cumpleaños";
+        $this->nm_new_label['direcciones'] = "direcciones";
     }
 ?>
 <?php
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $nacimiento = $this->nacimiento;
-   $sStyleHidden_nacimiento = '';
-   if (isset($this->nmgp_cmp_hidden['nacimiento']) && $this->nmgp_cmp_hidden['nacimiento'] == 'off')
+   $direcciones = $this->direcciones;
+   $sStyleHidden_direcciones = '';
+   if (isset($this->nmgp_cmp_hidden['direcciones']) && $this->nmgp_cmp_hidden['direcciones'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['nacimiento']);
-       $sStyleHidden_nacimiento = 'display: none;';
+       unset($this->nmgp_cmp_hidden['direcciones']);
+       $sStyleHidden_direcciones = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_nacimiento = 'display: none;';
-   $sStyleReadInp_nacimiento = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['nacimiento']) && $this->nmgp_cmp_readonly['nacimiento'] == 'on')
+   $sStyleReadLab_direcciones = 'display: none;';
+   $sStyleReadInp_direcciones = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['direcciones']) && $this->nmgp_cmp_readonly['direcciones'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['nacimiento']);
-       $sStyleReadLab_nacimiento = '';
-       $sStyleReadInp_nacimiento = 'display: none;';
+       unset($this->nmgp_cmp_readonly['direcciones']);
+       $sStyleReadLab_direcciones = '';
+       $sStyleReadInp_direcciones = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['nacimiento']) && $this->nmgp_cmp_hidden['nacimiento'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="nacimiento" value="<?php echo $this->form_encode_input($nacimiento) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['direcciones']) && $this->nmgp_cmp_hidden['direcciones'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="direcciones" value="<?php echo $this->form_encode_input($direcciones) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOdd css_nacimiento_line" id="hidden_field_data_nacimiento" style="<?php echo $sStyleHidden_nacimiento; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nacimiento_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_nacimiento_label" style=""><span id="id_label_nacimiento"><?php echo $this->nm_new_label['nacimiento']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["nacimiento"]) &&  $this->nmgp_cmp_readonly["nacimiento"] == "on") { 
-
- ?>
-<input type="hidden" name="nacimiento" value="<?php echo $this->form_encode_input($nacimiento) . "\">" . $nacimiento . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_nacimiento" class="sc-ui-readonly-nacimiento css_nacimiento_line" style="<?php echo $sStyleReadLab_nacimiento; ?>"><?php echo $this->form_format_readonly("nacimiento", $this->form_encode_input($nacimiento)); ?></span><span id="id_read_off_nacimiento" class="css_read_off_nacimiento<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_nacimiento; ?>"><?php
-$tmp_form_data = $this->field_config['nacimiento']['date_format'];
-$tmp_form_data = str_replace('aaaa', 'yyyy', $tmp_form_data);
-$tmp_form_data = str_replace('dd'  , $this->Ini->Nm_lang['lang_othr_date_days'], $tmp_form_data);
-$tmp_form_data = str_replace('mm'  , $this->Ini->Nm_lang['lang_othr_date_mnth'], $tmp_form_data);
-$tmp_form_data = str_replace('yyyy', $this->Ini->Nm_lang['lang_othr_date_year'], $tmp_form_data);
-$tmp_form_data = str_replace('hh'  , $this->Ini->Nm_lang['lang_othr_date_hour'], $tmp_form_data);
-$tmp_form_data = str_replace('ii'  , $this->Ini->Nm_lang['lang_othr_date_mint'], $tmp_form_data);
-$tmp_form_data = str_replace('ss'  , $this->Ini->Nm_lang['lang_othr_date_scnd'], $tmp_form_data);
-$tmp_form_data = str_replace(';'   , ' '                                       , $tmp_form_data);
-?>
+    <TD class="scFormDataOdd css_direcciones_line" id="hidden_field_data_direcciones" style="<?php echo $sStyleHidden_direcciones; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td width="100%" class="scFormDataFontOdd css_direcciones_line" style="vertical-align: top;padding: 0px">
 <?php
-$miniCalendarButton = $this->jqueryButtonText('calendar');
-if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
-    $miniCalendarButton[1] = substr($miniCalendarButton[1], 9);
+ if (isset($_SESSION['scriptcase']['dashboard_scinit'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['dashboard_info']['dashboard_app'] ][ $this->Ini->sc_lig_target['C_@scinf_direcciones'] ]) && '' != $_SESSION['scriptcase']['dashboard_scinit'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['dashboard_info']['dashboard_app'] ][ $this->Ini->sc_lig_target['C_@scinf_direcciones'] ]) {
+     $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] = $_SESSION['scriptcase']['dashboard_scinit'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['dashboard_info']['dashboard_app'] ][ $this->Ini->sc_lig_target['C_@scinf_direcciones'] ];
+ }
+ else {
+     $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] = $this->Ini->sc_page;
+ }
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_proc']  = false;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_form']  = true;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_call']  = true;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_multi'] = false;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_liga_form_insert'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_liga_form_update'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_liga_form_delete'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_liga_form_btn_nav'] = 'off';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_liga_grid_edit'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_liga_grid_edit_link'] = 'on';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_liga_qtd_reg'] = '';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_liga_tp_pag'] = 'total';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['embutida_parms'] = "cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['foreign_key']['idter'] = $this->nmgp_dados_form['idtercero'];
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['where_filter'] = "idter = " . $this->nmgp_dados_form['idtercero'] . "";
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['where_detal']  = "idter = " . $this->nmgp_dados_form['idtercero'] . "";
+ if ($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['terceros']['total'] < 0)
+ {
+     $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init'] ]['form_direccion']['where_filter'] = "1 <> 1";
+ }
+ $sDetailSrc = ('novo' == $this->nmgp_opcao) ? 'terceros_empty.htm' : $this->Ini->link_form_direccion_edit . '?script_case_init=' . $this->form_encode_input($this->Ini->sc_page) . '&script_case_detail=Y&sc_ifr_height=500';
+if (isset($this->Ini->sc_lig_target['C_@scinf_direcciones']) && 'nmsc_iframe_liga_form_direccion' != $this->Ini->sc_lig_target['C_@scinf_direcciones'])
+{
+    if ('novo' != $this->nmgp_opcao)
+    {
+        $sDetailSrc .= '&under_dashboard=1&dashboard_app=' . $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['dashboard_info']['dashboard_app'] . '&own_widget=' . $this->Ini->sc_lig_target['C_@scinf_direcciones'] . '&parent_widget=' . $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['dashboard_info']['own_widget'];
+        $sDetailSrc  = $this->addUrlParam($sDetailSrc, 'script_case_init', $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['form_direccion_script_case_init']);
+    }
+?>
+<script type="text/javascript">
+$(function() {
+    scOpenMasterDetail("<?php echo $this->Ini->sc_lig_target['C_@scinf_direcciones'] ?>", "<?php echo $sDetailSrc; ?>");
+});
+</script>
+<?php
+}
+else
+{
+?>
+<iframe border="0" id="nmsc_iframe_liga_form_direccion"  marginWidth="0" marginHeight="0" frameborder="0" valign="top" height="500" width="1200" name="nmsc_iframe_liga_form_direccion"  scrolling="auto" src="<?php echo $sDetailSrc; ?>"></iframe>
+<?php
 }
 ?>
-<span class='trigger-picker-<?php echo $miniCalendarButton[1]; ?>' style='display: inherit; width: 100%'>
-
- <input class="sc-js-input scFormObjectOdd css_nacimiento_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_nacimiento" type=text name="nacimiento" value="<?php echo $this->form_encode_input($nacimiento) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=10"; } ?> alt="{datatype: 'date', dateSep: '<?php echo $this->field_config['nacimiento']['date_sep']; ?>', dateFormat: '<?php echo $this->field_config['nacimiento']['date_format']; ?>', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: 'dd/mm/aaaa', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span>
-</span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_nacimiento_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_nacimiento_text"></span></td></tr></table></td></tr></table> </TD>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_direcciones_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_direcciones_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
-    <TD class="scFormDataOdd" colspan="1" >&nbsp;</TD>
 
 
 
 
-<?php if ($sc_hidden_yes > 0) { ?>
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
 
 
     <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
@@ -950,24 +976,134 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
 
 
 
-<?php } ?>
-<?php $sStyleHidden_nacimiento_dumb = ('' == $sStyleHidden_nacimiento) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_nacimiento_dumb" style="<?php echo $sStyleHidden_nacimiento_dumb; ?>"></TD>
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['sucur_cliente']))
+   {
+       $this->nm_new_label['sucur_cliente'] = "Sucursales";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $sucur_cliente = $this->sucur_cliente;
+   $sStyleHidden_sucur_cliente = '';
+   if (isset($this->nmgp_cmp_hidden['sucur_cliente']) && $this->nmgp_cmp_hidden['sucur_cliente'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['sucur_cliente']);
+       $sStyleHidden_sucur_cliente = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_sucur_cliente = 'display: none;';
+   $sStyleReadInp_sucur_cliente = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['sucur_cliente']) && $this->nmgp_cmp_readonly['sucur_cliente'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['sucur_cliente']);
+       $sStyleReadLab_sucur_cliente = '';
+       $sStyleReadInp_sucur_cliente = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['sucur_cliente']) && $this->nmgp_cmp_hidden['sucur_cliente'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="sucur_cliente" value="<?php echo $this->form_encode_input($this->sucur_cliente) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->sucur_cliente_1 = explode(";", trim($this->sucur_cliente));
+  } 
+  else
+  {
+      if (empty($this->sucur_cliente))
+      {
+          $this->sucur_cliente_1= array(); 
+          $this->sucur_cliente= "NO";
+      } 
+      else
+      {
+          $this->sucur_cliente_1= $this->sucur_cliente; 
+          $this->sucur_cliente= ""; 
+          foreach ($this->sucur_cliente_1 as $cada_sucur_cliente)
+          {
+             if (!empty($sucur_cliente))
+             {
+                 $this->sucur_cliente.= ";"; 
+             } 
+             $this->sucur_cliente.= $cada_sucur_cliente; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_sucur_cliente_line" id="hidden_field_data_sucur_cliente" style="<?php echo $sStyleHidden_sucur_cliente; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_sucur_cliente_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["sucur_cliente"]) &&  $this->nmgp_cmp_readonly["sucur_cliente"] == "on") { 
+
+$sucur_cliente_look = "";
+ if ($this->sucur_cliente == "SI") { $sucur_cliente_look .= "SI" ;} 
+ if (empty($sucur_cliente_look)) { $sucur_cliente_look = $this->sucur_cliente; }
+?>
+<input type="hidden" name="sucur_cliente" value="<?php echo $this->form_encode_input($sucur_cliente) . "\">" . $sucur_cliente_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$sucur_cliente_look = "";
+ if ($this->sucur_cliente == "SI") { $sucur_cliente_look .= "SI" ;} 
+ if (empty($sucur_cliente_look)) { $sucur_cliente_look = $this->sucur_cliente; }
+?>
+<span id="id_read_on_sucur_cliente" class="css_sucur_cliente_line" style="<?php echo $sStyleReadLab_sucur_cliente; ?>"><?php echo $this->form_format_readonly("sucur_cliente", $this->form_encode_input($sucur_cliente_look)); ?></span><span id="id_read_off_sucur_cliente" class="css_read_off_sucur_cliente css_sucur_cliente_line" style="<?php echo $sStyleReadInp_sucur_cliente; ?>"><?php echo "<div id=\"idAjaxCheckbox_sucur_cliente\" style=\"display: inline-block\" class=\"css_sucur_cliente_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_sucur_cliente_line"><?php $tempOptionId = "id-opt-sucur_cliente" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-sucur_cliente sc-ui-checkbox-sucur_cliente sc-js-input" name="sucur_cliente[]" value="SI"
+ alt="{type: 'checkbox', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['Lookup_sucur_cliente'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->sucur_cliente_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_sucur_cliente_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_sucur_cliente_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+
+
+
+
+
+
+<?php $sStyleHidden_sucur_cliente_dumb = ('' == $sStyleHidden_sucur_cliente) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_sucur_cliente_dumb" style="<?php echo $sStyleHidden_sucur_cliente_dumb; ?>"></TD>
    </tr>
 <?php $sc_hidden_no = 1; ?>
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_9"></a>
+   <a name="bloco_8"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_9"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_9" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+<div id="div_hidden_bloco_8"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_8" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
     <TD colspan="3" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf9\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>REQUERIDOS DIAN<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf8\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_exp . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>REQUERIDOS DIAN<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>
@@ -977,7 +1113,7 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
 
 
    </tr>
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -1183,128 +1319,26 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_10"></a>
+   <a name="bloco_9"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_10"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_10" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+<div id="div_hidden_bloco_9"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_9" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
-   <?php
-   if (!isset($this->nm_new_label['sucur_cliente']))
-   {
-       $this->nm_new_label['sucur_cliente'] = "Sucursales";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $sucur_cliente = $this->sucur_cliente;
-   $sStyleHidden_sucur_cliente = '';
-   if (isset($this->nmgp_cmp_hidden['sucur_cliente']) && $this->nmgp_cmp_hidden['sucur_cliente'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['sucur_cliente']);
-       $sStyleHidden_sucur_cliente = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_sucur_cliente = 'display: none;';
-   $sStyleReadInp_sucur_cliente = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['sucur_cliente']) && $this->nmgp_cmp_readonly['sucur_cliente'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['sucur_cliente']);
-       $sStyleReadLab_sucur_cliente = '';
-       $sStyleReadInp_sucur_cliente = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['sucur_cliente']) && $this->nmgp_cmp_hidden['sucur_cliente'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="sucur_cliente" value="<?php echo $this->form_encode_input($this->sucur_cliente) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-<?php 
-  if ($this->nmgp_opcao != "recarga") 
-  {
-      $this->sucur_cliente_1 = explode(";", trim($this->sucur_cliente));
-  } 
-  else
-  {
-      if (empty($this->sucur_cliente))
-      {
-          $this->sucur_cliente_1= array(); 
-          $this->sucur_cliente= "NO";
-      } 
-      else
-      {
-          $this->sucur_cliente_1= $this->sucur_cliente; 
-          $this->sucur_cliente= ""; 
-          foreach ($this->sucur_cliente_1 as $cada_sucur_cliente)
-          {
-             if (!empty($sucur_cliente))
-             {
-                 $this->sucur_cliente.= ";"; 
-             } 
-             $this->sucur_cliente.= $cada_sucur_cliente; 
-          } 
-      } 
-  } 
-?> 
-
-    <TD class="scFormDataOdd css_sucur_cliente_line" id="hidden_field_data_sucur_cliente" style="<?php echo $sStyleHidden_sucur_cliente; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_sucur_cliente_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_sucur_cliente_label" style=""><span id="id_label_sucur_cliente"><?php echo $this->nm_new_label['sucur_cliente']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["sucur_cliente"]) &&  $this->nmgp_cmp_readonly["sucur_cliente"] == "on") { 
-
-$sucur_cliente_look = "";
- if ($this->sucur_cliente == "SI") { $sucur_cliente_look .= "SI" ;} 
- if (empty($sucur_cliente_look)) { $sucur_cliente_look = $this->sucur_cliente; }
-?>
-<input type="hidden" name="sucur_cliente" value="<?php echo $this->form_encode_input($sucur_cliente) . "\">" . $sucur_cliente_look . ""; ?>
-<?php } else { ?>
-
-<?php
-
-$sucur_cliente_look = "";
- if ($this->sucur_cliente == "SI") { $sucur_cliente_look .= "SI" ;} 
- if (empty($sucur_cliente_look)) { $sucur_cliente_look = $this->sucur_cliente; }
-?>
-<span id="id_read_on_sucur_cliente" class="css_sucur_cliente_line" style="<?php echo $sStyleReadLab_sucur_cliente; ?>"><?php echo $this->form_format_readonly("sucur_cliente", $this->form_encode_input($sucur_cliente_look)); ?></span><span id="id_read_off_sucur_cliente" class="css_read_off_sucur_cliente css_sucur_cliente_line" style="<?php echo $sStyleReadInp_sucur_cliente; ?>"><?php echo "<div id=\"idAjaxCheckbox_sucur_cliente\" style=\"display: inline-block\" class=\"css_sucur_cliente_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
-  <TD class="scFormDataFontOdd css_sucur_cliente_line"><?php $tempOptionId = "id-opt-sucur_cliente" . $sc_seq_vert . "-1"; ?>
- <div class="sc switch">
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-sucur_cliente sc-ui-checkbox-sucur_cliente sc-js-input" name="sucur_cliente[]" value="SI"
- alt="{type: 'checkbox', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['Lookup_sucur_cliente'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->sucur_cliente_1))  { echo " checked" ;} ?> onClick="" ><span></span>
-<label for="<?php echo $tempOptionId ?>">SI</label> </div>
-</TD>
-</TR></TABLE>
-<?php echo "</div>\r\n"; ?></span><?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_sucur_cliente_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_sucur_cliente_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
+    <TD colspan="2" height="20" class="scFormBlock">
+     <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
+      <TR>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf9\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_exp . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos contacto y cumpleaños<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       
+      </TR>
+     </TABLE>
+    </TD>
 
 
 
 
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-
-
-
-
-
-
-<?php $sStyleHidden_sucur_cliente_dumb = ('' == $sStyleHidden_sucur_cliente) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_sucur_cliente_dumb" style="<?php echo $sStyleHidden_sucur_cliente_dumb; ?>"></TD>
    </tr>
-<?php $sc_hidden_no = 1; ?>
-</TABLE></div><!-- bloco_f -->
-   </td>
-   <td width="100%" height="">
-   <a name="bloco_11"></a>
-<div id="div_hidden_bloco_11"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_11" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 <?php
            if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['fechault']))
@@ -1315,67 +1349,73 @@ $sucur_cliente_look = "";
 
 
    <?php
-    if (!isset($this->nm_new_label['sucursales']))
+    if (!isset($this->nm_new_label['nacimiento']))
     {
-        $this->nm_new_label['sucursales'] = "Ingresar/Editar";
+        $this->nm_new_label['nacimiento'] = "Cumpleaños";
     }
 ?>
 <?php
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $sucursales = $this->sucursales;
-   $sStyleHidden_sucursales = '';
-   if (isset($this->nmgp_cmp_hidden['sucursales']) && $this->nmgp_cmp_hidden['sucursales'] == 'off')
+   $nacimiento = $this->nacimiento;
+   $sStyleHidden_nacimiento = '';
+   if (isset($this->nmgp_cmp_hidden['nacimiento']) && $this->nmgp_cmp_hidden['nacimiento'] == 'off')
    {
-       unset($this->nmgp_cmp_hidden['sucursales']);
-       $sStyleHidden_sucursales = 'display: none;';
+       unset($this->nmgp_cmp_hidden['nacimiento']);
+       $sStyleHidden_nacimiento = 'display: none;';
    }
    $bTestReadOnly = true;
-   $sStyleReadLab_sucursales = 'display: none;';
-   $sStyleReadInp_sucursales = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['sucursales']) && $this->nmgp_cmp_readonly['sucursales'] == 'on')
+   $sStyleReadLab_nacimiento = 'display: none;';
+   $sStyleReadInp_nacimiento = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['nacimiento']) && $this->nmgp_cmp_readonly['nacimiento'] == 'on')
    {
        $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['sucursales']);
-       $sStyleReadLab_sucursales = '';
-       $sStyleReadInp_sucursales = 'display: none;';
+       unset($this->nmgp_cmp_readonly['nacimiento']);
+       $sStyleReadLab_nacimiento = '';
+       $sStyleReadInp_nacimiento = 'display: none;';
    }
 ?>
-<?php if (isset($this->nmgp_cmp_hidden['sucursales']) && $this->nmgp_cmp_hidden['sucursales'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="sucursales" value="<?php echo $this->form_encode_input($sucursales) . "\">"; ?>
+<?php if (isset($this->nmgp_cmp_hidden['nacimiento']) && $this->nmgp_cmp_hidden['nacimiento'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="nacimiento" value="<?php echo $this->form_encode_input($nacimiento) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOdd css_sucursales_line" id="hidden_field_data_sucursales" style="<?php echo $sStyleHidden_sucursales; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_sucursales_line" style="padding: 0px"><span class="scFormLabelOddFormat css_sucursales_label" style=""><span id="id_label_sucursales"><?php echo $this->nm_new_label['sucursales']; ?></span></span><br><?php
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/usr__NM__ico__NM__shop_cafe_22672.png"))
-          { 
-              $sucursales = "&nbsp;" ;  
-          } 
-          else 
-          { 
-              if ($this->Ini->Export_img_zip) {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/usr__NM__ico__NM__shop_cafe_22672.png";
-                  $sucursales = "<img border=\"0\" src=\"usr__NM__ico__NM__shop_cafe_22672.png\"/>" ; 
-              }
-              else {
-                  $sucursales = "<img border=\"0\" src=\"" . $this->Ini->path_imag_cab . "/usr__NM__ico__NM__shop_cafe_22672.png\"/>" ; 
-              }
-          } 
-?>
-<span id="id_imghtml_sucursales"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_form_direccion_edit . "', '$this->nm_location', 'cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutNMSC_modal*scinok*scoutsc_redir_atualiz*scinok*scoutsc_redir_insert*scinok*scout', '', 'modal', '550', '1400', 'form_direccion')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $sucursales ; ?></font></a></span>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["sucursales"]) &&  $this->nmgp_cmp_readonly["sucursales"] == "on") { 
+    <TD class="scFormDataOdd css_nacimiento_line" id="hidden_field_data_nacimiento" style="<?php echo $sStyleHidden_nacimiento; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nacimiento_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_nacimiento_label" style=""><span id="id_label_nacimiento"><?php echo $this->nm_new_label['nacimiento']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["nacimiento"]) &&  $this->nmgp_cmp_readonly["nacimiento"] == "on") { 
 
  ?>
-<input type="hidden" name="sucursales" value="<?php echo $this->form_encode_input($sucursales) . "\">" . $sucursales . ""; ?>
+<input type="hidden" name="nacimiento" value="<?php echo $this->form_encode_input($nacimiento) . "\">" . $nacimiento . ""; ?>
 <?php } else { ?>
-<span id="id_read_on_sucursales" class="sc-ui-readonly-sucursales css_sucursales_line" style="<?php echo $sStyleReadLab_sucursales; ?>"><?php echo $this->form_format_readonly("sucursales", $this->form_encode_input($this->sucursales)); ?></span><span id="id_read_off_sucursales" class="css_read_off_sucursales<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_sucursales; ?>"></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_sucursales_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_sucursales_text"></span></td></tr></table></td></tr></table> </TD>
+<span id="id_read_on_nacimiento" class="sc-ui-readonly-nacimiento css_nacimiento_line" style="<?php echo $sStyleReadLab_nacimiento; ?>"><?php echo $this->form_format_readonly("nacimiento", $this->form_encode_input($nacimiento)); ?></span><span id="id_read_off_nacimiento" class="css_read_off_nacimiento<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_nacimiento; ?>"><?php
+$tmp_form_data = $this->field_config['nacimiento']['date_format'];
+$tmp_form_data = str_replace('aaaa', 'yyyy', $tmp_form_data);
+$tmp_form_data = str_replace('dd'  , $this->Ini->Nm_lang['lang_othr_date_days'], $tmp_form_data);
+$tmp_form_data = str_replace('mm'  , $this->Ini->Nm_lang['lang_othr_date_mnth'], $tmp_form_data);
+$tmp_form_data = str_replace('yyyy', $this->Ini->Nm_lang['lang_othr_date_year'], $tmp_form_data);
+$tmp_form_data = str_replace('hh'  , $this->Ini->Nm_lang['lang_othr_date_hour'], $tmp_form_data);
+$tmp_form_data = str_replace('ii'  , $this->Ini->Nm_lang['lang_othr_date_mint'], $tmp_form_data);
+$tmp_form_data = str_replace('ss'  , $this->Ini->Nm_lang['lang_othr_date_scnd'], $tmp_form_data);
+$tmp_form_data = str_replace(';'   , ' '                                       , $tmp_form_data);
+?>
+<?php
+$miniCalendarButton = $this->jqueryButtonText('calendar');
+if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
+    $miniCalendarButton[1] = substr($miniCalendarButton[1], 9);
+}
+?>
+<span class='trigger-picker-<?php echo $miniCalendarButton[1]; ?>' style='display: inherit; width: 100%'>
+
+ <input class="sc-js-input scFormObjectOdd css_nacimiento_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_nacimiento" type=text name="nacimiento" value="<?php echo $this->form_encode_input($nacimiento) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=10"; } ?> alt="{datatype: 'date', dateSep: '<?php echo $this->field_config['nacimiento']['date_sep']; ?>', dateFormat: '<?php echo $this->field_config['nacimiento']['date_format']; ?>', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: 'dd/mm/aaaa', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span>
+</span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_nacimiento_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_nacimiento_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
+    <TD class="scFormDataOdd" colspan="1" >&nbsp;</TD>
 
 
 
 
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+<?php if ($sc_hidden_yes > 0) { ?>
 
 
     <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
@@ -1383,31 +1423,24 @@ $sucur_cliente_look = "";
 
 
 
-<?php } 
-?> 
-
-
-
-
-
-
-<?php $sStyleHidden_sucursales_dumb = ('' == $sStyleHidden_sucursales) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_sucursales_dumb" style="<?php echo $sStyleHidden_sucursales_dumb; ?>"></TD>
+<?php } ?>
+<?php $sStyleHidden_nacimiento_dumb = ('' == $sStyleHidden_nacimiento) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_nacimiento_dumb" style="<?php echo $sStyleHidden_nacimiento_dumb; ?>"></TD>
    </tr>
 <?php $sc_hidden_no = 1; ?>
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_12"></a>
+   <a name="bloco_10"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_12"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_12" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+<div id="div_hidden_bloco_10"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_10" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
     <TD colspan="3" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf12\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos Fidelización<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf10\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_exp . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Datos Fidelización<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>
@@ -1417,7 +1450,7 @@ $sucur_cliente_look = "";
 
 
    </tr>
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr style=\"display: none;\">"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 <?php
            if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['saldo']))

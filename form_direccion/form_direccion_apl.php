@@ -93,7 +93,7 @@ class form_direccion_apl
    var $sc_max_reg = 10; 
    var $sc_max_reg_incl = 5; 
    var $form_vert_form_direccion = array();
-   var $form_paginacao = 'parcial';
+   var $form_paginacao = 'total';
    var $lig_edit_lookup      = false;
    var $lig_edit_lookup_call = false;
    var $lig_edit_lookup_cb   = '';
@@ -103,7 +103,7 @@ class form_direccion_apl
    var $Embutida_ronly = false;
    var $Embutida_proc  = false;
    var $Embutida_form  = false;
-   var $Grid_editavel  = false;
+   var $Grid_editavel  = true;
    var $url_webhelp = '';
    var $nm_todas_criticas;
    var $Campos_Mens_erro;
@@ -567,7 +567,8 @@ class form_direccion_apl
           include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
       }
       include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
-      $this->Ini->Str_btn_form    = trim($str_button);
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
@@ -615,7 +616,7 @@ class form_direccion_apl
 
 
 
-      $_SESSION['scriptcase']['error_icon']['form_direccion']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $_SESSION['scriptcase']['error_icon']['form_direccion']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_direccion'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
       $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['embutida_proc'] : $this->Embutida_proc;
@@ -1303,6 +1304,7 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
       }
       if ($this->NM_ajax_flag && 'submit_form' == $this->NM_ajax_opcao)
       {
+         if (isset($this->iddireccion_)) { $this->nm_limpa_alfa($this->iddireccion_); }
          if (isset($this->idter_)) { $this->nm_limpa_alfa($this->idter_); }
          if (isset($this->iddepar_)) { $this->nm_limpa_alfa($this->iddepar_); }
          if (isset($this->idmuni_)) { $this->nm_limpa_alfa($this->idmuni_); }
@@ -1322,7 +1324,6 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_form'][$sc_seq_vert]))
          {
              $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_form'][$sc_seq_vert];
-             $this->iddireccion_ = $this->nmgp_dados_form['iddireccion_']; 
          }
          $this->controle_form_vert();
          if ($Campos_Crit != "" || !empty($Campos_Falta) || $this->Campos_Mens_erro != "")
@@ -1443,6 +1444,10 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'celular_notificafe_');
           }
+          if ('validate_iddireccion_' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'iddireccion_');
+          }
           form_direccion_pack_ajax_response();
           exit;
       }
@@ -1463,11 +1468,12 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
          $this->correo_ = $GLOBALS["correo_" . $sc_seq_vert]; 
          $this->correo_notificafe_ = $GLOBALS["correo_notificafe_" . $sc_seq_vert]; 
          $this->celular_notificafe_ = $GLOBALS["celular_notificafe_" . $sc_seq_vert]; 
+         $this->iddireccion_ = $GLOBALS["iddireccion_" . $sc_seq_vert]; 
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_form'][$sc_seq_vert]))
          {
              $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_form'][$sc_seq_vert];
-             $this->iddireccion_ = $this->nmgp_dados_form['iddireccion_']; 
          }
+         if (isset($this->iddireccion_)) { $this->nm_limpa_alfa($this->iddireccion_); }
          if (isset($this->idter_)) { $this->nm_limpa_alfa($this->idter_); }
          if (isset($this->iddepar_)) { $this->nm_limpa_alfa($this->iddepar_); }
          if (isset($this->idmuni_)) { $this->nm_limpa_alfa($this->idmuni_); }
@@ -1488,7 +1494,11 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
          {
             $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert];
          }
-         if ($this->nmgp_opcao != "recarga" && (!in_array($sc_seq_vert, $sc_check_excl) && !in_array($sc_seq_vert, $sc_check_incl) ))
+         if ($this->nmgp_opcao != "recarga" && in_array($sc_seq_vert, $sc_check_excl))
+         {
+             $this->nmgp_opcao = "excluir";
+         }
+         if ($this->nmgp_opcao == "incluir" && !in_array($sc_seq_vert, $sc_check_incl))
          { }
          else
          {
@@ -2092,7 +2102,7 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
                return "Dirección";
                break;
            case 'codigo_postal_':
-               return "Codigo Postal";
+               return "Código Postal";
                break;
            case 'telefono_':
                return "Teléfono";
@@ -2143,7 +2153,7 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
 //--------------------------------------------------------------------------------------
    function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
    {
-     global $nm_browser, $teste_validade, $sc_seq_vert;
+     global $nm_browser, $teste_validade;
      if (is_array($filtro) && empty($filtro)) {
          $filtro = '';
      }
@@ -2187,6 +2197,8 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
         $this->ValidateField_correo_notificafe_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'celular_notificafe_' == $filtro)) || (is_array($filtro) && in_array('celular_notificafe_', $filtro)))
         $this->ValidateField_celular_notificafe_($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'iddireccion_' == $filtro)) || (is_array($filtro) && in_array('iddireccion_', $filtro)))
+        $this->ValidateField_iddireccion_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
           if (!empty($this->sc_force_zero))
@@ -2726,6 +2738,62 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
         }
     } // ValidateField_celular_notificafe_
 
+    function ValidateField_iddireccion_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->iddireccion_ === "" || is_null($this->iddireccion_))  
+      { 
+          $this->iddireccion_ = 0;
+      } 
+      nm_limpa_numero($this->iddireccion_, $this->field_config['iddireccion_']['symbol_grp']) ; 
+      if ($this->nmgp_opcao == "incluir")
+      { 
+          if ($this->iddireccion_ != '')  
+          { 
+              $iTestSize = 11;
+              if (strlen($this->iddireccion_) > $iTestSize)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Iddireccion: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['iddireccion_']))
+                  {
+                      $Campos_Erros['iddireccion_'] = array();
+                  }
+                  $Campos_Erros['iddireccion_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['iddireccion_']) || !is_array($this->NM_ajax_info['errList']['iddireccion_']))
+                  {
+                      $this->NM_ajax_info['errList']['iddireccion_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['iddireccion_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+              } 
+              if ($teste_validade->Valor($this->iddireccion_, 11, 0, 0, 0, "N") == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Iddireccion; " ; 
+                  if (!isset($Campos_Erros['iddireccion_']))
+                  {
+                      $Campos_Erros['iddireccion_'] = array();
+                  }
+                  $Campos_Erros['iddireccion_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['iddireccion_']) || !is_array($this->NM_ajax_info['errList']['iddireccion_']))
+                  {
+                      $this->NM_ajax_info['errList']['iddireccion_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['iddireccion_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'iddireccion_';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_iddireccion_
+
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -2841,6 +2909,10 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
       if (!empty($this->celular_notificafe_) || (!empty($format_fields) && isset($format_fields['celular_notificafe_'])))
       {
           $this->nm_gera_mask($this->celular_notificafe_, "999-9999999"); 
+      }
+      if ('' !== $this->iddireccion_ || (!empty($format_fields) && isset($format_fields['iddireccion_'])))
+      {
+          nmgp_Form_Num_Val($this->iddireccion_, $this->field_config['iddireccion_']['symbol_grp'], $this->field_config['iddireccion_']['symbol_dec'], "0", "S", $this->field_config['iddireccion_']['format_neg'], "", "", "-", $this->field_config['iddireccion_']['symbol_fmt']) ; 
       }
    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
@@ -3307,6 +3379,10 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
                   {
                       $this->form_vert_form_direccion[$this->nmgp_refresh_row]['celular_notificafe_'] = $this->celular_notificafe_;
                   }
+                  if (isset($this->NM_ajax_changed['iddireccion_']) && $this->NM_ajax_changed['iddireccion_'])
+                  {
+                      $this->form_vert_form_direccion[$this->nmgp_refresh_row]['iddireccion_'] = $this->iddireccion_;
+                  }
               }
           }
           if (isset($this->nmgp_refresh_row) && '' != $this->nmgp_refresh_row)
@@ -3329,7 +3405,7 @@ $_SESSION['scriptcase']['form_direccion']['contr_erro'] = 'off';
               if ('navigate_form' == $this->NM_ajax_opcao) {
                   $this->NM_ajax_info['buttonDisplayVert'][] = array(
                       'seq'      => $sc_seq_vert,
-                      'gridView' => false,
+                      'gridView' => true,
                       'delete'   => $this->nmgp_botoes['delete'],
                       'update'   => $this->nmgp_botoes['update'],
                   );
@@ -3368,16 +3444,19 @@ else
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT iddep, departamento  FROM departamento  ORDER BY departamento";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -3470,16 +3549,19 @@ if ($this->iddepar_ != "")
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT idmun, municipio  FROM municipio  WHERE iddepar=$this->iddepar_ ORDER BY municipio";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -3573,16 +3655,19 @@ if ($this->idmuni_ != "")
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT municipio FROM municipio  WHERE idmun=$this->idmuni_ ORDER BY municipio";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -3684,16 +3769,19 @@ if ($this->idmuni_ != "")
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT codigo_postal  FROM codigo_postal  WHERE idmuni=$this->idmuni_ ORDER BY codigo_postal";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -3791,16 +3879,19 @@ else
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT lenguaje, lenguaje  FROM lenguas  ORDER BY lenguaje";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -3904,6 +3995,17 @@ else
                   $this->NM_ajax_info['fldList']['celular_notificafe_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
+                       'valList' => array($sTmpValue),
+                       );
+              }
+              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("iddireccion_", $this->nmgp_refresh_fields)))
+              {
+                  $sTmpValue = NM_charset_to_utf8($aRecData['iddireccion_']);
+                  $aLookup = array();
+          $aLookupOrig = $aLookup;
+                  $this->NM_ajax_info['fldList']['iddireccion_' . $sc_seq_vert] = array(
+                       'row'    => $sc_seq_vert,
+                       'type'    => 'label',
                        'valList' => array($sTmpValue),
                        );
               }
@@ -4066,7 +4168,8 @@ else
               $this->nmgp_dados_select['obs_'] == $this->obs_ &&
               $this->nmgp_dados_select['correo_'] == $this->correo_ &&
               $this->nmgp_dados_select['correo_notificafe_'] == $this->correo_notificafe_ &&
-              $this->nmgp_dados_select['celular_notificafe_'] == $this->celular_notificafe_)
+              $this->nmgp_dados_select['celular_notificafe_'] == $this->celular_notificafe_ &&
+              $this->nmgp_dados_select['iddireccion_'] == $this->iddireccion_)
           { }
           else
           {
@@ -4082,6 +4185,7 @@ else
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['correo_'] = $this->correo_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['correo_notificafe_'] = $this->correo_notificafe_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['celular_notificafe_'] = $this->celular_notificafe_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['iddireccion_'] = $this->iddireccion_;
           }
       }
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -4378,6 +4482,8 @@ else
               }
 
               $this->sc_teve_alt = true; 
+              if     (isset($NM_val_form) && isset($NM_val_form['iddireccion_'])) { $this->iddireccion_ = $NM_val_form['iddireccion_']; }
+              elseif (isset($this->iddireccion_)) { $this->nm_limpa_alfa($this->iddireccion_); }
               if     (isset($NM_val_form) && isset($NM_val_form['idter_'])) { $this->idter_ = $NM_val_form['idter_']; }
               elseif (isset($this->idter_)) { $this->nm_limpa_alfa($this->idter_); }
               if     (isset($NM_val_form) && isset($NM_val_form['iddepar_'])) { $this->iddepar_ = $NM_val_form['iddepar_']; }
@@ -4402,6 +4508,7 @@ else
               elseif (isset($this->correo_notificafe_)) { $this->nm_limpa_alfa($this->correo_notificafe_); }
               if     (isset($NM_val_form) && isset($NM_val_form['celular_notificafe_'])) { $this->celular_notificafe_ = $NM_val_form['celular_notificafe_']; }
               elseif (isset($this->celular_notificafe_)) { $this->nm_limpa_alfa($this->celular_notificafe_); }
+              $this->nm_proc_onload_record($this->nmgp_refresh_row);
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -4409,7 +4516,8 @@ else
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('idter_', 'iddepar_', 'idmuni_', 'ciudad_', 'direc_', 'codigo_postal_', 'telefono_', 'lenguaje_', 'obs_', 'correo_', 'correo_notificafe_', 'celular_notificafe_'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('idter_', 'iddepar_', 'idmuni_', 'ciudad_', 'direc_', 'codigo_postal_', 'telefono_', 'lenguaje_', 'obs_', 'correo_', 'correo_notificafe_', 'celular_notificafe_', 'iddireccion_'), $aDoNotUpdate);
+              $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
               if (isset($this->Embutida_ronly) && $this->Embutida_ronly)
@@ -4438,6 +4546,8 @@ else
                   $this->NM_ajax_info['readOnly']['correo_notificafe_' . $this->nmgp_refresh_row] = 'on';
 
                   $this->NM_ajax_info['readOnly']['celular_notificafe_' . $this->nmgp_refresh_row] = 'on';
+
+                  $this->NM_ajax_info['readOnly']['iddireccion_' . $this->nmgp_refresh_row] = 'on';
 
 
                   $this->NM_ajax_info['closeLine'] = $this->nmgp_refresh_row;
@@ -4672,6 +4782,9 @@ else
               $this->correo_ = $this->correo__before_qstr;
               $this->correo_notificafe_ = $this->correo_notificafe__before_qstr;
               $this->celular_notificafe_ = $this->celular_notificafe__before_qstr;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['total']++; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_qtd']++; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_I_E']++; 
               $this->sc_teve_incl = true; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['idter_'] = $this->idter_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['iddepar_'] = $this->iddepar_;
@@ -4685,6 +4798,7 @@ else
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['correo_'] = $this->correo_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['correo_notificafe_'] = $this->correo_notificafe_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['celular_notificafe_'] = $this->celular_notificafe_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dados_select'][$sc_seq_vert]['iddireccion_'] = $this->iddireccion_;
               if (!empty($this->sc_force_zero))
               {
                   foreach ($this->sc_force_zero as $i_force_zero => $sc_force_zero_field)
@@ -4700,6 +4814,7 @@ else
                       eval('$this->' . $sc_val_null_field . ' = "";');
                   }
               }
+              if (isset($this->iddireccion_)) { $this->nm_limpa_alfa($this->iddireccion_); }
               if (isset($this->idter_)) { $this->nm_limpa_alfa($this->idter_); }
               if (isset($this->iddepar_)) { $this->nm_limpa_alfa($this->iddepar_); }
               if (isset($this->idmuni_)) { $this->nm_limpa_alfa($this->idmuni_); }
@@ -4715,6 +4830,7 @@ else
               if (isset($this->Embutida_form) && $this->Embutida_form)
               {
                   $this->nm_guardar_campos();
+                  $this->nm_proc_onload_record($this->nmgp_refresh_row);
                   $this->nm_formatar_campos();
 
                   $this->NM_ajax_info['fldList']['idter_' . $this->nmgp_refresh_row]['type']    = 'text';
@@ -4756,16 +4872,19 @@ else
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT iddep, departamento  FROM departamento  ORDER BY departamento";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -4841,16 +4960,19 @@ if ($this->iddepar_ != "")
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT idmun, municipio  FROM municipio  WHERE iddepar=$this->iddepar_ ORDER BY municipio";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -4927,16 +5049,19 @@ if ($this->idmuni_ != "")
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT municipio FROM municipio  WHERE idmun=$this->idmuni_ ORDER BY municipio";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -5031,16 +5156,19 @@ if ($this->idmuni_ != "")
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT codigo_postal  FROM codigo_postal  WHERE idmuni=$this->idmuni_ ORDER BY codigo_postal";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -5130,16 +5258,19 @@ else
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT lenguaje, lenguaje  FROM lenguas  ORDER BY lenguaje";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -5267,6 +5398,26 @@ else
                       }
                   }
 
+                  $tmpLabel_iddireccion_ = $this->iddireccion_;
+                  $this->NM_ajax_info['fldList']['iddireccion_' . $this->nmgp_refresh_row]['type']    = 'label';
+                  $this->NM_ajax_info['fldList']['iddireccion_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->iddireccion_)));
+                  $this->NM_ajax_info['fldList']['iddireccion_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_iddireccion_)));
+
+                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
+                  {
+                      if (!isset($this->NM_ajax_info['readOnly']['iddireccion_' . $this->nmgp_refresh_row]))
+                      {
+                          $this->NM_ajax_info['readOnly']['iddireccion_' . $this->nmgp_refresh_row] = "on";
+                      }
+                  }
+                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
+                  {
+                      if (!isset($this->NM_ajax_info['readOnly']['iddireccion_' . $this->nmgp_refresh_row]))
+                      {
+                          $this->NM_ajax_info['readOnly']['iddireccion_' . $this->nmgp_refresh_row] = "on";
+                      }
+                  }
+
 
                   $this->nm_tira_formatacao();
 
@@ -5382,6 +5533,7 @@ else
                   } 
               } 
               $this->sc_evento = "delete"; 
+              $this->nm_proc_onload_record($sc_seq_vert);
               $this->nmgp_opcao = "avanca"; 
               $this->nm_flag_iframe = true;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_start']--; 
@@ -5392,6 +5544,9 @@ else
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['db_changed'] = true;
 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_qtd']--; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['total']--; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_I_E']--; 
               $this->sc_teve_excl = true; 
               if ($this->lig_edit_lookup)
               {
@@ -5547,8 +5702,9 @@ else
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['total'] = $qt_geral_reg_form_direccion;
               $rt->Close();
           }
-      if ((isset($_POST['master_nav']) && 'on' == $_POST['master_nav']) || !isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['total']) || $this->sc_teve_excl || $this->sc_teve_incl)
+      if ((isset($_POST['master_nav']) && 'on' == $_POST['master_nav']) || !isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['total']))
       { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_I_E'] = 0; 
           if (!$this->sc_teve_excl && !$this->sc_teve_incl) 
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_start'] = 0; 
@@ -5616,7 +5772,7 @@ else
       } 
       if ($this->nmgp_opcao == "avanca")  
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_start'] += $this->sc_max_reg; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_start'] += ($this->sc_max_reg + $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_I_E']); 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_start'] > $qt_geral_reg_form_direccion)
           {
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_start'] = $qt_geral_reg_form_direccion - $this->sc_max_reg; 
@@ -5642,6 +5798,7 @@ else
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_start'] = 0; 
           }
       } 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['reg_I_E'] = 0; 
       }
       $Cmps_ord_def = array();
       $sc_order_by  = "";
@@ -5891,21 +6048,22 @@ else
           elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['embutida_multi']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['embutida_multi']) 
           { 
           } 
-          elseif ($this->Embutida_form) 
+          else 
           { 
               $this->sc_max_reg_incl = 0; 
           } 
           while ($sc_seq_vert <= $this->sc_max_reg_incl) 
           { 
-              $this->idter_ = "" . $_SESSION['cliente'] . "";  
-              $this->iddepar_ = "23";  
-              $this->idmuni_ = "828";  
+              $this->iddireccion_ = "";  
+              $this->idter_ = htmlentities("" . $_SESSION['cliente'] . "");  
+              $this->iddepar_ = htmlentities("23");  
+              $this->idmuni_ = htmlentities("828");  
               $this->direc_ = "";  
               $this->obs_ = "";  
               $this->telefono_ = "";  
               $this->ciudad_ = "";  
               $this->codigo_postal_ = "";  
-              $this->lenguaje_ = "Español, Castellano";  
+              $this->lenguaje_ = htmlentities("Español, Castellano");  
               $this->correo_ = "";  
               $this->correo_notificafe_ = "";  
               $this->celular_notificafe_ = "";  
@@ -6476,16 +6634,19 @@ else
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT iddep, departamento  FROM departamento  ORDER BY departamento";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -6545,16 +6706,19 @@ if ($this->iddepar_ != "")
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT idmun, municipio  FROM municipio  WHERE iddepar=$this->iddepar_ ORDER BY municipio";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -6615,16 +6779,19 @@ if ($this->idmuni_ != "")
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT municipio FROM municipio  WHERE idmun=$this->idmuni_ ORDER BY municipio";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -6682,16 +6849,19 @@ if ($this->idmuni_ != "")
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT codigo_postal  FROM codigo_postal  WHERE idmuni=$this->idmuni_ ORDER BY codigo_postal";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -6746,16 +6916,19 @@ else
 
    $old_value_idter_ = $this->idter_;
    $old_value_celular_notificafe_ = $this->celular_notificafe_;
+   $old_value_iddireccion_ = $this->iddireccion_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idter_ = $this->idter_;
    $unformatted_value_celular_notificafe_ = $this->celular_notificafe_;
+   $unformatted_value_iddireccion_ = $this->iddireccion_;
 
    $nm_comando = "SELECT lenguaje, lenguaje  FROM lenguas  ORDER BY lenguaje";
 
    $this->idter_ = $old_value_idter_;
    $this->celular_notificafe_ = $old_value_celular_notificafe_;
+   $this->iddireccion_ = $old_value_iddireccion_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -7257,29 +7430,26 @@ if (parent && parent.scAjaxDetailValue)
             case "bcancelar":
                 return array("sc_b_sai_t.sc-unique-btn-4");
                 break;
-            case "balterarsel":
+            case "update":
                 return array("sc_b_upd_t.sc-unique-btn-5");
-                break;
-            case "bexcluirsel":
-                return array("sc_b_del_t.sc-unique-btn-6");
                 break;
             case "help":
                 return array("sc_b_hlp_t");
                 break;
             case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-11");
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10");
                 break;
             case "first":
-                return array("sc_b_ini_b.sc-unique-btn-12");
+                return array("sc_b_ini_b.sc-unique-btn-11");
                 break;
             case "back":
-                return array("sc_b_ret_b.sc-unique-btn-13");
+                return array("sc_b_ret_b.sc-unique-btn-12");
                 break;
             case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-14");
+                return array("sc_b_avc_b.sc-unique-btn-13");
                 break;
             case "last":
-                return array("sc_b_fim_b.sc-unique-btn-15");
+                return array("sc_b_fim_b.sc-unique-btn-14");
                 break;
         }
 

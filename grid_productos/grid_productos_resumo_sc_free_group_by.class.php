@@ -446,7 +446,26 @@ if (!isset($_SESSION['gnube_activa'])) {$_SESSION['gnube_activa'] = "";}
 if (!isset($this->sc_temp_gnube_activa)) {$this->sc_temp_gnube_activa = (isset($_SESSION['gnube_activa'])) ? $_SESSION['gnube_activa'] : "";}
 if (!isset($_SESSION['gusuario_logueo'])) {$_SESSION['gusuario_logueo'] = "";}
 if (!isset($this->sc_temp_gusuario_logueo)) {$this->sc_temp_gusuario_logueo = (isset($_SESSION['gusuario_logueo'])) ? $_SESSION['gusuario_logueo'] : "";}
- $this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
+ ?>
+<style>
+body
+{
+	
+	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_productos.jpg'); ?>) !important;
+	
+	background-position: center center !important;
+	
+	background-repeat: no-repeat !important;
+	
+	background-attachment: fixed !important;
+	
+	background-size: cover !important;
+	
+	background-color: #1175bb !important;
+}
+</style>
+<?php
+$this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
  
       $nm_select = "select grupo from usuarios where usuario='".$this->sc_temp_gusuario_logueo."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -4161,7 +4180,7 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['doc_word'])
       $nm_saida->saida(" <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
 }
       $nm_saida->saida(" <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
-       $css_body = "margin-left:0px;margin-top:0px;";
+       $css_body = "";
       $nm_saida->saida(" <style type=\"text/css\">\r\n");
       $nm_saida->saida("  BODY { " . $css_body . " }\r\n");
       $nm_saida->saida(" </style>\r\n");
@@ -6095,27 +6114,68 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['doc_word'])
      else {
           $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\">\r\n");
      }
-      $nm_saida->saida("<TABLE width=\"100%\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" cellpadding=\"0\" cellspacing=\"0\">\r\n");
-      $nm_saida->saida("<TR align=\"center\">\r\n");
-      $nm_saida->saida(" <TD colspan=\"3\">\r\n");
-      $nm_saida->saida("     <table  style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\r\n");
-      $nm_saida->saida("       <tr valign=\"middle\">\r\n");
-      $nm_saida->saida("         <td align=\"left\" ><span class=\"" . $this->css_scGridHeaderFont . "\"> Lista de productos </span></td>\r\n");
-      $nm_saida->saida("         <td style=\"font-size: 5px\">&nbsp; &nbsp; </td>\r\n");
-      $nm_saida->saida("         <td align=\"center\" ><span class=\"" . $this->css_scGridHeaderFont . "\">  </span></td>\r\n");
-      $nm_saida->saida("         <td style=\"font-size: 5px\">&nbsp; &nbsp; </td>\r\n");
-      $nm_saida->saida("         <td align=\"right\" ><span class=\"" . $this->css_scGridHeaderFont . "\">  &nbsp;&nbsp;</span></td>\r\n");
-      $nm_saida->saida("         <td width=\"3px\" class=\"" . $this->css_scGridHeader . "\"></td>\r\n");
-      $nm_saida->saida("       </tr>\r\n");
-      $nm_saida->saida("     </table>\r\n");
-      $nm_saida->saida(" </TD>\r\n");
-      $nm_saida->saida("</TR>\r\n");
-      $nm_saida->saida("<TR align=\"center\" >\r\n");
-      $nm_saida->saida("  <TD height=\"5px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-      $nm_saida->saida("  <TD height=\"1px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-      $nm_saida->saida("  <TD height=\"1px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-      $nm_saida->saida("</TR>\r\n");
-      $nm_saida->saida("</TABLE>\r\n");
+      $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+      $nm_saida->saida("    <TR align=\"center\">\r\n");
+      $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+      $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          Lista de productos\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("      </TABLE>\r\n");
+      $nm_saida->saida("     </TD>\r\n");
+      $nm_saida->saida("    </TR>\r\n");
+      $nm_saida->saida("   </TABLE>\r\n");
       $nm_saida->saida("  </TD>\r\n");
       $nm_saida->saida(" </TR>\r\n");
    }
@@ -6266,7 +6326,26 @@ if (!isset($_SESSION['gnube_activa'])) {$_SESSION['gnube_activa'] = "";}
 if (!isset($this->sc_temp_gnube_activa)) {$this->sc_temp_gnube_activa = (isset($_SESSION['gnube_activa'])) ? $_SESSION['gnube_activa'] : "";}
 if (!isset($_SESSION['gusuario_logueo'])) {$_SESSION['gusuario_logueo'] = "";}
 if (!isset($this->sc_temp_gusuario_logueo)) {$this->sc_temp_gusuario_logueo = (isset($_SESSION['gusuario_logueo'])) ? $_SESSION['gusuario_logueo'] : "";}
- $this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
+ ?>
+<style>
+body
+{
+	
+	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_productos.jpg'); ?>) !important;
+	
+	background-position: center center !important;
+	
+	background-repeat: no-repeat !important;
+	
+	background-attachment: fixed !important;
+	
+	background-size: cover !important;
+	
+	background-color: #1175bb !important;
+}
+</style>
+<?php
+$this->NM_cmp_hidden["agregarnotainv"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["agregarnotainv"] = "off"; }
  
       $nm_select = "select grupo from usuarios where usuario='".$this->sc_temp_gusuario_logueo."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 

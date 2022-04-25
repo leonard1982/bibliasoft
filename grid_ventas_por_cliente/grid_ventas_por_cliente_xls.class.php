@@ -372,27 +372,27 @@ class grid_ventas_por_cliente_xls
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, convert(char(23),f.fechaven,121) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, convert(char(23),f.fechaven,121) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, EXTEND(f.fechaven, YEAR TO DAY) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, EXTEND(f.fechaven, YEAR TO DAY) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq'];
@@ -450,6 +450,8 @@ class grid_ventas_por_cliente_xls
          $this->f_total =  str_replace(",", ".", $this->f_total);
          $this->f_total = (strpos(strtolower($this->f_total), "e")) ? (float)$this->f_total : $this->f_total; 
          $this->f_total = (string)$this->f_total;
+         $this->f_dircliente = $rs->fields[7] ;  
+         $this->f_dircliente = (string)$this->f_dircliente;
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['SC_Gb_Free_orig']))
          {
              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -612,6 +614,43 @@ class grid_ventas_por_cliente_xls
      $prim_gb = false;
      $nm_houve_quebra = "N";
          $this->sc_proc_grid = true; 
+         $_SESSION['scriptcase']['grid_ventas_por_cliente']['contr_erro'] = 'on';
+ $sql_dir = "SELECT direc, ciudad FROM direccion WHERE iddireccion = '".$this->f_dircliente ."'";
+ 
+      $nm_select = $sql_dir; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_dir = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->ds_dir[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_dir = false;
+          $this->ds_dir_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_dir[0][0]))
+	{
+	$this->direcciones  = $this->ds_dir[0][0].' / '.$this->ds_dir[0][1];
+	}
+else
+	{
+	$this->direcciones  = 'SIN';
+	}
+$_SESSION['scriptcase']['grid_ventas_por_cliente']['contr_erro'] = 'off'; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['field_order'] as $Cada_col)
          { 
             if (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off")
@@ -858,6 +897,34 @@ class grid_ventas_por_cliente_xls
               }
               $this->Xls_col++;
           }
+          $SC_Label = (isset($this->New_label['direcciones'])) ? $this->New_label['direcciones'] : "Dirección(es)"; 
+          if ($Cada_col == "direcciones" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
           $SC_Label = (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "Fecha"; 
           if ($Cada_col == "fecha" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -1042,6 +1109,33 @@ class grid_ventas_por_cliente_xls
          }
          $this->Xls_col++;
    }
+   //----- direcciones
+   function NM_export_direcciones()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+      if (!empty($this->direcciones))
+      {
+             if ($this->direcciones !== "&nbsp;") 
+             { 
+                 $this->direcciones = sc_strtoupper($this->direcciones); 
+             } 
+      }
+         $this->direcciones = html_entity_decode($this->direcciones, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->direcciones = strip_tags($this->direcciones);
+         $this->direcciones = NM_charset_to_utf8($this->direcciones);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->direcciones, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->direcciones, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- fecha
    function NM_export_fecha()
    {
@@ -1158,6 +1252,25 @@ class grid_ventas_por_cliente_xls
          $this->cliente = strip_tags($this->cliente);
          $this->cliente = NM_charset_to_utf8($this->cliente);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->cliente;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- direcciones
+   function NM_sub_cons_direcciones()
+   {
+      if (!empty($this->direcciones))
+      {
+         if ($this->direcciones !== "&nbsp;") 
+         { 
+             $this->direcciones = sc_strtoupper($this->direcciones); 
+         } 
+      }
+         $this->direcciones = html_entity_decode($this->direcciones, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->direcciones = strip_tags($this->direcciones);
+         $this->direcciones = NM_charset_to_utf8($this->direcciones);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->direcciones;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";

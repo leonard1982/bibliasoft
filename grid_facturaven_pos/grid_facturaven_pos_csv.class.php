@@ -416,6 +416,24 @@ $vfactura = sc_url_library("prj", "factura", "index.php");
 <link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
 <script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
 <link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
+
+<style>
+body
+{
+	
+	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_punto_venta_supermercado.jpg'); ?>) !important;
+	
+	background-position: center center !important;
+	
+	background-repeat: no-repeat !important;
+	
+	background-attachment: fixed !important;
+	
+	background-size: cover !important;
+	
+	background-color: #1175bb !important;
+}
+</style>
 <?php
 
 $this->NM_cmp_hidden["pedido"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["pedido"] = "off"; }
@@ -1226,7 +1244,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "#"; 
+              $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Número"; 
               if ($Cada_col == "numero2" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
@@ -1338,7 +1356,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+              $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : ""; 
               if ($Cada_col == "opciones" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";

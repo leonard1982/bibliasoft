@@ -1187,6 +1187,7 @@ if (!isset($this->sc_temp_gdescripciongrupo)) {$this->sc_temp_gdescripciongrupo 
 		border: 1px solid #CCCCCC;
 	}
 </style>
+
 <?php
 
 

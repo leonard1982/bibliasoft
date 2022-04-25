@@ -288,6 +288,26 @@ else
 {
 	$this->NM_cmp_hidden["si_nomina"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['php_cmp_sel']["si_nomina"] = "off"; }
 }
+
+?>
+<style>
+body
+{
+	
+	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_clientes3.jpg'); ?>) !important;
+	
+	background-position: center center !important;
+	
+	background-repeat: no-repeat !important;
+	
+	background-attachment: fixed !important;
+	
+	background-size: cover !important;
+	
+	background-color: #1175bb !important;
+}
+</style>
+<?php
 if (isset($this->sc_temp_gnube_activa)) {$_SESSION['gnube_activa'] = $this->sc_temp_gnube_activa;}
 if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off'; 

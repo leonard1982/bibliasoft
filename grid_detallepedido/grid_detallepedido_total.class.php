@@ -59,7 +59,7 @@ class grid_detallepedido_total
    //---- 
    function quebra_geral_sc_free_total($res_limit=false)
    {
-      global $nada, $nm_lang , $codigoprod, $codigobar, $idpro;
+      global $nada, $nm_lang , $codigoprod, $codigobar, $idpro, $idbod;
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallepedido']['contr_total_geral'] == "OK") 
       { 
           return; 

@@ -437,7 +437,7 @@
   $this->Nm_lang['lang_othr_grid_export_email_type_xml'] = "XML";
   $this->Nm_lang['lang_othr_grid_export_email_type_xml_res'] = "XML";
   $this->Nm_lang['lang_othr_grid_titl'] = "CONSULTA";
-  $this->Nm_lang['lang_othr_grid_title'] = "Listado de ficheros Portal de traducción";
+  $this->Nm_lang['lang_othr_grid_title'] = "Listado de Contracto";
   $this->Nm_lang['lang_othr_groupby_available_fld'] = "Los campos disponibles";
   $this->Nm_lang['lang_othr_groupby_axis_x'] = "Los campos de los ejes X";
   $this->Nm_lang['lang_othr_groupby_axis_y'] = "Los campos de el eje Y";

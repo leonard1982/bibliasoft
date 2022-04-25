@@ -105,7 +105,7 @@ function Ord_cmp_init()
    $tab_labels["credito"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["credito"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["credito"] : "F.Pago";
    $tab_ger_campos['numero2'] = "on";
    $tab_def_campos['numero2'] = "numero2";
-   $tab_labels["numero2"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["numero2"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["numero2"] : "#";
+   $tab_labels["numero2"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["numero2"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["numero2"] : "Número";
    $tab_ger_campos['idcli'] = "on";
    $tab_def_campos['idcli'] = "idcli";
    $tab_labels["idcli"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["idcli"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["idcli"] : "Cliente";
@@ -217,7 +217,7 @@ function Ord_cmp_init()
    {
        $tab_def_campos['opciones'] = "";
    }
-   $tab_labels["opciones"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["opciones"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["opciones"] : "Opciones";
+   $tab_labels["opciones"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["opciones"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['labels']["opciones"] : "";
    $tab_ger_campos['editarpos'] = "none";
    $tab_ger_campos['imprimircopia'] = "none";
    $tab_ger_campos['a4'] = "none";

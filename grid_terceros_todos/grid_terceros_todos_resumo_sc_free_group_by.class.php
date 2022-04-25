@@ -417,6 +417,26 @@ else
 {
 	$this->NM_cmp_hidden["si_nomina"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['php_cmp_sel']["si_nomina"] = "off"; }
 }
+
+?>
+<style>
+body
+{
+	
+	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_clientes3.jpg'); ?>) !important;
+	
+	background-position: center center !important;
+	
+	background-repeat: no-repeat !important;
+	
+	background-attachment: fixed !important;
+	
+	background-size: cover !important;
+	
+	background-color: #1175bb !important;
+}
+</style>
+<?php
 if (isset($this->sc_temp_gnube_activa)) {$_SESSION['gnube_activa'] = $this->sc_temp_gnube_activa;}
 if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off'; 
@@ -3557,7 +3577,7 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['doc_wo
       $nm_saida->saida(" <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
 }
       $nm_saida->saida(" <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
-       $css_body = "margin-top:0px;margin-bottom:0px;";
+       $css_body = "";
       $nm_saida->saida(" <style type=\"text/css\">\r\n");
       $nm_saida->saida("  BODY { " . $css_body . " }\r\n");
       $nm_saida->saida(" </style>\r\n");
@@ -5468,27 +5488,68 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['doc_wo
      else {
           $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\">\r\n");
      }
-      $nm_saida->saida("<TABLE width=\"100%\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" cellpadding=\"0\" cellspacing=\"0\">\r\n");
-      $nm_saida->saida("<TR align=\"center\">\r\n");
-      $nm_saida->saida(" <TD colspan=\"3\">\r\n");
-      $nm_saida->saida("     <table  style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\r\n");
-      $nm_saida->saida("       <tr valign=\"middle\">\r\n");
-      $nm_saida->saida("         <td align=\"left\" ><span class=\"" . $this->css_scGridHeaderFont . "\"> Terceros </span></td>\r\n");
-      $nm_saida->saida("         <td style=\"font-size: 5px\">&nbsp; &nbsp; </td>\r\n");
-      $nm_saida->saida("         <td align=\"center\" ><span class=\"" . $this->css_scGridHeaderFont . "\">  </span></td>\r\n");
-      $nm_saida->saida("         <td style=\"font-size: 5px\">&nbsp; &nbsp; </td>\r\n");
-      $nm_saida->saida("         <td align=\"right\" ><span class=\"" . $this->css_scGridHeaderFont . "\">  &nbsp;&nbsp;</span></td>\r\n");
-      $nm_saida->saida("         <td width=\"3px\" class=\"" . $this->css_scGridHeader . "\"></td>\r\n");
-      $nm_saida->saida("       </tr>\r\n");
-      $nm_saida->saida("     </table>\r\n");
-      $nm_saida->saida(" </TD>\r\n");
-      $nm_saida->saida("</TR>\r\n");
-      $nm_saida->saida("<TR align=\"center\" >\r\n");
-      $nm_saida->saida("  <TD height=\"5px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-      $nm_saida->saida("  <TD height=\"1px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-      $nm_saida->saida("  <TD height=\"1px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-      $nm_saida->saida("</TR>\r\n");
-      $nm_saida->saida("</TABLE>\r\n");
+      $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+      $nm_saida->saida("    <TR align=\"center\">\r\n");
+      $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+      $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          Terceros\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("      </TABLE>\r\n");
+      $nm_saida->saida("     </TD>\r\n");
+      $nm_saida->saida("    </TR>\r\n");
+      $nm_saida->saida("   </TABLE>\r\n");
       $nm_saida->saida("  </TD>\r\n");
       $nm_saida->saida(" </TR>\r\n");
    }
@@ -5644,6 +5705,26 @@ else
 {
 	$this->NM_cmp_hidden["si_nomina"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['php_cmp_sel']["si_nomina"] = "off"; }
 }
+
+?>
+<style>
+body
+{
+	
+	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_clientes3.jpg'); ?>) !important;
+	
+	background-position: center center !important;
+	
+	background-repeat: no-repeat !important;
+	
+	background-attachment: fixed !important;
+	
+	background-size: cover !important;
+	
+	background-color: #1175bb !important;
+}
+</style>
+<?php
 if (isset($this->sc_temp_gnube_activa)) {$_SESSION['gnube_activa'] = $this->sc_temp_gnube_activa;}
 if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off'; 

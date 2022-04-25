@@ -27,7 +27,6 @@ function scFocusField(sField) {
       case 'tipo_documento':
       case 'documento':
       case 'dv':
-      case 'imagenter':
       case 'codigo_tercero':
       case 'sexo':
       case 'notificar':
@@ -69,12 +68,12 @@ function scFocusField(sField) {
       case 'loatiende':
       case 'autorizado':
       case 'relleno2':
-      case 'nacimiento':
+      case 'direcciones':
+      case 'sucur_cliente':
       case 'detalle_tributario':
       case 'responsabilidad_fiscal':
       case 'ciiu':
-      case 'sucur_cliente':
-      case 'sucursales':
+      case 'nacimiento':
       case 'fechault':
       case 'saldo':
       case 'afiliacion':
@@ -165,7 +164,6 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["tipo_documento" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["documento" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["dv" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["imagenter" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["codigo_tercero" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["sexo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["notificar" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -205,12 +203,12 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["loatiende" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["autorizado" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["relleno2" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["nacimiento" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["direcciones" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["sucur_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["detalle_tributario" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["responsabilidad_fiscal" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["ciiu" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["sucur_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["sucursales" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["nacimiento" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["fechault" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["saldo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["afiliacion" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -517,10 +515,16 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["relleno2" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["nacimiento" + iSeqRow]["blur"]) {
+  if (scEventControl_data["direcciones" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["nacimiento" + iSeqRow]["change"]) {
+  if (scEventControl_data["direcciones" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["sucur_cliente" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["sucur_cliente" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["detalle_tributario" + iSeqRow]["blur"]) {
@@ -541,16 +545,10 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["ciiu" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["sucur_cliente" + iSeqRow]["blur"]) {
+  if (scEventControl_data["nacimiento" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["sucur_cliente" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["sucursales" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["sucursales" + iSeqRow]["change"]) {
+  if (scEventControl_data["nacimiento" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["fechault" + iSeqRow]["blur"]) {
@@ -1060,8 +1058,6 @@ function scJQEventsAdd(iSeqRow) {
                                            .bind('focus', function() { sc_terceros_sucur_cliente_onfocus(this, iSeqRow) });
   $('#id_sc_field_representante' + iSeqRow).bind('blur', function() { sc_terceros_representante_onblur(this, iSeqRow) })
                                            .bind('focus', function() { sc_terceros_representante_onfocus(this, iSeqRow) });
-  $('#id_sc_field_imagenter' + iSeqRow).bind('blur', function() { sc_terceros_imagenter_onblur(this, iSeqRow) })
-                                       .bind('focus', function() { sc_terceros_imagenter_onfocus(this, iSeqRow) });
   $('#id_sc_field_es_restaurante' + iSeqRow).bind('blur', function() { sc_terceros_es_restaurante_onblur(this, iSeqRow) })
                                             .bind('focus', function() { sc_terceros_es_restaurante_onfocus(this, iSeqRow) });
   $('#id_sc_field_dias_credito' + iSeqRow).bind('blur', function() { sc_terceros_dias_credito_onblur(this, iSeqRow) })
@@ -1163,8 +1159,8 @@ function scJQEventsAdd(iSeqRow) {
                                       .bind('focus', function() { sc_terceros_relleno2_onfocus(this, iSeqRow) });
   $('#id_sc_field_responsabilidad_fiscal' + iSeqRow).bind('blur', function() { sc_terceros_responsabilidad_fiscal_onblur(this, iSeqRow) })
                                                     .bind('focus', function() { sc_terceros_responsabilidad_fiscal_onfocus(this, iSeqRow) });
-  $('#id_sc_field_sucursales' + iSeqRow).bind('blur', function() { sc_terceros_sucursales_onblur(this, iSeqRow) })
-                                        .bind('focus', function() { sc_terceros_sucursales_onfocus(this, iSeqRow) });
+  $('#id_sc_field_direcciones' + iSeqRow).bind('blur', function() { sc_terceros_direcciones_onblur(this, iSeqRow) })
+                                         .bind('focus', function() { sc_terceros_direcciones_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-notificar' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-cliente' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-proveedor' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -1638,14 +1634,6 @@ function sc_terceros_representante_onblur(oThis, iSeqRow) {
 
 function sc_terceros_representante_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
-}
-
-function sc_terceros_imagenter_onblur(oThis, iSeqRow) {
-  scCssBlur(oThis);
-}
-
-function sc_terceros_imagenter_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
@@ -2137,12 +2125,12 @@ function sc_terceros_responsabilidad_fiscal_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
-function sc_terceros_sucursales_onblur(oThis, iSeqRow) {
-  do_ajax_terceros_mob_validate_sucursales();
+function sc_terceros_direcciones_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_direcciones();
   scCssBlur(oThis);
 }
 
-function sc_terceros_sucursales_onfocus(oThis, iSeqRow) {
+function sc_terceros_direcciones_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
@@ -2178,40 +2166,38 @@ function displayChange_page_0(status) {
 	displayChange_block("3", status);
 	displayChange_block("4", status);
 	displayChange_block("5", status);
-	displayChange_block("6", status);
 }
 
 function displayChange_page_1(status) {
+	displayChange_block("6", status);
 	displayChange_block("7", status);
 	displayChange_block("8", status);
 	displayChange_block("9", status);
 	displayChange_block("10", status);
-	displayChange_block("11", status);
-	displayChange_block("12", status);
 }
 
 function displayChange_page_2(status) {
-	displayChange_block("13", status);
+	displayChange_block("11", status);
 }
 
 function displayChange_page_3(status) {
+	displayChange_block("12", status);
+	displayChange_block("13", status);
 	displayChange_block("14", status);
-	displayChange_block("15", status);
-	displayChange_block("16", status);
 }
 
 function displayChange_page_4(status) {
+	displayChange_block("15", status);
+	displayChange_block("16", status);
 	displayChange_block("17", status);
-	displayChange_block("18", status);
-	displayChange_block("19", status);
 }
 
 function displayChange_page_5(status) {
-	displayChange_block("20", status);
+	displayChange_block("18", status);
 }
 
 function displayChange_page_6(status) {
-	displayChange_block("21", status);
+	displayChange_block("19", status);
 }
 
 function displayChange_block(block, status) {
@@ -2275,12 +2261,6 @@ function displayChange_block(block, status) {
 	if ("19" == block) {
 		displayChange_block_19(status);
 	}
-	if ("20" == block) {
-		displayChange_block_20(status);
-	}
-	if ("21" == block) {
-		displayChange_block_21(status);
-	}
 }
 
 function displayChange_block_0(status) {
@@ -2289,16 +2269,12 @@ function displayChange_block_0(status) {
 	displayChange_field("tipo_documento", "", status);
 	displayChange_field("documento", "", status);
 	displayChange_field("dv", "", status);
-}
-
-function displayChange_block_1(status) {
-	displayChange_field("imagenter", "", status);
 	displayChange_field("codigo_tercero", "", status);
 	displayChange_field("sexo", "", status);
 	displayChange_field("notificar", "", status);
 }
 
-function displayChange_block_2(status) {
+function displayChange_block_1(status) {
 	displayChange_field("nombre1", "", status);
 	displayChange_field("nombre2", "", status);
 	displayChange_field("apellido1", "", status);
@@ -2308,14 +2284,14 @@ function displayChange_block_2(status) {
 	displayChange_field("idtercero", "", status);
 }
 
-function displayChange_block_3(status) {
+function displayChange_block_2(status) {
 	displayChange_field("r_social", "", status);
 	displayChange_field("nombres", "", status);
 	displayChange_field("nombre_comercil", "", status);
 	displayChange_field("representante", "", status);
 }
 
-function displayChange_block_4(status) {
+function displayChange_block_3(status) {
 	displayChange_field("direccion", "", status);
 	displayChange_field("departamento", "", status);
 	displayChange_field("idmuni", "", status);
@@ -2326,12 +2302,12 @@ function displayChange_block_4(status) {
 	displayChange_field("c_postal", "", status);
 }
 
-function displayChange_block_5(status) {
+function displayChange_block_4(status) {
 	displayChange_field("correo_notificafe", "", status);
 	displayChange_field("celular_notificafe", "", status);
 }
 
-function displayChange_block_6(status) {
+function displayChange_block_5(status) {
 	displayChange_field("cliente", "", status);
 	displayChange_field("proveedor", "", status);
 	displayChange_field("empleado", "", status);
@@ -2339,7 +2315,7 @@ function displayChange_block_6(status) {
 	displayChange_field("activo", "", status);
 }
 
-function displayChange_block_7(status) {
+function displayChange_block_6(status) {
 	displayChange_field("credito", "", status);
 	displayChange_field("cupo", "", status);
 	displayChange_field("cupodis", "", status);
@@ -2352,60 +2328,57 @@ function displayChange_block_7(status) {
 	displayChange_field("relleno2", "", status);
 }
 
-function displayChange_block_8(status) {
-	displayChange_field("nacimiento", "", status);
+function displayChange_block_7(status) {
+	displayChange_field("direcciones", "", status);
+	displayChange_field("sucur_cliente", "", status);
 }
 
-function displayChange_block_9(status) {
+function displayChange_block_8(status) {
 	displayChange_field("detalle_tributario", "", status);
 	displayChange_field("responsabilidad_fiscal", "", status);
 	displayChange_field("ciiu", "", status);
 }
 
+function displayChange_block_9(status) {
+	displayChange_field("nacimiento", "", status);
+}
+
 function displayChange_block_10(status) {
-	displayChange_field("sucur_cliente", "", status);
-}
-
-function displayChange_block_11(status) {
-	displayChange_field("sucursales", "", status);
-}
-
-function displayChange_block_12(status) {
 	displayChange_field("fechault", "", status);
 	displayChange_field("saldo", "", status);
 	displayChange_field("afiliacion", "", status);
 }
 
-function displayChange_block_13(status) {
+function displayChange_block_11(status) {
 	displayChange_field("es_cajero", "", status);
 	displayChange_field("cupo_vendedor", "", status);
 }
 
-function displayChange_block_14(status) {
+function displayChange_block_12(status) {
 	displayChange_field("autoretenedor", "", status);
 	displayChange_field("creditoprov", "", status);
 	displayChange_field("dias", "", status);
 }
 
-function displayChange_block_15(status) {
+function displayChange_block_13(status) {
 	displayChange_field("url", "", status);
 	displayChange_field("contacto", "", status);
 	displayChange_field("telefonos_prov", "", status);
 	displayChange_field("email", "", status);
 }
 
-function displayChange_block_16(status) {
+function displayChange_block_14(status) {
 	displayChange_field("fechultcomp", "", status);
 	displayChange_field("saldoapagar", "", status);
 }
 
-function displayChange_block_17(status) {
+function displayChange_block_15(status) {
 	displayChange_field("codigo_ter", "", status);
 	displayChange_field("zona_clientes", "", status);
 	displayChange_field("clasificacion_clientes", "", status);
 }
 
-function displayChange_block_18(status) {
+function displayChange_block_16(status) {
 	displayChange_field("puc_auxiliar_deudores", "", status);
 	displayChange_field("puc_retefuente_ventas", "", status);
 	displayChange_field("puc_retefuente_servicios_clie", "", status);
@@ -2414,7 +2387,7 @@ function displayChange_block_18(status) {
 	displayChange_field("puc_retefuente_servicios_prov", "", status);
 }
 
-function displayChange_block_19(status) {
+function displayChange_block_17(status) {
 	displayChange_field("archivo_cedula", "", status);
 	displayChange_field("archivo_rut", "", status);
 	displayChange_field("archivo_nit", "", status);
@@ -2430,11 +2403,11 @@ function displayChange_block_19(status) {
 	displayChange_field("nombre_empresa_bd", "", status);
 }
 
-function displayChange_block_20(status) {
+function displayChange_block_18(status) {
 	displayChange_field("archivos", "", status);
 }
 
-function displayChange_block_21(status) {
+function displayChange_block_19(status) {
 	displayChange_field("es_restaurante", "", status);
 	displayChange_field("porcentaje_propina_sugerida", "", status);
 }
@@ -2445,7 +2418,6 @@ function displayChange_row(row, status) {
 	displayChange_field_tipo_documento(row, status);
 	displayChange_field_documento(row, status);
 	displayChange_field_dv(row, status);
-	displayChange_field_imagenter(row, status);
 	displayChange_field_codigo_tercero(row, status);
 	displayChange_field_sexo(row, status);
 	displayChange_field_notificar(row, status);
@@ -2485,12 +2457,12 @@ function displayChange_row(row, status) {
 	displayChange_field_loatiende(row, status);
 	displayChange_field_autorizado(row, status);
 	displayChange_field_relleno2(row, status);
-	displayChange_field_nacimiento(row, status);
+	displayChange_field_direcciones(row, status);
+	displayChange_field_sucur_cliente(row, status);
 	displayChange_field_detalle_tributario(row, status);
 	displayChange_field_responsabilidad_fiscal(row, status);
 	displayChange_field_ciiu(row, status);
-	displayChange_field_sucur_cliente(row, status);
-	displayChange_field_sucursales(row, status);
+	displayChange_field_nacimiento(row, status);
 	displayChange_field_fechault(row, status);
 	displayChange_field_saldo(row, status);
 	displayChange_field_afiliacion(row, status);
@@ -2547,9 +2519,6 @@ function displayChange_field(field, row, status) {
 	}
 	if ("dv" == field) {
 		displayChange_field_dv(row, status);
-	}
-	if ("imagenter" == field) {
-		displayChange_field_imagenter(row, status);
 	}
 	if ("codigo_tercero" == field) {
 		displayChange_field_codigo_tercero(row, status);
@@ -2668,8 +2637,11 @@ function displayChange_field(field, row, status) {
 	if ("relleno2" == field) {
 		displayChange_field_relleno2(row, status);
 	}
-	if ("nacimiento" == field) {
-		displayChange_field_nacimiento(row, status);
+	if ("direcciones" == field) {
+		displayChange_field_direcciones(row, status);
+	}
+	if ("sucur_cliente" == field) {
+		displayChange_field_sucur_cliente(row, status);
 	}
 	if ("detalle_tributario" == field) {
 		displayChange_field_detalle_tributario(row, status);
@@ -2680,11 +2652,8 @@ function displayChange_field(field, row, status) {
 	if ("ciiu" == field) {
 		displayChange_field_ciiu(row, status);
 	}
-	if ("sucur_cliente" == field) {
-		displayChange_field_sucur_cliente(row, status);
-	}
-	if ("sucursales" == field) {
-		displayChange_field_sucursales(row, status);
+	if ("nacimiento" == field) {
+		displayChange_field_nacimiento(row, status);
 	}
 	if ("fechault" == field) {
 		displayChange_field_fechault(row, status);
@@ -2854,9 +2823,6 @@ function displayChange_field_documento(row, status) {
 }
 
 function displayChange_field_dv(row, status) {
-}
-
-function displayChange_field_imagenter(row, status) {
 }
 
 function displayChange_field_codigo_tercero(row, status) {
@@ -3096,7 +3062,13 @@ function displayChange_field_autorizado(row, status) {
 function displayChange_field_relleno2(row, status) {
 }
 
-function displayChange_field_nacimiento(row, status) {
+function displayChange_field_direcciones(row, status) {
+	if ("on" == status && typeof $("#nmsc_iframe_liga_form_direccion_mob")[0].contentWindow.scRecreateSelect2 === "function") {
+		$("#nmsc_iframe_liga_form_direccion_mob")[0].contentWindow.scRecreateSelect2();
+	}
+}
+
+function displayChange_field_sucur_cliente(row, status) {
 }
 
 function displayChange_field_detalle_tributario(row, status) {
@@ -3108,10 +3080,7 @@ function displayChange_field_responsabilidad_fiscal(row, status) {
 function displayChange_field_ciiu(row, status) {
 }
 
-function displayChange_field_sucur_cliente(row, status) {
-}
-
-function displayChange_field_sucursales(row, status) {
+function displayChange_field_nacimiento(row, status) {
 }
 
 function displayChange_field_fechault(row, status) {
@@ -3684,128 +3653,6 @@ function scJQLinkReadonlyAdd(iSeqRow) {
 } // scJQLinkReadonlyAdd
 
 function scJQUploadAdd(iSeqRow) {
-  $("#id_sc_field_imagenter" + iSeqRow).fileupload({
-    datatype: "json",
-    url: "terceros_mob_ul_save.php",
-    dropZone: "",
-    formData: function() {
-      return [
-        {name: 'param_field', value: 'imagenter'},
-        {name: 'param_seq', value: '<?php echo $this->Ini->sc_page; ?>'},
-        {name: 'upload_file_row', value: iSeqRow}
-      ];
-    },
-    progress: function(e, data) {
-      var loader, progress;
-      if (data.lengthComputable && window.FormData !== undefined) {
-        loader = $("#id_img_loader_imagenter" + iSeqRow);
-        loaderContent = $("#id_img_loader_imagenter" + iSeqRow + " .scProgressBarLoading");
-        loaderContent.html("&nbsp;");
-        progress = parseInt(data.loaded / data.total * 100, 10);
-        loader.show().find("div").css("width", progress + "%");
-      }
-      else {
-        loader = $("#id_ajax_loader_imagenter" + iSeqRow);
-        loader.show();
-      }
-    },
-    change: function(e, data) {
-      var checkUploadSize = scCheckUploadExtensionSize_imagenter(data);
-      if ('ok' != checkUploadSize) {
-        e.preventDefault();
-        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
-      }
-    },
-    drop: function(e, data) {
-      var checkUploadSize = scCheckUploadExtensionSize_imagenter(data);
-      if ('ok' != checkUploadSize) {
-        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
-      }
-    },
-    done: function(e, data) {
-      var fileData, respData, respPos, respMsg, thumbDisplay, checkDisplay, var_ajax_img_thumb, oTemp;
-      fileData = null;
-      respMsg = "";
-      if (data && data.result && data.result[0] && data.result[0].body) {
-        respData = data.result[0].body.innerText;
-        respPos = respData.indexOf("[{");
-        if (-1 !== respPos) {
-          respMsg = respData.substr(0, respPos);
-          respData = respData.substr(respPos);
-          fileData = $.parseJSON(respData);
-        }
-        else {
-          respMsg = respData;
-        }
-      }
-      else {
-        respData = data.result;
-        respPos = respData.indexOf("[{");
-        if (-1 !== respPos) {
-          respMsg = respData.substr(0, respPos);
-          respData = respData.substr(respPos);
-          fileData = eval(respData);
-        }
-        else {
-          respMsg = respData;
-        }
-      }
-      if (window.FormData !== undefined)
-      {
-        $("#id_img_loader_imagenter" + iSeqRow).hide();
-      }
-      else
-      {
-        $("#id_ajax_loader_imagenter" + iSeqRow).hide();
-      }
-      if (null == fileData) {
-        if ("" != respMsg) {
-          oTemp = {"htmOutput" : "<?php echo $this->Ini->Nm_lang['lang_errm_upld_admn']; ?>"};
-          scAjaxShowDebug(oTemp);
-        }
-        return;
-      }
-      if (fileData[0].error && "" != fileData[0].error) {
-        var uploadErrorMessage = "";
-        oResp = {};
-        if ("acceptFileTypes" == fileData[0].error) {
-          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_invl']) ?>";
-        }
-        else if ("maxFileSize" == fileData[0].error) {
-          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
-        }
-        else if ("minFileSize" == fileData[0].error) {
-          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
-        }
-        else if ("emptyFile" == fileData[0].error) {
-          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_empty']) ?>";
-        }
-        scAjaxShowErrorDisplay("table", uploadErrorMessage);
-        return;
-      }
-      $("#id_sc_field_imagenter" + iSeqRow).val("");
-      $("#id_sc_field_imagenter_ul_name" + iSeqRow).val(fileData[0].sc_ul_name);
-      $("#id_sc_field_imagenter_ul_type" + iSeqRow).val(fileData[0].type);
-      var_ajax_img_imagenter = '<?php echo $this->Ini->path_imag_temp; ?>/' + fileData[0].sc_image_source;
-      var_ajax_img_thumb = '<?php echo $this->Ini->path_imag_temp; ?>/' + fileData[0].sc_thumb_prot;
-      thumbDisplay = ("" == var_ajax_img_imagenter) ? "none" : "";
-      $("#id_ajax_img_imagenter" + iSeqRow).attr("src", var_ajax_img_thumb);
-      $("#id_ajax_img_imagenter" + iSeqRow).css("display", thumbDisplay);
-      if (document.F1.temp_out1_imagenter) {
-        document.F1.temp_out_imagenter.value = var_ajax_img_thumb;
-        document.F1.temp_out1_imagenter.value = var_ajax_img_imagenter;
-      }
-      else if (document.F1.temp_out_imagenter) {
-        document.F1.temp_out_imagenter.value = var_ajax_img_imagenter;
-      }
-      checkDisplay = ("" == fileData[0].sc_random_prot.substr(12)) ? "none" : "";
-      $("#chk_ajax_img_imagenter" + iSeqRow).css("display", checkDisplay);
-      $("#txt_ajax_img_imagenter" + iSeqRow).html(fileData[0].name);
-      $("#txt_ajax_img_imagenter" + iSeqRow).css("display", checkDisplay);
-      $("#id_ajax_link_imagenter" + iSeqRow).html(fileData[0].sc_random_prot.substr(12));
-    }
-  });
-
   $("#id_sc_field_archivo_cedula" + iSeqRow).fileupload({
     datatype: "json",
     url: "terceros_mob_ul_save.php",
@@ -4243,6 +4090,128 @@ function scJQUploadAdd(iSeqRow) {
       checkDisplay = ("" == fileData[0].sc_random_prot.substr(12)) ? "none" : "";
       $("#chk_ajax_img_archivo_pago" + iSeqRow).css("display", checkDisplay);
       $("#id_ajax_link_archivo_pago" + iSeqRow).html(fileData[0].sc_random_prot.substr(12));
+    }
+  });
+
+  $("#id_sc_field_imagenter" + iSeqRow).fileupload({
+    datatype: "json",
+    url: "terceros_mob_ul_save.php",
+    dropZone: "",
+    formData: function() {
+      return [
+        {name: 'param_field', value: 'imagenter'},
+        {name: 'param_seq', value: '<?php echo $this->Ini->sc_page; ?>'},
+        {name: 'upload_file_row', value: iSeqRow}
+      ];
+    },
+    progress: function(e, data) {
+      var loader, progress;
+      if (data.lengthComputable && window.FormData !== undefined) {
+        loader = $("#id_img_loader_imagenter" + iSeqRow);
+        loaderContent = $("#id_img_loader_imagenter" + iSeqRow + " .scProgressBarLoading");
+        loaderContent.html("&nbsp;");
+        progress = parseInt(data.loaded / data.total * 100, 10);
+        loader.show().find("div").css("width", progress + "%");
+      }
+      else {
+        loader = $("#id_ajax_loader_imagenter" + iSeqRow);
+        loader.show();
+      }
+    },
+    change: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_imagenter(data);
+      if ('ok' != checkUploadSize) {
+        e.preventDefault();
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    drop: function(e, data) {
+      var checkUploadSize = scCheckUploadExtensionSize_imagenter(data);
+      if ('ok' != checkUploadSize) {
+        scJs_alert(scFormatExtensionSizeErrorMsg(checkUploadSize), function() {}, {'type': 'error'});
+      }
+    },
+    done: function(e, data) {
+      var fileData, respData, respPos, respMsg, thumbDisplay, checkDisplay, var_ajax_img_thumb, oTemp;
+      fileData = null;
+      respMsg = "";
+      if (data && data.result && data.result[0] && data.result[0].body) {
+        respData = data.result[0].body.innerText;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = $.parseJSON(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      else {
+        respData = data.result;
+        respPos = respData.indexOf("[{");
+        if (-1 !== respPos) {
+          respMsg = respData.substr(0, respPos);
+          respData = respData.substr(respPos);
+          fileData = eval(respData);
+        }
+        else {
+          respMsg = respData;
+        }
+      }
+      if (window.FormData !== undefined)
+      {
+        $("#id_img_loader_imagenter" + iSeqRow).hide();
+      }
+      else
+      {
+        $("#id_ajax_loader_imagenter" + iSeqRow).hide();
+      }
+      if (null == fileData) {
+        if ("" != respMsg) {
+          oTemp = {"htmOutput" : "<?php echo $this->Ini->Nm_lang['lang_errm_upld_admn']; ?>"};
+          scAjaxShowDebug(oTemp);
+        }
+        return;
+      }
+      if (fileData[0].error && "" != fileData[0].error) {
+        var uploadErrorMessage = "";
+        oResp = {};
+        if ("acceptFileTypes" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_invl']) ?>";
+        }
+        else if ("maxFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("minFileSize" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_size']) ?>";
+        }
+        else if ("emptyFile" == fileData[0].error) {
+          uploadErrorMessage = "<?php echo $this->form_encode_input($this->Ini->Nm_lang['lang_errm_file_empty']) ?>";
+        }
+        scAjaxShowErrorDisplay("table", uploadErrorMessage);
+        return;
+      }
+      $("#id_sc_field_imagenter" + iSeqRow).val("");
+      $("#id_sc_field_imagenter_ul_name" + iSeqRow).val(fileData[0].sc_ul_name);
+      $("#id_sc_field_imagenter_ul_type" + iSeqRow).val(fileData[0].type);
+      var_ajax_img_imagenter = '<?php echo $this->Ini->path_imag_temp; ?>/' + fileData[0].sc_image_source;
+      var_ajax_img_thumb = '<?php echo $this->Ini->path_imag_temp; ?>/' + fileData[0].sc_thumb_prot;
+      thumbDisplay = ("" == var_ajax_img_imagenter) ? "none" : "";
+      $("#id_ajax_img_imagenter" + iSeqRow).attr("src", var_ajax_img_thumb);
+      $("#id_ajax_img_imagenter" + iSeqRow).css("display", thumbDisplay);
+      if (document.F1.temp_out1_imagenter) {
+        document.F1.temp_out_imagenter.value = var_ajax_img_thumb;
+        document.F1.temp_out1_imagenter.value = var_ajax_img_imagenter;
+      }
+      else if (document.F1.temp_out_imagenter) {
+        document.F1.temp_out_imagenter.value = var_ajax_img_imagenter;
+      }
+      checkDisplay = ("" == fileData[0].sc_random_prot.substr(12)) ? "none" : "";
+      $("#chk_ajax_img_imagenter" + iSeqRow).css("display", checkDisplay);
+      $("#txt_ajax_img_imagenter" + iSeqRow).html(fileData[0].name);
+      $("#txt_ajax_img_imagenter" + iSeqRow).css("display", checkDisplay);
+      $("#id_ajax_link_imagenter" + iSeqRow).html(fileData[0].sc_random_prot.substr(12));
     }
   });
 
@@ -4854,20 +4823,6 @@ function scFormatExtensionSizeErrorMsg(errorMsg)
     return returnMsg;
 }
 
-function scCheckUploadExtensionSize_imagenter(thisField)
-{
-    if ("files" in thisField && thisField.files.length > 0) {
-        thisFileExtension = scGetFileExtension(thisField.files[0].name);
-
-
-        if (!["jpg", "jpeg", "gif", "png"].includes(thisFileExtension)) {
-            return 'err_extension||' + thisFileExtension.toUpperCase();
-        }
-    }
-
-    return 'ok';
-}
-
 function scCheckUploadExtensionSize_archivo_cedula(thisField)
 {
     if ("files" in thisField && thisField.files.length > 0) {
@@ -4917,6 +4872,20 @@ function scCheckUploadExtensionSize_archivo_pago(thisField)
 
 
         if (![".pdf", ".jpg", ".jpeg", ".png", ".bmp", ".gif"].includes(thisFileExtension)) {
+            return 'err_extension||' + thisFileExtension.toUpperCase();
+        }
+    }
+
+    return 'ok';
+}
+
+function scCheckUploadExtensionSize_imagenter(thisField)
+{
+    if ("files" in thisField && thisField.files.length > 0) {
+        thisFileExtension = scGetFileExtension(thisField.files[0].name);
+
+
+        if (!["jpg", "jpeg", "gif", "png"].includes(thisFileExtension)) {
             return 'err_extension||' + thisFileExtension.toUpperCase();
         }
     }

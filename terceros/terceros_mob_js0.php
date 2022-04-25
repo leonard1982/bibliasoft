@@ -632,6 +632,9 @@ function sc_exib_ocult_pag(N_pagina)
     pag_ativa = N_pagina;
     sc_tab_pag(pag_ativa, 'scTabActive');
     displayChange_page(pag_ativa.substr(17), 'on');
+   if ("terceros_mob_form1" == N_pagina) {
+     scAjaxDetailHeight("form_direccion", "500");
+    }
    if ("terceros_mob_form5" == N_pagina) {
      scAjaxDetailHeight("grid_gestor_archivos_tercero", "500");
     }

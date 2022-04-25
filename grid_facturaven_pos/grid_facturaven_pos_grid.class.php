@@ -864,6 +864,24 @@ $vfactura = sc_url_library("prj", "factura", "index.php");
 <link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
 <script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
 <link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
+
+<style>
+body
+{
+	
+	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_punto_venta_supermercado.jpg'); ?>) !important;
+	
+	background-position: center center !important;
+	
+	background-repeat: no-repeat !important;
+	
+	background-attachment: fixed !important;
+	
+	background-size: cover !important;
+	
+	background-color: #1175bb !important;
+}
+</style>
 <?php
 
 $this->NM_cmp_hidden["pedido"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['php_cmp_sel']["pedido"] = "off"; }
@@ -4253,6 +4271,34 @@ $nm_saida->saida("}\r\n");
    }   
    $this->nm_data->SetaData(date("Y/m/d H:i:s"), "YYYY/MM/DD HH:II:SS"); 
    $nm_saida->saida(" <TR id=\"sc_grid_head\">\r\n");
+   if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sv_dt_head']))
+   { 
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sv_dt_head'] = array();
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sv_dt_head']['fix'] = $nm_data_fixa;
+       $nm_refresch_cab_rod = true;
+   } 
+   else 
+   { 
+       $nm_refresch_cab_rod = false;
+   } 
+   foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sv_dt_head'] as $ind => $val)
+   {
+       $tmp_var = "sc_data_cab" . $ind;
+       if ($$tmp_var != $val)
+       {
+           $nm_refresch_cab_rod = true;
+           break;
+       }
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sv_dt_head']['fix'] != $nm_data_fixa)
+   {
+       $nm_refresch_cab_rod = true;
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['ajax_nav'] && $nm_refresch_cab_rod)
+   { 
+       $_SESSION['scriptcase']['saida_html'] = "";
+   } 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['sv_dt_head']['fix'] = $nm_data_fixa;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] != "pdf")
    { 
        $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\" colspan=3 style=\"vertical-align: top\">\r\n");
@@ -4280,43 +4326,89 @@ $nm_saida->saida("}\r\n");
    } 
    if ($this->Ini->Export_img_zip)
    {
-       $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__cashier_32.png";
-       $img_LIN1_COL3 = "scriptcase__NM__ico__NM__cashier_32.png";
+       $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_punto_venta_32x32.png";
+       $img_NM_CAB_LOGOTIPO = "grp__NM__ico__NM__ico_punto_venta_32x32.png";
    }
    elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img)
    {
-       $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__cashier_32.png";
+       $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_punto_venta_32x32.png";
        $tmp_img_word = fopen($loc_img_word, "rb");
        $reg_img_word = fread($tmp_img_word, filesize($loc_img_word));
        fclose($tmp_img_word);
-       $img_LIN1_COL3 = "data:image/jpeg;base64," . base64_encode($reg_img_word);
+       $img_NM_CAB_LOGOTIPO = "data:image/jpeg;base64," . base64_encode($reg_img_word);
    }
    else
    {
-       $img_LIN1_COL3 = $this->NM_raiz_img . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__cashier_32.png";
+       $img_NM_CAB_LOGOTIPO = $this->NM_raiz_img . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_punto_venta_32x32.png";
    }
-   $nm_saida->saida("<TABLE width=\"100%\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" cellpadding=\"0\" cellspacing=\"0\">\r\n");
-   $nm_saida->saida("<TR align=\"center\">\r\n");
-   $nm_saida->saida(" <TD colspan=\"3\">\r\n");
-   $nm_saida->saida("     <table  style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\r\n");
-   $nm_saida->saida("       <tr valign=\"middle\">\r\n");
-   $nm_saida->saida("         <td align=\"left\" ><span class=\"" . $this->css_scGridHeaderFont . "\"> Venta Rápida </span></td>\r\n");
-   $nm_saida->saida("         <td style=\"font-size: 5px\">&nbsp; &nbsp; </td>\r\n");
-   $nm_saida->saida("         <td align=\"center\" ><span class=\"" . $this->css_scGridHeaderFont . "\"> " . $nm_cab_filtro . " </span></td>\r\n");
-   $nm_saida->saida("         <td style=\"font-size: 5px\">&nbsp; &nbsp; </td>\r\n");
-   $nm_saida->saida("         <td align=\"right\" ><span class=\"" . $this->css_scGridHeaderFont . "\">    <IMG SRC=\"" . $img_LIN1_COL3 . "\" BORDER=\"0\"/> &nbsp;&nbsp;</span></td>\r\n");
-   $nm_saida->saida("         <td width=\"3px\" class=\"" . $this->css_scGridHeader . "\"></td>\r\n");
-   $nm_saida->saida("       </tr>\r\n");
-   $nm_saida->saida("     </table>\r\n");
-   $nm_saida->saida(" </TD>\r\n");
-   $nm_saida->saida("</TR>\r\n");
-   $nm_saida->saida("<TR align=\"center\" >\r\n");
-   $nm_saida->saida("  <TD height=\"5px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-   $nm_saida->saida("  <TD height=\"1px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-   $nm_saida->saida("  <TD height=\"1px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-   $nm_saida->saida("</TR>\r\n");
-   $nm_saida->saida("</TABLE>\r\n");
+   $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+   $nm_saida->saida("    <TR align=\"center\">\r\n");
+   $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+   $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("             <IMG SRC=\"" . $img_NM_CAB_LOGOTIPO . "\" BORDER=\"0\"/>\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          Venta Rápida\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          " . $nm_cab_filtro . "\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          " . $nm_data_fixa . "\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("      </TABLE>\r\n");
+   $nm_saida->saida("     </TD>\r\n");
+   $nm_saida->saida("    </TR>\r\n");
+   $nm_saida->saida("   </TABLE>\r\n");
    $nm_saida->saida("  </TD>\r\n");
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['ajax_nav'] && $nm_refresch_cab_rod)
+   { 
+       $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_grid_head', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+       $_SESSION['scriptcase']['saida_html'] = "";
+   } 
    $nm_saida->saida(" </TR>\r\n");
  }
 // 
@@ -4456,7 +4548,7 @@ $nm_saida->saida("}\r\n");
  function NM_label_numero2()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "#"; 
+   $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Número"; 
    if (!isset($this->NM_cmp_hidden['numero2']) || $this->NM_cmp_hidden['numero2'] != "off") { 
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numero2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numero2_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
@@ -4568,7 +4660,7 @@ $nm_saida->saida("}\r\n");
  function NM_label_opciones()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+   $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : ""; 
    if (!isset($this->NM_cmp_hidden['opciones']) || $this->NM_cmp_hidden['opciones'] != "off") { 
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_opciones_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_opciones_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
@@ -4849,7 +4941,7 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['tipo'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['credito'])) ? $this->New_label['credito'] : "F.Pago"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['credito'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "#"; 
+   $SC_Label = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : "Número"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['numero2'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idcli'])) ? $this->New_label['idcli'] : "Cliente"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['idcli'] = $SC_Label; 
@@ -4877,7 +4969,7 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['pedido'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['envio_dataico'])) ? $this->New_label['envio_dataico'] : "Acción"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['envio_dataico'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : "Opciones"; 
+   $SC_Label = (isset($this->New_label['opciones'])) ? $this->New_label['opciones'] : ""; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['opciones'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idfacven'])) ? $this->New_label['idfacven'] : "Idfacven"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['idfacven'] = $SC_Label; 
@@ -17797,7 +17889,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           $OPC_cmp_sel = explode("_VLS_", $OPC_cmp);
           $nm_saida->saida("          <select multiple=multiple  id=\"fast_search_f0_top\" class=\"\" style=\"vertical-align: middle;\" name=\"nmgp_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
           $SC_Label_atu['SC_all_Cmp'] = $this->Ini->Nm_lang['lang_srch_all_fields']; 
-          $SC_Label_atu['numero2'] = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : '#'; 
+          $SC_Label_atu['numero2'] = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : 'Número'; 
           $SC_Label_atu['idcli'] = (isset($this->New_label['idcli'])) ? $this->New_label['idcli'] : 'Cliente'; 
           $SC_Label_atu['direccion2'] = (isset($this->New_label['direccion2'])) ? $this->New_label['direccion2'] : 'Dirección'; 
           $SC_Label_atu['observaciones'] = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : 'Observaciones'; 
@@ -18000,6 +18092,87 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
           $nm_saida->saida("            <div id=\"div_sc_btn_notifica_sms_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
           $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_notifica_sms", "sc_btn_btn_notifica_sms();", "sc_btn_btn_notifica_sms();", "sc_btn_notifica_sms_top", "", "Recordatorio Cobro Pendientes", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
+          $nm_saida->saida("          $Cod_Btn \r\n");
+          $nm_saida->saida("            </div>\r\n");
+          $NM_Gbtn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['copiar_documento_como'] == "on" && !$this->grid_emb_form) 
+      { 
+          $this->nm_btn_exist['copiar_documento_como'][] = "sc_copiar_documento_como_top";
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div id=\"div_sc_copiar_documento_como_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+           if (isset($this->Ini->sc_lig_md5["control_copiar_documento_como"]) && $this->Ini->sc_lig_md5["control_copiar_documento_como"] == "S") {
+               $Parms_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutsc_redir_atualiz*scinok*scoutsc_redir_insert*scinok*scout";
+               $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_facturaven_pos@SC_par@" . md5($Parms_Lig);
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+           } else {
+               $Md5_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutsc_redir_atualiz*scinok*scoutsc_redir_insert*scinok*scout";
+           }
+               $btn_value = "Copiar documento como";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
+               {
+                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+               $btn_hint = "Copiar documento como";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
+               {
+                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+          $nm_saida->saida("<a id=\"sc_copiar_documento_como_top\" href=\"javascript: nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_documento_como') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'control_copiar_documento_como');\" class=\"scBtnGrpLink\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
+          $nm_saida->saida("            </div>\r\n");
+          $NM_Gbtn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_reenviar'] == "on" && !$this->grid_emb_form) 
+      { 
+          $this->nm_btn_exist['btn_reenviar'][] = "sc_btn_reenviar_top";
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div id=\"div_sc_btn_reenviar_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+               $btn_value = "Reenviar correo factura electrónica";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
+               {
+                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+               $btn_hint = "Reenviar correo factura electrónica";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
+               {
+                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+          $nm_saida->saida("<a id=\"sc_btn_reenviar_top\" href=\"javascript: sc_btn_btn_reenviar();\" class=\"scBtnGrpLink\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
+          $nm_saida->saida("            </div>\r\n");
+          $NM_Gbtn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_calculadora'] == "on" && !$this->grid_emb_form) 
+      { 
+          $this->nm_btn_exist['btn_calculadora'][] = "sc_btn_calculadora_top";
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div id=\"div_sc_btn_calculadora_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+           if (isset($this->Ini->sc_lig_md5["blank_grupos_calculadora"]) && $this->Ini->sc_lig_md5["blank_grupos_calculadora"] == "S") {
+               $Parms_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scout";
+               $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_facturaven_pos@SC_par@" . md5($Parms_Lig);
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+           } else {
+               $Md5_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scout";
+           }
+               $btn_value = "btn_calculadora";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
+               {
+                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+               $btn_hint = "Terminal Restaurante";
+               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
+               {
+                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
+               }
+          $nm_saida->saida("<a id=\"sc_btn_calculadora_top\" href=\"javascript: nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_grupos_calculadora') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'blank_grupos_calculadora');\" class=\"scBtnGrpLink\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
+          $nm_saida->saida("            </div>\r\n");
+          $NM_Gbtn = true;
+      } 
+      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_vigencia_certificado'] == "on" && !$this->grid_emb_form) 
+      { 
+          $this->nm_btn_exist['btn_vigencia_certificado'][] = "sc_btn_vigencia_certificado_top";
+          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_2_top = true;</script>\r\n");
+          $nm_saida->saida("            <div id=\"div_sc_btn_vigencia_certificado_top\" class=\"scBtnGrpText scBtnGrpClick\">\r\n");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_vigencia_certificado", "sc_btn_btn_vigencia_certificado();", "sc_btn_btn_vigencia_certificado();", "sc_btn_vigencia_certificado_top", "", "Certificado", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_2", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("          $Cod_Btn \r\n");
           $nm_saida->saida("            </div>\r\n");
           $NM_Gbtn = true;
@@ -18277,38 +18450,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
               $nm_saida->saida("          <img id=\"NM_sep_5\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['copiar_documento_como'] == "on" && !$this->grid_emb_form) 
-      { 
-          $this->nm_btn_exist['copiar_documento_como'][] = "sc_copiar_documento_como_top";
-           if (isset($this->Ini->sc_lig_md5["control_copiar_documento_como"]) && $this->Ini->sc_lig_md5["control_copiar_documento_como"] == "S") {
-               $Parms_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutsc_redir_atualiz*scinok*scoutsc_redir_insert*scinok*scout";
-               $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_facturaven_pos@SC_par@" . md5($Parms_Lig);
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
-           } else {
-               $Md5_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scoutsc_redir_atualiz*scinok*scoutsc_redir_insert*scinok*scout";
-           }
-               $btn_value = "Copiar documento como";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Copiar documento como";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__copy_32.png\"  id=\"sc_copiar_documento_como_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_documento_como') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'control_copiar_documento_como');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_6";
-              $nm_saida->saida("          <img id=\"NM_sep_6\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_fe'] == "on" && !$this->grid_emb_form) 
       { 
           $this->nm_btn_exist['btn_enviar_fe'][] = "sc_btn_enviar_fe_top";
@@ -18330,8 +18471,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_7";
-              $nm_saida->saida("          <img id=\"NM_sep_7\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_6";
+              $nm_saida->saida("          <img id=\"NM_sep_6\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
           if ($this->nmgp_botoes['reload'] == "on")
@@ -18340,120 +18481,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_8";
-              $nm_saida->saida("          <img id=\"NM_sep_8\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_reenviar'] == "on" && !$this->grid_emb_form) 
-      { 
-          $this->nm_btn_exist['btn_reenviar'][] = "sc_btn_reenviar_top";
-               $btn_value = "Reenviar correo factura electrónica";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Reenviar correo factura electrónica";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__mail_forward_all_24.png\"  id=\"sc_btn_reenviar_top\" onClick=\"sc_btn_btn_reenviar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_9";
-              $nm_saida->saida("          <img id=\"NM_sep_9\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_hka_tech'] == "on" && !$this->grid_emb_form) 
-      { 
-          $this->nm_btn_exist['btn_enviar_hka_tech'][] = "sc_btn_enviar_hka_tech_top";
-               $btn_value = "btn_enviar_hka_tech";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Firmar documento electrónico (Enviar documento)";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__server_mail_download_32.png\"  id=\"sc_btn_enviar_hka_tech_top\" onClick=\"sc_btn_btn_enviar_hka_tech();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_10";
-              $nm_saida->saida("          <img id=\"NM_sep_10\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_pdf'] == "on" && !$this->grid_emb_form) 
-      { 
-          $this->nm_btn_exist['btn_pdf'][] = "sc_btn_pdf_top";
-               $btn_value = "PDF";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "PDF";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_pdf_32x32.png\"  id=\"sc_btn_pdf_top\" onClick=\"sc_btn_btn_pdf();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_11";
-              $nm_saida->saida("          <img id=\"NM_sep_11\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_calculadora'] == "on" && !$this->grid_emb_form) 
-      { 
-          $this->nm_btn_exist['btn_calculadora'][] = "sc_btn_calculadora_top";
-           if (isset($this->Ini->sc_lig_md5["blank_grupos_calculadora"]) && $this->Ini->sc_lig_md5["blank_grupos_calculadora"] == "S") {
-               $Parms_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scout";
-               $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_facturaven_pos@SC_par@" . md5($Parms_Lig);
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
-           } else {
-               $Md5_Lig  = "script_case_init*scin" . NM_encode_input($this->Ini->sc_page) . "*scout";
-           }
-               $btn_value = "btn_calculadora";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_value))
-               {
-                   $btn_value = sc_convert_encoding($btn_value, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-               $btn_hint = "Terminal Restaurante";
-               if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($btn_hint))
-               {
-                   $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
-               }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__plasma_tv_32.png\"  id=\"sc_btn_calculadora_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_grupos_calculadora') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'blank_grupos_calculadora');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
-          $NM_btn = true;
-      } 
-      if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_vigencia_certificado'] == "on" && !$this->grid_emb_form) 
-      { 
-          $this->nm_btn_exist['btn_vigencia_certificado'][] = "sc_btn_vigencia_certificado_top";
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_vigencia_certificado", "sc_btn_btn_vigencia_certificado();", "sc_btn_btn_vigencia_certificado();", "sc_btn_vigencia_certificado_top", "", "Vigencia Certificado", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-          $nm_saida->saida("          $Cod_Btn \r\n");
-          $NM_btn = true;
-      } 
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if (is_file("grid_facturaven_pos_help.txt") && !$this->grid_emb_form)
@@ -18783,7 +18810,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           $OPC_cmp_sel = explode("_VLS_", $OPC_cmp);
           $nm_saida->saida("          <select multiple=multiple  id=\"fast_search_f0_top\" class=\"\" style=\"vertical-align: middle;\" name=\"nmgp_fast_search\" onChange=\"change_fast_top = 'CH';\">\r\n");
           $SC_Label_atu['SC_all_Cmp'] = $this->Ini->Nm_lang['lang_srch_all_fields']; 
-          $SC_Label_atu['numero2'] = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : '#'; 
+          $SC_Label_atu['numero2'] = (isset($this->New_label['numero2'])) ? $this->New_label['numero2'] : 'Número'; 
           $SC_Label_atu['idcli'] = (isset($this->New_label['idcli'])) ? $this->New_label['idcli'] : 'Cliente'; 
           $SC_Label_atu['direccion2'] = (isset($this->New_label['direccion2'])) ? $this->New_label['direccion2'] : 'Dirección'; 
           $SC_Label_atu['observaciones'] = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : 'Observaciones'; 
@@ -19177,8 +19204,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_12";
-              $nm_saida->saida("          <img id=\"NM_sep_12\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_7";
+              $nm_saida->saida("          <img id=\"NM_sep_7\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['filter'] == "on"  && !$this->grid_emb_form)
@@ -19193,8 +19220,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_13";
-              $nm_saida->saida("          <img id=\"NM_sep_13\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_8";
+              $nm_saida->saida("          <img id=\"NM_sep_8\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19202,8 +19229,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_14";
-              $nm_saida->saida("          <img id=\"NM_sep_14\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_9";
+              $nm_saida->saida("          <img id=\"NM_sep_9\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['SC_btn_0'] == "on" && !$this->grid_emb_form) 
@@ -19234,8 +19261,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_15";
-              $nm_saida->saida("          <img id=\"NM_sep_15\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_10";
+              $nm_saida->saida("          <img id=\"NM_sep_10\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['Eliminar'] == "on" && !$this->grid_emb_form) 
@@ -19259,8 +19286,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_16";
-              $nm_saida->saida("          <img id=\"NM_sep_16\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_11";
+              $nm_saida->saida("          <img id=\"NM_sep_11\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['copiar_documento_como'] == "on" && !$this->grid_emb_form) 
@@ -19283,7 +19310,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__copy_32.png\"  id=\"sc_copiar_documento_como_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_documento_como') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'control_copiar_documento_como');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
+          $nm_saida->saida("<a id=\"sc_copiar_documento_como_top\" href=\"javascript: nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_documento_como') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'control_copiar_documento_como');\" class=\"scLink_default\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19291,8 +19318,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_17";
-              $nm_saida->saida("          <img id=\"NM_sep_17\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_12";
+              $nm_saida->saida("          <img id=\"NM_sep_12\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_fe'] == "on" && !$this->grid_emb_form) 
@@ -19316,8 +19343,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_18";
-              $nm_saida->saida("          <img id=\"NM_sep_18\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_13";
+              $nm_saida->saida("          <img id=\"NM_sep_13\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
           if ($this->nmgp_botoes['reload'] == "on")
@@ -19331,8 +19358,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_19";
-              $nm_saida->saida("          <img id=\"NM_sep_19\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_14";
+              $nm_saida->saida("          <img id=\"NM_sep_14\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_reenviar'] == "on" && !$this->grid_emb_form) 
@@ -19348,7 +19375,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__mail_forward_all_24.png\"  id=\"sc_btn_reenviar_top\" onClick=\"sc_btn_btn_reenviar();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
+          $nm_saida->saida("<a id=\"sc_btn_reenviar_top\" href=\"javascript: sc_btn_btn_reenviar();\" class=\"scLink_default\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
           $NM_btn = true;
       } 
       if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
@@ -19356,8 +19383,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_20";
-              $nm_saida->saida("          <img id=\"NM_sep_20\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_15";
+              $nm_saida->saida("          <img id=\"NM_sep_15\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_enviar_hka_tech'] == "on" && !$this->grid_emb_form) 
@@ -19381,8 +19408,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_21";
-              $nm_saida->saida("          <img id=\"NM_sep_21\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_16";
+              $nm_saida->saida("          <img id=\"NM_sep_16\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_pdf'] == "on" && !$this->grid_emb_form) 
@@ -19406,8 +19433,8 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if ($NM_btn)
           {
               $NM_btn = false;
-              $NM_ult_sep = "NM_sep_22";
-              $nm_saida->saida("          <img id=\"NM_sep_22\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+              $NM_ult_sep = "NM_sep_17";
+              $nm_saida->saida("          <img id=\"NM_sep_17\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_calculadora'] == "on" && !$this->grid_emb_form) 
@@ -19430,13 +19457,13 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__plasma_tv_32.png\"  id=\"sc_btn_calculadora_top\" onClick=\"nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_grupos_calculadora') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'blank_grupos_calculadora');; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
+          $nm_saida->saida("<a id=\"sc_btn_calculadora_top\" href=\"javascript: nm_gp_submit5('" . $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('blank_grupos_calculadora') . "/index.php', '$this->nm_location', '" . $Md5_Lig . "', '_self', '', '', '', '', 'blank_grupos_calculadora');\" class=\"scLink_default\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;\"> " . $btn_value . "</a>\r\n");
           $NM_btn = true;
       } 
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['btn_vigencia_certificado'] == "on" && !$this->grid_emb_form) 
       { 
           $this->nm_btn_exist['btn_vigencia_certificado'][] = "sc_btn_vigencia_certificado_top";
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_vigencia_certificado", "sc_btn_btn_vigencia_certificado();", "sc_btn_btn_vigencia_certificado();", "sc_btn_vigencia_certificado_top", "", "Vigencia Certificado", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "btn_vigencia_certificado", "sc_btn_btn_vigencia_certificado();", "sc_btn_btn_vigencia_certificado();", "sc_btn_vigencia_certificado_top", "", "Certificado", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("          $Cod_Btn \r\n");
           $NM_btn = true;
       } 

@@ -283,6 +283,14 @@ class grid_ventas_por_cliente_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
+              $SC_Label = (isset($this->New_label['direcciones'])) ? $this->New_label['direcciones'] : "Dirección(es)"; 
+              if ($Cada_col == "direcciones" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
               $SC_Label = (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "Fecha"; 
               if ($Cada_col == "fecha" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
@@ -332,27 +340,27 @@ class grid_ventas_por_cliente_csv
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, convert(char(23),f.fechaven,121) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, convert(char(23),f.fechaven,121) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, EXTEND(f.fechaven, YEAR TO DAY) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, EXTEND(f.fechaven, YEAR TO DAY) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq'];
@@ -415,7 +423,46 @@ class grid_ventas_por_cliente_csv
          $this->f_total =  str_replace(",", ".", $this->f_total);
          $this->f_total = (strpos(strtolower($this->f_total), "e")) ? (float)$this->f_total : $this->f_total; 
          $this->f_total = (string)$this->f_total;
+         $this->f_dircliente = $rs->fields[7] ;  
+         $this->f_dircliente = (string)$this->f_dircliente;
          $this->sc_proc_grid = true; 
+         $_SESSION['scriptcase']['grid_ventas_por_cliente']['contr_erro'] = 'on';
+ $sql_dir = "SELECT direc, ciudad FROM direccion WHERE iddireccion = '".$this->f_dircliente ."'";
+ 
+      $nm_select = $sql_dir; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_dir = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->ds_dir[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_dir = false;
+          $this->ds_dir_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_dir[0][0]))
+	{
+	$this->direcciones  = $this->ds_dir[0][0].' / '.$this->ds_dir[0][1];
+	}
+else
+	{
+	$this->direcciones  = 'SIN';
+	}
+$_SESSION['scriptcase']['grid_ventas_por_cliente']['contr_erro'] = 'off'; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['field_order'] as $Cada_col)
          { 
             if (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off")
@@ -550,6 +597,18 @@ class grid_ventas_por_cliente_csv
    {
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
       $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->cliente);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- direcciones
+   function NM_export_direcciones()
+   {
+             if ($this->direcciones !== "&nbsp;") 
+             { 
+                 $this->direcciones = sc_strtoupper($this->direcciones); 
+             } 
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direcciones);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }

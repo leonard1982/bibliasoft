@@ -106,7 +106,6 @@ class grid_terceros_pos_ini
    var $path_atual;
    var $Gd_missing;
    var $sc_site_ssl;
-   var $link_terceros_cliente;
    var $nm_cont_lin;
    var $nm_limite_lin;
    var $nm_limite_lin_prt;
@@ -226,8 +225,8 @@ class grid_terceros_pos_ini
       $this->nm_dt_criacao   = "20180723"; 
       $this->nm_hr_criacao   = "194642"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220114"; 
-      $this->nm_hr_ult_alt   = "172519"; 
+      $this->nm_dt_ult_alt   = "20220405"; 
+      $this->nm_hr_ult_alt   = "093120"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -510,25 +509,6 @@ class grid_terceros_pos_ini
       }
       $this->sc_lig_target["B_@scinf_sc_btn_0"] = '_self';
       $this->sc_lig_target["B_@scinf_sc_btn_0_@scinf_terceros_cliente"] = '_self';
-      $Tmp_apl_lig = "terceros_cliente";
-      if (is_file($this->root . $this->path_link . "_lib/friendly_url/terceros_cliente_ini.txt"))
-      {
-          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/terceros_cliente_ini.txt");
-          if (isset($Friendly[0]) && !empty($Friendly[0]))
-          {
-              $Tmp_apl_lig = trim($Friendly[0]);
-          }
-      }
-      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/terceros_cliente_ini.txt"))
-      {
-          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/terceros_cliente_ini.txt");
-          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
-          {
-              $this->sc_lig_md5["terceros_cliente"] = 'S';
-          }
-      }
-      $this->sc_lig_target["A_@scinf_"] = '_self';
-      $this->sc_lig_target["A_@scinf__@scinf_terceros_cliente"] = '_self';
       if ($_SESSION['sc_session'][$this->sc_page]['grid_terceros_pos']['dashboard_info']['under_dashboard'])
       {
           $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['grid_terceros_pos']['dashboard_info']['dashboard_app'];
@@ -543,7 +523,6 @@ class grid_terceros_pos_ini
               }
           }
       }
-      $this->link_terceros_cliente =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('terceros_cliente') . "/" ; 
       if ($Tp_init == "Path_sub")
       {
           return;
@@ -976,7 +955,7 @@ class grid_terceros_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_terceros_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZ9XGHAN7HuB/HgrKVcFKV5F/HIraHQXGZ1X7Z1BeV5BOHgBeDkB/DWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHEBUH5F/VoBODcXGH9BiHIrwHuNUHgrKDkFCDWXCVEX7HQXOZSB/HArYHQrqHgNOVkJ3DuJeHIJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSFGD1veD5JwHuzGVIBOH5FqDoraD9XOZSB/Z1BeD5JeDMNKZSJGDWF/DoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHEBUDWXCVoJeD9FYDuFaDSzGD5F7DMBYVIB/DWFYDoFGHQFYZ1BOD1rKHuFGDEBODkXKDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5X/DoBqHQXOH9BiHAveD5NUHgNKDkBOV5FYHMBiHQBsH9BqHIrwHQX7DEBeHEJGH5FGZuFaHQBiH9FUD1BeD5B/DMNOVIFCDWB3VoX7HQXOZ1B/HABYHQBqDENOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQFGHIrwV5BOHuzGDkBsHEX7HIX7HQBsH9BqHABYHQXGHgNKVkJGDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcFYH9B/D1vsD5BqDMveHErCDWX7HMBiHQJKDuFaHAN7V5FGHuvmVcXKH5FqHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBqD9NwH9X7DSBYD5JsHgrYDkFCH5XCDoraD9XOZSB/D1rwV5FaDErKVkXeV5FaDoXGDcXOZSFGHAveV5JwHuzGZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1BOHIveV5FaHgBOZSXeDuFaVoFGHQJKH9FGHANOD5rqHuvmVcB/DuX7HMBqHQFYZ1BOD1rKHQFUHgvsHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5BmDoJeHQXODuFaHAveD5NUHgNKDkBOV5FYHMBiD9BsZ1FGDSNOHQFUDEvsZSJGDWXCHIB/HQNwZSX7HIBeHurqDMNOVIBsDWJeHMFUHQNwZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4480,10 +4459,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_pos'][$path_doc_md5]
        { 
            $_SESSION['sc_session'][$script_case_init]['grid_terceros_pos']['opcao'] = $nmgp_opcao ;  
        }   
-       if (!isset($_SESSION['sc_session'][$script_case_init]['grid_terceros_pos']['mostra_edit'])) 
-       {
-           $_SESSION['sc_session'][$script_case_init]['grid_terceros_pos']['mostra_edit'] = "S";
-       }
        if (isset($nmgp_lig_edit_lapis)) 
        {
           $_SESSION['sc_session'][$script_case_init]['grid_terceros_pos']['mostra_edit'] = $nmgp_lig_edit_lapis;

@@ -165,12 +165,8 @@ function Sel_cmp_process()
       $tab_ger_campos['codigobar'] = "on";
       $tab_blk_campos[] = "codigobar";
       $tab_ger_campos['idpro'] = "on";
-      $tab_ger_campos['colores'] = "on";
-      $tab_blk_campos[] = "colores";
-      $tab_ger_campos['tallas'] = "on";
-      $tab_blk_campos[] = "tallas";
-      $tab_ger_campos['sabor'] = "on";
-      $tab_blk_campos[] = "sabor";
+      $tab_ger_campos['idbod'] = "on";
+      $tab_blk_campos[] = "idbod";
       $tab_ger_campos['cantidad'] = "on";
       $tab_ger_campos['valorunit'] = "on";
       $tab_ger_campos['descuento'] = "on";

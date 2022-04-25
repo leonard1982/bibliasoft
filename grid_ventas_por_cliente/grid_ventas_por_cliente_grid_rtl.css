@@ -2,6 +2,8 @@
 .css_t_documento_grid_line {vertical-align: top;text-align: right;}
 .css_cliente_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_cliente_grid_line {vertical-align: top;text-align: right;}
+.css_direcciones_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_direcciones_grid_line {text-align: right;}
 .css_fecha_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
 .css_fecha_grid_line {vertical-align: top;text-align: center;}
 .css_factura_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}

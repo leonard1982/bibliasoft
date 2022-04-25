@@ -15,7 +15,7 @@ header("X-Frame-Options: SAMEORIGIN");
 
 <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("Crear nuevo tercero"); } else { echo strip_tags("Actualización datos del tercero"); } ?></TITLE>
+ <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("CREACIÓN DE TERCEROS (CLIENTES, PROVEEDORES, EMPLEADOS)"); } else { echo strip_tags("EDICIÓN DE TERCEROS (CLIENTES, PROVEEDORES, EMPLEADOS)"); } ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT" />
  <META http-equiv="Last-Modified" content="<?php echo gmdate('D, d M Y H:i:s') ?> GMT" />
@@ -633,7 +633,7 @@ include_once('terceros_jquery.php');
 if ('' == $this->scFormFocusErrorName)
 {
 ?>
-  scFocusField('tipo_documento');
+  scFocusField('tipo');
 
 <?php
 }
@@ -644,7 +644,7 @@ if ('' == $this->scFormFocusErrorName)
 
   addAutocomplete(this);
 
-  $("#hidden_bloco_0,#hidden_bloco_2,#hidden_bloco_6,#hidden_bloco_7,#hidden_bloco_8,#hidden_bloco_9,#hidden_bloco_12,#hidden_bloco_13,#hidden_bloco_14,#hidden_bloco_15").each(function() {
+  $("#hidden_bloco_0,#hidden_bloco_1,#hidden_bloco_5,#hidden_bloco_6,#hidden_bloco_7,#hidden_bloco_8,#hidden_bloco_9,#hidden_bloco_10,#hidden_bloco_11,#hidden_bloco_12,#hidden_bloco_13").each(function() {
    $(this.rows[0]).bind("click", {block: this}, toggleBlock)
                   .mouseover(function() { $(this).css("cursor", "pointer"); })
                   .mouseout(function() { $(this).css("cursor", ""); });
@@ -772,15 +772,16 @@ if (!$this->NM_ajax_flag && isset($this->NM_non_ajax_info['ajaxJavascript']) && 
 
  var show_block = {
     "hidden_bloco_0": true,
-    "hidden_bloco_2": true,
+    "hidden_bloco_1": true,
+    "hidden_bloco_5": true,
     "hidden_bloco_6": true,
-    "hidden_bloco_7": true,
-    "hidden_bloco_8": true,
-    "hidden_bloco_9": true,
+    "hidden_bloco_7": false,
+    "hidden_bloco_8": false,
+    "hidden_bloco_9": false,
+    "hidden_bloco_10": false,
+    "hidden_bloco_11": true,
     "hidden_bloco_12": true,
-    "hidden_bloco_13": true,
-    "hidden_bloco_14": true,
-    "hidden_bloco_15": true
+    "hidden_bloco_13": true
  };
 
  function toggleBlock(e) {
@@ -811,7 +812,10 @@ if (!$this->NM_ajax_flag && isset($this->NM_non_ajax_info['ajaxJavascript']) && 
   }
 
   if (show_block[block_id]) {
-    if ("hidden_bloco_20" == block_id) {
+    if ("hidden_bloco_7" == block_id) {
+      scAjaxDetailHeight("form_direccion", "500");
+    }
+    if ("hidden_bloco_18" == block_id) {
       scAjaxDetailHeight("grid_gestor_archivos_tercero", "500");
     }
   }
@@ -1402,23 +1406,27 @@ sc_userSweetAlertDisplayed = false;
   {
 ?>
 <tr><td>
-<style>
-#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
-#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
-</style>
-
-<div style="width: 100%">
- <div class="scFormHeader" style="height:11px; display: block; border-width:0px; "></div>
- <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
- 	<table style="width:100%; border-collapse:collapse; padding:0;">
-    	<tr>
-        	<td id="lin1_col1" class="scFormHeaderFont"><span><?php if ($this->nmgp_opcao == "novo") { echo "Crear nuevo tercero"; } else { echo "Actualización datos del tercero"; } ?></span></td>
-            <td id="lin1_col2" class="scFormHeaderFont"><span><?php echo date($this->dateDefaultFormat()); ?></span></td>
-        </tr>
-    </table>		 
- </div>
-</div>
-</td></tr>
+   <TABLE width="100%" class="scFormHeader">
+    <TR align="center">
+     <TD style="padding: 0px">
+      <TABLE style="padding: 0px; border-spacing: 0px; border-width: 0px;" width="100%">
+       <TR align="center" valign="middle">
+        <TD align="left" rowspan="2" class="scFormHeaderFont">
+          
+        </TD>
+        <TD class="scFormHeaderFont">
+          <?php if ($this->nmgp_opcao == "novo") { echo "CREACIÓN DE TERCEROS (CLIENTES, PROVEEDORES, EMPLEADOS)"; } else { echo "EDICIÓN DE TERCEROS (CLIENTES, PROVEEDORES, EMPLEADOS)"; } ?>
+        </TD>
+       </TR>
+       <TR align="right" valign="middle">
+        <TD class="scFormHeaderFont">
+          <?php echo date($this->dateDefaultFormat()); ?>
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>
+   </TABLE></td></tr>
 <?php
   }
 ?>
@@ -2017,14 +2025,16 @@ var pag_ativa = "terceros_form0";
    {
        $this->nmgp_cmp_hidden['idtercero'] = 'off';
    }
+   if (!isset($this->nmgp_cmp_hidden['imagenter']))
+   {
+       $this->nmgp_cmp_hidden['imagenter'] = 'off';
+   }
    if (!isset($this->nmgp_cmp_hidden['relleno2']))
    {
        $this->nmgp_cmp_hidden['relleno2'] = 'off';
    }
 ?>
-<TABLE align="center" id="hidden_bloco_0" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><input type="hidden" name="imagenter_ul_name" id="id_sc_field_imagenter_ul_name" value="<?php echo $this->form_encode_input($this->imagenter_ul_name);?>">
-<input type="hidden" name="imagenter_ul_type" id="id_sc_field_imagenter_ul_type" value="<?php echo $this->form_encode_input($this->imagenter_ul_type);?>">
-<input type="hidden" name="archivo_cedula_ul_name" id="id_sc_field_archivo_cedula_ul_name" value="<?php echo $this->form_encode_input($this->archivo_cedula_ul_name);?>">
+<TABLE align="center" id="hidden_bloco_0" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><input type="hidden" name="archivo_cedula_ul_name" id="id_sc_field_archivo_cedula_ul_name" value="<?php echo $this->form_encode_input($this->archivo_cedula_ul_name);?>">
 <input type="hidden" name="archivo_cedula_ul_type" id="id_sc_field_archivo_cedula_ul_type" value="<?php echo $this->form_encode_input($this->archivo_cedula_ul_type);?>">
 <input type="hidden" name="archivo_rut_ul_name" id="id_sc_field_archivo_rut_ul_name" value="<?php echo $this->form_encode_input($this->archivo_rut_ul_name);?>">
 <input type="hidden" name="archivo_rut_ul_type" id="id_sc_field_archivo_rut_ul_type" value="<?php echo $this->form_encode_input($this->archivo_rut_ul_type);?>">
@@ -2337,7 +2347,7 @@ $tipo_documento_look = "";
 <?php } else { ?>
 <span id="id_read_on_dv" class="sc-ui-readonly-dv css_dv_line" style="<?php echo $sStyleReadLab_dv; ?>"><?php echo $this->form_format_readonly("dv", $this->form_encode_input($this->dv)); ?></span><span id="id_read_off_dv" class="css_read_off_dv<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_dv; ?>">
  <input class="sc-js-input scFormObjectOdd css_dv_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_dv" type=text name="dv" value="<?php echo $this->form_encode_input($dv) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=1"; } ?> alt="{datatype: 'integer', maxLength: 1, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['dv']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['dv']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['dv']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=1"; } ?> alt="{datatype: 'integer', maxLength: 1, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['dv']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['dv']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['dv']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'center', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_dv_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_dv_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2355,12 +2365,6 @@ $tipo_documento_look = "";
 
 <?php } 
 ?> 
-
-
-
-
-
-
 <?php $sStyleHidden_tipo_dumb = ('' == $sStyleHidden_tipo) ? 'display: none' : ''; ?>
     <TD class="scFormDataOdd" id="hidden_field_data_tipo_dumb" style="<?php echo $sStyleHidden_tipo_dumb; ?>"></TD>
 <?php $sStyleHidden_regimen_dumb = ('' == $sStyleHidden_regimen) ? 'display: none' : ''; ?>
@@ -2371,68 +2375,10 @@ $tipo_documento_look = "";
     <TD class="scFormDataOdd" id="hidden_field_data_documento_dumb" style="<?php echo $sStyleHidden_documento_dumb; ?>"></TD>
 <?php $sStyleHidden_dv_dumb = ('' == $sStyleHidden_dv) ? 'display: none' : ''; ?>
     <TD class="scFormDataOdd" id="hidden_field_data_dv_dumb" style="<?php echo $sStyleHidden_dv_dumb; ?>"></TD>
-   </tr>
-<?php $sc_hidden_no = 1; ?>
-</TABLE></div><!-- bloco_f -->
-   </td>
-   </tr></table>
-   <a name="bloco_1"></a>
-   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_1"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_1" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
-   <?php
-    if (!isset($this->nm_new_label['imagenter']))
-    {
-        $this->nm_new_label['imagenter'] = "Foto";
-    }
-?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $imagenter = $this->imagenter;
-   $sStyleHidden_imagenter = '';
-   if (isset($this->nmgp_cmp_hidden['imagenter']) && $this->nmgp_cmp_hidden['imagenter'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['imagenter']);
-       $sStyleHidden_imagenter = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_imagenter = 'display: none;';
-   $sStyleReadInp_imagenter = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['imagenter']) && $this->nmgp_cmp_readonly['imagenter'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['imagenter']);
-       $sStyleReadLab_imagenter = '';
-       $sStyleReadInp_imagenter = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['imagenter']) && $this->nmgp_cmp_hidden['imagenter'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="imagenter" value="<?php echo $this->form_encode_input($imagenter) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_imagenter_line" id="hidden_field_data_imagenter" style="<?php echo $sStyleHidden_imagenter; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_imagenter_line" style="padding: 0px"><span class="scFormLabelOddFormat css_imagenter_label" style=""><span id="id_label_imagenter"><?php echo $this->nm_new_label['imagenter']; ?></span></span><br>
- <?php $this->NM_ajax_info['varList'][] = array("var_ajax_img_imagenter" => $out1_imagenter); ?><script>var var_ajax_img_imagenter = '<?php echo $out1_imagenter; ?>';</script><input type="hidden" name="temp_out_imagenter" value="<?php echo $this->form_encode_input($out_imagenter); ?>" /><input type="hidden" name="temp_out1_imagenter" value="<?php echo $this->form_encode_input($out1_imagenter); ?>" /><?php if (!empty($out_imagenter)) {  echo "<a  href=\"javascript:nm_mostra_img(var_ajax_img_imagenter, '" . $this->nmgp_return_img['imagenter'][0] . "', '" . $this->nmgp_return_img['imagenter'][1] . "')\"><img id=\"id_ajax_img_imagenter\"  border=\"0\" src=\"$out_imagenter\"></a>"; } else {  echo "<img id=\"id_ajax_img_imagenter\" border=\"0\" style=\"display: none\">"; } ?><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["imagenter"]) &&  $this->nmgp_cmp_readonly["imagenter"] == "on") { 
-
- ?>
-<img id=\"imagenter_img_uploading\" style=\"display: none\" border=\"0\" src=\"" . $this->Ini->path_icones . "/scriptcase__NM__ajax_load.gif\" align=\"absmiddle\" /><input type="hidden" name="imagenter" value="<?php echo $this->form_encode_input($imagenter) . "\">" . $imagenter . ""; ?>
-<?php } else { ?>
-<span id="id_read_off_imagenter" class="css_read_off_imagenter<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_imagenter; ?>"><span style="display:inline-block"><span id="sc-id-upload-select-imagenter" class="fileinput-button fileinput-button-padding scButton_default">
- <span><?php echo $this->Ini->Nm_lang['lang_select_file'] ?></span>
-
- <input class="sc-js-input scFormObjectOdd css_imagenter_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" title="<?php echo $this->Ini->Nm_lang['lang_select_file'] ?>" type="file" name="imagenter[]" id="id_sc_field_imagenter" onchange="<?php if ($this->nmgp_opcao == "novo") {echo "if (document.F1.elements['sc_check_vert[" . $sc_seq_vert . "]']) { document.F1.elements['sc_check_vert[" . $sc_seq_vert . "]'].checked = true }"; }?>"></span></span>
-<?php
-   $sCheckInsert = "";
-?>
-<span id="chk_ajax_img_imagenter"<?php if ($this->nmgp_opcao == "novo" || empty($imagenter)) { echo " style=\"display: none\""; } ?>> <input type=checkbox name="imagenter_limpa" value="<?php echo $imagenter_limpa . '" '; if ($imagenter_limpa == "S"){echo "checked ";} ?> onclick="this.value = ''; if (this.checked){ this.value = 'S'};<?php echo $sCheckInsert ?>"><?php echo $this->Ini->Nm_lang['lang_btns_dele_hint']; ?> &nbsp;</span><img id="imagenter_img_uploading" style="display: none" border="0" src="<?php echo $this->Ini->path_icones; ?>/scriptcase__NM__ajax_load.gif" align="absmiddle" /><div id="id_img_loader_imagenter" class="progress progress-success progress-striped active scProgressBarStart" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="display: none"><div class="bar scProgressBarLoading">&nbsp;</div></div><img id="id_ajax_loader_imagenter" src="<?php echo $this->Ini->path_icones ?>/scriptcase__NM__ajax_load.gif" style="display: none" /></span><?php } ?>
-<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('imagenter')", "nm_mostra_mens('imagenter')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_imagenter_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_imagenter_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
    <?php
     if (!isset($this->nm_new_label['codigo_tercero']))
     {
@@ -2625,11 +2571,12 @@ $notificar_look = "";
 </span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_notificar_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_notificar_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
+    <TD class="scFormDataOdd" colspan="2" >&nbsp;</TD>
 
 
 
 
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+<?php if ($sc_hidden_yes > 0) { ?>
 
 
     <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
@@ -2637,16 +2584,7 @@ $notificar_look = "";
 
 
 
-<?php } 
-?> 
-
-
-
-
-
-
-<?php $sStyleHidden_imagenter_dumb = ('' == $sStyleHidden_imagenter) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_imagenter_dumb" style="<?php echo $sStyleHidden_imagenter_dumb; ?>"></TD>
+<?php } ?>
 <?php $sStyleHidden_codigo_tercero_dumb = ('' == $sStyleHidden_codigo_tercero) ? 'display: none' : ''; ?>
     <TD class="scFormDataOdd" id="hidden_field_data_codigo_tercero_dumb" style="<?php echo $sStyleHidden_codigo_tercero_dumb; ?>"></TD>
 <?php $sStyleHidden_sexo_dumb = ('' == $sStyleHidden_sexo) ? 'display: none' : ''; ?>
@@ -2658,16 +2596,16 @@ $notificar_look = "";
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_2"></a>
+   <a name="bloco_1"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_2"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_2" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+<div id="div_hidden_bloco_1"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_1" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
     <TD colspan="2" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf2\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>** DATOS OBLIGATORIOS PARA F. E.<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf1\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>** DATOS OBLIGATORIOS PARA FACTURA ELECTRÓNICA<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>
@@ -2908,7 +2846,7 @@ $notificar_look = "";
    <?php
     if (!isset($this->nm_new_label['tel_cel']))
     {
-        $this->nm_new_label['tel_cel'] = "Teléfono o celular";
+        $this->nm_new_label['tel_cel'] = "Teléfono o celular**";
     }
 ?>
 <?php
@@ -3083,10 +3021,10 @@ $notificar_look = "";
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_3"></a>
+   <a name="bloco_2"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_3"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_3" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<div id="div_hidden_bloco_2"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_2" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -3129,7 +3067,7 @@ $notificar_look = "";
 <?php } else { ?>
 <span id="id_read_on_r_social" class="sc-ui-readonly-r_social css_r_social_line" style="<?php echo $sStyleReadLab_r_social; ?>"><?php echo $this->form_format_readonly("r_social", $this->form_encode_input($this->r_social)); ?></span><span id="id_read_off_r_social" class="css_read_off_r_social<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_r_social; ?>">
  <input class="sc-js-input scFormObjectOdd css_r_social_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_r_social" type=text name="r_social" value="<?php echo $this->form_encode_input($r_social) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=60"; } ?> maxlength=120 alt="{datatype: 'text', maxLength: 120, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: 'upper', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: 'Coloque Razón Social persona Natural', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=60"; } ?> maxlength=120 alt="{datatype: 'text', maxLength: 120, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: 'upper', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: 'Coloque Razón Social (si tiene), solo persona Natural', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 <span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('r_social')", "nm_mostra_mens('r_social')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
 </span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_r_social_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_r_social_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
@@ -3320,10 +3258,10 @@ $nombre_comercil_val = str_replace('<br />', '__SC_BREAK_LINE__', nl2br($nombre_
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_4"></a>
+   <a name="bloco_3"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_4"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_4" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<div id="div_hidden_bloco_3"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_3" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -5148,10 +5086,10 @@ else
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_5"></a>
+   <a name="bloco_4"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_5"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_5" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+<div id="div_hidden_bloco_4"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_4" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
     <TD colspan="4" height="20" class="scFormBlock">
@@ -5272,16 +5210,16 @@ else
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_6"></a>
+   <a name="bloco_5"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_6"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_6" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+<div id="div_hidden_bloco_5"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_5" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
     <TD colspan="5" height="20" class="scFormBlock">
      <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
       <TR>
-       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf6\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>ROL(ES) TERCERO<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf5\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>ROL(ES) TERCERO<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
        
       </TR>
      </TABLE>

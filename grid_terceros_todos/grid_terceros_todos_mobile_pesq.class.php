@@ -3704,9 +3704,6 @@ function nm_open_popup(parms)
    {
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_fast'] = "";
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['fast_search']);
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq_interativ'] = "";
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'] = array();
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_dados'] = array();
       if ("" == $this->comando_filtro)
       {
           $this->comando = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_orig'];

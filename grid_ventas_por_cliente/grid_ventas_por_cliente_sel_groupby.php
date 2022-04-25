@@ -270,8 +270,9 @@ function Sel_processa_form()
    $arr_campos_free['cliente'] = "Cliente";
    $arr_campos_free['fecha'] = "Fecha";
    $arr_campos_free['factura'] = "Factura";
-   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
    include("../_lib/buttons/" . $Str_btn_grid);
    if (!function_exists("nmButtonOutput"))
@@ -742,11 +743,6 @@ if (!$embbed)
     $has_group_by_dynamic = true;
     $has_total_dynamic    = true && $opc_ret == "resumo";
     $iTabCount            = 1;
-    if ($opc_ret == "resumo")
-    {
-        $has_total_dynamic = true;
-        $iTabCount++;
-    }
     if (1 < $iTabCount)
     {
 ?>

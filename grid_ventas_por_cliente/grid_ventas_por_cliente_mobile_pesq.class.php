@@ -39,8 +39,8 @@ class grid_ventas_por_cliente_pesq
    {
       global $bprocessa;
       include("../_lib/css/" . $this->Ini->str_schema_filter . "_filter.php");
-      $this->Ini->Str_btn_filter = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
-      $this->Str_btn_filter_css  = trim($str_button) . "/" . trim($str_button) . ".css";
+      $this->Ini->Str_btn_filter = "scriptcase9_BlueBerry/scriptcase9_BlueBerry" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
+      $this->Str_btn_filter_css  = "scriptcase9_BlueBerry/scriptcase9_BlueBerry.css";
       $this->Ini->str_google_fonts = (isset($str_google_fonts) && !empty($str_google_fonts))?$str_google_fonts:'';
       include($this->Ini->path_btn . $this->Ini->Str_btn_filter);
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['path_libs_php'] = $this->Ini->path_lib_php;
@@ -414,7 +414,7 @@ class grid_ventas_por_cliente_pesq
       $nm_esp_postgres = array();
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $Nm_datas[] = "f.fechaven";$Nm_datas[] = "f_fechaven";$Nm_numeric[] = "f_subtotal";$Nm_numeric[] = "f_valoriva";$Nm_numeric[] = "f_total";
+      $Nm_datas[] = "f.fechaven";$Nm_datas[] = "f_fechaven";$Nm_numeric[] = "f_subtotal";$Nm_numeric[] = "f_valoriva";$Nm_numeric[] = "f_total";$Nm_numeric[] = "f_dircliente";
       $campo_join = strtolower(str_replace(".", "_", $nome));
       if (in_array($campo_join, $Nm_numeric))
       {
@@ -2217,21 +2217,22 @@ function nm_open_popup(parms)
  <TR align="center">
   <TD class="scFilterTableTd">
 <style>
-#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
-#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
+#lin1_col1 { font-size:22px; width:500px; color: #FFFFFF; }
+#lin1_col2 { font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align:right; color: #FFFFFF;  }
+#lin2_col1 { font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:15px; }
+#lin2_col2 { font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align:right; color: #FFFFFF;  }
+
 </style>
 
-<div style="width: 100%">
- <div class="scFilterHeader" style="height:11px; display: block; border-width:0px; "></div>
- <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
- 	<table style="width:100%; border-collapse:collapse; padding:0;">
-    	<tr>
-        	<td id="lin1_col1" class="scFilterHeaderFont"><span>Ventas por Cliente</span></td>
-            <td id="lin1_col2" class="scFilterHeaderFont"><span><IMG src="<?php echo $this->Ini->path_imag_cab; ?>/scriptcase__NM__img__NM__ct_stack_col_3d.png" border="0"></span></td>
-        </tr>
-    </table>		 
- </div>
-</div>
+<table width="100%" height="67px" class="scFilterHeader">
+        <tr>
+                <td width="5px"></td>
+        <td width="67px" class="scFilterHeaderFont"><IMG src="<?php echo $this->Ini->path_imag_cab; ?>/scriptcase__NM__img__NM__ct_bar_col_3d.png" border="0"></td>
+               <td class="scFilterHeaderFont"><span id="lin1_col1">Ventas por Cliente</span><br /><span id="lin2_col1"></span></td>
+               <td align="right" class="scFilterHeaderFont"><span  id="lin1_col2"></span><br /><span id="lin2_col2"></span></td>
+        <td width="5px"></td>
+    </tr>
+</table>
   </TD>
  </TR>
 <?php

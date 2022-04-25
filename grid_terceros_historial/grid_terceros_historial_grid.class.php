@@ -5672,6 +5672,8 @@ $_SESSION['scriptcase']['grid_terceros_historial']['contr_erro'] = 'off';
        $nm_saida->saida("            </div>\r\n");
        $nm_saida->saida("        </form>\r\n");
        $nm_saida->saida("    </div>\r\n");
+     if (!$_SESSION['scriptcase']['proc_mobile'])
+     { 
        $this->NM_fil_ant = $this->gera_array_filtros();
        $strDisplayFilter = (empty($this->NM_fil_ant))?'none':'';
        $nm_saida->saida("   <div id='save_grid_search' class='scGridFilterTagSave'>\r\n");
@@ -5789,6 +5791,7 @@ $_SESSION['scriptcase']['grid_terceros_historial']['contr_erro'] = 'off';
        $nm_saida->saida("    </DIV> \r\n");
        $nm_saida->saida("   </form>\r\n");
        $nm_saida->saida("  </div> \r\n");
+     } 
        $nm_saida->saida("    <div id='close_grid_search' class='scGridFilterTagClose' onclick=\"checkLastTag(true);setTimeout(function() {nm_proc_grid_search(0, 'del_grid_search_all', 'grid_search')}, 200);\"></div>\r\n");
        $nm_saida->saida("   </div>\r\n");
        $nm_saida->saida("   </td>\r\n");

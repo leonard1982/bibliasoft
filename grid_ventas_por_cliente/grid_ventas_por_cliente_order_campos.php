@@ -119,6 +119,18 @@ function Ord_cmp_init()
        $tab_def_seq[20] = "t.nombres";
    }
    $tab_labels["cliente"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_ventas_por_cliente']['labels']["cliente"])) ? $_SESSION['sc_session'][$sc_init]['grid_ventas_por_cliente']['labels']["cliente"] : "Cliente";
+   $tab_ger_campos['direcciones'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['direcciones'] = "direcciones";
+       $tab_def_seq[90] = "direcciones";
+   }
+   else
+   {
+       $tab_def_campos['direcciones'] = "";
+       $tab_def_seq[90] = "";
+   }
+   $tab_labels["direcciones"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_ventas_por_cliente']['labels']["direcciones"])) ? $_SESSION['sc_session'][$sc_init]['grid_ventas_por_cliente']['labels']["direcciones"] : "Dirección(es)";
    $tab_ger_campos['fecha'] = "on";
    if ($use_alias == "S")
    {
@@ -179,6 +191,7 @@ function Ord_cmp_init()
        $tab_def_seq[70] = "f.total";
    }
    $tab_labels["f_total"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_ventas_por_cliente']['labels']["f_total"])) ? $_SESSION['sc_session'][$sc_init]['grid_ventas_por_cliente']['labels']["f_total"] : "Neto";
+   $tab_ger_campos['direcciones'] = "none";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_ventas_por_cliente']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_ventas_por_cliente']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_ventas_por_cliente']['field_display'] as $NM_cada_field => $NM_cada_opc)
@@ -343,8 +356,9 @@ function Sel_processa_form()
           $this->Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
       }
    }
-   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
    include("../_lib/buttons/" . $Str_btn_grid);
    if (!function_exists("nmButtonOutput"))

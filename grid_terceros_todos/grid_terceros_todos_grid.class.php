@@ -202,82 +202,11 @@ class grid_terceros_todos_grid
        $nm_saida->saida("                  <TD id='sc_grid_content' style='padding: 0px;' colspan=3>\r\n");
             } 
        $nm_saida->saida("    <table width='100%' cellspacing=0 cellpadding=0>\r\n");
-       if (!$this->Proc_link_res && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != 'pdf' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != 'print')
-       { 
-       $nm_saida->saida("     <TR>\r\n");
-       $nm_saida->saida("      <TD id=\"div_refin_search\" class=\"scGridRefinedSearchPadding\" valign='top'>\r\n");
-           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav'])
-           { 
-               $_SESSION['scriptcase']['saida_html'] = "";
-           } 
-           $this->html_interativ_search();
-           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav'])
-           { 
-               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['refresh_interativ']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['refresh_interativ'] == "S") {
-                   $this->Ini->Arr_result['setValue'][] = array('field' => 'div_refin_search', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
-               }
-               unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['refresh_interativ']);
-               $tb_disp = (!empty($this->nm_grid_sem_reg) && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opc_int_search']) ? 'none' : '';
-               $this->Ini->Arr_result['setDisplay'][] = array('field' => 'TB_Interativ_Search', 'value' => $tb_disp);
-           } 
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opc_int_search'] = false;
-       $nm_saida->saida("      </TD>\r\n");
-       $nm_saida->saida("      <TD class=\"scGridRefinedSearchMolduraResult\" valign='top'>\r\n");
-       $nm_saida->saida("       <table width='100%' cellspacing=0 cellpadding=0>\r\n");
-       } 
        $nmgrp_apl_opcao= (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_terceros_todos'])) ? "pdf" : $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'];
        if ($nmgrp_apl_opcao != "pdf")
        { 
            $this->nmgp_barra_top();
        } 
-       $display_tag_interativ = "none";
-       $descr_refin = "";
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']))
-       { 
-           $display_tag_interativ = "";
-           $descr_refin = "<div class='scGridFilterTagList'>";
-           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'] as $fil => $dados_fil) {
-               foreach ($dados_fil['lab'] as $lab_fil => $opcs_fil) {
-                   foreach ($opcs_fil as $iopc => $cada_opc) {
-                       $descr_refin .= "<div class='scGridFilterTagListItem'>";
-                       $descr_refin .= "<img align='absmiddle' style=\"cursor: pointer; float:right; padding-left: 5px;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" border=\"0\" onclick=\"nm_proc_int_search('clear_opc','" . $dados_fil['tp_obj'] . "','" . $lab_fil . "','" . $fil . "', 'id_int_search_" . $fil . "', '" . $fil . "', '" . $dados_fil['val_sel'][$iopc] . "##@@" . $cada_opc . "', 'S')\"/>";
-                       $descr_refin .= "<span class='scGridFilterTagListItemLabel'>";
-                       $descr_refin .= $lab_fil . "<br>";
-                       if ($dados_fil['tp_obj'] == 'bw') {
-                           $descr_refin .= $opcs_fil[0] . " <=> " . $opcs_fil[1];
-                       }
-                       else {
-                           $descr_refin .= $cada_opc;
-                       }
-                       $descr_refin .= "</span></div>&nbsp;&nbsp;";
-                       if ($dados_fil['tp_obj'] == 'bw') {
-                           break;
-                       }
-                   }
-               }
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bfilref_limpar", "nm_proc_int_clear_all();", "nm_proc_int_clear_all();", "app_int_search_all_cancel", "", "", "vertical-align: text-bottom;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $descr_refin .= $Cod_Btn; 
-           $descr_refin .= "</div>";
-       } 
-       $nm_saida->saida("       <tr id=\"tr_descr_refin_search\" style=\"display:" . $display_tag_interativ . ";padding: 0px;text-align: left;\"><td><div id=\"div_descr_refin_search\"  class=\"scGridFilterTag\" style=\"text-align: left;\">\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav']) {
-           $_SESSION['scriptcase']['saida_html'] = "";
-       }
-       if ($_SESSION['scriptcase']['proc_mobile']) {
-           $nm_saida->saida("            <a onclick=\"refin_search_mobile();\" class='scGridFilterTagIconCol'><i class='icon_fa " . $this->Ini->scGridRefinedSearchCollapseFAIcon . "'></i></a>\r\n");
-       }
-       $nm_saida->saida("         " . $descr_refin . "\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav']) {
-           $this->Ini->Arr_result['setValue'][] = array('field' => 'div_descr_refin_search', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
-           $this->Ini->Arr_result['setDisplay'][] = array('field' => 'tr_descr_refin_search', 'value' => $display_tag_interativ);
-       }
-       $nm_saida->saida("       </div></td></tr> \r\n");
-
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['save_grid']))
-       {
-           $this->refresh_interativ_search();
-       }
        unset ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['save_grid']);
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['pdf_res'] && (!isset($_GET['flash_graf']) || 'chart' != $_GET['flash_graf']))
        {
@@ -286,12 +215,6 @@ class grid_terceros_todos_grid
        if ($nmgrp_apl_opcao != "pdf")
        { 
            $this->nmgp_barra_bot();
-       } 
-       if (!$this->Proc_link_res && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != 'pdf' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != 'print')
-       { 
-       $nm_saida->saida("       </table>\r\n");
-       $nm_saida->saida("      </TD>\r\n");
-       $nm_saida->saida("     </TR>\r\n");
        } 
        $nm_saida->saida("   </table>\r\n");
        $nm_saida->saida("  </TD>\r\n");
@@ -551,10 +474,70 @@ class grid_terceros_todos_grid
    $this->nmgp_botoes['btn_subir_a_nube'] = "on";
    $this->nmgp_botoes['btn_actualizar_nube'] = "on";
    $this->Cmps_ord_def['documento'] = " asc";
+   $this->Cmps_ord_def['dv'] = " desc";
    $this->Cmps_ord_def['nombres'] = " asc";
    $this->Cmps_ord_def['direccion'] = " asc";
+   $this->Cmps_ord_def['idmuni'] = " desc";
    $this->Cmps_ord_def['tel_cel'] = " asc";
+   $this->Cmps_ord_def['cliente'] = " asc";
+   $this->Cmps_ord_def['proveedor'] = " asc";
+   $this->Cmps_ord_def['empleado'] = " asc";
+   $this->Cmps_ord_def['si_nomina'] = " asc";
+   $this->Cmps_ord_def['idtercero'] = " desc";
    $this->Cmps_ord_def['nacimiento'] = " desc";
+   $this->Cmps_ord_def['sexo'] = " asc";
+   $this->Cmps_ord_def['urlmail'] = " asc";
+   $this->Cmps_ord_def['fechault'] = " desc";
+   $this->Cmps_ord_def['saldo'] = " desc";
+   $this->Cmps_ord_def['afiliacion'] = " desc";
+   $this->Cmps_ord_def['regimen'] = " asc";
+   $this->Cmps_ord_def['tipo'] = " asc";
+   $this->Cmps_ord_def['observaciones'] = " asc";
+   $this->Cmps_ord_def['loatiende'] = " desc";
+   $this->Cmps_ord_def['contacto'] = " asc";
+   $this->Cmps_ord_def['credito'] = " asc";
+   $this->Cmps_ord_def['cupo'] = " desc";
+   $this->Cmps_ord_def['listaprecios'] = " desc";
+   $this->Cmps_ord_def['con_actual'] = " desc";
+   $this->Cmps_ord_def['efec_retencion'] = " asc";
+   $this->Cmps_ord_def['urlmail_1'] = " asc";
+   $this->Cmps_ord_def["urlmail"] = "";
+   $this->Cmps_ord_def['nombre1'] = " asc";
+   $this->Cmps_ord_def['nombre2'] = " asc";
+   $this->Cmps_ord_def['apellido1'] = " asc";
+   $this->Cmps_ord_def['apellido2'] = " asc";
+   $this->Cmps_ord_def['sucur_cliente'] = " asc";
+   $this->Cmps_ord_def['representante'] = " asc";
+   $this->Cmps_ord_def['es_restaurante'] = " asc";
+   $this->Cmps_ord_def['dias_credito'] = " desc";
+   $this->Cmps_ord_def['dias_mora'] = " desc";
+   $this->Cmps_ord_def['cupo_vendedor'] = " desc";
+   $this->Cmps_ord_def['codigo_ter'] = " asc";
+   $this->Cmps_ord_def['es_cajero'] = " asc";
+   $this->Cmps_ord_def['autorizado'] = " asc";
+   $this->Cmps_ord_def['zona_clientes'] = " desc";
+   $this->Cmps_ord_def['clasificacion_clientes'] = " desc";
+   $this->Cmps_ord_def['creado'] = " desc";
+   $this->Cmps_ord_def['disponible'] = " asc";
+   $this->Cmps_ord_def['id_pedido_tmp'] = " desc";
+   $this->Cmps_ord_def['n_pedido_tmp'] = " asc";
+   $this->Cmps_ord_def['total_pedido_tmp'] = " desc";
+   $this->Cmps_ord_def['obs_pedido_tmp'] = " asc";
+   $this->Cmps_ord_def['vend_pedido_tmp'] = " asc";
+   $this->Cmps_ord_def['ciudad'] = " asc";
+   $this->Cmps_ord_def['codigo_postal'] = " asc";
+   $this->Cmps_ord_def['lenguaje'] = " asc";
+   $this->Cmps_ord_def['nombre_comercil'] = " asc";
+   $this->Cmps_ord_def['notificar'] = " asc";
+   $this->Cmps_ord_def['puc_auxiliar_deudores'] = " desc";
+   $this->Cmps_ord_def['puc_retefuente_ventas'] = " desc";
+   $this->Cmps_ord_def['puc_retefuente_servicios_clie'] = " desc";
+   $this->Cmps_ord_def['puc_auxiliar_proveedores'] = " desc";
+   $this->Cmps_ord_def['puc_retefuente_compras'] = " desc";
+   $this->Cmps_ord_def['puc_retefuente_servicios_prov'] = " desc";
+   $this->Cmps_ord_def['nube'] = " asc";
+   $this->Cmps_ord_def['tipo_documento'] = " asc";
+   $this->Cmps_ord_def['estado'] = " asc";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['btn_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
@@ -676,6 +659,26 @@ else
 {
 	$this->NM_cmp_hidden["si_nomina"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['php_cmp_sel']["si_nomina"] = "off"; }
 }
+
+?>
+<style>
+body
+{
+	
+	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_clientes3.jpg'); ?>) !important;
+	
+	background-position: center center !important;
+	
+	background-repeat: no-repeat !important;
+	
+	background-attachment: fixed !important;
+	
+	background-size: cover !important;
+	
+	background-color: #1175bb !important;
+}
+</style>
+<?php
 if (isset($this->sc_temp_gnube_activa)) {$_SESSION['gnube_activa'] = $this->sc_temp_gnube_activa;}
 if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off'; 
@@ -1610,7 +1613,14 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("   <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
        }
        $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
-       $css_body = "margin-top:0px;margin-bottom:0px;";
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'])
+       { 
+           $css_body = "";
+       } 
+       else 
+       { 
+           $css_body = "margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px;";
+       } 
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav'] && !$this->Ini->sc_export_ajax)
        { 
            $nm_saida->saida("   <form name=\"form_ajax_redir_1\" method=\"post\" style=\"display: none\">\r\n");
@@ -2774,6 +2784,34 @@ $nm_saida->saida("}\r\n");
    }   
    $this->nm_data->SetaData(date("Y/m/d H:i:s"), "YYYY/MM/DD HH:II:SS"); 
    $nm_saida->saida(" <TR id=\"sc_grid_head\">\r\n");
+   if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['sv_dt_head']))
+   { 
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['sv_dt_head'] = array();
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['sv_dt_head']['fix'] = $nm_data_fixa;
+       $nm_refresch_cab_rod = true;
+   } 
+   else 
+   { 
+       $nm_refresch_cab_rod = false;
+   } 
+   foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['sv_dt_head'] as $ind => $val)
+   {
+       $tmp_var = "sc_data_cab" . $ind;
+       if ($$tmp_var != $val)
+       {
+           $nm_refresch_cab_rod = true;
+           break;
+       }
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['sv_dt_head']['fix'] != $nm_data_fixa)
+   {
+       $nm_refresch_cab_rod = true;
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav'] && $nm_refresch_cab_rod)
+   { 
+       $_SESSION['scriptcase']['saida_html'] = "";
+   } 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['sv_dt_head']['fix'] = $nm_data_fixa;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
    { 
        $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\" colspan=3 style=\"vertical-align: top\">\r\n");
@@ -2802,7 +2840,7 @@ $nm_saida->saida("}\r\n");
    if ($this->Ini->Export_img_zip)
    {
        $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/usr__NM__bg__NM__groups_people_people_1715.png";
-       $img_LIN1_COL3 = "usr__NM__bg__NM__groups_people_people_1715.png";
+       $img_NM_CAB_LOGOTIPO = "usr__NM__bg__NM__groups_people_people_1715.png";
    }
    elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img)
    {
@@ -2810,34 +2848,80 @@ $nm_saida->saida("}\r\n");
        $tmp_img_word = fopen($loc_img_word, "rb");
        $reg_img_word = fread($tmp_img_word, filesize($loc_img_word));
        fclose($tmp_img_word);
-       $img_LIN1_COL3 = "data:image/jpeg;base64," . base64_encode($reg_img_word);
+       $img_NM_CAB_LOGOTIPO = "data:image/jpeg;base64," . base64_encode($reg_img_word);
    }
    else
    {
-       $img_LIN1_COL3 = $this->NM_raiz_img . $this->Ini->path_imag_cab . "/usr__NM__bg__NM__groups_people_people_1715.png";
+       $img_NM_CAB_LOGOTIPO = $this->NM_raiz_img . $this->Ini->path_imag_cab . "/usr__NM__bg__NM__groups_people_people_1715.png";
    }
-   $nm_saida->saida("<TABLE width=\"100%\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" cellpadding=\"0\" cellspacing=\"0\">\r\n");
-   $nm_saida->saida("<TR align=\"center\">\r\n");
-   $nm_saida->saida(" <TD colspan=\"3\">\r\n");
-   $nm_saida->saida("     <table  style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\r\n");
-   $nm_saida->saida("       <tr valign=\"middle\">\r\n");
-   $nm_saida->saida("         <td align=\"left\" ><span class=\"" . $this->css_scGridHeaderFont . "\"> Terceros </span></td>\r\n");
-   $nm_saida->saida("         <td style=\"font-size: 5px\">&nbsp; &nbsp; </td>\r\n");
-   $nm_saida->saida("         <td align=\"center\" ><span class=\"" . $this->css_scGridHeaderFont . "\"> " . $nm_cab_filtro . " </span></td>\r\n");
-   $nm_saida->saida("         <td style=\"font-size: 5px\">&nbsp; &nbsp; </td>\r\n");
-   $nm_saida->saida("         <td align=\"right\" ><span class=\"" . $this->css_scGridHeaderFont . "\">    <IMG SRC=\"" . $img_LIN1_COL3 . "\" BORDER=\"0\"/> &nbsp;&nbsp;</span></td>\r\n");
-   $nm_saida->saida("         <td width=\"3px\" class=\"" . $this->css_scGridHeader . "\"></td>\r\n");
-   $nm_saida->saida("       </tr>\r\n");
-   $nm_saida->saida("     </table>\r\n");
-   $nm_saida->saida(" </TD>\r\n");
-   $nm_saida->saida("</TR>\r\n");
-   $nm_saida->saida("<TR align=\"center\" >\r\n");
-   $nm_saida->saida("  <TD height=\"5px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-   $nm_saida->saida("  <TD height=\"1px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-   $nm_saida->saida("  <TD height=\"1px\" class=\"" . $this->css_scGridHeader . "\"></TD>\r\n");
-   $nm_saida->saida("</TR>\r\n");
-   $nm_saida->saida("</TABLE>\r\n");
+   $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+   $nm_saida->saida("    <TR align=\"center\">\r\n");
+   $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+   $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("             <IMG SRC=\"" . $img_NM_CAB_LOGOTIPO . "\" BORDER=\"0\"/>\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          Terceros\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          " . $nm_cab_filtro . "\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          " . $nm_data_fixa . "\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("      </TABLE>\r\n");
+   $nm_saida->saida("     </TD>\r\n");
+   $nm_saida->saida("    </TR>\r\n");
+   $nm_saida->saida("   </TABLE>\r\n");
    $nm_saida->saida("  </TD>\r\n");
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav'] && $nm_refresch_cab_rod)
+   { 
+       $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_grid_head', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+       $_SESSION['scriptcase']['saida_html'] = "";
+   } 
    $nm_saida->saida(" </TR>\r\n");
  }
 // 
@@ -3011,7 +3095,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['dv'])) ? $this->New_label['dv'] : "DV"; 
    if (!isset($this->NM_cmp_hidden['dv']) || $this->NM_cmp_hidden['dv'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_dv_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_dv_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_dv_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_dv_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'dv')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('dv')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_nombres()
@@ -3131,7 +3263,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['idmuni'])) ? $this->New_label['idmuni'] : "Ciudad"; 
    if (!isset($this->NM_cmp_hidden['idmuni']) || $this->NM_cmp_hidden['idmuni'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idmuni_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idmuni_label'] . "\" NOWRAP WIDTH=\"80px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idmuni_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idmuni_label'] . "\" NOWRAP WIDTH=\"80px\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'idmuni')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('idmuni')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_tel_cel()
@@ -3195,7 +3375,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['cliente'])) ? $this->New_label['cliente'] : "Cliente"; 
    if (!isset($this->NM_cmp_hidden['cliente']) || $this->NM_cmp_hidden['cliente'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_cliente_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_cliente_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_cliente_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_cliente_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'cliente')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('cliente')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_proveedor()
@@ -3203,7 +3431,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['proveedor'])) ? $this->New_label['proveedor'] : "Proveedor"; 
    if (!isset($this->NM_cmp_hidden['proveedor']) || $this->NM_cmp_hidden['proveedor'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_proveedor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_proveedor_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_proveedor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_proveedor_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'proveedor')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('proveedor')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_empleado()
@@ -3211,7 +3487,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['empleado'])) ? $this->New_label['empleado'] : "Empleado"; 
    if (!isset($this->NM_cmp_hidden['empleado']) || $this->NM_cmp_hidden['empleado'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_empleado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_empleado_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_empleado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_empleado_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'empleado')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('empleado')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_si_nomina()
@@ -3219,7 +3543,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['si_nomina'])) ? $this->New_label['si_nomina'] : "Nómina"; 
    if (!isset($this->NM_cmp_hidden['si_nomina']) || $this->NM_cmp_hidden['si_nomina'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_si_nomina_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_si_nomina_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_si_nomina_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_si_nomina_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'si_nomina')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('si_nomina')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_idtercero()
@@ -3227,7 +3599,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['idtercero'])) ? $this->New_label['idtercero'] : "Idtercero"; 
    if (!isset($this->NM_cmp_hidden['idtercero']) || $this->NM_cmp_hidden['idtercero'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idtercero_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idtercero_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idtercero_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idtercero_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'idtercero')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('idtercero')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_nacimiento()
@@ -3291,7 +3711,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['sexo'])) ? $this->New_label['sexo'] : "Género"; 
    if (!isset($this->NM_cmp_hidden['sexo']) || $this->NM_cmp_hidden['sexo'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_sexo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_sexo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_sexo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_sexo_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'sexo')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('sexo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_urlmail()
@@ -3299,7 +3767,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['urlmail'])) ? $this->New_label['urlmail'] : "E-mail"; 
    if (!isset($this->NM_cmp_hidden['urlmail']) || $this->NM_cmp_hidden['urlmail'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_urlmail_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_urlmail_label'] . "\" NOWRAP WIDTH=\"150px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_urlmail_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_urlmail_label'] . "\" NOWRAP WIDTH=\"150px\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'urlmail')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('urlmail')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_fechault()
@@ -3307,7 +3823,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['fechault'])) ? $this->New_label['fechault'] : "Última comp."; 
    if (!isset($this->NM_cmp_hidden['fechault']) || $this->NM_cmp_hidden['fechault'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechault_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechault_label'] . "\" NOWRAP WIDTH=\"70px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechault_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechault_label'] . "\" NOWRAP WIDTH=\"70px\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'fechault')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('fechault')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_saldo()
@@ -3315,7 +3879,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['saldo'])) ? $this->New_label['saldo'] : "Saldo"; 
    if (!isset($this->NM_cmp_hidden['saldo']) || $this->NM_cmp_hidden['saldo'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_saldo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_saldo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_saldo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_saldo_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'saldo')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('saldo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_afiliacion()
@@ -3323,7 +3935,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['afiliacion'])) ? $this->New_label['afiliacion'] : "Cliente desde"; 
    if (!isset($this->NM_cmp_hidden['afiliacion']) || $this->NM_cmp_hidden['afiliacion'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_afiliacion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_afiliacion_label'] . "\" NOWRAP WIDTH=\"70px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_afiliacion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_afiliacion_label'] . "\" NOWRAP WIDTH=\"70px\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'afiliacion')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('afiliacion')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_regimen()
@@ -3331,7 +3991,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['regimen'])) ? $this->New_label['regimen'] : "Regimen"; 
    if (!isset($this->NM_cmp_hidden['regimen']) || $this->NM_cmp_hidden['regimen'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_regimen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_regimen_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_regimen_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_regimen_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'regimen')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('regimen')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_tipo()
@@ -3339,7 +4047,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['tipo'])) ? $this->New_label['tipo'] : "Tipo"; 
    if (!isset($this->NM_cmp_hidden['tipo']) || $this->NM_cmp_hidden['tipo'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tipo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tipo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tipo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tipo_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'tipo')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('tipo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_observaciones()
@@ -3347,7 +4103,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Observaciones"; 
    if (!isset($this->NM_cmp_hidden['observaciones']) || $this->NM_cmp_hidden['observaciones'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_observaciones_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_observaciones_label'] . "\" NOWRAP WIDTH=\"100px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_observaciones_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_observaciones_label'] . "\" NOWRAP WIDTH=\"100px\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'observaciones')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('observaciones')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_loatiende()
@@ -3355,7 +4159,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['loatiende'])) ? $this->New_label['loatiende'] : "Vendedor"; 
    if (!isset($this->NM_cmp_hidden['loatiende']) || $this->NM_cmp_hidden['loatiende'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_loatiende_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_loatiende_label'] . "\" NOWRAP WIDTH=\"30px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_loatiende_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_loatiende_label'] . "\" NOWRAP WIDTH=\"30px\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'loatiende')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('loatiende')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_contacto()
@@ -3363,7 +4215,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['contacto'])) ? $this->New_label['contacto'] : "Contacto"; 
    if (!isset($this->NM_cmp_hidden['contacto']) || $this->NM_cmp_hidden['contacto'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_contacto_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_contacto_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_contacto_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_contacto_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'contacto')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('contacto')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_credito()
@@ -3371,7 +4271,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['credito'])) ? $this->New_label['credito'] : "Credito"; 
    if (!isset($this->NM_cmp_hidden['credito']) || $this->NM_cmp_hidden['credito'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_credito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_credito_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_credito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_credito_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'credito')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('credito')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_cupo()
@@ -3379,7 +4327,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['cupo'])) ? $this->New_label['cupo'] : "Cupo"; 
    if (!isset($this->NM_cmp_hidden['cupo']) || $this->NM_cmp_hidden['cupo'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_cupo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_cupo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_cupo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_cupo_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'cupo')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('cupo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_listaprecios()
@@ -3387,7 +4383,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['listaprecios'])) ? $this->New_label['listaprecios'] : "Listaprecios"; 
    if (!isset($this->NM_cmp_hidden['listaprecios']) || $this->NM_cmp_hidden['listaprecios'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_listaprecios_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_listaprecios_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_listaprecios_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_listaprecios_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'listaprecios')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('listaprecios')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_con_actual()
@@ -3395,7 +4439,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['con_actual'])) ? $this->New_label['con_actual'] : "Con Actual"; 
    if (!isset($this->NM_cmp_hidden['con_actual']) || $this->NM_cmp_hidden['con_actual'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_con_actual_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_con_actual_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_con_actual_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_con_actual_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'con_actual')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('con_actual')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_efec_retencion()
@@ -3403,7 +4495,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['efec_retencion'])) ? $this->New_label['efec_retencion'] : "Efec Retencion"; 
    if (!isset($this->NM_cmp_hidden['efec_retencion']) || $this->NM_cmp_hidden['efec_retencion'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_efec_retencion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_efec_retencion_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_efec_retencion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_efec_retencion_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'efec_retencion')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('efec_retencion')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_urlmail_1()
@@ -3411,7 +4551,67 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['urlmail_1'])) ? $this->New_label['urlmail_1'] : "Urlmail"; 
    if (!isset($this->NM_cmp_hidden['urlmail_1']) || $this->NM_cmp_hidden['urlmail_1'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_urlmail_1_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_urlmail_1_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_urlmail_1_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_urlmail_1_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+      {
+          $NM_cmp_class =  "urlmail";
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+      {
+          $NM_cmp_class =  "urlmail";
+      }
+      else
+      {
+          $NM_cmp_class =  "urlmail_1";
+      }
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == $NM_cmp_class)
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('" . $NM_cmp_class . "')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_nombre1()
@@ -3419,7 +4619,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['nombre1'])) ? $this->New_label['nombre1'] : "Nombre 1"; 
    if (!isset($this->NM_cmp_hidden['nombre1']) || $this->NM_cmp_hidden['nombre1'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nombre1_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nombre1_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nombre1_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nombre1_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'nombre1')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('nombre1')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_nombre2()
@@ -3427,7 +4675,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['nombre2'])) ? $this->New_label['nombre2'] : "Nombre 2"; 
    if (!isset($this->NM_cmp_hidden['nombre2']) || $this->NM_cmp_hidden['nombre2'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nombre2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nombre2_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nombre2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nombre2_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'nombre2')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('nombre2')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_apellido1()
@@ -3435,7 +4731,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['apellido1'])) ? $this->New_label['apellido1'] : "Apellido 1"; 
    if (!isset($this->NM_cmp_hidden['apellido1']) || $this->NM_cmp_hidden['apellido1'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_apellido1_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_apellido1_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_apellido1_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_apellido1_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'apellido1')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('apellido1')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_apellido2()
@@ -3443,7 +4787,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['apellido2'])) ? $this->New_label['apellido2'] : "Apellido 2"; 
    if (!isset($this->NM_cmp_hidden['apellido2']) || $this->NM_cmp_hidden['apellido2'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_apellido2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_apellido2_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_apellido2_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_apellido2_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'apellido2')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('apellido2')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_sucur_cliente()
@@ -3451,7 +4843,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['sucur_cliente'])) ? $this->New_label['sucur_cliente'] : "Sucur Cliente"; 
    if (!isset($this->NM_cmp_hidden['sucur_cliente']) || $this->NM_cmp_hidden['sucur_cliente'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_sucur_cliente_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_sucur_cliente_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_sucur_cliente_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_sucur_cliente_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'sucur_cliente')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('sucur_cliente')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_representante()
@@ -3459,7 +4899,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['representante'])) ? $this->New_label['representante'] : "Representante"; 
    if (!isset($this->NM_cmp_hidden['representante']) || $this->NM_cmp_hidden['representante'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_representante_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_representante_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_representante_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_representante_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'representante')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('representante')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_es_restaurante()
@@ -3467,7 +4955,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['es_restaurante'])) ? $this->New_label['es_restaurante'] : "Es Restaurante"; 
    if (!isset($this->NM_cmp_hidden['es_restaurante']) || $this->NM_cmp_hidden['es_restaurante'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_es_restaurante_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_es_restaurante_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_es_restaurante_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_es_restaurante_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'es_restaurante')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('es_restaurante')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_dias_credito()
@@ -3475,7 +5011,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['dias_credito'])) ? $this->New_label['dias_credito'] : "Dias Credito"; 
    if (!isset($this->NM_cmp_hidden['dias_credito']) || $this->NM_cmp_hidden['dias_credito'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_dias_credito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_dias_credito_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_dias_credito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_dias_credito_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'dias_credito')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('dias_credito')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_dias_mora()
@@ -3483,7 +5067,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['dias_mora'])) ? $this->New_label['dias_mora'] : "Dias Mora"; 
    if (!isset($this->NM_cmp_hidden['dias_mora']) || $this->NM_cmp_hidden['dias_mora'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_dias_mora_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_dias_mora_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_dias_mora_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_dias_mora_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'dias_mora')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('dias_mora')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_cupo_vendedor()
@@ -3491,7 +5123,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['cupo_vendedor'])) ? $this->New_label['cupo_vendedor'] : "Cupo Vendedor"; 
    if (!isset($this->NM_cmp_hidden['cupo_vendedor']) || $this->NM_cmp_hidden['cupo_vendedor'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_cupo_vendedor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_cupo_vendedor_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_cupo_vendedor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_cupo_vendedor_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'cupo_vendedor')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('cupo_vendedor')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_codigo_ter()
@@ -3499,7 +5179,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['codigo_ter'])) ? $this->New_label['codigo_ter'] : "Codigo Ter"; 
    if (!isset($this->NM_cmp_hidden['codigo_ter']) || $this->NM_cmp_hidden['codigo_ter'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_codigo_ter_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_codigo_ter_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_codigo_ter_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_codigo_ter_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'codigo_ter')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('codigo_ter')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_es_cajero()
@@ -3507,7 +5235,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['es_cajero'])) ? $this->New_label['es_cajero'] : "Es Cajero"; 
    if (!isset($this->NM_cmp_hidden['es_cajero']) || $this->NM_cmp_hidden['es_cajero'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_es_cajero_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_es_cajero_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_es_cajero_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_es_cajero_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'es_cajero')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('es_cajero')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_autorizado()
@@ -3515,7 +5291,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['autorizado'])) ? $this->New_label['autorizado'] : "Autorizado"; 
    if (!isset($this->NM_cmp_hidden['autorizado']) || $this->NM_cmp_hidden['autorizado'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_autorizado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_autorizado_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_autorizado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_autorizado_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'autorizado')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('autorizado')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_zona_clientes()
@@ -3523,7 +5347,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['zona_clientes'])) ? $this->New_label['zona_clientes'] : "Zona Clientes"; 
    if (!isset($this->NM_cmp_hidden['zona_clientes']) || $this->NM_cmp_hidden['zona_clientes'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_zona_clientes_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_zona_clientes_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_zona_clientes_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_zona_clientes_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'zona_clientes')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('zona_clientes')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_clasificacion_clientes()
@@ -3531,7 +5403,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['clasificacion_clientes'])) ? $this->New_label['clasificacion_clientes'] : "Clasificacion Clientes"; 
    if (!isset($this->NM_cmp_hidden['clasificacion_clientes']) || $this->NM_cmp_hidden['clasificacion_clientes'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_clasificacion_clientes_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_clasificacion_clientes_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_clasificacion_clientes_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_clasificacion_clientes_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'clasificacion_clientes')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('clasificacion_clientes')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_creado()
@@ -3539,7 +5459,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['creado'])) ? $this->New_label['creado'] : "Creado"; 
    if (!isset($this->NM_cmp_hidden['creado']) || $this->NM_cmp_hidden['creado'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_creado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_creado_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_creado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_creado_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'creado')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('creado')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_disponible()
@@ -3547,7 +5515,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['disponible'])) ? $this->New_label['disponible'] : "Disponible"; 
    if (!isset($this->NM_cmp_hidden['disponible']) || $this->NM_cmp_hidden['disponible'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_disponible_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_disponible_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_disponible_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_disponible_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'disponible')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('disponible')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_id_pedido_tmp()
@@ -3555,7 +5571,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['id_pedido_tmp'])) ? $this->New_label['id_pedido_tmp'] : "Id Pedido Tmp"; 
    if (!isset($this->NM_cmp_hidden['id_pedido_tmp']) || $this->NM_cmp_hidden['id_pedido_tmp'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_id_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_id_pedido_tmp_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_id_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_id_pedido_tmp_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'id_pedido_tmp')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('id_pedido_tmp')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_n_pedido_tmp()
@@ -3563,7 +5627,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['n_pedido_tmp'])) ? $this->New_label['n_pedido_tmp'] : "N Pedido Tmp"; 
    if (!isset($this->NM_cmp_hidden['n_pedido_tmp']) || $this->NM_cmp_hidden['n_pedido_tmp'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_n_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_n_pedido_tmp_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_n_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_n_pedido_tmp_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'n_pedido_tmp')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('n_pedido_tmp')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_total_pedido_tmp()
@@ -3571,7 +5683,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['total_pedido_tmp'])) ? $this->New_label['total_pedido_tmp'] : "Total Pedido Tmp"; 
    if (!isset($this->NM_cmp_hidden['total_pedido_tmp']) || $this->NM_cmp_hidden['total_pedido_tmp'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_total_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_total_pedido_tmp_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_total_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_total_pedido_tmp_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'total_pedido_tmp')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('total_pedido_tmp')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_obs_pedido_tmp()
@@ -3579,7 +5739,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['obs_pedido_tmp'])) ? $this->New_label['obs_pedido_tmp'] : "Obs Pedido Tmp"; 
    if (!isset($this->NM_cmp_hidden['obs_pedido_tmp']) || $this->NM_cmp_hidden['obs_pedido_tmp'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_obs_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_obs_pedido_tmp_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_obs_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_obs_pedido_tmp_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'obs_pedido_tmp')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('obs_pedido_tmp')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_vend_pedido_tmp()
@@ -3587,7 +5795,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['vend_pedido_tmp'])) ? $this->New_label['vend_pedido_tmp'] : "Vend Pedido Tmp"; 
    if (!isset($this->NM_cmp_hidden['vend_pedido_tmp']) || $this->NM_cmp_hidden['vend_pedido_tmp'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_vend_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_vend_pedido_tmp_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_vend_pedido_tmp_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_vend_pedido_tmp_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'vend_pedido_tmp')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('vend_pedido_tmp')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_ciudad()
@@ -3595,7 +5851,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['ciudad'])) ? $this->New_label['ciudad'] : "Ciudad"; 
    if (!isset($this->NM_cmp_hidden['ciudad']) || $this->NM_cmp_hidden['ciudad'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_ciudad_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_ciudad_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_ciudad_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_ciudad_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'ciudad')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('ciudad')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_codigo_postal()
@@ -3603,7 +5907,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['codigo_postal'])) ? $this->New_label['codigo_postal'] : "Codigo Postal"; 
    if (!isset($this->NM_cmp_hidden['codigo_postal']) || $this->NM_cmp_hidden['codigo_postal'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_codigo_postal_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_codigo_postal_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_codigo_postal_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_codigo_postal_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'codigo_postal')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('codigo_postal')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_lenguaje()
@@ -3611,7 +5963,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['lenguaje'])) ? $this->New_label['lenguaje'] : "Lenguaje"; 
    if (!isset($this->NM_cmp_hidden['lenguaje']) || $this->NM_cmp_hidden['lenguaje'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_lenguaje_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_lenguaje_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_lenguaje_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_lenguaje_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'lenguaje')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('lenguaje')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_nombre_comercil()
@@ -3619,7 +6019,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['nombre_comercil'])) ? $this->New_label['nombre_comercil'] : "Nombre Comercil"; 
    if (!isset($this->NM_cmp_hidden['nombre_comercil']) || $this->NM_cmp_hidden['nombre_comercil'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nombre_comercil_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nombre_comercil_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nombre_comercil_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nombre_comercil_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'nombre_comercil')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('nombre_comercil')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_notificar()
@@ -3627,7 +6075,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['notificar'])) ? $this->New_label['notificar'] : "Notificar"; 
    if (!isset($this->NM_cmp_hidden['notificar']) || $this->NM_cmp_hidden['notificar'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_notificar_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_notificar_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_notificar_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_notificar_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'notificar')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('notificar')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_puc_auxiliar_deudores()
@@ -3635,7 +6131,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['puc_auxiliar_deudores'])) ? $this->New_label['puc_auxiliar_deudores'] : "Puc Auxiliar Deudores"; 
    if (!isset($this->NM_cmp_hidden['puc_auxiliar_deudores']) || $this->NM_cmp_hidden['puc_auxiliar_deudores'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_auxiliar_deudores_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_auxiliar_deudores_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_auxiliar_deudores_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_auxiliar_deudores_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'puc_auxiliar_deudores')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('puc_auxiliar_deudores')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_puc_retefuente_ventas()
@@ -3643,7 +6187,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['puc_retefuente_ventas'])) ? $this->New_label['puc_retefuente_ventas'] : "Puc Retefuente Ventas"; 
    if (!isset($this->NM_cmp_hidden['puc_retefuente_ventas']) || $this->NM_cmp_hidden['puc_retefuente_ventas'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_retefuente_ventas_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_retefuente_ventas_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_retefuente_ventas_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_retefuente_ventas_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'puc_retefuente_ventas')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('puc_retefuente_ventas')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_puc_retefuente_servicios_clie()
@@ -3651,7 +6243,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['puc_retefuente_servicios_clie'])) ? $this->New_label['puc_retefuente_servicios_clie'] : "Puc Retefuente Servicios Clie"; 
    if (!isset($this->NM_cmp_hidden['puc_retefuente_servicios_clie']) || $this->NM_cmp_hidden['puc_retefuente_servicios_clie'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_retefuente_servicios_clie_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_retefuente_servicios_clie_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_retefuente_servicios_clie_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_retefuente_servicios_clie_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'puc_retefuente_servicios_clie')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('puc_retefuente_servicios_clie')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_puc_auxiliar_proveedores()
@@ -3659,7 +6299,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['puc_auxiliar_proveedores'])) ? $this->New_label['puc_auxiliar_proveedores'] : "Puc Auxiliar Proveedores"; 
    if (!isset($this->NM_cmp_hidden['puc_auxiliar_proveedores']) || $this->NM_cmp_hidden['puc_auxiliar_proveedores'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_auxiliar_proveedores_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_auxiliar_proveedores_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_auxiliar_proveedores_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_auxiliar_proveedores_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'puc_auxiliar_proveedores')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('puc_auxiliar_proveedores')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_puc_retefuente_compras()
@@ -3667,7 +6355,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['puc_retefuente_compras'])) ? $this->New_label['puc_retefuente_compras'] : "Puc Retefuente Compras"; 
    if (!isset($this->NM_cmp_hidden['puc_retefuente_compras']) || $this->NM_cmp_hidden['puc_retefuente_compras'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_retefuente_compras_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_retefuente_compras_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_retefuente_compras_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_retefuente_compras_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'puc_retefuente_compras')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('puc_retefuente_compras')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_puc_retefuente_servicios_prov()
@@ -3675,7 +6411,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['puc_retefuente_servicios_prov'])) ? $this->New_label['puc_retefuente_servicios_prov'] : "Puc Retefuente Servicios Prov"; 
    if (!isset($this->NM_cmp_hidden['puc_retefuente_servicios_prov']) || $this->NM_cmp_hidden['puc_retefuente_servicios_prov'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_retefuente_servicios_prov_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_retefuente_servicios_prov_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_puc_retefuente_servicios_prov_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_puc_retefuente_servicios_prov_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'puc_retefuente_servicios_prov')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('puc_retefuente_servicios_prov')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_nube()
@@ -3683,7 +6467,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['nube'])) ? $this->New_label['nube'] : "Nube"; 
    if (!isset($this->NM_cmp_hidden['nube']) || $this->NM_cmp_hidden['nube'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nube_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nube_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_nube_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_nube_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'nube')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('nube')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_tipo_documento()
@@ -3691,7 +6523,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['tipo_documento'])) ? $this->New_label['tipo_documento'] : "Tipo Documento"; 
    if (!isset($this->NM_cmp_hidden['tipo_documento']) || $this->NM_cmp_hidden['tipo_documento'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tipo_documento_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tipo_documento_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tipo_documento_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tipo_documento_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'tipo_documento')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('tipo_documento')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_estado()
@@ -3699,7 +6579,55 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['estado'])) ? $this->New_label['estado'] : "Estado"; 
    if (!isset($this->NM_cmp_hidden['estado']) || $this->NM_cmp_hidden['estado'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_estado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_estado_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_estado_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_estado_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_cmp'] == 'estado')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('estado')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
    } 
  }
  function NM_label_facturas()
@@ -3883,11 +6811,6 @@ $nm_saida->saida("}\r\n");
    if (!$this->grid_emb_form && isset($_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['lig_edit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['lig_edit'] != '')
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['mostra_edit'] = $_SESSION['scriptcase']['sc_apl_conf']['grid_terceros_todos']['lig_edit'];
-   }
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['ajax_nav'] && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_refresh']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_refresh'])
-   {
-       $this->refresh_interativ_search();
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_refresh'] = false;
    }
    if (!empty($this->nm_grid_sem_reg))
    {
@@ -8732,1008 +11655,6 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
         }
         return $str_value;
     }
-   function html_interativ_search()
-   {
-       global $nm_saida;
-       $bol_refin_use_modal = true;
-       if($_SESSION['scriptcase']['proc_mobile'])
-       {
-           $bol_refin_use_modal = false;
-       }
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label'] = array();
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_dados']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_dados'] = array();
-       }
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_sql']   = array();
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'] = array();
-       }
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['empleado'] = (isset($this->New_label['empleado'])) ? $this->New_label['empleado'] : 'Empleado';
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_sql']['empleado']   = "empleado";
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['proveedor'] = (isset($this->New_label['proveedor'])) ? $this->New_label['proveedor'] : 'Proveedor';
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_sql']['proveedor']   = "proveedor";
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['cliente'] = (isset($this->New_label['cliente'])) ? $this->New_label['cliente'] : 'Cliente';
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_sql']['cliente']   = "cliente";
-       $tb_disp = (empty($this->nm_grid_sem_reg)) ? '' : 'none';
-       $nm_saida->saida("     <script>\r\n");
-       $nm_saida->saida("         var Tab_obj_int_mult = {};\r\n");
-       $nm_saida->saida("     </script>\r\n");
-       $nm_saida->saida(" <table id=\"TB_Interativ_Search\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top; width: 100%; display:" . $tb_disp . ";\" valign=\"top\" cellspacing=0 cellpadding=0>\r\n");
-       $nm_saida->saida("   <tr id=\"NM_Interativ_Search\">\r\n");
-       $nm_saida->saida("   <td valign=\"top\"> \r\n");
-       $nm_saida->saida("    <form id= \"id_Interat_search\" name=\"FInterat_search\" method=\"post\" action=\"./\" target=\"_self\"> \r\n");
-       $nm_saida->saida("     <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
-       $nm_saida->saida("     <input type=\"hidden\" name=\"nmgp_opcao\" value=\"interativ_search\"/> \r\n");
-       $nm_saida->saida("     <input type=\"hidden\" name=\"parm\" value=\"\"/> \r\n");
-       $nm_saida->saida("    <div id='id_div_interativ_search' class='is-closed'>\r\n");
-           $disp_btn_collapse = 'none'; 
-           if('S' == 'S') 
-           { 
-               $disp_btn_collapse = ''; 
-           } 
-$nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSearchCollapse' style='display: " . $disp_btn_collapse . "' onclick='nm_proc_int_search_toggle(false);'><i class='icon_fa " . $this->Ini->scGridRefinedSearchCollapseFAIcon . "'></i></div> \r\n");
-       $nm_saida->saida("        <div id='id_div_interativ_search_content' class='scGridRefinedSearchMoldura' style='min-width:120px;'>\r\n");
-       $nm_saida->saida("            <div id='id_div_interativ_search_fields'>\r\n");
-       $lin_obj = $this->interativ_search_empleado($bol_refin_use_modal);
-       $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_proveedor($bol_refin_use_modal);
-       $nm_saida->saida("" . $lin_obj . "\r\n");
-       $lin_obj = $this->interativ_search_cliente($bol_refin_use_modal);
-       $nm_saida->saida("" . $lin_obj . "\r\n");
-       $nm_saida->saida("            </div>\r\n");
-       $nm_saida->saida("        </div>\r\n");
-       $nm_saida->saida("    </div>\r\n");
-       $nm_saida->saida("    </form>\r\n");
-       $nm_saida->saida("   </td>\r\n");
-       $nm_saida->saida("   </tr>\r\n");
-       $nm_saida->saida(" </table>\r\n");
-       $this->JS_interativ_search();
-       $nm_saida->saida(" <SCRIPT LANGUAGE=\"Javascript\" SRC=\"" . $this->Ini->path_js . "/nm_format_num.js\"></SCRIPT>\r\n");
-   }
-   function refresh_interativ_search()
-   {
-       $bol_refin_use_modal = true;
-       if($_SESSION['scriptcase']['proc_mobile'])
-       {
-           $bol_refin_use_modal = false;
-       }
-       $array_fields = array();
-       $array_fields[] = "empleado";
-       $array_fields[] = "proveedor";
-       $array_fields[] = "cliente";
-       if(is_array($array_fields) && !empty($array_fields))
-       {
-           $arr_new = [];
-           foreach($array_fields as $key => $str_field)
-           {
-               if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search'][$str_field]))
-               {
-                   unset($array_fields[ $key ]);
-                   $arr_new[] = $str_field;
-               }
-           }
-           $array_fields = array_merge($arr_new, $array_fields);
-           $str_out = "";
-           foreach($array_fields as $str_field)
-           {
-               $method = "interativ_search_" . $str_field;
-               $str_out .= $this->$method($bol_refin_use_modal);
-           }
-           $this->Ini->Arr_result['setValue'][] = array('field' => 'id_div_interativ_search_fields', 'value' => NM_charset_to_utf8($str_out));
-       }
-   }
-   function interativ_search_empleado($bol_refin_use_modal)
-   {
-       $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']["empleado"])) ? "" : "none";
-       $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']["empleado"])) ? "none" : "";
-       $displ_open= false;
-       $lin_obj  = "    <div id=\"div_int_empleado\">";
-       $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
-       $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('empleado')\">";
-       $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
-       $lin_obj .= "         <tr>";
-       $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_empleado\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
-       $lin_obj .= "              <span id=\"id_retract_empleado\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
-       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
-       $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['empleado'];
-       $lin_obj .= "              </span>";
-       $lin_obj .= "          </td>";
-       $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_empleado\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','empleado', '', 'empleado', '', 'S')\"/>   </span>";
-       $lin_obj .= "          </td>";
-       $lin_obj .= "         </tr>";
-       $lin_obj .= "        </table>";
-       $lin_obj .= "     </td></tr>";
-       $Cmps_where = "";
-       $nm_comando = "select empleado, COUNT(*) AS countTest from " . $this->Ini->nm_tabela;
-       $tmp_where = "";
-       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq']))
-       {
-           $tmp_where = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'];
-       }
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo'])) 
-       { 
-           if (empty($tmp_where)) 
-           { 
-               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo']; 
-           } 
-           else
-           { 
-               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo'] . ")"; 
-           } 
-       } 
-       $nm_comando .= " " . $tmp_where;
-       $nm_comando .= " GROUP BY empleado". $Cmps_where;
-       $nm_comando .= " order by empleado ASC";
-       $result = array();
-       $range_max = false;
-       $range_min = false;
-       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-       if ($RSI = $this->Db->Execute($nm_comando))
-       {
-           while (!$RSI->EOF) 
-           { 
-              if($RSI->fields[0] == '')
-              {
-                  if(isset($result[ $RSI->fields[0] ]))
-                  {
-                    $result[ $RSI->fields[0] ] += $RSI->fields[1];
-                  }
-                  else
-                  {
-                    $result[ $RSI->fields[0] ] = $RSI->fields[1];
-                  }
-              }
-              else
-              {
-              $result[$RSI->fields[0]] = $RSI->fields[1];
-              }
-              if($range_max === false || $RSI->fields[0] > $range_max)
-              {
-                  $range_max = $RSI->fields[0];
-              }
-              if($range_min === false || $RSI->fields[0] < $range_min)
-              {
-                  $range_min = $RSI->fields[0];
-              }
-              $RSI->MoveNext() ;
-           }  
-           $RSI->Close(); 
-       }
-       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
-       { 
-           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-           exit; 
-       } 
-       $lin_mult  = "";
-       $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['empleado'])) ? "" : "none";
-       $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_empleado_link\" style=\"display: " . $disp_link . ";\">";
-        $check_uncheck  = "
-            <span id='id_check_empleado' class='multipleempleado' style='display:" . (($displ_open)?'':'none') . ";'>
-                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox' checked='checked' onclick=\"refinedSearchCheckUncheckAll('empleado', true); this.checked=true;\" \>
-                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox'                   onclick=\"refinedSearchCheckUncheckAll('empleado', false); this.checked=false;\" \>
-            </span>";
-       $qtd_see_more  = 0;
-       $qtd_result_see_more  = 0;
-       $bol_open_see_more  = false;
-       if($bol_refin_use_modal)
-       {
-           $bol_populate_modal_values = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_dados']['empleado'])?false:true);
-       }
-       foreach ($result as $dados => $qtd_result)
-       {
-           $formatado = $dados;
-           $formatado_exib  = $formatado;
-           $dados = (string)$dados;
-           if($bol_refin_use_modal && $bol_populate_modal_values)
-           {
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_dados']['empleado'][$dados] = array('val'=>$formatado,'qtd'=>$qtd_result);
-           }
-           if($dados == '')
-           {
-               $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
-           }
-           $veja_mais_link  = '';
-           $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
-           if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
-           {
-               $lin_obj  .= "   <div id='id_see_more_list_empleado' style='display:none'>";
-               $bol_open_see_more  = true;
-           }
-           $on_mouse_over= "";
-           $on_mouse_out = "";
-           if(empty($disp_link))
-           {
-               $on_mouse_over= "$(this).find('img').css('opacity', 1);";
-               $on_mouse_out = "$(this).find('img').css('opacity', 0);";
-           }
-           $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
-           $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
-           $lin_obj  .= "   <tr>";
-           $lin_obj  .= "   <td>";
-           $lin_obj  .= "   <span class='simpleempleado' style='display:" . (($displ_open)?'none':'') . ";'>";
-           if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['empleado']))
-           {
-               $lin_obj  .= "        <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear_opc', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['empleado']) . "','empleado','id_int_search_empleado','empleado', '" . NM_encode_input($dados . "##@@" . $formatado) . "', 'S');\"/>";
-           }
-           $lin_obj  .= "        <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['empleado']) . "','empleado','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'empleado', '', 'N');\" class='scGridRefinedSearchCampoFont'>";
-           $lin_obj  .= $formatado_exib;
-           if(!empty($veja_mais_link))
-           {
-               $lin_obj  .= "            <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_obj  .= "        </a>";
-           $lin_obj  .= "    </span>";
-           $lin_obj  .= "    <span class='multipleempleado' style='display:"  . (($displ_open)?'':'none') .  ";'>";
-           $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['empleado']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['empleado']['val_sel'])) ? " checked" : "";
-           $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_empleado_" . md5($dados) . "\" name=\"int_search_empleado[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_empleado_". md5($dados) ."\" for=\"id_int_search_empleado_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
-           if(!empty($veja_mais_link))
-           {
-               $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_obj  .= "    </span>";
-           $lin_obj  .= "   </td>";
-           $lin_obj  .= "    </tr>";
-           $lin_obj  .= "   </table>";
-           $lin_obj  .= "   </div>";
-           $qtd_result_see_more++;
-       }
-           $displ_see_more = false;
-           if($bol_open_see_more)
-           {
-               $lin_obj  .= "   </div>";
-               $displ_see_more = true;
-           }
-           if($bol_refin_use_modal)
-           {
-               $displ_see_more = true;
-           }
-           $lin_obj  .= "   <div id='id_see_more_empleado' class='scGridRefinedSearchVejaMais'>";
-           $lin_obj  .= "       " . $check_uncheck;
-           if($bol_refin_use_modal)
-           {
-               $lin_obj  .= "       <a href=\"javascript:tb_show('', 'grid_terceros_todos_refin_modal.php?sc_init=" . NM_encode_input($this->Ini->sc_page) . "&cmp_modal=empleado&tp_obj=tx&TB_iframe=true&modal=true&height=440&width=630', '');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-           }
-           else
-           {
-               $lin_obj  .= "       <a style='display:" . (($displ_see_more)?'':'none') . ";'  href=\"javascript:toggleSeeMore('empleado');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-           }
-           $lin_obj  .= "   </div>";
-           $lin_obj  .= "   <div id='id_see_less_empleado' class='scGridRefinedSearchVejaMais' style='display:none;'>";
-           $lin_obj  .= "   " . $check_uncheck;
-           $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('empleado');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
-           $lin_obj  .= "   </div>";
-      $lin_obj  .= "<SCRIPT>
-";
-      $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "});";
-      $lin_obj  .= "</SCRIPT>";
-       $lin_obj  .= "   </div></td></tr>";
-       {
-           $lin_obj .= "    <tr class='toolbarFields'>";
-           $lin_obj .= "    <td style='display:'>";
-           $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_empleado\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('empleado', false);", "nm_mult_int_search('empleado', false);", "mult_int_search_empleado", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $disp_multi_btn = 'none';
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['empleado']) . "','empleado','id_int_search_empleado','empleado', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['empleado']) . "','empleado','id_int_search_empleado','empleado', '', 'N');", "app_int_search_empleado", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('empleado');", "nm_single_int_search('empleado');", "single_int_search_empleado", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $lin_obj .= "    </div>";
-       }
-       $lin_obj .= "    </td>";
-       $lin_obj .= "    </tr>";
-       $lin_obj .= "    </table>";
-       $lin_obj .= "    </div>";
-       return $lin_obj;
-   }
-   function interativ_search_proveedor($bol_refin_use_modal)
-   {
-       $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']["proveedor"])) ? "" : "none";
-       $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']["proveedor"])) ? "none" : "";
-       $displ_open= false;
-       $lin_obj  = "    <div id=\"div_int_proveedor\">";
-       $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
-       $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('proveedor')\">";
-       $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
-       $lin_obj .= "         <tr>";
-       $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_proveedor\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
-       $lin_obj .= "              <span id=\"id_retract_proveedor\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
-       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
-       $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['proveedor'];
-       $lin_obj .= "              </span>";
-       $lin_obj .= "          </td>";
-       $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_proveedor\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','proveedor', '', 'proveedor', '', 'S')\"/>   </span>";
-       $lin_obj .= "          </td>";
-       $lin_obj .= "         </tr>";
-       $lin_obj .= "        </table>";
-       $lin_obj .= "     </td></tr>";
-       $Cmps_where = "";
-       $nm_comando = "select proveedor, COUNT(*) AS countTest from " . $this->Ini->nm_tabela;
-       $tmp_where = "";
-       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq']))
-       {
-           $tmp_where = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'];
-       }
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo'])) 
-       { 
-           if (empty($tmp_where)) 
-           { 
-               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo']; 
-           } 
-           else
-           { 
-               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo'] . ")"; 
-           } 
-       } 
-       $nm_comando .= " " . $tmp_where;
-       $nm_comando .= " GROUP BY proveedor". $Cmps_where;
-       $nm_comando .= " order by proveedor ASC";
-       $result = array();
-       $range_max = false;
-       $range_min = false;
-       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-       if ($RSI = $this->Db->Execute($nm_comando))
-       {
-           while (!$RSI->EOF) 
-           { 
-              if($RSI->fields[0] == '')
-              {
-                  if(isset($result[ $RSI->fields[0] ]))
-                  {
-                    $result[ $RSI->fields[0] ] += $RSI->fields[1];
-                  }
-                  else
-                  {
-                    $result[ $RSI->fields[0] ] = $RSI->fields[1];
-                  }
-              }
-              else
-              {
-              $result[$RSI->fields[0]] = $RSI->fields[1];
-              }
-              if($range_max === false || $RSI->fields[0] > $range_max)
-              {
-                  $range_max = $RSI->fields[0];
-              }
-              if($range_min === false || $RSI->fields[0] < $range_min)
-              {
-                  $range_min = $RSI->fields[0];
-              }
-              $RSI->MoveNext() ;
-           }  
-           $RSI->Close(); 
-       }
-       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
-       { 
-           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-           exit; 
-       } 
-       $lin_mult  = "";
-       $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['proveedor'])) ? "" : "none";
-       $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_proveedor_link\" style=\"display: " . $disp_link . ";\">";
-        $check_uncheck  = "
-            <span id='id_check_proveedor' class='multipleproveedor' style='display:" . (($displ_open)?'':'none') . ";'>
-                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox' checked='checked' onclick=\"refinedSearchCheckUncheckAll('proveedor', true); this.checked=true;\" \>
-                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox'                   onclick=\"refinedSearchCheckUncheckAll('proveedor', false); this.checked=false;\" \>
-            </span>";
-       $qtd_see_more  = 0;
-       $qtd_result_see_more  = 0;
-       $bol_open_see_more  = false;
-       if($bol_refin_use_modal)
-       {
-           $bol_populate_modal_values = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_dados']['proveedor'])?false:true);
-       }
-       foreach ($result as $dados => $qtd_result)
-       {
-           $formatado = $dados;
-           $formatado_exib  = $formatado;
-           $dados = (string)$dados;
-           if($bol_refin_use_modal && $bol_populate_modal_values)
-           {
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_dados']['proveedor'][$dados] = array('val'=>$formatado,'qtd'=>$qtd_result);
-           }
-           if($dados == '')
-           {
-               $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
-           }
-           $veja_mais_link  = '';
-           $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
-           if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
-           {
-               $lin_obj  .= "   <div id='id_see_more_list_proveedor' style='display:none'>";
-               $bol_open_see_more  = true;
-           }
-           $on_mouse_over= "";
-           $on_mouse_out = "";
-           if(empty($disp_link))
-           {
-               $on_mouse_over= "$(this).find('img').css('opacity', 1);";
-               $on_mouse_out = "$(this).find('img').css('opacity', 0);";
-           }
-           $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
-           $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
-           $lin_obj  .= "   <tr>";
-           $lin_obj  .= "   <td>";
-           $lin_obj  .= "   <span class='simpleproveedor' style='display:" . (($displ_open)?'none':'') . ";'>";
-           if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['proveedor']))
-           {
-               $lin_obj  .= "        <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear_opc', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['proveedor']) . "','proveedor','id_int_search_proveedor','proveedor', '" . NM_encode_input($dados . "##@@" . $formatado) . "', 'S');\"/>";
-           }
-           $lin_obj  .= "        <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['proveedor']) . "','proveedor','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'proveedor', '', 'N');\" class='scGridRefinedSearchCampoFont'>";
-           $lin_obj  .= $formatado_exib;
-           if(!empty($veja_mais_link))
-           {
-               $lin_obj  .= "            <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_obj  .= "        </a>";
-           $lin_obj  .= "    </span>";
-           $lin_obj  .= "    <span class='multipleproveedor' style='display:"  . (($displ_open)?'':'none') .  ";'>";
-           $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['proveedor']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['proveedor']['val_sel'])) ? " checked" : "";
-           $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_proveedor_" . md5($dados) . "\" name=\"int_search_proveedor[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_proveedor_". md5($dados) ."\" for=\"id_int_search_proveedor_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
-           if(!empty($veja_mais_link))
-           {
-               $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_obj  .= "    </span>";
-           $lin_obj  .= "   </td>";
-           $lin_obj  .= "    </tr>";
-           $lin_obj  .= "   </table>";
-           $lin_obj  .= "   </div>";
-           $qtd_result_see_more++;
-       }
-           $displ_see_more = false;
-           if($bol_open_see_more)
-           {
-               $lin_obj  .= "   </div>";
-               $displ_see_more = true;
-           }
-           if($bol_refin_use_modal)
-           {
-               $displ_see_more = true;
-           }
-           $lin_obj  .= "   <div id='id_see_more_proveedor' class='scGridRefinedSearchVejaMais'>";
-           $lin_obj  .= "       " . $check_uncheck;
-           if($bol_refin_use_modal)
-           {
-               $lin_obj  .= "       <a href=\"javascript:tb_show('', 'grid_terceros_todos_refin_modal.php?sc_init=" . NM_encode_input($this->Ini->sc_page) . "&cmp_modal=proveedor&tp_obj=tx&TB_iframe=true&modal=true&height=440&width=630', '');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-           }
-           else
-           {
-               $lin_obj  .= "       <a style='display:" . (($displ_see_more)?'':'none') . ";'  href=\"javascript:toggleSeeMore('proveedor');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-           }
-           $lin_obj  .= "   </div>";
-           $lin_obj  .= "   <div id='id_see_less_proveedor' class='scGridRefinedSearchVejaMais' style='display:none;'>";
-           $lin_obj  .= "   " . $check_uncheck;
-           $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('proveedor');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
-           $lin_obj  .= "   </div>";
-      $lin_obj  .= "<SCRIPT>
-";
-      $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "});";
-      $lin_obj  .= "</SCRIPT>";
-       $lin_obj  .= "   </div></td></tr>";
-       {
-           $lin_obj .= "    <tr class='toolbarFields'>";
-           $lin_obj .= "    <td style='display:'>";
-           $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_proveedor\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('proveedor', false);", "nm_mult_int_search('proveedor', false);", "mult_int_search_proveedor", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $disp_multi_btn = 'none';
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['proveedor']) . "','proveedor','id_int_search_proveedor','proveedor', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['proveedor']) . "','proveedor','id_int_search_proveedor','proveedor', '', 'N');", "app_int_search_proveedor", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('proveedor');", "nm_single_int_search('proveedor');", "single_int_search_proveedor", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $lin_obj .= "    </div>";
-       }
-       $lin_obj .= "    </td>";
-       $lin_obj .= "    </tr>";
-       $lin_obj .= "    </table>";
-       $lin_obj .= "    </div>";
-       return $lin_obj;
-   }
-   function interativ_search_cliente($bol_refin_use_modal)
-   {
-       $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']["cliente"])) ? "" : "none";
-       $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']["cliente"])) ? "none" : "";
-       $displ_open= false;
-       $lin_obj  = "    <div id=\"div_int_cliente\">";
-       $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
-       $lin_obj .= "     <tr>";
-       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel' onclick=\"nm_toggle_int_search('cliente')\">";
-       $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
-       $lin_obj .= "         <tr>";
-       $lin_obj .= "          <td nowrap>";
-       $lin_obj .= "              <span id=\"id_expand_cliente\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" />   </span>";
-       $lin_obj .= "              <span id=\"id_retract_cliente\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" />   </span>";
-       $lin_obj .= "              <span class=\"dn-expand-button\" style=\"cursor: pointer;\">";
-       $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['cliente'];
-       $lin_obj .= "              </span>";
-       $lin_obj .= "          </td>";
-       $lin_obj .= "          <td align='right'>";
-       $lin_obj .= "              <span id=\"id_clear_cliente\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"event.stopPropagation(); nm_proc_int_search('clear','','','cliente', '', 'cliente', '', 'S')\"/>   </span>";
-       $lin_obj .= "          </td>";
-       $lin_obj .= "         </tr>";
-       $lin_obj .= "        </table>";
-       $lin_obj .= "     </td></tr>";
-       $Cmps_where = "";
-       $nm_comando = "select cliente, COUNT(*) AS countTest from " . $this->Ini->nm_tabela;
-       $tmp_where = "";
-       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq']))
-       {
-           $tmp_where = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_pesq'];
-       }
-       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo'])) 
-       { 
-           if (empty($tmp_where)) 
-           { 
-               $tmp_where = "where " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo']; 
-           } 
-           else
-           { 
-               $tmp_where .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['where_resumo'] . ")"; 
-           } 
-       } 
-       $nm_comando .= " " . $tmp_where;
-       $nm_comando .= " GROUP BY cliente". $Cmps_where;
-       $nm_comando .= " order by cliente ASC";
-       $result = array();
-       $range_max = false;
-       $range_min = false;
-       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-       if ($RSI = $this->Db->Execute($nm_comando))
-       {
-           while (!$RSI->EOF) 
-           { 
-              if($RSI->fields[0] == '')
-              {
-                  if(isset($result[ $RSI->fields[0] ]))
-                  {
-                    $result[ $RSI->fields[0] ] += $RSI->fields[1];
-                  }
-                  else
-                  {
-                    $result[ $RSI->fields[0] ] = $RSI->fields[1];
-                  }
-              }
-              else
-              {
-              $result[$RSI->fields[0]] = $RSI->fields[1];
-              }
-              if($range_max === false || $RSI->fields[0] > $range_max)
-              {
-                  $range_max = $RSI->fields[0];
-              }
-              if($range_min === false || $RSI->fields[0] < $range_min)
-              {
-                  $range_min = $RSI->fields[0];
-              }
-              $RSI->MoveNext() ;
-           }  
-           $RSI->Close(); 
-       }
-       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
-       { 
-           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-           exit; 
-       } 
-       $lin_mult  = "";
-       $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['cliente'])) ? "" : "none";
-       $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_cliente_link\" style=\"display: " . $disp_link . ";\">";
-        $check_uncheck  = "
-            <span id='id_check_cliente' class='multiplecliente' style='display:" . (($displ_open)?'':'none') . ";'>
-                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox' checked='checked' onclick=\"refinedSearchCheckUncheckAll('cliente', true); this.checked=true;\" \>
-                <input class='scAppDivToolbarInput' style='margin:0px' type='checkbox'                   onclick=\"refinedSearchCheckUncheckAll('cliente', false); this.checked=false;\" \>
-            </span>";
-       $qtd_see_more  = 0;
-       $qtd_result_see_more  = 0;
-       $bol_open_see_more  = false;
-       if($bol_refin_use_modal)
-       {
-           $bol_populate_modal_values = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_dados']['cliente'])?false:true);
-       }
-       foreach ($result as $dados => $qtd_result)
-       {
-           $formatado = $dados;
-           $formatado_exib  = $formatado;
-           $dados = (string)$dados;
-           if($bol_refin_use_modal && $bol_populate_modal_values)
-           {
-               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_dados']['cliente'][$dados] = array('val'=>$formatado,'qtd'=>$qtd_result);
-           }
-           if($dados == '')
-           {
-               $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
-           }
-           $veja_mais_link  = '';
-           $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
-           if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
-           {
-               $lin_obj  .= "   <div id='id_see_more_list_cliente' style='display:none'>";
-               $bol_open_see_more  = true;
-           }
-           $on_mouse_over= "";
-           $on_mouse_out = "";
-           if(empty($disp_link))
-           {
-               $on_mouse_over= "$(this).find('img').css('opacity', 1);";
-               $on_mouse_out = "$(this).find('img').css('opacity', 0);";
-           }
-           $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
-           $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
-           $lin_obj  .= "   <tr>";
-           $lin_obj  .= "   <td>";
-           $lin_obj  .= "   <span class='simplecliente' style='display:" . (($displ_open)?'none':'') . ";'>";
-           if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['cliente']))
-           {
-               $lin_obj  .= "        <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear_opc', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['cliente']) . "','cliente','id_int_search_cliente','cliente', '" . NM_encode_input($dados . "##@@" . $formatado) . "', 'S');\"/>";
-           }
-           $lin_obj  .= "        <a href=\"javascript:nm_proc_int_search('link','tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['cliente']) . "','cliente','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'cliente', '', 'N');\" class='scGridRefinedSearchCampoFont'>";
-           $lin_obj  .= $formatado_exib;
-           if(!empty($veja_mais_link))
-           {
-               $lin_obj  .= "            <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_obj  .= "        </a>";
-           $lin_obj  .= "    </span>";
-           $lin_obj  .= "    <span class='multiplecliente' style='display:"  . (($displ_open)?'':'none') .  ";'>";
-           $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['cliente']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['interativ_search']['cliente']['val_sel'])) ? " checked" : "";
-           $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_cliente_" . md5($dados) . "\" name=\"int_search_cliente[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_cliente_". md5($dados) ."\" for=\"id_int_search_cliente_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
-           if(!empty($veja_mais_link))
-           {
-               $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
-           }
-           $lin_obj  .= "    </span>";
-           $lin_obj  .= "   </td>";
-           $lin_obj  .= "    </tr>";
-           $lin_obj  .= "   </table>";
-           $lin_obj  .= "   </div>";
-           $qtd_result_see_more++;
-       }
-           $displ_see_more = false;
-           if($bol_open_see_more)
-           {
-               $lin_obj  .= "   </div>";
-               $displ_see_more = true;
-           }
-           if($bol_refin_use_modal)
-           {
-               $displ_see_more = true;
-           }
-           $lin_obj  .= "   <div id='id_see_more_cliente' class='scGridRefinedSearchVejaMais'>";
-           $lin_obj  .= "       " . $check_uncheck;
-           if($bol_refin_use_modal)
-           {
-               $lin_obj  .= "       <a href=\"javascript:tb_show('', 'grid_terceros_todos_refin_modal.php?sc_init=" . NM_encode_input($this->Ini->sc_page) . "&cmp_modal=cliente&tp_obj=tx&TB_iframe=true&modal=true&height=440&width=630', '');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-           }
-           else
-           {
-               $lin_obj  .= "       <a style='display:" . (($displ_see_more)?'':'none') . ";'  href=\"javascript:toggleSeeMore('cliente');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
-           }
-           $lin_obj  .= "   </div>";
-           $lin_obj  .= "   <div id='id_see_less_cliente' class='scGridRefinedSearchVejaMais' style='display:none;'>";
-           $lin_obj  .= "   " . $check_uncheck;
-           $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('cliente');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
-           $lin_obj  .= "   </div>";
-      $lin_obj  .= "<SCRIPT>
-";
-      $lin_obj  .= "$( document ).ready(function() {";
-      $lin_obj  .= "});";
-      $lin_obj  .= "</SCRIPT>";
-       $lin_obj  .= "   </div></td></tr>";
-       {
-           $lin_obj .= "    <tr class='toolbarFields'>";
-           $lin_obj .= "    <td style='display:'>";
-           $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_cliente\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('cliente', false);", "nm_mult_int_search('cliente', false);", "mult_int_search_cliente", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $disp_multi_btn = 'none';
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['cliente']) . "','cliente','id_int_search_cliente','cliente', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['int_search_label']['cliente']) . "','cliente','id_int_search_cliente','cliente', '', 'N');", "app_int_search_cliente", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('cliente');", "nm_single_int_search('cliente');", "single_int_search_cliente", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $lin_obj .= "    </div>";
-       }
-       $lin_obj .= "    </td>";
-       $lin_obj .= "    </tr>";
-       $lin_obj .= "    </table>";
-       $lin_obj .= "    </div>";
-       return $lin_obj;
-   }
-   function JS_interativ_search()
-   {
-       global $nm_saida;
-       $nm_saida->saida("   <script type=\"text/javascript\">\r\n");
-       $nm_saida->saida("     function toggleSeeMore(obj_id)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         if($('#id_see_less_'+obj_id).css('display') == 'none')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             $('#id_see_more_list_'+obj_id).slideDown();\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         else\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             $('#id_see_more_list_'+obj_id).slideUp();\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         $('#id_see_less_'+obj_id).toggle();\r\n");
-       $nm_saida->saida("         $('#id_see_more_'+obj_id).toggle();\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     var int_search_load_html = 'S';\r\n");
-       $nm_saida->saida("     function nm_proc_int_search_all()\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         int_search_load_html = 'N';\r\n");
-       $nm_saida->saida("     if($( \"#id_slider_empleado\").length > 0)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#app_int_search_range_empleado').click();\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     else if($( \"input[name='int_search_empleado[]']:checked\" ).length > 0)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#app_int_search_empleado').click();\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     else\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         nm_proc_int_search('clear','','','empleado', '', 'empleado', '', 'S');\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     if($( \"#id_slider_proveedor\").length > 0)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#app_int_search_range_proveedor').click();\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     else if($( \"input[name='int_search_proveedor[]']:checked\" ).length > 0)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#app_int_search_proveedor').click();\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     else\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         nm_proc_int_search('clear','','','proveedor', '', 'proveedor', '', 'S');\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("         int_search_load_html = 'S';\r\n");
-       $nm_saida->saida("     if($( \"#id_slider_cliente\").length > 0)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#app_int_search_range_cliente').click();\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     else if($( \"input[name='int_search_cliente[]']:checked\" ).length > 0)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('#app_int_search_cliente').click();\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     else\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         nm_proc_int_search('clear','','','cliente', '', 'cliente', '', 'S');\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_proc_int_clear_all()\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         nm_proc_int_search('clear_all','','','', '', '', '', 'S');\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_proc_int_search(tp_link, tp_obj, label, nam_db, val_obj, obj_id, val_atual, refresh)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         while (label.lastIndexOf(\"__sasp__\") != -1)\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("           label = label.replace(\"__sasp__\" , \"'\");\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         while (nam_db.lastIndexOf(\"__sasp__\") != -1)\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("           nam_db = nam_db.replace(\"__sasp__\" , \"'\");\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         while (label.lastIndexOf(\"__dasp__\") != -1)\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("           label = label.replace(\"__dasp__\" , '\"');\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         while (nam_db.lastIndexOf(\"__dasp__\") != -1)\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("           nam_db = nam_db.replace(\"__dasp__\" , '\"');\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         var out_int = nam_db + '__DL__' + label + '__DL__' + tp_obj + '__DL__';\r\n");
-       $nm_saida->saida("         if (tp_link == 'clear_all')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             out_int += 'clear_interativ_all';\r\n");
-       $nm_saida->saida("             Tab_obj_int_mult = {};\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         if (tp_link == 'clear')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             out_int += 'clear_interativ';\r\n");
-       $nm_saida->saida("             Tab_obj_int_mult[ obj_id ] = 'N';\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         if (tp_link == 'clear_opc')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             result = int_search_get_checkbox(obj_id, val_atual);\r\n");
-       $nm_saida->saida("             if (result != '') {\r\n");
-       $nm_saida->saida("                 out_int += result;\r\n");
-       $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("             else {\r\n");
-       $nm_saida->saida("                 out_int += 'clear_interativ';\r\n");
-       $nm_saida->saida("                 Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
-       $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         if (tp_link == 'link')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             out_int += val_obj;\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         if (tp_link == 'range')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             out_int += $('#id_slider_' + obj_id).slider('values')[0] + \"_VLS_\" + $('#id_slider_' + obj_id).slider('values')[1];\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         if (tp_link == 'chbx' || tp_link == 'uncheck')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             if(tp_link == 'uncheck')\r\n");
-       $nm_saida->saida("             {\r\n");
-       $nm_saida->saida("                 int_search_unset_checkbox(nam_db, val_atual, obj_id);\r\n");
-       $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("             else\r\n");
-       $nm_saida->saida("             {\r\n");
-       $nm_saida->saida("                 Tab_obj_int_mult[ obj_id ] = 'N';\r\n");
-       $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("             result  = int_search_get_checkbox(obj_id, '');\r\n");
-       $nm_saida->saida("             if(tp_link == 'chbx' && result == '')\r\n");
-       $nm_saida->saida("             {\r\n");
-       $nm_saida->saida("                 int_search_unset_checkbox(nam_db, val_atual, obj_id);\r\n");
-       $nm_saida->saida("                 return;\r\n");
-       $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("             out_int += result;\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         out_int  = out_int.replace(/[+]/g, \"__NM_PLUS__\");\r\n");
-       $nm_saida->saida("         out_int  = out_int.replace(/[&]/g, \"__NM_AMP__\");\r\n");
-       $nm_saida->saida("         out_int  = out_int.replace(/[%]/g, \"__NM_PRC__\");\r\n");
-       $nm_saida->saida("         out_int  += '__DL__' + int_search_load_html;\r\n");
-       $nm_saida->saida("         out_int  += '__DL__' + refresh;\r\n");
-       $nm_saida->saida("         ajax_navigate('interativ_search', out_int);\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     var submit_checkbox = 'N';\r\n");
-       $nm_saida->saida("     function nm_proc_check_parent_value(bol_checked, str_cmp, value_md5)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("        $('#id_int_search_'+ str_cmp +'_' + value_md5).prop('checked', bol_checked);\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_proc_int_search_toggle()\r\n");
-       $nm_saida->saida("    {\r\n");
-       $nm_saida->saida("        if ($('#id_div_interativ_search').hasClass('is-closed')) {\r\n");
-       $nm_saida->saida("            $('#id_div_interativ_search_content').show();\r\n");
-       $nm_saida->saida("            $('#id_div_interativ_search').css('position', 'relative');\r\n");
-       $nm_saida->saida("            $('#app_int_search_open').hide();\r\n");
-       $nm_saida->saida("            $('#app_int_search_close').show();\r\n");
-       $nm_saida->saida("        } else {\r\n");
-       $nm_saida->saida("            $('#id_div_interativ_search_content').hide();\r\n");
-       $nm_saida->saida("            $('#id_div_interativ_search').css('position', 'absolute');\r\n");
-       $nm_saida->saida("            $('#app_int_search_open').show();\r\n");
-       $nm_saida->saida("            $('#app_int_search_close').hide();\r\n");
-       $nm_saida->saida("        }\r\n");
-       $nm_saida->saida("        $('#id_div_interativ_search').toggleClass('is-closed');\r\n");
-       $nm_saida->saida("    }\r\n");
-       $nm_saida->saida("     function int_search_unset_checkbox(nam_db, val_atual, obj_id)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         var obj_check = eval(\"document.getElementsByName('int_search_\" + obj_id + \"[]')\");\r\n");
-       $nm_saida->saida("         has_checked = false;\r\n");
-       $nm_saida->saida("         for (i = 0; i < obj_check.length; i++)\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             if(obj_check[i].checked && obj_check[i].value == val_atual)\r\n");
-       $nm_saida->saida("             {\r\n");
-       $nm_saida->saida("                 obj_check[i].checked = false;\r\n");
-       $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("             if(obj_check[i].checked)\r\n");
-       $nm_saida->saida("             {\r\n");
-       $nm_saida->saida("                 has_checked = true;\r\n");
-       $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         //if doesnt have checked anymore, clear\r\n");
-       $nm_saida->saida("         if(!has_checked)\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             nm_proc_int_search('clear','','', nam_db, '', obj_id, '', 'S')\r\n");
-       $nm_saida->saida("             return;\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function int_search_get_checkbox(obj_id, val_out)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("        var val  = \"\";\r\n");
-       $nm_saida->saida("        $( \"input[name='int_search_\"+ obj_id +\"[]']:checked\" ).each(function(){\r\n");
-       $nm_saida->saida("            if($(this).val() != val_out)\r\n");
-       $nm_saida->saida("            {\r\n");
-       $nm_saida->saida("                val += (val != \"\") ? \"_VLS_\" : \"\";\r\n");
-       $nm_saida->saida("                val += $(this).val();\r\n");
-       $nm_saida->saida("            }\r\n");
-       $nm_saida->saida("        });\r\n");
-       $nm_saida->saida("        return val;\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_toggle_int_search(obj_id)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         if($('#id_expand_' + obj_id).css('display') != 'none')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             nm_expand_int_search(obj_id);\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         else\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             nm_retracts_int_search(obj_id);\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_expand_int_search(obj_id)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         if(submit_checkbox != 'S')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             if (Tab_obj_int_mult[ obj_id ] && Tab_obj_int_mult[ obj_id ] == 'S') {\r\n");
-       $nm_saida->saida("                 $('#app_int_search_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("             else\r\n");
-       $nm_saida->saida("             {\r\n");
-       $nm_saida->saida("                 $('#app_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("             }\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','');\r\n");
-       $nm_saida->saida("         $('#id_toolbar_' + obj_id).show();\r\n");
-       $nm_saida->saida("         $('#id_retract_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("         $('#id_expand_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_retracts_int_search(obj_id)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         if(submit_checkbox != 'S')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("             $('#app_int_search_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_toolbar_' + obj_id).hide();\r\n");
-       $nm_saida->saida("         $('#id_retract_' + obj_id).css('display','none');\r\n");
-       $nm_saida->saida("         $('#id_expand_' + obj_id).css('display','');\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_mult_int_search(obj_id, bol_first)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('.simple' + obj_id).hide();\r\n");
-       $nm_saida->saida("         $('.multiple' + obj_id).show();\r\n");
-       $nm_saida->saida("         $('#mult_int_search_' + obj_id).hide();\r\n");
-       $nm_saida->saida("         $('#single_int_search_' + obj_id).show();\r\n");
-       $nm_saida->saida("         if(submit_checkbox != 'S')\r\n");
-       $nm_saida->saida("         {\r\n");
-       $nm_saida->saida("            $('#app_int_search_' + obj_id).show();\r\n");
-       $nm_saida->saida("         }\r\n");
-       $nm_saida->saida("         Tab_obj_int_mult[ obj_id ] = 'S';\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     function nm_single_int_search(obj_id)\r\n");
-       $nm_saida->saida("     {\r\n");
-       $nm_saida->saida("         $('.simple' + obj_id).show();\r\n");
-       $nm_saida->saida("         $('.multiple' + obj_id).hide();\r\n");
-       $nm_saida->saida("         $('#mult_int_search_' + obj_id).show();\r\n");
-       $nm_saida->saida("         $('#single_int_search_' + obj_id).hide();\r\n");
-       $nm_saida->saida("         $('#app_int_search_' + obj_id).hide();\r\n");
-       $nm_saida->saida("         Tab_obj_int_mult[ obj_id ] = 'N';\r\n");
-       $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("    function refinedSearchCheckUncheckAll(field_name, bol_value)\r\n");
-       $nm_saida->saida("    {\r\n");
-       $nm_saida->saida("        $(\"input[name='int_search_\"+ field_name +\"[]']\").prop('checked', bol_value);\r\n");
-       $nm_saida->saida("        if (submit_checkbox == \"S\") {\r\n");
-       $nm_saida->saida("            $('#app_int_search_' + field_name).click();\r\n");
-       $nm_saida->saida("        }\r\n");
-       $nm_saida->saida("    }\r\n");
-       $nm_saida->saida("     $( document ).ready(function() {\r\n");
-       $nm_saida->saida("        adjustMobile();\r\n");
-       $nm_saida->saida("    });\r\n");
-       $nm_saida->saida("function adjustMobile()\r\n");
-       $nm_saida->saida("{\r\n");
-       $nm_saida->saida("}\r\n");
-       $nm_saida->saida("</script>\r\n");
-   }
 //--- 
 //--- 
  function grafico_pdf()

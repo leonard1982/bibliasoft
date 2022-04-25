@@ -2,18 +2,22 @@
 <?php $sc_hidden_no = 1; $sc_hidden_yes = 0; ?>
    <a name="bloco_0"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_17"><!-- bloco_c -->
+<div id="div_hidden_bloco_15"><!-- bloco_c -->
 <?php
    if (!isset($this->nmgp_cmp_hidden['idtercero']))
    {
        $this->nmgp_cmp_hidden['idtercero'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['imagenter']))
+   {
+       $this->nmgp_cmp_hidden['imagenter'] = 'off';
    }
    if (!isset($this->nmgp_cmp_hidden['relleno2']))
    {
        $this->nmgp_cmp_hidden['relleno2'] = 'off';
    }
 ?>
-<TABLE align="center" id="hidden_bloco_17" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
+<TABLE align="center" id="hidden_bloco_15" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
            if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['idtercero']))
            {
                $this->nmgp_cmp_readonly['idtercero'] = 'on';
@@ -1163,10 +1167,10 @@ else
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_18"></a>
+   <a name="bloco_16"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_18"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_18" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<div id="div_hidden_bloco_16"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_16" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -6151,10 +6155,10 @@ $puc_retefuente_servicios_prov_look = (isset($aLookup[0][$this->puc_retefuente_s
 </TABLE></div><!-- bloco_f -->
    </td>
    </tr></table>
-   <a name="bloco_19"></a>
+   <a name="bloco_17"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_19"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_19" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+<div id="div_hidden_bloco_17"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_17" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
 
 
     <TD colspan="1" height="20" class="scFormBlock">

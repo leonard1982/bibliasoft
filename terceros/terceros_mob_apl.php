@@ -214,6 +214,7 @@ class terceros_mob_apl
    var $relleno2;
    var $responsabilidad_fiscal;
    var $sucursales;
+   var $direcciones;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -459,6 +460,10 @@ class terceros_mob_apl
           {
               $this->direccion = $this->NM_ajax_info['param']['direccion'];
           }
+          if (isset($this->NM_ajax_info['param']['direcciones']))
+          {
+              $this->direcciones = $this->NM_ajax_info['param']['direcciones'];
+          }
           if (isset($this->NM_ajax_info['param']['documento']))
           {
               $this->documento = $this->NM_ajax_info['param']['documento'];
@@ -518,22 +523,6 @@ class terceros_mob_apl
           if (isset($this->NM_ajax_info['param']['idtercero']))
           {
               $this->idtercero = $this->NM_ajax_info['param']['idtercero'];
-          }
-          if (isset($this->NM_ajax_info['param']['imagenter']))
-          {
-              $this->imagenter = $this->NM_ajax_info['param']['imagenter'];
-          }
-          if (isset($this->NM_ajax_info['param']['imagenter_limpa']))
-          {
-              $this->imagenter_limpa = $this->NM_ajax_info['param']['imagenter_limpa'];
-          }
-          if (isset($this->NM_ajax_info['param']['imagenter_ul_name']))
-          {
-              $this->imagenter_ul_name = $this->NM_ajax_info['param']['imagenter_ul_name'];
-          }
-          if (isset($this->NM_ajax_info['param']['imagenter_ul_type']))
-          {
-              $this->imagenter_ul_type = $this->NM_ajax_info['param']['imagenter_ul_type'];
           }
           if (isset($this->NM_ajax_info['param']['lenguaje']))
           {
@@ -714,10 +703,6 @@ class terceros_mob_apl
           if (isset($this->NM_ajax_info['param']['sucur_cliente']))
           {
               $this->sucur_cliente = $this->NM_ajax_info['param']['sucur_cliente'];
-          }
-          if (isset($this->NM_ajax_info['param']['sucursales']))
-          {
-              $this->sucursales = $this->NM_ajax_info['param']['sucursales'];
           }
           if (isset($this->NM_ajax_info['param']['tel_cel']))
           {
@@ -1057,6 +1042,11 @@ class terceros_mob_apl
               $_SESSION['sc_session'][$script_case_init]['terceros_mob']['where_filter_form'] = $this->NM_where_filter_form;
               unset($_SESSION['sc_session'][$script_case_init]['terceros_mob']['total']);
           }
+          if (!isset($_SESSION['sc_session'][$script_case_init]['terceros_mob']['total']))
+          {
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$script_case_init]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['reg_start'] = "";
+              unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$script_case_init]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['total']);
+          }
           if (isset($this->sc_redir_atualiz))
           {
               $_SESSION['sc_session'][$script_case_init]['terceros_mob']['sc_redir_atualiz'] = $this->sc_redir_atualiz;
@@ -1174,23 +1164,23 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
   $this->departamento =23;
 if($this->idtercero >0)
 	{
-	$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
-	$this->Ini->nm_hidden_blocos[12] = "on"; $this->NM_ajax_info['blockDisplay']['12'] = 'on';
-	$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
-	$this->Ini->nm_hidden_blocos[11] = "on"; $this->NM_ajax_info['blockDisplay']['11'] = 'on';
-	$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
-	;
 	$this->Ini->nm_hidden_blocos[9] = "on"; $this->NM_ajax_info['blockDisplay']['9'] = 'on';
+	$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
+	$this->Ini->nm_hidden_blocos[6] = "on"; $this->NM_ajax_info['blockDisplay']['6'] = 'on';
+	;
+	$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
+	;
+	$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
 	}
 else
 	{
-	$this->Ini->nm_hidden_blocos[8] = "off"; $this->NM_ajax_info['blockDisplay']['8'] = 'off';
-	$this->Ini->nm_hidden_blocos[12] = "off"; $this->NM_ajax_info['blockDisplay']['12'] = 'off';
-	$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
-	$this->Ini->nm_hidden_blocos[11] = "off"; $this->NM_ajax_info['blockDisplay']['11'] = 'off';
-	$this->Ini->nm_hidden_blocos[10] = "off"; $this->NM_ajax_info['blockDisplay']['10'] = 'off';
-	;
 	$this->Ini->nm_hidden_blocos[9] = "off"; $this->NM_ajax_info['blockDisplay']['9'] = 'off';
+	$this->Ini->nm_hidden_blocos[10] = "off"; $this->NM_ajax_info['blockDisplay']['10'] = 'off';
+	$this->Ini->nm_hidden_blocos[6] = "off"; $this->NM_ajax_info['blockDisplay']['6'] = 'off';
+	;
+	$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
+	;
+	$this->Ini->nm_hidden_blocos[8] = "off"; $this->NM_ajax_info['blockDisplay']['8'] = 'off';
 	}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
@@ -1219,20 +1209,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
          $this->nm_data = new nm_data("es");
       } 
       $_SESSION['sc_session'][$script_case_init]['terceros_mob']['upload_field_info'] = array();
-
-      $_SESSION['sc_session'][$script_case_init]['terceros_mob']['upload_field_info']['imagenter'] = array(
-          'app_dir'            => $this->Ini->path_aplicacao,
-          'app_name'           => 'terceros_mob',
-          'upload_dir'         => $this->Ini->root . $this->Ini->path_imag_temp . '/',
-          'upload_url'         => $this->Ini->path_imag_temp . '/',
-          'upload_type'        => 'single',
-          'upload_allowed_type'  => '/\.(jpg|jpeg|gif|png)$/i',
-          'upload_max_size'  => null,
-          'upload_file_height' => '80',
-          'upload_file_width'  => '80',
-          'upload_file_aspect' => 'S',
-          'upload_file_type'   => 'I',
-      );
 
       $_SESSION['sc_session'][$script_case_init]['terceros_mob']['upload_field_info']['archivo_cedula'] = array(
           'app_dir'            => $this->Ini->path_aplicacao,
@@ -1290,6 +1266,20 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           'upload_file_type'   => 'N4',
       );
 
+      $_SESSION['sc_session'][$script_case_init]['terceros_mob']['upload_field_info']['imagenter'] = array(
+          'app_dir'            => $this->Ini->path_aplicacao,
+          'app_name'           => 'terceros_mob',
+          'upload_dir'         => $this->Ini->root . $this->Ini->path_imag_temp . '/',
+          'upload_url'         => $this->Ini->path_imag_temp . '/',
+          'upload_type'        => 'single',
+          'upload_allowed_type'  => '/\.(jpg|jpeg|gif|png)$/i',
+          'upload_max_size'  => null,
+          'upload_file_height' => '80',
+          'upload_file_width'  => '80',
+          'upload_file_aspect' => 'S',
+          'upload_file_type'   => 'I',
+      );
+
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['masterValue']);
       $this->Change_Menu = false;
       $run_iframe = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['run_iframe']) && ($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['run_iframe'] == "R")) ? true : false;
@@ -1314,7 +1304,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['terceros_mob']))
           {
                $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['terceros_mob']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('terceros_mob') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['terceros_mob']['label'] = "Actualización datos del tercero";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['terceros_mob']['label'] = "EDICIÓN DE TERCEROS (CLIENTES, PROVEEDORES, EMPLEADOS)";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -1339,7 +1329,8 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
       }
       include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
-      $this->Ini->Str_btn_form    = trim($str_button);
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
@@ -1420,7 +1411,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       );
 
 
-      $_SESSION['scriptcase']['error_icon']['terceros_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $_SESSION['scriptcase']['error_icon']['terceros_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['terceros_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
       $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['embutida_proc'] : $this->Embutida_proc;
@@ -1472,28 +1463,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_valida.php", "C", "NM_Valida") ; 
       $teste_validade = new NM_Valida ;
 
-      if (isset($this->NM_ajax_info['param']['imagenter_ul_name']) && '' != $this->NM_ajax_info['param']['imagenter_ul_name'])
-      {
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->imagenter_ul_name]))
-          {
-              $this->NM_ajax_info['param']['imagenter_ul_name'] = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->imagenter_ul_name];
-          }
-          $this->imagenter = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->NM_ajax_info['param']['imagenter_ul_name'];
-          $this->imagenter_scfile_name = substr($this->NM_ajax_info['param']['imagenter_ul_name'], 12);
-          $this->imagenter_scfile_type = $this->NM_ajax_info['param']['imagenter_ul_type'];
-          $this->imagenter_ul_name = $this->NM_ajax_info['param']['imagenter_ul_name'];
-          $this->imagenter_ul_type = $this->NM_ajax_info['param']['imagenter_ul_type'];
-      }
-      elseif (isset($this->imagenter_ul_name) && '' != $this->imagenter_ul_name)
-      {
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->imagenter_ul_name]))
-          {
-              $this->imagenter_ul_name = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->imagenter_ul_name];
-          }
-          $this->imagenter = $this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->imagenter_ul_name;
-          $this->imagenter_scfile_name = substr($this->imagenter_ul_name, 12);
-          $this->imagenter_scfile_type = $this->imagenter_ul_type;
-      }
       if (isset($this->NM_ajax_info['param']['archivo_cedula_ul_name']) && '' != $this->NM_ajax_info['param']['archivo_cedula_ul_name'])
       {
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['upload_field_ul_name'][$this->archivo_cedula_ul_name]))
@@ -1859,6 +1828,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form'];
           if ($this->nmgp_opcao == "incluir" && $this->nmgp_dados_form['saldo'] != "null"){$this->saldo = $this->nmgp_dados_form['saldo'];} 
           if (!isset($this->con_actual)){$this->con_actual = $this->nmgp_dados_form['con_actual'];} 
+          if (!isset($this->imagenter)){$this->imagenter = $this->nmgp_dados_form['imagenter'];} 
           if (!isset($this->creado)){$this->creado = $this->nmgp_dados_form['creado'];} 
           if (!isset($this->disponible)){$this->disponible = $this->nmgp_dados_form['disponible'];} 
           if (!isset($this->id_pedido_tmp)){$this->id_pedido_tmp = $this->nmgp_dados_form['id_pedido_tmp'];} 
@@ -1869,6 +1839,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           if (!isset($this->nube)){$this->nube = $this->nmgp_dados_form['nube'];} 
           if (!isset($this->latitude)){$this->latitude = $this->nmgp_dados_form['latitude'];} 
           if (!isset($this->longitude)){$this->longitude = $this->nmgp_dados_form['longitude'];} 
+          if (!isset($this->sucursales)){$this->sucursales = $this->nmgp_dados_form['sucursales'];} 
       }
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       $this->aba_iframe = false;
@@ -2079,6 +2050,13 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       if ($this->nmgp_opcao == "excluir")
       {
           $GLOBALS['script_case_init'] = $this->Ini->sc_page;
+          $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_form'] = false;
+          $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['embutida_proc'] = true;
+          $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['reg_start'] = "";
+          unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['total']);
+          require_once($this->Ini->root . $this->Ini->path_link  . SC_dir_app_name('form_direccion_mob') . "/index.php");
+          require_once($this->Ini->root . $this->Ini->path_link  . SC_dir_app_name('form_direccion_mob') . "/form_direccion_mob_apl.php");
+          $this->form_direccion_mob = new form_direccion_mob_apl;
       }
       $this->NM_case_insensitive = false;
       $this->sc_evento = $this->nmgp_opcao;
@@ -2105,13 +2083,13 @@ else
 
 if($this->sc_temp_gnit=="88261176-7" and $vso=="nube")
 {
-	$this->Ini->nm_hidden_blocos[19] = "on"; $this->NM_ajax_info['blockDisplay']['19'] = 'on';
+	$this->Ini->nm_hidden_blocos[17] = "on"; $this->NM_ajax_info['blockDisplay']['17'] = 'on';
 	$this->NM_ajax_info['buttonDisplay']['btn_generar_nomina'] = $this->nmgp_botoes["btn_generar_nomina"] = "on";;
 	$this->NM_ajax_info['buttonDisplay']['btn_reenviar_correo_nomina'] = $this->nmgp_botoes["btn_reenviar_correo_nomina"] = "on";;
 }
 else
 {
-	$this->Ini->nm_hidden_blocos[19] = "off"; $this->NM_ajax_info['blockDisplay']['19'] = 'off';
+	$this->Ini->nm_hidden_blocos[17] = "off"; $this->NM_ajax_info['blockDisplay']['17'] = 'off';
 	$this->NM_ajax_info['buttonDisplay']['btn_generar_nomina'] = $this->nmgp_botoes["btn_generar_nomina"] = "off";;
 	$this->NM_ajax_info['buttonDisplay']['btn_reenviar_correo_nomina'] = $this->nmgp_botoes["btn_reenviar_correo_nomina"] = "off";;
 }
@@ -2119,20 +2097,20 @@ else
 $this->sc_temp_id_tercero=0;
 if($this->idtercero >0)
 	{
-	$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
-	$this->Ini->nm_hidden_blocos[12] = "on"; $this->NM_ajax_info['blockDisplay']['12'] = 'on';
-	$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
-	$this->Ini->nm_hidden_blocos[11] = "on"; $this->NM_ajax_info['blockDisplay']['11'] = 'on';
+	$this->Ini->nm_hidden_blocos[9] = "on"; $this->NM_ajax_info['blockDisplay']['9'] = 'on';
 	$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
+	$this->Ini->nm_hidden_blocos[6] = "on"; $this->NM_ajax_info['blockDisplay']['6'] = 'on';
+	;
+	$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
 	;
 	}
 else
 	{
-	$this->Ini->nm_hidden_blocos[8] = "off"; $this->NM_ajax_info['blockDisplay']['8'] = 'off';
-	$this->Ini->nm_hidden_blocos[12] = "off"; $this->NM_ajax_info['blockDisplay']['12'] = 'off';
-	$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
-	$this->Ini->nm_hidden_blocos[11] = "off"; $this->NM_ajax_info['blockDisplay']['11'] = 'off';
+	$this->Ini->nm_hidden_blocos[9] = "off"; $this->NM_ajax_info['blockDisplay']['9'] = 'off';
 	$this->Ini->nm_hidden_blocos[10] = "off"; $this->NM_ajax_info['blockDisplay']['10'] = 'off';
+	$this->Ini->nm_hidden_blocos[6] = "off"; $this->NM_ajax_info['blockDisplay']['6'] = 'off';
+	;
+	$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
 	;
 	}
 if (isset($this->sc_temp_gnit)) { $_SESSION['gnit'] = $this->sc_temp_gnit;}
@@ -2170,9 +2148,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
             if(!empty($img_width) && !empty($img_height)){
                 $sc_obj_img->setWidth($img_width);
                 $sc_obj_img->setHeight($img_height);
-            }
-                $sc_obj_img->setManterAspecto(true);
-            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            }            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
             echo $out1_img_cache;
                exit;
             }
@@ -2228,6 +2204,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       if (isset($this->nombre_empresa_bd)) { $this->nm_limpa_alfa($this->nombre_empresa_bd); }
       if (isset($this->n_trabajadores)) { $this->nm_limpa_alfa($this->n_trabajadores); }
       if (isset($this->archivos)) { $this->nm_limpa_alfa($this->archivos); }
+      if (isset($this->direcciones)) { $this->nm_limpa_alfa($this->direcciones); }
       if ($nm_opc_form_php == "formphp")
       { 
           if ($nm_call_php == "btn_generar_nomina")
@@ -2475,10 +2452,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'dv');
           }
-          if ('validate_imagenter' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'imagenter');
-          }
           if ('validate_codigo_tercero' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'codigo_tercero');
@@ -2635,9 +2608,13 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'relleno2');
           }
-          if ('validate_nacimiento' == $this->NM_ajax_opcao)
+          if ('validate_direcciones' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'nacimiento');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'direcciones');
+          }
+          if ('validate_sucur_cliente' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'sucur_cliente');
           }
           if ('validate_detalle_tributario' == $this->NM_ajax_opcao)
           {
@@ -2651,13 +2628,9 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'ciiu');
           }
-          if ('validate_sucur_cliente' == $this->NM_ajax_opcao)
+          if ('validate_nacimiento' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'sucur_cliente');
-          }
-          if ('validate_sucursales' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'sucursales');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'nacimiento');
           }
           if ('validate_fechault' == $this->NM_ajax_opcao)
           {
@@ -5720,23 +5693,23 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
   $this->departamento =23;
 if($this->idtercero >0)
 	{
-	$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
-	$this->Ini->nm_hidden_blocos[12] = "on"; $this->NM_ajax_info['blockDisplay']['12'] = 'on';
-	$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
-	$this->Ini->nm_hidden_blocos[11] = "on"; $this->NM_ajax_info['blockDisplay']['11'] = 'on';
-	$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
-	;
 	$this->Ini->nm_hidden_blocos[9] = "on"; $this->NM_ajax_info['blockDisplay']['9'] = 'on';
+	$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
+	$this->Ini->nm_hidden_blocos[6] = "on"; $this->NM_ajax_info['blockDisplay']['6'] = 'on';
+	;
+	$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
+	;
+	$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
 	}
 else
 	{
-	$this->Ini->nm_hidden_blocos[8] = "off"; $this->NM_ajax_info['blockDisplay']['8'] = 'off';
-	$this->Ini->nm_hidden_blocos[12] = "off"; $this->NM_ajax_info['blockDisplay']['12'] = 'off';
-	$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
-	$this->Ini->nm_hidden_blocos[11] = "off"; $this->NM_ajax_info['blockDisplay']['11'] = 'off';
-	$this->Ini->nm_hidden_blocos[10] = "off"; $this->NM_ajax_info['blockDisplay']['10'] = 'off';
-	;
 	$this->Ini->nm_hidden_blocos[9] = "off"; $this->NM_ajax_info['blockDisplay']['9'] = 'off';
+	$this->Ini->nm_hidden_blocos[10] = "off"; $this->NM_ajax_info['blockDisplay']['10'] = 'off';
+	$this->Ini->nm_hidden_blocos[6] = "off"; $this->NM_ajax_info['blockDisplay']['6'] = 'off';
+	;
+	$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
+	;
+	$this->Ini->nm_hidden_blocos[8] = "off"; $this->NM_ajax_info['blockDisplay']['8'] = 'off';
 	}
 if($this->cliente =='NO')
 	{	
@@ -5766,10 +5739,10 @@ else
 		$this->nmgp_cmp_hidden["efec_retencion"] = "on"; $this->NM_ajax_info['fieldDisplay']['efec_retencion'] = 'on';
 		$this->nmgp_cmp_hidden["listaprecios"] = "on"; $this->NM_ajax_info['fieldDisplay']['listaprecios'] = 'on';
 		$this->nmgp_cmp_hidden["loatiende"] = "on"; $this->NM_ajax_info['fieldDisplay']['loatiende'] = 'on';
-		$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
-		$this->Ini->nm_hidden_blocos[12] = "on"; $this->NM_ajax_info['blockDisplay']['12'] = 'on';
-		$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
 		$this->Ini->nm_hidden_blocos[9] = "on"; $this->NM_ajax_info['blockDisplay']['9'] = 'on';
+		$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
+		$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
+		$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
 		}
 
 
@@ -5810,7 +5783,7 @@ if($this->credito =='SI')
 
 if($this->proveedor =='SI')
 	{
-	$this->Ini->nm_hidden_blocos[15] = "on"; $this->NM_ajax_info['blockDisplay']['15'] = 'on';
+	$this->Ini->nm_hidden_blocos[13] = "on"; $this->NM_ajax_info['blockDisplay']['13'] = 'on';
 	
 	$this->nmgp_cmp_hidden["autoretenedor"] = "on"; $this->NM_ajax_info['fieldDisplay']['autoretenedor'] = 'on';
 	$this->nmgp_cmp_hidden["creditoprov"] = "on"; $this->NM_ajax_info['fieldDisplay']['creditoprov'] = 'on';
@@ -5818,14 +5791,14 @@ if($this->proveedor =='SI')
 	}
 else
 	{
-	$this->Ini->nm_hidden_blocos[15] = "off"; $this->NM_ajax_info['blockDisplay']['15'] = 'off';
+	$this->Ini->nm_hidden_blocos[13] = "off"; $this->NM_ajax_info['blockDisplay']['13'] = 'off';
 	$this->nmgp_cmp_hidden["autoretenedor"] = "off"; $this->NM_ajax_info['fieldDisplay']['autoretenedor'] = 'off';
 	$this->nmgp_cmp_hidden["creditoprov"] = "off"; $this->NM_ajax_info['fieldDisplay']['creditoprov'] = 'off';
 	$this->nmgp_cmp_hidden["dias"] = "off"; $this->NM_ajax_info['fieldDisplay']['dias'] = 'off';
 	}
 if($this->sucur_cliente =='SI')
 	{
-	$this->Ini->nm_hidden_blocos[11] = "on"; $this->NM_ajax_info['blockDisplay']['11'] = 'on';
+	;
 	}
 else
 	{
@@ -6025,7 +5998,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
 ?>
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo strip_tags("Actualización datos del tercero") ?></TITLE>
+ <TITLE><?php echo strip_tags("EDICIÓN DE TERCEROS (CLIENTES, PROVEEDORES, EMPLEADOS)") ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 
@@ -7862,9 +7835,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
            case 'dv':
                return "DV";
                break;
-           case 'imagenter':
-               return "Foto";
-               break;
            case 'codigo_tercero':
                return "Código Tercero";
                break;
@@ -7887,7 +7857,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                return "Segundo Apellido";
                break;
            case 'tel_cel':
-               return "Teléfono o celular";
+               return "Teléfono o celular**";
                break;
            case 'urlmail':
                return "email **";
@@ -7982,8 +7952,11 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
            case 'relleno2':
                return "";
                break;
-           case 'nacimiento':
-               return "Cumpleaños";
+           case 'direcciones':
+               return "direcciones";
+               break;
+           case 'sucur_cliente':
+               return "Sucursales";
                break;
            case 'detalle_tributario':
                return "DETALLE TRIBUTARIO";
@@ -7994,11 +7967,8 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
            case 'ciiu':
                return "ACTIVIDAD ECONÓMICA (CIIU)";
                break;
-           case 'sucur_cliente':
-               return "Sucursales";
-               break;
-           case 'sucursales':
-               return "Ingresar/Editar";
+           case 'nacimiento':
+               return "Cumpleaños";
                break;
            case 'fechault':
                return "Fecha de última compra";
@@ -8120,6 +8090,9 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
            case 'con_actual':
                return "Con Actual";
                break;
+           case 'imagenter':
+               return "Foto";
+               break;
            case 'creado':
                return "Creado";
                break;
@@ -8149,6 +8122,9 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                break;
            case 'longitude':
                return "Longitude";
+               break;
+           case 'sucursales':
+               return "Ingresar/Editar";
                break;
        }
 
@@ -8208,8 +8184,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         $this->ValidateField_documento($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'dv' == $filtro)) || (is_array($filtro) && in_array('dv', $filtro)))
         $this->ValidateField_dv($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'imagenter' == $filtro)) || (is_array($filtro) && in_array('imagenter', $filtro)))
-        $this->ValidateField_imagenter($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'codigo_tercero' == $filtro)) || (is_array($filtro) && in_array('codigo_tercero', $filtro)))
         $this->ValidateField_codigo_tercero($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'sexo' == $filtro)) || (is_array($filtro) && in_array('sexo', $filtro)))
@@ -8288,18 +8262,18 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         $this->ValidateField_autorizado($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'relleno2' == $filtro)) || (is_array($filtro) && in_array('relleno2', $filtro)))
         $this->ValidateField_relleno2($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'nacimiento' == $filtro)) || (is_array($filtro) && in_array('nacimiento', $filtro)))
-        $this->ValidateField_nacimiento($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'direcciones' == $filtro)) || (is_array($filtro) && in_array('direcciones', $filtro)))
+        $this->ValidateField_direcciones($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'sucur_cliente' == $filtro)) || (is_array($filtro) && in_array('sucur_cliente', $filtro)))
+        $this->ValidateField_sucur_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'detalle_tributario' == $filtro)) || (is_array($filtro) && in_array('detalle_tributario', $filtro)))
         $this->ValidateField_detalle_tributario($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'responsabilidad_fiscal' == $filtro)) || (is_array($filtro) && in_array('responsabilidad_fiscal', $filtro)))
         $this->ValidateField_responsabilidad_fiscal($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'ciiu' == $filtro)) || (is_array($filtro) && in_array('ciiu', $filtro)))
         $this->ValidateField_ciiu($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'sucur_cliente' == $filtro)) || (is_array($filtro) && in_array('sucur_cliente', $filtro)))
-        $this->ValidateField_sucur_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'sucursales' == $filtro)) || (is_array($filtro) && in_array('sucursales', $filtro)))
-        $this->ValidateField_sucursales($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'nacimiento' == $filtro)) || (is_array($filtro) && in_array('nacimiento', $filtro)))
+        $this->ValidateField_nacimiento($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'fechault' == $filtro)) || (is_array($filtro) && in_array('fechault', $filtro)))
         $this->ValidateField_fechault($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'saldo' == $filtro)) || (is_array($filtro) && in_array('saldo', $filtro)))
@@ -8491,7 +8465,7 @@ if($this->sc_evento == "alterar" || $this->sc_evento == "update")
 				$this->apellido1 	= NULL;
 				$this->apellido2 	= NULL;
 				$this->nombres 	= NULL;
-				$this->r_social 	=NULL;
+				$this->r_social 	= NULL;
 				$this->representante 	= NULL;
 				
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
@@ -8565,8 +8539,8 @@ else
 			{
 			if(!isset($this->nombre1 ) or (empty($this->nombre1 ) or $this->nombre1 ==' ' or $this->nombre1 ==NULL))
 				{
-				$this->nombres 	=NULL;
-				$this->r_social 	=NULL;
+				$this->nombres 	= NULL;
+				$this->r_social 	= NULL;
 				$this->sc_field_readonly("nombre_comercil", 'off');
 				$this->nombre_comercil  = NULL;
 				
@@ -8599,7 +8573,7 @@ else
 				$this->apellido1 	= NULL;
 				$this->apellido2 	= NULL;
 				$this->nombres 	= NULL;
-				$this->r_social 	=NULL;
+				$this->r_social 	= NULL;
 				$this->representante 	= NULL;
 				
  if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
@@ -8917,60 +8891,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_dv
 
-    function ValidateField_imagenter(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-        if ($this->nmgp_opcao != "excluir")
-        {
-            $sTestFile = $this->imagenter;
-            if ("" != $this->imagenter && "S" != $this->imagenter_limpa && !$teste_validade->ArqExtensao($this->imagenter, array('jpg', 'jpeg', 'gif', 'png')))
-            {
-                $hasError = true;
-                $Campos_Crit .= "Foto: " . $this->Ini->Nm_lang['lang_errm_file_invl']; 
-                if (!isset($Campos_Erros['imagenter']))
-                {
-                    $Campos_Erros['imagenter'] = array();
-                }
-                $Campos_Erros['imagenter'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
-                if (!isset($this->NM_ajax_info['errList']['imagenter']) || !is_array($this->NM_ajax_info['errList']['imagenter']))
-                {
-                    $this->NM_ajax_info['errList']['imagenter'] = array();
-                }
-                $this->NM_ajax_info['errList']['imagenter'][] = $this->Ini->Nm_lang['lang_errm_file_invl'];
-            }
-            if (!$hasError && "" != $this->imagenter && "S" != $this->imagenter_limpa) {
-                if (!function_exists('sc_upload_unprotect_chars')) {
-                    include_once 'terceros_mob_doc_name.php';
-                }
-                $pathParts = pathinfo(sc_upload_unprotect_chars($sTestFile));
-                $fileSize = filesize(sc_upload_unprotect_chars($sTestFile));
-                $sizeErrorSuffix = '';
-                if ($hasError) {
-                    $Campos_Crit .= "Foto: " . $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
-                    if (!isset($Campos_Erros['imagenter']))
-                    {
-                        $Campos_Erros['imagenter'] = array();
-                    }
-                    $Campos_Erros['imagenter'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
-                    if (!isset($this->NM_ajax_info['errList']['imagenter']) || !is_array($this->NM_ajax_info['errList']['imagenter']))
-                    {
-                        $this->NM_ajax_info['errList']['imagenter'] = array();
-                    }
-                    $this->NM_ajax_info['errList']['imagenter'][] = $this->Ini->Nm_lang['lang_errm_file_size'] . $sizeErrorSuffix;
-                }
-            }
-        }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'imagenter';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_imagenter
-
     function ValidateField_codigo_tercero(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
@@ -9261,7 +9181,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           if (NM_utf8_strlen($this->tel_cel) > 14) 
           { 
               $hasError = true;
-              $Campos_Crit .= "Teléfono o celular " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 14 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= "Teléfono o celular** " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 14 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['tel_cel']))
               {
                   $Campos_Erros['tel_cel'] = array();
@@ -10487,49 +10407,68 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_relleno2
 
-    function ValidateField_nacimiento(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_direcciones(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      nm_limpa_data($this->nacimiento, $this->field_config['nacimiento']['date_sep']) ; 
-      $trab_dt_min = ""; 
-      $trab_dt_max = ""; 
-      $trab_dt_max = date('Ymd'); 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          $guarda_datahora = $this->field_config['nacimiento']['date_format']; 
-          if (false !== strpos($guarda_datahora, ';')) $this->field_config['nacimiento']['date_format'] = substr($guarda_datahora, 0, strpos($guarda_datahora, ';'));
-          $Format_Data = $this->field_config['nacimiento']['date_format']; 
-          nm_limpa_data($Format_Data, $this->field_config['nacimiento']['date_sep']) ; 
-          if (trim($this->nacimiento) != "")  
+          if (trim($this->direcciones) != "")  
           { 
-              if ($teste_validade->Data($this->nacimiento, $Format_Data, $trab_dt_min, $trab_dt_max) == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Cumpleaños; " ; 
-                  if (!isset($Campos_Erros['nacimiento']))
-                  {
-                      $Campos_Erros['nacimiento'] = array();
-                  }
-                  $Campos_Erros['nacimiento'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['nacimiento']) || !is_array($this->NM_ajax_info['errList']['nacimiento']))
-                  {
-                      $this->NM_ajax_info['errList']['nacimiento'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['nacimiento'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
           } 
-          $this->field_config['nacimiento']['date_format'] = $guarda_datahora; 
-       } 
+      } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'nacimiento';
+            $fieldName = 'direcciones';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_nacimiento
+    } // ValidateField_direcciones
+
+    function ValidateField_sucur_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->sucur_cliente == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->sucur_cliente = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->sucur_cliente))
+          {
+              $x = 0; 
+              $this->sucur_cliente_1 = array(); 
+              foreach ($this->sucur_cliente as $ind => $dados_sucur_cliente_1 ) 
+              {
+                  if ($dados_sucur_cliente_1 != "") 
+                  {
+                      $this->sucur_cliente_1[] = $dados_sucur_cliente_1;
+                  } 
+              } 
+              $this->sucur_cliente = ""; 
+              foreach ($this->sucur_cliente_1 as $dados_sucur_cliente_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->sucur_cliente .= ";";
+                   } 
+                   $this->sucur_cliente .= $dados_sucur_cliente_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'sucur_cliente';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_sucur_cliente
 
     function ValidateField_detalle_tributario(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
@@ -10591,68 +10530,49 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_ciiu
 
-    function ValidateField_sucur_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_nacimiento(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->sucur_cliente == "" && $this->nmgp_opcao != "excluir")
-      { 
-          $this->sucur_cliente = "NO";
-      } 
-      else 
-      { 
-          if (is_array($this->sucur_cliente))
-          {
-              $x = 0; 
-              $this->sucur_cliente_1 = array(); 
-              foreach ($this->sucur_cliente as $ind => $dados_sucur_cliente_1 ) 
-              {
-                  if ($dados_sucur_cliente_1 != "") 
-                  {
-                      $this->sucur_cliente_1[] = $dados_sucur_cliente_1;
-                  } 
-              } 
-              $this->sucur_cliente = ""; 
-              foreach ($this->sucur_cliente_1 as $dados_sucur_cliente_1 ) 
-              { 
-                   if ($x != 0)
-                   { 
-                       $this->sucur_cliente .= ";";
-                   } 
-                   $this->sucur_cliente .= $dados_sucur_cliente_1;
-                   $x++ ; 
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'sucur_cliente';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_sucur_cliente
-
-    function ValidateField_sucursales(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
+      nm_limpa_data($this->nacimiento, $this->field_config['nacimiento']['date_sep']) ; 
+      $trab_dt_min = ""; 
+      $trab_dt_max = ""; 
+      $trab_dt_max = date('Ymd'); 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if (trim($this->sucursales) != "")  
+          $guarda_datahora = $this->field_config['nacimiento']['date_format']; 
+          if (false !== strpos($guarda_datahora, ';')) $this->field_config['nacimiento']['date_format'] = substr($guarda_datahora, 0, strpos($guarda_datahora, ';'));
+          $Format_Data = $this->field_config['nacimiento']['date_format']; 
+          nm_limpa_data($Format_Data, $this->field_config['nacimiento']['date_sep']) ; 
+          if (trim($this->nacimiento) != "")  
           { 
+              if ($teste_validade->Data($this->nacimiento, $Format_Data, $trab_dt_min, $trab_dt_max) == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Cumpleaños; " ; 
+                  if (!isset($Campos_Erros['nacimiento']))
+                  {
+                      $Campos_Erros['nacimiento'] = array();
+                  }
+                  $Campos_Erros['nacimiento'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['nacimiento']) || !is_array($this->NM_ajax_info['errList']['nacimiento']))
+                  {
+                      $this->NM_ajax_info['errList']['nacimiento'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['nacimiento'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
           } 
-      } 
+          $this->field_config['nacimiento']['date_format'] = $guarda_datahora; 
+       } 
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'sucursales';
+            $fieldName = 'nacimiento';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_sucursales
+    } // ValidateField_nacimiento
 
     function ValidateField_fechault(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
@@ -12468,80 +12388,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
      {
           return;
      }
-      if ($this->nmgp_opcao == "incluir" && $this->imagenter == "" &&  $this->imagenter_limpa != "S" && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_clone']['imagenter']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_clone']['imagenter']))
-      { 
-          $this->imagenter = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_clone']['imagenter'];
-      } 
-      elseif ($this->nmgp_opcao != "excluir") 
-      { 
-          if ($this->imagenter == "none") 
-          { 
-              $this->imagenter = ""; 
-          } 
-          if ($this->imagenter != "") 
-          { 
-              if (!function_exists('sc_upload_unprotect_chars'))
-              {
-                  include_once 'terceros_mob_doc_name.php';
-              }
-              $this->imagenter = sc_upload_unprotect_chars($this->imagenter);
-              $this->imagenter_scfile_name = sc_upload_unprotect_chars($this->imagenter_scfile_name);
-              if ($nm_browser == "Opera")  
-              { 
-                  $this->imagenter_scfile_type = substr($this->imagenter_scfile_type, 0, strpos($this->imagenter_scfile_type, ";")) ; 
-              } 
-              if ($this->imagenter_scfile_type == "image/pjpeg" || $this->imagenter_scfile_type == "image/jpeg" || $this->imagenter_scfile_type == "image/gif" ||  
-                  $this->imagenter_scfile_type == "image/png" || $this->imagenter_scfile_type == "image/x-png" || $this->imagenter_scfile_type == "image/bmp")  
-              { 
-                  if (is_file($this->imagenter))  
-                  { 
-                      $this->NM_size_docs[$this->imagenter_scfile_name] = $this->sc_file_size($this->imagenter);
-                      $reg_imagenter = file_get_contents($this->imagenter); 
-                      $this->imagenter = $reg_imagenter; 
-                  } 
-                  else 
-                  { 
-                      $Campos_Crit .= "Foto " . $this->Ini->Nm_lang['lang_errm_upld']; 
-                      $this->imagenter = "";
-                      if (!isset($Campos_Erros['imagenter']))
-                      {
-                          $Campos_Erros['imagenter'] = array();
-                      }
-                      $Campos_Erros['imagenter'][] = $this->Ini->Nm_lang['lang_errm_upld'];
-                      if (!isset($this->NM_ajax_info['errList']['imagenter']) || !is_array($this->NM_ajax_info['errList']['imagenter']))
-                      {
-                          $this->NM_ajax_info['errList']['imagenter'] = array();
-                      }
-                      $this->NM_ajax_info['errList']['imagenter'][] = $this->Ini->Nm_lang['lang_errm_upld'];
-                  } 
-              } 
-              else 
-              { 
-                  if ($nm_browser == "Konqueror")  
-                  { 
-                      $this->imagenter = "" ; 
-                  } 
-                  else 
-                  { 
-                     $Campos_Crit .= "Foto " . $this->Ini->Nm_lang['lang_errm_ivtp'];  
-                      if (!isset($Campos_Erros['imagenter']))
-                      {
-                          $Campos_Erros['imagenter'] = array();
-                      }
-                      $Campos_Erros['imagenter'][] = $this->Ini->Nm_lang['lang_errm_ivtp'];
-                      if (!isset($this->NM_ajax_info['errList']['imagenter']) || !is_array($this->NM_ajax_info['errList']['imagenter']))
-                      {
-                          $this->NM_ajax_info['errList']['imagenter'] = array();
-                      }
-                      $this->NM_ajax_info['errList']['imagenter'][] = $this->Ini->Nm_lang['lang_errm_ivtp'];
-                  } 
-              } 
-          } 
-          elseif (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['imagenter']) && $this->imagenter_limpa != "S")
-          {
-              $this->imagenter = $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form']['imagenter'];
-          }
-      } 
       if ($this->nmgp_opcao != "excluir") 
       { 
           if ($this->archivo_cedula == "none") 
@@ -12884,12 +12730,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['tipo_documento'] = $this->tipo_documento;
     $this->nmgp_dados_form['documento'] = $this->documento;
     $this->nmgp_dados_form['dv'] = $this->dv;
-    if (empty($this->imagenter))
-    {
-        $this->imagenter = $this->nmgp_dados_form['imagenter'];
-    }
-    $this->nmgp_dados_form['imagenter'] = $this->imagenter;
-    $this->nmgp_dados_form['imagenter_limpa'] = $this->imagenter_limpa;
     $this->nmgp_dados_form['codigo_tercero'] = $this->codigo_tercero;
     $this->nmgp_dados_form['sexo'] = $this->sexo;
     $this->nmgp_dados_form['notificar'] = $this->notificar;
@@ -12929,12 +12769,12 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['loatiende'] = $this->loatiende;
     $this->nmgp_dados_form['autorizado'] = $this->autorizado;
     $this->nmgp_dados_form['relleno2'] = $this->relleno2;
-    $this->nmgp_dados_form['nacimiento'] = (strlen(trim($this->nacimiento)) > 19) ? str_replace(".", ":", $this->nacimiento) : trim($this->nacimiento);
+    $this->nmgp_dados_form['direcciones'] = $this->direcciones;
+    $this->nmgp_dados_form['sucur_cliente'] = $this->sucur_cliente;
     $this->nmgp_dados_form['detalle_tributario'] = $this->detalle_tributario;
     $this->nmgp_dados_form['responsabilidad_fiscal'] = $this->responsabilidad_fiscal;
     $this->nmgp_dados_form['ciiu'] = $this->ciiu;
-    $this->nmgp_dados_form['sucur_cliente'] = $this->sucur_cliente;
-    $this->nmgp_dados_form['sucursales'] = $this->sucursales;
+    $this->nmgp_dados_form['nacimiento'] = (strlen(trim($this->nacimiento)) > 19) ? str_replace(".", ":", $this->nacimiento) : trim($this->nacimiento);
     $this->nmgp_dados_form['fechault'] = (strlen(trim($this->fechault)) > 19) ? str_replace(".", ":", $this->fechault) : trim($this->fechault);
     $this->nmgp_dados_form['saldo'] = $this->saldo;
     $this->nmgp_dados_form['afiliacion'] = (strlen(trim($this->afiliacion)) > 19) ? str_replace(".", ":", $this->afiliacion) : trim($this->afiliacion);
@@ -12995,6 +12835,12 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['es_restaurante'] = $this->es_restaurante;
     $this->nmgp_dados_form['porcentaje_propina_sugerida'] = $this->porcentaje_propina_sugerida;
     $this->nmgp_dados_form['con_actual'] = $this->con_actual;
+    if (empty($this->imagenter))
+    {
+        $this->imagenter = $this->nmgp_dados_form['imagenter'];
+    }
+    $this->nmgp_dados_form['imagenter'] = $this->imagenter;
+    $this->nmgp_dados_form['imagenter_limpa'] = $this->imagenter_limpa;
     $this->nmgp_dados_form['creado'] = $this->creado;
     $this->nmgp_dados_form['disponible'] = $this->disponible;
     $this->nmgp_dados_form['id_pedido_tmp'] = $this->id_pedido_tmp;
@@ -13005,6 +12851,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['nube'] = $this->nube;
     $this->nmgp_dados_form['latitude'] = $this->latitude;
     $this->nmgp_dados_form['longitude'] = $this->longitude;
+    $this->nmgp_dados_form['sucursales'] = $this->sucursales;
     $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form'] = $this->nmgp_dados_form;
    }
    function nm_tira_formatacao()
@@ -13949,7 +13796,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $this->ajax_return_values_tipo_documento();
           $this->ajax_return_values_documento();
           $this->ajax_return_values_dv();
-          $this->ajax_return_values_imagenter();
           $this->ajax_return_values_codigo_tercero();
           $this->ajax_return_values_sexo();
           $this->ajax_return_values_notificar();
@@ -13989,12 +13835,12 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $this->ajax_return_values_loatiende();
           $this->ajax_return_values_autorizado();
           $this->ajax_return_values_relleno2();
-          $this->ajax_return_values_nacimiento();
+          $this->ajax_return_values_direcciones();
+          $this->ajax_return_values_sucur_cliente();
           $this->ajax_return_values_detalle_tributario();
           $this->ajax_return_values_responsabilidad_fiscal();
           $this->ajax_return_values_ciiu();
-          $this->ajax_return_values_sucur_cliente();
-          $this->ajax_return_values_sucursales();
+          $this->ajax_return_values_nacimiento();
           $this->ajax_return_values_fechault();
           $this->ajax_return_values_saldo();
           $this->ajax_return_values_afiliacion();
@@ -14053,6 +13899,23 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               if (isset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['grid_gestor_archivos_tercero_script_case_init'] ]['grid_gestor_archivos_tercero']['total']))
               {
                   unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['grid_gestor_archivos_tercero_script_case_init'] ]['grid_gestor_archivos_tercero']['total']);
+              }
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['foreign_key']['idter'] = $this->nmgp_dados_form['idtercero'];
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['where_filter'] = "idter = " . $this->nmgp_dados_form['idtercero'] . "";
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['where_detal']  = "idter = " . $this->nmgp_dados_form['idtercero'] . "";
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['total'] < 0)
+              {
+                  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['where_filter'] = "1 <> 1";
+              }
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['reg_start'] = "";
+              unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['total']);
+              foreach ($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob'] as $i => $v)
+              {
+                  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion'][$i] = $v;
+              }
+              if (isset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['total']))
+              {
+                  unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['form_direccion_mob_script_case_init'] ]['form_direccion_mob']['total']);
               }
           }
    } // ajax_return_values
@@ -14294,76 +14157,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_tipo_docume
                        'row'    => '',
                'type'    => 'text',
                'valList' => array($sTmpValue),
-              );
-          }
-   }
-
-          //----- imagenter
-   function ajax_return_values_imagenter($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("imagenter", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->imagenter);
-              $aLookup = array();
-   $out_imagenter = '';
-   $out1_imagenter = '';
-   if ('' != $this->imagenter_ul_name && @is_file($this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->imagenter_ul_name))
-   {
-       $this->imagenter = @file_get_contents($this->Ini->root . $this->Ini->path_imag_temp . '/' . $this->imagenter_ul_name);
-   }
-   if ($this->imagenter != "" && $this->imagenter != "none")   
-   { 
-       $out_imagenter = $this->Ini->path_imag_temp . "/sc_imagenter_" . $_SESSION['scriptcase']['sc_num_img'] . session_id() . ".gif" ;  
-       $out1_imagenter = $out_imagenter; 
-       $arq_imagenter = fopen($this->Ini->root . $out_imagenter, "w") ;  
-       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access)) 
-       { 
-           $nm_tmp = nm_conv_img_access(substr($this->imagenter, 0, 12));
-           if (substr($this->imagenter, 0, 4) != "*nm*" && substr($nm_tmp, 0, 4) == "*nm*") 
-           { 
-               $this->imagenter = nm_conv_img_access($this->imagenter);
-           } 
-       } 
-       if (substr($this->imagenter, 0, 4) == "*nm*") 
-       { 
-           $this->imagenter = substr($this->imagenter, 4) ; 
-           $this->imagenter = base64_decode($this->imagenter) ; 
-       } 
-       $img_pos_bm = strpos($this->imagenter, "BM") ; 
-       if (!$img_pos_bm === FALSE && $img_pos_bm == 78) 
-       { 
-           $this->imagenter = substr($this->imagenter, $img_pos_bm) ; 
-       } 
-       fwrite($arq_imagenter, $this->imagenter) ;  
-       fclose($arq_imagenter) ;  
-       $sc_obj_img = new nm_trata_img($this->Ini->root . $out_imagenter, true);
-       $this->nmgp_return_img['imagenter'][0] = $sc_obj_img->getHeight();
-       $this->nmgp_return_img['imagenter'][1] = $sc_obj_img->getWidth();
-       $_SESSION['scriptcase']['sc_num_img']++ ; 
-       $out_imagenter = $this->Ini->path_imag_temp . "/sc_" . "imagenter_" . $_SESSION['scriptcase']['sc_num_img'] . session_id() . ".gif" ; 
-       $_SESSION['scriptcase']['sc_num_img']++ ; 
-       if (!$this->Ini->Gd_missing)
-       { 
-           $sc_obj_img = new nm_trata_img($this->Ini->root . $out1_imagenter, true);
-           $sc_obj_img->setWidth(80);
-           $sc_obj_img->setHeight(80);
-           $sc_obj_img->setManterAspecto(true);
-           $sc_obj_img->createImg($this->Ini->root . $out_imagenter);
-       } 
-       else 
-       { 
-           $out_imagenter = $out1_imagenter;
-       } 
-       $_SESSION['scriptcase']['sc_num_img']++ ; 
-   } 
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['imagenter'] = array(
-                       'row'    => '',
-               'type'    => 'imagem',
-               'valList' => array($this->Ini->Nm_lang['lang_othr_show_imgg']),
-               'imgFile' => $out_imagenter,
-               'imgOrig' => $out1_imagenter,
-               'keepImg' => $sKeepImage,
               );
           }
    }
@@ -16878,19 +16671,66 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_autorizado'
           }
    }
 
-          //----- nacimiento
-   function ajax_return_values_nacimiento($bForce = false)
+          //----- direcciones
+   function ajax_return_values_direcciones($bForce = false)
    {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("nacimiento", $this->nmgp_refresh_fields)) || $bForce)
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("direcciones", $this->nmgp_refresh_fields)) || $bForce)
           {
-              $sTmpValue = NM_charset_to_utf8($this->nacimiento);
+              $sTmpValue = NM_charset_to_utf8($this->direcciones);
               $aLookup = array();
           $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['nacimiento'] = array(
+          $this->NM_ajax_info['fldList']['direcciones'] = array(
                        'row'    => '',
                'type'    => 'text',
                'valList' => array($sTmpValue),
               );
+          }
+   }
+
+          //----- sucur_cliente
+   function ajax_return_values_sucur_cliente($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("sucur_cliente", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->sucur_cliente);
+              $aLookup = array();
+              $this->_tmp_lookup_sucur_cliente = $this->sucur_cliente;
+
+$aLookup[] = array(terceros_mob_pack_protect_string('SI') => str_replace('<', '&lt;',terceros_mob_pack_protect_string("SI")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_sucur_cliente'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['sucur_cliente']) && !empty($this->NM_ajax_info['select_html']['sucur_cliente']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['sucur_cliente']);
+          }
+          $this->NM_ajax_info['fldList']['sucur_cliente'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => true,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-sucur_cliente',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['sucur_cliente']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['sucur_cliente']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['sucur_cliente']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['sucur_cliente']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['sucur_cliente']['labList'] = $aLabel;
           }
    }
 
@@ -16972,75 +16812,18 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_autorizado'
           }
    }
 
-          //----- sucur_cliente
-   function ajax_return_values_sucur_cliente($bForce = false)
+          //----- nacimiento
+   function ajax_return_values_nacimiento($bForce = false)
    {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("sucur_cliente", $this->nmgp_refresh_fields)) || $bForce)
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("nacimiento", $this->nmgp_refresh_fields)) || $bForce)
           {
-              $sTmpValue = NM_charset_to_utf8($this->sucur_cliente);
+              $sTmpValue = NM_charset_to_utf8($this->nacimiento);
               $aLookup = array();
-              $this->_tmp_lookup_sucur_cliente = $this->sucur_cliente;
-
-$aLookup[] = array(terceros_mob_pack_protect_string('SI') => str_replace('<', '&lt;',terceros_mob_pack_protect_string("SI")));
-$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_sucur_cliente'][] = 'SI';
           $aLookupOrig = $aLookup;
-          $sOptComp = "";
-          if (isset($this->NM_ajax_info['select_html']['sucur_cliente']) && !empty($this->NM_ajax_info['select_html']['sucur_cliente']))
-          {
-              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['sucur_cliente']);
-          }
-          $this->NM_ajax_info['fldList']['sucur_cliente'] = array(
+          $this->NM_ajax_info['fldList']['nacimiento'] = array(
                        'row'    => '',
-               'type'    => 'checkbox',
-               'switch'  => true,
-               'valList' => explode(';', $sTmpValue),
-               'colNum'  => 1,
-               'optComp'  => $sOptComp,
-               'optClass' => 'sc-ui-checkbox-sucur_cliente',
-              );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['sucur_cliente']['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['sucur_cliente']['valList'][$i] = terceros_mob_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['sucur_cliente']['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['sucur_cliente']['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['sucur_cliente']['labList'] = $aLabel;
-          }
-   }
-
-          //----- sucursales
-   function ajax_return_values_sucursales($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("sucursales", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->sucursales);
-              $aLookup = array();
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/usr__NM__ico__NM__shop_cafe_22672.png"))
-          { 
-              $sucursales = "&nbsp;" ;  
-          } 
-          else 
-          { 
-              $sucursales = "<img border=\"0\" src=\"" . $this->Ini->path_imag_cab . "/usr__NM__ico__NM__shop_cafe_22672.png\"/>" ; 
-          } 
-    $sTmpImgHtml = "<a href=\"javascript:nm_gp_submit('" . $this->Ini->link_form_direccion_edit . "', '$this->nm_location', 'cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout', '', '_self', '0', '0', 'form_direccion')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $sucursales . "</font></a>";
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['sucursales'] = array(
-                       'row'    => '',
-               'type'    => 'imagehtml',
+               'type'    => 'text',
                'valList' => array($sTmpValue),
-               'imgHtml' => $sTmpImgHtml,
               );
           }
    }
@@ -21951,23 +21734,23 @@ $this->sc_temp_sa=$this->apellido2 ;
 $this->sc_temp_nomb=$this->nombres ;
 if($this->idtercero >0)
 	{
-	$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
-	$this->Ini->nm_hidden_blocos[12] = "on"; $this->NM_ajax_info['blockDisplay']['12'] = 'on';
-	$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
-	$this->Ini->nm_hidden_blocos[11] = "on"; $this->NM_ajax_info['blockDisplay']['11'] = 'on';
-	$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
-	;
 	$this->Ini->nm_hidden_blocos[9] = "on"; $this->NM_ajax_info['blockDisplay']['9'] = 'on';
+	$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
+	$this->Ini->nm_hidden_blocos[6] = "on"; $this->NM_ajax_info['blockDisplay']['6'] = 'on';
+	;
+	$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
+	;
+	$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
 	}
 else
 	{
-	$this->Ini->nm_hidden_blocos[8] = "off"; $this->NM_ajax_info['blockDisplay']['8'] = 'off';
-	$this->Ini->nm_hidden_blocos[12] = "off"; $this->NM_ajax_info['blockDisplay']['12'] = 'off';
-	$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
-	$this->Ini->nm_hidden_blocos[11] = "off"; $this->NM_ajax_info['blockDisplay']['11'] = 'off';
-	$this->Ini->nm_hidden_blocos[10] = "off"; $this->NM_ajax_info['blockDisplay']['10'] = 'off';
-	;
 	$this->Ini->nm_hidden_blocos[9] = "off"; $this->NM_ajax_info['blockDisplay']['9'] = 'off';
+	$this->Ini->nm_hidden_blocos[10] = "off"; $this->NM_ajax_info['blockDisplay']['10'] = 'off';
+	$this->Ini->nm_hidden_blocos[6] = "off"; $this->NM_ajax_info['blockDisplay']['6'] = 'off';
+	;
+	$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
+	;
+	$this->Ini->nm_hidden_blocos[8] = "off"; $this->NM_ajax_info['blockDisplay']['8'] = 'off';
 	}
 if($this->documento !="")
 	{
@@ -22037,9 +21820,9 @@ if($this->documento !="")
 	
 	if($this->cliente =='SI')
 		{	
+		
 		if($this->credito =='SI')
 			{
-				
 				$this->cupodis =$this->cupo -$this->saldo ;
 				if($this->cupodis !=$this->cupo ){$this->sc_ajax_javascript('nm_field_disabled', array("credito=disabled", ""));
 ;}
@@ -22064,14 +21847,13 @@ if($this->documento !="")
 		$this->cupodis =0;
 		$this->cupo =0;
 		$this->efec_retencion ='N';
-		
 		}
 	}
 
 	
 if($this->proveedor =='SI')
 	{
-	$this->Ini->nm_hidden_blocos[15] = "on"; $this->NM_ajax_info['blockDisplay']['15'] = 'on';
+	$this->Ini->nm_hidden_blocos[13] = "on"; $this->NM_ajax_info['blockDisplay']['13'] = 'on';
 	$this->nmgp_cmp_hidden["autoretenedor"] = "on"; $this->NM_ajax_info['fieldDisplay']['autoretenedor'] = 'on';
 	$this->nmgp_cmp_hidden["creditoprov"] = "on"; $this->NM_ajax_info['fieldDisplay']['creditoprov'] = 'on';
 	$this->nmgp_cmp_hidden["dias"] = "on"; $this->NM_ajax_info['fieldDisplay']['dias'] = 'on';
@@ -22084,7 +21866,7 @@ else
 	}
 if($this->sucur_cliente =='SI')
 	{
-	$this->Ini->nm_hidden_blocos[11] = "on"; $this->NM_ajax_info['blockDisplay']['11'] = 'on';
+	;
 	}
 else
 	{
@@ -22312,10 +22094,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $this->sc_erro_insert = "";
       $this->sc_erro_update = "";
       $this->sc_erro_delete = "";
-      if ($this->nmgp_opcao != "incluir")  
-      {
-           unset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_clone']['imagenter']);
-      }
       if (!empty($this->sc_force_zero))
       {
           foreach ($this->sc_force_zero as $i_force_zero => $sc_force_zero_field)
@@ -22668,7 +22446,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $NM_val_form['tipo_documento'] = $this->tipo_documento;
       $NM_val_form['documento'] = $this->documento;
       $NM_val_form['dv'] = $this->dv;
-      $NM_val_form['imagenter'] = $this->imagenter;
       $NM_val_form['codigo_tercero'] = $this->codigo_tercero;
       $NM_val_form['sexo'] = $this->sexo;
       $NM_val_form['notificar'] = $this->notificar;
@@ -22708,12 +22485,12 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $NM_val_form['loatiende'] = $this->loatiende;
       $NM_val_form['autorizado'] = $this->autorizado;
       $NM_val_form['relleno2'] = $this->relleno2;
-      $NM_val_form['nacimiento'] = $this->nacimiento;
+      $NM_val_form['direcciones'] = $this->direcciones;
+      $NM_val_form['sucur_cliente'] = $this->sucur_cliente;
       $NM_val_form['detalle_tributario'] = $this->detalle_tributario;
       $NM_val_form['responsabilidad_fiscal'] = $this->responsabilidad_fiscal;
       $NM_val_form['ciiu'] = $this->ciiu;
-      $NM_val_form['sucur_cliente'] = $this->sucur_cliente;
-      $NM_val_form['sucursales'] = $this->sucursales;
+      $NM_val_form['nacimiento'] = $this->nacimiento;
       $NM_val_form['fechault'] = $this->fechault;
       $NM_val_form['saldo'] = $this->saldo;
       $NM_val_form['afiliacion'] = $this->afiliacion;
@@ -22754,6 +22531,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $NM_val_form['es_restaurante'] = $this->es_restaurante;
       $NM_val_form['porcentaje_propina_sugerida'] = $this->porcentaje_propina_sugerida;
       $NM_val_form['con_actual'] = $this->con_actual;
+      $NM_val_form['imagenter'] = $this->imagenter;
       $NM_val_form['creado'] = $this->creado;
       $NM_val_form['disponible'] = $this->disponible;
       $NM_val_form['id_pedido_tmp'] = $this->id_pedido_tmp;
@@ -22764,6 +22542,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $NM_val_form['nube'] = $this->nube;
       $NM_val_form['latitude'] = $this->latitude;
       $NM_val_form['longitude'] = $this->longitude;
+      $NM_val_form['sucursales'] = $this->sucursales;
       if ($this->idtercero === "" || is_null($this->idtercero))  
       { 
           $this->idtercero = 0;
@@ -23367,49 +23146,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                   $NM_val_null[] = "representante";
               } 
           }
-          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-          { 
-              $nm_tmp = nm_conv_img_access(substr($this->imagenter, 0, 12));
-              if (substr($this->imagenter, 0, 4) != "*nm*" && substr($nm_tmp, 0, 4) == "*nm*") 
-              { 
-                  $this->imagenter = nm_conv_img_access($this->imagenter);
-              } 
-              if (!empty($this->imagenter) && $this->imagenter != 'null' && substr($this->imagenter, 0, 4) != "*nm*") 
-              { 
-                  $this->imagenter = "*nm*" . base64_encode($this->imagenter) ; 
-              } 
-          } 
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-          { 
-              if ($this->Ini->nm_tpbanco != "pdo_sqlsrv" && !empty($this->imagenter) && $this->imagenter != 'null' && substr($this->imagenter, 0, 4) != "*nm*") 
-              { 
-                  $this->imagenter = "*nm*" . base64_encode($this->imagenter) ; 
-              } 
-          } 
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-          { 
-          } 
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
-          { }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-          { }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
-          { }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-          { }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
-          { }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-          { 
-              if ($this->Ini->nm_tpbanco != 'pdo_ibm' && !empty($this->imagenter) && $this->imagenter != 'null' && substr($this->imagenter, 0, 4) != "*nm*") 
-              { 
-                  $this->imagenter = "*nm*" . base64_encode($this->imagenter) ; 
-              } 
-          } 
-          else
-          { 
-              $this->imagenter =  substr($this->Db->qstr($this->imagenter), 1, -1);
-          } 
           if ($this->nmgp_opcao == "alterar") 
           {
               if ($this->imagenter == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
@@ -23725,6 +23461,13 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->archivos = "null"; 
               $NM_val_null[] = "archivos";
           } 
+          $this->direcciones_before_qstr = $this->direcciones;
+          $this->direcciones = substr($this->Db->qstr($this->direcciones), 1, -1); 
+          if ($this->direcciones == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->direcciones = "null"; 
+              $NM_val_null[] = "direcciones";
+          } 
       }
       if ($this->nmgp_opcao == "alterar") 
       {
@@ -23888,44 +23631,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               } 
               $aDoNotUpdate = array();
               $aEraseFiles  = array();
-              $temp_cmd_sql = "";
-              if ($this->imagenter_limpa == "S")
-              {
-                  if ($this->imagenter != "null")
-                  {
-                      $this->imagenter = '';
-                  }
-                  if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
-                  {
-                  }
-                  else
-                  {
-                      $temp_cmd_sql = "imagenter = '" . $this->imagenter . "'";
-                  }
-                  $this->imagenter = "";
-              }
-              else
-              {
-                  if ($this->imagenter != "none" && $this->imagenter != "")
-                  {
-                      $NM_conteudo =  $this->imagenter;
-                      if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
-                      {
-                      }
-                      else
-                      {
-                          $temp_cmd_sql .= " imagenter = '$NM_conteudo'";
-                      }
-                  }
-                  else
-                  {
-                      $aDoNotUpdate[] = "imagenter";
-                  }
-              }
-              if (!empty($temp_cmd_sql))
-              {
-                  $SC_fields_update[] = $temp_cmd_sql;
-              }
               $temp_cmd_sql = "";
               if ($this->archivo_cedula_limpa == "S")
               {
@@ -24094,33 +23799,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               {
                   $SC_fields_update[] = $temp_cmd_sql;
               }
-              if ($this->imagenter_limpa == "S" || ($this->imagenter != "none" && $this->imagenter != "" && in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))) 
-              { 
-                  if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase)) 
-                  { 
-                      $SC_fields_update[] = "imagenter = ''"; 
-                  } 
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql)) 
-                  { 
-                      $SC_fields_update[] = "imagenter = ''"; 
-                  } 
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access)) 
-                  { 
-                      $SC_fields_update[] = "imagenter = ''"; 
-                  } 
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix)) 
-                  { 
-                      $SC_fields_update[] = "imagenter = null"; 
-                  } 
-                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite)) 
-                  { 
-                      $SC_fields_update[] = "imagenter = ''"; 
-                  } 
-                  else 
-                  { 
-                      $SC_fields_update[] = "imagenter = empty_blob()"; 
-                  } 
-              } 
               $comando .= implode(",", $SC_fields_update);  
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               {
@@ -24179,9 +23857,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                       }   
                   }   
               }   
-              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql)) 
-              { 
-              }   
               $this->documento = $this->documento_before_qstr;
               $this->nombres = $this->nombres_before_qstr;
               $this->direccion = $this->direccion_before_qstr;
@@ -24225,40 +23900,10 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->estado = $this->estado_before_qstr;
               $this->nombre_empresa_bd = $this->nombre_empresa_bd_before_qstr;
               $this->archivos = $this->archivos_before_qstr;
+              $this->direcciones = $this->direcciones_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
-                  if ($this->imagenter_limpa == "S" && !in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle) && !in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix)) 
-                  { 
-                      $_SESSION['scriptcase']['sc_sql_ult_comando'] = "UpdateBlob($this->Ini->nm_tabela, \"imagenter\", \"\",  \"idtercero = $this->idtercero\")"; 
-                      $rs = $this->Db->UpdateBlob($this->Ini->nm_tabela, "imagenter", "",  "idtercero = $this->idtercero"); 
-                  } 
-                  else 
-                  { 
-                      if ($this->imagenter != "none" && $this->imagenter != "") 
-                      { 
-                          $_SESSION['scriptcase']['sc_sql_ult_comando'] = "UpdateBlob($this->Ini->nm_tabela, \"imagenter\", $this->imagenter,  \"idtercero = $this->idtercero\")"; 
-                          $rs = $this->Db->UpdateBlob($this->Ini->nm_tabela, "imagenter", $this->imagenter,  "idtercero = $this->idtercero"); 
-                      } 
-                  } 
-                  if ($rs === false) 
-                  { 
-                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_updt'], $this->Db->ErrorMsg()); 
-                      $this->NM_rollback_db(); 
-                      if ($this->NM_ajax_flag)
-                      {
-                          terceros_mob_pack_ajax_response();
-                      }
-                      exit;  
-                  }   
               }   
-              if ($this->imagenter_limpa == "S")
-              {
-                  $this->NM_ajax_info['fldList']['imagenter_salva'] = array(
-                      'row'     => '',
-                      'type'    => 'text',
-                      'valList' => array(''),
-                  );
-              }
               if ($this->archivo_cedula_limpa == "S")
               {
                   $this->NM_ajax_info['fldList']['archivo_cedula_salva'] = array(
@@ -24313,11 +23958,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['db_changed'] = true;
               if ($this->NM_ajax_flag) {
                   $this->NM_ajax_info['clearUpload'] = 'S';
-                  $this->NM_ajax_info['fldList']['imagenter_salva'] = array(
-                      'row'     => '',
-                      'type'    => 'text',
-                      'valList' => array(''),
-                  );
                   $this->NM_ajax_info['fldList']['archivo_cedula_salva'] = array(
                       'row'     => '',
                       'type'    => 'text',
@@ -24445,6 +24085,8 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               elseif (isset($this->n_trabajadores)) { $this->nm_limpa_alfa($this->n_trabajadores); }
               if     (isset($NM_val_form) && isset($NM_val_form['archivos'])) { $this->archivos = $NM_val_form['archivos']; }
               elseif (isset($this->archivos)) { $this->nm_limpa_alfa($this->archivos); }
+              if     (isset($NM_val_form) && isset($NM_val_form['direcciones'])) { $this->direcciones = $NM_val_form['direcciones']; }
+              elseif (isset($this->direcciones)) { $this->nm_limpa_alfa($this->direcciones); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -24484,7 +24126,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('tipo', 'regimen', 'tipo_documento', 'documento', 'dv', 'imagenter', 'codigo_tercero', 'sexo', 'notificar', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'tel_cel', 'urlmail', 'idtercero', 'r_social', 'nombres', 'nombre_comercil', 'representante', 'direccion', 'departamento', 'idmuni', 'ciudad', 'codigo_postal', 'observaciones', 'lenguaje', 'c_postal', 'correo_notificafe', 'celular_notificafe', 'cliente', 'proveedor', 'empleado', 'es_tecnico', 'activo', 'credito', 'cupo', 'cupodis', 'dias_credito', 'dias_mora', 'efec_retencion', 'listaprecios', 'loatiende', 'autorizado', 'relleno2', 'nacimiento', 'detalle_tributario', 'responsabilidad_fiscal', 'ciiu', 'sucur_cliente', 'sucursales', 'fechault', 'saldo', 'afiliacion', 'es_cajero', 'cupo_vendedor', 'autoretenedor', 'creditoprov', 'dias', 'url', 'contacto', 'telefonos_prov', 'email', 'fechultcomp', 'saldoapagar', 'codigo_ter', 'zona_clientes', 'clasificacion_clientes', 'puc_auxiliar_deudores', 'puc_retefuente_ventas', 'puc_retefuente_servicios_clie', 'puc_auxiliar_proveedores', 'puc_retefuente_compras', 'puc_retefuente_servicios_prov', 'archivo_cedula', 'archivo_rut', 'archivo_nit', 'archivo_pago', 'id_plan', 'valor_plan', 'fecha_registro_fe', 'nombre_contador', 'estado', 'si_nomina', 'n_trabajadores', 'si_factura_electronica', 'nombre_empresa_bd', 'archivos', 'es_restaurante', 'porcentaje_propina_sugerida'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('tipo', 'regimen', 'tipo_documento', 'documento', 'dv', 'codigo_tercero', 'sexo', 'notificar', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'tel_cel', 'urlmail', 'idtercero', 'r_social', 'nombres', 'nombre_comercil', 'representante', 'direccion', 'departamento', 'idmuni', 'ciudad', 'codigo_postal', 'observaciones', 'lenguaje', 'c_postal', 'correo_notificafe', 'celular_notificafe', 'cliente', 'proveedor', 'empleado', 'es_tecnico', 'activo', 'credito', 'cupo', 'cupodis', 'dias_credito', 'dias_mora', 'efec_retencion', 'listaprecios', 'loatiende', 'autorizado', 'relleno2', 'direcciones', 'sucur_cliente', 'detalle_tributario', 'responsabilidad_fiscal', 'ciiu', 'nacimiento', 'fechault', 'saldo', 'afiliacion', 'es_cajero', 'cupo_vendedor', 'autoretenedor', 'creditoprov', 'dias', 'url', 'contacto', 'telefonos_prov', 'email', 'fechultcomp', 'saldoapagar', 'codigo_ter', 'zona_clientes', 'clasificacion_clientes', 'puc_auxiliar_deudores', 'puc_retefuente_ventas', 'puc_retefuente_servicios_clie', 'puc_auxiliar_proveedores', 'puc_retefuente_compras', 'puc_retefuente_servicios_prov', 'archivo_cedula', 'archivo_rut', 'archivo_nit', 'archivo_pago', 'id_plan', 'valor_plan', 'fecha_registro_fe', 'nombre_contador', 'estado', 'si_nomina', 'n_trabajadores', 'si_factura_electronica', 'nombre_empresa_bd', 'archivos', 'es_restaurante', 'porcentaje_propina_sugerida'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -24645,12 +24287,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           }
           if ($bInsertOk)
           { 
-              $_test_file = $this->fetchUniqueUploadName($this->imagenter_scfile_name, $dir_file, "imagenter");
-              if (trim($this->imagenter_scfile_name) != $_test_file)
-              {
-                  $this->imagenter_scfile_name = $_test_file;
-                  $this->imagenter = $_test_file;
-              }
               $dir_file = $this->Ini->path_doc . "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/" . "/"; 
               $_test_file = $this->fetchUniqueUploadName($this->archivo_cedula_scfile_name, $dir_file, "archivo_cedula");
               if (trim($this->archivo_cedula_scfile_name) != $_test_file)
@@ -24678,6 +24314,12 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               {
                   $this->archivo_pago_scfile_name = $_test_file;
                   $this->archivo_pago = $_test_file;
+              }
+              $_test_file = $this->fetchUniqueUploadName($this->imagenter_scfile_name, $dir_file, "imagenter");
+              if (trim($this->imagenter_scfile_name) != $_test_file)
+              {
+                  $this->imagenter_scfile_name = $_test_file;
+                  $this->imagenter = $_test_file;
               }
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
@@ -27959,9 +27601,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->estado = $this->estado_before_qstr;
               $this->nombre_empresa_bd = $this->nombre_empresa_bd_before_qstr;
               $this->archivos = $this->archivos_before_qstr;
-              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql)) 
-              { 
-              }   
+              $this->direcciones = $this->direcciones_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
                   if (trim($this->imagenter ) != "") 
@@ -28073,6 +27713,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->estado = $this->estado_before_qstr;
               $this->nombre_empresa_bd = $this->nombre_empresa_bd_before_qstr;
               $this->archivos = $this->archivos_before_qstr;
+              $this->direcciones = $this->direcciones_before_qstr;
               $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
@@ -28101,6 +27742,16 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
 
           $bDelecaoOk = true;
           $sMsgErro   = '';
+          if ($bDelecaoOk)
+          {
+              $sDetailWhere = "idter = " . $this->idtercero . "";
+              $this->form_direccion_mob->ini_controle();
+              if ($this->form_direccion_mob->temRegistros($sDetailWhere))
+              {
+                  $bDelecaoOk = false;
+                  $sMsgErro   = $this->Ini->Nm_lang['lang_errm_fkvi'];
+              }
+          }
 
           if ($bDelecaoOk)
           {
@@ -28277,8 +27928,9 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 }
   
 $doc=$this->documento ;
+$sql1 = "select idtercero from terceros where documento = '".$doc."'";
  
-      $nm_select = "select idtercero from terceros where documento=$doc"; 
+      $nm_select = $sql1; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->ds_terc = array();
@@ -28288,9 +27940,6 @@ $doc=$this->documento ;
           $nm_count = $SCrx->FieldCount();
           while (!$SCrx->EOF)
           { 
-                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
-                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
-                 $SCrx->fields[0] = (string)$SCrx->fields[0];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
                       $this->ds_terc[$SCy] [$SCx] = $SCrx->fields[$SCx];
@@ -28308,25 +27957,44 @@ $doc=$this->documento ;
 ;
 if(isset($this->ds_terc[0][0]))
 	{
-	$idt= $this->ds_terc[0][0];
-	$muni=$this->idmuni ;
+	$idt  = $this->ds_terc[0][0];
+	$muni = $this->idmuni ;
+	$sql2 = "select iddepar from municipio where idmun = '".$muni."'";
 	 
-      $nm_select = "select iddepar from municipio where idmun=$muni"; 
+      $nm_select = $sql2; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->des = $this->Db->Execute($nm_select)) 
-      { }
+      $this->des = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->des[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
       elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
       { 
           $this->des = false;
           $this->des_erro = $this->Db->ErrorMsg();
       } 
 ;
-	$dep=substr($this->des , 7);
+	if(isset($this->des[0][0]))
+		{
+		$dep = $this->des[0][0];
+		}
+	
 	if($this->cliente =="SI")
 		{
-	
-     $nm_select ="insert direccion SET idter=$idt, iddepar=$dep, idmuni=$muni, direc='$this->direccion', obs='PRINCIPAL', telefono='$this->tel_cel', ciudad='$this->ciudad',  codigo_postal='$this->codigo_postal', lenguaje='$this->lenguaje' "; 
+		
+     $nm_select ="insert direccion SET idter = '".$idt."', iddepar = '".$dep."', idmuni = '".$muni."', direc = '".$this->direccion ."', obs = 'PRINCIPAL', telefono = '".$this->tel_cel ."', ciudad = '".$this->ciudad ."',  codigo_postal = '".$this->codigo_postal ."', lenguaje = '".$this->lenguaje ."'"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -28781,7 +28449,7 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     $original_idtercero = $this->idtercero;
 }
   
-     $nm_select ="delete from direccion where idter=$this->idtercero "; 
+     $nm_select ="delete from direccion where idter= '".$this->idtercero ."'"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -28831,9 +28499,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['parms'] = "idtercero?#?$this->idtercero?@?"; 
       }
-      $this->nmgp_dados_form['imagenter'] = ""; 
-      $this->imagenter_limpa = ""; 
-      $this->imagenter_salva = ""; 
       $this->nmgp_dados_form['archivo_cedula'] = ""; 
       $this->archivo_cedula_limpa = ""; 
       $this->archivo_cedula_salva = ""; 
@@ -29700,6 +29365,8 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["responsabilidad_fiscal"] = $this->responsabilidad_fiscal;
               $this->sucursales = "";  
               $this->nmgp_dados_form["sucursales"] = $this->sucursales;
+              $this->direcciones = "";  
+              $this->nmgp_dados_form["direcciones"] = $this->direcciones;
               $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
               if ($this->nmgp_clone != "S")
@@ -29801,6 +29468,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                   $this->nombre_empresa_bd = $this->nmgp_dados_select['nombre_empresa_bd'];  
                   $this->n_trabajadores = $this->nmgp_dados_select['n_trabajadores'];  
                   $this->archivos = $this->nmgp_dados_select['archivos'];  
+                  $this->direcciones = $this->nmgp_dados_select['direcciones'];  
               }
           }
           if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['foreign_key']))
@@ -29825,6 +29493,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       { 
           $this->nm_proc_onload();
       }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion_mob']['embutida_parms'] = "cliente*scin" . $this->nmgp_dados_form['idtercero'] . "*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_gestor_archivos_tercero']['embutida_parms'] = "gcctercero*scin" . $this->nmgp_dados_form['documento'] . "*scoutNMSC_inicial*scininicio*scoutNMSC_cab*scinN*scoutNMSC_nav*scinN*scout";
   }
 // 
@@ -30260,7 +29929,7 @@ if($this->sc_temp_id_tercero>0)
 		$this->credito ='NO';
 		$this->cupodis =0;
 		$this->cupo =0;
-		$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
+		$this->Ini->nm_hidden_blocos[6] = "on"; $this->NM_ajax_info['blockDisplay']['6'] = 'on';
 		$this->nmgp_cmp_hidden["credito"] = "on"; $this->NM_ajax_info['fieldDisplay']['credito'] = 'on';
 		$this->nmgp_cmp_hidden["cupodis"] = "on"; $this->NM_ajax_info['fieldDisplay']['cupodis'] = 'on';
 		$this->nmgp_cmp_hidden["cupo"] = "on"; $this->NM_ajax_info['fieldDisplay']['cupo'] = 'on';
@@ -30270,9 +29939,9 @@ if($this->sc_temp_id_tercero>0)
 		$this->nmgp_cmp_hidden["efec_retencion"] = "on"; $this->NM_ajax_info['fieldDisplay']['efec_retencion'] = 'on';
 		$this->nmgp_cmp_hidden["listaprecios"] = "on"; $this->NM_ajax_info['fieldDisplay']['listaprecios'] = 'on';
 		$this->nmgp_cmp_hidden["loatiende"] = "on"; $this->NM_ajax_info['fieldDisplay']['loatiende'] = 'on';
-		$this->Ini->nm_hidden_blocos[8] = "on"; $this->NM_ajax_info['blockDisplay']['8'] = 'on';
-		$this->Ini->nm_hidden_blocos[12] = "on"; $this->NM_ajax_info['blockDisplay']['12'] = 'on';
+		$this->Ini->nm_hidden_blocos[9] = "on"; $this->NM_ajax_info['blockDisplay']['9'] = 'on';
 		$this->Ini->nm_hidden_blocos[10] = "on"; $this->NM_ajax_info['blockDisplay']['10'] = 'on';
+		$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
 		$this->sc_set_focus('credito');
 		
 		
@@ -30284,10 +29953,10 @@ if($this->sc_temp_id_tercero>0)
 		$this->cupo =0;
 		$this->efec_retencion ='N';
 		
-		$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
-		$this->Ini->nm_hidden_blocos[8] = "off"; $this->NM_ajax_info['blockDisplay']['8'] = 'off';
-		$this->Ini->nm_hidden_blocos[12] = "off"; $this->NM_ajax_info['blockDisplay']['12'] = 'off';
+		$this->Ini->nm_hidden_blocos[6] = "off"; $this->NM_ajax_info['blockDisplay']['6'] = 'off';
+		$this->Ini->nm_hidden_blocos[9] = "off"; $this->NM_ajax_info['blockDisplay']['9'] = 'off';
 		$this->Ini->nm_hidden_blocos[10] = "off"; $this->NM_ajax_info['blockDisplay']['10'] = 'off';
+		$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
 		$this->sc_set_focus('proveedor');
 		}
 	}
@@ -30357,7 +30026,7 @@ $original_cupodis = $this->cupodis;
 
 if($this->credito =='SI')
 	{
-	$this->Ini->nm_hidden_blocos[7] = "on"; $this->NM_ajax_info['blockDisplay']['7'] = 'on';
+	$this->Ini->nm_hidden_blocos[6] = "on"; $this->NM_ajax_info['blockDisplay']['6'] = 'on';
 	$this->dias_credito =0;
 	$this->dias_mora =0;
 	$this->sc_ajax_javascript('nm_field_disabled', array("cupo=", ""));
@@ -30368,7 +30037,7 @@ if($this->credito =='SI')
 	}
 else
 	{
-	$this->Ini->nm_hidden_blocos[7] = "off"; $this->NM_ajax_info['blockDisplay']['7'] = 'off';
+	$this->Ini->nm_hidden_blocos[6] = "off"; $this->NM_ajax_info['blockDisplay']['6'] = 'off';
 	$this->cupo =0;
 	$this->cupodis =0;
 	$this->sc_ajax_javascript('nm_field_disabled', array("cupo=disabled", ""));
@@ -30845,8 +30514,8 @@ $original_dias = $this->dias;
 
 if($this->proveedor =='SI')
 	{
-	$this->Ini->nm_hidden_blocos[15] = "on"; $this->NM_ajax_info['blockDisplay']['15'] = 'on';
-	$this->Ini->nm_hidden_blocos[11] = "on"; $this->NM_ajax_info['blockDisplay']['11'] = 'on';
+	$this->Ini->nm_hidden_blocos[13] = "on"; $this->NM_ajax_info['blockDisplay']['13'] = 'on';
+	;
 	$this->nmgp_cmp_hidden["autoretenedor"] = "on"; $this->NM_ajax_info['fieldDisplay']['autoretenedor'] = 'on';
 	$this->nmgp_cmp_hidden["creditoprov"] = "on"; $this->NM_ajax_info['fieldDisplay']['creditoprov'] = 'on';
 	$this->nmgp_cmp_hidden["dias"] = "on"; $this->NM_ajax_info['fieldDisplay']['dias'] = 'on';
@@ -30856,8 +30525,8 @@ if($this->proveedor =='SI')
 	}
 else
 	{
-	$this->Ini->nm_hidden_blocos[15] = "off"; $this->NM_ajax_info['blockDisplay']['15'] = 'off';
-	$this->Ini->nm_hidden_blocos[11] = "off"; $this->NM_ajax_info['blockDisplay']['11'] = 'off';
+	$this->Ini->nm_hidden_blocos[13] = "off"; $this->NM_ajax_info['blockDisplay']['13'] = 'off';
+	;
 	$this->nmgp_cmp_hidden["autoretenedor"] = "off"; $this->NM_ajax_info['fieldDisplay']['autoretenedor'] = 'off';
 	$this->nmgp_cmp_hidden["creditoprov"] = "off"; $this->NM_ajax_info['fieldDisplay']['creditoprov'] = 'off';
 	$this->nmgp_cmp_hidden["dias"] = "off"; $this->NM_ajax_info['fieldDisplay']['dias'] = 'off';
@@ -31080,7 +30749,7 @@ if($this->idtercero >0)
          }
          $rf->Close();
       ;
-		$this->Ini->nm_hidden_blocos[11] = "on"; $this->NM_ajax_info['blockDisplay']['11'] = 'on';
+		;
 		$muni=$this->idmuni ;
 		 
       $nm_select = "select iddepar from municipio where idmun=$muni"; 
@@ -31563,76 +31232,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
          exit;
      }
 //-- 
-   if ($this->nmgp_opcao == "novo")
-   { 
-       $out_imagenter = "";  
-   } 
-   else 
-   { 
-       $out_imagenter = $this->imagenter;  
-   } 
-   if ($this->imagenter != "" && $this->imagenter != "none")   
-   { 
-       $out_imagenter = $this->Ini->path_imag_temp . "/sc_imagenter_" . $_SESSION['scriptcase']['sc_num_img'] . session_id() . ".gif" ;  
-       $arq_imagenter = fopen($this->Ini->root . $out_imagenter, "w") ;  
-       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access)) 
-       { 
-           $nm_tmp = nm_conv_img_access(substr($this->imagenter, 0, 12));
-           if (substr($this->imagenter, 0, 4) != "*nm*" && substr($nm_tmp, 0, 4) == "*nm*") 
-           { 
-               $this->imagenter = nm_conv_img_access($this->imagenter);
-           } 
-       } 
-       if (substr($this->imagenter, 0, 4) == "*nm*") 
-       { 
-           $this->imagenter = substr($this->imagenter, 4) ; 
-           $this->imagenter = base64_decode($this->imagenter) ; 
-       } 
-       $img_pos_bm = strpos($this->imagenter, "BM") ; 
-       if (!$img_pos_bm === FALSE && $img_pos_bm == 78) 
-       { 
-           $this->imagenter = substr($this->imagenter, $img_pos_bm) ; 
-       } 
-       fwrite($arq_imagenter, $this->imagenter) ;  
-       fclose($arq_imagenter) ;  
-       $sc_obj_img = new nm_trata_img($this->Ini->root . $out_imagenter, true);
-       $this->nmgp_return_img['imagenter'][0] = $sc_obj_img->getHeight();
-       $this->nmgp_return_img['imagenter'][1] = $sc_obj_img->getWidth();
-       $out1_imagenter = $out_imagenter; 
-       $_SESSION['scriptcase']['sc_num_img']++ ; 
-       $out_imagenter = $this->Ini->path_imag_temp . "/sc_" . "imagenter_" . $_SESSION['scriptcase']['sc_num_img'] . session_id() . ".gif" ; 
-       $_SESSION['scriptcase']['sc_num_img']++ ; 
-       if (!$this->Ini->Gd_missing)
-       { 
-           $sc_obj_img = new nm_trata_img($this->Ini->root . $out1_imagenter, true);
-           $sc_obj_img->setWidth(80);
-           $sc_obj_img->setHeight(80);
-           $sc_obj_img->setManterAspecto(true);
-           $sc_obj_img->createImg($this->Ini->root . $out_imagenter);
-       } 
-       else 
-       { 
-           $out_imagenter = $out1_imagenter;
-       } 
-       if ($this->Ini->Export_img_zip) {
-           $this->Ini->Img_export_zip[] = $this->Ini->root . $out_imagenter;
-           $out_imagenter = str_replace($this->Ini->path_imag_temp . "/", "", $out_imagenter);
-       } 
-       $_SESSION['scriptcase']['sc_num_img']++ ; 
-   } 
-   if (isset($_POST['nmgp_opcao']) && 'excluir' == $_POST['nmgp_opcao'] && $this->sc_evento != "delete" && (!isset($this->sc_evento_old) || 'delete' != $this->sc_evento_old))
-   {
-       global $temp_out_imagenter;
-       if (isset($temp_out_imagenter))
-       {
-           $out_imagenter = $temp_out_imagenter;
-       }
-       global $temp_out1_imagenter;
-       if (isset($temp_out1_imagenter))
-       {
-           $out1_imagenter = $temp_out1_imagenter;
-       }
-   }
    if ($this->archivo_cedula != "" && $this->archivo_cedula != "none")   
    { 
        $sTmpExtension = pathinfo($this->archivo_cedula, PATHINFO_EXTENSION);
@@ -31708,34 +31307,32 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                                 3 => 'on',
                                 4 => 'on',
                                 5 => 'on',
-                                6 => 'on',
                         ),
                         'cliente' => array(
+                                6 => 'on',
                                 7 => 'on',
                                 8 => 'on',
                                 9 => 'on',
                                 10 => 'on',
-                                11 => 'on',
-                                12 => 'on',
                         ),
                         'empleado' => array(
-                                13 => 'on',
+                                11 => 'on',
                         ),
                         'proveedor' => array(
+                                12 => 'on',
+                                13 => 'on',
                                 14 => 'on',
-                                15 => 'on',
-                                16 => 'on',
                         ),
                         'otros' => array(
+                                15 => 'on',
+                                16 => 'on',
                                 17 => 'on',
-                                18 => 'on',
-                                19 => 'on',
                         ),
                         'archivos' => array(
-                                20 => 'on',
+                                18 => 'on',
                         ),
                         'restaurante' => array(
-                                21 => 'on',
+                                19 => 'on',
                         ),
                 );
 
@@ -31746,22 +31343,20 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                         3 => 'datos',
                         4 => 'datos',
                         5 => 'datos',
-                        6 => 'datos',
+                        6 => 'cliente',
                         7 => 'cliente',
                         8 => 'cliente',
                         9 => 'cliente',
                         10 => 'cliente',
-                        11 => 'cliente',
-                        12 => 'cliente',
-                        13 => 'empleado',
+                        11 => 'empleado',
+                        12 => 'proveedor',
+                        13 => 'proveedor',
                         14 => 'proveedor',
-                        15 => 'proveedor',
-                        16 => 'proveedor',
+                        15 => 'otros',
+                        16 => 'otros',
                         17 => 'otros',
-                        18 => 'otros',
-                        19 => 'otros',
-                        20 => 'archivos',
-                        21 => 'restaurante',
+                        18 => 'archivos',
+                        19 => 'restaurante',
                 );
 
                 if (!empty($this->Ini->nm_hidden_blocos)) {
@@ -35406,7 +35001,6 @@ if (parent && parent.scAjaxDetailValue)
                         'tipo_documento' => 'tipo_documento',
                         'documento' => 'documento',
                         'dv' => 'dv',
-                        'imagenter' => 'imagenter',
                         'codigo_tercero' => 'codigo_tercero',
                         'sexo' => 'sexo',
                         'notificar' => 'notificar',
@@ -35446,12 +35040,12 @@ if (parent && parent.scAjaxDetailValue)
                         'loatiende' => 'loatiende',
                         'autorizado' => 'autorizado',
                         'relleno2' => 'relleno2',
-                        'nacimiento' => 'nacimiento',
+                        'direcciones' => 'direcciones',
+                        'sucur_cliente' => 'sucur_cliente',
                         'detalle_tributario' => 'detalle_tributario',
                         'responsabilidad_fiscal' => 'responsabilidad_fiscal',
                         'ciiu' => 'ciiu',
-                        'sucur_cliente' => 'sucur_cliente',
-                        'sucursales' => 'sucursales',
+                        'nacimiento' => 'nacimiento',
                         'fechault' => 'fechault',
                         'saldo' => 'saldo',
                         'afiliacion' => 'afiliacion',

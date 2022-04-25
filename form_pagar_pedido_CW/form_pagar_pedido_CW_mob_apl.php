@@ -1979,6 +1979,10 @@ include_once("form_pagar_pedido_CW_mob_sajax_js.php");
       }
       else
       {
+          if (!isset($this->usuario) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_CW_mob']['dados_form']['usuario']))
+          {
+              $varloc_btn_php['usuario'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_CW_mob']['dados_form']['usuario'];
+          }
           if (!isset($this->adicional2) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_CW_mob']['dados_form']['adicional2']))
           {
               $varloc_btn_php['adicional2'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_CW_mob']['dados_form']['adicional2'];
@@ -2091,7 +2095,40 @@ include_once("form_pagar_pedido_CW_mob_sajax_js.php");
           $this->$cmp = $val_cmp;
       }
       $_SESSION['scriptcase']['form_pagar_pedido_CW_mob']['contr_erro'] = 'on';
-  if($this->adicional2 <$this->total )
+  $lacaja = 1;
+$sql_cajus = "SELECT banco_movil FROM usuarios WHERE tercero = '".$this->usuario ."'";
+ 
+      $nm_select = $sql_cajus; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_us = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_us[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_us = false;
+          $this->ds_us_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_us[0][0]))
+	{
+	$lacaja = $this->ds_us[0][0];
+	}
+
+if($this->adicional2 <$this->total )
 	{
 	$this->NM_ajax_info['buttonDisplay']['Imprimir'] = $this->nmgp_botoes["Imprimir"] = "off";;
 	
@@ -2143,7 +2180,7 @@ else
 	if(isset($this->ds[0][0]))
 		{
 		
-     $nm_select ="UPDATE caja SET fecha = '".$this->fechaven ."', detalle = 'PED. CONTADO.', cantidad = '".$this->total ."', documento = '".$this->numpedido ."', cierredia = 'NO', resolucion = 4, idpedido = '".$this->idpedido ."', banco  = 1, usuario = '".$this->usuario ."', tipodoc = 'PV' WHERE idpedido='".$this->idpedido ."'"; 
+     $nm_select ="UPDATE caja SET fecha = '".$this->fechaven ."', detalle = 'PED. CONTADO.', cantidad = '".$this->total ."', documento = '".$this->numpedido ."', cierredia = 'NO', resolucion = 4, idpedido = '".$this->idpedido ."', banco  = '".$lacaja."', usuario = '".$this->usuario ."', tipodoc = 'PV' WHERE idpedido='".$this->idpedido ."'"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -2163,7 +2200,7 @@ else
 	else
 		{
 		
-     $nm_select ="INSERT caja SET fecha = '".$this->fechaven ."', detalle = 'PED. CONTADO.', cantidad = '".$this->total ."', documento = '".$this->numpedido ."', cierredia = 'NO', resolucion = 4, idpedido = '".$this->idpedido ."', banco  = 1, usuario = '".$this->usuario ."', tipodoc = 'PV'"; 
+     $nm_select ="INSERT caja SET fecha = '".$this->fechaven ."', detalle = 'PED. CONTADO.', cantidad = '".$this->total ."', documento = '".$this->numpedido ."', cierredia = 'NO', resolucion = 4, idpedido = '".$this->idpedido ."', banco  = '".$lacaja."', usuario = '".$this->usuario ."', tipodoc = 'PV'"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -2205,6 +2242,10 @@ else
 }
 
 	$this->sc_ajax_message ("Pago realizado, puede salir...", "Información");
+	 if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+ {
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('grid_pedidos_CW') . "/", $this->nm_location, "","_self", '', 440, 630);
+ };
 	}
 $_SESSION['scriptcase']['form_pagar_pedido_CW_mob']['contr_erro'] = 'off'; 
     echo ob_get_clean();
@@ -8498,6 +8539,216 @@ if (parent && parent.scAjaxDetailValue)
    </HTML>
 <?php
   exit;
+}
+function nmgp_redireciona_form($nm_apl_dest, $nm_apl_retorno, $nm_apl_parms, $nm_target="", $opc="", $alt_modal=430, $larg_modal=630)
+{
+   if (isset($this->NM_is_redirected) && $this->NM_is_redirected)
+   {
+       return;
+   }
+   if (is_array($nm_apl_parms))
+   {
+       $tmp_parms = "";
+       foreach ($nm_apl_parms as $par => $val)
+       {
+           $par = trim($par);
+           $val = trim($val);
+           $tmp_parms .= str_replace(".", "_", $par) . "?#?";
+           if (substr($val, 0, 1) == "$")
+           {
+               $tmp_parms .= $$val;
+           }
+           elseif (substr($val, 0, 1) == "{")
+           {
+               $val        = substr($val, 1, -1);
+               $tmp_parms .= $this->$val;
+           }
+           elseif (substr($val, 0, 1) == "[")
+           {
+               $tmp_parms .= $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_CW_mob'][substr($val, 1, -1)];
+           }
+           else
+           {
+               $tmp_parms .= $val;
+           }
+           $tmp_parms .= "?@?";
+       }
+       $nm_apl_parms = $tmp_parms;
+   }
+   if (empty($opc))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_CW_mob']['opcao'] = "";
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_CW_mob']['opc_ant'] = "";
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_pagar_pedido_CW_mob']['retorno_edit'] = "";
+   }
+   $nm_target_form = (empty($nm_target)) ? "_self" : $nm_target;
+   if (strtolower(substr($nm_apl_dest, -4)) != ".php" && (strtolower(substr($nm_apl_dest, 0, 7)) == "http://" || strtolower(substr($nm_apl_dest, 0, 8)) == "https://" || strtolower(substr($nm_apl_dest, 0, 3)) == "../"))
+   {
+       if ($this->NM_ajax_flag)
+       {
+           $this->NM_ajax_info['redir']['metodo'] = 'location';
+           $this->NM_ajax_info['redir']['action'] = $nm_apl_dest;
+           $this->NM_ajax_info['redir']['target'] = $nm_target_form;
+           form_pagar_pedido_CW_mob_pack_ajax_response();
+           exit;
+       }
+       echo "<SCRIPT language=\"javascript\">";
+       if (strtolower($nm_target) == "_blank")
+       {
+           echo "window.open ('" . $nm_apl_dest . "');";
+           echo "</SCRIPT>";
+           return;
+       }
+       else
+       {
+           echo "window.location='" . $nm_apl_dest . "';";
+           echo "</SCRIPT>";
+           $this->NM_close_db();
+           exit;
+       }
+   }
+   $dir = explode("/", $nm_apl_dest);
+   if (count($dir) == 1)
+   {
+       $nm_apl_dest = str_replace(".php", "", $nm_apl_dest);
+       $nm_apl_dest = $this->Ini->path_link . SC_dir_app_name($nm_apl_dest) . "/" . $nm_apl_dest . ".php";
+   }
+   if ($this->NM_ajax_flag)
+   {
+       $nm_apl_parms = str_replace("?#?", "*scin", NM_charset_to_utf8($nm_apl_parms));
+       $nm_apl_parms = str_replace("?@?", "*scout", $nm_apl_parms);
+       $this->NM_ajax_info['redir']['metodo']     = 'post';
+       $this->NM_ajax_info['redir']['action']     = $nm_apl_dest;
+       $this->NM_ajax_info['redir']['nmgp_parms'] = $nm_apl_parms;
+       $this->NM_ajax_info['redir']['target']     = $nm_target_form;
+       $this->NM_ajax_info['redir']['h_modal']    = $alt_modal;
+       $this->NM_ajax_info['redir']['w_modal']    = $larg_modal;
+       if ($nm_target_form == "_blank")
+       {
+           $this->NM_ajax_info['redir']['nmgp_outra_jan'] = 'true';
+       }
+       else
+       {
+           $this->NM_ajax_info['redir']['nmgp_url_saida']      = $nm_apl_retorno;
+           $this->NM_ajax_info['redir']['script_case_init']    = $this->Ini->sc_page;
+       }
+       form_pagar_pedido_CW_mob_pack_ajax_response();
+       exit;
+   }
+   if ($nm_target == "modal")
+   {
+       if (!empty($nm_apl_parms))
+       {
+           $nm_apl_parms = str_replace("?#?", "*scin", $nm_apl_parms);
+           $nm_apl_parms = str_replace("?@?", "*scout", $nm_apl_parms);
+           $nm_apl_parms = "nmgp_parms=" . $nm_apl_parms . "&";
+       }
+       $par_modal = "?script_case_init=" . $this->Ini->sc_page . "&nmgp_outra_jan=true&nmgp_url_saida=modal&NMSC_modal=ok&";
+       $this->redir_modal = "$(function() { tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
+       $this->NM_is_redirected = true;
+       return;
+   }
+   if ($nm_target == "_blank")
+   {
+?>
+<form name="Fredir" method="post" target="_blank" action="<?php echo $nm_apl_dest; ?>">
+  <input type="hidden" name="nmgp_parms" value="<?php echo $this->form_encode_input($nm_apl_parms); ?>"/>
+</form>
+<script type="text/javascript">
+setTimeout(function() { document.Fredir.submit(); }, 250);
+</script>
+<?php
+    return;
+   }
+?>
+<?php
+   if ($nm_target_form != "_blank" && $nm_target_form != "modal")
+   {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+   <HTML>
+   <HEAD>
+    <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+   if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+   {
+?>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+   }
+
+?>
+    <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+    <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+    <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+    <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+    <META http-equiv="Pragma" content="no-cache"/>
+    <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
+   </HEAD>
+   <BODY>
+<?php
+   }
+?>
+<form name="Fredir" method="post" 
+                  target="_self"> 
+  <input type="hidden" name="nmgp_parms" value="<?php echo $this->form_encode_input($nm_apl_parms); ?>"/>
+<?php
+   if ($nm_target_form == "_blank")
+   {
+?>
+  <input type="hidden" name="nmgp_outra_jan" value="true"/> 
+<?php
+   }
+   else
+   {
+?>
+  <input type="hidden" name="nmgp_url_saida" value="<?php echo $this->form_encode_input($nm_apl_retorno) ?>">
+  <input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"/> 
+<?php
+   }
+?>
+</form> 
+   <SCRIPT type="text/javascript">
+<?php
+   if ($nm_target_form == "modal")
+   {
+?>
+       $(document).ready(function(){
+           tb_show('', '<?php echo $nm_apl_dest ?>?script_case_init=<?php echo $this->Ini->sc_page; ?>&nmgp_url_saida=modal&nmgp_parms=<?php echo $this->form_encode_input($nm_apl_parms); ?>&nmgp_outra_jan=true&TB_iframe=true&height=<?php echo $alt_modal; ?>&width=<?php echo $larg_modal; ?>&modal=true', '');
+       });
+<?php
+   }
+   else
+   {
+?>
+    $(function() {
+       document.Fredir.target = "<?php echo $nm_target_form ?>"; 
+       document.Fredir.action = "<?php echo $nm_apl_dest ?>";
+       document.Fredir.submit();
+    });
+<?php
+   }
+?>
+   </SCRIPT>
+<?php
+   if ($nm_target_form != "_blank" && $nm_target_form != "modal")
+   {
+?>
+   </BODY>
+   </HTML>
+<?php
+   }
+?>
+<?php
+   if ($nm_target_form != "_blank" && $nm_target_form != "modal")
+   {
+       $this->NM_close_db();
+       exit;
+   }
 }
     function sc_ajax_alert($sMessage, $params = array())
     {

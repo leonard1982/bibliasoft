@@ -88,6 +88,7 @@ class grid_ventas_por_cliente_grid
    var $sum_factura_f_subtotal;
    var $sum_factura_f_valoriva;
    var $sum_factura_f_total;
+   var $direcciones;
    var $t_documento;
    var $cliente;
    var $fecha;
@@ -95,6 +96,7 @@ class grid_ventas_por_cliente_grid
    var $f_subtotal;
    var $f_valoriva;
    var $f_total;
+   var $f_dircliente;
 //--- 
  function monta_grid($linhas = 0)
  {
@@ -944,27 +946,27 @@ class grid_ventas_por_cliente_grid
 //----- 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, str_replace (convert(char(10),f.fechaven,102), '.', '-') + ' ' + convert(char(8),f.fechaven,20) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, convert(char(23),f.fechaven,121) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, convert(char(23),f.fechaven,121) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, EXTEND(f.fechaven, YEAR TO DAY) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, EXTEND(f.fechaven, YEAR TO DAY) as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT t.documento as t_documento, t.nombres as cliente, f.fechaven as fecha, concat(r.prefijo,'/',f.numfacven) as factura, f.subtotal as f_subtotal, f.valoriva as f_valoriva, f.total as f_total, f.dircliente as f_dircliente from " . $this->Ini->nm_tabela; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['where_resumo'])) 
@@ -1060,6 +1062,8 @@ class grid_ventas_por_cliente_grid
        $this->f_total =  str_replace(",", ".", $this->f_total);
        $this->f_total = (strpos(strtolower($this->f_total), "e")) ? (float)$this->f_total : $this->f_total; 
        $this->f_total = (string)$this->f_total;
+       $this->f_dircliente = $this->rs_grid->fields[7] ;  
+       $this->f_dircliente = (string)$this->f_dircliente;
        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['SC_Gb_Free_orig']))
        {
            foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -1134,6 +1138,7 @@ class grid_ventas_por_cliente_grid
            $this->f_subtotal = $this->rs_grid->fields[4] ;  
            $this->f_valoriva = $this->rs_grid->fields[5] ;  
            $this->f_total = $this->rs_grid->fields[6] ;  
+           $this->f_dircliente = $this->rs_grid->fields[7] ;  
            if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['SC_Gb_Free_orig']))
            {
                foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -1208,10 +1213,10 @@ class grid_ventas_por_cliente_grid
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="#61678C">
+                    <meta name="msapplication-TileColor" content="#3C4858">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="#61678C">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="#61678C">
+                    <meta name="theme-color" content="#3C4858">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="#3C4858">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -1304,10 +1309,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#61678C\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#3C4858\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#61678C\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#61678C\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#3C4858\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#3C4858\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['doc_word'])
@@ -2246,7 +2251,7 @@ $nm_saida->saida("}\r\n");
        } 
        $this->Tab_align  = "center";
        $this->Tab_valign = "top";
-       $this->Tab_width = "";
+       $this->Tab_width = " width=\"60%\"";
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pdf_res'])
        {
            return;
@@ -2353,6 +2358,8 @@ $nm_saida->saida("}\r\n");
    $this->css_t_documento_grid_line = $compl_css_emb . "css_t_documento_grid_line";
    $this->css_cliente_label = $compl_css_emb . "css_cliente_label";
    $this->css_cliente_grid_line = $compl_css_emb . "css_cliente_grid_line";
+   $this->css_direcciones_label = $compl_css_emb . "css_direcciones_label";
+   $this->css_direcciones_grid_line = $compl_css_emb . "css_direcciones_grid_line";
    $this->css_fecha_label = $compl_css_emb . "css_fecha_label";
    $this->css_fecha_grid_line = $compl_css_emb . "css_fecha_grid_line";
    $this->css_factura_label = $compl_css_emb . "css_factura_label";
@@ -2471,32 +2478,6 @@ $nm_saida->saida("}\r\n");
    }   
    $this->nm_data->SetaData(date("Y/m/d H:i:s"), "YYYY/MM/DD HH:II:SS"); 
    $nm_saida->saida(" <TR id=\"sc_grid_head\">\r\n");
-   $this->nm_data->SetaData(date("Y/m/d H:i:s"), "YYYY/MM/DD HH:II:SS");
-   $sc_data_cab1 = $this->nm_data->FormataSaida("l, d @?#?@de F @?#?@de Y");
-   if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['sv_dt_head']))
-   { 
-       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['sv_dt_head'] = array();
-       $nm_refresch_cab_rod = true;
-   } 
-   else 
-   { 
-       $nm_refresch_cab_rod = false;
-   } 
-   foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['sv_dt_head'] as $ind => $val)
-   {
-       $tmp_var = "sc_data_cab" . $ind;
-       if ($$tmp_var != $val)
-       {
-           $nm_refresch_cab_rod = true;
-           break;
-       }
-   }
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['ajax_nav'] && $nm_refresch_cab_rod)
-   { 
-       $_SESSION['scriptcase']['saida_html'] = "";
-   } 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['sv_dt_head'][1] = $sc_data_cab1;
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['sv_dt_head']['fix'] = $nm_data_fixa;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['opcao'] != "pdf")
    { 
        $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top\">\r\n");
@@ -2524,89 +2505,37 @@ $nm_saida->saida("}\r\n");
    } 
    if ($this->Ini->Export_img_zip)
    {
-       $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__img__NM__ct_stack_col_3d.png";
-       $img_NM_CAB_LOGOTIPO = "scriptcase__NM__img__NM__ct_stack_col_3d.png";
+       $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__img__NM__ct_bar_col_3d.png";
+       $img_NM_LOGOTIPO = "scriptcase__NM__img__NM__ct_bar_col_3d.png";
    }
    elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img)
    {
-       $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__img__NM__ct_stack_col_3d.png";
+       $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__img__NM__ct_bar_col_3d.png";
        $tmp_img_word = fopen($loc_img_word, "rb");
        $reg_img_word = fread($tmp_img_word, filesize($loc_img_word));
        fclose($tmp_img_word);
-       $img_NM_CAB_LOGOTIPO = "data:image/jpeg;base64," . base64_encode($reg_img_word);
+       $img_NM_LOGOTIPO = "data:image/jpeg;base64," . base64_encode($reg_img_word);
    }
    else
    {
-       $img_NM_CAB_LOGOTIPO = $this->NM_raiz_img . $this->Ini->path_imag_cab . "/scriptcase__NM__img__NM__ct_stack_col_3d.png";
+       $img_NM_LOGOTIPO = $this->NM_raiz_img . $this->Ini->path_imag_cab . "/scriptcase__NM__img__NM__ct_bar_col_3d.png";
    }
-   $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
-   $nm_saida->saida("    <TR align=\"center\">\r\n");
-   $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
-   $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
-   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
-   $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("             <IMG SRC=\"" . $img_NM_CAB_LOGOTIPO . "\" BORDER=\"0\"/>\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("          Ventas por Cliente\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("          \r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("          " . $sc_data_cab1 . "\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("       </TR>\r\n");
-   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
-   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("          " . $nm_cab_filtro . "\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("          \r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("          \r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("       </TR>\r\n");
-   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
-   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("          \r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("          \r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
-   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
-   $nm_saida->saida("          \r\n");
-   $nm_saida->saida("        </TD>\r\n");
-   $nm_saida->saida("       </TR>\r\n");
-   $nm_saida->saida("      </TABLE>\r\n");
-   $nm_saida->saida("     </TD>\r\n");
-   $nm_saida->saida("    </TR>\r\n");
-   $nm_saida->saida("   </TABLE>\r\n");
+   $nm_saida->saida("<style>\r\n");
+   $nm_saida->saida("#lin1_col1 { font-size:22px; width:500px; color: #FFFFFF; }\r\n");
+   $nm_saida->saida("#lin1_col2 { font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align:right; color: #FFFFFF;  }\r\n");
+   $nm_saida->saida("#lin2_col1 { font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:15px; }\r\n");
+   $nm_saida->saida("#lin2_col2 { font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align:right; color: #FFFFFF;  }\r\n");
+   $nm_saida->saida("</style>\r\n");
+   $nm_saida->saida("<table width=\"100%\" height=\"67px\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+   $nm_saida->saida("        <tr>\r\n");
+   $nm_saida->saida("                <td width=\"5px\"></td>\r\n");
+   $nm_saida->saida("        <td width=\"67px\" class=\"" . $this->css_scGridHeaderFont . "\">   <IMG SRC=\"" . $img_NM_LOGOTIPO . "\" BORDER=\"0\"/></td>\r\n");
+   $nm_saida->saida("               <td class=\"" . $this->css_scGridHeaderFont . "\"><span id=\"lin1_col1\">Ventas por Cliente</span><br /><span id=\"lin2_col1\">" . $nm_cab_filtro . "</span></td>\r\n");
+   $nm_saida->saida("               <td align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\"><span  id=\"lin1_col2\"></span><br /><span id=\"lin2_col2\"></span></td>\r\n");
+   $nm_saida->saida("        <td width=\"5px\"></td>\r\n");
+   $nm_saida->saida("    </tr>\r\n");
+   $nm_saida->saida("</table>\r\n");
    $nm_saida->saida("  </TD>\r\n");
-   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['ajax_nav'] && $nm_refresch_cab_rod)
-   { 
-       $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_grid_head', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
-       $_SESSION['scriptcase']['saida_html'] = "";
-   } 
    $nm_saida->saida(" </TR>\r\n");
  }
 // 
@@ -2650,7 +2579,7 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_f_total_label'] . "\" >&nbsp;</TD>\r\n");
    } 
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['embutida'] || ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['exibe_seq'] == "S")) { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_f_total_label'] . "\" >&nbsp;</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_f_total_label'] . "\"  WIDTH=\"\">&nbsp;</TD>\r\n");
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['field_order'] as $Cada_label)
    { 
@@ -2849,6 +2778,14 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
    }
    $nm_saida->saida("</TD>\r\n");
+   } 
+ }
+ function NM_label_direcciones()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['direcciones'])) ? $this->New_label['direcciones'] : "Dirección(es)"; 
+   if (!isset($this->NM_cmp_hidden['direcciones']) || $this->NM_cmp_hidden['direcciones'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_direcciones_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_direcciones_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
  function NM_label_fecha()
@@ -3225,6 +3162,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['t_documento'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['cliente'])) ? $this->New_label['cliente'] : "Cliente"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['cliente'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['direcciones'])) ? $this->New_label['direcciones'] : "Dirección(es)"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['direcciones'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['fecha'])) ? $this->New_label['fecha'] : "Fecha"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['labels']['fecha'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['factura'])) ? $this->New_label['factura'] : "Factura"; 
@@ -3337,7 +3276,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
 }
 else
 {
-   $nm_saida->saida("  <TD " . $this->Grid_body . " class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top;text-align: center;" . $TD_padding . "\">\r\n");
+   $nm_saida->saida("  <TD " . $this->Grid_body . " class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top;text-align: center;" . $TD_padding . "\" width=\"100%\">\r\n");
 }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['ajax_nav'])
    { 
@@ -3510,6 +3449,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
           $this->f_total =  str_replace(",", ".", $this->f_total);
           $this->f_total = (strpos(strtolower($this->f_total), "e")) ? (float)$this->f_total : $this->f_total; 
           $this->f_total = (string)$this->f_total;
+          $this->f_dircliente = $this->rs_grid->fields[7] ;  
+          $this->f_dircliente = (string)$this->f_dircliente;
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['SC_Gb_Free_orig']))
           {
               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -3636,6 +3577,43 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
               }
           }  
           $this->sc_proc_grid = true;
+          $_SESSION['scriptcase']['grid_ventas_por_cliente']['contr_erro'] = 'on';
+ $sql_dir = "SELECT direc, ciudad FROM direccion WHERE iddireccion = '".$this->f_dircliente ."'";
+ 
+      $nm_select = $sql_dir; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_dir = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->ds_dir[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_dir = false;
+          $this->ds_dir_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_dir[0][0]))
+	{
+	$this->direcciones  = $this->ds_dir[0][0].' / '.$this->ds_dir[0][1];
+	}
+else
+	{
+	$this->direcciones  = 'SIN';
+	}
+$_SESSION['scriptcase']['grid_ventas_por_cliente']['contr_erro'] = 'off';
           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['proc_pdf'])
           {
               if ($nm_houve_quebra == "S" || $this->nm_inicio_pag == 0)
@@ -3870,6 +3848,39 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_cliente_grid_line . "\"  style=\"" . $this->Css_Cmp['css_cliente_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_cliente_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_direcciones()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['direcciones']) || $this->NM_cmp_hidden['direcciones'] != "off") { 
+          $conteudo = sc_strip_script($this->direcciones); 
+          $conteudo_original = sc_strip_script($this->direcciones); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          if ($conteudo !== "&nbsp;") 
+          { 
+              $conteudo = sc_strtoupper($conteudo); 
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'direcciones', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'direcciones', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_direcciones_grid_line . "\"  style=\"" . $this->Css_Cmp['css_direcciones_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_direcciones_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_fecha()
  {
       global $nm_saida;
@@ -4039,7 +4050,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 9;
+   $this->NM_colspan  = 10;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['opc_psq'])
    {
        $this->NM_colspan++;
@@ -4107,7 +4118,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
            }
         }
         $nm_saida->saida(" <TR> \r\n");
-        $nm_saida->saida("  <TD style=\"padding: 0px; vertical-align: top;\"> \r\n");
+        $nm_saida->saida("  <TD style=\"padding: 0px; vertical-align: top;\" width=\"100%\"> \r\n");
         $nm_saida->saida("   <TABLE class=\"" . $this->css_scGridTabela . "\" align=\"center\" " . $nm_id_aplicacao . " width=\"100%\">\r\n");
         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['proc_pdf'] && ($this->pdf_all_cab == "S" || $this->pdf_all_label == "S")) { 
             $nm_saida->saida(" <thead> \r\n");
@@ -4358,6 +4369,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
     {
         $colspan++;
     }
+    if ($Cada_cmp == "direcciones" && (!isset($this->NM_cmp_hidden['direcciones']) || $this->NM_cmp_hidden['direcciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "fecha" && (!isset($this->NM_cmp_hidden['fecha']) || $this->NM_cmp_hidden['fecha'] != "off"))
     {
         $colspan++;
@@ -4405,7 +4420,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
    }
    if ($colspan > 0)
    {
-       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_f_total_sub_tot\" style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"  style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
        $nm_saida->saida("    </TR>\r\n");
    }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['embutida_grid'] && $this->nm_prim_linha)
@@ -4513,6 +4528,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
     {
         $colspan++;
     }
+    if ($Cada_cmp == "direcciones" && (!isset($this->NM_cmp_hidden['direcciones']) || $this->NM_cmp_hidden['direcciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "fecha" && (!isset($this->NM_cmp_hidden['fecha']) || $this->NM_cmp_hidden['fecha'] != "off"))
     {
         $colspan++;
@@ -4560,7 +4579,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
    }
    if ($colspan > 0)
    {
-       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_f_total_sub_tot\" style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"  style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
        $nm_saida->saida("    </TR>\r\n");
    }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['embutida_grid'] && $this->nm_prim_linha)
@@ -4668,6 +4687,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
     {
         $colspan++;
     }
+    if ($Cada_cmp == "direcciones" && (!isset($this->NM_cmp_hidden['direcciones']) || $this->NM_cmp_hidden['direcciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "fecha" && (!isset($this->NM_cmp_hidden['fecha']) || $this->NM_cmp_hidden['fecha'] != "off"))
     {
         $colspan++;
@@ -4715,7 +4738,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
    }
    if ($colspan > 0)
    {
-       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_f_total_sub_tot\" style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"  style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
        $nm_saida->saida("    </TR>\r\n");
    }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['embutida_grid'] && $this->nm_prim_linha)
@@ -4823,6 +4846,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
     {
         $colspan++;
     }
+    if ($Cada_cmp == "direcciones" && (!isset($this->NM_cmp_hidden['direcciones']) || $this->NM_cmp_hidden['direcciones'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "fecha" && (!isset($this->NM_cmp_hidden['fecha']) || $this->NM_cmp_hidden['fecha'] != "off"))
     {
         $colspan++;
@@ -4870,7 +4897,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
    }
    if ($colspan > 0)
    {
-       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_f_total_sub_tot\" style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"  style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
        $nm_saida->saida("    </TR>\r\n");
    }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['embutida_grid'] && $this->nm_prim_linha)
@@ -4928,6 +4955,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['pro
        $colspan++;
     }
     if ($Cada_cmp == "cliente" && (!isset($this->NM_cmp_hidden['cliente']) || $this->NM_cmp_hidden['cliente'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "direcciones" && (!isset($this->NM_cmp_hidden['direcciones']) || $this->NM_cmp_hidden['direcciones'] != "off"))
     {
        $colspan++;
     }
@@ -8545,29 +8576,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    }
    if ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['opcao'] != "pdf" && !$_SESSION['scriptcase']['proc_mobile'])
    { 
-       $nm_saida->saida("   document.getElementById('first_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       $nm_saida->saida("   document.getElementById('back_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    elseif ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['opcao'] != "pdf" && $_SESSION['scriptcase']['proc_mobile'])
    { 
-       $nm_saida->saida("   document.getElementById('first_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       $nm_saida->saida("   document.getElementById('back_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_ventas_por_cliente']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    $nm_saida->saida("  $(window).scroll(function() {\r\n");
    $nm_saida->saida("   if (typeof(scSetFixedHeaders) === typeof(function(){})) scSetFixedHeaders();\r\n");

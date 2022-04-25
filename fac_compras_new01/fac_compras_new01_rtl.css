@@ -1,0 +1,96 @@
+.css_idfaccom_label { }
+.css_idfaccom_line {text-align:left;}
+.css_idfaccom_obj {text-align:left;}
+.css_numfacom_label { }
+.css_numfacom_line {text-align:left;}
+.css_numfacom_obj {text-align:center;}
+.css_formapago_label { }
+.css_formapago_line {text-align:left;}
+.css_formapago_obj { }
+.css_fechacom_label { }
+.css_fechacom_line { }
+.css_fechacom_obj {text-align:center;}
+.css_fechavenc_label { }
+.css_fechavenc_line { }
+.css_fechavenc_obj {text-align:center;}
+.css_idprov_label { }
+.css_idprov_line {text-align:left;}
+.css_idprov_obj {text-align:left;}
+.css_subtotal_label { }
+.css_subtotal_line {font-size:15px;font-weight:bold;text-align:left;}
+.css_subtotal_obj {font-size:15px;font-weight:bold;text-align:center;}
+.css_valoriva_label { }
+.css_valoriva_line {font-size:15px;font-weight:bold;text-align:left;}
+.css_valoriva_obj {font-size:15px;font-weight:bold;text-align:center;}
+.css_total_label { }
+.css_total_line {font-size:18px;font-weight:bold;text-align:left;vertical-align:middle;}
+.css_total_obj {font-size:18px;font-weight:bold;text-align:center;}
+.css_pagada_label { }
+.css_pagada_line { }
+.css_pagada_obj { }
+.css_asentada_label {font-size:14px;color:#000000;background-color:#6699FF;font-weight:bold;}
+.css_asentada_line {border-color:#FFFFFF;text-align:left;}
+.css_asentada_obj {background-color:#FF9900;text-align:left;}
+.css_control_label { }
+.css_control_line {text-align:left;}
+.css_control_obj {text-align:left;}
+.css_observaciones_label { }
+.css_observaciones_line { }
+.css_observaciones_obj {text-align:justify;width:400px;}
+.css_saldo_label { }
+.css_saldo_line {text-align:left;}
+.css_saldo_obj {text-align:right;}
+.css_anulada_label { }
+.css_anulada_line { }
+.css_anulada_obj { }
+.css_es_remision_label {text-align:left;width:50px;}
+.css_es_remision_line {text-align:left;}
+.css_es_remision_obj { }
+.css_id_pedidocom_label { }
+.css_id_pedidocom_line {text-align:left;}
+.css_id_pedidocom_obj {text-align:left;}
+.css_retencion_label { }
+.css_retencion_line {text-align:left;}
+.css_retencion_obj {text-align:left;}
+.css_reteica_label { }
+.css_reteica_line {text-align:left;}
+.css_reteica_obj {text-align:left;}
+.css_reteiva_label { }
+.css_reteiva_line {text-align:left;}
+.css_reteiva_obj {text-align:right;}
+.css_usuario_label { }
+.css_usuario_line {text-align:left;}
+.css_usuario_obj {text-align:left;}
+.css_banco_label { }
+.css_banco_line {text-align:left;}
+.css_banco_obj {text-align:left;}
+.css_creado_label { }
+.css_creado_line { }
+.css_creado_obj { }
+.css_editado_label { }
+.css_editado_line { }
+.css_editado_obj { }
+.css_cod_cuenta_label { }
+.css_cod_cuenta_line { }
+.css_cod_cuenta_obj { }
+.css_prefijo_com_label { }
+.css_prefijo_com_line { }
+.css_prefijo_com_obj { }
+.css_numero_com_label { }
+.css_numero_com_line {text-align:left;}
+.css_numero_com_obj {text-align:right;}
+.css_tipo_com_label { }
+.css_tipo_com_line { }
+.css_tipo_com_obj { }
+.css_id_comafec_label { }
+.css_id_comafec_line {text-align:left;}
+.css_id_comafec_obj {text-align:left;}
+.css_detalle_label { }
+.css_detalle_line { }
+.css_detalle_obj { }
+.css_hdetalle_label { }
+.css_hdetalle_line { }
+.css_hdetalle_obj {color:#FFFFFF;background-color:#34495e;font-weight:bold;text-align:center;}
+.css_prefijo_delpedido_label { }
+.css_prefijo_delpedido_line {border-color:#FFFFFF;}
+.css_prefijo_delpedido_obj {border-color:#FFFFFF;}

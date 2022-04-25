@@ -34,29 +34,6 @@
 <div id="id_div_process_block" style="display: none; margin: 10px; whitespace: nowrap"><span class="scFormProcess"><img border="0" src="<?php echo $this->Ini->path_icones; ?>/scriptcase__NM__ajax_load.gif" align="absmiddle" />&nbsp;<?php echo $this->Ini->Nm_lang['lang_othr_prcs']; ?>...</span></div>
 <div id="id_fatal_error" class="" style="display: none; position: absolute"></div>
 <script type="text/javascript"> 
-<?php
-  if (isset($this->NM_ajax_info['masterValue']) && !empty($this->NM_ajax_info['masterValue']))
-  {
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dashboard_info']['under_dashboard']) {
-          echo "  var dbParentFrame = $(parent.document).find(\"[name='" . $_SESSION['sc_session'][$this->Ini->sc_page]['form_direccion']['dashboard_info']['parent_widget'] . "']\")";
-          echo "  if (dbParentFrame && dbParentFrame[0] && dbParentFrame[0].contentWindow.scAjaxDetailValue)";
-          echo "  {"; 
-          foreach ($this->NM_ajax_info['masterValue'] as $cmp => $val)
-          {
-              echo " dbParentFrame[0].contentWindow.scAjaxDetailValue('" . $cmp . "', '" . $val . "');";
-          }
-      }
-      else {
-          echo "  if (parent.scAjaxDetailValue)";
-          echo "  {"; 
-          foreach ($this->NM_ajax_info['masterValue'] as $cmp => $val)
-          {
-              echo " parent.scAjaxDetailValue('" . $cmp . "', '" . $val . "');";
-          }
-          echo "  }"; 
-      }
-  }
-?> 
  NM_tp_critica(1);
 
 function scInlineFormSend()
@@ -147,10 +124,6 @@ function nm_atualiza(x, y)
 <?php 
     }
 ?>
-    if (scEventControl_active_all()) {
-      setTimeout(function() { nm_atualiza(x, y); }, 500);
-      return;
-    }
     if (!sc_mupload_ok)
     {
         if (!confirm("<?php echo $this->Ini->Nm_lang['lang_errm_muok'] ?>"))
@@ -292,10 +265,6 @@ if (isset($this->Refresh_aba_menu)) {
 <?php
 }
 ?>
-	if (scEventControl_active_all()) {
-		setTimeout(function() { nm_atualiza(x, y); }, 500);
-		return false;
-	}
 
 	Nm_submit_ok = true;
 	if (Nm_Proc_Atualiz) {
