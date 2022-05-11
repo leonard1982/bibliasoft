@@ -2904,8 +2904,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     isRunning_scFormClose_F5 = true;
     setTimeout(function() { isRunning_scFormClose_F5 = false; }, 3000);
 
-    document.F5.action = exitUrl;
-    document.F5.submit();
+    if (scFormHasChanged) {
+      scJs_confirm('<?php echo html_entity_decode($this->Ini->Nm_lang['lang_reload_confirm']) ?>', function() { document.F5.action = exitUrl; document.F5.submit(); }, function() {});
+    } else {
+      document.F5.action = exitUrl;
+      document.F5.submit();
+    }
 
   }
 
@@ -2917,8 +2921,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     isRunning_scFormClose_F6 = true;
     setTimeout(function() { isRunning_scFormClose_F6 = false; }, 3000);
 
-    document.F6.action = exitUrl;
-    document.F6.submit();
+    if (scFormHasChanged) {
+      scJs_confirm('<?php echo html_entity_decode($this->Ini->Nm_lang['lang_reload_confirm']) ?>', function() { document.F6.action = exitUrl; document.F6.submit(); }, function() {});
+    } else {
+      document.F6.action = exitUrl;
+      document.F6.submit();
+    }
 
   }
 
@@ -3291,6 +3299,112 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetMaster();
     scAjaxSetFocus();
   } // do_ajax_form_bancos_validate_puc_cb
+
+  // ---------- Validate id_puc_auxiliar
+  function do_ajax_form_bancos_validate_id_puc_auxiliar()
+  {
+    var nomeCampo_id_puc_auxiliar = "id_puc_auxiliar";
+    var var_id_puc_auxiliar = scAjaxGetFieldSelect(nomeCampo_id_puc_auxiliar);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_bancos_validate_id_puc_auxiliar(var_id_puc_auxiliar, var_script_case_init, do_ajax_form_bancos_validate_id_puc_auxiliar_cb);
+  } // do_ajax_form_bancos_validate_id_puc_auxiliar
+
+  function do_ajax_form_bancos_validate_id_puc_auxiliar_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_puc_auxiliar";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_bancos_validate_id_puc_auxiliar_cb
+
+  // ---------- Refresh puc
+  function do_ajax_form_bancos_refresh_puc()
+  {
+    var var_puc = scAjaxGetFieldSelect("puc");
+    var var_nmgp_refresh_fields = "id_puc_auxiliar";
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_form_bancos_refresh_puc(var_puc, var_nmgp_refresh_fields, var_script_case_init, do_ajax_form_bancos_refresh_puc_cb);
+  } // do_ajax_form_bancos_refresh_puc
+
+  function do_ajax_form_bancos_refresh_puc_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_bancos_refresh_puc_cb
+
+  // ---------- Event onchange puc
+  function do_ajax_form_bancos_event_puc_onchange()
+  {
+    var var_puc = scAjaxGetFieldSelect("puc");
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_form_bancos_event_puc_onchange(var_puc, var_script_case_init, do_ajax_form_bancos_event_puc_onchange_cb);
+  } // do_ajax_form_bancos_event_puc_onchange
+
+  function do_ajax_form_bancos_event_puc_onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    sFieldValid = "puc";
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_form_bancos_event_puc_onchange_cb_after_alert);
+  } // do_ajax_form_bancos_event_puc_onchange_cb
+  function do_ajax_form_bancos_event_puc_onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    do_ajax_form_bancos_refresh_puc();
+    scAjaxRedir();
+  } // do_ajax_form_bancos_event_puc_onchange_cb_after_alert
 function scAjaxShowErrorDisplay(sErrorId, sErrorMsg) {
 	if ("table" != sErrorId && !$("id_error_display_" + sErrorId + "_frame").hasClass('scFormToastDivFixed')) {
 		scAjaxShowErrorDisplay_default(sErrorId, sErrorMsg);
@@ -3596,6 +3710,7 @@ function scJs_sweetalert_params(params) {
     var var_saldo = scAjaxGetFieldHidden("saldo");
     var var_estado = scAjaxGetFieldHidden("estado");
     var var_puc = scAjaxGetFieldSelect("puc");
+    var var_id_puc_auxiliar = scAjaxGetFieldSelect("id_puc_auxiliar");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -3605,7 +3720,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_bancos_submit_form(var_codigo_banco, var_descripcion, var_numero_cuenta, var_comportamiento, var_cajero, var_entrada, var_salida, var_saldo, var_estado, var_puc, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_bancos_submit_form_cb);
+    x_ajax_form_bancos_submit_form(var_codigo_banco, var_descripcion, var_numero_cuenta, var_comportamiento, var_cajero, var_entrada, var_salida, var_saldo, var_estado, var_puc, var_id_puc_auxiliar, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_bancos_submit_form_cb);
   } // do_ajax_form_bancos_submit_form
 
   function do_ajax_form_bancos_submit_form_cb(sResp)
@@ -3639,6 +3754,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("saldo");
       scAjaxHideErrorDisplay("estado");
       scAjaxHideErrorDisplay("puc");
+      scAjaxHideErrorDisplay("id_puc_auxiliar");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['dashboard_info']['under_dashboard']) {
@@ -3686,7 +3802,11 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['dashboard
 
   function do_ajax_form_bancos_navigate_form()
   {
-    perform_ajax_form_bancos_navigate_form();
+    if (scFormHasChanged) {
+      scJs_confirm('<?php echo html_entity_decode($this->Ini->Nm_lang['lang_reload_confirm']) ?>', perform_ajax_form_bancos_navigate_form, function() {});
+    } else {
+      perform_ajax_form_bancos_navigate_form();
+    }
   }
 
   function perform_ajax_form_bancos_navigate_form()
@@ -3707,6 +3827,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['dashboard
     scAjaxHideErrorDisplay("saldo");
     scAjaxHideErrorDisplay("estado");
     scAjaxHideErrorDisplay("puc");
+    scAjaxHideErrorDisplay("id_puc_auxiliar");
     var var_idcaja_vta = document.F2.idcaja_vta.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -3759,6 +3880,8 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
   function do_ajax_form_bancos_navigate_form_cb_after_alert() {
     scAjaxMessage();
     scAjaxJavascript();
+    scFocusField('codigo_banco');
+
     scAjaxSetFocus();
 <?php
 if ($this->Embutida_form)
@@ -3780,6 +3903,23 @@ if ($this->Embutida_form)
     }
   } // sc_hide_form_bancos_form
 
+
+  function do_ajax_form_bancos_lkpedt_refresh_id_puc_auxiliar()
+  {
+    var var_id_puc_auxiliar = scAjaxGetFieldSelect("id_puc_auxiliar");
+    var var_puc = scAjaxGetFieldSelect("puc");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_puc_auxiliar";
+    x_ajax_form_bancos_lkpedt_refresh_id_puc_auxiliar(var_id_puc_auxiliar, var_puc, nmgp_refresh_fields, var_script_case_init, do_ajax_form_bancos_lkpedt_refresh_id_puc_auxiliar_cb);
+  } // do_ajax_form_bancos_lkpedt_refresh_id_puc_auxiliar
+
+  function do_ajax_form_bancos_lkpedt_refresh_id_puc_auxiliar_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_form_bancos_lkpedt_refresh_id_puc_auxiliar_cb
 
   function scAjaxDetailProc()
   {
@@ -3803,6 +3943,7 @@ if ($this->Embutida_form)
   ajax_field_list[7] = "saldo";
   ajax_field_list[8] = "estado";
   ajax_field_list[9] = "puc";
+  ajax_field_list[10] = "id_puc_auxiliar";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -3817,7 +3958,8 @@ if ($this->Embutida_form)
     "salida": {"label": "Salida", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "saldo": {"label": "Saldo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "estado": {"label": "Estado", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "puc": {"label": "P.U.C", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "puc": {"label": "P.U.C", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_puc_auxiliar": {"label": "Cta. Auxiliar", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
@@ -3839,7 +3981,8 @@ if ($this->Embutida_form)
     "salida": new Array(),
     "saldo": new Array(),
     "estado": new Array(),
-    "puc": new Array()
+    "puc": new Array(),
+    "id_puc_auxiliar": new Array()
   };
   ajax_field_mult["codigo_banco"][1] = "codigo_banco";
   ajax_field_mult["descripcion"][1] = "descripcion";
@@ -3851,6 +3994,7 @@ if ($this->Embutida_form)
   ajax_field_mult["saldo"][1] = "saldo";
   ajax_field_mult["estado"][1] = "estado";
   ajax_field_mult["puc"][1] = "puc";
+  ajax_field_mult["id_puc_auxiliar"][1] = "id_puc_auxiliar";
 
   var ajax_field_id = {
     "codigo_banco": new Array("hidden_field_label_codigo_banco", "hidden_field_data_codigo_banco"),
@@ -3862,7 +4006,8 @@ if ($this->Embutida_form)
     "salida": new Array("hidden_field_label_salida", "hidden_field_data_salida"),
     "saldo": new Array("hidden_field_label_saldo", "hidden_field_data_saldo"),
     "estado": new Array("hidden_field_label_estado", "hidden_field_data_estado"),
-    "puc": new Array("hidden_field_label_puc", "hidden_field_data_puc")
+    "puc": new Array("hidden_field_label_puc", "hidden_field_data_puc"),
+    "id_puc_auxiliar": new Array("hidden_field_label_id_puc_auxiliar", "hidden_field_data_id_puc_auxiliar")
   };
 
   var ajax_read_only = {
@@ -3870,12 +4015,13 @@ if ($this->Embutida_form)
     "descripcion": "off",
     "numero_cuenta": "off",
     "comportamiento": "off",
-    "cajero": "on",
+    "cajero": "off",
     "entrada": "off",
     "salida": "off",
     "saldo": "off",
     "estado": "off",
-    "puc": "off"
+    "puc": "off",
+    "id_puc_auxiliar": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -4041,6 +4187,23 @@ if ($this->Embutida_form)
       return;
     }
     if ("puc" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_puc_auxiliar" == sIndex)
     {
       scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);

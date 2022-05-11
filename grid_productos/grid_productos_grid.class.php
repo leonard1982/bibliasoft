@@ -105,6 +105,7 @@ class grid_productos_grid
    var $count_escombo;
    var $sum_escombo_existencia_menor;
    var $btn_stock;
+   var $combo;
    var $agregarnotainv;
    var $sc_field_0;
    var $idgrup;
@@ -118,7 +119,6 @@ class grid_productos_grid
    var $ubicacion;
    var $costomen;
    var $idpro1;
-   var $escombo;
    var $idprod;
    var $unimay;
    var $recmayamen;
@@ -128,6 +128,7 @@ class grid_productos_grid
    var $idpro2;
    var $otro;
    var $otro2;
+   var $escombo;
    var $preciomen2;
    var $preciomen3;
    var $precio2;
@@ -537,7 +538,6 @@ class grid_productos_grid
    $this->Cmps_ord_def['ubicacion'] = " asc";
    $this->Cmps_ord_def['costomen'] = " desc";
    $this->Cmps_ord_def['idpro1'] = " desc";
-   $this->Cmps_ord_def['escombo'] = " asc";
    $this->Cmps_ord_def['idprod'] = " desc";
    $this->Cmps_ord_def['unimay'] = " asc";
    $this->Cmps_ord_def['recmayamen'] = " desc";
@@ -547,6 +547,7 @@ class grid_productos_grid
    $this->Cmps_ord_def['idpro2'] = " desc";
    $this->Cmps_ord_def['otro'] = " desc";
    $this->Cmps_ord_def['otro2'] = " desc";
+   $this->Cmps_ord_def['escombo'] = " asc";
    $this->Cmps_ord_def['preciomen2'] = " desc";
    $this->Cmps_ord_def['preciomen3'] = " desc";
    $this->Cmps_ord_def['precio2'] = " desc";
@@ -669,17 +670,17 @@ if (!isset($this->sc_temp_gusuario_logueo)) {$this->sc_temp_gusuario_logueo = (i
 body
 {
 	
-	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_productos.jpg'); ?>) !important;
 	
-	background-position: center center !important;
 	
-	background-repeat: no-repeat !important;
 	
-	background-attachment: fixed !important;
 	
-	background-size: cover !important;
 	
-	background-color: #1175bb !important;
+	
+	
+	
+	
+	
+	
 }
 </style>
 <?php
@@ -861,11 +862,11 @@ if(isset($this->vconfig[0][0]))
 	
 	if($this->vconfig[0][11]=="SI")
 	{
-		$this->NM_cmp_hidden["escombo"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "on"; }
+		$this->NM_cmp_hidden["combo"] = "on";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["combo"] = "on"; }
 	}
 	else
 	{
-		$this->NM_cmp_hidden["escombo"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["escombo"] = "off"; }
+		$this->NM_cmp_hidden["combo"] = "off";if (!isset($this->NM_ajax_event) || !$this->NM_ajax_event) {$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['php_cmp_sel']["combo"] = "off"; }
 	}
 	
 	if($this->vconfig[0][12]=="SI")
@@ -1379,27 +1380,27 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, escombo, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, escombo, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, escombo, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, escombo, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, escombo, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, escombo, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
+       $nmgp_select = "SELECT idgrup, codigobar, nompro, imagen, existencia_menor, unimen, preciomen, idiva, ubicacion, costomen, idpro1, idprod, unimay, recmayamen, preciofull, stockmay, stockmen, idpro2, otro, otro2, escombo, preciomen2, preciomen3, precio2, preciomay, unidmaymen from (SELECT      idprod,     codigobar,     nompro,     unimay,     unimen,     costomay,     costomen,     recmayamen,     preciofull,     preciomen,     stockmay,     stockmen,     idgrup,     idpro1,     idpro2,     idiva,     otro,     otro2,     imagenprod,     escombo,     unidmaymen,     if(maneja_tcs_lfs='LFS',if(unidmaymen='SI',coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)*recmayamen,coalesce((select sum(vl.existencia) from vencimiento_lote vl where vl.idproducto=idprod),0)),(if(unidmaymen='SI',(stockmen*recmayamen),stockmen))) as existencia_menor,    preciomen2,    preciomen3,    precio2,    preciomay,    imagen,    ubicacion FROM      productos ) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['where_resumo'])) 
@@ -1510,27 +1511,27 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $this->costomen = (string)$this->costomen;
        $this->idpro1 = $this->rs_grid->fields[10] ;  
        $this->idpro1 = (string)$this->idpro1;
-       $this->escombo = $this->rs_grid->fields[11] ;  
-       $this->idprod = $this->rs_grid->fields[12] ;  
+       $this->idprod = $this->rs_grid->fields[11] ;  
        $this->idprod = (string)$this->idprod;
-       $this->unimay = $this->rs_grid->fields[13] ;  
-       $this->recmayamen = $this->rs_grid->fields[14] ;  
+       $this->unimay = $this->rs_grid->fields[12] ;  
+       $this->recmayamen = $this->rs_grid->fields[13] ;  
        $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
        $this->recmayamen = (string)$this->recmayamen;
-       $this->preciofull = $this->rs_grid->fields[15] ;  
+       $this->preciofull = $this->rs_grid->fields[14] ;  
        $this->preciofull =  str_replace(",", ".", $this->preciofull);
        $this->preciofull = (string)$this->preciofull;
-       $this->stockmay = $this->rs_grid->fields[16] ;  
+       $this->stockmay = $this->rs_grid->fields[15] ;  
        $this->stockmay =  str_replace(",", ".", $this->stockmay);
        $this->stockmay = (string)$this->stockmay;
-       $this->stockmen = $this->rs_grid->fields[17] ;  
+       $this->stockmen = $this->rs_grid->fields[16] ;  
        $this->stockmen = (string)$this->stockmen;
-       $this->idpro2 = $this->rs_grid->fields[18] ;  
+       $this->idpro2 = $this->rs_grid->fields[17] ;  
        $this->idpro2 = (string)$this->idpro2;
-       $this->otro = $this->rs_grid->fields[19] ;  
+       $this->otro = $this->rs_grid->fields[18] ;  
        $this->otro = (string)$this->otro;
-       $this->otro2 = $this->rs_grid->fields[20] ;  
+       $this->otro2 = $this->rs_grid->fields[19] ;  
        $this->otro2 = (string)$this->otro2;
+       $this->escombo = $this->rs_grid->fields[20] ;  
        $this->preciomen2 = $this->rs_grid->fields[21] ;  
        $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
        $this->preciomen2 = (string)$this->preciomen2;
@@ -1567,10 +1568,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $this->arg_sum_unimen = " = " . $this->Db->qstr($this->unimen);
        $this->arg_sum_idiva = ($this->idiva == "") ? " is null " : " = " . $this->idiva;
        $this->arg_sum_idpro1 = ($this->idpro1 == "") ? " is null " : " = " . $this->idpro1;
-       $this->arg_sum_escombo = " = " . $this->Db->qstr($this->escombo);
        $this->arg_sum_unimay = " = " . $this->Db->qstr($this->unimay);
        $this->look_otro = $this->otro; 
        $this->Lookup->lookup_otro($this->look_otro); 
+       $this->arg_sum_escombo = " = " . $this->Db->qstr($this->escombo);
        $this->SC_seq_register = $this->nmgp_reg_start ; 
        $this->SC_seq_page = 0;
        $this->SC_sep_quebra = false;
@@ -1621,16 +1622,16 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
            $this->ubicacion = $this->rs_grid->fields[8] ;  
            $this->costomen = $this->rs_grid->fields[9] ;  
            $this->idpro1 = $this->rs_grid->fields[10] ;  
-           $this->escombo = $this->rs_grid->fields[11] ;  
-           $this->idprod = $this->rs_grid->fields[12] ;  
-           $this->unimay = $this->rs_grid->fields[13] ;  
-           $this->recmayamen = $this->rs_grid->fields[14] ;  
-           $this->preciofull = $this->rs_grid->fields[15] ;  
-           $this->stockmay = $this->rs_grid->fields[16] ;  
-           $this->stockmen = $this->rs_grid->fields[17] ;  
-           $this->idpro2 = $this->rs_grid->fields[18] ;  
-           $this->otro = $this->rs_grid->fields[19] ;  
-           $this->otro2 = $this->rs_grid->fields[20] ;  
+           $this->idprod = $this->rs_grid->fields[11] ;  
+           $this->unimay = $this->rs_grid->fields[12] ;  
+           $this->recmayamen = $this->rs_grid->fields[13] ;  
+           $this->preciofull = $this->rs_grid->fields[14] ;  
+           $this->stockmay = $this->rs_grid->fields[15] ;  
+           $this->stockmen = $this->rs_grid->fields[16] ;  
+           $this->idpro2 = $this->rs_grid->fields[17] ;  
+           $this->otro = $this->rs_grid->fields[18] ;  
+           $this->otro2 = $this->rs_grid->fields[19] ;  
+           $this->escombo = $this->rs_grid->fields[20] ;  
            $this->preciomen2 = $this->rs_grid->fields[21] ;  
            $this->preciomen3 = $this->rs_grid->fields[22] ;  
            $this->precio2 = $this->rs_grid->fields[23] ;  
@@ -1707,10 +1708,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="#61678C">
+                    <meta name="msapplication-TileColor" content="#3C4858">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="#61678C">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="#61678C">
+                    <meta name="theme-color" content="#3C4858">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="#3C4858">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -1803,10 +1804,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#61678C\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#3C4858\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#61678C\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#61678C\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#3C4858\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#3C4858\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['doc_word'])
@@ -2821,8 +2822,8 @@ $nm_saida->saida("}\r\n");
    $this->css_costomen_grid_line = $compl_css_emb . "css_costomen_grid_line";
    $this->css_idpro1_label = $compl_css_emb . "css_idpro1_label";
    $this->css_idpro1_grid_line = $compl_css_emb . "css_idpro1_grid_line";
-   $this->css_escombo_label = $compl_css_emb . "css_escombo_label";
-   $this->css_escombo_grid_line = $compl_css_emb . "css_escombo_grid_line";
+   $this->css_combo_label = $compl_css_emb . "css_combo_label";
+   $this->css_combo_grid_line = $compl_css_emb . "css_combo_grid_line";
    $this->css_agregarnotainv_label = $compl_css_emb . "css_agregarnotainv_label";
    $this->css_agregarnotainv_grid_line = $compl_css_emb . "css_agregarnotainv_grid_line";
    $this->css_idprod_label = $compl_css_emb . "css_idprod_label";
@@ -2843,6 +2844,8 @@ $nm_saida->saida("}\r\n");
    $this->css_otro_grid_line = $compl_css_emb . "css_otro_grid_line";
    $this->css_otro2_label = $compl_css_emb . "css_otro2_label";
    $this->css_otro2_grid_line = $compl_css_emb . "css_otro2_grid_line";
+   $this->css_escombo_label = $compl_css_emb . "css_escombo_label";
+   $this->css_escombo_grid_line = $compl_css_emb . "css_escombo_grid_line";
    $this->css_preciomen2_label = $compl_css_emb . "css_preciomen2_label";
    $this->css_preciomen2_grid_line = $compl_css_emb . "css_preciomen2_grid_line";
    $this->css_preciomen3_label = $compl_css_emb . "css_preciomen3_label";
@@ -3788,60 +3791,12 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
- function NM_label_escombo()
+ function NM_label_combo()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['escombo'])) ? $this->New_label['escombo'] : "Combo"; 
-   if (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_escombo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_escombo_label'] . "\" >\r\n");
-   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
-   {
-      $link_img = "";
-      $nome_img = $this->Ini->Label_sort;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'escombo')
-      {
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
-          {
-              $nome_img = $this->Ini->Label_sort_desc;
-          }
-          else
-          {
-              $nome_img = $this->Ini->Label_sort_asc;
-          }
-      }
-      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
-      {
-          $this->Ini->Label_sort_pos = "right_field";
-      }
-      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
-      if (empty($nome_img))
-      {
-          $link_img = nl2br($SC_Label);
-          $Css_compl_sort = "";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_field")
-      {
-          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_field")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_cell")
-      {
-          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_cell")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('escombo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
-   }
-   else
-   {
-   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
-   }
-   $nm_saida->saida("</TD>\r\n");
+   $SC_Label = (isset($this->New_label['combo'])) ? $this->New_label['combo'] : "Combo"; 
+   if (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_combo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_combo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
  function NM_label_agregarnotainv()
@@ -4356,6 +4311,62 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
+ function NM_label_escombo()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['escombo'])) ? $this->New_label['escombo'] : "Combo"; 
+   if (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_escombo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_escombo_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_cmp'] == 'escombo')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('escombo')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
  function NM_label_preciomen2()
  {
    global $nm_saida;
@@ -4634,8 +4645,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['costomen'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idpro1'])) ? $this->New_label['idpro1'] : "Proveedor"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['idpro1'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['escombo'])) ? $this->New_label['escombo'] : "Combo"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['escombo'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['combo'])) ? $this->New_label['combo'] : "Combo"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['combo'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['agregarnotainv'])) ? $this->New_label['agregarnotainv'] : "Nota"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['agregarnotainv'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idprod'])) ? $this->New_label['idprod'] : "Producto"; 
@@ -4656,6 +4667,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['otro'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['otro2'])) ? $this->New_label['otro2'] : "%  Desc."; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['otro2'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['escombo'])) ? $this->New_label['escombo'] : "Combo"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['escombo'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['preciomen2'])) ? $this->New_label['preciomen2'] : "$ Menudeo Especial"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['labels']['preciomen2'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['preciomen3'])) ? $this->New_label['preciomen3'] : "$ Menudeo Mayor"; 
@@ -5007,27 +5020,27 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf']) 
           $this->costomen = (string)$this->costomen;
           $this->idpro1 = $this->rs_grid->fields[10] ;  
           $this->idpro1 = (string)$this->idpro1;
-          $this->escombo = $this->rs_grid->fields[11] ;  
-          $this->idprod = $this->rs_grid->fields[12] ;  
+          $this->idprod = $this->rs_grid->fields[11] ;  
           $this->idprod = (string)$this->idprod;
-          $this->unimay = $this->rs_grid->fields[13] ;  
-          $this->recmayamen = $this->rs_grid->fields[14] ;  
+          $this->unimay = $this->rs_grid->fields[12] ;  
+          $this->recmayamen = $this->rs_grid->fields[13] ;  
           $this->recmayamen =  str_replace(",", ".", $this->recmayamen);
           $this->recmayamen = (string)$this->recmayamen;
-          $this->preciofull = $this->rs_grid->fields[15] ;  
+          $this->preciofull = $this->rs_grid->fields[14] ;  
           $this->preciofull =  str_replace(",", ".", $this->preciofull);
           $this->preciofull = (string)$this->preciofull;
-          $this->stockmay = $this->rs_grid->fields[16] ;  
+          $this->stockmay = $this->rs_grid->fields[15] ;  
           $this->stockmay =  str_replace(",", ".", $this->stockmay);
           $this->stockmay = (string)$this->stockmay;
-          $this->stockmen = $this->rs_grid->fields[17] ;  
+          $this->stockmen = $this->rs_grid->fields[16] ;  
           $this->stockmen = (string)$this->stockmen;
-          $this->idpro2 = $this->rs_grid->fields[18] ;  
+          $this->idpro2 = $this->rs_grid->fields[17] ;  
           $this->idpro2 = (string)$this->idpro2;
-          $this->otro = $this->rs_grid->fields[19] ;  
+          $this->otro = $this->rs_grid->fields[18] ;  
           $this->otro = (string)$this->otro;
-          $this->otro2 = $this->rs_grid->fields[20] ;  
+          $this->otro2 = $this->rs_grid->fields[19] ;  
           $this->otro2 = (string)$this->otro2;
+          $this->escombo = $this->rs_grid->fields[20] ;  
           $this->preciomen2 = $this->rs_grid->fields[21] ;  
           $this->preciomen2 =  str_replace(",", ".", $this->preciomen2);
           $this->preciomen2 = (string)$this->preciomen2;
@@ -5064,10 +5077,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf']) 
           $this->arg_sum_unimen = " = " . $this->Db->qstr($this->unimen);
           $this->arg_sum_idiva = ($this->idiva == "") ? " is null " : " = " . $this->idiva;
           $this->arg_sum_idpro1 = ($this->idpro1 == "") ? " is null " : " = " . $this->idpro1;
-          $this->arg_sum_escombo = " = " . $this->Db->qstr($this->escombo);
           $this->arg_sum_unimay = " = " . $this->Db->qstr($this->unimay);
           $this->look_otro = $this->otro; 
           $this->Lookup->lookup_otro($this->look_otro); 
+          $this->arg_sum_escombo = " = " . $this->Db->qstr($this->escombo);
           $this->SC_seq_page++; 
           if ($this->NM_btn_run_show)
           {
@@ -5174,7 +5187,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf']) 
           $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'on';
  if($this->escombo =="SI")
 {
-	$this->NM_field_style["escombo"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
+	$this->NM_field_style["combo"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
 }
 if ($this->otro ==1)
 	{
@@ -5816,12 +5829,29 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
           { 
               $conteudo = "&nbsp;" ;  
           } 
+          elseif ($this->Ini->Gd_missing)
+          { 
+              $conteudo = "<span class=\"scErrorLine\">" . $this->Ini->Nm_lang['lang_errm_gd'] . "</span>";
+          } 
           else 
           { 
+              $in_btn_stock = $this->Ini->root  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__shopping_bag_24.png"; 
+              $img_time = filemtime($this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__shopping_bag_24.png"); 
+              $out_btn_stock = str_replace("/", "_", $this->Ini->path_imag_cab); 
+              $out_btn_stock = $this->Ini->path_imag_temp . "/sc_" . $out_btn_stock . "_btn_stock_3232_" . $img_time . "_scriptcase__NM__ico__NM__shopping_bag_24.png";
+              if (!is_file($this->Ini->root . $out_btn_stock)) 
+              {  
+                  $sc_obj_img = new nm_trata_img($in_btn_stock);
+                  $sc_obj_img->setWidth(32);
+                  $sc_obj_img->setHeight(32);
+                  $sc_obj_img->setManterAspecto(true);
+                  $sc_obj_img->createImg($this->Ini->root . $out_btn_stock);
+              } 
               if ($this->Ini->Export_img_zip)
               {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__shopping_bag_24.png";
-                  $conteudo = "<img border=\"\" src=\"scriptcase__NM__ico__NM__shopping_bag_24.png\"/>"; 
+                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $out_btn_stock;
+                  $Clear_path_img = str_replace($this->Ini->path_imag_temp . "/", "", $out_btn_stock);
+                  $conteudo = "<img border=\"\" src=\"" . $Clear_path_img . "\"/>"; 
               }
               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img) 
               { 
@@ -5833,7 +5863,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
               } 
               else 
               { 
-                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__shopping_bag_24.png\"/>" ; 
+                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img . $out_btn_stock . "\"/>" ; 
               } 
           } 
           $str_tem_display = $conteudo;
@@ -5968,42 +5998,60 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idpro1_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idpro1_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idpro1_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_escombo()
+ function NM_grid_combo()
  {
       global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off") { 
-          $conteudo = sc_strip_script($this->escombo); 
-          $conteudo_original = sc_strip_script($this->escombo); 
-          if ($conteudo === "") 
+      if (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off") { 
+          $conteudo = $this->combo; 
+          $conteudo_original = $this->combo; 
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_combo_32x32.png"))
           { 
               $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
+          } 
+          else 
+          { 
+              if ($this->Ini->Export_img_zip)
+              {
+                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_combo_32x32.png";
+                  $conteudo = "<img border=\"\" src=\"grp__NM__ico__NM__ico_combo_32x32.png\"/>"; 
+              }
+              elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img) 
+              { 
+                  $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_combo_32x32.png";
+                  $tmp_combo = fopen($loc_img_word, "rb"); 
+                  $reg_combo = fread($tmp_combo, filesize($loc_img_word)); 
+                  fclose($tmp_combo);  
+                  $conteudo = "<img border=\"0\" src=\"data:image/jpeg;base64," . base64_encode($reg_combo) . "\"/>" ; 
+              } 
+              else 
+              { 
+                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_combo_32x32.png\"/>" ; 
+              } 
           } 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
           { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'escombo', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'escombo', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'combo', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'combo', $str_tem_display, $conteudo_original); 
           } 
-              $conteudo = $str_tem_display; 
-              $Style_escombo = "";
-          if (isset($this->NM_field_style["escombo"]) && !empty($this->NM_field_style["escombo"]))
+              $Style_combo = "";
+          if (isset($this->NM_field_style["combo"]) && !empty($this->NM_field_style["combo"]))
           {
-              $Style_escombo .= $this->NM_field_style["escombo"];
+              $Style_combo .= $this->NM_field_style["combo"];
           }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
           {
-              $this->SC_nowrap = "";
+              $this->SC_nowrap = "NOWRAP";
           }
           else
           {
-              $this->SC_nowrap = "";
+              $this->SC_nowrap = "NOWRAP";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_escombo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_escombo_grid_line'] . $Style_escombo . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\">\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_combo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_combo_grid_line'] . $Style_combo . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\">\r\n");
  if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['Ind_lig_mult']++;
-       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_escombo_@scinf_form_combos']) ? $this->Ini->sc_lig_target['C_@scinf_escombo_@scinf_form_combos'] : (isset($this->Ini->sc_lig_target['C_@scinf_escombo']) ? $this->Ini->sc_lig_target['C_@scinf_escombo'] : null);
+       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_combo_@scinf_form_combos']) ? $this->Ini->sc_lig_target['C_@scinf_combo_@scinf_form_combos'] : (isset($this->Ini->sc_lig_target['C_@scinf_combo']) ? $this->Ini->sc_lig_target['C_@scinf_combo'] : null);
        if (isset($this->Ini->sc_lig_md5["form_combos"]) && $this->Ini->sc_lig_md5["form_combos"] == "S") {
-           $Parms_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?idprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?gidprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?NM_btn_insert?#?N?@?NM_btn_update?#?S?@?NM_btn_delete?#?N?@?NM_btn_navega?#?N?@?";
+           $Parms_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?idprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?gidprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?";
            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['under_dashboard'] && isset($linkTarget))
            {
                if ('' != $Parms_Lig)
@@ -6015,11 +6063,11 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
            $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_productos@SC_par@" . md5($Parms_Lig);
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
        } else {
-           $Md5_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?idprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?gidprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?NM_btn_insert?#?N?@?NM_btn_update?#?S?@?NM_btn_delete?#?N?@?NM_btn_navega?#?N?@?";
+           $Md5_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?idprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?gidprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?";
        }
-   $nm_saida->saida("<a  id=\"id_sc_field_escombo_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_form_combos_edit . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : '_self') . "', '', '0', '0', '', 'form_combos', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, '')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_escombo_grid_line . "\" style=\"" . $this->Css_Cmp['css_escombo_grid_line'] . $Style_escombo . "\">" . $conteudo . "</a>\r\n");
+   $nm_saida->saida("<a  id=\"id_sc_field_combo_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_form_combos_edit . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : '_self') . "', '', '0', '0', '', 'form_combos', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, '')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_combo_grid_line . "\" style=\"" . $this->Css_Cmp['css_combo_grid_line'] . $Style_combo . "\">" . $conteudo . "</a>\r\n");
 } else {
-   $nm_saida->saida(" <span id=\"id_sc_field_escombo_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
+   $nm_saida->saida(" <span id=\"id_sc_field_combo_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
        } 
    $nm_saida->saida("</TD>\r\n");
       }
@@ -6030,20 +6078,37 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
       if (!isset($this->NM_cmp_hidden['agregarnotainv']) || $this->NM_cmp_hidden['agregarnotainv'] != "off") { 
           $conteudo = $this->agregarnotainv; 
           $conteudo_original = $this->agregarnotainv; 
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__add2_32.png"))
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_notas_inventario_40x40.png"))
           { 
               $conteudo = "&nbsp;" ;  
           } 
+          elseif ($this->Ini->Gd_missing)
+          { 
+              $conteudo = "<span class=\"scErrorLine\">" . $this->Ini->Nm_lang['lang_errm_gd'] . "</span>";
+          } 
           else 
           { 
+              $in_agregarnotainv = $this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_notas_inventario_40x40.png"; 
+              $img_time = filemtime($this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_notas_inventario_40x40.png"); 
+              $out_agregarnotainv = str_replace("/", "_", $this->Ini->path_imag_cab); 
+              $out_agregarnotainv = $this->Ini->path_imag_temp . "/sc_" . $out_agregarnotainv . "_agregarnotainv_3232_" . $img_time . "_grp__NM__ico__NM__ico_notas_inventario_40x40.png";
+              if (!is_file($this->Ini->root . $out_agregarnotainv)) 
+              {  
+                  $sc_obj_img = new nm_trata_img($in_agregarnotainv);
+                  $sc_obj_img->setWidth(32);
+                  $sc_obj_img->setHeight(32);
+                  $sc_obj_img->setManterAspecto(true);
+                  $sc_obj_img->createImg($this->Ini->root . $out_agregarnotainv);
+              } 
               if ($this->Ini->Export_img_zip)
               {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__add2_32.png";
-                  $conteudo = "<img border=\"\" src=\"scriptcase__NM__ico__NM__add2_32.png\"/>"; 
+                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $out_agregarnotainv;
+                  $Clear_path_img = str_replace($this->Ini->path_imag_temp . "/", "", $out_agregarnotainv);
+                  $conteudo = "<img border=\"\" src=\"" . $Clear_path_img . "\"/>"; 
               }
               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img) 
               { 
-                  $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__add2_32.png";
+                  $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_notas_inventario_40x40.png";
                   $tmp_agregarnotainv = fopen($loc_img_word, "rb"); 
                   $reg_agregarnotainv = fread($tmp_agregarnotainv, filesize($loc_img_word)); 
                   fclose($tmp_agregarnotainv);  
@@ -6051,7 +6116,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
               } 
               else 
               { 
-                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__add2_32.png\"/>" ; 
+                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img . $out_agregarnotainv . "\"/>" ; 
               } 
           } 
           $str_tem_display = $conteudo;
@@ -6392,6 +6457,57 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_otro2_grid_line . "\"  style=\"" . $this->Css_Cmp['css_otro2_grid_line'] . $Style_otro2 . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_otro2_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_escombo()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off") { 
+          $conteudo = sc_strip_script($this->escombo); 
+          $conteudo_original = sc_strip_script($this->escombo); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'escombo', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'escombo', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_escombo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_escombo_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\">\r\n");
+ if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['Ind_lig_mult']++;
+       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_escombo_@scinf_form_combos']) ? $this->Ini->sc_lig_target['C_@scinf_escombo_@scinf_form_combos'] : (isset($this->Ini->sc_lig_target['C_@scinf_escombo']) ? $this->Ini->sc_lig_target['C_@scinf_escombo'] : null);
+       if (isset($this->Ini->sc_lig_md5["form_combos"]) && $this->Ini->sc_lig_md5["form_combos"] == "S") {
+           $Parms_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?idprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?gidprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?NM_btn_insert?#?N?@?NM_btn_update?#?S?@?NM_btn_delete?#?N?@?NM_btn_navega?#?N?@?";
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['under_dashboard'] && isset($linkTarget))
+           {
+               if ('' != $Parms_Lig)
+               {
+                   $Parms_Lig .= '*scout';
+               }
+               $Parms_Lig .= 'under_dashboard*scin1*scoutdashboard_app*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['dashboard_app'] . '*scoutown_widget*scin' . $linkTarget . '*scoutparent_widget*scin' . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['own_widget'] . '*scoutcompact_mode*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['compact_mode'] ? '1' : '0') . '*scoutremove_margin*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_margin'] ? '1' : '0') . '*scoutremove_border*scin' . ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['dashboard_info']['remove_border'] ? '1' : '0');
+           }
+           $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_productos@SC_par@" . md5($Parms_Lig);
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+       } else {
+           $Md5_Lig = "nmgp_lig_edit_lapis?#?S?@?nmgp_opcao?#?igual?@?idprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?gidprod?#?" . str_replace("'", "@aspass@", $this->idprod) . "?@?NM_btn_insert?#?N?@?NM_btn_update?#?S?@?NM_btn_delete?#?N?@?NM_btn_navega?#?N?@?";
+       }
+   $nm_saida->saida("<a  id=\"id_sc_field_escombo_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_form_combos_edit . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : '_self') . "', '', '0', '0', '', 'form_combos', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, '')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_escombo_grid_line . "\" style=\"" . $this->Css_Cmp['css_escombo_grid_line'] . "\">" . $conteudo . "</a>\r\n");
+} else {
+   $nm_saida->saida(" <span id=\"id_sc_field_escombo_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
+       } 
+   $nm_saida->saida("</TD>\r\n");
+      }
+ }
  function NM_grid_preciomen2()
  {
       global $nm_saida;
@@ -6530,7 +6646,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 30;
+   $this->NM_colspan  = 31;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -7038,7 +7154,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
         $colspan++;
     }
@@ -7079,6 +7195,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
         $colspan++;
     }
@@ -7258,7 +7378,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
         $colspan++;
     }
@@ -7299,6 +7419,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
         $colspan++;
     }
@@ -7478,7 +7602,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
         $colspan++;
     }
@@ -7519,6 +7643,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
         $colspan++;
     }
@@ -7698,7 +7826,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
         $colspan++;
     }
@@ -7739,6 +7867,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
         $colspan++;
     }
@@ -7918,7 +8050,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
         $colspan++;
     }
@@ -7959,6 +8091,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
         $colspan++;
     }
@@ -8136,7 +8272,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
         $colspan++;
     }
@@ -8177,6 +8313,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
         $colspan++;
     }
@@ -8354,7 +8494,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
         $colspan++;
     }
@@ -8395,6 +8535,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
         $colspan++;
     }
@@ -8572,7 +8716,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
         $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
         $colspan++;
     }
@@ -8613,6 +8757,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
         $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
         $colspan++;
     }
@@ -8751,7 +8899,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
        $colspan++;
     }
@@ -8792,6 +8940,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
        $colspan++;
     }
@@ -8919,7 +9071,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
     {
        $colspan++;
     }
-    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
+    if ($Cada_cmp == "combo" && (!isset($this->NM_cmp_hidden['combo']) || $this->NM_cmp_hidden['combo'] != "off"))
     {
        $colspan++;
     }
@@ -8960,6 +9112,10 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
        $colspan++;
     }
     if ($Cada_cmp == "otro2" && (!isset($this->NM_cmp_hidden['otro2']) || $this->NM_cmp_hidden['otro2'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "escombo" && (!isset($this->NM_cmp_hidden['escombo']) || $this->NM_cmp_hidden['escombo'] != "off"))
     {
        $colspan++;
     }
@@ -9102,11 +9258,11 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
       if ($this->nmgp_botoes['group_2'] == "on" && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_2_top = false;</script>\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_2", "scBtnGrpShow('group_2_top')", "scBtnGrpShow('group_2_top')", "sc_btgp_btn_group_2_top", "", "HERRAMIENTAS", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "__sc_grp__", "only_text", "text_right", "", "", "", "", "", "", "");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_2", "scBtnGrpShow('group_2_top')", "scBtnGrpShow('group_2_top')", "sc_btgp_btn_group_2_top", "", "Herramientas", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "__sc_grp__", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("           $Cod_Btn\r\n");
           $NM_btn  = true;
           $NM_Gbtn = false;
-          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'ini');
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'app', 'ini');
           $nm_saida->saida("           $Cod_Btn\r\n");
       if ($this->nmgp_botoes['sel_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
@@ -9220,7 +9376,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
       }
-          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'fim');
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'app', 'fim');
           $nm_saida->saida("           $Cod_Btn\r\n");
           $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
           $nm_saida->saida("             if (!sc_itens_btgp_group_2_top) {\r\n");
@@ -9445,7 +9601,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__refresh_32.png\"  id=\"sc_btn_recalcular_top\" onClick=\"sc_btn_btn_recalcular();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_recalcular_32x32.png\"  id=\"sc_btn_recalcular_top\" onClick=\"sc_btn_btn_recalcular();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
           if ($this->nmgp_botoes['reload'] == "on")
@@ -9862,11 +10018,11 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
       if ($this->nmgp_botoes['group_2'] == "on" && !$this->grid_emb_form)
       {
           $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_2_top = false;</script>\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_2", "scBtnGrpShow('group_2_top')", "scBtnGrpShow('group_2_top')", "sc_btgp_btn_group_2_top", "", "HERRAMIENTAS", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "__sc_grp__", "only_text", "text_right", "", "", "", "", "", "", "");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_2", "scBtnGrpShow('group_2_top')", "scBtnGrpShow('group_2_top')", "sc_btgp_btn_group_2_top", "", "Herramientas", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "__sc_grp__", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("           $Cod_Btn\r\n");
           $NM_btn  = true;
           $NM_Gbtn = false;
-          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'ini');
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'app', 'ini');
           $nm_saida->saida("           $Cod_Btn\r\n");
       if ($this->nmgp_botoes['sel_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
       {
@@ -9980,7 +10136,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
           $nm_saida->saida("            </div>\r\n");
               $NM_Gbtn = true;
       }
-          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'list', 'fim');
+          $Cod_Btn = nmButtonGroupTableOutput($this->arr_buttons, "group_group_2", 'group_2', 'top', 'app', 'fim');
           $nm_saida->saida("           $Cod_Btn\r\n");
           $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
           $nm_saida->saida("             if (!sc_itens_btgp_group_2_top) {\r\n");
@@ -10205,7 +10361,7 @@ $_SESSION['scriptcase']['grid_productos']['contr_erro'] = 'off';
                {
                    $btn_hint = sc_convert_encoding($btn_hint, $_SESSION['scriptcase']['charset'], "UTF-8");
                }
-          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/scriptcase__NM__ico__NM__refresh_32.png\"  id=\"sc_btn_recalcular_top\" onClick=\"sc_btn_btn_recalcular();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
+          $nm_saida->saida("<img src=\"" . $this->Ini->path_botoes . "/grp__NM__ico__NM__ico_recalcular_32x32.png\"  id=\"sc_btn_recalcular_top\" onClick=\"sc_btn_btn_recalcular();; return false\" border=\"0px\" title=\"" . $btn_hint . "\" style=\"vertical-align: middle;cursor: pointer;\" align=\"absmiddle\" class=\"scButton_default\">\r\n");
           $NM_btn = true;
       } 
           if ($this->nmgp_botoes['reload'] == "on")
@@ -12621,29 +12777,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    }
    if ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf" && !$_SESSION['scriptcase']['proc_mobile'])
    { 
-       $nm_saida->saida("   document.getElementById('first_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       $nm_saida->saida("   document.getElementById('back_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    elseif ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf" && $_SESSION['scriptcase']['proc_mobile'])
    { 
-       $nm_saida->saida("   document.getElementById('first_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       $nm_saida->saida("   document.getElementById('back_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    if ($this->rs_grid->EOF && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['opcao'] != "pdf")
    {

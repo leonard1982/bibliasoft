@@ -980,7 +980,7 @@ class grid_bancos_grid
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Bancos :: PDF</TITLE>
+ <TITLE>Bancos y/o cajas :: PDF</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
            if ($_SESSION['scriptcase']['proc_mobile'])
@@ -1003,10 +1003,10 @@ class grid_bancos_grid
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="#61678C">
+                    <meta name="msapplication-TileColor" content="#3C4858">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="#61678C">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="#61678C">
+                    <meta name="theme-color" content="#3C4858">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="#3C4858">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -1078,7 +1078,7 @@ class grid_bancos_grid
        $nm_saida->saida("            \"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd\">\r\n");
        $nm_saida->saida("  <HTML" . $_SESSION['scriptcase']['reg_conf']['html_dir'] . ">\r\n");
        $nm_saida->saida("  <HEAD>\r\n");
-       $nm_saida->saida("   <TITLE>Bancos</TITLE>\r\n");
+       $nm_saida->saida("   <TITLE>Bancos y/o cajas</TITLE>\r\n");
        $nm_saida->saida("   <META http-equiv=\"Content-Type\" content=\"text/html; charset=" . $_SESSION['scriptcase']['charset_html'] . "\" />\r\n");
        if ($_SESSION['scriptcase']['proc_mobile'])
        {
@@ -1099,10 +1099,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#61678C\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#3C4858\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#61678C\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#61678C\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#3C4858\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#3C4858\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['doc_word'])
@@ -2236,6 +2236,34 @@ $nm_saida->saida("}\r\n");
    }   
    $this->nm_data->SetaData(date("Y/m/d H:i:s"), "YYYY/MM/DD HH:II:SS"); 
    $nm_saida->saida(" <TR id=\"sc_grid_head\">\r\n");
+   if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['sv_dt_head']))
+   { 
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['sv_dt_head'] = array();
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['sv_dt_head']['fix'] = $nm_data_fixa;
+       $nm_refresch_cab_rod = true;
+   } 
+   else 
+   { 
+       $nm_refresch_cab_rod = false;
+   } 
+   foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['sv_dt_head'] as $ind => $val)
+   {
+       $tmp_var = "sc_data_cab" . $ind;
+       if ($$tmp_var != $val)
+       {
+           $nm_refresch_cab_rod = true;
+           break;
+       }
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['sv_dt_head']['fix'] != $nm_data_fixa)
+   {
+       $nm_refresch_cab_rod = true;
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['ajax_nav'] && $nm_refresch_cab_rod)
+   { 
+       $_SESSION['scriptcase']['saida_html'] = "";
+   } 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['sv_dt_head']['fix'] = $nm_data_fixa;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['opcao'] != "pdf")
    { 
        $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\" colspan=3 style=\"vertical-align: top\">\r\n");
@@ -2264,7 +2292,7 @@ $nm_saida->saida("}\r\n");
    if ($this->Ini->Export_img_zip)
    {
        $this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__Bank_icon-icons.com_74914.png";
-       $img_LIN1_COL2 = "grp__NM__ico__NM__Bank_icon-icons.com_74914.png";
+       $img_LIN1_COL3 = "grp__NM__ico__NM__Bank_icon-icons.com_74914.png";
    }
    elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img)
    {
@@ -2272,28 +2300,80 @@ $nm_saida->saida("}\r\n");
        $tmp_img_word = fopen($loc_img_word, "rb");
        $reg_img_word = fread($tmp_img_word, filesize($loc_img_word));
        fclose($tmp_img_word);
-       $img_LIN1_COL2 = "data:image/jpeg;base64," . base64_encode($reg_img_word);
+       $img_LIN1_COL3 = "data:image/jpeg;base64," . base64_encode($reg_img_word);
    }
    else
    {
-       $img_LIN1_COL2 = $this->NM_raiz_img . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__Bank_icon-icons.com_74914.png";
+       $img_LIN1_COL3 = $this->NM_raiz_img . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__Bank_icon-icons.com_74914.png";
    }
-   $nm_saida->saida("<style>\r\n");
-   $nm_saida->saida("#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 \r\n");
-   $nm_saida->saida("#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}\r\n");
-   $nm_saida->saida("</style>\r\n");
-   $nm_saida->saida("<div style=\"width: 100%\">\r\n");
-   $nm_saida->saida(" <div class=\"" . $this->css_scGridHeader . "\" style=\"height:11px; display: block; border-width:0px; \"></div>\r\n");
-   $nm_saida->saida(" <div style=\"height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block\">\r\n");
-   $nm_saida->saida(" 	<table style=\"width:100%; border-collapse:collapse; padding:0;\">\r\n");
-   $nm_saida->saida("    	<tr>\r\n");
-   $nm_saida->saida("        	<td id=\"lin1_col1\" class=\"" . $this->css_scGridHeaderFont . "\"><span>Bancos</span></td>\r\n");
-   $nm_saida->saida("            <td id=\"lin1_col2\" class=\"" . $this->css_scGridHeaderFont . "\"><span>   <IMG SRC=\"" . $img_LIN1_COL2 . "\" BORDER=\"0\"/></span></td>\r\n");
-   $nm_saida->saida("        </tr>\r\n");
-   $nm_saida->saida("    </table>		 \r\n");
-   $nm_saida->saida(" </div>\r\n");
-   $nm_saida->saida("</div>\r\n");
+   $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+   $nm_saida->saida("    <TR align=\"center\">\r\n");
+   $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+   $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          Bancos y/o cajas\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("             <IMG SRC=\"" . $img_LIN1_COL3 . "\" BORDER=\"0\"/>\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          " . $nm_data_fixa . "\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("      </TABLE>\r\n");
+   $nm_saida->saida("     </TD>\r\n");
+   $nm_saida->saida("    </TR>\r\n");
+   $nm_saida->saida("   </TABLE>\r\n");
    $nm_saida->saida("  </TD>\r\n");
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['ajax_nav'] && $nm_refresch_cab_rod)
+   { 
+       $this->Ini->Arr_result['setValue'][] = array('field' => 'sc_grid_head', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+       $_SESSION['scriptcase']['saida_html'] = "";
+   } 
    $nm_saida->saida(" </TR>\r\n");
  }
 // 
@@ -5288,29 +5368,9 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['proc_pdf']) {
    }
    if ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['opcao'] != "pdf" && !$_SESSION['scriptcase']['proc_mobile'])
    { 
-       $nm_saida->saida("   document.getElementById('first_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       $nm_saida->saida("   document.getElementById('back_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    elseif ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['opcao'] != "pdf" && $_SESSION['scriptcase']['proc_mobile'])
    { 
-       $nm_saida->saida("   document.getElementById('first_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       $nm_saida->saida("   document.getElementById('back_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_bancos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    $nm_saida->saida("  $(window).scroll(function() {\r\n");
    $nm_saida->saida("   if (typeof(scSetFixedHeaders) === typeof(function(){})) scSetFixedHeaders();\r\n");

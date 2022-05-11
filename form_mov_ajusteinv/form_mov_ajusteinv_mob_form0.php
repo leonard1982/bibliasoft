@@ -370,36 +370,6 @@ function navpage_atualiza(str_navpage)
             $('select[name="idpro"]').removeClass("scFormInputDisabled");
         }
      }
-     if (F_name == "colores")
-     {
-        $('select[name="colores"]').prop("disabled", F_opc);
-        if (F_opc == "disabled" || F_opc == true) {
-            $('select[name="colores"]').addClass("scFormInputDisabled");
-        }
-        else {
-            $('select[name="colores"]').removeClass("scFormInputDisabled");
-        }
-     }
-     if (F_name == "tallas")
-     {
-        $('select[name="tallas"]').prop("disabled", F_opc);
-        if (F_opc == "disabled" || F_opc == true) {
-            $('select[name="tallas"]').addClass("scFormInputDisabled");
-        }
-        else {
-            $('select[name="tallas"]').removeClass("scFormInputDisabled");
-        }
-     }
-     if (F_name == "sabor")
-     {
-        $('select[name="sabor"]').prop("disabled", F_opc);
-        if (F_opc == "disabled" || F_opc == true) {
-            $('select[name="sabor"]').addClass("scFormInputDisabled");
-        }
-        else {
-            $('select[name="sabor"]').removeClass("scFormInputDisabled");
-        }
-     }
      if (F_name == "presentacion")
      {
         $('input[name="presentacion"]').prop("disabled", F_opc);
@@ -1016,18 +986,6 @@ unset($NM_ult_sep);
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
 <div id="div_hidden_bloco_0"><!-- bloco_c -->
 <?php
-   if (!isset($this->nmgp_cmp_hidden['colores']))
-   {
-       $this->nmgp_cmp_hidden['colores'] = 'off';
-   }
-   if (!isset($this->nmgp_cmp_hidden['tallas']))
-   {
-       $this->nmgp_cmp_hidden['tallas'] = 'off';
-   }
-   if (!isset($this->nmgp_cmp_hidden['sabor']))
-   {
-       $this->nmgp_cmp_hidden['sabor'] = 'off';
-   }
 ?>
 <TABLE align="center" id="hidden_bloco_0" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
@@ -1093,7 +1051,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -1102,7 +1059,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    $nm_comando = "SELECT Idres, prefijo  FROM resdian  WHERE prefijo like '%not%' or prefijo like '%inv%'  and resolucion=0";
 
@@ -1110,7 +1066,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -1341,7 +1296,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -1350,7 +1304,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    $nm_comando = "SELECT idtipo, nombre  FROM tipotransfe WHERE idtipo !=2 ORDER BY nombre";
 
@@ -1358,7 +1311,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -1632,7 +1584,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -1641,7 +1592,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -1676,7 +1626,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -1797,621 +1746,6 @@ else
 
 
    <?php
-   if (!isset($this->nm_new_label['colores']))
-   {
-       $this->nm_new_label['colores'] = "Color";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $colores = $this->colores;
-   if (!isset($this->nmgp_cmp_hidden['colores']))
-   {
-       $this->nmgp_cmp_hidden['colores'] = 'off';
-   }
-   $sStyleHidden_colores = '';
-   if (isset($this->nmgp_cmp_hidden['colores']) && $this->nmgp_cmp_hidden['colores'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['colores']);
-       $sStyleHidden_colores = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_colores = 'display: none;';
-   $sStyleReadInp_colores = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['colores']) && $this->nmgp_cmp_readonly['colores'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['colores']);
-       $sStyleReadLab_colores = '';
-       $sStyleReadInp_colores = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['colores']) && $this->nmgp_cmp_hidden['colores'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="colores" value="<?php echo $this->form_encode_input($this->colores) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_colores_line" id="hidden_field_data_colores" style="<?php echo $sStyleHidden_colores; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_colores_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_colores_label" style=""><span id="id_label_colores"><?php echo $this->nm_new_label['colores']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["colores"]) &&  $this->nmgp_cmp_readonly["colores"] == "on") { 
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array(); 
-}
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array(); 
-    }
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT f.idcol, c.color  FROM colorxproducto f left join colores c on f.idcol=c.idcolores where idpr=$this->idpro ORDER BY f.idcol";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-   $x = 0; 
-   $colores_look = ""; 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   while (!empty($todo[$x])) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->colores_1))
-          {
-              foreach ($this->colores_1 as $tmp_colores)
-              {
-                  if (trim($tmp_colores) === trim($cadaselect[1])) { $colores_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->colores) === trim($cadaselect[1])) { $colores_look .= $cadaselect[0]; } 
-          $x++; 
-   }
-
-?>
-<input type="hidden" name="colores" value="<?php echo $this->form_encode_input($colores) . "\">" . $colores_look . ""; ?>
-<?php } else { ?>
-<?php
-   $todo = $this->Form_lookup_colores();
-   $x = 0 ; 
-   $colores_look = ""; 
-   while (!empty($todo[$x])) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->colores_1))
-          {
-              foreach ($this->colores_1 as $tmp_colores)
-              {
-                  if (trim($tmp_colores) === trim($cadaselect[1])) { $colores_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->colores) === trim($cadaselect[1])) { $colores_look .= $cadaselect[0]; } 
-          $x++; 
-   }
-          if (empty($colores_look))
-          {
-              $colores_look = $this->colores;
-          }
-   $x = 0; 
-   echo "<span id=\"id_read_on_colores\" class=\"css_colores_line\" style=\"" .  $sStyleReadLab_colores . "\">" . $this->form_format_readonly("colores", $this->form_encode_input($colores_look)) . "</span><span id=\"id_read_off_colores\" class=\"css_read_off_colores" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_colores . "\">";
-   echo " <span id=\"idAjaxSelect_colores\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_colores_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_colores\" name=\"colores\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
-   echo "\r" ; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'][] = '0'; 
-   echo "  <option value=\"0\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
-   while (!empty($todo[$x]) && !$nm_nao_carga) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          echo "  <option value=\"$cadaselect[1]\"" ; 
-          if (trim($this->colores) === trim($cadaselect[1])) 
-          {
-              echo " selected" ; 
-          }
-          if (strtoupper($cadaselect[2]) == "S") 
-          {
-              if (empty($this->colores)) 
-              {
-                  echo " selected" ;
-              } 
-           } 
-          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
-          echo "\r" ; 
-          $x++ ; 
-   }  ; 
-   echo " </select></span>" ; 
-   echo "\r" ; 
-   echo "</span>";
-?> 
-<?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_colores_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_colores_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['tallas']))
-   {
-       $this->nm_new_label['tallas'] = "Talla";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $tallas = $this->tallas;
-   if (!isset($this->nmgp_cmp_hidden['tallas']))
-   {
-       $this->nmgp_cmp_hidden['tallas'] = 'off';
-   }
-   $sStyleHidden_tallas = '';
-   if (isset($this->nmgp_cmp_hidden['tallas']) && $this->nmgp_cmp_hidden['tallas'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['tallas']);
-       $sStyleHidden_tallas = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_tallas = 'display: none;';
-   $sStyleReadInp_tallas = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['tallas']) && $this->nmgp_cmp_readonly['tallas'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['tallas']);
-       $sStyleReadLab_tallas = '';
-       $sStyleReadInp_tallas = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['tallas']) && $this->nmgp_cmp_hidden['tallas'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="tallas" value="<?php echo $this->form_encode_input($this->tallas) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_tallas_line" id="hidden_field_data_tallas" style="<?php echo $sStyleHidden_tallas; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_tallas_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_tallas_label" style=""><span id="id_label_tallas"><?php echo $this->nm_new_label['tallas']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["tallas"]) &&  $this->nmgp_cmp_readonly["tallas"] == "on") { 
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array(); 
-}
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array(); 
-    }
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT f.idta, t.tamaño FROM tallaxproducto f left join tallas t on f.idta=t.idtallas where idpr=$this->idpro ORDER BY f.idta";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-   $x = 0; 
-   $tallas_look = ""; 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   while (!empty($todo[$x])) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->tallas_1))
-          {
-              foreach ($this->tallas_1 as $tmp_tallas)
-              {
-                  if (trim($tmp_tallas) === trim($cadaselect[1])) { $tallas_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->tallas) === trim($cadaselect[1])) { $tallas_look .= $cadaselect[0]; } 
-          $x++; 
-   }
-
-?>
-<input type="hidden" name="tallas" value="<?php echo $this->form_encode_input($tallas) . "\">" . $tallas_look . ""; ?>
-<?php } else { ?>
-<?php
-   $todo = $this->Form_lookup_tallas();
-   $x = 0 ; 
-   $tallas_look = ""; 
-   while (!empty($todo[$x])) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->tallas_1))
-          {
-              foreach ($this->tallas_1 as $tmp_tallas)
-              {
-                  if (trim($tmp_tallas) === trim($cadaselect[1])) { $tallas_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->tallas) === trim($cadaselect[1])) { $tallas_look .= $cadaselect[0]; } 
-          $x++; 
-   }
-          if (empty($tallas_look))
-          {
-              $tallas_look = $this->tallas;
-          }
-   $x = 0; 
-   echo "<span id=\"id_read_on_tallas\" class=\"css_tallas_line\" style=\"" .  $sStyleReadLab_tallas . "\">" . $this->form_format_readonly("tallas", $this->form_encode_input($tallas_look)) . "</span><span id=\"id_read_off_tallas\" class=\"css_read_off_tallas" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_tallas . "\">";
-   echo " <span id=\"idAjaxSelect_tallas\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_tallas_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_tallas\" name=\"tallas\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
-   echo "\r" ; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'][] = '0'; 
-   echo "  <option value=\"0\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
-   while (!empty($todo[$x]) && !$nm_nao_carga) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          echo "  <option value=\"$cadaselect[1]\"" ; 
-          if (trim($this->tallas) === trim($cadaselect[1])) 
-          {
-              echo " selected" ; 
-          }
-          if (strtoupper($cadaselect[2]) == "S") 
-          {
-              if (empty($this->tallas)) 
-              {
-                  echo " selected" ;
-              } 
-           } 
-          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
-          echo "\r" ; 
-          $x++ ; 
-   }  ; 
-   echo " </select></span>" ; 
-   echo "\r" ; 
-   echo "</span>";
-?> 
-<?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_tallas_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_tallas_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['sabor']))
-   {
-       $this->nm_new_label['sabor'] = "Sabor";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $sabor = $this->sabor;
-   if (!isset($this->nmgp_cmp_hidden['sabor']))
-   {
-       $this->nmgp_cmp_hidden['sabor'] = 'off';
-   }
-   $sStyleHidden_sabor = '';
-   if (isset($this->nmgp_cmp_hidden['sabor']) && $this->nmgp_cmp_hidden['sabor'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['sabor']);
-       $sStyleHidden_sabor = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_sabor = 'display: none;';
-   $sStyleReadInp_sabor = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['sabor']) && $this->nmgp_cmp_readonly['sabor'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['sabor']);
-       $sStyleReadLab_sabor = '';
-       $sStyleReadInp_sabor = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['sabor']) && $this->nmgp_cmp_hidden['sabor'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="sabor" value="<?php echo $this->form_encode_input($this->sabor) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_sabor_line" id="hidden_field_data_sabor" style="<?php echo $sStyleHidden_sabor; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_sabor_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_sabor_label" style=""><span id="id_label_sabor"><?php echo $this->nm_new_label['sabor']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["sabor"]) &&  $this->nmgp_cmp_readonly["sabor"] == "on") { 
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array(); 
-}
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array(); 
-    }
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT f.idsa, t.tamaño FROM saborxproducto f left join tallas t on f.idsa=t.idtallas where idpr=$this->idpro ORDER BY f.idsa";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-   $x = 0; 
-   $sabor_look = ""; 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   while (!empty($todo[$x])) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->sabor_1))
-          {
-              foreach ($this->sabor_1 as $tmp_sabor)
-              {
-                  if (trim($tmp_sabor) === trim($cadaselect[1])) { $sabor_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->sabor) === trim($cadaselect[1])) { $sabor_look .= $cadaselect[0]; } 
-          $x++; 
-   }
-
-?>
-<input type="hidden" name="sabor" value="<?php echo $this->form_encode_input($sabor) . "\">" . $sabor_look . ""; ?>
-<?php } else { ?>
-<?php
-   $todo = $this->Form_lookup_sabor();
-   $x = 0 ; 
-   $sabor_look = ""; 
-   while (!empty($todo[$x])) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->sabor_1))
-          {
-              foreach ($this->sabor_1 as $tmp_sabor)
-              {
-                  if (trim($tmp_sabor) === trim($cadaselect[1])) { $sabor_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->sabor) === trim($cadaselect[1])) { $sabor_look .= $cadaselect[0]; } 
-          $x++; 
-   }
-          if (empty($sabor_look))
-          {
-              $sabor_look = $this->sabor;
-          }
-   $x = 0; 
-   echo "<span id=\"id_read_on_sabor\" class=\"css_sabor_line\" style=\"" .  $sStyleReadLab_sabor . "\">" . $this->form_format_readonly("sabor", $this->form_encode_input($sabor_look)) . "</span><span id=\"id_read_off_sabor\" class=\"css_read_off_sabor" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_sabor . "\">";
-   echo " <span id=\"idAjaxSelect_sabor\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_sabor_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_sabor\" name=\"sabor\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
-   echo "\r" ; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'][] = '0'; 
-   echo "  <option value=\"0\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
-   while (!empty($todo[$x]) && !$nm_nao_carga) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          echo "  <option value=\"$cadaselect[1]\"" ; 
-          if (trim($this->sabor) === trim($cadaselect[1])) 
-          {
-              echo " selected" ; 
-          }
-          if (strtoupper($cadaselect[2]) == "S") 
-          {
-              if (empty($this->sabor)) 
-              {
-                  echo " selected" ;
-              } 
-           } 
-          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
-          echo "\r" ; 
-          $x++ ; 
-   }  ; 
-   echo " </select></span>" ; 
-   echo "\r" ; 
-   echo "</span>";
-?> 
-<?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_sabor_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_sabor_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
     if (!isset($this->nm_new_label['presentacion']))
     {
         $this->nm_new_label['presentacion'] = "Presentación";
@@ -2452,207 +1786,6 @@ if ($this->idpro != "")
  <input class="sc-js-input scFormObjectOdd css_presentacion_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_presentacion" type=text name="presentacion" value="<?php echo $this->form_encode_input($presentacion) ?>"
  <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=10"; } ?> maxlength=20 alt="{datatype: 'text', maxLength: 20, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_presentacion_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_presentacion_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-   if (!isset($this->nm_new_label['seleccionarlfs']))
-   {
-       $this->nm_new_label['seleccionarlfs'] = "Seleccione";
-   }
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $seleccionarlfs = $this->seleccionarlfs;
-   $sStyleHidden_seleccionarlfs = '';
-   if (isset($this->nmgp_cmp_hidden['seleccionarlfs']) && $this->nmgp_cmp_hidden['seleccionarlfs'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['seleccionarlfs']);
-       $sStyleHidden_seleccionarlfs = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_seleccionarlfs = 'display: none;';
-   $sStyleReadInp_seleccionarlfs = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['seleccionarlfs']) && $this->nmgp_cmp_readonly['seleccionarlfs'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['seleccionarlfs']);
-       $sStyleReadLab_seleccionarlfs = '';
-       $sStyleReadInp_seleccionarlfs = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['seleccionarlfs']) && $this->nmgp_cmp_hidden['seleccionarlfs'] == 'off') { $sc_hidden_yes++; ?>
-<input type=hidden name="seleccionarlfs" value="<?php echo $this->form_encode_input($this->seleccionarlfs) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_seleccionarlfs_line" id="hidden_field_data_seleccionarlfs" style="<?php echo $sStyleHidden_seleccionarlfs; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_seleccionarlfs_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_seleccionarlfs_label" style=""><span id="id_label_seleccionarlfs"><?php echo $this->nm_new_label['seleccionarlfs']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["seleccionarlfs"]) &&  $this->nmgp_cmp_readonly["seleccionarlfs"] == "on") { 
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array(); 
-}
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array(); 
-    }
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT vl.idvenclote,concat('Vence: ',coalesce(vl.fecha_vencimiento,''),' -- Lote: ',coalesce(vl.lote,''),' -- Bodega: ',b.bodega,' -- Existencia: ',vl.existencia) as descripcion FROM vencimiento_lote vl LEFT JOIN productos p on vl.idproducto=p.idprod LEFT JOIN bodegas b on vl.idbodega=b.idbodega where         p.maneja_tcs_lfs = 'LFS' and vl.idproducto='$this->idpro' and vl.existencia <> 0";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-   $x = 0; 
-   $seleccionarlfs_look = ""; 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   while (!empty($todo[$x])) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->seleccionarlfs_1))
-          {
-              foreach ($this->seleccionarlfs_1 as $tmp_seleccionarlfs)
-              {
-                  if (trim($tmp_seleccionarlfs) === trim($cadaselect[1])) { $seleccionarlfs_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->seleccionarlfs) === trim($cadaselect[1])) { $seleccionarlfs_look .= $cadaselect[0]; } 
-          $x++; 
-   }
-
-?>
-<input type="hidden" name="seleccionarlfs" value="<?php echo $this->form_encode_input($seleccionarlfs) . "\">" . $seleccionarlfs_look . ""; ?>
-<?php } else { ?>
-<?php
-   $todo = $this->Form_lookup_seleccionarlfs();
-   $x = 0 ; 
-   $seleccionarlfs_look = ""; 
-   while (!empty($todo[$x])) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->seleccionarlfs_1))
-          {
-              foreach ($this->seleccionarlfs_1 as $tmp_seleccionarlfs)
-              {
-                  if (trim($tmp_seleccionarlfs) === trim($cadaselect[1])) { $seleccionarlfs_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
-              }
-          }
-          elseif (trim($this->seleccionarlfs) === trim($cadaselect[1])) { $seleccionarlfs_look .= $cadaselect[0]; } 
-          $x++; 
-   }
-          if (empty($seleccionarlfs_look))
-          {
-              $seleccionarlfs_look = $this->seleccionarlfs;
-          }
-   $x = 0; 
-   echo "<span id=\"id_read_on_seleccionarlfs\" class=\"css_seleccionarlfs_line\" style=\"" .  $sStyleReadLab_seleccionarlfs . "\">" . $this->form_format_readonly("seleccionarlfs", $this->form_encode_input($seleccionarlfs_look)) . "</span><span id=\"id_read_off_seleccionarlfs\" class=\"css_read_off_seleccionarlfs" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_seleccionarlfs . "\">";
-   echo " <span id=\"idAjaxSelect_seleccionarlfs\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_seleccionarlfs_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_seleccionarlfs\" name=\"seleccionarlfs\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
-   echo "\r" ; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'][] = ''; 
-   echo "  <option value=\"\">" . str_replace("<", "&lt;","Vencimiento/Lote/Bodega") . "</option>" ; 
-   while (!empty($todo[$x]) && !$nm_nao_carga) 
-   {
-          $cadaselect = explode("?#?", $todo[$x]) ; 
-          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
-          echo "  <option value=\"$cadaselect[1]\"" ; 
-          if (trim($this->seleccionarlfs) === trim($cadaselect[1])) 
-          {
-              echo " selected" ; 
-          }
-          if (strtoupper($cadaselect[2]) == "S") 
-          {
-              if (empty($this->seleccionarlfs)) 
-              {
-                  echo " selected" ;
-              } 
-           } 
-          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
-          echo "\r" ; 
-          $x++ ; 
-   }  ; 
-   echo " </select></span>" ; 
-   echo "\r" ; 
-   echo "</span>";
-?> 
-<?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_seleccionarlfs_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_seleccionarlfs_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 
@@ -2810,7 +1943,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -2819,7 +1951,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY bodega";
 
@@ -2827,7 +1958,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -3013,163 +2143,6 @@ else
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
 <div id="div_hidden_bloco_3"><!-- bloco_c -->
 <TABLE align="center" id="hidden_bloco_3" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['lote']))
-    {
-        $this->nm_new_label['lote'] = "Lote";
-    }
-?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $lote = $this->lote;
-   $sStyleHidden_lote = '';
-   if (isset($this->nmgp_cmp_hidden['lote']) && $this->nmgp_cmp_hidden['lote'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['lote']);
-       $sStyleHidden_lote = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_lote = 'display: none;';
-   $sStyleReadInp_lote = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['lote']) && $this->nmgp_cmp_readonly['lote'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['lote']);
-       $sStyleReadLab_lote = '';
-       $sStyleReadInp_lote = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['lote']) && $this->nmgp_cmp_hidden['lote'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="lote" value="<?php echo $this->form_encode_input($lote) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_lote_line" id="hidden_field_data_lote" style="<?php echo $sStyleHidden_lote; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_lote_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_lote_label" style=""><span id="id_label_lote"><?php echo $this->nm_new_label['lote']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["lote"]) &&  $this->nmgp_cmp_readonly["lote"] == "on") { 
-
- ?>
-<input type="hidden" name="lote" value="<?php echo $this->form_encode_input($lote) . "\">" . $lote . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_lote" class="sc-ui-readonly-lote css_lote_line" style="<?php echo $sStyleReadLab_lote; ?>"><?php echo $this->form_format_readonly("lote", $this->form_encode_input($this->lote)); ?></span><span id="id_read_off_lote" class="css_read_off_lote<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_lote; ?>">
- <input class="sc-js-input scFormObjectOdd css_lote_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_lote" type=text name="lote" value="<?php echo $this->form_encode_input($lote) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=20"; } ?> maxlength=20 alt="{datatype: 'text', maxLength: 20, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: 'upper', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_lote_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_lote_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
-      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-
-
-   <?php
-    if (!isset($this->nm_new_label['vence']))
-    {
-        $this->nm_new_label['vence'] = "Vence";
-    }
-?>
-<?php
-   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
-   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
-   $vence = $this->vence;
-   $sStyleHidden_vence = '';
-   if (isset($this->nmgp_cmp_hidden['vence']) && $this->nmgp_cmp_hidden['vence'] == 'off')
-   {
-       unset($this->nmgp_cmp_hidden['vence']);
-       $sStyleHidden_vence = 'display: none;';
-   }
-   $bTestReadOnly = true;
-   $sStyleReadLab_vence = 'display: none;';
-   $sStyleReadInp_vence = '';
-   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['vence']) && $this->nmgp_cmp_readonly['vence'] == 'on')
-   {
-       $bTestReadOnly = false;
-       unset($this->nmgp_cmp_readonly['vence']);
-       $sStyleReadLab_vence = '';
-       $sStyleReadInp_vence = 'display: none;';
-   }
-?>
-<?php if (isset($this->nmgp_cmp_hidden['vence']) && $this->nmgp_cmp_hidden['vence'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="vence" value="<?php echo $this->form_encode_input($vence) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOdd css_vence_line" id="hidden_field_data_vence" style="<?php echo $sStyleHidden_vence; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_vence_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_vence_label" style=""><span id="id_label_vence"><?php echo $this->nm_new_label['vence']; ?></span></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["vence"]) &&  $this->nmgp_cmp_readonly["vence"] == "on") { 
-
- ?>
-<input type="hidden" name="vence" value="<?php echo $this->form_encode_input($vence) . "\">" . $vence . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_vence" class="sc-ui-readonly-vence css_vence_line" style="<?php echo $sStyleReadLab_vence; ?>"><?php echo $this->form_format_readonly("vence", $this->form_encode_input($vence)); ?></span><span id="id_read_off_vence" class="css_read_off_vence<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_vence; ?>"><?php
-$tmp_form_data = $this->field_config['vence']['date_format'];
-$tmp_form_data = str_replace('aaaa', 'yyyy', $tmp_form_data);
-$tmp_form_data = str_replace('dd'  , $this->Ini->Nm_lang['lang_othr_date_days'], $tmp_form_data);
-$tmp_form_data = str_replace('mm'  , $this->Ini->Nm_lang['lang_othr_date_mnth'], $tmp_form_data);
-$tmp_form_data = str_replace('yyyy', $this->Ini->Nm_lang['lang_othr_date_year'], $tmp_form_data);
-$tmp_form_data = str_replace('hh'  , $this->Ini->Nm_lang['lang_othr_date_hour'], $tmp_form_data);
-$tmp_form_data = str_replace('ii'  , $this->Ini->Nm_lang['lang_othr_date_mint'], $tmp_form_data);
-$tmp_form_data = str_replace('ss'  , $this->Ini->Nm_lang['lang_othr_date_scnd'], $tmp_form_data);
-$tmp_form_data = str_replace(';'   , ' '                                       , $tmp_form_data);
-?>
-<?php
-$miniCalendarButton = $this->jqueryButtonText('calendar');
-if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
-    $miniCalendarButton[1] = substr($miniCalendarButton[1], 9);
-}
-?>
-<span class='trigger-picker-<?php echo $miniCalendarButton[1]; ?>' style='display: inherit; width: 100%'>
-
- <input class="sc-js-input scFormObjectOdd css_vence_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_vence" type=text name="vence" value="<?php echo $this->form_encode_input($vence) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=10"; } ?> alt="{datatype: 'date', dateSep: '<?php echo $this->field_config['vence']['date_sep']; ?>', dateFormat: '<?php echo $this->field_config['vence']['date_format']; ?>', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span>
-&nbsp;<span class="scFormDataHelpOdd"><?php echo $tmp_form_data; ?></span></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_vence_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_vence_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-
-
-
-
-<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
-
-
-    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
-
-
-
-
-<?php } 
-?> 
-
-
-
-
-
-
-<?php $sStyleHidden_vence_dumb = ('' == $sStyleHidden_vence) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_vence_dumb" style="<?php echo $sStyleHidden_vence_dumb; ?>"></TD>
-   </tr>
-<?php $sc_hidden_no = 1; ?>
-</TABLE></div><!-- bloco_f -->
-   </td>
-   </tr></table>
-   <a name="bloco_4"></a>
-   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_4"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_4" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -3392,7 +2365,7 @@ unset($NM_ult_sep);
 </form> 
 <script> 
 <?php
-  $nm_sc_blocos_da_pag = array(0,1,2,3,4);
+  $nm_sc_blocos_da_pag = array(0,1,2,3);
 
   foreach ($this->Ini->nm_hidden_blocos as $bloco => $hidden)
   {

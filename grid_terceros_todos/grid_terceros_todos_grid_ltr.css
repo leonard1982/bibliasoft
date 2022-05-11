@@ -1,7 +1,5 @@
-.css_documento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
-.css_documento_grid_line {vertical-align: middle;text-align: center;}
-.css_dv_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
-.css_dv_grid_line {vertical-align: middle;text-align: center;}
+.css_ccnit_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ccnit_grid_line {vertical-align: top;text-align: left;}
 .css_nombres_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
 .css_nombres_grid_line {vertical-align: middle;text-align: left;}
 .css_direccion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
@@ -20,6 +18,8 @@
 .css_si_nomina_grid_line {background-color:#0099FF;font-weight:bold;vertical-align: top;text-align: left;}
 .css_idtercero_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_idtercero_grid_line {vertical-align: top;text-align: right;}
+.css_documento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_documento_grid_line {vertical-align: middle;text-align: center;}
 .css_nacimiento_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
 .css_nacimiento_grid_line {vertical-align: middle;text-align: center;}
 .css_sexo_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
@@ -40,6 +40,8 @@
 .css_observaciones_grid_line {vertical-align: middle;text-align: left;}
 .css_loatiende_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_loatiende_grid_line {vertical-align: middle;text-align: right;}
+.css_dv_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_dv_grid_line {vertical-align: middle;text-align: center;}
 .css_contacto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_contacto_grid_line {vertical-align: top;text-align: left;}
 .css_credito_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}

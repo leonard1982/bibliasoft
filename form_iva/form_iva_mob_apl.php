@@ -54,9 +54,22 @@ class form_iva_mob_apl
    var $tipo_impuesto;
    var $codigo;
    var $puc;
+   var $puc_1;
    var $puc_dv_ventas;
    var $puc_compras;
+   var $puc_compras_1;
    var $puc_dv_compras;
+   var $puc_dv_compras_1;
+   var $id_pucaux_compras;
+   var $id_pucaux_compras_1;
+   var $id_pucaux_ventas;
+   var $id_pucaux_ventas_1;
+   var $id_pucaux_nc;
+   var $id_pucaux_nc_1;
+   var $id_pucaux_nd;
+   var $id_pucaux_nd_1;
+   var $id_pucaux_exec;
+   var $id_pucaux_exec_1;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -109,6 +122,26 @@ class form_iva_mob_apl
           {
               $this->csrf_token = $this->NM_ajax_info['param']['csrf_token'];
           }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_compras']))
+          {
+              $this->id_pucaux_compras = $this->NM_ajax_info['param']['id_pucaux_compras'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_exec']))
+          {
+              $this->id_pucaux_exec = $this->NM_ajax_info['param']['id_pucaux_exec'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_nc']))
+          {
+              $this->id_pucaux_nc = $this->NM_ajax_info['param']['id_pucaux_nc'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_nd']))
+          {
+              $this->id_pucaux_nd = $this->NM_ajax_info['param']['id_pucaux_nd'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_ventas']))
+          {
+              $this->id_pucaux_ventas = $this->NM_ajax_info['param']['id_pucaux_ventas'];
+          }
           if (isset($this->NM_ajax_info['param']['idiva']))
           {
               $this->idiva = $this->NM_ajax_info['param']['idiva'];
@@ -141,13 +174,13 @@ class form_iva_mob_apl
           {
               $this->nmgp_parms = $this->NM_ajax_info['param']['nmgp_parms'];
           }
+          if (isset($this->NM_ajax_info['param']['nmgp_refresh_fields']))
+          {
+              $this->nmgp_refresh_fields = $this->NM_ajax_info['param']['nmgp_refresh_fields'];
+          }
           if (isset($this->NM_ajax_info['param']['nmgp_url_saida']))
           {
               $this->nmgp_url_saida = $this->NM_ajax_info['param']['nmgp_url_saida'];
-          }
-          if (isset($this->NM_ajax_info['param']['puc']))
-          {
-              $this->puc = $this->NM_ajax_info['param']['puc'];
           }
           if (isset($this->NM_ajax_info['param']['puc_compras']))
           {
@@ -156,10 +189,6 @@ class form_iva_mob_apl
           if (isset($this->NM_ajax_info['param']['puc_dv_compras']))
           {
               $this->puc_dv_compras = $this->NM_ajax_info['param']['puc_dv_compras'];
-          }
-          if (isset($this->NM_ajax_info['param']['puc_dv_ventas']))
-          {
-              $this->puc_dv_ventas = $this->NM_ajax_info['param']['puc_dv_ventas'];
           }
           if (isset($this->NM_ajax_info['param']['script_case_init']))
           {
@@ -434,7 +463,7 @@ class form_iva_mob_apl
           if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_iva_mob']))
           {
                $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_iva_mob']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('form_iva_mob') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_iva_mob']['label'] = "Tabla de Impuestos a las ventas";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_iva_mob']['label'] = "Tabla de Impuestos (IVA, CONSUMO)";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -459,7 +488,8 @@ class form_iva_mob_apl
           include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
       }
       include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
-      $this->Ini->Str_btn_form    = trim($str_button);
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
@@ -507,7 +537,7 @@ class form_iva_mob_apl
 
 
 
-      $_SESSION['scriptcase']['error_icon']['form_iva_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $_SESSION['scriptcase']['error_icon']['form_iva_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_iva_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
       $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['embutida_proc'] : $this->Embutida_proc;
@@ -828,6 +858,8 @@ class form_iva_mob_apl
       {
           $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['dados_form'];
           if (!isset($this->idiva)){$this->idiva = $this->nmgp_dados_form['idiva'];} 
+          if (!isset($this->puc)){$this->puc = $this->nmgp_dados_form['puc'];} 
+          if (!isset($this->puc_dv_ventas)){$this->puc_dv_ventas = $this->nmgp_dados_form['puc_dv_ventas'];} 
       }
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       $this->aba_iframe = false;
@@ -1041,10 +1073,13 @@ class form_iva_mob_apl
       if (isset($this->trifa)) { $this->nm_limpa_alfa($this->trifa); }
       if (isset($this->tipo_impuesto)) { $this->nm_limpa_alfa($this->tipo_impuesto); }
       if (isset($this->codigo)) { $this->nm_limpa_alfa($this->codigo); }
-      if (isset($this->puc)) { $this->nm_limpa_alfa($this->puc); }
-      if (isset($this->puc_dv_ventas)) { $this->nm_limpa_alfa($this->puc_dv_ventas); }
       if (isset($this->puc_compras)) { $this->nm_limpa_alfa($this->puc_compras); }
       if (isset($this->puc_dv_compras)) { $this->nm_limpa_alfa($this->puc_dv_compras); }
+      if (isset($this->id_pucaux_compras)) { $this->nm_limpa_alfa($this->id_pucaux_compras); }
+      if (isset($this->id_pucaux_ventas)) { $this->nm_limpa_alfa($this->id_pucaux_ventas); }
+      if (isset($this->id_pucaux_nc)) { $this->nm_limpa_alfa($this->id_pucaux_nc); }
+      if (isset($this->id_pucaux_nd)) { $this->nm_limpa_alfa($this->id_pucaux_nd); }
+      if (isset($this->id_pucaux_exec)) { $this->nm_limpa_alfa($this->id_pucaux_exec); }
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -1128,422 +1163,33 @@ class form_iva_mob_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'codigo');
           }
-          if ('validate_puc' == $this->NM_ajax_opcao)
+          if ('validate_id_pucaux_compras' == $this->NM_ajax_opcao)
           {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc');
-          }
-          if ('validate_puc_dv_ventas' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_dv_ventas');
-          }
-          if ('validate_puc_compras' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_compras');
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_compras');
           }
           if ('validate_puc_dv_compras' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_dv_compras');
           }
-          form_iva_mob_pack_ajax_response();
-          exit;
-      }
-      if ($this->NM_ajax_flag && 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9))
-      {
-          if ('autocomp_puc' == $this->NM_ajax_opcao)
+          if ('validate_puc_compras' == $this->NM_ajax_opcao)
           {
-              if (isset($_GET['term'])) {
-                  $this->puc = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc'] = array(); 
-    }
-
-   $old_value_trifa = $this->trifa;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_trifa = $this->trifa;
-
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE concat(codigo,' - ',nombre) LIKE '%" . substr($this->Db->qstr($this->puc), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->trifa = $old_value_trifa;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_compras');
           }
-          if ('autocomp_puc_dv_ventas' == $this->NM_ajax_opcao)
+          if ('validate_id_pucaux_ventas' == $this->NM_ajax_opcao)
           {
-              if (isset($_GET['term'])) {
-                  $this->puc_dv_ventas = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc_dv_ventas = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas'] = array(); 
-    }
-
-   $old_value_trifa = $this->trifa;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_trifa = $this->trifa;
-
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE concat(codigo,' - ',nombre) LIKE '%" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->trifa = $old_value_trifa;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_ventas');
           }
-          if ('autocomp_puc_compras' == $this->NM_ajax_opcao)
+          if ('validate_id_pucaux_nc' == $this->NM_ajax_opcao)
           {
-              if (isset($_GET['term'])) {
-                  $this->puc_compras = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc_compras = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array(); 
-    }
-
-   $old_value_trifa = $this->trifa;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_trifa = $this->trifa;
-
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE concat(codigo,' - ',nombre) LIKE '%" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->trifa = $old_value_trifa;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_nc');
           }
-          if ('autocomp_puc_dv_compras' == $this->NM_ajax_opcao)
+          if ('validate_id_pucaux_nd' == $this->NM_ajax_opcao)
           {
-              if (isset($_GET['term'])) {
-                  $this->puc_dv_compras = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc_dv_compras = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array(); 
-    }
-
-   $old_value_trifa = $this->trifa;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_trifa = $this->trifa;
-
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE concat(codigo,' - ',nombre) LIKE '%" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->trifa = $old_value_trifa;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_nd');
+          }
+          if ('validate_id_pucaux_exec' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_exec');
           }
           form_iva_mob_pack_ajax_response();
           exit;
@@ -1758,7 +1404,7 @@ class form_iva_mob_apl
 ?>
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo strip_tags("Tabla de Impuestos a las ventas") ?></TITLE>
+ <TITLE><?php echo strip_tags("Tabla de Impuestos (IVA, CONSUMO)") ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 
@@ -2050,7 +1696,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
        switch($campo)
        {
            case 'trifa':
-               return "Tasa IVA";
+               return "Tasa Impuesto";
                break;
            case 'tipo_impuesto':
                return "Tipo de Impuesto";
@@ -2058,20 +1704,35 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'codigo':
                return "Codigo";
                break;
+           case 'id_pucaux_compras':
+               return "Auxiliar Compras";
+               break;
+           case 'puc_dv_compras':
+               return "Auxiliar NC Compras";
+               break;
+           case 'puc_compras':
+               return "Auxiliar ND Compras";
+               break;
+           case 'id_pucaux_ventas':
+               return "Auxiliar Ventas";
+               break;
+           case 'id_pucaux_nc':
+               return "Auxuliar NC Ventas";
+               break;
+           case 'id_pucaux_nd':
+               return "Auxiliar ND en Ventas";
+               break;
+           case 'id_pucaux_exec':
+               return "Auxiliar Exentos";
+               break;
+           case 'idiva':
+               return "Idiva";
+               break;
            case 'puc':
                return "Cuenta Ventas";
                break;
            case 'puc_dv_ventas':
                return "Cuenta Devolución Ventas";
-               break;
-           case 'puc_compras':
-               return "Cuenta Compras";
-               break;
-           case 'puc_dv_compras':
-               return "Cuenta Devolución Compras";
-               break;
-           case 'idiva':
-               return "Idiva";
                break;
        }
 
@@ -2127,14 +1788,20 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_tipo_impuesto($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'codigo' == $filtro)) || (is_array($filtro) && in_array('codigo', $filtro)))
         $this->ValidateField_codigo($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'puc' == $filtro)) || (is_array($filtro) && in_array('puc', $filtro)))
-        $this->ValidateField_puc($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'puc_dv_ventas' == $filtro)) || (is_array($filtro) && in_array('puc_dv_ventas', $filtro)))
-        $this->ValidateField_puc_dv_ventas($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'puc_compras' == $filtro)) || (is_array($filtro) && in_array('puc_compras', $filtro)))
-        $this->ValidateField_puc_compras($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_compras' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_compras', $filtro)))
+        $this->ValidateField_id_pucaux_compras($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc_dv_compras' == $filtro)) || (is_array($filtro) && in_array('puc_dv_compras', $filtro)))
         $this->ValidateField_puc_dv_compras($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'puc_compras' == $filtro)) || (is_array($filtro) && in_array('puc_compras', $filtro)))
+        $this->ValidateField_puc_compras($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_ventas' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_ventas', $filtro)))
+        $this->ValidateField_id_pucaux_ventas($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_nc' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_nc', $filtro)))
+        $this->ValidateField_id_pucaux_nc($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_nd' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_nd', $filtro)))
+        $this->ValidateField_id_pucaux_nd($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_exec' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_exec', $filtro)))
+        $this->ValidateField_id_pucaux_exec($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
           if (!empty($this->sc_force_zero))
@@ -2166,7 +1833,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               if (strlen($this->trifa) > $iTestSize)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Tasa IVA: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  $Campos_Crit .= "Tasa Impuesto: " . $this->Ini->Nm_lang['lang_errm_size']; 
                   if (!isset($Campos_Erros['trifa']))
                   {
                       $Campos_Erros['trifa'] = array();
@@ -2181,7 +1848,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               if ($teste_validade->Valor($this->trifa, 2, 0, -0, 99, "N") == false)  
               { 
                   $hasError = true;
-                  $Campos_Crit .= "Tasa IVA; " ; 
+                  $Campos_Crit .= "Tasa Impuesto; " ; 
                   if (!isset($Campos_Erros['trifa']))
                   {
                       $Campos_Erros['trifa'] = array();
@@ -2311,93 +1978,83 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         }
     } // ValidateField_codigo
 
-    function ValidateField_puc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_id_pucaux_compras(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      $this->puc = sc_strtoupper($this->puc); 
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "Cuenta Ventas " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc']))
-              {
-                  $Campos_Erros['puc'] = array();
-              }
-              $Campos_Erros['puc'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc']) || !is_array($this->NM_ajax_info['errList']['puc']))
-              {
-                  $this->NM_ajax_info['errList']['puc'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->id_pucaux_compras) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras']) && !in_array($this->id_pucaux_compras, $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_compras']))
+                   {
+                       $Campos_Erros['id_pucaux_compras'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_compras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_compras']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_compras']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_compras'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_compras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'puc';
+            $fieldName = 'id_pucaux_compras';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_puc
+    } // ValidateField_id_pucaux_compras
 
-    function ValidateField_puc_dv_ventas(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_puc_dv_compras(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc_dv_ventas) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "Cuenta Devolución Ventas " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc_dv_ventas']))
-              {
-                  $Campos_Erros['puc_dv_ventas'] = array();
-              }
-              $Campos_Erros['puc_dv_ventas'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc_dv_ventas']) || !is_array($this->NM_ajax_info['errList']['puc_dv_ventas']))
-              {
-                  $this->NM_ajax_info['errList']['puc_dv_ventas'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc_dv_ventas'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->puc_dv_compras) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']) && !in_array($this->puc_dv_compras, $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['puc_dv_compras']))
+                   {
+                       $Campos_Erros['puc_dv_compras'] = array();
+                   }
+                   $Campos_Erros['puc_dv_compras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['puc_dv_compras']) || !is_array($this->NM_ajax_info['errList']['puc_dv_compras']))
+                   {
+                       $this->NM_ajax_info['errList']['puc_dv_compras'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['puc_dv_compras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'puc_dv_ventas';
+            $fieldName = 'puc_dv_compras';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_puc_dv_ventas
+    } // ValidateField_puc_dv_compras
 
     function ValidateField_puc_compras(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc_compras) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "Cuenta Compras " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc_compras']))
-              {
-                  $Campos_Erros['puc_compras'] = array();
-              }
-              $Campos_Erros['puc_compras'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc_compras']) || !is_array($this->NM_ajax_info['errList']['puc_compras']))
-              {
-                  $this->NM_ajax_info['errList']['puc_compras'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc_compras'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->puc_compras) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']) && !in_array($this->puc_compras, $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['puc_compras']))
+                   {
+                       $Campos_Erros['puc_compras'] = array();
+                   }
+                   $Campos_Erros['puc_compras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['puc_compras']) || !is_array($this->NM_ajax_info['errList']['puc_compras']))
+                   {
+                       $this->NM_ajax_info['errList']['puc_compras'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['puc_compras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'puc_compras';
@@ -2408,37 +2065,121 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         }
     } // ValidateField_puc_compras
 
-    function ValidateField_puc_dv_compras(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    function ValidateField_id_pucaux_ventas(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc_dv_compras) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "Cuenta Devolución Compras " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc_dv_compras']))
-              {
-                  $Campos_Erros['puc_dv_compras'] = array();
-              }
-              $Campos_Erros['puc_dv_compras'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc_dv_compras']) || !is_array($this->NM_ajax_info['errList']['puc_dv_compras']))
-              {
-                  $this->NM_ajax_info['errList']['puc_dv_compras'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc_dv_compras'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->id_pucaux_ventas) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas']) && !in_array($this->id_pucaux_ventas, $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_ventas']))
+                   {
+                       $Campos_Erros['id_pucaux_ventas'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_ventas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_ventas']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_ventas']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_ventas'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_ventas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
-            $fieldName = 'puc_dv_compras';
+            $fieldName = 'id_pucaux_ventas';
             if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
                 $fieldName .= $sc_seq_vert;
             }
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
-    } // ValidateField_puc_dv_compras
+    } // ValidateField_id_pucaux_ventas
+
+    function ValidateField_id_pucaux_nc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_nc) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc']) && !in_array($this->id_pucaux_nc, $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_nc']))
+                   {
+                       $Campos_Erros['id_pucaux_nc'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_nc'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_nc']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_nc']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_nc'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_nc'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_nc';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_nc
+
+    function ValidateField_id_pucaux_nd(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_nd) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd']) && !in_array($this->id_pucaux_nd, $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_nd']))
+                   {
+                       $Campos_Erros['id_pucaux_nd'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_nd'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_nd']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_nd']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_nd'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_nd'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_nd';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_nd
+
+    function ValidateField_id_pucaux_exec(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_exec) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec']) && !in_array($this->id_pucaux_exec, $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_exec']))
+                   {
+                       $Campos_Erros['id_pucaux_exec'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_exec'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_exec']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_exec']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_exec'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_exec'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_exec';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_exec
 
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
@@ -2466,11 +2207,16 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     $this->nmgp_dados_form['trifa'] = $this->trifa;
     $this->nmgp_dados_form['tipo_impuesto'] = $this->tipo_impuesto;
     $this->nmgp_dados_form['codigo'] = $this->codigo;
+    $this->nmgp_dados_form['id_pucaux_compras'] = $this->id_pucaux_compras;
+    $this->nmgp_dados_form['puc_dv_compras'] = $this->puc_dv_compras;
+    $this->nmgp_dados_form['puc_compras'] = $this->puc_compras;
+    $this->nmgp_dados_form['id_pucaux_ventas'] = $this->id_pucaux_ventas;
+    $this->nmgp_dados_form['id_pucaux_nc'] = $this->id_pucaux_nc;
+    $this->nmgp_dados_form['id_pucaux_nd'] = $this->id_pucaux_nd;
+    $this->nmgp_dados_form['id_pucaux_exec'] = $this->id_pucaux_exec;
+    $this->nmgp_dados_form['idiva'] = $this->idiva;
     $this->nmgp_dados_form['puc'] = $this->puc;
     $this->nmgp_dados_form['puc_dv_ventas'] = $this->puc_dv_ventas;
-    $this->nmgp_dados_form['puc_compras'] = $this->puc_compras;
-    $this->nmgp_dados_form['puc_dv_compras'] = $this->puc_dv_compras;
-    $this->nmgp_dados_form['idiva'] = $this->idiva;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['dados_form'] = $this->nmgp_dados_form;
    }
    function nm_tira_formatacao()
@@ -2950,10 +2696,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $this->ajax_return_values_trifa();
           $this->ajax_return_values_tipo_impuesto();
           $this->ajax_return_values_codigo();
-          $this->ajax_return_values_puc();
-          $this->ajax_return_values_puc_dv_ventas();
-          $this->ajax_return_values_puc_compras();
+          $this->ajax_return_values_id_pucaux_compras();
           $this->ajax_return_values_puc_dv_compras();
+          $this->ajax_return_values_puc_compras();
+          $this->ajax_return_values_id_pucaux_ventas();
+          $this->ajax_return_values_id_pucaux_nc();
+          $this->ajax_return_values_id_pucaux_nd();
+          $this->ajax_return_values_id_pucaux_exec();
           $this->ajax_return_values_idiva();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
@@ -3012,29 +2761,33 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           }
    }
 
-          //----- puc
-   function ajax_return_values_puc($bForce = false)
+          //----- id_pucaux_compras
+   function ajax_return_values_id_pucaux_compras($bForce = false)
    {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("puc", $this->nmgp_refresh_fields)) || $bForce)
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_compras", $this->nmgp_refresh_fields)) || $bForce)
           {
-              $sTmpValue = NM_charset_to_utf8($this->puc);
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_compras);
               $aLookup = array();
-              $this->_tmp_lookup_puc = $this->puc;
+              $this->_tmp_lookup_id_pucaux_compras = $this->id_pucaux_compras;
 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras'] = array(); 
+}
+$aLookup[] = array(form_iva_mob_pack_protect_string('') => str_replace('<', '&lt;',form_iva_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc'] = array(); 
-    }
 
    $old_value_trifa = $this->trifa;
    $this->nm_tira_formatacao();
@@ -3042,47 +2795,20 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
 
    $unformatted_value_trifa = $this->trifa;
 
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc), 1, -1) . "' ORDER BY codigo, nombre";
-   }
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
 
    $this->trifa = $old_value_trifa;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
               $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
               $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
               $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc'][] = $rs->fields[0];
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras'][] = $rs->fields[0];
               $rs->MoveNext() ; 
        } 
        $rs->Close() ; 
@@ -3094,248 +2820,55 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['puc'] = array(
+          $sSelComp = "name=\"id_pucaux_compras\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_compras']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_compras']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_compras']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_compras == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_compras = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_compras'] = array(
                        'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
           $aLabel     = array();
           $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_compras']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_compras']['valList'][$i] = form_iva_mob_pack_protect_string($v);
+          }
           foreach ($aLookupOrig as $aValData)
           {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc']['valList']))
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_compras']['valList']))
               {
                   $aLabelTemp[key($aValData)] = current($aValData);
               }
           }
-          foreach ($this->NM_ajax_info['fldList']['puc']['valList'] as $iIndex => $sValue)
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_compras']['valList'] as $iIndex => $sValue)
           {
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
-          $this->NM_ajax_info['fldList']['puc']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][form_iva_mob_pack_protect_string(NM_charset_to_utf8($this->puc))]) ? $aLookup[0][form_iva_mob_pack_protect_string(NM_charset_to_utf8($this->puc))] : "";
-          $this->NM_ajax_info['fldList']['puc_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
-              );
-          }
-   }
-
-          //----- puc_dv_ventas
-   function ajax_return_values_puc_dv_ventas($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("puc_dv_ventas", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->puc_dv_ventas);
-              $aLookup = array();
-              $this->_tmp_lookup_puc_dv_ventas = $this->puc_dv_ventas;
-
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas'] = array(); 
-    }
-
-   $old_value_trifa = $this->trifa;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_trifa = $this->trifa;
-
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_ventas), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-
-   $this->trifa = $old_value_trifa;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_ventas'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['puc_dv_ventas'] = array(
-                       'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_dv_ventas']['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['puc_dv_ventas']['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['puc_dv_ventas']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][form_iva_mob_pack_protect_string(NM_charset_to_utf8($this->puc_dv_ventas))]) ? $aLookup[0][form_iva_mob_pack_protect_string(NM_charset_to_utf8($this->puc_dv_ventas))] : "";
-          $this->NM_ajax_info['fldList']['puc_dv_ventas_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
-              );
-          }
-   }
-
-          //----- puc_compras
-   function ajax_return_values_puc_compras($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("puc_compras", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->puc_compras);
-              $aLookup = array();
-              $this->_tmp_lookup_puc_compras = $this->puc_compras;
-
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array(); 
-    }
-
-   $old_value_trifa = $this->trifa;
-   $this->nm_tira_formatacao();
-
-
-   $unformatted_value_trifa = $this->trifa;
-
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-
-   $this->trifa = $old_value_trifa;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['puc_compras'] = array(
-                       'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_compras']['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['puc_compras']['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['puc_compras']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][form_iva_mob_pack_protect_string(NM_charset_to_utf8($this->puc_compras))]) ? $aLookup[0][form_iva_mob_pack_protect_string(NM_charset_to_utf8($this->puc_compras))] : "";
-          $this->NM_ajax_info['fldList']['puc_compras_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
-              );
+          $this->NM_ajax_info['fldList']['id_pucaux_compras']['labList'] = $aLabel;
           }
    }
 
@@ -3348,20 +2881,24 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $aLookup = array();
               $this->_tmp_lookup_puc_dv_compras = $this->puc_dv_compras;
 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array(); 
+}
+$aLookup[] = array(form_iva_mob_pack_protect_string('') => str_replace('<', '&lt;',form_iva_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array(); 
-    }
 
    $old_value_trifa = $this->trifa;
    $this->nm_tira_formatacao();
@@ -3369,40 +2906,13 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
 
    $unformatted_value_trifa = $this->trifa;
 
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_dv_compras), 1, -1) . "' ORDER BY codigo, nombre";
-   }
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
 
    $this->trifa = $old_value_trifa;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
@@ -3421,13 +2931,43 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"puc_dv_compras\"";
+          if (isset($this->NM_ajax_info['select_html']['puc_dv_compras']) && !empty($this->NM_ajax_info['select_html']['puc_dv_compras']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['puc_dv_compras']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->puc_dv_compras == $sValue)
+                  {
+                      $this->_tmp_lookup_puc_dv_compras = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
           $this->NM_ajax_info['fldList']['puc_dv_compras'] = array(
                        'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
           $aLabel     = array();
           $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['puc_dv_compras']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['puc_dv_compras']['valList'][$i] = form_iva_mob_pack_protect_string($v);
+          }
           foreach ($aLookupOrig as $aValData)
           {
               if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_dv_compras']['valList']))
@@ -3440,11 +2980,561 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['puc_dv_compras']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][form_iva_mob_pack_protect_string(NM_charset_to_utf8($this->puc_dv_compras))]) ? $aLookup[0][form_iva_mob_pack_protect_string(NM_charset_to_utf8($this->puc_dv_compras))] : "";
-          $this->NM_ajax_info['fldList']['puc_dv_compras_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
+          }
+   }
+
+          //----- puc_compras
+   function ajax_return_values_puc_compras($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("puc_compras", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->puc_compras);
+              $aLookup = array();
+              $this->_tmp_lookup_puc_compras = $this->puc_compras;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array(); 
+}
+$aLookup[] = array(form_iva_mob_pack_protect_string('') => str_replace('<', '&lt;',form_iva_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"puc_compras\"";
+          if (isset($this->NM_ajax_info['select_html']['puc_compras']) && !empty($this->NM_ajax_info['select_html']['puc_compras']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['puc_compras']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->puc_compras == $sValue)
+                  {
+                      $this->_tmp_lookup_puc_compras = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['puc_compras'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['puc_compras']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['puc_compras']['valList'][$i] = form_iva_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_compras']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['puc_compras']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['puc_compras']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_ventas
+   function ajax_return_values_id_pucaux_ventas($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_ventas", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_ventas);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_ventas = $this->id_pucaux_ventas;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas'] = array(); 
+}
+$aLookup[] = array(form_iva_mob_pack_protect_string('') => str_replace('<', '&lt;',form_iva_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_ventas\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_ventas']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_ventas']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_ventas']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_ventas == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_ventas = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_ventas'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_ventas']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_ventas']['valList'][$i] = form_iva_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_ventas']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_ventas']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_ventas']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_nc
+   function ajax_return_values_id_pucaux_nc($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_nc", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_nc);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_nc = $this->id_pucaux_nc;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc'] = array(); 
+}
+$aLookup[] = array(form_iva_mob_pack_protect_string('') => str_replace('<', '&lt;',form_iva_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_nc\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_nc']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_nc']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_nc']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_nc == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_nc = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_nc'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_nc']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_nc']['valList'][$i] = form_iva_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_nc']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_nc']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_nc']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_nd
+   function ajax_return_values_id_pucaux_nd($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_nd", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_nd);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_nd = $this->id_pucaux_nd;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd'] = array(); 
+}
+$aLookup[] = array(form_iva_mob_pack_protect_string('') => str_replace('<', '&lt;',form_iva_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_nd\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_nd']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_nd']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_nd']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_nd == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_nd = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_nd'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_nd']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_nd']['valList'][$i] = form_iva_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_nd']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_nd']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_nd']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_exec
+   function ajax_return_values_id_pucaux_exec($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_exec", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_exec);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_exec = $this->id_pucaux_exec;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec'] = array(); 
+}
+$aLookup[] = array(form_iva_mob_pack_protect_string('') => str_replace('<', '&lt;',form_iva_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_iva_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_exec\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_exec']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_exec']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_exec']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_exec == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_exec = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_exec'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_exec']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_exec']['valList'][$i] = form_iva_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_exec']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_exec']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_exec']['labList'] = $aLabel;
           }
    }
 
@@ -3801,11 +3891,16 @@ $_SESSION['scriptcase']['form_iva_mob']['contr_erro'] = 'off';
       $NM_val_form['trifa'] = $this->trifa;
       $NM_val_form['tipo_impuesto'] = $this->tipo_impuesto;
       $NM_val_form['codigo'] = $this->codigo;
+      $NM_val_form['id_pucaux_compras'] = $this->id_pucaux_compras;
+      $NM_val_form['puc_dv_compras'] = $this->puc_dv_compras;
+      $NM_val_form['puc_compras'] = $this->puc_compras;
+      $NM_val_form['id_pucaux_ventas'] = $this->id_pucaux_ventas;
+      $NM_val_form['id_pucaux_nc'] = $this->id_pucaux_nc;
+      $NM_val_form['id_pucaux_nd'] = $this->id_pucaux_nd;
+      $NM_val_form['id_pucaux_exec'] = $this->id_pucaux_exec;
+      $NM_val_form['idiva'] = $this->idiva;
       $NM_val_form['puc'] = $this->puc;
       $NM_val_form['puc_dv_ventas'] = $this->puc_dv_ventas;
-      $NM_val_form['puc_compras'] = $this->puc_compras;
-      $NM_val_form['puc_dv_compras'] = $this->puc_dv_compras;
-      $NM_val_form['idiva'] = $this->idiva;
       if ($this->idiva === "" || is_null($this->idiva))  
       { 
           $this->idiva = 0;
@@ -3814,6 +3909,31 @@ $_SESSION['scriptcase']['form_iva_mob']['contr_erro'] = 'off';
       { 
           $this->trifa = 0;
           $this->sc_force_zero[] = 'trifa';
+      } 
+      if ($this->id_pucaux_compras === "" || is_null($this->id_pucaux_compras))  
+      { 
+          $this->id_pucaux_compras = 0;
+          $this->sc_force_zero[] = 'id_pucaux_compras';
+      } 
+      if ($this->id_pucaux_ventas === "" || is_null($this->id_pucaux_ventas))  
+      { 
+          $this->id_pucaux_ventas = 0;
+          $this->sc_force_zero[] = 'id_pucaux_ventas';
+      } 
+      if ($this->id_pucaux_nc === "" || is_null($this->id_pucaux_nc))  
+      { 
+          $this->id_pucaux_nc = 0;
+          $this->sc_force_zero[] = 'id_pucaux_nc';
+      } 
+      if ($this->id_pucaux_nd === "" || is_null($this->id_pucaux_nd))  
+      { 
+          $this->id_pucaux_nd = 0;
+          $this->sc_force_zero[] = 'id_pucaux_nd';
+      } 
+      if ($this->id_pucaux_exec === "" || is_null($this->id_pucaux_exec))  
+      { 
+          $this->id_pucaux_exec = 0;
+          $this->sc_force_zero[] = 'id_pucaux_exec';
       } 
       $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
       if ($this->nmgp_opcao == "alterar" || $this->nmgp_opcao == "incluir") 
@@ -3926,37 +4046,45 @@ $_SESSION['scriptcase']['form_iva_mob']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc = '$this->puc', puc_dv_ventas = '$this->puc_dv_ventas', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras'"; 
+                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras', id_pucaux_compras = $this->id_pucaux_compras, id_pucaux_ventas = $this->id_pucaux_ventas, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_exec = $this->id_pucaux_exec"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc = '$this->puc', puc_dv_ventas = '$this->puc_dv_ventas', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras'"; 
+                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras', id_pucaux_compras = $this->id_pucaux_compras, id_pucaux_ventas = $this->id_pucaux_ventas, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_exec = $this->id_pucaux_exec"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc = '$this->puc', puc_dv_ventas = '$this->puc_dv_ventas', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras'"; 
+                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras', id_pucaux_compras = $this->id_pucaux_compras, id_pucaux_ventas = $this->id_pucaux_ventas, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_exec = $this->id_pucaux_exec"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc = '$this->puc', puc_dv_ventas = '$this->puc_dv_ventas', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras'"; 
+                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras', id_pucaux_compras = $this->id_pucaux_compras, id_pucaux_ventas = $this->id_pucaux_ventas, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_exec = $this->id_pucaux_exec"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc = '$this->puc', puc_dv_ventas = '$this->puc_dv_ventas', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras'"; 
+                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras', id_pucaux_compras = $this->id_pucaux_compras, id_pucaux_ventas = $this->id_pucaux_ventas, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_exec = $this->id_pucaux_exec"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc = '$this->puc', puc_dv_ventas = '$this->puc_dv_ventas', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras'"; 
+                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras', id_pucaux_compras = $this->id_pucaux_compras, id_pucaux_ventas = $this->id_pucaux_ventas, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_exec = $this->id_pucaux_exec"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc = '$this->puc', puc_dv_ventas = '$this->puc_dv_ventas', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras'"; 
+                  $SC_fields_update[] = "trifa = $this->trifa, tipo_impuesto = '$this->tipo_impuesto', codigo = '$this->codigo', puc_compras = '$this->puc_compras', puc_dv_compras = '$this->puc_dv_compras', id_pucaux_compras = $this->id_pucaux_compras, id_pucaux_ventas = $this->id_pucaux_ventas, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_exec = $this->id_pucaux_exec"; 
+              } 
+              if (isset($NM_val_form['puc']) && $NM_val_form['puc'] != $this->nmgp_dados_select['puc']) 
+              { 
+                  $SC_fields_update[] = "puc = '$this->puc'"; 
+              } 
+              if (isset($NM_val_form['puc_dv_ventas']) && $NM_val_form['puc_dv_ventas'] != $this->nmgp_dados_select['puc_dv_ventas']) 
+              { 
+                  $SC_fields_update[] = "puc_dv_ventas = '$this->puc_dv_ventas'"; 
               } 
               $aDoNotUpdate = array();
               $comando .= implode(",", $SC_fields_update);  
@@ -4048,14 +4176,20 @@ $_SESSION['scriptcase']['form_iva_mob']['contr_erro'] = 'off';
               elseif (isset($this->tipo_impuesto)) { $this->nm_limpa_alfa($this->tipo_impuesto); }
               if     (isset($NM_val_form) && isset($NM_val_form['codigo'])) { $this->codigo = $NM_val_form['codigo']; }
               elseif (isset($this->codigo)) { $this->nm_limpa_alfa($this->codigo); }
-              if     (isset($NM_val_form) && isset($NM_val_form['puc'])) { $this->puc = $NM_val_form['puc']; }
-              elseif (isset($this->puc)) { $this->nm_limpa_alfa($this->puc); }
-              if     (isset($NM_val_form) && isset($NM_val_form['puc_dv_ventas'])) { $this->puc_dv_ventas = $NM_val_form['puc_dv_ventas']; }
-              elseif (isset($this->puc_dv_ventas)) { $this->nm_limpa_alfa($this->puc_dv_ventas); }
               if     (isset($NM_val_form) && isset($NM_val_form['puc_compras'])) { $this->puc_compras = $NM_val_form['puc_compras']; }
               elseif (isset($this->puc_compras)) { $this->nm_limpa_alfa($this->puc_compras); }
               if     (isset($NM_val_form) && isset($NM_val_form['puc_dv_compras'])) { $this->puc_dv_compras = $NM_val_form['puc_dv_compras']; }
               elseif (isset($this->puc_dv_compras)) { $this->nm_limpa_alfa($this->puc_dv_compras); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_compras'])) { $this->id_pucaux_compras = $NM_val_form['id_pucaux_compras']; }
+              elseif (isset($this->id_pucaux_compras)) { $this->nm_limpa_alfa($this->id_pucaux_compras); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_ventas'])) { $this->id_pucaux_ventas = $NM_val_form['id_pucaux_ventas']; }
+              elseif (isset($this->id_pucaux_ventas)) { $this->nm_limpa_alfa($this->id_pucaux_ventas); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_nc'])) { $this->id_pucaux_nc = $NM_val_form['id_pucaux_nc']; }
+              elseif (isset($this->id_pucaux_nc)) { $this->nm_limpa_alfa($this->id_pucaux_nc); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_nd'])) { $this->id_pucaux_nd = $NM_val_form['id_pucaux_nd']; }
+              elseif (isset($this->id_pucaux_nd)) { $this->nm_limpa_alfa($this->id_pucaux_nd); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_exec'])) { $this->id_pucaux_exec = $NM_val_form['id_pucaux_exec']; }
+              elseif (isset($this->id_pucaux_exec)) { $this->nm_limpa_alfa($this->id_pucaux_exec); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -4063,7 +4197,7 @@ $_SESSION['scriptcase']['form_iva_mob']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('trifa', 'tipo_impuesto', 'codigo', 'puc', 'puc_dv_ventas', 'puc_compras', 'puc_dv_compras'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('trifa', 'tipo_impuesto', 'codigo', 'id_pucaux_compras', 'puc_dv_compras', 'puc_compras', 'id_pucaux_ventas', 'id_pucaux_nc', 'id_pucaux_nd', 'id_pucaux_exec'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -4111,39 +4245,39 @@ $_SESSION['scriptcase']['form_iva_mob']['contr_erro'] = 'off';
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras) VALUES ($this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec) VALUES ($this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras', $this->id_pucaux_compras, $this->id_pucaux_ventas, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_exec)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras', $this->id_pucaux_compras, $this->id_pucaux_ventas, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_exec)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras', $this->id_pucaux_compras, $this->id_pucaux_ventas, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_exec)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras', $this->id_pucaux_compras, $this->id_pucaux_ventas, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_exec)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras', $this->id_pucaux_compras, $this->id_pucaux_ventas, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_exec)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras', $this->id_pucaux_compras, $this->id_pucaux_ventas, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_exec)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras', $this->id_pucaux_compras, $this->id_pucaux_ventas, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_exec)"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras', $this->id_pucaux_compras, $this->id_pucaux_ventas, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_exec)"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec) VALUES (" . $NM_seq_auto . "$this->trifa, '$this->tipo_impuesto', '$this->codigo', '$this->puc', '$this->puc_dv_ventas', '$this->puc_compras', '$this->puc_dv_compras', $this->id_pucaux_compras, $this->id_pucaux_ventas, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_exec)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -4514,23 +4648,23 @@ $_SESSION['scriptcase']['form_iva_mob']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idiva, trifa, tipo_impuesto, codigo, puc, puc_dv_ventas, puc_compras, puc_dv_compras, id_pucaux_compras, id_pucaux_ventas, id_pucaux_nc, id_pucaux_nd, id_pucaux_exec from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -4658,9 +4792,24 @@ $_SESSION['scriptcase']['form_iva_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_select['puc_compras'] = $this->puc_compras;
               $this->puc_dv_compras = $rs->fields[7] ; 
               $this->nmgp_dados_select['puc_dv_compras'] = $this->puc_dv_compras;
+              $this->id_pucaux_compras = $rs->fields[8] ; 
+              $this->nmgp_dados_select['id_pucaux_compras'] = $this->id_pucaux_compras;
+              $this->id_pucaux_ventas = $rs->fields[9] ; 
+              $this->nmgp_dados_select['id_pucaux_ventas'] = $this->id_pucaux_ventas;
+              $this->id_pucaux_nc = $rs->fields[10] ; 
+              $this->nmgp_dados_select['id_pucaux_nc'] = $this->id_pucaux_nc;
+              $this->id_pucaux_nd = $rs->fields[11] ; 
+              $this->nmgp_dados_select['id_pucaux_nd'] = $this->id_pucaux_nd;
+              $this->id_pucaux_exec = $rs->fields[12] ; 
+              $this->nmgp_dados_select['id_pucaux_exec'] = $this->id_pucaux_exec;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->idiva = (string)$this->idiva; 
               $this->trifa = (string)$this->trifa; 
+              $this->id_pucaux_compras = (string)$this->id_pucaux_compras; 
+              $this->id_pucaux_ventas = (string)$this->id_pucaux_ventas; 
+              $this->id_pucaux_nc = (string)$this->id_pucaux_nc; 
+              $this->id_pucaux_nd = (string)$this->id_pucaux_nd; 
+              $this->id_pucaux_exec = (string)$this->id_pucaux_exec; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['parms'] = "idiva?#?$this->idiva?@?";
           } 
           $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['dados_select'] = $this->nmgp_dados_select;
@@ -4696,6 +4845,16 @@ $_SESSION['scriptcase']['form_iva_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["puc_compras"] = $this->puc_compras;
               $this->puc_dv_compras = "";  
               $this->nmgp_dados_form["puc_dv_compras"] = $this->puc_dv_compras;
+              $this->id_pucaux_compras = "";  
+              $this->nmgp_dados_form["id_pucaux_compras"] = $this->id_pucaux_compras;
+              $this->id_pucaux_ventas = "";  
+              $this->nmgp_dados_form["id_pucaux_ventas"] = $this->id_pucaux_ventas;
+              $this->id_pucaux_nc = "";  
+              $this->nmgp_dados_form["id_pucaux_nc"] = $this->id_pucaux_nc;
+              $this->id_pucaux_nd = "";  
+              $this->nmgp_dados_form["id_pucaux_nd"] = $this->id_pucaux_nd;
+              $this->id_pucaux_exec = "";  
+              $this->nmgp_dados_form["id_pucaux_exec"] = $this->id_pucaux_exec;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
@@ -5214,6 +5373,426 @@ function sc_file_size($file, $format = false)
      }
  } // new_date_format
 
+   function Form_lookup_id_pucaux_compras()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras'] = array(); 
+    }
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_compras'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_puc_dv_compras()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'] = array(); 
+    }
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_dv_compras'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_puc_compras()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'] = array(); 
+    }
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_puc_compras'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_ventas()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas'] = array(); 
+    }
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_ventas'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_nc()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc'] = array(); 
+    }
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_nd()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd'] = array(); 
+    }
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_nd'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_exec()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec'] = array(); 
+    }
+
+   $old_value_trifa = $this->trifa;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_trifa = $this->trifa;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->trifa = $old_value_trifa;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['Lookup_id_pucaux_exec'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
    function SC_fast_search($in_fields, $arg_search, $data_search)
    {
       $fields = (strpos($in_fields, "SC_all_Cmp") !== false) ? array("SC_all_Cmp") : explode(";", $in_fields);
@@ -5308,7 +5887,7 @@ function sc_file_size($file, $format = false)
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idiva";$nm_numeric[] = "trifa";
+      $nm_numeric[] = "idiva";$nm_numeric[] = "trifa";$nm_numeric[] = "id_pucaux_compras";$nm_numeric[] = "id_pucaux_ventas";$nm_numeric[] = "id_pucaux_nc";$nm_numeric[] = "id_pucaux_nd";$nm_numeric[] = "id_pucaux_exec";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_iva_mob']['decimal_db'] == ".")

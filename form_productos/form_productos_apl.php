@@ -139,6 +139,20 @@ class form_productos_apl
    var $ubicacion;
    var $para_registro_fe;
    var $para_registro_fe_1;
+   var $id_pucaux_inventario;
+   var $id_pucaux_inventario_1;
+   var $id_pucaux_ncc;
+   var $id_pucaux_ncc_1;
+   var $id_pucaux_ndc;
+   var $id_pucaux_ndc_1;
+   var $id_pucaux_ingresos;
+   var $id_pucaux_ingresos_1;
+   var $id_pucaux_nc;
+   var $id_pucaux_nc_1;
+   var $id_pucaux_nd;
+   var $id_pucaux_nd_1;
+   var $id_pucaux_costoventas;
+   var $id_pucaux_costoventas_1;
    var $sugerido_mayor;
    var $sugerido_menor;
    var $confcolor;
@@ -264,6 +278,34 @@ class form_productos_apl
           if (isset($this->NM_ajax_info['param']['id_marca']))
           {
               $this->id_marca = $this->NM_ajax_info['param']['id_marca'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_costoventas']))
+          {
+              $this->id_pucaux_costoventas = $this->NM_ajax_info['param']['id_pucaux_costoventas'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_ingresos']))
+          {
+              $this->id_pucaux_ingresos = $this->NM_ajax_info['param']['id_pucaux_ingresos'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_inventario']))
+          {
+              $this->id_pucaux_inventario = $this->NM_ajax_info['param']['id_pucaux_inventario'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_nc']))
+          {
+              $this->id_pucaux_nc = $this->NM_ajax_info['param']['id_pucaux_nc'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_ncc']))
+          {
+              $this->id_pucaux_ncc = $this->NM_ajax_info['param']['id_pucaux_ncc'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_nd']))
+          {
+              $this->id_pucaux_nd = $this->NM_ajax_info['param']['id_pucaux_nd'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_ndc']))
+          {
+              $this->id_pucaux_ndc = $this->NM_ajax_info['param']['id_pucaux_ndc'];
           }
           if (isset($this->NM_ajax_info['param']['idgrup']))
           {
@@ -921,7 +963,8 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
           include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
       }
       include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
-      $this->Ini->Str_btn_form    = trim($str_button);
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
@@ -1009,7 +1052,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
       $this->arr_buttons['recalcular']['image']            = "";
 
 
-      $_SESSION['scriptcase']['error_icon']['form_productos']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $_SESSION['scriptcase']['error_icon']['form_productos']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_productos'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
       $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['embutida_proc'] : $this->Embutida_proc;
@@ -1688,6 +1731,13 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
       if (isset($this->tipo_producto)) { $this->nm_limpa_alfa($this->tipo_producto); }
       if (isset($this->costo_prom)) { $this->nm_limpa_alfa($this->costo_prom); }
       if (isset($this->ubicacion)) { $this->nm_limpa_alfa($this->ubicacion); }
+      if (isset($this->id_pucaux_inventario)) { $this->nm_limpa_alfa($this->id_pucaux_inventario); }
+      if (isset($this->id_pucaux_ncc)) { $this->nm_limpa_alfa($this->id_pucaux_ncc); }
+      if (isset($this->id_pucaux_ndc)) { $this->nm_limpa_alfa($this->id_pucaux_ndc); }
+      if (isset($this->id_pucaux_ingresos)) { $this->nm_limpa_alfa($this->id_pucaux_ingresos); }
+      if (isset($this->id_pucaux_nc)) { $this->nm_limpa_alfa($this->id_pucaux_nc); }
+      if (isset($this->id_pucaux_nd)) { $this->nm_limpa_alfa($this->id_pucaux_nd); }
+      if (isset($this->id_pucaux_costoventas)) { $this->nm_limpa_alfa($this->id_pucaux_costoventas); }
       if ($nm_opc_form_php == "formphp")
       { 
           if ($nm_call_php == "recalcular")
@@ -2116,6 +2166,34 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
           if ('validate_idprod' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'idprod');
+          }
+          if ('validate_id_pucaux_inventario' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_inventario');
+          }
+          if ('validate_id_pucaux_ncc' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_ncc');
+          }
+          if ('validate_id_pucaux_ndc' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_ndc');
+          }
+          if ('validate_id_pucaux_ingresos' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_ingresos');
+          }
+          if ('validate_id_pucaux_nc' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_nc');
+          }
+          if ('validate_id_pucaux_nd' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_nd');
+          }
+          if ('validate_id_pucaux_costoventas' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_costoventas');
           }
           if ('validate_id_marca' == $this->NM_ajax_opcao)
           {
@@ -3865,6 +3943,27 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
            case 'idprod':
                return "Idprod";
                break;
+           case 'id_pucaux_inventario':
+               return "Auxiliar Inventario";
+               break;
+           case 'id_pucaux_ncc':
+               return "Auxiliar NC en Compras";
+               break;
+           case 'id_pucaux_ndc':
+               return "Auxiliar ND en Compras";
+               break;
+           case 'id_pucaux_ingresos':
+               return "Auxiliar Ingresos";
+               break;
+           case 'id_pucaux_nc':
+               return "Auxiliar NC en Ventas";
+               break;
+           case 'id_pucaux_nd':
+               return "Auxiliar ND en Ventas";
+               break;
+           case 'id_pucaux_costoventas':
+               return "Auxiliar Costoventas";
+               break;
            case 'id_marca':
                return "Marca";
                break;
@@ -4064,6 +4163,20 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
         $this->ValidateField_cod_cuenta($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'idprod' == $filtro)) || (is_array($filtro) && in_array('idprod', $filtro)))
         $this->ValidateField_idprod($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_inventario' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_inventario', $filtro)))
+        $this->ValidateField_id_pucaux_inventario($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_ncc' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_ncc', $filtro)))
+        $this->ValidateField_id_pucaux_ncc($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_ndc' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_ndc', $filtro)))
+        $this->ValidateField_id_pucaux_ndc($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_ingresos' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_ingresos', $filtro)))
+        $this->ValidateField_id_pucaux_ingresos($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_nc' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_nc', $filtro)))
+        $this->ValidateField_id_pucaux_nc($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_nd' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_nd', $filtro)))
+        $this->ValidateField_id_pucaux_nd($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_costoventas' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_costoventas', $filtro)))
+        $this->ValidateField_id_pucaux_costoventas($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'id_marca' == $filtro)) || (is_array($filtro) && in_array('id_marca', $filtro)))
         $this->ValidateField_id_marca($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'id_linea' == $filtro)) || (is_array($filtro) && in_array('id_linea', $filtro)))
@@ -6617,6 +6730,209 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
         }
     } // ValidateField_idprod
 
+    function ValidateField_id_pucaux_inventario(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_inventario) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario']) && !in_array($this->id_pucaux_inventario, $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_inventario']))
+                   {
+                       $Campos_Erros['id_pucaux_inventario'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_inventario'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_inventario']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_inventario']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_inventario'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_inventario'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_inventario';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_inventario
+
+    function ValidateField_id_pucaux_ncc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_ncc) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc']) && !in_array($this->id_pucaux_ncc, $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_ncc']))
+                   {
+                       $Campos_Erros['id_pucaux_ncc'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_ncc'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_ncc']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_ncc']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_ncc'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_ncc'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_ncc';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_ncc
+
+    function ValidateField_id_pucaux_ndc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_ndc) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc']) && !in_array($this->id_pucaux_ndc, $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_ndc']))
+                   {
+                       $Campos_Erros['id_pucaux_ndc'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_ndc'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_ndc']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_ndc']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_ndc'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_ndc'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_ndc';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_ndc
+
+    function ValidateField_id_pucaux_ingresos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_ingresos) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos']) && !in_array($this->id_pucaux_ingresos, $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_ingresos']))
+                   {
+                       $Campos_Erros['id_pucaux_ingresos'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_ingresos'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_ingresos']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_ingresos']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_ingresos'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_ingresos'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_ingresos';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_ingresos
+
+    function ValidateField_id_pucaux_nc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_nc) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc']) && !in_array($this->id_pucaux_nc, $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_nc']))
+                   {
+                       $Campos_Erros['id_pucaux_nc'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_nc'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_nc']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_nc']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_nc'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_nc'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_nc';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_nc
+
+    function ValidateField_id_pucaux_nd(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_nd) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd']) && !in_array($this->id_pucaux_nd, $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_nd']))
+                   {
+                       $Campos_Erros['id_pucaux_nd'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_nd'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_nd']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_nd']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_nd'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_nd'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_nd';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_nd
+
+    function ValidateField_id_pucaux_costoventas(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_costoventas) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas']) && !in_array($this->id_pucaux_costoventas, $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_costoventas']))
+                   {
+                       $Campos_Erros['id_pucaux_costoventas'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_costoventas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_costoventas']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_costoventas']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_costoventas'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_costoventas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_costoventas';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_costoventas
+
     function ValidateField_id_marca(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
@@ -6952,6 +7268,13 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
     $this->nmgp_dados_form['imagen_limpa'] = $this->imagen_limpa;
     $this->nmgp_dados_form['cod_cuenta'] = $this->cod_cuenta;
     $this->nmgp_dados_form['idprod'] = $this->idprod;
+    $this->nmgp_dados_form['id_pucaux_inventario'] = $this->id_pucaux_inventario;
+    $this->nmgp_dados_form['id_pucaux_ncc'] = $this->id_pucaux_ncc;
+    $this->nmgp_dados_form['id_pucaux_ndc'] = $this->id_pucaux_ndc;
+    $this->nmgp_dados_form['id_pucaux_ingresos'] = $this->id_pucaux_ingresos;
+    $this->nmgp_dados_form['id_pucaux_nc'] = $this->id_pucaux_nc;
+    $this->nmgp_dados_form['id_pucaux_nd'] = $this->id_pucaux_nd;
+    $this->nmgp_dados_form['id_pucaux_costoventas'] = $this->id_pucaux_costoventas;
     $this->nmgp_dados_form['id_marca'] = $this->id_marca;
     $this->nmgp_dados_form['id_linea'] = $this->id_linea;
     $this->nmgp_dados_form['codigobar2'] = $this->codigobar2;
@@ -7802,6 +8125,13 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
           $this->ajax_return_values_imagen();
           $this->ajax_return_values_cod_cuenta();
           $this->ajax_return_values_idprod();
+          $this->ajax_return_values_id_pucaux_inventario();
+          $this->ajax_return_values_id_pucaux_ncc();
+          $this->ajax_return_values_id_pucaux_ndc();
+          $this->ajax_return_values_id_pucaux_ingresos();
+          $this->ajax_return_values_id_pucaux_nc();
+          $this->ajax_return_values_id_pucaux_nd();
+          $this->ajax_return_values_id_pucaux_costoventas();
           $this->ajax_return_values_id_marca();
           $this->ajax_return_values_id_linea();
           $this->ajax_return_values_codigobar2();
@@ -10456,6 +10786,1098 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_cod_cuent
           }
    }
 
+          //----- id_pucaux_inventario
+   function ajax_return_values_id_pucaux_inventario($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_inventario", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_inventario);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_inventario = $this->id_pucaux_inventario;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario'] = array(); 
+}
+$aLookup[] = array(form_productos_pack_protect_string('') => str_replace('<', '&lt;',form_productos_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_inventario\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_inventario']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_inventario']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_inventario']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_inventario == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_inventario = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_inventario'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_inventario']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_inventario']['valList'][$i] = form_productos_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_inventario']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_inventario']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_inventario']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_ncc
+   function ajax_return_values_id_pucaux_ncc($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_ncc", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_ncc);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_ncc = $this->id_pucaux_ncc;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc'] = array(); 
+}
+$aLookup[] = array(form_productos_pack_protect_string('') => str_replace('<', '&lt;',form_productos_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_ncc\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_ncc']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_ncc']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_ncc']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_ncc == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_ncc = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_ncc'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_ncc']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_ncc']['valList'][$i] = form_productos_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_ncc']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_ncc']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_ncc']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_ndc
+   function ajax_return_values_id_pucaux_ndc($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_ndc", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_ndc);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_ndc = $this->id_pucaux_ndc;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc'] = array(); 
+}
+$aLookup[] = array(form_productos_pack_protect_string('') => str_replace('<', '&lt;',form_productos_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_ndc\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_ndc']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_ndc']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_ndc']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_ndc == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_ndc = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_ndc'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_ndc']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_ndc']['valList'][$i] = form_productos_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_ndc']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_ndc']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_ndc']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_ingresos
+   function ajax_return_values_id_pucaux_ingresos($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_ingresos", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_ingresos);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_ingresos = $this->id_pucaux_ingresos;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos'] = array(); 
+}
+$aLookup[] = array(form_productos_pack_protect_string('') => str_replace('<', '&lt;',form_productos_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_ingresos\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_ingresos']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_ingresos']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_ingresos']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_ingresos == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_ingresos = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_ingresos'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_ingresos']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_ingresos']['valList'][$i] = form_productos_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_ingresos']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_ingresos']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_ingresos']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_nc
+   function ajax_return_values_id_pucaux_nc($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_nc", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_nc);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_nc = $this->id_pucaux_nc;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc'] = array(); 
+}
+$aLookup[] = array(form_productos_pack_protect_string('') => str_replace('<', '&lt;',form_productos_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_nc\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_nc']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_nc']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_nc']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_nc == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_nc = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_nc'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_nc']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_nc']['valList'][$i] = form_productos_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_nc']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_nc']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_nc']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_nd
+   function ajax_return_values_id_pucaux_nd($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_nd", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_nd);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_nd = $this->id_pucaux_nd;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd'] = array(); 
+}
+$aLookup[] = array(form_productos_pack_protect_string('') => str_replace('<', '&lt;',form_productos_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_nd\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_nd']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_nd']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_nd']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_nd == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_nd = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_nd'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_nd']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_nd']['valList'][$i] = form_productos_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_nd']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_nd']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_nd']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_pucaux_costoventas
+   function ajax_return_values_id_pucaux_costoventas($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_costoventas", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_costoventas);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_costoventas = $this->id_pucaux_costoventas;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas'] = array(); 
+}
+$aLookup[] = array(form_productos_pack_protect_string('') => str_replace('<', '&lt;',form_productos_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_productos_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_costoventas\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_costoventas']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_costoventas']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_costoventas']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_costoventas == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_costoventas = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_costoventas'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_costoventas']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_costoventas']['valList'][$i] = form_productos_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_costoventas']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_costoventas']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_costoventas']['labList'] = $aLabel;
+          }
+   }
+
           //----- id_marca
    function ajax_return_values_id_marca($bForce = false)
    {
@@ -12000,6 +13422,13 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
       $NM_val_form['imagen'] = $this->imagen;
       $NM_val_form['cod_cuenta'] = $this->cod_cuenta;
       $NM_val_form['idprod'] = $this->idprod;
+      $NM_val_form['id_pucaux_inventario'] = $this->id_pucaux_inventario;
+      $NM_val_form['id_pucaux_ncc'] = $this->id_pucaux_ncc;
+      $NM_val_form['id_pucaux_ndc'] = $this->id_pucaux_ndc;
+      $NM_val_form['id_pucaux_ingresos'] = $this->id_pucaux_ingresos;
+      $NM_val_form['id_pucaux_nc'] = $this->id_pucaux_nc;
+      $NM_val_form['id_pucaux_nd'] = $this->id_pucaux_nd;
+      $NM_val_form['id_pucaux_costoventas'] = $this->id_pucaux_costoventas;
       $NM_val_form['id_marca'] = $this->id_marca;
       $NM_val_form['id_linea'] = $this->id_linea;
       $NM_val_form['codigobar2'] = $this->codigobar2;
@@ -12149,6 +13578,41 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
       { 
           $this->costo_prom = 0;
           $this->sc_force_zero[] = 'costo_prom';
+      } 
+      if ($this->id_pucaux_inventario === "" || is_null($this->id_pucaux_inventario))  
+      { 
+          $this->id_pucaux_inventario = 0;
+          $this->sc_force_zero[] = 'id_pucaux_inventario';
+      } 
+      if ($this->id_pucaux_ncc === "" || is_null($this->id_pucaux_ncc))  
+      { 
+          $this->id_pucaux_ncc = 0;
+          $this->sc_force_zero[] = 'id_pucaux_ncc';
+      } 
+      if ($this->id_pucaux_ndc === "" || is_null($this->id_pucaux_ndc))  
+      { 
+          $this->id_pucaux_ndc = 0;
+          $this->sc_force_zero[] = 'id_pucaux_ndc';
+      } 
+      if ($this->id_pucaux_ingresos === "" || is_null($this->id_pucaux_ingresos))  
+      { 
+          $this->id_pucaux_ingresos = 0;
+          $this->sc_force_zero[] = 'id_pucaux_ingresos';
+      } 
+      if ($this->id_pucaux_nc === "" || is_null($this->id_pucaux_nc))  
+      { 
+          $this->id_pucaux_nc = 0;
+          $this->sc_force_zero[] = 'id_pucaux_nc';
+      } 
+      if ($this->id_pucaux_nd === "" || is_null($this->id_pucaux_nd))  
+      { 
+          $this->id_pucaux_nd = 0;
+          $this->sc_force_zero[] = 'id_pucaux_nd';
+      } 
+      if ($this->id_pucaux_costoventas === "" || is_null($this->id_pucaux_costoventas))  
+      { 
+          $this->id_pucaux_costoventas = 0;
+          $this->sc_force_zero[] = 'id_pucaux_costoventas';
       } 
       $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['decimal_db'] == ",") 
@@ -12427,37 +13891,37 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe', id_pucaux_inventario = $this->id_pucaux_inventario, id_pucaux_ncc = $this->id_pucaux_ncc, id_pucaux_ndc = $this->id_pucaux_ndc, id_pucaux_ingresos = $this->id_pucaux_ingresos, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_costoventas = $this->id_pucaux_costoventas"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe', id_pucaux_inventario = $this->id_pucaux_inventario, id_pucaux_ncc = $this->id_pucaux_ncc, id_pucaux_ndc = $this->id_pucaux_ndc, id_pucaux_ingresos = $this->id_pucaux_ingresos, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_costoventas = $this->id_pucaux_costoventas"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe', id_pucaux_inventario = $this->id_pucaux_inventario, id_pucaux_ncc = $this->id_pucaux_ncc, id_pucaux_ndc = $this->id_pucaux_ndc, id_pucaux_ingresos = $this->id_pucaux_ingresos, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_costoventas = $this->id_pucaux_costoventas"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe', id_pucaux_inventario = $this->id_pucaux_inventario, id_pucaux_ncc = $this->id_pucaux_ncc, id_pucaux_ndc = $this->id_pucaux_ndc, id_pucaux_ingresos = $this->id_pucaux_ingresos, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_costoventas = $this->id_pucaux_costoventas"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe', id_pucaux_inventario = $this->id_pucaux_inventario, id_pucaux_ncc = $this->id_pucaux_ncc, id_pucaux_ndc = $this->id_pucaux_ndc, id_pucaux_ingresos = $this->id_pucaux_ingresos, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_costoventas = $this->id_pucaux_costoventas"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe', id_pucaux_inventario = $this->id_pucaux_inventario, id_pucaux_ncc = $this->id_pucaux_ncc, id_pucaux_ndc = $this->id_pucaux_ndc, id_pucaux_ingresos = $this->id_pucaux_ingresos, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_costoventas = $this->id_pucaux_costoventas"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe'"; 
+                  $SC_fields_update[] = "codigobar = '$this->codigobar', codigoprod = '$this->codigoprod', nompro = '$this->nompro', unidmaymen = '$this->unidmaymen', unimay = '$this->unimay', unimen = '$this->unimen', costomen = $this->costomen, recmayamen = $this->recmayamen, preciomen = $this->preciomen, preciomen2 = $this->preciomen2, preciomen3 = $this->preciomen3, precio2 = $this->precio2, preciomay = $this->preciomay, preciofull = $this->preciofull, stockmen = $this->stockmen, idgrup = $this->idgrup, idpro1 = $this->idpro1, idpro2 = $this->idpro2, idiva = $this->idiva, otro = $this->otro, otro2 = $this->otro2, colores = '$this->colores', tallas = '$this->tallas', sabores = '$this->sabores', precio_editable = '$this->precio_editable', cod_cuenta = '$this->cod_cuenta', fecha_vencimiento = '$this->fecha_vencimiento', lote = '$this->lote', serial_codbarras = '$this->serial_codbarras', maneja_tcs_lfs = '$this->maneja_tcs_lfs', control_costo = '$this->control_costo', por_preciominimo = $this->por_preciominimo, id_marca = $this->id_marca, id_linea = $this->id_linea, codigobar2 = '$this->codigobar2', codigobar3 = '$this->codigobar3', existencia = $this->existencia, multiple_escala = '$this->multiple_escala', en_base_a = '$this->en_base_a', activo = '$this->activo', tipo_producto = '$this->tipo_producto', costo_prom = $this->costo_prom, ubicacion = '$this->ubicacion', para_registro_fe = '$this->para_registro_fe', id_pucaux_inventario = $this->id_pucaux_inventario, id_pucaux_ncc = $this->id_pucaux_ncc, id_pucaux_ndc = $this->id_pucaux_ndc, id_pucaux_ingresos = $this->id_pucaux_ingresos, id_pucaux_nc = $this->id_pucaux_nc, id_pucaux_nd = $this->id_pucaux_nd, id_pucaux_costoventas = $this->id_pucaux_costoventas"; 
               } 
               if (isset($NM_val_form['costomay']) && $NM_val_form['costomay'] != $this->nmgp_dados_select['costomay']) 
               { 
@@ -12742,6 +14206,20 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               elseif (isset($this->costo_prom)) { $this->nm_limpa_alfa($this->costo_prom); }
               if     (isset($NM_val_form) && isset($NM_val_form['ubicacion'])) { $this->ubicacion = $NM_val_form['ubicacion']; }
               elseif (isset($this->ubicacion)) { $this->nm_limpa_alfa($this->ubicacion); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_inventario'])) { $this->id_pucaux_inventario = $NM_val_form['id_pucaux_inventario']; }
+              elseif (isset($this->id_pucaux_inventario)) { $this->nm_limpa_alfa($this->id_pucaux_inventario); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_ncc'])) { $this->id_pucaux_ncc = $NM_val_form['id_pucaux_ncc']; }
+              elseif (isset($this->id_pucaux_ncc)) { $this->nm_limpa_alfa($this->id_pucaux_ncc); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_ndc'])) { $this->id_pucaux_ndc = $NM_val_form['id_pucaux_ndc']; }
+              elseif (isset($this->id_pucaux_ndc)) { $this->nm_limpa_alfa($this->id_pucaux_ndc); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_ingresos'])) { $this->id_pucaux_ingresos = $NM_val_form['id_pucaux_ingresos']; }
+              elseif (isset($this->id_pucaux_ingresos)) { $this->nm_limpa_alfa($this->id_pucaux_ingresos); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_nc'])) { $this->id_pucaux_nc = $NM_val_form['id_pucaux_nc']; }
+              elseif (isset($this->id_pucaux_nc)) { $this->nm_limpa_alfa($this->id_pucaux_nc); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_nd'])) { $this->id_pucaux_nd = $NM_val_form['id_pucaux_nd']; }
+              elseif (isset($this->id_pucaux_nd)) { $this->nm_limpa_alfa($this->id_pucaux_nd); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_costoventas'])) { $this->id_pucaux_costoventas = $NM_val_form['id_pucaux_costoventas']; }
+              elseif (isset($this->id_pucaux_costoventas)) { $this->nm_limpa_alfa($this->id_pucaux_costoventas); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -12749,7 +14227,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('codigoprod', 'codigobar', 'nompro', 'idgrup', 'idpro1', 'tipo_producto', 'idpro2', 'otro', 'otro2', 'precio_editable', 'maneja_tcs_lfs', 'stockmen', 'unidmaymen', 'unimay', 'unimen', 'unidad_ma', 'unidad_', 'multiple_escala', 'en_base_a', 'costomen', 'costo_prom', 'recmayamen', 'idiva', 'existencia', 'u_menor', 'ubicacion', 'activo', 'colores', 'confcolor', 'tallas', 'conftalla', 'sabores', 'sabor', 'fecha_vencimiento', 'lote', 'serial_codbarras', 'relleno', 'control_costo', 'por_preciominimo', 'sugerido_mayor', 'sugerido_menor', 'preciofull', 'precio2', 'preciomay', 'preciomen', 'preciomen2', 'preciomen3', 'cod_cuenta', 'idprod', 'id_marca', 'id_linea', 'codigobar2', 'codigobar3', 'para_registro_fe'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('codigoprod', 'codigobar', 'nompro', 'idgrup', 'idpro1', 'tipo_producto', 'idpro2', 'otro', 'otro2', 'precio_editable', 'maneja_tcs_lfs', 'stockmen', 'unidmaymen', 'unimay', 'unimen', 'unidad_ma', 'unidad_', 'multiple_escala', 'en_base_a', 'costomen', 'costo_prom', 'recmayamen', 'idiva', 'existencia', 'u_menor', 'ubicacion', 'activo', 'colores', 'confcolor', 'tallas', 'conftalla', 'sabores', 'sabor', 'fecha_vencimiento', 'lote', 'serial_codbarras', 'relleno', 'control_costo', 'por_preciominimo', 'sugerido_mayor', 'sugerido_menor', 'preciofull', 'precio2', 'preciomay', 'preciomen', 'preciomen2', 'preciomen3', 'cod_cuenta', 'idprod', 'id_pucaux_inventario', 'id_pucaux_ncc', 'id_pucaux_ndc', 'id_pucaux_ingresos', 'id_pucaux_nc', 'id_pucaux_nd', 'id_pucaux_costoventas', 'id_marca', 'id_linea', 'codigobar2', 'codigobar3', 'para_registro_fe'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -12824,7 +14302,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, #$this->ultima_compra#, '$this->n_ultcompra', #$this->ultima_venta#, '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, #$this->ultima_compra#, '$this->n_ultcompra', #$this->ultima_venta#, '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco == "pdo_sqlsrv")
               { 
@@ -12845,7 +14323,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
@@ -12866,7 +14344,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
@@ -12887,7 +14365,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES ('$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
@@ -12908,7 +14386,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', EMPTY_BLOB(), $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', EMPTY_BLOB(), $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
@@ -12929,7 +14407,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', null, $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, EXTEND('$this->ultima_compra', YEAR TO DAY), '$this->n_ultcompra', EXTEND('$this->ultima_venta', YEAR TO DAY), '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', null, $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, EXTEND('$this->ultima_compra', YEAR TO DAY), '$this->n_ultcompra', EXTEND('$this->ultima_venta', YEAR TO DAY), '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               {
@@ -12950,7 +14428,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
@@ -12971,7 +14449,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
@@ -12992,7 +14470,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco =='pdo_ibm')
               {
@@ -13013,7 +14491,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', EMPTY_BLOB(), $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', EMPTY_BLOB(), $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               else
               {
@@ -13034,7 +14512,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                        $compl_insert     .= ", stockmen";
                        $compl_insert_val .= ", $this->stockmen";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe' $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas $compl_insert) VALUES (" . $NM_seq_auto . "'$this->codigobar', '$this->codigoprod', '$this->nompro', '$this->unidmaymen', '$this->unimay', '$this->unimen', $this->costomay, $this->costomen, $this->preciomen, $this->preciomen2, $this->preciomen3, $this->precio2, $this->preciomay, $this->preciofull, $this->idgrup, $this->idpro1, $this->idpro2, $this->idiva, $this->otro, $this->otro2, '$this->colores', '$this->tallas', '$this->sabores', '$this->imagenprod', $this->imconsumo, $this->idcombo, '$this->precio_editable', '$this->cod_cuenta', '$this->fecha_vencimiento', '$this->fecha_fab', '$this->lote', '$this->serial_codbarras', '$this->maneja_tcs_lfs', '$this->control_costo', $this->por_preciominimo, $this->id_marca, $this->id_linea, " . $this->Ini->date_delim . $this->ultima_compra . $this->Ini->date_delim1 . ", '$this->n_ultcompra', " . $this->Ini->date_delim . $this->ultima_venta . $this->Ini->date_delim1 . ", '$this->n_ultventa', '$this->codigobar2', '$this->codigobar3', '$this->nube', $this->existencia, '$this->multiple_escala', '$this->en_base_a', '$this->activo', '$this->tipo_producto', $this->costo_prom, '$this->imagen', '$this->ubicacion', '$this->para_registro_fe', $this->id_pucaux_inventario, $this->id_pucaux_ncc, $this->id_pucaux_ndc, $this->id_pucaux_ingresos, $this->id_pucaux_nc, $this->id_pucaux_nd, $this->id_pucaux_costoventas $compl_insert_val)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -14053,23 +15531,23 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, str_replace (convert(char(10),ultima_compra,102), '.', '-') + ' ' + convert(char(8),ultima_compra,20), n_ultcompra, str_replace (convert(char(10),ultima_venta,102), '.', '-') + ' ' + convert(char(8),ultima_venta,20), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, str_replace (convert(char(10),ultima_compra,102), '.', '-') + ' ' + convert(char(8),ultima_compra,20), n_ultcompra, str_replace (convert(char(10),ultima_venta,102), '.', '-') + ' ' + convert(char(8),ultima_venta,20), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, convert(char(23),ultima_compra,121), n_ultcompra, convert(char(23),ultima_venta,121), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, convert(char(23),ultima_compra,121), n_ultcompra, convert(char(23),ultima_venta,121), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, LOTOFILE(imagenprod, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_imagenprod', 'client'), imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, EXTEND(ultima_compra, YEAR TO DAY), n_ultcompra, EXTEND(ultima_venta, YEAR TO DAY), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, LOTOFILE(imagenprod, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_imagenprod', 'client'), imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, EXTEND(ultima_compra, YEAR TO DAY), n_ultcompra, EXTEND(ultima_venta, YEAR TO DAY), n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idprod, codigobar, codigoprod, nompro, unidmaymen, unimay, unimen, costomay, costomen, recmayamen, preciomen, preciomen2, preciomen3, precio2, preciomay, preciofull, stockmay, stockmen, idgrup, idpro1, idpro2, idiva, otro, otro2, colores, tallas, sabores, imagenprod, imconsumo, escombo, idcombo, precio_editable, cod_cuenta, fecha_vencimiento, fecha_fab, lote, serial_codbarras, maneja_tcs_lfs, control_costo, por_preciominimo, id_marca, id_linea, ultima_compra, n_ultcompra, ultima_venta, n_ultventa, codigobar2, codigobar3, nube, existencia, multiple_escala, en_base_a, activo, tipo_producto, costo_prom, imagen, ubicacion, para_registro_fe, id_pucaux_inventario, id_pucaux_ncc, id_pucaux_ndc, id_pucaux_ingresos, id_pucaux_nc, id_pucaux_nd, id_pucaux_costoventas from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -14355,6 +15833,20 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               $this->nmgp_dados_select['ubicacion'] = $this->ubicacion;
               $this->para_registro_fe = $rs->fields[57] ; 
               $this->nmgp_dados_select['para_registro_fe'] = $this->para_registro_fe;
+              $this->id_pucaux_inventario = $rs->fields[58] ; 
+              $this->nmgp_dados_select['id_pucaux_inventario'] = $this->id_pucaux_inventario;
+              $this->id_pucaux_ncc = $rs->fields[59] ; 
+              $this->nmgp_dados_select['id_pucaux_ncc'] = $this->id_pucaux_ncc;
+              $this->id_pucaux_ndc = $rs->fields[60] ; 
+              $this->nmgp_dados_select['id_pucaux_ndc'] = $this->id_pucaux_ndc;
+              $this->id_pucaux_ingresos = $rs->fields[61] ; 
+              $this->nmgp_dados_select['id_pucaux_ingresos'] = $this->id_pucaux_ingresos;
+              $this->id_pucaux_nc = $rs->fields[62] ; 
+              $this->nmgp_dados_select['id_pucaux_nc'] = $this->id_pucaux_nc;
+              $this->id_pucaux_nd = $rs->fields[63] ; 
+              $this->nmgp_dados_select['id_pucaux_nd'] = $this->id_pucaux_nd;
+              $this->id_pucaux_costoventas = $rs->fields[64] ; 
+              $this->nmgp_dados_select['id_pucaux_costoventas'] = $this->id_pucaux_costoventas;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->nm_troca_decimal(",", ".");
               $this->idprod = (string)$this->idprod; 
@@ -14382,6 +15874,13 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               $this->id_linea = (string)$this->id_linea; 
               $this->existencia = (string)$this->existencia; 
               $this->costo_prom = (string)$this->costo_prom; 
+              $this->id_pucaux_inventario = (string)$this->id_pucaux_inventario; 
+              $this->id_pucaux_ncc = (string)$this->id_pucaux_ncc; 
+              $this->id_pucaux_ndc = (string)$this->id_pucaux_ndc; 
+              $this->id_pucaux_ingresos = (string)$this->id_pucaux_ingresos; 
+              $this->id_pucaux_nc = (string)$this->id_pucaux_nc; 
+              $this->id_pucaux_nd = (string)$this->id_pucaux_nd; 
+              $this->id_pucaux_costoventas = (string)$this->id_pucaux_costoventas; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['parms'] = "idprod?#?$this->idprod?@?";
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['sub_dir'][0]  = "";
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['sub_dir'][1]  = "/" . $_SESSION['gnit'] . "/";
@@ -14527,6 +16026,20 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
               $this->nmgp_dados_form["ubicacion"] = $this->ubicacion;
               $this->para_registro_fe = "NO";  
               $this->nmgp_dados_form["para_registro_fe"] = $this->para_registro_fe;
+              $this->id_pucaux_inventario = "";  
+              $this->nmgp_dados_form["id_pucaux_inventario"] = $this->id_pucaux_inventario;
+              $this->id_pucaux_ncc = "";  
+              $this->nmgp_dados_form["id_pucaux_ncc"] = $this->id_pucaux_ncc;
+              $this->id_pucaux_ndc = "";  
+              $this->nmgp_dados_form["id_pucaux_ndc"] = $this->id_pucaux_ndc;
+              $this->id_pucaux_ingresos = "";  
+              $this->nmgp_dados_form["id_pucaux_ingresos"] = $this->id_pucaux_ingresos;
+              $this->id_pucaux_nc = "";  
+              $this->nmgp_dados_form["id_pucaux_nc"] = $this->id_pucaux_nc;
+              $this->id_pucaux_nd = "";  
+              $this->nmgp_dados_form["id_pucaux_nd"] = $this->id_pucaux_nd;
+              $this->id_pucaux_costoventas = "";  
+              $this->nmgp_dados_form["id_pucaux_costoventas"] = $this->id_pucaux_costoventas;
               $this->sugerido_mayor = "";  
               $this->nmgp_dados_form["sugerido_mayor"] = $this->sugerido_mayor;
               $this->sugerido_menor = "";  
@@ -14612,6 +16125,13 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                   $this->imagen = $this->nmgp_dados_select['imagen'];  
                   $this->ubicacion = $this->nmgp_dados_select['ubicacion'];  
                   $this->para_registro_fe = $this->nmgp_dados_select['para_registro_fe'];  
+                  $this->id_pucaux_inventario = $this->nmgp_dados_select['id_pucaux_inventario'];  
+                  $this->id_pucaux_ncc = $this->nmgp_dados_select['id_pucaux_ncc'];  
+                  $this->id_pucaux_ndc = $this->nmgp_dados_select['id_pucaux_ndc'];  
+                  $this->id_pucaux_ingresos = $this->nmgp_dados_select['id_pucaux_ingresos'];  
+                  $this->id_pucaux_nc = $this->nmgp_dados_select['id_pucaux_nc'];  
+                  $this->id_pucaux_nd = $this->nmgp_dados_select['id_pucaux_nd'];  
+                  $this->id_pucaux_costoventas = $this->nmgp_dados_select['id_pucaux_costoventas'];  
               }
           }
           if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['foreign_key']))
@@ -16767,6 +18287,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                         'Pag2' => array(
                                 7 => 'on',
                                 8 => 'on',
+                                9 => 'on',
                         ),
                 );
 
@@ -16780,6 +18301,7 @@ $_SESSION['scriptcase']['form_productos']['contr_erro'] = 'off';
                         6 => 'Pag1',
                         7 => 'Pag2',
                         8 => 'Pag2',
+                        9 => 'Pag2',
                 );
 
                 if (!empty($this->Ini->nm_hidden_blocos)) {
@@ -17955,6 +19477,741 @@ else
    return $todo;
 
    }
+   function Form_lookup_id_pucaux_inventario()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_inventario'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_ncc()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ncc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_ndc()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ndc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_ingresos()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_ingresos'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_nc()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_nd()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_nd'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_costoventas()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['Lookup_id_pucaux_costoventas'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
    function Form_lookup_id_marca()
    {
 $nmgp_def_dados = "" ; 
@@ -18412,7 +20669,7 @@ else
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idprod";$nm_numeric[] = "costomay";$nm_numeric[] = "costomen";$nm_numeric[] = "recmayamen";$nm_numeric[] = "preciomen";$nm_numeric[] = "preciomen2";$nm_numeric[] = "preciomen3";$nm_numeric[] = "precio2";$nm_numeric[] = "preciomay";$nm_numeric[] = "preciofull";$nm_numeric[] = "stockmay";$nm_numeric[] = "stockmen";$nm_numeric[] = "idgrup";$nm_numeric[] = "idpro1";$nm_numeric[] = "idpro2";$nm_numeric[] = "idiva";$nm_numeric[] = "otro";$nm_numeric[] = "otro2";$nm_numeric[] = "imconsumo";$nm_numeric[] = "idcombo";$nm_numeric[] = "por_preciominimo";$nm_numeric[] = "id_marca";$nm_numeric[] = "id_linea";$nm_numeric[] = "existencia";$nm_numeric[] = "costo_prom";$nm_numeric[] = "";
+      $nm_numeric[] = "idprod";$nm_numeric[] = "costomay";$nm_numeric[] = "costomen";$nm_numeric[] = "recmayamen";$nm_numeric[] = "preciomen";$nm_numeric[] = "preciomen2";$nm_numeric[] = "preciomen3";$nm_numeric[] = "precio2";$nm_numeric[] = "preciomay";$nm_numeric[] = "preciofull";$nm_numeric[] = "stockmay";$nm_numeric[] = "stockmen";$nm_numeric[] = "idgrup";$nm_numeric[] = "idpro1";$nm_numeric[] = "idpro2";$nm_numeric[] = "idiva";$nm_numeric[] = "otro";$nm_numeric[] = "otro2";$nm_numeric[] = "imconsumo";$nm_numeric[] = "idcombo";$nm_numeric[] = "por_preciominimo";$nm_numeric[] = "id_marca";$nm_numeric[] = "id_linea";$nm_numeric[] = "existencia";$nm_numeric[] = "costo_prom";$nm_numeric[] = "id_pucaux_inventario";$nm_numeric[] = "id_pucaux_ncc";$nm_numeric[] = "id_pucaux_ndc";$nm_numeric[] = "id_pucaux_ingresos";$nm_numeric[] = "id_pucaux_nc";$nm_numeric[] = "id_pucaux_nd";$nm_numeric[] = "id_pucaux_costoventas";$nm_numeric[] = "";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['decimal_db'] == ".")
@@ -19268,6 +21525,13 @@ if (parent && parent.scAjaxDetailValue)
                         'imagen' => 'imagen',
                         'cod_cuenta' => 'cod_cuenta',
                         'idprod' => 'idprod',
+                        'id_pucaux_inventario' => 'id_pucaux_inventario',
+                        'id_pucaux_ncc' => 'id_pucaux_ncc',
+                        'id_pucaux_ndc' => 'id_pucaux_ndc',
+                        'id_pucaux_ingresos' => 'id_pucaux_ingresos',
+                        'id_pucaux_nc' => 'id_pucaux_nc',
+                        'id_pucaux_nd' => 'id_pucaux_nd',
+                        'id_pucaux_costoventas' => 'id_pucaux_costoventas',
                         'id_marca' => 'id_marca',
                         'id_linea' => 'id_linea',
                         'codigobar2' => 'codigobar2',
@@ -19371,18 +21635,6 @@ if (parent && parent.scAjaxDetailValue)
                 break;
             case "delete":
                 return array("sc_b_del_t.sc-unique-btn-5");
-                break;
-            case "sc_btn_0":
-                return array("sc_sc_btn_0_top");
-                break;
-            case "sc_btn_1":
-                return array("sc_sc_btn_1_top");
-                break;
-            case "sc_btn_2":
-                return array("sc_sc_btn_2_top");
-                break;
-            case "escalas":
-                return array("sc_escalas_top");
                 break;
             case "recalcular":
                 return array("sc_recalcular_top");

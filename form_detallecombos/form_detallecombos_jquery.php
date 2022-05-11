@@ -53,9 +53,7 @@ function scSetFocusOnField($oField) {
 function scEventControl_init(iSeqRow) {
   scEventControl_data["idcombo_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["idproducto_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["total_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["cantidad_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["precio_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -71,22 +69,10 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["idproducto_" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["total_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["total_" + iSeqRow]["change"]) {
-    return true;
-  }
   if (scEventControl_data["cantidad_" + iSeqRow]["blur"]) {
     return true;
   }
   if (scEventControl_data["cantidad_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["precio_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["precio_" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["idproducto_" + iSeqRow]["autocomp"]) {
@@ -160,16 +146,12 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_cantidad_' + iSeqRow).bind('blur', function() { sc_form_detallecombos_cantidad__onblur(this, iSeqRow) })
                                        .bind('change', function() { sc_form_detallecombos_cantidad__onchange(this, iSeqRow) })
                                        .bind('focus', function() { sc_form_detallecombos_cantidad__onfocus(this, iSeqRow) });
-  $('#id_sc_field_precio_' + iSeqRow).bind('blur', function() { sc_form_detallecombos_precio__onblur(this, iSeqRow) })
-                                     .bind('change', function() { sc_form_detallecombos_precio__onchange(this, iSeqRow) })
-                                     .bind('focus', function() { sc_form_detallecombos_precio__onfocus(this, iSeqRow) });
+  $('#id_sc_field_precio_' + iSeqRow).bind('change', function() { sc_form_detallecombos_precio__onchange(this, iSeqRow) });
   $('#id_sc_field_creado_' + iSeqRow).bind('change', function() { sc_form_detallecombos_creado__onchange(this, iSeqRow) });
   $('#id_sc_field_creado__hora' + iSeqRow).bind('change', function() { sc_form_detallecombos_creado__hora_onchange(this, iSeqRow) });
   $('#id_sc_field_actualizado_' + iSeqRow).bind('change', function() { sc_form_detallecombos_actualizado__onchange(this, iSeqRow) });
   $('#id_sc_field_actualizado__hora' + iSeqRow).bind('change', function() { sc_form_detallecombos_actualizado__hora_onchange(this, iSeqRow) });
-  $('#id_sc_field_total_' + iSeqRow).bind('blur', function() { sc_form_detallecombos_total__onblur(this, iSeqRow) })
-                                    .bind('change', function() { sc_form_detallecombos_total__onchange(this, iSeqRow) })
-                                    .bind('focus', function() { sc_form_detallecombos_total__onfocus(this, iSeqRow) });
+  $('#id_sc_field_total_' + iSeqRow).bind('change', function() { sc_form_detallecombos_total__onchange(this, iSeqRow) });
 } // scJQEventsAdd
 
 function sc_form_detallecombos_iddetallecombo__onchange(oThis, iSeqRow) {
@@ -222,19 +204,8 @@ function sc_form_detallecombos_cantidad__onfocus(oThis, iSeqRow) {
   scCssFocus(oThis, iSeqRow);
 }
 
-function sc_form_detallecombos_precio__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallecombos_validate_precio_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
 function sc_form_detallecombos_precio__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallecombos_precio__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
 }
 
 function sc_form_detallecombos_creado__onchange(oThis, iSeqRow) {
@@ -253,20 +224,8 @@ function sc_form_detallecombos_actualizado__hora_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 
-function sc_form_detallecombos_total__onblur(oThis, iSeqRow) {
-  do_ajax_form_detallecombos_validate_total_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
 function sc_form_detallecombos_total__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  do_ajax_form_detallecombos_event_total__onchange(iSeqRow);
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_detallecombos_total__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
 }
 
 function displayChange_block(block, status) {
@@ -278,17 +237,13 @@ function displayChange_block(block, status) {
 function displayChange_block_0(status) {
 	displayChange_field("idcombo_", "", status);
 	displayChange_field("idproducto_", "", status);
-	displayChange_field("total_", "", status);
 	displayChange_field("cantidad_", "", status);
-	displayChange_field("precio_", "", status);
 }
 
 function displayChange_row(row, status) {
 	displayChange_field_idcombo_(row, status);
 	displayChange_field_idproducto_(row, status);
-	displayChange_field_total_(row, status);
 	displayChange_field_cantidad_(row, status);
-	displayChange_field_precio_(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -298,14 +253,8 @@ function displayChange_field(field, row, status) {
 	if ("idproducto_" == field) {
 		displayChange_field_idproducto_(row, status);
 	}
-	if ("total_" == field) {
-		displayChange_field_total_(row, status);
-	}
 	if ("cantidad_" == field) {
 		displayChange_field_cantidad_(row, status);
-	}
-	if ("precio_" == field) {
-		displayChange_field_precio_(row, status);
 	}
 }
 
@@ -315,13 +264,7 @@ function displayChange_field_idcombo_(row, status) {
 function displayChange_field_idproducto_(row, status) {
 }
 
-function displayChange_field_total_(row, status) {
-}
-
 function displayChange_field_cantidad_(row, status) {
-}
-
-function displayChange_field_precio_(row, status) {
 }
 
 function scRecreateSelect2() {

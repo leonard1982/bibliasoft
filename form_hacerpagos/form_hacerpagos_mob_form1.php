@@ -607,6 +607,15 @@ scAjax_displayEmptyForm();
 			 return;
 		}
 	}
+	function scBtnFn_refrescar() {
+		if ($("#sc_refrescar_top").length && $("#sc_refrescar_top").is(":visible")) {
+		    if ($("#sc_refrescar_top").hasClass("disabled")) {
+		        return;
+		    }
+			sc_btn_refrescar()
+			 return;
+		}
+	}
 	function scBtnFn_sys_format_hlp() {
 		if ($("#sc_b_hlp_t").length && $("#sc_b_hlp_t").is(":visible")) {
 		    if ($("#sc_b_hlp_t").hasClass("disabled")) {

@@ -132,7 +132,7 @@ class menu_notificacion_form_php
           $_SESSION['scriptcase']['menu_notificacion']['actual_lang'] = $this->str_lang;
           setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
       }
-      $this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+      $this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
        if (isset($_SESSION['scriptcase']['user_logout']))
        {
            foreach ($_SESSION['scriptcase']['user_logout'] as $ind => $parms)

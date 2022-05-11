@@ -124,10 +124,6 @@ class form_mov_ajusteinv_mob_apl
           {
               $this->cantidad = $this->NM_ajax_info['param']['cantidad'];
           }
-          if (isset($this->NM_ajax_info['param']['colores']))
-          {
-              $this->colores = $this->NM_ajax_info['param']['colores'];
-          }
           if (isset($this->NM_ajax_info['param']['csrf_token']))
           {
               $this->csrf_token = $this->NM_ajax_info['param']['csrf_token'];
@@ -151,10 +147,6 @@ class form_mov_ajusteinv_mob_apl
           if (isset($this->NM_ajax_info['param']['idtipotran']))
           {
               $this->idtipotran = $this->NM_ajax_info['param']['idtipotran'];
-          }
-          if (isset($this->NM_ajax_info['param']['lote']))
-          {
-              $this->lote = $this->NM_ajax_info['param']['lote'];
           }
           if (isset($this->NM_ajax_info['param']['nm_form_submit']))
           {
@@ -208,29 +200,13 @@ class form_mov_ajusteinv_mob_apl
           {
               $this->presentacion = $this->NM_ajax_info['param']['presentacion'];
           }
-          if (isset($this->NM_ajax_info['param']['sabor']))
-          {
-              $this->sabor = $this->NM_ajax_info['param']['sabor'];
-          }
           if (isset($this->NM_ajax_info['param']['script_case_init']))
           {
               $this->script_case_init = $this->NM_ajax_info['param']['script_case_init'];
           }
-          if (isset($this->NM_ajax_info['param']['seleccionarlfs']))
-          {
-              $this->seleccionarlfs = $this->NM_ajax_info['param']['seleccionarlfs'];
-          }
           if (isset($this->NM_ajax_info['param']['stcock']))
           {
               $this->stcock = $this->NM_ajax_info['param']['stcock'];
-          }
-          if (isset($this->NM_ajax_info['param']['tallas']))
-          {
-              $this->tallas = $this->NM_ajax_info['param']['tallas'];
-          }
-          if (isset($this->NM_ajax_info['param']['vence']))
-          {
-              $this->vence = $this->NM_ajax_info['param']['vence'];
           }
           if (isset($this->nmgp_refresh_fields))
           {
@@ -583,7 +559,7 @@ class form_mov_ajusteinv_mob_apl
 
 
 
-      $_SESSION['scriptcase']['error_icon']['form_mov_ajusteinv_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $_SESSION['scriptcase']['error_icon']['form_mov_ajusteinv_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_mov_ajusteinv_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
       $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['embutida_proc'] : $this->Embutida_proc;
@@ -905,7 +881,13 @@ class form_mov_ajusteinv_mob_apl
           $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_form'];
           if (!isset($this->idmov)){$this->idmov = $this->nmgp_dados_form['idmov'];} 
           if (!isset($this->idboddes)){$this->idboddes = $this->nmgp_dados_form['idboddes'];} 
+          if (!isset($this->colores)){$this->colores = $this->nmgp_dados_form['colores'];} 
+          if (!isset($this->tallas)){$this->tallas = $this->nmgp_dados_form['tallas'];} 
+          if (!isset($this->sabor)){$this->sabor = $this->nmgp_dados_form['sabor'];} 
+          if (!isset($this->lote)){$this->lote = $this->nmgp_dados_form['lote'];} 
+          if (!isset($this->vence)){$this->vence = $this->nmgp_dados_form['vence'];} 
           if ($this->nmgp_opcao == "incluir" && $this->nmgp_dados_form['presentacion'] != "null"){$this->presentacion = $this->nmgp_dados_form['presentacion'];} 
+          if (!isset($this->seleccionarlfs)){$this->seleccionarlfs = $this->nmgp_dados_form['seleccionarlfs'];} 
       }
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       $this->aba_iframe = false;
@@ -1122,9 +1104,7 @@ class form_mov_ajusteinv_mob_apl
             if(!empty($img_width) && !empty($img_height)){
                 $sc_obj_img->setWidth($img_width);
                 $sc_obj_img->setHeight($img_height);
-            }
-                $sc_obj_img->setManterAspecto(true);
-            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            }            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
             echo $out1_img_cache;
                exit;
             }
@@ -1133,12 +1113,8 @@ class form_mov_ajusteinv_mob_apl
       if (isset($this->cantidad)) { $this->nm_limpa_alfa($this->cantidad); }
       if (isset($this->idbodorig)) { $this->nm_limpa_alfa($this->idbodorig); }
       if (isset($this->observaciones)) { $this->nm_limpa_alfa($this->observaciones); }
-      if (isset($this->colores)) { $this->nm_limpa_alfa($this->colores); }
-      if (isset($this->tallas)) { $this->nm_limpa_alfa($this->tallas); }
-      if (isset($this->sabor)) { $this->nm_limpa_alfa($this->sabor); }
       if (isset($this->numeronota)) { $this->nm_limpa_alfa($this->numeronota); }
       if (isset($this->prefijonota)) { $this->nm_limpa_alfa($this->prefijonota); }
-      if (isset($this->lote)) { $this->nm_limpa_alfa($this->lote); }
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -1184,12 +1160,6 @@ class form_mov_ajusteinv_mob_apl
       $this->field_config['stcock']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_num'];
       $this->field_config['stcock']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['stcock']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- vence
-      $this->field_config['vence']                 = array();
-      $this->field_config['vence']['date_format']  = $_SESSION['scriptcase']['reg_conf']['date_format'];
-      $this->field_config['vence']['date_sep']     = $_SESSION['scriptcase']['reg_conf']['date_sep'];
-      $this->field_config['vence']['date_display'] = "ddmmaaaa";
-      $this->new_date_format('DT', 'vence');
       //-- idmov
       $this->field_config['idmov']               = array();
       $this->field_config['idmov']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
@@ -1197,6 +1167,12 @@ class form_mov_ajusteinv_mob_apl
       $this->field_config['idmov']['symbol_dec'] = '';
       $this->field_config['idmov']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['idmov']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- vence
+      $this->field_config['vence']                 = array();
+      $this->field_config['vence']['date_format']  = $_SESSION['scriptcase']['reg_conf']['date_format'];
+      $this->field_config['vence']['date_sep']     = $_SESSION['scriptcase']['reg_conf']['date_sep'];
+      $this->field_config['vence']['date_display'] = "ddmmaaaa";
+      $this->new_date_format('DT', 'vence');
    }
 
    function controle()
@@ -1257,25 +1233,9 @@ class form_mov_ajusteinv_mob_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'idpro');
           }
-          if ('validate_colores' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'colores');
-          }
-          if ('validate_tallas' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'tallas');
-          }
-          if ('validate_sabor' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'sabor');
-          }
           if ('validate_presentacion' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'presentacion');
-          }
-          if ('validate_seleccionarlfs' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'seleccionarlfs');
           }
           if ('validate_cantidad' == $this->NM_ajax_opcao)
           {
@@ -1288,14 +1248,6 @@ class form_mov_ajusteinv_mob_apl
           if ('validate_stcock' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'stcock');
-          }
-          if ('validate_lote' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'lote');
-          }
-          if ('validate_vence' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'vence');
           }
           if ('validate_observaciones' == $this->NM_ajax_opcao)
           {
@@ -1352,18 +1304,6 @@ class form_mov_ajusteinv_mob_apl
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['idpro']) && !isset($this->nmgp_refresh_fields))
           { 
               $this->idpro = $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['idpro'];
-          } 
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['colores']) && !isset($this->nmgp_refresh_fields))
-          { 
-              $this->colores = $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['colores'];
-          } 
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['tallas']) && !isset($this->nmgp_refresh_fields))
-          { 
-              $this->tallas = $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['tallas'];
-          } 
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['sabor']) && !isset($this->nmgp_refresh_fields))
-          { 
-              $this->sabor = $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['sabor'];
           } 
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['presentacion']) && !isset($this->nmgp_refresh_fields))
           { 
@@ -1904,20 +1844,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'idpro':
                return "Producto";
                break;
-           case 'colores':
-               return "Color";
-               break;
-           case 'tallas':
-               return "Talla";
-               break;
-           case 'sabor':
-               return "Sabor";
-               break;
            case 'presentacion':
                return "Presentación";
-               break;
-           case 'seleccionarlfs':
-               return "Seleccione";
                break;
            case 'cantidad':
                return "Cantidad";
@@ -1928,12 +1856,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'stcock':
                return "Existencia en ubicación";
                break;
-           case 'lote':
-               return "Lote";
-               break;
-           case 'vence':
-               return "Vence";
-               break;
            case 'observaciones':
                return "Observaciones";
                break;
@@ -1942,6 +1864,24 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
                break;
            case 'idboddes':
                return "Idboddes";
+               break;
+           case 'colores':
+               return "Color";
+               break;
+           case 'tallas':
+               return "Talla";
+               break;
+           case 'sabor':
+               return "Sabor";
+               break;
+           case 'lote':
+               return "Lote";
+               break;
+           case 'vence':
+               return "Vence";
+               break;
+           case 'seleccionarlfs':
+               return "Seleccione";
                break;
        }
 
@@ -2001,26 +1941,14 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_fecha($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'idpro' == $filtro)) || (is_array($filtro) && in_array('idpro', $filtro)))
         $this->ValidateField_idpro($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'colores' == $filtro)) || (is_array($filtro) && in_array('colores', $filtro)))
-        $this->ValidateField_colores($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'tallas' == $filtro)) || (is_array($filtro) && in_array('tallas', $filtro)))
-        $this->ValidateField_tallas($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'sabor' == $filtro)) || (is_array($filtro) && in_array('sabor', $filtro)))
-        $this->ValidateField_sabor($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'presentacion' == $filtro)) || (is_array($filtro) && in_array('presentacion', $filtro)))
         $this->ValidateField_presentacion($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'seleccionarlfs' == $filtro)) || (is_array($filtro) && in_array('seleccionarlfs', $filtro)))
-        $this->ValidateField_seleccionarlfs($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'cantidad' == $filtro)) || (is_array($filtro) && in_array('cantidad', $filtro)))
         $this->ValidateField_cantidad($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'idbodorig' == $filtro)) || (is_array($filtro) && in_array('idbodorig', $filtro)))
         $this->ValidateField_idbodorig($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'stcock' == $filtro)) || (is_array($filtro) && in_array('stcock', $filtro)))
         $this->ValidateField_stcock($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'lote' == $filtro)) || (is_array($filtro) && in_array('lote', $filtro)))
-        $this->ValidateField_lote($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'vence' == $filtro)) || (is_array($filtro) && in_array('vence', $filtro)))
-        $this->ValidateField_vence($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'observaciones' == $filtro)) || (is_array($filtro) && in_array('observaciones', $filtro)))
         $this->ValidateField_observaciones($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
@@ -2283,93 +2211,6 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_idpro
 
-    function ValidateField_colores(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-               if (!empty($this->colores) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']) && !in_array($this->colores, $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['colores']))
-                   {
-                       $Campos_Erros['colores'] = array();
-                   }
-                   $Campos_Erros['colores'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['colores']) || !is_array($this->NM_ajax_info['errList']['colores']))
-                   {
-                       $this->NM_ajax_info['errList']['colores'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['colores'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'colores';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_colores
-
-    function ValidateField_tallas(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-               if (!empty($this->tallas) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']) && !in_array($this->tallas, $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['tallas']))
-                   {
-                       $Campos_Erros['tallas'] = array();
-                   }
-                   $Campos_Erros['tallas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['tallas']) || !is_array($this->NM_ajax_info['errList']['tallas']))
-                   {
-                       $this->NM_ajax_info['errList']['tallas'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['tallas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'tallas';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_tallas
-
-    function ValidateField_sabor(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-               if (!empty($this->sabor) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']) && !in_array($this->sabor, $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['sabor']))
-                   {
-                       $Campos_Erros['sabor'] = array();
-                   }
-                   $Campos_Erros['sabor'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['sabor']) || !is_array($this->NM_ajax_info['errList']['sabor']))
-                   {
-                       $this->NM_ajax_info['errList']['sabor'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['sabor'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'sabor';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_sabor
-
     function ValidateField_presentacion(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
@@ -2401,35 +2242,6 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
     } // ValidateField_presentacion
-
-    function ValidateField_seleccionarlfs(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-               if (!empty($this->seleccionarlfs) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']) && !in_array($this->seleccionarlfs, $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']))
-               {
-                   $hasError = true;
-                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($Campos_Erros['seleccionarlfs']))
-                   {
-                       $Campos_Erros['seleccionarlfs'] = array();
-                   }
-                   $Campos_Erros['seleccionarlfs'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-                   if (!isset($this->NM_ajax_info['errList']['seleccionarlfs']) || !is_array($this->NM_ajax_info['errList']['seleccionarlfs']))
-                   {
-                       $this->NM_ajax_info['errList']['seleccionarlfs'] = array();
-                   }
-                   $this->NM_ajax_info['errList']['seleccionarlfs'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
-               }
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'seleccionarlfs';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_seleccionarlfs
 
     function ValidateField_cantidad(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
@@ -2646,82 +2458,6 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_stcock
 
-    function ValidateField_lote(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      $this->lote = sc_strtoupper($this->lote); 
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->lote) > 20) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "Lote " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['lote']))
-              {
-                  $Campos_Erros['lote'] = array();
-              }
-              $Campos_Erros['lote'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['lote']) || !is_array($this->NM_ajax_info['errList']['lote']))
-              {
-                  $this->NM_ajax_info['errList']['lote'] = array();
-              }
-              $this->NM_ajax_info['errList']['lote'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 20 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'lote';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_lote
-
-    function ValidateField_vence(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      nm_limpa_data($this->vence, $this->field_config['vence']['date_sep']) ; 
-      $trab_dt_min = ""; 
-      $trab_dt_max = ""; 
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          $guarda_datahora = $this->field_config['vence']['date_format']; 
-          if (false !== strpos($guarda_datahora, ';')) $this->field_config['vence']['date_format'] = substr($guarda_datahora, 0, strpos($guarda_datahora, ';'));
-          $Format_Data = $this->field_config['vence']['date_format']; 
-          nm_limpa_data($Format_Data, $this->field_config['vence']['date_sep']) ; 
-          if (trim($this->vence) != "")  
-          { 
-              if ($teste_validade->Data($this->vence, $Format_Data, $trab_dt_min, $trab_dt_max) == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Vence; " ; 
-                  if (!isset($Campos_Erros['vence']))
-                  {
-                      $Campos_Erros['vence'] = array();
-                  }
-                  $Campos_Erros['vence'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['vence']) || !is_array($this->NM_ajax_info['errList']['vence']))
-                  {
-                      $this->NM_ajax_info['errList']['vence'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['vence'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-          $this->field_config['vence']['date_format'] = $guarda_datahora; 
-       } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'vence';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_vence
-
     function ValidateField_observaciones(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
@@ -2783,19 +2519,19 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['idtipotran'] = $this->idtipotran;
     $this->nmgp_dados_form['fecha'] = (strlen(trim($this->fecha)) > 19) ? str_replace(".", ":", $this->fecha) : trim($this->fecha);
     $this->nmgp_dados_form['idpro'] = $this->idpro;
-    $this->nmgp_dados_form['colores'] = $this->colores;
-    $this->nmgp_dados_form['tallas'] = $this->tallas;
-    $this->nmgp_dados_form['sabor'] = $this->sabor;
     $this->nmgp_dados_form['presentacion'] = $this->presentacion;
-    $this->nmgp_dados_form['seleccionarlfs'] = $this->seleccionarlfs;
     $this->nmgp_dados_form['cantidad'] = $this->cantidad;
     $this->nmgp_dados_form['idbodorig'] = $this->idbodorig;
     $this->nmgp_dados_form['stcock'] = $this->stcock;
-    $this->nmgp_dados_form['lote'] = $this->lote;
-    $this->nmgp_dados_form['vence'] = (strlen(trim($this->vence)) > 19) ? str_replace(".", ":", $this->vence) : trim($this->vence);
     $this->nmgp_dados_form['observaciones'] = $this->observaciones;
     $this->nmgp_dados_form['idmov'] = $this->idmov;
     $this->nmgp_dados_form['idboddes'] = $this->idboddes;
+    $this->nmgp_dados_form['colores'] = $this->colores;
+    $this->nmgp_dados_form['tallas'] = $this->tallas;
+    $this->nmgp_dados_form['sabor'] = $this->sabor;
+    $this->nmgp_dados_form['lote'] = $this->lote;
+    $this->nmgp_dados_form['vence'] = $this->vence;
+    $this->nmgp_dados_form['seleccionarlfs'] = $this->seleccionarlfs;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_form'] = $this->nmgp_dados_form;
    }
    function nm_tira_formatacao()
@@ -2818,10 +2554,10 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
       {
          nm_limpa_valor($this->stcock, $this->field_config['stcock']['symbol_dec'], $this->field_config['stcock']['symbol_grp']);
       }
-      $this->Before_unformat['vence'] = $this->vence;
-      nm_limpa_data($this->vence, $this->field_config['vence']['date_sep']) ; 
       $this->Before_unformat['idmov'] = $this->idmov;
       nm_limpa_numero($this->idmov, $this->field_config['idmov']['symbol_grp']) ; 
+      $this->Before_unformat['vence'] = $this->vence;
+      nm_limpa_data($this->vence, $this->field_config['vence']['date_sep']) ; 
    }
    function sc_add_currency(&$value, $symbol, $pos)
    {
@@ -2917,15 +2653,6 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
       if ('' !== $this->stcock || (!empty($format_fields) && isset($format_fields['stcock'])))
       {
           nmgp_Form_Num_Val($this->stcock, $this->field_config['stcock']['symbol_grp'], $this->field_config['stcock']['symbol_dec'], "3", "S", $this->field_config['stcock']['format_neg'], "", "", "-", $this->field_config['stcock']['symbol_fmt']) ; 
-      }
-      if ((!empty($this->vence) && 'null' != $this->vence) || (!empty($format_fields) && isset($format_fields['vence'])))
-      {
-          nm_volta_data($this->vence, $this->field_config['vence']['date_format']) ; 
-          nmgp_Form_Datas($this->vence, $this->field_config['vence']['date_format'], $this->field_config['vence']['date_sep']) ;  
-      }
-      elseif ('null' == $this->vence || '' == $this->vence)
-      {
-          $this->vence = '';
       }
    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
@@ -3298,37 +3025,6 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
           $this->fecha = "null" ; 
       } 
       $this->field_config['fecha']['date_format'] = $guarda_format_hora;
-      $guarda_format_hora = $this->field_config['vence']['date_format'];
-      if ($this->vence != "")  
-      { 
-          nm_conv_data($this->vence, $this->field_config['vence']['date_format']) ; 
-          $this->vence_hora = "00:00:00:000" ; 
-          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-          {
-              $this->vence_hora = substr($this->vence_hora, 0, -4);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-          {
-              $this->vence_hora = substr($this->vence_hora, 0, -4);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-          {
-              $this->vence_hora = substr($this->vence_hora, 0, -4);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
-          {
-              $this->vence_hora = substr($this->vence_hora, 0, -4);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-          {
-              $this->vence_hora = substr($this->vence_hora, 0, -4);
-          }
-      } 
-      if ($this->vence == "" && $use_null)  
-      { 
-          $this->vence = "null" ; 
-      } 
-      $this->field_config['vence']['date_format'] = $guarda_format_hora;
    }
 //
    function nm_prep_date_change($cmp_date, $format_dt)
@@ -3414,16 +3110,10 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
           $this->ajax_return_values_idtipotran();
           $this->ajax_return_values_fecha();
           $this->ajax_return_values_idpro();
-          $this->ajax_return_values_colores();
-          $this->ajax_return_values_tallas();
-          $this->ajax_return_values_sabor();
           $this->ajax_return_values_presentacion();
-          $this->ajax_return_values_seleccionarlfs();
           $this->ajax_return_values_cantidad();
           $this->ajax_return_values_idbodorig();
           $this->ajax_return_values_stcock();
-          $this->ajax_return_values_lote();
-          $this->ajax_return_values_vence();
           $this->ajax_return_values_observaciones();
           $this->ajax_return_values_idmov();
           if ('navigate_form' == $this->NM_ajax_opcao)
@@ -3465,7 +3155,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -3474,7 +3163,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    $nm_comando = "SELECT Idres, prefijo  FROM resdian  WHERE prefijo like '%not%' or prefijo like '%inv%'  and resolucion=0";
 
@@ -3482,7 +3170,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -3606,7 +3293,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -3615,7 +3301,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    $nm_comando = "SELECT idtipo, nombre  FROM tipotransfe WHERE idtipo !=2 ORDER BY nombre";
 
@@ -3623,7 +3308,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -3749,7 +3433,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_i
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -3758,7 +3441,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_i
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -3793,7 +3475,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_i
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -3871,399 +3552,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_i
           }
    }
 
-          //----- colores
-   function ajax_return_values_colores($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("colores", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->colores);
-              $aLookup = array();
-              $this->_tmp_lookup_colores = $this->colores;
-
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array(); 
-}
-$aLookup[] = array(form_mov_ajusteinv_mob_pack_protect_string('0') => str_replace('<', '&lt;',form_mov_ajusteinv_mob_pack_protect_string(' ')));
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'][] = '0';
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT f.idcol, c.color  FROM colorxproducto f left join colores c on f.idcol=c.idcolores where idpr=$this->idpro ORDER BY f.idcol";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_mov_ajusteinv_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_mov_ajusteinv_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"colores\"";
-          if (isset($this->NM_ajax_info['select_html']['colores']) && !empty($this->NM_ajax_info['select_html']['colores']))
-          {
-              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['colores']);
-          }
-          $sLookup = '';
-          if (empty($aLookup))
-          {
-              $aLookup[] = array('' => '');
-          }
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-
-                  if ($this->colores == $sValue)
-                  {
-                      $this->_tmp_lookup_colores = $sLabel;
-                  }
-
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-          $this->NM_ajax_info['fldList']['colores'] = array(
-                       'row'    => '',
-               'type'    => 'select',
-               'valList' => array($sTmpValue),
-               'optList' => $aLookup,
-              );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['colores']['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['colores']['valList'][$i] = form_mov_ajusteinv_mob_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['colores']['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['colores']['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['colores']['labList'] = $aLabel;
-          }
-   }
-
-          //----- tallas
-   function ajax_return_values_tallas($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("tallas", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->tallas);
-              $aLookup = array();
-              $this->_tmp_lookup_tallas = $this->tallas;
-
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array(); 
-}
-$aLookup[] = array(form_mov_ajusteinv_mob_pack_protect_string('0') => str_replace('<', '&lt;',form_mov_ajusteinv_mob_pack_protect_string(' ')));
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'][] = '0';
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT f.idta, t.tamaño FROM tallaxproducto f left join tallas t on f.idta=t.idtallas where idpr=$this->idpro ORDER BY f.idta";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_mov_ajusteinv_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_mov_ajusteinv_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"tallas\"";
-          if (isset($this->NM_ajax_info['select_html']['tallas']) && !empty($this->NM_ajax_info['select_html']['tallas']))
-          {
-              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['tallas']);
-          }
-          $sLookup = '';
-          if (empty($aLookup))
-          {
-              $aLookup[] = array('' => '');
-          }
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-
-                  if ($this->tallas == $sValue)
-                  {
-                      $this->_tmp_lookup_tallas = $sLabel;
-                  }
-
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-          $this->NM_ajax_info['fldList']['tallas'] = array(
-                       'row'    => '',
-               'type'    => 'select',
-               'valList' => array($sTmpValue),
-               'optList' => $aLookup,
-              );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['tallas']['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['tallas']['valList'][$i] = form_mov_ajusteinv_mob_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['tallas']['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['tallas']['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['tallas']['labList'] = $aLabel;
-          }
-   }
-
-          //----- sabor
-   function ajax_return_values_sabor($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("sabor", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->sabor);
-              $aLookup = array();
-              $this->_tmp_lookup_sabor = $this->sabor;
-
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array(); 
-}
-$aLookup[] = array(form_mov_ajusteinv_mob_pack_protect_string('0') => str_replace('<', '&lt;',form_mov_ajusteinv_mob_pack_protect_string(' ')));
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'][] = '0';
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT f.idsa, t.tamaño FROM saborxproducto f left join tallas t on f.idsa=t.idtallas where idpr=$this->idpro ORDER BY f.idsa";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_mov_ajusteinv_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_mov_ajusteinv_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"sabor\"";
-          if (isset($this->NM_ajax_info['select_html']['sabor']) && !empty($this->NM_ajax_info['select_html']['sabor']))
-          {
-              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['sabor']);
-          }
-          $sLookup = '';
-          if (empty($aLookup))
-          {
-              $aLookup[] = array('' => '');
-          }
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-
-                  if ($this->sabor == $sValue)
-                  {
-                      $this->_tmp_lookup_sabor = $sLabel;
-                  }
-
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-          $this->NM_ajax_info['fldList']['sabor'] = array(
-                       'row'    => '',
-               'type'    => 'select',
-               'valList' => array($sTmpValue),
-               'optList' => $aLookup,
-              );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['sabor']['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['sabor']['valList'][$i] = form_mov_ajusteinv_mob_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['sabor']['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['sabor']['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['sabor']['labList'] = $aLabel;
-          }
-   }
-
           //----- presentacion
    function ajax_return_values_presentacion($bForce = false)
    {
@@ -4277,137 +3565,6 @@ if ($this->idpro != "")
                'type'    => 'text',
                'valList' => array($this->form_encode_input($sTmpValue)),
               );
-          }
-   }
-
-          //----- seleccionarlfs
-   function ajax_return_values_seleccionarlfs($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("seleccionarlfs", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->seleccionarlfs);
-              $aLookup = array();
-              $this->_tmp_lookup_seleccionarlfs = $this->seleccionarlfs;
-
- 
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array(); 
-}
-$aLookup[] = array(form_mov_ajusteinv_mob_pack_protect_string('') => str_replace('<', '&lt;',form_mov_ajusteinv_mob_pack_protect_string('Vencimiento/Lote/Bodega')));
-$_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'][] = '';
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT vl.idvenclote,concat('Vence: ',coalesce(vl.fecha_vencimiento,''),' -- Lote: ',coalesce(vl.lote,''),' -- Bodega: ',b.bodega,' -- Existencia: ',vl.existencia) as descripcion FROM vencimiento_lote vl LEFT JOIN productos p on vl.idproducto=p.idprod LEFT JOIN bodegas b on vl.idbodega=b.idbodega where         p.maneja_tcs_lfs = 'LFS' and vl.idproducto='$this->idpro' and vl.existencia <> 0";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $aLookup[] = array(form_mov_ajusteinv_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_mov_ajusteinv_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-          $aLookupOrig = $aLookup;
-          $sSelComp = "name=\"seleccionarlfs\"";
-          if (isset($this->NM_ajax_info['select_html']['seleccionarlfs']) && !empty($this->NM_ajax_info['select_html']['seleccionarlfs']))
-          {
-              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['seleccionarlfs']);
-          }
-          $sLookup = '';
-          if (empty($aLookup))
-          {
-              $aLookup[] = array('' => '');
-          }
-          foreach ($aLookup as $aOption)
-          {
-              foreach ($aOption as $sValue => $sLabel)
-              {
-
-                  if ($this->seleccionarlfs == $sValue)
-                  {
-                      $this->_tmp_lookup_seleccionarlfs = $sLabel;
-                  }
-
-                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
-                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
-              }
-          }
-          $aLookup  = $sLookup;
-          $this->NM_ajax_info['fldList']['seleccionarlfs'] = array(
-                       'row'    => '',
-               'type'    => 'select',
-               'valList' => array($sTmpValue),
-               'optList' => $aLookup,
-              );
-          $aLabel     = array();
-          $aLabelTemp = array();
-          foreach ($this->NM_ajax_info['fldList']['seleccionarlfs']['valList'] as $i => $v)
-          {
-              $this->NM_ajax_info['fldList']['seleccionarlfs']['valList'][$i] = form_mov_ajusteinv_mob_pack_protect_string($v);
-          }
-          foreach ($aLookupOrig as $aValData)
-          {
-              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['seleccionarlfs']['valList']))
-              {
-                  $aLabelTemp[key($aValData)] = current($aValData);
-              }
-          }
-          foreach ($this->NM_ajax_info['fldList']['seleccionarlfs']['valList'] as $iIndex => $sValue)
-          {
-              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
-          }
-          $this->NM_ajax_info['fldList']['seleccionarlfs']['labList'] = $aLabel;
           }
    }
 
@@ -4459,7 +3616,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_i
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -4468,7 +3624,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_i
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY bodega";
 
@@ -4476,7 +3631,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_i
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -4565,38 +3719,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_i
           $this->NM_ajax_info['fldList']['stcock'] = array(
                        'row'    => '',
                'type'    => 'label',
-               'valList' => array($sTmpValue),
-              );
-          }
-   }
-
-          //----- lote
-   function ajax_return_values_lote($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("lote", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->lote);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['lote'] = array(
-                       'row'    => '',
-               'type'    => 'text',
-               'valList' => array($this->form_encode_input($sTmpValue)),
-              );
-          }
-   }
-
-          //----- vence
-   function ajax_return_values_vence($bForce = false)
-   {
-          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("vence", $this->nmgp_refresh_fields)) || $bForce)
-          {
-              $sTmpValue = NM_charset_to_utf8($this->vence);
-              $aLookup = array();
-          $aLookupOrig = $aLookup;
-          $this->NM_ajax_info['fldList']['vence'] = array(
-                       'row'    => '',
-               'type'    => 'text',
                'valList' => array($sTmpValue),
               );
           }
@@ -4931,10 +4053,8 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_idbodorig = $this->idbodorig;
     $original_idpro = $this->idpro;
-    $original_lote = $this->lote;
     $original_numeronota = $this->numeronota;
     $original_prefijonota = $this->prefijonota;
-    $original_vence = $this->vence;
 }
    
       $nm_select = "select maneja_tcs_lfs,lote,fecha_vencimiento from productos where idprod='".$this->idpro ."'"; 
@@ -5045,10 +4165,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     {
         $this->ajax_return_values_idpro(true);
     }
-    if (($original_lote != $this->lote || (isset($bFlagRead_lote) && $bFlagRead_lote)))
-    {
-        $this->ajax_return_values_lote(true);
-    }
     if (($original_numeronota != $this->numeronota || (isset($bFlagRead_numeronota) && $bFlagRead_numeronota)))
     {
         $this->ajax_return_values_numeronota(true);
@@ -5056,10 +4172,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     if (($original_prefijonota != $this->prefijonota || (isset($bFlagRead_prefijonota) && $bFlagRead_prefijonota)))
     {
         $this->ajax_return_values_prefijonota(true);
-    }
-    if (($original_vence != $this->vence || (isset($bFlagRead_vence) && $bFlagRead_vence)))
-    {
-        $this->ajax_return_values_vence(true);
     }
 }
 $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off'; 
@@ -5238,19 +4350,19 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
       $NM_val_form['idtipotran'] = $this->idtipotran;
       $NM_val_form['fecha'] = $this->fecha;
       $NM_val_form['idpro'] = $this->idpro;
-      $NM_val_form['colores'] = $this->colores;
-      $NM_val_form['tallas'] = $this->tallas;
-      $NM_val_form['sabor'] = $this->sabor;
       $NM_val_form['presentacion'] = $this->presentacion;
-      $NM_val_form['seleccionarlfs'] = $this->seleccionarlfs;
       $NM_val_form['cantidad'] = $this->cantidad;
       $NM_val_form['idbodorig'] = $this->idbodorig;
       $NM_val_form['stcock'] = $this->stcock;
-      $NM_val_form['lote'] = $this->lote;
-      $NM_val_form['vence'] = $this->vence;
       $NM_val_form['observaciones'] = $this->observaciones;
       $NM_val_form['idmov'] = $this->idmov;
       $NM_val_form['idboddes'] = $this->idboddes;
+      $NM_val_form['colores'] = $this->colores;
+      $NM_val_form['tallas'] = $this->tallas;
+      $NM_val_form['sabor'] = $this->sabor;
+      $NM_val_form['lote'] = $this->lote;
+      $NM_val_form['vence'] = $this->vence;
+      $NM_val_form['seleccionarlfs'] = $this->seleccionarlfs;
       if ($this->idmov === "" || is_null($this->idmov))  
       { 
           $this->idmov = 0;
@@ -5406,41 +4518,72 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = #$this->fecha#, idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', colores = $this->colores, tallas = $this->tallas, sabor = $this->sabor, numeronota = $this->numeronota, prefijonota = $this->prefijonota, lote = '$this->lote', vence = #$this->vence#"; 
+                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = #$this->fecha#, idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', numeronota = $this->numeronota, prefijonota = $this->prefijonota"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', colores = $this->colores, tallas = $this->tallas, sabor = $this->sabor, numeronota = $this->numeronota, prefijonota = $this->prefijonota, lote = '$this->lote', vence = " . $this->Ini->date_delim . $this->vence . $this->Ini->date_delim1 . ""; 
+                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', numeronota = $this->numeronota, prefijonota = $this->prefijonota"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', colores = $this->colores, tallas = $this->tallas, sabor = $this->sabor, numeronota = $this->numeronota, prefijonota = $this->prefijonota, lote = '$this->lote', vence = " . $this->Ini->date_delim . $this->vence . $this->Ini->date_delim1 . ""; 
+                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', numeronota = $this->numeronota, prefijonota = $this->prefijonota"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = EXTEND('$this->fecha', YEAR TO DAY), idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', colores = $this->colores, tallas = $this->tallas, sabor = $this->sabor, numeronota = $this->numeronota, prefijonota = $this->prefijonota, lote = '$this->lote', vence = EXTEND('$this->vence', YEAR TO DAY)"; 
+                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = EXTEND('$this->fecha', YEAR TO DAY), idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', numeronota = $this->numeronota, prefijonota = $this->prefijonota"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', colores = $this->colores, tallas = $this->tallas, sabor = $this->sabor, numeronota = $this->numeronota, prefijonota = $this->prefijonota, lote = '$this->lote', vence = " . $this->Ini->date_delim . $this->vence . $this->Ini->date_delim1 . ""; 
+                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', numeronota = $this->numeronota, prefijonota = $this->prefijonota"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', colores = $this->colores, tallas = $this->tallas, sabor = $this->sabor, numeronota = $this->numeronota, prefijonota = $this->prefijonota, lote = '$this->lote', vence = " . $this->Ini->date_delim . $this->vence . $this->Ini->date_delim1 . ""; 
+                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', numeronota = $this->numeronota, prefijonota = $this->prefijonota"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', colores = $this->colores, tallas = $this->tallas, sabor = $this->sabor, numeronota = $this->numeronota, prefijonota = $this->prefijonota, lote = '$this->lote', vence = " . $this->Ini->date_delim . $this->vence . $this->Ini->date_delim1 . ""; 
+                  $SC_fields_update[] = "idtipotran = $this->idtipotran, fecha = " . $this->Ini->date_delim . $this->fecha . $this->Ini->date_delim1 . ", idpro = $this->idpro, cantidad = $this->cantidad, idbodorig = $this->idbodorig, observaciones = '$this->observaciones', numeronota = $this->numeronota, prefijonota = $this->prefijonota"; 
               } 
               if (isset($NM_val_form['idboddes']) && $NM_val_form['idboddes'] != $this->nmgp_dados_select['idboddes']) 
               { 
                   $SC_fields_update[] = "idboddes = $this->idboddes"; 
+              } 
+              if (isset($NM_val_form['colores']) && $NM_val_form['colores'] != $this->nmgp_dados_select['colores']) 
+              { 
+                  $SC_fields_update[] = "colores = $this->colores"; 
+              } 
+              if (isset($NM_val_form['tallas']) && $NM_val_form['tallas'] != $this->nmgp_dados_select['tallas']) 
+              { 
+                  $SC_fields_update[] = "tallas = $this->tallas"; 
+              } 
+              if (isset($NM_val_form['sabor']) && $NM_val_form['sabor'] != $this->nmgp_dados_select['sabor']) 
+              { 
+                  $SC_fields_update[] = "sabor = $this->sabor"; 
+              } 
+              if (isset($NM_val_form['lote']) && $NM_val_form['lote'] != $this->nmgp_dados_select['lote']) 
+              { 
+                  $SC_fields_update[] = "lote = '$this->lote'"; 
+              } 
+              if (isset($NM_val_form['vence']) && $NM_val_form['vence'] != $this->nmgp_dados_select['vence']) 
+              { 
+                  if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+                  { 
+                      $SC_fields_update[] = "vence = #$this->vence#"; 
+                  } 
+                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+                  { 
+                      $SC_fields_update[] = "vence = EXTEND('" . $this->vence . "', YEAR TO DAY)"; 
+                  } 
+                  else
+                  { 
+                      $SC_fields_update[] = "vence = " . $this->Ini->date_delim . $this->vence . $this->Ini->date_delim1 . ""; 
+                  } 
               } 
               $aDoNotUpdate = array();
               $comando .= implode(",", $SC_fields_update);  
@@ -5532,18 +4675,10 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
               elseif (isset($this->idbodorig)) { $this->nm_limpa_alfa($this->idbodorig); }
               if     (isset($NM_val_form) && isset($NM_val_form['observaciones'])) { $this->observaciones = $NM_val_form['observaciones']; }
               elseif (isset($this->observaciones)) { $this->nm_limpa_alfa($this->observaciones); }
-              if     (isset($NM_val_form) && isset($NM_val_form['colores'])) { $this->colores = $NM_val_form['colores']; }
-              elseif (isset($this->colores)) { $this->nm_limpa_alfa($this->colores); }
-              if     (isset($NM_val_form) && isset($NM_val_form['tallas'])) { $this->tallas = $NM_val_form['tallas']; }
-              elseif (isset($this->tallas)) { $this->nm_limpa_alfa($this->tallas); }
-              if     (isset($NM_val_form) && isset($NM_val_form['sabor'])) { $this->sabor = $NM_val_form['sabor']; }
-              elseif (isset($this->sabor)) { $this->nm_limpa_alfa($this->sabor); }
               if     (isset($NM_val_form) && isset($NM_val_form['numeronota'])) { $this->numeronota = $NM_val_form['numeronota']; }
               elseif (isset($this->numeronota)) { $this->nm_limpa_alfa($this->numeronota); }
               if     (isset($NM_val_form) && isset($NM_val_form['prefijonota'])) { $this->prefijonota = $NM_val_form['prefijonota']; }
               elseif (isset($this->prefijonota)) { $this->nm_limpa_alfa($this->prefijonota); }
-              if     (isset($NM_val_form) && isset($NM_val_form['lote'])) { $this->lote = $NM_val_form['lote']; }
-              elseif (isset($this->lote)) { $this->nm_limpa_alfa($this->lote); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -5551,7 +4686,7 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('prefijonota', 'numeronota', 'idtipotran', 'fecha', 'idpro', 'colores', 'tallas', 'sabor', 'presentacion', 'seleccionarlfs', 'cantidad', 'idbodorig', 'stcock', 'lote', 'vence', 'observaciones'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('prefijonota', 'numeronota', 'idtipotran', 'fecha', 'idpro', 'presentacion', 'cantidad', 'idbodorig', 'stcock', 'observaciones'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -5968,15 +5103,10 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_cantidad = $this->cantidad;
-    $original_colores = $this->colores;
     $original_fecha = $this->fecha;
     $original_idbodorig = $this->idbodorig;
     $original_idpro = $this->idpro;
     $original_idtipotran = $this->idtipotran;
-    $original_lote = $this->lote;
-    $original_sabor = $this->sabor;
-    $original_tallas = $this->tallas;
-    $original_vence = $this->vence;
 }
    
       $nm_select = "SELECT LAST_INSERT_ID()"; 
@@ -6117,10 +5247,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     {
         $this->ajax_return_values_cantidad(true);
     }
-    if (($original_colores != $this->colores || (isset($bFlagRead_colores) && $bFlagRead_colores)))
-    {
-        $this->ajax_return_values_colores(true);
-    }
     if (($original_fecha != $this->fecha || (isset($bFlagRead_fecha) && $bFlagRead_fecha)))
     {
         $this->ajax_return_values_fecha(true);
@@ -6136,22 +5262,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     if (($original_idtipotran != $this->idtipotran || (isset($bFlagRead_idtipotran) && $bFlagRead_idtipotran)))
     {
         $this->ajax_return_values_idtipotran(true);
-    }
-    if (($original_lote != $this->lote || (isset($bFlagRead_lote) && $bFlagRead_lote)))
-    {
-        $this->ajax_return_values_lote(true);
-    }
-    if (($original_sabor != $this->sabor || (isset($bFlagRead_sabor) && $bFlagRead_sabor)))
-    {
-        $this->ajax_return_values_sabor(true);
-    }
-    if (($original_tallas != $this->tallas || (isset($bFlagRead_tallas) && $bFlagRead_tallas)))
-    {
-        $this->ajax_return_values_tallas(true);
-    }
-    if (($original_vence != $this->vence || (isset($bFlagRead_vence) && $bFlagRead_vence)))
-    {
-        $this->ajax_return_values_vence(true);
     }
 }
 $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off'; 
@@ -7010,36 +6120,18 @@ function idbodorig_onChange()
 $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'on';
   
 $original_idpro = $this->idpro;
-$original_colores = $this->colores;
-$original_tallas = $this->tallas;
-$original_sabor = $this->sabor;
 $original_idbodorig = $this->idbodorig;
 $original_stcock = $this->stcock;
 
 $this->ver_stock();
 
 $modificado_idpro = $this->idpro;
-$modificado_colores = $this->colores;
-$modificado_tallas = $this->tallas;
-$modificado_sabor = $this->sabor;
 $modificado_idbodorig = $this->idbodorig;
 $modificado_stcock = $this->stcock;
-$this->nm_formatar_campos('idpro', 'colores', 'tallas', 'sabor', 'idbodorig', 'stcock');
+$this->nm_formatar_campos('idpro', 'idbodorig', 'stcock');
 if ($original_idpro !== $modificado_idpro || isset($this->nmgp_cmp_readonly['idpro']) || (isset($bFlagRead_idpro) && $bFlagRead_idpro))
 {
     $this->ajax_return_values_idpro(true);
-}
-if ($original_colores !== $modificado_colores || isset($this->nmgp_cmp_readonly['colores']) || (isset($bFlagRead_colores) && $bFlagRead_colores))
-{
-    $this->ajax_return_values_colores(true);
-}
-if ($original_tallas !== $modificado_tallas || isset($this->nmgp_cmp_readonly['tallas']) || (isset($bFlagRead_tallas) && $bFlagRead_tallas))
-{
-    $this->ajax_return_values_tallas(true);
-}
-if ($original_sabor !== $modificado_sabor || isset($this->nmgp_cmp_readonly['sabor']) || (isset($bFlagRead_sabor) && $bFlagRead_sabor))
-{
-    $this->ajax_return_values_sabor(true);
 }
 if ($original_idbodorig !== $modificado_idbodorig || isset($this->nmgp_cmp_readonly['idbodorig']) || (isset($bFlagRead_idbodorig) && $bFlagRead_idbodorig))
 {
@@ -7123,10 +6215,7 @@ function seleccionarlfs_onChange()
 {
 $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'on';
   
-$original_seleccionarlfs = $this->seleccionarlfs;
 $original_idbodorig = $this->idbodorig;
-$original_lote = $this->lote;
-$original_vence = $this->vence;
 $original_cantidad = $this->cantidad;
 $original_stcock = $this->stcock;
 
@@ -7211,28 +6300,13 @@ else
 }
 
 
-$modificado_seleccionarlfs = $this->seleccionarlfs;
 $modificado_idbodorig = $this->idbodorig;
-$modificado_lote = $this->lote;
-$modificado_vence = $this->vence;
 $modificado_cantidad = $this->cantidad;
 $modificado_stcock = $this->stcock;
-$this->nm_formatar_campos('seleccionarlfs', 'idbodorig', 'lote', 'vence', 'cantidad', 'stcock');
-if ($original_seleccionarlfs !== $modificado_seleccionarlfs || isset($this->nmgp_cmp_readonly['seleccionarlfs']) || (isset($bFlagRead_seleccionarlfs) && $bFlagRead_seleccionarlfs))
-{
-    $this->ajax_return_values_seleccionarlfs(true);
-}
+$this->nm_formatar_campos('idbodorig', 'cantidad', 'stcock');
 if ($original_idbodorig !== $modificado_idbodorig || isset($this->nmgp_cmp_readonly['idbodorig']) || (isset($bFlagRead_idbodorig) && $bFlagRead_idbodorig))
 {
     $this->ajax_return_values_idbodorig(true);
-}
-if ($original_lote !== $modificado_lote || isset($this->nmgp_cmp_readonly['lote']) || (isset($bFlagRead_lote) && $bFlagRead_lote))
-{
-    $this->ajax_return_values_lote(true);
-}
-if ($original_vence !== $modificado_vence || isset($this->nmgp_cmp_readonly['vence']) || (isset($bFlagRead_vence) && $bFlagRead_vence))
-{
-    $this->ajax_return_values_vence(true);
 }
 if ($original_cantidad !== $modificado_cantidad || isset($this->nmgp_cmp_readonly['cantidad']) || (isset($bFlagRead_cantidad) && $bFlagRead_cantidad))
 {
@@ -7972,7 +7046,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -7981,7 +7054,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    $nm_comando = "SELECT Idres, prefijo  FROM resdian  WHERE prefijo like '%not%' or prefijo like '%inv%'  and resolucion=0";
 
@@ -7989,7 +7061,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -8048,7 +7119,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -8057,7 +7127,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    $nm_comando = "SELECT idtipo, nombre  FROM tipotransfe WHERE idtipo !=2 ORDER BY nombre";
 
@@ -8065,7 +7134,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -8124,7 +7192,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -8133,7 +7200,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -8168,7 +7234,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -8192,326 +7257,6 @@ else
        exit; 
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   return $todo;
-
-   }
-   function Form_lookup_colores()
-   {
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array(); 
-}
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'] = array(); 
-    }
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT f.idcol, c.color  FROM colorxproducto f left join colores c on f.idcol=c.idcolores where idpr=$this->idpro ORDER BY f.idcol";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_colores'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   return $todo;
-
-   }
-   function Form_lookup_tallas()
-   {
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array(); 
-}
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'] = array(); 
-    }
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT f.idta, t.tamaño FROM tallaxproducto f left join tallas t on f.idta=t.idtallas where idpr=$this->idpro ORDER BY f.idta";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_tallas'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   return $todo;
-
-   }
-   function Form_lookup_sabor()
-   {
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array(); 
-}
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'] = array(); 
-    }
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT f.idsa, t.tamaño FROM saborxproducto f left join tallas t on f.idsa=t.idtallas where idpr=$this->idpro ORDER BY f.idsa";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_sabor'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
-   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
-   $todo  = explode("?@?", $todox) ; 
-   return $todo;
-
-   }
-   function Form_lookup_seleccionarlfs()
-   {
-$nmgp_def_dados = "" ; 
-if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']))
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']); 
-}
-else
-{
-    $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array(); 
-}
-if ($this->idpro != "")
-{ 
-   $this->nm_clear_val("idpro");
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'] = array(); 
-    }
-
-   $old_value_numeronota = $this->numeronota;
-   $old_value_fecha = $this->fecha;
-   $old_value_cantidad = $this->cantidad;
-   $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_numeronota = $this->numeronota;
-   $unformatted_value_fecha = $this->fecha;
-   $unformatted_value_cantidad = $this->cantidad;
-   $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
-
-   $nm_comando = "SELECT vl.idvenclote,concat('Vence: ',coalesce(vl.fecha_vencimiento,''),' -- Lote: ',coalesce(vl.lote,''),' -- Bodega: ',b.bodega,' -- Existencia: ',vl.existencia) as descripcion FROM vencimiento_lote vl LEFT JOIN productos p on vl.idproducto=p.idprod LEFT JOIN bodegas b on vl.idbodega=b.idbodega where         p.maneja_tcs_lfs = 'LFS' and vl.idproducto='$this->idpro' and vl.existencia <> 0";
-
-   $this->numeronota = $old_value_numeronota;
-   $this->fecha = $old_value_fecha;
-   $this->cantidad = $old_value_cantidad;
-   $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
-   {
-       while (!$rs->EOF) 
-       { 
-              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
-              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
-              $rs->fields[0] = (string)$rs->fields[0];
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['Lookup_seleccionarlfs'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-} 
    $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
    $todo  = explode("?@?", $todox) ; 
    return $todo;
@@ -8547,7 +7292,6 @@ else
    $old_value_fecha = $this->fecha;
    $old_value_cantidad = $this->cantidad;
    $old_value_stcock = $this->stcock;
-   $old_value_vence = $this->vence;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -8556,7 +7300,6 @@ else
    $unformatted_value_fecha = $this->fecha;
    $unformatted_value_cantidad = $this->cantidad;
    $unformatted_value_stcock = $this->stcock;
-   $unformatted_value_vence = $this->vence;
 
    $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY bodega";
 
@@ -8564,7 +7307,6 @@ else
    $this->fecha = $old_value_fecha;
    $this->cantidad = $old_value_cantidad;
    $this->stcock = $old_value_stcock;
-   $this->vence = $old_value_vence;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -9353,16 +8095,10 @@ if (parent && parent.scAjaxDetailValue)
                         'idtipotran' => 'idtipotran',
                         'fecha' => 'fecha',
                         'idpro' => 'idpro',
-                        'colores' => 'colores',
-                        'tallas' => 'tallas',
-                        'sabor' => 'sabor',
                         'presentacion' => 'presentacion',
-                        'seleccionarlfs' => 'seleccionarlfs',
                         'cantidad' => 'cantidad',
                         'idbodorig' => 'idbodorig',
                         'stcock' => 'stcock',
-                        'lote' => 'lote',
-                        'vence' => 'vence',
                         'observaciones' => 'observaciones',
                        );
         if (isset($aFocus[$sFieldName]))

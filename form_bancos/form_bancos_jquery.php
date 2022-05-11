@@ -61,6 +61,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["saldo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["estado" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_puc_auxiliar" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -124,6 +125,12 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["puc" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["id_puc_auxiliar" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_puc_auxiliar" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -137,6 +144,15 @@ function scEventControl_onFocus(oField, iSeq) {
   }
   if ("puc" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_puc_auxiliar" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
   }
   scEventControl_data[fieldName]["change"] = false;
 } // scEventControl_onFocus
@@ -194,6 +210,9 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_numero_cuenta' + iSeqRow).bind('blur', function() { sc_form_bancos_numero_cuenta_onblur(this, iSeqRow) })
                                            .bind('change', function() { sc_form_bancos_numero_cuenta_onchange(this, iSeqRow) })
                                            .bind('focus', function() { sc_form_bancos_numero_cuenta_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_puc_auxiliar' + iSeqRow).bind('blur', function() { sc_form_bancos_id_puc_auxiliar_onblur(this, iSeqRow) })
+                                             .bind('change', function() { sc_form_bancos_id_puc_auxiliar_onchange(this, iSeqRow) })
+                                             .bind('focus', function() { sc_form_bancos_id_puc_auxiliar_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-comportamiento' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
 } // scJQEventsAdd
 
@@ -328,6 +347,7 @@ function sc_form_bancos_puc_onblur(oThis, iSeqRow) {
 
 function sc_form_bancos_puc_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
+  do_ajax_form_bancos_event_puc_onchange();
 }
 
 function sc_form_bancos_puc_onfocus(oThis, iSeqRow) {
@@ -349,6 +369,20 @@ function sc_form_bancos_numero_cuenta_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_bancos_id_puc_auxiliar_onblur(oThis, iSeqRow) {
+  do_ajax_form_bancos_validate_id_puc_auxiliar();
+  scCssBlur(oThis);
+}
+
+function sc_form_bancos_id_puc_auxiliar_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_bancos_id_puc_auxiliar_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
@@ -366,6 +400,7 @@ function displayChange_block_0(status) {
 	displayChange_field("saldo", "", status);
 	displayChange_field("estado", "", status);
 	displayChange_field("puc", "", status);
+	displayChange_field("id_puc_auxiliar", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -379,6 +414,7 @@ function displayChange_row(row, status) {
 	displayChange_field_saldo(row, status);
 	displayChange_field_estado(row, status);
 	displayChange_field_puc(row, status);
+	displayChange_field_id_puc_auxiliar(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -411,6 +447,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("puc" == field) {
 		displayChange_field_puc(row, status);
+	}
+	if ("id_puc_auxiliar" == field) {
+		displayChange_field_id_puc_auxiliar(row, status);
 	}
 }
 
@@ -468,9 +507,25 @@ function displayChange_field_puc(row, status) {
 	}
 }
 
+function displayChange_field_id_puc_auxiliar(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_puc_auxiliar__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_puc_auxiliar" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_puc_auxiliar");
+	}
+}
+
 function scRecreateSelect2() {
 	displayChange_field_cajero("all", "on");
 	displayChange_field_puc("all", "on");
+	displayChange_field_id_puc_auxiliar("all", "on");
 }
 function scResetPagesDisplay() {
 	$(".sc-form-page").show();
@@ -707,6 +762,9 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "puc" == specificField) {
     scJQSelect2Add_puc(seqRow);
   }
+  if (null == specificField || "id_puc_auxiliar" == specificField) {
+    scJQSelect2Add_id_puc_auxiliar(seqRow);
+  }
 } // scJQSelect2Add
 
 function scJQSelect2Add_cajero(seqRow) {
@@ -745,6 +803,24 @@ function scJQSelect2Add_puc(seqRow) {
   );
 } // scJQSelect2Add
 
+function scJQSelect2Add_id_puc_auxiliar(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_puc_auxiliar_obj" : "#id_sc_field_id_puc_auxiliar" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_puc_auxiliar_obj',
+      dropdownCssClass: 'css_id_puc_auxiliar_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
 
 function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
@@ -755,6 +831,7 @@ function scJQElementsAdd(iLine) {
   scJQSelect2Add(iLine);
   setTimeout(function () { if ('function' == typeof displayChange_field_cajero) { displayChange_field_cajero(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_puc) { displayChange_field_puc(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_puc_auxiliar) { displayChange_field_id_puc_auxiliar(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)

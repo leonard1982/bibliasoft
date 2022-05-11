@@ -146,6 +146,17 @@ if ('' != $miniCalendarFA) {
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_prod; ?>/third/font-awesome/css/all.min.css" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_calendar.css" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_calendar<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+ <STYLE>
+     .scTabLine li {
+         display: inline-block !important;
+         text-align: center !important;
+         overflow: hidden !important;
+         vertical-align:top !important;
+         height: auto !important;
+         min-width: 40 !important;
+         max-width: 70 !important;
+     }
+ </STYLE>
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_progressbar.css" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_progressbar<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
 <?php
@@ -404,6 +415,12 @@ include_once('form_productos_mob_jquery.php');
 
   addAutocomplete(this);
 
+  $("#hidden_bloco_6").each(function() {
+   $(this.rows[0]).bind("click", {block: this}, toggleBlock)
+                  .mouseover(function() { $(this).css("cursor", "pointer"); })
+                  .mouseout(function() { $(this).css("cursor", ""); });
+  });
+
   sc_form_onload();
 
   $(document).bind('drop dragover', function (e) {
@@ -447,7 +464,7 @@ if (!$this->NM_ajax_flag && isset($this->NM_non_ajax_info['ajaxJavascript']) && 
  }
 
  var show_block = {
-  
+    "hidden_bloco_6": true
  };
 
  function toggleBlock(e) {
@@ -931,7 +948,7 @@ sc_userSweetAlertDisplayed = false;
 <?php
 }
 ?>
-<table id="main_table_form"  align="center" cellpadding=0 cellspacing=0 >
+<table id="main_table_form"  align="center" cellpadding=0 cellspacing=0  width="70%">
  <tr>
   <td>
   <div class="scFormBorder" style="<?php echo (isset($remove_border) ? $remove_border : ''); ?>">
@@ -941,23 +958,68 @@ sc_userSweetAlertDisplayed = false;
   {
 ?>
 <tr><td>
-<style>
-#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
-#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
-</style>
-
-<div style="width: 100%">
- <div class="scFormHeader" style="height:11px; display: block; border-width:0px; "></div>
- <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
- 	<table style="width:100%; border-collapse:collapse; padding:0;">
-    	<tr>
-        	<td id="lin1_col1" class="scFormHeaderFont"><span><?php if ($this->nmgp_opcao == "novo") { echo "Ingresar nuevo producto"; } else { echo "Editar producto"; } ?></span></td>
-            <td id="lin1_col2" class="scFormHeaderFont"><span><?php echo date($this->dateDefaultFormat()); ?></span></td>
-        </tr>
-    </table>		 
- </div>
-</div>
-</td></tr>
+   <TABLE width="100%" class="scFormHeader">
+    <TR align="center">
+     <TD style="padding: 0px">
+      <TABLE style="padding: 0px; border-spacing: 0px; border-width: 0px;" width="100%">
+       <TR valign="middle">
+        <TD align="left" rowspan="3" class="scFormHeaderFont">
+          
+        </TD>
+        <TD align="left" class="scFormHeaderFont">
+          <?php if ($this->nmgp_opcao == "novo") { echo "Ingresar nuevo producto"; } else { echo "Editar producto"; } ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          <?php echo date($this->dateDefaultFormat()); ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>
+   </TABLE></td></tr>
 <?php
   }
 ?>
@@ -1066,158 +1128,6 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         }
 ?>
 <?php echo nmButtonOutput($this->arr_buttons, "bexcluir", "scBtnFn_sys_format_exc()", "scBtnFn_sys_format_exc()", "sc_b_del_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if ($opcao_botoes != "novo") {
-        $sCondStyle = ($this->nmgp_botoes['sc_btn_0'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = '';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_0']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_0']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_0']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_0']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_0'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "sc_btn_0", "scBtnFn_sc_btn_0()", "scBtnFn_sc_btn_0()", "sc_sc_btn_0_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if ($opcao_botoes == "novo") {
-        $sCondStyle = ($this->nmgp_botoes['sc_btn_0'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = '';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_0']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_0']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_0']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_0']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_0'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "sc_btn_0", "scBtnFn_sc_btn_0()", "scBtnFn_sc_btn_0()", "sc_sc_btn_0_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if ($opcao_botoes != "novo") {
-        $sCondStyle = ($this->nmgp_botoes['sc_btn_1'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = '';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_1']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_1']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_1']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_1']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_1'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "sc_btn_1", "scBtnFn_sc_btn_1()", "scBtnFn_sc_btn_1()", "sc_sc_btn_1_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if ($opcao_botoes == "novo") {
-        $sCondStyle = ($this->nmgp_botoes['sc_btn_1'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = '';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_1']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_1']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_1']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_1']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_1'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "sc_btn_1", "scBtnFn_sc_btn_1()", "scBtnFn_sc_btn_1()", "sc_sc_btn_1_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if ($opcao_botoes != "novo") {
-        $sCondStyle = ($this->nmgp_botoes['sc_btn_2'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = '';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_2']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_2']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_2']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_2']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_2'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "sc_btn_2", "scBtnFn_sc_btn_2()", "scBtnFn_sc_btn_2()", "sc_sc_btn_2_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if ($opcao_botoes == "novo") {
-        $sCondStyle = ($this->nmgp_botoes['sc_btn_2'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = '';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_2']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['sc_btn_2']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_2']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_2']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['sc_btn_2'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "sc_btn_2", "scBtnFn_sc_btn_2()", "scBtnFn_sc_btn_2()", "sc_sc_btn_2_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if (($opcao_botoes != "novo") && ($opcao_botoes != "novo")) {
-        $sCondStyle = ($this->nmgp_botoes['escalas'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = '';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['escalas']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['escalas']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['escalas']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['escalas']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['escalas'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "escalas", "scBtnFn_escalas()", "scBtnFn_escalas()", "sc_escalas_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if (($opcao_botoes == "novo") && ($opcao_botoes != "novo")) {
-        $sCondStyle = ($this->nmgp_botoes['escalas'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = '';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['escalas']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_disabled']['escalas']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['escalas']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['escalas']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['btn_label']['escalas'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "escalas", "scBtnFn_escalas()", "scBtnFn_escalas()", "sc_escalas_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -1517,6 +1427,10 @@ var pag_ativa = "form_productos_mob_form0";
    if (!isset($this->nmgp_cmp_hidden['idpro2']))
    {
        $this->nmgp_cmp_hidden['idpro2'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['cod_cuenta']))
+   {
+       $this->nmgp_cmp_hidden['cod_cuenta'] = 'off';
    }
    if (!isset($this->nmgp_cmp_hidden['multiple_escala']))
    {
@@ -5891,7 +5805,23 @@ $serial_codbarras_look = "";
    <a name="bloco_6"></a>
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
 <div id="div_hidden_bloco_6"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_6" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<TABLE align="center" id="hidden_bloco_6" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;">   <tr>
+
+
+    <TD colspan="1" height="20" class="scFormBlock">
+     <TABLE style="padding: 0px; spacing: 0px; border-width: 0px;" width="100%" height="100%">
+      <TR>
+       <TD align="" valign="" class="scFormBlockFont"><?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "<table style=\"border-collapse: collapse; height: 100%; width: 100%\"><tr><td style=\"vertical-align: middle; border-width: 0px; padding: 0px 2px 0px 0px\"><img id=\"SC_blk_pdf6\" src=\"" . $this->Ini->path_icones . "/" . $this->Ini->Block_img_col . "\" style=\"border: 0px; float: left\" class=\"sc-ui-block-control\"></td><td style=\"border-width: 0px; padding: 0px; width: 100%;\" class=\"scFormBlockAlign\">"; } ?>Precios Incluyen el valor del Impuesto<?php if ('' != $this->Ini->Block_img_exp && '' != $this->Ini->Block_img_col && !$this->Ini->Export_img_zip) { echo "</td></tr></table>"; } ?></TD>
+       
+      </TR>
+     </TABLE>
+    </TD>
+
+
+
+
+   </tr>
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 

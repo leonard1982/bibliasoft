@@ -1,21 +1,30 @@
-.css_trifa_label {text-align:right;}
-.css_trifa_line {text-align:center;}
+.css_trifa_label { }
+.css_trifa_line { }
 .css_trifa_obj {text-align:center;}
 .css_tipo_impuesto_label { }
 .css_tipo_impuesto_line { }
-.css_tipo_impuesto_obj { }
+.css_tipo_impuesto_obj {width:200px;}
 .css_codigo_label { }
 .css_codigo_line { }
 .css_codigo_obj { }
-.css_puc_label { }
-.css_puc_line { }
-.css_puc_obj { }
-.css_puc_dv_ventas_label { }
-.css_puc_dv_ventas_line { }
-.css_puc_dv_ventas_obj { }
 .css_puc_compras_label { }
 .css_puc_compras_line { }
-.css_puc_compras_obj { }
+.css_puc_compras_obj {width:200px;}
 .css_puc_dv_compras_label { }
 .css_puc_dv_compras_line { }
-.css_puc_dv_compras_obj { }
+.css_puc_dv_compras_obj {width:200px;}
+.css_id_pucaux_compras_label { }
+.css_id_pucaux_compras_line {text-align:left;}
+.css_id_pucaux_compras_obj {text-align:left;width:200px;}
+.css_id_pucaux_ventas_label { }
+.css_id_pucaux_ventas_line {text-align:left;}
+.css_id_pucaux_ventas_obj {text-align:left;width:200px;}
+.css_id_pucaux_nc_label { }
+.css_id_pucaux_nc_line {text-align:left;}
+.css_id_pucaux_nc_obj {text-align:left;width:200px;}
+.css_id_pucaux_nd_label { }
+.css_id_pucaux_nd_line {text-align:left;}
+.css_id_pucaux_nd_obj {text-align:left;width:200px;}
+.css_id_pucaux_exec_label { }
+.css_id_pucaux_exec_line {text-align:left;}
+.css_id_pucaux_exec_obj {text-align:left;width:200px;}

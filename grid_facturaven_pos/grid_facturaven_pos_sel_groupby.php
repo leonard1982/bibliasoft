@@ -285,7 +285,7 @@ function Sel_processa_form()
    $arr_campos_free['resolucion'] = "PJ";
    $arr_campos_free['vendedor'] = " Vendedor";
    $arr_campos_free['tipo'] = "Tipo";
-   $str_schema_all = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['str_schema_all']) && !empty($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['str_schema_all'])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+   $str_schema_all = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['str_schema_all']) && !empty($_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['str_schema_all'])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_pos']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
    $str_button = "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";

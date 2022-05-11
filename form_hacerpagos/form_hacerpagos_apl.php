@@ -796,7 +796,7 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
           if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_hacerpagos']))
           {
                $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_hacerpagos']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('form_hacerpagos') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_hacerpagos']['label'] = "Pagos a terceros";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_hacerpagos']['label'] = "Editar comprobante de egreso";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -821,7 +821,8 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
           include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
       }
       include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
-      $this->Ini->Str_btn_form    = trim($str_button);
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
@@ -868,8 +869,18 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
         $this->classes_100perc_fields['keep_field_size'] = true;
 
 
+      $this->arr_buttons['refrescar']['hint']             = "Recarga el formulario...";
+      $this->arr_buttons['refrescar']['type']             = "image";
+      $this->arr_buttons['refrescar']['value']            = "Recargar";
+      $this->arr_buttons['refrescar']['display']          = "only_img";
+      $this->arr_buttons['refrescar']['display_position'] = "text_right";
+      $this->arr_buttons['refrescar']['style']            = "";
+      $this->arr_buttons['refrescar']['image']            = "scriptcase__NM__ico__NM__refresh_24.png";
+      $this->arr_buttons['refrescar']['has_fa']            = "true";
+      $this->arr_buttons['refrescar']['fontawesomeicon']            = "";
 
-      $_SESSION['scriptcase']['error_icon']['form_hacerpagos']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+
+      $_SESSION['scriptcase']['error_icon']['form_hacerpagos']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_hacerpagos'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
       $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['embutida_proc'] : $this->Embutida_proc;
@@ -1024,6 +1035,7 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
       $this->nmgp_botoes['goto'] = "on";
       $this->nmgp_botoes['qtline'] = "off";
       $this->nmgp_botoes['reload'] = "off";
+      $this->nmgp_botoes['refrescar'] = "on";
       if (isset($this->NM_btn_cancel) && 'N' == $this->NM_btn_cancel)
       {
           $this->nmgp_botoes['cancel'] = "off";
@@ -1363,6 +1375,14 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
       {
           $this->nmgp_opc_ant = $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['opc_ant'];
       } 
+      if ($this->nmgp_opcao == "novo")  
+      {
+          $this->nmgp_botoes['refrescar'] = "off";
+      }
+      elseif ($this->nmgp_opcao == "incluir")  
+      {
+          $this->nmgp_botoes['refrescar'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['botoes']['refrescar'];
+      }
       if ($this->nmgp_opcao == "recarga" || $this->nmgp_opcao == "muda_form")  
       {
           $this->nmgp_botoes = $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['botoes'];
@@ -1450,6 +1470,15 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
       if (isset($this->cod_cuenta)) { $this->nm_limpa_alfa($this->cod_cuenta); }
       if (isset($this->detallepagos)) { $this->nm_limpa_alfa($this->detallepagos); }
       if (isset($this->archivos)) { $this->nm_limpa_alfa($this->archivos); }
+      if ($nm_opc_form_php == "formphp")
+      { 
+          if ($nm_call_php == "refrescar")
+          { 
+              $this->sc_btn_refrescar();
+          } 
+          $this->NM_close_db(); 
+          exit;
+      } 
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -2078,7 +2107,7 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
 ?>
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo strip_tags("Pagos a terceros") ?></TITLE>
+ <TITLE><?php echo strip_tags("Editar comprobante de egreso") ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 
@@ -2173,6 +2202,157 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
        { 
            $this->Db->Close(); 
        } 
+   }
+   function sc_btn_refrescar() 
+   {
+        global $nm_url_saida, $teste_validade, 
+               $glo_senha_protect, $nm_apl_dependente, $nm_form_submit, $sc_check_excl, $nm_opc_form_php, $nm_call_php, $nm_opc_lookup;
+ 
+     ob_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+ <head>
+    <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+      if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+      {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+      }
+
+?>
+        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <SCRIPT type="text/javascript">
+      var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+      var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_close"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_esc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_userSweetAlertDisplayed = false;
+    </SCRIPT>
+    <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></SCRIPT>
+<?php
+include_once("form_hacerpagos_sajax_js.php");
+?>
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_sweetalert.css" />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/sweetalert2.all.min.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/polyfill.min.js"></SCRIPT>
+ <script type="text/javascript" src="../_lib/lib/js/frameControl.js"></script>
+    <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form.css" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+  <?php 
+  if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts)) 
+  { 
+  ?> 
+  <link href="<?php echo $this->Ini->str_google_fonts ?>" rel="stylesheet" /> 
+  <?php 
+  } 
+  ?> 
+ </head>
+  <body class="scFormPage">
+      <table class="scFormTabela" align="center"><tr><td>
+<?php
+      $nmgp_opcao_saida_php = "igual";
+      $nmgp_opc_ant_saida_php = "";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['opc_ant'] == "novo" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['opc_ant'] == "incluir")
+      {
+          $nmgp_opc_ant_saida_php = "novo";
+          $nmgp_opcao_saida_php   = "recarga";
+      }
+      $nm_f_saida = "./";
+      nm_limpa_numero($this->numpago, $this->field_config['numpago']['symbol_grp']) ; 
+      nm_limpa_data($this->fecpago, $this->field_config['fecpago']['date_sep']) ; 
+      if (!empty($this->field_config['valor_base']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->valor_base, $this->field_config['valor_base']['symbol_dec'], $this->field_config['valor_base']['symbol_grp'], $this->field_config['valor_base']['symbol_mon']); 
+          nm_limpa_valor($this->valor_base, $this->field_config['valor_base']['symbol_dec'], $this->field_config['valor_base']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['valor_iva']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->valor_iva, $this->field_config['valor_iva']['symbol_dec'], $this->field_config['valor_iva']['symbol_grp'], $this->field_config['valor_iva']['symbol_mon']); 
+          nm_limpa_valor($this->valor_iva, $this->field_config['valor_iva']['symbol_dec'], $this->field_config['valor_iva']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['montocan']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->montocan, $this->field_config['montocan']['symbol_dec'], $this->field_config['montocan']['symbol_grp'], $this->field_config['montocan']['symbol_mon']); 
+          nm_limpa_valor($this->montocan, $this->field_config['montocan']['symbol_dec'], $this->field_config['montocan']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['saldodocumento']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->saldodocumento, $this->field_config['saldodocumento']['symbol_dec'], $this->field_config['saldodocumento']['symbol_grp'], $this->field_config['saldodocumento']['symbol_mon']); 
+          nm_limpa_valor($this->saldodocumento, $this->field_config['saldodocumento']['symbol_dec'], $this->field_config['saldodocumento']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['valpagar']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->valpagar, $this->field_config['valpagar']['symbol_dec'], $this->field_config['valpagar']['symbol_grp'], $this->field_config['valpagar']['symbol_mon']); 
+          nm_limpa_valor($this->valpagar, $this->field_config['valpagar']['symbol_dec'], $this->field_config['valpagar']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['ret']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->ret, $this->field_config['ret']['symbol_dec'], $this->field_config['ret']['symbol_grp'], $this->field_config['ret']['symbol_mon']); 
+          nm_limpa_valor($this->ret, $this->field_config['ret']['symbol_dec'], $this->field_config['ret']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['val_ica']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->val_ica, $this->field_config['val_ica']['symbol_dec'], $this->field_config['val_ica']['symbol_grp'], $this->field_config['val_ica']['symbol_mon']); 
+          nm_limpa_valor($this->val_ica, $this->field_config['val_ica']['symbol_dec'], $this->field_config['val_ica']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['porc_reteiva']['symbol_dec']))
+      {
+          nm_limpa_valor($this->porc_reteiva, $this->field_config['porc_reteiva']['symbol_dec'], $this->field_config['porc_reteiva']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['val_reteiva']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->val_reteiva, $this->field_config['val_reteiva']['symbol_dec'], $this->field_config['val_reteiva']['symbol_grp'], $this->field_config['val_reteiva']['symbol_mon']); 
+          nm_limpa_valor($this->val_reteiva, $this->field_config['val_reteiva']['symbol_dec'], $this->field_config['val_reteiva']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['descuent']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->descuent, $this->field_config['descuent']['symbol_dec'], $this->field_config['descuent']['symbol_grp'], $this->field_config['descuent']['symbol_mon']); 
+          nm_limpa_valor($this->descuent, $this->field_config['descuent']['symbol_dec'], $this->field_config['descuent']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['total_cuenta']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->total_cuenta, $this->field_config['total_cuenta']['symbol_dec'], $this->field_config['total_cuenta']['symbol_grp'], $this->field_config['total_cuenta']['symbol_mon']); 
+          nm_limpa_valor($this->total_cuenta, $this->field_config['total_cuenta']['symbol_dec'], $this->field_config['total_cuenta']['symbol_grp']) ; 
+      }
+      nm_limpa_numero($this->idpago, $this->field_config['idpago']['symbol_grp']) ; 
+      $this->nm_converte_datas();
+      $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'on';
+   if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+ {
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('form_hacerpagos') . "/", $this->nm_location, "","_self", '', 440, 630);
+ };
+$_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off'; 
+       unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['total']);
+    echo ob_get_clean();
+?>
+      </td></tr><tr><td align="center">
+      <form name="FPHP" method="post" 
+                        action="<?php echo $nm_f_saida ?>" 
+                        target="_self">
+      <input type=hidden name="nmgp_opcao" value=""/>
+      <input type=hidden name="script_case_init" value="<?php  echo $this->form_encode_input($this->Ini->sc_page); ?>"/>
+      <input type=hidden name="idpago" value="<?php echo $this->form_encode_input($this->idpago) ?>"/>
+      <input type=hidden name="nmgp_opcao" value="<?php echo $this->form_encode_input($nmgp_opcao_saida_php); ?>"/>
+      <input type=hidden name="nmgp_opc_ant" value="<?php echo $this->form_encode_input($nmgp_opc_ant_saida_php); ?>"/>
+      <input type=submit name="nmgp_bok" value="<?php echo $this->Ini->Nm_lang['lang_btns_cfrm'] ?>"/>
+      </form>
+      </td></tr></table>
+      </body>
+      </html>
+<?php
+       if (isset($this->redir_modal) && !empty($this->redir_modal))
+       {
+           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
+           $this->redir_modal = "";
+       }
    }
 //
 //--------------------------------------------------------------------------------------
@@ -7841,6 +8021,7 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
               {
               $this->nmgp_opcao   = "igual"; 
               $this->nmgp_opc_ant = "igual"; 
+              $this->nmgp_botoes['refrescar'] = "on";
               $this->return_after_insert();
               }
               $this->nm_flag_iframe = true;
@@ -8489,6 +8670,7 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
                   $this->NM_ajax_info['buttonDisplay']['update']  = $this->nmgp_botoes['update']  = "off";
                   $this->NM_ajax_info['buttonDisplay']['delete']  = $this->nmgp_botoes['delete']  = "off";
                   $this->NM_ajax_info['buttonDisplay']['first']   = $this->nmgp_botoes['insert']  = "off";
+                  $this->NM_ajax_info['buttonDisplay']['refrescar'] = $this->nmgp_botoes['refrescar'] = "off";
                   $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['empty_filter'] = true;
                   return; 
               }
@@ -8503,6 +8685,7 @@ $_SESSION['scriptcase']['form_hacerpagos']['contr_erro'] = 'off';
               $this->nmgp_opcao = "novo"; 
               $this->nm_flag_saida_novo = "S"; 
               $rs->Close(); 
+              $this->NM_ajax_info['buttonDisplay']['refrescar'] = $this->nmgp_botoes['refrescar'] = "off";
               if ($this->aba_iframe)
               {
                   $this->NM_ajax_info['buttonDisplay']['exit'] = $this->nmgp_botoes['exit'] = 'off';
@@ -14210,6 +14393,9 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
                 break;
             case "delete":
                 return array("sc_b_del_t.sc-unique-btn-5");
+                break;
+            case "refrescar":
+                return array("sc_refrescar_top");
                 break;
             case "help":
                 return array("sc_b_hlp_t");

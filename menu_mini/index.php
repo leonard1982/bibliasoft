@@ -300,7 +300,7 @@ if ($_SESSION['scriptcase']['menu_mini']['glo_nm_usa_grupo'] == "S")
     $path_apls     = substr($path_apls, 0, strrpos($path_apls, '/'));
 }
 $path_apls     .= "/";
-$this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+$this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
 include("../_lib/lang/". $this->str_lang .".lang.php");
 include("../_lib/css/" . $this->str_schema_all . "_menutab.php");
 include("../_lib/css/" . $this->str_schema_all . "_menuH.php");

@@ -20,6 +20,10 @@
    {
        $this->nmgp_cmp_hidden['idpro2'] = 'off';
    }
+   if (!isset($this->nmgp_cmp_hidden['cod_cuenta']))
+   {
+       $this->nmgp_cmp_hidden['cod_cuenta'] = 'off';
+   }
    if (!isset($this->nmgp_cmp_hidden['multiple_escala']))
    {
        $this->nmgp_cmp_hidden['multiple_escala'] = 'off';
@@ -114,6 +118,10 @@
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
    $cod_cuenta = $this->cod_cuenta;
+   if (!isset($this->nmgp_cmp_hidden['cod_cuenta']))
+   {
+       $this->nmgp_cmp_hidden['cod_cuenta'] = 'off';
+   }
    $sStyleHidden_cod_cuenta = '';
    if (isset($this->nmgp_cmp_hidden['cod_cuenta']) && $this->nmgp_cmp_hidden['cod_cuenta'] == 'off')
    {
@@ -436,6 +444,1660 @@ else
    <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
 <div id="div_hidden_bloco_8"><!-- bloco_c -->
 <TABLE align="center" id="hidden_bloco_8" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['id_pucaux_inventario']))
+   {
+       $this->nm_new_label['id_pucaux_inventario'] = "Auxiliar Inventario";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_pucaux_inventario = $this->id_pucaux_inventario;
+   $sStyleHidden_id_pucaux_inventario = '';
+   if (isset($this->nmgp_cmp_hidden['id_pucaux_inventario']) && $this->nmgp_cmp_hidden['id_pucaux_inventario'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_pucaux_inventario']);
+       $sStyleHidden_id_pucaux_inventario = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_pucaux_inventario = 'display: none;';
+   $sStyleReadInp_id_pucaux_inventario = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_pucaux_inventario']) && $this->nmgp_cmp_readonly['id_pucaux_inventario'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_pucaux_inventario']);
+       $sStyleReadLab_id_pucaux_inventario = '';
+       $sStyleReadInp_id_pucaux_inventario = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_pucaux_inventario']) && $this->nmgp_cmp_hidden['id_pucaux_inventario'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="id_pucaux_inventario" value="<?php echo $this->form_encode_input($this->id_pucaux_inventario) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_id_pucaux_inventario_line" id="hidden_field_data_id_pucaux_inventario" style="<?php echo $sStyleHidden_id_pucaux_inventario; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_pucaux_inventario_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_id_pucaux_inventario_label" style=""><span id="id_label_id_pucaux_inventario"><?php echo $this->nm_new_label['id_pucaux_inventario']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_pucaux_inventario"]) &&  $this->nmgp_cmp_readonly["id_pucaux_inventario"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $id_pucaux_inventario_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_inventario_1))
+          {
+              foreach ($this->id_pucaux_inventario_1 as $tmp_id_pucaux_inventario)
+              {
+                  if (trim($tmp_id_pucaux_inventario) === trim($cadaselect[1])) { $id_pucaux_inventario_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_inventario) === trim($cadaselect[1])) { $id_pucaux_inventario_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="id_pucaux_inventario" value="<?php echo $this->form_encode_input($id_pucaux_inventario) . "\">" . $id_pucaux_inventario_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_id_pucaux_inventario();
+   $x = 0 ; 
+   $id_pucaux_inventario_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_inventario_1))
+          {
+              foreach ($this->id_pucaux_inventario_1 as $tmp_id_pucaux_inventario)
+              {
+                  if (trim($tmp_id_pucaux_inventario) === trim($cadaselect[1])) { $id_pucaux_inventario_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_inventario) === trim($cadaselect[1])) { $id_pucaux_inventario_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($id_pucaux_inventario_look))
+          {
+              $id_pucaux_inventario_look = $this->id_pucaux_inventario;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_id_pucaux_inventario\" class=\"css_id_pucaux_inventario_line\" style=\"" .  $sStyleReadLab_id_pucaux_inventario . "\">" . $this->form_format_readonly("id_pucaux_inventario", $this->form_encode_input($id_pucaux_inventario_look)) . "</span><span id=\"id_read_off_id_pucaux_inventario\" class=\"css_read_off_id_pucaux_inventario" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_id_pucaux_inventario . "\">";
+   echo " <span id=\"idAjaxSelect_id_pucaux_inventario\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_id_pucaux_inventario_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_id_pucaux_inventario\" name=\"id_pucaux_inventario\" size=\"1\" alt=\"{type: 'select', enterTab: true}\">" ; 
+   echo "\r" ; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_inventario'][] = ''; 
+   echo "  <option value=\"\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->id_pucaux_inventario) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->id_pucaux_inventario)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   if (isset($this->Ini->sc_lig_md5["form_puc_auxiliares"]) && $this->Ini->sc_lig_md5["form_puc_auxiliares"] == "S") {
+       $Parms_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_inventario*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+       $Md5_Lig    = "@SC_par@" . $this->form_encode_input($this->Ini->sc_page) . "@SC_par@form_productos_mob@SC_par@" . md5($Parms_Lig);
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+   } else {
+       $Md5_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_inventario*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+   }
+ ?><?php echo nmButtonOutput($this->arr_buttons, "bform_lookuplink", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "fldedt_id_pucaux_inventario", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php    echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_pucaux_inventario_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_pucaux_inventario_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['id_pucaux_ncc']))
+   {
+       $this->nm_new_label['id_pucaux_ncc'] = "Auxiliar NC en Compras";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_pucaux_ncc = $this->id_pucaux_ncc;
+   $sStyleHidden_id_pucaux_ncc = '';
+   if (isset($this->nmgp_cmp_hidden['id_pucaux_ncc']) && $this->nmgp_cmp_hidden['id_pucaux_ncc'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_pucaux_ncc']);
+       $sStyleHidden_id_pucaux_ncc = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_pucaux_ncc = 'display: none;';
+   $sStyleReadInp_id_pucaux_ncc = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_pucaux_ncc']) && $this->nmgp_cmp_readonly['id_pucaux_ncc'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_pucaux_ncc']);
+       $sStyleReadLab_id_pucaux_ncc = '';
+       $sStyleReadInp_id_pucaux_ncc = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_pucaux_ncc']) && $this->nmgp_cmp_hidden['id_pucaux_ncc'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="id_pucaux_ncc" value="<?php echo $this->form_encode_input($this->id_pucaux_ncc) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_id_pucaux_ncc_line" id="hidden_field_data_id_pucaux_ncc" style="<?php echo $sStyleHidden_id_pucaux_ncc; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_pucaux_ncc_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_id_pucaux_ncc_label" style=""><span id="id_label_id_pucaux_ncc"><?php echo $this->nm_new_label['id_pucaux_ncc']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_pucaux_ncc"]) &&  $this->nmgp_cmp_readonly["id_pucaux_ncc"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $id_pucaux_ncc_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_ncc_1))
+          {
+              foreach ($this->id_pucaux_ncc_1 as $tmp_id_pucaux_ncc)
+              {
+                  if (trim($tmp_id_pucaux_ncc) === trim($cadaselect[1])) { $id_pucaux_ncc_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_ncc) === trim($cadaselect[1])) { $id_pucaux_ncc_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="id_pucaux_ncc" value="<?php echo $this->form_encode_input($id_pucaux_ncc) . "\">" . $id_pucaux_ncc_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_id_pucaux_ncc();
+   $x = 0 ; 
+   $id_pucaux_ncc_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_ncc_1))
+          {
+              foreach ($this->id_pucaux_ncc_1 as $tmp_id_pucaux_ncc)
+              {
+                  if (trim($tmp_id_pucaux_ncc) === trim($cadaselect[1])) { $id_pucaux_ncc_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_ncc) === trim($cadaselect[1])) { $id_pucaux_ncc_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($id_pucaux_ncc_look))
+          {
+              $id_pucaux_ncc_look = $this->id_pucaux_ncc;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_id_pucaux_ncc\" class=\"css_id_pucaux_ncc_line\" style=\"" .  $sStyleReadLab_id_pucaux_ncc . "\">" . $this->form_format_readonly("id_pucaux_ncc", $this->form_encode_input($id_pucaux_ncc_look)) . "</span><span id=\"id_read_off_id_pucaux_ncc\" class=\"css_read_off_id_pucaux_ncc" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_id_pucaux_ncc . "\">";
+   echo " <span id=\"idAjaxSelect_id_pucaux_ncc\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_id_pucaux_ncc_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_id_pucaux_ncc\" name=\"id_pucaux_ncc\" size=\"1\" alt=\"{type: 'select', enterTab: true}\">" ; 
+   echo "\r" ; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ncc'][] = ''; 
+   echo "  <option value=\"\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->id_pucaux_ncc) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->id_pucaux_ncc)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   if (isset($this->Ini->sc_lig_md5["form_puc_auxiliares"]) && $this->Ini->sc_lig_md5["form_puc_auxiliares"] == "S") {
+       $Parms_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_ncc*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+       $Md5_Lig    = "@SC_par@" . $this->form_encode_input($this->Ini->sc_page) . "@SC_par@form_productos_mob@SC_par@" . md5($Parms_Lig);
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+   } else {
+       $Md5_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_ncc*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+   }
+ ?><?php echo nmButtonOutput($this->arr_buttons, "bform_lookuplink", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "fldedt_id_pucaux_ncc", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php    echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_pucaux_ncc_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_pucaux_ncc_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['id_pucaux_ndc']))
+   {
+       $this->nm_new_label['id_pucaux_ndc'] = "Auxiliar ND en Compras";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_pucaux_ndc = $this->id_pucaux_ndc;
+   $sStyleHidden_id_pucaux_ndc = '';
+   if (isset($this->nmgp_cmp_hidden['id_pucaux_ndc']) && $this->nmgp_cmp_hidden['id_pucaux_ndc'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_pucaux_ndc']);
+       $sStyleHidden_id_pucaux_ndc = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_pucaux_ndc = 'display: none;';
+   $sStyleReadInp_id_pucaux_ndc = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_pucaux_ndc']) && $this->nmgp_cmp_readonly['id_pucaux_ndc'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_pucaux_ndc']);
+       $sStyleReadLab_id_pucaux_ndc = '';
+       $sStyleReadInp_id_pucaux_ndc = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_pucaux_ndc']) && $this->nmgp_cmp_hidden['id_pucaux_ndc'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="id_pucaux_ndc" value="<?php echo $this->form_encode_input($this->id_pucaux_ndc) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_id_pucaux_ndc_line" id="hidden_field_data_id_pucaux_ndc" style="<?php echo $sStyleHidden_id_pucaux_ndc; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_pucaux_ndc_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_id_pucaux_ndc_label" style=""><span id="id_label_id_pucaux_ndc"><?php echo $this->nm_new_label['id_pucaux_ndc']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_pucaux_ndc"]) &&  $this->nmgp_cmp_readonly["id_pucaux_ndc"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $id_pucaux_ndc_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_ndc_1))
+          {
+              foreach ($this->id_pucaux_ndc_1 as $tmp_id_pucaux_ndc)
+              {
+                  if (trim($tmp_id_pucaux_ndc) === trim($cadaselect[1])) { $id_pucaux_ndc_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_ndc) === trim($cadaselect[1])) { $id_pucaux_ndc_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="id_pucaux_ndc" value="<?php echo $this->form_encode_input($id_pucaux_ndc) . "\">" . $id_pucaux_ndc_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_id_pucaux_ndc();
+   $x = 0 ; 
+   $id_pucaux_ndc_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_ndc_1))
+          {
+              foreach ($this->id_pucaux_ndc_1 as $tmp_id_pucaux_ndc)
+              {
+                  if (trim($tmp_id_pucaux_ndc) === trim($cadaselect[1])) { $id_pucaux_ndc_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_ndc) === trim($cadaselect[1])) { $id_pucaux_ndc_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($id_pucaux_ndc_look))
+          {
+              $id_pucaux_ndc_look = $this->id_pucaux_ndc;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_id_pucaux_ndc\" class=\"css_id_pucaux_ndc_line\" style=\"" .  $sStyleReadLab_id_pucaux_ndc . "\">" . $this->form_format_readonly("id_pucaux_ndc", $this->form_encode_input($id_pucaux_ndc_look)) . "</span><span id=\"id_read_off_id_pucaux_ndc\" class=\"css_read_off_id_pucaux_ndc" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_id_pucaux_ndc . "\">";
+   echo " <span id=\"idAjaxSelect_id_pucaux_ndc\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_id_pucaux_ndc_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_id_pucaux_ndc\" name=\"id_pucaux_ndc\" size=\"1\" alt=\"{type: 'select', enterTab: true}\">" ; 
+   echo "\r" ; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ndc'][] = ''; 
+   echo "  <option value=\"\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->id_pucaux_ndc) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->id_pucaux_ndc)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   if (isset($this->Ini->sc_lig_md5["form_puc_auxiliares"]) && $this->Ini->sc_lig_md5["form_puc_auxiliares"] == "S") {
+       $Parms_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_ndc*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+       $Md5_Lig    = "@SC_par@" . $this->form_encode_input($this->Ini->sc_page) . "@SC_par@form_productos_mob@SC_par@" . md5($Parms_Lig);
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+   } else {
+       $Md5_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_ndc*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+   }
+ ?><?php echo nmButtonOutput($this->arr_buttons, "bform_lookuplink", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "fldedt_id_pucaux_ndc", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php    echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_pucaux_ndc_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_pucaux_ndc_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['id_pucaux_ingresos']))
+   {
+       $this->nm_new_label['id_pucaux_ingresos'] = "Auxiliar Ingresos";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_pucaux_ingresos = $this->id_pucaux_ingresos;
+   $sStyleHidden_id_pucaux_ingresos = '';
+   if (isset($this->nmgp_cmp_hidden['id_pucaux_ingresos']) && $this->nmgp_cmp_hidden['id_pucaux_ingresos'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_pucaux_ingresos']);
+       $sStyleHidden_id_pucaux_ingresos = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_pucaux_ingresos = 'display: none;';
+   $sStyleReadInp_id_pucaux_ingresos = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_pucaux_ingresos']) && $this->nmgp_cmp_readonly['id_pucaux_ingresos'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_pucaux_ingresos']);
+       $sStyleReadLab_id_pucaux_ingresos = '';
+       $sStyleReadInp_id_pucaux_ingresos = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_pucaux_ingresos']) && $this->nmgp_cmp_hidden['id_pucaux_ingresos'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="id_pucaux_ingresos" value="<?php echo $this->form_encode_input($this->id_pucaux_ingresos) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_id_pucaux_ingresos_line" id="hidden_field_data_id_pucaux_ingresos" style="<?php echo $sStyleHidden_id_pucaux_ingresos; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_pucaux_ingresos_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_id_pucaux_ingresos_label" style=""><span id="id_label_id_pucaux_ingresos"><?php echo $this->nm_new_label['id_pucaux_ingresos']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_pucaux_ingresos"]) &&  $this->nmgp_cmp_readonly["id_pucaux_ingresos"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $id_pucaux_ingresos_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_ingresos_1))
+          {
+              foreach ($this->id_pucaux_ingresos_1 as $tmp_id_pucaux_ingresos)
+              {
+                  if (trim($tmp_id_pucaux_ingresos) === trim($cadaselect[1])) { $id_pucaux_ingresos_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_ingresos) === trim($cadaselect[1])) { $id_pucaux_ingresos_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="id_pucaux_ingresos" value="<?php echo $this->form_encode_input($id_pucaux_ingresos) . "\">" . $id_pucaux_ingresos_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_id_pucaux_ingresos();
+   $x = 0 ; 
+   $id_pucaux_ingresos_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_ingresos_1))
+          {
+              foreach ($this->id_pucaux_ingresos_1 as $tmp_id_pucaux_ingresos)
+              {
+                  if (trim($tmp_id_pucaux_ingresos) === trim($cadaselect[1])) { $id_pucaux_ingresos_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_ingresos) === trim($cadaselect[1])) { $id_pucaux_ingresos_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($id_pucaux_ingresos_look))
+          {
+              $id_pucaux_ingresos_look = $this->id_pucaux_ingresos;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_id_pucaux_ingresos\" class=\"css_id_pucaux_ingresos_line\" style=\"" .  $sStyleReadLab_id_pucaux_ingresos . "\">" . $this->form_format_readonly("id_pucaux_ingresos", $this->form_encode_input($id_pucaux_ingresos_look)) . "</span><span id=\"id_read_off_id_pucaux_ingresos\" class=\"css_read_off_id_pucaux_ingresos" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_id_pucaux_ingresos . "\">";
+   echo " <span id=\"idAjaxSelect_id_pucaux_ingresos\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_id_pucaux_ingresos_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_id_pucaux_ingresos\" name=\"id_pucaux_ingresos\" size=\"1\" alt=\"{type: 'select', enterTab: true}\">" ; 
+   echo "\r" ; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_ingresos'][] = ''; 
+   echo "  <option value=\"\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->id_pucaux_ingresos) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->id_pucaux_ingresos)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   if (isset($this->Ini->sc_lig_md5["form_puc_auxiliares"]) && $this->Ini->sc_lig_md5["form_puc_auxiliares"] == "S") {
+       $Parms_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_ingresos*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+       $Md5_Lig    = "@SC_par@" . $this->form_encode_input($this->Ini->sc_page) . "@SC_par@form_productos_mob@SC_par@" . md5($Parms_Lig);
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+   } else {
+       $Md5_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_ingresos*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+   }
+ ?><?php echo nmButtonOutput($this->arr_buttons, "bform_lookuplink", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "fldedt_id_pucaux_ingresos", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php    echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_pucaux_ingresos_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_pucaux_ingresos_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['id_pucaux_nc']))
+   {
+       $this->nm_new_label['id_pucaux_nc'] = "Auxiliar NC en Ventas";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_pucaux_nc = $this->id_pucaux_nc;
+   $sStyleHidden_id_pucaux_nc = '';
+   if (isset($this->nmgp_cmp_hidden['id_pucaux_nc']) && $this->nmgp_cmp_hidden['id_pucaux_nc'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_pucaux_nc']);
+       $sStyleHidden_id_pucaux_nc = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_pucaux_nc = 'display: none;';
+   $sStyleReadInp_id_pucaux_nc = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_pucaux_nc']) && $this->nmgp_cmp_readonly['id_pucaux_nc'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_pucaux_nc']);
+       $sStyleReadLab_id_pucaux_nc = '';
+       $sStyleReadInp_id_pucaux_nc = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_pucaux_nc']) && $this->nmgp_cmp_hidden['id_pucaux_nc'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="id_pucaux_nc" value="<?php echo $this->form_encode_input($this->id_pucaux_nc) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_id_pucaux_nc_line" id="hidden_field_data_id_pucaux_nc" style="<?php echo $sStyleHidden_id_pucaux_nc; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_pucaux_nc_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_id_pucaux_nc_label" style=""><span id="id_label_id_pucaux_nc"><?php echo $this->nm_new_label['id_pucaux_nc']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_pucaux_nc"]) &&  $this->nmgp_cmp_readonly["id_pucaux_nc"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $id_pucaux_nc_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_nc_1))
+          {
+              foreach ($this->id_pucaux_nc_1 as $tmp_id_pucaux_nc)
+              {
+                  if (trim($tmp_id_pucaux_nc) === trim($cadaselect[1])) { $id_pucaux_nc_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_nc) === trim($cadaselect[1])) { $id_pucaux_nc_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="id_pucaux_nc" value="<?php echo $this->form_encode_input($id_pucaux_nc) . "\">" . $id_pucaux_nc_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_id_pucaux_nc();
+   $x = 0 ; 
+   $id_pucaux_nc_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_nc_1))
+          {
+              foreach ($this->id_pucaux_nc_1 as $tmp_id_pucaux_nc)
+              {
+                  if (trim($tmp_id_pucaux_nc) === trim($cadaselect[1])) { $id_pucaux_nc_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_nc) === trim($cadaselect[1])) { $id_pucaux_nc_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($id_pucaux_nc_look))
+          {
+              $id_pucaux_nc_look = $this->id_pucaux_nc;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_id_pucaux_nc\" class=\"css_id_pucaux_nc_line\" style=\"" .  $sStyleReadLab_id_pucaux_nc . "\">" . $this->form_format_readonly("id_pucaux_nc", $this->form_encode_input($id_pucaux_nc_look)) . "</span><span id=\"id_read_off_id_pucaux_nc\" class=\"css_read_off_id_pucaux_nc" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_id_pucaux_nc . "\">";
+   echo " <span id=\"idAjaxSelect_id_pucaux_nc\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_id_pucaux_nc_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_id_pucaux_nc\" name=\"id_pucaux_nc\" size=\"1\" alt=\"{type: 'select', enterTab: true}\">" ; 
+   echo "\r" ; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nc'][] = ''; 
+   echo "  <option value=\"\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->id_pucaux_nc) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->id_pucaux_nc)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   if (isset($this->Ini->sc_lig_md5["form_puc_auxiliares"]) && $this->Ini->sc_lig_md5["form_puc_auxiliares"] == "S") {
+       $Parms_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_nc*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+       $Md5_Lig    = "@SC_par@" . $this->form_encode_input($this->Ini->sc_page) . "@SC_par@form_productos_mob@SC_par@" . md5($Parms_Lig);
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+   } else {
+       $Md5_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_nc*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+   }
+ ?><?php echo nmButtonOutput($this->arr_buttons, "bform_lookuplink", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "fldedt_id_pucaux_nc", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php    echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_pucaux_nc_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_pucaux_nc_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['id_pucaux_nd']))
+   {
+       $this->nm_new_label['id_pucaux_nd'] = "Auxiliar ND en Ventas";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_pucaux_nd = $this->id_pucaux_nd;
+   $sStyleHidden_id_pucaux_nd = '';
+   if (isset($this->nmgp_cmp_hidden['id_pucaux_nd']) && $this->nmgp_cmp_hidden['id_pucaux_nd'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_pucaux_nd']);
+       $sStyleHidden_id_pucaux_nd = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_pucaux_nd = 'display: none;';
+   $sStyleReadInp_id_pucaux_nd = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_pucaux_nd']) && $this->nmgp_cmp_readonly['id_pucaux_nd'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_pucaux_nd']);
+       $sStyleReadLab_id_pucaux_nd = '';
+       $sStyleReadInp_id_pucaux_nd = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_pucaux_nd']) && $this->nmgp_cmp_hidden['id_pucaux_nd'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="id_pucaux_nd" value="<?php echo $this->form_encode_input($this->id_pucaux_nd) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_id_pucaux_nd_line" id="hidden_field_data_id_pucaux_nd" style="<?php echo $sStyleHidden_id_pucaux_nd; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_pucaux_nd_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_id_pucaux_nd_label" style=""><span id="id_label_id_pucaux_nd"><?php echo $this->nm_new_label['id_pucaux_nd']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_pucaux_nd"]) &&  $this->nmgp_cmp_readonly["id_pucaux_nd"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $id_pucaux_nd_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_nd_1))
+          {
+              foreach ($this->id_pucaux_nd_1 as $tmp_id_pucaux_nd)
+              {
+                  if (trim($tmp_id_pucaux_nd) === trim($cadaselect[1])) { $id_pucaux_nd_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_nd) === trim($cadaselect[1])) { $id_pucaux_nd_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="id_pucaux_nd" value="<?php echo $this->form_encode_input($id_pucaux_nd) . "\">" . $id_pucaux_nd_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_id_pucaux_nd();
+   $x = 0 ; 
+   $id_pucaux_nd_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_nd_1))
+          {
+              foreach ($this->id_pucaux_nd_1 as $tmp_id_pucaux_nd)
+              {
+                  if (trim($tmp_id_pucaux_nd) === trim($cadaselect[1])) { $id_pucaux_nd_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_nd) === trim($cadaselect[1])) { $id_pucaux_nd_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($id_pucaux_nd_look))
+          {
+              $id_pucaux_nd_look = $this->id_pucaux_nd;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_id_pucaux_nd\" class=\"css_id_pucaux_nd_line\" style=\"" .  $sStyleReadLab_id_pucaux_nd . "\">" . $this->form_format_readonly("id_pucaux_nd", $this->form_encode_input($id_pucaux_nd_look)) . "</span><span id=\"id_read_off_id_pucaux_nd\" class=\"css_read_off_id_pucaux_nd" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_id_pucaux_nd . "\">";
+   echo " <span id=\"idAjaxSelect_id_pucaux_nd\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_id_pucaux_nd_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_id_pucaux_nd\" name=\"id_pucaux_nd\" size=\"1\" alt=\"{type: 'select', enterTab: true}\">" ; 
+   echo "\r" ; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_nd'][] = ''; 
+   echo "  <option value=\"\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->id_pucaux_nd) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->id_pucaux_nd)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   if (isset($this->Ini->sc_lig_md5["form_puc_auxiliares"]) && $this->Ini->sc_lig_md5["form_puc_auxiliares"] == "S") {
+       $Parms_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_nd*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+       $Md5_Lig    = "@SC_par@" . $this->form_encode_input($this->Ini->sc_page) . "@SC_par@form_productos_mob@SC_par@" . md5($Parms_Lig);
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+   } else {
+       $Md5_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_nd*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+   }
+ ?><?php echo nmButtonOutput($this->arr_buttons, "bform_lookuplink", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "fldedt_id_pucaux_nd", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php    echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_pucaux_nd_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_pucaux_nd_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['id_pucaux_costoventas']))
+   {
+       $this->nm_new_label['id_pucaux_costoventas'] = "Auxiliar Costoventas";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_pucaux_costoventas = $this->id_pucaux_costoventas;
+   $sStyleHidden_id_pucaux_costoventas = '';
+   if (isset($this->nmgp_cmp_hidden['id_pucaux_costoventas']) && $this->nmgp_cmp_hidden['id_pucaux_costoventas'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_pucaux_costoventas']);
+       $sStyleHidden_id_pucaux_costoventas = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_pucaux_costoventas = 'display: none;';
+   $sStyleReadInp_id_pucaux_costoventas = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_pucaux_costoventas']) && $this->nmgp_cmp_readonly['id_pucaux_costoventas'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_pucaux_costoventas']);
+       $sStyleReadLab_id_pucaux_costoventas = '';
+       $sStyleReadInp_id_pucaux_costoventas = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_pucaux_costoventas']) && $this->nmgp_cmp_hidden['id_pucaux_costoventas'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="id_pucaux_costoventas" value="<?php echo $this->form_encode_input($this->id_pucaux_costoventas) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_id_pucaux_costoventas_line" id="hidden_field_data_id_pucaux_costoventas" style="<?php echo $sStyleHidden_id_pucaux_costoventas; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_pucaux_costoventas_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_id_pucaux_costoventas_label" style=""><span id="id_label_id_pucaux_costoventas"><?php echo $this->nm_new_label['id_pucaux_costoventas']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_pucaux_costoventas"]) &&  $this->nmgp_cmp_readonly["id_pucaux_costoventas"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas'] = array(); 
+    }
+
+   $old_value_otro2 = $this->otro2;
+   $old_value_stockmen = $this->stockmen;
+   $old_value_costomen = $this->costomen;
+   $old_value_costo_prom = $this->costo_prom;
+   $old_value_recmayamen = $this->recmayamen;
+   $old_value_existencia = $this->existencia;
+   $old_value_por_preciominimo = $this->por_preciominimo;
+   $old_value_sugerido_mayor = $this->sugerido_mayor;
+   $old_value_sugerido_menor = $this->sugerido_menor;
+   $old_value_preciofull = $this->preciofull;
+   $old_value_precio2 = $this->precio2;
+   $old_value_preciomay = $this->preciomay;
+   $old_value_preciomen = $this->preciomen;
+   $old_value_preciomen2 = $this->preciomen2;
+   $old_value_preciomen3 = $this->preciomen3;
+   $old_value_idprod = $this->idprod;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_otro2 = $this->otro2;
+   $unformatted_value_stockmen = $this->stockmen;
+   $unformatted_value_costomen = $this->costomen;
+   $unformatted_value_costo_prom = $this->costo_prom;
+   $unformatted_value_recmayamen = $this->recmayamen;
+   $unformatted_value_existencia = $this->existencia;
+   $unformatted_value_por_preciominimo = $this->por_preciominimo;
+   $unformatted_value_sugerido_mayor = $this->sugerido_mayor;
+   $unformatted_value_sugerido_menor = $this->sugerido_menor;
+   $unformatted_value_preciofull = $this->preciofull;
+   $unformatted_value_precio2 = $this->precio2;
+   $unformatted_value_preciomay = $this->preciomay;
+   $unformatted_value_preciomen = $this->preciomen;
+   $unformatted_value_preciomen2 = $this->preciomen2;
+   $unformatted_value_preciomen3 = $this->preciomen3;
+   $unformatted_value_idprod = $this->idprod;
+
+   $nm_comando = "SELECT id, concat((select p.codigo from puc p where p.id=id_puc), codigo,' ',nombre) FROM puc_auxiliares";
+
+   $this->otro2 = $old_value_otro2;
+   $this->stockmen = $old_value_stockmen;
+   $this->costomen = $old_value_costomen;
+   $this->costo_prom = $old_value_costo_prom;
+   $this->recmayamen = $old_value_recmayamen;
+   $this->existencia = $old_value_existencia;
+   $this->por_preciominimo = $old_value_por_preciominimo;
+   $this->sugerido_mayor = $old_value_sugerido_mayor;
+   $this->sugerido_menor = $old_value_sugerido_menor;
+   $this->preciofull = $old_value_preciofull;
+   $this->precio2 = $old_value_precio2;
+   $this->preciomay = $old_value_preciomay;
+   $this->preciomen = $old_value_preciomen;
+   $this->preciomen2 = $old_value_preciomen2;
+   $this->preciomen3 = $old_value_preciomen3;
+   $this->idprod = $old_value_idprod;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $id_pucaux_costoventas_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_costoventas_1))
+          {
+              foreach ($this->id_pucaux_costoventas_1 as $tmp_id_pucaux_costoventas)
+              {
+                  if (trim($tmp_id_pucaux_costoventas) === trim($cadaselect[1])) { $id_pucaux_costoventas_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_costoventas) === trim($cadaselect[1])) { $id_pucaux_costoventas_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="id_pucaux_costoventas" value="<?php echo $this->form_encode_input($id_pucaux_costoventas) . "\">" . $id_pucaux_costoventas_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_id_pucaux_costoventas();
+   $x = 0 ; 
+   $id_pucaux_costoventas_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_pucaux_costoventas_1))
+          {
+              foreach ($this->id_pucaux_costoventas_1 as $tmp_id_pucaux_costoventas)
+              {
+                  if (trim($tmp_id_pucaux_costoventas) === trim($cadaselect[1])) { $id_pucaux_costoventas_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_pucaux_costoventas) === trim($cadaselect[1])) { $id_pucaux_costoventas_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($id_pucaux_costoventas_look))
+          {
+              $id_pucaux_costoventas_look = $this->id_pucaux_costoventas;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_id_pucaux_costoventas\" class=\"css_id_pucaux_costoventas_line\" style=\"" .  $sStyleReadLab_id_pucaux_costoventas . "\">" . $this->form_format_readonly("id_pucaux_costoventas", $this->form_encode_input($id_pucaux_costoventas_look)) . "</span><span id=\"id_read_off_id_pucaux_costoventas\" class=\"css_read_off_id_pucaux_costoventas" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_id_pucaux_costoventas . "\">";
+   echo " <span id=\"idAjaxSelect_id_pucaux_costoventas\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_id_pucaux_costoventas_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_id_pucaux_costoventas\" name=\"id_pucaux_costoventas\" size=\"1\" alt=\"{type: 'select', enterTab: true}\">" ; 
+   echo "\r" ; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lookup_id_pucaux_costoventas'][] = ''; 
+   echo "  <option value=\"\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->id_pucaux_costoventas) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->id_pucaux_costoventas)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   if (isset($this->Ini->sc_lig_md5["form_puc_auxiliares"]) && $this->Ini->sc_lig_md5["form_puc_auxiliares"] == "S") {
+       $Parms_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_costoventas*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+       $Md5_Lig    = "@SC_par@" . $this->form_encode_input($this->Ini->sc_page) . "@SC_par@form_productos_mob@SC_par@" . md5($Parms_Lig);
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_productos_mob']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+   } else {
+       $Md5_Lig  = "gidcta*scin0*scoutnm_evt_ret_edit*scindo_ajax_form_productos_mob_lkpedt_refresh_id_pucaux_costoventas*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+   }
+ ?><?php echo nmButtonOutput($this->arr_buttons, "bform_lookuplink", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "fldedt_id_pucaux_costoventas", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php    echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_pucaux_costoventas_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_pucaux_costoventas_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+
+
+
+
+
+
+<?php $sStyleHidden_id_pucaux_costoventas_dumb = ('' == $sStyleHidden_id_pucaux_costoventas) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_id_pucaux_costoventas_dumb" style="<?php echo $sStyleHidden_id_pucaux_costoventas_dumb; ?>"></TD>
+   </tr>
+<?php $sc_hidden_no = 1; ?>
+</TABLE></div><!-- bloco_f -->
+   </td>
+   </tr></table>
+   <a name="bloco_9"></a>
+   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
+<div id="div_hidden_bloco_9"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_9" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -1407,7 +3069,7 @@ else {
 ?>
 <script> 
 <?php
-  $nm_sc_blocos_da_pag = array(0,1,2,3,4,5,6,7,8);
+  $nm_sc_blocos_da_pag = array(0,1,2,3,4,5,6,7,8,9);
 
   foreach ($this->Ini->nm_hidden_blocos as $bloco => $hidden)
   {
@@ -1656,42 +3318,6 @@ scAjax_displayEmptyForm();
 		        return;
 		    }
 			nm_atualiza ('excluir');
-			 return;
-		}
-	}
-	function scBtnFn_sc_btn_0() {
-		if ($("#sc_sc_btn_0_top").length && $("#sc_sc_btn_0_top").is(":visible")) {
-		    if ($("#sc_sc_btn_0_top").hasClass("disabled")) {
-		        return;
-		    }
-			sc_btn_sc_btn_0()
-			 return;
-		}
-	}
-	function scBtnFn_sc_btn_1() {
-		if ($("#sc_sc_btn_1_top").length && $("#sc_sc_btn_1_top").is(":visible")) {
-		    if ($("#sc_sc_btn_1_top").hasClass("disabled")) {
-		        return;
-		    }
-			sc_btn_sc_btn_1()
-			 return;
-		}
-	}
-	function scBtnFn_sc_btn_2() {
-		if ($("#sc_sc_btn_2_top").length && $("#sc_sc_btn_2_top").is(":visible")) {
-		    if ($("#sc_sc_btn_2_top").hasClass("disabled")) {
-		        return;
-		    }
-			sc_btn_sc_btn_2()
-			 return;
-		}
-	}
-	function scBtnFn_escalas() {
-		if ($("#sc_escalas_top").length && $("#sc_escalas_top").is(":visible")) {
-		    if ($("#sc_escalas_top").hasClass("disabled")) {
-		        return;
-		    }
-			sc_btn_escalas()
 			 return;
 		}
 	}

@@ -74,6 +74,13 @@ function scFocusField(sField) {
       case 'imagen':
       case 'cod_cuenta':
       case 'idprod':
+      case 'id_pucaux_inventario':
+      case 'id_pucaux_ncc':
+      case 'id_pucaux_ndc':
+      case 'id_pucaux_ingresos':
+      case 'id_pucaux_nc':
+      case 'id_pucaux_nd':
+      case 'id_pucaux_costoventas':
       case 'id_marca':
       case 'id_linea':
       case 'codigobar2':
@@ -165,6 +172,13 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["imagen" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["cod_cuenta" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["idprod" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_inventario" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_ncc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_ndc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_ingresos" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_nc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_nd" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_costoventas" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["id_marca" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["id_linea" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["codigobar2" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -467,6 +481,48 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["idprod" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["id_pucaux_inventario" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_inventario" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_ncc" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_ncc" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_ndc" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_ndc" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_ingresos" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_ingresos" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_nc" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_nc" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_nd" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_nd" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_costoventas" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_costoventas" + iSeqRow]["change"]) {
+    return true;
+  }
   if (scEventControl_data["id_marca" + iSeqRow]["blur"]) {
     return true;
   }
@@ -551,6 +607,27 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("cod_cuenta" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_inventario" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_ncc" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_ndc" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_ingresos" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_nc" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_nd" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_costoventas" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("id_marca" + iSeq == fieldName) {
@@ -818,6 +895,27 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_para_registro_fe' + iSeqRow).bind('blur', function() { sc_form_productos_para_registro_fe_onblur(this, iSeqRow) })
                                               .bind('change', function() { sc_form_productos_para_registro_fe_onchange(this, iSeqRow) })
                                               .bind('focus', function() { sc_form_productos_para_registro_fe_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_inventario' + iSeqRow).bind('blur', function() { sc_form_productos_id_pucaux_inventario_onblur(this, iSeqRow) })
+                                                  .bind('change', function() { sc_form_productos_id_pucaux_inventario_onchange(this, iSeqRow) })
+                                                  .bind('focus', function() { sc_form_productos_id_pucaux_inventario_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_ncc' + iSeqRow).bind('blur', function() { sc_form_productos_id_pucaux_ncc_onblur(this, iSeqRow) })
+                                           .bind('change', function() { sc_form_productos_id_pucaux_ncc_onchange(this, iSeqRow) })
+                                           .bind('focus', function() { sc_form_productos_id_pucaux_ncc_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_ndc' + iSeqRow).bind('blur', function() { sc_form_productos_id_pucaux_ndc_onblur(this, iSeqRow) })
+                                           .bind('change', function() { sc_form_productos_id_pucaux_ndc_onchange(this, iSeqRow) })
+                                           .bind('focus', function() { sc_form_productos_id_pucaux_ndc_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_ingresos' + iSeqRow).bind('blur', function() { sc_form_productos_id_pucaux_ingresos_onblur(this, iSeqRow) })
+                                                .bind('change', function() { sc_form_productos_id_pucaux_ingresos_onchange(this, iSeqRow) })
+                                                .bind('focus', function() { sc_form_productos_id_pucaux_ingresos_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_nc' + iSeqRow).bind('blur', function() { sc_form_productos_id_pucaux_nc_onblur(this, iSeqRow) })
+                                          .bind('change', function() { sc_form_productos_id_pucaux_nc_onchange(this, iSeqRow) })
+                                          .bind('focus', function() { sc_form_productos_id_pucaux_nc_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_nd' + iSeqRow).bind('blur', function() { sc_form_productos_id_pucaux_nd_onblur(this, iSeqRow) })
+                                          .bind('change', function() { sc_form_productos_id_pucaux_nd_onchange(this, iSeqRow) })
+                                          .bind('focus', function() { sc_form_productos_id_pucaux_nd_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_costoventas' + iSeqRow).bind('blur', function() { sc_form_productos_id_pucaux_costoventas_onblur(this, iSeqRow) })
+                                                   .bind('change', function() { sc_form_productos_id_pucaux_costoventas_onchange(this, iSeqRow) })
+                                                   .bind('focus', function() { sc_form_productos_id_pucaux_costoventas_onfocus(this, iSeqRow) });
   $('#id_sc_field_sugerido_mayor' + iSeqRow).bind('blur', function() { sc_form_productos_sugerido_mayor_onblur(this, iSeqRow) })
                                             .bind('change', function() { sc_form_productos_sugerido_mayor_onchange(this, iSeqRow) })
                                             .bind('focus', function() { sc_form_productos_sugerido_mayor_onfocus(this, iSeqRow) });
@@ -1572,6 +1670,104 @@ function sc_form_productos_para_registro_fe_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_productos_id_pucaux_inventario_onblur(oThis, iSeqRow) {
+  do_ajax_form_productos_validate_id_pucaux_inventario();
+  scCssBlur(oThis);
+}
+
+function sc_form_productos_id_pucaux_inventario_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_productos_id_pucaux_inventario_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_productos_id_pucaux_ncc_onblur(oThis, iSeqRow) {
+  do_ajax_form_productos_validate_id_pucaux_ncc();
+  scCssBlur(oThis);
+}
+
+function sc_form_productos_id_pucaux_ncc_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_productos_id_pucaux_ncc_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_productos_id_pucaux_ndc_onblur(oThis, iSeqRow) {
+  do_ajax_form_productos_validate_id_pucaux_ndc();
+  scCssBlur(oThis);
+}
+
+function sc_form_productos_id_pucaux_ndc_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_productos_id_pucaux_ndc_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_productos_id_pucaux_ingresos_onblur(oThis, iSeqRow) {
+  do_ajax_form_productos_validate_id_pucaux_ingresos();
+  scCssBlur(oThis);
+}
+
+function sc_form_productos_id_pucaux_ingresos_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_productos_id_pucaux_ingresos_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_productos_id_pucaux_nc_onblur(oThis, iSeqRow) {
+  do_ajax_form_productos_validate_id_pucaux_nc();
+  scCssBlur(oThis);
+}
+
+function sc_form_productos_id_pucaux_nc_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_productos_id_pucaux_nc_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_productos_id_pucaux_nd_onblur(oThis, iSeqRow) {
+  do_ajax_form_productos_validate_id_pucaux_nd();
+  scCssBlur(oThis);
+}
+
+function sc_form_productos_id_pucaux_nd_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_productos_id_pucaux_nd_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_productos_id_pucaux_costoventas_onblur(oThis, iSeqRow) {
+  do_ajax_form_productos_validate_id_pucaux_costoventas();
+  scCssBlur(oThis);
+}
+
+function sc_form_productos_id_pucaux_costoventas_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_productos_id_pucaux_costoventas_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_productos_sugerido_mayor_onblur(oThis, iSeqRow) {
   do_ajax_form_productos_validate_sugerido_mayor();
   scCssBlur(oThis);
@@ -1720,6 +1916,7 @@ function displayChange_page_0(status) {
 function displayChange_page_1(status) {
 	displayChange_block("7", status);
 	displayChange_block("8", status);
+	displayChange_block("9", status);
 }
 
 function displayChange_block(block, status) {
@@ -1749,6 +1946,9 @@ function displayChange_block(block, status) {
 	}
 	if ("8" == block) {
 		displayChange_block_8(status);
+	}
+	if ("9" == block) {
+		displayChange_block_9(status);
 	}
 }
 
@@ -1827,6 +2027,16 @@ function displayChange_block_7(status) {
 }
 
 function displayChange_block_8(status) {
+	displayChange_field("id_pucaux_inventario", "", status);
+	displayChange_field("id_pucaux_ncc", "", status);
+	displayChange_field("id_pucaux_ndc", "", status);
+	displayChange_field("id_pucaux_ingresos", "", status);
+	displayChange_field("id_pucaux_nc", "", status);
+	displayChange_field("id_pucaux_nd", "", status);
+	displayChange_field("id_pucaux_costoventas", "", status);
+}
+
+function displayChange_block_9(status) {
 	displayChange_field("id_marca", "", status);
 	displayChange_field("id_linea", "", status);
 	displayChange_field("codigobar2", "", status);
@@ -1885,6 +2095,13 @@ function displayChange_row(row, status) {
 	displayChange_field_imagen(row, status);
 	displayChange_field_cod_cuenta(row, status);
 	displayChange_field_idprod(row, status);
+	displayChange_field_id_pucaux_inventario(row, status);
+	displayChange_field_id_pucaux_ncc(row, status);
+	displayChange_field_id_pucaux_ndc(row, status);
+	displayChange_field_id_pucaux_ingresos(row, status);
+	displayChange_field_id_pucaux_nc(row, status);
+	displayChange_field_id_pucaux_nd(row, status);
+	displayChange_field_id_pucaux_costoventas(row, status);
 	displayChange_field_id_marca(row, status);
 	displayChange_field_id_linea(row, status);
 	displayChange_field_codigobar2(row, status);
@@ -2042,6 +2259,27 @@ function displayChange_field(field, row, status) {
 	}
 	if ("idprod" == field) {
 		displayChange_field_idprod(row, status);
+	}
+	if ("id_pucaux_inventario" == field) {
+		displayChange_field_id_pucaux_inventario(row, status);
+	}
+	if ("id_pucaux_ncc" == field) {
+		displayChange_field_id_pucaux_ncc(row, status);
+	}
+	if ("id_pucaux_ndc" == field) {
+		displayChange_field_id_pucaux_ndc(row, status);
+	}
+	if ("id_pucaux_ingresos" == field) {
+		displayChange_field_id_pucaux_ingresos(row, status);
+	}
+	if ("id_pucaux_nc" == field) {
+		displayChange_field_id_pucaux_nc(row, status);
+	}
+	if ("id_pucaux_nd" == field) {
+		displayChange_field_id_pucaux_nd(row, status);
+	}
+	if ("id_pucaux_costoventas" == field) {
+		displayChange_field_id_pucaux_costoventas(row, status);
 	}
 	if ("id_marca" == field) {
 		displayChange_field_id_marca(row, status);
@@ -2354,6 +2592,111 @@ function displayChange_field_cod_cuenta(row, status) {
 function displayChange_field_idprod(row, status) {
 }
 
+function displayChange_field_id_pucaux_inventario(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_inventario__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_inventario" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_inventario");
+	}
+}
+
+function displayChange_field_id_pucaux_ncc(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_ncc__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_ncc" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_ncc");
+	}
+}
+
+function displayChange_field_id_pucaux_ndc(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_ndc__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_ndc" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_ndc");
+	}
+}
+
+function displayChange_field_id_pucaux_ingresos(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_ingresos__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_ingresos" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_ingresos");
+	}
+}
+
+function displayChange_field_id_pucaux_nc(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_nc__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_nc" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_nc");
+	}
+}
+
+function displayChange_field_id_pucaux_nd(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_nd__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_nd" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_nd");
+	}
+}
+
+function displayChange_field_id_pucaux_costoventas(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_costoventas__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_costoventas" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_costoventas");
+	}
+}
+
 function displayChange_field_id_marca(row, status) {
 	if ("on" == status) {
 		if ("all" == row) {
@@ -2418,6 +2761,13 @@ function scRecreateSelect2() {
 	displayChange_field_lote("all", "on");
 	displayChange_field_serial_codbarras("all", "on");
 	displayChange_field_cod_cuenta("all", "on");
+	displayChange_field_id_pucaux_inventario("all", "on");
+	displayChange_field_id_pucaux_ncc("all", "on");
+	displayChange_field_id_pucaux_ndc("all", "on");
+	displayChange_field_id_pucaux_ingresos("all", "on");
+	displayChange_field_id_pucaux_nc("all", "on");
+	displayChange_field_id_pucaux_nd("all", "on");
+	displayChange_field_id_pucaux_costoventas("all", "on");
 	displayChange_field_id_marca("all", "on");
 	displayChange_field_id_linea("all", "on");
 	displayChange_field_para_registro_fe("all", "on");
@@ -2959,6 +3309,27 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "cod_cuenta" == specificField) {
     scJQSelect2Add_cod_cuenta(seqRow);
   }
+  if (null == specificField || "id_pucaux_inventario" == specificField) {
+    scJQSelect2Add_id_pucaux_inventario(seqRow);
+  }
+  if (null == specificField || "id_pucaux_ncc" == specificField) {
+    scJQSelect2Add_id_pucaux_ncc(seqRow);
+  }
+  if (null == specificField || "id_pucaux_ndc" == specificField) {
+    scJQSelect2Add_id_pucaux_ndc(seqRow);
+  }
+  if (null == specificField || "id_pucaux_ingresos" == specificField) {
+    scJQSelect2Add_id_pucaux_ingresos(seqRow);
+  }
+  if (null == specificField || "id_pucaux_nc" == specificField) {
+    scJQSelect2Add_id_pucaux_nc(seqRow);
+  }
+  if (null == specificField || "id_pucaux_nd" == specificField) {
+    scJQSelect2Add_id_pucaux_nd(seqRow);
+  }
+  if (null == specificField || "id_pucaux_costoventas" == specificField) {
+    scJQSelect2Add_id_pucaux_costoventas(seqRow);
+  }
   if (null == specificField || "id_marca" == specificField) {
     scJQSelect2Add_id_marca(seqRow);
   }
@@ -3186,6 +3557,132 @@ function scJQSelect2Add_cod_cuenta(seqRow) {
   );
 } // scJQSelect2Add
 
+function scJQSelect2Add_id_pucaux_inventario(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_inventario_obj" : "#id_sc_field_id_pucaux_inventario" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_inventario_obj',
+      dropdownCssClass: 'css_id_pucaux_inventario_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_ncc(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_ncc_obj" : "#id_sc_field_id_pucaux_ncc" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_ncc_obj',
+      dropdownCssClass: 'css_id_pucaux_ncc_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_ndc(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_ndc_obj" : "#id_sc_field_id_pucaux_ndc" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_ndc_obj',
+      dropdownCssClass: 'css_id_pucaux_ndc_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_ingresos(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_ingresos_obj" : "#id_sc_field_id_pucaux_ingresos" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_ingresos_obj',
+      dropdownCssClass: 'css_id_pucaux_ingresos_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_nc(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_nc_obj" : "#id_sc_field_id_pucaux_nc" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_nc_obj',
+      dropdownCssClass: 'css_id_pucaux_nc_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_nd(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_nd_obj" : "#id_sc_field_id_pucaux_nd" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_nd_obj',
+      dropdownCssClass: 'css_id_pucaux_nd_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_costoventas(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_costoventas_obj" : "#id_sc_field_id_pucaux_costoventas" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_costoventas_obj',
+      dropdownCssClass: 'css_id_pucaux_costoventas_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
 function scJQSelect2Add_id_marca(seqRow) {
   var elemSelector = "all" == seqRow ? ".css_id_marca_obj" : "#id_sc_field_id_marca" + seqRow;
   $(elemSelector).select2(
@@ -3261,6 +3758,13 @@ function scJQElementsAdd(iLine) {
   setTimeout(function () { if ('function' == typeof displayChange_field_lote) { displayChange_field_lote(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_serial_codbarras) { displayChange_field_serial_codbarras(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_cod_cuenta) { displayChange_field_cod_cuenta(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_inventario) { displayChange_field_id_pucaux_inventario(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_ncc) { displayChange_field_id_pucaux_ncc(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_ndc) { displayChange_field_id_pucaux_ndc(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_ingresos) { displayChange_field_id_pucaux_ingresos(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_nc) { displayChange_field_id_pucaux_nc(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_nd) { displayChange_field_id_pucaux_nd(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_costoventas) { displayChange_field_id_pucaux_costoventas(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_id_marca) { displayChange_field_id_marca(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_id_linea) { displayChange_field_id_linea(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_para_registro_fe) { displayChange_field_para_registro_fe(iLine, "on"); } }, 150);

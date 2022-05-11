@@ -1,0 +1,37 @@
+.css_numpago_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_numpago_grid_line {vertical-align: middle;text-align: center;}
+.css_fecpago_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fecpago_grid_line {vertical-align: middle;text-align: center;}
+.css_client_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_client_grid_line {vertical-align: middle;text-align: left;}
+.css_montocan_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_montocan_grid_line {vertical-align: middle;text-align: right;}
+.css_montocan_sub_tot {text-align: right;}
+.css_montocan_tot_ger {text-align: right;}
+.css_docapagar_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_docapagar_grid_line {vertical-align: middle;text-align: center;}
+.css_ncuenta_tercero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_ncuenta_tercero_grid_line {vertical-align: top;text-align: center;}
+.css_ret_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_ret_grid_line {vertical-align: middle;text-align: right;}
+.css_ret_sub_tot {text-align: right;}
+.css_ret_tot_ger {text-align: right;}
+.css_descuent_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_descuent_grid_line {vertical-align: middle;text-align: right;}
+.css_asent_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_asent_grid_line {vertical-align: middle;text-align: center;}
+.css_imprimir_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_imprimir_grid_line {vertical-align: middle;text-align: center;}
+.css_idpago_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idpago_grid_line {vertical-align: top;text-align: right;}
+.css_saldodocumento_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_saldodocumento_grid_line {vertical-align: top;text-align: right;}
+.css_conc_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_conc_grid_line {vertical-align: top;text-align: left;}
+.css_obs_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_obs_grid_line {vertical-align: top;text-align: left;}
+.css_banco_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_banco_grid_line {vertical-align: top;text-align: center;}
+.css_id_concepto_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_id_concepto_grid_line {vertical-align: top;text-align: left;}
+.css_detallepagos_grid_line {text-align: center;}

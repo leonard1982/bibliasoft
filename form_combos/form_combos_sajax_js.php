@@ -2926,7 +2926,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   function do_ajax_form_combos_validate_codigobar()
   {
     var nomeCampo_codigobar = "codigobar";
-    var var_codigobar = scAjaxGetFieldText(nomeCampo_codigobar);
+    var var_codigobar = scAjaxGetFieldHidden(nomeCampo_codigobar);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_combos_validate_codigobar(var_codigobar, var_script_case_init, do_ajax_form_combos_validate_codigobar_cb);
   } // do_ajax_form_combos_validate_codigobar
@@ -2963,7 +2963,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   function do_ajax_form_combos_validate_nompro()
   {
     var nomeCampo_nompro = "nompro";
-    var var_nompro = scAjaxGetFieldText(nomeCampo_nompro);
+    var var_nompro = scAjaxGetFieldHidden(nomeCampo_nompro);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_combos_validate_nompro(var_nompro, var_script_case_init, do_ajax_form_combos_validate_nompro_cb);
   } // do_ajax_form_combos_validate_nompro
@@ -3475,8 +3475,8 @@ function scJs_sweetalert_params(params) {
       return;
     }
     scAjaxHideMessage();
-    var var_codigobar = scAjaxGetFieldText("codigobar");
-    var var_nompro = scAjaxGetFieldText("nompro");
+    var var_codigobar = scAjaxGetFieldHidden("codigobar");
+    var var_nompro = scAjaxGetFieldHidden("nompro");
     var var_preciomen = scAjaxGetFieldHidden("preciomen");
     var var_escombo = scAjaxGetFieldCheckbox("escombo", ";");
     var var_maneja_tcs_lfs = scAjaxGetFieldText("maneja_tcs_lfs");
@@ -3650,8 +3650,8 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
         scMoveMasterDetail(scMasterDetailIframe["nmsc_iframe_liga_form_detallecombos"]);
     }
     else {
-        document.getElementById('nmsc_iframe_liga_form_detallecombos').contentWindow.nm_move('apl_detalhe', true, '300');
-        document.getElementById('nmsc_iframe_liga_form_detallecombos').style.height = "300";
+        document.getElementById('nmsc_iframe_liga_form_detallecombos').contentWindow.nm_move('apl_detalhe', true, '600');
+        document.getElementById('nmsc_iframe_liga_form_detallecombos').style.height = "600";
         document.getElementById('nmsc_iframe_liga_form_detallecombos').style.display = "none";
     }
     scAjaxSetBtnVars();
@@ -3800,7 +3800,7 @@ if ($this->Embutida_form)
     aValue[0] = {"value" : sValue};
     if ("codigobar" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -3817,7 +3817,7 @@ if ($this->Embutida_form)
     }
     if ("nompro" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

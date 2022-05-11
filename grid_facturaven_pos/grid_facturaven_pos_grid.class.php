@@ -865,21 +865,27 @@ $vfactura = sc_url_library("prj", "factura", "index.php");
 <script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
 <link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
 
+<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
+
 <style>
 body
 {
 	
-	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_punto_venta_supermercado.jpg'); ?>) !important;
 	
-	background-position: center center !important;
 	
-	background-repeat: no-repeat !important;
 	
-	background-attachment: fixed !important;
 	
-	background-size: cover !important;
 	
-	background-color: #1175bb !important;
+	
+	
+	
+	
+	
+	
 }
 </style>
 <?php
@@ -1288,6 +1294,7 @@ function fJSONDataico(idfacven,bd)
 	
 function fReenviarPropio(idfacven)
 {
+	alertify.set('notifier','position', 'top-center');
 
 	$.post("../blank_correo_reenvio/index.php",{
 
@@ -1298,11 +1305,12 @@ function fReenviarPropio(idfacven)
 		console.log(r);
 		var correo = "";
 		
-		if(correo = prompt("Correo Electrónico",r))
-		{
-			if(correo == null || correo == "")
+		alertify.prompt( 'Reenviar al correo el documento electrónico', 'Correo', r
+	    ,function(evt, value)
+		{ 
+			if(value == null || value == "")
 			{
-			   alert("Debe digitar un correo.");
+			   alertify.error('Debe digitar un correo.'); 
 			}
 			else
 			{
@@ -1318,22 +1326,26 @@ function fReenviarPropio(idfacven)
 						color: '#fff'
 					}
 				});
-				
+
 				$.post("../blank_correo_reenvio2/index.php",{
 
 					idfacven:idfacven,
-					correo:correo
+					correo:value
 
 				},function(r2){
 
 					$.unblockUI();
-					
+
 					console.log(r2);
-					alert(r2);
+					alertify.notify(r2, 'success', 5, function(){  });
 				});
 			}
-		}
+	   }
+	   ,function()
+	   { 
 
+			alertify.error('Canceló el reenvío.'); 
+		});
 	});
 }
 	
@@ -2861,10 +2873,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="#61678C">
+                    <meta name="msapplication-TileColor" content="#3C4858">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="#61678C">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="#61678C">
+                    <meta name="theme-color" content="#3C4858">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="#3C4858">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -2957,10 +2969,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#61678C\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#3C4858\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#61678C\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#61678C\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#3C4858\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#3C4858\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['doc_word'])
@@ -21623,29 +21635,9 @@ $nm_saida->saida("       scJs_alert('" . $mensagem . "', $jsonParams);\r\n");
    }
    if ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] != "pdf" && !$_SESSION['scriptcase']['proc_mobile'])
    { 
-       $nm_saida->saida("   document.getElementById('first_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       $nm_saida->saida("   document.getElementById('back_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    elseif ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] != "pdf" && $_SESSION['scriptcase']['proc_mobile'])
    { 
-       $nm_saida->saida("   document.getElementById('first_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       $nm_saida->saida("   document.getElementById('back_bot').disabled = true;\r\n");
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    if ($this->rs_grid->EOF && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] != "pdf")
    {

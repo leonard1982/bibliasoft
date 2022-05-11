@@ -186,6 +186,7 @@ class terceros_mob_ini
    var $link_form_ciiu_tercero_edit;
    var $link_form_zona_clientes_edit;
    var $link_form_clasificacion_clientes_edit;
+   var $link_form_puc_auxiliares_edit;
    var $link_grid_gestor_archivos_tercero_cons;
    var $nm_cont_lin;
    var $nm_limite_lin;
@@ -303,9 +304,9 @@ class terceros_mob_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20171205"; 
       $this->nm_hr_criacao   = "171843"; 
-      $this->nm_autor_alt    = "edgar"; 
-      $this->nm_dt_ult_alt   = ""; 
-      $this->nm_hr_ult_alt   = ""; 
+      $this->nm_autor_alt    = "admin"; 
+      $this->nm_dt_ult_alt   = "20220505"; 
+      $this->nm_hr_ult_alt   = "114546"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -538,7 +539,8 @@ class terceros_mob_ini
           }
       }
       if (isset($_SESSION['scriptcase']['terceros_mob']['session_timeout']['redir'])) {
-          $SS_cod_html  = '';
+          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -796,6 +798,108 @@ class terceros_mob_ini
               $this->sc_lig_md5["form_direccion_mob"] = 'S';
           }
       }
+      $Tmp_apl_lig = "form_puc_auxiliares";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["form_puc_auxiliares"] = 'S';
+          }
+      }
+      $Tmp_apl_lig = "form_puc_auxiliares";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["form_puc_auxiliares"] = 'S';
+          }
+      }
+      $Tmp_apl_lig = "form_puc_auxiliares";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["form_puc_auxiliares"] = 'S';
+          }
+      }
+      $Tmp_apl_lig = "form_puc_auxiliares";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["form_puc_auxiliares"] = 'S';
+          }
+      }
+      $Tmp_apl_lig = "form_puc_auxiliares";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["form_puc_auxiliares"] = 'S';
+          }
+      }
+      $Tmp_apl_lig = "form_puc_auxiliares";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/form_puc_auxiliares_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/form_puc_auxiliares_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["form_puc_auxiliares"] = 'S';
+          }
+      }
       $PHP_ver = str_replace(".", "", phpversion()); 
       if (substr($PHP_ver, 0, 3) < 434)
       {
@@ -986,6 +1090,7 @@ class terceros_mob_ini
       $this->sc_lig_iframe["nmsc_iframe_liga_form_ciiu_tercero"] = 'nmsc_iframe_liga_form_ciiu_tercero';
       $this->link_form_zona_clientes_edit = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('form_zona_clientes') . "/";
       $this->link_form_clasificacion_clientes_edit = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('form_clasificacion_clientes') . "/";
+      $this->link_form_puc_auxiliares_edit = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('form_puc_auxiliares') . "/";
       $this->link_grid_gestor_archivos_tercero_cons = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_gestor_archivos_tercero') . "/";
       $this->sc_lig_target["C_@scinf_Archivos"] = 'nmsc_iframe_liga_grid_gestor_archivos_tercero';
       $this->sc_lig_iframe["nmsc_iframe_liga_grid_gestor_archivos_tercero"] = 'nmsc_iframe_liga_grid_gestor_archivos_tercero';
@@ -1060,7 +1165,7 @@ class terceros_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSFGHIrKD5JwDMvmV9FeDWBmVEX7HQNwZ1FGDSNOHQBqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKHEX/VoF7DcFYH9BqHAN7HQrqHgNKHEXeDuJeZuXGHQBiZSX7D1BeV5BODMrYVcBUH5FqHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaZuFaDcBwDQFGHANOV5FGHgrKVcFCDWJeVoraD9XOH9BOZ1BeV5X7DEBOZSXeDWrGVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQJwHABYHQBODMNOV9BUDWXCHMJsHQXOH9FaHAN7HuB/HgvsZSJ3H5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveDkXKDWBmZuFaHQBiDuBqDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSrYHQFaHgvsZSXeV5XCVoFGHQNwZ9F7DSBYHuJeDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDuFaD1BeHQBqDMBOV9BUDWFaHMJeHQNwZSBqDSNOHuJsDErKHArsHEFqHIJwHQFYZSX7Z1BYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJsZ1N7HQB/DMvsVcXKDuX7VoBODcJUZkFGDSrYZMBOHgvsZSJGHEFqHIJeD9XsDuBqD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSJGH5F/VoB/D9NwH9X7D1BeD5JwHuzGVIBOV5X7VoFGDcNwH9B/Z1rYD5FaDMBYDkFeV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGD1rKHQX7HgBOHEJqHEXCHMFaHQFYH9X7Z1rwHurqHuBOVcXKDWFYHIraDcJUZSFaDSvOD5XGHgveHErCDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5FGDoBqHQBiDuFaHAveD5NUHgNKDkBOV5FYHMBiD9BsZkBiDSvOD5JeHgveHEFiV5XCDoF7D9XsZSFUD1veVWBODMrYDkFCH5XCHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['terceros_mob']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['terceros_mob']['initialize'])  
       { 
@@ -2165,9 +2270,19 @@ ob_start();
             $puc_auxiliar_deudores = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_terceros_mob_validate_id_pucaux_cliente' == $_POST['rs'])
+        {
+            $id_pucaux_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_terceros_mob_validate_puc_retefuente_ventas' == $_POST['rs'])
         {
             $puc_retefuente_ventas = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_mob_validate_id_pucaux_retteventas' == $_POST['rs'])
+        {
+            $id_pucaux_retteventas = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_terceros_mob_validate_puc_retefuente_servicios_clie' == $_POST['rs'])
@@ -2175,9 +2290,19 @@ ob_start();
             $puc_retefuente_servicios_clie = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_terceros_mob_validate_id_pucaux_retteservicios' == $_POST['rs'])
+        {
+            $id_pucaux_retteservicios = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_terceros_mob_validate_puc_auxiliar_proveedores' == $_POST['rs'])
         {
             $puc_auxiliar_proveedores = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_mob_validate_id_pucaux_proveedor' == $_POST['rs'])
+        {
+            $id_pucaux_proveedor = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_terceros_mob_validate_puc_retefuente_compras' == $_POST['rs'])
@@ -2185,9 +2310,19 @@ ob_start();
             $puc_retefuente_compras = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_terceros_mob_validate_id_pucaux_rettecompras' == $_POST['rs'])
+        {
+            $id_pucaux_rettecompras = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_terceros_mob_validate_puc_retefuente_servicios_prov' == $_POST['rs'])
         {
             $puc_retefuente_servicios_prov = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_mob_validate_id_pucaux_rettesercomp' == $_POST['rs'])
+        {
+            $id_pucaux_rettesercomp = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_terceros_mob_validate_archivo_cedula' == $_POST['rs'])
@@ -2282,6 +2417,43 @@ ob_start();
             $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
+        if ('ajax_terceros_mob_refresh_puc_auxiliar_deudores' == $_POST['rs'])
+        {
+            $puc_auxiliar_deudores = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_terceros_mob_refresh_puc_retefuente_ventas' == $_POST['rs'])
+        {
+            $puc_retefuente_ventas = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_terceros_mob_refresh_puc_retefuente_servicios_clie' == $_POST['rs'])
+        {
+            $puc_retefuente_servicios_clie = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_terceros_mob_refresh_puc_auxiliar_proveedores' == $_POST['rs'])
+        {
+            $puc_auxiliar_proveedores = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $puc_auxiliar_proveedor = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
+        }
+        if ('ajax_terceros_mob_refresh_puc_retefuente_compras' == $_POST['rs'])
+        {
+            $puc_retefuente_compras = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_terceros_mob_refresh_puc_retefuente_servicios_prov' == $_POST['rs'])
+        {
+            $puc_retefuente_servicios_prov = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
         if ('ajax_terceros_mob_lkpedt_refresh_zona_clientes' == $_POST['rs'])
         {
             $zona_clientes = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -2293,6 +2465,47 @@ ob_start();
             $clasificacion_clientes = NM_utf8_urldecode($_POST['rsargs'][0]);
             $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_terceros_mob_lkpedt_refresh_id_pucaux_cliente' == $_POST['rs'])
+        {
+            $id_pucaux_cliente = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $puc_auxiliar_deudores = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
+        }
+        if ('ajax_terceros_mob_lkpedt_refresh_id_pucaux_retteventas' == $_POST['rs'])
+        {
+            $id_pucaux_retteventas = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $puc_retefuente_ventas = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
+        }
+        if ('ajax_terceros_mob_lkpedt_refresh_id_pucaux_retteservicios' == $_POST['rs'])
+        {
+            $id_pucaux_retteservicios = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $puc_retefuente_servicios_clie = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
+        }
+        if ('ajax_terceros_mob_lkpedt_refresh_id_pucaux_proveedor' == $_POST['rs'])
+        {
+            $id_pucaux_proveedor = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_terceros_mob_lkpedt_refresh_id_pucaux_rettecompras' == $_POST['rs'])
+        {
+            $id_pucaux_rettecompras = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $puc_retefuente_compras = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
+        }
+        if ('ajax_terceros_mob_lkpedt_refresh_id_pucaux_rettesercomp' == $_POST['rs'])
+        {
+            $id_pucaux_rettesercomp = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $puc_retefuente_servicios_prov = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $nmgp_refresh_fields = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
         }
         if ('ajax_terceros_mob_event_apellido1_onchange' == $_POST['rs'])
         {
@@ -2388,6 +2601,36 @@ ob_start();
             $dias = NM_utf8_urldecode($_POST['rsargs'][3]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][4]);
         }
+        if ('ajax_terceros_mob_event_puc_auxiliar_deudores_onchange' == $_POST['rs'])
+        {
+            $puc_auxiliar_deudores = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_mob_event_puc_auxiliar_proveedores_onchange' == $_POST['rs'])
+        {
+            $puc_auxiliar_proveedores = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_mob_event_puc_retefuente_compras_onchange' == $_POST['rs'])
+        {
+            $puc_retefuente_compras = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_mob_event_puc_retefuente_servicios_clie_onchange' == $_POST['rs'])
+        {
+            $puc_retefuente_servicios_clie = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_mob_event_puc_retefuente_servicios_prov_onchange' == $_POST['rs'])
+        {
+            $puc_retefuente_servicios_prov = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_terceros_mob_event_puc_retefuente_ventas_onchange' == $_POST['rs'])
+        {
+            $puc_retefuente_ventas = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_terceros_mob_event_r_social_onchange' == $_POST['rs'])
         {
             $tipo = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -2439,36 +2682,6 @@ ob_start();
             $documento = NM_utf8_urldecode($_POST['rsargs'][11]);
             $dv = NM_utf8_urldecode($_POST['rsargs'][12]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][13]);
-        }
-        if ('ajax_terceros_mob_autocomp_puc_auxiliar_deudores' == $_POST['rs'])
-        {
-            $puc_auxiliar_deudores = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_terceros_mob_autocomp_puc_retefuente_ventas' == $_POST['rs'])
-        {
-            $puc_retefuente_ventas = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_terceros_mob_autocomp_puc_retefuente_servicios_clie' == $_POST['rs'])
-        {
-            $puc_retefuente_servicios_clie = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_terceros_mob_autocomp_puc_auxiliar_proveedores' == $_POST['rs'])
-        {
-            $puc_auxiliar_proveedores = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_terceros_mob_autocomp_puc_retefuente_compras' == $_POST['rs'])
-        {
-            $puc_retefuente_compras = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
-        }
-        if ('ajax_terceros_mob_autocomp_puc_retefuente_servicios_prov' == $_POST['rs'])
-        {
-            $puc_retefuente_servicios_prov = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_terceros_mob_submit_form' == $_POST['rs'])
         {
@@ -2539,50 +2752,56 @@ ob_start();
             $zona_clientes = NM_utf8_urldecode($_POST['rsargs'][64]);
             $clasificacion_clientes = NM_utf8_urldecode($_POST['rsargs'][65]);
             $puc_auxiliar_deudores = NM_utf8_urldecode($_POST['rsargs'][66]);
-            $puc_retefuente_ventas = NM_utf8_urldecode($_POST['rsargs'][67]);
-            $puc_retefuente_servicios_clie = NM_utf8_urldecode($_POST['rsargs'][68]);
-            $puc_auxiliar_proveedores = NM_utf8_urldecode($_POST['rsargs'][69]);
-            $puc_retefuente_compras = NM_utf8_urldecode($_POST['rsargs'][70]);
-            $puc_retefuente_servicios_prov = NM_utf8_urldecode($_POST['rsargs'][71]);
-            $archivo_cedula = NM_utf8_urldecode($_POST['rsargs'][72]);
-            $archivo_rut = NM_utf8_urldecode($_POST['rsargs'][73]);
-            $archivo_nit = NM_utf8_urldecode($_POST['rsargs'][74]);
-            $archivo_pago = NM_utf8_urldecode($_POST['rsargs'][75]);
-            $id_plan = NM_utf8_urldecode($_POST['rsargs'][76]);
-            $valor_plan = NM_utf8_urldecode($_POST['rsargs'][77]);
-            $fecha_registro_fe = NM_utf8_urldecode($_POST['rsargs'][78]);
-            $nombre_contador = NM_utf8_urldecode($_POST['rsargs'][79]);
-            $estado = NM_utf8_urldecode($_POST['rsargs'][80]);
-            $si_nomina = NM_utf8_urldecode($_POST['rsargs'][81]);
-            $n_trabajadores = NM_utf8_urldecode($_POST['rsargs'][82]);
-            $si_factura_electronica = NM_utf8_urldecode($_POST['rsargs'][83]);
-            $nombre_empresa_bd = NM_utf8_urldecode($_POST['rsargs'][84]);
-            $es_restaurante = NM_utf8_urldecode($_POST['rsargs'][85]);
-            $porcentaje_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][86]);
-            $archivo_cedula_ul_name = NM_utf8_urldecode($_POST['rsargs'][87]);
-            $archivo_cedula_ul_type = NM_utf8_urldecode($_POST['rsargs'][88]);
-            $archivo_rut_ul_name = NM_utf8_urldecode($_POST['rsargs'][89]);
-            $archivo_rut_ul_type = NM_utf8_urldecode($_POST['rsargs'][90]);
-            $archivo_nit_ul_name = NM_utf8_urldecode($_POST['rsargs'][91]);
-            $archivo_nit_ul_type = NM_utf8_urldecode($_POST['rsargs'][92]);
-            $archivo_pago_ul_name = NM_utf8_urldecode($_POST['rsargs'][93]);
-            $archivo_pago_ul_type = NM_utf8_urldecode($_POST['rsargs'][94]);
-            $archivo_cedula_salva = NM_utf8_urldecode($_POST['rsargs'][95]);
-            $archivo_cedula_limpa = NM_utf8_urldecode($_POST['rsargs'][96]);
-            $archivo_rut_salva = NM_utf8_urldecode($_POST['rsargs'][97]);
-            $archivo_rut_limpa = NM_utf8_urldecode($_POST['rsargs'][98]);
-            $archivo_nit_salva = NM_utf8_urldecode($_POST['rsargs'][99]);
-            $archivo_nit_limpa = NM_utf8_urldecode($_POST['rsargs'][100]);
-            $archivo_pago_salva = NM_utf8_urldecode($_POST['rsargs'][101]);
-            $archivo_pago_limpa = NM_utf8_urldecode($_POST['rsargs'][102]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][103]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][104]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][105]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][106]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][107]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][108]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][109]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][110]);
+            $id_pucaux_cliente = NM_utf8_urldecode($_POST['rsargs'][67]);
+            $puc_retefuente_ventas = NM_utf8_urldecode($_POST['rsargs'][68]);
+            $id_pucaux_retteventas = NM_utf8_urldecode($_POST['rsargs'][69]);
+            $puc_retefuente_servicios_clie = NM_utf8_urldecode($_POST['rsargs'][70]);
+            $id_pucaux_retteservicios = NM_utf8_urldecode($_POST['rsargs'][71]);
+            $puc_auxiliar_proveedores = NM_utf8_urldecode($_POST['rsargs'][72]);
+            $id_pucaux_proveedor = NM_utf8_urldecode($_POST['rsargs'][73]);
+            $puc_retefuente_compras = NM_utf8_urldecode($_POST['rsargs'][74]);
+            $id_pucaux_rettecompras = NM_utf8_urldecode($_POST['rsargs'][75]);
+            $puc_retefuente_servicios_prov = NM_utf8_urldecode($_POST['rsargs'][76]);
+            $id_pucaux_rettesercomp = NM_utf8_urldecode($_POST['rsargs'][77]);
+            $archivo_cedula = NM_utf8_urldecode($_POST['rsargs'][78]);
+            $archivo_rut = NM_utf8_urldecode($_POST['rsargs'][79]);
+            $archivo_nit = NM_utf8_urldecode($_POST['rsargs'][80]);
+            $archivo_pago = NM_utf8_urldecode($_POST['rsargs'][81]);
+            $id_plan = NM_utf8_urldecode($_POST['rsargs'][82]);
+            $valor_plan = NM_utf8_urldecode($_POST['rsargs'][83]);
+            $fecha_registro_fe = NM_utf8_urldecode($_POST['rsargs'][84]);
+            $nombre_contador = NM_utf8_urldecode($_POST['rsargs'][85]);
+            $estado = NM_utf8_urldecode($_POST['rsargs'][86]);
+            $si_nomina = NM_utf8_urldecode($_POST['rsargs'][87]);
+            $n_trabajadores = NM_utf8_urldecode($_POST['rsargs'][88]);
+            $si_factura_electronica = NM_utf8_urldecode($_POST['rsargs'][89]);
+            $nombre_empresa_bd = NM_utf8_urldecode($_POST['rsargs'][90]);
+            $es_restaurante = NM_utf8_urldecode($_POST['rsargs'][91]);
+            $porcentaje_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][92]);
+            $archivo_cedula_ul_name = NM_utf8_urldecode($_POST['rsargs'][93]);
+            $archivo_cedula_ul_type = NM_utf8_urldecode($_POST['rsargs'][94]);
+            $archivo_rut_ul_name = NM_utf8_urldecode($_POST['rsargs'][95]);
+            $archivo_rut_ul_type = NM_utf8_urldecode($_POST['rsargs'][96]);
+            $archivo_nit_ul_name = NM_utf8_urldecode($_POST['rsargs'][97]);
+            $archivo_nit_ul_type = NM_utf8_urldecode($_POST['rsargs'][98]);
+            $archivo_pago_ul_name = NM_utf8_urldecode($_POST['rsargs'][99]);
+            $archivo_pago_ul_type = NM_utf8_urldecode($_POST['rsargs'][100]);
+            $archivo_cedula_salva = NM_utf8_urldecode($_POST['rsargs'][101]);
+            $archivo_cedula_limpa = NM_utf8_urldecode($_POST['rsargs'][102]);
+            $archivo_rut_salva = NM_utf8_urldecode($_POST['rsargs'][103]);
+            $archivo_rut_limpa = NM_utf8_urldecode($_POST['rsargs'][104]);
+            $archivo_nit_salva = NM_utf8_urldecode($_POST['rsargs'][105]);
+            $archivo_nit_limpa = NM_utf8_urldecode($_POST['rsargs'][106]);
+            $archivo_pago_salva = NM_utf8_urldecode($_POST['rsargs'][107]);
+            $archivo_pago_limpa = NM_utf8_urldecode($_POST['rsargs'][108]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][109]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][110]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][111]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][112]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][113]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][114]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][115]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][116]);
         }
         if ('ajax_terceros_mob_navigate_form' == $_POST['rs'])
         {
@@ -2755,6 +2974,54 @@ ob_start();
         if (isset($gnit)) 
         {
             $_SESSION['gnit'] = $gnit;
+        }
+        if (!isset($gIdcta1) && isset($gidcta1)) 
+        {
+            $gIdcta1 = $gidcta1;
+        }
+        if (isset($gIdcta1)) 
+        {
+            $_SESSION['gIdcta1'] = $gIdcta1;
+        }
+        if (!isset($gIdcta2) && isset($gidcta2)) 
+        {
+            $gIdcta2 = $gidcta2;
+        }
+        if (isset($gIdcta2)) 
+        {
+            $_SESSION['gIdcta2'] = $gIdcta2;
+        }
+        if (!isset($gIdcta3) && isset($gidcta3)) 
+        {
+            $gIdcta3 = $gidcta3;
+        }
+        if (isset($gIdcta3)) 
+        {
+            $_SESSION['gIdcta3'] = $gIdcta3;
+        }
+        if (!isset($gIdcta4) && isset($gidcta4)) 
+        {
+            $gIdcta4 = $gidcta4;
+        }
+        if (isset($gIdcta4)) 
+        {
+            $_SESSION['gIdcta4'] = $gIdcta4;
+        }
+        if (!isset($gIdcta5) && isset($gidcta5)) 
+        {
+            $gIdcta5 = $gidcta5;
+        }
+        if (isset($gIdcta5)) 
+        {
+            $_SESSION['gIdcta5'] = $gIdcta5;
+        }
+        if (!isset($gIdcta6) && isset($gidcta6)) 
+        {
+            $gIdcta6 = $gidcta6;
+        }
+        if (isset($gIdcta6)) 
+        {
+            $_SESSION['gIdcta6'] = $gIdcta6;
         }
         if (isset($gidtercero)) 
         {
@@ -3052,6 +3319,126 @@ ob_start();
             $_SESSION['gnit'] = $_GET["gnit"];
             nm_limpa_str_terceros_mob($_SESSION['gnit']);
         }
+        if (isset($_POST["gIdcta1"])) 
+        {
+            $_SESSION['gIdcta1'] = $_POST["gIdcta1"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta1']);
+        }
+        if (!isset($_POST["gIdcta1"]) && isset($_POST["gidcta1"])) 
+        {
+            $_SESSION['gIdcta1'] = $_POST["gidcta1"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta1']);
+        }
+        if (isset($_GET["gIdcta1"])) 
+        {
+            $_SESSION['gIdcta1'] = $_GET["gIdcta1"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta1']);
+        }
+        if (!isset($_GET["gIdcta1"]) && isset($_GET["gidcta1"])) 
+        {
+            $_SESSION['gIdcta1'] = $_GET["gidcta1"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta1']);
+        }
+        if (isset($_POST["gIdcta2"])) 
+        {
+            $_SESSION['gIdcta2'] = $_POST["gIdcta2"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta2']);
+        }
+        if (!isset($_POST["gIdcta2"]) && isset($_POST["gidcta2"])) 
+        {
+            $_SESSION['gIdcta2'] = $_POST["gidcta2"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta2']);
+        }
+        if (isset($_GET["gIdcta2"])) 
+        {
+            $_SESSION['gIdcta2'] = $_GET["gIdcta2"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta2']);
+        }
+        if (!isset($_GET["gIdcta2"]) && isset($_GET["gidcta2"])) 
+        {
+            $_SESSION['gIdcta2'] = $_GET["gidcta2"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta2']);
+        }
+        if (isset($_POST["gIdcta3"])) 
+        {
+            $_SESSION['gIdcta3'] = $_POST["gIdcta3"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta3']);
+        }
+        if (!isset($_POST["gIdcta3"]) && isset($_POST["gidcta3"])) 
+        {
+            $_SESSION['gIdcta3'] = $_POST["gidcta3"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta3']);
+        }
+        if (isset($_GET["gIdcta3"])) 
+        {
+            $_SESSION['gIdcta3'] = $_GET["gIdcta3"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta3']);
+        }
+        if (!isset($_GET["gIdcta3"]) && isset($_GET["gidcta3"])) 
+        {
+            $_SESSION['gIdcta3'] = $_GET["gidcta3"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta3']);
+        }
+        if (isset($_POST["gIdcta4"])) 
+        {
+            $_SESSION['gIdcta4'] = $_POST["gIdcta4"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta4']);
+        }
+        if (!isset($_POST["gIdcta4"]) && isset($_POST["gidcta4"])) 
+        {
+            $_SESSION['gIdcta4'] = $_POST["gidcta4"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta4']);
+        }
+        if (isset($_GET["gIdcta4"])) 
+        {
+            $_SESSION['gIdcta4'] = $_GET["gIdcta4"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta4']);
+        }
+        if (!isset($_GET["gIdcta4"]) && isset($_GET["gidcta4"])) 
+        {
+            $_SESSION['gIdcta4'] = $_GET["gidcta4"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta4']);
+        }
+        if (isset($_POST["gIdcta5"])) 
+        {
+            $_SESSION['gIdcta5'] = $_POST["gIdcta5"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta5']);
+        }
+        if (!isset($_POST["gIdcta5"]) && isset($_POST["gidcta5"])) 
+        {
+            $_SESSION['gIdcta5'] = $_POST["gidcta5"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta5']);
+        }
+        if (isset($_GET["gIdcta5"])) 
+        {
+            $_SESSION['gIdcta5'] = $_GET["gIdcta5"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta5']);
+        }
+        if (!isset($_GET["gIdcta5"]) && isset($_GET["gidcta5"])) 
+        {
+            $_SESSION['gIdcta5'] = $_GET["gidcta5"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta5']);
+        }
+        if (isset($_POST["gIdcta6"])) 
+        {
+            $_SESSION['gIdcta6'] = $_POST["gIdcta6"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta6']);
+        }
+        if (!isset($_POST["gIdcta6"]) && isset($_POST["gidcta6"])) 
+        {
+            $_SESSION['gIdcta6'] = $_POST["gidcta6"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta6']);
+        }
+        if (isset($_GET["gIdcta6"])) 
+        {
+            $_SESSION['gIdcta6'] = $_GET["gIdcta6"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta6']);
+        }
+        if (!isset($_GET["gIdcta6"]) && isset($_GET["gidcta6"])) 
+        {
+            $_SESSION['gIdcta6'] = $_GET["gidcta6"];
+            nm_limpa_str_terceros_mob($_SESSION['gIdcta6']);
+        }
         if (isset($_POST["gidtercero"])) 
         {
             $_SESSION['gidtercero'] = $_POST["gidtercero"];
@@ -3194,6 +3581,18 @@ ob_start();
     $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['creditoprov'] = "class=\"sc-js-input scFormObjectOdd css_creditoprov_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_creditoprov\" name=\"creditoprov\" size=\"1\" alt=\"{type: \'select\', enterTab: true}\"";
     $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['zona_clientes'] = "class=\"sc-js-input scFormObjectOdd css_zona_clientes_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_zona_clientes\" name=\"zona_clientes\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
     $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['clasificacion_clientes'] = "class=\"sc-js-input scFormObjectOdd css_clasificacion_clientes_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_clasificacion_clientes\" name=\"clasificacion_clientes\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['puc_auxiliar_deudores'] = "class=\"sc-js-input scFormObjectOdd css_puc_auxiliar_deudores_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_puc_auxiliar_deudores\" name=\"puc_auxiliar_deudores\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['id_pucaux_cliente'] = "class=\"sc-js-input scFormObjectOdd css_id_pucaux_cliente_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_pucaux_cliente\" name=\"id_pucaux_cliente\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['puc_retefuente_ventas'] = "class=\"sc-js-input scFormObjectOdd css_puc_retefuente_ventas_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_puc_retefuente_ventas\" name=\"puc_retefuente_ventas\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['id_pucaux_retteventas'] = "class=\"sc-js-input scFormObjectOdd css_id_pucaux_retteventas_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_pucaux_retteventas\" name=\"id_pucaux_retteventas\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['puc_retefuente_servicios_clie'] = "class=\"sc-js-input scFormObjectOdd css_puc_retefuente_servicios_clie_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_puc_retefuente_servicios_clie\" name=\"puc_retefuente_servicios_clie\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['id_pucaux_retteservicios'] = "class=\"sc-js-input scFormObjectOdd css_id_pucaux_retteservicios_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_pucaux_retteservicios\" name=\"id_pucaux_retteservicios\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['puc_auxiliar_proveedores'] = "class=\"sc-js-input scFormObjectOdd css_puc_auxiliar_proveedores_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_puc_auxiliar_proveedores\" name=\"puc_auxiliar_proveedores\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['id_pucaux_proveedor'] = "class=\"sc-js-input scFormObjectOdd css_id_pucaux_proveedor_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_pucaux_proveedor\" name=\"id_pucaux_proveedor\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['puc_retefuente_compras'] = "class=\"sc-js-input scFormObjectOdd css_puc_retefuente_compras_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_puc_retefuente_compras\" name=\"puc_retefuente_compras\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['id_pucaux_rettecompras'] = "class=\"sc-js-input scFormObjectOdd css_id_pucaux_rettecompras_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_pucaux_rettecompras\" name=\"id_pucaux_rettecompras\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['puc_retefuente_servicios_prov'] = "class=\"sc-js-input scFormObjectOdd css_puc_retefuente_servicios_prov_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_puc_retefuente_servicios_prov\" name=\"puc_retefuente_servicios_prov\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
+    $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['id_pucaux_rettesercomp'] = "class=\"sc-js-input scFormObjectOdd css_id_pucaux_rettesercomp_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_pucaux_rettesercomp\" name=\"id_pucaux_rettesercomp\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
     $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['id_plan'] = "class=\"sc-js-input scFormObjectOdd css_id_plan_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_plan\" name=\"id_plan\" size=\"1\" alt=\"{type: 'select', enterTab: true}\"";
     $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['estado'] = "class=\"sc-js-input scFormObjectOdd css_estado_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_estado\" name=\"estado\" size=\"1\" alt=\"{type: \'select\', enterTab: true}\"";
     $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['select_html']['si_nomina'] = " onClick=\"\" ";
@@ -3280,11 +3679,17 @@ ob_start();
     sajax_export("ajax_terceros_mob_validate_zona_clientes");
     sajax_export("ajax_terceros_mob_validate_clasificacion_clientes");
     sajax_export("ajax_terceros_mob_validate_puc_auxiliar_deudores");
+    sajax_export("ajax_terceros_mob_validate_id_pucaux_cliente");
     sajax_export("ajax_terceros_mob_validate_puc_retefuente_ventas");
+    sajax_export("ajax_terceros_mob_validate_id_pucaux_retteventas");
     sajax_export("ajax_terceros_mob_validate_puc_retefuente_servicios_clie");
+    sajax_export("ajax_terceros_mob_validate_id_pucaux_retteservicios");
     sajax_export("ajax_terceros_mob_validate_puc_auxiliar_proveedores");
+    sajax_export("ajax_terceros_mob_validate_id_pucaux_proveedor");
     sajax_export("ajax_terceros_mob_validate_puc_retefuente_compras");
+    sajax_export("ajax_terceros_mob_validate_id_pucaux_rettecompras");
     sajax_export("ajax_terceros_mob_validate_puc_retefuente_servicios_prov");
+    sajax_export("ajax_terceros_mob_validate_id_pucaux_rettesercomp");
     sajax_export("ajax_terceros_mob_validate_archivo_cedula");
     sajax_export("ajax_terceros_mob_validate_archivo_rut");
     sajax_export("ajax_terceros_mob_validate_archivo_nit");
@@ -3303,8 +3708,20 @@ ob_start();
     sajax_export("ajax_terceros_mob_validate_porcentaje_propina_sugerida");
     sajax_export("ajax_terceros_mob_refresh_departamento");
     sajax_export("ajax_terceros_mob_refresh_idmuni");
+    sajax_export("ajax_terceros_mob_refresh_puc_auxiliar_deudores");
+    sajax_export("ajax_terceros_mob_refresh_puc_retefuente_ventas");
+    sajax_export("ajax_terceros_mob_refresh_puc_retefuente_servicios_clie");
+    sajax_export("ajax_terceros_mob_refresh_puc_auxiliar_proveedores");
+    sajax_export("ajax_terceros_mob_refresh_puc_retefuente_compras");
+    sajax_export("ajax_terceros_mob_refresh_puc_retefuente_servicios_prov");
     sajax_export("ajax_terceros_mob_lkpedt_refresh_zona_clientes");
     sajax_export("ajax_terceros_mob_lkpedt_refresh_clasificacion_clientes");
+    sajax_export("ajax_terceros_mob_lkpedt_refresh_id_pucaux_cliente");
+    sajax_export("ajax_terceros_mob_lkpedt_refresh_id_pucaux_retteventas");
+    sajax_export("ajax_terceros_mob_lkpedt_refresh_id_pucaux_retteservicios");
+    sajax_export("ajax_terceros_mob_lkpedt_refresh_id_pucaux_proveedor");
+    sajax_export("ajax_terceros_mob_lkpedt_refresh_id_pucaux_rettecompras");
+    sajax_export("ajax_terceros_mob_lkpedt_refresh_id_pucaux_rettesercomp");
     sajax_export("ajax_terceros_mob_event_apellido1_onchange");
     sajax_export("ajax_terceros_mob_event_apellido2_onchange");
     sajax_export("ajax_terceros_mob_event_cliente_onchange");
@@ -3318,17 +3735,17 @@ ob_start();
     sajax_export("ajax_terceros_mob_event_nombres_onblur");
     sajax_export("ajax_terceros_mob_event_nombres_onfocus");
     sajax_export("ajax_terceros_mob_event_proveedor_onchange");
+    sajax_export("ajax_terceros_mob_event_puc_auxiliar_deudores_onchange");
+    sajax_export("ajax_terceros_mob_event_puc_auxiliar_proveedores_onchange");
+    sajax_export("ajax_terceros_mob_event_puc_retefuente_compras_onchange");
+    sajax_export("ajax_terceros_mob_event_puc_retefuente_servicios_clie_onchange");
+    sajax_export("ajax_terceros_mob_event_puc_retefuente_servicios_prov_onchange");
+    sajax_export("ajax_terceros_mob_event_puc_retefuente_ventas_onchange");
     sajax_export("ajax_terceros_mob_event_r_social_onchange");
     sajax_export("ajax_terceros_mob_event_regimen_onchange");
     sajax_export("ajax_terceros_mob_event_sucur_cliente_onchange");
     sajax_export("ajax_terceros_mob_event_tipo_documento_onchange");
     sajax_export("ajax_terceros_mob_event_tipo_onchange");
-    sajax_export("ajax_terceros_mob_autocomp_puc_auxiliar_deudores");
-    sajax_export("ajax_terceros_mob_autocomp_puc_retefuente_ventas");
-    sajax_export("ajax_terceros_mob_autocomp_puc_retefuente_servicios_clie");
-    sajax_export("ajax_terceros_mob_autocomp_puc_auxiliar_proveedores");
-    sajax_export("ajax_terceros_mob_autocomp_puc_retefuente_compras");
-    sajax_export("ajax_terceros_mob_autocomp_puc_retefuente_servicios_prov");
     sajax_export("ajax_terceros_mob_submit_form");
     sajax_export("ajax_terceros_mob_navigate_form");
     sajax_handle_client_request();
@@ -4652,6 +5069,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_puc_auxiliar_deudores
 
+    function ajax_terceros_mob_validate_id_pucaux_cliente($id_pucaux_cliente, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'validate_id_pucaux_cliente';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_cliente' => NM_utf8_urldecode($id_pucaux_cliente),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_validate_id_pucaux_cliente
+
     function ajax_terceros_mob_validate_puc_retefuente_ventas($puc_retefuente_ventas, $script_case_init)
     {
         global $inicial_terceros_mob;
@@ -4670,6 +5106,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_terceros_mob->contr_terceros_mob->controle();
         exit;
     } // ajax_validate_puc_retefuente_ventas
+
+    function ajax_terceros_mob_validate_id_pucaux_retteventas($id_pucaux_retteventas, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'validate_id_pucaux_retteventas';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_retteventas' => NM_utf8_urldecode($id_pucaux_retteventas),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_validate_id_pucaux_retteventas
 
     function ajax_terceros_mob_validate_puc_retefuente_servicios_clie($puc_retefuente_servicios_clie, $script_case_init)
     {
@@ -4690,6 +5145,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_puc_retefuente_servicios_clie
 
+    function ajax_terceros_mob_validate_id_pucaux_retteservicios($id_pucaux_retteservicios, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'validate_id_pucaux_retteservicios';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_retteservicios' => NM_utf8_urldecode($id_pucaux_retteservicios),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_validate_id_pucaux_retteservicios
+
     function ajax_terceros_mob_validate_puc_auxiliar_proveedores($puc_auxiliar_proveedores, $script_case_init)
     {
         global $inicial_terceros_mob;
@@ -4708,6 +5182,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_terceros_mob->contr_terceros_mob->controle();
         exit;
     } // ajax_validate_puc_auxiliar_proveedores
+
+    function ajax_terceros_mob_validate_id_pucaux_proveedor($id_pucaux_proveedor, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'validate_id_pucaux_proveedor';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_proveedor' => NM_utf8_urldecode($id_pucaux_proveedor),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_validate_id_pucaux_proveedor
 
     function ajax_terceros_mob_validate_puc_retefuente_compras($puc_retefuente_compras, $script_case_init)
     {
@@ -4728,6 +5221,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_puc_retefuente_compras
 
+    function ajax_terceros_mob_validate_id_pucaux_rettecompras($id_pucaux_rettecompras, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'validate_id_pucaux_rettecompras';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_rettecompras' => NM_utf8_urldecode($id_pucaux_rettecompras),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_validate_id_pucaux_rettecompras
+
     function ajax_terceros_mob_validate_puc_retefuente_servicios_prov($puc_retefuente_servicios_prov, $script_case_init)
     {
         global $inicial_terceros_mob;
@@ -4746,6 +5258,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_terceros_mob->contr_terceros_mob->controle();
         exit;
     } // ajax_validate_puc_retefuente_servicios_prov
+
+    function ajax_terceros_mob_validate_id_pucaux_rettesercomp($id_pucaux_rettesercomp, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'validate_id_pucaux_rettesercomp';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_rettesercomp' => NM_utf8_urldecode($id_pucaux_rettesercomp),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_validate_id_pucaux_rettesercomp
 
     function ajax_terceros_mob_validate_archivo_cedula($archivo_cedula, $script_case_init)
     {
@@ -5091,6 +5622,127 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_refresh_idmuni
 
+    function ajax_terceros_mob_refresh_puc_auxiliar_deudores($puc_auxiliar_deudores, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'refresh_puc_auxiliar_deudores';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_auxiliar_deudores' => NM_utf8_urldecode($puc_auxiliar_deudores),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_refresh_puc_auxiliar_deudores
+
+    function ajax_terceros_mob_refresh_puc_retefuente_ventas($puc_retefuente_ventas, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'refresh_puc_retefuente_ventas';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_retefuente_ventas' => NM_utf8_urldecode($puc_retefuente_ventas),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_refresh_puc_retefuente_ventas
+
+    function ajax_terceros_mob_refresh_puc_retefuente_servicios_clie($puc_retefuente_servicios_clie, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'refresh_puc_retefuente_servicios_clie';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_retefuente_servicios_clie' => NM_utf8_urldecode($puc_retefuente_servicios_clie),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_refresh_puc_retefuente_servicios_clie
+
+    function ajax_terceros_mob_refresh_puc_auxiliar_proveedores($puc_auxiliar_proveedores, $puc_auxiliar_proveedor, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'refresh_puc_auxiliar_proveedores';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_auxiliar_proveedores' => NM_utf8_urldecode($puc_auxiliar_proveedores),
+                  'puc_auxiliar_proveedor' => NM_utf8_urldecode($puc_auxiliar_proveedor),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_refresh_puc_auxiliar_proveedores
+
+    function ajax_terceros_mob_refresh_puc_retefuente_compras($puc_retefuente_compras, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'refresh_puc_retefuente_compras';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_retefuente_compras' => NM_utf8_urldecode($puc_retefuente_compras),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_refresh_puc_retefuente_compras
+
+    function ajax_terceros_mob_refresh_puc_retefuente_servicios_prov($puc_retefuente_servicios_prov, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'refresh_puc_retefuente_servicios_prov';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_retefuente_servicios_prov' => NM_utf8_urldecode($puc_retefuente_servicios_prov),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_refresh_puc_retefuente_servicios_prov
+
     function ajax_terceros_mob_lkpedt_refresh_zona_clientes($zona_clientes, $nmgp_refresh_fields, $script_case_init)
     {
         global $inicial_terceros_mob;
@@ -5130,6 +5782,131 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_terceros_mob->contr_terceros_mob->controle();
         exit;
     } // ajax_lkpedt_refresh_clasificacion_clientes
+
+    function ajax_terceros_mob_lkpedt_refresh_id_pucaux_cliente($id_pucaux_cliente, $puc_auxiliar_deudores, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'lkpedt_refresh_id_pucaux_cliente';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_cliente' => NM_utf8_urldecode($id_pucaux_cliente),
+                  'puc_auxiliar_deudores' => NM_utf8_urldecode($puc_auxiliar_deudores),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_lkpedt_refresh_id_pucaux_cliente
+
+    function ajax_terceros_mob_lkpedt_refresh_id_pucaux_retteventas($id_pucaux_retteventas, $puc_retefuente_ventas, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'lkpedt_refresh_id_pucaux_retteventas';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_retteventas' => NM_utf8_urldecode($id_pucaux_retteventas),
+                  'puc_retefuente_ventas' => NM_utf8_urldecode($puc_retefuente_ventas),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_lkpedt_refresh_id_pucaux_retteventas
+
+    function ajax_terceros_mob_lkpedt_refresh_id_pucaux_retteservicios($id_pucaux_retteservicios, $puc_retefuente_servicios_clie, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'lkpedt_refresh_id_pucaux_retteservicios';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_retteservicios' => NM_utf8_urldecode($id_pucaux_retteservicios),
+                  'puc_retefuente_servicios_clie' => NM_utf8_urldecode($puc_retefuente_servicios_clie),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_lkpedt_refresh_id_pucaux_retteservicios
+
+    function ajax_terceros_mob_lkpedt_refresh_id_pucaux_proveedor($id_pucaux_proveedor, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'lkpedt_refresh_id_pucaux_proveedor';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_proveedor' => NM_utf8_urldecode($id_pucaux_proveedor),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_lkpedt_refresh_id_pucaux_proveedor
+
+    function ajax_terceros_mob_lkpedt_refresh_id_pucaux_rettecompras($id_pucaux_rettecompras, $puc_retefuente_compras, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'lkpedt_refresh_id_pucaux_rettecompras';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_rettecompras' => NM_utf8_urldecode($id_pucaux_rettecompras),
+                  'puc_retefuente_compras' => NM_utf8_urldecode($puc_retefuente_compras),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_lkpedt_refresh_id_pucaux_rettecompras
+
+    function ajax_terceros_mob_lkpedt_refresh_id_pucaux_rettesercomp($id_pucaux_rettesercomp, $puc_retefuente_servicios_prov, $nmgp_refresh_fields, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'lkpedt_refresh_id_pucaux_rettesercomp';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'id_pucaux_rettesercomp' => NM_utf8_urldecode($id_pucaux_rettesercomp),
+                  'puc_retefuente_servicios_prov' => NM_utf8_urldecode($puc_retefuente_servicios_prov),
+                  'nmgp_refresh_fields' => NM_utf8_urldecode($nmgp_refresh_fields),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_lkpedt_refresh_id_pucaux_rettesercomp
 
     function ajax_terceros_mob_event_apellido1_onchange($nombre1, $apellido1, $script_case_init)
     {
@@ -5407,6 +6184,120 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_proveedor_onchange
 
+    function ajax_terceros_mob_event_puc_auxiliar_deudores_onchange($puc_auxiliar_deudores, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'event_puc_auxiliar_deudores_onchange';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_auxiliar_deudores' => NM_utf8_urldecode($puc_auxiliar_deudores),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_event_puc_auxiliar_deudores_onchange
+
+    function ajax_terceros_mob_event_puc_auxiliar_proveedores_onchange($puc_auxiliar_proveedores, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'event_puc_auxiliar_proveedores_onchange';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_auxiliar_proveedores' => NM_utf8_urldecode($puc_auxiliar_proveedores),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_event_puc_auxiliar_proveedores_onchange
+
+    function ajax_terceros_mob_event_puc_retefuente_compras_onchange($puc_retefuente_compras, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'event_puc_retefuente_compras_onchange';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_retefuente_compras' => NM_utf8_urldecode($puc_retefuente_compras),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_event_puc_retefuente_compras_onchange
+
+    function ajax_terceros_mob_event_puc_retefuente_servicios_clie_onchange($puc_retefuente_servicios_clie, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'event_puc_retefuente_servicios_clie_onchange';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_retefuente_servicios_clie' => NM_utf8_urldecode($puc_retefuente_servicios_clie),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_event_puc_retefuente_servicios_clie_onchange
+
+    function ajax_terceros_mob_event_puc_retefuente_servicios_prov_onchange($puc_retefuente_servicios_prov, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'event_puc_retefuente_servicios_prov_onchange';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_retefuente_servicios_prov' => NM_utf8_urldecode($puc_retefuente_servicios_prov),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_event_puc_retefuente_servicios_prov_onchange
+
+    function ajax_terceros_mob_event_puc_retefuente_ventas_onchange($puc_retefuente_ventas, $script_case_init)
+    {
+        global $inicial_terceros_mob;
+        //register_shutdown_function("terceros_mob_pack_ajax_response");
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'event_puc_retefuente_ventas_onchange';
+        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
+                  'puc_retefuente_ventas' => NM_utf8_urldecode($puc_retefuente_ventas),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_terceros_mob->contr_terceros_mob->controle();
+        exit;
+    } // ajax_event_puc_retefuente_ventas_onchange
+
     function ajax_terceros_mob_event_r_social_onchange($tipo, $r_social, $nombre2, $apellido2, $nombres, $nombre1, $apellido1, $script_case_init)
     {
         global $inicial_terceros_mob;
@@ -5529,127 +6420,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_tipo_onchange
 
-    function ajax_terceros_mob_autocomp_puc_auxiliar_deudores($puc_auxiliar_deudores, $script_case_init)
-    {
-        global $inicial_terceros_mob;
-        //register_shutdown_function("terceros_mob_pack_ajax_response");
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'autocomp_puc_auxiliar_deudores';
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
-                  'puc_auxiliar_deudores' => NM_utf8_urldecode($puc_auxiliar_deudores),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_auxiliar_deudores'] = utf8_decode(urldecode($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_auxiliar_deudores']));
-        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_terceros_mob->contr_terceros_mob->controle();
-        exit;
-    } // ajax_autocomp_puc_auxiliar_deudores
-
-    function ajax_terceros_mob_autocomp_puc_retefuente_ventas($puc_retefuente_ventas, $script_case_init)
-    {
-        global $inicial_terceros_mob;
-        //register_shutdown_function("terceros_mob_pack_ajax_response");
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'autocomp_puc_retefuente_ventas';
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
-                  'puc_retefuente_ventas' => NM_utf8_urldecode($puc_retefuente_ventas),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_retefuente_ventas'] = utf8_decode(urldecode($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_retefuente_ventas']));
-        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_terceros_mob->contr_terceros_mob->controle();
-        exit;
-    } // ajax_autocomp_puc_retefuente_ventas
-
-    function ajax_terceros_mob_autocomp_puc_retefuente_servicios_clie($puc_retefuente_servicios_clie, $script_case_init)
-    {
-        global $inicial_terceros_mob;
-        //register_shutdown_function("terceros_mob_pack_ajax_response");
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'autocomp_puc_retefuente_servicios_clie';
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
-                  'puc_retefuente_servicios_clie' => NM_utf8_urldecode($puc_retefuente_servicios_clie),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_retefuente_servicios_clie'] = utf8_decode(urldecode($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_retefuente_servicios_clie']));
-        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_terceros_mob->contr_terceros_mob->controle();
-        exit;
-    } // ajax_autocomp_puc_retefuente_servicios_clie
-
-    function ajax_terceros_mob_autocomp_puc_auxiliar_proveedores($puc_auxiliar_proveedores, $script_case_init)
-    {
-        global $inicial_terceros_mob;
-        //register_shutdown_function("terceros_mob_pack_ajax_response");
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'autocomp_puc_auxiliar_proveedores';
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
-                  'puc_auxiliar_proveedores' => NM_utf8_urldecode($puc_auxiliar_proveedores),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_auxiliar_proveedores'] = utf8_decode(urldecode($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_auxiliar_proveedores']));
-        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_terceros_mob->contr_terceros_mob->controle();
-        exit;
-    } // ajax_autocomp_puc_auxiliar_proveedores
-
-    function ajax_terceros_mob_autocomp_puc_retefuente_compras($puc_retefuente_compras, $script_case_init)
-    {
-        global $inicial_terceros_mob;
-        //register_shutdown_function("terceros_mob_pack_ajax_response");
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'autocomp_puc_retefuente_compras';
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
-                  'puc_retefuente_compras' => NM_utf8_urldecode($puc_retefuente_compras),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_retefuente_compras'] = utf8_decode(urldecode($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_retefuente_compras']));
-        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_terceros_mob->contr_terceros_mob->controle();
-        exit;
-    } // ajax_autocomp_puc_retefuente_compras
-
-    function ajax_terceros_mob_autocomp_puc_retefuente_servicios_prov($puc_retefuente_servicios_prov, $script_case_init)
-    {
-        global $inicial_terceros_mob;
-        //register_shutdown_function("terceros_mob_pack_ajax_response");
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_flag          = true;
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_opcao         = 'autocomp_puc_retefuente_servicios_prov';
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param'] = array(
-                  'puc_retefuente_servicios_prov' => NM_utf8_urldecode($puc_retefuente_servicios_prov),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        $inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_retefuente_servicios_prov'] = utf8_decode(urldecode($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['puc_retefuente_servicios_prov']));
-        if ($inicial_terceros_mob->contr_terceros_mob->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_terceros_mob->contr_terceros_mob->controle();
-        exit;
-    } // ajax_autocomp_puc_retefuente_servicios_prov
-
-    function ajax_terceros_mob_submit_form($tipo, $regimen, $tipo_documento, $documento, $dv, $codigo_tercero, $sexo, $notificar, $nombre1, $nombre2, $apellido1, $apellido2, $tel_cel, $urlmail, $idtercero, $r_social, $nombres, $nombre_comercil, $representante, $direccion, $departamento, $idmuni, $ciudad, $codigo_postal, $observaciones, $lenguaje, $c_postal, $correo_notificafe, $celular_notificafe, $cliente, $proveedor, $empleado, $es_tecnico, $activo, $credito, $cupo, $cupodis, $dias_credito, $dias_mora, $efec_retencion, $listaprecios, $loatiende, $autorizado, $relleno2, $sucur_cliente, $detalle_tributario, $responsabilidad_fiscal, $ciiu, $nacimiento, $fechault, $saldo, $afiliacion, $es_cajero, $cupo_vendedor, $autoretenedor, $creditoprov, $dias, $url, $contacto, $telefonos_prov, $email, $fechultcomp, $saldoapagar, $codigo_ter, $zona_clientes, $clasificacion_clientes, $puc_auxiliar_deudores, $puc_retefuente_ventas, $puc_retefuente_servicios_clie, $puc_auxiliar_proveedores, $puc_retefuente_compras, $puc_retefuente_servicios_prov, $archivo_cedula, $archivo_rut, $archivo_nit, $archivo_pago, $id_plan, $valor_plan, $fecha_registro_fe, $nombre_contador, $estado, $si_nomina, $n_trabajadores, $si_factura_electronica, $nombre_empresa_bd, $es_restaurante, $porcentaje_propina_sugerida, $archivo_cedula_ul_name, $archivo_cedula_ul_type, $archivo_rut_ul_name, $archivo_rut_ul_type, $archivo_nit_ul_name, $archivo_nit_ul_type, $archivo_pago_ul_name, $archivo_pago_ul_type, $archivo_cedula_salva, $archivo_cedula_limpa, $archivo_rut_salva, $archivo_rut_limpa, $archivo_nit_salva, $archivo_nit_limpa, $archivo_pago_salva, $archivo_pago_limpa, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_terceros_mob_submit_form($tipo, $regimen, $tipo_documento, $documento, $dv, $codigo_tercero, $sexo, $notificar, $nombre1, $nombre2, $apellido1, $apellido2, $tel_cel, $urlmail, $idtercero, $r_social, $nombres, $nombre_comercil, $representante, $direccion, $departamento, $idmuni, $ciudad, $codigo_postal, $observaciones, $lenguaje, $c_postal, $correo_notificafe, $celular_notificafe, $cliente, $proveedor, $empleado, $es_tecnico, $activo, $credito, $cupo, $cupodis, $dias_credito, $dias_mora, $efec_retencion, $listaprecios, $loatiende, $autorizado, $relleno2, $sucur_cliente, $detalle_tributario, $responsabilidad_fiscal, $ciiu, $nacimiento, $fechault, $saldo, $afiliacion, $es_cajero, $cupo_vendedor, $autoretenedor, $creditoprov, $dias, $url, $contacto, $telefonos_prov, $email, $fechultcomp, $saldoapagar, $codigo_ter, $zona_clientes, $clasificacion_clientes, $puc_auxiliar_deudores, $id_pucaux_cliente, $puc_retefuente_ventas, $id_pucaux_retteventas, $puc_retefuente_servicios_clie, $id_pucaux_retteservicios, $puc_auxiliar_proveedores, $id_pucaux_proveedor, $puc_retefuente_compras, $id_pucaux_rettecompras, $puc_retefuente_servicios_prov, $id_pucaux_rettesercomp, $archivo_cedula, $archivo_rut, $archivo_nit, $archivo_pago, $id_plan, $valor_plan, $fecha_registro_fe, $nombre_contador, $estado, $si_nomina, $n_trabajadores, $si_factura_electronica, $nombre_empresa_bd, $es_restaurante, $porcentaje_propina_sugerida, $archivo_cedula_ul_name, $archivo_cedula_ul_type, $archivo_rut_ul_name, $archivo_rut_ul_type, $archivo_nit_ul_name, $archivo_nit_ul_type, $archivo_pago_ul_name, $archivo_pago_ul_type, $archivo_cedula_salva, $archivo_cedula_limpa, $archivo_rut_salva, $archivo_rut_limpa, $archivo_nit_salva, $archivo_nit_limpa, $archivo_pago_salva, $archivo_pago_limpa, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_terceros_mob;
         //register_shutdown_function("terceros_mob_pack_ajax_response");
@@ -5723,11 +6494,17 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'zona_clientes' => NM_utf8_urldecode($zona_clientes),
                   'clasificacion_clientes' => NM_utf8_urldecode($clasificacion_clientes),
                   'puc_auxiliar_deudores' => NM_utf8_urldecode($puc_auxiliar_deudores),
+                  'id_pucaux_cliente' => NM_utf8_urldecode($id_pucaux_cliente),
                   'puc_retefuente_ventas' => NM_utf8_urldecode($puc_retefuente_ventas),
+                  'id_pucaux_retteventas' => NM_utf8_urldecode($id_pucaux_retteventas),
                   'puc_retefuente_servicios_clie' => NM_utf8_urldecode($puc_retefuente_servicios_clie),
+                  'id_pucaux_retteservicios' => NM_utf8_urldecode($id_pucaux_retteservicios),
                   'puc_auxiliar_proveedores' => NM_utf8_urldecode($puc_auxiliar_proveedores),
+                  'id_pucaux_proveedor' => NM_utf8_urldecode($id_pucaux_proveedor),
                   'puc_retefuente_compras' => NM_utf8_urldecode($puc_retefuente_compras),
+                  'id_pucaux_rettecompras' => NM_utf8_urldecode($id_pucaux_rettecompras),
                   'puc_retefuente_servicios_prov' => NM_utf8_urldecode($puc_retefuente_servicios_prov),
+                  'id_pucaux_rettesercomp' => NM_utf8_urldecode($id_pucaux_rettesercomp),
                   'archivo_cedula' => NM_utf8_urldecode($archivo_cedula),
                   'archivo_rut' => NM_utf8_urldecode($archivo_rut),
                   'archivo_nit' => NM_utf8_urldecode($archivo_nit),

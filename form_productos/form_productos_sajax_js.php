@@ -4756,6 +4756,265 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_form_productos_validate_idprod_cb
 
+  // ---------- Validate id_pucaux_inventario
+  function do_ajax_form_productos_validate_id_pucaux_inventario()
+  {
+    var nomeCampo_id_pucaux_inventario = "id_pucaux_inventario";
+    var var_id_pucaux_inventario = scAjaxGetFieldSelect(nomeCampo_id_pucaux_inventario);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_productos_validate_id_pucaux_inventario(var_id_pucaux_inventario, var_script_case_init, do_ajax_form_productos_validate_id_pucaux_inventario_cb);
+  } // do_ajax_form_productos_validate_id_pucaux_inventario
+
+  function do_ajax_form_productos_validate_id_pucaux_inventario_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_inventario";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_productos_validate_id_pucaux_inventario_cb
+
+  // ---------- Validate id_pucaux_ncc
+  function do_ajax_form_productos_validate_id_pucaux_ncc()
+  {
+    var nomeCampo_id_pucaux_ncc = "id_pucaux_ncc";
+    var var_id_pucaux_ncc = scAjaxGetFieldSelect(nomeCampo_id_pucaux_ncc);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_productos_validate_id_pucaux_ncc(var_id_pucaux_ncc, var_script_case_init, do_ajax_form_productos_validate_id_pucaux_ncc_cb);
+  } // do_ajax_form_productos_validate_id_pucaux_ncc
+
+  function do_ajax_form_productos_validate_id_pucaux_ncc_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_ncc";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_productos_validate_id_pucaux_ncc_cb
+
+  // ---------- Validate id_pucaux_ndc
+  function do_ajax_form_productos_validate_id_pucaux_ndc()
+  {
+    var nomeCampo_id_pucaux_ndc = "id_pucaux_ndc";
+    var var_id_pucaux_ndc = scAjaxGetFieldSelect(nomeCampo_id_pucaux_ndc);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_productos_validate_id_pucaux_ndc(var_id_pucaux_ndc, var_script_case_init, do_ajax_form_productos_validate_id_pucaux_ndc_cb);
+  } // do_ajax_form_productos_validate_id_pucaux_ndc
+
+  function do_ajax_form_productos_validate_id_pucaux_ndc_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_ndc";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_productos_validate_id_pucaux_ndc_cb
+
+  // ---------- Validate id_pucaux_ingresos
+  function do_ajax_form_productos_validate_id_pucaux_ingresos()
+  {
+    var nomeCampo_id_pucaux_ingresos = "id_pucaux_ingresos";
+    var var_id_pucaux_ingresos = scAjaxGetFieldSelect(nomeCampo_id_pucaux_ingresos);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_productos_validate_id_pucaux_ingresos(var_id_pucaux_ingresos, var_script_case_init, do_ajax_form_productos_validate_id_pucaux_ingresos_cb);
+  } // do_ajax_form_productos_validate_id_pucaux_ingresos
+
+  function do_ajax_form_productos_validate_id_pucaux_ingresos_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_ingresos";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_productos_validate_id_pucaux_ingresos_cb
+
+  // ---------- Validate id_pucaux_nc
+  function do_ajax_form_productos_validate_id_pucaux_nc()
+  {
+    var nomeCampo_id_pucaux_nc = "id_pucaux_nc";
+    var var_id_pucaux_nc = scAjaxGetFieldSelect(nomeCampo_id_pucaux_nc);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_productos_validate_id_pucaux_nc(var_id_pucaux_nc, var_script_case_init, do_ajax_form_productos_validate_id_pucaux_nc_cb);
+  } // do_ajax_form_productos_validate_id_pucaux_nc
+
+  function do_ajax_form_productos_validate_id_pucaux_nc_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_nc";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_productos_validate_id_pucaux_nc_cb
+
+  // ---------- Validate id_pucaux_nd
+  function do_ajax_form_productos_validate_id_pucaux_nd()
+  {
+    var nomeCampo_id_pucaux_nd = "id_pucaux_nd";
+    var var_id_pucaux_nd = scAjaxGetFieldSelect(nomeCampo_id_pucaux_nd);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_productos_validate_id_pucaux_nd(var_id_pucaux_nd, var_script_case_init, do_ajax_form_productos_validate_id_pucaux_nd_cb);
+  } // do_ajax_form_productos_validate_id_pucaux_nd
+
+  function do_ajax_form_productos_validate_id_pucaux_nd_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_nd";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_productos_validate_id_pucaux_nd_cb
+
+  // ---------- Validate id_pucaux_costoventas
+  function do_ajax_form_productos_validate_id_pucaux_costoventas()
+  {
+    var nomeCampo_id_pucaux_costoventas = "id_pucaux_costoventas";
+    var var_id_pucaux_costoventas = scAjaxGetFieldSelect(nomeCampo_id_pucaux_costoventas);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_productos_validate_id_pucaux_costoventas(var_id_pucaux_costoventas, var_script_case_init, do_ajax_form_productos_validate_id_pucaux_costoventas_cb);
+  } // do_ajax_form_productos_validate_id_pucaux_costoventas
+
+  function do_ajax_form_productos_validate_id_pucaux_costoventas_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_costoventas";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_productos_validate_id_pucaux_costoventas_cb
+
   // ---------- Validate id_marca
   function do_ajax_form_productos_validate_id_marca()
   {
@@ -6161,6 +6420,13 @@ function scJs_sweetalert_params(params) {
     var var_imagen = scAjaxGetFieldText("imagen");
     var var_cod_cuenta = scAjaxGetFieldSelect("cod_cuenta");
     var var_idprod = scAjaxGetFieldHidden("idprod");
+    var var_id_pucaux_inventario = scAjaxGetFieldSelect("id_pucaux_inventario");
+    var var_id_pucaux_ncc = scAjaxGetFieldSelect("id_pucaux_ncc");
+    var var_id_pucaux_ndc = scAjaxGetFieldSelect("id_pucaux_ndc");
+    var var_id_pucaux_ingresos = scAjaxGetFieldSelect("id_pucaux_ingresos");
+    var var_id_pucaux_nc = scAjaxGetFieldSelect("id_pucaux_nc");
+    var var_id_pucaux_nd = scAjaxGetFieldSelect("id_pucaux_nd");
+    var var_id_pucaux_costoventas = scAjaxGetFieldSelect("id_pucaux_costoventas");
     var var_id_marca = scAjaxGetFieldSelect("id_marca");
     var var_id_linea = scAjaxGetFieldSelect("id_linea");
     var var_codigobar2 = scAjaxGetFieldText("codigobar2");
@@ -6179,7 +6445,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_productos_submit_form(var_codigoprod, var_codigobar, var_nompro, var_idgrup, var_idpro1, var_tipo_producto, var_idpro2, var_otro, var_otro2, var_precio_editable, var_maneja_tcs_lfs, var_stockmen, var_unidmaymen, var_unimay, var_unimen, var_unidad_ma, var_unidad_, var_multiple_escala, var_en_base_a, var_costomen, var_costo_prom, var_recmayamen, var_idiva, var_existencia, var_u_menor, var_ubicacion, var_activo, var_colores, var_confcolor, var_tallas, var_conftalla, var_sabores, var_sabor, var_fecha_vencimiento, var_lote, var_serial_codbarras, var_relleno, var_control_costo, var_por_preciominimo, var_sugerido_mayor, var_sugerido_menor, var_preciofull, var_precio2, var_preciomay, var_preciomen, var_preciomen2, var_preciomen3, var_imagen, var_cod_cuenta, var_idprod, var_id_marca, var_id_linea, var_codigobar2, var_codigobar3, var_para_registro_fe, var_imagen_ul_name, var_imagen_ul_type, var_imagen_salva, var_imagen_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_productos_submit_form_cb);
+    x_ajax_form_productos_submit_form(var_codigoprod, var_codigobar, var_nompro, var_idgrup, var_idpro1, var_tipo_producto, var_idpro2, var_otro, var_otro2, var_precio_editable, var_maneja_tcs_lfs, var_stockmen, var_unidmaymen, var_unimay, var_unimen, var_unidad_ma, var_unidad_, var_multiple_escala, var_en_base_a, var_costomen, var_costo_prom, var_recmayamen, var_idiva, var_existencia, var_u_menor, var_ubicacion, var_activo, var_colores, var_confcolor, var_tallas, var_conftalla, var_sabores, var_sabor, var_fecha_vencimiento, var_lote, var_serial_codbarras, var_relleno, var_control_costo, var_por_preciominimo, var_sugerido_mayor, var_sugerido_menor, var_preciofull, var_precio2, var_preciomay, var_preciomen, var_preciomen2, var_preciomen3, var_imagen, var_cod_cuenta, var_idprod, var_id_pucaux_inventario, var_id_pucaux_ncc, var_id_pucaux_ndc, var_id_pucaux_ingresos, var_id_pucaux_nc, var_id_pucaux_nd, var_id_pucaux_costoventas, var_id_marca, var_id_linea, var_codigobar2, var_codigobar3, var_para_registro_fe, var_imagen_ul_name, var_imagen_ul_type, var_imagen_salva, var_imagen_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_productos_submit_form_cb);
   } // do_ajax_form_productos_submit_form
 
   function do_ajax_form_productos_submit_form_cb(sResp)
@@ -6253,6 +6519,13 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("imagen");
       scAjaxHideErrorDisplay("cod_cuenta");
       scAjaxHideErrorDisplay("idprod");
+      scAjaxHideErrorDisplay("id_pucaux_inventario");
+      scAjaxHideErrorDisplay("id_pucaux_ncc");
+      scAjaxHideErrorDisplay("id_pucaux_ndc");
+      scAjaxHideErrorDisplay("id_pucaux_ingresos");
+      scAjaxHideErrorDisplay("id_pucaux_nc");
+      scAjaxHideErrorDisplay("id_pucaux_nd");
+      scAjaxHideErrorDisplay("id_pucaux_costoventas");
       scAjaxHideErrorDisplay("id_marca");
       scAjaxHideErrorDisplay("id_linea");
       scAjaxHideErrorDisplay("codigobar2");
@@ -6373,6 +6646,13 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_productos']['dashbo
     scAjaxHideErrorDisplay("imagen");
     scAjaxHideErrorDisplay("cod_cuenta");
     scAjaxHideErrorDisplay("idprod");
+    scAjaxHideErrorDisplay("id_pucaux_inventario");
+    scAjaxHideErrorDisplay("id_pucaux_ncc");
+    scAjaxHideErrorDisplay("id_pucaux_ndc");
+    scAjaxHideErrorDisplay("id_pucaux_ingresos");
+    scAjaxHideErrorDisplay("id_pucaux_nc");
+    scAjaxHideErrorDisplay("id_pucaux_nd");
+    scAjaxHideErrorDisplay("id_pucaux_costoventas");
     scAjaxHideErrorDisplay("id_marca");
     scAjaxHideErrorDisplay("id_linea");
     scAjaxHideErrorDisplay("codigobar2");
@@ -6487,6 +6767,118 @@ if ($this->Embutida_form)
     scAjaxSetVariables();
   } // do_ajax_form_productos_lkpedt_refresh_idpro1_cb
 
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_inventario()
+  {
+    var var_id_pucaux_inventario = scAjaxGetFieldSelect("id_pucaux_inventario");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_inventario";
+    x_ajax_form_productos_lkpedt_refresh_id_pucaux_inventario(var_id_pucaux_inventario, nmgp_refresh_fields, var_script_case_init, do_ajax_form_productos_lkpedt_refresh_id_pucaux_inventario_cb);
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_inventario
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_inventario_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_inventario_cb
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_ncc()
+  {
+    var var_id_pucaux_ncc = scAjaxGetFieldSelect("id_pucaux_ncc");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_ncc";
+    x_ajax_form_productos_lkpedt_refresh_id_pucaux_ncc(var_id_pucaux_ncc, nmgp_refresh_fields, var_script_case_init, do_ajax_form_productos_lkpedt_refresh_id_pucaux_ncc_cb);
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_ncc
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_ncc_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_ncc_cb
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_ndc()
+  {
+    var var_id_pucaux_ndc = scAjaxGetFieldSelect("id_pucaux_ndc");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_ndc";
+    x_ajax_form_productos_lkpedt_refresh_id_pucaux_ndc(var_id_pucaux_ndc, nmgp_refresh_fields, var_script_case_init, do_ajax_form_productos_lkpedt_refresh_id_pucaux_ndc_cb);
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_ndc
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_ndc_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_ndc_cb
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_ingresos()
+  {
+    var var_id_pucaux_ingresos = scAjaxGetFieldSelect("id_pucaux_ingresos");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_ingresos";
+    x_ajax_form_productos_lkpedt_refresh_id_pucaux_ingresos(var_id_pucaux_ingresos, nmgp_refresh_fields, var_script_case_init, do_ajax_form_productos_lkpedt_refresh_id_pucaux_ingresos_cb);
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_ingresos
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_ingresos_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_ingresos_cb
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_nc()
+  {
+    var var_id_pucaux_nc = scAjaxGetFieldSelect("id_pucaux_nc");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_nc";
+    x_ajax_form_productos_lkpedt_refresh_id_pucaux_nc(var_id_pucaux_nc, nmgp_refresh_fields, var_script_case_init, do_ajax_form_productos_lkpedt_refresh_id_pucaux_nc_cb);
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_nc
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_nc_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_nc_cb
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_nd()
+  {
+    var var_id_pucaux_nd = scAjaxGetFieldSelect("id_pucaux_nd");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_nd";
+    x_ajax_form_productos_lkpedt_refresh_id_pucaux_nd(var_id_pucaux_nd, nmgp_refresh_fields, var_script_case_init, do_ajax_form_productos_lkpedt_refresh_id_pucaux_nd_cb);
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_nd
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_nd_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_nd_cb
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_costoventas()
+  {
+    var var_id_pucaux_costoventas = scAjaxGetFieldSelect("id_pucaux_costoventas");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_costoventas";
+    x_ajax_form_productos_lkpedt_refresh_id_pucaux_costoventas(var_id_pucaux_costoventas, nmgp_refresh_fields, var_script_case_init, do_ajax_form_productos_lkpedt_refresh_id_pucaux_costoventas_cb);
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_costoventas
+
+  function do_ajax_form_productos_lkpedt_refresh_id_pucaux_costoventas_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_form_productos_lkpedt_refresh_id_pucaux_costoventas_cb
+
   function do_ajax_form_productos_lkpedt_refresh_id_marca()
   {
     var var_id_marca = scAjaxGetFieldSelect("id_marca");
@@ -6581,11 +6973,18 @@ if ($this->Embutida_form)
   ajax_field_list[47] = "imagen";
   ajax_field_list[48] = "cod_cuenta";
   ajax_field_list[49] = "idprod";
-  ajax_field_list[50] = "id_marca";
-  ajax_field_list[51] = "id_linea";
-  ajax_field_list[52] = "codigobar2";
-  ajax_field_list[53] = "codigobar3";
-  ajax_field_list[54] = "para_registro_fe";
+  ajax_field_list[50] = "id_pucaux_inventario";
+  ajax_field_list[51] = "id_pucaux_ncc";
+  ajax_field_list[52] = "id_pucaux_ndc";
+  ajax_field_list[53] = "id_pucaux_ingresos";
+  ajax_field_list[54] = "id_pucaux_nc";
+  ajax_field_list[55] = "id_pucaux_nd";
+  ajax_field_list[56] = "id_pucaux_costoventas";
+  ajax_field_list[57] = "id_marca";
+  ajax_field_list[58] = "id_linea";
+  ajax_field_list[59] = "codigobar2";
+  ajax_field_list[60] = "codigobar3";
+  ajax_field_list[61] = "para_registro_fe";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -6597,6 +6996,7 @@ if ($this->Embutida_form)
   ajax_block_list[6] = "6";
   ajax_block_list[7] = "7";
   ajax_block_list[8] = "8";
+  ajax_block_list[9] = "9";
 
   var ajax_error_list = {
     "codigoprod": {"label": "Código producto", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -6649,6 +7049,13 @@ if ($this->Embutida_form)
     "imagen": {"label": "Imagen", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "cod_cuenta": {"label": "Grupo Contable", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "idprod": {"label": "Idprod", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_inventario": {"label": "Auxiliar Inventario", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_ncc": {"label": "Auxiliar NC en Compras", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_ndc": {"label": "Auxiliar ND en Compras", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_ingresos": {"label": "Auxiliar Ingresos", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_nc": {"label": "Auxiliar NC en Ventas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_nd": {"label": "Auxiliar ND en Ventas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_costoventas": {"label": "Auxiliar Costoventas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "id_marca": {"label": "Marca", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "id_linea": {"label": "Linea", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "codigobar2": {"label": "Código barras 2", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -6666,7 +7073,8 @@ if ($this->Embutida_form)
     "5": "hidden_bloco_5",
     "6": "hidden_bloco_6",
     "7": "hidden_bloco_7",
-    "8": "hidden_bloco_8"
+    "8": "hidden_bloco_8",
+    "9": "hidden_bloco_9"
   };
 
   var ajax_block_tab = {
@@ -6678,7 +7086,8 @@ if ($this->Embutida_form)
     "hidden_bloco_5": "",
     "hidden_bloco_6": "",
     "hidden_bloco_7": "",
-    "hidden_bloco_8": ""
+    "hidden_bloco_8": "",
+    "hidden_bloco_9": ""
   };
 
   var ajax_field_mult = {
@@ -6732,6 +7141,13 @@ if ($this->Embutida_form)
     "imagen": new Array(),
     "cod_cuenta": new Array(),
     "idprod": new Array(),
+    "id_pucaux_inventario": new Array(),
+    "id_pucaux_ncc": new Array(),
+    "id_pucaux_ndc": new Array(),
+    "id_pucaux_ingresos": new Array(),
+    "id_pucaux_nc": new Array(),
+    "id_pucaux_nd": new Array(),
+    "id_pucaux_costoventas": new Array(),
     "id_marca": new Array(),
     "id_linea": new Array(),
     "codigobar2": new Array(),
@@ -6788,6 +7204,13 @@ if ($this->Embutida_form)
   ajax_field_mult["imagen"][1] = "imagen";
   ajax_field_mult["cod_cuenta"][1] = "cod_cuenta";
   ajax_field_mult["idprod"][1] = "idprod";
+  ajax_field_mult["id_pucaux_inventario"][1] = "id_pucaux_inventario";
+  ajax_field_mult["id_pucaux_ncc"][1] = "id_pucaux_ncc";
+  ajax_field_mult["id_pucaux_ndc"][1] = "id_pucaux_ndc";
+  ajax_field_mult["id_pucaux_ingresos"][1] = "id_pucaux_ingresos";
+  ajax_field_mult["id_pucaux_nc"][1] = "id_pucaux_nc";
+  ajax_field_mult["id_pucaux_nd"][1] = "id_pucaux_nd";
+  ajax_field_mult["id_pucaux_costoventas"][1] = "id_pucaux_costoventas";
   ajax_field_mult["id_marca"][1] = "id_marca";
   ajax_field_mult["id_linea"][1] = "id_linea";
   ajax_field_mult["codigobar2"][1] = "codigobar2";
@@ -6838,7 +7261,13 @@ if ($this->Embutida_form)
     "preciomen2": new Array("hidden_field_label_preciomen2", "hidden_field_data_preciomen2"),
     "preciomen3": new Array("hidden_field_label_preciomen3", "hidden_field_data_preciomen3"),
     "imagen": new Array("hidden_field_label_imagen", "hidden_field_data_imagen"),
-    "cod_cuenta": new Array("hidden_field_label_cod_cuenta", "hidden_field_data_cod_cuenta"),
+    "id_pucaux_inventario": new Array("hidden_field_label_id_pucaux_inventario", "hidden_field_data_id_pucaux_inventario"),
+    "id_pucaux_ncc": new Array("hidden_field_label_id_pucaux_ncc", "hidden_field_data_id_pucaux_ncc"),
+    "id_pucaux_ndc": new Array("hidden_field_label_id_pucaux_ndc", "hidden_field_data_id_pucaux_ndc"),
+    "id_pucaux_ingresos": new Array("hidden_field_label_id_pucaux_ingresos", "hidden_field_data_id_pucaux_ingresos"),
+    "id_pucaux_nc": new Array("hidden_field_label_id_pucaux_nc", "hidden_field_data_id_pucaux_nc"),
+    "id_pucaux_nd": new Array("hidden_field_label_id_pucaux_nd", "hidden_field_data_id_pucaux_nd"),
+    "id_pucaux_costoventas": new Array("hidden_field_label_id_pucaux_costoventas", "hidden_field_data_id_pucaux_costoventas"),
     "id_marca": new Array("hidden_field_label_id_marca", "hidden_field_data_id_marca"),
     "id_linea": new Array("hidden_field_label_id_linea", "hidden_field_data_id_linea"),
     "codigobar2": new Array("hidden_field_label_codigobar2", "hidden_field_data_codigobar2"),
@@ -6897,6 +7326,13 @@ if ($this->Embutida_form)
     "imagen": "off",
     "cod_cuenta": "off",
     "idprod": "on",
+    "id_pucaux_inventario": "off",
+    "id_pucaux_ncc": "off",
+    "id_pucaux_ndc": "off",
+    "id_pucaux_ingresos": "off",
+    "id_pucaux_nc": "off",
+    "id_pucaux_nd": "off",
+    "id_pucaux_costoventas": "off",
     "id_marca": "off",
     "id_linea": "off",
     "codigobar2": "off",
@@ -7745,6 +8181,125 @@ if ($this->Embutida_form)
     if ("idprod" == sIndex)
     {
       scAjaxSetFieldLabel(sIndex, aValue);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_inventario" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_ncc" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_ndc" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_ingresos" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_nc" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_nd" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_costoventas" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

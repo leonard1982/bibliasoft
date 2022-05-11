@@ -923,10 +923,10 @@ class grid_terceros_contratos_detalle_generar_fv_grid
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="#61678C">
+                    <meta name="msapplication-TileColor" content="#3C4858">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="#61678C">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="#61678C">
+                    <meta name="theme-color" content="#3C4858">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="#3C4858">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -1019,10 +1019,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#61678C\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#3C4858\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#61678C\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#61678C\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#3C4858\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#3C4858\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_detalle_generar_fv']['doc_word'])
@@ -4515,25 +4515,9 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_detall
    }
    if ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_detalle_generar_fv']['opcao'] != "pdf" && !$_SESSION['scriptcase']['proc_mobile'])
    { 
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_detalle_generar_fv']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_detalle_generar_fv']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    elseif ($this->Rec_ini == 0 && empty($this->nm_grid_sem_reg) && !$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_detalle_generar_fv']['opcao'] != "pdf" && $_SESSION['scriptcase']['proc_mobile'])
    { 
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_detalle_generar_fv']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'first_bot', 'value' => "true");
-       }
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_contratos_detalle_generar_fv']['ajax_nav'])
-       {
-           $this->Ini->Arr_result['setDisabled'][] = array('field' => 'back_bot', 'value' => "true");
-       }
    } 
    $nm_saida->saida("  $(window).scroll(function() {\r\n");
    $nm_saida->saida("   if (typeof(scSetFixedHeaders) === typeof(function(){})) scSetFixedHeaders();\r\n");

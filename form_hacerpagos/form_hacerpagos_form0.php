@@ -15,7 +15,7 @@ header("X-Frame-Options: SAMEORIGIN");
 
 <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("Pagos a terceros"); } else { echo strip_tags("Pagos a terceros"); } ?></TITLE>
+ <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("Hacer comprobante de egreso"); } else { echo strip_tags("Editar comprobante de egreso"); } ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT" />
  <META http-equiv="Last-Modified" content="<?php echo gmdate('D, d M Y H:i:s') ?> GMT" />
@@ -642,6 +642,76 @@ sc_userSweetAlertDisplayed = false;
   <td>
   <div class="scFormBorder" style="<?php echo (isset($remove_border) ? $remove_border : ''); ?>">
    <table width='100%' cellspacing=0 cellpadding=0>
+<?php
+  if (!$this->Embutida_call && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['mostra_cab']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['mostra_cab'] != "N") && (!$_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['dashboard_info']['under_dashboard'] || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['dashboard_info']['compact_mode'] || $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['dashboard_info']['maximized']))
+  {
+?>
+<tr><td>
+   <TABLE width="100%" class="scFormHeader">
+    <TR align="center">
+     <TD style="padding: 0px">
+      <TABLE style="padding: 0px; border-spacing: 0px; border-width: 0px;" width="100%">
+       <TR valign="middle">
+        <TD align="left" rowspan="3" class="scFormHeaderFont">
+          
+        </TD>
+        <TD align="left" class="scFormHeaderFont">
+          <?php if ($this->nmgp_opcao == "novo") { echo "Hacer comprobante de egreso"; } else { echo "Editar comprobante de egreso"; } ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          <?php echo date($this->dateDefaultFormat()); ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>
+   </TABLE></td></tr>
+<?php
+  }
+?>
 <tr><td>
 <?php
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['run_iframe'] != "R")
@@ -751,6 +821,44 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         }
 ?>
 <?php echo nmButtonOutput($this->arr_buttons, "bexcluir", "scBtnFn_sys_format_exc()", "scBtnFn_sys_format_exc()", "sc_b_del_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes != "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['refrescar'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_disabled']['refrescar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_disabled']['refrescar']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_label']['refrescar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_label']['refrescar']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_label']['refrescar'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "refrescar", "scBtnFn_refrescar()", "scBtnFn_refrescar()", "sc_refrescar_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes == "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['refrescar'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_disabled']['refrescar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_disabled']['refrescar']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_label']['refrescar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_label']['refrescar']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_hacerpagos']['btn_label']['refrescar'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "refrescar", "scBtnFn_refrescar()", "scBtnFn_refrescar()", "sc_refrescar_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -2083,18 +2191,9 @@ $asent_look = "";
 <input type="hidden" name="valpagar" value="<?php echo $this->form_encode_input($valpagar) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOdd css_valpagar_line" id="hidden_field_data_valpagar" style="<?php echo $sStyleHidden_valpagar; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_valpagar_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_valpagar_label" style=""><span id="id_label_valpagar"><?php echo $this->nm_new_label['valpagar']; ?></span></span><br><input type="hidden" name="valpagar" value="<?php echo $this->form_encode_input($valpagar); ?>"><span id="id_ajax_label_valpagar"><?php echo nl2br($valpagar); ?></span>
-<span class="scFormPopupBubble" style="display: inline-block"><span class="scFormPopupTrigger"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "return false;", "return false;", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
-</span><table class="scFormPopup"><tbody><?php
-if (isset($_SESSION['scriptcase']['reg_conf']['html_dir']) && $_SESSION['scriptcase']['reg_conf']['html_dir'] == " DIR='RTL'") {
-?>
-<tr><td class="scFormPopupTopRight scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopLeft scFormPopupCorner"></td></tr><tr><td class="scFormPopupRight"></td><td class="scFormPopupContent">Si el pago es sobre una compra, y es solo un abono, se recomienda dejar las tasas de retenciones que trae de la factura, pero colocar los valores (Valor retención, valor retenido ICA, Valor rete IVA y Descuento) en 0.</td><td class="scFormPopupLeft"></td></tr><tr><td class="scFormPopupBottomRight scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomLeft scFormPopupCorner"></td></tr><?php
-} else {
-?>
-<tr><td class="scFormPopupTopLeft scFormPopupCorner"></td><td class="scFormPopupTop"></td><td class="scFormPopupTopRight scFormPopupCorner"></td></tr><tr><td class="scFormPopupLeft"></td><td class="scFormPopupContent">Si el pago es sobre una compra, y es solo un abono, se recomienda dejar las tasas de retenciones que trae de la factura, pero colocar los valores (Valor retención, valor retenido ICA, Valor rete IVA y Descuento) en 0.</td><td class="scFormPopupRight"></td></tr><tr><td class="scFormPopupBottomLeft scFormPopupCorner"></td><td class="scFormPopupBottom"><img src="<?php echo $this->Ini->path_icones . '/' . $this->Ini->Bubble_tail; ?>" /></td><td class="scFormPopupBottomRight scFormPopupCorner"></td></tr><?php
-}
-?>
-</tbody></table></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_valpagar_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_valpagar_text"></span></td></tr></table></td></tr></table> </TD>
+    <TD class="scFormDataOdd css_valpagar_line" id="hidden_field_data_valpagar" style="<?php echo $sStyleHidden_valpagar; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_valpagar_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_valpagar_label" style=""><span id="id_label_valpagar"><?php echo $this->nm_new_label['valpagar']; ?></span><span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('valpagar')", "nm_mostra_mens('valpagar')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></span><br><input type="hidden" name="valpagar" value="<?php echo $this->form_encode_input($valpagar); ?>"><span id="id_ajax_label_valpagar"><?php echo nl2br($valpagar); ?></span>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_valpagar_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_valpagar_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 

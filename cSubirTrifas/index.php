@@ -220,8 +220,8 @@ class cSubirTrifas_ini
       $this->nm_dt_criacao   = "20191002"; 
       $this->nm_hr_criacao   = "233303"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220405"; 
-      $this->nm_hr_ult_alt   = "093120"; 
+      $this->nm_dt_ult_alt   = "20220425"; 
+      $this->nm_hr_ult_alt   = "155927"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -913,7 +913,7 @@ class cSubirTrifas_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['cSubirTrifas']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['cSubirTrifas']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYZSFUHAN7HuJwDMvsVcBUDur/VErqHQXOZSBODSrYHQNUDErKHEFiDWrGZuBOD9XsDQFaHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJsHABYHuBiHuNODkB/DurGVEraHQXOZSBqZ1vmD5XGDEBOHArsDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/D1rwHuX7DEvsHEXeDWr/VoXGD9NwH9FUD1veV5BOHuvmVcBODWF/VoB/D9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWJeHMBODcBqH9FaHAvCZMXGDErKHEFiDWXCHIraHQBiZSFGHIrwHuBqHuNOV9FeV5X7VEraDcNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNwZ1BiHAvCZMFaHgBeHEFiV5B3DoF7D9XsDuFaHANKVWXGHgrwVcFeDuX7VoB/DcBqH9B/D1rKZMBqDEvsDkXKH5F/HMJeHQNwDuBqHAN7VWBqDMzGVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOZSFGHAN7D5JwDMvODkFCH5XCHIX7HQBiZkFGZ1NOHQX7DMzGVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEF7HQBsH9BqHIBeHQJeHgvsVkJ3V5XCZuXGDcBiDQBqHAvmV5XGDMzGZSNiH5XKVEX7HQXGH9BOHArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5FGDMBODkFCDWFYVoBOD9JmZ1FaHAN7HuFUDErKVkXeHEFqVoBODcJeDQFGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcrsH5XCHMJwD9BiH9FaD1rwHQNUHgveZSJ3DWX7VoJeD9NwZ9XGD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJwDMvOV9BUDWFaHMBiD9BsVIraD1rwV5X7HgBeHErCDuFaZuFaHQJeDQJsZ1NaVWBqHgrKZSJqDWF/HMF7DcJUZkFGHIveHuBODMvCVkJ3H5FYHMJsHQNmZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2034,10 +2034,25 @@ class cSubirTrifas_apl
           { 
                  $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
                  $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[8] = str_replace(',', '.', $SCrx->fields[8]);
+                 $SCrx->fields[9] = str_replace(',', '.', $SCrx->fields[9]);
+                 $SCrx->fields[10] = str_replace(',', '.', $SCrx->fields[10]);
+                 $SCrx->fields[11] = str_replace(',', '.', $SCrx->fields[11]);
+                 $SCrx->fields[12] = str_replace(',', '.', $SCrx->fields[12]);
                  $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
                  $SCrx->fields[0] = (string)$SCrx->fields[0];
                  $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
                  $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[8] = (strpos(strtolower($SCrx->fields[8]), "e")) ? (float)$SCrx->fields[8] : $SCrx->fields[8];
+                 $SCrx->fields[8] = (string)$SCrx->fields[8];
+                 $SCrx->fields[9] = (strpos(strtolower($SCrx->fields[9]), "e")) ? (float)$SCrx->fields[9] : $SCrx->fields[9];
+                 $SCrx->fields[9] = (string)$SCrx->fields[9];
+                 $SCrx->fields[10] = (strpos(strtolower($SCrx->fields[10]), "e")) ? (float)$SCrx->fields[10] : $SCrx->fields[10];
+                 $SCrx->fields[10] = (string)$SCrx->fields[10];
+                 $SCrx->fields[11] = (strpos(strtolower($SCrx->fields[11]), "e")) ? (float)$SCrx->fields[11] : $SCrx->fields[11];
+                 $SCrx->fields[11] = (string)$SCrx->fields[11];
+                 $SCrx->fields[12] = (strpos(strtolower($SCrx->fields[12]), "e")) ? (float)$SCrx->fields[12] : $SCrx->fields[12];
+                 $SCrx->fields[12] = (string)$SCrx->fields[12];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
                         $this->vSiExiste[$SCy] [$SCx] = $SCrx->fields[$SCx];
@@ -2112,10 +2127,25 @@ if(isset($this->vsiexiste[0][0]))
           { 
                  $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
                  $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[8] = str_replace(',', '.', $SCrx->fields[8]);
+                 $SCrx->fields[9] = str_replace(',', '.', $SCrx->fields[9]);
+                 $SCrx->fields[10] = str_replace(',', '.', $SCrx->fields[10]);
+                 $SCrx->fields[11] = str_replace(',', '.', $SCrx->fields[11]);
+                 $SCrx->fields[12] = str_replace(',', '.', $SCrx->fields[12]);
                  $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
                  $SCrx->fields[0] = (string)$SCrx->fields[0];
                  $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
                  $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[8] = (strpos(strtolower($SCrx->fields[8]), "e")) ? (float)$SCrx->fields[8] : $SCrx->fields[8];
+                 $SCrx->fields[8] = (string)$SCrx->fields[8];
+                 $SCrx->fields[9] = (strpos(strtolower($SCrx->fields[9]), "e")) ? (float)$SCrx->fields[9] : $SCrx->fields[9];
+                 $SCrx->fields[9] = (string)$SCrx->fields[9];
+                 $SCrx->fields[10] = (strpos(strtolower($SCrx->fields[10]), "e")) ? (float)$SCrx->fields[10] : $SCrx->fields[10];
+                 $SCrx->fields[10] = (string)$SCrx->fields[10];
+                 $SCrx->fields[11] = (strpos(strtolower($SCrx->fields[11]), "e")) ? (float)$SCrx->fields[11] : $SCrx->fields[11];
+                 $SCrx->fields[11] = (string)$SCrx->fields[11];
+                 $SCrx->fields[12] = (strpos(strtolower($SCrx->fields[12]), "e")) ? (float)$SCrx->fields[12] : $SCrx->fields[12];
+                 $SCrx->fields[12] = (string)$SCrx->fields[12];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
                         $this->vDatos[$SCy] [$SCx] = $SCrx->fields[$SCx];
@@ -2181,10 +2211,25 @@ if(isset($this->vsiexiste[0][0]))
           { 
                  $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
                  $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[8] = str_replace(',', '.', $SCrx->fields[8]);
+                 $SCrx->fields[9] = str_replace(',', '.', $SCrx->fields[9]);
+                 $SCrx->fields[10] = str_replace(',', '.', $SCrx->fields[10]);
+                 $SCrx->fields[11] = str_replace(',', '.', $SCrx->fields[11]);
+                 $SCrx->fields[12] = str_replace(',', '.', $SCrx->fields[12]);
                  $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
                  $SCrx->fields[0] = (string)$SCrx->fields[0];
                  $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
                  $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[8] = (strpos(strtolower($SCrx->fields[8]), "e")) ? (float)$SCrx->fields[8] : $SCrx->fields[8];
+                 $SCrx->fields[8] = (string)$SCrx->fields[8];
+                 $SCrx->fields[9] = (strpos(strtolower($SCrx->fields[9]), "e")) ? (float)$SCrx->fields[9] : $SCrx->fields[9];
+                 $SCrx->fields[9] = (string)$SCrx->fields[9];
+                 $SCrx->fields[10] = (strpos(strtolower($SCrx->fields[10]), "e")) ? (float)$SCrx->fields[10] : $SCrx->fields[10];
+                 $SCrx->fields[10] = (string)$SCrx->fields[10];
+                 $SCrx->fields[11] = (strpos(strtolower($SCrx->fields[11]), "e")) ? (float)$SCrx->fields[11] : $SCrx->fields[11];
+                 $SCrx->fields[11] = (string)$SCrx->fields[11];
+                 $SCrx->fields[12] = (strpos(strtolower($SCrx->fields[12]), "e")) ? (float)$SCrx->fields[12] : $SCrx->fields[12];
+                 $SCrx->fields[12] = (string)$SCrx->fields[12];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
                         $this->vVerificar[$SCy] [$SCx] = $SCrx->fields[$SCx];

@@ -476,7 +476,7 @@ class grid_productos_total
    //----- 
    function Calc_resumo_sc_free_group_by($destino_resumo)
    {
-      global $nm_lang, $btn_stock, $agregarnotainv, $sc_field_0, $idgrup, $idiva;
+      global $nm_lang, $btn_stock, $combo, $agregarnotainv, $sc_field_0, $idgrup, $idiva;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos']['campos_busca']))

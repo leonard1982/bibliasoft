@@ -98,11 +98,17 @@ function scFocusField(sField) {
       case 'zona_clientes':
       case 'clasificacion_clientes':
       case 'puc_auxiliar_deudores':
+      case 'id_pucaux_cliente':
       case 'puc_retefuente_ventas':
+      case 'id_pucaux_retteventas':
       case 'puc_retefuente_servicios_clie':
+      case 'id_pucaux_retteservicios':
       case 'puc_auxiliar_proveedores':
+      case 'id_pucaux_proveedor':
       case 'puc_retefuente_compras':
+      case 'id_pucaux_rettecompras':
       case 'puc_retefuente_servicios_prov':
+      case 'id_pucaux_rettesercomp':
       case 'archivo_cedula':
       case 'archivo_rut':
       case 'archivo_nit':
@@ -227,11 +233,17 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["zona_clientes" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["clasificacion_clientes" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_auxiliar_deudores" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_cliente" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_retefuente_ventas" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_retteventas" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_retefuente_servicios_clie" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_retteservicios" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_auxiliar_proveedores" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_proveedor" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_retefuente_compras" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_rettecompras" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_retefuente_servicios_prov" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_rettesercomp" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["archivo_cedula" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["archivo_rut" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["archivo_nit" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -659,10 +671,22 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["puc_auxiliar_deudores" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["id_pucaux_cliente" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_cliente" + iSeqRow]["change"]) {
+    return true;
+  }
   if (scEventControl_data["puc_retefuente_ventas" + iSeqRow]["blur"]) {
     return true;
   }
   if (scEventControl_data["puc_retefuente_ventas" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_retteventas" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_retteventas" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["puc_retefuente_servicios_clie" + iSeqRow]["blur"]) {
@@ -671,10 +695,22 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["puc_retefuente_servicios_clie" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["id_pucaux_retteservicios" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_retteservicios" + iSeqRow]["change"]) {
+    return true;
+  }
   if (scEventControl_data["puc_auxiliar_proveedores" + iSeqRow]["blur"]) {
     return true;
   }
   if (scEventControl_data["puc_auxiliar_proveedores" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_proveedor" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_proveedor" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["puc_retefuente_compras" + iSeqRow]["blur"]) {
@@ -683,10 +719,22 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["puc_retefuente_compras" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["id_pucaux_rettecompras" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_rettecompras" + iSeqRow]["change"]) {
+    return true;
+  }
   if (scEventControl_data["puc_retefuente_servicios_prov" + iSeqRow]["blur"]) {
     return true;
   }
   if (scEventControl_data["puc_retefuente_servicios_prov" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_rettesercomp" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_rettesercomp" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["id_plan" + iSeqRow]["blur"]) {
@@ -761,24 +809,6 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["porcentaje_propina_sugerida" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["puc_auxiliar_deudores" + iSeqRow]["autocomp"]) {
-    return true;
-  }
-  if (scEventControl_data["puc_retefuente_ventas" + iSeqRow]["autocomp"]) {
-    return true;
-  }
-  if (scEventControl_data["puc_retefuente_servicios_clie" + iSeqRow]["autocomp"]) {
-    return true;
-  }
-  if (scEventControl_data["puc_auxiliar_proveedores" + iSeqRow]["autocomp"]) {
-    return true;
-  }
-  if (scEventControl_data["puc_retefuente_compras" + iSeqRow]["autocomp"]) {
-    return true;
-  }
-  if (scEventControl_data["puc_retefuente_servicios_prov" + iSeqRow]["autocomp"]) {
-    return true;
-  }
   return false;
 } // scEventControl_active
 
@@ -836,6 +866,42 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("clasificacion_clientes" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc_auxiliar_deudores" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_cliente" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc_retefuente_ventas" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_retteventas" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc_retefuente_servicios_clie" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_retteservicios" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc_auxiliar_proveedores" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_proveedor" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc_retefuente_compras" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_rettecompras" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc_retefuente_servicios_prov" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_rettesercomp" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("id_plan" + iSeq == fieldName) {
@@ -905,6 +971,42 @@ function scEventControl_onFocus(oField, iSeq) {
     return;
   }
   if ("proveedor" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
+  if ("puc_auxiliar_deudores" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
+  if ("puc_auxiliar_proveedores" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
+  if ("puc_retefuente_compras" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
+  if ("puc_retefuente_servicios_clie" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
+  if ("puc_retefuente_servicios_prov" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
+  if ("puc_retefuente_ventas" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
     scEventControl_data[fieldName]["original"] = $(oField).val();
     scEventControl_data[fieldName]["calculated"] = $(oField).val();
@@ -1088,16 +1190,22 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_notificar' + iSeqRow).bind('blur', function() { sc_terceros_notificar_onblur(this, iSeqRow) })
                                        .bind('focus', function() { sc_terceros_notificar_onfocus(this, iSeqRow) });
   $('#id_sc_field_puc_auxiliar_deudores' + iSeqRow).bind('blur', function() { sc_terceros_puc_auxiliar_deudores_onblur(this, iSeqRow) })
+                                                   .bind('change', function() { sc_terceros_puc_auxiliar_deudores_onchange(this, iSeqRow) })
                                                    .bind('focus', function() { sc_terceros_puc_auxiliar_deudores_onfocus(this, iSeqRow) });
   $('#id_sc_field_puc_retefuente_ventas' + iSeqRow).bind('blur', function() { sc_terceros_puc_retefuente_ventas_onblur(this, iSeqRow) })
+                                                   .bind('change', function() { sc_terceros_puc_retefuente_ventas_onchange(this, iSeqRow) })
                                                    .bind('focus', function() { sc_terceros_puc_retefuente_ventas_onfocus(this, iSeqRow) });
   $('#id_sc_field_puc_retefuente_servicios_clie' + iSeqRow).bind('blur', function() { sc_terceros_puc_retefuente_servicios_clie_onblur(this, iSeqRow) })
+                                                           .bind('change', function() { sc_terceros_puc_retefuente_servicios_clie_onchange(this, iSeqRow) })
                                                            .bind('focus', function() { sc_terceros_puc_retefuente_servicios_clie_onfocus(this, iSeqRow) });
   $('#id_sc_field_puc_auxiliar_proveedores' + iSeqRow).bind('blur', function() { sc_terceros_puc_auxiliar_proveedores_onblur(this, iSeqRow) })
+                                                      .bind('change', function() { sc_terceros_puc_auxiliar_proveedores_onchange(this, iSeqRow) })
                                                       .bind('focus', function() { sc_terceros_puc_auxiliar_proveedores_onfocus(this, iSeqRow) });
   $('#id_sc_field_puc_retefuente_compras' + iSeqRow).bind('blur', function() { sc_terceros_puc_retefuente_compras_onblur(this, iSeqRow) })
+                                                    .bind('change', function() { sc_terceros_puc_retefuente_compras_onchange(this, iSeqRow) })
                                                     .bind('focus', function() { sc_terceros_puc_retefuente_compras_onfocus(this, iSeqRow) });
   $('#id_sc_field_puc_retefuente_servicios_prov' + iSeqRow).bind('blur', function() { sc_terceros_puc_retefuente_servicios_prov_onblur(this, iSeqRow) })
+                                                           .bind('change', function() { sc_terceros_puc_retefuente_servicios_prov_onchange(this, iSeqRow) })
                                                            .bind('focus', function() { sc_terceros_puc_retefuente_servicios_prov_onfocus(this, iSeqRow) });
   $('#id_sc_field_activo' + iSeqRow).bind('blur', function() { sc_terceros_activo_onblur(this, iSeqRow) })
                                     .bind('focus', function() { sc_terceros_activo_onfocus(this, iSeqRow) });
@@ -1139,6 +1247,18 @@ function scJQEventsAdd(iSeqRow) {
                                                .bind('focus', function() { sc_terceros_nombre_empresa_bd_onfocus(this, iSeqRow) });
   $('#id_sc_field_n_trabajadores' + iSeqRow).bind('blur', function() { sc_terceros_n_trabajadores_onblur(this, iSeqRow) })
                                             .bind('focus', function() { sc_terceros_n_trabajadores_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_cliente' + iSeqRow).bind('blur', function() { sc_terceros_id_pucaux_cliente_onblur(this, iSeqRow) })
+                                               .bind('focus', function() { sc_terceros_id_pucaux_cliente_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_retteventas' + iSeqRow).bind('blur', function() { sc_terceros_id_pucaux_retteventas_onblur(this, iSeqRow) })
+                                                   .bind('focus', function() { sc_terceros_id_pucaux_retteventas_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_retteservicios' + iSeqRow).bind('blur', function() { sc_terceros_id_pucaux_retteservicios_onblur(this, iSeqRow) })
+                                                      .bind('focus', function() { sc_terceros_id_pucaux_retteservicios_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_proveedor' + iSeqRow).bind('blur', function() { sc_terceros_id_pucaux_proveedor_onblur(this, iSeqRow) })
+                                                 .bind('focus', function() { sc_terceros_id_pucaux_proveedor_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_rettecompras' + iSeqRow).bind('blur', function() { sc_terceros_id_pucaux_rettecompras_onblur(this, iSeqRow) })
+                                                    .bind('focus', function() { sc_terceros_id_pucaux_rettecompras_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_rettesercomp' + iSeqRow).bind('blur', function() { sc_terceros_id_pucaux_rettesercomp_onblur(this, iSeqRow) })
+                                                    .bind('focus', function() { sc_terceros_id_pucaux_rettesercomp_onfocus(this, iSeqRow) });
   $('#id_sc_field_archivos' + iSeqRow).bind('blur', function() { sc_terceros_archivos_onblur(this, iSeqRow) })
                                       .bind('focus', function() { sc_terceros_archivos_onfocus(this, iSeqRow) });
   $('#id_sc_field_c_postal' + iSeqRow).bind('blur', function() { sc_terceros_c_postal_onblur(this, iSeqRow) })
@@ -1152,6 +1272,8 @@ function scJQEventsAdd(iSeqRow) {
                                           .bind('focus', function() { sc_terceros_departamento_onfocus(this, iSeqRow) });
   $('#id_sc_field_detalle_tributario' + iSeqRow).bind('blur', function() { sc_terceros_detalle_tributario_onblur(this, iSeqRow) })
                                                 .bind('focus', function() { sc_terceros_detalle_tributario_onfocus(this, iSeqRow) });
+  $('#id_sc_field_direcciones' + iSeqRow).bind('blur', function() { sc_terceros_direcciones_onblur(this, iSeqRow) })
+                                         .bind('focus', function() { sc_terceros_direcciones_onfocus(this, iSeqRow) });
   $('#id_sc_field_r_social' + iSeqRow).bind('blur', function() { sc_terceros_r_social_onblur(this, iSeqRow) })
                                       .bind('change', function() { sc_terceros_r_social_onchange(this, iSeqRow) })
                                       .bind('focus', function() { sc_terceros_r_social_onfocus(this, iSeqRow) });
@@ -1159,8 +1281,6 @@ function scJQEventsAdd(iSeqRow) {
                                       .bind('focus', function() { sc_terceros_relleno2_onfocus(this, iSeqRow) });
   $('#id_sc_field_responsabilidad_fiscal' + iSeqRow).bind('blur', function() { sc_terceros_responsabilidad_fiscal_onblur(this, iSeqRow) })
                                                     .bind('focus', function() { sc_terceros_responsabilidad_fiscal_onfocus(this, iSeqRow) });
-  $('#id_sc_field_direcciones' + iSeqRow).bind('blur', function() { sc_terceros_direcciones_onblur(this, iSeqRow) })
-                                         .bind('focus', function() { sc_terceros_direcciones_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-notificar' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-cliente' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-proveedor' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -1786,7 +1906,12 @@ function sc_terceros_puc_auxiliar_deudores_onblur(oThis, iSeqRow) {
   scCssBlur(oThis);
 }
 
+function sc_terceros_puc_auxiliar_deudores_onchange(oThis, iSeqRow) {
+  do_ajax_terceros_mob_event_puc_auxiliar_deudores_onchange();
+}
+
 function sc_terceros_puc_auxiliar_deudores_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
@@ -1795,7 +1920,12 @@ function sc_terceros_puc_retefuente_ventas_onblur(oThis, iSeqRow) {
   scCssBlur(oThis);
 }
 
+function sc_terceros_puc_retefuente_ventas_onchange(oThis, iSeqRow) {
+  do_ajax_terceros_mob_event_puc_retefuente_ventas_onchange();
+}
+
 function sc_terceros_puc_retefuente_ventas_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
@@ -1804,7 +1934,12 @@ function sc_terceros_puc_retefuente_servicios_clie_onblur(oThis, iSeqRow) {
   scCssBlur(oThis);
 }
 
+function sc_terceros_puc_retefuente_servicios_clie_onchange(oThis, iSeqRow) {
+  do_ajax_terceros_mob_event_puc_retefuente_servicios_clie_onchange();
+}
+
 function sc_terceros_puc_retefuente_servicios_clie_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
@@ -1813,7 +1948,12 @@ function sc_terceros_puc_auxiliar_proveedores_onblur(oThis, iSeqRow) {
   scCssBlur(oThis);
 }
 
+function sc_terceros_puc_auxiliar_proveedores_onchange(oThis, iSeqRow) {
+  do_ajax_terceros_mob_event_puc_auxiliar_proveedores_onchange();
+}
+
 function sc_terceros_puc_auxiliar_proveedores_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
@@ -1822,7 +1962,12 @@ function sc_terceros_puc_retefuente_compras_onblur(oThis, iSeqRow) {
   scCssBlur(oThis);
 }
 
+function sc_terceros_puc_retefuente_compras_onchange(oThis, iSeqRow) {
+  do_ajax_terceros_mob_event_puc_retefuente_compras_onchange();
+}
+
 function sc_terceros_puc_retefuente_compras_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
@@ -1831,7 +1976,12 @@ function sc_terceros_puc_retefuente_servicios_prov_onblur(oThis, iSeqRow) {
   scCssBlur(oThis);
 }
 
+function sc_terceros_puc_retefuente_servicios_prov_onchange(oThis, iSeqRow) {
+  do_ajax_terceros_mob_event_puc_retefuente_servicios_prov_onchange();
+}
+
 function sc_terceros_puc_retefuente_servicios_prov_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
@@ -2027,6 +2177,66 @@ function sc_terceros_n_trabajadores_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_terceros_id_pucaux_cliente_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_id_pucaux_cliente();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_id_pucaux_cliente_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_id_pucaux_retteventas_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_id_pucaux_retteventas();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_id_pucaux_retteventas_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_id_pucaux_retteservicios_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_id_pucaux_retteservicios();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_id_pucaux_retteservicios_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_id_pucaux_proveedor_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_id_pucaux_proveedor();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_id_pucaux_proveedor_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_id_pucaux_rettecompras_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_id_pucaux_rettecompras();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_id_pucaux_rettecompras_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_terceros_id_pucaux_rettesercomp_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_id_pucaux_rettesercomp();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_id_pucaux_rettesercomp_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_terceros_archivos_onblur(oThis, iSeqRow) {
   do_ajax_terceros_mob_validate_archivos();
   scCssBlur(oThis);
@@ -2091,6 +2301,16 @@ function sc_terceros_detalle_tributario_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_terceros_direcciones_onblur(oThis, iSeqRow) {
+  do_ajax_terceros_mob_validate_direcciones();
+  scCssBlur(oThis);
+}
+
+function sc_terceros_direcciones_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_terceros_r_social_onblur(oThis, iSeqRow) {
   do_ajax_terceros_mob_validate_r_social();
   scCssBlur(oThis);
@@ -2121,16 +2341,6 @@ function sc_terceros_responsabilidad_fiscal_onblur(oThis, iSeqRow) {
 }
 
 function sc_terceros_responsabilidad_fiscal_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
-}
-
-function sc_terceros_direcciones_onblur(oThis, iSeqRow) {
-  do_ajax_terceros_mob_validate_direcciones();
-  scCssBlur(oThis);
-}
-
-function sc_terceros_direcciones_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
@@ -2380,11 +2590,17 @@ function displayChange_block_15(status) {
 
 function displayChange_block_16(status) {
 	displayChange_field("puc_auxiliar_deudores", "", status);
+	displayChange_field("id_pucaux_cliente", "", status);
 	displayChange_field("puc_retefuente_ventas", "", status);
+	displayChange_field("id_pucaux_retteventas", "", status);
 	displayChange_field("puc_retefuente_servicios_clie", "", status);
+	displayChange_field("id_pucaux_retteservicios", "", status);
 	displayChange_field("puc_auxiliar_proveedores", "", status);
+	displayChange_field("id_pucaux_proveedor", "", status);
 	displayChange_field("puc_retefuente_compras", "", status);
+	displayChange_field("id_pucaux_rettecompras", "", status);
 	displayChange_field("puc_retefuente_servicios_prov", "", status);
+	displayChange_field("id_pucaux_rettesercomp", "", status);
 }
 
 function displayChange_block_17(status) {
@@ -2481,11 +2697,17 @@ function displayChange_row(row, status) {
 	displayChange_field_zona_clientes(row, status);
 	displayChange_field_clasificacion_clientes(row, status);
 	displayChange_field_puc_auxiliar_deudores(row, status);
+	displayChange_field_id_pucaux_cliente(row, status);
 	displayChange_field_puc_retefuente_ventas(row, status);
+	displayChange_field_id_pucaux_retteventas(row, status);
 	displayChange_field_puc_retefuente_servicios_clie(row, status);
+	displayChange_field_id_pucaux_retteservicios(row, status);
 	displayChange_field_puc_auxiliar_proveedores(row, status);
+	displayChange_field_id_pucaux_proveedor(row, status);
 	displayChange_field_puc_retefuente_compras(row, status);
+	displayChange_field_id_pucaux_rettecompras(row, status);
 	displayChange_field_puc_retefuente_servicios_prov(row, status);
+	displayChange_field_id_pucaux_rettesercomp(row, status);
 	displayChange_field_archivo_cedula(row, status);
 	displayChange_field_archivo_rut(row, status);
 	displayChange_field_archivo_nit(row, status);
@@ -2709,20 +2931,38 @@ function displayChange_field(field, row, status) {
 	if ("puc_auxiliar_deudores" == field) {
 		displayChange_field_puc_auxiliar_deudores(row, status);
 	}
+	if ("id_pucaux_cliente" == field) {
+		displayChange_field_id_pucaux_cliente(row, status);
+	}
 	if ("puc_retefuente_ventas" == field) {
 		displayChange_field_puc_retefuente_ventas(row, status);
+	}
+	if ("id_pucaux_retteventas" == field) {
+		displayChange_field_id_pucaux_retteventas(row, status);
 	}
 	if ("puc_retefuente_servicios_clie" == field) {
 		displayChange_field_puc_retefuente_servicios_clie(row, status);
 	}
+	if ("id_pucaux_retteservicios" == field) {
+		displayChange_field_id_pucaux_retteservicios(row, status);
+	}
 	if ("puc_auxiliar_proveedores" == field) {
 		displayChange_field_puc_auxiliar_proveedores(row, status);
+	}
+	if ("id_pucaux_proveedor" == field) {
+		displayChange_field_id_pucaux_proveedor(row, status);
 	}
 	if ("puc_retefuente_compras" == field) {
 		displayChange_field_puc_retefuente_compras(row, status);
 	}
+	if ("id_pucaux_rettecompras" == field) {
+		displayChange_field_id_pucaux_rettecompras(row, status);
+	}
 	if ("puc_retefuente_servicios_prov" == field) {
 		displayChange_field_puc_retefuente_servicios_prov(row, status);
+	}
+	if ("id_pucaux_rettesercomp" == field) {
+		displayChange_field_id_pucaux_rettesercomp(row, status);
 	}
 	if ("archivo_cedula" == field) {
 		displayChange_field_archivo_cedula(row, status);
@@ -3183,21 +3423,183 @@ function displayChange_field_clasificacion_clientes(row, status) {
 }
 
 function displayChange_field_puc_auxiliar_deudores(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_puc_auxiliar_deudores__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_puc_auxiliar_deudores" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "puc_auxiliar_deudores");
+	}
+}
+
+function displayChange_field_id_pucaux_cliente(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_cliente__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_cliente" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_cliente");
+	}
 }
 
 function displayChange_field_puc_retefuente_ventas(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_puc_retefuente_ventas__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_puc_retefuente_ventas" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "puc_retefuente_ventas");
+	}
+}
+
+function displayChange_field_id_pucaux_retteventas(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_retteventas__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_retteventas" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_retteventas");
+	}
 }
 
 function displayChange_field_puc_retefuente_servicios_clie(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_puc_retefuente_servicios_clie__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_puc_retefuente_servicios_clie" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "puc_retefuente_servicios_clie");
+	}
+}
+
+function displayChange_field_id_pucaux_retteservicios(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_retteservicios__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_retteservicios" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_retteservicios");
+	}
 }
 
 function displayChange_field_puc_auxiliar_proveedores(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_puc_auxiliar_proveedores__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_puc_auxiliar_proveedores" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "puc_auxiliar_proveedores");
+	}
+}
+
+function displayChange_field_id_pucaux_proveedor(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_proveedor__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_proveedor" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_proveedor");
+	}
 }
 
 function displayChange_field_puc_retefuente_compras(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_puc_retefuente_compras__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_puc_retefuente_compras" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "puc_retefuente_compras");
+	}
+}
+
+function displayChange_field_id_pucaux_rettecompras(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_rettecompras__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_rettecompras" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_rettecompras");
+	}
 }
 
 function displayChange_field_puc_retefuente_servicios_prov(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_puc_retefuente_servicios_prov__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_puc_retefuente_servicios_prov" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "puc_retefuente_servicios_prov");
+	}
+}
+
+function displayChange_field_id_pucaux_rettesercomp(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_rettesercomp__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_rettesercomp" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_rettesercomp");
+	}
 }
 
 function displayChange_field_archivo_cedula(row, status) {
@@ -3293,6 +3695,18 @@ function scRecreateSelect2() {
 	displayChange_field_creditoprov("all", "on");
 	displayChange_field_zona_clientes("all", "on");
 	displayChange_field_clasificacion_clientes("all", "on");
+	displayChange_field_puc_auxiliar_deudores("all", "on");
+	displayChange_field_id_pucaux_cliente("all", "on");
+	displayChange_field_puc_retefuente_ventas("all", "on");
+	displayChange_field_id_pucaux_retteventas("all", "on");
+	displayChange_field_puc_retefuente_servicios_clie("all", "on");
+	displayChange_field_id_pucaux_retteservicios("all", "on");
+	displayChange_field_puc_auxiliar_proveedores("all", "on");
+	displayChange_field_id_pucaux_proveedor("all", "on");
+	displayChange_field_puc_retefuente_compras("all", "on");
+	displayChange_field_id_pucaux_rettecompras("all", "on");
+	displayChange_field_puc_retefuente_servicios_prov("all", "on");
+	displayChange_field_id_pucaux_rettesercomp("all", "on");
 	displayChange_field_id_plan("all", "on");
 	displayChange_field_estado("all", "on");
 }
@@ -4418,6 +4832,42 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "clasificacion_clientes" == specificField) {
     scJQSelect2Add_clasificacion_clientes(seqRow);
   }
+  if (null == specificField || "puc_auxiliar_deudores" == specificField) {
+    scJQSelect2Add_puc_auxiliar_deudores(seqRow);
+  }
+  if (null == specificField || "id_pucaux_cliente" == specificField) {
+    scJQSelect2Add_id_pucaux_cliente(seqRow);
+  }
+  if (null == specificField || "puc_retefuente_ventas" == specificField) {
+    scJQSelect2Add_puc_retefuente_ventas(seqRow);
+  }
+  if (null == specificField || "id_pucaux_retteventas" == specificField) {
+    scJQSelect2Add_id_pucaux_retteventas(seqRow);
+  }
+  if (null == specificField || "puc_retefuente_servicios_clie" == specificField) {
+    scJQSelect2Add_puc_retefuente_servicios_clie(seqRow);
+  }
+  if (null == specificField || "id_pucaux_retteservicios" == specificField) {
+    scJQSelect2Add_id_pucaux_retteservicios(seqRow);
+  }
+  if (null == specificField || "puc_auxiliar_proveedores" == specificField) {
+    scJQSelect2Add_puc_auxiliar_proveedores(seqRow);
+  }
+  if (null == specificField || "id_pucaux_proveedor" == specificField) {
+    scJQSelect2Add_id_pucaux_proveedor(seqRow);
+  }
+  if (null == specificField || "puc_retefuente_compras" == specificField) {
+    scJQSelect2Add_puc_retefuente_compras(seqRow);
+  }
+  if (null == specificField || "id_pucaux_rettecompras" == specificField) {
+    scJQSelect2Add_id_pucaux_rettecompras(seqRow);
+  }
+  if (null == specificField || "puc_retefuente_servicios_prov" == specificField) {
+    scJQSelect2Add_puc_retefuente_servicios_prov(seqRow);
+  }
+  if (null == specificField || "id_pucaux_rettesercomp" == specificField) {
+    scJQSelect2Add_id_pucaux_rettesercomp(seqRow);
+  }
   if (null == specificField || "id_plan" == specificField) {
     scJQSelect2Add_id_plan(seqRow);
   }
@@ -4732,6 +5182,222 @@ function scJQSelect2Add_clasificacion_clientes(seqRow) {
   );
 } // scJQSelect2Add
 
+function scJQSelect2Add_puc_auxiliar_deudores(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_puc_auxiliar_deudores_obj" : "#id_sc_field_puc_auxiliar_deudores" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_puc_auxiliar_deudores_obj',
+      dropdownCssClass: 'css_puc_auxiliar_deudores_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_cliente(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_cliente_obj" : "#id_sc_field_id_pucaux_cliente" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_cliente_obj',
+      dropdownCssClass: 'css_id_pucaux_cliente_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_puc_retefuente_ventas(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_puc_retefuente_ventas_obj" : "#id_sc_field_puc_retefuente_ventas" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_puc_retefuente_ventas_obj',
+      dropdownCssClass: 'css_puc_retefuente_ventas_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_retteventas(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_retteventas_obj" : "#id_sc_field_id_pucaux_retteventas" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_retteventas_obj',
+      dropdownCssClass: 'css_id_pucaux_retteventas_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_puc_retefuente_servicios_clie(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_puc_retefuente_servicios_clie_obj" : "#id_sc_field_puc_retefuente_servicios_clie" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_puc_retefuente_servicios_clie_obj',
+      dropdownCssClass: 'css_puc_retefuente_servicios_clie_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_retteservicios(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_retteservicios_obj" : "#id_sc_field_id_pucaux_retteservicios" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_retteservicios_obj',
+      dropdownCssClass: 'css_id_pucaux_retteservicios_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_puc_auxiliar_proveedores(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_puc_auxiliar_proveedores_obj" : "#id_sc_field_puc_auxiliar_proveedores" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_puc_auxiliar_proveedores_obj',
+      dropdownCssClass: 'css_puc_auxiliar_proveedores_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_proveedor(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_proveedor_obj" : "#id_sc_field_id_pucaux_proveedor" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_proveedor_obj',
+      dropdownCssClass: 'css_id_pucaux_proveedor_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_puc_retefuente_compras(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_puc_retefuente_compras_obj" : "#id_sc_field_puc_retefuente_compras" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_puc_retefuente_compras_obj',
+      dropdownCssClass: 'css_puc_retefuente_compras_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_rettecompras(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_rettecompras_obj" : "#id_sc_field_id_pucaux_rettecompras" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_rettecompras_obj',
+      dropdownCssClass: 'css_id_pucaux_rettecompras_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_puc_retefuente_servicios_prov(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_puc_retefuente_servicios_prov_obj" : "#id_sc_field_puc_retefuente_servicios_prov" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_puc_retefuente_servicios_prov_obj',
+      dropdownCssClass: 'css_puc_retefuente_servicios_prov_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_rettesercomp(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_rettesercomp_obj" : "#id_sc_field_id_pucaux_rettesercomp" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_rettesercomp_obj',
+      dropdownCssClass: 'css_id_pucaux_rettesercomp_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
 function scJQSelect2Add_id_plan(seqRow) {
   var elemSelector = "all" == seqRow ? ".css_id_plan_obj" : "#id_sc_field_id_plan" + seqRow;
   $(elemSelector).select2(
@@ -4795,6 +5461,18 @@ function scJQElementsAdd(iLine) {
   setTimeout(function () { if ('function' == typeof displayChange_field_creditoprov) { displayChange_field_creditoprov(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_zona_clientes) { displayChange_field_zona_clientes(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_clasificacion_clientes) { displayChange_field_clasificacion_clientes(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_puc_auxiliar_deudores) { displayChange_field_puc_auxiliar_deudores(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_cliente) { displayChange_field_id_pucaux_cliente(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_puc_retefuente_ventas) { displayChange_field_puc_retefuente_ventas(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_retteventas) { displayChange_field_id_pucaux_retteventas(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_puc_retefuente_servicios_clie) { displayChange_field_puc_retefuente_servicios_clie(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_retteservicios) { displayChange_field_id_pucaux_retteservicios(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_puc_auxiliar_proveedores) { displayChange_field_puc_auxiliar_proveedores(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_proveedor) { displayChange_field_id_pucaux_proveedor(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_puc_retefuente_compras) { displayChange_field_puc_retefuente_compras(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_rettecompras) { displayChange_field_id_pucaux_rettecompras(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_puc_retefuente_servicios_prov) { displayChange_field_puc_retefuente_servicios_prov(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_rettesercomp) { displayChange_field_id_pucaux_rettesercomp(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_id_plan) { displayChange_field_id_plan(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_estado) { displayChange_field_estado(iLine, "on"); } }, 150);
 } // scJQElementsAdd

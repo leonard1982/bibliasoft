@@ -16,33 +16,15 @@
 .css_observaciones_label { }
 .css_observaciones_line {width:300px;}
 .css_observaciones_obj {text-align:left;}
-.css_colores_label { }
-.css_colores_line {text-align:left;}
-.css_colores_obj {text-align:left;}
-.css_tallas_label { }
-.css_tallas_line {text-align:left;}
-.css_tallas_obj {text-align:left;}
-.css_sabor_label { }
-.css_sabor_line {text-align:left;}
-.css_sabor_obj {text-align:left;}
 .css_numeronota_label { }
 .css_numeronota_line {text-align:left;}
 .css_numeronota_obj {text-align:right;}
 .css_prefijonota_label { }
 .css_prefijonota_line {text-align:left;}
 .css_prefijonota_obj {text-align:left;}
-.css_lote_label { }
-.css_lote_line { }
-.css_lote_obj { }
-.css_vence_label { }
-.css_vence_line { }
-.css_vence_obj { }
 .css_presentacion_label { }
 .css_presentacion_line {font-size:16px;font-weight:bold;}
 .css_presentacion_obj {font-size:16px;font-weight:bold;text-align:center;}
 .css_stcock_label {text-align:center;vertical-align:middle;width:80px;}
 .css_stcock_line {font-size:18px;background-color:#FFFF66;font-weight:bold;text-align:center;vertical-align:middle;}
 .css_stcock_obj {text-align:center;}
-.css_seleccionarlfs_label { }
-.css_seleccionarlfs_line { }
-.css_seleccionarlfs_obj {background-color:#3399CC;}

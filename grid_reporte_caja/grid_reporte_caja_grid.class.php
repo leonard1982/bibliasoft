@@ -960,10 +960,10 @@ class grid_reporte_caja_grid
                     <link rel="icon" type="image/png"   sizes="32x32" href="">
                     <link rel="icon" type="image/png"   sizes="96x96" href="">
                     <link rel="icon" type="image/png"   sizes="16x16" href="">
-                    <meta name="msapplication-TileColor" content="">
+                    <meta name="msapplication-TileColor" content="#3C4858">
                     <meta name="msapplication-TileImage" content="">
-                    <meta name="theme-color" content="">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="">
+                    <meta name="theme-color" content="#3C4858">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="#3C4858">
                     <link rel="shortcut icon" href=""><?php
            }
 ?>
@@ -1056,10 +1056,10 @@ $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" 
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"96x96\" href=\"\">\r\n");
 $nm_saida->saida("                        <link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"\" >\r\n");
+$nm_saida->saida("                        <meta name=\"msapplication-TileColor\" content=\"#3C4858\" >\r\n");
 $nm_saida->saida("                        <meta name=\"msapplication-TileImage\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"theme-color\" content=\"\">\r\n");
-$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"\">\r\n");
+$nm_saida->saida("                        <meta name=\"theme-color\" content=\"#3C4858\">\r\n");
+$nm_saida->saida("                        <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"#3C4858\">\r\n");
 $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">\r\n");
        }
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_reporte_caja']['doc_word'])

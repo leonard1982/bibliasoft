@@ -622,7 +622,7 @@ sc_userSweetAlertDisplayed = false;
 <?php
 }
 ?>
-<table id="main_table_form"  align="center" cellpadding=0 cellspacing=0 >
+<table id="main_table_form"  align="center" cellpadding=0 cellspacing=0  width="100%">
  <tr>
   <td>
   <div class="scFormBorder" style="<?php echo (isset($remove_border) ? $remove_border : ''); ?>">
@@ -878,28 +878,12 @@ $orderColOrient = '';
     <TD class="scFormLabelOddMult css_idproducto__label" id="hidden_field_label_idproducto_" style="<?php echo $sStyleHidden_idproducto_; ?>" > <?php echo $this->nm_new_label['idproducto_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
    <?php } ?>
 
-   <?php if (isset($this->nmgp_cmp_hidden['total_']) && $this->nmgp_cmp_hidden['total_'] == 'off') { $sStyleHidden_total_ = 'display: none'; }
-      if (1 || !isset($this->nmgp_cmp_hidden['total_']) || $this->nmgp_cmp_hidden['total_'] == 'on') {
-      if (!isset($this->nm_new_label['total_'])) {
-          $this->nm_new_label['total_'] = "Precio"; } ?>
-
-    <TD class="scFormLabelOddMult css_total__label" id="hidden_field_label_total_" style="<?php echo $sStyleHidden_total_; ?>" > <?php echo $this->nm_new_label['total_'] ?> </TD>
-   <?php } ?>
-
    <?php if (isset($this->nmgp_cmp_hidden['cantidad_']) && $this->nmgp_cmp_hidden['cantidad_'] == 'off') { $sStyleHidden_cantidad_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['cantidad_']) || $this->nmgp_cmp_hidden['cantidad_'] == 'on') {
       if (!isset($this->nm_new_label['cantidad_'])) {
           $this->nm_new_label['cantidad_'] = "Cantidad"; } ?>
 
     <TD class="scFormLabelOddMult css_cantidad__label" id="hidden_field_label_cantidad_" style="<?php echo $sStyleHidden_cantidad_; ?>" > <?php echo $this->nm_new_label['cantidad_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
-   <?php } ?>
-
-   <?php if (isset($this->nmgp_cmp_hidden['precio_']) && $this->nmgp_cmp_hidden['precio_'] == 'off') { $sStyleHidden_precio_ = 'display: none'; }
-      if (1 || !isset($this->nmgp_cmp_hidden['precio_']) || $this->nmgp_cmp_hidden['precio_'] == 'on') {
-      if (!isset($this->nm_new_label['precio_'])) {
-          $this->nm_new_label['precio_'] = "Total Línea"; } ?>
-
-    <TD class="scFormLabelOddMult css_precio__label" id="hidden_field_label_precio_" style="<?php echo $sStyleHidden_precio_; ?>" > <?php echo $this->nm_new_label['precio_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
    <?php } ?>
 
 
@@ -933,23 +917,21 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
    {
        $this->loadRecordState($sc_seq_vert);
        $this->iddetallecombo_ = $this->form_vert_form_detallecombos[$sc_seq_vert]['iddetallecombo_'];
+       $this->precio_ = $this->form_vert_form_detallecombos[$sc_seq_vert]['precio_'];
        $this->creado_ = $this->form_vert_form_detallecombos[$sc_seq_vert]['creado_'];
        $this->actualizado_ = $this->form_vert_form_detallecombos[$sc_seq_vert]['actualizado_'];
+       $this->total_ = $this->form_vert_form_detallecombos[$sc_seq_vert]['total_'];
        if (isset($this->Embutida_ronly) && $this->Embutida_ronly && !$Line_Add)
        {
            $this->nmgp_cmp_readonly['idcombo_'] = true;
            $this->nmgp_cmp_readonly['idproducto_'] = true;
-           $this->nmgp_cmp_readonly['total_'] = true;
            $this->nmgp_cmp_readonly['cantidad_'] = true;
-           $this->nmgp_cmp_readonly['precio_'] = true;
        }
        elseif ($Line_Add)
        {
            if (!isset($this->nmgp_cmp_readonly['idcombo_']) || $this->nmgp_cmp_readonly['idcombo_'] != "on") {$this->nmgp_cmp_readonly['idcombo_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['idproducto_']) || $this->nmgp_cmp_readonly['idproducto_'] != "on") {$this->nmgp_cmp_readonly['idproducto_'] = false;}
-           if (!isset($this->nmgp_cmp_readonly['total_']) || $this->nmgp_cmp_readonly['total_'] != "on") {$this->nmgp_cmp_readonly['total_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['cantidad_']) || $this->nmgp_cmp_readonly['cantidad_'] != "on") {$this->nmgp_cmp_readonly['cantidad_'] = false;}
-           if (!isset($this->nmgp_cmp_readonly['precio_']) || $this->nmgp_cmp_readonly['precio_'] != "on") {$this->nmgp_cmp_readonly['precio_'] = false;}
        }
             if (isset($this->form_vert_form_preenchimento[$sc_seq_vert])) {
               foreach ($this->form_vert_form_preenchimento[$sc_seq_vert] as $sCmpNome => $mCmpVal)
@@ -1013,32 +995,6 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            $sStyleReadLab_idproducto_ = '';
            $sStyleReadInp_idproducto_ = 'display: none;';
        }
-       $this->total_ = $this->form_vert_form_detallecombos[$sc_seq_vert]['total_']; 
-       $total_ = $this->total_; 
-       $sStyleHidden_total_ = '';
-       if (isset($sCheckRead_total_))
-       {
-           unset($sCheckRead_total_);
-       }
-       if (isset($this->nmgp_cmp_readonly['total_']))
-       {
-           $sCheckRead_total_ = $this->nmgp_cmp_readonly['total_'];
-       }
-       if (isset($this->nmgp_cmp_hidden['total_']) && $this->nmgp_cmp_hidden['total_'] == 'off')
-       {
-           unset($this->nmgp_cmp_hidden['total_']);
-           $sStyleHidden_total_ = 'display: none;';
-       }
-       $bTestReadOnly_total_ = true;
-       $sStyleReadLab_total_ = 'display: none;';
-       $sStyleReadInp_total_ = '';
-       if (isset($this->nmgp_cmp_readonly['total_']) && $this->nmgp_cmp_readonly['total_'] == 'on')
-       {
-           $bTestReadOnly_total_ = false;
-           unset($this->nmgp_cmp_readonly['total_']);
-           $sStyleReadLab_total_ = '';
-           $sStyleReadInp_total_ = 'display: none;';
-       }
        $this->cantidad_ = $this->form_vert_form_detallecombos[$sc_seq_vert]['cantidad_']; 
        $cantidad_ = $this->cantidad_; 
        $sStyleHidden_cantidad_ = '';
@@ -1064,32 +1020,6 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            unset($this->nmgp_cmp_readonly['cantidad_']);
            $sStyleReadLab_cantidad_ = '';
            $sStyleReadInp_cantidad_ = 'display: none;';
-       }
-       $this->precio_ = $this->form_vert_form_detallecombos[$sc_seq_vert]['precio_']; 
-       $precio_ = $this->precio_; 
-       $sStyleHidden_precio_ = '';
-       if (isset($sCheckRead_precio_))
-       {
-           unset($sCheckRead_precio_);
-       }
-       if (isset($this->nmgp_cmp_readonly['precio_']))
-       {
-           $sCheckRead_precio_ = $this->nmgp_cmp_readonly['precio_'];
-       }
-       if (isset($this->nmgp_cmp_hidden['precio_']) && $this->nmgp_cmp_hidden['precio_'] == 'off')
-       {
-           unset($this->nmgp_cmp_hidden['precio_']);
-           $sStyleHidden_precio_ = 'display: none;';
-       }
-       $bTestReadOnly_precio_ = true;
-       $sStyleReadLab_precio_ = 'display: none;';
-       $sStyleReadInp_precio_ = '';
-       if (isset($this->nmgp_cmp_readonly['precio_']) && $this->nmgp_cmp_readonly['precio_'] == 'on')
-       {
-           $bTestReadOnly_precio_ = false;
-           unset($this->nmgp_cmp_readonly['precio_']);
-           $sStyleReadLab_precio_ = '';
-           $sStyleReadInp_precio_ = 'display: none;';
        }
 
        $nm_cor_fun_vert = (isset($nm_cor_fun_vert) && $nm_cor_fun_vert == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
@@ -1217,16 +1147,12 @@ $aLookup = array();
     }
 
    $old_value_idcombo_ = $this->idcombo_;
-   $old_value_total_ = $this->total_;
    $old_value_cantidad_ = $this->cantidad_;
-   $old_value_precio_ = $this->precio_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idcombo_ = $this->idcombo_;
-   $unformatted_value_total_ = $this->total_;
    $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_precio_ = $this->precio_;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -1258,9 +1184,7 @@ $aLookup = array();
    }
 
    $this->idcombo_ = $old_value_idcombo_;
-   $this->total_ = $old_value_total_;
    $this->cantidad_ = $old_value_cantidad_;
-   $this->precio_ = $old_value_precio_;
 
    if ('' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'])
    {
@@ -1313,16 +1237,12 @@ $aLookup = array();
     }
 
    $old_value_idcombo_ = $this->idcombo_;
-   $old_value_total_ = $this->total_;
    $old_value_cantidad_ = $this->cantidad_;
-   $old_value_precio_ = $this->precio_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idcombo_ = $this->idcombo_;
-   $unformatted_value_total_ = $this->total_;
    $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_precio_ = $this->precio_;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -1354,9 +1274,7 @@ $aLookup = array();
    }
 
    $this->idcombo_ = $old_value_idcombo_;
-   $this->total_ = $old_value_total_;
    $this->cantidad_ = $old_value_cantidad_;
-   $this->precio_ = $old_value_precio_;
 
    if ('' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'])
    {
@@ -1391,22 +1309,6 @@ $idproducto__look = (isset($aLookup[0][$this->idproducto_])) ? $aLookup[0][$this
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_idproducto_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_idproducto_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
-   <?php if (isset($this->nmgp_cmp_hidden['total_']) && $this->nmgp_cmp_hidden['total_'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="total_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($total_) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOddMult css_total__line" id="hidden_field_data_total_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_total_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_total__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_total_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["total_"]) &&  $this->nmgp_cmp_readonly["total_"] == "on") { 
-
- ?>
-<input type="hidden" name="total_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($total_) . "\">" . $total_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_total_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-total_<?php echo $sc_seq_vert ?> css_total__line" style="<?php echo $sStyleReadLab_total_; ?>"><?php echo $this->form_format_readonly("total_", $this->form_encode_input($this->total_)); ?></span><span id="id_read_off_total_<?php echo $sc_seq_vert ?>" class="css_read_off_total_<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_total_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_total__obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_total_<?php echo $sc_seq_vert ?>" type=text name="total_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($total_) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=10"; } ?> alt="{datatype: 'currency', currencySymbol: '<?php echo $this->field_config['total_']['symbol_mon']; ?>', currencyPosition: '<?php echo ((1 == $this->field_config['total_']['format_pos'] || 3 == $this->field_config['total_']['format_pos']) ? 'left' : 'right'); ?>', maxLength: 20, precision: 0, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['total_']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['total_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['total_']['symbol_fmt']; ?>, manualDecimals: false, allowNegative: true, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['total_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_total_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_total_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
    <?php if (isset($this->nmgp_cmp_hidden['cantidad_']) && $this->nmgp_cmp_hidden['cantidad_'] == 'off') { $sc_hidden_yes++;  ?>
 <input type="hidden" name="cantidad_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($cantidad_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
@@ -1419,16 +1321,8 @@ $idproducto__look = (isset($aLookup[0][$this->idproducto_])) ? $aLookup[0][$this
 <?php } else { ?>
 <span id="id_read_on_cantidad_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-cantidad_<?php echo $sc_seq_vert ?> css_cantidad__line" style="<?php echo $sStyleReadLab_cantidad_; ?>"><?php echo $this->form_format_readonly("cantidad_", $this->form_encode_input($this->cantidad_)); ?></span><span id="id_read_off_cantidad_<?php echo $sc_seq_vert ?>" class="css_read_off_cantidad_<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_cantidad_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_cantidad__obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_cantidad_<?php echo $sc_seq_vert ?>" type=text name="cantidad_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($cantidad_) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=10"; } ?> alt="{datatype: 'decimal', maxLength: 10, precision: 3, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['cantidad_']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['cantidad_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['cantidad_']['symbol_fmt']; ?>, manualDecimals: false, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['cantidad_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'center', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=10"; } ?> alt="{datatype: 'decimal', maxLength: 10, precision: 2, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['cantidad_']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['cantidad_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['cantidad_']['symbol_fmt']; ?>, manualDecimals: false, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['cantidad_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'center', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cantidad_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cantidad_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-   <?php if (isset($this->nmgp_cmp_hidden['precio_']) && $this->nmgp_cmp_hidden['precio_'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="precio_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($precio_) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOddMult css_precio__line" id="hidden_field_data_precio_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_precio_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_precio__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="precio_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($precio_); ?>"><span id="id_ajax_label_precio_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($precio_); ?></span>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_precio_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_precio_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 
@@ -1453,14 +1347,6 @@ $idproducto__look = (isset($aLookup[0][$this->idproducto_])) ? $aLookup[0][$this
        {
            $this->nmgp_cmp_hidden['idproducto_'] = 'off';
        }
-       if (isset($sCheckRead_total_))
-       {
-           $this->nmgp_cmp_readonly['total_'] = $sCheckRead_total_;
-       }
-       if ('display: none;' == $sStyleHidden_total_)
-       {
-           $this->nmgp_cmp_hidden['total_'] = 'off';
-       }
        if (isset($sCheckRead_cantidad_))
        {
            $this->nmgp_cmp_readonly['cantidad_'] = $sCheckRead_cantidad_;
@@ -1468,14 +1354,6 @@ $idproducto__look = (isset($aLookup[0][$this->idproducto_])) ? $aLookup[0][$this
        if ('display: none;' == $sStyleHidden_cantidad_)
        {
            $this->nmgp_cmp_hidden['cantidad_'] = 'off';
-       }
-       if (isset($sCheckRead_precio_))
-       {
-           $this->nmgp_cmp_readonly['precio_'] = $sCheckRead_precio_;
-       }
-       if ('display: none;' == $sStyleHidden_precio_)
-       {
-           $this->nmgp_cmp_hidden['precio_'] = 'off';
        }
 
    }

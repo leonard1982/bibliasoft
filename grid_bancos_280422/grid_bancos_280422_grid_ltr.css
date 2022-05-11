@@ -1,0 +1,18 @@
+.css_codigo_banco_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_codigo_banco_grid_line {vertical-align: top;text-align: left;}
+.css_descripcion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_descripcion_grid_line {vertical-align: top;text-align: left;}
+.css_comportamiento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_comportamiento_grid_line {vertical-align: top;text-align: left;}
+.css_cajero_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_cajero_grid_line {vertical-align: top;text-align: left;}
+.css_entrada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_entrada_grid_line {vertical-align: top;text-align: right;}
+.css_salida_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_salida_grid_line {vertical-align: top;text-align: right;}
+.css_saldo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_saldo_grid_line {vertical-align: top;text-align: right;}
+.css_idcaja_vta_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idcaja_vta_grid_line {vertical-align: top;text-align: right;}
+.css_fech_hora_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_fech_hora_grid_line {vertical-align: top;text-align: center;}

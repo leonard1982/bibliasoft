@@ -6,8 +6,8 @@
         <title>Facturación y manejo de Inventarios - [empresa]</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet"  href="<?php echo $_SESSION["scriptcase"]["menu_mini"]["glo_nm_path_prod"]; ?>/third/jquery.mobile/jquery.mobile-1.2.0.min.css" />
-        <link rel="stylesheet"  href="<?php echo $this->url_css; ?>Sc9_BlueBerry/Sc9_BlueBerry_menuMobile.css" />
-        <link rel="stylesheet"  href="<?php echo $this->url_css; ?>Sc9_BlueBerry/Sc9_BlueBerry_menuMobile<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+        <link rel="stylesheet"  href="<?php echo $this->url_css; ?>Sc9_Rhino/Sc9_Rhino_menuMobile.css" />
+        <link rel="stylesheet"  href="<?php echo $this->url_css; ?>Sc9_Rhino/Sc9_Rhino_menuMobile<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
         <link rel="stylesheet" href="<?php echo $_SESSION['scriptcase']['menu_mini']['glo_nm_path_prod']; ?>/third/font-awesome/css/all.min.css" type="text/css" media="screen" />
         <script src="<?php echo $_SESSION["scriptcase"]["menu_mini"]["glo_nm_path_prod"]; ?>/third/jquery.mobile/jquery.js"></script>
         <script type="text/javascript">

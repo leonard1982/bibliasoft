@@ -160,8 +160,8 @@ function Sel_cmp_process()
       $tab_ger_campos = array();
       $tab_blk_campos = array();
 
-            $tab_ger_campos['documento'] = "on";
-      $tab_ger_campos['dv'] = "on";
+            $tab_ger_campos['ccnit'] = "on";
+      $tab_blk_campos[] = "ccnit";
       $tab_ger_campos['nombres'] = "on";
       $tab_ger_campos['direccion'] = "on";
       $tab_ger_campos['idmuni'] = "on";
@@ -172,6 +172,7 @@ function Sel_cmp_process()
       $tab_ger_campos['si_nomina'] = "on";
       $tab_blk_campos[] = "si_nomina";
       $tab_ger_campos['idtercero'] = "on";
+      $tab_ger_campos['documento'] = "on";
       $tab_ger_campos['nacimiento'] = "on";
       $tab_ger_campos['sexo'] = "on";
       $tab_ger_campos['urlmail'] = "on";
@@ -182,6 +183,7 @@ function Sel_cmp_process()
       $tab_ger_campos['tipo'] = "on";
       $tab_ger_campos['observaciones'] = "on";
       $tab_ger_campos['loatiende'] = "on";
+      $tab_ger_campos['dv'] = "on";
       $tab_ger_campos['contacto'] = "on";
       $tab_ger_campos['credito'] = "on";
       $tab_ger_campos['cupo'] = "on";
@@ -721,7 +723,7 @@ function proc_btn_sel(btn, proc) {
           $this->Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
       }
    }
-   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
    $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";

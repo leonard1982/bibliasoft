@@ -56,16 +56,10 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["idtipotran" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["fecha" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["idpro" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["colores" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["tallas" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["sabor" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["presentacion" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["seleccionarlfs" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["cantidad" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["idbodorig" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["stcock" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["lote" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["vence" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["observaciones" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
@@ -100,34 +94,10 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["idpro" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["colores" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["colores" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["tallas" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["tallas" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["sabor" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["sabor" + iSeqRow]["change"]) {
-    return true;
-  }
   if (scEventControl_data["presentacion" + iSeqRow]["blur"]) {
     return true;
   }
   if (scEventControl_data["presentacion" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["seleccionarlfs" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["seleccionarlfs" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["cantidad" + iSeqRow]["blur"]) {
@@ -146,18 +116,6 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["stcock" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["lote" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["lote" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["vence" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["vence" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["observaciones" + iSeqRow]["blur"]) {
@@ -183,6 +141,9 @@ function scEventControl_onFocus(oField, iSeq) {
   if ("idpro" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
+  if ("idbodorig" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
   if ("colores" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
@@ -193,9 +154,6 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("seleccionarlfs" + iSeq == fieldName) {
-    scEventControl_data[fieldName]["blur"] = false;
-  }
-  if ("idbodorig" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
   if ("idbodorig" + iSeq == fieldName) {
@@ -259,36 +217,24 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_observaciones' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_observaciones_onblur(this, iSeqRow) })
                                            .bind('change', function() { sc_form_mov_ajusteinv_observaciones_onchange(this, iSeqRow) })
                                            .bind('focus', function() { sc_form_mov_ajusteinv_observaciones_onfocus(this, iSeqRow) });
-  $('#id_sc_field_colores' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_colores_onblur(this, iSeqRow) })
-                                     .bind('change', function() { sc_form_mov_ajusteinv_colores_onchange(this, iSeqRow) })
-                                     .bind('focus', function() { sc_form_mov_ajusteinv_colores_onfocus(this, iSeqRow) });
-  $('#id_sc_field_tallas' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_tallas_onblur(this, iSeqRow) })
-                                    .bind('change', function() { sc_form_mov_ajusteinv_tallas_onchange(this, iSeqRow) })
-                                    .bind('focus', function() { sc_form_mov_ajusteinv_tallas_onfocus(this, iSeqRow) });
-  $('#id_sc_field_sabor' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_sabor_onblur(this, iSeqRow) })
-                                   .bind('change', function() { sc_form_mov_ajusteinv_sabor_onchange(this, iSeqRow) })
-                                   .bind('focus', function() { sc_form_mov_ajusteinv_sabor_onfocus(this, iSeqRow) });
+  $('#id_sc_field_colores' + iSeqRow).bind('change', function() { sc_form_mov_ajusteinv_colores_onchange(this, iSeqRow) });
+  $('#id_sc_field_tallas' + iSeqRow).bind('change', function() { sc_form_mov_ajusteinv_tallas_onchange(this, iSeqRow) });
+  $('#id_sc_field_sabor' + iSeqRow).bind('change', function() { sc_form_mov_ajusteinv_sabor_onchange(this, iSeqRow) });
   $('#id_sc_field_numeronota' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_numeronota_onblur(this, iSeqRow) })
                                         .bind('change', function() { sc_form_mov_ajusteinv_numeronota_onchange(this, iSeqRow) })
                                         .bind('focus', function() { sc_form_mov_ajusteinv_numeronota_onfocus(this, iSeqRow) });
   $('#id_sc_field_prefijonota' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_prefijonota_onblur(this, iSeqRow) })
                                          .bind('change', function() { sc_form_mov_ajusteinv_prefijonota_onchange(this, iSeqRow) })
                                          .bind('focus', function() { sc_form_mov_ajusteinv_prefijonota_onfocus(this, iSeqRow) });
-  $('#id_sc_field_lote' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_lote_onblur(this, iSeqRow) })
-                                  .bind('change', function() { sc_form_mov_ajusteinv_lote_onchange(this, iSeqRow) })
-                                  .bind('focus', function() { sc_form_mov_ajusteinv_lote_onfocus(this, iSeqRow) });
-  $('#id_sc_field_vence' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_vence_onblur(this, iSeqRow) })
-                                   .bind('change', function() { sc_form_mov_ajusteinv_vence_onchange(this, iSeqRow) })
-                                   .bind('focus', function() { sc_form_mov_ajusteinv_vence_onfocus(this, iSeqRow) });
+  $('#id_sc_field_lote' + iSeqRow).bind('change', function() { sc_form_mov_ajusteinv_lote_onchange(this, iSeqRow) });
+  $('#id_sc_field_vence' + iSeqRow).bind('change', function() { sc_form_mov_ajusteinv_vence_onchange(this, iSeqRow) });
   $('#id_sc_field_presentacion' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_presentacion_onblur(this, iSeqRow) })
                                           .bind('change', function() { sc_form_mov_ajusteinv_presentacion_onchange(this, iSeqRow) })
                                           .bind('focus', function() { sc_form_mov_ajusteinv_presentacion_onfocus(this, iSeqRow) });
   $('#id_sc_field_stcock' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_stcock_onblur(this, iSeqRow) })
                                     .bind('change', function() { sc_form_mov_ajusteinv_stcock_onchange(this, iSeqRow) })
                                     .bind('focus', function() { sc_form_mov_ajusteinv_stcock_onfocus(this, iSeqRow) });
-  $('#id_sc_field_seleccionarlfs' + iSeqRow).bind('blur', function() { sc_form_mov_ajusteinv_seleccionarlfs_onblur(this, iSeqRow) })
-                                            .bind('change', function() { sc_form_mov_ajusteinv_seleccionarlfs_onchange(this, iSeqRow) })
-                                            .bind('focus', function() { sc_form_mov_ajusteinv_seleccionarlfs_onfocus(this, iSeqRow) });
+  $('#id_sc_field_seleccionarlfs' + iSeqRow).bind('change', function() { sc_form_mov_ajusteinv_seleccionarlfs_onchange(this, iSeqRow) });
 } // scJQEventsAdd
 
 function sc_form_mov_ajusteinv_idmov_onchange(oThis, iSeqRow) {
@@ -385,46 +331,16 @@ function sc_form_mov_ajusteinv_observaciones_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
-function sc_form_mov_ajusteinv_colores_onblur(oThis, iSeqRow) {
-  do_ajax_form_mov_ajusteinv_validate_colores();
-  scCssBlur(oThis);
-}
-
 function sc_form_mov_ajusteinv_colores_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-}
-
-function sc_form_mov_ajusteinv_colores_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
-}
-
-function sc_form_mov_ajusteinv_tallas_onblur(oThis, iSeqRow) {
-  do_ajax_form_mov_ajusteinv_validate_tallas();
-  scCssBlur(oThis);
 }
 
 function sc_form_mov_ajusteinv_tallas_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 
-function sc_form_mov_ajusteinv_tallas_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
-}
-
-function sc_form_mov_ajusteinv_sabor_onblur(oThis, iSeqRow) {
-  do_ajax_form_mov_ajusteinv_validate_sabor();
-  scCssBlur(oThis);
-}
-
 function sc_form_mov_ajusteinv_sabor_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-}
-
-function sc_form_mov_ajusteinv_sabor_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
 }
 
 function sc_form_mov_ajusteinv_numeronota_onblur(oThis, iSeqRow) {
@@ -455,32 +371,12 @@ function sc_form_mov_ajusteinv_prefijonota_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
-function sc_form_mov_ajusteinv_lote_onblur(oThis, iSeqRow) {
-  do_ajax_form_mov_ajusteinv_validate_lote();
-  scCssBlur(oThis);
-}
-
 function sc_form_mov_ajusteinv_lote_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 
-function sc_form_mov_ajusteinv_lote_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
-}
-
-function sc_form_mov_ajusteinv_vence_onblur(oThis, iSeqRow) {
-  do_ajax_form_mov_ajusteinv_validate_vence();
-  scCssBlur(oThis);
-}
-
 function sc_form_mov_ajusteinv_vence_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-}
-
-function sc_form_mov_ajusteinv_vence_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
 }
 
 function sc_form_mov_ajusteinv_presentacion_onblur(oThis, iSeqRow) {
@@ -511,19 +407,8 @@ function sc_form_mov_ajusteinv_stcock_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
-function sc_form_mov_ajusteinv_seleccionarlfs_onblur(oThis, iSeqRow) {
-  do_ajax_form_mov_ajusteinv_validate_seleccionarlfs();
-  scCssBlur(oThis);
-}
-
 function sc_form_mov_ajusteinv_seleccionarlfs_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-  do_ajax_form_mov_ajusteinv_event_seleccionarlfs_onchange();
-}
-
-function sc_form_mov_ajusteinv_seleccionarlfs_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
 }
 
 function displayChange_block(block, status) {
@@ -539,9 +424,6 @@ function displayChange_block(block, status) {
 	if ("3" == block) {
 		displayChange_block_3(status);
 	}
-	if ("4" == block) {
-		displayChange_block_4(status);
-	}
 }
 
 function displayChange_block_0(status) {
@@ -553,11 +435,7 @@ function displayChange_block_0(status) {
 
 function displayChange_block_1(status) {
 	displayChange_field("idpro", "", status);
-	displayChange_field("colores", "", status);
-	displayChange_field("tallas", "", status);
-	displayChange_field("sabor", "", status);
 	displayChange_field("presentacion", "", status);
-	displayChange_field("seleccionarlfs", "", status);
 	displayChange_field("cantidad", "", status);
 }
 
@@ -567,11 +445,6 @@ function displayChange_block_2(status) {
 }
 
 function displayChange_block_3(status) {
-	displayChange_field("lote", "", status);
-	displayChange_field("vence", "", status);
-}
-
-function displayChange_block_4(status) {
 	displayChange_field("observaciones", "", status);
 }
 
@@ -581,16 +454,10 @@ function displayChange_row(row, status) {
 	displayChange_field_idtipotran(row, status);
 	displayChange_field_fecha(row, status);
 	displayChange_field_idpro(row, status);
-	displayChange_field_colores(row, status);
-	displayChange_field_tallas(row, status);
-	displayChange_field_sabor(row, status);
 	displayChange_field_presentacion(row, status);
-	displayChange_field_seleccionarlfs(row, status);
 	displayChange_field_cantidad(row, status);
 	displayChange_field_idbodorig(row, status);
 	displayChange_field_stcock(row, status);
-	displayChange_field_lote(row, status);
-	displayChange_field_vence(row, status);
 	displayChange_field_observaciones(row, status);
 }
 
@@ -610,20 +477,8 @@ function displayChange_field(field, row, status) {
 	if ("idpro" == field) {
 		displayChange_field_idpro(row, status);
 	}
-	if ("colores" == field) {
-		displayChange_field_colores(row, status);
-	}
-	if ("tallas" == field) {
-		displayChange_field_tallas(row, status);
-	}
-	if ("sabor" == field) {
-		displayChange_field_sabor(row, status);
-	}
 	if ("presentacion" == field) {
 		displayChange_field_presentacion(row, status);
-	}
-	if ("seleccionarlfs" == field) {
-		displayChange_field_seleccionarlfs(row, status);
 	}
 	if ("cantidad" == field) {
 		displayChange_field_cantidad(row, status);
@@ -633,12 +488,6 @@ function displayChange_field(field, row, status) {
 	}
 	if ("stcock" == field) {
 		displayChange_field_stcock(row, status);
-	}
-	if ("lote" == field) {
-		displayChange_field_lote(row, status);
-	}
-	if ("vence" == field) {
-		displayChange_field_vence(row, status);
 	}
 	if ("observaciones" == field) {
 		displayChange_field_observaciones(row, status);
@@ -696,67 +545,7 @@ function displayChange_field_idpro(row, status) {
 	}
 }
 
-function displayChange_field_colores(row, status) {
-	if ("on" == status) {
-		if ("all" == row) {
-			var fieldList = $(".css_colores__obj");
-			for (var i = 0; i < fieldList.length; i++) {
-				$($(fieldList[i]).attr("id")).select2("destroy");
-			}
-		}
-		else {
-			$("#id_sc_field_colores" + row).select2("destroy");
-		}
-		scJQSelect2Add(row, "colores");
-	}
-}
-
-function displayChange_field_tallas(row, status) {
-	if ("on" == status) {
-		if ("all" == row) {
-			var fieldList = $(".css_tallas__obj");
-			for (var i = 0; i < fieldList.length; i++) {
-				$($(fieldList[i]).attr("id")).select2("destroy");
-			}
-		}
-		else {
-			$("#id_sc_field_tallas" + row).select2("destroy");
-		}
-		scJQSelect2Add(row, "tallas");
-	}
-}
-
-function displayChange_field_sabor(row, status) {
-	if ("on" == status) {
-		if ("all" == row) {
-			var fieldList = $(".css_sabor__obj");
-			for (var i = 0; i < fieldList.length; i++) {
-				$($(fieldList[i]).attr("id")).select2("destroy");
-			}
-		}
-		else {
-			$("#id_sc_field_sabor" + row).select2("destroy");
-		}
-		scJQSelect2Add(row, "sabor");
-	}
-}
-
 function displayChange_field_presentacion(row, status) {
-}
-
-function displayChange_field_seleccionarlfs(row, status) {
-	if ("on" == status) {
-		if ("all" == row) {
-			var fieldList = $(".css_seleccionarlfs__obj");
-			for (var i = 0; i < fieldList.length; i++) {
-				$($(fieldList[i]).attr("id")).select2("destroy");
-			}
-		}
-		else {
-			$("#id_sc_field_seleccionarlfs" + row).select2("destroy");
-		}
-		scJQSelect2Add(row, "seleccionarlfs");
-	}
 }
 
 function displayChange_field_cantidad(row, status) {
@@ -780,12 +569,6 @@ function displayChange_field_idbodorig(row, status) {
 function displayChange_field_stcock(row, status) {
 }
 
-function displayChange_field_lote(row, status) {
-}
-
-function displayChange_field_vence(row, status) {
-}
-
 function displayChange_field_observaciones(row, status) {
 }
 
@@ -793,10 +576,6 @@ function scRecreateSelect2() {
 	displayChange_field_prefijonota("all", "on");
 	displayChange_field_idtipotran("all", "on");
 	displayChange_field_idpro("all", "on");
-	displayChange_field_colores("all", "on");
-	displayChange_field_tallas("all", "on");
-	displayChange_field_sabor("all", "on");
-	displayChange_field_seleccionarlfs("all", "on");
 	displayChange_field_idbodorig("all", "on");
 }
 function scResetPagesDisplay() {
@@ -1078,6 +857,9 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "idpro" == specificField) {
     scJQSelect2Add_idpro(seqRow);
   }
+  if (null == specificField || "idbodorig" == specificField) {
+    scJQSelect2Add_idbodorig(seqRow);
+  }
   if (null == specificField || "colores" == specificField) {
     scJQSelect2Add_colores(seqRow);
   }
@@ -1089,9 +871,6 @@ function scJQSelect2Add(seqRow, specificField) {
   }
   if (null == specificField || "seleccionarlfs" == specificField) {
     scJQSelect2Add_seleccionarlfs(seqRow);
-  }
-  if (null == specificField || "idbodorig" == specificField) {
-    scJQSelect2Add_idbodorig(seqRow);
   }
 } // scJQSelect2Add
 
@@ -1137,6 +916,24 @@ function scJQSelect2Add_idpro(seqRow) {
     {
       containerCssClass: 'css_idpro_obj',
       dropdownCssClass: 'css_idpro_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_idbodorig(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_idbodorig_obj" : "#id_sc_field_idbodorig" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_idbodorig_obj',
+      dropdownCssClass: 'css_idbodorig_obj',
       language: {
         noResults: function() {
           return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
@@ -1221,24 +1018,6 @@ function scJQSelect2Add_seleccionarlfs(seqRow) {
   );
 } // scJQSelect2Add
 
-function scJQSelect2Add_idbodorig(seqRow) {
-  var elemSelector = "all" == seqRow ? ".css_idbodorig_obj" : "#id_sc_field_idbodorig" + seqRow;
-  $(elemSelector).select2(
-    {
-      containerCssClass: 'css_idbodorig_obj',
-      dropdownCssClass: 'css_idbodorig_obj',
-      language: {
-        noResults: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
-        },
-        searching: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
-        }
-      }
-    }
-  );
-} // scJQSelect2Add
-
 
 function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
@@ -1250,11 +1029,11 @@ function scJQElementsAdd(iLine) {
   setTimeout(function () { if ('function' == typeof displayChange_field_prefijonota) { displayChange_field_prefijonota(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_idtipotran) { displayChange_field_idtipotran(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_idpro) { displayChange_field_idpro(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_idbodorig) { displayChange_field_idbodorig(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_colores) { displayChange_field_colores(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_tallas) { displayChange_field_tallas(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_sabor) { displayChange_field_sabor(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_seleccionarlfs) { displayChange_field_seleccionarlfs(iLine, "on"); } }, 150);
-  setTimeout(function () { if ('function' == typeof displayChange_field_idbodorig) { displayChange_field_idbodorig(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)

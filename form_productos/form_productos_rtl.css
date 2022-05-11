@@ -128,14 +128,35 @@
 .css_costo_prom_line {text-align:left;}
 .css_costo_prom_obj {text-align:left;}
 .css_imagen_label { }
-.css_imagen_line { }
-.css_imagen_obj { }
+.css_imagen_line {width:200px;}
+.css_imagen_obj {width:200px;}
 .css_ubicacion_label { }
 .css_ubicacion_line { }
 .css_ubicacion_obj { }
 .css_para_registro_fe_label { }
 .css_para_registro_fe_line { }
 .css_para_registro_fe_obj { }
+.css_id_pucaux_inventario_label { }
+.css_id_pucaux_inventario_line {text-align:left;}
+.css_id_pucaux_inventario_obj {text-align:left;width:200px;}
+.css_id_pucaux_ncc_label { }
+.css_id_pucaux_ncc_line {text-align:left;}
+.css_id_pucaux_ncc_obj {text-align:left;width:200px;}
+.css_id_pucaux_ndc_label { }
+.css_id_pucaux_ndc_line {text-align:left;}
+.css_id_pucaux_ndc_obj {text-align:left;width:200px;}
+.css_id_pucaux_ingresos_label { }
+.css_id_pucaux_ingresos_line {text-align:left;}
+.css_id_pucaux_ingresos_obj {text-align:left;width:200px;}
+.css_id_pucaux_nc_label { }
+.css_id_pucaux_nc_line {text-align:left;}
+.css_id_pucaux_nc_obj {text-align:left;width:200px;}
+.css_id_pucaux_nd_label { }
+.css_id_pucaux_nd_line {text-align:left;}
+.css_id_pucaux_nd_obj {text-align:left;width:200px;}
+.css_id_pucaux_costoventas_label { }
+.css_id_pucaux_costoventas_line {text-align:left;}
+.css_id_pucaux_costoventas_obj {text-align:left;width:200px;}
 .css_sugerido_mayor_label {color:#000099;font-weight:bold;text-align:left;}
 .css_sugerido_mayor_line {font-weight:bold;text-align:center;}
 .css_sugerido_mayor_obj {font-size:16px;font-weight:bold;border-color:#FFFFFF;}

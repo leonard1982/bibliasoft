@@ -436,7 +436,7 @@ class form_comprobantes_detalle_mob_apl
           if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_comprobantes_detalle_mob']))
           {
                $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_comprobantes_detalle_mob']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('form_comprobantes_detalle_mob') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_comprobantes_detalle_mob']['label'] = "" . $this->Ini->Nm_lang['lang_othr_frmu_titl'] . " - comprobantes_detalle";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_comprobantes_detalle_mob']['label'] = "DETALLE ASIENTO";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -509,7 +509,7 @@ class form_comprobantes_detalle_mob_apl
 
 
 
-      $_SESSION['scriptcase']['error_icon']['form_comprobantes_detalle_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $_SESSION['scriptcase']['error_icon']['form_comprobantes_detalle_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_comprobantes_detalle_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
       $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_comprobantes_detalle_mob']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_comprobantes_detalle_mob']['embutida_proc'] : $this->Embutida_proc;
@@ -1610,7 +1610,7 @@ class form_comprobantes_detalle_mob_apl
 ?>
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo strip_tags("" . $this->Ini->Nm_lang['lang_othr_frmu_titl'] . " - comprobantes_detalle") ?></TITLE>
+ <TITLE><?php echo strip_tags("DETALLE ASIENTO") ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 

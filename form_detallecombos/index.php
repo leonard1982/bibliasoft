@@ -285,8 +285,8 @@ class form_detallecombos_ini
       $this->nm_dt_criacao   = "20180927"; 
       $this->nm_hr_criacao   = "165433"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220316"; 
-      $this->nm_hr_ult_alt   = "103617"; 
+      $this->nm_dt_ult_alt   = "20220505"; 
+      $this->nm_hr_ult_alt   = "160352"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -943,7 +943,7 @@ class form_detallecombos_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDQFaD1BOV5JeDMzGDkFCHEX/VorqHQBiH9FaHIveHQrqDMveHENiDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9XGZkFGDSNOV5BODMvCZSJGDWX7HIB/D9JKDQFaDSN7D5FaHuBOVcXKH5FqDoNUHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwH9X7Z1rwV5BOHuNOVcB/V5X7DoNUDcJUZ1FaD1rKD5NUDEBOHEFiDuFYVoB/DcJeZSX7Z1rwD5F7HgvsVIBOV5X7VoFGHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKD5F7HgBeVkXeDuFaHMXGHQXOZSFUDSN7VWBqDMNOVIB/DWFYHIJeHQXOZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1vsD5XGHgNKHArCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKDkFCH5FqVoF7D9JmH9FaD1vsZMBqDMBYVkJqDWXCHMBqHQJeDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQB/HIrKHQFaHgvsZSJqH5XCHIXGDcJUZ1F7HABYD5NUHgveZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMF7HQBiH9BOHIveHQBODEvsHEXeDuFYVoJsHQXsH9BiHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HANOD5FaDErKVkXeV5FqDoFUDcBwDQJsHABYVWJsHgvsVcBODuFqDoJeDcJUZ1B/D1rwD5FaDEBOHEXeDWr/DoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUH5XCHIF7HQNmH9B/Z1rYHuX7DMzGHArsH5BmDoBqD9NwDQFaZ1rwV5FGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYV9BUDWXKVoF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoBOHQNwDuFaDSBYVWJeHgrKV9BUH5FqHIFUDcJUZ1X7DSrYHQrqHgNOHEFiDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['form_detallecombos']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['form_detallecombos']['ordem_cmp'] = ""; 
@@ -1729,47 +1729,29 @@ ob_start();
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
-        if ('ajax_form_detallecombos_validate_total_' == $_POST['rs'])
-        {
-            $total_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
         if ('ajax_form_detallecombos_validate_cantidad_' == $_POST['rs'])
         {
             $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
-        if ('ajax_form_detallecombos_validate_precio_' == $_POST['rs'])
-        {
-            $precio_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
         if ('ajax_form_detallecombos_event_cantidad__onchange' == $_POST['rs'])
         {
-            $precio_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $total_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
         if ('ajax_form_detallecombos_event_idproducto__onchange' == $_POST['rs'])
         {
             $idproducto_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $precio_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $total_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
         if ('ajax_form_detallecombos_event_total__onchange' == $_POST['rs'])
         {
-            $precio_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $total_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
         for ($iSeq = 1; $iSeq <= 10; $iSeq++)
         {
@@ -1783,18 +1765,16 @@ ob_start();
         {
             $idcombo_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $idproducto_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $total_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $precio_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][11]);
         }
         if ('ajax_form_detallecombos_navigate_form' == $_POST['rs'])
         {
@@ -2287,9 +2267,7 @@ ob_start();
     //$sajax_debug_mode = 1;
     sajax_export("ajax_form_detallecombos_validate_idcombo_");
     sajax_export("ajax_form_detallecombos_validate_idproducto_");
-    sajax_export("ajax_form_detallecombos_validate_total_");
     sajax_export("ajax_form_detallecombos_validate_cantidad_");
-    sajax_export("ajax_form_detallecombos_validate_precio_");
     sajax_export("ajax_form_detallecombos_event_cantidad__onchange");
     sajax_export("ajax_form_detallecombos_event_idproducto__onchange");
     sajax_export("ajax_form_detallecombos_event_total__onchange");
@@ -2371,26 +2349,6 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_idproducto_
 
-    function ajax_form_detallecombos_validate_total_($total_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallecombos;
-        //register_shutdown_function("form_detallecombos_pack_ajax_response");
-        $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_flag          = true;
-        $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_opcao         = 'validate_total_';
-        $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_info['param'] = array(
-                  'total_' => NM_utf8_urldecode($total_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallecombos->contr_form_detallecombos->controle();
-        exit;
-    } // ajax_validate_total_
-
     function ajax_form_detallecombos_validate_cantidad_($cantidad_, $nmgp_refresh_row, $script_case_init)
     {
         global $inicial_form_detallecombos;
@@ -2411,35 +2369,13 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_cantidad_
 
-    function ajax_form_detallecombos_validate_precio_($precio_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_detallecombos;
-        //register_shutdown_function("form_detallecombos_pack_ajax_response");
-        $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_flag          = true;
-        $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_opcao         = 'validate_precio_';
-        $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_info['param'] = array(
-                  'precio_' => NM_utf8_urldecode($precio_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_detallecombos->contr_form_detallecombos->controle();
-        exit;
-    } // ajax_validate_precio_
-
-    function ajax_form_detallecombos_event_cantidad__onchange($precio_, $total_, $cantidad_, $script_case_init, $nmgp_refresh_row)
+    function ajax_form_detallecombos_event_cantidad__onchange($cantidad_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detallecombos;
         //register_shutdown_function("form_detallecombos_pack_ajax_response");
         $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_flag          = true;
         $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_opcao         = 'event_cantidad__onchange';
         $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_info['param'] = array(
-                  'precio_' => NM_utf8_urldecode($precio_),
-                  'total_' => NM_utf8_urldecode($total_),
                   'cantidad_' => NM_utf8_urldecode($cantidad_),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
@@ -2453,7 +2389,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_cantidad__onchange
 
-    function ajax_form_detallecombos_event_idproducto__onchange($idproducto_, $precio_, $total_, $script_case_init, $nmgp_refresh_row)
+    function ajax_form_detallecombos_event_idproducto__onchange($idproducto_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detallecombos;
         //register_shutdown_function("form_detallecombos_pack_ajax_response");
@@ -2461,8 +2397,6 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_opcao         = 'event_idproducto__onchange';
         $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_info['param'] = array(
                   'idproducto_' => NM_utf8_urldecode($idproducto_),
-                  'precio_' => NM_utf8_urldecode($precio_),
-                  'total_' => NM_utf8_urldecode($total_),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'buffer_output' => true,
@@ -2475,15 +2409,13 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_idproducto__onchange
 
-    function ajax_form_detallecombos_event_total__onchange($precio_, $total_, $cantidad_, $script_case_init, $nmgp_refresh_row)
+    function ajax_form_detallecombos_event_total__onchange($cantidad_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_detallecombos;
         //register_shutdown_function("form_detallecombos_pack_ajax_response");
         $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_flag          = true;
         $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_opcao         = 'event_total__onchange';
         $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_info['param'] = array(
-                  'precio_' => NM_utf8_urldecode($precio_),
-                  'total_' => NM_utf8_urldecode($total_),
                   'cantidad_' => NM_utf8_urldecode($cantidad_),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
@@ -3638,7 +3570,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_autocomp_idproducto_60
 
-    function ajax_form_detallecombos_submit_form($idcombo_, $idproducto_, $total_, $cantidad_, $precio_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_detallecombos_submit_form($idcombo_, $idproducto_, $cantidad_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_detallecombos;
         //register_shutdown_function("form_detallecombos_pack_ajax_response");
@@ -3647,9 +3579,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_form_detallecombos->contr_form_detallecombos->NM_ajax_info['param'] = array(
                   'idcombo_' => NM_utf8_urldecode($idcombo_),
                   'idproducto_' => NM_utf8_urldecode($idproducto_),
-                  'total_' => NM_utf8_urldecode($total_),
                   'cantidad_' => NM_utf8_urldecode($cantidad_),
-                  'precio_' => NM_utf8_urldecode($precio_),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),

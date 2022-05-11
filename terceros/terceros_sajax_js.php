@@ -5404,6 +5404,10 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   // ---------- Validate puc_auxiliar_deudores
   function do_ajax_terceros_validate_puc_auxiliar_deudores()
   {
+    var nomeCampo_puc_auxiliar_deudores = "puc_auxiliar_deudores";
+    var var_puc_auxiliar_deudores = scAjaxGetFieldSelect(nomeCampo_puc_auxiliar_deudores);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_puc_auxiliar_deudores(var_puc_auxiliar_deudores, var_script_case_init, do_ajax_terceros_validate_puc_auxiliar_deudores_cb);
   } // do_ajax_terceros_validate_puc_auxiliar_deudores
 
   function do_ajax_terceros_validate_puc_auxiliar_deudores_cb(sResp)
@@ -5434,9 +5438,50 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_terceros_validate_puc_auxiliar_deudores_cb
 
+  // ---------- Validate id_pucaux_cliente
+  function do_ajax_terceros_validate_id_pucaux_cliente()
+  {
+    var nomeCampo_id_pucaux_cliente = "id_pucaux_cliente";
+    var var_id_pucaux_cliente = scAjaxGetFieldSelect(nomeCampo_id_pucaux_cliente);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_id_pucaux_cliente(var_id_pucaux_cliente, var_script_case_init, do_ajax_terceros_validate_id_pucaux_cliente_cb);
+  } // do_ajax_terceros_validate_id_pucaux_cliente
+
+  function do_ajax_terceros_validate_id_pucaux_cliente_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_cliente";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_validate_id_pucaux_cliente_cb
+
   // ---------- Validate puc_retefuente_ventas
   function do_ajax_terceros_validate_puc_retefuente_ventas()
   {
+    var nomeCampo_puc_retefuente_ventas = "puc_retefuente_ventas";
+    var var_puc_retefuente_ventas = scAjaxGetFieldSelect(nomeCampo_puc_retefuente_ventas);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_puc_retefuente_ventas(var_puc_retefuente_ventas, var_script_case_init, do_ajax_terceros_validate_puc_retefuente_ventas_cb);
   } // do_ajax_terceros_validate_puc_retefuente_ventas
 
   function do_ajax_terceros_validate_puc_retefuente_ventas_cb(sResp)
@@ -5467,9 +5512,50 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_terceros_validate_puc_retefuente_ventas_cb
 
+  // ---------- Validate id_pucaux_retteventas
+  function do_ajax_terceros_validate_id_pucaux_retteventas()
+  {
+    var nomeCampo_id_pucaux_retteventas = "id_pucaux_retteventas";
+    var var_id_pucaux_retteventas = scAjaxGetFieldSelect(nomeCampo_id_pucaux_retteventas);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_id_pucaux_retteventas(var_id_pucaux_retteventas, var_script_case_init, do_ajax_terceros_validate_id_pucaux_retteventas_cb);
+  } // do_ajax_terceros_validate_id_pucaux_retteventas
+
+  function do_ajax_terceros_validate_id_pucaux_retteventas_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_retteventas";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_validate_id_pucaux_retteventas_cb
+
   // ---------- Validate puc_retefuente_servicios_clie
   function do_ajax_terceros_validate_puc_retefuente_servicios_clie()
   {
+    var nomeCampo_puc_retefuente_servicios_clie = "puc_retefuente_servicios_clie";
+    var var_puc_retefuente_servicios_clie = scAjaxGetFieldSelect(nomeCampo_puc_retefuente_servicios_clie);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_puc_retefuente_servicios_clie(var_puc_retefuente_servicios_clie, var_script_case_init, do_ajax_terceros_validate_puc_retefuente_servicios_clie_cb);
   } // do_ajax_terceros_validate_puc_retefuente_servicios_clie
 
   function do_ajax_terceros_validate_puc_retefuente_servicios_clie_cb(sResp)
@@ -5500,9 +5586,50 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_terceros_validate_puc_retefuente_servicios_clie_cb
 
+  // ---------- Validate id_pucaux_retteservicios
+  function do_ajax_terceros_validate_id_pucaux_retteservicios()
+  {
+    var nomeCampo_id_pucaux_retteservicios = "id_pucaux_retteservicios";
+    var var_id_pucaux_retteservicios = scAjaxGetFieldSelect(nomeCampo_id_pucaux_retteservicios);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_id_pucaux_retteservicios(var_id_pucaux_retteservicios, var_script_case_init, do_ajax_terceros_validate_id_pucaux_retteservicios_cb);
+  } // do_ajax_terceros_validate_id_pucaux_retteservicios
+
+  function do_ajax_terceros_validate_id_pucaux_retteservicios_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_retteservicios";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_validate_id_pucaux_retteservicios_cb
+
   // ---------- Validate puc_auxiliar_proveedores
   function do_ajax_terceros_validate_puc_auxiliar_proveedores()
   {
+    var nomeCampo_puc_auxiliar_proveedores = "puc_auxiliar_proveedores";
+    var var_puc_auxiliar_proveedores = scAjaxGetFieldSelect(nomeCampo_puc_auxiliar_proveedores);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_puc_auxiliar_proveedores(var_puc_auxiliar_proveedores, var_script_case_init, do_ajax_terceros_validate_puc_auxiliar_proveedores_cb);
   } // do_ajax_terceros_validate_puc_auxiliar_proveedores
 
   function do_ajax_terceros_validate_puc_auxiliar_proveedores_cb(sResp)
@@ -5533,9 +5660,50 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_terceros_validate_puc_auxiliar_proveedores_cb
 
+  // ---------- Validate id_pucaux_proveedor
+  function do_ajax_terceros_validate_id_pucaux_proveedor()
+  {
+    var nomeCampo_id_pucaux_proveedor = "id_pucaux_proveedor";
+    var var_id_pucaux_proveedor = scAjaxGetFieldSelect(nomeCampo_id_pucaux_proveedor);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_id_pucaux_proveedor(var_id_pucaux_proveedor, var_script_case_init, do_ajax_terceros_validate_id_pucaux_proveedor_cb);
+  } // do_ajax_terceros_validate_id_pucaux_proveedor
+
+  function do_ajax_terceros_validate_id_pucaux_proveedor_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_proveedor";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_validate_id_pucaux_proveedor_cb
+
   // ---------- Validate puc_retefuente_compras
   function do_ajax_terceros_validate_puc_retefuente_compras()
   {
+    var nomeCampo_puc_retefuente_compras = "puc_retefuente_compras";
+    var var_puc_retefuente_compras = scAjaxGetFieldSelect(nomeCampo_puc_retefuente_compras);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_puc_retefuente_compras(var_puc_retefuente_compras, var_script_case_init, do_ajax_terceros_validate_puc_retefuente_compras_cb);
   } // do_ajax_terceros_validate_puc_retefuente_compras
 
   function do_ajax_terceros_validate_puc_retefuente_compras_cb(sResp)
@@ -5566,9 +5734,50 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_terceros_validate_puc_retefuente_compras_cb
 
+  // ---------- Validate id_pucaux_rettecompras
+  function do_ajax_terceros_validate_id_pucaux_rettecompras()
+  {
+    var nomeCampo_id_pucaux_rettecompras = "id_pucaux_rettecompras";
+    var var_id_pucaux_rettecompras = scAjaxGetFieldSelect(nomeCampo_id_pucaux_rettecompras);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_id_pucaux_rettecompras(var_id_pucaux_rettecompras, var_script_case_init, do_ajax_terceros_validate_id_pucaux_rettecompras_cb);
+  } // do_ajax_terceros_validate_id_pucaux_rettecompras
+
+  function do_ajax_terceros_validate_id_pucaux_rettecompras_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_rettecompras";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_validate_id_pucaux_rettecompras_cb
+
   // ---------- Validate puc_retefuente_servicios_prov
   function do_ajax_terceros_validate_puc_retefuente_servicios_prov()
   {
+    var nomeCampo_puc_retefuente_servicios_prov = "puc_retefuente_servicios_prov";
+    var var_puc_retefuente_servicios_prov = scAjaxGetFieldSelect(nomeCampo_puc_retefuente_servicios_prov);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_puc_retefuente_servicios_prov(var_puc_retefuente_servicios_prov, var_script_case_init, do_ajax_terceros_validate_puc_retefuente_servicios_prov_cb);
   } // do_ajax_terceros_validate_puc_retefuente_servicios_prov
 
   function do_ajax_terceros_validate_puc_retefuente_servicios_prov_cb(sResp)
@@ -5598,6 +5807,43 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetMaster();
     scAjaxSetFocus();
   } // do_ajax_terceros_validate_puc_retefuente_servicios_prov_cb
+
+  // ---------- Validate id_pucaux_rettesercomp
+  function do_ajax_terceros_validate_id_pucaux_rettesercomp()
+  {
+    var nomeCampo_id_pucaux_rettesercomp = "id_pucaux_rettesercomp";
+    var var_id_pucaux_rettesercomp = scAjaxGetFieldSelect(nomeCampo_id_pucaux_rettesercomp);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_terceros_validate_id_pucaux_rettesercomp(var_id_pucaux_rettesercomp, var_script_case_init, do_ajax_terceros_validate_id_pucaux_rettesercomp_cb);
+  } // do_ajax_terceros_validate_id_pucaux_rettesercomp
+
+  function do_ajax_terceros_validate_id_pucaux_rettesercomp_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "id_pucaux_rettesercomp";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_validate_id_pucaux_rettesercomp_cb
 
   // ---------- Validate archivo_cedula
   function do_ajax_terceros_validate_archivo_cedula()
@@ -6236,6 +6482,139 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_terceros_refresh_idmuni_cb
 
+  // ---------- Refresh puc_auxiliar_deudores
+  function do_ajax_terceros_refresh_puc_auxiliar_deudores()
+  {
+    var var_puc_auxiliar_deudores = scAjaxGetFieldSelect("puc_auxiliar_deudores");
+    var var_nmgp_refresh_fields = "id_pucaux_cliente";
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_refresh_puc_auxiliar_deudores(var_puc_auxiliar_deudores, var_nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_refresh_puc_auxiliar_deudores_cb);
+  } // do_ajax_terceros_refresh_puc_auxiliar_deudores
+
+  function do_ajax_terceros_refresh_puc_auxiliar_deudores_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_refresh_puc_auxiliar_deudores_cb
+
+  // ---------- Refresh puc_retefuente_ventas
+  function do_ajax_terceros_refresh_puc_retefuente_ventas()
+  {
+    var var_puc_retefuente_ventas = scAjaxGetFieldSelect("puc_retefuente_ventas");
+    var var_nmgp_refresh_fields = "id_pucaux_retteventas";
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_refresh_puc_retefuente_ventas(var_puc_retefuente_ventas, var_nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_refresh_puc_retefuente_ventas_cb);
+  } // do_ajax_terceros_refresh_puc_retefuente_ventas
+
+  function do_ajax_terceros_refresh_puc_retefuente_ventas_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_refresh_puc_retefuente_ventas_cb
+
+  // ---------- Refresh puc_retefuente_servicios_clie
+  function do_ajax_terceros_refresh_puc_retefuente_servicios_clie()
+  {
+    var var_puc_retefuente_servicios_clie = scAjaxGetFieldSelect("puc_retefuente_servicios_clie");
+    var var_nmgp_refresh_fields = "id_pucaux_retteservicios";
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_refresh_puc_retefuente_servicios_clie(var_puc_retefuente_servicios_clie, var_nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_refresh_puc_retefuente_servicios_clie_cb);
+  } // do_ajax_terceros_refresh_puc_retefuente_servicios_clie
+
+  function do_ajax_terceros_refresh_puc_retefuente_servicios_clie_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_refresh_puc_retefuente_servicios_clie_cb
+
+  // ---------- Refresh puc_auxiliar_proveedores
+  function do_ajax_terceros_refresh_puc_auxiliar_proveedores()
+  {
+    var var_puc_auxiliar_proveedores = scAjaxGetFieldSelect("puc_auxiliar_proveedores");
+    var var_puc_auxiliar_proveedor = scAjaxGetFieldText("puc_auxiliar_proveedor");
+    var var_nmgp_refresh_fields = "id_pucaux_proveedor";
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_refresh_puc_auxiliar_proveedores(var_puc_auxiliar_proveedores, var_puc_auxiliar_proveedor, var_nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_refresh_puc_auxiliar_proveedores_cb);
+  } // do_ajax_terceros_refresh_puc_auxiliar_proveedores
+
+  function do_ajax_terceros_refresh_puc_auxiliar_proveedores_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_refresh_puc_auxiliar_proveedores_cb
+
+  // ---------- Refresh puc_retefuente_compras
+  function do_ajax_terceros_refresh_puc_retefuente_compras()
+  {
+    var var_puc_retefuente_compras = scAjaxGetFieldSelect("puc_retefuente_compras");
+    var var_nmgp_refresh_fields = "id_pucaux_rettecompras";
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_refresh_puc_retefuente_compras(var_puc_retefuente_compras, var_nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_refresh_puc_retefuente_compras_cb);
+  } // do_ajax_terceros_refresh_puc_retefuente_compras
+
+  function do_ajax_terceros_refresh_puc_retefuente_compras_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_refresh_puc_retefuente_compras_cb
+
+  // ---------- Refresh puc_retefuente_servicios_prov
+  function do_ajax_terceros_refresh_puc_retefuente_servicios_prov()
+  {
+    var var_puc_retefuente_servicios_prov = scAjaxGetFieldSelect("puc_retefuente_servicios_prov");
+    var var_nmgp_refresh_fields = "id_pucaux_rettesercomp";
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_refresh_puc_retefuente_servicios_prov(var_puc_retefuente_servicios_prov, var_nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_refresh_puc_retefuente_servicios_prov_cb);
+  } // do_ajax_terceros_refresh_puc_retefuente_servicios_prov
+
+  function do_ajax_terceros_refresh_puc_retefuente_servicios_prov_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_terceros_refresh_puc_retefuente_servicios_prov_cb
+
   // ---------- Event onchange apellido1
   function do_ajax_terceros_event_apellido1_onchange()
   {
@@ -6861,6 +7240,288 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxRedir();
   } // do_ajax_terceros_event_proveedor_onchange_cb_after_alert
 
+  // ---------- Event onchange puc_auxiliar_deudores
+  function do_ajax_terceros_event_puc_auxiliar_deudores_onchange()
+  {
+    var var_puc_auxiliar_deudores = scAjaxGetFieldSelect("puc_auxiliar_deudores");
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_event_puc_auxiliar_deudores_onchange(var_puc_auxiliar_deudores, var_script_case_init, do_ajax_terceros_event_puc_auxiliar_deudores_onchange_cb);
+  } // do_ajax_terceros_event_puc_auxiliar_deudores_onchange
+
+  function do_ajax_terceros_event_puc_auxiliar_deudores_onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    sFieldValid = "puc_auxiliar_deudores";
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_terceros_event_puc_auxiliar_deudores_onchange_cb_after_alert);
+  } // do_ajax_terceros_event_puc_auxiliar_deudores_onchange_cb
+  function do_ajax_terceros_event_puc_auxiliar_deudores_onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    do_ajax_terceros_refresh_puc_auxiliar_deudores();
+    scAjaxRedir();
+  } // do_ajax_terceros_event_puc_auxiliar_deudores_onchange_cb_after_alert
+
+  // ---------- Event onchange puc_auxiliar_proveedores
+  function do_ajax_terceros_event_puc_auxiliar_proveedores_onchange()
+  {
+    var var_puc_auxiliar_proveedores = scAjaxGetFieldSelect("puc_auxiliar_proveedores");
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_event_puc_auxiliar_proveedores_onchange(var_puc_auxiliar_proveedores, var_script_case_init, do_ajax_terceros_event_puc_auxiliar_proveedores_onchange_cb);
+  } // do_ajax_terceros_event_puc_auxiliar_proveedores_onchange
+
+  function do_ajax_terceros_event_puc_auxiliar_proveedores_onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    sFieldValid = "puc_auxiliar_proveedores";
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_terceros_event_puc_auxiliar_proveedores_onchange_cb_after_alert);
+  } // do_ajax_terceros_event_puc_auxiliar_proveedores_onchange_cb
+  function do_ajax_terceros_event_puc_auxiliar_proveedores_onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    do_ajax_terceros_refresh_puc_auxiliar_proveedores();
+    scAjaxRedir();
+  } // do_ajax_terceros_event_puc_auxiliar_proveedores_onchange_cb_after_alert
+
+  // ---------- Event onchange puc_retefuente_compras
+  function do_ajax_terceros_event_puc_retefuente_compras_onchange()
+  {
+    var var_puc_retefuente_compras = scAjaxGetFieldSelect("puc_retefuente_compras");
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_event_puc_retefuente_compras_onchange(var_puc_retefuente_compras, var_script_case_init, do_ajax_terceros_event_puc_retefuente_compras_onchange_cb);
+  } // do_ajax_terceros_event_puc_retefuente_compras_onchange
+
+  function do_ajax_terceros_event_puc_retefuente_compras_onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    sFieldValid = "puc_retefuente_compras";
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_terceros_event_puc_retefuente_compras_onchange_cb_after_alert);
+  } // do_ajax_terceros_event_puc_retefuente_compras_onchange_cb
+  function do_ajax_terceros_event_puc_retefuente_compras_onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    do_ajax_terceros_refresh_puc_retefuente_compras();
+    scAjaxRedir();
+  } // do_ajax_terceros_event_puc_retefuente_compras_onchange_cb_after_alert
+
+  // ---------- Event onchange puc_retefuente_servicios_clie
+  function do_ajax_terceros_event_puc_retefuente_servicios_clie_onchange()
+  {
+    var var_puc_retefuente_servicios_clie = scAjaxGetFieldSelect("puc_retefuente_servicios_clie");
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_event_puc_retefuente_servicios_clie_onchange(var_puc_retefuente_servicios_clie, var_script_case_init, do_ajax_terceros_event_puc_retefuente_servicios_clie_onchange_cb);
+  } // do_ajax_terceros_event_puc_retefuente_servicios_clie_onchange
+
+  function do_ajax_terceros_event_puc_retefuente_servicios_clie_onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    sFieldValid = "puc_retefuente_servicios_clie";
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_terceros_event_puc_retefuente_servicios_clie_onchange_cb_after_alert);
+  } // do_ajax_terceros_event_puc_retefuente_servicios_clie_onchange_cb
+  function do_ajax_terceros_event_puc_retefuente_servicios_clie_onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    do_ajax_terceros_refresh_puc_retefuente_servicios_clie();
+    scAjaxRedir();
+  } // do_ajax_terceros_event_puc_retefuente_servicios_clie_onchange_cb_after_alert
+
+  // ---------- Event onchange puc_retefuente_servicios_prov
+  function do_ajax_terceros_event_puc_retefuente_servicios_prov_onchange()
+  {
+    var var_puc_retefuente_servicios_prov = scAjaxGetFieldSelect("puc_retefuente_servicios_prov");
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_event_puc_retefuente_servicios_prov_onchange(var_puc_retefuente_servicios_prov, var_script_case_init, do_ajax_terceros_event_puc_retefuente_servicios_prov_onchange_cb);
+  } // do_ajax_terceros_event_puc_retefuente_servicios_prov_onchange
+
+  function do_ajax_terceros_event_puc_retefuente_servicios_prov_onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    sFieldValid = "puc_retefuente_servicios_prov";
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_terceros_event_puc_retefuente_servicios_prov_onchange_cb_after_alert);
+  } // do_ajax_terceros_event_puc_retefuente_servicios_prov_onchange_cb
+  function do_ajax_terceros_event_puc_retefuente_servicios_prov_onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    do_ajax_terceros_refresh_puc_retefuente_servicios_prov();
+    scAjaxRedir();
+  } // do_ajax_terceros_event_puc_retefuente_servicios_prov_onchange_cb_after_alert
+
+  // ---------- Event onchange puc_retefuente_ventas
+  function do_ajax_terceros_event_puc_retefuente_ventas_onchange()
+  {
+    var var_puc_retefuente_ventas = scAjaxGetFieldSelect("puc_retefuente_ventas");
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_terceros_event_puc_retefuente_ventas_onchange(var_puc_retefuente_ventas, var_script_case_init, do_ajax_terceros_event_puc_retefuente_ventas_onchange_cb);
+  } // do_ajax_terceros_event_puc_retefuente_ventas_onchange
+
+  function do_ajax_terceros_event_puc_retefuente_ventas_onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    sFieldValid = "puc_retefuente_ventas";
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_terceros_event_puc_retefuente_ventas_onchange_cb_after_alert);
+  } // do_ajax_terceros_event_puc_retefuente_ventas_onchange_cb
+  function do_ajax_terceros_event_puc_retefuente_ventas_onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    do_ajax_terceros_refresh_puc_retefuente_ventas();
+    scAjaxRedir();
+  } // do_ajax_terceros_event_puc_retefuente_ventas_onchange_cb_after_alert
+
   // ---------- Event onchange r_social
   function do_ajax_terceros_event_r_social_onchange()
   {
@@ -7478,12 +8139,18 @@ function scJs_sweetalert_params(params) {
     var var_codigo_ter = scAjaxGetFieldText("codigo_ter");
     var var_zona_clientes = scAjaxGetFieldSelect("zona_clientes");
     var var_clasificacion_clientes = scAjaxGetFieldSelect("clasificacion_clientes");
-    var var_puc_auxiliar_deudores = scAjaxGetFieldText("puc_auxiliar_deudores");
-    var var_puc_retefuente_ventas = scAjaxGetFieldText("puc_retefuente_ventas");
-    var var_puc_retefuente_servicios_clie = scAjaxGetFieldText("puc_retefuente_servicios_clie");
-    var var_puc_auxiliar_proveedores = scAjaxGetFieldText("puc_auxiliar_proveedores");
-    var var_puc_retefuente_compras = scAjaxGetFieldText("puc_retefuente_compras");
-    var var_puc_retefuente_servicios_prov = scAjaxGetFieldText("puc_retefuente_servicios_prov");
+    var var_puc_auxiliar_deudores = scAjaxGetFieldSelect("puc_auxiliar_deudores");
+    var var_id_pucaux_cliente = scAjaxGetFieldSelect("id_pucaux_cliente");
+    var var_puc_retefuente_ventas = scAjaxGetFieldSelect("puc_retefuente_ventas");
+    var var_id_pucaux_retteventas = scAjaxGetFieldSelect("id_pucaux_retteventas");
+    var var_puc_retefuente_servicios_clie = scAjaxGetFieldSelect("puc_retefuente_servicios_clie");
+    var var_id_pucaux_retteservicios = scAjaxGetFieldSelect("id_pucaux_retteservicios");
+    var var_puc_auxiliar_proveedores = scAjaxGetFieldSelect("puc_auxiliar_proveedores");
+    var var_id_pucaux_proveedor = scAjaxGetFieldSelect("id_pucaux_proveedor");
+    var var_puc_retefuente_compras = scAjaxGetFieldSelect("puc_retefuente_compras");
+    var var_id_pucaux_rettecompras = scAjaxGetFieldSelect("id_pucaux_rettecompras");
+    var var_puc_retefuente_servicios_prov = scAjaxGetFieldSelect("puc_retefuente_servicios_prov");
+    var var_id_pucaux_rettesercomp = scAjaxGetFieldSelect("id_pucaux_rettesercomp");
     var var_archivo_cedula = scAjaxGetFieldText("archivo_cedula");
     var var_archivo_rut = scAjaxGetFieldText("archivo_rut");
     var var_archivo_nit = scAjaxGetFieldText("archivo_nit");
@@ -7524,7 +8191,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_terceros_submit_form(var_tipo, var_regimen, var_tipo_documento, var_documento, var_dv, var_codigo_tercero, var_sexo, var_notificar, var_nombre1, var_nombre2, var_apellido1, var_apellido2, var_tel_cel, var_urlmail, var_idtercero, var_r_social, var_nombres, var_nombre_comercil, var_representante, var_direccion, var_departamento, var_idmuni, var_ciudad, var_codigo_postal, var_observaciones, var_lenguaje, var_c_postal, var_correo_notificafe, var_celular_notificafe, var_cliente, var_proveedor, var_empleado, var_es_tecnico, var_activo, var_credito, var_cupo, var_cupodis, var_dias_credito, var_dias_mora, var_efec_retencion, var_listaprecios, var_loatiende, var_autorizado, var_relleno2, var_sucur_cliente, var_detalle_tributario, var_responsabilidad_fiscal, var_ciiu, var_nacimiento, var_fechault, var_saldo, var_afiliacion, var_es_cajero, var_cupo_vendedor, var_autoretenedor, var_creditoprov, var_dias, var_url, var_contacto, var_telefonos_prov, var_email, var_fechultcomp, var_saldoapagar, var_codigo_ter, var_zona_clientes, var_clasificacion_clientes, var_puc_auxiliar_deudores, var_puc_retefuente_ventas, var_puc_retefuente_servicios_clie, var_puc_auxiliar_proveedores, var_puc_retefuente_compras, var_puc_retefuente_servicios_prov, var_archivo_cedula, var_archivo_rut, var_archivo_nit, var_archivo_pago, var_id_plan, var_valor_plan, var_fecha_registro_fe, var_nombre_contador, var_estado, var_si_nomina, var_n_trabajadores, var_si_factura_electronica, var_nombre_empresa_bd, var_es_restaurante, var_porcentaje_propina_sugerida, var_archivo_cedula_ul_name, var_archivo_cedula_ul_type, var_archivo_rut_ul_name, var_archivo_rut_ul_type, var_archivo_nit_ul_name, var_archivo_nit_ul_type, var_archivo_pago_ul_name, var_archivo_pago_ul_type, var_archivo_cedula_salva, var_archivo_cedula_limpa, var_archivo_rut_salva, var_archivo_rut_limpa, var_archivo_nit_salva, var_archivo_nit_limpa, var_archivo_pago_salva, var_archivo_pago_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_terceros_submit_form_cb);
+    x_ajax_terceros_submit_form(var_tipo, var_regimen, var_tipo_documento, var_documento, var_dv, var_codigo_tercero, var_sexo, var_notificar, var_nombre1, var_nombre2, var_apellido1, var_apellido2, var_tel_cel, var_urlmail, var_idtercero, var_r_social, var_nombres, var_nombre_comercil, var_representante, var_direccion, var_departamento, var_idmuni, var_ciudad, var_codigo_postal, var_observaciones, var_lenguaje, var_c_postal, var_correo_notificafe, var_celular_notificafe, var_cliente, var_proveedor, var_empleado, var_es_tecnico, var_activo, var_credito, var_cupo, var_cupodis, var_dias_credito, var_dias_mora, var_efec_retencion, var_listaprecios, var_loatiende, var_autorizado, var_relleno2, var_sucur_cliente, var_detalle_tributario, var_responsabilidad_fiscal, var_ciiu, var_nacimiento, var_fechault, var_saldo, var_afiliacion, var_es_cajero, var_cupo_vendedor, var_autoretenedor, var_creditoprov, var_dias, var_url, var_contacto, var_telefonos_prov, var_email, var_fechultcomp, var_saldoapagar, var_codigo_ter, var_zona_clientes, var_clasificacion_clientes, var_puc_auxiliar_deudores, var_id_pucaux_cliente, var_puc_retefuente_ventas, var_id_pucaux_retteventas, var_puc_retefuente_servicios_clie, var_id_pucaux_retteservicios, var_puc_auxiliar_proveedores, var_id_pucaux_proveedor, var_puc_retefuente_compras, var_id_pucaux_rettecompras, var_puc_retefuente_servicios_prov, var_id_pucaux_rettesercomp, var_archivo_cedula, var_archivo_rut, var_archivo_nit, var_archivo_pago, var_id_plan, var_valor_plan, var_fecha_registro_fe, var_nombre_contador, var_estado, var_si_nomina, var_n_trabajadores, var_si_factura_electronica, var_nombre_empresa_bd, var_es_restaurante, var_porcentaje_propina_sugerida, var_archivo_cedula_ul_name, var_archivo_cedula_ul_type, var_archivo_rut_ul_name, var_archivo_rut_ul_type, var_archivo_nit_ul_name, var_archivo_nit_ul_type, var_archivo_pago_ul_name, var_archivo_pago_ul_type, var_archivo_cedula_salva, var_archivo_cedula_limpa, var_archivo_rut_salva, var_archivo_rut_limpa, var_archivo_nit_salva, var_archivo_nit_limpa, var_archivo_pago_salva, var_archivo_pago_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_terceros_submit_form_cb);
   } // do_ajax_terceros_submit_form
 
   function do_ajax_terceros_submit_form_cb(sResp)
@@ -7616,11 +8283,17 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("zona_clientes");
       scAjaxHideErrorDisplay("clasificacion_clientes");
       scAjaxHideErrorDisplay("puc_auxiliar_deudores");
+      scAjaxHideErrorDisplay("id_pucaux_cliente");
       scAjaxHideErrorDisplay("puc_retefuente_ventas");
+      scAjaxHideErrorDisplay("id_pucaux_retteventas");
       scAjaxHideErrorDisplay("puc_retefuente_servicios_clie");
+      scAjaxHideErrorDisplay("id_pucaux_retteservicios");
       scAjaxHideErrorDisplay("puc_auxiliar_proveedores");
+      scAjaxHideErrorDisplay("id_pucaux_proveedor");
       scAjaxHideErrorDisplay("puc_retefuente_compras");
+      scAjaxHideErrorDisplay("id_pucaux_rettecompras");
       scAjaxHideErrorDisplay("puc_retefuente_servicios_prov");
+      scAjaxHideErrorDisplay("id_pucaux_rettesercomp");
       scAjaxHideErrorDisplay("archivo_cedula");
       scAjaxHideErrorDisplay("archivo_rut");
       scAjaxHideErrorDisplay("archivo_nit");
@@ -7801,11 +8474,17 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros']['dashboard_in
     scAjaxHideErrorDisplay("zona_clientes");
     scAjaxHideErrorDisplay("clasificacion_clientes");
     scAjaxHideErrorDisplay("puc_auxiliar_deudores");
+    scAjaxHideErrorDisplay("id_pucaux_cliente");
     scAjaxHideErrorDisplay("puc_retefuente_ventas");
+    scAjaxHideErrorDisplay("id_pucaux_retteventas");
     scAjaxHideErrorDisplay("puc_retefuente_servicios_clie");
+    scAjaxHideErrorDisplay("id_pucaux_retteservicios");
     scAjaxHideErrorDisplay("puc_auxiliar_proveedores");
+    scAjaxHideErrorDisplay("id_pucaux_proveedor");
     scAjaxHideErrorDisplay("puc_retefuente_compras");
+    scAjaxHideErrorDisplay("id_pucaux_rettecompras");
     scAjaxHideErrorDisplay("puc_retefuente_servicios_prov");
+    scAjaxHideErrorDisplay("id_pucaux_rettesercomp");
     scAjaxHideErrorDisplay("archivo_cedula");
     scAjaxHideErrorDisplay("archivo_rut");
     scAjaxHideErrorDisplay("archivo_nit");
@@ -7965,6 +8644,107 @@ if ($this->Embutida_form)
     scAjaxSetVariables();
   } // do_ajax_terceros_lkpedt_refresh_clasificacion_clientes_cb
 
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_cliente()
+  {
+    var var_id_pucaux_cliente = scAjaxGetFieldSelect("id_pucaux_cliente");
+    var var_puc_auxiliar_deudores = scAjaxGetFieldSelect("puc_auxiliar_deudores");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_cliente";
+    x_ajax_terceros_lkpedt_refresh_id_pucaux_cliente(var_id_pucaux_cliente, var_puc_auxiliar_deudores, nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_lkpedt_refresh_id_pucaux_cliente_cb);
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_cliente
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_cliente_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_cliente_cb
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_retteventas()
+  {
+    var var_id_pucaux_retteventas = scAjaxGetFieldSelect("id_pucaux_retteventas");
+    var var_puc_retefuente_ventas = scAjaxGetFieldSelect("puc_retefuente_ventas");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_retteventas";
+    x_ajax_terceros_lkpedt_refresh_id_pucaux_retteventas(var_id_pucaux_retteventas, var_puc_retefuente_ventas, nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_lkpedt_refresh_id_pucaux_retteventas_cb);
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_retteventas
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_retteventas_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_retteventas_cb
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_retteservicios()
+  {
+    var var_id_pucaux_retteservicios = scAjaxGetFieldSelect("id_pucaux_retteservicios");
+    var var_puc_retefuente_servicios_clie = scAjaxGetFieldSelect("puc_retefuente_servicios_clie");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_retteservicios";
+    x_ajax_terceros_lkpedt_refresh_id_pucaux_retteservicios(var_id_pucaux_retteservicios, var_puc_retefuente_servicios_clie, nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_lkpedt_refresh_id_pucaux_retteservicios_cb);
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_retteservicios
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_retteservicios_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_retteservicios_cb
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_proveedor()
+  {
+    var var_id_pucaux_proveedor = scAjaxGetFieldSelect("id_pucaux_proveedor");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_proveedor";
+    x_ajax_terceros_lkpedt_refresh_id_pucaux_proveedor(var_id_pucaux_proveedor, nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_lkpedt_refresh_id_pucaux_proveedor_cb);
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_proveedor
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_proveedor_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_proveedor_cb
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_rettecompras()
+  {
+    var var_id_pucaux_rettecompras = scAjaxGetFieldSelect("id_pucaux_rettecompras");
+    var var_puc_retefuente_compras = scAjaxGetFieldSelect("puc_retefuente_compras");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_rettecompras";
+    x_ajax_terceros_lkpedt_refresh_id_pucaux_rettecompras(var_id_pucaux_rettecompras, var_puc_retefuente_compras, nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_lkpedt_refresh_id_pucaux_rettecompras_cb);
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_rettecompras
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_rettecompras_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_rettecompras_cb
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_rettesercomp()
+  {
+    var var_id_pucaux_rettesercomp = scAjaxGetFieldSelect("id_pucaux_rettesercomp");
+    var var_puc_retefuente_servicios_prov = scAjaxGetFieldSelect("puc_retefuente_servicios_prov");
+    var var_script_case_init = document.F1.script_case_init.value;
+    var nmgp_refresh_fields = "id_pucaux_rettesercomp";
+    x_ajax_terceros_lkpedt_refresh_id_pucaux_rettesercomp(var_id_pucaux_rettesercomp, var_puc_retefuente_servicios_prov, nmgp_refresh_fields, var_script_case_init, do_ajax_terceros_lkpedt_refresh_id_pucaux_rettesercomp_cb);
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_rettesercomp
+
+  function do_ajax_terceros_lkpedt_refresh_id_pucaux_rettesercomp_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    scAjaxSetFields(false);
+    scAjaxSetVariables();
+  } // do_ajax_terceros_lkpedt_refresh_id_pucaux_rettesercomp_cb
+
   function scAjaxDetailStatus(sDetailApp)
   {
     if (scStatusDetail[sDetailApp])
@@ -8069,27 +8849,33 @@ if ($this->Embutida_form)
   ajax_field_list[65] = "zona_clientes";
   ajax_field_list[66] = "clasificacion_clientes";
   ajax_field_list[67] = "puc_auxiliar_deudores";
-  ajax_field_list[68] = "puc_retefuente_ventas";
-  ajax_field_list[69] = "puc_retefuente_servicios_clie";
-  ajax_field_list[70] = "puc_auxiliar_proveedores";
-  ajax_field_list[71] = "puc_retefuente_compras";
-  ajax_field_list[72] = "puc_retefuente_servicios_prov";
-  ajax_field_list[73] = "archivo_cedula";
-  ajax_field_list[74] = "archivo_rut";
-  ajax_field_list[75] = "archivo_nit";
-  ajax_field_list[76] = "archivo_pago";
-  ajax_field_list[77] = "id_plan";
-  ajax_field_list[78] = "valor_plan";
-  ajax_field_list[79] = "fecha_registro_fe";
-  ajax_field_list[80] = "nombre_contador";
-  ajax_field_list[81] = "estado";
-  ajax_field_list[82] = "si_nomina";
-  ajax_field_list[83] = "n_trabajadores";
-  ajax_field_list[84] = "si_factura_electronica";
-  ajax_field_list[85] = "nombre_empresa_bd";
-  ajax_field_list[86] = "archivos";
-  ajax_field_list[87] = "es_restaurante";
-  ajax_field_list[88] = "porcentaje_propina_sugerida";
+  ajax_field_list[68] = "id_pucaux_cliente";
+  ajax_field_list[69] = "puc_retefuente_ventas";
+  ajax_field_list[70] = "id_pucaux_retteventas";
+  ajax_field_list[71] = "puc_retefuente_servicios_clie";
+  ajax_field_list[72] = "id_pucaux_retteservicios";
+  ajax_field_list[73] = "puc_auxiliar_proveedores";
+  ajax_field_list[74] = "id_pucaux_proveedor";
+  ajax_field_list[75] = "puc_retefuente_compras";
+  ajax_field_list[76] = "id_pucaux_rettecompras";
+  ajax_field_list[77] = "puc_retefuente_servicios_prov";
+  ajax_field_list[78] = "id_pucaux_rettesercomp";
+  ajax_field_list[79] = "archivo_cedula";
+  ajax_field_list[80] = "archivo_rut";
+  ajax_field_list[81] = "archivo_nit";
+  ajax_field_list[82] = "archivo_pago";
+  ajax_field_list[83] = "id_plan";
+  ajax_field_list[84] = "valor_plan";
+  ajax_field_list[85] = "fecha_registro_fe";
+  ajax_field_list[86] = "nombre_contador";
+  ajax_field_list[87] = "estado";
+  ajax_field_list[88] = "si_nomina";
+  ajax_field_list[89] = "n_trabajadores";
+  ajax_field_list[90] = "si_factura_electronica";
+  ajax_field_list[91] = "nombre_empresa_bd";
+  ajax_field_list[92] = "archivos";
+  ajax_field_list[93] = "es_restaurante";
+  ajax_field_list[94] = "porcentaje_propina_sugerida";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -8181,12 +8967,18 @@ if ($this->Embutida_form)
     "codigo_ter": {"label": "Código TNS", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "zona_clientes": {"label": "Zona Tercero", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "clasificacion_clientes": {"label": "Clasificacion Tercero", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "puc_auxiliar_deudores": {"label": "PUC Auxiliar Deudores", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "puc_auxiliar_deudores": {"label": "PUC Clientes", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_cliente": {"label": "Auxiliar Clientes", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "puc_retefuente_ventas": {"label": "PUC Retefuente Ventas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "puc_retefuente_servicios_clie": {"label": "PUC Retefuente Servicios Clie", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "puc_auxiliar_proveedores": {"label": "PUC Auxiliar Proveedores", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_retteventas": {"label": "Auxiliar Rete ventas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "puc_retefuente_servicios_clie": {"label": "PUC Retefuente Servicios Venta", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_retteservicios": {"label": "Auxiliar Rete servicios ventas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "puc_auxiliar_proveedores": {"label": "PUC Proveedores", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_proveedor": {"label": "Auxiliar Proveedor", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "puc_retefuente_compras": {"label": "PUC Retefuente Compras", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "puc_retefuente_servicios_prov": {"label": "PUC Retefuente Servicios Prov", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_rettecompras": {"label": "Auxiliar Rete compras", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "puc_retefuente_servicios_prov": {"label": "PUC Retefuente Servicios Compras", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "id_pucaux_rettesercomp": {"label": "Auxiliar Rete servicios compras", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "archivo_cedula": {"label": "Cédula", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "archivo_rut": {"label": "RUT", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "archivo_nit": {"label": "Cámara de Comercio", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -8321,11 +9113,17 @@ if ($this->Embutida_form)
     "zona_clientes": new Array(),
     "clasificacion_clientes": new Array(),
     "puc_auxiliar_deudores": new Array(),
+    "id_pucaux_cliente": new Array(),
     "puc_retefuente_ventas": new Array(),
+    "id_pucaux_retteventas": new Array(),
     "puc_retefuente_servicios_clie": new Array(),
+    "id_pucaux_retteservicios": new Array(),
     "puc_auxiliar_proveedores": new Array(),
+    "id_pucaux_proveedor": new Array(),
     "puc_retefuente_compras": new Array(),
+    "id_pucaux_rettecompras": new Array(),
     "puc_retefuente_servicios_prov": new Array(),
+    "id_pucaux_rettesercomp": new Array(),
     "archivo_cedula": new Array(),
     "archivo_rut": new Array(),
     "archivo_nit": new Array(),
@@ -8411,11 +9209,17 @@ if ($this->Embutida_form)
   ajax_field_mult["zona_clientes"][1] = "zona_clientes";
   ajax_field_mult["clasificacion_clientes"][1] = "clasificacion_clientes";
   ajax_field_mult["puc_auxiliar_deudores"][1] = "puc_auxiliar_deudores";
+  ajax_field_mult["id_pucaux_cliente"][1] = "id_pucaux_cliente";
   ajax_field_mult["puc_retefuente_ventas"][1] = "puc_retefuente_ventas";
+  ajax_field_mult["id_pucaux_retteventas"][1] = "id_pucaux_retteventas";
   ajax_field_mult["puc_retefuente_servicios_clie"][1] = "puc_retefuente_servicios_clie";
+  ajax_field_mult["id_pucaux_retteservicios"][1] = "id_pucaux_retteservicios";
   ajax_field_mult["puc_auxiliar_proveedores"][1] = "puc_auxiliar_proveedores";
+  ajax_field_mult["id_pucaux_proveedor"][1] = "id_pucaux_proveedor";
   ajax_field_mult["puc_retefuente_compras"][1] = "puc_retefuente_compras";
+  ajax_field_mult["id_pucaux_rettecompras"][1] = "id_pucaux_rettecompras";
   ajax_field_mult["puc_retefuente_servicios_prov"][1] = "puc_retefuente_servicios_prov";
+  ajax_field_mult["id_pucaux_rettesercomp"][1] = "id_pucaux_rettesercomp";
   ajax_field_mult["archivo_cedula"][1] = "archivo_cedula";
   ajax_field_mult["archivo_rut"][1] = "archivo_rut";
   ajax_field_mult["archivo_nit"][1] = "archivo_nit";
@@ -8500,11 +9304,17 @@ if ($this->Embutida_form)
     "zona_clientes": new Array("hidden_field_label_zona_clientes", "hidden_field_data_zona_clientes"),
     "clasificacion_clientes": new Array("hidden_field_label_clasificacion_clientes", "hidden_field_data_clasificacion_clientes"),
     "puc_auxiliar_deudores": new Array("hidden_field_label_puc_auxiliar_deudores", "hidden_field_data_puc_auxiliar_deudores"),
+    "id_pucaux_cliente": new Array("hidden_field_label_id_pucaux_cliente", "hidden_field_data_id_pucaux_cliente"),
     "puc_retefuente_ventas": new Array("hidden_field_label_puc_retefuente_ventas", "hidden_field_data_puc_retefuente_ventas"),
+    "id_pucaux_retteventas": new Array("hidden_field_label_id_pucaux_retteventas", "hidden_field_data_id_pucaux_retteventas"),
     "puc_retefuente_servicios_clie": new Array("hidden_field_label_puc_retefuente_servicios_clie", "hidden_field_data_puc_retefuente_servicios_clie"),
+    "id_pucaux_retteservicios": new Array("hidden_field_label_id_pucaux_retteservicios", "hidden_field_data_id_pucaux_retteservicios"),
     "puc_auxiliar_proveedores": new Array("hidden_field_label_puc_auxiliar_proveedores", "hidden_field_data_puc_auxiliar_proveedores"),
+    "id_pucaux_proveedor": new Array("hidden_field_label_id_pucaux_proveedor", "hidden_field_data_id_pucaux_proveedor"),
     "puc_retefuente_compras": new Array("hidden_field_label_puc_retefuente_compras", "hidden_field_data_puc_retefuente_compras"),
+    "id_pucaux_rettecompras": new Array("hidden_field_label_id_pucaux_rettecompras", "hidden_field_data_id_pucaux_rettecompras"),
     "puc_retefuente_servicios_prov": new Array("hidden_field_label_puc_retefuente_servicios_prov", "hidden_field_data_puc_retefuente_servicios_prov"),
+    "id_pucaux_rettesercomp": new Array("hidden_field_label_id_pucaux_rettesercomp", "hidden_field_data_id_pucaux_rettesercomp"),
     "archivo_cedula": new Array("hidden_field_label_archivo_cedula", "hidden_field_data_archivo_cedula"),
     "archivo_rut": new Array("hidden_field_label_archivo_rut", "hidden_field_data_archivo_rut"),
     "archivo_nit": new Array("hidden_field_label_archivo_nit", "hidden_field_data_archivo_nit"),
@@ -8592,11 +9402,17 @@ if ($this->Embutida_form)
     "zona_clientes": "off",
     "clasificacion_clientes": "off",
     "puc_auxiliar_deudores": "off",
+    "id_pucaux_cliente": "off",
     "puc_retefuente_ventas": "off",
+    "id_pucaux_retteventas": "off",
     "puc_retefuente_servicios_clie": "off",
+    "id_pucaux_retteservicios": "off",
     "puc_auxiliar_proveedores": "off",
+    "id_pucaux_proveedor": "off",
     "puc_retefuente_compras": "off",
+    "id_pucaux_rettecompras": "off",
     "puc_retefuente_servicios_prov": "off",
+    "id_pucaux_rettesercomp": "off",
     "archivo_cedula": "off",
     "archivo_rut": "off",
     "archivo_nit": "off",
@@ -9761,7 +10577,24 @@ if ($this->Embutida_form)
     }
     if ("puc_auxiliar_deudores" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_cliente" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -9778,7 +10611,24 @@ if ($this->Embutida_form)
     }
     if ("puc_retefuente_ventas" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_retteventas" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -9795,7 +10645,24 @@ if ($this->Embutida_form)
     }
     if ("puc_retefuente_servicios_clie" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_retteservicios" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -9812,7 +10679,24 @@ if ($this->Embutida_form)
     }
     if ("puc_auxiliar_proveedores" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_proveedor" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -9829,7 +10713,24 @@ if ($this->Embutida_form)
     }
     if ("puc_retefuente_compras" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_rettecompras" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -9846,7 +10747,24 @@ if ($this->Embutida_form)
     }
     if ("puc_retefuente_servicios_prov" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_pucaux_rettesercomp" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

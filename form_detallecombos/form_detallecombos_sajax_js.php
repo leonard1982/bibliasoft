@@ -3012,53 +3012,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_form_detallecombos_validate_idproducto__cb
 
-  // ---------- Validate total_
-  function do_ajax_form_detallecombos_validate_total_(iNumLinha)
-  {
-    var nomeCampo_total_ = "total_" + iNumLinha;
-    var var_total_ = scAjaxGetFieldText(nomeCampo_total_);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_detallecombos_validate_total_(var_total_, iNumLinha, var_script_case_init, do_ajax_form_detallecombos_validate_total__cb);
-  } // do_ajax_form_detallecombos_validate_total_
-
-  function do_ajax_form_detallecombos_validate_total__cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    iLineNumber = scAjaxGetLineNumber();
-    if ("" != iLineNumber)
-    {
-      sFieldValid = "total_" + iLineNumber;
-    }
-    else
-    {
-      sFieldValid = "total_";
-    }
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-      scErrorLineOff(iLineNumber, "total_");
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-      scErrorLineOn(iLineNumber, "total_");
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_detallecombos_validate_total__cb
-
   // ---------- Validate cantidad_
   function do_ajax_form_detallecombos_validate_cantidad_(iNumLinha)
   {
@@ -3106,63 +3059,14 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_form_detallecombos_validate_cantidad__cb
 
-  // ---------- Validate precio_
-  function do_ajax_form_detallecombos_validate_precio_(iNumLinha)
-  {
-    var nomeCampo_precio_ = "precio_" + iNumLinha;
-    var var_precio_ = scAjaxGetFieldHidden(nomeCampo_precio_);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_detallecombos_validate_precio_(var_precio_, iNumLinha, var_script_case_init, do_ajax_form_detallecombos_validate_precio__cb);
-  } // do_ajax_form_detallecombos_validate_precio_
-
-  function do_ajax_form_detallecombos_validate_precio__cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    iLineNumber = scAjaxGetLineNumber();
-    if ("" != iLineNumber)
-    {
-      sFieldValid = "precio_" + iLineNumber;
-    }
-    else
-    {
-      sFieldValid = "precio_";
-    }
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-      scErrorLineOff(iLineNumber, "precio_");
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-      scErrorLineOn(iLineNumber, "precio_");
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_detallecombos_validate_precio__cb
-
   // ---------- Event onchange cantidad_
   function do_ajax_form_detallecombos_event_cantidad__onchange(iSeqForm)
   {
-    var var_precio_ = scAjaxGetFieldHidden("precio_" + iSeqForm);
-    var var_total_ = scAjaxGetFieldText("total_" + iSeqForm);
     var var_cantidad_ = scAjaxGetFieldText("cantidad_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
-    x_ajax_form_detallecombos_event_cantidad__onchange(var_precio_, var_total_, var_cantidad_, var_script_case_init, var_nmgp_refresh_row, do_ajax_form_detallecombos_event_cantidad__onchange_cb);
+    x_ajax_form_detallecombos_event_cantidad__onchange(var_cantidad_, var_script_case_init, var_nmgp_refresh_row, do_ajax_form_detallecombos_event_cantidad__onchange_cb);
   } // do_ajax_form_detallecombos_event_cantidad__onchange
 
   function do_ajax_form_detallecombos_event_cantidad__onchange_cb(sResp)
@@ -3216,12 +3120,10 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   function do_ajax_form_detallecombos_event_idproducto__onchange(iSeqForm)
   {
     var var_idproducto_ = scAjaxGetFieldText("id_ac_idproducto_" + iSeqForm);
-    var var_precio_ = scAjaxGetFieldHidden("precio_" + iSeqForm);
-    var var_total_ = scAjaxGetFieldText("total_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
-    x_ajax_form_detallecombos_event_idproducto__onchange(var_idproducto_, var_precio_, var_total_, var_script_case_init, var_nmgp_refresh_row, do_ajax_form_detallecombos_event_idproducto__onchange_cb);
+    x_ajax_form_detallecombos_event_idproducto__onchange(var_idproducto_, var_script_case_init, var_nmgp_refresh_row, do_ajax_form_detallecombos_event_idproducto__onchange_cb);
   } // do_ajax_form_detallecombos_event_idproducto__onchange
 
   function do_ajax_form_detallecombos_event_idproducto__onchange_cb(sResp)
@@ -3274,13 +3176,11 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   // ---------- Event onchange total_
   function do_ajax_form_detallecombos_event_total__onchange(iSeqForm)
   {
-    var var_precio_ = scAjaxGetFieldHidden("precio_" + iSeqForm);
-    var var_total_ = scAjaxGetFieldText("total_" + iSeqForm);
     var var_cantidad_ = scAjaxGetFieldText("cantidad_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
-    x_ajax_form_detallecombos_event_total__onchange(var_precio_, var_total_, var_cantidad_, var_script_case_init, var_nmgp_refresh_row, do_ajax_form_detallecombos_event_total__onchange_cb);
+    x_ajax_form_detallecombos_event_total__onchange(var_cantidad_, var_script_case_init, var_nmgp_refresh_row, do_ajax_form_detallecombos_event_total__onchange_cb);
   } // do_ajax_form_detallecombos_event_total__onchange
 
   function do_ajax_form_detallecombos_event_total__onchange_cb(sResp)
@@ -3853,9 +3753,7 @@ function scJs_sweetalert_params(params) {
     scAjaxHideMessage();
     var var_idcombo_ = scAjaxGetFieldText("idcombo_" + iNumLinha);
     var var_idproducto_ = scAjaxGetFieldText("idproducto_" + iNumLinha);
-    var var_total_ = scAjaxGetFieldText("total_" + iNumLinha);
     var var_cantidad_ = scAjaxGetFieldText("cantidad_" + iNumLinha);
-    var var_precio_ = scAjaxGetFieldHidden("precio_" + iNumLinha);
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -3888,7 +3786,7 @@ function scJs_sweetalert_params(params) {
 <?php
     }
 ?>
-    x_ajax_form_detallecombos_submit_form(var_idcombo_, var_idproducto_, var_total_, var_cantidad_, var_precio_, var_nmgp_refresh_row, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_detallecombos_submit_form_cb);
+    x_ajax_form_detallecombos_submit_form(var_idcombo_, var_idproducto_, var_cantidad_, var_nmgp_refresh_row, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_detallecombos_submit_form_cb);
   } // do_ajax_form_detallecombos_submit_form
 
   function do_ajax_form_detallecombos_submit_form_cb(sResp)
@@ -3985,9 +3883,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("table");
       scAjaxHideErrorDisplay("idcombo_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("idproducto_" + sc_num_ult_line);
-      scAjaxHideErrorDisplay("total_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("cantidad_" + sc_num_ult_line);
-      scAjaxHideErrorDisplay("precio_" + sc_num_ult_line);
 <?php
 if (isset($this->Embutida_form) && $this->Embutida_form) {
 ?>
@@ -4065,9 +3961,7 @@ if (isset($this->Embutida_form) && $this->Embutida_form) {
     {
       scAjaxHideErrorDisplay("idcombo_" + iNavForm);
       scAjaxHideErrorDisplay("idproducto_" + iNavForm);
-      scAjaxHideErrorDisplay("total_" + iNavForm);
       scAjaxHideErrorDisplay("cantidad_" + iNavForm);
-      scAjaxHideErrorDisplay("precio_" + iNavForm);
     }
     var var_iddetallecombo_ = document.F2.iddetallecombo_.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
@@ -4175,40 +4069,26 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     iTotCampos++;
     ajax_field_list[iTotCampos] = "idproducto_" + iNumLinha;
     iTotCampos++;
-    ajax_field_list[iTotCampos] = "total_" + iNumLinha;
-    iTotCampos++;
     ajax_field_list[iTotCampos] = "cantidad_" + iNumLinha;
-    iTotCampos++;
-    ajax_field_list[iTotCampos] = "precio_" + iNumLinha;
     iTotCampos++;
     ajax_error_list["idcombo_" + iNumLinha] = {"label": "Idcombo<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["idproducto_" + iNumLinha] = {"label": "Producto<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["total_" + iNumLinha] = {"label": "Precio<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["cantidad_" + iNumLinha] = {"label": "Cantidad<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["precio_" + iNumLinha] = {"label": "Total Línea<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_field_mult["idcombo_"][iNumLinha] = "idcombo_" + iNumLinha;
     ajax_field_mult["idproducto_"][iNumLinha] = "idproducto_" + iNumLinha;
-    ajax_field_mult["total_"][iNumLinha] = "total_" + iNumLinha;
     ajax_field_mult["cantidad_"][iNumLinha] = "cantidad_" + iNumLinha;
-    ajax_field_mult["precio_"][iNumLinha] = "precio_" + iNumLinha;
     ajax_field_id["idproducto_" + iNumLinha] = new Array("hidden_field_label_idproducto_", "hidden_field_data_idproducto_" + iNumLinha);
-    ajax_field_id["total_" + iNumLinha] = new Array("hidden_field_label_total_", "hidden_field_data_total_" + iNumLinha);
     ajax_field_id["cantidad_" + iNumLinha] = new Array("hidden_field_label_cantidad_", "hidden_field_data_cantidad_" + iNumLinha);
-    ajax_field_id["precio_" + iNumLinha] = new Array("hidden_field_label_precio_", "hidden_field_data_precio_" + iNumLinha);
     ajax_error_count["idcombo_" + iNumLinha] = "off";
     ajax_error_count["idproducto_" + iNumLinha] = "off";
-    ajax_error_count["total_" + iNumLinha] = "off";
     ajax_error_count["cantidad_" + iNumLinha] = "off";
-    ajax_error_count["precio_" + iNumLinha] = "off";
 <?php
 if (!$this->Grid_editavel)
 {
 ?>
     ajax_read_only["idcombo_" + iNumLinha] = "off";
     ajax_read_only["idproducto_" + iNumLinha] = "off";
-    ajax_read_only["total_" + iNumLinha] = "off";
     ajax_read_only["cantidad_" + iNumLinha] = "off";
-    ajax_read_only["precio_" + iNumLinha] = "off";
 <?php
 }
 else
@@ -4216,9 +4096,7 @@ else
 ?>
     ajax_read_only["idcombo_" + iNumLinha] = "on";
     ajax_read_only["idproducto_" + iNumLinha] = "on";
-    ajax_read_only["total_" + iNumLinha] = "on";
     ajax_read_only["cantidad_" + iNumLinha] = "on";
-    ajax_read_only["precio_" + iNumLinha] = "on";
 <?php
 }
 ?>
@@ -4227,9 +4105,7 @@ else
   {
     ajax_error_list["idcombo_" + iNumLinha] = null;
     ajax_error_list["idproducto_" + iNumLinha] = null;
-    ajax_error_list["total_" + iNumLinha] = null;
     ajax_error_list["cantidad_" + iNumLinha] = null;
-    ajax_error_list["precio_" + iNumLinha] = null;
   }
 
   var ajax_error_geral = "";
@@ -4258,9 +4134,7 @@ else
   var ajax_field_mult = {
     "idcombo_": new Array(),
     "idproducto_": new Array(),
-    "total_": new Array(),
-    "cantidad_": new Array(),
-    "precio_": new Array()
+    "cantidad_": new Array()
   };
 
   var ajax_field_id = {};
@@ -4289,21 +4163,11 @@ else
       ajax_error_list["idproducto_" + iNumLinha]["onchange"] = new Array();
       ajax_error_list["idproducto_" + iNumLinha]["onclick"] = new Array();
       ajax_error_list["idproducto_" + iNumLinha]["onfocus"] = new Array();
-      ajax_error_list["total_" + iNumLinha]["valid"] = new Array();
-      ajax_error_list["total_" + iNumLinha]["onblur"] = new Array();
-      ajax_error_list["total_" + iNumLinha]["onchange"] = new Array();
-      ajax_error_list["total_" + iNumLinha]["onclick"] = new Array();
-      ajax_error_list["total_" + iNumLinha]["onfocus"] = new Array();
       ajax_error_list["cantidad_" + iNumLinha]["valid"] = new Array();
       ajax_error_list["cantidad_" + iNumLinha]["onblur"] = new Array();
       ajax_error_list["cantidad_" + iNumLinha]["onchange"] = new Array();
       ajax_error_list["cantidad_" + iNumLinha]["onclick"] = new Array();
       ajax_error_list["cantidad_" + iNumLinha]["onfocus"] = new Array();
-      ajax_error_list["precio_" + iNumLinha]["valid"] = new Array();
-      ajax_error_list["precio_" + iNumLinha]["onblur"] = new Array();
-      ajax_error_list["precio_" + iNumLinha]["onchange"] = new Array();
-      ajax_error_list["precio_" + iNumLinha]["onclick"] = new Array();
-      ajax_error_list["precio_" + iNumLinha]["onfocus"] = new Array();
     }
   }
 
@@ -4347,26 +4211,16 @@ else
 ?>
     scAjaxFieldRead("idproducto_" + iSeq, "<?php echo $NM_contr_readonly ?>");
 <?php
-  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['total_'])) ? $this->nmgp_cmp_readonly['total_'] : 'off';
-?>
-    scAjaxFieldRead("total_" + iSeq, "<?php echo $NM_contr_readonly ?>");
-<?php
   $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['cantidad_'])) ? $this->nmgp_cmp_readonly['cantidad_'] : 'off';
 ?>
     scAjaxFieldRead("cantidad_" + iSeq, "<?php echo $NM_contr_readonly ?>");
-<?php
-  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['precio_'])) ? $this->nmgp_cmp_readonly['precio_'] : 'off';
-?>
-    scAjaxFieldRead("precio_" + iSeq, "<?php echo $NM_contr_readonly ?>");
   }
 
   function mdCloseObjects(iSeq)
   {
     scAjaxFieldRead("idcombo_" + iSeq, "on");
     scAjaxFieldRead("idproducto_" + iSeq, "on");
-    scAjaxFieldRead("total_" + iSeq, "on");
     scAjaxFieldRead("cantidad_" + iSeq, "on");
-    scAjaxFieldRead("precio_" + iSeq, "on");
   }
 
   function mdCloseLine()
@@ -4430,15 +4284,13 @@ else
     {
       ajax_error_count[sIdError + iRow] = "on";
     }
-    if (bErrorRow || ("on" == ajax_error_count["idcombo_" + iRow] || "on" == ajax_error_count["idproducto_" + iRow] || "on" == ajax_error_count["total_" + iRow] || "on" == ajax_error_count["cantidad_" + iRow] || "on" == ajax_error_count["precio_" + iRow]))
+    if (bErrorRow || ("on" == ajax_error_count["idcombo_" + iRow] || "on" == ajax_error_count["idproducto_" + iRow] || "on" == ajax_error_count["cantidad_" + iRow]))
     {
       $("#hidden_field_data_sc_seq" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_sc_actions" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_idcombo_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_idproducto_" + iRow).addClass("scFormErrorLine");
-      $("#hidden_field_data_total_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_cantidad_" + iRow).addClass("scFormErrorLine");
-      $("#hidden_field_data_precio_" + iRow).addClass("scFormErrorLine");
     }
   }
 
@@ -4453,24 +4305,20 @@ else
     {
       ajax_error_count[sIdError + iRow] = "off";
     }
-    if (bErrorRow || ("off" == ajax_error_count["idcombo_" + iRow] && "off" == ajax_error_count["idproducto_" + iRow] && "off" == ajax_error_count["total_" + iRow] && "off" == ajax_error_count["cantidad_" + iRow] && "off" == ajax_error_count["precio_" + iRow]))
+    if (bErrorRow || ("off" == ajax_error_count["idcombo_" + iRow] && "off" == ajax_error_count["idproducto_" + iRow] && "off" == ajax_error_count["cantidad_" + iRow]))
     {
       if (bErrorRow)
       {
         ajax_error_count["idcombo_" + iRow] = "off";
         ajax_error_count["idproducto_" + iRow] = "off";
-        ajax_error_count["total_" + iRow] = "off";
         ajax_error_count["cantidad_" + iRow] = "off";
-        ajax_error_count["precio_" + iRow] = "off";
       }
       var sCssLine = scErrorLineCss(iRow);
       $("#hidden_field_data_sc_seq" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_sc_actions" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_idcombo_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_idproducto_" + iRow).removeClass("scFormErrorLine");
-      $("#hidden_field_data_total_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_cantidad_" + iRow).removeClass("scFormErrorLine");
-      $("#hidden_field_data_precio_" + iRow).removeClass("scFormErrorLine");
     }
   }
 
@@ -4536,43 +4384,9 @@ else
 
       return;
     }
-    if ("total_" == sIndex)
-    {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
     if ("cantidad_" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("precio_" == sIndex)
-    {
-      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

@@ -348,8 +348,8 @@ class dash_ventas_ini {
         $this->nm_dt_criacao   = "20210115";
         $this->nm_hr_criacao   = "101406";
         $this->nm_autor_alt    = "admin";
-        $this->nm_dt_ult_alt   = "20220405";
-        $this->nm_hr_ult_alt   = "093120";
+        $this->nm_dt_ult_alt   = "20220505";
+        $this->nm_hr_ult_alt   = "111214";
         list($NM_usec, $NM_sec) = explode(" ", microtime());
         $this->nm_timestamp  = (float) $NM_sec;
 
@@ -599,7 +599,7 @@ class dash_ventas_ini {
             }
         }
 
-        $this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+        $this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
         include("../_lib/css/" . $this->str_schema_all . "_form.php");
         $this->Str_btn_form = trim($str_button);
 

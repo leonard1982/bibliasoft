@@ -173,7 +173,8 @@ function Sel_cmp_process()
       $tab_ger_campos['ubicacion'] = "on";
       $tab_ger_campos['costomen'] = "on";
       $tab_ger_campos['idpro1'] = "on";
-      $tab_ger_campos['escombo'] = "on";
+      $tab_ger_campos['combo'] = "on";
+      $tab_blk_campos[] = "combo";
       $tab_ger_campos['agregarnotainv'] = "on";
       $tab_ger_campos['idprod'] = "on";
       $tab_ger_campos['unimay'] = "on";
@@ -184,6 +185,7 @@ function Sel_cmp_process()
       $tab_ger_campos['idpro2'] = "on";
       $tab_ger_campos['otro'] = "on";
       $tab_ger_campos['otro2'] = "on";
+      $tab_ger_campos['escombo'] = "on";
       $tab_ger_campos['preciomen2'] = "on";
       $tab_ger_campos['preciomen3'] = "on";
       $tab_ger_campos['precio2'] = "on";
@@ -682,7 +684,7 @@ function proc_btn_sel(btn, proc) {
           $this->Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
       }
    }
-   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
    $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";

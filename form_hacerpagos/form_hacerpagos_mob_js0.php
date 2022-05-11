@@ -46,6 +46,27 @@
 <div id="id_div_process_block" style="display: none; margin: 10px; whitespace: nowrap"><span class="scFormProcess"><img border="0" src="<?php echo $this->Ini->path_icones; ?>/scriptcase__NM__ajax_load.gif" align="absmiddle" />&nbsp;<?php echo $this->Ini->Nm_lang['lang_othr_prcs']; ?>...</span></div>
 <div id="id_fatal_error" class="scFormLabelOdd" style="display: none; position: absolute"></div>
 <script type="text/javascript"> 
+var Crtl_btn_refrescar = false;
+function sc_btn_refrescar()
+{
+    if (scEventControl_active("")) {
+      setTimeout(function() { sc_btn_refrescar(); }, 500);
+      return;
+    }
+    if (Crtl_btn_refrescar) {return;}
+    sc_btn_refrescar_ok();
+}
+function sc_btn_refrescar_cancel()
+{
+}
+function sc_btn_refrescar_ok()
+{
+    Crtl_btn_refrescar = true;
+    document.F1.nmgp_parms.value = "nmgp_opcao?#?formphp?@?nm_call_php?#?refrescar?@?";
+    document.F1.action = "form_hacerpagos_mob.php";
+    document.F1.target = "_self";
+    document.F1.submit();
+}
  NM_tp_critica(1);
 function nm_gp_submit(apl_lig, apl_saida, parms, opc, target, modal_h, modal_w, apl_name) 
 { 
@@ -421,6 +442,10 @@ function nm_mostra_img(imagem, altura, largura)
         },
     });
     viewer.show();
+}
+function nm_mostra_mens(campo)
+{
+    NovaJanela = window.open ("form_hacerpagos_mob_help.php?nm_cod_campo=" + campo + "&language=<?php echo $this->Ini->path_lang . $this->Ini->str_lang?>&help_css=<?php echo '../_lib/css/' . $this->Ini->str_schema_all . '_form.css'; ?>", "ScriptCase", "height=100, width=300, resizable, scrollbars");
 }
 function nm_recarga_form(nm_ult_ancora, nm_ult_page) 
 { 

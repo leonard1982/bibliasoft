@@ -134,19 +134,6 @@ function Sel_processa_out($sel_groupby)
        unset($_SESSION['sc_session'][$sc_init]['grid_pagos']['pivot_order_start']);
        unset($_SESSION['sc_session'][$sc_init]['grid_pagos']['pivot_tabular']);
    }
-   if ($opc_ret == "resumo" && !empty($this->summ_fields))
-   {
-       $summ_fields = explode("@?@", $this->summ_fields);
-       if(isset($_SESSION['sc_session'][$sc_init]['grid_pagos']['summarizing_fields_display'][ $sel_groupby ]))
-       {
-           foreach ($_SESSION['sc_session'][$sc_init]['grid_pagos']['summarizing_fields_display'][ $sel_groupby ] as $i_sum => $d_sum)
-           {
-               $_SESSION['sc_session'][$sc_init]['grid_pagos']['summarizing_fields_display'][ $sel_groupby ][$i_sum]['display'] = in_array($i_sum, $summ_fields);
-           }
-       }
-       $_SESSION['sc_session'][$sc_init]['grid_pagos']['summarizing_fields_order'][ $sel_groupby ] = $summ_fields;
-       $_SESSION['sc_session'][$sc_init]['grid_pagos']['summarizing_drill_down'] = $this->drill_down;
-   }
 ?>
     <script language="javascript"> 
 <?php
@@ -192,8 +179,9 @@ function Sel_processa_form()
    $display_free_gb  = false;
    $arr_campos_free  = array();
    $arr_date_format  = array();
-   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
    include("../_lib/buttons/" . $Str_btn_grid);
    if (!function_exists("nmButtonOutput"))
@@ -676,11 +664,6 @@ if (!$embbed)
             }
         }
     }
-    if ($opc_ret == "resumo")
-    {
-        $has_total_dynamic = true;
-        $iTabCount++;
-    }
     if (1 < $iTabCount)
     {
 ?>
@@ -1150,14 +1133,14 @@ $(function() {
    if (!$embbed)
    {
 ?>
-   <?php echo nmButtonOutput($this->arr_buttons, "bok_appdiv", "proc_btn_gb('f_sel_sub_gb','scPackGroupBy();buttonunselectedGROUP();document.Fsel_quebras.submit()')", "proc_btn_gb('f_sel_sub_gb','scPackGroupBy();buttonunselectedGROUP();document.Fsel_quebras.submit()')", "f_sel_sub_gb", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+   <?php echo nmButtonOutput($this->arr_buttons, "bok_appdiv", "proc_btn_gb('f_sel_sub_gb','buttonunselectedGROUP();document.Fsel_quebras.submit()')", "proc_btn_gb('f_sel_sub_gb','buttonunselectedGROUP();document.Fsel_quebras.submit()')", "f_sel_sub_gb", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }
    else
    {
 ?>
-   <?php echo nmButtonOutput($this->arr_buttons, "bapply_appdiv", "proc_btn_gb('f_sel_sub_gb','scPackGroupBy();scSubmitGroupBy(\\'" . $tbar_pos . "\\')')", "proc_btn_gb('f_sel_sub_gb','scPackGroupBy();scSubmitGroupBy(\\'" . $tbar_pos . "\\')')", "f_sel_sub_gb", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+   <?php echo nmButtonOutput($this->arr_buttons, "bapply_appdiv", "proc_btn_gb('f_sel_sub_gb','scSubmitGroupBy(\\'" . $tbar_pos . "\\')')", "proc_btn_gb('f_sel_sub_gb','scSubmitGroupBy(\\'" . $tbar_pos . "\\')')", "f_sel_sub_gb", "", "", "", "absmiddle", "", "0px", $path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }

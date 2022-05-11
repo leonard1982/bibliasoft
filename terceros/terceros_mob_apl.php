@@ -149,11 +149,17 @@ class terceros_mob_apl
    var $notificar;
    var $notificar_1;
    var $puc_auxiliar_deudores;
+   var $puc_auxiliar_deudores_1;
    var $puc_retefuente_ventas;
+   var $puc_retefuente_ventas_1;
    var $puc_retefuente_servicios_clie;
+   var $puc_retefuente_servicios_clie_1;
    var $puc_auxiliar_proveedores;
+   var $puc_auxiliar_proveedores_1;
    var $puc_retefuente_compras;
+   var $puc_retefuente_compras_1;
    var $puc_retefuente_servicios_prov;
+   var $puc_retefuente_servicios_prov_1;
    var $nube;
    var $latitude;
    var $longitude;
@@ -203,6 +209,18 @@ class terceros_mob_apl
    var $si_factura_electronica_1;
    var $nombre_empresa_bd;
    var $n_trabajadores;
+   var $id_pucaux_cliente;
+   var $id_pucaux_cliente_1;
+   var $id_pucaux_retteventas;
+   var $id_pucaux_retteventas_1;
+   var $id_pucaux_retteservicios;
+   var $id_pucaux_retteservicios_1;
+   var $id_pucaux_proveedor;
+   var $id_pucaux_proveedor_1;
+   var $id_pucaux_rettecompras;
+   var $id_pucaux_rettecompras_1;
+   var $id_pucaux_rettesercomp;
+   var $id_pucaux_rettesercomp_1;
    var $archivos;
    var $c_postal;
    var $ciiu;
@@ -210,11 +228,11 @@ class terceros_mob_apl
    var $departamento;
    var $departamento_1;
    var $detalle_tributario;
+   var $direcciones;
    var $r_social;
    var $relleno2;
    var $responsabilidad_fiscal;
    var $sucursales;
-   var $direcciones;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -516,6 +534,30 @@ class terceros_mob_apl
           {
               $this->id_plan = $this->NM_ajax_info['param']['id_plan'];
           }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_cliente']))
+          {
+              $this->id_pucaux_cliente = $this->NM_ajax_info['param']['id_pucaux_cliente'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_proveedor']))
+          {
+              $this->id_pucaux_proveedor = $this->NM_ajax_info['param']['id_pucaux_proveedor'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_rettecompras']))
+          {
+              $this->id_pucaux_rettecompras = $this->NM_ajax_info['param']['id_pucaux_rettecompras'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_rettesercomp']))
+          {
+              $this->id_pucaux_rettesercomp = $this->NM_ajax_info['param']['id_pucaux_rettesercomp'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_retteservicios']))
+          {
+              $this->id_pucaux_retteservicios = $this->NM_ajax_info['param']['id_pucaux_retteservicios'];
+          }
+          if (isset($this->NM_ajax_info['param']['id_pucaux_retteventas']))
+          {
+              $this->id_pucaux_retteventas = $this->NM_ajax_info['param']['id_pucaux_retteventas'];
+          }
           if (isset($this->NM_ajax_info['param']['idmuni']))
           {
               $this->idmuni = $this->NM_ajax_info['param']['idmuni'];
@@ -635,6 +677,10 @@ class terceros_mob_apl
           if (isset($this->NM_ajax_info['param']['puc_auxiliar_deudores']))
           {
               $this->puc_auxiliar_deudores = $this->NM_ajax_info['param']['puc_auxiliar_deudores'];
+          }
+          if (isset($this->NM_ajax_info['param']['puc_auxiliar_proveedor']))
+          {
+              $this->puc_auxiliar_proveedor = $this->NM_ajax_info['param']['puc_auxiliar_proveedor'];
           }
           if (isset($this->NM_ajax_info['param']['puc_auxiliar_proveedores']))
           {
@@ -872,6 +918,30 @@ class terceros_mob_apl
       {
           $_SESSION['gnit'] = $this->gnit;
       }
+      if (isset($this->gIdcta1) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gIdcta1'] = $this->gIdcta1;
+      }
+      if (isset($this->gIdcta2) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gIdcta2'] = $this->gIdcta2;
+      }
+      if (isset($this->gIdcta3) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gIdcta3'] = $this->gIdcta3;
+      }
+      if (isset($this->gIdcta4) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gIdcta4'] = $this->gIdcta4;
+      }
+      if (isset($this->gIdcta5) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gIdcta5'] = $this->gIdcta5;
+      }
+      if (isset($this->gIdcta6) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gIdcta6'] = $this->gIdcta6;
+      }
       if (isset($this->gidtercero) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
@@ -908,6 +978,54 @@ class terceros_mob_apl
       {
           $_SESSION['gnit'] = $this->gnit;
       }
+      if (isset($_POST["gIdcta1"]) && isset($this->gIdcta1)) 
+      {
+          $_SESSION['gIdcta1'] = $this->gIdcta1;
+      }
+      if (!isset($_POST["gIdcta1"]) && isset($_POST["gidcta1"])) 
+      {
+          $_SESSION['gIdcta1'] = $_POST["gidcta1"];
+      }
+      if (isset($_POST["gIdcta2"]) && isset($this->gIdcta2)) 
+      {
+          $_SESSION['gIdcta2'] = $this->gIdcta2;
+      }
+      if (!isset($_POST["gIdcta2"]) && isset($_POST["gidcta2"])) 
+      {
+          $_SESSION['gIdcta2'] = $_POST["gidcta2"];
+      }
+      if (isset($_POST["gIdcta3"]) && isset($this->gIdcta3)) 
+      {
+          $_SESSION['gIdcta3'] = $this->gIdcta3;
+      }
+      if (!isset($_POST["gIdcta3"]) && isset($_POST["gidcta3"])) 
+      {
+          $_SESSION['gIdcta3'] = $_POST["gidcta3"];
+      }
+      if (isset($_POST["gIdcta4"]) && isset($this->gIdcta4)) 
+      {
+          $_SESSION['gIdcta4'] = $this->gIdcta4;
+      }
+      if (!isset($_POST["gIdcta4"]) && isset($_POST["gidcta4"])) 
+      {
+          $_SESSION['gIdcta4'] = $_POST["gidcta4"];
+      }
+      if (isset($_POST["gIdcta5"]) && isset($this->gIdcta5)) 
+      {
+          $_SESSION['gIdcta5'] = $this->gIdcta5;
+      }
+      if (!isset($_POST["gIdcta5"]) && isset($_POST["gidcta5"])) 
+      {
+          $_SESSION['gIdcta5'] = $_POST["gidcta5"];
+      }
+      if (isset($_POST["gIdcta6"]) && isset($this->gIdcta6)) 
+      {
+          $_SESSION['gIdcta6'] = $this->gIdcta6;
+      }
+      if (!isset($_POST["gIdcta6"]) && isset($_POST["gidcta6"])) 
+      {
+          $_SESSION['gIdcta6'] = $_POST["gidcta6"];
+      }
       if (isset($_POST["gidtercero"]) && isset($this->gidtercero)) 
       {
           $_SESSION['gidtercero'] = $this->gidtercero;
@@ -943,6 +1061,54 @@ class terceros_mob_apl
       if (isset($_GET["gnit"]) && isset($this->gnit)) 
       {
           $_SESSION['gnit'] = $this->gnit;
+      }
+      if (isset($_GET["gIdcta1"]) && isset($this->gIdcta1)) 
+      {
+          $_SESSION['gIdcta1'] = $this->gIdcta1;
+      }
+      if (!isset($_GET["gIdcta1"]) && isset($_GET["gidcta1"])) 
+      {
+          $_SESSION['gIdcta1'] = $_GET["gidcta1"];
+      }
+      if (isset($_GET["gIdcta2"]) && isset($this->gIdcta2)) 
+      {
+          $_SESSION['gIdcta2'] = $this->gIdcta2;
+      }
+      if (!isset($_GET["gIdcta2"]) && isset($_GET["gidcta2"])) 
+      {
+          $_SESSION['gIdcta2'] = $_GET["gidcta2"];
+      }
+      if (isset($_GET["gIdcta3"]) && isset($this->gIdcta3)) 
+      {
+          $_SESSION['gIdcta3'] = $this->gIdcta3;
+      }
+      if (!isset($_GET["gIdcta3"]) && isset($_GET["gidcta3"])) 
+      {
+          $_SESSION['gIdcta3'] = $_GET["gidcta3"];
+      }
+      if (isset($_GET["gIdcta4"]) && isset($this->gIdcta4)) 
+      {
+          $_SESSION['gIdcta4'] = $this->gIdcta4;
+      }
+      if (!isset($_GET["gIdcta4"]) && isset($_GET["gidcta4"])) 
+      {
+          $_SESSION['gIdcta4'] = $_GET["gidcta4"];
+      }
+      if (isset($_GET["gIdcta5"]) && isset($this->gIdcta5)) 
+      {
+          $_SESSION['gIdcta5'] = $this->gIdcta5;
+      }
+      if (!isset($_GET["gIdcta5"]) && isset($_GET["gidcta5"])) 
+      {
+          $_SESSION['gIdcta5'] = $_GET["gidcta5"];
+      }
+      if (isset($_GET["gIdcta6"]) && isset($this->gIdcta6)) 
+      {
+          $_SESSION['gIdcta6'] = $this->gIdcta6;
+      }
+      if (!isset($_GET["gIdcta6"]) && isset($_GET["gidcta6"])) 
+      {
+          $_SESSION['gIdcta6'] = $_GET["gidcta6"];
       }
       if (isset($_GET["gidtercero"]) && isset($this->gidtercero)) 
       {
@@ -1029,6 +1195,54 @@ class terceros_mob_apl
           {
               $_SESSION['gnit'] = $this->gnit;
           }
+          if (!isset($this->gIdcta1) && isset($this->gidcta1)) 
+          {
+              $this->gIdcta1 = $this->gidcta1;
+          }
+          if (isset($this->gIdcta1)) 
+          {
+              $_SESSION['gIdcta1'] = $this->gIdcta1;
+          }
+          if (!isset($this->gIdcta2) && isset($this->gidcta2)) 
+          {
+              $this->gIdcta2 = $this->gidcta2;
+          }
+          if (isset($this->gIdcta2)) 
+          {
+              $_SESSION['gIdcta2'] = $this->gIdcta2;
+          }
+          if (!isset($this->gIdcta3) && isset($this->gidcta3)) 
+          {
+              $this->gIdcta3 = $this->gidcta3;
+          }
+          if (isset($this->gIdcta3)) 
+          {
+              $_SESSION['gIdcta3'] = $this->gIdcta3;
+          }
+          if (!isset($this->gIdcta4) && isset($this->gidcta4)) 
+          {
+              $this->gIdcta4 = $this->gidcta4;
+          }
+          if (isset($this->gIdcta4)) 
+          {
+              $_SESSION['gIdcta4'] = $this->gIdcta4;
+          }
+          if (!isset($this->gIdcta5) && isset($this->gidcta5)) 
+          {
+              $this->gIdcta5 = $this->gidcta5;
+          }
+          if (isset($this->gIdcta5)) 
+          {
+              $_SESSION['gIdcta5'] = $this->gIdcta5;
+          }
+          if (!isset($this->gIdcta6) && isset($this->gidcta6)) 
+          {
+              $this->gIdcta6 = $this->gidcta6;
+          }
+          if (isset($this->gIdcta6)) 
+          {
+              $_SESSION['gIdcta6'] = $this->gIdcta6;
+          }
           if (isset($this->gidtercero)) 
           {
               $_SESSION['gidtercero'] = $this->gidtercero;
@@ -1082,6 +1296,54 @@ class terceros_mob_apl
           if (isset($this->gnit)) 
           {
               $_SESSION['gnit'] = $this->gnit;
+          }
+          if (!isset($this->gIdcta1) && isset($this->gidcta1)) 
+          {
+              $this->gIdcta1 = $this->gidcta1;
+          }
+          if (isset($this->gIdcta1)) 
+          {
+              $_SESSION['gIdcta1'] = $this->gIdcta1;
+          }
+          if (!isset($this->gIdcta2) && isset($this->gidcta2)) 
+          {
+              $this->gIdcta2 = $this->gidcta2;
+          }
+          if (isset($this->gIdcta2)) 
+          {
+              $_SESSION['gIdcta2'] = $this->gIdcta2;
+          }
+          if (!isset($this->gIdcta3) && isset($this->gidcta3)) 
+          {
+              $this->gIdcta3 = $this->gidcta3;
+          }
+          if (isset($this->gIdcta3)) 
+          {
+              $_SESSION['gIdcta3'] = $this->gIdcta3;
+          }
+          if (!isset($this->gIdcta4) && isset($this->gidcta4)) 
+          {
+              $this->gIdcta4 = $this->gidcta4;
+          }
+          if (isset($this->gIdcta4)) 
+          {
+              $_SESSION['gIdcta4'] = $this->gIdcta4;
+          }
+          if (!isset($this->gIdcta5) && isset($this->gidcta5)) 
+          {
+              $this->gIdcta5 = $this->gidcta5;
+          }
+          if (isset($this->gIdcta5)) 
+          {
+              $_SESSION['gIdcta5'] = $this->gIdcta5;
+          }
+          if (!isset($this->gIdcta6) && isset($this->gidcta6)) 
+          {
+              $this->gIdcta6 = $this->gidcta6;
+          }
+          if (isset($this->gIdcta6)) 
+          {
+              $_SESSION['gIdcta6'] = $this->gIdcta6;
           }
           if (isset($this->gidtercero)) 
           {
@@ -2203,6 +2465,12 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       if (isset($this->estado)) { $this->nm_limpa_alfa($this->estado); }
       if (isset($this->nombre_empresa_bd)) { $this->nm_limpa_alfa($this->nombre_empresa_bd); }
       if (isset($this->n_trabajadores)) { $this->nm_limpa_alfa($this->n_trabajadores); }
+      if (isset($this->id_pucaux_cliente)) { $this->nm_limpa_alfa($this->id_pucaux_cliente); }
+      if (isset($this->id_pucaux_retteventas)) { $this->nm_limpa_alfa($this->id_pucaux_retteventas); }
+      if (isset($this->id_pucaux_retteservicios)) { $this->nm_limpa_alfa($this->id_pucaux_retteservicios); }
+      if (isset($this->id_pucaux_proveedor)) { $this->nm_limpa_alfa($this->id_pucaux_proveedor); }
+      if (isset($this->id_pucaux_rettecompras)) { $this->nm_limpa_alfa($this->id_pucaux_rettecompras); }
+      if (isset($this->id_pucaux_rettesercomp)) { $this->nm_limpa_alfa($this->id_pucaux_rettesercomp); }
       if (isset($this->archivos)) { $this->nm_limpa_alfa($this->archivos); }
       if (isset($this->direcciones)) { $this->nm_limpa_alfa($this->direcciones); }
       if ($nm_opc_form_php == "formphp")
@@ -2704,25 +2972,49 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_auxiliar_deudores');
           }
+          if ('validate_id_pucaux_cliente' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_cliente');
+          }
           if ('validate_puc_retefuente_ventas' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_retefuente_ventas');
+          }
+          if ('validate_id_pucaux_retteventas' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_retteventas');
           }
           if ('validate_puc_retefuente_servicios_clie' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_retefuente_servicios_clie');
           }
+          if ('validate_id_pucaux_retteservicios' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_retteservicios');
+          }
           if ('validate_puc_auxiliar_proveedores' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_auxiliar_proveedores');
+          }
+          if ('validate_id_pucaux_proveedor' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_proveedor');
           }
           if ('validate_puc_retefuente_compras' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_retefuente_compras');
           }
+          if ('validate_id_pucaux_rettecompras' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_rettecompras');
+          }
           if ('validate_puc_retefuente_servicios_prov' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_retefuente_servicios_prov');
+          }
+          if ('validate_id_pucaux_rettesercomp' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_pucaux_rettesercomp');
           }
           if ('validate_archivo_cedula' == $this->NM_ajax_opcao)
           {
@@ -2847,6 +3139,30 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           {
               $this->proveedor_onChange();
           }
+          if ('event_puc_auxiliar_deudores_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->puc_auxiliar_deudores_onChange();
+          }
+          if ('event_puc_auxiliar_proveedores_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->puc_auxiliar_proveedores_onChange();
+          }
+          if ('event_puc_retefuente_compras_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->puc_retefuente_compras_onChange();
+          }
+          if ('event_puc_retefuente_servicios_clie_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->puc_retefuente_servicios_clie_onChange();
+          }
+          if ('event_puc_retefuente_servicios_prov_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->puc_retefuente_servicios_prov_onChange();
+          }
+          if ('event_puc_retefuente_ventas_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->puc_retefuente_ventas_onChange();
+          }
           if ('event_r_social_onchange' == $this->NM_ajax_opcao)
           {
               $this->r_social_onChange();
@@ -2866,2465 +3182,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           if ('event_tipo_onchange' == $this->NM_ajax_opcao)
           {
               $this->tipo_onChange();
-          }
-          terceros_mob_pack_ajax_response();
-          exit;
-      }
-      if ($this->NM_ajax_flag && 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9))
-      {
-          if ('autocomp_puc_auxiliar_deudores' == $this->NM_ajax_opcao)
-          {
-              if (isset($_GET['term'])) {
-                  $this->puc_auxiliar_deudores = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc_auxiliar_deudores = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array(); 
-    }
-
-   $old_value_dv = $this->dv;
-   $old_value_idtercero = $this->idtercero;
-   $old_value_celular_notificafe = $this->celular_notificafe;
-   $old_value_cupo = $this->cupo;
-   $old_value_cupodis = $this->cupodis;
-   $old_value_dias_credito = $this->dias_credito;
-   $old_value_dias_mora = $this->dias_mora;
-   $old_value_nacimiento = $this->nacimiento;
-   $old_value_fechault = $this->fechault;
-   $old_value_saldo = $this->saldo;
-   $old_value_afiliacion = $this->afiliacion;
-   $old_value_cupo_vendedor = $this->cupo_vendedor;
-   $old_value_dias = $this->dias;
-   $old_value_fechultcomp = $this->fechultcomp;
-   $old_value_saldoapagar = $this->saldoapagar;
-   $old_value_valor_plan = $this->valor_plan;
-   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $old_value_n_trabajadores = $this->n_trabajadores;
-   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_dv = $this->dv;
-   $unformatted_value_idtercero = $this->idtercero;
-   $unformatted_value_celular_notificafe = $this->celular_notificafe;
-   $unformatted_value_cupo = $this->cupo;
-   $unformatted_value_cupodis = $this->cupodis;
-   $unformatted_value_dias_credito = $this->dias_credito;
-   $unformatted_value_dias_mora = $this->dias_mora;
-   $unformatted_value_nacimiento = $this->nacimiento;
-   $unformatted_value_fechault = $this->fechault;
-   $unformatted_value_saldo = $this->saldo;
-   $unformatted_value_afiliacion = $this->afiliacion;
-   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
-   $unformatted_value_dias = $this->dias;
-   $unformatted_value_fechultcomp = $this->fechultcomp;
-   $unformatted_value_saldoapagar = $this->saldoapagar;
-   $unformatted_value_valor_plan = $this->valor_plan;
-   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $unformatted_value_n_trabajadores = $this->n_trabajadores;
-   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-
-   $cliente_val_str = "''";
-   if (!empty($this->cliente))
-   {
-       if (is_array($this->cliente))
-       {
-           $Tmp_array = $this->cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->cliente);
-       }
-       $cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $cliente_val_str)
-          {
-             $cliente_val_str .= ", ";
-          }
-          $cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $empleado_val_str = "''";
-   if (!empty($this->empleado))
-   {
-       if (is_array($this->empleado))
-       {
-           $Tmp_array = $this->empleado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->empleado);
-       }
-       $empleado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $empleado_val_str)
-          {
-             $empleado_val_str .= ", ";
-          }
-          $empleado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $proveedor_val_str = "''";
-   if (!empty($this->proveedor))
-   {
-       if (is_array($this->proveedor))
-       {
-           $Tmp_array = $this->proveedor;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->proveedor);
-       }
-       $proveedor_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $proveedor_val_str)
-          {
-             $proveedor_val_str .= ", ";
-          }
-          $proveedor_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $sucur_cliente_val_str = "''";
-   if (!empty($this->sucur_cliente))
-   {
-       if (is_array($this->sucur_cliente))
-       {
-           $Tmp_array = $this->sucur_cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->sucur_cliente);
-       }
-       $sucur_cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $sucur_cliente_val_str)
-          {
-             $sucur_cliente_val_str .= ", ";
-          }
-          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_restaurante_val_str = "''";
-   if (!empty($this->es_restaurante))
-   {
-       if (is_array($this->es_restaurante))
-       {
-           $Tmp_array = $this->es_restaurante;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_restaurante);
-       }
-       $es_restaurante_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_restaurante_val_str)
-          {
-             $es_restaurante_val_str .= ", ";
-          }
-          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_cajero_val_str = "''";
-   if (!empty($this->es_cajero))
-   {
-       if (is_array($this->es_cajero))
-       {
-           $Tmp_array = $this->es_cajero;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_cajero);
-       }
-       $es_cajero_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_cajero_val_str)
-          {
-             $es_cajero_val_str .= ", ";
-          }
-          $es_cajero_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $autorizado_val_str = "''";
-   if (!empty($this->autorizado))
-   {
-       if (is_array($this->autorizado))
-       {
-           $Tmp_array = $this->autorizado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->autorizado);
-       }
-       $autorizado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $autorizado_val_str)
-          {
-             $autorizado_val_str .= ", ";
-          }
-          $autorizado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $notificar_val_str = "''";
-   if (!empty($this->notificar))
-   {
-       if (is_array($this->notificar))
-       {
-           $Tmp_array = $this->notificar;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->notificar);
-       }
-       $notificar_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $notificar_val_str)
-          {
-             $notificar_val_str .= ", ";
-          }
-          $notificar_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $activo_val_str = "''";
-   if (!empty($this->activo))
-   {
-       if (is_array($this->activo))
-       {
-           $Tmp_array = $this->activo;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->activo);
-       }
-       $activo_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $activo_val_str)
-          {
-             $activo_val_str .= ", ";
-          }
-          $activo_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_tecnico_val_str = "''";
-   if (!empty($this->es_tecnico))
-   {
-       if (is_array($this->es_tecnico))
-       {
-           $Tmp_array = $this->es_tecnico;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_tecnico);
-       }
-       $es_tecnico_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_tecnico_val_str)
-          {
-             $es_tecnico_val_str .= ", ";
-          }
-          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_nomina_val_str = "''";
-   if (!empty($this->si_nomina))
-   {
-       if (is_array($this->si_nomina))
-       {
-           $Tmp_array = $this->si_nomina;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_nomina);
-       }
-       $si_nomina_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_nomina_val_str)
-          {
-             $si_nomina_val_str .= ", ";
-          }
-          $si_nomina_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_factura_electronica_val_str = "''";
-   if (!empty($this->si_factura_electronica))
-   {
-       if (is_array($this->si_factura_electronica))
-       {
-           $Tmp_array = $this->si_factura_electronica;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_factura_electronica);
-       }
-       $si_factura_electronica_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_factura_electronica_val_str)
-          {
-             $si_factura_electronica_val_str .= ", ";
-          }
-          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE concat(codigo,' - ', nombre) LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->dv = $old_value_dv;
-   $this->idtercero = $old_value_idtercero;
-   $this->celular_notificafe = $old_value_celular_notificafe;
-   $this->cupo = $old_value_cupo;
-   $this->cupodis = $old_value_cupodis;
-   $this->dias_credito = $old_value_dias_credito;
-   $this->dias_mora = $old_value_dias_mora;
-   $this->nacimiento = $old_value_nacimiento;
-   $this->fechault = $old_value_fechault;
-   $this->saldo = $old_value_saldo;
-   $this->afiliacion = $old_value_afiliacion;
-   $this->cupo_vendedor = $old_value_cupo_vendedor;
-   $this->dias = $old_value_dias;
-   $this->fechultcomp = $old_value_fechultcomp;
-   $this->saldoapagar = $old_value_saldoapagar;
-   $this->valor_plan = $old_value_valor_plan;
-   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
-   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
-   $this->n_trabajadores = $old_value_n_trabajadores;
-   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
-          }
-          if ('autocomp_puc_retefuente_ventas' == $this->NM_ajax_opcao)
-          {
-              if (isset($_GET['term'])) {
-                  $this->puc_retefuente_ventas = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc_retefuente_ventas = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array(); 
-    }
-
-   $old_value_dv = $this->dv;
-   $old_value_idtercero = $this->idtercero;
-   $old_value_celular_notificafe = $this->celular_notificafe;
-   $old_value_cupo = $this->cupo;
-   $old_value_cupodis = $this->cupodis;
-   $old_value_dias_credito = $this->dias_credito;
-   $old_value_dias_mora = $this->dias_mora;
-   $old_value_nacimiento = $this->nacimiento;
-   $old_value_fechault = $this->fechault;
-   $old_value_saldo = $this->saldo;
-   $old_value_afiliacion = $this->afiliacion;
-   $old_value_cupo_vendedor = $this->cupo_vendedor;
-   $old_value_dias = $this->dias;
-   $old_value_fechultcomp = $this->fechultcomp;
-   $old_value_saldoapagar = $this->saldoapagar;
-   $old_value_valor_plan = $this->valor_plan;
-   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $old_value_n_trabajadores = $this->n_trabajadores;
-   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_dv = $this->dv;
-   $unformatted_value_idtercero = $this->idtercero;
-   $unformatted_value_celular_notificafe = $this->celular_notificafe;
-   $unformatted_value_cupo = $this->cupo;
-   $unformatted_value_cupodis = $this->cupodis;
-   $unformatted_value_dias_credito = $this->dias_credito;
-   $unformatted_value_dias_mora = $this->dias_mora;
-   $unformatted_value_nacimiento = $this->nacimiento;
-   $unformatted_value_fechault = $this->fechault;
-   $unformatted_value_saldo = $this->saldo;
-   $unformatted_value_afiliacion = $this->afiliacion;
-   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
-   $unformatted_value_dias = $this->dias;
-   $unformatted_value_fechultcomp = $this->fechultcomp;
-   $unformatted_value_saldoapagar = $this->saldoapagar;
-   $unformatted_value_valor_plan = $this->valor_plan;
-   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $unformatted_value_n_trabajadores = $this->n_trabajadores;
-   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-
-   $cliente_val_str = "''";
-   if (!empty($this->cliente))
-   {
-       if (is_array($this->cliente))
-       {
-           $Tmp_array = $this->cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->cliente);
-       }
-       $cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $cliente_val_str)
-          {
-             $cliente_val_str .= ", ";
-          }
-          $cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $empleado_val_str = "''";
-   if (!empty($this->empleado))
-   {
-       if (is_array($this->empleado))
-       {
-           $Tmp_array = $this->empleado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->empleado);
-       }
-       $empleado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $empleado_val_str)
-          {
-             $empleado_val_str .= ", ";
-          }
-          $empleado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $proveedor_val_str = "''";
-   if (!empty($this->proveedor))
-   {
-       if (is_array($this->proveedor))
-       {
-           $Tmp_array = $this->proveedor;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->proveedor);
-       }
-       $proveedor_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $proveedor_val_str)
-          {
-             $proveedor_val_str .= ", ";
-          }
-          $proveedor_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $sucur_cliente_val_str = "''";
-   if (!empty($this->sucur_cliente))
-   {
-       if (is_array($this->sucur_cliente))
-       {
-           $Tmp_array = $this->sucur_cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->sucur_cliente);
-       }
-       $sucur_cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $sucur_cliente_val_str)
-          {
-             $sucur_cliente_val_str .= ", ";
-          }
-          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_restaurante_val_str = "''";
-   if (!empty($this->es_restaurante))
-   {
-       if (is_array($this->es_restaurante))
-       {
-           $Tmp_array = $this->es_restaurante;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_restaurante);
-       }
-       $es_restaurante_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_restaurante_val_str)
-          {
-             $es_restaurante_val_str .= ", ";
-          }
-          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_cajero_val_str = "''";
-   if (!empty($this->es_cajero))
-   {
-       if (is_array($this->es_cajero))
-       {
-           $Tmp_array = $this->es_cajero;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_cajero);
-       }
-       $es_cajero_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_cajero_val_str)
-          {
-             $es_cajero_val_str .= ", ";
-          }
-          $es_cajero_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $autorizado_val_str = "''";
-   if (!empty($this->autorizado))
-   {
-       if (is_array($this->autorizado))
-       {
-           $Tmp_array = $this->autorizado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->autorizado);
-       }
-       $autorizado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $autorizado_val_str)
-          {
-             $autorizado_val_str .= ", ";
-          }
-          $autorizado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $notificar_val_str = "''";
-   if (!empty($this->notificar))
-   {
-       if (is_array($this->notificar))
-       {
-           $Tmp_array = $this->notificar;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->notificar);
-       }
-       $notificar_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $notificar_val_str)
-          {
-             $notificar_val_str .= ", ";
-          }
-          $notificar_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $activo_val_str = "''";
-   if (!empty($this->activo))
-   {
-       if (is_array($this->activo))
-       {
-           $Tmp_array = $this->activo;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->activo);
-       }
-       $activo_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $activo_val_str)
-          {
-             $activo_val_str .= ", ";
-          }
-          $activo_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_tecnico_val_str = "''";
-   if (!empty($this->es_tecnico))
-   {
-       if (is_array($this->es_tecnico))
-       {
-           $Tmp_array = $this->es_tecnico;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_tecnico);
-       }
-       $es_tecnico_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_tecnico_val_str)
-          {
-             $es_tecnico_val_str .= ", ";
-          }
-          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_nomina_val_str = "''";
-   if (!empty($this->si_nomina))
-   {
-       if (is_array($this->si_nomina))
-       {
-           $Tmp_array = $this->si_nomina;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_nomina);
-       }
-       $si_nomina_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_nomina_val_str)
-          {
-             $si_nomina_val_str .= ", ";
-          }
-          $si_nomina_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_factura_electronica_val_str = "''";
-   if (!empty($this->si_factura_electronica))
-   {
-       if (is_array($this->si_factura_electronica))
-       {
-           $Tmp_array = $this->si_factura_electronica;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_factura_electronica);
-       }
-       $si_factura_electronica_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_factura_electronica_val_str)
-          {
-             $si_factura_electronica_val_str .= ", ";
-          }
-          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE concat(codigo,' - ', nombre) LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->dv = $old_value_dv;
-   $this->idtercero = $old_value_idtercero;
-   $this->celular_notificafe = $old_value_celular_notificafe;
-   $this->cupo = $old_value_cupo;
-   $this->cupodis = $old_value_cupodis;
-   $this->dias_credito = $old_value_dias_credito;
-   $this->dias_mora = $old_value_dias_mora;
-   $this->nacimiento = $old_value_nacimiento;
-   $this->fechault = $old_value_fechault;
-   $this->saldo = $old_value_saldo;
-   $this->afiliacion = $old_value_afiliacion;
-   $this->cupo_vendedor = $old_value_cupo_vendedor;
-   $this->dias = $old_value_dias;
-   $this->fechultcomp = $old_value_fechultcomp;
-   $this->saldoapagar = $old_value_saldoapagar;
-   $this->valor_plan = $old_value_valor_plan;
-   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
-   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
-   $this->n_trabajadores = $old_value_n_trabajadores;
-   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
-          }
-          if ('autocomp_puc_retefuente_servicios_clie' == $this->NM_ajax_opcao)
-          {
-              if (isset($_GET['term'])) {
-                  $this->puc_retefuente_servicios_clie = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc_retefuente_servicios_clie = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array(); 
-    }
-
-   $old_value_dv = $this->dv;
-   $old_value_idtercero = $this->idtercero;
-   $old_value_celular_notificafe = $this->celular_notificafe;
-   $old_value_cupo = $this->cupo;
-   $old_value_cupodis = $this->cupodis;
-   $old_value_dias_credito = $this->dias_credito;
-   $old_value_dias_mora = $this->dias_mora;
-   $old_value_nacimiento = $this->nacimiento;
-   $old_value_fechault = $this->fechault;
-   $old_value_saldo = $this->saldo;
-   $old_value_afiliacion = $this->afiliacion;
-   $old_value_cupo_vendedor = $this->cupo_vendedor;
-   $old_value_dias = $this->dias;
-   $old_value_fechultcomp = $this->fechultcomp;
-   $old_value_saldoapagar = $this->saldoapagar;
-   $old_value_valor_plan = $this->valor_plan;
-   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $old_value_n_trabajadores = $this->n_trabajadores;
-   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_dv = $this->dv;
-   $unformatted_value_idtercero = $this->idtercero;
-   $unformatted_value_celular_notificafe = $this->celular_notificafe;
-   $unformatted_value_cupo = $this->cupo;
-   $unformatted_value_cupodis = $this->cupodis;
-   $unformatted_value_dias_credito = $this->dias_credito;
-   $unformatted_value_dias_mora = $this->dias_mora;
-   $unformatted_value_nacimiento = $this->nacimiento;
-   $unformatted_value_fechault = $this->fechault;
-   $unformatted_value_saldo = $this->saldo;
-   $unformatted_value_afiliacion = $this->afiliacion;
-   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
-   $unformatted_value_dias = $this->dias;
-   $unformatted_value_fechultcomp = $this->fechultcomp;
-   $unformatted_value_saldoapagar = $this->saldoapagar;
-   $unformatted_value_valor_plan = $this->valor_plan;
-   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $unformatted_value_n_trabajadores = $this->n_trabajadores;
-   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-
-   $cliente_val_str = "''";
-   if (!empty($this->cliente))
-   {
-       if (is_array($this->cliente))
-       {
-           $Tmp_array = $this->cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->cliente);
-       }
-       $cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $cliente_val_str)
-          {
-             $cliente_val_str .= ", ";
-          }
-          $cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $empleado_val_str = "''";
-   if (!empty($this->empleado))
-   {
-       if (is_array($this->empleado))
-       {
-           $Tmp_array = $this->empleado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->empleado);
-       }
-       $empleado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $empleado_val_str)
-          {
-             $empleado_val_str .= ", ";
-          }
-          $empleado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $proveedor_val_str = "''";
-   if (!empty($this->proveedor))
-   {
-       if (is_array($this->proveedor))
-       {
-           $Tmp_array = $this->proveedor;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->proveedor);
-       }
-       $proveedor_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $proveedor_val_str)
-          {
-             $proveedor_val_str .= ", ";
-          }
-          $proveedor_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $sucur_cliente_val_str = "''";
-   if (!empty($this->sucur_cliente))
-   {
-       if (is_array($this->sucur_cliente))
-       {
-           $Tmp_array = $this->sucur_cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->sucur_cliente);
-       }
-       $sucur_cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $sucur_cliente_val_str)
-          {
-             $sucur_cliente_val_str .= ", ";
-          }
-          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_restaurante_val_str = "''";
-   if (!empty($this->es_restaurante))
-   {
-       if (is_array($this->es_restaurante))
-       {
-           $Tmp_array = $this->es_restaurante;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_restaurante);
-       }
-       $es_restaurante_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_restaurante_val_str)
-          {
-             $es_restaurante_val_str .= ", ";
-          }
-          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_cajero_val_str = "''";
-   if (!empty($this->es_cajero))
-   {
-       if (is_array($this->es_cajero))
-       {
-           $Tmp_array = $this->es_cajero;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_cajero);
-       }
-       $es_cajero_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_cajero_val_str)
-          {
-             $es_cajero_val_str .= ", ";
-          }
-          $es_cajero_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $autorizado_val_str = "''";
-   if (!empty($this->autorizado))
-   {
-       if (is_array($this->autorizado))
-       {
-           $Tmp_array = $this->autorizado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->autorizado);
-       }
-       $autorizado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $autorizado_val_str)
-          {
-             $autorizado_val_str .= ", ";
-          }
-          $autorizado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $notificar_val_str = "''";
-   if (!empty($this->notificar))
-   {
-       if (is_array($this->notificar))
-       {
-           $Tmp_array = $this->notificar;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->notificar);
-       }
-       $notificar_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $notificar_val_str)
-          {
-             $notificar_val_str .= ", ";
-          }
-          $notificar_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $activo_val_str = "''";
-   if (!empty($this->activo))
-   {
-       if (is_array($this->activo))
-       {
-           $Tmp_array = $this->activo;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->activo);
-       }
-       $activo_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $activo_val_str)
-          {
-             $activo_val_str .= ", ";
-          }
-          $activo_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_tecnico_val_str = "''";
-   if (!empty($this->es_tecnico))
-   {
-       if (is_array($this->es_tecnico))
-       {
-           $Tmp_array = $this->es_tecnico;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_tecnico);
-       }
-       $es_tecnico_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_tecnico_val_str)
-          {
-             $es_tecnico_val_str .= ", ";
-          }
-          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_nomina_val_str = "''";
-   if (!empty($this->si_nomina))
-   {
-       if (is_array($this->si_nomina))
-       {
-           $Tmp_array = $this->si_nomina;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_nomina);
-       }
-       $si_nomina_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_nomina_val_str)
-          {
-             $si_nomina_val_str .= ", ";
-          }
-          $si_nomina_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_factura_electronica_val_str = "''";
-   if (!empty($this->si_factura_electronica))
-   {
-       if (is_array($this->si_factura_electronica))
-       {
-           $Tmp_array = $this->si_factura_electronica;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_factura_electronica);
-       }
-       $si_factura_electronica_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_factura_electronica_val_str)
-          {
-             $si_factura_electronica_val_str .= ", ";
-          }
-          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE concat(codigo,' - ', nombre) LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->dv = $old_value_dv;
-   $this->idtercero = $old_value_idtercero;
-   $this->celular_notificafe = $old_value_celular_notificafe;
-   $this->cupo = $old_value_cupo;
-   $this->cupodis = $old_value_cupodis;
-   $this->dias_credito = $old_value_dias_credito;
-   $this->dias_mora = $old_value_dias_mora;
-   $this->nacimiento = $old_value_nacimiento;
-   $this->fechault = $old_value_fechault;
-   $this->saldo = $old_value_saldo;
-   $this->afiliacion = $old_value_afiliacion;
-   $this->cupo_vendedor = $old_value_cupo_vendedor;
-   $this->dias = $old_value_dias;
-   $this->fechultcomp = $old_value_fechultcomp;
-   $this->saldoapagar = $old_value_saldoapagar;
-   $this->valor_plan = $old_value_valor_plan;
-   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
-   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
-   $this->n_trabajadores = $old_value_n_trabajadores;
-   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
-          }
-          if ('autocomp_puc_auxiliar_proveedores' == $this->NM_ajax_opcao)
-          {
-              if (isset($_GET['term'])) {
-                  $this->puc_auxiliar_proveedores = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc_auxiliar_proveedores = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array(); 
-    }
-
-   $old_value_dv = $this->dv;
-   $old_value_idtercero = $this->idtercero;
-   $old_value_celular_notificafe = $this->celular_notificafe;
-   $old_value_cupo = $this->cupo;
-   $old_value_cupodis = $this->cupodis;
-   $old_value_dias_credito = $this->dias_credito;
-   $old_value_dias_mora = $this->dias_mora;
-   $old_value_nacimiento = $this->nacimiento;
-   $old_value_fechault = $this->fechault;
-   $old_value_saldo = $this->saldo;
-   $old_value_afiliacion = $this->afiliacion;
-   $old_value_cupo_vendedor = $this->cupo_vendedor;
-   $old_value_dias = $this->dias;
-   $old_value_fechultcomp = $this->fechultcomp;
-   $old_value_saldoapagar = $this->saldoapagar;
-   $old_value_valor_plan = $this->valor_plan;
-   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $old_value_n_trabajadores = $this->n_trabajadores;
-   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_dv = $this->dv;
-   $unformatted_value_idtercero = $this->idtercero;
-   $unformatted_value_celular_notificafe = $this->celular_notificafe;
-   $unformatted_value_cupo = $this->cupo;
-   $unformatted_value_cupodis = $this->cupodis;
-   $unformatted_value_dias_credito = $this->dias_credito;
-   $unformatted_value_dias_mora = $this->dias_mora;
-   $unformatted_value_nacimiento = $this->nacimiento;
-   $unformatted_value_fechault = $this->fechault;
-   $unformatted_value_saldo = $this->saldo;
-   $unformatted_value_afiliacion = $this->afiliacion;
-   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
-   $unformatted_value_dias = $this->dias;
-   $unformatted_value_fechultcomp = $this->fechultcomp;
-   $unformatted_value_saldoapagar = $this->saldoapagar;
-   $unformatted_value_valor_plan = $this->valor_plan;
-   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $unformatted_value_n_trabajadores = $this->n_trabajadores;
-   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-
-   $cliente_val_str = "''";
-   if (!empty($this->cliente))
-   {
-       if (is_array($this->cliente))
-       {
-           $Tmp_array = $this->cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->cliente);
-       }
-       $cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $cliente_val_str)
-          {
-             $cliente_val_str .= ", ";
-          }
-          $cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $empleado_val_str = "''";
-   if (!empty($this->empleado))
-   {
-       if (is_array($this->empleado))
-       {
-           $Tmp_array = $this->empleado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->empleado);
-       }
-       $empleado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $empleado_val_str)
-          {
-             $empleado_val_str .= ", ";
-          }
-          $empleado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $proveedor_val_str = "''";
-   if (!empty($this->proveedor))
-   {
-       if (is_array($this->proveedor))
-       {
-           $Tmp_array = $this->proveedor;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->proveedor);
-       }
-       $proveedor_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $proveedor_val_str)
-          {
-             $proveedor_val_str .= ", ";
-          }
-          $proveedor_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $sucur_cliente_val_str = "''";
-   if (!empty($this->sucur_cliente))
-   {
-       if (is_array($this->sucur_cliente))
-       {
-           $Tmp_array = $this->sucur_cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->sucur_cliente);
-       }
-       $sucur_cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $sucur_cliente_val_str)
-          {
-             $sucur_cliente_val_str .= ", ";
-          }
-          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_restaurante_val_str = "''";
-   if (!empty($this->es_restaurante))
-   {
-       if (is_array($this->es_restaurante))
-       {
-           $Tmp_array = $this->es_restaurante;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_restaurante);
-       }
-       $es_restaurante_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_restaurante_val_str)
-          {
-             $es_restaurante_val_str .= ", ";
-          }
-          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_cajero_val_str = "''";
-   if (!empty($this->es_cajero))
-   {
-       if (is_array($this->es_cajero))
-       {
-           $Tmp_array = $this->es_cajero;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_cajero);
-       }
-       $es_cajero_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_cajero_val_str)
-          {
-             $es_cajero_val_str .= ", ";
-          }
-          $es_cajero_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $autorizado_val_str = "''";
-   if (!empty($this->autorizado))
-   {
-       if (is_array($this->autorizado))
-       {
-           $Tmp_array = $this->autorizado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->autorizado);
-       }
-       $autorizado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $autorizado_val_str)
-          {
-             $autorizado_val_str .= ", ";
-          }
-          $autorizado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $notificar_val_str = "''";
-   if (!empty($this->notificar))
-   {
-       if (is_array($this->notificar))
-       {
-           $Tmp_array = $this->notificar;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->notificar);
-       }
-       $notificar_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $notificar_val_str)
-          {
-             $notificar_val_str .= ", ";
-          }
-          $notificar_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $activo_val_str = "''";
-   if (!empty($this->activo))
-   {
-       if (is_array($this->activo))
-       {
-           $Tmp_array = $this->activo;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->activo);
-       }
-       $activo_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $activo_val_str)
-          {
-             $activo_val_str .= ", ";
-          }
-          $activo_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_tecnico_val_str = "''";
-   if (!empty($this->es_tecnico))
-   {
-       if (is_array($this->es_tecnico))
-       {
-           $Tmp_array = $this->es_tecnico;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_tecnico);
-       }
-       $es_tecnico_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_tecnico_val_str)
-          {
-             $es_tecnico_val_str .= ", ";
-          }
-          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_nomina_val_str = "''";
-   if (!empty($this->si_nomina))
-   {
-       if (is_array($this->si_nomina))
-       {
-           $Tmp_array = $this->si_nomina;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_nomina);
-       }
-       $si_nomina_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_nomina_val_str)
-          {
-             $si_nomina_val_str .= ", ";
-          }
-          $si_nomina_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_factura_electronica_val_str = "''";
-   if (!empty($this->si_factura_electronica))
-   {
-       if (is_array($this->si_factura_electronica))
-       {
-           $Tmp_array = $this->si_factura_electronica;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_factura_electronica);
-       }
-       $si_factura_electronica_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_factura_electronica_val_str)
-          {
-             $si_factura_electronica_val_str .= ", ";
-          }
-          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE concat(codigo,' - ', nombre) LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->dv = $old_value_dv;
-   $this->idtercero = $old_value_idtercero;
-   $this->celular_notificafe = $old_value_celular_notificafe;
-   $this->cupo = $old_value_cupo;
-   $this->cupodis = $old_value_cupodis;
-   $this->dias_credito = $old_value_dias_credito;
-   $this->dias_mora = $old_value_dias_mora;
-   $this->nacimiento = $old_value_nacimiento;
-   $this->fechault = $old_value_fechault;
-   $this->saldo = $old_value_saldo;
-   $this->afiliacion = $old_value_afiliacion;
-   $this->cupo_vendedor = $old_value_cupo_vendedor;
-   $this->dias = $old_value_dias;
-   $this->fechultcomp = $old_value_fechultcomp;
-   $this->saldoapagar = $old_value_saldoapagar;
-   $this->valor_plan = $old_value_valor_plan;
-   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
-   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
-   $this->n_trabajadores = $old_value_n_trabajadores;
-   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
-          }
-          if ('autocomp_puc_retefuente_compras' == $this->NM_ajax_opcao)
-          {
-              if (isset($_GET['term'])) {
-                  $this->puc_retefuente_compras = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc_retefuente_compras = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array(); 
-    }
-
-   $old_value_dv = $this->dv;
-   $old_value_idtercero = $this->idtercero;
-   $old_value_celular_notificafe = $this->celular_notificafe;
-   $old_value_cupo = $this->cupo;
-   $old_value_cupodis = $this->cupodis;
-   $old_value_dias_credito = $this->dias_credito;
-   $old_value_dias_mora = $this->dias_mora;
-   $old_value_nacimiento = $this->nacimiento;
-   $old_value_fechault = $this->fechault;
-   $old_value_saldo = $this->saldo;
-   $old_value_afiliacion = $this->afiliacion;
-   $old_value_cupo_vendedor = $this->cupo_vendedor;
-   $old_value_dias = $this->dias;
-   $old_value_fechultcomp = $this->fechultcomp;
-   $old_value_saldoapagar = $this->saldoapagar;
-   $old_value_valor_plan = $this->valor_plan;
-   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $old_value_n_trabajadores = $this->n_trabajadores;
-   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_dv = $this->dv;
-   $unformatted_value_idtercero = $this->idtercero;
-   $unformatted_value_celular_notificafe = $this->celular_notificafe;
-   $unformatted_value_cupo = $this->cupo;
-   $unformatted_value_cupodis = $this->cupodis;
-   $unformatted_value_dias_credito = $this->dias_credito;
-   $unformatted_value_dias_mora = $this->dias_mora;
-   $unformatted_value_nacimiento = $this->nacimiento;
-   $unformatted_value_fechault = $this->fechault;
-   $unformatted_value_saldo = $this->saldo;
-   $unformatted_value_afiliacion = $this->afiliacion;
-   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
-   $unformatted_value_dias = $this->dias;
-   $unformatted_value_fechultcomp = $this->fechultcomp;
-   $unformatted_value_saldoapagar = $this->saldoapagar;
-   $unformatted_value_valor_plan = $this->valor_plan;
-   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $unformatted_value_n_trabajadores = $this->n_trabajadores;
-   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-
-   $cliente_val_str = "''";
-   if (!empty($this->cliente))
-   {
-       if (is_array($this->cliente))
-       {
-           $Tmp_array = $this->cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->cliente);
-       }
-       $cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $cliente_val_str)
-          {
-             $cliente_val_str .= ", ";
-          }
-          $cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $empleado_val_str = "''";
-   if (!empty($this->empleado))
-   {
-       if (is_array($this->empleado))
-       {
-           $Tmp_array = $this->empleado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->empleado);
-       }
-       $empleado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $empleado_val_str)
-          {
-             $empleado_val_str .= ", ";
-          }
-          $empleado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $proveedor_val_str = "''";
-   if (!empty($this->proveedor))
-   {
-       if (is_array($this->proveedor))
-       {
-           $Tmp_array = $this->proveedor;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->proveedor);
-       }
-       $proveedor_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $proveedor_val_str)
-          {
-             $proveedor_val_str .= ", ";
-          }
-          $proveedor_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $sucur_cliente_val_str = "''";
-   if (!empty($this->sucur_cliente))
-   {
-       if (is_array($this->sucur_cliente))
-       {
-           $Tmp_array = $this->sucur_cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->sucur_cliente);
-       }
-       $sucur_cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $sucur_cliente_val_str)
-          {
-             $sucur_cliente_val_str .= ", ";
-          }
-          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_restaurante_val_str = "''";
-   if (!empty($this->es_restaurante))
-   {
-       if (is_array($this->es_restaurante))
-       {
-           $Tmp_array = $this->es_restaurante;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_restaurante);
-       }
-       $es_restaurante_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_restaurante_val_str)
-          {
-             $es_restaurante_val_str .= ", ";
-          }
-          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_cajero_val_str = "''";
-   if (!empty($this->es_cajero))
-   {
-       if (is_array($this->es_cajero))
-       {
-           $Tmp_array = $this->es_cajero;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_cajero);
-       }
-       $es_cajero_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_cajero_val_str)
-          {
-             $es_cajero_val_str .= ", ";
-          }
-          $es_cajero_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $autorizado_val_str = "''";
-   if (!empty($this->autorizado))
-   {
-       if (is_array($this->autorizado))
-       {
-           $Tmp_array = $this->autorizado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->autorizado);
-       }
-       $autorizado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $autorizado_val_str)
-          {
-             $autorizado_val_str .= ", ";
-          }
-          $autorizado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $notificar_val_str = "''";
-   if (!empty($this->notificar))
-   {
-       if (is_array($this->notificar))
-       {
-           $Tmp_array = $this->notificar;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->notificar);
-       }
-       $notificar_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $notificar_val_str)
-          {
-             $notificar_val_str .= ", ";
-          }
-          $notificar_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $activo_val_str = "''";
-   if (!empty($this->activo))
-   {
-       if (is_array($this->activo))
-       {
-           $Tmp_array = $this->activo;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->activo);
-       }
-       $activo_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $activo_val_str)
-          {
-             $activo_val_str .= ", ";
-          }
-          $activo_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_tecnico_val_str = "''";
-   if (!empty($this->es_tecnico))
-   {
-       if (is_array($this->es_tecnico))
-       {
-           $Tmp_array = $this->es_tecnico;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_tecnico);
-       }
-       $es_tecnico_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_tecnico_val_str)
-          {
-             $es_tecnico_val_str .= ", ";
-          }
-          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_nomina_val_str = "''";
-   if (!empty($this->si_nomina))
-   {
-       if (is_array($this->si_nomina))
-       {
-           $Tmp_array = $this->si_nomina;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_nomina);
-       }
-       $si_nomina_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_nomina_val_str)
-          {
-             $si_nomina_val_str .= ", ";
-          }
-          $si_nomina_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_factura_electronica_val_str = "''";
-   if (!empty($this->si_factura_electronica))
-   {
-       if (is_array($this->si_factura_electronica))
-       {
-           $Tmp_array = $this->si_factura_electronica;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_factura_electronica);
-       }
-       $si_factura_electronica_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_factura_electronica_val_str)
-          {
-             $si_factura_electronica_val_str .= ", ";
-          }
-          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE concat(codigo,' - ', nombre) LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->dv = $old_value_dv;
-   $this->idtercero = $old_value_idtercero;
-   $this->celular_notificafe = $old_value_celular_notificafe;
-   $this->cupo = $old_value_cupo;
-   $this->cupodis = $old_value_cupodis;
-   $this->dias_credito = $old_value_dias_credito;
-   $this->dias_mora = $old_value_dias_mora;
-   $this->nacimiento = $old_value_nacimiento;
-   $this->fechault = $old_value_fechault;
-   $this->saldo = $old_value_saldo;
-   $this->afiliacion = $old_value_afiliacion;
-   $this->cupo_vendedor = $old_value_cupo_vendedor;
-   $this->dias = $old_value_dias;
-   $this->fechultcomp = $old_value_fechultcomp;
-   $this->saldoapagar = $old_value_saldoapagar;
-   $this->valor_plan = $old_value_valor_plan;
-   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
-   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
-   $this->n_trabajadores = $old_value_n_trabajadores;
-   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
-          }
-          if ('autocomp_puc_retefuente_servicios_prov' == $this->NM_ajax_opcao)
-          {
-              if (isset($_GET['term'])) {
-                  $this->puc_retefuente_servicios_prov = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
-              } else {
-                  $this->puc_retefuente_servicios_prov = '';
-              }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-   { 
-       $GLOBALS["NM_ERRO_IBASE"] = 1;  
-   } 
-   $nm_nao_carga = false;
-   $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array(); 
-    }
-
-   $old_value_dv = $this->dv;
-   $old_value_idtercero = $this->idtercero;
-   $old_value_celular_notificafe = $this->celular_notificafe;
-   $old_value_cupo = $this->cupo;
-   $old_value_cupodis = $this->cupodis;
-   $old_value_dias_credito = $this->dias_credito;
-   $old_value_dias_mora = $this->dias_mora;
-   $old_value_nacimiento = $this->nacimiento;
-   $old_value_fechault = $this->fechault;
-   $old_value_saldo = $this->saldo;
-   $old_value_afiliacion = $this->afiliacion;
-   $old_value_cupo_vendedor = $this->cupo_vendedor;
-   $old_value_dias = $this->dias;
-   $old_value_fechultcomp = $this->fechultcomp;
-   $old_value_saldoapagar = $this->saldoapagar;
-   $old_value_valor_plan = $this->valor_plan;
-   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $old_value_n_trabajadores = $this->n_trabajadores;
-   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-   $this->nm_tira_formatacao();
-   $this->nm_converte_datas(false);
-
-
-   $unformatted_value_dv = $this->dv;
-   $unformatted_value_idtercero = $this->idtercero;
-   $unformatted_value_celular_notificafe = $this->celular_notificafe;
-   $unformatted_value_cupo = $this->cupo;
-   $unformatted_value_cupodis = $this->cupodis;
-   $unformatted_value_dias_credito = $this->dias_credito;
-   $unformatted_value_dias_mora = $this->dias_mora;
-   $unformatted_value_nacimiento = $this->nacimiento;
-   $unformatted_value_fechault = $this->fechault;
-   $unformatted_value_saldo = $this->saldo;
-   $unformatted_value_afiliacion = $this->afiliacion;
-   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
-   $unformatted_value_dias = $this->dias;
-   $unformatted_value_fechultcomp = $this->fechultcomp;
-   $unformatted_value_saldoapagar = $this->saldoapagar;
-   $unformatted_value_valor_plan = $this->valor_plan;
-   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
-   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
-   $unformatted_value_n_trabajadores = $this->n_trabajadores;
-   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
-
-   $cliente_val_str = "''";
-   if (!empty($this->cliente))
-   {
-       if (is_array($this->cliente))
-       {
-           $Tmp_array = $this->cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->cliente);
-       }
-       $cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $cliente_val_str)
-          {
-             $cliente_val_str .= ", ";
-          }
-          $cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $empleado_val_str = "''";
-   if (!empty($this->empleado))
-   {
-       if (is_array($this->empleado))
-       {
-           $Tmp_array = $this->empleado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->empleado);
-       }
-       $empleado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $empleado_val_str)
-          {
-             $empleado_val_str .= ", ";
-          }
-          $empleado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $proveedor_val_str = "''";
-   if (!empty($this->proveedor))
-   {
-       if (is_array($this->proveedor))
-       {
-           $Tmp_array = $this->proveedor;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->proveedor);
-       }
-       $proveedor_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $proveedor_val_str)
-          {
-             $proveedor_val_str .= ", ";
-          }
-          $proveedor_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $sucur_cliente_val_str = "''";
-   if (!empty($this->sucur_cliente))
-   {
-       if (is_array($this->sucur_cliente))
-       {
-           $Tmp_array = $this->sucur_cliente;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->sucur_cliente);
-       }
-       $sucur_cliente_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $sucur_cliente_val_str)
-          {
-             $sucur_cliente_val_str .= ", ";
-          }
-          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_restaurante_val_str = "''";
-   if (!empty($this->es_restaurante))
-   {
-       if (is_array($this->es_restaurante))
-       {
-           $Tmp_array = $this->es_restaurante;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_restaurante);
-       }
-       $es_restaurante_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_restaurante_val_str)
-          {
-             $es_restaurante_val_str .= ", ";
-          }
-          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_cajero_val_str = "''";
-   if (!empty($this->es_cajero))
-   {
-       if (is_array($this->es_cajero))
-       {
-           $Tmp_array = $this->es_cajero;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_cajero);
-       }
-       $es_cajero_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_cajero_val_str)
-          {
-             $es_cajero_val_str .= ", ";
-          }
-          $es_cajero_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $autorizado_val_str = "''";
-   if (!empty($this->autorizado))
-   {
-       if (is_array($this->autorizado))
-       {
-           $Tmp_array = $this->autorizado;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->autorizado);
-       }
-       $autorizado_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $autorizado_val_str)
-          {
-             $autorizado_val_str .= ", ";
-          }
-          $autorizado_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $notificar_val_str = "''";
-   if (!empty($this->notificar))
-   {
-       if (is_array($this->notificar))
-       {
-           $Tmp_array = $this->notificar;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->notificar);
-       }
-       $notificar_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $notificar_val_str)
-          {
-             $notificar_val_str .= ", ";
-          }
-          $notificar_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $activo_val_str = "''";
-   if (!empty($this->activo))
-   {
-       if (is_array($this->activo))
-       {
-           $Tmp_array = $this->activo;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->activo);
-       }
-       $activo_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $activo_val_str)
-          {
-             $activo_val_str .= ", ";
-          }
-          $activo_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $es_tecnico_val_str = "''";
-   if (!empty($this->es_tecnico))
-   {
-       if (is_array($this->es_tecnico))
-       {
-           $Tmp_array = $this->es_tecnico;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->es_tecnico);
-       }
-       $es_tecnico_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $es_tecnico_val_str)
-          {
-             $es_tecnico_val_str .= ", ";
-          }
-          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_nomina_val_str = "''";
-   if (!empty($this->si_nomina))
-   {
-       if (is_array($this->si_nomina))
-       {
-           $Tmp_array = $this->si_nomina;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_nomina);
-       }
-       $si_nomina_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_nomina_val_str)
-          {
-             $si_nomina_val_str .= ", ";
-          }
-          $si_nomina_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   $si_factura_electronica_val_str = "''";
-   if (!empty($this->si_factura_electronica))
-   {
-       if (is_array($this->si_factura_electronica))
-       {
-           $Tmp_array = $this->si_factura_electronica;
-       }
-       else
-       {
-           $Tmp_array = explode(";", $this->si_factura_electronica);
-       }
-       $si_factura_electronica_val_str = "";
-       foreach ($Tmp_array as $Tmp_val_cmp)
-       {
-          if ("" != $si_factura_electronica_val_str)
-          {
-             $si_factura_electronica_val_str .= ", ";
-          }
-          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
-       }
-   }
-   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-   {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE concat(codigo,' - ', nombre) LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-   {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-   {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-   else
-   {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "%' ORDER BY codigo, nombre";
-   }
-
-   $this->dv = $old_value_dv;
-   $this->idtercero = $old_value_idtercero;
-   $this->celular_notificafe = $old_value_celular_notificafe;
-   $this->cupo = $old_value_cupo;
-   $this->cupodis = $old_value_cupodis;
-   $this->dias_credito = $old_value_dias_credito;
-   $this->dias_mora = $old_value_dias_mora;
-   $this->nacimiento = $old_value_nacimiento;
-   $this->fechault = $old_value_fechault;
-   $this->saldo = $old_value_saldo;
-   $this->afiliacion = $old_value_afiliacion;
-   $this->cupo_vendedor = $old_value_cupo_vendedor;
-   $this->dias = $old_value_dias;
-   $this->fechultcomp = $old_value_fechultcomp;
-   $this->saldoapagar = $old_value_saldoapagar;
-   $this->valor_plan = $old_value_valor_plan;
-   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
-   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
-   $this->n_trabajadores = $old_value_n_trabajadores;
-   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
-
-   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
-   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
-   {
-       while (!$rs->EOF) 
-       { 
-              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
-              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
-              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'][] = $rs->fields[0];
-              $rs->MoveNext() ; 
-       } 
-       $rs->Close() ; 
-   } 
-   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
-   {  
-       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-       exit; 
-   } 
-   $GLOBALS["NM_ERRO_IBASE"] = 0; 
-              $AjaxLim = 0;
-              $aResponse = array();
-              foreach ($aLookup as $sLkpIndex => $aLkpList)
-              {
-                  $AjaxLim++;
-                  if ($AjaxLim > 10)
-                  {
-                      break;
-                  }
-                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
-                  {
-                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
-                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
-                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
-                  }
-              }
-              $oJson = new Services_JSON();
-              echo $oJson->encode(array('results' => $aResponse));
-              exit;
           }
           terceros_mob_pack_ajax_response();
           exit;
@@ -8022,22 +5879,40 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                return "Clasificacion Tercero";
                break;
            case 'puc_auxiliar_deudores':
-               return "PUC Auxiliar Deudores";
+               return "PUC Clientes";
+               break;
+           case 'id_pucaux_cliente':
+               return "Auxiliar Clientes";
                break;
            case 'puc_retefuente_ventas':
                return "PUC Retefuente Ventas";
                break;
+           case 'id_pucaux_retteventas':
+               return "Auxiliar Rete ventas";
+               break;
            case 'puc_retefuente_servicios_clie':
-               return "PUC Retefuente Servicios Clie";
+               return "PUC Retefuente Servicios Venta";
+               break;
+           case 'id_pucaux_retteservicios':
+               return "Auxiliar Rete servicios ventas";
                break;
            case 'puc_auxiliar_proveedores':
-               return "PUC Auxiliar Proveedores";
+               return "PUC Proveedores";
+               break;
+           case 'id_pucaux_proveedor':
+               return "Auxiliar Proveedor";
                break;
            case 'puc_retefuente_compras':
                return "PUC Retefuente Compras";
                break;
+           case 'id_pucaux_rettecompras':
+               return "Auxiliar Rete compras";
+               break;
            case 'puc_retefuente_servicios_prov':
-               return "PUC Retefuente Servicios Prov";
+               return "PUC Retefuente Servicios Compras";
+               break;
+           case 'id_pucaux_rettesercomp':
+               return "Auxiliar Rete servicios compras";
                break;
            case 'archivo_cedula':
                return "Cédula";
@@ -8310,16 +6185,28 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         $this->ValidateField_clasificacion_clientes($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc_auxiliar_deudores' == $filtro)) || (is_array($filtro) && in_array('puc_auxiliar_deudores', $filtro)))
         $this->ValidateField_puc_auxiliar_deudores($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_cliente' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_cliente', $filtro)))
+        $this->ValidateField_id_pucaux_cliente($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc_retefuente_ventas' == $filtro)) || (is_array($filtro) && in_array('puc_retefuente_ventas', $filtro)))
         $this->ValidateField_puc_retefuente_ventas($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_retteventas' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_retteventas', $filtro)))
+        $this->ValidateField_id_pucaux_retteventas($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc_retefuente_servicios_clie' == $filtro)) || (is_array($filtro) && in_array('puc_retefuente_servicios_clie', $filtro)))
         $this->ValidateField_puc_retefuente_servicios_clie($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_retteservicios' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_retteservicios', $filtro)))
+        $this->ValidateField_id_pucaux_retteservicios($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc_auxiliar_proveedores' == $filtro)) || (is_array($filtro) && in_array('puc_auxiliar_proveedores', $filtro)))
         $this->ValidateField_puc_auxiliar_proveedores($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_proveedor' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_proveedor', $filtro)))
+        $this->ValidateField_id_pucaux_proveedor($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc_retefuente_compras' == $filtro)) || (is_array($filtro) && in_array('puc_retefuente_compras', $filtro)))
         $this->ValidateField_puc_retefuente_compras($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_rettecompras' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_rettecompras', $filtro)))
+        $this->ValidateField_id_pucaux_rettecompras($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc_retefuente_servicios_prov' == $filtro)) || (is_array($filtro) && in_array('puc_retefuente_servicios_prov', $filtro)))
         $this->ValidateField_puc_retefuente_servicios_prov($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_pucaux_rettesercomp' == $filtro)) || (is_array($filtro) && in_array('id_pucaux_rettesercomp', $filtro)))
+        $this->ValidateField_id_pucaux_rettesercomp($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'archivo_cedula' == $filtro)) || (is_array($filtro) && in_array('archivo_cedula', $filtro)))
         $this->ValidateField_archivo_cedula($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'archivo_rut' == $filtro)) || (is_array($filtro) && in_array('archivo_rut', $filtro)))
@@ -11377,24 +9264,21 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc_auxiliar_deudores) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "PUC Auxiliar Deudores " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc_auxiliar_deudores']))
-              {
-                  $Campos_Erros['puc_auxiliar_deudores'] = array();
-              }
-              $Campos_Erros['puc_auxiliar_deudores'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc_auxiliar_deudores']) || !is_array($this->NM_ajax_info['errList']['puc_auxiliar_deudores']))
-              {
-                  $this->NM_ajax_info['errList']['puc_auxiliar_deudores'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc_auxiliar_deudores'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->puc_auxiliar_deudores) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']) && !in_array($this->puc_auxiliar_deudores, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['puc_auxiliar_deudores']))
+                   {
+                       $Campos_Erros['puc_auxiliar_deudores'] = array();
+                   }
+                   $Campos_Erros['puc_auxiliar_deudores'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['puc_auxiliar_deudores']) || !is_array($this->NM_ajax_info['errList']['puc_auxiliar_deudores']))
+                   {
+                       $this->NM_ajax_info['errList']['puc_auxiliar_deudores'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['puc_auxiliar_deudores'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'puc_auxiliar_deudores';
@@ -11405,28 +9289,54 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_puc_auxiliar_deudores
 
+    function ValidateField_id_pucaux_cliente(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_cliente) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente']) && !in_array($this->id_pucaux_cliente, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_cliente']))
+                   {
+                       $Campos_Erros['id_pucaux_cliente'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_cliente']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_cliente']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_cliente'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_cliente'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_cliente';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_cliente
+
     function ValidateField_puc_retefuente_ventas(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc_retefuente_ventas) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "PUC Retefuente Ventas " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc_retefuente_ventas']))
-              {
-                  $Campos_Erros['puc_retefuente_ventas'] = array();
-              }
-              $Campos_Erros['puc_retefuente_ventas'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc_retefuente_ventas']) || !is_array($this->NM_ajax_info['errList']['puc_retefuente_ventas']))
-              {
-                  $this->NM_ajax_info['errList']['puc_retefuente_ventas'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc_retefuente_ventas'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->puc_retefuente_ventas) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']) && !in_array($this->puc_retefuente_ventas, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['puc_retefuente_ventas']))
+                   {
+                       $Campos_Erros['puc_retefuente_ventas'] = array();
+                   }
+                   $Campos_Erros['puc_retefuente_ventas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['puc_retefuente_ventas']) || !is_array($this->NM_ajax_info['errList']['puc_retefuente_ventas']))
+                   {
+                       $this->NM_ajax_info['errList']['puc_retefuente_ventas'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['puc_retefuente_ventas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'puc_retefuente_ventas';
@@ -11437,28 +9347,54 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_puc_retefuente_ventas
 
+    function ValidateField_id_pucaux_retteventas(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_retteventas) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas']) && !in_array($this->id_pucaux_retteventas, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_retteventas']))
+                   {
+                       $Campos_Erros['id_pucaux_retteventas'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_retteventas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_retteventas']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_retteventas']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_retteventas'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_retteventas'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_retteventas';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_retteventas
+
     function ValidateField_puc_retefuente_servicios_clie(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc_retefuente_servicios_clie) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "PUC Retefuente Servicios Clie " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc_retefuente_servicios_clie']))
-              {
-                  $Campos_Erros['puc_retefuente_servicios_clie'] = array();
-              }
-              $Campos_Erros['puc_retefuente_servicios_clie'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc_retefuente_servicios_clie']) || !is_array($this->NM_ajax_info['errList']['puc_retefuente_servicios_clie']))
-              {
-                  $this->NM_ajax_info['errList']['puc_retefuente_servicios_clie'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc_retefuente_servicios_clie'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->puc_retefuente_servicios_clie) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']) && !in_array($this->puc_retefuente_servicios_clie, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['puc_retefuente_servicios_clie']))
+                   {
+                       $Campos_Erros['puc_retefuente_servicios_clie'] = array();
+                   }
+                   $Campos_Erros['puc_retefuente_servicios_clie'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['puc_retefuente_servicios_clie']) || !is_array($this->NM_ajax_info['errList']['puc_retefuente_servicios_clie']))
+                   {
+                       $this->NM_ajax_info['errList']['puc_retefuente_servicios_clie'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['puc_retefuente_servicios_clie'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'puc_retefuente_servicios_clie';
@@ -11469,28 +9405,54 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_puc_retefuente_servicios_clie
 
+    function ValidateField_id_pucaux_retteservicios(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_retteservicios) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios']) && !in_array($this->id_pucaux_retteservicios, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_retteservicios']))
+                   {
+                       $Campos_Erros['id_pucaux_retteservicios'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_retteservicios'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_retteservicios']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_retteservicios']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_retteservicios'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_retteservicios'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_retteservicios';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_retteservicios
+
     function ValidateField_puc_auxiliar_proveedores(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc_auxiliar_proveedores) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "PUC Auxiliar Proveedores " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc_auxiliar_proveedores']))
-              {
-                  $Campos_Erros['puc_auxiliar_proveedores'] = array();
-              }
-              $Campos_Erros['puc_auxiliar_proveedores'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc_auxiliar_proveedores']) || !is_array($this->NM_ajax_info['errList']['puc_auxiliar_proveedores']))
-              {
-                  $this->NM_ajax_info['errList']['puc_auxiliar_proveedores'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc_auxiliar_proveedores'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->puc_auxiliar_proveedores) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']) && !in_array($this->puc_auxiliar_proveedores, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['puc_auxiliar_proveedores']))
+                   {
+                       $Campos_Erros['puc_auxiliar_proveedores'] = array();
+                   }
+                   $Campos_Erros['puc_auxiliar_proveedores'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['puc_auxiliar_proveedores']) || !is_array($this->NM_ajax_info['errList']['puc_auxiliar_proveedores']))
+                   {
+                       $this->NM_ajax_info['errList']['puc_auxiliar_proveedores'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['puc_auxiliar_proveedores'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'puc_auxiliar_proveedores';
@@ -11501,28 +9463,54 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_puc_auxiliar_proveedores
 
+    function ValidateField_id_pucaux_proveedor(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_proveedor) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor']) && !in_array($this->id_pucaux_proveedor, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_proveedor']))
+                   {
+                       $Campos_Erros['id_pucaux_proveedor'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_proveedor'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_proveedor']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_proveedor']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_proveedor'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_proveedor'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_proveedor';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_proveedor
+
     function ValidateField_puc_retefuente_compras(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc_retefuente_compras) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "PUC Retefuente Compras " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc_retefuente_compras']))
-              {
-                  $Campos_Erros['puc_retefuente_compras'] = array();
-              }
-              $Campos_Erros['puc_retefuente_compras'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc_retefuente_compras']) || !is_array($this->NM_ajax_info['errList']['puc_retefuente_compras']))
-              {
-                  $this->NM_ajax_info['errList']['puc_retefuente_compras'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc_retefuente_compras'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->puc_retefuente_compras) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']) && !in_array($this->puc_retefuente_compras, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['puc_retefuente_compras']))
+                   {
+                       $Campos_Erros['puc_retefuente_compras'] = array();
+                   }
+                   $Campos_Erros['puc_retefuente_compras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['puc_retefuente_compras']) || !is_array($this->NM_ajax_info['errList']['puc_retefuente_compras']))
+                   {
+                       $this->NM_ajax_info['errList']['puc_retefuente_compras'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['puc_retefuente_compras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'puc_retefuente_compras';
@@ -11533,28 +9521,54 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_puc_retefuente_compras
 
+    function ValidateField_id_pucaux_rettecompras(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_rettecompras) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras']) && !in_array($this->id_pucaux_rettecompras, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_rettecompras']))
+                   {
+                       $Campos_Erros['id_pucaux_rettecompras'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_rettecompras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_rettecompras']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_rettecompras']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_rettecompras'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_rettecompras'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_rettecompras';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_rettecompras
+
     function ValidateField_puc_retefuente_servicios_prov(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
         $hasError = false;
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if (NM_utf8_strlen($this->puc_retefuente_servicios_prov) > 16) 
-          { 
-              $hasError = true;
-              $Campos_Crit .= "PUC Retefuente Servicios Prov " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
-              if (!isset($Campos_Erros['puc_retefuente_servicios_prov']))
-              {
-                  $Campos_Erros['puc_retefuente_servicios_prov'] = array();
-              }
-              $Campos_Erros['puc_retefuente_servicios_prov'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-              if (!isset($this->NM_ajax_info['errList']['puc_retefuente_servicios_prov']) || !is_array($this->NM_ajax_info['errList']['puc_retefuente_servicios_prov']))
-              {
-                  $this->NM_ajax_info['errList']['puc_retefuente_servicios_prov'] = array();
-              }
-              $this->NM_ajax_info['errList']['puc_retefuente_servicios_prov'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
-          } 
-      } 
+               if (!empty($this->puc_retefuente_servicios_prov) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']) && !in_array($this->puc_retefuente_servicios_prov, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['puc_retefuente_servicios_prov']))
+                   {
+                       $Campos_Erros['puc_retefuente_servicios_prov'] = array();
+                   }
+                   $Campos_Erros['puc_retefuente_servicios_prov'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['puc_retefuente_servicios_prov']) || !is_array($this->NM_ajax_info['errList']['puc_retefuente_servicios_prov']))
+                   {
+                       $this->NM_ajax_info['errList']['puc_retefuente_servicios_prov'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['puc_retefuente_servicios_prov'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'puc_retefuente_servicios_prov';
@@ -11564,6 +9578,35 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
             $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
         }
     } // ValidateField_puc_retefuente_servicios_prov
+
+    function ValidateField_id_pucaux_rettesercomp(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_pucaux_rettesercomp) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp']) && !in_array($this->id_pucaux_rettesercomp, $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_pucaux_rettesercomp']))
+                   {
+                       $Campos_Erros['id_pucaux_rettesercomp'] = array();
+                   }
+                   $Campos_Erros['id_pucaux_rettesercomp'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_pucaux_rettesercomp']) || !is_array($this->NM_ajax_info['errList']['id_pucaux_rettesercomp']))
+                   {
+                       $this->NM_ajax_info['errList']['id_pucaux_rettesercomp'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_pucaux_rettesercomp'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_pucaux_rettesercomp';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_pucaux_rettesercomp
 
     function ValidateField_archivo_cedula(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
@@ -12793,11 +10836,17 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['zona_clientes'] = $this->zona_clientes;
     $this->nmgp_dados_form['clasificacion_clientes'] = $this->clasificacion_clientes;
     $this->nmgp_dados_form['puc_auxiliar_deudores'] = $this->puc_auxiliar_deudores;
+    $this->nmgp_dados_form['id_pucaux_cliente'] = $this->id_pucaux_cliente;
     $this->nmgp_dados_form['puc_retefuente_ventas'] = $this->puc_retefuente_ventas;
+    $this->nmgp_dados_form['id_pucaux_retteventas'] = $this->id_pucaux_retteventas;
     $this->nmgp_dados_form['puc_retefuente_servicios_clie'] = $this->puc_retefuente_servicios_clie;
+    $this->nmgp_dados_form['id_pucaux_retteservicios'] = $this->id_pucaux_retteservicios;
     $this->nmgp_dados_form['puc_auxiliar_proveedores'] = $this->puc_auxiliar_proveedores;
+    $this->nmgp_dados_form['id_pucaux_proveedor'] = $this->id_pucaux_proveedor;
     $this->nmgp_dados_form['puc_retefuente_compras'] = $this->puc_retefuente_compras;
+    $this->nmgp_dados_form['id_pucaux_rettecompras'] = $this->id_pucaux_rettecompras;
     $this->nmgp_dados_form['puc_retefuente_servicios_prov'] = $this->puc_retefuente_servicios_prov;
+    $this->nmgp_dados_form['id_pucaux_rettesercomp'] = $this->id_pucaux_rettesercomp;
     if (empty($this->archivo_cedula))
     {
         $this->archivo_cedula = $this->nmgp_dados_form['archivo_cedula'];
@@ -13859,11 +11908,17 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           $this->ajax_return_values_zona_clientes();
           $this->ajax_return_values_clasificacion_clientes();
           $this->ajax_return_values_puc_auxiliar_deudores();
+          $this->ajax_return_values_id_pucaux_cliente();
           $this->ajax_return_values_puc_retefuente_ventas();
+          $this->ajax_return_values_id_pucaux_retteventas();
           $this->ajax_return_values_puc_retefuente_servicios_clie();
+          $this->ajax_return_values_id_pucaux_retteservicios();
           $this->ajax_return_values_puc_auxiliar_proveedores();
+          $this->ajax_return_values_id_pucaux_proveedor();
           $this->ajax_return_values_puc_retefuente_compras();
+          $this->ajax_return_values_id_pucaux_rettecompras();
           $this->ajax_return_values_puc_retefuente_servicios_prov();
+          $this->ajax_return_values_id_pucaux_rettesercomp();
           $this->ajax_return_values_archivo_cedula();
           $this->ajax_return_values_archivo_rut();
           $this->ajax_return_values_archivo_nit();
@@ -18110,20 +16165,24 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLookup = array();
               $this->_tmp_lookup_puc_auxiliar_deudores = $this->puc_auxiliar_deudores;
 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array(); 
-    }
 
    $old_value_dv = $this->dv;
    $old_value_idtercero = $this->idtercero;
@@ -18424,31 +16483,31 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_deudores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
 
    $this->dv = $old_value_dv;
@@ -18474,7 +16533,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
@@ -18493,13 +16552,43 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"puc_auxiliar_deudores\"";
+          if (isset($this->NM_ajax_info['select_html']['puc_auxiliar_deudores']) && !empty($this->NM_ajax_info['select_html']['puc_auxiliar_deudores']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['puc_auxiliar_deudores']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->puc_auxiliar_deudores == $sValue)
+                  {
+                      $this->_tmp_lookup_puc_auxiliar_deudores = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
           $this->NM_ajax_info['fldList']['puc_auxiliar_deudores'] = array(
                        'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
           $aLabel     = array();
           $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['puc_auxiliar_deudores']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['puc_auxiliar_deudores']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
           foreach ($aLookupOrig as $aValData)
           {
               if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_auxiliar_deudores']['valList']))
@@ -18512,11 +16601,175 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['puc_auxiliar_deudores']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_auxiliar_deudores))]) ? $aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_auxiliar_deudores))] : "";
-          $this->NM_ajax_info['fldList']['puc_auxiliar_deudores_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
+          }
+   }
+
+          //----- id_pucaux_cliente
+   function ajax_return_values_id_pucaux_cliente($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_cliente", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_cliente);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_cliente = $this->id_pucaux_cliente;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_auxiliar_deudores' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_cliente\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_cliente']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_cliente']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_cliente']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_cliente == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_cliente = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_cliente'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_cliente']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_cliente']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_cliente']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_cliente']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_cliente']['labList'] = $aLabel;
           }
    }
 
@@ -18529,20 +16782,24 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLookup = array();
               $this->_tmp_lookup_puc_retefuente_ventas = $this->puc_retefuente_ventas;
 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array(); 
-    }
 
    $old_value_dv = $this->dv;
    $old_value_idtercero = $this->idtercero;
@@ -18843,31 +17100,31 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_ventas), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
 
    $this->dv = $old_value_dv;
@@ -18893,7 +17150,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
@@ -18912,13 +17169,43 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"puc_retefuente_ventas\"";
+          if (isset($this->NM_ajax_info['select_html']['puc_retefuente_ventas']) && !empty($this->NM_ajax_info['select_html']['puc_retefuente_ventas']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['puc_retefuente_ventas']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->puc_retefuente_ventas == $sValue)
+                  {
+                      $this->_tmp_lookup_puc_retefuente_ventas = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
           $this->NM_ajax_info['fldList']['puc_retefuente_ventas'] = array(
                        'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
           $aLabel     = array();
           $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['puc_retefuente_ventas']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['puc_retefuente_ventas']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
           foreach ($aLookupOrig as $aValData)
           {
               if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_retefuente_ventas']['valList']))
@@ -18931,11 +17218,175 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['puc_retefuente_ventas']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_retefuente_ventas))]) ? $aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_retefuente_ventas))] : "";
-          $this->NM_ajax_info['fldList']['puc_retefuente_ventas_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
+          }
+   }
+
+          //----- id_pucaux_retteventas
+   function ajax_return_values_id_pucaux_retteventas($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_retteventas", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_retteventas);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_retteventas = $this->id_pucaux_retteventas;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_retefuente_ventas' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_retteventas\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_retteventas']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_retteventas']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_retteventas']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_retteventas == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_retteventas = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_retteventas'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_retteventas']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_retteventas']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_retteventas']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_retteventas']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_retteventas']['labList'] = $aLabel;
           }
    }
 
@@ -18948,20 +17399,24 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLookup = array();
               $this->_tmp_lookup_puc_retefuente_servicios_clie = $this->puc_retefuente_servicios_clie;
 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array(); 
-    }
 
    $old_value_dv = $this->dv;
    $old_value_idtercero = $this->idtercero;
@@ -19262,31 +17717,31 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_clie), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
 
    $this->dv = $old_value_dv;
@@ -19312,7 +17767,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
@@ -19331,13 +17786,43 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"puc_retefuente_servicios_clie\"";
+          if (isset($this->NM_ajax_info['select_html']['puc_retefuente_servicios_clie']) && !empty($this->NM_ajax_info['select_html']['puc_retefuente_servicios_clie']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['puc_retefuente_servicios_clie']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->puc_retefuente_servicios_clie == $sValue)
+                  {
+                      $this->_tmp_lookup_puc_retefuente_servicios_clie = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
           $this->NM_ajax_info['fldList']['puc_retefuente_servicios_clie'] = array(
                        'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
           $aLabel     = array();
           $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['puc_retefuente_servicios_clie']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['puc_retefuente_servicios_clie']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
           foreach ($aLookupOrig as $aValData)
           {
               if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_retefuente_servicios_clie']['valList']))
@@ -19350,11 +17835,175 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['puc_retefuente_servicios_clie']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_retefuente_servicios_clie))]) ? $aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_retefuente_servicios_clie))] : "";
-          $this->NM_ajax_info['fldList']['puc_retefuente_servicios_clie_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
+          }
+   }
+
+          //----- id_pucaux_retteservicios
+   function ajax_return_values_id_pucaux_retteservicios($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_retteservicios", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_retteservicios);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_retteservicios = $this->id_pucaux_retteservicios;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_retefuente_servicios_clie' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_retteservicios\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_retteservicios']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_retteservicios']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_retteservicios']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_retteservicios == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_retteservicios = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_retteservicios'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_retteservicios']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_retteservicios']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_retteservicios']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_retteservicios']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_retteservicios']['labList'] = $aLabel;
           }
    }
 
@@ -19367,20 +18016,24 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLookup = array();
               $this->_tmp_lookup_puc_auxiliar_proveedores = $this->puc_auxiliar_proveedores;
 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array(); 
-    }
 
    $old_value_dv = $this->dv;
    $old_value_idtercero = $this->idtercero;
@@ -19681,31 +18334,31 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_auxiliar_proveedores), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
 
    $this->dv = $old_value_dv;
@@ -19731,7 +18384,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
@@ -19750,13 +18403,43 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"puc_auxiliar_proveedores\"";
+          if (isset($this->NM_ajax_info['select_html']['puc_auxiliar_proveedores']) && !empty($this->NM_ajax_info['select_html']['puc_auxiliar_proveedores']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['puc_auxiliar_proveedores']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->puc_auxiliar_proveedores == $sValue)
+                  {
+                      $this->_tmp_lookup_puc_auxiliar_proveedores = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
           $this->NM_ajax_info['fldList']['puc_auxiliar_proveedores'] = array(
                        'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
           $aLabel     = array();
           $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['puc_auxiliar_proveedores']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['puc_auxiliar_proveedores']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
           foreach ($aLookupOrig as $aValData)
           {
               if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_auxiliar_proveedores']['valList']))
@@ -19769,11 +18452,175 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['puc_auxiliar_proveedores']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_auxiliar_proveedores))]) ? $aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_auxiliar_proveedores))] : "";
-          $this->NM_ajax_info['fldList']['puc_auxiliar_proveedores_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
+          }
+   }
+
+          //----- id_pucaux_proveedor
+   function ajax_return_values_id_pucaux_proveedor($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_proveedor", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_proveedor);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_proveedor = $this->id_pucaux_proveedor;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_auxiliar_proveedor' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_proveedor\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_proveedor']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_proveedor']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_proveedor']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_proveedor == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_proveedor = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_proveedor'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_proveedor']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_proveedor']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_proveedor']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_proveedor']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_proveedor']['labList'] = $aLabel;
           }
    }
 
@@ -19786,20 +18633,24 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLookup = array();
               $this->_tmp_lookup_puc_retefuente_compras = $this->puc_retefuente_compras;
 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array(); 
-    }
 
    $old_value_dv = $this->dv;
    $old_value_idtercero = $this->idtercero;
@@ -20100,31 +18951,31 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_compras), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
 
    $this->dv = $old_value_dv;
@@ -20150,7 +19001,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
@@ -20169,13 +19020,43 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"puc_retefuente_compras\"";
+          if (isset($this->NM_ajax_info['select_html']['puc_retefuente_compras']) && !empty($this->NM_ajax_info['select_html']['puc_retefuente_compras']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['puc_retefuente_compras']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->puc_retefuente_compras == $sValue)
+                  {
+                      $this->_tmp_lookup_puc_retefuente_compras = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
           $this->NM_ajax_info['fldList']['puc_retefuente_compras'] = array(
                        'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
           $aLabel     = array();
           $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['puc_retefuente_compras']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['puc_retefuente_compras']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
           foreach ($aLookupOrig as $aValData)
           {
               if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_retefuente_compras']['valList']))
@@ -20188,11 +19069,175 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['puc_retefuente_compras']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_retefuente_compras))]) ? $aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_retefuente_compras))] : "";
-          $this->NM_ajax_info['fldList']['puc_retefuente_compras_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
+          }
+   }
+
+          //----- id_pucaux_rettecompras
+   function ajax_return_values_id_pucaux_rettecompras($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_rettecompras", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_rettecompras);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_rettecompras = $this->id_pucaux_rettecompras;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_retefuente_compras' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_rettecompras\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_rettecompras']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_rettecompras']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_rettecompras']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_rettecompras == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_rettecompras = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_rettecompras'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_rettecompras']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_rettecompras']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_rettecompras']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_rettecompras']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_rettecompras']['labList'] = $aLabel;
           }
    }
 
@@ -20205,20 +19250,24 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLookup = array();
               $this->_tmp_lookup_puc_retefuente_servicios_prov = $this->puc_retefuente_servicios_prov;
 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
    } 
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
-   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']))
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']); 
-   }
-   else
-   {
-       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array(); 
-    }
 
    $old_value_dv = $this->dv;
    $old_value_idtercero = $this->idtercero;
@@ -20519,31 +19568,31 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ', nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_retefuente_servicios_prov), 1, -1) . "' ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
    }
 
    $this->dv = $old_value_dv;
@@ -20569,7 +19618,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
-   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
    {
        while (!$rs->EOF) 
        { 
@@ -20588,13 +19637,43 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"puc_retefuente_servicios_prov\"";
+          if (isset($this->NM_ajax_info['select_html']['puc_retefuente_servicios_prov']) && !empty($this->NM_ajax_info['select_html']['puc_retefuente_servicios_prov']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['puc_retefuente_servicios_prov']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->puc_retefuente_servicios_prov == $sValue)
+                  {
+                      $this->_tmp_lookup_puc_retefuente_servicios_prov = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
           $this->NM_ajax_info['fldList']['puc_retefuente_servicios_prov'] = array(
                        'row'    => '',
-               'type'    => 'select2_ac',
-               'valList' => array($this->form_encode_input($sTmpValue)),
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
           $aLabel     = array();
           $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['puc_retefuente_servicios_prov']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['puc_retefuente_servicios_prov']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
           foreach ($aLookupOrig as $aValData)
           {
               if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_retefuente_servicios_prov']['valList']))
@@ -20607,11 +19686,175 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_clasificaci
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['puc_retefuente_servicios_prov']['labList'] = $aLabel;
-          $val_output = isset($aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_retefuente_servicios_prov))]) ? $aLookup[0][terceros_mob_pack_protect_string(NM_charset_to_utf8($this->puc_retefuente_servicios_prov))] : "";
-          $this->NM_ajax_info['fldList']['puc_retefuente_servicios_prov_autocomp'] = array(
-               'type'    => 'text',
-               'valList' => array($val_output),
+          }
+   }
+
+          //----- id_pucaux_rettesercomp
+   function ajax_return_values_id_pucaux_rettesercomp($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_pucaux_rettesercomp", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_pucaux_rettesercomp);
+              $aLookup = array();
+              $this->_tmp_lookup_id_pucaux_rettesercomp = $this->id_pucaux_rettesercomp;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp'] = array(); 
+}
+$aLookup[] = array(terceros_mob_pack_protect_string('') => str_replace('<', '&lt;',terceros_mob_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp'][] = '';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_retefuente_servicios_prov' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', terceros_mob_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_pucaux_rettesercomp\"";
+          if (isset($this->NM_ajax_info['select_html']['id_pucaux_rettesercomp']) && !empty($this->NM_ajax_info['select_html']['id_pucaux_rettesercomp']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_pucaux_rettesercomp']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_pucaux_rettesercomp == $sValue)
+                  {
+                      $this->_tmp_lookup_id_pucaux_rettesercomp = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_pucaux_rettesercomp'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
               );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_rettesercomp']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_pucaux_rettesercomp']['valList'][$i] = terceros_mob_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_pucaux_rettesercomp']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_pucaux_rettesercomp']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_pucaux_rettesercomp']['labList'] = $aLabel;
           }
    }
 
@@ -21659,6 +20902,12 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     $original_nombre2 = $this->nombre2;
     $original_nombres = $this->nombres;
     $original_proveedor = $this->proveedor;
+    $original_puc_auxiliar_deudores = $this->puc_auxiliar_deudores;
+    $original_puc_auxiliar_proveedores = $this->puc_auxiliar_proveedores;
+    $original_puc_retefuente_compras = $this->puc_retefuente_compras;
+    $original_puc_retefuente_servicios_clie = $this->puc_retefuente_servicios_clie;
+    $original_puc_retefuente_servicios_prov = $this->puc_retefuente_servicios_prov;
+    $original_puc_retefuente_ventas = $this->puc_retefuente_ventas;
     $original_r_social = $this->r_social;
     $original_regimen = $this->regimen;
     $original_saldo = $this->saldo;
@@ -21671,8 +20920,226 @@ if (!isset($this->sc_temp_pa)) {$this->sc_temp_pa = (isset($_SESSION['pa'])) ? $
 if (!isset($this->sc_temp_sn)) {$this->sc_temp_sn = (isset($_SESSION['sn'])) ? $_SESSION['sn'] : "";}
 if (!isset($this->sc_temp_pn)) {$this->sc_temp_pn = (isset($_SESSION['pn'])) ? $_SESSION['pn'] : "";}
 if (!isset($this->sc_temp_id_tercero)) {$this->sc_temp_id_tercero = (isset($_SESSION['id_tercero'])) ? $_SESSION['id_tercero'] : "";}
+if (!isset($this->sc_temp_gIdcta6)) {$this->sc_temp_gIdcta6 = (isset($_SESSION['gIdcta6'])) ? $_SESSION['gIdcta6'] : "";}
+if (!isset($this->sc_temp_gIdcta5)) {$this->sc_temp_gIdcta5 = (isset($_SESSION['gIdcta5'])) ? $_SESSION['gIdcta5'] : "";}
+if (!isset($this->sc_temp_gIdcta4)) {$this->sc_temp_gIdcta4 = (isset($_SESSION['gIdcta4'])) ? $_SESSION['gIdcta4'] : "";}
+if (!isset($this->sc_temp_gIdcta3)) {$this->sc_temp_gIdcta3 = (isset($_SESSION['gIdcta3'])) ? $_SESSION['gIdcta3'] : "";}
+if (!isset($this->sc_temp_gIdcta2)) {$this->sc_temp_gIdcta2 = (isset($_SESSION['gIdcta2'])) ? $_SESSION['gIdcta2'] : "";}
+if (!isset($this->sc_temp_gIdcta1)) {$this->sc_temp_gIdcta1 = (isset($_SESSION['gIdcta1'])) ? $_SESSION['gIdcta1'] : "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
-  $vGrupo=0;
+  $this->sc_temp_gIdcta1  = 0;
+$this->sc_temp_gIdcta2 = 0;
+$this->sc_temp_gIdcta3 = 0;
+$this->sc_temp_gIdcta4 = 0;
+$this->sc_temp_gIdcta5 = 0;
+$this->sc_temp_gIdcta6 = 0;
+
+if(!empty($this->puc_auxiliar_deudores ))
+	{
+	$sql1 = "SELECT id FROM puc WHERE codigo = '".$this->puc_auxiliar_deudores ."'";
+	 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->ds_cod[0][0]))
+		{
+		$this->sc_temp_gIdcta1 = $this->ds_cod[0][0];
+		}
+	}
+if(!empty($this->puc_retefuente_ventas ))
+	{
+	$sql2 = "SELECT id FROM puc WHERE codigo = '".$this->puc_retefuente_ventas ."'";
+	 
+      $nm_select = $sql2; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->ds_cod[0][0]))
+		{
+		$this->sc_temp_gIdcta2 = $this->ds_cod[0][0];
+		}
+	}
+if(!empty($this->puc_retefuente_servicios_clie ))
+	{
+	$sql3 = "SELECT id FROM puc WHERE codigo = '".$this->puc_retefuente_servicios_clie ."'";
+	 
+      $nm_select = $sql3; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->ds_cod[0][0]))
+		{
+		$this->sc_temp_gIdcta3 = $this->ds_cod[0][0];
+		}
+	}
+if(!empty($this->puc_auxiliar_proveedores ))
+	{
+	$sql4 = "SELECT id FROM puc WHERE codigo = '".$this->puc_auxiliar_proveedores ."'";
+	 
+      $nm_select = $sql4; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->ds_cod[0][0]))
+		{
+		$this->sc_temp_gIdcta4 = $this->ds_cod[0][0];
+		}
+	}
+if(!empty($this->puc_retefuente_compras ))
+	{
+	$sql5 = "SELECT id FROM puc WHERE codigo = '".$this->puc_retefuente_compras ."'";
+	 
+      $nm_select = $sql5; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->ds_cod[0][0]))
+		{
+		$this->sc_temp_gIdcta5 = $this->ds_cod[0][0];
+		}
+	}
+if(!empty($this->puc_retefuente_servicios_prov ))
+	{
+	$sql6 = "SELECT id FROM puc WHERE codigo = '".$this->puc_retefuente_servicios_prov ."'";
+	 
+      $nm_select = $sql6; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->ds_cod[0][0]))
+		{
+		$this->sc_temp_gIdcta6 = $this->ds_cod[0][0];
+		}
+	}
+
+$vGrupo=0;
  
       $nm_select = "select grupo from usuarios where tercero=$this->sc_temp_gidtercero"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -21885,6 +21352,12 @@ if(!empty($this->nombres ) and $this->tipo =='NAT')
 		}
 	}
 if (isset($this->sc_temp_gidtercero)) { $_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
+if (isset($this->sc_temp_gIdcta1)) { $_SESSION['gIdcta1'] = $this->sc_temp_gIdcta1;}
+if (isset($this->sc_temp_gIdcta2)) { $_SESSION['gIdcta2'] = $this->sc_temp_gIdcta2;}
+if (isset($this->sc_temp_gIdcta3)) { $_SESSION['gIdcta3'] = $this->sc_temp_gIdcta3;}
+if (isset($this->sc_temp_gIdcta4)) { $_SESSION['gIdcta4'] = $this->sc_temp_gIdcta4;}
+if (isset($this->sc_temp_gIdcta5)) { $_SESSION['gIdcta5'] = $this->sc_temp_gIdcta5;}
+if (isset($this->sc_temp_gIdcta6)) { $_SESSION['gIdcta6'] = $this->sc_temp_gIdcta6;}
 if (isset($this->sc_temp_id_tercero)) { $_SESSION['id_tercero'] = $this->sc_temp_id_tercero;}
 if (isset($this->sc_temp_pn)) { $_SESSION['pn'] = $this->sc_temp_pn;}
 if (isset($this->sc_temp_sn)) { $_SESSION['sn'] = $this->sc_temp_sn;}
@@ -21968,6 +21441,30 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     if (($original_proveedor != $this->proveedor || (isset($bFlagRead_proveedor) && $bFlagRead_proveedor)))
     {
         $this->ajax_return_values_proveedor(true);
+    }
+    if (($original_puc_auxiliar_deudores != $this->puc_auxiliar_deudores || (isset($bFlagRead_puc_auxiliar_deudores) && $bFlagRead_puc_auxiliar_deudores)))
+    {
+        $this->ajax_return_values_puc_auxiliar_deudores(true);
+    }
+    if (($original_puc_auxiliar_proveedores != $this->puc_auxiliar_proveedores || (isset($bFlagRead_puc_auxiliar_proveedores) && $bFlagRead_puc_auxiliar_proveedores)))
+    {
+        $this->ajax_return_values_puc_auxiliar_proveedores(true);
+    }
+    if (($original_puc_retefuente_compras != $this->puc_retefuente_compras || (isset($bFlagRead_puc_retefuente_compras) && $bFlagRead_puc_retefuente_compras)))
+    {
+        $this->ajax_return_values_puc_retefuente_compras(true);
+    }
+    if (($original_puc_retefuente_servicios_clie != $this->puc_retefuente_servicios_clie || (isset($bFlagRead_puc_retefuente_servicios_clie) && $bFlagRead_puc_retefuente_servicios_clie)))
+    {
+        $this->ajax_return_values_puc_retefuente_servicios_clie(true);
+    }
+    if (($original_puc_retefuente_servicios_prov != $this->puc_retefuente_servicios_prov || (isset($bFlagRead_puc_retefuente_servicios_prov) && $bFlagRead_puc_retefuente_servicios_prov)))
+    {
+        $this->ajax_return_values_puc_retefuente_servicios_prov(true);
+    }
+    if (($original_puc_retefuente_ventas != $this->puc_retefuente_ventas || (isset($bFlagRead_puc_retefuente_ventas) && $bFlagRead_puc_retefuente_ventas)))
+    {
+        $this->ajax_return_values_puc_retefuente_ventas(true);
     }
     if (($original_r_social != $this->r_social || (isset($bFlagRead_r_social) && $bFlagRead_r_social)))
     {
@@ -22509,11 +22006,17 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       $NM_val_form['zona_clientes'] = $this->zona_clientes;
       $NM_val_form['clasificacion_clientes'] = $this->clasificacion_clientes;
       $NM_val_form['puc_auxiliar_deudores'] = $this->puc_auxiliar_deudores;
+      $NM_val_form['id_pucaux_cliente'] = $this->id_pucaux_cliente;
       $NM_val_form['puc_retefuente_ventas'] = $this->puc_retefuente_ventas;
+      $NM_val_form['id_pucaux_retteventas'] = $this->id_pucaux_retteventas;
       $NM_val_form['puc_retefuente_servicios_clie'] = $this->puc_retefuente_servicios_clie;
+      $NM_val_form['id_pucaux_retteservicios'] = $this->id_pucaux_retteservicios;
       $NM_val_form['puc_auxiliar_proveedores'] = $this->puc_auxiliar_proveedores;
+      $NM_val_form['id_pucaux_proveedor'] = $this->id_pucaux_proveedor;
       $NM_val_form['puc_retefuente_compras'] = $this->puc_retefuente_compras;
+      $NM_val_form['id_pucaux_rettecompras'] = $this->id_pucaux_rettecompras;
       $NM_val_form['puc_retefuente_servicios_prov'] = $this->puc_retefuente_servicios_prov;
+      $NM_val_form['id_pucaux_rettesercomp'] = $this->id_pucaux_rettesercomp;
       $NM_val_form['archivo_cedula'] = $this->archivo_cedula;
       $NM_val_form['archivo_rut'] = $this->archivo_rut;
       $NM_val_form['archivo_nit'] = $this->archivo_nit;
@@ -22812,6 +22315,36 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
       { 
           $this->n_trabajadores = 0;
           $this->sc_force_zero[] = 'n_trabajadores';
+      } 
+      if ($this->id_pucaux_cliente === "" || is_null($this->id_pucaux_cliente))  
+      { 
+          $this->id_pucaux_cliente = 0;
+          $this->sc_force_zero[] = 'id_pucaux_cliente';
+      } 
+      if ($this->id_pucaux_retteventas === "" || is_null($this->id_pucaux_retteventas))  
+      { 
+          $this->id_pucaux_retteventas = 0;
+          $this->sc_force_zero[] = 'id_pucaux_retteventas';
+      } 
+      if ($this->id_pucaux_retteservicios === "" || is_null($this->id_pucaux_retteservicios))  
+      { 
+          $this->id_pucaux_retteservicios = 0;
+          $this->sc_force_zero[] = 'id_pucaux_retteservicios';
+      } 
+      if ($this->id_pucaux_proveedor === "" || is_null($this->id_pucaux_proveedor))  
+      { 
+          $this->id_pucaux_proveedor = 0;
+          $this->sc_force_zero[] = 'id_pucaux_proveedor';
+      } 
+      if ($this->id_pucaux_rettecompras === "" || is_null($this->id_pucaux_rettecompras))  
+      { 
+          $this->id_pucaux_rettecompras = 0;
+          $this->sc_force_zero[] = 'id_pucaux_rettecompras';
+      } 
+      if ($this->id_pucaux_rettesercomp === "" || is_null($this->id_pucaux_rettesercomp))  
+      { 
+          $this->id_pucaux_rettesercomp = 0;
+          $this->sc_force_zero[] = 'id_pucaux_rettesercomp';
       } 
       $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['decimal_db'] == ",") 
@@ -23570,37 +23103,37 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = #$this->nacimiento#, sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = #$this->afiliacion#, idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = #$this->fechultcomp#, saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = #$this->fecha_registro_fe#, nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = #$this->nacimiento#, sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = #$this->afiliacion#, idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = #$this->fechultcomp#, saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = #$this->fecha_registro_fe#, nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores, id_pucaux_cliente = $this->id_pucaux_cliente, id_pucaux_retteventas = $this->id_pucaux_retteventas, id_pucaux_retteservicios = $this->id_pucaux_retteservicios, id_pucaux_proveedor = $this->id_pucaux_proveedor, id_pucaux_rettecompras = $this->id_pucaux_rettecompras, id_pucaux_rettesercomp = $this->id_pucaux_rettesercomp"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores, id_pucaux_cliente = $this->id_pucaux_cliente, id_pucaux_retteventas = $this->id_pucaux_retteventas, id_pucaux_retteservicios = $this->id_pucaux_retteservicios, id_pucaux_proveedor = $this->id_pucaux_proveedor, id_pucaux_rettecompras = $this->id_pucaux_rettecompras, id_pucaux_rettesercomp = $this->id_pucaux_rettesercomp"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores, id_pucaux_cliente = $this->id_pucaux_cliente, id_pucaux_retteventas = $this->id_pucaux_retteventas, id_pucaux_retteservicios = $this->id_pucaux_retteservicios, id_pucaux_proveedor = $this->id_pucaux_proveedor, id_pucaux_rettecompras = $this->id_pucaux_rettecompras, id_pucaux_rettesercomp = $this->id_pucaux_rettesercomp"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = EXTEND('$this->nacimiento', YEAR TO DAY), sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = EXTEND('$this->afiliacion', YEAR TO DAY), idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = EXTEND('$this->fechultcomp', YEAR TO DAY), saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = EXTEND('$this->fecha_registro_fe', YEAR TO FRACTION), nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = EXTEND('$this->nacimiento', YEAR TO DAY), sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = EXTEND('$this->afiliacion', YEAR TO DAY), idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = EXTEND('$this->fechultcomp', YEAR TO DAY), saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = EXTEND('$this->fecha_registro_fe', YEAR TO FRACTION), nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores, id_pucaux_cliente = $this->id_pucaux_cliente, id_pucaux_retteventas = $this->id_pucaux_retteventas, id_pucaux_retteservicios = $this->id_pucaux_retteservicios, id_pucaux_proveedor = $this->id_pucaux_proveedor, id_pucaux_rettecompras = $this->id_pucaux_rettecompras, id_pucaux_rettesercomp = $this->id_pucaux_rettesercomp"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores, id_pucaux_cliente = $this->id_pucaux_cliente, id_pucaux_retteventas = $this->id_pucaux_retteventas, id_pucaux_retteservicios = $this->id_pucaux_retteservicios, id_pucaux_proveedor = $this->id_pucaux_proveedor, id_pucaux_rettecompras = $this->id_pucaux_rettecompras, id_pucaux_rettesercomp = $this->id_pucaux_rettesercomp"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores, id_pucaux_cliente = $this->id_pucaux_cliente, id_pucaux_retteventas = $this->id_pucaux_retteventas, id_pucaux_retteservicios = $this->id_pucaux_retteservicios, id_pucaux_proveedor = $this->id_pucaux_proveedor, id_pucaux_rettecompras = $this->id_pucaux_rettecompras, id_pucaux_rettesercomp = $this->id_pucaux_rettesercomp"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores"; 
+                  $SC_fields_update[] = "documento = '$this->documento', nombres = '$this->nombres', direccion = '$this->direccion', tel_cel = '$this->tel_cel', nacimiento = " . $this->Ini->date_delim . $this->nacimiento . $this->Ini->date_delim1 . ", sexo = '$this->sexo', urlmail = '$this->urlmail', afiliacion = " . $this->Ini->date_delim . $this->afiliacion . $this->Ini->date_delim1 . ", idmuni = $this->idmuni, observaciones = '$this->observaciones', credito = '$this->credito', cupo = $this->cupo, listaprecios = $this->listaprecios, loatiende = $this->loatiende, efec_retencion = '$this->efec_retencion', regimen = '$this->regimen', tipo = '$this->tipo', cliente = '$this->cliente', empleado = '$this->empleado', proveedor = '$this->proveedor', contacto = '$this->contacto', telefonos_prov = '$this->telefonos_prov', email = '$this->email', url = '$this->url', creditoprov = '$this->creditoprov', dias = $this->dias, fechultcomp = " . $this->Ini->date_delim . $this->fechultcomp . $this->Ini->date_delim1 . ", saldoapagar = $this->saldoapagar, autoretenedor = '$this->autoretenedor', tipo_documento = '$this->tipo_documento', dv = $this->dv, nombre1 = '$this->nombre1', nombre2 = '$this->nombre2', apellido1 = '$this->apellido1', apellido2 = '$this->apellido2', sucur_cliente = '$this->sucur_cliente', representante = '$this->representante', es_restaurante = '$this->es_restaurante', dias_credito = $this->dias_credito, dias_mora = $this->dias_mora, cupo_vendedor = $this->cupo_vendedor, codigo_ter = '$this->codigo_ter', es_cajero = '$this->es_cajero', autorizado = '$this->autorizado', zona_clientes = $this->zona_clientes, clasificacion_clientes = $this->clasificacion_clientes, codigo_postal = '$this->codigo_postal', lenguaje = '$this->lenguaje', nombre_comercil = '$this->nombre_comercil', notificar = '$this->notificar', puc_auxiliar_deudores = '$this->puc_auxiliar_deudores', puc_retefuente_ventas = '$this->puc_retefuente_ventas', puc_retefuente_servicios_clie = '$this->puc_retefuente_servicios_clie', puc_retefuente_compras = '$this->puc_retefuente_compras', puc_retefuente_servicios_prov = '$this->puc_retefuente_servicios_prov', activo = '$this->activo', es_tecnico = '$this->es_tecnico', codigo_tercero = '$this->codigo_tercero', porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida, correo_notificafe = '$this->correo_notificafe', celular_notificafe = '$this->celular_notificafe', id_plan = $this->id_plan, valor_plan = $this->valor_plan, fecha_registro_fe = " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", nombre_contador = '$this->nombre_contador', estado = '$this->estado', si_nomina = '$this->si_nomina', si_factura_electronica = '$this->si_factura_electronica', nombre_empresa_bd = '$this->nombre_empresa_bd', n_trabajadores = $this->n_trabajadores, id_pucaux_cliente = $this->id_pucaux_cliente, id_pucaux_retteventas = $this->id_pucaux_retteventas, id_pucaux_retteservicios = $this->id_pucaux_retteservicios, id_pucaux_proveedor = $this->id_pucaux_proveedor, id_pucaux_rettecompras = $this->id_pucaux_rettecompras, id_pucaux_rettesercomp = $this->id_pucaux_rettesercomp"; 
               } 
               if (isset($NM_val_form['fechault']) && $NM_val_form['fechault'] != $this->nmgp_dados_select['fechault']) 
               { 
@@ -24083,6 +23616,18 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               elseif (isset($this->nombre_empresa_bd)) { $this->nm_limpa_alfa($this->nombre_empresa_bd); }
               if     (isset($NM_val_form) && isset($NM_val_form['n_trabajadores'])) { $this->n_trabajadores = $NM_val_form['n_trabajadores']; }
               elseif (isset($this->n_trabajadores)) { $this->nm_limpa_alfa($this->n_trabajadores); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_cliente'])) { $this->id_pucaux_cliente = $NM_val_form['id_pucaux_cliente']; }
+              elseif (isset($this->id_pucaux_cliente)) { $this->nm_limpa_alfa($this->id_pucaux_cliente); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_retteventas'])) { $this->id_pucaux_retteventas = $NM_val_form['id_pucaux_retteventas']; }
+              elseif (isset($this->id_pucaux_retteventas)) { $this->nm_limpa_alfa($this->id_pucaux_retteventas); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_retteservicios'])) { $this->id_pucaux_retteservicios = $NM_val_form['id_pucaux_retteservicios']; }
+              elseif (isset($this->id_pucaux_retteservicios)) { $this->nm_limpa_alfa($this->id_pucaux_retteservicios); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_proveedor'])) { $this->id_pucaux_proveedor = $NM_val_form['id_pucaux_proveedor']; }
+              elseif (isset($this->id_pucaux_proveedor)) { $this->nm_limpa_alfa($this->id_pucaux_proveedor); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_rettecompras'])) { $this->id_pucaux_rettecompras = $NM_val_form['id_pucaux_rettecompras']; }
+              elseif (isset($this->id_pucaux_rettecompras)) { $this->nm_limpa_alfa($this->id_pucaux_rettecompras); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_pucaux_rettesercomp'])) { $this->id_pucaux_rettesercomp = $NM_val_form['id_pucaux_rettesercomp']; }
+              elseif (isset($this->id_pucaux_rettesercomp)) { $this->nm_limpa_alfa($this->id_pucaux_rettesercomp); }
               if     (isset($NM_val_form) && isset($NM_val_form['archivos'])) { $this->archivos = $NM_val_form['archivos']; }
               elseif (isset($this->archivos)) { $this->nm_limpa_alfa($this->archivos); }
               if     (isset($NM_val_form) && isset($NM_val_form['direcciones'])) { $this->direcciones = $NM_val_form['direcciones']; }
@@ -24126,7 +23671,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('tipo', 'regimen', 'tipo_documento', 'documento', 'dv', 'codigo_tercero', 'sexo', 'notificar', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'tel_cel', 'urlmail', 'idtercero', 'r_social', 'nombres', 'nombre_comercil', 'representante', 'direccion', 'departamento', 'idmuni', 'ciudad', 'codigo_postal', 'observaciones', 'lenguaje', 'c_postal', 'correo_notificafe', 'celular_notificafe', 'cliente', 'proveedor', 'empleado', 'es_tecnico', 'activo', 'credito', 'cupo', 'cupodis', 'dias_credito', 'dias_mora', 'efec_retencion', 'listaprecios', 'loatiende', 'autorizado', 'relleno2', 'direcciones', 'sucur_cliente', 'detalle_tributario', 'responsabilidad_fiscal', 'ciiu', 'nacimiento', 'fechault', 'saldo', 'afiliacion', 'es_cajero', 'cupo_vendedor', 'autoretenedor', 'creditoprov', 'dias', 'url', 'contacto', 'telefonos_prov', 'email', 'fechultcomp', 'saldoapagar', 'codigo_ter', 'zona_clientes', 'clasificacion_clientes', 'puc_auxiliar_deudores', 'puc_retefuente_ventas', 'puc_retefuente_servicios_clie', 'puc_auxiliar_proveedores', 'puc_retefuente_compras', 'puc_retefuente_servicios_prov', 'archivo_cedula', 'archivo_rut', 'archivo_nit', 'archivo_pago', 'id_plan', 'valor_plan', 'fecha_registro_fe', 'nombre_contador', 'estado', 'si_nomina', 'n_trabajadores', 'si_factura_electronica', 'nombre_empresa_bd', 'archivos', 'es_restaurante', 'porcentaje_propina_sugerida'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('tipo', 'regimen', 'tipo_documento', 'documento', 'dv', 'codigo_tercero', 'sexo', 'notificar', 'nombre1', 'nombre2', 'apellido1', 'apellido2', 'tel_cel', 'urlmail', 'idtercero', 'r_social', 'nombres', 'nombre_comercil', 'representante', 'direccion', 'departamento', 'idmuni', 'ciudad', 'codigo_postal', 'observaciones', 'lenguaje', 'c_postal', 'correo_notificafe', 'celular_notificafe', 'cliente', 'proveedor', 'empleado', 'es_tecnico', 'activo', 'credito', 'cupo', 'cupodis', 'dias_credito', 'dias_mora', 'efec_retencion', 'listaprecios', 'loatiende', 'autorizado', 'relleno2', 'direcciones', 'sucur_cliente', 'detalle_tributario', 'responsabilidad_fiscal', 'ciiu', 'nacimiento', 'fechault', 'saldo', 'afiliacion', 'es_cajero', 'cupo_vendedor', 'autoretenedor', 'creditoprov', 'dias', 'url', 'contacto', 'telefonos_prov', 'email', 'fechultcomp', 'saldoapagar', 'codigo_ter', 'zona_clientes', 'clasificacion_clientes', 'puc_auxiliar_deudores', 'id_pucaux_cliente', 'puc_retefuente_ventas', 'id_pucaux_retteventas', 'puc_retefuente_servicios_clie', 'id_pucaux_retteservicios', 'puc_auxiliar_proveedores', 'id_pucaux_proveedor', 'puc_retefuente_compras', 'id_pucaux_rettecompras', 'puc_retefuente_servicios_prov', 'id_pucaux_rettesercomp', 'archivo_cedula', 'archivo_rut', 'archivo_nit', 'archivo_pago', 'id_plan', 'valor_plan', 'fecha_registro_fe', 'nombre_contador', 'estado', 'si_nomina', 'n_trabajadores', 'si_factura_electronica', 'nombre_empresa_bd', 'archivos', 'es_restaurante', 'porcentaje_propina_sugerida'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -24610,7 +24155,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, #$this->fecha_registro_fe#, '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, #$this->fecha_registro_fe#, '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco == "pdo_sqlsrv")
               { 
@@ -24901,7 +24446,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
@@ -25192,7 +24737,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
@@ -25483,7 +25028,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES ($this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
@@ -25774,7 +25319,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
@@ -26065,7 +25610,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, EXTEND('$this->fecha_registro_fe', YEAR TO FRACTION), '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, EXTEND('$this->fecha_registro_fe', YEAR TO FRACTION), '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               {
@@ -26356,7 +25901,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
@@ -26647,7 +26192,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
@@ -26938,7 +26483,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco =='pdo_ibm')
               {
@@ -27229,7 +26774,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               else
               {
@@ -27520,7 +27065,7 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", puc_retefuente_servicios_prov";
                        $compl_insert_val .= ", '$this->puc_retefuente_servicios_prov'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idtercero, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp $compl_insert) VALUES (" . $NM_seq_auto . "$this->idtercero, '$this->nube', '$this->latitude', '$this->longitude', '$this->activo', '$this->es_tecnico', '$this->codigo_tercero', $this->porcentaje_propina_sugerida, '$this->correo_notificafe', '$this->celular_notificafe', '$this->archivo_cedula', '$this->archivo_rut', '$this->archivo_nit', '$this->archivo_pago', $this->id_plan, $this->valor_plan, " . $this->Ini->date_delim . $this->fecha_registro_fe . $this->Ini->date_delim1 . ", '$this->nombre_contador', '$this->estado', '$this->si_nomina', '$this->si_factura_electronica', '$this->nombre_empresa_bd', $this->n_trabajadores, $this->id_pucaux_cliente, $this->id_pucaux_retteventas, $this->id_pucaux_retteservicios, $this->id_pucaux_proveedor, $this->id_pucaux_rettecompras, $this->id_pucaux_rettesercomp $compl_insert_val)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -28713,23 +28258,23 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, str_replace (convert(char(10),nacimiento,102), '.', '-') + ' ' + convert(char(8),nacimiento,20), sexo, urlmail, str_replace (convert(char(10),fechault,102), '.', '-') + ' ' + convert(char(8),fechault,20), saldo, str_replace (convert(char(10),afiliacion,102), '.', '-') + ' ' + convert(char(8),afiliacion,20), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, str_replace (convert(char(10),fechultcomp,102), '.', '-') + ' ' + convert(char(8),fechultcomp,20), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, str_replace (convert(char(10),fecha_registro_fe,102), '.', '-') + ' ' + convert(char(8),fecha_registro_fe,20), nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, str_replace (convert(char(10),nacimiento,102), '.', '-') + ' ' + convert(char(8),nacimiento,20), sexo, urlmail, str_replace (convert(char(10),fechault,102), '.', '-') + ' ' + convert(char(8),fechault,20), saldo, str_replace (convert(char(10),afiliacion,102), '.', '-') + ' ' + convert(char(8),afiliacion,20), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, str_replace (convert(char(10),fechultcomp,102), '.', '-') + ' ' + convert(char(8),fechultcomp,20), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, str_replace (convert(char(10),fecha_registro_fe,102), '.', '-') + ' ' + convert(char(8),fecha_registro_fe,20), nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, convert(char(23),nacimiento,121), sexo, urlmail, convert(char(23),fechault,121), saldo, convert(char(23),afiliacion,121), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, convert(char(23),fechultcomp,121), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, convert(char(23),fecha_registro_fe,121), nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, convert(char(23),nacimiento,121), sexo, urlmail, convert(char(23),fechault,121), saldo, convert(char(23),afiliacion,121), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, convert(char(23),fechultcomp,121), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, convert(char(23),fecha_registro_fe,121), nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, idmuni, observaciones, credito, cupo, listaprecios, loatiende, TO_DATE(TO_CHAR(con_actual, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, fechultcomp, saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, idmuni, observaciones, credito, cupo, listaprecios, loatiende, TO_DATE(TO_CHAR(con_actual, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, fechultcomp, saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, EXTEND(nacimiento, YEAR TO DAY), sexo, urlmail, EXTEND(fechault, YEAR TO DAY), saldo, EXTEND(afiliacion, YEAR TO DAY), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, EXTEND(fechultcomp, YEAR TO DAY), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, LOTOFILE(imagenter, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_imagenter', 'client'), es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, EXTEND(fecha_registro_fe, YEAR TO FRACTION), nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, EXTEND(nacimiento, YEAR TO DAY), sexo, urlmail, EXTEND(fechault, YEAR TO DAY), saldo, EXTEND(afiliacion, YEAR TO DAY), idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, EXTEND(fechultcomp, YEAR TO DAY), saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, LOTOFILE(imagenter, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_imagenter', 'client'), es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, EXTEND(fecha_registro_fe, YEAR TO FRACTION), nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, fechultcomp, saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idtercero, documento, nombres, direccion, tel_cel, nacimiento, sexo, urlmail, fechault, saldo, afiliacion, idmuni, observaciones, credito, cupo, listaprecios, loatiende, con_actual, efec_retencion, regimen, tipo, cliente, empleado, proveedor, contacto, telefonos_prov, email, url, creditoprov, dias, fechultcomp, saldoapagar, autoretenedor, tipo_documento, dv, nombre1, nombre2, apellido1, apellido2, sucur_cliente, representante, imagenter, es_restaurante, dias_credito, dias_mora, cupo_vendedor, codigo_ter, es_cajero, autorizado, zona_clientes, clasificacion_clientes, creado, disponible, id_pedido_tmp, n_pedido_tmp, total_pedido_tmp, obs_pedido_tmp, vend_pedido_tmp, ciudad, codigo_postal, lenguaje, nombre_comercil, notificar, puc_auxiliar_deudores, puc_retefuente_ventas, puc_retefuente_servicios_clie, puc_auxiliar_proveedores, puc_retefuente_compras, puc_retefuente_servicios_prov, nube, latitude, longitude, activo, es_tecnico, codigo_tercero, porcentaje_propina_sugerida, correo_notificafe, celular_notificafe, archivo_cedula, archivo_rut, archivo_nit, archivo_pago, id_plan, valor_plan, fecha_registro_fe, nombre_contador, estado, si_nomina, si_factura_electronica, nombre_empresa_bd, n_trabajadores, id_pucaux_cliente, id_pucaux_retteventas, id_pucaux_retteservicios, id_pucaux_proveedor, id_pucaux_rettecompras, id_pucaux_rettesercomp from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -29099,6 +28644,18 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_select['nombre_empresa_bd'] = $this->nombre_empresa_bd;
               $this->n_trabajadores = $rs->fields[90] ; 
               $this->nmgp_dados_select['n_trabajadores'] = $this->n_trabajadores;
+              $this->id_pucaux_cliente = $rs->fields[91] ; 
+              $this->nmgp_dados_select['id_pucaux_cliente'] = $this->id_pucaux_cliente;
+              $this->id_pucaux_retteventas = $rs->fields[92] ; 
+              $this->nmgp_dados_select['id_pucaux_retteventas'] = $this->id_pucaux_retteventas;
+              $this->id_pucaux_retteservicios = $rs->fields[93] ; 
+              $this->nmgp_dados_select['id_pucaux_retteservicios'] = $this->id_pucaux_retteservicios;
+              $this->id_pucaux_proveedor = $rs->fields[94] ; 
+              $this->nmgp_dados_select['id_pucaux_proveedor'] = $this->id_pucaux_proveedor;
+              $this->id_pucaux_rettecompras = $rs->fields[95] ; 
+              $this->nmgp_dados_select['id_pucaux_rettecompras'] = $this->id_pucaux_rettecompras;
+              $this->id_pucaux_rettesercomp = $rs->fields[96] ; 
+              $this->nmgp_dados_select['id_pucaux_rettesercomp'] = $this->id_pucaux_rettesercomp;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->nm_troca_decimal(",", ".");
               $this->idtercero = (string)$this->idtercero; 
@@ -29121,6 +28678,12 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->id_plan = (string)$this->id_plan; 
               $this->valor_plan = (string)$this->valor_plan; 
               $this->n_trabajadores = (string)$this->n_trabajadores; 
+              $this->id_pucaux_cliente = (string)$this->id_pucaux_cliente; 
+              $this->id_pucaux_retteventas = (string)$this->id_pucaux_retteventas; 
+              $this->id_pucaux_retteservicios = (string)$this->id_pucaux_retteservicios; 
+              $this->id_pucaux_proveedor = (string)$this->id_pucaux_proveedor; 
+              $this->id_pucaux_rettecompras = (string)$this->id_pucaux_rettecompras; 
+              $this->id_pucaux_rettesercomp = (string)$this->id_pucaux_rettesercomp; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['parms'] = "idtercero?#?$this->idtercero?@?";
               $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['sub_dir'][0]  = "";
               $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['sub_dir'][1]  = "/../../../../registro/_lib/file/doc/registro_facilweb/" . $this->nm_tira_formatacao_documento($this->documento) . "/";
@@ -29345,6 +28908,18 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["nombre_empresa_bd"] = $this->nombre_empresa_bd;
               $this->n_trabajadores = "";  
               $this->nmgp_dados_form["n_trabajadores"] = $this->n_trabajadores;
+              $this->id_pucaux_cliente = "";  
+              $this->nmgp_dados_form["id_pucaux_cliente"] = $this->id_pucaux_cliente;
+              $this->id_pucaux_retteventas = "";  
+              $this->nmgp_dados_form["id_pucaux_retteventas"] = $this->id_pucaux_retteventas;
+              $this->id_pucaux_retteservicios = "";  
+              $this->nmgp_dados_form["id_pucaux_retteservicios"] = $this->id_pucaux_retteservicios;
+              $this->id_pucaux_proveedor = "";  
+              $this->nmgp_dados_form["id_pucaux_proveedor"] = $this->id_pucaux_proveedor;
+              $this->id_pucaux_rettecompras = "";  
+              $this->nmgp_dados_form["id_pucaux_rettecompras"] = $this->id_pucaux_rettecompras;
+              $this->id_pucaux_rettesercomp = "";  
+              $this->nmgp_dados_form["id_pucaux_rettesercomp"] = $this->id_pucaux_rettesercomp;
               $this->archivos = "";  
               $this->nmgp_dados_form["archivos"] = $this->archivos;
               $this->c_postal = "";  
@@ -29357,6 +28932,8 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["departamento"] = $this->departamento;
               $this->detalle_tributario = "";  
               $this->nmgp_dados_form["detalle_tributario"] = $this->detalle_tributario;
+              $this->direcciones = "";  
+              $this->nmgp_dados_form["direcciones"] = $this->direcciones;
               $this->r_social = "";  
               $this->nmgp_dados_form["r_social"] = $this->r_social;
               $this->relleno2 = "";  
@@ -29365,8 +28942,6 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["responsabilidad_fiscal"] = $this->responsabilidad_fiscal;
               $this->sucursales = "";  
               $this->nmgp_dados_form["sucursales"] = $this->sucursales;
-              $this->direcciones = "";  
-              $this->nmgp_dados_form["direcciones"] = $this->direcciones;
               $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
               if ($this->nmgp_clone != "S")
@@ -29467,6 +29042,12 @@ $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
                   $this->si_factura_electronica = $this->nmgp_dados_select['si_factura_electronica'];  
                   $this->nombre_empresa_bd = $this->nmgp_dados_select['nombre_empresa_bd'];  
                   $this->n_trabajadores = $this->nmgp_dados_select['n_trabajadores'];  
+                  $this->id_pucaux_cliente = $this->nmgp_dados_select['id_pucaux_cliente'];  
+                  $this->id_pucaux_retteventas = $this->nmgp_dados_select['id_pucaux_retteventas'];  
+                  $this->id_pucaux_retteservicios = $this->nmgp_dados_select['id_pucaux_retteservicios'];  
+                  $this->id_pucaux_proveedor = $this->nmgp_dados_select['id_pucaux_proveedor'];  
+                  $this->id_pucaux_rettecompras = $this->nmgp_dados_select['id_pucaux_rettecompras'];  
+                  $this->id_pucaux_rettesercomp = $this->nmgp_dados_select['id_pucaux_rettesercomp'];  
                   $this->archivos = $this->nmgp_dados_select['archivos'];  
                   $this->direcciones = $this->nmgp_dados_select['direcciones'];  
               }
@@ -30557,6 +30138,318 @@ $this->NM_ajax_info['event_field'] = 'proveedor';
 terceros_mob_pack_ajax_response();
 exit;
 $_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
+}
+function puc_auxiliar_deudores_onChange()
+{
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_gIdcta1)) {$this->sc_temp_gIdcta1 = (isset($_SESSION['gIdcta1'])) ? $_SESSION['gIdcta1'] : "";}
+  
+$original_puc_auxiliar_deudores = $this->puc_auxiliar_deudores;
+
+$sql1 = "SELECT id FROM puc WHERE codigo = '".$this->puc_auxiliar_deudores ."'";
+ 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_cod[0][0]))
+	{
+	$this->sc_temp_gIdcta1 = $this->ds_cod[0][0];
+	}
+
+
+if (isset($this->sc_temp_gIdcta1)) { $_SESSION['gIdcta1'] = $this->sc_temp_gIdcta1;}
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
+$modificado_puc_auxiliar_deudores = $this->puc_auxiliar_deudores;
+$this->nm_formatar_campos('puc_auxiliar_deudores');
+if ($original_puc_auxiliar_deudores !== $modificado_puc_auxiliar_deudores || isset($this->nmgp_cmp_readonly['puc_auxiliar_deudores']) || (isset($bFlagRead_puc_auxiliar_deudores) && $bFlagRead_puc_auxiliar_deudores))
+{
+    $this->ajax_return_values_puc_auxiliar_deudores(true);
+}
+$this->NM_ajax_info['event_field'] = 'puc';
+terceros_mob_pack_ajax_response();
+exit;
+}
+function puc_auxiliar_proveedores_onChange()
+{
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_gIdcta4)) {$this->sc_temp_gIdcta4 = (isset($_SESSION['gIdcta4'])) ? $_SESSION['gIdcta4'] : "";}
+  
+$original_puc_auxiliar_proveedores = $this->puc_auxiliar_proveedores;
+
+$sql1 = "SELECT id FROM puc WHERE codigo = '".$this->puc_auxiliar_proveedores ."'";
+ 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_cod[0][0]))
+	{
+	$this->sc_temp_gIdcta4 = $this->ds_cod[0][0];
+	}
+
+
+if (isset($this->sc_temp_gIdcta4)) { $_SESSION['gIdcta4'] = $this->sc_temp_gIdcta4;}
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
+$modificado_puc_auxiliar_proveedores = $this->puc_auxiliar_proveedores;
+$this->nm_formatar_campos('puc_auxiliar_proveedores');
+if ($original_puc_auxiliar_proveedores !== $modificado_puc_auxiliar_proveedores || isset($this->nmgp_cmp_readonly['puc_auxiliar_proveedores']) || (isset($bFlagRead_puc_auxiliar_proveedores) && $bFlagRead_puc_auxiliar_proveedores))
+{
+    $this->ajax_return_values_puc_auxiliar_proveedores(true);
+}
+$this->NM_ajax_info['event_field'] = 'puc';
+terceros_mob_pack_ajax_response();
+exit;
+}
+function puc_retefuente_compras_onChange()
+{
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_gIdcta5)) {$this->sc_temp_gIdcta5 = (isset($_SESSION['gIdcta5'])) ? $_SESSION['gIdcta5'] : "";}
+  
+$original_puc_retefuente_compras = $this->puc_retefuente_compras;
+
+$sql1 = "SELECT id FROM puc WHERE codigo = '".$this->puc_retefuente_compras ."'";
+ 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_cod[0][0]))
+	{
+	$this->sc_temp_gIdcta5 = $this->ds_cod[0][0];
+	}
+
+
+if (isset($this->sc_temp_gIdcta5)) { $_SESSION['gIdcta5'] = $this->sc_temp_gIdcta5;}
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
+$modificado_puc_retefuente_compras = $this->puc_retefuente_compras;
+$this->nm_formatar_campos('puc_retefuente_compras');
+if ($original_puc_retefuente_compras !== $modificado_puc_retefuente_compras || isset($this->nmgp_cmp_readonly['puc_retefuente_compras']) || (isset($bFlagRead_puc_retefuente_compras) && $bFlagRead_puc_retefuente_compras))
+{
+    $this->ajax_return_values_puc_retefuente_compras(true);
+}
+$this->NM_ajax_info['event_field'] = 'puc';
+terceros_mob_pack_ajax_response();
+exit;
+}
+function puc_retefuente_servicios_clie_onChange()
+{
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_gIdcta3)) {$this->sc_temp_gIdcta3 = (isset($_SESSION['gIdcta3'])) ? $_SESSION['gIdcta3'] : "";}
+  
+$original_puc_retefuente_servicios_clie = $this->puc_retefuente_servicios_clie;
+
+$sql1 = "SELECT id FROM puc WHERE codigo = '".$this->puc_retefuente_servicios_clie ."'";
+ 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_cod[0][0]))
+	{
+	$this->sc_temp_gIdcta3 = $this->ds_cod[0][0];
+	}
+
+
+if (isset($this->sc_temp_gIdcta3)) { $_SESSION['gIdcta3'] = $this->sc_temp_gIdcta3;}
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
+$modificado_puc_retefuente_servicios_clie = $this->puc_retefuente_servicios_clie;
+$this->nm_formatar_campos('puc_retefuente_servicios_clie');
+if ($original_puc_retefuente_servicios_clie !== $modificado_puc_retefuente_servicios_clie || isset($this->nmgp_cmp_readonly['puc_retefuente_servicios_clie']) || (isset($bFlagRead_puc_retefuente_servicios_clie) && $bFlagRead_puc_retefuente_servicios_clie))
+{
+    $this->ajax_return_values_puc_retefuente_servicios_clie(true);
+}
+$this->NM_ajax_info['event_field'] = 'puc';
+terceros_mob_pack_ajax_response();
+exit;
+}
+function puc_retefuente_servicios_prov_onChange()
+{
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_gIdcta6)) {$this->sc_temp_gIdcta6 = (isset($_SESSION['gIdcta6'])) ? $_SESSION['gIdcta6'] : "";}
+  
+$original_puc_retefuente_servicios_prov = $this->puc_retefuente_servicios_prov;
+
+$sql1 = "SELECT id FROM puc WHERE codigo = '".$this->puc_retefuente_servicios_prov ."'";
+ 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_cod[0][0]))
+	{
+	$this->sc_temp_gIdcta6 = $this->ds_cod[0][0];
+	}
+
+
+if (isset($this->sc_temp_gIdcta6)) { $_SESSION['gIdcta6'] = $this->sc_temp_gIdcta6;}
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
+$modificado_puc_retefuente_servicios_prov = $this->puc_retefuente_servicios_prov;
+$this->nm_formatar_campos('puc_retefuente_servicios_prov');
+if ($original_puc_retefuente_servicios_prov !== $modificado_puc_retefuente_servicios_prov || isset($this->nmgp_cmp_readonly['puc_retefuente_servicios_prov']) || (isset($bFlagRead_puc_retefuente_servicios_prov) && $bFlagRead_puc_retefuente_servicios_prov))
+{
+    $this->ajax_return_values_puc_retefuente_servicios_prov(true);
+}
+$this->NM_ajax_info['event_field'] = 'puc';
+terceros_mob_pack_ajax_response();
+exit;
+}
+function puc_retefuente_ventas_onChange()
+{
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_gIdcta2)) {$this->sc_temp_gIdcta2 = (isset($_SESSION['gIdcta2'])) ? $_SESSION['gIdcta2'] : "";}
+  
+$original_puc_retefuente_ventas = $this->puc_retefuente_ventas;
+
+$sql1 = "SELECT id FROM puc WHERE codigo = '".$this->puc_retefuente_ventas ."'";
+ 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_cod[0][0]))
+	{
+	$this->sc_temp_gIdcta2 = $this->ds_cod[0][0];
+	}
+
+
+if (isset($this->sc_temp_gIdcta2)) { $_SESSION['gIdcta2'] = $this->sc_temp_gIdcta2;}
+$_SESSION['scriptcase']['terceros_mob']['contr_erro'] = 'off';
+$modificado_puc_retefuente_ventas = $this->puc_retefuente_ventas;
+$this->nm_formatar_campos('puc_retefuente_ventas');
+if ($original_puc_retefuente_ventas !== $modificado_puc_retefuente_ventas || isset($this->nmgp_cmp_readonly['puc_retefuente_ventas']) || (isset($bFlagRead_puc_retefuente_ventas) && $bFlagRead_puc_retefuente_ventas))
+{
+    $this->ajax_return_values_puc_retefuente_ventas(true);
+}
+$this->NM_ajax_info['event_field'] = 'puc';
+terceros_mob_pack_ajax_response();
+exit;
 }
 function r_social_onChange()
 {
@@ -34114,6 +34007,3096 @@ else
    return $todo;
 
    }
+   function Form_lookup_puc_auxiliar_deudores()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $cliente_val_str = "''";
+   if (!empty($this->cliente))
+   {
+       if (is_array($this->cliente))
+       {
+           $Tmp_array = $this->cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->cliente);
+       }
+       $cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $cliente_val_str)
+          {
+             $cliente_val_str .= ", ";
+          }
+          $cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $empleado_val_str = "''";
+   if (!empty($this->empleado))
+   {
+       if (is_array($this->empleado))
+       {
+           $Tmp_array = $this->empleado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->empleado);
+       }
+       $empleado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $empleado_val_str)
+          {
+             $empleado_val_str .= ", ";
+          }
+          $empleado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $proveedor_val_str = "''";
+   if (!empty($this->proveedor))
+   {
+       if (is_array($this->proveedor))
+       {
+           $Tmp_array = $this->proveedor;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->proveedor);
+       }
+       $proveedor_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $proveedor_val_str)
+          {
+             $proveedor_val_str .= ", ";
+          }
+          $proveedor_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $sucur_cliente_val_str = "''";
+   if (!empty($this->sucur_cliente))
+   {
+       if (is_array($this->sucur_cliente))
+       {
+           $Tmp_array = $this->sucur_cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->sucur_cliente);
+       }
+       $sucur_cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $sucur_cliente_val_str)
+          {
+             $sucur_cliente_val_str .= ", ";
+          }
+          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_restaurante_val_str = "''";
+   if (!empty($this->es_restaurante))
+   {
+       if (is_array($this->es_restaurante))
+       {
+           $Tmp_array = $this->es_restaurante;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_restaurante);
+       }
+       $es_restaurante_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_restaurante_val_str)
+          {
+             $es_restaurante_val_str .= ", ";
+          }
+          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_cajero_val_str = "''";
+   if (!empty($this->es_cajero))
+   {
+       if (is_array($this->es_cajero))
+       {
+           $Tmp_array = $this->es_cajero;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_cajero);
+       }
+       $es_cajero_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_cajero_val_str)
+          {
+             $es_cajero_val_str .= ", ";
+          }
+          $es_cajero_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $autorizado_val_str = "''";
+   if (!empty($this->autorizado))
+   {
+       if (is_array($this->autorizado))
+       {
+           $Tmp_array = $this->autorizado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->autorizado);
+       }
+       $autorizado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $autorizado_val_str)
+          {
+             $autorizado_val_str .= ", ";
+          }
+          $autorizado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $notificar_val_str = "''";
+   if (!empty($this->notificar))
+   {
+       if (is_array($this->notificar))
+       {
+           $Tmp_array = $this->notificar;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->notificar);
+       }
+       $notificar_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $notificar_val_str)
+          {
+             $notificar_val_str .= ", ";
+          }
+          $notificar_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_tecnico_val_str = "''";
+   if (!empty($this->es_tecnico))
+   {
+       if (is_array($this->es_tecnico))
+       {
+           $Tmp_array = $this->es_tecnico;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_tecnico);
+       }
+       $es_tecnico_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_tecnico_val_str)
+          {
+             $es_tecnico_val_str .= ", ";
+          }
+          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_deudores'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_cliente()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_auxiliar_deudores' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_cliente'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_puc_retefuente_ventas()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $cliente_val_str = "''";
+   if (!empty($this->cliente))
+   {
+       if (is_array($this->cliente))
+       {
+           $Tmp_array = $this->cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->cliente);
+       }
+       $cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $cliente_val_str)
+          {
+             $cliente_val_str .= ", ";
+          }
+          $cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $empleado_val_str = "''";
+   if (!empty($this->empleado))
+   {
+       if (is_array($this->empleado))
+       {
+           $Tmp_array = $this->empleado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->empleado);
+       }
+       $empleado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $empleado_val_str)
+          {
+             $empleado_val_str .= ", ";
+          }
+          $empleado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $proveedor_val_str = "''";
+   if (!empty($this->proveedor))
+   {
+       if (is_array($this->proveedor))
+       {
+           $Tmp_array = $this->proveedor;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->proveedor);
+       }
+       $proveedor_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $proveedor_val_str)
+          {
+             $proveedor_val_str .= ", ";
+          }
+          $proveedor_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $sucur_cliente_val_str = "''";
+   if (!empty($this->sucur_cliente))
+   {
+       if (is_array($this->sucur_cliente))
+       {
+           $Tmp_array = $this->sucur_cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->sucur_cliente);
+       }
+       $sucur_cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $sucur_cliente_val_str)
+          {
+             $sucur_cliente_val_str .= ", ";
+          }
+          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_restaurante_val_str = "''";
+   if (!empty($this->es_restaurante))
+   {
+       if (is_array($this->es_restaurante))
+       {
+           $Tmp_array = $this->es_restaurante;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_restaurante);
+       }
+       $es_restaurante_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_restaurante_val_str)
+          {
+             $es_restaurante_val_str .= ", ";
+          }
+          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_cajero_val_str = "''";
+   if (!empty($this->es_cajero))
+   {
+       if (is_array($this->es_cajero))
+       {
+           $Tmp_array = $this->es_cajero;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_cajero);
+       }
+       $es_cajero_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_cajero_val_str)
+          {
+             $es_cajero_val_str .= ", ";
+          }
+          $es_cajero_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $autorizado_val_str = "''";
+   if (!empty($this->autorizado))
+   {
+       if (is_array($this->autorizado))
+       {
+           $Tmp_array = $this->autorizado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->autorizado);
+       }
+       $autorizado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $autorizado_val_str)
+          {
+             $autorizado_val_str .= ", ";
+          }
+          $autorizado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $notificar_val_str = "''";
+   if (!empty($this->notificar))
+   {
+       if (is_array($this->notificar))
+       {
+           $Tmp_array = $this->notificar;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->notificar);
+       }
+       $notificar_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $notificar_val_str)
+          {
+             $notificar_val_str .= ", ";
+          }
+          $notificar_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_tecnico_val_str = "''";
+   if (!empty($this->es_tecnico))
+   {
+       if (is_array($this->es_tecnico))
+       {
+           $Tmp_array = $this->es_tecnico;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_tecnico);
+       }
+       $es_tecnico_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_tecnico_val_str)
+          {
+             $es_tecnico_val_str .= ", ";
+          }
+          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_ventas'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_retteventas()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_retefuente_ventas' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteventas'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_puc_retefuente_servicios_clie()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $cliente_val_str = "''";
+   if (!empty($this->cliente))
+   {
+       if (is_array($this->cliente))
+       {
+           $Tmp_array = $this->cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->cliente);
+       }
+       $cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $cliente_val_str)
+          {
+             $cliente_val_str .= ", ";
+          }
+          $cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $empleado_val_str = "''";
+   if (!empty($this->empleado))
+   {
+       if (is_array($this->empleado))
+       {
+           $Tmp_array = $this->empleado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->empleado);
+       }
+       $empleado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $empleado_val_str)
+          {
+             $empleado_val_str .= ", ";
+          }
+          $empleado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $proveedor_val_str = "''";
+   if (!empty($this->proveedor))
+   {
+       if (is_array($this->proveedor))
+       {
+           $Tmp_array = $this->proveedor;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->proveedor);
+       }
+       $proveedor_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $proveedor_val_str)
+          {
+             $proveedor_val_str .= ", ";
+          }
+          $proveedor_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $sucur_cliente_val_str = "''";
+   if (!empty($this->sucur_cliente))
+   {
+       if (is_array($this->sucur_cliente))
+       {
+           $Tmp_array = $this->sucur_cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->sucur_cliente);
+       }
+       $sucur_cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $sucur_cliente_val_str)
+          {
+             $sucur_cliente_val_str .= ", ";
+          }
+          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_restaurante_val_str = "''";
+   if (!empty($this->es_restaurante))
+   {
+       if (is_array($this->es_restaurante))
+       {
+           $Tmp_array = $this->es_restaurante;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_restaurante);
+       }
+       $es_restaurante_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_restaurante_val_str)
+          {
+             $es_restaurante_val_str .= ", ";
+          }
+          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_cajero_val_str = "''";
+   if (!empty($this->es_cajero))
+   {
+       if (is_array($this->es_cajero))
+       {
+           $Tmp_array = $this->es_cajero;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_cajero);
+       }
+       $es_cajero_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_cajero_val_str)
+          {
+             $es_cajero_val_str .= ", ";
+          }
+          $es_cajero_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $autorizado_val_str = "''";
+   if (!empty($this->autorizado))
+   {
+       if (is_array($this->autorizado))
+       {
+           $Tmp_array = $this->autorizado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->autorizado);
+       }
+       $autorizado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $autorizado_val_str)
+          {
+             $autorizado_val_str .= ", ";
+          }
+          $autorizado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $notificar_val_str = "''";
+   if (!empty($this->notificar))
+   {
+       if (is_array($this->notificar))
+       {
+           $Tmp_array = $this->notificar;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->notificar);
+       }
+       $notificar_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $notificar_val_str)
+          {
+             $notificar_val_str .= ", ";
+          }
+          $notificar_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_tecnico_val_str = "''";
+   if (!empty($this->es_tecnico))
+   {
+       if (is_array($this->es_tecnico))
+       {
+           $Tmp_array = $this->es_tecnico;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_tecnico);
+       }
+       $es_tecnico_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_tecnico_val_str)
+          {
+             $es_tecnico_val_str .= ", ";
+          }
+          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_clie'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_retteservicios()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_retefuente_servicios_clie' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_retteservicios'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_puc_auxiliar_proveedores()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $cliente_val_str = "''";
+   if (!empty($this->cliente))
+   {
+       if (is_array($this->cliente))
+       {
+           $Tmp_array = $this->cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->cliente);
+       }
+       $cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $cliente_val_str)
+          {
+             $cliente_val_str .= ", ";
+          }
+          $cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $empleado_val_str = "''";
+   if (!empty($this->empleado))
+   {
+       if (is_array($this->empleado))
+       {
+           $Tmp_array = $this->empleado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->empleado);
+       }
+       $empleado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $empleado_val_str)
+          {
+             $empleado_val_str .= ", ";
+          }
+          $empleado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $proveedor_val_str = "''";
+   if (!empty($this->proveedor))
+   {
+       if (is_array($this->proveedor))
+       {
+           $Tmp_array = $this->proveedor;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->proveedor);
+       }
+       $proveedor_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $proveedor_val_str)
+          {
+             $proveedor_val_str .= ", ";
+          }
+          $proveedor_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $sucur_cliente_val_str = "''";
+   if (!empty($this->sucur_cliente))
+   {
+       if (is_array($this->sucur_cliente))
+       {
+           $Tmp_array = $this->sucur_cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->sucur_cliente);
+       }
+       $sucur_cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $sucur_cliente_val_str)
+          {
+             $sucur_cliente_val_str .= ", ";
+          }
+          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_restaurante_val_str = "''";
+   if (!empty($this->es_restaurante))
+   {
+       if (is_array($this->es_restaurante))
+       {
+           $Tmp_array = $this->es_restaurante;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_restaurante);
+       }
+       $es_restaurante_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_restaurante_val_str)
+          {
+             $es_restaurante_val_str .= ", ";
+          }
+          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_cajero_val_str = "''";
+   if (!empty($this->es_cajero))
+   {
+       if (is_array($this->es_cajero))
+       {
+           $Tmp_array = $this->es_cajero;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_cajero);
+       }
+       $es_cajero_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_cajero_val_str)
+          {
+             $es_cajero_val_str .= ", ";
+          }
+          $es_cajero_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $autorizado_val_str = "''";
+   if (!empty($this->autorizado))
+   {
+       if (is_array($this->autorizado))
+       {
+           $Tmp_array = $this->autorizado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->autorizado);
+       }
+       $autorizado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $autorizado_val_str)
+          {
+             $autorizado_val_str .= ", ";
+          }
+          $autorizado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $notificar_val_str = "''";
+   if (!empty($this->notificar))
+   {
+       if (is_array($this->notificar))
+       {
+           $Tmp_array = $this->notificar;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->notificar);
+       }
+       $notificar_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $notificar_val_str)
+          {
+             $notificar_val_str .= ", ";
+          }
+          $notificar_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_tecnico_val_str = "''";
+   if (!empty($this->es_tecnico))
+   {
+       if (is_array($this->es_tecnico))
+       {
+           $Tmp_array = $this->es_tecnico;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_tecnico);
+       }
+       $es_tecnico_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_tecnico_val_str)
+          {
+             $es_tecnico_val_str .= ", ";
+          }
+          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_auxiliar_proveedores'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_proveedor()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_auxiliar_proveedor' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_proveedor'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_puc_retefuente_compras()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $cliente_val_str = "''";
+   if (!empty($this->cliente))
+   {
+       if (is_array($this->cliente))
+       {
+           $Tmp_array = $this->cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->cliente);
+       }
+       $cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $cliente_val_str)
+          {
+             $cliente_val_str .= ", ";
+          }
+          $cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $empleado_val_str = "''";
+   if (!empty($this->empleado))
+   {
+       if (is_array($this->empleado))
+       {
+           $Tmp_array = $this->empleado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->empleado);
+       }
+       $empleado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $empleado_val_str)
+          {
+             $empleado_val_str .= ", ";
+          }
+          $empleado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $proveedor_val_str = "''";
+   if (!empty($this->proveedor))
+   {
+       if (is_array($this->proveedor))
+       {
+           $Tmp_array = $this->proveedor;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->proveedor);
+       }
+       $proveedor_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $proveedor_val_str)
+          {
+             $proveedor_val_str .= ", ";
+          }
+          $proveedor_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $sucur_cliente_val_str = "''";
+   if (!empty($this->sucur_cliente))
+   {
+       if (is_array($this->sucur_cliente))
+       {
+           $Tmp_array = $this->sucur_cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->sucur_cliente);
+       }
+       $sucur_cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $sucur_cliente_val_str)
+          {
+             $sucur_cliente_val_str .= ", ";
+          }
+          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_restaurante_val_str = "''";
+   if (!empty($this->es_restaurante))
+   {
+       if (is_array($this->es_restaurante))
+       {
+           $Tmp_array = $this->es_restaurante;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_restaurante);
+       }
+       $es_restaurante_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_restaurante_val_str)
+          {
+             $es_restaurante_val_str .= ", ";
+          }
+          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_cajero_val_str = "''";
+   if (!empty($this->es_cajero))
+   {
+       if (is_array($this->es_cajero))
+       {
+           $Tmp_array = $this->es_cajero;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_cajero);
+       }
+       $es_cajero_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_cajero_val_str)
+          {
+             $es_cajero_val_str .= ", ";
+          }
+          $es_cajero_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $autorizado_val_str = "''";
+   if (!empty($this->autorizado))
+   {
+       if (is_array($this->autorizado))
+       {
+           $Tmp_array = $this->autorizado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->autorizado);
+       }
+       $autorizado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $autorizado_val_str)
+          {
+             $autorizado_val_str .= ", ";
+          }
+          $autorizado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $notificar_val_str = "''";
+   if (!empty($this->notificar))
+   {
+       if (is_array($this->notificar))
+       {
+           $Tmp_array = $this->notificar;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->notificar);
+       }
+       $notificar_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $notificar_val_str)
+          {
+             $notificar_val_str .= ", ";
+          }
+          $notificar_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_tecnico_val_str = "''";
+   if (!empty($this->es_tecnico))
+   {
+       if (is_array($this->es_tecnico))
+       {
+           $Tmp_array = $this->es_tecnico;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_tecnico);
+       }
+       $es_tecnico_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_tecnico_val_str)
+          {
+             $es_tecnico_val_str .= ", ";
+          }
+          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_compras'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_rettecompras()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_retefuente_compras' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettecompras'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_puc_retefuente_servicios_prov()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $cliente_val_str = "''";
+   if (!empty($this->cliente))
+   {
+       if (is_array($this->cliente))
+       {
+           $Tmp_array = $this->cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->cliente);
+       }
+       $cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $cliente_val_str)
+          {
+             $cliente_val_str .= ", ";
+          }
+          $cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $empleado_val_str = "''";
+   if (!empty($this->empleado))
+   {
+       if (is_array($this->empleado))
+       {
+           $Tmp_array = $this->empleado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->empleado);
+       }
+       $empleado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $empleado_val_str)
+          {
+             $empleado_val_str .= ", ";
+          }
+          $empleado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $proveedor_val_str = "''";
+   if (!empty($this->proveedor))
+   {
+       if (is_array($this->proveedor))
+       {
+           $Tmp_array = $this->proveedor;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->proveedor);
+       }
+       $proveedor_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $proveedor_val_str)
+          {
+             $proveedor_val_str .= ", ";
+          }
+          $proveedor_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $sucur_cliente_val_str = "''";
+   if (!empty($this->sucur_cliente))
+   {
+       if (is_array($this->sucur_cliente))
+       {
+           $Tmp_array = $this->sucur_cliente;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->sucur_cliente);
+       }
+       $sucur_cliente_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $sucur_cliente_val_str)
+          {
+             $sucur_cliente_val_str .= ", ";
+          }
+          $sucur_cliente_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_restaurante_val_str = "''";
+   if (!empty($this->es_restaurante))
+   {
+       if (is_array($this->es_restaurante))
+       {
+           $Tmp_array = $this->es_restaurante;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_restaurante);
+       }
+       $es_restaurante_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_restaurante_val_str)
+          {
+             $es_restaurante_val_str .= ", ";
+          }
+          $es_restaurante_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_cajero_val_str = "''";
+   if (!empty($this->es_cajero))
+   {
+       if (is_array($this->es_cajero))
+       {
+           $Tmp_array = $this->es_cajero;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_cajero);
+       }
+       $es_cajero_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_cajero_val_str)
+          {
+             $es_cajero_val_str .= ", ";
+          }
+          $es_cajero_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $autorizado_val_str = "''";
+   if (!empty($this->autorizado))
+   {
+       if (is_array($this->autorizado))
+       {
+           $Tmp_array = $this->autorizado;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->autorizado);
+       }
+       $autorizado_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $autorizado_val_str)
+          {
+             $autorizado_val_str .= ", ";
+          }
+          $autorizado_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $notificar_val_str = "''";
+   if (!empty($this->notificar))
+   {
+       if (is_array($this->notificar))
+       {
+           $Tmp_array = $this->notificar;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->notificar);
+       }
+       $notificar_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $notificar_val_str)
+          {
+             $notificar_val_str .= ", ";
+          }
+          $notificar_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $es_tecnico_val_str = "''";
+   if (!empty($this->es_tecnico))
+   {
+       if (is_array($this->es_tecnico))
+       {
+           $Tmp_array = $this->es_tecnico;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->es_tecnico);
+       }
+       $es_tecnico_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $es_tecnico_val_str)
+          {
+             $es_tecnico_val_str .= ", ";
+          }
+          $es_tecnico_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_nomina_val_str = "''";
+   if (!empty($this->si_nomina))
+   {
+       if (is_array($this->si_nomina))
+       {
+           $Tmp_array = $this->si_nomina;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_nomina);
+       }
+       $si_nomina_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_nomina_val_str)
+          {
+             $si_nomina_val_str .= ", ";
+          }
+          $si_nomina_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   $si_factura_electronica_val_str = "''";
+   if (!empty($this->si_factura_electronica))
+   {
+       if (is_array($this->si_factura_electronica))
+       {
+           $Tmp_array = $this->si_factura_electronica;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->si_factura_electronica);
+       }
+       $si_factura_electronica_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $si_factura_electronica_val_str)
+          {
+             $si_factura_electronica_val_str .= ", ";
+          }
+          $si_factura_electronica_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_puc_retefuente_servicios_prov'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_pucaux_rettesercomp()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp'] = array(); 
+    }
+
+   $old_value_dv = $this->dv;
+   $old_value_idtercero = $this->idtercero;
+   $old_value_celular_notificafe = $this->celular_notificafe;
+   $old_value_cupo = $this->cupo;
+   $old_value_cupodis = $this->cupodis;
+   $old_value_dias_credito = $this->dias_credito;
+   $old_value_dias_mora = $this->dias_mora;
+   $old_value_nacimiento = $this->nacimiento;
+   $old_value_fechault = $this->fechault;
+   $old_value_saldo = $this->saldo;
+   $old_value_afiliacion = $this->afiliacion;
+   $old_value_cupo_vendedor = $this->cupo_vendedor;
+   $old_value_dias = $this->dias;
+   $old_value_fechultcomp = $this->fechultcomp;
+   $old_value_saldoapagar = $this->saldoapagar;
+   $old_value_valor_plan = $this->valor_plan;
+   $old_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $old_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $old_value_n_trabajadores = $this->n_trabajadores;
+   $old_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+   $this->nm_tira_formatacao();
+   $this->nm_converte_datas(false);
+
+
+   $unformatted_value_dv = $this->dv;
+   $unformatted_value_idtercero = $this->idtercero;
+   $unformatted_value_celular_notificafe = $this->celular_notificafe;
+   $unformatted_value_cupo = $this->cupo;
+   $unformatted_value_cupodis = $this->cupodis;
+   $unformatted_value_dias_credito = $this->dias_credito;
+   $unformatted_value_dias_mora = $this->dias_mora;
+   $unformatted_value_nacimiento = $this->nacimiento;
+   $unformatted_value_fechault = $this->fechault;
+   $unformatted_value_saldo = $this->saldo;
+   $unformatted_value_afiliacion = $this->afiliacion;
+   $unformatted_value_cupo_vendedor = $this->cupo_vendedor;
+   $unformatted_value_dias = $this->dias;
+   $unformatted_value_fechultcomp = $this->fechultcomp;
+   $unformatted_value_saldoapagar = $this->saldoapagar;
+   $unformatted_value_valor_plan = $this->valor_plan;
+   $unformatted_value_fecha_registro_fe = $this->fecha_registro_fe;
+   $unformatted_value_fecha_registro_fe_hora = $this->fecha_registro_fe_hora;
+   $unformatted_value_n_trabajadores = $this->n_trabajadores;
+   $unformatted_value_porcentaje_propina_sugerida = $this->porcentaje_propina_sugerida;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc_retefuente_servicios_prov' LIMIT 1)";
+
+   $this->dv = $old_value_dv;
+   $this->idtercero = $old_value_idtercero;
+   $this->celular_notificafe = $old_value_celular_notificafe;
+   $this->cupo = $old_value_cupo;
+   $this->cupodis = $old_value_cupodis;
+   $this->dias_credito = $old_value_dias_credito;
+   $this->dias_mora = $old_value_dias_mora;
+   $this->nacimiento = $old_value_nacimiento;
+   $this->fechault = $old_value_fechault;
+   $this->saldo = $old_value_saldo;
+   $this->afiliacion = $old_value_afiliacion;
+   $this->cupo_vendedor = $old_value_cupo_vendedor;
+   $this->dias = $old_value_dias;
+   $this->fechultcomp = $old_value_fechultcomp;
+   $this->saldoapagar = $old_value_saldoapagar;
+   $this->valor_plan = $old_value_valor_plan;
+   $this->fecha_registro_fe = $old_value_fecha_registro_fe;
+   $this->fecha_registro_fe_hora = $old_value_fecha_registro_fe_hora;
+   $this->n_trabajadores = $old_value_n_trabajadores;
+   $this->porcentaje_propina_sugerida = $old_value_porcentaje_propina_sugerida;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['Lookup_id_pucaux_rettesercomp'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
    function Form_lookup_id_plan()
    {
 $nmgp_def_dados = "" ; 
@@ -34660,7 +37643,7 @@ else
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idtercero";$nm_numeric[] = "saldo";$nm_numeric[] = "idmuni";$nm_numeric[] = "cupo";$nm_numeric[] = "listaprecios";$nm_numeric[] = "loatiende";$nm_numeric[] = "dias";$nm_numeric[] = "saldoapagar";$nm_numeric[] = "dv";$nm_numeric[] = "dias_credito";$nm_numeric[] = "dias_mora";$nm_numeric[] = "cupo_vendedor";$nm_numeric[] = "zona_clientes";$nm_numeric[] = "clasificacion_clientes";$nm_numeric[] = "id_pedido_tmp";$nm_numeric[] = "total_pedido_tmp";$nm_numeric[] = "porcentaje_propina_sugerida";$nm_numeric[] = "id_plan";$nm_numeric[] = "valor_plan";$nm_numeric[] = "n_trabajadores";$nm_numeric[] = "";
+      $nm_numeric[] = "idtercero";$nm_numeric[] = "saldo";$nm_numeric[] = "idmuni";$nm_numeric[] = "cupo";$nm_numeric[] = "listaprecios";$nm_numeric[] = "loatiende";$nm_numeric[] = "dias";$nm_numeric[] = "saldoapagar";$nm_numeric[] = "dv";$nm_numeric[] = "dias_credito";$nm_numeric[] = "dias_mora";$nm_numeric[] = "cupo_vendedor";$nm_numeric[] = "zona_clientes";$nm_numeric[] = "clasificacion_clientes";$nm_numeric[] = "id_pedido_tmp";$nm_numeric[] = "total_pedido_tmp";$nm_numeric[] = "porcentaje_propina_sugerida";$nm_numeric[] = "id_plan";$nm_numeric[] = "valor_plan";$nm_numeric[] = "n_trabajadores";$nm_numeric[] = "id_pucaux_cliente";$nm_numeric[] = "id_pucaux_retteventas";$nm_numeric[] = "id_pucaux_retteservicios";$nm_numeric[] = "id_pucaux_proveedor";$nm_numeric[] = "id_pucaux_rettecompras";$nm_numeric[] = "id_pucaux_rettesercomp";$nm_numeric[] = "";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['terceros_mob']['decimal_db'] == ".")
@@ -35064,11 +38047,17 @@ if (parent && parent.scAjaxDetailValue)
                         'zona_clientes' => 'zona_clientes',
                         'clasificacion_clientes' => 'clasificacion_clientes',
                         'puc_auxiliar_deudores' => 'puc_auxiliar_deudores',
+                        'id_pucaux_cliente' => 'id_pucaux_cliente',
                         'puc_retefuente_ventas' => 'puc_retefuente_ventas',
+                        'id_pucaux_retteventas' => 'id_pucaux_retteventas',
                         'puc_retefuente_servicios_clie' => 'puc_retefuente_servicios_clie',
+                        'id_pucaux_retteservicios' => 'id_pucaux_retteservicios',
                         'puc_auxiliar_proveedores' => 'puc_auxiliar_proveedores',
+                        'id_pucaux_proveedor' => 'id_pucaux_proveedor',
                         'puc_retefuente_compras' => 'puc_retefuente_compras',
+                        'id_pucaux_rettecompras' => 'id_pucaux_rettecompras',
                         'puc_retefuente_servicios_prov' => 'puc_retefuente_servicios_prov',
+                        'id_pucaux_rettesercomp' => 'id_pucaux_rettesercomp',
                         'archivo_cedula' => 'archivo_cedula',
                         'archivo_rut' => 'archivo_rut',
                         'archivo_nit' => 'archivo_nit',

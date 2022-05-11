@@ -137,9 +137,16 @@ function Ord_cmp_init()
    $tab_ger_campos['idpro1'] = "on";
    $tab_def_campos['idpro1'] = "idpro1";
    $tab_labels["idpro1"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["idpro1"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["idpro1"] : "Proveedor";
-   $tab_ger_campos['escombo'] = "on";
-   $tab_def_campos['escombo'] = "escombo";
-   $tab_labels["escombo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["escombo"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["escombo"] : "Combo";
+   $tab_ger_campos['combo'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['combo'] = "Combo";
+   }
+   else
+   {
+       $tab_def_campos['combo'] = "";
+   }
+   $tab_labels["combo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["combo"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["combo"] : "Combo";
    $tab_ger_campos['agregarnotainv'] = "on";
    if ($use_alias == "S")
    {
@@ -151,6 +158,7 @@ function Ord_cmp_init()
    }
    $tab_labels["agregarnotainv"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["agregarnotainv"])) ? $_SESSION['sc_session'][$sc_init]['grid_productos']['labels']["agregarnotainv"] : "Nota";
    $tab_ger_campos['btn_stock'] = "none";
+   $tab_ger_campos['combo'] = "none";
    $tab_ger_campos['agregarnotainv'] = "none";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_productos']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_productos']['field_display']))
    {
@@ -275,7 +283,7 @@ function Sel_processa_form()
           $this->Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
       }
    }
-   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
    $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";

@@ -23,8 +23,11 @@
 .css_saldo_line {text-align:left;}
 .css_saldo_obj {text-align:left;}
 .css_puc_label { }
-.css_puc_line { }
-.css_puc_obj { }
+.css_puc_line {width:200px;}
+.css_puc_obj {width:200px;}
 .css_numero_cuenta_label { }
 .css_numero_cuenta_line { }
 .css_numero_cuenta_obj { }
+.css_id_puc_auxiliar_label { }
+.css_id_puc_auxiliar_line {text-align:left;}
+.css_id_puc_auxiliar_obj {text-align:left;width:200px;}

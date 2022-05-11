@@ -3689,7 +3689,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $summary_width . ">\r\n");
           $nm_saida->saida("     <TR>\r\n");
           $nm_saida->saida("       <TD align=\"center\">\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "prit_web_page()", "prit_web_page()", "Bprint_print", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "prit_web_page()", "prit_web_page()", "Bprint_print", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + P)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida("           $Cod_Btn \r\n");
           $nm_saida->saida("       </TD>\r\n");
           $nm_saida->saida("     </TR>\r\n");
@@ -3922,7 +3922,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if ($this->nmgp_botoes['chart_exit'] == 'on' && !$this->grid_emb_form)
       {
           $this->nm_btn_exist['exit'][] = "Rsai_top";
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('igual', '0');", "nm_gp_move('igual', '0');", "Rsai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('igual', '0');", "nm_gp_move('igual', '0');", "Rsai_top", "", " ", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
          $nm_saida->saida("     </TD> \r\n");
@@ -4111,7 +4111,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       if ($this->nmgp_botoes['chart_exit'] == 'on' && !$this->grid_emb_form)
       {
           $this->nm_btn_exist['exit'][] = "Rsai_top";
-         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('igual', '0');", "nm_gp_move('igual', '0');", "Rsai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "nm_gp_move('igual', '0');", "nm_gp_move('igual', '0');", "Rsai_top", "", " ", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
          $nm_saida->saida("           $Cod_Btn \r\n");
       }
          $nm_saida->saida("     </TD> \r\n");
@@ -5170,21 +5170,68 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_pagos']['doc_word'])
      else {
           $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\">\r\n");
      }
-      $nm_saida->saida("<style>\r\n");
-      $nm_saida->saida("#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 \r\n");
-      $nm_saida->saida("#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}\r\n");
-      $nm_saida->saida("</style>\r\n");
-      $nm_saida->saida("<div style=\"width: 100%\">\r\n");
-      $nm_saida->saida(" <div class=\"" . $this->css_scGridHeader . "\" style=\"height:11px; display: block; border-width:0px; \"></div>\r\n");
-      $nm_saida->saida(" <div style=\"height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block\">\r\n");
-      $nm_saida->saida(" 	<table style=\"width:100%; border-collapse:collapse; padding:0;\">\r\n");
-      $nm_saida->saida("    	<tr>\r\n");
-      $nm_saida->saida("        	<td id=\"lin1_col1\" class=\"" . $this->css_scGridHeaderFont . "\"><span>Lista Comprobantes de Egreso</span></td>\r\n");
-      $nm_saida->saida("            <td id=\"lin1_col2\" class=\"" . $this->css_scGridHeaderFont . "\"><span></span></td>\r\n");
-      $nm_saida->saida("        </tr>\r\n");
-      $nm_saida->saida("    </table>		 \r\n");
-      $nm_saida->saida(" </div>\r\n");
-      $nm_saida->saida("</div>\r\n");
+      $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+      $nm_saida->saida("    <TR align=\"center\">\r\n");
+      $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+      $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          Lista Comprobantes de Egreso\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("      </TABLE>\r\n");
+      $nm_saida->saida("     </TD>\r\n");
+      $nm_saida->saida("    </TR>\r\n");
+      $nm_saida->saida("   </TABLE>\r\n");
       $nm_saida->saida("  </TD>\r\n");
       $nm_saida->saida(" </TR>\r\n");
    }

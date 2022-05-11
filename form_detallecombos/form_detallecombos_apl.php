@@ -169,10 +169,6 @@ class form_detallecombos_apl
           {
               $this->nmgp_url_saida = $this->NM_ajax_info['param']['nmgp_url_saida'];
           }
-          if (isset($this->NM_ajax_info['param']['precio_']))
-          {
-              $this->precio_ = $this->NM_ajax_info['param']['precio_'];
-          }
           if (isset($this->NM_ajax_info['param']['sc_clone']))
           {
               $this->sc_clone = $this->NM_ajax_info['param']['sc_clone'];
@@ -188,10 +184,6 @@ class form_detallecombos_apl
           if (isset($this->NM_ajax_info['param']['script_case_init']))
           {
               $this->script_case_init = $this->NM_ajax_info['param']['script_case_init'];
-          }
-          if (isset($this->NM_ajax_info['param']['total_']))
-          {
-              $this->total_ = $this->NM_ajax_info['param']['total_'];
           }
           if (isset($this->nmgp_refresh_fields))
           {
@@ -1079,9 +1071,7 @@ class form_detallecombos_apl
             if(!empty($img_width) && !empty($img_height)){
                 $sc_obj_img->setWidth($img_width);
                 $sc_obj_img->setHeight($img_height);
-            }
-                $sc_obj_img->setManterAspecto(true);
-            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            }            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
             echo $out1_img_cache;
                exit;
             }
@@ -1097,14 +1087,6 @@ class form_detallecombos_apl
       $this->field_config['idcombo_']['symbol_dec'] = '';
       $this->field_config['idcombo_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['idcombo_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- total_
-      $this->field_config['total_']               = array();
-      $this->field_config['total_']['symbol_grp'] = '.';
-      $this->field_config['total_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit'];
-      $this->field_config['total_']['symbol_dec'] = ',';
-      $this->field_config['total_']['symbol_mon'] = '$';
-      $this->field_config['total_']['format_pos'] = '3';
-      $this->field_config['total_']['format_neg'] = '';
       //-- cantidad_
       $this->field_config['cantidad_']               = array();
       $this->field_config['cantidad_']['symbol_grp'] = '.';
@@ -1112,13 +1094,6 @@ class form_detallecombos_apl
       $this->field_config['cantidad_']['symbol_dec'] = ',';
       $this->field_config['cantidad_']['symbol_neg'] = '-';
       $this->field_config['cantidad_']['format_neg'] = '4';
-      //-- precio_
-      $this->field_config['precio_']               = array();
-      $this->field_config['precio_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['precio_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['precio_']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_num'];
-      $this->field_config['precio_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['precio_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
       //-- iddetallecombo_
       $this->field_config['iddetallecombo_']               = array();
       $this->field_config['iddetallecombo_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
@@ -1126,6 +1101,13 @@ class form_detallecombos_apl
       $this->field_config['iddetallecombo_']['symbol_dec'] = '';
       $this->field_config['iddetallecombo_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['iddetallecombo_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- precio_
+      $this->field_config['precio_']               = array();
+      $this->field_config['precio_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['precio_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['precio_']['symbol_dec'] = $_SESSION['scriptcase']['reg_conf']['dec_num'];
+      $this->field_config['precio_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['precio_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
       //-- creado_
       $this->field_config['creado_']                 = array();
       $this->field_config['creado_']['date_format']  = $_SESSION['scriptcase']['reg_conf']['date_format'] . ';' . $_SESSION['scriptcase']['reg_conf']['time_format'];
@@ -1140,6 +1122,14 @@ class form_detallecombos_apl
       $this->field_config['actualizado_']['time_sep']     = $_SESSION['scriptcase']['reg_conf']['time_sep'];
       $this->field_config['actualizado_']['date_display'] = "ddmmaaaa;hhiiss";
       $this->new_date_format('DH', 'actualizado_');
+      //-- total_
+      $this->field_config['total_']               = array();
+      $this->field_config['total_']['symbol_grp'] = '.';
+      $this->field_config['total_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit'];
+      $this->field_config['total_']['symbol_dec'] = ',';
+      $this->field_config['total_']['symbol_mon'] = '$';
+      $this->field_config['total_']['format_pos'] = '3';
+      $this->field_config['total_']['format_neg'] = '';
    }
 
    function controle()
@@ -1226,7 +1216,6 @@ class form_detallecombos_apl
          if (isset($this->idcombo_)) { $this->nm_limpa_alfa($this->idcombo_); }
          if (isset($this->idproducto_)) { $this->nm_limpa_alfa($this->idproducto_); }
          if (isset($this->cantidad_)) { $this->nm_limpa_alfa($this->cantidad_); }
-         if (isset($this->precio_)) { $this->nm_limpa_alfa($this->precio_); }
          if (isset($this->Sc_num_lin_alt) && $this->Sc_num_lin_alt > 0) 
          {
              $sc_seq_vert = $this->Sc_num_lin_alt;
@@ -1235,8 +1224,10 @@ class form_detallecombos_apl
          {
              $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_form'][$sc_seq_vert];
              $this->iddetallecombo_ = $this->nmgp_dados_form['iddetallecombo_']; 
+             $this->precio_ = $this->nmgp_dados_form['precio_']; 
              $this->creado_ = $this->nmgp_dados_form['creado_']; 
              $this->actualizado_ = $this->nmgp_dados_form['actualizado_']; 
+             $this->total_ = $this->nmgp_dados_form['total_']; 
          }
          $this->controle_form_vert();
          if ($Campos_Crit != "" || !empty($Campos_Falta) || $this->Campos_Mens_erro != "")
@@ -1317,17 +1308,9 @@ class form_detallecombos_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'idproducto_');
           }
-          if ('validate_total_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'total_');
-          }
           if ('validate_cantidad_' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'cantidad_');
-          }
-          if ('validate_precio_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'precio_');
           }
           form_detallecombos_pack_ajax_response();
           exit;
@@ -1357,16 +1340,12 @@ class form_detallecombos_apl
     }
 
    $old_value_idcombo_ = $this->idcombo_;
-   $old_value_total_ = $this->total_;
    $old_value_cantidad_ = $this->cantidad_;
-   $old_value_precio_ = $this->precio_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idcombo_ = $this->idcombo_;
-   $unformatted_value_total_ = $this->total_;
    $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_precio_ = $this->precio_;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -1398,9 +1377,7 @@ class form_detallecombos_apl
    }
 
    $this->idcombo_ = $old_value_idcombo_;
-   $this->total_ = $old_value_total_;
    $this->cantidad_ = $old_value_cantidad_;
-   $this->precio_ = $old_value_precio_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -1455,20 +1432,19 @@ class form_detallecombos_apl
          $Campos_Erros = array();
          $this->idcombo_ = $GLOBALS["idcombo_" . $sc_seq_vert]; 
          $this->idproducto_ = $GLOBALS["idproducto_" . $sc_seq_vert]; 
-         $this->total_ = $GLOBALS["total_" . $sc_seq_vert]; 
          $this->cantidad_ = $GLOBALS["cantidad_" . $sc_seq_vert]; 
-         $this->precio_ = $GLOBALS["precio_" . $sc_seq_vert]; 
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_form'][$sc_seq_vert]))
          {
              $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_form'][$sc_seq_vert];
              $this->iddetallecombo_ = $this->nmgp_dados_form['iddetallecombo_']; 
+             $this->precio_ = $this->nmgp_dados_form['precio_']; 
              $this->creado_ = $this->nmgp_dados_form['creado_']; 
              $this->actualizado_ = $this->nmgp_dados_form['actualizado_']; 
+             $this->total_ = $this->nmgp_dados_form['total_']; 
          }
          if (isset($this->idcombo_)) { $this->nm_limpa_alfa($this->idcombo_); }
          if (isset($this->idproducto_)) { $this->nm_limpa_alfa($this->idproducto_); }
          if (isset($this->cantidad_)) { $this->nm_limpa_alfa($this->cantidad_); }
-         if (isset($this->precio_)) { $this->nm_limpa_alfa($this->precio_); }
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_form'])) 
          {
             $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_form'][$sc_seq_vert];
@@ -1498,14 +1474,14 @@ class form_detallecombos_apl
              }
              $this->form_vert_form_detallecombos[$sc_seq_vert]['idcombo_'] =  $this->idcombo_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['idproducto_'] =  $this->idproducto_; 
-             $this->form_vert_form_detallecombos[$sc_seq_vert]['total_'] =  $this->total_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['cantidad_'] =  $this->cantidad_; 
-             $this->form_vert_form_detallecombos[$sc_seq_vert]['precio_'] =  $this->precio_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['iddetallecombo_'] =  $this->iddetallecombo_; 
+             $this->form_vert_form_detallecombos[$sc_seq_vert]['precio_'] =  $this->precio_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['creado_'] =  $this->creado_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['creado__hora'] =  $this->creado__hora; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['actualizado_'] =  $this->actualizado_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['actualizado__hora'] =  $this->actualizado__hora; 
+             $this->form_vert_form_detallecombos[$sc_seq_vert]['total_'] =  $this->total_; 
          }
          $sc_seq_vert++; 
       } 
@@ -2087,23 +2063,23 @@ class form_detallecombos_apl
            case 'idproducto_':
                return "Producto";
                break;
-           case 'total_':
-               return "Precio";
-               break;
            case 'cantidad_':
                return "Cantidad";
                break;
-           case 'precio_':
-               return "Total Línea";
-               break;
            case 'iddetallecombo_':
                return "Iddetallecombo";
+               break;
+           case 'precio_':
+               return "Total Línea";
                break;
            case 'creado_':
                return "Creado";
                break;
            case 'actualizado_':
                return "Actualizado";
+               break;
+           case 'total_':
+               return "Precio";
                break;
        }
 
@@ -2157,12 +2133,8 @@ class form_detallecombos_apl
         $this->ValidateField_idcombo_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'idproducto_' == $filtro)) || (is_array($filtro) && in_array('idproducto_', $filtro)))
         $this->ValidateField_idproducto_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'total_' == $filtro)) || (is_array($filtro) && in_array('total_', $filtro)))
-        $this->ValidateField_total_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'cantidad_' == $filtro)) || (is_array($filtro) && in_array('cantidad_', $filtro)))
         $this->ValidateField_cantidad_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ((!is_array($filtro) && ('' == $filtro || 'precio_' == $filtro)) || (is_array($filtro) && in_array('precio_', $filtro)))
-        $this->ValidateField_precio_($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (!isset($this->NM_ajax_flag) || 'validate_' != substr($this->NM_ajax_opcao, 0, 9))
       {
@@ -2372,87 +2344,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
         }
     } // ValidateField_idproducto_
 
-    function ValidateField_total_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if ($this->total_ === "" || is_null($this->total_))  
-      { 
-          $this->total_ = 0;
-          $this->sc_force_zero[] = 'total_';
-      } 
-      if (!empty($this->field_config['total_']['symbol_dec']))
-      {
-          $this->sc_remove_currency($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp'], $this->field_config['total_']['symbol_mon']); 
-          nm_limpa_valor($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp']) ; 
-          if ('.' == substr($this->total_, 0, 1))
-          {
-              if ('' == str_replace('0', '', substr($this->total_, 1)))
-              {
-                  $this->total_ = '';
-              }
-              else
-              {
-                  $this->total_ = '0' . $this->total_;
-              }
-          }
-      }
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if ($this->total_ != '')  
-          { 
-              $iTestSize = 21;
-              if ('-' == substr($this->total_, 0, 1))
-              {
-                  $iTestSize++;
-              }
-              elseif ('-' == substr($this->total_, -1))
-              {
-                  $iTestSize++;
-                  $this->total_ = '-' . substr($this->total_, 0, -1);
-              }
-              if (strlen($this->total_) > $iTestSize)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Precio: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['total_']))
-                  {
-                      $Campos_Erros['total_'] = array();
-                  }
-                  $Campos_Erros['total_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['total_']) || !is_array($this->NM_ajax_info['errList']['total_']))
-                  {
-                      $this->NM_ajax_info['errList']['total_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['total_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->total_, 20, 0, 0, 0, "S") == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Precio; " ; 
-                  if (!isset($Campos_Erros['total_']))
-                  {
-                      $Campos_Erros['total_'] = array();
-                  }
-                  $Campos_Erros['total_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['total_']) || !is_array($this->NM_ajax_info['errList']['total_']))
-                  {
-                      $this->NM_ajax_info['errList']['total_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['total_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'total_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_total_
-
     function ValidateField_cantidad_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
@@ -2492,7 +2383,7 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
                   }
                   $this->NM_ajax_info['errList']['cantidad_'][] = $this->Ini->Nm_lang['lang_errm_size'];
               } 
-              if ($teste_validade->Valor($this->cantidad_, 7, 3, 0, 0, "N") == false)  
+              if ($teste_validade->Valor($this->cantidad_, 8, 2, 0, 0, "N") == false)  
               { 
                   $hasError = true;
                   $Campos_Crit .= "Cantidad; " ; 
@@ -2534,96 +2425,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
         }
     } // ValidateField_cantidad_
 
-    function ValidateField_precio_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-        $hasError = false;
-      if (!empty($this->field_config['precio_']['symbol_dec']))
-      {
-          nm_limpa_valor($this->precio_, $this->field_config['precio_']['symbol_dec'], $this->field_config['precio_']['symbol_grp']) ; 
-          if ('.' == substr($this->precio_, 0, 1))
-          {
-              if ('' == str_replace('0', '', substr($this->precio_, 1)))
-              {
-                  $this->precio_ = '';
-              }
-              else
-              {
-                  $this->precio_ = '0' . $this->precio_;
-              }
-          }
-      }
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if ($this->precio_ != '')  
-          { 
-              $iTestSize = 11;
-              if ('-' == substr($this->precio_, 0, 1))
-              {
-                  $iTestSize++;
-              }
-              elseif ('-' == substr($this->precio_, -1))
-              {
-                  $iTestSize++;
-                  $this->precio_ = '-' . substr($this->precio_, 0, -1);
-              }
-              if (strlen($this->precio_) > $iTestSize)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Total Línea: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['precio_']))
-                  {
-                      $Campos_Erros['precio_'] = array();
-                  }
-                  $Campos_Erros['precio_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['precio_']) || !is_array($this->NM_ajax_info['errList']['precio_']))
-                  {
-                      $this->NM_ajax_info['errList']['precio_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['precio_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->precio_, 10, 0, 0, 0, "S") == false)  
-              { 
-                  $hasError = true;
-                  $Campos_Crit .= "Total Línea; " ; 
-                  if (!isset($Campos_Erros['precio_']))
-                  {
-                      $Campos_Erros['precio_'] = array();
-                  }
-                  $Campos_Erros['precio_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['precio_']) || !is_array($this->NM_ajax_info['errList']['precio_']))
-                  {
-                      $this->NM_ajax_info['errList']['precio_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['precio_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-           elseif (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['php_cmp_required']['precio_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['php_cmp_required']['precio_'] == "on") 
-           { 
-              $hasError = true;
-              $Campos_Falta[] = "Total Línea" ; 
-              if (!isset($Campos_Erros['precio_']))
-              {
-                  $Campos_Erros['precio_'] = array();
-              }
-              $Campos_Erros['precio_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-                  if (!isset($this->NM_ajax_info['errList']['precio_']) || !is_array($this->NM_ajax_info['errList']['precio_']))
-                  {
-                      $this->NM_ajax_info['errList']['precio_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['precio_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-           } 
-      } 
-        if ($hasError) {
-            global $sc_seq_vert;
-            $fieldName = 'precio_';
-            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
-                $fieldName .= $sc_seq_vert;
-            }
-            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
-        }
-    } // ValidateField_precio_
-
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -2649,12 +2450,12 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
            $sc_seq_vert;
     $this->nmgp_dados_form['idcombo_'] = $this->idcombo_;
     $this->nmgp_dados_form['idproducto_'] = $this->idproducto_;
-    $this->nmgp_dados_form['total_'] = $this->total_;
     $this->nmgp_dados_form['cantidad_'] = $this->cantidad_;
-    $this->nmgp_dados_form['precio_'] = $this->precio_;
     $this->nmgp_dados_form['iddetallecombo_'] = $this->iddetallecombo_;
+    $this->nmgp_dados_form['precio_'] = $this->precio_;
     $this->nmgp_dados_form['creado_'] = $this->creado_;
     $this->nmgp_dados_form['actualizado_'] = $this->actualizado_;
+    $this->nmgp_dados_form['total_'] = $this->total_;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_form'][$sc_seq_vert] = $this->nmgp_dados_form;
    }
    function nm_tira_formatacao()
@@ -2664,24 +2465,18 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
          $this->formatado = false;
       $this->Before_unformat['idcombo_'] = $this->idcombo_;
       nm_limpa_numero($this->idcombo_, $this->field_config['idcombo_']['symbol_grp']) ; 
-      $this->Before_unformat['total_'] = $this->total_;
-      if (!empty($this->field_config['total_']['symbol_dec']))
-      {
-         $this->sc_remove_currency($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp'], $this->field_config['total_']['symbol_mon']);
-         nm_limpa_valor($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp']);
-      }
       $this->Before_unformat['cantidad_'] = $this->cantidad_;
       if (!empty($this->field_config['cantidad_']['symbol_dec']))
       {
          nm_limpa_valor($this->cantidad_, $this->field_config['cantidad_']['symbol_dec'], $this->field_config['cantidad_']['symbol_grp']);
       }
+      $this->Before_unformat['iddetallecombo_'] = $this->iddetallecombo_;
+      nm_limpa_numero($this->iddetallecombo_, $this->field_config['iddetallecombo_']['symbol_grp']) ; 
       $this->Before_unformat['precio_'] = $this->precio_;
       if (!empty($this->field_config['precio_']['symbol_dec']))
       {
          nm_limpa_valor($this->precio_, $this->field_config['precio_']['symbol_dec'], $this->field_config['precio_']['symbol_grp']);
       }
-      $this->Before_unformat['iddetallecombo_'] = $this->iddetallecombo_;
-      nm_limpa_numero($this->iddetallecombo_, $this->field_config['iddetallecombo_']['symbol_grp']) ; 
       $this->Before_unformat['creado_'] = $this->creado_;
       $this->Before_unformat['creado__hora'] = $this->creado__hora;
       nm_limpa_data($this->creado_, $this->field_config['creado_']['date_sep']) ; 
@@ -2690,6 +2485,12 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
       $this->Before_unformat['actualizado__hora'] = $this->actualizado__hora;
       nm_limpa_data($this->actualizado_, $this->field_config['actualizado_']['date_sep']) ; 
       nm_limpa_hora($this->actualizado__hora, $this->field_config['actualizado_']['time_sep']) ; 
+      $this->Before_unformat['total_'] = $this->total_;
+      if (!empty($this->field_config['total_']['symbol_dec']))
+      {
+         $this->sc_remove_currency($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp'], $this->field_config['total_']['symbol_mon']);
+         nm_limpa_valor($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp']);
+      }
    }
    function sc_add_currency(&$value, $symbol, $pos)
    {
@@ -2737,20 +2538,16 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
       {
           nm_limpa_numero($this->idcombo_, $this->field_config['idcombo_']['symbol_grp']) ; 
       }
-      if ($Nome_Campo == "total_")
-      {
-          if (!empty($this->field_config['total_']['symbol_dec']))
-          {
-             $this->sc_remove_currency($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp'], $this->field_config['total_']['symbol_mon']);
-             nm_limpa_valor($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp']);
-          }
-      }
       if ($Nome_Campo == "cantidad_")
       {
           if (!empty($this->field_config['cantidad_']['symbol_dec']))
           {
              nm_limpa_valor($this->cantidad_, $this->field_config['cantidad_']['symbol_dec'], $this->field_config['cantidad_']['symbol_grp']);
           }
+      }
+      if ($Nome_Campo == "iddetallecombo_")
+      {
+          nm_limpa_numero($this->iddetallecombo_, $this->field_config['iddetallecombo_']['symbol_grp']) ; 
       }
       if ($Nome_Campo == "precio_")
       {
@@ -2759,9 +2556,13 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
              nm_limpa_valor($this->precio_, $this->field_config['precio_']['symbol_dec'], $this->field_config['precio_']['symbol_grp']);
           }
       }
-      if ($Nome_Campo == "iddetallecombo_")
+      if ($Nome_Campo == "total_")
       {
-          nm_limpa_numero($this->iddetallecombo_, $this->field_config['iddetallecombo_']['symbol_grp']) ; 
+          if (!empty($this->field_config['total_']['symbol_dec']))
+          {
+             $this->sc_remove_currency($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp'], $this->field_config['total_']['symbol_mon']);
+             nm_limpa_valor($this->total_, $this->field_config['total_']['symbol_dec'], $this->field_config['total_']['symbol_grp']);
+          }
       }
    }
    function nm_formatar_campos($format_fields = array())
@@ -2771,19 +2572,9 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
       {
           nmgp_Form_Num_Val($this->idcombo_, $this->field_config['idcombo_']['symbol_grp'], $this->field_config['idcombo_']['symbol_dec'], "0", "S", $this->field_config['idcombo_']['format_neg'], "", "", "-", $this->field_config['idcombo_']['symbol_fmt']) ; 
       }
-      if ('' !== $this->total_ || (!empty($format_fields) && isset($format_fields['total_'])))
-      {
-          nmgp_Form_Num_Val($this->total_, $this->field_config['total_']['symbol_grp'], $this->field_config['total_']['symbol_dec'], "0", "S", $this->field_config['total_']['format_neg'], "", "", "-", $this->field_config['total_']['symbol_fmt']) ; 
-          $sMonSymb = $this->field_config['total_']['symbol_mon'];
-          $this->sc_add_currency($this->total_, $sMonSymb, $this->field_config['total_']['format_pos']); 
-      }
       if ('' !== $this->cantidad_ || (!empty($format_fields) && isset($format_fields['cantidad_'])))
       {
-          nmgp_Form_Num_Val($this->cantidad_, $this->field_config['cantidad_']['symbol_grp'], $this->field_config['cantidad_']['symbol_dec'], "3", "S", $this->field_config['cantidad_']['format_neg'], "", "", "-", $this->field_config['cantidad_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->precio_ || (!empty($format_fields) && isset($format_fields['precio_'])))
-      {
-          nmgp_Form_Num_Val($this->precio_, $this->field_config['precio_']['symbol_grp'], $this->field_config['precio_']['symbol_dec'], "0", "S", $this->field_config['precio_']['format_neg'], "", "", "-", $this->field_config['precio_']['symbol_fmt']) ; 
+          nmgp_Form_Num_Val($this->cantidad_, $this->field_config['cantidad_']['symbol_grp'], $this->field_config['cantidad_']['symbol_dec'], "2", "S", $this->field_config['cantidad_']['format_neg'], "", "", "-", $this->field_config['cantidad_']['symbol_fmt']) ; 
       }
    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
@@ -3210,17 +3001,9 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
                   {
                       $this->form_vert_form_detallecombos[$this->nmgp_refresh_row]['idproducto_'] = $this->idproducto_;
                   }
-                  if (isset($this->NM_ajax_changed['total_']) && $this->NM_ajax_changed['total_'])
-                  {
-                      $this->form_vert_form_detallecombos[$this->nmgp_refresh_row]['total_'] = $this->total_;
-                  }
                   if (isset($this->NM_ajax_changed['cantidad_']) && $this->NM_ajax_changed['cantidad_'])
                   {
                       $this->form_vert_form_detallecombos[$this->nmgp_refresh_row]['cantidad_'] = $this->cantidad_;
-                  }
-                  if (isset($this->NM_ajax_changed['precio_']) && $this->NM_ajax_changed['precio_'])
-                  {
-                      $this->form_vert_form_detallecombos[$this->nmgp_refresh_row]['precio_'] = $this->precio_;
                   }
               }
           }
@@ -3274,16 +3057,12 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
     }
 
    $old_value_idcombo_ = $this->idcombo_;
-   $old_value_total_ = $this->total_;
    $old_value_cantidad_ = $this->cantidad_;
-   $old_value_precio_ = $this->precio_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idcombo_ = $this->idcombo_;
-   $unformatted_value_total_ = $this->total_;
    $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_precio_ = $this->precio_;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -3315,9 +3094,7 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
    }
 
    $this->idcombo_ = $old_value_idcombo_;
-   $this->total_ = $old_value_total_;
    $this->cantidad_ = $old_value_cantidad_;
-   $this->precio_ = $old_value_precio_;
 
    if ('' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'])
    {
@@ -3370,17 +3147,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
                'valList' => array($aLookup[0][form_detallecombos_pack_protect_string($aRecData['idproducto_'])]),
               );
               }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("total_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['total_']);
-                  $aLookup = array();
-          $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['total_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($sTmpValue),
-                       );
-              }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("cantidad_", $this->nmgp_refresh_fields)))
               {
                   $sTmpValue = NM_charset_to_utf8($aRecData['cantidad_']);
@@ -3389,17 +3155,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
                   $this->NM_ajax_info['fldList']['cantidad_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
-                       );
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("precio_", $this->nmgp_refresh_fields)))
-              {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['precio_']);
-                  $aLookup = array();
-          $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['precio_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'label',
                        'valList' => array($sTmpValue),
                        );
               }
@@ -3483,8 +3238,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_cantidad_ = $this->cantidad_;
-    $original_precio_ = $this->precio_;
-    $original_total_ = $this->total_;
 }
   if($this->precio_ >0 and $this->cantidad_ >1)
 {
@@ -3497,18 +3250,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['type']    = 'text';
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->cantidad_);
         $this->NM_ajax_changed['cantidad_'] = true;
-    }
-    if (($original_precio_ != $this->precio_ || (isset($bFlagRead_precio_) && $bFlagRead_precio_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['valList'] = array($this->precio_);
-        $this->NM_ajax_changed['precio_'] = true;
-    }
-    if (($original_total_ != $this->total_ || (isset($bFlagRead_total_) && $bFlagRead_total_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['valList'] = array($this->total_);
-        $this->NM_ajax_changed['total_'] = true;
     }
 }
 $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off'; 
@@ -3526,21 +3267,21 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
 //
    function nm_troca_decimal($sc_parm1, $sc_parm2) 
    { 
-      $this->total_ = str_replace($sc_parm1, $sc_parm2, $this->total_); 
       $this->cantidad_ = str_replace($sc_parm1, $sc_parm2, $this->cantidad_); 
       $this->precio_ = str_replace($sc_parm1, $sc_parm2, $this->precio_); 
+      $this->total_ = str_replace($sc_parm1, $sc_parm2, $this->total_); 
    } 
    function nm_poe_aspas_decimal() 
    { 
-      $this->total_ = "'" . $this->total_ . "'";
       $this->cantidad_ = "'" . $this->cantidad_ . "'";
       $this->precio_ = "'" . $this->precio_ . "'";
+      $this->total_ = "'" . $this->total_ . "'";
    } 
    function nm_tira_aspas_decimal() 
    { 
-      $this->total_ = str_replace("'", "", $this->total_); 
       $this->cantidad_ = str_replace("'", "", $this->cantidad_); 
       $this->precio_ = str_replace("'", "", $this->precio_); 
+      $this->total_ = str_replace("'", "", $this->total_); 
    } 
 //----------- 
 
@@ -3608,8 +3349,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_cantidad_ = $this->cantidad_;
-    $original_precio_ = $this->precio_;
-    $original_total_ = $this->total_;
 }
   $this->precio_  = $this->total_ *$this->cantidad_ ;
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
@@ -3619,18 +3358,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['type']    = 'text';
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->cantidad_);
         $this->NM_ajax_changed['cantidad_'] = true;
-    }
-    if (($original_precio_ != $this->precio_ || (isset($bFlagRead_precio_) && $bFlagRead_precio_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['valList'] = array($this->precio_);
-        $this->NM_ajax_changed['precio_'] = true;
-    }
-    if (($original_total_ != $this->total_ || (isset($bFlagRead_total_) && $bFlagRead_total_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['valList'] = array($this->total_);
-        $this->NM_ajax_changed['total_'] = true;
     }
 }
 $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off'; 
@@ -3641,8 +3368,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_cantidad_ = $this->cantidad_;
-    $original_precio_ = $this->precio_;
-    $original_total_ = $this->total_;
 }
   $this->precio_  = $this->total_ *$this->cantidad_ ;
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
@@ -3652,18 +3377,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['type']    = 'text';
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->cantidad_);
         $this->NM_ajax_changed['cantidad_'] = true;
-    }
-    if (($original_precio_ != $this->precio_ || (isset($bFlagRead_precio_) && $bFlagRead_precio_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['valList'] = array($this->precio_);
-        $this->NM_ajax_changed['precio_'] = true;
-    }
-    if (($original_total_ != $this->total_ || (isset($bFlagRead_total_) && $bFlagRead_total_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['valList'] = array($this->total_);
-        $this->NM_ajax_changed['total_'] = true;
     }
 }
 $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off'; 
@@ -3677,15 +3390,13 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
           $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_select'][$sc_seq_vert];
           if ($this->nmgp_dados_select['idcombo_'] == $this->idcombo_ &&
               $this->nmgp_dados_select['idproducto_'] == $this->idproducto_ &&
-              $this->nmgp_dados_select['cantidad_'] == $this->cantidad_ &&
-              $this->nmgp_dados_select['precio_'] == $this->precio_)
+              $this->nmgp_dados_select['cantidad_'] == $this->cantidad_)
           { }
           else
           {
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_select'][$sc_seq_vert]['idcombo_'] = $this->idcombo_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_select'][$sc_seq_vert]['idproducto_'] = $this->idproducto_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_select'][$sc_seq_vert]['cantidad_'] = $this->cantidad_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_select'][$sc_seq_vert]['precio_'] = $this->precio_;
           }
       }
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3700,12 +3411,12 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
       } 
       $NM_val_form['idcombo_'] = $this->idcombo_;
       $NM_val_form['idproducto_'] = $this->idproducto_;
-      $NM_val_form['total_'] = $this->total_;
       $NM_val_form['cantidad_'] = $this->cantidad_;
-      $NM_val_form['precio_'] = $this->precio_;
       $NM_val_form['iddetallecombo_'] = $this->iddetallecombo_;
+      $NM_val_form['precio_'] = $this->precio_;
       $NM_val_form['creado_'] = $this->creado_;
       $NM_val_form['actualizado_'] = $this->actualizado_;
+      $NM_val_form['total_'] = $this->total_;
       if ($this->iddetallecombo_ === "" || is_null($this->iddetallecombo_))  
       { 
           $this->iddetallecombo_ = 0;
@@ -3839,37 +3550,41 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_, precio = $this->precio_"; 
+                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_, precio = $this->precio_"; 
+                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_, precio = $this->precio_"; 
+                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_, precio = $this->precio_"; 
+                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_, precio = $this->precio_"; 
+                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_, precio = $this->precio_"; 
+                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_, precio = $this->precio_"; 
+                  $SC_fields_update[] = "idcombo = $this->idcombo_, idproducto = $this->idproducto_, cantidad = $this->cantidad_"; 
+              } 
+              if (isset($NM_val_form['precio_']) && $NM_val_form['precio_'] != $this->nmgp_dados_select['precio_']) 
+              { 
+                  $SC_fields_update[] = "precio = $this->precio_"; 
               } 
               if (isset($NM_val_form['creado_']) && $NM_val_form['creado_'] != $this->nmgp_dados_select['creado_']) 
               { 
@@ -3975,8 +3690,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
               elseif (isset($this->idproducto_)) { $this->nm_limpa_alfa($this->idproducto_); }
               if     (isset($NM_val_form) && isset($NM_val_form['cantidad_'])) { $this->cantidad_ = $NM_val_form['cantidad_']; }
               elseif (isset($this->cantidad_)) { $this->nm_limpa_alfa($this->cantidad_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['precio_'])) { $this->precio_ = $NM_val_form['precio_']; }
-              elseif (isset($this->precio_)) { $this->nm_limpa_alfa($this->precio_); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -3984,7 +3697,7 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('idcombo_', 'idproducto_', 'total_', 'cantidad_', 'precio_'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('idcombo_', 'idproducto_', 'cantidad_'), $aDoNotUpdate);
               $this->nmgp_refresh_fields = $aOldRefresh;
 
               if (isset($this->Embutida_ronly) && $this->Embutida_ronly)
@@ -3994,11 +3707,7 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
 
                   $this->NM_ajax_info['readOnly']['idproducto_' . $this->nmgp_refresh_row] = 'on';
 
-                  $this->NM_ajax_info['readOnly']['total_' . $this->nmgp_refresh_row] = 'on';
-
                   $this->NM_ajax_info['readOnly']['cantidad_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['precio_' . $this->nmgp_refresh_row] = 'on';
 
 
                   $this->NM_ajax_info['closeLine'] = $this->nmgp_refresh_row;
@@ -4331,7 +4040,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_select'][$sc_seq_vert]['idcombo_'] = $this->idcombo_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_select'][$sc_seq_vert]['idproducto_'] = $this->idproducto_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_select'][$sc_seq_vert]['cantidad_'] = $this->cantidad_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['dados_select'][$sc_seq_vert]['precio_'] = $this->precio_;
               if (!empty($this->sc_force_zero))
               {
                   foreach ($this->sc_force_zero as $i_force_zero => $sc_force_zero_field)
@@ -4350,7 +4058,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
               if (isset($this->idcombo_)) { $this->nm_limpa_alfa($this->idcombo_); }
               if (isset($this->idproducto_)) { $this->nm_limpa_alfa($this->idproducto_); }
               if (isset($this->cantidad_)) { $this->nm_limpa_alfa($this->cantidad_); }
-              if (isset($this->precio_)) { $this->nm_limpa_alfa($this->precio_); }
               if (isset($this->Embutida_form) && $this->Embutida_form)
               {
                   $this->nm_guardar_campos();
@@ -4403,16 +4110,12 @@ else
     }
 
    $old_value_idcombo_ = $this->idcombo_;
-   $old_value_total_ = $this->total_;
    $old_value_cantidad_ = $this->cantidad_;
-   $old_value_precio_ = $this->precio_;
    $this->nm_tira_formatacao();
 
 
    $unformatted_value_idcombo_ = $this->idcombo_;
-   $unformatted_value_total_ = $this->total_;
    $unformatted_value_cantidad_ = $this->cantidad_;
-   $unformatted_value_precio_ = $this->precio_;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -4444,9 +4147,7 @@ else
    }
 
    $this->idcombo_ = $old_value_idcombo_;
-   $this->total_ = $old_value_total_;
    $this->cantidad_ = $old_value_cantidad_;
-   $this->precio_ = $old_value_precio_;
 
    if ('' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'] && '' != $aRecData['idproducto_'])
    {
@@ -4510,25 +4211,6 @@ else
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['type']    = 'text';
-                  $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->total_)));
-                  $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_total_)));
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['total_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['total_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['total_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['total_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
                   $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['type']    = 'text';
                   $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->cantidad_)));
                   $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_cantidad_)));
@@ -4545,26 +4227,6 @@ else
                       if (!isset($this->NM_ajax_info['readOnly']['cantidad_' . $this->nmgp_refresh_row]))
                       {
                           $this->NM_ajax_info['readOnly']['cantidad_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $tmpLabel_precio_ = $this->precio_;
-                  $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['type']    = 'label';
-                  $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->precio_)));
-                  $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_precio_)));
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['precio_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['precio_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['precio_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['precio_' . $this->nmgp_refresh_row] = "on";
                       }
                   }
 
@@ -4723,59 +4385,17 @@ else
               eval('$this->' . $sc_val_null_field . ' = "";');
           }
       }
-    if ("insert" == $this->sc_evento && $this->nmgp_opcao != "nada") {
-        if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['decimal_db'] == ",")
-        {
-            $this->nm_troca_decimal(",", ".");
-        }
-        $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'on';
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    $original_idcombo_ = $this->idcombo_;
-}
-  $this->fActualizarTotal($this->idcombo_ );
-
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    if (($original_idcombo_ != $this->idcombo_ || (isset($bFlagRead_idcombo_) && $bFlagRead_idcombo_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idcombo_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['idcombo_' . $this->nmgp_refresh_row]['valList'] = array($this->idcombo_);
-        $this->NM_ajax_changed['idcombo_'] = true;
-    }
-}
-$_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off'; 
-    }
-    if ("update" == $this->sc_evento && $this->nmgp_opcao != "nada") {
-        $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'on';
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    $original_idcombo_ = $this->idcombo_;
-}
-  $this->fActualizarTotal($this->idcombo_ );
-
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    if (($original_idcombo_ != $this->idcombo_ || (isset($bFlagRead_idcombo_) && $bFlagRead_idcombo_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idcombo_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['idcombo_' . $this->nmgp_refresh_row]['valList'] = array($this->idcombo_);
-        $this->NM_ajax_changed['idcombo_'] = true;
-    }
-}
-$_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off'; 
-    }
     if ("delete" == $this->sc_evento && $this->nmgp_opcao != "nada") {
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['decimal_db'] == ",")
+   {
+       $this->nm_troca_decimal(",", ".");
+   }
       $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'on';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_cantidad_ = $this->cantidad_;
-    $original_idcombo_ = $this->idcombo_;
-    $original_precio_ = $this->precio_;
-    $original_total_ = $this->total_;
 }
-  $this->fActualizarTotal($this->idcombo_ );
-$this->precio_  = $this->total_ *$this->cantidad_ ;
+  $this->precio_  = $this->total_ *$this->cantidad_ ;
 
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
@@ -4784,24 +4404,6 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['type']    = 'text';
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->cantidad_);
         $this->NM_ajax_changed['cantidad_'] = true;
-    }
-    if (($original_idcombo_ != $this->idcombo_ || (isset($bFlagRead_idcombo_) && $bFlagRead_idcombo_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idcombo_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['idcombo_' . $this->nmgp_refresh_row]['valList'] = array($this->idcombo_);
-        $this->NM_ajax_changed['idcombo_'] = true;
-    }
-    if (($original_precio_ != $this->precio_ || (isset($bFlagRead_precio_) && $bFlagRead_precio_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['precio_' . $this->nmgp_refresh_row]['valList'] = array($this->precio_);
-        $this->NM_ajax_changed['precio_'] = true;
-    }
-    if (($original_total_ != $this->total_ || (isset($bFlagRead_total_) && $bFlagRead_total_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['total_' . $this->nmgp_refresh_row]['valList'] = array($this->total_);
-        $this->NM_ajax_changed['total_'] = true;
     }
 }
 $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off'; 
@@ -5225,14 +4827,14 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
               $this->nm_formatar_campos();
              $this->form_vert_form_detallecombos[$sc_seq_vert]['idcombo_'] =  $this->idcombo_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['idproducto_'] =  $this->idproducto_; 
-             $this->form_vert_form_detallecombos[$sc_seq_vert]['total_'] =  $this->total_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['cantidad_'] =  $this->cantidad_; 
-             $this->form_vert_form_detallecombos[$sc_seq_vert]['precio_'] =  $this->precio_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['iddetallecombo_'] =  $this->iddetallecombo_; 
+             $this->form_vert_form_detallecombos[$sc_seq_vert]['precio_'] =  $this->precio_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['creado_'] =  $this->creado_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['creado__hora'] =  $this->creado__hora; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['actualizado_'] =  $this->actualizado_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['actualizado__hora'] =  $this->actualizado__hora; 
+             $this->form_vert_form_detallecombos[$sc_seq_vert]['total_'] =  $this->total_; 
               $sc_seq_vert++; 
               $rs->MoveNext() ; 
               if (isset($this->NM_ajax_opcao) && 'backup_line' == $this->NM_ajax_opcao)
@@ -5275,8 +4877,6 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
               $this->idcombo_ = "";  
               $this->idproducto_ = "";  
               $this->cantidad_ = "1";  
-              $this->precio_ = "";  
-              $this->total_ = "";  
               $this->nm_proc_onload_record($sc_seq_vert);
               if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_detallecombos']['foreign_key']))
               {
@@ -5293,14 +4893,14 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
               $this->nm_formatar_campos();
              $this->form_vert_form_detallecombos[$sc_seq_vert]['idcombo_'] =  $this->idcombo_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['idproducto_'] =  $this->idproducto_; 
-             $this->form_vert_form_detallecombos[$sc_seq_vert]['total_'] =  $this->total_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['cantidad_'] =  $this->cantidad_; 
-             $this->form_vert_form_detallecombos[$sc_seq_vert]['precio_'] =  $this->precio_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['iddetallecombo_'] =  $this->iddetallecombo_; 
+             $this->form_vert_form_detallecombos[$sc_seq_vert]['precio_'] =  $this->precio_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['creado_'] =  $this->creado_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['creado__hora'] =  $this->creado__hora; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['actualizado_'] =  $this->actualizado_; 
              $this->form_vert_form_detallecombos[$sc_seq_vert]['actualizado__hora'] =  $this->actualizado__hora; 
+             $this->form_vert_form_detallecombos[$sc_seq_vert]['total_'] =  $this->total_; 
               $sc_seq_vert++; 
           } 
       }  
@@ -5341,29 +4941,13 @@ function cantidad__onChange()
 {
 $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'on';
   
-$original_precio_ = $this->precio_;
-$original_total_ = $this->total_;
 $original_cantidad_ = $this->cantidad_;
 
 $this->precio_  = $this->total_ *$this->cantidad_ ;
 
-$modificado_precio_ = $this->precio_;
-$modificado_total_ = $this->total_;
 $modificado_cantidad_ = $this->cantidad_;
-$this->nm_formatar_campos('precio_', 'total_', 'cantidad_');
+$this->nm_formatar_campos('cantidad_');
 $this->nmgp_refresh_fields = array();
-if ($original_precio_ !== $modificado_precio_ || isset($this->nmgp_cmp_readonly['precio_']) || (isset($bFlagRead_precio_) && $bFlagRead_precio_))
-{
-    $this->nmgp_refresh_fields[] = 'precio_';
-    $this->NM_ajax_changed['precio_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_total_ !== $modificado_total_ || isset($this->nmgp_cmp_readonly['total_']) || (isset($bFlagRead_total_) && $bFlagRead_total_))
-{
-    $this->nmgp_refresh_fields[] = 'total_';
-    $this->NM_ajax_changed['total_'] = true;
-    $this->NM_ajax_force_values = true;
-}
 if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
 {
     $this->nmgp_refresh_fields[] = 'cantidad_';
@@ -5446,8 +5030,6 @@ function idproducto__onChange()
 $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'on';
   
 $original_idproducto_ = $this->idproducto_;
-$original_precio_ = $this->precio_;
-$original_total_ = $this->total_;
 
 if(!empty($this->idproducto_ ))
 {
@@ -5497,26 +5079,12 @@ if(!empty($this->idproducto_ ))
 }
 
 $modificado_idproducto_ = $this->idproducto_;
-$modificado_precio_ = $this->precio_;
-$modificado_total_ = $this->total_;
-$this->nm_formatar_campos('idproducto_', 'precio_', 'total_');
+$this->nm_formatar_campos('idproducto_');
 $this->nmgp_refresh_fields = array();
 if ($original_idproducto_ !== $modificado_idproducto_ || isset($this->nmgp_cmp_readonly['idproducto_']) || (isset($bFlagRead_idproducto_) && $bFlagRead_idproducto_))
 {
     $this->nmgp_refresh_fields[] = 'idproducto_';
     $this->NM_ajax_changed['idproducto_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_precio_ !== $modificado_precio_ || isset($this->nmgp_cmp_readonly['precio_']) || (isset($bFlagRead_precio_) && $bFlagRead_precio_))
-{
-    $this->nmgp_refresh_fields[] = 'precio_';
-    $this->NM_ajax_changed['precio_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_total_ !== $modificado_total_ || isset($this->nmgp_cmp_readonly['total_']) || (isset($bFlagRead_total_) && $bFlagRead_total_))
-{
-    $this->nmgp_refresh_fields[] = 'total_';
-    $this->NM_ajax_changed['total_'] = true;
     $this->NM_ajax_force_values = true;
 }
 if ($this->NM_ajax_force_values)
@@ -5532,29 +5100,13 @@ function total__onChange()
 {
 $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'on';
   
-$original_precio_ = $this->precio_;
-$original_total_ = $this->total_;
 $original_cantidad_ = $this->cantidad_;
 
 $this->precio_  = $this->total_ *$this->cantidad_ ;
 
-$modificado_precio_ = $this->precio_;
-$modificado_total_ = $this->total_;
 $modificado_cantidad_ = $this->cantidad_;
-$this->nm_formatar_campos('precio_', 'total_', 'cantidad_');
+$this->nm_formatar_campos('cantidad_');
 $this->nmgp_refresh_fields = array();
-if ($original_precio_ !== $modificado_precio_ || isset($this->nmgp_cmp_readonly['precio_']) || (isset($bFlagRead_precio_) && $bFlagRead_precio_))
-{
-    $this->nmgp_refresh_fields[] = 'precio_';
-    $this->NM_ajax_changed['precio_'] = true;
-    $this->NM_ajax_force_values = true;
-}
-if ($original_total_ !== $modificado_total_ || isset($this->nmgp_cmp_readonly['total_']) || (isset($bFlagRead_total_) && $bFlagRead_total_))
-{
-    $this->nmgp_refresh_fields[] = 'total_';
-    $this->NM_ajax_changed['total_'] = true;
-    $this->NM_ajax_force_values = true;
-}
 if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
 {
     $this->nmgp_refresh_fields[] = 'cantidad_';
@@ -6744,9 +6296,7 @@ if (parent && parent.scAjaxDetailValue)
         $aFocus = array(
                         'idcombo' => 'idcombo_',
                         'idproducto' => 'idproducto_',
-                        'total_' => 'total_',
                         'cantidad' => 'cantidad_',
-                        'precio' => 'precio_',
                        );
         if (isset($aFocus[$sFieldName]))
         {

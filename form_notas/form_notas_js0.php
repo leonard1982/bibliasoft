@@ -134,6 +134,48 @@ function sc_btn_autorizar_ok()
     document.F1.target = "_self";
     document.F1.submit();
 }
+var Crtl_btn_btn_asentar = false;
+function sc_btn_btn_asentar()
+{
+    if (scEventControl_active("")) {
+      setTimeout(function() { sc_btn_btn_asentar(); }, 500);
+      return;
+    }
+    if (Crtl_btn_btn_asentar) {return;}
+    sc_btn_btn_asentar_ok();
+}
+function sc_btn_btn_asentar_cancel()
+{
+}
+function sc_btn_btn_asentar_ok()
+{
+    Crtl_btn_btn_asentar = true;
+    document.F1.nmgp_parms.value = "nmgp_opcao?#?formphp?@?nm_call_php?#?btn_asentar?@?";
+    document.F1.action = "./";
+    document.F1.target = "_self";
+    document.F1.submit();
+}
+var Crtl_btn_btn_reversar = false;
+function sc_btn_btn_reversar()
+{
+    if (scEventControl_active("")) {
+      setTimeout(function() { sc_btn_btn_reversar(); }, 500);
+      return;
+    }
+    if (Crtl_btn_btn_reversar) {return;}
+    sc_btn_btn_reversar_ok();
+}
+function sc_btn_btn_reversar_cancel()
+{
+}
+function sc_btn_btn_reversar_ok()
+{
+    Crtl_btn_btn_reversar = true;
+    document.F1.nmgp_parms.value = "nmgp_opcao?#?formphp?@?nm_call_php?#?btn_reversar?@?";
+    document.F1.action = "./";
+    document.F1.target = "_self";
+    document.F1.submit();
+}
  NM_tp_critica(1);
 function nm_gp_submit(apl_lig, apl_saida, parms, opc, target, modal_h, modal_w, apl_name) 
 { 

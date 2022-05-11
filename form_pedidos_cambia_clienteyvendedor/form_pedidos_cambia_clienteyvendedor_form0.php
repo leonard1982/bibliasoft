@@ -1321,6 +1321,24 @@ else
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_idcli_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_idcli_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
    <?php
    if (!isset($this->nm_new_label['vendedor']))
    {
@@ -1533,10 +1551,6 @@ else
 
 <?php } 
 ?> 
-<?php $sStyleHidden_idcli_dumb = ('' == $sStyleHidden_idcli) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_idcli_dumb" style="<?php echo $sStyleHidden_idcli_dumb; ?>"></TD>
-<?php $sStyleHidden_vendedor_dumb = ('' == $sStyleHidden_vendedor) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_vendedor_dumb" style="<?php echo $sStyleHidden_vendedor_dumb; ?>"></TD>
 <?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 <?php
@@ -1605,6 +1619,24 @@ $disponible_en_movil_look = "";
 </span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_disponible_en_movil_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_disponible_en_movil_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
    <?php
     if (!isset($this->nm_new_label['idpedido']))
     {
@@ -1639,16 +1671,17 @@ $disponible_en_movil_look = "";
 <?php if (isset($this->nmgp_cmp_hidden['idpedido']) && $this->nmgp_cmp_hidden['idpedido'] == 'off') { $sc_hidden_yes++;  ?>
 <input type="hidden" name="idpedido" value="<?php echo $this->form_encode_input($idpedido) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
+<?php if ((isset($this->Embutida_form) && $this->Embutida_form) || ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir")) { ?>
 
-    <TD class="scFormDataOdd css_idpedido_line" id="hidden_field_data_idpedido" style="<?php echo $sStyleHidden_idpedido; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_idpedido_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_idpedido_label" style=""><span id="id_label_idpedido"><?php echo $this->nm_new_label['idpedido']; ?></span></span><br>
-<?php if ((isset($this->Embutida_form) && $this->Embutida_form) || ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir")) { 
- ?>
-<span id="id_read_on_idpedido" css_idpedido_line" style="<?php echo $sStyleReadLab_idpedido; ?>"><?php echo $this->form_format_readonly("idpedido", $this->form_encode_input($this->idpedido)); ?></span><span id="id_read_off_idpedido" class="css_read_off_idpedido" style="<?php echo $sStyleReadInp_idpedido; ?>"><input type="hidden" name="idpedido" value="<?php echo $this->form_encode_input($idpedido) . "\">"?><span id="id_ajax_label_idpedido"><?php echo nl2br($idpedido); ?></span>
-</span><?php } else { ?>
-&nbsp;
-<?php } ?>
-</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_idpedido_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_idpedido_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
+    <TD class="scFormDataOdd css_idpedido_line" id="hidden_field_data_idpedido" style="<?php echo $sStyleHidden_idpedido; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_idpedido_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_idpedido_label" style=""><span id="id_label_idpedido"><?php echo $this->nm_new_label['idpedido']; ?></span></span><br><span id="id_read_on_idpedido" class="css_idpedido_line" style="<?php echo $sStyleReadLab_idpedido; ?>"><?php echo $this->form_format_readonly("idpedido", $this->form_encode_input($this->idpedido)); ?></span><span id="id_read_off_idpedido" class="css_read_off_idpedido" style="<?php echo $sStyleReadInp_idpedido; ?>"><input type="hidden" name="idpedido" value="<?php echo $this->form_encode_input($idpedido) . "\">"?><span id="id_ajax_label_idpedido"><?php echo nl2br($idpedido); ?></span>
+</span></span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_idpedido_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_idpedido_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }
+      else
+      {
+         $sc_hidden_no--;
+      }
+?>
+<?php }?>
 
 
 

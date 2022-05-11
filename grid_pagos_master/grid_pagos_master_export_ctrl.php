@@ -56,7 +56,7 @@ class grid_pagos_master_export_control
       asort($this->Nm_lang_conf_region);
       $_SESSION['scriptcase']['reg_conf']['html_dir'] = (isset($this->Nm_conf_reg[$this->str_conf_reg]['ger_ltr_rtl'])) ? " DIR='" . $this->Nm_conf_reg[$this->str_conf_reg]['ger_ltr_rtl'] . "'" : "";
       $_SESSION['scriptcase']['reg_conf']['css_dir']  = (isset($this->Nm_conf_reg[$this->str_conf_reg]['ger_ltr_rtl'])) ? $this->Nm_conf_reg[$this->str_conf_reg]['ger_ltr_rtl'] : "LTR";
-      $this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+      $this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
       require_once("../_lib/css/" . $this->str_schema_all . "_grid.php");
       $this->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";

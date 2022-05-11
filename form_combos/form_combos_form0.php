@@ -454,7 +454,7 @@ if (!$this->NM_ajax_flag && isset($this->NM_non_ajax_info['ajaxJavascript']) && 
 
   if (show_block[block_id]) {
     if ("hidden_bloco_1" == block_id) {
-      scAjaxDetailHeight("form_detallecombos", "300");
+      scAjaxDetailHeight("form_detallecombos", "600");
     }
   }
  }
@@ -898,15 +898,7 @@ unset($NM_ult_sep);
 <input type="hidden" name="codigobar" value="<?php echo $this->form_encode_input($codigobar) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOdd css_codigobar_line" id="hidden_field_data_codigobar" style="<?php echo $sStyleHidden_codigobar; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_codigobar_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_codigobar_label" style=""><span id="id_label_codigobar"><?php echo $this->nm_new_label['codigobar']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['php_cmp_required']['codigobar']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['php_cmp_required']['codigobar'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["codigobar"]) &&  $this->nmgp_cmp_readonly["codigobar"] == "on") { 
-
- ?>
-<input type="hidden" name="codigobar" value="<?php echo $this->form_encode_input($codigobar) . "\">" . $codigobar . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_codigobar" class="sc-ui-readonly-codigobar css_codigobar_line" style="<?php echo $sStyleReadLab_codigobar; ?>"><?php echo $this->form_format_readonly("codigobar", $this->form_encode_input($this->codigobar)); ?></span><span id="id_read_off_codigobar" class="css_read_off_codigobar<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_codigobar; ?>">
- <input class="sc-js-input scFormObjectOdd css_codigobar_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_codigobar" type=text name="codigobar" value="<?php echo $this->form_encode_input($codigobar) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=20"; } ?> maxlength=20 alt="{datatype: 'text', maxLength: 20, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: 'COD COMBO', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOdd css_codigobar_line" id="hidden_field_data_codigobar" style="<?php echo $sStyleHidden_codigobar; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_codigobar_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_codigobar_label" style=""><span id="id_label_codigobar"><?php echo $this->nm_new_label['codigobar']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['php_cmp_required']['codigobar']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['php_cmp_required']['codigobar'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></span><br><input type="hidden" name="codigobar" value="<?php echo $this->form_encode_input($codigobar); ?>"><span id="id_ajax_label_codigobar"><?php echo nl2br($codigobar); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_codigobar_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_codigobar_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -941,15 +933,7 @@ unset($NM_ult_sep);
 <input type="hidden" name="nompro" value="<?php echo $this->form_encode_input($nompro) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOdd css_nompro_line" id="hidden_field_data_nompro" style="<?php echo $sStyleHidden_nompro; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nompro_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_nompro_label" style=""><span id="id_label_nompro"><?php echo $this->nm_new_label['nompro']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['php_cmp_required']['nompro']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['php_cmp_required']['nompro'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></span><br>
-<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["nompro"]) &&  $this->nmgp_cmp_readonly["nompro"] == "on") { 
-
- ?>
-<input type="hidden" name="nompro" value="<?php echo $this->form_encode_input($nompro) . "\">" . $nompro . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_nompro" class="sc-ui-readonly-nompro css_nompro_line" style="<?php echo $sStyleReadLab_nompro; ?>"><?php echo $this->form_format_readonly("nompro", $this->form_encode_input($this->nompro)); ?></span><span id="id_read_off_nompro" class="css_read_off_nompro<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_nompro; ?>">
- <input class="sc-js-input scFormObjectOdd css_nompro_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_nompro" type=text name="nompro" value="<?php echo $this->form_encode_input($nompro) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=50"; } ?> maxlength=50 alt="{datatype: 'text', maxLength: 50, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOdd css_nompro_line" id="hidden_field_data_nompro" style="<?php echo $sStyleHidden_nompro; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_nompro_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_nompro_label" style=""><span id="id_label_nompro"><?php echo $this->nm_new_label['nompro']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['php_cmp_required']['nompro']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['php_cmp_required']['nompro'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></span><br><input type="hidden" name="nompro" value="<?php echo $this->form_encode_input($nompro); ?>"><span id="id_ajax_label_nompro"><?php echo nl2br($nompro); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_nompro_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_nompro_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -1245,7 +1229,7 @@ $escombo_look = "";
  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['form_detallecombos_script_case_init'] ]['form_detallecombos']['embutida_liga_grid_edit'] = 'on';
  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['form_detallecombos_script_case_init'] ]['form_detallecombos']['embutida_liga_grid_edit_link'] = 'on';
  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['form_detallecombos_script_case_init'] ]['form_detallecombos']['embutida_liga_qtd_reg'] = '10';
- $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['form_detallecombos_script_case_init'] ]['form_detallecombos']['embutida_liga_tp_pag'] = 'parcial';
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['form_detallecombos_script_case_init'] ]['form_detallecombos']['embutida_liga_tp_pag'] = 'total';
  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['form_detallecombos_script_case_init'] ]['form_detallecombos']['embutida_parms'] = "NM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['form_detallecombos_script_case_init'] ]['form_detallecombos']['foreign_key']['idcombo'] = $this->nmgp_dados_form['idprod'];
  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['form_detallecombos_script_case_init'] ]['form_detallecombos']['where_filter'] = "idcombo = " . $this->nmgp_dados_form['idprod'] . "";
@@ -1254,7 +1238,7 @@ $escombo_look = "";
  {
      $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_combos']['form_detallecombos_script_case_init'] ]['form_detallecombos']['where_filter'] = "1 <> 1";
  }
- $sDetailSrc = ('novo' == $this->nmgp_opcao) ? 'form_combos_empty.htm' : $this->Ini->link_form_detallecombos_edit . '?script_case_init=' . $this->form_encode_input($this->Ini->sc_page) . '&script_case_detail=Y&sc_ifr_height=300';
+ $sDetailSrc = ('novo' == $this->nmgp_opcao) ? 'form_combos_empty.htm' : $this->Ini->link_form_detallecombos_edit . '?script_case_init=' . $this->form_encode_input($this->Ini->sc_page) . '&script_case_detail=Y&sc_ifr_height=600';
 if (isset($this->Ini->sc_lig_target['C_@scinf_detalle']) && 'nmsc_iframe_liga_form_detallecombos' != $this->Ini->sc_lig_target['C_@scinf_detalle'])
 {
     if ('novo' != $this->nmgp_opcao)
@@ -1273,7 +1257,7 @@ $(function() {
 else
 {
 ?>
-<iframe border="0" id="nmsc_iframe_liga_form_detallecombos"  marginWidth="0" marginHeight="0" frameborder="0" valign="top" height="300" width="100%" name="nmsc_iframe_liga_form_detallecombos"  scrolling="auto" src="<?php echo $sDetailSrc; ?>"></iframe>
+<iframe border="0" id="nmsc_iframe_liga_form_detallecombos"  marginWidth="0" marginHeight="0" frameborder="0" valign="top" height="600" width="100%" name="nmsc_iframe_liga_form_detallecombos"  scrolling="auto" src="<?php echo $sDetailSrc; ?>"></iframe>
 <?php
 }
 ?>

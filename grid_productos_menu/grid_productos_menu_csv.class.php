@@ -222,6 +222,23 @@ class grid_productos_menu_csv
               $this->nompro = substr($this->nompro, 0, $tmp_pos);
           }
       } 
+      $this->nm_where_dinamico = "";
+      $_SESSION['scriptcase']['grid_productos_menu']['contr_erro'] = 'on';
+ ;
+
+?>
+<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
+<?php
+$_SESSION['scriptcase']['grid_productos_menu']['contr_erro'] = 'off'; 
+      if  (!empty($this->nm_where_dinamico)) 
+      {   
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_menu']['where_pesq'] .= $this->nm_where_dinamico;
+      }   
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_menu']['csv_name']))
       {
           $Pos = strrpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_menu']['csv_name'], ".");
@@ -338,13 +355,33 @@ if (!isset($_SESSION['gnit'])) {$_SESSION['gnit'] = "";}
 if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
  if(!empty($this->imagen ))
 {
-
-	$this->seleccionar  = "<div style='width:200px;height:150px;paddin:8px;white-space : normal;cursor:pointer;' doc='".$this->codigobar ."' onclick='window.opener.document.getElementById(\"txt_articulo\").value=\"".$this->codigobar ."\";window.opener.document.getElementById(\"div_ingresar_codigo\").click();window.close();'>".$this->nompro ." - PRECIO: ".number_format($this->preciomen )."<br><img src='../_lib/file/img/".$this->sc_temp_gnit."/".$this->imagen ."' style='width:120px;'/></div>";
+	
+	$this->seleccionar  = "<div style='width:200px;height:150px;paddin:8px;white-space : normal;cursor:pointer;' doc='".$this->codigobar ."' onclick='alertify.notify(\"".$this->nompro ." agregado con exito.\", \"success\", 3, function(){  });window.opener.document.getElementById(\"txt_articulo\").value=\"".$this->codigobar ."\";window.opener.document.getElementById(\"div_ingresar_codigo\").click();'>
+	<table style='width:100%;' border='0'>
+	<tr>
+	<td style='text-align:center;'>".$this->nompro ." - PRECIO: ".number_format($this->preciomen )."<td>
+	</tr>
+	<tr>
+	<td style='text-align:center;'><img src='../_lib/file/img/".$this->sc_temp_gnit."/".$this->imagen ."' style='width:120px;'/><td>
+	</tr>
+	</table>
+	</div>";
 }
 else
 {
-	$this->seleccionar  = "<div style='width:200px;height:150px;paddin:8px;white-space : normal;cursor:pointer;' doc='".$this->codigobar ."' onclick='window.opener.document.getElementById(\"txt_articulo\").value=\"".$this->codigobar ."\";window.opener.document.getElementById(\"div_ingresar_codigo\").click();window.close();'>".$this->nompro ." - PRECIO: ".number_format($this->preciomen )."</div>";
+	
+	$this->seleccionar  = "<div style='width:200px;height:150px;paddin:8px;white-space : normal;cursor:pointer;' doc='".$this->codigobar ."' onclick='alertify.notify(\"".$this->nompro ." agregado con exito.\", \"success\", 3, function(){  });window.opener.document.getElementById(\"txt_articulo\").value=\"".$this->codigobar ."\";window.opener.document.getElementById(\"div_ingresar_codigo\").click();'>
+	<table style='width:100%;' border='0'>
+	<tr>
+	<td style='text-align:center;'>".$this->nompro ." - PRECIO: ".number_format($this->preciomen )."<td>
+	</tr>
+	<tr>
+	<td style='text-align:center;'><td>
+	</tr>
+	</table>
+	</div>";
 }
+
 if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 $_SESSION['scriptcase']['grid_productos_menu']['contr_erro'] = 'off'; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_productos_menu']['field_order'] as $Cada_col)

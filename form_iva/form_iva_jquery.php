@@ -54,10 +54,13 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["trifa" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["tipo_impuesto" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["codigo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["puc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["puc_dv_ventas" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["puc_compras" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_compras" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_dv_compras" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["puc_compras" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_ventas" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_nc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_nd" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_pucaux_exec" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -79,22 +82,10 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["codigo" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["puc" + iSeqRow]["blur"]) {
+  if (scEventControl_data["id_pucaux_compras" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["puc" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["puc_dv_ventas" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["puc_dv_ventas" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["puc_compras" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["puc_compras" + iSeqRow]["change"]) {
+  if (scEventControl_data["id_pucaux_compras" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["puc_dv_compras" + iSeqRow]["blur"]) {
@@ -103,16 +94,34 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["puc_dv_compras" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["puc" + iSeqRow]["autocomp"]) {
+  if (scEventControl_data["puc_compras" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["puc_dv_ventas" + iSeqRow]["autocomp"]) {
+  if (scEventControl_data["puc_compras" + iSeqRow]["change"]) {
     return true;
   }
-  if (scEventControl_data["puc_compras" + iSeqRow]["autocomp"]) {
+  if (scEventControl_data["id_pucaux_ventas" + iSeqRow]["blur"]) {
     return true;
   }
-  if (scEventControl_data["puc_dv_compras" + iSeqRow]["autocomp"]) {
+  if (scEventControl_data["id_pucaux_ventas" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_nc" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_nc" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_nd" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_nd" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_exec" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_pucaux_exec" + iSeqRow]["change"]) {
     return true;
   }
   return false;
@@ -123,6 +132,30 @@ function scEventControl_onFocus(oField, iSeq) {
   fieldId = $(oField).attr("id");
   fieldName = fieldId.substr(12);
   scEventControl_data[fieldName]["blur"] = true;
+  if ("id_pucaux_compras" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc_dv_compras" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc_compras" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_ventas" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_nc" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_nd" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("id_pucaux_exec" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("puc" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
   scEventControl_data[fieldName]["change"] = false;
 } // scEventControl_onFocus
 
@@ -156,18 +189,29 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_codigo' + iSeqRow).bind('blur', function() { sc_form_iva_codigo_onblur(this, iSeqRow) })
                                     .bind('change', function() { sc_form_iva_codigo_onchange(this, iSeqRow) })
                                     .bind('focus', function() { sc_form_iva_codigo_onfocus(this, iSeqRow) });
-  $('#id_sc_field_puc' + iSeqRow).bind('blur', function() { sc_form_iva_puc_onblur(this, iSeqRow) })
-                                 .bind('change', function() { sc_form_iva_puc_onchange(this, iSeqRow) })
-                                 .bind('focus', function() { sc_form_iva_puc_onfocus(this, iSeqRow) });
-  $('#id_sc_field_puc_dv_ventas' + iSeqRow).bind('blur', function() { sc_form_iva_puc_dv_ventas_onblur(this, iSeqRow) })
-                                           .bind('change', function() { sc_form_iva_puc_dv_ventas_onchange(this, iSeqRow) })
-                                           .bind('focus', function() { sc_form_iva_puc_dv_ventas_onfocus(this, iSeqRow) });
+  $('#id_sc_field_puc' + iSeqRow).bind('change', function() { sc_form_iva_puc_onchange(this, iSeqRow) });
+  $('#id_sc_field_puc_dv_ventas' + iSeqRow).bind('change', function() { sc_form_iva_puc_dv_ventas_onchange(this, iSeqRow) });
   $('#id_sc_field_puc_compras' + iSeqRow).bind('blur', function() { sc_form_iva_puc_compras_onblur(this, iSeqRow) })
                                          .bind('change', function() { sc_form_iva_puc_compras_onchange(this, iSeqRow) })
                                          .bind('focus', function() { sc_form_iva_puc_compras_onfocus(this, iSeqRow) });
   $('#id_sc_field_puc_dv_compras' + iSeqRow).bind('blur', function() { sc_form_iva_puc_dv_compras_onblur(this, iSeqRow) })
                                             .bind('change', function() { sc_form_iva_puc_dv_compras_onchange(this, iSeqRow) })
                                             .bind('focus', function() { sc_form_iva_puc_dv_compras_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_compras' + iSeqRow).bind('blur', function() { sc_form_iva_id_pucaux_compras_onblur(this, iSeqRow) })
+                                               .bind('change', function() { sc_form_iva_id_pucaux_compras_onchange(this, iSeqRow) })
+                                               .bind('focus', function() { sc_form_iva_id_pucaux_compras_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_ventas' + iSeqRow).bind('blur', function() { sc_form_iva_id_pucaux_ventas_onblur(this, iSeqRow) })
+                                              .bind('change', function() { sc_form_iva_id_pucaux_ventas_onchange(this, iSeqRow) })
+                                              .bind('focus', function() { sc_form_iva_id_pucaux_ventas_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_nc' + iSeqRow).bind('blur', function() { sc_form_iva_id_pucaux_nc_onblur(this, iSeqRow) })
+                                          .bind('change', function() { sc_form_iva_id_pucaux_nc_onchange(this, iSeqRow) })
+                                          .bind('focus', function() { sc_form_iva_id_pucaux_nc_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_nd' + iSeqRow).bind('blur', function() { sc_form_iva_id_pucaux_nd_onblur(this, iSeqRow) })
+                                          .bind('change', function() { sc_form_iva_id_pucaux_nd_onchange(this, iSeqRow) })
+                                          .bind('focus', function() { sc_form_iva_id_pucaux_nd_onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_pucaux_exec' + iSeqRow).bind('blur', function() { sc_form_iva_id_pucaux_exec_onblur(this, iSeqRow) })
+                                            .bind('change', function() { sc_form_iva_id_pucaux_exec_onchange(this, iSeqRow) })
+                                            .bind('focus', function() { sc_form_iva_id_pucaux_exec_onfocus(this, iSeqRow) });
 } // scJQEventsAdd
 
 function sc_form_iva_idiva_onchange(oThis, iSeqRow) {
@@ -216,30 +260,12 @@ function sc_form_iva_codigo_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
-function sc_form_iva_puc_onblur(oThis, iSeqRow) {
-  do_ajax_form_iva_validate_puc();
-  scCssBlur(oThis);
-}
-
 function sc_form_iva_puc_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 
-function sc_form_iva_puc_onfocus(oThis, iSeqRow) {
-  scCssFocus(oThis);
-}
-
-function sc_form_iva_puc_dv_ventas_onblur(oThis, iSeqRow) {
-  do_ajax_form_iva_validate_puc_dv_ventas();
-  scCssBlur(oThis);
-}
-
 function sc_form_iva_puc_dv_ventas_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
-}
-
-function sc_form_iva_puc_dv_ventas_onfocus(oThis, iSeqRow) {
-  scCssFocus(oThis);
 }
 
 function sc_form_iva_puc_compras_onblur(oThis, iSeqRow) {
@@ -252,6 +278,7 @@ function sc_form_iva_puc_compras_onchange(oThis, iSeqRow) {
 }
 
 function sc_form_iva_puc_compras_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
@@ -265,6 +292,77 @@ function sc_form_iva_puc_dv_compras_onchange(oThis, iSeqRow) {
 }
 
 function sc_form_iva_puc_dv_compras_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_iva_id_pucaux_compras_onblur(oThis, iSeqRow) {
+  do_ajax_form_iva_validate_id_pucaux_compras();
+  scCssBlur(oThis);
+}
+
+function sc_form_iva_id_pucaux_compras_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_iva_id_pucaux_compras_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_iva_id_pucaux_ventas_onblur(oThis, iSeqRow) {
+  do_ajax_form_iva_validate_id_pucaux_ventas();
+  scCssBlur(oThis);
+}
+
+function sc_form_iva_id_pucaux_ventas_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_iva_id_pucaux_ventas_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_iva_id_pucaux_nc_onblur(oThis, iSeqRow) {
+  do_ajax_form_iva_validate_id_pucaux_nc();
+  scCssBlur(oThis);
+}
+
+function sc_form_iva_id_pucaux_nc_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_iva_id_pucaux_nc_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_iva_id_pucaux_nd_onblur(oThis, iSeqRow) {
+  do_ajax_form_iva_validate_id_pucaux_nd();
+  scCssBlur(oThis);
+}
+
+function sc_form_iva_id_pucaux_nd_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_iva_id_pucaux_nd_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_iva_id_pucaux_exec_onblur(oThis, iSeqRow) {
+  do_ajax_form_iva_validate_id_pucaux_exec();
+  scCssBlur(oThis);
+}
+
+function sc_form_iva_id_pucaux_exec_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_iva_id_pucaux_exec_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
 
@@ -278,20 +376,26 @@ function displayChange_block_0(status) {
 	displayChange_field("trifa", "", status);
 	displayChange_field("tipo_impuesto", "", status);
 	displayChange_field("codigo", "", status);
-	displayChange_field("puc", "", status);
-	displayChange_field("puc_dv_ventas", "", status);
-	displayChange_field("puc_compras", "", status);
+	displayChange_field("id_pucaux_compras", "", status);
 	displayChange_field("puc_dv_compras", "", status);
+	displayChange_field("puc_compras", "", status);
+	displayChange_field("id_pucaux_ventas", "", status);
+	displayChange_field("id_pucaux_nc", "", status);
+	displayChange_field("id_pucaux_nd", "", status);
+	displayChange_field("id_pucaux_exec", "", status);
 }
 
 function displayChange_row(row, status) {
 	displayChange_field_trifa(row, status);
 	displayChange_field_tipo_impuesto(row, status);
 	displayChange_field_codigo(row, status);
-	displayChange_field_puc(row, status);
-	displayChange_field_puc_dv_ventas(row, status);
-	displayChange_field_puc_compras(row, status);
+	displayChange_field_id_pucaux_compras(row, status);
 	displayChange_field_puc_dv_compras(row, status);
+	displayChange_field_puc_compras(row, status);
+	displayChange_field_id_pucaux_ventas(row, status);
+	displayChange_field_id_pucaux_nc(row, status);
+	displayChange_field_id_pucaux_nd(row, status);
+	displayChange_field_id_pucaux_exec(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -304,17 +408,26 @@ function displayChange_field(field, row, status) {
 	if ("codigo" == field) {
 		displayChange_field_codigo(row, status);
 	}
-	if ("puc" == field) {
-		displayChange_field_puc(row, status);
+	if ("id_pucaux_compras" == field) {
+		displayChange_field_id_pucaux_compras(row, status);
 	}
-	if ("puc_dv_ventas" == field) {
-		displayChange_field_puc_dv_ventas(row, status);
+	if ("puc_dv_compras" == field) {
+		displayChange_field_puc_dv_compras(row, status);
 	}
 	if ("puc_compras" == field) {
 		displayChange_field_puc_compras(row, status);
 	}
-	if ("puc_dv_compras" == field) {
-		displayChange_field_puc_dv_compras(row, status);
+	if ("id_pucaux_ventas" == field) {
+		displayChange_field_id_pucaux_ventas(row, status);
+	}
+	if ("id_pucaux_nc" == field) {
+		displayChange_field_id_pucaux_nc(row, status);
+	}
+	if ("id_pucaux_nd" == field) {
+		displayChange_field_id_pucaux_nd(row, status);
+	}
+	if ("id_pucaux_exec" == field) {
+		displayChange_field_id_pucaux_exec(row, status);
 	}
 }
 
@@ -327,19 +440,119 @@ function displayChange_field_tipo_impuesto(row, status) {
 function displayChange_field_codigo(row, status) {
 }
 
-function displayChange_field_puc(row, status) {
-}
-
-function displayChange_field_puc_dv_ventas(row, status) {
-}
-
-function displayChange_field_puc_compras(row, status) {
+function displayChange_field_id_pucaux_compras(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_compras__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_compras" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_compras");
+	}
 }
 
 function displayChange_field_puc_dv_compras(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_puc_dv_compras__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_puc_dv_compras" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "puc_dv_compras");
+	}
+}
+
+function displayChange_field_puc_compras(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_puc_compras__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_puc_compras" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "puc_compras");
+	}
+}
+
+function displayChange_field_id_pucaux_ventas(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_ventas__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_ventas" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_ventas");
+	}
+}
+
+function displayChange_field_id_pucaux_nc(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_nc__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_nc" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_nc");
+	}
+}
+
+function displayChange_field_id_pucaux_nd(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_nd__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_nd" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_nd");
+	}
+}
+
+function displayChange_field_id_pucaux_exec(row, status) {
+	if ("on" == status) {
+		if ("all" == row) {
+			var fieldList = $(".css_id_pucaux_exec__obj");
+			for (var i = 0; i < fieldList.length; i++) {
+				$($(fieldList[i]).attr("id")).select2("destroy");
+			}
+		}
+		else {
+			$("#id_sc_field_id_pucaux_exec" + row).select2("destroy");
+		}
+		scJQSelect2Add(row, "id_pucaux_exec");
+	}
 }
 
 function scRecreateSelect2() {
+	displayChange_field_id_pucaux_compras("all", "on");
+	displayChange_field_puc_dv_compras("all", "on");
+	displayChange_field_puc_compras("all", "on");
+	displayChange_field_id_pucaux_ventas("all", "on");
+	displayChange_field_id_pucaux_nc("all", "on");
+	displayChange_field_id_pucaux_nd("all", "on");
+	displayChange_field_id_pucaux_exec("all", "on");
 }
 function scResetPagesDisplay() {
 	$(".sc-form-page").show();
@@ -510,6 +723,175 @@ $(document).ready(function(){
 } // scJQPasswordToggleAdd
 
 function scJQSelect2Add(seqRow, specificField) {
+  if (null == specificField || "id_pucaux_compras" == specificField) {
+    scJQSelect2Add_id_pucaux_compras(seqRow);
+  }
+  if (null == specificField || "puc_dv_compras" == specificField) {
+    scJQSelect2Add_puc_dv_compras(seqRow);
+  }
+  if (null == specificField || "puc_compras" == specificField) {
+    scJQSelect2Add_puc_compras(seqRow);
+  }
+  if (null == specificField || "id_pucaux_ventas" == specificField) {
+    scJQSelect2Add_id_pucaux_ventas(seqRow);
+  }
+  if (null == specificField || "id_pucaux_nc" == specificField) {
+    scJQSelect2Add_id_pucaux_nc(seqRow);
+  }
+  if (null == specificField || "id_pucaux_nd" == specificField) {
+    scJQSelect2Add_id_pucaux_nd(seqRow);
+  }
+  if (null == specificField || "id_pucaux_exec" == specificField) {
+    scJQSelect2Add_id_pucaux_exec(seqRow);
+  }
+  if (null == specificField || "puc" == specificField) {
+    scJQSelect2Add_puc(seqRow);
+  }
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_compras(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_compras_obj" : "#id_sc_field_id_pucaux_compras" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_compras_obj',
+      dropdownCssClass: 'css_id_pucaux_compras_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_puc_dv_compras(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_puc_dv_compras_obj" : "#id_sc_field_puc_dv_compras" + seqRow;
+  $(elemSelector).select2(
+    {
+      minimumResultsForSearch: Infinity,
+      containerCssClass: 'css_puc_dv_compras_obj',
+      dropdownCssClass: 'css_puc_dv_compras_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_puc_compras(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_puc_compras_obj" : "#id_sc_field_puc_compras" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_puc_compras_obj',
+      dropdownCssClass: 'css_puc_compras_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_ventas(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_ventas_obj" : "#id_sc_field_id_pucaux_ventas" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_ventas_obj',
+      dropdownCssClass: 'css_id_pucaux_ventas_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_nc(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_nc_obj" : "#id_sc_field_id_pucaux_nc" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_nc_obj',
+      dropdownCssClass: 'css_id_pucaux_nc_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_nd(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_nd_obj" : "#id_sc_field_id_pucaux_nd" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_nd_obj',
+      dropdownCssClass: 'css_id_pucaux_nd_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_id_pucaux_exec(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_id_pucaux_exec_obj" : "#id_sc_field_id_pucaux_exec" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_id_pucaux_exec_obj',
+      dropdownCssClass: 'css_id_pucaux_exec_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
+} // scJQSelect2Add
+
+function scJQSelect2Add_puc(seqRow) {
+  var elemSelector = "all" == seqRow ? ".css_puc_obj" : "#id_sc_field_puc" + seqRow;
+  $(elemSelector).select2(
+    {
+      containerCssClass: 'css_puc_obj',
+      dropdownCssClass: 'css_puc_obj',
+      language: {
+        noResults: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+        },
+        searching: function() {
+          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+        }
+      }
+    }
+  );
 } // scJQSelect2Add
 
 
@@ -519,6 +901,14 @@ function scJQElementsAdd(iLine) {
   scJQUploadAdd(iLine);
   scJQPasswordToggleAdd(iLine);
   scJQSelect2Add(iLine);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_compras) { displayChange_field_id_pucaux_compras(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_puc_dv_compras) { displayChange_field_puc_dv_compras(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_puc_compras) { displayChange_field_puc_compras(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_ventas) { displayChange_field_id_pucaux_ventas(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_nc) { displayChange_field_id_pucaux_nc(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_nd) { displayChange_field_id_pucaux_nd(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_id_pucaux_exec) { displayChange_field_id_pucaux_exec(iLine, "on"); } }, 150);
+  setTimeout(function () { if ('function' == typeof displayChange_field_puc) { displayChange_field_puc(iLine, "on"); } }, 150);
 } // scJQElementsAdd
 
 function scGetFileExtension(fileName)

@@ -742,7 +742,8 @@ class form_notas_mob_apl
           include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
       }
       include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
-      $this->Ini->Str_btn_form    = trim($str_button);
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
@@ -821,8 +822,28 @@ class form_notas_mob_apl
       $this->arr_buttons['autorizar']['style']            = "default";
       $this->arr_buttons['autorizar']['image']            = "";
 
+      $this->arr_buttons['btn_asentar']['hint']             = "Asentar Documento";
+      $this->arr_buttons['btn_asentar']['type']             = "button";
+      $this->arr_buttons['btn_asentar']['value']            = "Asentar";
+      $this->arr_buttons['btn_asentar']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons['btn_asentar']['display_position'] = "text_right";
+      $this->arr_buttons['btn_asentar']['style']            = "google";
+      $this->arr_buttons['btn_asentar']['image']            = "";
+      $this->arr_buttons['btn_asentar']['has_fa']            = "true";
+      $this->arr_buttons['btn_asentar']['fontawesomeicon']            = "";
 
-      $_SESSION['scriptcase']['error_icon']['form_notas_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $this->arr_buttons['btn_reversar']['hint']             = "Reversar Documento";
+      $this->arr_buttons['btn_reversar']['type']             = "button";
+      $this->arr_buttons['btn_reversar']['value']            = "Reversar";
+      $this->arr_buttons['btn_reversar']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons['btn_reversar']['display_position'] = "text_right";
+      $this->arr_buttons['btn_reversar']['style']            = "youtube";
+      $this->arr_buttons['btn_reversar']['image']            = "";
+      $this->arr_buttons['btn_reversar']['has_fa']            = "true";
+      $this->arr_buttons['btn_reversar']['fontawesomeicon']            = "";
+
+
+      $_SESSION['scriptcase']['error_icon']['form_notas_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_notas_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
       $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['embutida_proc'] : $this->Embutida_proc;
@@ -981,6 +1002,8 @@ class form_notas_mob_apl
       $this->nmgp_botoes['Eliminar'] = "on";
       $this->nmgp_botoes['rc'] = "on";
       $this->nmgp_botoes['autorizar'] = "on";
+      $this->nmgp_botoes['btn_asentar'] = "on";
+      $this->nmgp_botoes['btn_reversar'] = "on";
       if (isset($this->NM_btn_cancel) && 'N' == $this->NM_btn_cancel)
       {
           $this->nmgp_botoes['cancel'] = "off";
@@ -1340,6 +1363,8 @@ class form_notas_mob_apl
           $this->nmgp_botoes['Eliminar'] = "off";
           $this->nmgp_botoes['rc'] = "off";
           $this->nmgp_botoes['autorizar'] = "on";
+          $this->nmgp_botoes['btn_asentar'] = "off";
+          $this->nmgp_botoes['btn_reversar'] = "off";
       }
       elseif ($this->nmgp_opcao == "incluir")  
       {
@@ -1347,6 +1372,8 @@ class form_notas_mob_apl
           $this->nmgp_botoes['Eliminar'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['botoes']['Eliminar'];
           $this->nmgp_botoes['rc'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['botoes']['rc'];
           $this->nmgp_botoes['autorizar'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['botoes']['autorizar'];
+          $this->nmgp_botoes['btn_asentar'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['botoes']['btn_asentar'];
+          $this->nmgp_botoes['btn_reversar'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['botoes']['btn_reversar'];
       }
       if ($this->nmgp_opcao == "recarga" || $this->nmgp_opcao == "muda_form")  
       {
@@ -1473,6 +1500,14 @@ $_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'off';
           if ($nm_call_php == "autorizar")
           { 
               $this->sc_btn_autorizar();
+          } 
+          if ($nm_call_php == "btn_asentar")
+          { 
+              $this->sc_btn_btn_asentar();
+          } 
+          if ($nm_call_php == "btn_reversar")
+          { 
+              $this->sc_btn_btn_reversar();
           } 
           $this->NM_close_db(); 
           exit;
@@ -2875,6 +2910,1897 @@ $_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'off';
            $this->redir_modal = "";
        }
    }
+   function sc_btn_btn_asentar() 
+   {
+        global $nm_url_saida, $teste_validade, 
+               $glo_senha_protect, $nm_apl_dependente, $nm_form_submit, $sc_check_excl, $nm_opc_form_php, $nm_call_php, $nm_opc_lookup;
+ 
+     ob_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+ <head>
+    <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+      if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+      {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+      }
+
+?>
+        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <SCRIPT type="text/javascript">
+      var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+      var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_close"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_esc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_userSweetAlertDisplayed = false;
+    </SCRIPT>
+    <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></SCRIPT>
+<?php
+include_once("form_notas_mob_sajax_js.php");
+?>
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_sweetalert.css" />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/sweetalert2.all.min.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/polyfill.min.js"></SCRIPT>
+ <script type="text/javascript" src="../_lib/lib/js/frameControl.js"></script>
+    <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form.css" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+  <?php 
+  if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts)) 
+  { 
+  ?> 
+  <link href="<?php echo $this->Ini->str_google_fonts ?>" rel="stylesheet" /> 
+  <?php 
+  } 
+  ?> 
+ </head>
+  <body class="scFormPage">
+      <table class="scFormTabela" align="center"><tr><td>
+<?php
+      $varloc_btn_php = array();
+      $nmgp_opcao_saida_php = "igual";
+      $nmgp_opc_ant_saida_php = "";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['opc_ant'] == "novo" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['opc_ant'] == "incluir")
+      {
+          $nmgp_opc_ant_saida_php = "novo";
+          $nmgp_opcao_saida_php   = "recarga";
+      }
+      else
+      {
+          if (!isset($this->idfacven) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven']))
+          {
+              $varloc_btn_php['idfacven'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven'];
+          }
+          if (!isset($this->fechaven) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['fechaven']))
+          {
+              $varloc_btn_php['fechaven'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['fechaven'];
+          }
+          if (!isset($this->id_fact) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['id_fact']))
+          {
+              $varloc_btn_php['id_fact'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['id_fact'];
+          }
+          if (!isset($this->asentada) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada']))
+          {
+              $varloc_btn_php['asentada'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->asentada) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada']))
+          {
+              $varloc_btn_php['asentada'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada'];
+          }
+          if (!isset($this->idcli) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idcli']))
+          {
+              $varloc_btn_php['idcli'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idcli'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->idfacven) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven']))
+          {
+              $varloc_btn_php['idfacven'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven'];
+          }
+          if (!isset($this->idcli) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idcli']))
+          {
+              $varloc_btn_php['idcli'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idcli'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->idfacven) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven']))
+          {
+              $varloc_btn_php['idfacven'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven'];
+          }
+          if (!isset($this->asentada) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada']))
+          {
+              $varloc_btn_php['asentada'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada'];
+          }
+      }
+      $nm_f_saida = "form_notas_mob.php";
+      nm_limpa_numero($this->numfacven, $this->field_config['numfacven']['symbol_grp']) ; 
+      nm_limpa_data($this->fechaven, $this->field_config['fechaven']['date_sep']) ; 
+      nm_limpa_numero($this->dias_decredito, $this->field_config['dias_decredito']['symbol_grp']) ; 
+      nm_limpa_data($this->fechavenc, $this->field_config['fechavenc']['date_sep']) ; 
+      nm_limpa_numero($this->id_fact, $this->field_config['id_fact']['symbol_grp']) ; 
+      nm_limpa_numero($this->nremision, $this->field_config['nremision']['symbol_grp']) ; 
+      if (!empty($this->field_config['cupodis']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupodis, $this->field_config['cupodis']['symbol_dec'], $this->field_config['cupodis']['symbol_grp'], $this->field_config['cupodis']['symbol_mon']); 
+          nm_limpa_valor($this->cupodis, $this->field_config['cupodis']['symbol_dec'], $this->field_config['cupodis']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['cupo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupo, $this->field_config['cupo']['symbol_dec'], $this->field_config['cupo']['symbol_grp'], $this->field_config['cupo']['symbol_mon']); 
+          nm_limpa_valor($this->cupo, $this->field_config['cupo']['symbol_dec'], $this->field_config['cupo']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['subtotal']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->subtotal, $this->field_config['subtotal']['symbol_dec'], $this->field_config['subtotal']['symbol_grp'], $this->field_config['subtotal']['symbol_mon']); 
+          nm_limpa_valor($this->subtotal, $this->field_config['subtotal']['symbol_dec'], $this->field_config['subtotal']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['valoriva']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->valoriva, $this->field_config['valoriva']['symbol_dec'], $this->field_config['valoriva']['symbol_grp'], $this->field_config['valoriva']['symbol_mon']); 
+          nm_limpa_valor($this->valoriva, $this->field_config['valoriva']['symbol_dec'], $this->field_config['valoriva']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['total']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->total, $this->field_config['total']['symbol_dec'], $this->field_config['total']['symbol_grp'], $this->field_config['total']['symbol_mon']); 
+          nm_limpa_valor($this->total, $this->field_config['total']['symbol_dec'], $this->field_config['total']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['adicional']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->adicional, $this->field_config['adicional']['symbol_dec'], $this->field_config['adicional']['symbol_grp'], $this->field_config['adicional']['symbol_mon']); 
+          nm_limpa_valor($this->adicional, $this->field_config['adicional']['symbol_dec'], $this->field_config['adicional']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['saldo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->saldo, $this->field_config['saldo']['symbol_dec'], $this->field_config['saldo']['symbol_grp'], $this->field_config['saldo']['symbol_mon']); 
+          nm_limpa_valor($this->saldo, $this->field_config['saldo']['symbol_dec'], $this->field_config['saldo']['symbol_grp']) ; 
+      }
+      nm_limpa_numero($this->idfacven, $this->field_config['idfacven']['symbol_grp']) ; 
+      if (!empty($this->field_config['reteiva']['symbol_dec']))
+      {
+          nm_limpa_valor($this->reteiva, $this->field_config['reteiva']['symbol_dec'], $this->field_config['reteiva']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['imconsumo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->imconsumo, $this->field_config['imconsumo']['symbol_dec'], $this->field_config['imconsumo']['symbol_grp'], $this->field_config['imconsumo']['symbol_mon']); 
+          nm_limpa_valor($this->imconsumo, $this->field_config['imconsumo']['symbol_dec'], $this->field_config['imconsumo']['symbol_grp']) ; 
+      }
+      $this->nm_converte_datas();
+      foreach ($varloc_btn_php as $cmp => $val_cmp)
+      {
+          $this->$cmp = $val_cmp;
+      }
+      $_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'on';
+  $vIdFV=			$this->idfacven ;
+$fec=			$this->fechaven ;
+$vIdFacinter=	$this->id_fact ;
+$i=				0;
+$vGrupo=		0;
+$unimay=		'NO';
+$facto=			0;
+$cant=			0;
+$aux=			0;
+$vSaldoF=		0;
+$vPagada=		'';
+$vCredito=		'';
+$vTotal=		0;
+
+$this->asentada =1;
+
+     $nm_select ="UPDATE facturaven set asentada='1' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+if($this->total >0)
+	{
+	if ($this->asentada ==1)
+		{
+		$this->sc_ajax_javascript('nm_field_disabled', array("tipo=disabled;resolucion=disabled;idcli=disabled;observaciones=disabled;numfacven=disabled;pagada=disabled;fechaven=disabled;fechavenc=disabled;credito=disabled;resolucion=disabled;numfacven=disabled;pedido=disabled", ""));
+;
+		$this->Ini->nm_hidden_blocos[5] = "off"; $this->NM_ajax_info['blockDisplay']['5'] = 'off';
+				
+		$idt=$this->idcli ; 
+		 
+      $nm_select = "select saldo from terceros where idtercero=$idt"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_ter = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_ter[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_ter = false;
+          $this->ds_ter_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->ds_ter[0][0]))
+			{
+			$sal=$this->ds_ter[0][0];
+			}
+		
+		 
+      $nm_select = "select saldo, credito, pagada, total from facturaven where idfacven=$vIdFacinter"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dat_f = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
+                 $SCrx->fields[3] = (string)$SCrx->fields[3];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dat_f[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dat_f = false;
+          $this->dat_f_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->dat_f[0][0]))
+			{
+			if($this->dat_f[0][0]>0)
+				{
+				$vSaldoF=$this->dat_f[0][0];
+				}
+			$vCredito=	$this->dat_f[0][1];
+			$vPagada=	$this->dat_f[0][2];
+			$vTotal=	$this->dat_f[0][3];
+			}
+		
+			if($this->tipo =='ND')
+				{
+				
+     $nm_select ="UPDATE terceros set saldo=$this->total +$sal where idtercero=$idt"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				}
+		
+			elseif($this->tipo =='NC')
+				{
+				
+				if($vCredito==2 )
+					{
+					if($vPagada=='NO' or $vPagada=='AB')
+						{
+						if($this->total ==$vSaldoF or $this->total >$vSaldoF)
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=0, pagada='SI' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						elseif($this->total <$vSaldoF)
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$vSaldoF-$this->total , pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						$this->fHacerRecibo();
+						}
+					
+					else
+						{
+						$this->fHacerRecibo();
+						}
+						
+					}
+				
+				else 
+					{
+					
+     $nm_select ="UPDATE terceros set saldo=$sal-$this->total  where idtercero=$idt"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					if($vPagada=='NO' or $vPagada=='AB')
+						{
+						if($this->total ==$vSaldoF or $this->total >$vSaldoF)
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=0, pagada='SI' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						elseif($this->total <$vSaldoF)
+							{
+							
+							
+     $nm_select ="UPDATE facturaven set saldo=$vSaldoF-$this->total , pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						$this->fHacerReciboCr($this->total -$vSaldoF);
+						}
+					
+					else
+						{
+						$this->fHacerRecibo();
+						}
+						
+					}
+						
+				}
+			
+     $nm_select ="UPDATE facturaven set idcli=$idt, asentada=1 where idfacven=$this->idfacven "; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			$this->NM_ajax_info['buttonDisplay']['imprimir'] = $this->nmgp_botoes["imprimir"] = "on";;
+			$this->NM_ajax_info['buttonDisplay']['new'] = $this->nmgp_botoes["new"] = "on";;
+			
+	
+		}
+	
+	else
+		{
+		
+		 
+      $nm_select = "select saldo, credito, pagada, total from facturaven where idfacven=$vIdFacinter"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dat_f = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
+                 $SCrx->fields[3] = (string)$SCrx->fields[3];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dat_f[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dat_f = false;
+          $this->dat_f_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->dat_f[0][0]))
+			{
+			if($this->dat_f[0][0]>0)
+				{
+				$vSaldoF=$this->dat_f[0][0];
+				}
+			$vCredito=	$this->dat_f[0][1];
+			$vPagada=	$this->dat_f[0][2];
+			$vTotal=	$this->dat_f[0][3];
+			}
+				
+		$this->Ini->nm_hidden_blocos[5] = "on"; $this->NM_ajax_info['blockDisplay']['5'] = 'on';
+		
+		$idt=$this->idcli ; 
+		 
+      $nm_select = "select saldo from terceros where idtercero=$idt"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_ter = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_ter[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_ter = false;
+          $this->ds_ter_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->ds_ter[0][0]))
+			{
+			$sal=$this->ds_ter[0][0];
+			}
+		
+		if($this->tipo =='ND')
+			{
+			
+     $nm_select ="UPDATE terceros set saldo=$sal-$this->total  where idtercero=$idt"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			}
+		
+		elseif($this->tipo =='NC')
+			{
+			if($vCredito==2 )
+				{
+				if($vPagada=='SI')
+					{
+					if($vTotal==$this->total )
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$this->total , pagada='NO' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						
+						else
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+					}
+				
+				elseif($vPagada=='AB')
+					{
+					if($this->total ==$vSaldoF or $this->total >$vSaldoF)
+						{
+						if($vTotal==($this->total +$vSaldoF) or $vTotal<($this->total +$vSaldoF))
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='NO' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						else
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						
+						}
+					elseif($this->total <$vSaldoF)
+						{
+						
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						}
+					}
+				$this->fBorrarRecibo();
+				}
+			
+			else 
+				{
+				
+     $nm_select ="UPDATE terceros set saldo=$this->total +$sal where idtercero=$idt"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				
+				if($vPagada=='SI' or $vPagada=='AB')
+					{
+					if($this->total ==$vTotal)
+						{
+						
+     $nm_select ="UPDATE facturaven set saldo=$vTotal, pagada='NO' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						}
+					elseif($this->total <$vTotal)
+						{
+						
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						}
+					}
+					
+				else
+					{
+					}
+				}
+						
+			
+			
+			
+			$this->NM_ajax_info['buttonDisplay']['imprimir'] = $this->nmgp_botoes["imprimir"] = "off";;
+			$this->NM_ajax_info['buttonDisplay']['new'] = $this->nmgp_botoes["new"] = "on";;
+			
+     $nm_select ="UPDATE facturaven set asentada=0 where idfacven=$this->idfacven "; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				
+			}
+		}
+		
+	}
+
+else
+	{
+	$this->nm_mens_alert[] = "No ha Detallado la Nota, NO puede Asentar"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("No ha Detallado la Nota, NO puede Asentar"); }$this->asentada =0;
+	$this->NM_ajax_info['buttonDisplay']['imprimir'] = $this->nmgp_botoes["imprimir"] = "off";;
+	$this->sc_ajax_javascript('nm_field_disabled', array("numfacven=disabled;pagada=disabled;fechaven=disabled;fechavenc=disabled", ""));
+;
+	}
+
+
+echo "<div style='padding:10px;border-radius:8px;color:white;background:#1c2f74;'>Documento asentado con éxito.</div><br>";
+$_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'off'; 
+    echo ob_get_clean();
+?>
+      </td></tr><tr><td align="center">
+      <form name="FPHP" method="post" 
+                        action="<?php echo $nm_f_saida ?>" 
+                        target="_self">
+      <input type=hidden name="nmgp_opcao" value=""/>
+      <input type=hidden name="script_case_init" value="<?php  echo $this->form_encode_input($this->Ini->sc_page); ?>"/>
+      <input type=hidden name="idfacven" value="<?php echo $this->form_encode_input($this->idfacven) ?>"/>
+      <input type=hidden name="nmgp_opcao" value="<?php echo $this->form_encode_input($nmgp_opcao_saida_php); ?>"/>
+      <input type=hidden name="nmgp_opc_ant" value="<?php echo $this->form_encode_input($nmgp_opc_ant_saida_php); ?>"/>
+      <input type=submit name="nmgp_bok" value="<?php echo $this->Ini->Nm_lang['lang_btns_cfrm'] ?>"/>
+      </form>
+      </td></tr></table>
+      </body>
+      </html>
+<?php
+       if (isset($this->redir_modal) && !empty($this->redir_modal))
+       {
+           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
+           $this->redir_modal = "";
+       }
+   }
+   function sc_btn_btn_reversar() 
+   {
+        global $nm_url_saida, $teste_validade, 
+               $glo_senha_protect, $nm_apl_dependente, $nm_form_submit, $sc_check_excl, $nm_opc_form_php, $nm_call_php, $nm_opc_lookup;
+ 
+     ob_start();
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+ <head>
+    <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+      if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+      {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+      }
+
+?>
+        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <SCRIPT type="text/javascript">
+      var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
+      var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_close"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_esc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
+      var sc_userSweetAlertDisplayed = false;
+    </SCRIPT>
+    <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></SCRIPT>
+    <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></SCRIPT>
+<?php
+include_once("form_notas_mob_sajax_js.php");
+?>
+ <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_sweetalert.css" />
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/sweetalert2.all.min.js"></SCRIPT>
+ <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/polyfill.min.js"></SCRIPT>
+ <script type="text/javascript" src="../_lib/lib/js/frameControl.js"></script>
+    <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form.css" />
+    <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+  <?php 
+  if(isset($this->Ini->str_google_fonts) && !empty($this->Ini->str_google_fonts)) 
+  { 
+  ?> 
+  <link href="<?php echo $this->Ini->str_google_fonts ?>" rel="stylesheet" /> 
+  <?php 
+  } 
+  ?> 
+ </head>
+  <body class="scFormPage">
+      <table class="scFormTabela" align="center"><tr><td>
+<?php
+      $varloc_btn_php = array();
+      $nmgp_opcao_saida_php = "igual";
+      $nmgp_opc_ant_saida_php = "";
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['opc_ant'] == "novo" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['opc_ant'] == "incluir")
+      {
+          $nmgp_opc_ant_saida_php = "novo";
+          $nmgp_opcao_saida_php   = "recarga";
+      }
+      else
+      {
+          if (!isset($this->idfacven) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven']))
+          {
+              $varloc_btn_php['idfacven'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven'];
+          }
+          if (!isset($this->fechaven) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['fechaven']))
+          {
+              $varloc_btn_php['fechaven'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['fechaven'];
+          }
+          if (!isset($this->id_fact) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['id_fact']))
+          {
+              $varloc_btn_php['id_fact'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['id_fact'];
+          }
+          if (!isset($this->asentada) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada']))
+          {
+              $varloc_btn_php['asentada'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->asentada) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada']))
+          {
+              $varloc_btn_php['asentada'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada'];
+          }
+          if (!isset($this->idcli) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idcli']))
+          {
+              $varloc_btn_php['idcli'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idcli'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->idfacven) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven']))
+          {
+              $varloc_btn_php['idfacven'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven'];
+          }
+          if (!isset($this->idcli) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idcli']))
+          {
+              $varloc_btn_php['idcli'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idcli'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->tipo) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo']))
+          {
+              $varloc_btn_php['tipo'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['tipo'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->total) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total']))
+          {
+              $varloc_btn_php['total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['total'];
+          }
+          if (!isset($this->idfacven) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven']))
+          {
+              $varloc_btn_php['idfacven'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['idfacven'];
+          }
+          if (!isset($this->asentada) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada']))
+          {
+              $varloc_btn_php['asentada'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['dados_form']['asentada'];
+          }
+      }
+      $nm_f_saida = "form_notas_mob.php";
+      nm_limpa_numero($this->numfacven, $this->field_config['numfacven']['symbol_grp']) ; 
+      nm_limpa_data($this->fechaven, $this->field_config['fechaven']['date_sep']) ; 
+      nm_limpa_numero($this->dias_decredito, $this->field_config['dias_decredito']['symbol_grp']) ; 
+      nm_limpa_data($this->fechavenc, $this->field_config['fechavenc']['date_sep']) ; 
+      nm_limpa_numero($this->id_fact, $this->field_config['id_fact']['symbol_grp']) ; 
+      nm_limpa_numero($this->nremision, $this->field_config['nremision']['symbol_grp']) ; 
+      if (!empty($this->field_config['cupodis']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupodis, $this->field_config['cupodis']['symbol_dec'], $this->field_config['cupodis']['symbol_grp'], $this->field_config['cupodis']['symbol_mon']); 
+          nm_limpa_valor($this->cupodis, $this->field_config['cupodis']['symbol_dec'], $this->field_config['cupodis']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['cupo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->cupo, $this->field_config['cupo']['symbol_dec'], $this->field_config['cupo']['symbol_grp'], $this->field_config['cupo']['symbol_mon']); 
+          nm_limpa_valor($this->cupo, $this->field_config['cupo']['symbol_dec'], $this->field_config['cupo']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['subtotal']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->subtotal, $this->field_config['subtotal']['symbol_dec'], $this->field_config['subtotal']['symbol_grp'], $this->field_config['subtotal']['symbol_mon']); 
+          nm_limpa_valor($this->subtotal, $this->field_config['subtotal']['symbol_dec'], $this->field_config['subtotal']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['valoriva']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->valoriva, $this->field_config['valoriva']['symbol_dec'], $this->field_config['valoriva']['symbol_grp'], $this->field_config['valoriva']['symbol_mon']); 
+          nm_limpa_valor($this->valoriva, $this->field_config['valoriva']['symbol_dec'], $this->field_config['valoriva']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['total']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->total, $this->field_config['total']['symbol_dec'], $this->field_config['total']['symbol_grp'], $this->field_config['total']['symbol_mon']); 
+          nm_limpa_valor($this->total, $this->field_config['total']['symbol_dec'], $this->field_config['total']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['adicional']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->adicional, $this->field_config['adicional']['symbol_dec'], $this->field_config['adicional']['symbol_grp'], $this->field_config['adicional']['symbol_mon']); 
+          nm_limpa_valor($this->adicional, $this->field_config['adicional']['symbol_dec'], $this->field_config['adicional']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['saldo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->saldo, $this->field_config['saldo']['symbol_dec'], $this->field_config['saldo']['symbol_grp'], $this->field_config['saldo']['symbol_mon']); 
+          nm_limpa_valor($this->saldo, $this->field_config['saldo']['symbol_dec'], $this->field_config['saldo']['symbol_grp']) ; 
+      }
+      nm_limpa_numero($this->idfacven, $this->field_config['idfacven']['symbol_grp']) ; 
+      if (!empty($this->field_config['reteiva']['symbol_dec']))
+      {
+          nm_limpa_valor($this->reteiva, $this->field_config['reteiva']['symbol_dec'], $this->field_config['reteiva']['symbol_grp']) ; 
+      }
+      if (!empty($this->field_config['imconsumo']['symbol_dec']))
+      {
+          $this->sc_remove_currency($this->imconsumo, $this->field_config['imconsumo']['symbol_dec'], $this->field_config['imconsumo']['symbol_grp'], $this->field_config['imconsumo']['symbol_mon']); 
+          nm_limpa_valor($this->imconsumo, $this->field_config['imconsumo']['symbol_dec'], $this->field_config['imconsumo']['symbol_grp']) ; 
+      }
+      $this->nm_converte_datas();
+      foreach ($varloc_btn_php as $cmp => $val_cmp)
+      {
+          $this->$cmp = $val_cmp;
+      }
+      $_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'on';
+  $vIdFV=			$this->idfacven ;
+$fec=			$this->fechaven ;
+$vIdFacinter=	$this->id_fact ;
+$i=				0;
+$vGrupo=		0;
+$unimay=		'NO';
+$facto=			0;
+$cant=			0;
+$aux=			0;
+$vSaldoF=		0;
+$vPagada=		'';
+$vCredito=		'';
+$vTotal=		0;
+
+$this->asentada =0;
+
+     $nm_select ="UPDATE facturaven set asentada='0' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+if($this->total >0)
+	{
+	if ($this->asentada ==1)
+		{
+		$this->sc_ajax_javascript('nm_field_disabled', array("tipo=disabled;resolucion=disabled;idcli=disabled;observaciones=disabled;numfacven=disabled;pagada=disabled;fechaven=disabled;fechavenc=disabled;credito=disabled;resolucion=disabled;numfacven=disabled;pedido=disabled", ""));
+;
+		$this->Ini->nm_hidden_blocos[5] = "off"; $this->NM_ajax_info['blockDisplay']['5'] = 'off';
+				
+		$idt=$this->idcli ; 
+		 
+      $nm_select = "select saldo from terceros where idtercero=$idt"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_ter = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_ter[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_ter = false;
+          $this->ds_ter_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->ds_ter[0][0]))
+			{
+			$sal=$this->ds_ter[0][0];
+			}
+		
+		 
+      $nm_select = "select saldo, credito, pagada, total from facturaven where idfacven=$vIdFacinter"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dat_f = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
+                 $SCrx->fields[3] = (string)$SCrx->fields[3];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dat_f[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dat_f = false;
+          $this->dat_f_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->dat_f[0][0]))
+			{
+			if($this->dat_f[0][0]>0)
+				{
+				$vSaldoF=$this->dat_f[0][0];
+				}
+			$vCredito=	$this->dat_f[0][1];
+			$vPagada=	$this->dat_f[0][2];
+			$vTotal=	$this->dat_f[0][3];
+			}
+		
+			if($this->tipo =='ND')
+				{
+				
+     $nm_select ="UPDATE terceros set saldo=$this->total +$sal where idtercero=$idt"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				}
+		
+			elseif($this->tipo =='NC')
+				{
+				
+				if($vCredito==2 )
+					{
+					if($vPagada=='NO' or $vPagada=='AB')
+						{
+						if($this->total ==$vSaldoF or $this->total >$vSaldoF)
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=0, pagada='SI' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						elseif($this->total <$vSaldoF)
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$vSaldoF-$this->total , pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						$this->fHacerRecibo();
+						}
+					
+					else
+						{
+						$this->fHacerRecibo();
+						}
+						
+					}
+				
+				else 
+					{
+					
+     $nm_select ="UPDATE terceros set saldo=$sal-$this->total  where idtercero=$idt"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					if($vPagada=='NO' or $vPagada=='AB')
+						{
+						if($this->total ==$vSaldoF or $this->total >$vSaldoF)
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=0, pagada='SI' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						elseif($this->total <$vSaldoF)
+							{
+							
+							
+     $nm_select ="UPDATE facturaven set saldo=$vSaldoF-$this->total , pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						$this->fHacerReciboCr($this->total -$vSaldoF);
+						}
+					
+					else
+						{
+						$this->fHacerRecibo();
+						}
+						
+					}
+						
+				}
+			
+     $nm_select ="UPDATE facturaven set idcli=$idt, asentada=1 where idfacven=$this->idfacven "; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			$this->NM_ajax_info['buttonDisplay']['imprimir'] = $this->nmgp_botoes["imprimir"] = "on";;
+			$this->NM_ajax_info['buttonDisplay']['new'] = $this->nmgp_botoes["new"] = "on";;
+			
+	
+		}
+	
+	else
+		{
+		
+		 
+      $nm_select = "select saldo, credito, pagada, total from facturaven where idfacven=$vIdFacinter"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dat_f = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[1] = str_replace(',', '.', $SCrx->fields[1]);
+                 $SCrx->fields[3] = str_replace(',', '.', $SCrx->fields[3]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
+                 $SCrx->fields[1] = (string)$SCrx->fields[1];
+                 $SCrx->fields[3] = (strpos(strtolower($SCrx->fields[3]), "e")) ? (float)$SCrx->fields[3] : $SCrx->fields[3];
+                 $SCrx->fields[3] = (string)$SCrx->fields[3];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dat_f[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dat_f = false;
+          $this->dat_f_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->dat_f[0][0]))
+			{
+			if($this->dat_f[0][0]>0)
+				{
+				$vSaldoF=$this->dat_f[0][0];
+				}
+			$vCredito=	$this->dat_f[0][1];
+			$vPagada=	$this->dat_f[0][2];
+			$vTotal=	$this->dat_f[0][3];
+			}
+				
+		$this->Ini->nm_hidden_blocos[5] = "on"; $this->NM_ajax_info['blockDisplay']['5'] = 'on';
+		
+		$idt=$this->idcli ; 
+		 
+      $nm_select = "select saldo from terceros where idtercero=$idt"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_ter = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_ter[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_ter = false;
+          $this->ds_ter_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->ds_ter[0][0]))
+			{
+			$sal=$this->ds_ter[0][0];
+			}
+		
+		if($this->tipo =='ND')
+			{
+			
+     $nm_select ="UPDATE terceros set saldo=$sal-$this->total  where idtercero=$idt"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			}
+		
+		elseif($this->tipo =='NC')
+			{
+			if($vCredito==2 )
+				{
+				if($vPagada=='SI')
+					{
+					if($vTotal==$this->total )
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$this->total , pagada='NO' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						
+						else
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+					}
+				
+				elseif($vPagada=='AB')
+					{
+					if($this->total ==$vSaldoF or $this->total >$vSaldoF)
+						{
+						if($vTotal==($this->total +$vSaldoF) or $vTotal<($this->total +$vSaldoF))
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='NO' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						else
+							{
+							
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						
+						}
+					elseif($this->total <$vSaldoF)
+						{
+						
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						}
+					}
+				$this->fBorrarRecibo();
+				}
+			
+			else 
+				{
+				
+     $nm_select ="UPDATE terceros set saldo=$this->total +$sal where idtercero=$idt"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				
+				if($vPagada=='SI' or $vPagada=='AB')
+					{
+					if($this->total ==$vTotal)
+						{
+						
+     $nm_select ="UPDATE facturaven set saldo=$vTotal, pagada='NO' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						}
+					elseif($this->total <$vTotal)
+						{
+						
+     $nm_select ="UPDATE facturaven set saldo=$this->total +$vSaldoF, pagada='AB' where idfacven=$vIdFacinter"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						}
+					}
+					
+				else
+					{
+					}
+				}
+						
+			
+			
+			
+			$this->NM_ajax_info['buttonDisplay']['imprimir'] = $this->nmgp_botoes["imprimir"] = "off";;
+			$this->NM_ajax_info['buttonDisplay']['new'] = $this->nmgp_botoes["new"] = "on";;
+			
+     $nm_select ="UPDATE facturaven set asentada=0 where idfacven=$this->idfacven "; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+				
+			}
+		}
+		
+	}
+
+else
+	{
+	$this->nm_mens_alert[] = "No ha Detallado la Nota, NO puede Asentar"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("No ha Detallado la Nota, NO puede Asentar"); }$this->asentada =0;
+	$this->NM_ajax_info['buttonDisplay']['imprimir'] = $this->nmgp_botoes["imprimir"] = "off";;
+	$this->sc_ajax_javascript('nm_field_disabled', array("numfacven=disabled;pagada=disabled;fechaven=disabled;fechavenc=disabled", ""));
+;
+	}
+
+
+
+echo "<div style='padding:10px;border-radius:8px;color:white;background:#d50011;'>Documento reversado con éxito.</div><br>";
+$_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'off'; 
+    echo ob_get_clean();
+?>
+      </td></tr><tr><td align="center">
+      <form name="FPHP" method="post" 
+                        action="<?php echo $nm_f_saida ?>" 
+                        target="_self">
+      <input type=hidden name="nmgp_opcao" value=""/>
+      <input type=hidden name="script_case_init" value="<?php  echo $this->form_encode_input($this->Ini->sc_page); ?>"/>
+      <input type=hidden name="idfacven" value="<?php echo $this->form_encode_input($this->idfacven) ?>"/>
+      <input type=hidden name="nmgp_opcao" value="<?php echo $this->form_encode_input($nmgp_opcao_saida_php); ?>"/>
+      <input type=hidden name="nmgp_opc_ant" value="<?php echo $this->form_encode_input($nmgp_opc_ant_saida_php); ?>"/>
+      <input type=submit name="nmgp_bok" value="<?php echo $this->Ini->Nm_lang['lang_btns_cfrm'] ?>"/>
+      </form>
+      </td></tr></table>
+      </body>
+      </html>
+<?php
+       if (isset($this->redir_modal) && !empty($this->redir_modal))
+       {
+           echo "<script type=\"text/javascript\">" . $this->redir_modal . "</script>";
+           $this->redir_modal = "";
+       }
+   }
 //
 //--------------------------------------------------------------------------------------
    function Formata_Erros($Campos_Crit, $Campos_Falta, $Campos_Erros, $mode = 3) 
@@ -3086,7 +5012,7 @@ $_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'off';
                return "FECHA:";
                break;
            case 'asentada':
-               return "ASENTADA?:";
+               return "ASENTADA:";
                break;
            case 'dias_decredito':
                return "DIAS CRÉDITO?:";
@@ -6693,7 +8619,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['Lookup_prefijo_f
    $unformatted_value_reteiva = $this->reteiva;
    $unformatted_value_imconsumo = $this->imconsumo;
 
-   $nm_comando = "SELECT Idres, prefijo  FROM resdian  WHERE pref_factura='SI' ORDER BY prefijo";
+   $nm_comando = "SELECT Idres, concat(prefijo,' - Vencer ',fec_vencimiento)  FROM resdian  WHERE pref_factura='SI' ORDER BY prefijo";
 
    $this->numfacven = $old_value_numfacven;
    $this->fechaven = $old_value_fechaven;
@@ -8876,6 +10802,18 @@ if(isset($this->idfacven ) or $this->idfacven >0)
 		$this->NM_ajax_info['buttonDisplay']['rc'] = $this->nmgp_botoes["rc"] = "off";;
 		}
 	}
+
+
+if($this->asentada ==1)
+{
+	$this->NM_ajax_info['buttonDisplay']['btn_asentar'] = $this->nmgp_botoes["btn_asentar"] = "off";;
+	$this->NM_ajax_info['buttonDisplay']['btn_reversar'] = $this->nmgp_botoes["btn_reversar"] = "on";;
+}
+else
+{
+	$this->NM_ajax_info['buttonDisplay']['btn_asentar'] = $this->nmgp_botoes["btn_asentar"] = "on";;
+	$this->NM_ajax_info['buttonDisplay']['btn_reversar'] = $this->nmgp_botoes["btn_reversar"] = "off";;
+}
 if (isset($this->sc_temp_gCupoilimitado)) { $_SESSION['gCupoilimitado'] = $this->sc_temp_gCupoilimitado;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
@@ -10601,6 +12539,8 @@ $_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'off';
               $this->nmgp_botoes['Eliminar'] = "on";
               $this->nmgp_botoes['rc'] = "on";
               $this->nmgp_botoes['autorizar'] = "off";
+              $this->nmgp_botoes['btn_asentar'] = "on";
+              $this->nmgp_botoes['btn_reversar'] = "on";
               $this->return_after_insert();
               }
               $this->nm_flag_iframe = true;
@@ -10858,9 +12798,14 @@ if(isset($this->ds[0][0]))
 		 $sab.=$ads[18];
 		 $laobs.=$ads[21];
 		 $descpro.=$ads[22];
+		 
+		 if($unimay!='SI' and $unimay!='NO')
+		 {
+		 	$unimay = "NO";
+		 }
 
 
-     $nm_select ="insert detalleventa set numfac=$vIdFV, remision=0, idpro=$idproducto, unidadmayor='$unimay', factor=$facto, idbod=$bod, costop=$cost, cantidad=$cantidad, valorunit=$vunit, valorpar=$vparcial, iva=$iva, descuento=$desc, adicional=$tiva, adicional1=$tdes, devuelto=0, colores=$col, tallas=$tal, sabor=$sab, obs='$laobs', tipo_doc='$tipodocu', id_nota=$idnota"; 
+     $nm_select ="insert detalleventa set numfac=$vIdFV, remision=0, idpro=$idproducto, unidadmayor='$unimay', factor=$facto, idbod=$bod, costop=$cost, cantidad=$cantidad, valorunit=$vunit, valorpar=$vparcial, iva=$iva, descuento=$desc, adicional=$tiva, adicional1=$tdes, devuelto=0, colores=$col, tallas=$tal, sabor=$sab, obs='$laobs', tipo_doc='$tipodocu', id_nota=$idnota, tipo_tran='DEV'"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -11273,6 +13218,8 @@ $_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'off';
                   $this->NM_ajax_info['buttonDisplay']['Eliminar'] = $this->nmgp_botoes['Eliminar'] = "off";
                   $this->NM_ajax_info['buttonDisplay']['rc'] = $this->nmgp_botoes['rc'] = "off";
                   $this->NM_ajax_info['buttonDisplay']['autorizar'] = $this->nmgp_botoes['autorizar'] = "off";
+                  $this->NM_ajax_info['buttonDisplay']['btn_asentar'] = $this->nmgp_botoes['btn_asentar'] = "off";
+                  $this->NM_ajax_info['buttonDisplay']['btn_reversar'] = $this->nmgp_botoes['btn_reversar'] = "off";
                   $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['empty_filter'] = true;
                   return; 
               }
@@ -11291,6 +13238,8 @@ $_SESSION['scriptcase']['form_notas_mob']['contr_erro'] = 'off';
               $this->NM_ajax_info['buttonDisplay']['Eliminar'] = $this->nmgp_botoes['Eliminar'] = "off";
               $this->NM_ajax_info['buttonDisplay']['rc'] = $this->nmgp_botoes['rc'] = "off";
               $this->NM_ajax_info['buttonDisplay']['autorizar'] = $this->nmgp_botoes['autorizar'] = "on";
+              $this->NM_ajax_info['buttonDisplay']['btn_asentar'] = $this->nmgp_botoes['btn_asentar'] = "off";
+              $this->NM_ajax_info['buttonDisplay']['btn_reversar'] = $this->nmgp_botoes['btn_reversar'] = "off";
               if ($this->aba_iframe)
               {
                   $this->NM_ajax_info['buttonDisplay']['exit'] = $this->nmgp_botoes['exit'] = 'off';
@@ -15628,7 +17577,7 @@ else
    $unformatted_value_reteiva = $this->reteiva;
    $unformatted_value_imconsumo = $this->imconsumo;
 
-   $nm_comando = "SELECT Idres, prefijo  FROM resdian  WHERE pref_factura='SI' ORDER BY prefijo";
+   $nm_comando = "SELECT Idres, concat(prefijo,' - Vencer ',fec_vencimiento)  FROM resdian  WHERE pref_factura='SI' ORDER BY prefijo";
 
    $this->numfacven = $old_value_numfacven;
    $this->fechaven = $old_value_fechaven;
@@ -17579,6 +19528,12 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
                 break;
             case "rc":
                 return array("sc_rc_top");
+                break;
+            case "btn_asentar":
+                return array("sc_btn_asentar_top");
+                break;
+            case "btn_reversar":
+                return array("sc_btn_reversar_top");
                 break;
             case "imprimir":
                 return array("sc_imprimir_top");

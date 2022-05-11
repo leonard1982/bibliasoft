@@ -162,22 +162,22 @@
 .css_notificar_obj { }
 .css_puc_auxiliar_deudores_label { }
 .css_puc_auxiliar_deudores_line { }
-.css_puc_auxiliar_deudores_obj { }
+.css_puc_auxiliar_deudores_obj {width:200px;}
 .css_puc_retefuente_ventas_label { }
 .css_puc_retefuente_ventas_line { }
-.css_puc_retefuente_ventas_obj { }
+.css_puc_retefuente_ventas_obj {width:200px;}
 .css_puc_retefuente_servicios_clie_label { }
 .css_puc_retefuente_servicios_clie_line { }
-.css_puc_retefuente_servicios_clie_obj { }
+.css_puc_retefuente_servicios_clie_obj {width:200px;}
 .css_puc_auxiliar_proveedores_label { }
 .css_puc_auxiliar_proveedores_line { }
-.css_puc_auxiliar_proveedores_obj { }
+.css_puc_auxiliar_proveedores_obj {width:200px;}
 .css_puc_retefuente_compras_label { }
 .css_puc_retefuente_compras_line { }
-.css_puc_retefuente_compras_obj { }
+.css_puc_retefuente_compras_obj {width:200px;}
 .css_puc_retefuente_servicios_prov_label { }
 .css_puc_retefuente_servicios_prov_line { }
-.css_puc_retefuente_servicios_prov_obj { }
+.css_puc_retefuente_servicios_prov_obj {width:200px;}
 .css_activo_label { }
 .css_activo_line { }
 .css_activo_obj { }
@@ -235,6 +235,24 @@
 .css_n_trabajadores_label { }
 .css_n_trabajadores_line {text-align:left;}
 .css_n_trabajadores_obj {text-align:left;}
+.css_id_pucaux_cliente_label { }
+.css_id_pucaux_cliente_line {text-align:left;}
+.css_id_pucaux_cliente_obj {text-align:left;width:200px;}
+.css_id_pucaux_retteventas_label { }
+.css_id_pucaux_retteventas_line {text-align:left;}
+.css_id_pucaux_retteventas_obj {text-align:left;width:200px;}
+.css_id_pucaux_retteservicios_label { }
+.css_id_pucaux_retteservicios_line {text-align:left;}
+.css_id_pucaux_retteservicios_obj {text-align:left;width:200px;}
+.css_id_pucaux_proveedor_label { }
+.css_id_pucaux_proveedor_line {text-align:left;}
+.css_id_pucaux_proveedor_obj {text-align:left;width:200px;}
+.css_id_pucaux_rettecompras_label { }
+.css_id_pucaux_rettecompras_line {text-align:left;}
+.css_id_pucaux_rettecompras_obj {text-align:left;width:200px;}
+.css_id_pucaux_rettesercomp_label { }
+.css_id_pucaux_rettesercomp_line {text-align:left;}
+.css_id_pucaux_rettesercomp_obj {text-align:left;width:200px;}
 .css_archivos_label { }
 .css_archivos_line { }
 .css_archivos_obj { }
@@ -253,6 +271,9 @@
 .css_detalle_tributario_label {text-align:center;}
 .css_detalle_tributario_line {text-align:center;}
 .css_detalle_tributario_obj {text-align:center;}
+.css_direcciones_label { }
+.css_direcciones_line { }
+.css_direcciones_obj { }
 .css_r_social_label { }
 .css_r_social_line { }
 .css_r_social_obj {width:350px;}
@@ -262,6 +283,3 @@
 .css_responsabilidad_fiscal_label {text-align:center;}
 .css_responsabilidad_fiscal_line {text-align:center;}
 .css_responsabilidad_fiscal_obj {text-align:center;}
-.css_direcciones_label { }
-.css_direcciones_line { }
-.css_direcciones_obj { }

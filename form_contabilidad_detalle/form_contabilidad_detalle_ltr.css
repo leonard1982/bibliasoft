@@ -1,0 +1,24 @@
+.css_id_label { }
+.css_id_line {text-align:left;}
+.css_id_obj {text-align:left;}
+.css_id_contabilidad_label { }
+.css_id_contabilidad_line {text-align:left;}
+.css_id_contabilidad_obj {text-align:left;}
+.css_id_puc_label { }
+.css_id_puc_line {text-align:left;}
+.css_id_puc_obj {text-align:left;width:150px;}
+.css_valor_label { }
+.css_valor_line {text-align:left;}
+.css_valor_obj {text-align:right;}
+.css_tipo_label { }
+.css_tipo_line { }
+.css_tipo_obj {text-align:left;width:100px;}
+.css_id_tercero_label { }
+.css_id_tercero_line {text-align:left;}
+.css_id_tercero_obj {text-align:left;width:150px;}
+.css_notas_label { }
+.css_notas_line { }
+.css_notas_obj {width:200px;}
+.css_ndocumento_label { }
+.css_ndocumento_line { }
+.css_ndocumento_obj {width:150px;}

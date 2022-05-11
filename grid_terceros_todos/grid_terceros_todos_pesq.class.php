@@ -2005,54 +2005,6 @@ function nm_open_popup(parms)
  </SCRIPT>
 <script type="text/javascript">
  $(function() {
-  $(".sc-ui-autocomp-documento").on("focus", function() {
-  }).on("blur", function() {
-  }).on("keydown", function(e) {
-   if(e.keyCode == $.ui.keyCode.TAB && $(".ui-autocomplete").filter(":visible").length) {
-    e.keyCode = $.ui.keyCode.DOWN;
-    $(this).trigger(e);
-    e.keyCode = $.ui.keyCode.ENTER;
-    $(this).trigger(e);
-   }
-  }).select2({
-   minimumInputLength: 1,
-   language: {
-    inputTooShort: function() {
-     return "<?php echo sprintf($this->Ini->Nm_lang['lang_autocomp_tooshort'], 1) ?>";
-    },
-    containerCssClass: 'scGridFilterDivResult',
-    dropdownCssClass: 'scGridFilterDivDropdown',
-    noResults: function() {
-     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
-    },
-    searching: function() {
-     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
-    }
-   },
-   width: "300px",
-   ajax: {
-    url: "index.php",
-    dataType: "json",
-    processResults: function (data) {
-      if (data == "ss_time_out") {
-          nm_move();
-      }
-      return data;
-    },
-    data: function (params) {
-     var query = {
-      q: params.term,
-      nmgp_opcao: "ajax_autocomp",
-      nmgp_parms: "NM_ajax_opcao?#?autocomp_documento",
-      max_itens: "10",
-      script_case_init: <?php echo $this->Ini->sc_page ?>
-     }
-     return query;
-    }
-   }
-  }).on("select2:select", function(e) {;
-   $("#SC_documento").val(e.params.data.id);
-  });
   $(".sc-ui-autocomp-nombres").on("focus", function() {
   }).on("blur", function() {
   }).on("keydown", function(e) {
@@ -2100,6 +2052,54 @@ function nm_open_popup(parms)
    }
   }).on("select2:select", function(e) {;
    $("#SC_nombres").val(e.params.data.id);
+  });
+  $(".sc-ui-autocomp-documento").on("focus", function() {
+  }).on("blur", function() {
+  }).on("keydown", function(e) {
+   if(e.keyCode == $.ui.keyCode.TAB && $(".ui-autocomplete").filter(":visible").length) {
+    e.keyCode = $.ui.keyCode.DOWN;
+    $(this).trigger(e);
+    e.keyCode = $.ui.keyCode.ENTER;
+    $(this).trigger(e);
+   }
+  }).select2({
+   minimumInputLength: 1,
+   language: {
+    inputTooShort: function() {
+     return "<?php echo sprintf($this->Ini->Nm_lang['lang_autocomp_tooshort'], 1) ?>";
+    },
+    containerCssClass: 'scGridFilterDivResult',
+    dropdownCssClass: 'scGridFilterDivDropdown',
+    noResults: function() {
+     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
+    },
+    searching: function() {
+     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
+    }
+   },
+   width: "300px",
+   ajax: {
+    url: "index.php",
+    dataType: "json",
+    processResults: function (data) {
+      if (data == "ss_time_out") {
+          nm_move();
+      }
+      return data;
+    },
+    data: function (params) {
+     var query = {
+      q: params.term,
+      nmgp_opcao: "ajax_autocomp",
+      nmgp_parms: "NM_ajax_opcao?#?autocomp_documento",
+      max_itens: "10",
+      script_case_init: <?php echo $this->Ini->sc_page ?>
+     }
+     return query;
+    }
+   }
+  }).on("select2:select", function(e) {;
+   $("#SC_documento").val(e.params.data.id);
   });
  });
 </script>

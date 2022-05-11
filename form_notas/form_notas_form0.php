@@ -1029,6 +1029,82 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
 <?php
         $NM_btn = true;
     }
+    if (($opcao_botoes != "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['btn_asentar'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_disabled']['btn_asentar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_disabled']['btn_asentar']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_asentar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_asentar']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_asentar'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "btn_asentar", "scBtnFn_btn_asentar()", "scBtnFn_btn_asentar()", "sc_btn_asentar_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes == "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['btn_asentar'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_disabled']['btn_asentar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_disabled']['btn_asentar']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_asentar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_asentar']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_asentar'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "btn_asentar", "scBtnFn_btn_asentar()", "scBtnFn_btn_asentar()", "sc_btn_asentar_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes != "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['btn_reversar'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_disabled']['btn_reversar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_disabled']['btn_reversar']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_reversar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_reversar']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_reversar'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "btn_reversar", "scBtnFn_btn_reversar()", "scBtnFn_btn_reversar()", "sc_btn_reversar_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes == "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['btn_reversar'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_disabled']['btn_reversar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_disabled']['btn_reversar']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_reversar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_reversar']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['btn_label']['btn_reversar'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "btn_reversar", "scBtnFn_btn_reversar()", "scBtnFn_btn_reversar()", "sc_btn_reversar_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
 ?> 
      </td> 
      <td nowrap align="right" valign="middle" width="33%" class="scFormToolbarPadding"> 
@@ -1239,6 +1315,10 @@ unset($NM_ult_sep);
    if (!isset($this->nmgp_cmp_hidden['pagada']))
    {
        $this->nmgp_cmp_hidden['pagada'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['asentada']))
+   {
+       $this->nmgp_cmp_hidden['asentada'] = 'off';
    }
    if (!isset($this->nmgp_cmp_hidden['pedido']))
    {
@@ -1970,11 +2050,15 @@ if ('scButton_' == substr($miniCalendarButton[1], 0, 9)) {
    <?php
    if (!isset($this->nm_new_label['asentada']))
    {
-       $this->nm_new_label['asentada'] = "ASENTADA?:";
+       $this->nm_new_label['asentada'] = "ASENTADA:";
    }
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
    $asentada = $this->asentada;
+   if (!isset($this->nmgp_cmp_hidden['asentada']))
+   {
+       $this->nmgp_cmp_hidden['asentada'] = 'off';
+   }
    $sStyleHidden_asentada = '';
    if (isset($this->nmgp_cmp_hidden['asentada']) && $this->nmgp_cmp_hidden['asentada'] == 'off')
    {
@@ -2377,7 +2461,7 @@ else
    $unformatted_value_reteiva = $this->reteiva;
    $unformatted_value_imconsumo = $this->imconsumo;
 
-   $nm_comando = "SELECT Idres, prefijo  FROM resdian  WHERE pref_factura='SI' ORDER BY prefijo";
+   $nm_comando = "SELECT Idres, concat(prefijo,' - Vencer ',fec_vencimiento)  FROM resdian  WHERE pref_factura='SI' ORDER BY prefijo";
 
    $this->numfacven = $old_value_numfacven;
    $this->fechaven = $old_value_fechaven;
@@ -6047,6 +6131,24 @@ scAjax_displayEmptyForm();
 		        return;
 		    }
 			sc_btn_rc()
+			 return;
+		}
+	}
+	function scBtnFn_btn_asentar() {
+		if ($("#sc_btn_asentar_top").length && $("#sc_btn_asentar_top").is(":visible")) {
+		    if ($("#sc_btn_asentar_top").hasClass("disabled")) {
+		        return;
+		    }
+			sc_btn_btn_asentar()
+			 return;
+		}
+	}
+	function scBtnFn_btn_reversar() {
+		if ($("#sc_btn_reversar_top").length && $("#sc_btn_reversar_top").is(":visible")) {
+		    if ($("#sc_btn_reversar_top").hasClass("disabled")) {
+		        return;
+		    }
+			sc_btn_btn_reversar()
 			 return;
 		}
 	}

@@ -24,8 +24,8 @@
 .css_costomen_grid_line {vertical-align: top;text-align: right;}
 .css_idpro1_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_idpro1_grid_line {vertical-align: middle;text-align: right;}
-.css_escombo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_escombo_grid_line {vertical-align: top;text-align: right;}
+.css_combo_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
+.css_combo_grid_line {text-align: center;}
 .css_agregarnotainv_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
 .css_agregarnotainv_grid_line {text-align: center;}
 .css_idprod_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
@@ -46,6 +46,8 @@
 .css_otro_grid_line {vertical-align: middle;text-align: center;}
 .css_otro2_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
 .css_otro2_grid_line {vertical-align: middle;text-align: center;}
+.css_escombo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_escombo_grid_line {vertical-align: top;text-align: right;}
 .css_preciomen2_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_preciomen2_grid_line {vertical-align: top;text-align: right;}
 .css_preciomen3_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}

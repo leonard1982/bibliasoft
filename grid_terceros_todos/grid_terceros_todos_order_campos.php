@@ -94,12 +94,16 @@ function Ord_cmp_init()
    $tab_ger_campos = array();
    $tab_def_campos = array();
    $tab_labels     = array();
-   $tab_ger_campos['documento'] = "on";
-   $tab_def_campos['documento'] = "documento";
-   $tab_labels["documento"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["documento"])) ? $_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["documento"] : "Cédula/Nit";
-   $tab_ger_campos['dv'] = "on";
-   $tab_def_campos['dv'] = "dv";
-   $tab_labels["dv"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["dv"])) ? $_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["dv"] : "DV";
+   $tab_ger_campos['ccnit'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['ccnit'] = "ccnit";
+   }
+   else
+   {
+       $tab_def_campos['ccnit'] = "(if(dv is not null and dv <>'',concat(documento,'-',dv),documento))";
+   }
+   $tab_labels["ccnit"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["ccnit"])) ? $_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["ccnit"] : "Identificación";
    $tab_ger_campos['nombres'] = "on";
    $tab_def_campos['nombres'] = "nombres";
    $tab_labels["nombres"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["nombres"])) ? $_SESSION['sc_session'][$sc_init]['grid_terceros_todos']['labels']["nombres"] : "Nombres";
@@ -247,7 +251,7 @@ function Sel_processa_form()
           $this->Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
       }
    }
-   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
+   $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
    $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";

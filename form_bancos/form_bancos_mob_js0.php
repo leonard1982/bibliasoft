@@ -81,7 +81,11 @@ function nm_move(x, y, z)
        $NM_parm_ifr = (isset($NM_run_iframe) && $NM_run_iframe == 1) ? "NM_run_iframe?#?1?@?" : "";
 ?>
         document.F2.nmgp_parms.value = "<?php echo $NM_parm_ifr ?>";
-        document.F2.submit();
+        if (scFormHasChanged) {
+          scJs_confirm('<?php echo html_entity_decode($this->Ini->Nm_lang['lang_reload_confirm']) ?>', function() { document.F2.submit(); }, function() {});
+        } else {
+          document.F2.submit();
+        }
     }
     else
     {

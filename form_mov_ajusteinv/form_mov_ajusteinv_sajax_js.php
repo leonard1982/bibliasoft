@@ -3107,117 +3107,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_form_mov_ajusteinv_validate_idpro_cb
 
-  // ---------- Validate colores
-  function do_ajax_form_mov_ajusteinv_validate_colores()
-  {
-    var nomeCampo_colores = "colores";
-    var var_colores = scAjaxGetFieldSelect(nomeCampo_colores);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_mov_ajusteinv_validate_colores(var_colores, var_script_case_init, do_ajax_form_mov_ajusteinv_validate_colores_cb);
-  } // do_ajax_form_mov_ajusteinv_validate_colores
-
-  function do_ajax_form_mov_ajusteinv_validate_colores_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "colores";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_mov_ajusteinv_validate_colores_cb
-
-  // ---------- Validate tallas
-  function do_ajax_form_mov_ajusteinv_validate_tallas()
-  {
-    var nomeCampo_tallas = "tallas";
-    var var_tallas = scAjaxGetFieldSelect(nomeCampo_tallas);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_mov_ajusteinv_validate_tallas(var_tallas, var_script_case_init, do_ajax_form_mov_ajusteinv_validate_tallas_cb);
-  } // do_ajax_form_mov_ajusteinv_validate_tallas
-
-  function do_ajax_form_mov_ajusteinv_validate_tallas_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "tallas";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_mov_ajusteinv_validate_tallas_cb
-
-  // ---------- Validate sabor
-  function do_ajax_form_mov_ajusteinv_validate_sabor()
-  {
-    var nomeCampo_sabor = "sabor";
-    var var_sabor = scAjaxGetFieldSelect(nomeCampo_sabor);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_mov_ajusteinv_validate_sabor(var_sabor, var_script_case_init, do_ajax_form_mov_ajusteinv_validate_sabor_cb);
-  } // do_ajax_form_mov_ajusteinv_validate_sabor
-
-  function do_ajax_form_mov_ajusteinv_validate_sabor_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "sabor";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_mov_ajusteinv_validate_sabor_cb
-
   // ---------- Validate presentacion
   function do_ajax_form_mov_ajusteinv_validate_presentacion()
   {
@@ -3254,43 +3143,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetMaster();
     scAjaxSetFocus();
   } // do_ajax_form_mov_ajusteinv_validate_presentacion_cb
-
-  // ---------- Validate seleccionarlfs
-  function do_ajax_form_mov_ajusteinv_validate_seleccionarlfs()
-  {
-    var nomeCampo_seleccionarlfs = "seleccionarlfs";
-    var var_seleccionarlfs = scAjaxGetFieldSelect(nomeCampo_seleccionarlfs);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_mov_ajusteinv_validate_seleccionarlfs(var_seleccionarlfs, var_script_case_init, do_ajax_form_mov_ajusteinv_validate_seleccionarlfs_cb);
-  } // do_ajax_form_mov_ajusteinv_validate_seleccionarlfs
-
-  function do_ajax_form_mov_ajusteinv_validate_seleccionarlfs_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "seleccionarlfs";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_mov_ajusteinv_validate_seleccionarlfs_cb
 
   // ---------- Validate cantidad
   function do_ajax_form_mov_ajusteinv_validate_cantidad()
@@ -3403,80 +3255,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_form_mov_ajusteinv_validate_stcock_cb
 
-  // ---------- Validate lote
-  function do_ajax_form_mov_ajusteinv_validate_lote()
-  {
-    var nomeCampo_lote = "lote";
-    var var_lote = scAjaxGetFieldText(nomeCampo_lote);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_mov_ajusteinv_validate_lote(var_lote, var_script_case_init, do_ajax_form_mov_ajusteinv_validate_lote_cb);
-  } // do_ajax_form_mov_ajusteinv_validate_lote
-
-  function do_ajax_form_mov_ajusteinv_validate_lote_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "lote";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_mov_ajusteinv_validate_lote_cb
-
-  // ---------- Validate vence
-  function do_ajax_form_mov_ajusteinv_validate_vence()
-  {
-    var nomeCampo_vence = "vence";
-    var var_vence = scAjaxGetFieldText(nomeCampo_vence);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_mov_ajusteinv_validate_vence(var_vence, var_script_case_init, do_ajax_form_mov_ajusteinv_validate_vence_cb);
-  } // do_ajax_form_mov_ajusteinv_validate_vence
-
-  function do_ajax_form_mov_ajusteinv_validate_vence_cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    sFieldValid = "vence";
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_mov_ajusteinv_validate_vence_cb
-
   // ---------- Validate observaciones
   function do_ajax_form_mov_ajusteinv_validate_observaciones()
   {
@@ -3540,14 +3318,11 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   function do_ajax_form_mov_ajusteinv_event_idbodorig_onchange()
   {
     var var_idpro = scAjaxGetFieldSelect("idpro");
-    var var_colores = scAjaxGetFieldSelect("colores");
-    var var_tallas = scAjaxGetFieldSelect("tallas");
-    var var_sabor = scAjaxGetFieldSelect("sabor");
     var var_idbodorig = scAjaxGetFieldSelect("idbodorig");
     var var_stcock = scAjaxGetFieldHidden("stcock");
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn(true);
-    x_ajax_form_mov_ajusteinv_event_idbodorig_onchange(var_idpro, var_colores, var_tallas, var_sabor, var_idbodorig, var_stcock, var_script_case_init, do_ajax_form_mov_ajusteinv_event_idbodorig_onchange_cb);
+    x_ajax_form_mov_ajusteinv_event_idbodorig_onchange(var_idpro, var_idbodorig, var_stcock, var_script_case_init, do_ajax_form_mov_ajusteinv_event_idbodorig_onchange_cb);
   } // do_ajax_form_mov_ajusteinv_event_idbodorig_onchange
 
   function do_ajax_form_mov_ajusteinv_event_idbodorig_onchange_cb(sResp)
@@ -3638,15 +3413,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   // ---------- Event onchange seleccionarlfs
   function do_ajax_form_mov_ajusteinv_event_seleccionarlfs_onchange()
   {
-    var var_seleccionarlfs = scAjaxGetFieldSelect("seleccionarlfs");
     var var_idbodorig = scAjaxGetFieldSelect("idbodorig");
-    var var_lote = scAjaxGetFieldText("lote");
-    var var_vence = scAjaxGetFieldText("vence");
     var var_cantidad = scAjaxGetFieldText("cantidad");
     var var_stcock = scAjaxGetFieldHidden("stcock");
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn(true);
-    x_ajax_form_mov_ajusteinv_event_seleccionarlfs_onchange(var_seleccionarlfs, var_idbodorig, var_lote, var_vence, var_cantidad, var_stcock, var_script_case_init, do_ajax_form_mov_ajusteinv_event_seleccionarlfs_onchange_cb);
+    x_ajax_form_mov_ajusteinv_event_seleccionarlfs_onchange(var_idbodorig, var_cantidad, var_stcock, var_script_case_init, do_ajax_form_mov_ajusteinv_event_seleccionarlfs_onchange_cb);
   } // do_ajax_form_mov_ajusteinv_event_seleccionarlfs_onchange
 
   function do_ajax_form_mov_ajusteinv_event_seleccionarlfs_onchange_cb(sResp)
@@ -3727,16 +3499,10 @@ function scJs_confirm(message, callbackOk, callbackCancel) {
     var var_idtipotran = scAjaxGetFieldSelect("idtipotran");
     var var_fecha = scAjaxGetFieldText("fecha");
     var var_idpro = scAjaxGetFieldSelect("idpro");
-    var var_colores = scAjaxGetFieldSelect("colores");
-    var var_tallas = scAjaxGetFieldSelect("tallas");
-    var var_sabor = scAjaxGetFieldSelect("sabor");
     var var_presentacion = scAjaxGetFieldText("presentacion");
-    var var_seleccionarlfs = scAjaxGetFieldSelect("seleccionarlfs");
     var var_cantidad = scAjaxGetFieldText("cantidad");
     var var_idbodorig = scAjaxGetFieldSelect("idbodorig");
     var var_stcock = scAjaxGetFieldHidden("stcock");
-    var var_lote = scAjaxGetFieldText("lote");
-    var var_vence = scAjaxGetFieldText("vence");
     var var_observaciones = scAjaxGetFieldText("observaciones");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
@@ -3747,7 +3513,7 @@ function scJs_confirm(message, callbackOk, callbackCancel) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_mov_ajusteinv_submit_form(var_prefijonota, var_numeronota, var_idtipotran, var_fecha, var_idpro, var_colores, var_tallas, var_sabor, var_presentacion, var_seleccionarlfs, var_cantidad, var_idbodorig, var_stcock, var_lote, var_vence, var_observaciones, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_mov_ajusteinv_submit_form_cb);
+    x_ajax_form_mov_ajusteinv_submit_form(var_prefijonota, var_numeronota, var_idtipotran, var_fecha, var_idpro, var_presentacion, var_cantidad, var_idbodorig, var_stcock, var_observaciones, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_mov_ajusteinv_submit_form_cb);
   } // do_ajax_form_mov_ajusteinv_submit_form
 
   function do_ajax_form_mov_ajusteinv_submit_form_cb(sResp)
@@ -3776,16 +3542,10 @@ function scJs_confirm(message, callbackOk, callbackCancel) {
       scAjaxHideErrorDisplay("idtipotran");
       scAjaxHideErrorDisplay("fecha");
       scAjaxHideErrorDisplay("idpro");
-      scAjaxHideErrorDisplay("colores");
-      scAjaxHideErrorDisplay("tallas");
-      scAjaxHideErrorDisplay("sabor");
       scAjaxHideErrorDisplay("presentacion");
-      scAjaxHideErrorDisplay("seleccionarlfs");
       scAjaxHideErrorDisplay("cantidad");
       scAjaxHideErrorDisplay("idbodorig");
       scAjaxHideErrorDisplay("stcock");
-      scAjaxHideErrorDisplay("lote");
-      scAjaxHideErrorDisplay("vence");
       scAjaxHideErrorDisplay("observaciones");
       scLigEditLookupCall();
 <?php
@@ -3850,16 +3610,10 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv']['da
     scAjaxHideErrorDisplay("idtipotran");
     scAjaxHideErrorDisplay("fecha");
     scAjaxHideErrorDisplay("idpro");
-    scAjaxHideErrorDisplay("colores");
-    scAjaxHideErrorDisplay("tallas");
-    scAjaxHideErrorDisplay("sabor");
     scAjaxHideErrorDisplay("presentacion");
-    scAjaxHideErrorDisplay("seleccionarlfs");
     scAjaxHideErrorDisplay("cantidad");
     scAjaxHideErrorDisplay("idbodorig");
     scAjaxHideErrorDisplay("stcock");
-    scAjaxHideErrorDisplay("lote");
-    scAjaxHideErrorDisplay("vence");
     scAjaxHideErrorDisplay("observaciones");
     var var_idmov = document.F2.idmov.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
@@ -3952,24 +3706,17 @@ if ($this->Embutida_form)
   ajax_field_list[2] = "idtipotran";
   ajax_field_list[3] = "fecha";
   ajax_field_list[4] = "idpro";
-  ajax_field_list[5] = "colores";
-  ajax_field_list[6] = "tallas";
-  ajax_field_list[7] = "sabor";
-  ajax_field_list[8] = "presentacion";
-  ajax_field_list[9] = "seleccionarlfs";
-  ajax_field_list[10] = "cantidad";
-  ajax_field_list[11] = "idbodorig";
-  ajax_field_list[12] = "stcock";
-  ajax_field_list[13] = "lote";
-  ajax_field_list[14] = "vence";
-  ajax_field_list[15] = "observaciones";
+  ajax_field_list[5] = "presentacion";
+  ajax_field_list[6] = "cantidad";
+  ajax_field_list[7] = "idbodorig";
+  ajax_field_list[8] = "stcock";
+  ajax_field_list[9] = "observaciones";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
   ajax_block_list[1] = "1";
   ajax_block_list[2] = "2";
   ajax_block_list[3] = "3";
-  ajax_block_list[4] = "4";
 
   var ajax_error_list = {
     "prefijonota": {"label": "Prefijo", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -3977,16 +3724,10 @@ if ($this->Embutida_form)
     "idtipotran": {"label": "Concepto del ajuste", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "fecha": {"label": "Fecha", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "idpro": {"label": "Producto", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "colores": {"label": "Color", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "tallas": {"label": "Talla", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "sabor": {"label": "Sabor", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "presentacion": {"label": "Presentación", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "seleccionarlfs": {"label": "Seleccione", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "cantidad": {"label": "Cantidad", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "idbodorig": {"label": "Ubicación", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "stcock": {"label": "Existencia en ubicación", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "lote": {"label": "Lote", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "vence": {"label": "Vence", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "observaciones": {"label": "Observaciones", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
@@ -3995,16 +3736,14 @@ if ($this->Embutida_form)
     "0": "hidden_bloco_0",
     "1": "hidden_bloco_1",
     "2": "hidden_bloco_2",
-    "3": "hidden_bloco_3",
-    "4": "hidden_bloco_4"
+    "3": "hidden_bloco_3"
   };
 
   var ajax_block_tab = {
     "hidden_bloco_0": "",
     "hidden_bloco_1": "",
     "hidden_bloco_2": "",
-    "hidden_bloco_3": "",
-    "hidden_bloco_4": ""
+    "hidden_bloco_3": ""
   };
 
   var ajax_field_mult = {
@@ -4013,16 +3752,10 @@ if ($this->Embutida_form)
     "idtipotran": new Array(),
     "fecha": new Array(),
     "idpro": new Array(),
-    "colores": new Array(),
-    "tallas": new Array(),
-    "sabor": new Array(),
     "presentacion": new Array(),
-    "seleccionarlfs": new Array(),
     "cantidad": new Array(),
     "idbodorig": new Array(),
     "stcock": new Array(),
-    "lote": new Array(),
-    "vence": new Array(),
     "observaciones": new Array()
   };
   ajax_field_mult["prefijonota"][1] = "prefijonota";
@@ -4030,16 +3763,10 @@ if ($this->Embutida_form)
   ajax_field_mult["idtipotran"][1] = "idtipotran";
   ajax_field_mult["fecha"][1] = "fecha";
   ajax_field_mult["idpro"][1] = "idpro";
-  ajax_field_mult["colores"][1] = "colores";
-  ajax_field_mult["tallas"][1] = "tallas";
-  ajax_field_mult["sabor"][1] = "sabor";
   ajax_field_mult["presentacion"][1] = "presentacion";
-  ajax_field_mult["seleccionarlfs"][1] = "seleccionarlfs";
   ajax_field_mult["cantidad"][1] = "cantidad";
   ajax_field_mult["idbodorig"][1] = "idbodorig";
   ajax_field_mult["stcock"][1] = "stcock";
-  ajax_field_mult["lote"][1] = "lote";
-  ajax_field_mult["vence"][1] = "vence";
   ajax_field_mult["observaciones"][1] = "observaciones";
 
   var ajax_field_id = {
@@ -4049,12 +3776,9 @@ if ($this->Embutida_form)
     "fecha": new Array("hidden_field_label_fecha", "hidden_field_data_fecha"),
     "idpro": new Array("hidden_field_label_idpro", "hidden_field_data_idpro"),
     "presentacion": new Array("hidden_field_label_presentacion", "hidden_field_data_presentacion"),
-    "seleccionarlfs": new Array("hidden_field_label_seleccionarlfs", "hidden_field_data_seleccionarlfs"),
     "cantidad": new Array("hidden_field_label_cantidad", "hidden_field_data_cantidad"),
     "idbodorig": new Array("hidden_field_label_idbodorig", "hidden_field_data_idbodorig"),
     "stcock": new Array("hidden_field_label_stcock", "hidden_field_data_stcock"),
-    "lote": new Array("hidden_field_label_lote", "hidden_field_data_lote"),
-    "vence": new Array("hidden_field_label_vence", "hidden_field_data_vence"),
     "observaciones": new Array("hidden_field_label_observaciones", "hidden_field_data_observaciones")
   };
 
@@ -4064,16 +3788,10 @@ if ($this->Embutida_form)
     "idtipotran": "off",
     "fecha": "off",
     "idpro": "off",
-    "colores": "off",
-    "tallas": "off",
-    "sabor": "off",
     "presentacion": "off",
-    "seleccionarlfs": "off",
     "cantidad": "off",
     "idbodorig": "off",
     "stcock": "off",
-    "lote": "off",
-    "vence": "off",
     "observaciones": "off"
   };
   var bRefreshTable = false;
@@ -4171,77 +3889,9 @@ if ($this->Embutida_form)
 
       return;
     }
-    if ("colores" == sIndex)
-    {
-      scAjaxSetFieldSelect(sIndex, aValue, null);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("tallas" == sIndex)
-    {
-      scAjaxSetFieldSelect(sIndex, aValue, null);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("sabor" == sIndex)
-    {
-      scAjaxSetFieldSelect(sIndex, aValue, null);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
     if ("presentacion" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("seleccionarlfs" == sIndex)
-    {
-      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -4293,40 +3943,6 @@ if ($this->Embutida_form)
     if ("stcock" == sIndex)
     {
       scAjaxSetFieldLabel(sIndex, aValue);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("lote" == sIndex)
-    {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("vence" == sIndex)
-    {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

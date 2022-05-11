@@ -649,21 +649,27 @@ $vfactura = sc_url_library("prj", "factura", "index.php");
 <script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
 <link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
 
+<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
+
 <style>
 body
 {
 	
-	background-image: url(<?php echo sc_url_library('prj', 'imagenes', 'fondo_punto_venta_supermercado.jpg'); ?>) !important;
 	
-	background-position: center center !important;
 	
-	background-repeat: no-repeat !important;
 	
-	background-attachment: fixed !important;
 	
-	background-size: cover !important;
 	
-	background-color: #1175bb !important;
+	
+	
+	
+	
+	
+	
 }
 </style>
 <?php
@@ -1072,6 +1078,7 @@ function fJSONDataico(idfacven,bd)
 	
 function fReenviarPropio(idfacven)
 {
+	alertify.set('notifier','position', 'top-center');
 
 	$.post("../blank_correo_reenvio/index.php",{
 
@@ -1082,11 +1089,12 @@ function fReenviarPropio(idfacven)
 		console.log(r);
 		var correo = "";
 		
-		if(correo = prompt("Correo Electrónico",r))
-		{
-			if(correo == null || correo == "")
+		alertify.prompt( 'Reenviar al correo el documento electrónico', 'Correo', r
+	    ,function(evt, value)
+		{ 
+			if(value == null || value == "")
 			{
-			   alert("Debe digitar un correo.");
+			   alertify.error('Debe digitar un correo.'); 
 			}
 			else
 			{
@@ -1102,22 +1110,26 @@ function fReenviarPropio(idfacven)
 						color: '#fff'
 					}
 				});
-				
+
 				$.post("../blank_correo_reenvio2/index.php",{
 
 					idfacven:idfacven,
-					correo:correo
+					correo:value
 
 				},function(r2){
 
 					$.unblockUI();
-					
+
 					console.log(r2);
-					alert(r2);
+					alertify.notify(r2, 'success', 5, function(){  });
 				});
 			}
-		}
+	   }
+	   ,function()
+	   { 
 
+			alertify.error('Canceló el reenvío.'); 
+		});
 	});
 }
 	

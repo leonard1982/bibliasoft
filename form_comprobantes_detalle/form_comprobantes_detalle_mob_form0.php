@@ -15,7 +15,7 @@ header("X-Frame-Options: SAMEORIGIN");
 
 <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("" . $this->Ini->Nm_lang['lang_othr_frmi_titl'] . " - comprobantes_detalle"); } else { echo strip_tags("" . $this->Ini->Nm_lang['lang_othr_frmu_titl'] . " - comprobantes_detalle"); } ?></TITLE>
+ <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("DETALLE ASIENTO"); } else { echo strip_tags("DETALLE ASIENTO"); } ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT" />
  <META http-equiv="Last-Modified" content="<?php echo gmdate('D, d M Y H:i:s') ?> GMT" />

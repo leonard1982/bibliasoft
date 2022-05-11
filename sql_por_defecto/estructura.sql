@@ -5684,6 +5684,62 @@ CREATE TABLE `plan` ( `id` INT NOT NULL AUTO_INCREMENT , `fecha` DATETIME NULL D
 
 CREATE TABLE `folios` ( `id` INT NOT NULL AUTO_INCREMENT , `fecha` DATETIME NULL DEFAULT NULL COMMENT 'el día y la hora en que se consumió el folio' , `tipo_documento` VARCHAR(2) NULL DEFAULT NULL , `documento` VARCHAR(30) NULL DEFAULT NULL COMMENT 'prefijo + numero' , `usuario` VARCHAR(30) NULL DEFAULT NULL , `tercero_usuario` INT NOT NULL DEFAULT '0' COMMENT 'El id tercero que está relacionado con el usuario' , `prueba` SET('SI','NO') NOT NULL DEFAULT 'NO' , `proveedor` VARCHAR(100) NULL DEFAULT NULL COMMENT 'el nombre del proveedor de la tabla webservice' , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci COMMENT = 'aquí va el contador de consumo de documentos fe y no fe';
 
+
+
+CREATE TABLE `puc_auxiliares` ( `id` INT NOT NULL AUTO_INCREMENT , `id_puc` INT NOT NULL DEFAULT '0' , `codigo` VARCHAR(5) NULL DEFAULT NULL , `nombre` VARCHAR(120) NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `puc` ( `id` INT NOT NULL AUTO_INCREMENT , `codigo` VARCHAR(20) NULL DEFAULT NULL , `nombre` VARCHAR(120) NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `conceptos_dian` ( `id` INT NOT NULL AUTO_INCREMENT , `codigo` VARCHAR(10) NULL DEFAULT NULL , `descripcion` TEXT NULL DEFAULT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `contabilidad` (
+  `id` int(11) NOT NULL,
+  `tipodoc` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'FC=FACTURA COMPRA,CO=CONSUMO,FV=FACTURA VENTA, CI=COMPROBANTE DE INGRESO, CE=COMPROBANTE DE EGRESO, NC=NOTA CREDITO,NB=NOTA DÉBITO, NCC=NOTA CRÉDITO COMPRA, NDC=NOTA DÉBITO COMPRA',
+  `prefijo` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `numero` int(11) NOT NULL DEFAULT '0',
+  `notas` text COLLATE utf8_unicode_ci,
+  `fecha` date DEFAULT NULL,
+  `asentada` timestamp NULL DEFAULT NULL,
+  `total_debito` decimal(15,2) NOT NULL DEFAULT '0.00',
+  `total_credito` decimal(15,2) NOT NULL DEFAULT '0.00',
+  `periodo` int(11) NOT NULL DEFAULT '0',
+  `usuario` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'NOMBRE DEL USUARIO EN FACILWEB',
+  `tercero` int(11) NOT NULL DEFAULT '0' COMMENT 'TERCERO DEL USUARIO',
+  `creado` timestamp NULL DEFAULT NULL,
+  `actualizado` timestamp NULL DEFAULT NULL,
+  `importado` set('SI','NO') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT ' SI FUE IMPORTADO DESDE EXCEL'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+ALTER TABLE `contabilidad`
+  ADD PRIMARY KEY (`id`);
+
+
+ALTER TABLE `contabilidad`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `contabilidad_detalle` ( `id` INT NOT NULL AUTO_INCREMENT , `id_contabilidad` INT NOT NULL DEFAULT '0' , `id_puc` INT NOT NULL DEFAULT '0' , `valor` DECIMAL(15,2) NOT NULL DEFAULT '0' , `tipo` SET('C','D') NOT NULL DEFAULT 'C' , `id_tercero` INT NOT NULL DEFAULT '0' , `notas` TEXT NULL DEFAULT NULL , `ndocumento` VARCHAR(20) NULL DEFAULT NULL COMMENT 'ES EL TIPODOCUMENTO+PREFIJO+NUMERO EJEMPLO: FVFE0001(FV+FE+0001)' , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE bancos ADD id_puc_auxiliar INT(5) NOT NULL DEFAULT '0' AFTER numero_cuenta;
+
+ALTER TABLE iva ADD id_pucaux_compras INT(5) NOT NULL DEFAULT '0' AFTER puc_dv_compras, ADD id_pucaux_ventas INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_compras, ADD id_pucaux_nc INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_ventas, ADD id_pucaux_nd INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_nc, ADD id_pucaux_exec INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_nd;
+
+ALTER TABLE terceros ADD id_pucaux_cliente INT(5) NOT NULL DEFAULT '0' AFTER n_trabajadores, ADD id_pucaux_retteventas INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_cliente, ADD id_pucaux_retteservicios INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_retteventas, ADD id_pucaux_proveedor INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_retteservicios, ADD id_pucaux_rettecompras INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_proveedor, ADD id_pucaux_rettesercomp INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_rettecompras;
+
+ALTER TABLE productos ADD id_pucaux_inventario INT(5) NOT NULL DEFAULT '0' AFTER para_registro_fe, ADD id_pucaux_ncc INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_inventario, ADD id_pucaux_ndc INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_ncc, ADD id_pucaux_ingresos INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_ndc, ADD id_pucaux_nc INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_ingresos, ADD id_pucaux_nd INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_nc, ADD id_pucaux_costoventas INT(5) NOT NULL DEFAULT '0' AFTER id_pucaux_nd;
+
+
+
+CREATE TABLE licencias_planes ( id BIGINT NOT NULL AUTO_INCREMENT , codigo VARCHAR(6) NOT NULL DEFAULT '000000' , descripcion VARCHAR(120) NULL , porc_gan_lic_1nivel DECIMAL(4,2) NOT NULL DEFAULT '0' COMMENT 'porcentaje de ganancia licencias desde un primer nivel' , porc_gan_lic_2nivel DECIMAL(4,2) NOT NULL DEFAULT '0' , por_gan_doc_1nivel DECIMAL(4,2) NOT NULL DEFAULT '0' COMMENT 'porcentaje de ganancia de documentos desde un primer nivel' , por_gan_doc_2nivel DECIMAL(4,2) NOT NULL DEFAULT '0' , por_gan_doc_3nivel DECIMAL(4,2) NOT NULL DEFAULT '0' , por_gan_doc_4nivel DECIMAL(4,2) NOT NULL DEFAULT '0' , creado TIMESTAMP NULL , actualizado TIMESTAMP NULL , usuario VARCHAR(30) NULL DEFAULT NULL , tercero INT NOT NULL DEFAULT '0' , PRIMARY KEY (id)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci COMMENT = 'Tabla para licencias y planes de facturación';
+
+ALTER TABLE usuarios ADD nivel INT(2) NOT NULL DEFAULT '1' COMMENT 'Nivel del usuario' AFTER ocultar_bod;
+
+CREATE TABLE payu ( id BIGINT NOT NULL AUTO_INCREMENT , id_usuario INT NOT NULL DEFAULT '0' , usuario VARCHAR(30) NULL DEFAULT NULL , apikey VARCHAR(60) NULL DEFAULT NULL , merchantid VARCHAR(30) NULL DEFAULT NULL , accountid VARCHAR(30) NULL DEFAULT NULL , apilogin VARCHAR(30) NULL DEFAULT NULL , correo_remite VARCHAR(120) NULL DEFAULT NULL , responseUrl TEXT NULL DEFAULT NULL , confirmationUrl TEXT NULL DEFAULT NULL , PRIMARY KEY (id)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+ALTER TABLE `usuarios` ADD `posicion` VARCHAR(60) NULL DEFAULT '0' AFTER `nivel`, ADD `id_licencia` INT NOT NULL DEFAULT '0' AFTER `posicion`;
+
+ALTER TABLE `usuarios` CHANGE `nivel` `nivel` INT(2) NOT NULL DEFAULT '0' COMMENT 'Nivel del usuario';
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -15,7 +15,7 @@ header("X-Frame-Options: SAMEORIGIN");
 
 <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("Banco/Caja"); } else { echo strip_tags("Banco/Caja"); } ?></TITLE>
+ <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("Creación de Banco o Caja"); } else { echo strip_tags("Edición Banco o Caja"); } ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT" />
  <META http-equiv="Last-Modified" content="<?php echo gmdate('D, d M Y H:i:s') ?> GMT" />
@@ -371,6 +371,15 @@ include_once('form_bancos_jquery.php');
 
   scJQGeneralAdd();
 
+<?php
+if ('' == $this->scFormFocusErrorName)
+{
+?>
+  scFocusField('codigo_banco');
+
+<?php
+}
+?>
   $(document).bind('drop dragover', function (e) {
       e.preventDefault();
   });
@@ -503,6 +512,7 @@ function NM_tp_critica(TP)
  include_once("form_bancos_js0.php");
 ?>
 <script type="text/javascript"> 
+nmdg_enter_tab = true;
  function setLocale(oSel)
  {
   var sLocale = "";
@@ -535,6 +545,7 @@ $(function() {
  </script>
 <form  name="F1" method="post" 
                action="./" 
+               onsubmit="return false;" 
                target="_self">
 <input type="hidden" name="nmgp_url_saida" value="">
 <?php
@@ -635,23 +646,68 @@ sc_userSweetAlertDisplayed = false;
   {
 ?>
 <tr><td>
-<style>
-#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
-#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
-</style>
-
-<div style="width: 100%">
- <div class="scFormHeader" style="height:11px; display: block; border-width:0px; "></div>
- <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
- 	<table style="width:100%; border-collapse:collapse; padding:0;">
-    	<tr>
-        	<td id="lin1_col1" class="scFormHeaderFont"><span><?php if ($this->nmgp_opcao == "novo") { echo "Banco/Caja"; } else { echo "Banco/Caja"; } ?></span></td>
-            <td id="lin1_col2" class="scFormHeaderFont"><span><?php if ($this->Ini->Export_img_zip) {$this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . '/grp__NM__ico__NM__Bank_icon-icons.com_74914.png';echo '<IMG SRC="grp__NM__ico__NM__Bank_icon-icons.com_74914.png';}else{ echo '<IMG SRC="' . $this->Ini->path_imag_cab  . '/grp__NM__ico__NM__Bank_icon-icons.com_74914.png';}?>" BORDER="0"/></span></td>
-        </tr>
-    </table>		 
- </div>
-</div>
-</td></tr>
+   <TABLE width="100%" class="scFormHeader">
+    <TR align="center">
+     <TD style="padding: 0px">
+      <TABLE style="padding: 0px; border-spacing: 0px; border-width: 0px;" width="100%">
+       <TR valign="middle">
+        <TD align="left" rowspan="3" class="scFormHeaderFont">
+          
+        </TD>
+        <TD align="left" class="scFormHeaderFont">
+          <?php if ($this->nmgp_opcao == "novo") { echo "Creación de Banco o Caja"; } else { echo "Edición Banco o Caja"; } ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          <?php if ($this->Ini->Export_img_zip) {$this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . '/grp__NM__ico__NM__Bank_icon-icons.com_74914.png';echo '<IMG SRC="grp__NM__ico__NM__Bank_icon-icons.com_74914.png';}else{ echo '<IMG SRC="' . $this->Ini->path_imag_cab  . '/grp__NM__ico__NM__Bank_icon-icons.com_74914.png';}?>" BORDER="0"/>
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          <?php echo date($this->dateDefaultFormat()); ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>
+   </TABLE></td></tr>
 <?php
   }
 ?>
@@ -913,7 +969,7 @@ unset($NM_ult_sep);
 <?php } else { ?>
 <span id="id_read_on_codigo_banco" class="sc-ui-readonly-codigo_banco css_codigo_banco_line" style="<?php echo $sStyleReadLab_codigo_banco; ?>"><?php echo $this->form_format_readonly("codigo_banco", $this->form_encode_input($this->codigo_banco)); ?></span><span id="id_read_off_codigo_banco" class="css_read_off_codigo_banco<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_codigo_banco; ?>">
  <input class="sc-js-input scFormObjectOdd css_codigo_banco_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_codigo_banco" type=text name="codigo_banco" value="<?php echo $this->form_encode_input($codigo_banco) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=2"; } ?> maxlength=2 alt="{datatype: 'text', maxLength: 2, allowedChars: '<?php echo $this->allowedCharsCharset("abcdefghijklmnopqrstuvwxyz0123456789") ?>', lettersCase: 'upper', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=2"; } ?> maxlength=2 alt="{datatype: 'text', maxLength: 2, allowedChars: '<?php echo $this->allowedCharsCharset("abcdefghijklmnopqrstuvwxyz0123456789") ?>', lettersCase: 'upper', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_codigo_banco_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_codigo_banco_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
 
@@ -967,7 +1023,7 @@ unset($NM_ult_sep);
 <?php } else { ?>
 <span id="id_read_on_descripcion" class="sc-ui-readonly-descripcion css_descripcion_line" style="<?php echo $sStyleReadLab_descripcion; ?>"><?php echo $this->form_format_readonly("descripcion", $this->form_encode_input($this->descripcion)); ?></span><span id="id_read_off_descripcion" class="css_read_off_descripcion<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_descripcion; ?>">
  <input class="sc-js-input scFormObjectOdd css_descripcion_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_descripcion" type=text name="descripcion" value="<?php echo $this->form_encode_input($descripcion) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=50"; } ?> maxlength=60 alt="{datatype: 'text', maxLength: 60, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: 'upper', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=50"; } ?> maxlength=60 alt="{datatype: 'text', maxLength: 60, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: 'upper', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_descripcion_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_descripcion_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
 
@@ -1021,7 +1077,7 @@ unset($NM_ult_sep);
 <?php } else { ?>
 <span id="id_read_on_numero_cuenta" class="sc-ui-readonly-numero_cuenta css_numero_cuenta_line" style="<?php echo $sStyleReadLab_numero_cuenta; ?>"><?php echo $this->form_format_readonly("numero_cuenta", $this->form_encode_input($this->numero_cuenta)); ?></span><span id="id_read_off_numero_cuenta" class="css_read_off_numero_cuenta<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_numero_cuenta; ?>">
  <input class="sc-js-input scFormObjectOdd css_numero_cuenta_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_numero_cuenta" type=text name="numero_cuenta" value="<?php echo $this->form_encode_input($numero_cuenta) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=20"; } ?> maxlength=20 alt="{datatype: 'text', maxLength: 20, allowedChars: '<?php echo $this->allowedCharsCharset("abcdefghijklmnopqrstuvwxyzç") ?>', lettersCase: 'upper', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=20"; } ?> maxlength=20 alt="{datatype: 'text', maxLength: 20, allowedChars: '<?php echo $this->allowedCharsCharset("abcdefghijklmnopqrstuvwxyzç") ?>', lettersCase: 'upper', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 <span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('numero_cuenta')", "nm_mostra_mens('numero_cuenta')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
 </span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_numero_cuenta_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_numero_cuenta_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
@@ -1034,12 +1090,6 @@ unset($NM_ult_sep);
 ?> 
 <?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
-<?php
-           if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['cajero']))
-           {
-               $this->nmgp_cmp_readonly['cajero'] = 'on';
-           }
-?>
 
 
    <?php
@@ -1117,8 +1167,8 @@ $comportamiento_look = "";
 ?>
 <span id="id_read_on_comportamiento" class="css_comportamiento_line" style="<?php echo $sStyleReadLab_comportamiento; ?>"><?php echo $this->form_format_readonly("comportamiento", $this->form_encode_input($comportamiento_look)); ?></span><span id="id_read_off_comportamiento" class="css_read_off_comportamiento css_comportamiento_line" style="<?php echo $sStyleReadInp_comportamiento; ?>"><?php echo "<div id=\"idAjaxCheckbox_comportamiento\" style=\"display: inline-block\" class=\"css_comportamiento_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
   <TD class="scFormDataFontOdd css_comportamiento_line"><?php $tempOptionId = "id-opt-comportamiento" . $sc_seq_vert . "-1"; ?>
- <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-comportamiento sc-ui-checkbox-comportamiento" name="comportamiento[]" value="SI"
-<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_comportamiento'][] = 'SI'; ?>
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-comportamiento sc-ui-checkbox-comportamiento sc-js-input" name="comportamiento[]" value="SI"
+ alt="{type: 'checkbox', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_comportamiento'][] = 'SI'; ?>
 <?php  if (in_array("SI", $this->comportamiento_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
 </TR></TABLE>
 <?php echo "</div>\r\n"; ?></span><?php  }?>
@@ -1152,7 +1202,7 @@ $comportamiento_look = "";
    $bTestReadOnly = true;
    $sStyleReadLab_cajero = 'display: none;';
    $sStyleReadInp_cajero = '';
-   if (/*($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || */(isset($this->nmgp_cmp_readonly["cajero"]) &&  $this->nmgp_cmp_readonly["cajero"] == "on"))
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['cajero']) && $this->nmgp_cmp_readonly['cajero'] == 'on')
    {
        $bTestReadOnly = false;
        unset($this->nmgp_cmp_readonly['cajero']);
@@ -1166,7 +1216,7 @@ $comportamiento_look = "";
 
     <TD class="scFormLabelOdd scUiLabelWidthFix css_cajero_label" id="hidden_field_label_cajero" style="<?php echo $sStyleHidden_cajero; ?>"><span id="id_label_cajero"><?php echo $this->nm_new_label['cajero']; ?></span></TD>
     <TD class="scFormDataOdd css_cajero_line" id="hidden_field_data_cajero" style="<?php echo $sStyleHidden_cajero; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_cajero_line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly && ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || (isset($this->nmgp_cmp_readonly["cajero"]) &&  $this->nmgp_cmp_readonly["cajero"] == "on")) { 
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["cajero"]) &&  $this->nmgp_cmp_readonly["cajero"] == "on") { 
  
 $nmgp_def_dados = "" ; 
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_cajero']))
@@ -1250,7 +1300,7 @@ else
    }
 
 ?>
-<input type="hidden" name="cajero" value="<?php echo $this->form_encode_input($cajero) . "\"><span id=\"id_ajax_label_cajero\">" . $cajero_look . "</span>"; ?>
+<input type="hidden" name="cajero" value="<?php echo $this->form_encode_input($cajero) . "\">" . $cajero_look . ""; ?>
 <?php } else { ?>
 <?php
    $todo = $this->Form_lookup_cajero();
@@ -1276,7 +1326,7 @@ else
           }
    $x = 0; 
    echo "<span id=\"id_read_on_cajero\" class=\"css_cajero_line\" style=\"" .  $sStyleReadLab_cajero . "\">" . $this->form_format_readonly("cajero", $this->form_encode_input($cajero_look)) . "</span><span id=\"id_read_off_cajero\" class=\"css_read_off_cajero" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_cajero . "\">";
-   echo " <span id=\"idAjaxSelect_cajero\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_cajero_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_cajero\" name=\"cajero\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
+   echo " <span id=\"idAjaxSelect_cajero\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_cajero_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_cajero\" name=\"cajero\" size=\"1\" alt=\"{type: 'select', enterTab: true}\">" ; 
    echo "\r" ; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_cajero'][] = ''; 
    echo "  <option value=\"\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
@@ -1591,7 +1641,34 @@ else
           $comportamiento_val_str .= "'$Tmp_val_cmp'";
        }
    }
-   $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre)  FROM plancuentas  ORDER BY codigo, nombre";
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
 
    $this->entrada = $old_value_entrada;
    $this->salida = $old_value_salida;
@@ -1662,8 +1739,10 @@ else
           }
    $x = 0; 
    echo "<span id=\"id_read_on_puc\" class=\"css_puc_line\" style=\"" .  $sStyleReadLab_puc . "\">" . $this->form_format_readonly("puc", $this->form_encode_input($puc_look)) . "</span><span id=\"id_read_off_puc\" class=\"css_read_off_puc" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_puc . "\">";
-   echo " <span id=\"idAjaxSelect_puc\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_puc_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_puc\" name=\"puc\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
+   echo " <span id=\"idAjaxSelect_puc\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_puc_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_puc\" name=\"puc\" size=\"1\" alt=\"{type: 'select', enterTab: true}\">" ; 
    echo "\r" ; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_puc'][] = ''; 
+   echo "  <option value=\"\">" . str_replace("<", "&lt;"," ") . "</option>" ; 
    while (!empty($todo[$x]) && !$nm_nao_carga) 
    {
           $cadaselect = explode("?#?", $todo[$x]) ; 
@@ -1690,6 +1769,192 @@ else
 ?> 
 <?php  }?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_puc_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_puc_text"></span></td></tr></table></td></tr></table></TD>
+   <?php }?>
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['id_puc_auxiliar']))
+   {
+       $this->nm_new_label['id_puc_auxiliar'] = "Cta. Auxiliar";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $id_puc_auxiliar = $this->id_puc_auxiliar;
+   $sStyleHidden_id_puc_auxiliar = '';
+   if (isset($this->nmgp_cmp_hidden['id_puc_auxiliar']) && $this->nmgp_cmp_hidden['id_puc_auxiliar'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['id_puc_auxiliar']);
+       $sStyleHidden_id_puc_auxiliar = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_id_puc_auxiliar = 'display: none;';
+   $sStyleReadInp_id_puc_auxiliar = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['id_puc_auxiliar']) && $this->nmgp_cmp_readonly['id_puc_auxiliar'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['id_puc_auxiliar']);
+       $sStyleReadLab_id_puc_auxiliar = '';
+       $sStyleReadInp_id_puc_auxiliar = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['id_puc_auxiliar']) && $this->nmgp_cmp_hidden['id_puc_auxiliar'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="id_puc_auxiliar" value="<?php echo $this->form_encode_input($this->id_puc_auxiliar) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_id_puc_auxiliar_label" id="hidden_field_label_id_puc_auxiliar" style="<?php echo $sStyleHidden_id_puc_auxiliar; ?>"><span id="id_label_id_puc_auxiliar"><?php echo $this->nm_new_label['id_puc_auxiliar']; ?></span></TD>
+    <TD class="scFormDataOdd css_id_puc_auxiliar_line" id="hidden_field_data_id_puc_auxiliar" style="<?php echo $sStyleHidden_id_puc_auxiliar; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_id_puc_auxiliar_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_puc_auxiliar"]) &&  $this->nmgp_cmp_readonly["id_puc_auxiliar"] == "on") { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array(); 
+    }
+
+   $old_value_entrada = $this->entrada;
+   $old_value_salida = $this->salida;
+   $old_value_saldo = $this->saldo;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_entrada = $this->entrada;
+   $unformatted_value_salida = $this->salida;
+   $unformatted_value_saldo = $this->saldo;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc' LIMIT 1)";
+
+   $this->entrada = $old_value_entrada;
+   $this->salida = $old_value_salida;
+   $this->saldo = $old_value_saldo;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $id_puc_auxiliar_look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_puc_auxiliar_1))
+          {
+              foreach ($this->id_puc_auxiliar_1 as $tmp_id_puc_auxiliar)
+              {
+                  if (trim($tmp_id_puc_auxiliar) === trim($cadaselect[1])) { $id_puc_auxiliar_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_puc_auxiliar) === trim($cadaselect[1])) { $id_puc_auxiliar_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="id_puc_auxiliar" value="<?php echo $this->form_encode_input($id_puc_auxiliar) . "\">" . $id_puc_auxiliar_look . ""; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_id_puc_auxiliar();
+   $x = 0 ; 
+   $id_puc_auxiliar_look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->id_puc_auxiliar_1))
+          {
+              foreach ($this->id_puc_auxiliar_1 as $tmp_id_puc_auxiliar)
+              {
+                  if (trim($tmp_id_puc_auxiliar) === trim($cadaselect[1])) { $id_puc_auxiliar_look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->id_puc_auxiliar) === trim($cadaselect[1])) { $id_puc_auxiliar_look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($id_puc_auxiliar_look))
+          {
+              $id_puc_auxiliar_look = $this->id_puc_auxiliar;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_id_puc_auxiliar\" class=\"css_id_puc_auxiliar_line\" style=\"" .  $sStyleReadLab_id_puc_auxiliar . "\">" . $this->form_format_readonly("id_puc_auxiliar", $this->form_encode_input($id_puc_auxiliar_look)) . "</span><span id=\"id_read_off_id_puc_auxiliar\" class=\"css_read_off_id_puc_auxiliar" . $this->classes_100perc_fields['span_input'] . "\" style=\"white-space: nowrap; " . $sStyleReadInp_id_puc_auxiliar . "\">";
+   echo " <span id=\"idAjaxSelect_id_puc_auxiliar\" class=\"" . $this->classes_100perc_fields['span_select'] . "\"><select class=\"sc-js-input scFormObjectOdd css_id_puc_auxiliar_obj" . $this->classes_100perc_fields['input'] . "\" style=\"\" id=\"id_sc_field_id_puc_auxiliar\" name=\"id_puc_auxiliar\" size=\"7\" alt=\"{type: 'select', enterTab: true}\">" ; 
+   echo "\r" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->id_puc_auxiliar) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->id_puc_auxiliar)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">" . str_replace('<', '&lt;',$cadaselect[0]) . "</option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   if (isset($this->Ini->sc_lig_md5["form_puc_auxiliares"]) && $this->Ini->sc_lig_md5["form_puc_auxiliares"] == "S") {
+       $Parms_Lig  = "SC_glo_par_gidcta*scingIdcta*scoutnm_evt_ret_edit*scindo_ajax_form_bancos_lkpedt_refresh_id_puc_auxiliar*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+       $Md5_Lig    = "@SC_par@" . $this->form_encode_input($this->Ini->sc_page) . "@SC_par@form_bancos@SC_par@" . md5($Parms_Lig);
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+   } else {
+       $Md5_Lig  = "SC_glo_par_gidcta*scingIdcta*scoutnm_evt_ret_edit*scindo_ajax_form_bancos_lkpedt_refresh_id_puc_auxiliar*scoutnmgp_url_saida*scin*scoutsc_redir_atualiz*scinok*scout";
+   }
+ ?><?php echo nmButtonOutput($this->arr_buttons, "bform_lookuplink", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "nm_submit_cap('" . $this->Ini->link_form_puc_auxiliares_edit. "', '" . $Md5_Lig . "')", "fldedt_id_puc_auxiliar", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+<?php    echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_puc_auxiliar_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_puc_auxiliar_text"></span></td></tr></table></td></tr></table></TD>
    <?php }?>
 
 <?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>

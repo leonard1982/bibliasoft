@@ -66,6 +66,8 @@ class form_bancos_apl
    var $puc;
    var $puc_1;
    var $numero_cuenta;
+   var $id_puc_auxiliar;
+   var $id_puc_auxiliar_1;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -139,6 +141,10 @@ class form_bancos_apl
           {
               $this->estado = $this->NM_ajax_info['param']['estado'];
           }
+          if (isset($this->NM_ajax_info['param']['id_puc_auxiliar']))
+          {
+              $this->id_puc_auxiliar = $this->NM_ajax_info['param']['id_puc_auxiliar'];
+          }
           if (isset($this->NM_ajax_info['param']['idcaja_vta']))
           {
               $this->idcaja_vta = $this->NM_ajax_info['param']['idcaja_vta'];
@@ -170,6 +176,10 @@ class form_bancos_apl
           if (isset($this->NM_ajax_info['param']['nmgp_parms']))
           {
               $this->nmgp_parms = $this->NM_ajax_info['param']['nmgp_parms'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_refresh_fields']))
+          {
+              $this->nmgp_refresh_fields = $this->NM_ajax_info['param']['nmgp_refresh_fields'];
           }
           if (isset($this->NM_ajax_info['param']['nmgp_url_saida']))
           {
@@ -303,6 +313,26 @@ class form_bancos_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->gIdcta) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gIdcta'] = $this->gIdcta;
+      }
+      if (isset($_POST["gIdcta"]) && isset($this->gIdcta)) 
+      {
+          $_SESSION['gIdcta'] = $this->gIdcta;
+      }
+      if (!isset($_POST["gIdcta"]) && isset($_POST["gidcta"])) 
+      {
+          $_SESSION['gIdcta'] = $_POST["gidcta"];
+      }
+      if (isset($_GET["gIdcta"]) && isset($this->gIdcta)) 
+      {
+          $_SESSION['gIdcta'] = $this->gIdcta;
+      }
+      if (!isset($_GET["gIdcta"]) && isset($_GET["gidcta"])) 
+      {
+          $_SESSION['gIdcta'] = $_GET["gidcta"];
+      }
       if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
           $_POST['nmgp_opcao'] = "novo";
           $this->nmgp_opcao    = "novo";
@@ -352,6 +382,14 @@ class form_bancos_apl
              }
              $ix++;
           }
+          if (!isset($this->gIdcta) && isset($this->gidcta)) 
+          {
+              $this->gIdcta = $this->gidcta;
+          }
+          if (isset($this->gIdcta)) 
+          {
+              $_SESSION['gIdcta'] = $this->gIdcta;
+          }
           if (isset($this->NM_where_filter_form))
           {
               $_SESSION['sc_session'][$script_case_init]['form_bancos']['where_filter_form'] = $this->NM_where_filter_form;
@@ -364,6 +402,14 @@ class form_bancos_apl
           if (isset($this->sc_redir_insert))
           {
               $_SESSION['sc_session'][$script_case_init]['form_bancos']['sc_redir_insert'] = $this->sc_redir_insert;
+          }
+          if (!isset($this->gIdcta) && isset($this->gidcta)) 
+          {
+              $this->gIdcta = $this->gidcta;
+          }
+          if (isset($this->gIdcta)) 
+          {
+              $_SESSION['gIdcta'] = $this->gIdcta;
           }
       } 
       elseif (isset($script_case_init) && !empty($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_bancos']['parms']))
@@ -449,7 +495,7 @@ class form_bancos_apl
           if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_bancos']))
           {
                $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_bancos']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('form_bancos') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_bancos']['label'] = "Banco/Caja";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_bancos']['label'] = "Edición Banco o Caja";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -474,7 +520,8 @@ class form_bancos_apl
           include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
       }
       include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
-      $this->Ini->Str_btn_form    = trim($str_button);
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
@@ -522,7 +569,7 @@ class form_bancos_apl
 
 
 
-      $_SESSION['scriptcase']['error_icon']['form_bancos']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Lemon__NM__nm_scriptcase9_Lemon_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $_SESSION['scriptcase']['error_icon']['form_bancos']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['form_bancos'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
 
       $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['embutida_proc'] : $this->Embutida_proc;
@@ -1057,14 +1104,13 @@ class form_bancos_apl
             }
       if (isset($this->codigo_banco)) { $this->nm_limpa_alfa($this->codigo_banco); }
       if (isset($this->descripcion)) { $this->nm_limpa_alfa($this->descripcion); }
-      if (isset($this->comportamiento)) { $this->nm_limpa_alfa($this->comportamiento); }
       if (isset($this->cajero)) { $this->nm_limpa_alfa($this->cajero); }
       if (isset($this->entrada)) { $this->nm_limpa_alfa($this->entrada); }
       if (isset($this->salida)) { $this->nm_limpa_alfa($this->salida); }
-      if (isset($this->estado)) { $this->nm_limpa_alfa($this->estado); }
       if (isset($this->saldo)) { $this->nm_limpa_alfa($this->saldo); }
       if (isset($this->puc)) { $this->nm_limpa_alfa($this->puc); }
       if (isset($this->numero_cuenta)) { $this->nm_limpa_alfa($this->numero_cuenta); }
+      if (isset($this->id_puc_auxiliar)) { $this->nm_limpa_alfa($this->id_puc_auxiliar); }
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -1199,6 +1245,20 @@ class form_bancos_apl
           if ('validate_puc' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc');
+          }
+          if ('validate_id_puc_auxiliar' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'id_puc_auxiliar');
+          }
+          form_bancos_pack_ajax_response();
+          exit;
+      }
+      if ($this->NM_ajax_flag && 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+      {
+          $this->nm_tira_formatacao();
+          if ('event_puc_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->puc_onChange();
           }
           form_bancos_pack_ajax_response();
           exit;
@@ -1468,7 +1528,7 @@ class form_bancos_apl
 ?>
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php echo strip_tags("Banco/Caja") ?></TITLE>
+ <TITLE><?php echo strip_tags("Edición Banco o Caja") ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 
@@ -1789,6 +1849,9 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'puc':
                return "P.U.C";
                break;
+           case 'id_puc_auxiliar':
+               return "Cta. Auxiliar";
+               break;
            case 'idcaja_vta':
                return "Idcaja Vta";
                break;
@@ -1863,6 +1926,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_estado($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc' == $filtro)) || (is_array($filtro) && in_array('puc', $filtro)))
         $this->ValidateField_puc($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'id_puc_auxiliar' == $filtro)) || (is_array($filtro) && in_array('id_puc_auxiliar', $filtro)))
+        $this->ValidateField_id_puc_auxiliar($Campos_Crit, $Campos_Falta, $Campos_Erros);
 
       if (!isset($this->NM_ajax_flag) || 'validate_' != substr($this->NM_ajax_opcao, 0, 9))
       {
@@ -1871,7 +1936,7 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_codigo_banco = $this->codigo_banco;
 }
- if ($this->sc_evento == "excluir" || $this->sc_evento == "delete")
+  if ($this->sc_evento == "excluir" || $this->sc_evento == "delete")
 {
 	if($this->codigo_banco =="00")
 	{
@@ -2178,8 +2243,6 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
     {
         global $teste_validade;
         $hasError = false;
-   if ($this->nmgp_opcao == "incluir")
-   {
                if (!empty($this->cajero) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_cajero']) && !in_array($this->cajero, $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_cajero']))
                {
                    $hasError = true;
@@ -2195,7 +2258,6 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
                    }
                    $this->NM_ajax_info['errList']['cajero'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
                }
-   }
         if ($hasError) {
             global $sc_seq_vert;
             $fieldName = 'cajero';
@@ -2510,6 +2572,35 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
         }
     } // ValidateField_puc
 
+    function ValidateField_id_puc_auxiliar(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->id_puc_auxiliar) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']) && !in_array($this->id_puc_auxiliar, $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['id_puc_auxiliar']))
+                   {
+                       $Campos_Erros['id_puc_auxiliar'] = array();
+                   }
+                   $Campos_Erros['id_puc_auxiliar'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['id_puc_auxiliar']) || !is_array($this->NM_ajax_info['errList']['id_puc_auxiliar']))
+                   {
+                       $this->NM_ajax_info['errList']['id_puc_auxiliar'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['id_puc_auxiliar'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'id_puc_auxiliar';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_id_puc_auxiliar
+
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -2543,6 +2634,7 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
     $this->nmgp_dados_form['saldo'] = $this->saldo;
     $this->nmgp_dados_form['estado'] = $this->estado;
     $this->nmgp_dados_form['puc'] = $this->puc;
+    $this->nmgp_dados_form['id_puc_auxiliar'] = $this->id_puc_auxiliar;
     $this->nmgp_dados_form['idcaja_vta'] = $this->idcaja_vta;
     $this->nmgp_dados_form['fech_hora'] = $this->fech_hora;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['dados_form'] = $this->nmgp_dados_form;
@@ -3085,6 +3177,7 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
           $this->ajax_return_values_saldo();
           $this->ajax_return_values_estado();
           $this->ajax_return_values_puc();
+          $this->ajax_return_values_id_puc_auxiliar();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
@@ -3282,10 +3375,9 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_cajero'][] =
               }
           }
           $aLookup  = $sLookup;
-          $Nm_tp_obj = (isset($this->nmgp_refresh_fields) && in_array("cajero", $this->nmgp_refresh_fields)) ? 'select' : 'text';
           $this->NM_ajax_info['fldList']['cajero'] = array(
                        'row'    => '',
-               'type'    => $Nm_tp_obj,
+               'type'    => 'select',
                'valList' => array($sTmpValue),
                'optList' => $aLookup,
               );
@@ -3393,6 +3485,8 @@ else
 {
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_puc'] = array(); 
 }
+$aLookup[] = array(form_bancos_pack_protect_string('') => str_replace('<', '&lt;',form_bancos_pack_protect_string(' ')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_puc'][] = '';
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
@@ -3431,7 +3525,34 @@ else
           $comportamiento_val_str .= "'$Tmp_val_cmp'";
        }
    }
-   $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre)  FROM plancuentas  ORDER BY codigo, nombre";
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
 
    $this->entrada = $old_value_entrada;
    $this->salida = $old_value_salida;
@@ -3507,6 +3628,121 @@ else
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['puc']['labList'] = $aLabel;
+          }
+   }
+
+          //----- id_puc_auxiliar
+   function ajax_return_values_id_puc_auxiliar($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("id_puc_auxiliar", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->id_puc_auxiliar);
+              $aLookup = array();
+              $this->_tmp_lookup_id_puc_auxiliar = $this->id_puc_auxiliar;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_entrada = $this->entrada;
+   $old_value_salida = $this->salida;
+   $old_value_saldo = $this->saldo;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_entrada = $this->entrada;
+   $unformatted_value_salida = $this->salida;
+   $unformatted_value_saldo = $this->saldo;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc' LIMIT 1)";
+
+   $this->entrada = $old_value_entrada;
+   $this->salida = $old_value_salida;
+   $this->saldo = $old_value_saldo;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_bancos_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_bancos_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"id_puc_auxiliar\"";
+          if (isset($this->NM_ajax_info['select_html']['id_puc_auxiliar']) && !empty($this->NM_ajax_info['select_html']['id_puc_auxiliar']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['id_puc_auxiliar']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->id_puc_auxiliar == $sValue)
+                  {
+                      $this->_tmp_lookup_id_puc_auxiliar = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['id_puc_auxiliar'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['id_puc_auxiliar']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['id_puc_auxiliar']['valList'][$i] = form_bancos_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['id_puc_auxiliar']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['id_puc_auxiliar']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['id_puc_auxiliar']['labList'] = $aLabel;
           }
    }
 
@@ -3586,18 +3822,75 @@ else
       $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'on';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
+    $original_cajero = $this->cajero;
     $original_codigo_banco = $this->codigo_banco;
+    $original_puc = $this->puc;
 }
- if($this->codigo_banco =="00")
+if (!isset($this->sc_temp_gIdcta)) {$this->sc_temp_gIdcta = (isset($_SESSION['gIdcta'])) ? $_SESSION['gIdcta'] : "";}
+  if($this->codigo_banco =="00")
 {
 	$this->sc_ajax_javascript('nm_field_disabled', array("codigo_banco=disabled;descripcion=disabled;comportamiento=disabled;cajero=disabled", ""));
 ;
 }
+else
+	{
+	$this->sc_ajax_javascript('nm_field_disabled', array("codigo_banco=;descripcion=;comportamiento=;cajero=", ""));
+;
+	}
+$this->nmgp_cmp_hidden["cajero"] = "on"; $this->NM_ajax_info['fieldDisplay']['cajero'] = 'on';
+
+if(!empty($this->puc ))
+	{
+	$sql1 = "SELECT id FROM puc WHERE codigo = '".$this->puc ."'";
+	 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->ds_cod[0][0]))
+		{
+		$this->sc_temp_gIdcta = $this->ds_cod[0][0];
+		}
+	}
+else
+	{
+	$this->sc_temp_gIdcta = 0;
+	}
+if (isset($this->sc_temp_gIdcta)) { $_SESSION['gIdcta'] = $this->sc_temp_gIdcta;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
+    if (($original_cajero != $this->cajero || (isset($bFlagRead_cajero) && $bFlagRead_cajero)))
+    {
+        $this->ajax_return_values_cajero(true);
+    }
     if (($original_codigo_banco != $this->codigo_banco || (isset($bFlagRead_codigo_banco) && $bFlagRead_codigo_banco)))
     {
         $this->ajax_return_values_codigo_banco(true);
+    }
+    if (($original_puc != $this->puc || (isset($bFlagRead_puc) && $bFlagRead_puc)))
+    {
+        $this->ajax_return_values_puc(true);
     }
 }
 $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off'; 
@@ -3712,6 +4005,7 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
       $NM_val_form['saldo'] = $this->saldo;
       $NM_val_form['estado'] = $this->estado;
       $NM_val_form['puc'] = $this->puc;
+      $NM_val_form['id_puc_auxiliar'] = $this->id_puc_auxiliar;
       $NM_val_form['idcaja_vta'] = $this->idcaja_vta;
       $NM_val_form['fech_hora'] = $this->fech_hora;
       if ($this->idcaja_vta === "" || is_null($this->idcaja_vta))  
@@ -3738,6 +4032,11 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
           $this->saldo = 0;
           $this->sc_force_zero[] = 'saldo';
       } 
+      if ($this->id_puc_auxiliar === "" || is_null($this->id_puc_auxiliar))  
+      { 
+          $this->id_puc_auxiliar = 0;
+          $this->sc_force_zero[] = 'id_puc_auxiliar';
+      } 
       $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['decimal_db'] == ",") 
       {
@@ -3759,8 +4058,6 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
               $this->descripcion = "null"; 
               $NM_val_null[] = "descripcion";
           } 
-          $this->comportamiento_before_qstr = $this->comportamiento;
-          $this->comportamiento = substr($this->Db->qstr($this->comportamiento), 1, -1); 
           if ($this->comportamiento == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
           { 
               $this->comportamiento = "null"; 
@@ -3771,8 +4068,6 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
               $this->fech_hora = "null"; 
               $NM_val_null[] = "fech_hora";
           } 
-          $this->estado_before_qstr = $this->estado;
-          $this->estado = substr($this->Db->qstr($this->estado), 1, -1); 
           if ($this->estado == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
           { 
               $this->estado = "null"; 
@@ -3862,37 +4157,37 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta'"; 
+                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', cajero = $this->cajero, entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta', id_puc_auxiliar = $this->id_puc_auxiliar"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta'"; 
+                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', cajero = $this->cajero, entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta', id_puc_auxiliar = $this->id_puc_auxiliar"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta'"; 
+                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', cajero = $this->cajero, entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta', id_puc_auxiliar = $this->id_puc_auxiliar"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta'"; 
+                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', cajero = $this->cajero, entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta', id_puc_auxiliar = $this->id_puc_auxiliar"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta'"; 
+                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', cajero = $this->cajero, entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta', id_puc_auxiliar = $this->id_puc_auxiliar"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta'"; 
+                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', cajero = $this->cajero, entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta', id_puc_auxiliar = $this->id_puc_auxiliar"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta'"; 
+                  $SC_fields_update[] = "codigo_banco = '$this->codigo_banco', descripcion = '$this->descripcion', comportamiento = '$this->comportamiento', cajero = $this->cajero, entrada = $this->entrada, salida = $this->salida, estado = '$this->estado', saldo = $this->saldo, puc = '$this->puc', numero_cuenta = '$this->numero_cuenta', id_puc_auxiliar = $this->id_puc_auxiliar"; 
               } 
               $aDoNotUpdate = array();
               $comando .= implode(",", $SC_fields_update);  
@@ -3955,8 +4250,6 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
               }   
               $this->codigo_banco = $this->codigo_banco_before_qstr;
               $this->descripcion = $this->descripcion_before_qstr;
-              $this->comportamiento = $this->comportamiento_before_qstr;
-              $this->estado = $this->estado_before_qstr;
               $this->puc = $this->puc_before_qstr;
               $this->numero_cuenta = $this->numero_cuenta_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
@@ -3980,22 +4273,20 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
               elseif (isset($this->codigo_banco)) { $this->nm_limpa_alfa($this->codigo_banco); }
               if     (isset($NM_val_form) && isset($NM_val_form['descripcion'])) { $this->descripcion = $NM_val_form['descripcion']; }
               elseif (isset($this->descripcion)) { $this->nm_limpa_alfa($this->descripcion); }
-              if     (isset($NM_val_form) && isset($NM_val_form['comportamiento'])) { $this->comportamiento = $NM_val_form['comportamiento']; }
-              elseif (isset($this->comportamiento)) { $this->nm_limpa_alfa($this->comportamiento); }
               if     (isset($NM_val_form) && isset($NM_val_form['cajero'])) { $this->cajero = $NM_val_form['cajero']; }
               elseif (isset($this->cajero)) { $this->nm_limpa_alfa($this->cajero); }
               if     (isset($NM_val_form) && isset($NM_val_form['entrada'])) { $this->entrada = $NM_val_form['entrada']; }
               elseif (isset($this->entrada)) { $this->nm_limpa_alfa($this->entrada); }
               if     (isset($NM_val_form) && isset($NM_val_form['salida'])) { $this->salida = $NM_val_form['salida']; }
               elseif (isset($this->salida)) { $this->nm_limpa_alfa($this->salida); }
-              if     (isset($NM_val_form) && isset($NM_val_form['estado'])) { $this->estado = $NM_val_form['estado']; }
-              elseif (isset($this->estado)) { $this->nm_limpa_alfa($this->estado); }
               if     (isset($NM_val_form) && isset($NM_val_form['saldo'])) { $this->saldo = $NM_val_form['saldo']; }
               elseif (isset($this->saldo)) { $this->nm_limpa_alfa($this->saldo); }
               if     (isset($NM_val_form) && isset($NM_val_form['puc'])) { $this->puc = $NM_val_form['puc']; }
               elseif (isset($this->puc)) { $this->nm_limpa_alfa($this->puc); }
               if     (isset($NM_val_form) && isset($NM_val_form['numero_cuenta'])) { $this->numero_cuenta = $NM_val_form['numero_cuenta']; }
               elseif (isset($this->numero_cuenta)) { $this->nm_limpa_alfa($this->numero_cuenta); }
+              if     (isset($NM_val_form) && isset($NM_val_form['id_puc_auxiliar'])) { $this->id_puc_auxiliar = $NM_val_form['id_puc_auxiliar']; }
+              elseif (isset($this->id_puc_auxiliar)) { $this->nm_limpa_alfa($this->id_puc_auxiliar); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -4003,7 +4294,7 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('codigo_banco', 'descripcion', 'numero_cuenta', 'comportamiento', 'cajero', 'entrada', 'salida', 'saldo', 'estado', 'puc'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('codigo_banco', 'descripcion', 'numero_cuenta', 'comportamiento', 'cajero', 'entrada', 'salida', 'saldo', 'estado', 'puc', 'id_puc_auxiliar'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -4055,39 +4346,39 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigo_banco, descripcion, comportamiento, entrada, salida, estado, saldo, puc, numero_cuenta) VALUES ('$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigo_banco, descripcion, comportamiento, cajero, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar) VALUES ('$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->cajero, $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta', $this->id_puc_auxiliar)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, entrada, salida, estado, saldo, puc, numero_cuenta) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, cajero, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->cajero, $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta', $this->id_puc_auxiliar)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, entrada, salida, estado, saldo, puc, numero_cuenta) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, cajero, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->cajero, $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta', $this->id_puc_auxiliar)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, entrada, salida, estado, saldo, puc, numero_cuenta) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, cajero, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->cajero, $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta', $this->id_puc_auxiliar)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, entrada, salida, estado, saldo, puc, numero_cuenta) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, cajero, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->cajero, $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta', $this->id_puc_auxiliar)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, entrada, salida, estado, saldo, puc, numero_cuenta) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, cajero, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->cajero, $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta', $this->id_puc_auxiliar)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, entrada, salida, estado, saldo, puc, numero_cuenta) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, cajero, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->cajero, $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta', $this->id_puc_auxiliar)"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, entrada, salida, estado, saldo, puc, numero_cuenta) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, cajero, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->cajero, $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta', $this->id_puc_auxiliar)"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, entrada, salida, estado, saldo, puc, numero_cuenta) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo_banco, descripcion, comportamiento, cajero, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar) VALUES (" . $NM_seq_auto . "'$this->codigo_banco', '$this->descripcion', '$this->comportamiento', $this->cajero, $this->entrada, $this->salida, '$this->estado', $this->saldo, '$this->puc', '$this->numero_cuenta', $this->id_puc_auxiliar)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -4233,8 +4524,6 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
               } 
               $this->codigo_banco = $this->codigo_banco_before_qstr;
               $this->descripcion = $this->descripcion_before_qstr;
-              $this->comportamiento = $this->comportamiento_before_qstr;
-              $this->estado = $this->estado_before_qstr;
               $this->puc = $this->puc_before_qstr;
               $this->numero_cuenta = $this->numero_cuenta_before_qstr;
               }
@@ -4249,8 +4538,6 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
               $this->sc_evento = "insert"; 
               $this->codigo_banco = $this->codigo_banco_before_qstr;
               $this->descripcion = $this->descripcion_before_qstr;
-              $this->comportamiento = $this->comportamiento_before_qstr;
-              $this->estado = $this->estado_before_qstr;
               $this->puc = $this->puc_before_qstr;
               $this->numero_cuenta = $this->numero_cuenta_before_qstr;
               $this->sc_insert_on = true; 
@@ -4468,23 +4755,23 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, str_replace (convert(char(10),fech_hora,102), '.', '-') + ' ' + convert(char(8),fech_hora,20), entrada, salida, estado, saldo, puc, numero_cuenta from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, str_replace (convert(char(10),fech_hora,102), '.', '-') + ' ' + convert(char(8),fech_hora,20), entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, convert(char(23),fech_hora,121), entrada, salida, estado, saldo, puc, numero_cuenta from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, convert(char(23),fech_hora,121), entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, fech_hora, entrada, salida, estado, saldo, puc, numero_cuenta from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, fech_hora, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, EXTEND(fech_hora, YEAR TO FRACTION), entrada, salida, estado, saldo, puc, numero_cuenta from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, EXTEND(fech_hora, YEAR TO FRACTION), entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, fech_hora, entrada, salida, estado, saldo, puc, numero_cuenta from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idcaja_vta, codigo_banco, descripcion, comportamiento, cajero, fech_hora, entrada, salida, estado, saldo, puc, numero_cuenta, id_puc_auxiliar from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -4643,28 +4930,28 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
                  $this->fech_hora = substr($this->fech_hora, 0, 13) . ":" . substr($this->fech_hora, 14, 2) . ":" . substr($this->fech_hora, 17);
               } 
               $this->nmgp_dados_select['fech_hora'] = $this->fech_hora;
-              $this->entrada = trim($rs->fields[6]) ; 
+              $this->entrada = $rs->fields[6] ; 
               $this->nmgp_dados_select['entrada'] = $this->entrada;
-              $this->salida = trim($rs->fields[7]) ; 
+              $this->salida = $rs->fields[7] ; 
               $this->nmgp_dados_select['salida'] = $this->salida;
               $this->estado = $rs->fields[8] ; 
               $this->nmgp_dados_select['estado'] = $this->estado;
-              $this->saldo = trim($rs->fields[9]) ; 
+              $this->saldo = $rs->fields[9] ; 
               $this->nmgp_dados_select['saldo'] = $this->saldo;
               $this->puc = $rs->fields[10] ; 
               $this->nmgp_dados_select['puc'] = $this->puc;
               $this->numero_cuenta = $rs->fields[11] ; 
               $this->nmgp_dados_select['numero_cuenta'] = $this->numero_cuenta;
+              $this->id_puc_auxiliar = $rs->fields[12] ; 
+              $this->nmgp_dados_select['id_puc_auxiliar'] = $this->id_puc_auxiliar;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->nm_troca_decimal(",", ".");
               $this->idcaja_vta = (string)$this->idcaja_vta; 
               $this->cajero = (string)$this->cajero; 
-              $this->entrada = (strpos(strtolower($this->entrada), "e")) ? (float)$this->entrada : $this->entrada; 
               $this->entrada = (string)$this->entrada; 
-              $this->salida = (strpos(strtolower($this->salida), "e")) ? (float)$this->salida : $this->salida; 
               $this->salida = (string)$this->salida; 
-              $this->saldo = (strpos(strtolower($this->saldo), "e")) ? (float)$this->saldo : $this->saldo; 
               $this->saldo = (string)$this->saldo; 
+              $this->id_puc_auxiliar = (string)$this->id_puc_auxiliar; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['parms'] = "idcaja_vta?#?$this->idcaja_vta?@?";
           } 
           $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['dados_select'] = $this->nmgp_dados_select;
@@ -4711,6 +4998,8 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
               $this->nmgp_dados_form["puc"] = $this->puc;
               $this->numero_cuenta = "";  
               $this->nmgp_dados_form["numero_cuenta"] = $this->numero_cuenta;
+              $this->id_puc_auxiliar = "";  
+              $this->nmgp_dados_form["id_puc_auxiliar"] = $this->id_puc_auxiliar;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
@@ -4768,6 +5057,60 @@ $_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
                 }
         }
 
+//
+function puc_onChange()
+{
+$_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_gIdcta)) {$this->sc_temp_gIdcta = (isset($_SESSION['gIdcta'])) ? $_SESSION['gIdcta'] : "";}
+  
+$original_puc = $this->puc;
+
+$sql1 = "SELECT id FROM puc WHERE codigo = '".$this->puc ."'";
+ 
+      $nm_select = $sql1; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_cod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_cod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_cod = false;
+          $this->ds_cod_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_cod[0][0]))
+	{
+	$this->sc_temp_gIdcta = $this->ds_cod[0][0];
+	}
+
+
+
+if (isset($this->sc_temp_gIdcta)) { $_SESSION['gIdcta'] = $this->sc_temp_gIdcta;}
+$_SESSION['scriptcase']['form_bancos']['contr_erro'] = 'off';
+$modificado_puc = $this->puc;
+$this->nm_formatar_campos('puc');
+if ($original_puc !== $modificado_puc || isset($this->nmgp_cmp_readonly['puc']) || (isset($bFlagRead_puc) && $bFlagRead_puc))
+{
+    $this->ajax_return_values_puc(true);
+}
+$this->NM_ajax_info['event_field'] = 'puc';
+form_bancos_pack_ajax_response();
+exit;
+}
 //
  function nm_gera_html()
  {
@@ -5500,7 +5843,34 @@ else
           $comportamiento_val_str .= "'$Tmp_val_cmp'";
        }
    }
-   $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre)  FROM plancuentas  ORDER BY codigo, nombre";
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo, ' ',nombre)  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' '&nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' ' + nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' '||nombre  FROM puc  ORDER BY codigo, nombre";
+   }
 
    $this->entrada = $old_value_entrada;
    $this->salida = $old_value_salida;
@@ -5515,6 +5885,72 @@ else
               $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
               $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_puc'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_id_puc_auxiliar()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'] = array(); 
+    }
+
+   $old_value_entrada = $this->entrada;
+   $old_value_salida = $this->salida;
+   $old_value_saldo = $this->saldo;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_entrada = $this->entrada;
+   $unformatted_value_salida = $this->salida;
+   $unformatted_value_saldo = $this->saldo;
+
+   $nm_comando = "SELECT pa.id, concat(puc.codigo, pa.codigo,' ', pa.nombre) FROM puc_auxiliares pa left join puc on pa.id_puc  WHERE pa.id_puc = (SELECT puc.id WHERE puc.codigo = '$this->puc' LIMIT 1)";
+
+   $this->entrada = $old_value_entrada;
+   $this->salida = $old_value_salida;
+   $this->saldo = $old_value_saldo;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['Lookup_id_puc_auxiliar'][] = $rs->fields[0];
               $rs->MoveNext() ; 
        } 
        $rs->Close() ; 
@@ -5628,7 +6064,7 @@ else
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idcaja_vta";$nm_numeric[] = "cajero";$nm_numeric[] = "entrada";$nm_numeric[] = "salida";$nm_numeric[] = "saldo";
+      $nm_numeric[] = "idcaja_vta";$nm_numeric[] = "cajero";$nm_numeric[] = "entrada";$nm_numeric[] = "salida";$nm_numeric[] = "saldo";$nm_numeric[] = "id_puc_auxiliar";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_bancos']['decimal_db'] == ".")
