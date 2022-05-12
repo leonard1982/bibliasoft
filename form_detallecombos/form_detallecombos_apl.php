@@ -1349,31 +1349,31 @@ class form_detallecombos_apl
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND codigobar + ' - ' + nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND codigobar + ' - ' + nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo='NO') AND concat(codigobar,' - ',nompro) LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo <> 'SI') AND concat(codigobar,' - ',nompro) LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo='NO') AND codigobar&' - '&nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo <> 'SI') AND codigobar&' - '&nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND codigobar||' - '||nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND codigobar||' - '||nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND codigobar + ' - ' + nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND codigobar + ' - ' + nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND codigobar||' - '||nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND codigobar||' - '||nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
    }
    else
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND codigobar||' - '||nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND codigobar||' - '||nompro LIKE '%" . substr($this->Db->qstr($this->idproducto_), 1, -1) . "%' ORDER BY codigobar, nompro";
    }
 
    $this->idcombo_ = $old_value_idcombo_;
@@ -2383,7 +2383,7 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
                   }
                   $this->NM_ajax_info['errList']['cantidad_'][] = $this->Ini->Nm_lang['lang_errm_size'];
               } 
-              if ($teste_validade->Valor($this->cantidad_, 8, 2, 0, 0, "N") == false)  
+              if ($teste_validade->Valor($this->cantidad_, 7, 3, 0, 0, "N") == false)  
               { 
                   $hasError = true;
                   $Campos_Crit .= "Cantidad; " ; 
@@ -2574,7 +2574,7 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
       }
       if ('' !== $this->cantidad_ || (!empty($format_fields) && isset($format_fields['cantidad_'])))
       {
-          nmgp_Form_Num_Val($this->cantidad_, $this->field_config['cantidad_']['symbol_grp'], $this->field_config['cantidad_']['symbol_dec'], "2", "S", $this->field_config['cantidad_']['format_neg'], "", "", "-", $this->field_config['cantidad_']['symbol_fmt']) ; 
+          nmgp_Form_Num_Val($this->cantidad_, $this->field_config['cantidad_']['symbol_grp'], $this->field_config['cantidad_']['symbol_dec'], "3", "S", $this->field_config['cantidad_']['format_neg'], "", "", "-", $this->field_config['cantidad_']['symbol_fmt']) ; 
       }
    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
@@ -3066,31 +3066,31 @@ $_SESSION['scriptcase']['form_detallecombos']['contr_erro'] = 'off';
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    else
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
 
    $this->idcombo_ = $old_value_idcombo_;
@@ -4119,31 +4119,31 @@ else
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    else
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
 
    $this->idcombo_ = $old_value_idcombo_;
@@ -6039,31 +6039,31 @@ function sc_file_size($file, $format = false)
        $campo  = substr($this->Db->qstr($campo), 1, -1);
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nm_comando = "SELECT codigobar + ' - ' + nompro, idprod FROM productos WHERE (codigobar + ' - ' + nompro LIKE '%$campo%') AND (escombo='NO')" ; 
+          $nm_comando = "SELECT codigobar + ' - ' + nompro, idprod FROM productos WHERE (codigobar + ' - ' + nompro LIKE '%$campo%') AND (escombo <> 'SI')" ; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nm_comando = "SELECT concat(codigobar,' - ',nompro), idprod FROM productos WHERE (concat(codigobar,' - ',nompro) LIKE '%$campo%') AND (escombo='NO')" ; 
+          $nm_comando = "SELECT concat(codigobar,' - ',nompro), idprod FROM productos WHERE (concat(codigobar,' - ',nompro) LIKE '%$campo%') AND (escombo <> 'SI')" ; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
       { 
-          $nm_comando = "SELECT codigobar&' - '&nompro, idprod FROM productos WHERE (codigobar&' - '&nompro LIKE '%$campo%') AND (escombo='NO')" ; 
+          $nm_comando = "SELECT codigobar&' - '&nompro, idprod FROM productos WHERE (codigobar&' - '&nompro LIKE '%$campo%') AND (escombo <> 'SI')" ; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
       { 
-          $nm_comando = "SELECT codigobar||' - '||nompro, idprod FROM productos WHERE (codigobar||' - '||nompro LIKE '%$campo%') AND (escombo='NO')" ; 
+          $nm_comando = "SELECT codigobar||' - '||nompro, idprod FROM productos WHERE (codigobar||' - '||nompro LIKE '%$campo%') AND (escombo <> 'SI')" ; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nm_comando = "SELECT codigobar + ' - ' + nompro, idprod FROM productos WHERE (codigobar + ' - ' + nompro LIKE '%$campo%') AND (escombo='NO')" ; 
+          $nm_comando = "SELECT codigobar + ' - ' + nompro, idprod FROM productos WHERE (codigobar + ' - ' + nompro LIKE '%$campo%') AND (escombo <> 'SI')" ; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
       { 
-          $nm_comando = "SELECT codigobar||' - '||nompro, idprod FROM productos WHERE (codigobar||' - '||nompro LIKE '%$campo%') AND (escombo='NO')" ; 
+          $nm_comando = "SELECT codigobar||' - '||nompro, idprod FROM productos WHERE (codigobar||' - '||nompro LIKE '%$campo%') AND (escombo <> 'SI')" ; 
       } 
       else 
       { 
-          $nm_comando = "SELECT codigobar||' - '||nompro, idprod FROM productos WHERE (codigobar||' - '||nompro LIKE '%$campo%') AND (escombo='NO')" ; 
+          $nm_comando = "SELECT codigobar||' - '||nompro, idprod FROM productos WHERE (codigobar||' - '||nompro LIKE '%$campo%') AND (escombo <> 'SI')" ; 
       } 
        if ($condicao == "ii")
        {

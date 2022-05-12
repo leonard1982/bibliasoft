@@ -30,7 +30,28 @@ header("X-Frame-Options: SAMEORIGIN");
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
  <META http-equiv="Pragma" content="no-cache" />
  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
- <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+            <meta name="viewport" content="minimal-ui, width=300, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+            <meta name="mobile-web-app-capable" content="yes">
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <link rel="apple-touch-icon"   sizes="57x57" href="">
+            <link rel="apple-touch-icon"   sizes="60x60" href="">
+            <link rel="apple-touch-icon"   sizes="72x72" href="">
+            <link rel="apple-touch-icon"   sizes="76x76" href="">
+            <link rel="apple-touch-icon" sizes="114x114" href="">
+            <link rel="apple-touch-icon" sizes="120x120" href="">
+            <link rel="apple-touch-icon" sizes="144x144" href="">
+            <link rel="apple-touch-icon" sizes="152x152" href="">
+            <link rel="apple-touch-icon" sizes="180x180" href="">
+            <link rel="icon" type="image/png" sizes="192x192" href="">
+            <link rel="icon" type="image/png"   sizes="32x32" href="">
+            <link rel="icon" type="image/png"   sizes="96x96" href="">
+            <link rel="icon" type="image/png"   sizes="16x16" href="">
+            <meta name="msapplication-TileColor" content="___">
+            <meta name="msapplication-TileImage" content="">
+            <meta name="theme-color" content="___">
+            <meta name="apple-mobile-web-app-status-bar-style" content="___">
+            <link rel="shortcut icon" href=""> <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
  <SCRIPT type="text/javascript">
   var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
   var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_close"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
@@ -66,7 +87,30 @@ else
 ?>
  </SCRIPT>
         <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
- <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></SCRIPT>
+            <?php
+               if ($_SESSION['scriptcase']['display_mobile'] && $_SESSION['scriptcase']['device_mobile']) {
+                   $sc_app_data = json_encode([
+                       'appType' => 'form',
+                       'improvements' => true,
+                       'displayOptionsButton' => false,
+                       'displayScrollUp' => true,
+                       'scrollUpPosition' => 'R',
+                       'toolbarOrientation' => 'H',
+                       'mobilePanes' => 'true',
+                       'navigationBarButtons' => unserialize('a:3:{i:0;s:2:"NP";i:1;s:2:"FL";i:2;s:2:"RC";}'),
+                   ]); ?>
+            <input type="hidden" id="sc-mobile-app-data" value='<?php echo $sc_app_data; ?>' />
+            <script type="text/javascript" src="../_lib/lib/js/nm_modal_panes.jquery.js"></script>
+            <script type="text/javascript" src="../_lib/lib/js/nm_form_mobile.js"></script>
+            <link rel='stylesheet' href='../_lib/lib/css/nm_form_mobile.css' type='text/css'/>
+            <script>
+                $(document).ready(function(){
+
+                    bootstrapMobile();
+
+                });
+            </script>
+            <?php } ?> <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></SCRIPT>
  <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery/css/smoothness/jquery-ui.css" type="text/css" media="screen" />
  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_link ?>_lib/css/<?php echo $this->Ini->str_schema_all ?>_sweetalert.css" />
  <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/sweetalert/sweetalert2.all.min.js"></SCRIPT>
@@ -1156,31 +1200,31 @@ $aLookup = array();
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    else
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
 
    $this->idcombo_ = $old_value_idcombo_;
@@ -1246,31 +1290,31 @@ $aLookup = array();
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, concat(codigobar,' - ',nompro) FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar&' - '&nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar + ' - ' + nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
    else
    {
-       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo='NO') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
+       $nm_comando = "SELECT idprod, codigobar||' - '||nompro FROM productos WHERE (escombo <> 'SI') AND idprod = " . $aRecData['idproducto_'] . " ORDER BY codigobar, nompro";
    }
 
    $this->idcombo_ = $old_value_idcombo_;
@@ -1321,7 +1365,7 @@ $idproducto__look = (isset($aLookup[0][$this->idproducto_])) ? $aLookup[0][$this
 <?php } else { ?>
 <span id="id_read_on_cantidad_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-cantidad_<?php echo $sc_seq_vert ?> css_cantidad__line" style="<?php echo $sStyleReadLab_cantidad_; ?>"><?php echo $this->form_format_readonly("cantidad_", $this->form_encode_input($this->cantidad_)); ?></span><span id="id_read_off_cantidad_<?php echo $sc_seq_vert ?>" class="css_read_off_cantidad_<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_cantidad_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_cantidad__obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_cantidad_<?php echo $sc_seq_vert ?>" type=text name="cantidad_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($cantidad_) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=10"; } ?> alt="{datatype: 'decimal', maxLength: 10, precision: 2, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['cantidad_']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['cantidad_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['cantidad_']['symbol_fmt']; ?>, manualDecimals: false, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['cantidad_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'center', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=10"; } ?> alt="{datatype: 'decimal', maxLength: 10, precision: 3, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['cantidad_']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['cantidad_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['cantidad_']['symbol_fmt']; ?>, manualDecimals: false, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['cantidad_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'center', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cantidad_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cantidad_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
