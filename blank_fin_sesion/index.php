@@ -217,8 +217,8 @@ class blank_fin_sesion_ini
       $this->nm_dt_criacao   = "20181228"; 
       $this->nm_hr_criacao   = "062322"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220425"; 
-      $this->nm_hr_ult_alt   = "155927"; 
+      $this->nm_dt_ult_alt   = "20220511"; 
+      $this->nm_hr_ult_alt   = "110652"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_fin_sesion_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_fin_sesion']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_fin_sesion']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYZ9F7HArYVWBqHgvOVcrsDWBmVENUDcJUZ1BOD1rKZMFaHgrKZSJqDWX7ZuFaHQXsZ9F7D1BeHQrqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHQrqDMNODkFCH5XCHMX7D9BiZ1BiHArKD5JwDMveDkXKDWXCVoBOHQJeDuBqHANOHQNUDMvmVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcJeH9X7HIBeV5FUHuNOVIBOHEX7VoJwDcJUZSB/DSrYV5FUDMNKZSJGH5FYVoB/D9NwZSX7DSBYV5JwHuNOZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsHAvOD5F7HuvmV9BUHEFYVoBqD9BiZ1rqHAvsD5XGDMveVkJGDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5FGDoBqHQBiDuFaHAveD5NUHgNKDkBOV5FYHMBiHQXOZSBqHANOHQFaHgNOHEXeDWFqHIJwD9XsH9FGHIrwD5F7DMBOVcXKDWF/HIBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZSX7Z1BYVWXGDMzGVcrsDur/HMX7DcBqH9BqDSBeHQJsDEBeHEJqV5FaVoXGDcXGDQJwHIrwHuBiHgrKVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoFUHQJeDQFGD1veHQBOHgrKVIFCDWFaHMraHQXGZ1F7DSBOD5XGHgBOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWJeDoJeDcBqZ1B/Z1NOV5JsDMNKZSXeDWXCVoXGD9XsH9FUZ1rwV5BqHgrKVcFCH5FqDoFGD9BsH9B/Z1vmV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErsDWF/HIrqHQJKH9FGHABYVWJsHuBYVcBUDWXCHIFUD9BsZ1BiHABYHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMFaHgveHArsDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWrmVEraDcFYZ1BiHABYHuXGDEvsHEFiV5B7ZuBqHQNwH9X7HABYHuF7DMvOVcFKDuX7VErqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1041,6 +1041,18 @@ class blank_fin_sesion_ini
           if (!isset($_SESSION['gpassword_logueo'])) 
           {
               $this->nm_falta_var .= "gpassword_logueo; ";
+          }
+          if (!isset($_SESSION['g_recordarme'])) 
+          {
+              $this->nm_falta_var .= "g_recordarme; ";
+          }
+          if (!isset($_SESSION['g_usuario'])) 
+          {
+              $this->nm_falta_var .= "g_usuario; ";
+          }
+          if (!isset($_SESSION['g_password'])) 
+          {
+              $this->nm_falta_var .= "g_password; ";
           }
       }
 // 
@@ -1940,6 +1952,12 @@ class blank_fin_sesion_apl
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
       $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['g_password'])) {$_SESSION['g_password'] = "";}
+if (!isset($this->sc_temp_g_password)) {$this->sc_temp_g_password = (isset($_SESSION['g_password'])) ? $_SESSION['g_password'] : "";}
+if (!isset($_SESSION['g_usuario'])) {$_SESSION['g_usuario'] = "";}
+if (!isset($this->sc_temp_g_usuario)) {$this->sc_temp_g_usuario = (isset($_SESSION['g_usuario'])) ? $_SESSION['g_usuario'] : "";}
+if (!isset($_SESSION['g_recordarme'])) {$_SESSION['g_recordarme'] = "";}
+if (!isset($this->sc_temp_g_recordarme)) {$this->sc_temp_g_recordarme = (isset($_SESSION['g_recordarme'])) ? $_SESSION['g_recordarme'] : "";}
 if (!isset($_SESSION['gsesion_id'])) {$_SESSION['gsesion_id'] = "";}
 if (!isset($this->sc_temp_gsesion_id)) {$this->sc_temp_gsesion_id = (isset($_SESSION['gsesion_id'])) ? $_SESSION['gsesion_id'] : "";}
 if (!isset($_SESSION['gModificarInventario'])) {$_SESSION['gModificarInventario'] = "";}
@@ -2062,6 +2080,12 @@ $this->sc_temp_gGrupoUsuarioComanda = 0;
 $this->sc_temp_gModificarInventario = "";
 $this->sc_temp_gsesion_id  = "";
 
+if($this->sc_temp_g_recordarme!="SI")
+{
+	$this->sc_temp_g_usuario  = "";
+	$this->sc_temp_g_password = "";
+}
+
 
 ;
 ;
@@ -2128,6 +2152,9 @@ if (isset($this->sc_temp_gimpresorapos)) {$_SESSION['gimpresorapos'] = $this->sc
 if (isset($this->sc_temp_gGrupoUsuarioComanda)) {$_SESSION['gGrupoUsuarioComanda'] = $this->sc_temp_gGrupoUsuarioComanda;}
 if (isset($this->sc_temp_gModificarInventario)) {$_SESSION['gModificarInventario'] = $this->sc_temp_gModificarInventario;}
 if (isset($this->sc_temp_gsesion_id)) {$_SESSION['gsesion_id'] = $this->sc_temp_gsesion_id;}
+if (isset($this->sc_temp_g_recordarme)) {$_SESSION['g_recordarme'] = $this->sc_temp_g_recordarme;}
+if (isset($this->sc_temp_g_usuario)) {$_SESSION['g_usuario'] = $this->sc_temp_g_usuario;}
+if (isset($this->sc_temp_g_password)) {$_SESSION['g_password'] = $this->sc_temp_g_password;}
 $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 
@@ -2324,101 +2351,6 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
    {
        $_SESSION['sc_session']['SC_parm_violation'] = true;
    }
-   if (isset($gusuario_logueo) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gusuario_logueo);
-       $_SESSION['gusuario_logueo'] = $gusuario_logueo;
-   }
-   if (isset($gpassword_logueo) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gpassword_logueo);
-       $_SESSION['gpassword_logueo'] = $gpassword_logueo;
-   }
-   if (isset($gPermisosUsuario) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gPermisosUsuario);
-       $_SESSION['gPermisosUsuario'] = $gPermisosUsuario;
-   }
-   if (isset($gnombreusuario) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gnombreusuario);
-       $_SESSION['gnombreusuario'] = $gnombreusuario;
-   }
-   if (isset($gidtercero) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gidtercero);
-       $_SESSION['gidtercero'] = $gidtercero;
-   }
-   if (isset($gidresolucion) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gidresolucion);
-       $_SESSION['gidresolucion'] = $gidresolucion;
-   }
-   if (isset($gusuariologueado) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gusuariologueado);
-       $_SESSION['gusuariologueado'] = $gusuariologueado;
-   }
-   if (isset($gnuevaactualizacion) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gnuevaactualizacion);
-       $_SESSION['gnuevaactualizacion'] = $gnuevaactualizacion;
-   }
-   if (isset($glineasporfactura) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($glineasporfactura);
-       $_SESSION['glineasporfactura'] = $glineasporfactura;
-   }
-   if (isset($gconsolidararticulos) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gconsolidararticulos);
-       $_SESSION['gconsolidararticulos'] = $gconsolidararticulos;
-   }
-   if (isset($gespaciadodetallefactura) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gespaciadodetallefactura);
-       $_SESSION['gespaciadodetallefactura'] = $gespaciadodetallefactura;
-   }
-   if (isset($gserialguardado) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gserialguardado);
-       $_SESSION['gserialguardado'] = $gserialguardado;
-   }
-   if (isset($gSerial) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gSerial);
-       $_SESSION['gSerial'] = $gSerial;
-   }
-   if (isset($gmensaje) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gmensaje);
-       $_SESSION['gmensaje'] = $gmensaje;
-   }
-   if (isset($gTiempoSegRefreshDoc) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gTiempoSegRefreshDoc);
-       $_SESSION['gTiempoSegRefreshDoc'] = $gTiempoSegRefreshDoc;
-   }
-   if (isset($gimpresorapos) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gimpresorapos);
-       $_SESSION['gimpresorapos'] = $gimpresorapos;
-   }
-   if (isset($gGrupoUsuarioComanda) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gGrupoUsuarioComanda);
-       $_SESSION['gGrupoUsuarioComanda'] = $gGrupoUsuarioComanda;
-   }
-   if (isset($gModificarInventario) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gModificarInventario);
-       $_SESSION['gModificarInventario'] = $gModificarInventario;
-   }
-   if (isset($gsesion_id) && isset($NM_contr_var_session) && $NM_contr_var_session == "Yes") 
-   {
-       nm_limpa_str_blank_fin_sesion($gsesion_id);
-       $_SESSION['gsesion_id'] = $gsesion_id;
-   }
    if (isset($_POST["gusuario_logueo"])) 
    {
        $_SESSION["gusuario_logueo"] = $_POST["gusuario_logueo"];
@@ -2446,6 +2378,20 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
    if (!isset($_SESSION["gpassword_logueo"])) 
    {
        $_SESSION["gpassword_logueo"] = "";
+   }
+   if (isset($_POST["gidtercero"])) 
+   {
+       $_SESSION["gidtercero"] = $_POST["gidtercero"];
+       nm_limpa_str_blank_fin_sesion($_SESSION["gidtercero"]);
+   }
+   if (isset($_GET["gidtercero"])) 
+   {
+       $_SESSION["gidtercero"] = $_GET["gidtercero"];
+       nm_limpa_str_blank_fin_sesion($_SESSION["gidtercero"]);
+   }
+   if (!isset($_SESSION["gidtercero"])) 
+   {
+       $_SESSION["gidtercero"] = "";
    }
    if (isset($_POST["gPermisosUsuario"])) 
    {
@@ -2484,20 +2430,6 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
    if (!isset($_SESSION["gnombreusuario"])) 
    {
        $_SESSION["gnombreusuario"] = "";
-   }
-   if (isset($_POST["gidtercero"])) 
-   {
-       $_SESSION["gidtercero"] = $_POST["gidtercero"];
-       nm_limpa_str_blank_fin_sesion($_SESSION["gidtercero"]);
-   }
-   if (isset($_GET["gidtercero"])) 
-   {
-       $_SESSION["gidtercero"] = $_GET["gidtercero"];
-       nm_limpa_str_blank_fin_sesion($_SESSION["gidtercero"]);
-   }
-   if (!isset($_SESSION["gidtercero"])) 
-   {
-       $_SESSION["gidtercero"] = "";
    }
    if (isset($_POST["gidresolucion"])) 
    {
@@ -2735,6 +2667,48 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
    {
        $_SESSION["gsesion_id"] = "";
    }
+   if (isset($_POST["g_recordarme"])) 
+   {
+       $_SESSION["g_recordarme"] = $_POST["g_recordarme"];
+       nm_limpa_str_blank_fin_sesion($_SESSION["g_recordarme"]);
+   }
+   if (isset($_GET["g_recordarme"])) 
+   {
+       $_SESSION["g_recordarme"] = $_GET["g_recordarme"];
+       nm_limpa_str_blank_fin_sesion($_SESSION["g_recordarme"]);
+   }
+   if (!isset($_SESSION["g_recordarme"])) 
+   {
+       $_SESSION["g_recordarme"] = "";
+   }
+   if (isset($_POST["g_usuario"])) 
+   {
+       $_SESSION["g_usuario"] = $_POST["g_usuario"];
+       nm_limpa_str_blank_fin_sesion($_SESSION["g_usuario"]);
+   }
+   if (isset($_GET["g_usuario"])) 
+   {
+       $_SESSION["g_usuario"] = $_GET["g_usuario"];
+       nm_limpa_str_blank_fin_sesion($_SESSION["g_usuario"]);
+   }
+   if (!isset($_SESSION["g_usuario"])) 
+   {
+       $_SESSION["g_usuario"] = "";
+   }
+   if (isset($_POST["g_password"])) 
+   {
+       $_SESSION["g_password"] = $_POST["g_password"];
+       nm_limpa_str_blank_fin_sesion($_SESSION["g_password"]);
+   }
+   if (isset($_GET["g_password"])) 
+   {
+       $_SESSION["g_password"] = $_GET["g_password"];
+       nm_limpa_str_blank_fin_sesion($_SESSION["g_password"]);
+   }
+   if (!isset($_SESSION["g_password"])) 
+   {
+       $_SESSION["g_password"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -2900,6 +2874,11 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
            $_SESSION['gpassword_logueo'] = $gpassword_logueo;
            nm_limpa_str_blank_fin_sesion($_SESSION["gpassword_logueo"]);
        }
+       if (isset($gidtercero)) 
+       {
+           $_SESSION['gidtercero'] = $gidtercero;
+           nm_limpa_str_blank_fin_sesion($_SESSION["gidtercero"]);
+       }
        if (!isset($gPermisosUsuario) && isset($gpermisosusuario)) 
        {
            $_SESSION["gPermisosUsuario"] = $gpermisosusuario;
@@ -2913,11 +2892,6 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
        {
            $_SESSION['gnombreusuario'] = $gnombreusuario;
            nm_limpa_str_blank_fin_sesion($_SESSION["gnombreusuario"]);
-       }
-       if (isset($gidtercero)) 
-       {
-           $_SESSION['gidtercero'] = $gidtercero;
-           nm_limpa_str_blank_fin_sesion($_SESSION["gidtercero"]);
        }
        if (isset($gidresolucion)) 
        {
@@ -3004,6 +2978,21 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
        {
            $_SESSION['gsesion_id'] = $gsesion_id;
            nm_limpa_str_blank_fin_sesion($_SESSION["gsesion_id"]);
+       }
+       if (isset($g_recordarme)) 
+       {
+           $_SESSION['g_recordarme'] = $g_recordarme;
+           nm_limpa_str_blank_fin_sesion($_SESSION["g_recordarme"]);
+       }
+       if (isset($g_usuario)) 
+       {
+           $_SESSION['g_usuario'] = $g_usuario;
+           nm_limpa_str_blank_fin_sesion($_SESSION["g_usuario"]);
+       }
+       if (isset($g_password)) 
+       {
+           $_SESSION['g_password'] = $g_password;
+           nm_limpa_str_blank_fin_sesion($_SESSION["g_password"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

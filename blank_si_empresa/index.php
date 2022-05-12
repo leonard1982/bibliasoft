@@ -217,8 +217,8 @@ class blank_si_empresa_ini
       $this->nm_dt_criacao   = "20211122"; 
       $this->nm_hr_criacao   = "154807"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220425"; 
-      $this->nm_hr_ult_alt   = "155927"; 
+      $this->nm_dt_ult_alt   = "20220511"; 
+      $this->nm_hr_ult_alt   = "110652"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_si_empresa_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_si_empresa']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_si_empresa']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmZSFGHAN7VWJwHuzGDkBsHEX7HIrqHQXOZSBOHArKHQraDEBOHErsH5FYHIrqD9NwZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGDEBOHEFiDWrGDoXGHQNwDQBqHAveD5F7HuBOVcXKV5X7VoJwHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcJeH9X7HIBeV5FUHuNOVIBOHEX7VoJwD9XOH9B/DSrYD5BiDMzGHEXeV5FqDoBOD9NwH9X7HABYV5BqHgvsV9FiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZ1BiHAzGD5BqHgrKDkXKDWX7DoJsHQNmDQX7HIrwD5JsHgvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUH5XKVoF7HQNmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQFYDuBqD1veHuFGHuBYVcBODuX7VEFGD9BiZSBODSrYV5FUHgBODkBsV5FqHMBqHQXOZ9XGHAN7HuJwHgrwVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDQFaHIrKHQrqHuvmVIBsV5F/VEFGHQNwZSB/HIrwHuJsDMBYZSJqDWFqHINUD9JKZ9XGHAN7V5FGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJwHQXsH9BiZ1rwD5rqDMvmDkB/DuX7HMBqHQXOVIraZ1rYHQXGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDErKZSXeHEFqDoFUDcBwDQX7Z1BYV5JeHuzGVIBODWFYVoFGDcBqZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDErKZSXeH5F/DoB/HQXODQB/D1veVWBqDMrYVcXKDWXCVEF7HQBsVINUHArKD5NUHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgNKHArsDWFGDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVorqDcJUZ1F7HIveZMBqDEvsVkJ3H5FGZuB/DcBiDQJsD1BeHQF7HuzGVcFCHEFYVEraHQBiH9B/Z1rYHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1041,6 +1041,10 @@ class blank_si_empresa_ini
           if (!isset($_SESSION['gOS'])) 
           {
               $this->nm_falta_var .= "gOS; ";
+          }
+          if (!isset($_SESSION['gnitempresa'])) 
+          {
+              $this->nm_falta_var .= "gnitempresa; ";
           }
       }
 // 
@@ -1942,6 +1946,8 @@ class blank_si_empresa_apl
       $_SESSION['scriptcase']['blank_si_empresa']['contr_erro'] = 'on';
 if (!isset($_SESSION['gOS'])) {$_SESSION['gOS'] = "";}
 if (!isset($this->sc_temp_gOS)) {$this->sc_temp_gOS = (isset($_SESSION['gOS'])) ? $_SESSION['gOS'] : "";}
+if (!isset($_SESSION['gnitempresa'])) {$_SESSION['gnitempresa'] = "";}
+if (!isset($this->sc_temp_gnitempresa)) {$this->sc_temp_gnitempresa = (isset($_SESSION['gnitempresa'])) ? $_SESSION['gnitempresa'] : "";}
 if (!isset($_SESSION['gtipo_empresa'])) {$_SESSION['gtipo_empresa'] = "";}
 if (!isset($this->sc_temp_gtipo_empresa)) {$this->sc_temp_gtipo_empresa = (isset($_SESSION['gtipo_empresa'])) ? $_SESSION['gtipo_empresa'] : "";}
  $vcodempresa = "";
@@ -1968,6 +1974,8 @@ if(!empty($vcodempresa))
 			if($re = mysqli_fetch_row($co))
 			{
 				$vsi = "SI";
+				
+				$this->sc_temp_gnitempresa = $vcodempresa;
 
 				if (isset($_SESSION['scriptcase']['sc_connection']))
 {
@@ -1996,6 +2004,8 @@ if(!empty($vcodempresa))
 			if($re = mysqli_fetch_row($co))
 			{
 				$vsi = "SI";
+				
+				$this->sc_temp_gnitempresa = $vcodempresa;
 
 				if (isset($_SESSION['scriptcase']['sc_connection']))
 {
@@ -2018,6 +2028,7 @@ if(!empty($vcodempresa))
 
 echo json_encode(array("ok"=>$vsi,"sql"=>$vsql,"nombre_bd"=>$vnombre_bd));
 if (isset($this->sc_temp_gtipo_empresa)) {$_SESSION['gtipo_empresa'] = $this->sc_temp_gtipo_empresa;}
+if (isset($this->sc_temp_gnitempresa)) {$_SESSION['gnitempresa'] = $this->sc_temp_gnitempresa;}
 if (isset($this->sc_temp_gOS)) {$_SESSION['gOS'] = $this->sc_temp_gOS;}
 $_SESSION['scriptcase']['blank_si_empresa']['contr_erro'] = 'off'; 
 //--- 
@@ -2253,6 +2264,20 @@ $_SESSION['scriptcase']['blank_si_empresa']['contr_erro'] = 'off';
    {
        $_SESSION["gOS"] = "";
    }
+   if (isset($_POST["gnitempresa"])) 
+   {
+       $_SESSION["gnitempresa"] = $_POST["gnitempresa"];
+       nm_limpa_str_blank_si_empresa($_SESSION["gnitempresa"]);
+   }
+   if (isset($_GET["gnitempresa"])) 
+   {
+       $_SESSION["gnitempresa"] = $_GET["gnitempresa"];
+       nm_limpa_str_blank_si_empresa($_SESSION["gnitempresa"]);
+   }
+   if (!isset($_SESSION["gnitempresa"])) 
+   {
+       $_SESSION["gnitempresa"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -2421,6 +2446,11 @@ $_SESSION['scriptcase']['blank_si_empresa']['contr_erro'] = 'off';
        {
            $_SESSION['gOS'] = $gOS;
            nm_limpa_str_blank_si_empresa($_SESSION["gOS"]);
+       }
+       if (isset($gnitempresa)) 
+       {
+           $_SESSION['gnitempresa'] = $gnitempresa;
+           nm_limpa_str_blank_si_empresa($_SESSION["gnitempresa"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

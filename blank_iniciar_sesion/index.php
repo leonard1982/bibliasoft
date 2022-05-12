@@ -220,8 +220,8 @@ class blank_iniciar_sesion_ini
       $this->nm_dt_criacao   = "20180904"; 
       $this->nm_hr_criacao   = "084030"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220425"; 
-      $this->nm_hr_ult_alt   = "155927"; 
+      $this->nm_dt_ult_alt   = "20220512"; 
+      $this->nm_hr_ult_alt   = "100153"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -913,7 +913,7 @@ class blank_iniciar_sesion_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_iniciar_sesion']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_iniciar_sesion']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQJsDSzGV5XGHgvsZSNiHEX/VEF7HQNwZSB/HIrwHQBODMveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQNwZkBiHIBeHuBOHgBYHErCHEXCHMJsHQNwH9FGD1veHuNUDMNOVIBODuFqVEX7HQXOVIJsHAN7HQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5X7HuNOVcFKDWFaDoJsD9JmH9BOZ1BeV5JeDEBOVkXeHEFqDoF7D9JKDQX7HArYV5BOHgrYDkFCH5FqDoraD9XOH9B/DSrYD5FaDEBODkFeV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcJeH9X7HAN7D5NUHuvmVIBOH5XCHMJsHQXOZkFGD1rwHQF7HgrKDkXKH5FYHIB/D9NwZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqD1vOV5XGDMvOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgBOHArCDWFqZuBODcBwDQFUHIvsV5XGHgrYDkBOV5FYHIX7D9XOZkBiD1rwD5rqDMBYHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQFUHIrKHuBODMvsV9BUDurGVorqHQBsZ1BiHArYZMB/DMvCHEFiV5XCDoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIrqDcXGDQFaHIrwHQrqDMrYVcFeH5XCVorqHQBiZ1FaHIBeHuJwHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7HABYV5FUDEBeZSJqV5FaVoXGD9XsH9X7DSBYV5FGHuvmVcBODWFaVoX7DcNwH9FaD1rwV5FaDErKZSXeHEFqDoB/D9XsZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCV5XKVoFGDcXGDQX7DSBYVWJsHgrKVIBsDuX7VEX7D9XOH9BqHAN7D5JeHgveHEBUDurmZuB/DcJeDuBqHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqD1vOV5XGDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMNKZSJ3HEXCHIraD9XsDuBqD1BeD5JeHgrwVcFKH5XCHMraHQNwZ1FGDSBeHuJsHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2020,6 +2020,12 @@ class blank_iniciar_sesion_apl
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
       $_SESSION['scriptcase']['blank_iniciar_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['g_recordarme'])) {$_SESSION['g_recordarme'] = "";}
+if (!isset($this->sc_temp_g_recordarme)) {$this->sc_temp_g_recordarme = (isset($_SESSION['g_recordarme'])) ? $_SESSION['g_recordarme'] : "";}
+if (!isset($_SESSION['g_password'])) {$_SESSION['g_password'] = "";}
+if (!isset($this->sc_temp_g_password)) {$this->sc_temp_g_password = (isset($_SESSION['g_password'])) ? $_SESSION['g_password'] : "";}
+if (!isset($_SESSION['g_usuario'])) {$_SESSION['g_usuario'] = "";}
+if (!isset($this->sc_temp_g_usuario)) {$this->sc_temp_g_usuario = (isset($_SESSION['g_usuario'])) ? $_SESSION['g_usuario'] : "";}
 if (!isset($_SESSION['gnitempresa'])) {$_SESSION['gnitempresa'] = "";}
 if (!isset($this->sc_temp_gnitempresa)) {$this->sc_temp_gnitempresa = (isset($_SESSION['gnitempresa'])) ? $_SESSION['gnitempresa'] : "";}
 if (!isset($_SESSION['gdescuento_general'])) {$_SESSION['gdescuento_general'] = "";}
@@ -2160,15 +2166,15 @@ if (!isset($_SESSION['gurl_reg_software'])) {$_SESSION['gurl_reg_software'] = ""
 if (!isset($this->sc_temp_gurl_reg_software)) {$this->sc_temp_gurl_reg_software = (isset($_SESSION['gurl_reg_software'])) ? $_SESSION['gurl_reg_software'] : "";}
 if (!isset($_SESSION['gurl_reg_empresa'])) {$_SESSION['gurl_reg_empresa'] = "";}
 if (!isset($this->sc_temp_gurl_reg_empresa)) {$this->sc_temp_gurl_reg_empresa = (isset($_SESSION['gurl_reg_empresa'])) ? $_SESSION['gurl_reg_empresa'] : "";}
- $this->sc_temp_gurl_reg_empresa     = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config';
-$this->sc_temp_gurl_reg_software    = 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/software';
-$this->sc_temp_gurl_reg_certificado = 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/certificate';
-$this->sc_temp_gurl_reg_subirlogo   = 'http://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/logo';
-$this->sc_temp_gurl_reg_resolucion  = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/config/resolution';
-$this->sc_temp_gurl_rangos          = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/numbering-range';
-$this->sc_temp_gurl_enviofacturas   = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/invoice';   
-$this->sc_temp_gurl_envionotacredito= 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/credit-note';
-$this->sc_temp_gurl_envionotadebito = 'https://www.facilwebnube.com/apidian2021/public/api/ubl2.1/debit-note';
+ $this->sc_temp_gurl_reg_empresa     = 'https://www.apifacilweb.com/public/api/ubl2.1/config';
+$this->sc_temp_gurl_reg_software    = 'http://www.apifacilweb.com/public/api/ubl2.1/config/software';
+$this->sc_temp_gurl_reg_certificado = 'http://www.apifacilweb.com/public/api/ubl2.1/config/certificate';
+$this->sc_temp_gurl_reg_subirlogo   = 'http://www.apifacilweb.com/public/api/ubl2.1/config/logo';
+$this->sc_temp_gurl_reg_resolucion  = 'https://www.apifacilweb.com/public/api/ubl2.1/config/resolution';
+$this->sc_temp_gurl_rangos          = 'https://www.apifacilweb.com/public/api/ubl2.1/numbering-range';
+$this->sc_temp_gurl_enviofacturas   = 'https://www.apifacilweb.com/public/api/ubl2.1/invoice';   
+$this->sc_temp_gurl_envionotacredito= 'https://www.apifacilweb.com/public/api/ubl2.1/credit-note';
+$this->sc_temp_gurl_envionotadebito = 'https://www.apifacilweb.com/public/api/ubl2.1/debit-note';
 
 $this->sc_temp_gOS = strtoupper(substr(PHP_OS, 0, 3));
 
@@ -2184,8 +2190,6 @@ if(is_array($vuri2))
 	$rest1 = substr($vuri2[0], 0, -21);
 }
 $vserv = $_SERVER['HTTP_HOST'];
-
-
 
 ?>
 <script src="<?php echo sc_url_library('prj', 'js', 'js.cookie.min.js'); ?>"></script>
@@ -2353,14 +2357,15 @@ if(isset($_GET["username"]) and isset($_GET["password"]))
  if (isset($this->sc_temp_gaplicaciones_menu)) {$_SESSION['gaplicaciones_menu'] = $this->sc_temp_gaplicaciones_menu;}
  if (isset($this->sc_temp_gdescuento_general)) {$_SESSION['gdescuento_general'] = $this->sc_temp_gdescuento_general;}
  if (isset($this->sc_temp_gnitempresa)) {$_SESSION['gnitempresa'] = $this->sc_temp_gnitempresa;}
+ if (isset($this->sc_temp_g_usuario)) {$_SESSION['g_usuario'] = $this->sc_temp_g_usuario;}
+ if (isset($this->sc_temp_g_password)) {$_SESSION['g_password'] = $this->sc_temp_g_password;}
+ if (isset($this->sc_temp_g_recordarme)) {$_SESSION['g_recordarme'] = $this->sc_temp_g_recordarme;}
  if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
  {
 $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('blank_valida_sesion') . "/", $this->nm_location, "","_self", 440, 630, "ret_self");
  };
 	
 }
-
-
 
 $this->sc_temp_gPermisosUsuario = "";
 $this->sc_temp_gnombreusuario = "";
@@ -2481,8 +2486,6 @@ if(isset($this->vtempresa[0][0]))
 ?>
 <meta name="viewport" content="width=device-width,height=device-height, user-scalable=no" charset="UTF-8">
 <meta name="mobile-web-app-capable" content="yes">
-<meta http-equiv="Expires" content="0" />
-<meta http-equiv="Pragma" content="no-cache" />
 <meta name="MobileOptimized" content="320">
 <meta name="HandheldFriendly" content="True">
 
@@ -2682,8 +2685,6 @@ $(document).ready(function(){
 	});
 	
 	$("#empresa").change(function(){
-		
-		
 
 	});
 	
@@ -2914,7 +2915,21 @@ $(document).ready(function(){
 											{
 												for($i=0;$i<count($this->vempresas );$i++)
 												{
-													echo "<option value='".$this->vempresas[$i][0]."'>".$this->vempresas[$i][1]."</option>";
+													if(isset($this->sc_temp_gnitempresa))
+													{
+														if($this->sc_temp_gnitempresa == $this->vempresas[$i][0])
+														{
+															echo "<option value='".$this->vempresas[$i][0]."' selected='selected'>".$this->vempresas[$i][1]."</option>";
+														}
+														else
+														{
+															echo "<option value='".$this->vempresas[$i][0]."'>".$this->vempresas[$i][1]."</option>";
+														}
+													}
+													else
+													{
+														echo "<option value='".$this->vempresas[$i][0]."'>".$this->vempresas[$i][1]."</option>";
+													}
 												}
 											}
 											?>
@@ -2925,14 +2940,14 @@ $(document).ready(function(){
 									</div>
 									<div class="form-group">
 										<label for="username" style="float:left;">Usuario/E-mail</label>
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="<?php if(isset($_COOKIE["usuario"])){ echo $_COOKIE["usuario"];} ?>" required="required">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="<?php if(isset($this->sc_temp_g_usuario)){ echo $this->sc_temp_g_usuario;} ?>" required="required">
 									</div>
 									<div class="form-group">
 										<label for="password" style="float:left;">Contraseña</label>
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña" value="<?php if(isset($_COOKIE["password"])){ echo $_COOKIE["password"];} ?>" required="required">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña" value="<?php if(isset($this->sc_temp_g_password)){ echo $this->sc_temp_g_password;} ?>" required="required">
 									</div>
 									<div class="form-group">
-										<input style="float:left;" type="checkbox" tabindex="3" class="" name="remember" id="remember" <?php if(isset($_COOKIE["recordarme"])){ echo "checked='checked'";} ?>>
+										<input style="float:left;" type="checkbox" tabindex="3" class="" name="remember" id="remember" <?php if(isset($this->sc_temp_g_recordarme)){ if($this->sc_temp_g_recordarme=="SI"){ echo "checked='checked'";}} ?>>
 										<label for="remember" style="float:left;margin-left:10px;"> Recordarme</label>
 									</div>
 									
@@ -3088,6 +3103,9 @@ if (isset($this->sc_temp_gidbanco)) {$_SESSION['gidbanco'] = $this->sc_temp_gidb
 if (isset($this->sc_temp_gaplicaciones_menu)) {$_SESSION['gaplicaciones_menu'] = $this->sc_temp_gaplicaciones_menu;}
 if (isset($this->sc_temp_gdescuento_general)) {$_SESSION['gdescuento_general'] = $this->sc_temp_gdescuento_general;}
 if (isset($this->sc_temp_gnitempresa)) {$_SESSION['gnitempresa'] = $this->sc_temp_gnitempresa;}
+if (isset($this->sc_temp_g_usuario)) {$_SESSION['g_usuario'] = $this->sc_temp_g_usuario;}
+if (isset($this->sc_temp_g_password)) {$_SESSION['g_password'] = $this->sc_temp_g_password;}
+if (isset($this->sc_temp_g_recordarme)) {$_SESSION['g_recordarme'] = $this->sc_temp_g_recordarme;}
 $_SESSION['scriptcase']['blank_iniciar_sesion']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 
@@ -4443,6 +4461,48 @@ $_SESSION['scriptcase']['blank_iniciar_sesion']['contr_erro'] = 'off';
    {
        $_SESSION["gurl_envionotadebito"] = "";
    }
+   if (isset($_POST["g_usuario"])) 
+   {
+       $_SESSION["g_usuario"] = $_POST["g_usuario"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["g_usuario"]);
+   }
+   if (isset($_GET["g_usuario"])) 
+   {
+       $_SESSION["g_usuario"] = $_GET["g_usuario"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["g_usuario"]);
+   }
+   if (!isset($_SESSION["g_usuario"])) 
+   {
+       $_SESSION["g_usuario"] = "";
+   }
+   if (isset($_POST["g_password"])) 
+   {
+       $_SESSION["g_password"] = $_POST["g_password"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["g_password"]);
+   }
+   if (isset($_GET["g_password"])) 
+   {
+       $_SESSION["g_password"] = $_GET["g_password"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["g_password"]);
+   }
+   if (!isset($_SESSION["g_password"])) 
+   {
+       $_SESSION["g_password"] = "";
+   }
+   if (isset($_POST["g_recordarme"])) 
+   {
+       $_SESSION["g_recordarme"] = $_POST["g_recordarme"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["g_recordarme"]);
+   }
+   if (isset($_GET["g_recordarme"])) 
+   {
+       $_SESSION["g_recordarme"] = $_GET["g_recordarme"];
+       nm_limpa_str_blank_iniciar_sesion($_SESSION["g_recordarme"]);
+   }
+   if (!isset($_SESSION["g_recordarme"])) 
+   {
+       $_SESSION["g_recordarme"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -4967,6 +5027,21 @@ $_SESSION['scriptcase']['blank_iniciar_sesion']['contr_erro'] = 'off';
        {
            $_SESSION['gurl_envionotadebito'] = $gurl_envionotadebito;
            nm_limpa_str_blank_iniciar_sesion($_SESSION["gurl_envionotadebito"]);
+       }
+       if (isset($g_usuario)) 
+       {
+           $_SESSION['g_usuario'] = $g_usuario;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["g_usuario"]);
+       }
+       if (isset($g_password)) 
+       {
+           $_SESSION['g_password'] = $g_password;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["g_password"]);
+       }
+       if (isset($g_recordarme)) 
+       {
+           $_SESSION['g_recordarme'] = $g_recordarme;
+           nm_limpa_str_blank_iniciar_sesion($_SESSION["g_recordarme"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  
