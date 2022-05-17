@@ -879,6 +879,7 @@ class grid_facturaven_Save_Grid
          $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
          include("../_lib/css/" . $str_schema_all . "_grid.php");
          $str_toolbar_separator     = trim($str_toolbar_separator);
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
          $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
          include("../_lib/buttons/" . $Str_btn_grid);
          if (!function_exists("nmButtonOutput"))
@@ -893,7 +894,7 @@ class grid_facturaven_Save_Grid
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
       <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
       <HEAD>
-       <TITLE>Facturas de Venta</TITLE>
+       <TITLE>Facturas y NC en Ventas</TITLE>
        <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -1246,7 +1247,7 @@ else
          </tr>
          <tr><td class="<?php echo ($this->embbed)? 'scAppDivToolbar':'scGridToolbar'; ?>">
                <div id="id_btn_edit" style="display:<?php echo $str_display_edit_buttons; ?>">
-          <?php echo nmButtonOutput($this->arr_buttons, "bnovo_appdiv", "nm_new_grid();", "nm_new_grid();", "Ativa_save", "", "", "", "absmiddle", "", "0px", $this->path_btn, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          <?php echo nmButtonOutput($this->arr_buttons, "bnovo_appdiv", "nm_new_grid();", "nm_new_grid();", "Ativa_save", "", " ", "", "absmiddle", "", "0px", $this->path_btn, "", "__NM_HINT__ (Ctrl + E)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
   &nbsp;&nbsp;&nbsp;&nbsp;
 <span id='id_btn_Brestore' style="display:<?php echo (!$_SESSION['sc_session'][$this->sc_init]['grid_facturaven']['prim_save_grid'])?'':'none' ?>">

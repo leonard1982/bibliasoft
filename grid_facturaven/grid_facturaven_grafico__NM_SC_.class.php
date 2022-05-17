@@ -36,6 +36,8 @@ class grid_facturaven_grafico
 
    var $reload_as_analytic = false;
    var $array_tipo_doc = array();
+   var $array_direccion = array();
+   var $array_documento = array();
 
    //---- 
    function __construct()
@@ -306,7 +308,7 @@ class grid_facturaven_grafico
       $this->nivel     = (isset($nivel_quebra)) ? $nivel_quebra : 0;
       $this->campo_val = (isset($campo_val))    ? $campo_val    : 1;
       //---- 
-      $this->array_total_tipo = array();
+      $this->array_total_idcli = array();
       //---- 
       $ind_tit = $this->campo_val;
       if ($this->campo > 0)
@@ -325,10 +327,10 @@ class grid_facturaven_grafico
       $this->titulo      = $this->list_titulo;
       //---- Label
       $this->label    = array();
-      $this->label[0] = "Tipo";
-      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['contr_label_graf']['tipo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['contr_label_graf']['tipo']))
+      $this->label[0] = "Cliente";
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['contr_label_graf']['idcli']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['contr_label_graf']['idcli']))
       {
-         $this->label[0] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['contr_label_graf']['tipo'];
+         $this->label[0] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['contr_label_graf']['idcli'];
       }
    }
 

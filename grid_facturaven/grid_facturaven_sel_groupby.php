@@ -181,6 +181,7 @@ function Sel_processa_form()
    $arr_date_format  = array();
    $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
    include("../_lib/buttons/" . $Str_btn_grid);
    if (!function_exists("nmButtonOutput"))
@@ -196,7 +197,7 @@ function Sel_processa_form()
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta</TITLE>
+ <TITLE>Facturas y NC en Ventas</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -970,6 +971,36 @@ $(function() {
 <?php
     $prep_labels = array();
     $prep_labels[] = "Tipo";
+?>
+        <span>
+        <?php echo implode($prep_labels, ', ');?>
+        </span>
+      </label>
+      </div>
+<?php
+     }
+?>
+<?php
+     if (!in_array("idcli", $_SESSION['sc_session'][$sc_init]['grid_facturaven']['SC_Groupby_hide']))
+     {
+        if ($groupby_atual == "idcli")
+        {
+            $check = " checked";
+            $bStartFree = false;
+            $this->static_gb_ok = "sc_id_sel_groupby_idcli";
+        }
+        else
+        {
+            $check = "";
+        }
+?>
+      <div>
+      <input type="radio" class="scAppDivToolbarInput sc_ui_gby_selected" onclick='scShowTotalFields();change_actual_static("sc_id_sel_groupby_idcli");display_btn_restore_gb();' name="sel_groupby" value="idcli" id="sc_id_sel_groupby_idcli"<?php echo $check ?> style='display:' />
+      <label for="sc_id_sel_groupby_idcli">
+        Tercero
+<?php
+    $prep_labels = array();
+    $prep_labels[] = "Cliente";
 ?>
         <span>
         <?php echo implode($prep_labels, ', ');?>

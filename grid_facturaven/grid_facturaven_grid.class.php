@@ -55,6 +55,8 @@ class grid_facturaven_grid
    var $progress_res;
    var $progress_graf;
    var $array_tipo_doc = array();
+   var $array_direccion = array();
+   var $array_documento = array();
    var $count_ger;
    var $sum_total;
    var $sum_subtotal;
@@ -170,10 +172,29 @@ class grid_facturaven_grid
    var $sum_tipo_valor_con_8;
    var $sum_tipo_t_iva;
    var $sum_tipo_imp_bolsa;
+   var $idcli_Old;
+   var $arg_sum_idcli;
+   var $Label_idcli;
+   var $sc_proc_quebra_idcli;
+   var $count_idcli;
+   var $sum_idcli_total;
+   var $sum_idcli_subtotal;
+   var $sum_idcli_valoriva;
+   var $sum_idcli_base_iva_19;
+   var $sum_idcli_valor_iva_19;
+   var $sum_idcli_base_iva_5;
+   var $sum_idcli_valor_iva_5;
+   var $sum_idcli_excento;
+   var $sum_idcli_base_con_8;
+   var $sum_idcli_valor_con_8;
+   var $sum_idcli_t_iva;
+   var $sum_idcli_imp_bolsa;
    var $tipo_doc;
    var $imprimir;
    var $imprmirtirilla;
    var $print;
+   var $direccion;
+   var $documento;
    var $enviarfe;
    var $estadofe;
    var $pdf;
@@ -333,6 +354,50 @@ class grid_facturaven_grid
        { 
            $this->nmgp_barra_top();
        } 
+       $display_tag_interativ = "none";
+       $descr_refin = "";
+       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']))
+       { 
+           $display_tag_interativ = "";
+           $descr_refin = "<div class='scGridFilterTagList'>";
+           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search'] as $fil => $dados_fil) {
+               foreach ($dados_fil['lab'] as $lab_fil => $opcs_fil) {
+                   foreach ($opcs_fil as $iopc => $cada_opc) {
+                       $descr_refin .= "<div class='scGridFilterTagListItem'>";
+                       $descr_refin .= "<img align='absmiddle' style=\"cursor: pointer; float:right; padding-left: 5px;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" border=\"0\" onclick=\"nm_proc_int_search('clear_opc','" . $dados_fil['tp_obj'] . "','" . $lab_fil . "','" . $fil . "', 'id_int_search_" . $fil . "', '" . $fil . "', '" . $dados_fil['val_sel'][$iopc] . "##@@" . $cada_opc . "', 'S')\"/>";
+                       $descr_refin .= "<span class='scGridFilterTagListItemLabel'>";
+                       $descr_refin .= $lab_fil . "<br>";
+                       if ($dados_fil['tp_obj'] == 'bw') {
+                           $descr_refin .= $opcs_fil[0] . " <=> " . $opcs_fil[1];
+                       }
+                       else {
+                           $descr_refin .= $cada_opc;
+                       }
+                       $descr_refin .= "</span></div>&nbsp;&nbsp;";
+                       if ($dados_fil['tp_obj'] == 'bw') {
+                           break;
+                       }
+                   }
+               }
+           }
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bfilref_limpar", "nm_proc_int_clear_all();", "nm_proc_int_clear_all();", "app_int_search_all_cancel", "", "", "vertical-align: text-bottom;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+           $descr_refin .= $Cod_Btn; 
+           $descr_refin .= "</div>";
+       } 
+       $nm_saida->saida("       <tr id=\"tr_descr_refin_search\" style=\"display:" . $display_tag_interativ . ";padding: 0px;text-align: left;\"><td><div id=\"div_descr_refin_search\"  class=\"scGridFilterTag\" style=\"text-align: left;\">\r\n");
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ajax_nav']) {
+           $_SESSION['scriptcase']['saida_html'] = "";
+       }
+       if ($_SESSION['scriptcase']['proc_mobile']) {
+           $nm_saida->saida("            <a onclick=\"refin_search_mobile();\" class='scGridFilterTagIconCol'><i class='icon_fa " . $this->Ini->scGridRefinedSearchCollapseFAIcon . "'></i></a>\r\n");
+       }
+       $nm_saida->saida("         " . $descr_refin . "\r\n");
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ajax_nav']) {
+           $this->Ini->Arr_result['setValue'][] = array('field' => 'div_descr_refin_search', 'value' => NM_charset_to_utf8($_SESSION['scriptcase']['saida_html']));
+           $this->Ini->Arr_result['setDisplay'][] = array('field' => 'tr_descr_refin_search', 'value' => $display_tag_interativ);
+       }
+       $nm_saida->saida("       </div></td></tr> \r\n");
+
        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['save_grid']))
        {
            $this->refresh_interativ_search();
@@ -528,6 +593,11 @@ class grid_facturaven_grid
        $this->width_tabula_quebra  = "3px";
        $this->width_tabula_display = "none";
    }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+   {
+       $this->width_tabula_quebra  = "3px";
+       $this->width_tabula_display = "none";
+   }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_")
    {
        $this->width_tabula_quebra  = "0px";
@@ -564,6 +634,7 @@ class grid_facturaven_grid
    $this->sc_proc_quebra_vendedor = false;
    $this->sc_proc_quebra_resolucion = false;
    $this->sc_proc_quebra_tipo = false;
+   $this->sc_proc_quebra_idcli = false;
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'])
    { 
        $_SESSION['sc_session'][$this->Ini->sc_page]['NM_arr_tree'] = array();
@@ -624,6 +695,7 @@ class grid_facturaven_grid
    $this->nmgp_botoes['gantt'] = "on";
    $this->nmgp_botoes['groupby'] = "on";
    $this->nmgp_botoes['gridsave'] = "on";
+   $this->nmgp_botoes['reload'] = "on";
    $this->nmgp_botoes['SC_btn_0'] = "on";
    $this->nmgp_botoes['SC_btn_1'] = "on";
    $this->nmgp_botoes['Estado'] = "on";
@@ -1002,6 +1074,15 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_select_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_select']; 
        } 
    }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli") 
+   {
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_select']))  
+       { 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_select'] = array(); 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_select']['idfacven'] = 'DESC'; 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_select_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_select']; 
+       } 
+   }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_") 
    {
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_select']))  
@@ -1057,6 +1138,14 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
        { 
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_quebra'] = array(); 
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_quebra']['tipo']["tipo"] = "asc"; 
+       } 
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli") 
+   {
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_quebra']))  
+       { 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_quebra'] = array(); 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ordem_quebra']['idcli']["idcli"] = "asc"; 
        } 
    }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_") 
@@ -1299,6 +1388,20 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
    $this->sum_tipo_valor_con_8 = 0;
    $this->sum_tipo_t_iva = 0;
    $this->sum_tipo_imp_bolsa = 0;
+   $this->arg_sum_idcli = "";
+   $this->count_idcli = 0;
+   $this->sum_idcli_total = 0;
+   $this->sum_idcli_subtotal = 0;
+   $this->sum_idcli_valoriva = 0;
+   $this->sum_idcli_base_iva_19 = 0;
+   $this->sum_idcli_valor_iva_19 = 0;
+   $this->sum_idcli_base_iva_5 = 0;
+   $this->sum_idcli_valor_iva_5 = 0;
+   $this->sum_idcli_excento = 0;
+   $this->sum_idcli_base_con_8 = 0;
+   $this->sum_idcli_valor_con_8 = 0;
+   $this->sum_idcli_t_iva = 0;
+   $this->sum_idcli_imp_bolsa = 0;
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][1])) 
    { 
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['sc_total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][1] ;  
@@ -1599,6 +1702,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
        if (!isset($this->vendedor)) { $this->vendedor = ""; }
        if (!isset($this->resolucion)) { $this->resolucion = ""; }
        if (!isset($this->tipo)) { $this->tipo = ""; }
+       if (!isset($this->idcli)) { $this->idcli = ""; }
        $GLOBALS["idfacven"] = $this->rs_grid->fields[8] ;  
        $GLOBALS["idfacven"] = (string)$GLOBALS["idfacven"] ;
        $GLOBALS["idcli"] = $this->rs_grid->fields[2] ;  
@@ -1606,6 +1710,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
        $GLOBALS["vendedor"] = $this->rs_grid->fields[17] ;  
        $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"] ;
        $this->arg_sum_resolucion = ($this->resolucion == "") ? " is null " : " = " . $this->resolucion;
+       $this->arg_sum_idcli = ($this->idcli == "") ? " is null " : " = " . $this->idcli;
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "fecha")
        {
            $Format_tst = $this->Ini->Get_Gb_date_format('fecha', 'fechaven');
@@ -1660,6 +1765,8 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
        $this->SC_seq_register = $this->nmgp_reg_start ; 
        $this->SC_seq_page = 0;
        $this->Lookup->lookup_tipo_doc($this->tipo_doc, $this->idfacven, $this->array_tipo_doc); 
+       $this->Lookup->lookup_direccion($this->direccion, $this->idcli, $this->array_direccion); 
+       $this->Lookup->lookup_documento($this->documento, $this->idcli, $this->array_documento); 
        $this->SC_sep_quebra = false;
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "fecha") 
        {
@@ -1694,6 +1801,11 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
        {
            $this->tipo_Old = $this->tipo ; 
            $this->quebra_tipo_tipo($this->tipo) ; 
+       }
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli") 
+       {
+           $this->idcli_Old = $this->idcli ; 
+           $this->quebra_idcli_idcli($this->idcli) ; 
        }
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['final'] = $this->nmgp_reg_start ; 
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['inicio'] != 0 && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] != "pdf") 
@@ -1736,6 +1848,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
            if (!isset($this->vendedor)) { $this->vendedor = ""; }
            if (!isset($this->resolucion)) { $this->resolucion = ""; }
            if (!isset($this->tipo)) { $this->tipo = ""; }
+           if (!isset($this->idcli)) { $this->idcli = ""; }
        } 
    } 
    $this->nmgp_reg_inicial = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['final'] + 1;
@@ -1776,7 +1889,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta :: PDF</TITLE>
+ <TITLE>Facturas y NC en Ventas :: PDF</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
            if ($_SESSION['scriptcase']['proc_mobile'])
@@ -1874,7 +1987,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
        $nm_saida->saida("            \"http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd\">\r\n");
        $nm_saida->saida("  <HTML" . $_SESSION['scriptcase']['reg_conf']['html_dir'] . ">\r\n");
        $nm_saida->saida("  <HEAD>\r\n");
-       $nm_saida->saida("   <TITLE>Facturas de Venta</TITLE>\r\n");
+       $nm_saida->saida("   <TITLE>Facturas y NC en Ventas</TITLE>\r\n");
        $nm_saida->saida("   <META http-equiv=\"Content-Type\" content=\"text/html; charset=" . $_SESSION['scriptcase']['charset_html'] . "\" />\r\n");
        if ($_SESSION['scriptcase']['proc_mobile'])
        {
@@ -2801,6 +2914,18 @@ $nm_saida->saida("}\r\n");
                    $nm_saida->saida("          <div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\">{$groupByLabel}</H1></div>\r\n");
                } 
            }
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+           {
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['pdf_res'])
+               {
+                   $nm_saida->saida("          <div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\">" . $this->Ini->Nm_lang['lang_othr_smry_msge'] . "</H1></div>\r\n");
+               } 
+               else
+               {
+                   $groupByLabel = sprintf("Cliente", "idcli");
+                   $nm_saida->saida("          <div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\">{$groupByLabel}</H1></div>\r\n");
+               } 
+           }
            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_")
            {
            $nm_saida->saida("          <div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\"></H1></div>\r\n");
@@ -2812,7 +2937,7 @@ $nm_saida->saida("}\r\n");
        } 
        $this->Tab_align  = "center";
        $this->Tab_valign = "top";
-       $this->Tab_width = "";
+       $this->Tab_width = " width=\"70%\"";
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['pdf_res'])
        {
            return;
@@ -3012,6 +3137,10 @@ $nm_saida->saida("}\r\n");
    $this->css_imp_bolsa_grid_line = $compl_css_emb . "css_imp_bolsa_grid_line";
    $this->css_print_label = $compl_css_emb . "css_print_label";
    $this->css_print_grid_line = $compl_css_emb . "css_print_grid_line";
+   $this->css_direccion_label = $compl_css_emb . "css_direccion_label";
+   $this->css_direccion_grid_line = $compl_css_emb . "css_direccion_grid_line";
+   $this->css_documento_label = $compl_css_emb . "css_documento_label";
+   $this->css_documento_grid_line = $compl_css_emb . "css_documento_grid_line";
  }  
  function cabecalho()
  {
@@ -3145,21 +3274,68 @@ $nm_saida->saida("}\r\n");
            $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top\">\r\n");
      }
    } 
-   $nm_saida->saida("<style>\r\n");
-   $nm_saida->saida("#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 \r\n");
-   $nm_saida->saida("#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}\r\n");
-   $nm_saida->saida("</style>\r\n");
-   $nm_saida->saida("<div style=\"width: 100%\">\r\n");
-   $nm_saida->saida(" <div class=\"" . $this->css_scGridHeader . "\" style=\"height:11px; display: block; border-width:0px; \"></div>\r\n");
-   $nm_saida->saida(" <div style=\"height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block\">\r\n");
-   $nm_saida->saida(" 	<table style=\"width:100%; border-collapse:collapse; padding:0;\">\r\n");
-   $nm_saida->saida("    	<tr>\r\n");
-   $nm_saida->saida("        	<td id=\"lin1_col1\" class=\"" . $this->css_scGridHeaderFont . "\"><span>Facturas de Venta</span></td>\r\n");
-   $nm_saida->saida("            <td id=\"lin1_col2\" class=\"" . $this->css_scGridHeaderFont . "\"><span>" . $nm_cab_filtro . "</span></td>\r\n");
-   $nm_saida->saida("        </tr>\r\n");
-   $nm_saida->saida("    </table>		 \r\n");
-   $nm_saida->saida(" </div>\r\n");
-   $nm_saida->saida("</div>\r\n");
+   $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+   $nm_saida->saida("    <TR align=\"center\">\r\n");
+   $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+   $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          Facturas y NC en Ventas\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          " . $nm_cab_filtro . "\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("      </TABLE>\r\n");
+   $nm_saida->saida("     </TD>\r\n");
+   $nm_saida->saida("    </TR>\r\n");
+   $nm_saida->saida("   </TABLE>\r\n");
    $nm_saida->saida("  </TD>\r\n");
    $nm_saida->saida(" </TR>\r\n");
  }
@@ -3199,16 +3375,16 @@ $nm_saida->saida("}\r\n");
       } 
    $nm_saida->saida("    <TR id=\"tit_grid_facturaven__SCCS__" . $nm_seq_titulos . "\" align=\"center\" class=\"" . $this->css_scGridLabel . " sc-ui-grid-header-row sc-ui-grid-header-row-grid_facturaven-" . $tmp_header_row . "\">\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_label']) { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_print_label'] . "\" >&nbsp;</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_documento_label'] . "\" >&nbsp;</TD>\r\n");
    } 
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opc_psq']) { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_print_label'] . "\" >&nbsp;</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_documento_label'] . "\" >&nbsp;</TD>\r\n");
    } 
    if ($this->NM_btn_run_show) { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_print_label'] . "\" ><input type=checkbox id=\"NM_ck_run0\" name=\"NM_ck_grid[]\" value=\"0\" style=\"display:" . $this->SC_contr_ck_grid . "\" onClick=\"nm_marca_check_grid(this)\"></TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_documento_label'] . "\" ><input type=checkbox id=\"NM_ck_run0\" name=\"NM_ck_grid[]\" value=\"0\" style=\"display:" . $this->SC_contr_ck_grid . "\" onClick=\"nm_marca_check_grid(this)\"></TD>\r\n");
    } 
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] != "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_pdf'] != "pdf") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_print_label'] . "\" >&nbsp;</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_documento_label'] . "\" >&nbsp;</TD>\r\n");
    } 
    foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'] as $Cada_label)
    { 
@@ -3278,7 +3454,7 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['tipo_doc'])) ? $this->New_label['tipo_doc'] : "TIPO"; 
    if (!isset($this->NM_cmp_hidden['tipo_doc']) || $this->NM_cmp_hidden['tipo_doc'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tipo_doc_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tipo_doc_label'] . "\" NOWRAP WIDTH=\"40px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tipo_doc_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tipo_doc_label'] . "\" NOWRAP WIDTH=\"40%\">" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
  function NM_label_resolucion()
@@ -3294,7 +3470,7 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['numfacven'])) ? $this->New_label['numfacven'] : "Número"; 
    if (!isset($this->NM_cmp_hidden['numfacven']) || $this->NM_cmp_hidden['numfacven'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numfacven_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numfacven_label'] . "\" NOWRAP WIDTH=\"80px\">\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_numfacven_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_numfacven_label'] . "\" NOWRAP WIDTH=\"80%\">\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] != "pdf")
    {
       $link_img = "";
@@ -3350,7 +3526,7 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['idcli'])) ? $this->New_label['idcli'] : "Cliente"; 
    if (!isset($this->NM_cmp_hidden['idcli']) || $this->NM_cmp_hidden['idcli'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idcli_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idcli_label'] . "\" NOWRAP WIDTH=\"120px\">\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_idcli_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_idcli_label'] . "\" NOWRAP WIDTH=\"120%\">\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] != "pdf")
    {
       $link_img = "";
@@ -3406,7 +3582,7 @@ $nm_saida->saida("}\r\n");
    global $nm_saida;
    $SC_Label = (isset($this->New_label['fechaven'])) ? $this->New_label['fechaven'] : "Fecha"; 
    if (!isset($this->NM_cmp_hidden['fechaven']) || $this->NM_cmp_hidden['fechaven'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechaven_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechaven_label'] . "\" NOWRAP WIDTH=\"80px\">\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechaven_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechaven_label'] . "\" NOWRAP WIDTH=\"80%\">\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] != "pdf")
    {
       $link_img = "";
@@ -3493,7 +3669,7 @@ $Link_Graf .= nmButtonOutput($this->arr_buttons, "bconf_graf", "", "", "sc_bc_gr
    global $nm_saida;
    $SC_Label = (isset($this->New_label['credito'])) ? $this->New_label['credito'] : "Crédito"; 
    if (!isset($this->NM_cmp_hidden['credito']) || $this->NM_cmp_hidden['credito'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_credito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_credito_label'] . "\" NOWRAP WIDTH=\"60px\">\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_credito_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_credito_label'] . "\" NOWRAP WIDTH=\"60%\">\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] != "pdf")
    {
       $link_img = "";
@@ -3621,7 +3797,7 @@ $Link_Graf .= nmButtonOutput($this->arr_buttons, "bconf_graf", "", "", "sc_bc_gr
    global $nm_saida;
    $SC_Label = (isset($this->New_label['fechavenc'])) ? $this->New_label['fechavenc'] : "Vence"; 
    if (!isset($this->NM_cmp_hidden['fechavenc']) || $this->NM_cmp_hidden['fechavenc'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechavenc_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechavenc_label'] . "\" NOWRAP WIDTH=\"80px\">\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_fechavenc_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_fechavenc_label'] . "\" NOWRAP WIDTH=\"80%\">\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] != "pdf")
    {
       $link_img = "";
@@ -3733,7 +3909,7 @@ $Link_Graf .= nmButtonOutput($this->arr_buttons, "bconf_graf", "", "", "sc_bc_gr
    global $nm_saida;
    $SC_Label = (isset($this->New_label['vendedor'])) ? $this->New_label['vendedor'] : "Vendedor"; 
    if (!isset($this->NM_cmp_hidden['vendedor']) || $this->NM_cmp_hidden['vendedor'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_vendedor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_vendedor_label'] . "\" NOWRAP WIDTH=\"35px\">" . nl2br($SC_Label) . "</TD>\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_vendedor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_vendedor_label'] . "\" NOWRAP WIDTH=\"35%\">" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
  function NM_label_pedido()
@@ -3822,6 +3998,22 @@ $Link_Graf .= nmButtonOutput($this->arr_buttons, "bconf_graf", "", "", "sc_bc_gr
    $SC_Label = (isset($this->New_label['print'])) ? $this->New_label['print'] : "print"; 
    if (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off") { 
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_print_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_print_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
+ function NM_label_direccion()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['direccion'])) ? $this->New_label['direccion'] : "Dirección"; 
+   if (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_direccion_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_direccion_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
+ function NM_label_documento()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['documento'])) ? $this->New_label['documento'] : "NIT/CC"; 
+   if (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_documento_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_documento_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
 // 
@@ -3918,6 +4110,10 @@ $Link_Graf .= nmButtonOutput($this->arr_buttons, "bconf_graf", "", "", "sc_bc_gr
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['imp_bolsa'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['print'])) ? $this->New_label['print'] : "print"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['print'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['direccion'])) ? $this->New_label['direccion'] : "Dirección"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['direccion'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['documento'])) ? $this->New_label['documento'] : "NIT/CC"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['documento'] = $SC_Label; 
    if (!$this->grid_emb_form && isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven']['lig_edit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven']['lig_edit'] != '')
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['mostra_edit'] = $_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven']['lig_edit'];
@@ -4057,7 +4253,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'] 
 }
 else
 {
-   $nm_saida->saida("  <TD " . $this->Grid_body . " class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top;text-align: center;" . $TD_padding . "\">\r\n");
+   $nm_saida->saida("  <TD " . $this->Grid_body . " class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top;text-align: center;" . $TD_padding . "\" width=\"100%\">\r\n");
 }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['ajax_nav'])
    { 
@@ -4130,6 +4326,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'])
    $this->Break_pag_prt['prefijo']['resolucion'] = "N";
    $this->Break_pag_pdf['tipo']['tipo'] = "S";
    $this->Break_pag_prt['tipo']['tipo'] = "N";
+   $this->Break_pag_pdf['idcli']['idcli'] = "N";
+   $this->Break_pag_prt['idcli']['idcli'] = "N";
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['Config_Page_break_PDF'] = "N";
    if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['Page_break_PDF']))
    {
@@ -4197,6 +4395,14 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'])
        if (isset($this->tipo))
        {
            $this->quebra_tipo_tipo_top(); 
+       }
+       $this->nmgp_prim_pag_pdf = false;
+   } 
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['final'] == 0 && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli") 
+   { 
+       if (isset($this->idcli))
+       {
+           $this->quebra_idcli_idcli_top(); 
        }
        $this->nmgp_prim_pag_pdf = false;
    } 
@@ -4328,6 +4534,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'])
           if (!isset($this->vendedor)) { $this->vendedor = ""; }
           if (!isset($this->resolucion)) { $this->resolucion = ""; }
           if (!isset($this->tipo)) { $this->tipo = ""; }
+          if (!isset($this->idcli)) { $this->idcli = ""; }
           $GLOBALS["idfacven"] = $this->rs_grid->fields[8] ;  
           $GLOBALS["idfacven"] = (string)$GLOBALS["idfacven"];
           $GLOBALS["idcli"] = $this->rs_grid->fields[2] ;  
@@ -4335,6 +4542,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'])
           $GLOBALS["vendedor"] = $this->rs_grid->fields[17] ;  
           $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"];
           $this->arg_sum_resolucion = ($this->resolucion == "") ? " is null " : " = " . $this->resolucion;
+          $this->arg_sum_idcli = ($this->idcli == "") ? " is null " : " = " . $this->idcli;
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "fecha")
           {
                $Format_tst = $this->Ini->Get_Gb_date_format('fecha', 'fechaven');
@@ -4534,6 +4742,28 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'])
               if (isset($this->tipo_Old))
               {
                  $this->quebra_tipo_tipo_top() ; 
+              }
+              $nm_houve_quebra = "S";
+          } 
+          if ($this->idcli !== $this->idcli_Old && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli") 
+          {  
+              if (isset($this->idcli_Old))
+              {
+                 $this->quebra_idcli_idcli_bot() ; 
+              }
+              if ($this->Print_All && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['doc_word'] && $this->Break_pag_prt[$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby']]['idcli'] == "S")
+              {
+                  $this->nm_quebra_pagina("pagina"); 
+              }
+              elseif (!$this->Print_All && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] == "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['Page_break_PDF']['idcli'] == "S")
+              {
+                  $this->nm_quebra_pagina("pagina"); 
+              }
+              $this->idcli_Old = $this->idcli ; 
+              $this->quebra_idcli_idcli($this->idcli) ; 
+              if (isset($this->idcli_Old))
+              {
+                 $this->quebra_idcli_idcli_top() ; 
               }
               $nm_houve_quebra = "S";
           } 
@@ -4771,6 +5001,8 @@ if($this->d_est[0][1]=='ND' or $this->d_est[0][1]=='NC')
 if (isset($this->sc_temp_par_numfacventa)) {$_SESSION['par_numfacventa'] = $this->sc_temp_par_numfacventa;}
 $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
           $this->Lookup->lookup_tipo_doc($this->tipo_doc, $this->idfacven, $this->array_tipo_doc); 
+          $this->Lookup->lookup_direccion($this->direccion, $this->idcli, $this->array_direccion); 
+          $this->Lookup->lookup_documento($this->documento, $this->idcli, $this->array_documento); 
           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'])
           {
               if ($nm_houve_quebra == "S" || $this->nm_inicio_pag == 0)
@@ -4854,15 +5086,15 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
           $this->SC_ancora = $this->SC_seq_page;
           $nm_saida->saida("    <TR  class=\"" . $this->css_line_back . "\"  style=\"page-break-inside: avoid;\"" . $NM_destaque . " id=\"SC_ancor" . $this->SC_ancora . "\">\r\n");
  if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_grid']){ 
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\"  style=\"" . $this->Css_Cmp['css_print_grid_line'] . "\" NOWRAP align=\"\" valign=\"\"  >&nbsp;</TD>\r\n");
+          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\"  style=\"" . $this->Css_Cmp['css_documento_grid_line'] . "\" NOWRAP align=\"\" valign=\"\"   HEIGHT=\"0px\">&nbsp;</TD>\r\n");
  }
  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opc_psq']){ 
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  style=\"" . $this->Css_Cmp['css_print_grid_line'] . "\" NOWRAP align=\"left\" valign=\"top\" WIDTH=\"1px\" >\r\n");
+          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  style=\"" . $this->Css_Cmp['css_documento_grid_line'] . "\" NOWRAP align=\"left\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\">\r\n");
  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcapture", "document.Fpesq.nm_ret_psq.value='" . $teste . "'; nm_escreve_window();", "document.Fpesq.nm_ret_psq.value='" . $teste . "'; nm_escreve_window();", "", "Rad_psq", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
           $nm_saida->saida(" $Cod_Btn</TD>\r\n");
  } 
  if ($this->NM_btn_run_show){ 
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  style=\"" . $this->Css_Cmp['css_print_grid_line'] . "\" NOWRAP align=\"left\" valign=\"top\" WIDTH=\"1px\" > <input type=\"checkbox\" id=\"NM_ck_run" . $this->SC_seq_btn_run . "\" class=\"sc-ui-check-run\" name=\"NM_ck_grid[]\" value=\"" . NM_encode_input($this->SC_seq_btn_run) . "\" style=\"align:left;vertical-align:middle;font-weight:bold;\" /></TD>\r\n");
+          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  style=\"" . $this->Css_Cmp['css_documento_grid_line'] . "\" NOWRAP align=\"left\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\"> <input type=\"checkbox\" id=\"NM_ck_run" . $this->SC_seq_btn_run . "\" class=\"sc-ui-check-run\" name=\"NM_ck_grid[]\" value=\"" . NM_encode_input($this->SC_seq_btn_run) . "\" style=\"align:left;vertical-align:middle;font-weight:bold;\" /></TD>\r\n");
  } 
  if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] != "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['mostra_edit'] != "N"){ 
               $Sc_parent = ($this->grid_emb_form_full) ? "S" : "";
@@ -4886,7 +5118,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
                   $Md5_Edt  = "idfacven?#?" . str_replace('"', "@aspasd@", $this->idfacven) . "?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
               }
               $Link_Edit = nmButtonOutput($this->arr_buttons, "bform_editar", "nm_gp_submit4('" .  $this->Ini->link_form_facturaven . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'form_facturaven', '" . $this->SC_ancora . "')", "nm_gp_submit4('" .  $this->Ini->link_form_facturaven . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'form_facturaven', '" . $this->SC_ancora . "')", "bedit", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\" ><table style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\"><tr><td style=\"padding: 0px\"><img id=\"b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:''\" onclick=\"document.getElementById('b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_exp . "\">\r\n");
+          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\"><table style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\"><tr><td style=\"padding: 0px\"><img id=\"b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:''\" onclick=\"document.getElementById('b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_exp . "\">\r\n");
           $nm_saida->saida("<img id=\"b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:none\" onclick=\"document.getElementById('b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_col . "\">\r\n");
           $nm_saida->saida("</td><td style=\"padding: 0px\">" . $Link_Edit . "</td></tr></table></TD>\r\n");
  } 
@@ -4912,12 +5144,12 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
                   $Md5_Edt  = "idfacven?#?" . str_replace('"', "@aspasd@", $this->idfacven) . "?@?NM_btn_insert?#?S?@?NM_btn_update?#?S?@?NM_btn_delete?#?S?@?NM_btn_navega?#?N?@?nmgp_opcao?#?igual?@?";
               }
               $Link_Edit = nmButtonOutput($this->arr_buttons, "bform_editar", "nm_gp_submit4('" .  $this->Ini->link_form_facturaven . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'form_facturaven', '" . $this->SC_ancora . "')", "nm_gp_submit4('" .  $this->Ini->link_form_facturaven . "', '$this->nm_location',  '$Md5_Edt' , '". (isset($linkTarget) ? $linkTarget : '_self') . "', '', 'form_facturaven', '" . $this->SC_ancora . "')", "bedit", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\" ><table style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\"><tr><td style=\"padding: 0px\"><img id=\"b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:''\" onclick=\"document.getElementById('b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_exp . "\">\r\n");
+          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\"><table style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\"><tr><td style=\"padding: 0px\"><img id=\"b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:''\" onclick=\"document.getElementById('b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_exp . "\">\r\n");
           $nm_saida->saida("<img id=\"b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:none\" onclick=\"document.getElementById('b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_col . "\">\r\n");
           $nm_saida->saida("</td></tr></table></TD>\r\n");
  } 
  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] != "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_pdf'] != "pdf"){ 
-          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\" ><img id=\"b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:''\" onclick=\"document.getElementById('b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_exp . "\">\r\n");
+          $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . "\"  NOWRAP align=\"center\" valign=\"top\" WIDTH=\"1px\"  HEIGHT=\"0px\"><img id=\"b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:''\" onclick=\"document.getElementById('b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_exp . "\">\r\n");
           $nm_saida->saida("<img id=\"b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "\" style=\"display:none\" onclick=\"document.getElementById('b_close_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; document.getElementById('b_open_emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = ''; document.getElementById('emb_grid_facturaven_linha_" . $this->NM_cont_emb_linha . "').style.display = 'none'; return false;\" src=\"" . $this->Ini->path_img_global . "/" . $this->Ini->Tree_img_col . "\">\r\n");
           $nm_saida->saida("</TD>\r\n");
  } 
@@ -4994,6 +5226,10 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
        if (isset($this->tipo_Old) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "tipo")
        {
            $this->quebra_tipo_tipo_bot() ; 
+       }
+       if (isset($this->idcli_Old) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+       {
+           $this->quebra_idcli_idcli_bot() ; 
        }
   
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['exibe_total'] == "S")
@@ -6237,9 +6473,57 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_print_grid_line . "\"  style=\"" . $this->Css_Cmp['css_print_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"  ><span id=\"id_sc_field_print_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_direccion()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off") { 
+          $conteudo = sc_strip_script($this->direccion); 
+          $conteudo_original = sc_strip_script($this->direccion); 
+          $conteudo = trim($this->direccion); 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'direccion', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'direccion', $str_tem_display, $conteudo_original); 
+          } 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_direccion_grid_line . "\"  style=\"" . $this->Css_Cmp['css_direccion_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_direccion_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_documento()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off") { 
+          $conteudo = sc_strip_script($this->documento); 
+          $conteudo_original = sc_strip_script($this->documento); 
+          $conteudo = trim($this->documento); 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'documento', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'documento', $str_tem_display, $conteudo_original); 
+          } 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_documento_grid_line . "\"  style=\"" . $this->Css_Cmp['css_documento_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_documento_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 34;
+   $this->NM_colspan  = 36;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -6304,7 +6588,7 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
            }
         }
         $nm_saida->saida(" <TR> \r\n");
-        $nm_saida->saida("  <TD style=\"padding: 0px; vertical-align: top;\"> \r\n");
+        $nm_saida->saida("  <TD style=\"padding: 0px; vertical-align: top;\" width=\"100%\"> \r\n");
         $nm_saida->saida("   <TABLE class=\"" . $this->css_scGridTabela . "\" align=\"center\" " . $nm_id_aplicacao . " width=\"100%\">\r\n");
         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'] && ($this->pdf_all_cab == "S" || $this->pdf_all_label == "S")) { 
             $nm_saida->saida(" <thead> \r\n");
@@ -6510,6 +6794,32 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
    $this->campos_quebra_tipo[0]['lab'] = "Tipo"; 
    }
    $this->sc_proc_quebra_tipo = false; 
+ } 
+ function quebra_idcli_idcli($idcli) 
+ {
+   global $tot_idcli;
+   $this->sc_proc_quebra_idcli = true; 
+   $this->Tot->quebra_idcli_idcli($idcli, $this->arg_sum_idcli);
+   $conteudo = $tot_idcli[0] ;  
+   $this->count_idcli = $tot_idcli[1];
+   $this->sum_idcli_base_iva_19 = $tot_idcli[2];
+   $this->sum_idcli_valor_iva_19 = $tot_idcli[3];
+   $this->sum_idcli_base_iva_5 = $tot_idcli[4];
+   $this->sum_idcli_valor_iva_5 = $tot_idcli[5];
+   $this->sum_idcli_excento = $tot_idcli[6];
+   $this->campos_quebra_idcli = array(); 
+   $conteudo = sc_strip_script($this->idcli); 
+   $this->Lookup->lookup_idcli_idcli($conteudo , $this->idcli) ; 
+   $this->campos_quebra_idcli[0]['cmp'] = $conteudo; 
+   if (isset($this->nmgp_label_quebras['idcli']))
+   {
+       $this->campos_quebra_idcli[0]['lab'] = $this->nmgp_label_quebras['idcli']; 
+   }
+   else
+   {
+   $this->campos_quebra_idcli[0]['lab'] = "Cliente"; 
+   }
+   $this->sc_proc_quebra_idcli = false; 
  } 
  function quebra_fechaven_fecha_top() 
  { global
@@ -6777,6 +7087,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "print" && (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
     {
         $colspan++;
     }
@@ -7061,6 +7379,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
+    {
+        $colspan++;
+    }
    }
    if ($colspan > 0)
    {
@@ -7339,6 +7665,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "print" && (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
     {
         $colspan++;
     }
@@ -7623,6 +7957,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
+    {
+        $colspan++;
+    }
    }
    if ($colspan > 0)
    {
@@ -7901,6 +8243,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
         $colspan++;
     }
     if ($Cada_cmp == "print" && (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
     {
         $colspan++;
     }
@@ -8185,6 +8535,279 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
     {
         $colspan++;
     }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
+    {
+        $colspan++;
+    }
+   }
+   if ($colspan > 0)
+   {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"  style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+       $nm_saida->saida("    </TR>\r\n");
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_grid'] && $this->nm_prim_linha)
+   { 
+       $nm_saida->saida("##NM@@"); 
+       $this->nm_prim_linha = false; 
+    } 
+ } 
+ function quebra_idcli_idcli_top() 
+ { global
+          $idcli_ant_desc, 
+          $nm_saida, $tot_idcli;
+   $this->SC_tab_quebra = 0;
+   $idcli_ant_desc = $this->campos_quebra_idcli[0]['cmp'];
+   static $cont_quebra_idcli = 0; 
+   $cont_quebra_idcli++;
+   $nm_nivel_book_pdf = "";
+   $nm_fecha_pdf_old = "";
+   $nm_fecha_pdf_new = "";
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['rows_emb']++;
+   $nm_nivel_book_pdf = "";
+   $nm_fecha_pdf_new  = "";
+   $this->NM_calc_span();
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] == "pdf" && !$this->Print_All)
+   {
+       $nm_nivel_book_pdf = "<div style=\"height:1px;overflow:hidden\"><H2 style=\"font-size:0;padding:1px\">" .  $this->campos_quebra_idcli[0]['cmp'] ;
+       $nm_fecha_pdf_new = "</H2></div>";
+   }
+   $conteudo = $tot_idcli[0] ;  
+   if ($this->SC_sep_quebra)
+   {
+       $this->SC_sep_quebra = false;
+        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['proc_pdf_vert']) { 
+         } else {
+             $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['rows_emb']++;
+   $nm_saida->saida("<tr>\r\n");
+   $nm_saida->saida("<td class=\"" . $this->css_scGridBlockSpaceBg . "\" style=\"height: 10px;\" colspan=\"" . $this->NM_colspan . "\">&nbsp;</td>\r\n");
+   $nm_saida->saida("</tr>\r\n");
+         }
+   }
+   $colspan = $this->NM_colspan;
+   $this->Label_idcli = "<table>"; 
+   foreach ($this->campos_quebra_idcli as $cada_campo) 
+   { 
+       $this->Label_idcli .= "<tr>"; 
+       if ($this->SC_tab_quebra > 0 && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_grid'])
+       {
+           $this->Label_idcli .= "<td class=\"" . $this->css_scGridBlockLineBg . "\" style=\"width: " . $this->SC_tab_quebra . "px;\">&nbsp;</td>"; 
+       }
+       $this->Label_idcli .= "<td>" . $cada_campo['lab'] . "</td><td> => </td>";
+       $this->Label_idcli .= "<td>" . $cada_campo['cmp'] . "</td>";
+       $this->Label_idcli .= "</tr>"; 
+   } 
+   $this->Label_idcli .= "</table>"; 
+   $nm_saida->saida("    <TR >\r\n");
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridBlock . "\" style=\"text-align:left;\"  style=\"text-align: left;\" NOWRAP " . "colspan=\"" . $colspan . "\"" . ">" . $nm_nivel_book_pdf . $nm_fecha_pdf_new  . $this->Label_idcli . $nm_fecha_pdf_old . "</TD>\r\n");
+   $nm_saida->saida("    </TR>\r\n");
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_grid'] && $this->nm_prim_linha)
+   { 
+       $nm_saida->saida("##NM@@"); 
+       $this->nm_prim_linha = false; 
+    } 
+ } 
+ function quebra_idcli_idcli_bot() 
+ { global 
+          $idcli_ant_desc, 
+          $nm_saida, $tot_idcli;
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['rows_emb']++;
+   $idcli_ant_desc = $this->campos_quebra_idcli[0]['cmp'];
+       $nm_saida->saida("    <TR class=\"" . $this->css_scGridSubtotal . "\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_grid']) {
+       $nm_saida->saida("    <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\">&nbsp;</TD>\r\n");
+   }
+   $tit_lin_sumariza_atu = "";
+   $colspan  = 1;
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opc_psq'] || $this->NM_btn_run_show)
+   {
+       $colspan++;
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] == "print" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] == "pdf" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_pdf'] == "pdf")
+   {
+       $colspan--;
+   } 
+   foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'] as $Cada_cmp)
+   {
+    if ($Cada_cmp == "tipo_doc" && (!isset($this->NM_cmp_hidden['tipo_doc']) || $this->NM_cmp_hidden['tipo_doc'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "resolucion" && (!isset($this->NM_cmp_hidden['resolucion']) || $this->NM_cmp_hidden['resolucion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "numfacven" && (!isset($this->NM_cmp_hidden['numfacven']) || $this->NM_cmp_hidden['numfacven'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idcli" && (!isset($this->NM_cmp_hidden['idcli']) || $this->NM_cmp_hidden['idcli'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "fechaven" && (!isset($this->NM_cmp_hidden['fechaven']) || $this->NM_cmp_hidden['fechaven'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "total" && (!isset($this->NM_cmp_hidden['total']) || $this->NM_cmp_hidden['total'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "pagada" && (!isset($this->NM_cmp_hidden['pagada']) || $this->NM_cmp_hidden['pagada'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "asentada" && (!isset($this->NM_cmp_hidden['asentada']) || $this->NM_cmp_hidden['asentada'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "credito" && (!isset($this->NM_cmp_hidden['credito']) || $this->NM_cmp_hidden['credito'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "imprimir" && (!isset($this->NM_cmp_hidden['imprimir']) || $this->NM_cmp_hidden['imprimir'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "imprmirtirilla" && (!isset($this->NM_cmp_hidden['imprmirtirilla']) || $this->NM_cmp_hidden['imprmirtirilla'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "fechavenc" && (!isset($this->NM_cmp_hidden['fechavenc']) || $this->NM_cmp_hidden['fechavenc'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "subtotal" && (!isset($this->NM_cmp_hidden['subtotal']) || $this->NM_cmp_hidden['subtotal'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "valoriva" && (!isset($this->NM_cmp_hidden['valoriva']) || $this->NM_cmp_hidden['valoriva'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "observaciones" && (!isset($this->NM_cmp_hidden['observaciones']) || $this->NM_cmp_hidden['observaciones'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "saldo" && (!isset($this->NM_cmp_hidden['saldo']) || $this->NM_cmp_hidden['saldo'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "adicional" && (!isset($this->NM_cmp_hidden['adicional']) || $this->NM_cmp_hidden['adicional'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "adicional2" && (!isset($this->NM_cmp_hidden['adicional2']) || $this->NM_cmp_hidden['adicional2'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "adicional3" && (!isset($this->NM_cmp_hidden['adicional3']) || $this->NM_cmp_hidden['adicional3'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "vendedor" && (!isset($this->NM_cmp_hidden['vendedor']) || $this->NM_cmp_hidden['vendedor'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "pedido" && (!isset($this->NM_cmp_hidden['pedido']) || $this->NM_cmp_hidden['pedido'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "base_iva_19" && (!isset($this->NM_cmp_hidden['base_iva_19']) || $this->NM_cmp_hidden['base_iva_19'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"   style=\"text-align: left;\"  NOWRAP " . "colspan=\"" . $colspan . "\"" . " >" . $tit_lin_sumariza_atu . "</TD>\r\n");
+           $colspan = 0;
+           $tit_lin_sumariza_atu = "&nbsp;";
+      }
+      $conteudo =  $tot_idcli[2] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_base_iva_19_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "valor_iva_19" && (!isset($this->NM_cmp_hidden['valor_iva_19']) || $this->NM_cmp_hidden['valor_iva_19'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"   style=\"text-align: left;\"  NOWRAP " . "colspan=\"" . $colspan . "\"" . " >" . $tit_lin_sumariza_atu . "</TD>\r\n");
+           $colspan = 0;
+           $tit_lin_sumariza_atu = "&nbsp;";
+      }
+      $conteudo =  $tot_idcli[3] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_valor_iva_19_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "base_iva_5" && (!isset($this->NM_cmp_hidden['base_iva_5']) || $this->NM_cmp_hidden['base_iva_5'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"   style=\"text-align: left;\"  NOWRAP " . "colspan=\"" . $colspan . "\"" . " >" . $tit_lin_sumariza_atu . "</TD>\r\n");
+           $colspan = 0;
+           $tit_lin_sumariza_atu = "&nbsp;";
+      }
+      $conteudo =  $tot_idcli[4] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_base_iva_5_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "valor_iva_5" && (!isset($this->NM_cmp_hidden['valor_iva_5']) || $this->NM_cmp_hidden['valor_iva_5'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"   style=\"text-align: left;\"  NOWRAP " . "colspan=\"" . $colspan . "\"" . " >" . $tit_lin_sumariza_atu . "</TD>\r\n");
+           $colspan = 0;
+           $tit_lin_sumariza_atu = "&nbsp;";
+      }
+      $conteudo =  $tot_idcli[5] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_valor_iva_5_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "excento" && (!isset($this->NM_cmp_hidden['excento']) || $this->NM_cmp_hidden['excento'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . "\"   style=\"text-align: left;\"  NOWRAP " . "colspan=\"" . $colspan . "\"" . " >" . $tit_lin_sumariza_atu . "</TD>\r\n");
+           $colspan = 0;
+           $tit_lin_sumariza_atu = "&nbsp;";
+      }
+      $conteudo =  $tot_idcli[6] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridSubtotalFont . " css_excento_sub_tot\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "base_con_8" && (!isset($this->NM_cmp_hidden['base_con_8']) || $this->NM_cmp_hidden['base_con_8'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "valor_con_8" && (!isset($this->NM_cmp_hidden['valor_con_8']) || $this->NM_cmp_hidden['valor_con_8'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "t_iva" && (!isset($this->NM_cmp_hidden['t_iva']) || $this->NM_cmp_hidden['t_iva'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "imp_bolsa" && (!isset($this->NM_cmp_hidden['imp_bolsa']) || $this->NM_cmp_hidden['imp_bolsa'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "print" && (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
+    {
+        $colspan++;
+    }
    }
    if ($colspan > 0)
    {
@@ -8430,6 +9053,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
+    {
+       $colspan++;
+    }
    }
    if ($colspan > 0)
    {
@@ -8667,6 +9298,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
        $colspan++;
     }
     if ($Cada_cmp == "print" && (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
     {
        $colspan++;
     }
@@ -8910,6 +9549,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
+    {
+       $colspan++;
+    }
    }
    if ($colspan > 0)
    {
@@ -9147,6 +9794,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
        $colspan++;
     }
     if ($Cada_cmp == "print" && (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
     {
        $colspan++;
     }
@@ -9390,6 +10045,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
     {
        $colspan++;
     }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
+    {
+       $colspan++;
+    }
    }
    if ($colspan > 0)
    {
@@ -9627,6 +10290,238 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
        $colspan++;
     }
     if ($Cada_cmp == "print" && (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
+    {
+       $colspan++;
+    }
+   }
+   if ($colspan > 0)
+   {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\"   " . "colspan=\"" . $colspan . "\"" . ">&nbsp;</TD>\r\n");
+       $nm_saida->saida("    </TR>\r\n");
+   }
+ } 
+ function quebra_geral_idcli_top() 
+ {
+   global $nm_saida; 
+   $this->NM_calc_span();
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['rows_emb']++;
+    $nm_saida->saida("<tr>\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_grid']) {
+        $nm_saida->saida("<td class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . "; height: 10px;\">&nbsp;</td>\r\n");
+   }
+    $nm_saida->saida("<td class=\"" . $this->css_scGridTotal . "\" style=\"height: 10px;\" colspan=\"" . $this->NM_colspan . "\">&nbsp;</td>\r\n");
+    $nm_saida->saida("</tr>\r\n");
+ }
+ function quebra_geral_idcli_bot() 
+ {
+   global 
+          $nm_saida, $nm_data; 
+   $this->Tot->quebra_geral_idcli(); 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['rows_emb']++;
+   $nm_nivel_book_pdf = "";
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] == "pdf" && !$this->Print_All)
+   {
+      $nm_nivel_book_pdf = "<div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\">" .  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][0] . "</H1></div>";
+   }
+   $tit_lin_sumariza      =  $nm_nivel_book_pdf . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][1] . ")";
+   $tit_lin_sumariza_orig =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][1] . ")";
+       $nm_saida->saida("    <TR class=\"" . $this->css_scGridTotal . "\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_grid']) {
+       $nm_saida->saida("    <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra  . "; display:" . $this->width_tabula_display . ";\">&nbsp;</TD>\r\n");
+   }
+   $tit_lin_sumariza_atu = $tit_lin_sumariza;
+   $colspan  = 1;
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opc_psq'] || $this->NM_btn_run_show)
+   {
+       $colspan++;
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao_print'] == "print" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['opcao'] == "pdf" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida_pdf'] == "pdf")
+   {
+       $colspan--;
+   } 
+   foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'] as $Cada_cmp)
+   {
+    if ($Cada_cmp == "tipo_doc" && (!isset($this->NM_cmp_hidden['tipo_doc']) || $this->NM_cmp_hidden['tipo_doc'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "resolucion" && (!isset($this->NM_cmp_hidden['resolucion']) || $this->NM_cmp_hidden['resolucion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "numfacven" && (!isset($this->NM_cmp_hidden['numfacven']) || $this->NM_cmp_hidden['numfacven'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "idcli" && (!isset($this->NM_cmp_hidden['idcli']) || $this->NM_cmp_hidden['idcli'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "fechaven" && (!isset($this->NM_cmp_hidden['fechaven']) || $this->NM_cmp_hidden['fechaven'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "total" && (!isset($this->NM_cmp_hidden['total']) || $this->NM_cmp_hidden['total'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "pagada" && (!isset($this->NM_cmp_hidden['pagada']) || $this->NM_cmp_hidden['pagada'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "asentada" && (!isset($this->NM_cmp_hidden['asentada']) || $this->NM_cmp_hidden['asentada'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "credito" && (!isset($this->NM_cmp_hidden['credito']) || $this->NM_cmp_hidden['credito'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "imprimir" && (!isset($this->NM_cmp_hidden['imprimir']) || $this->NM_cmp_hidden['imprimir'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "imprmirtirilla" && (!isset($this->NM_cmp_hidden['imprmirtirilla']) || $this->NM_cmp_hidden['imprmirtirilla'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "idfacven" && (!isset($this->NM_cmp_hidden['idfacven']) || $this->NM_cmp_hidden['idfacven'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "fechavenc" && (!isset($this->NM_cmp_hidden['fechavenc']) || $this->NM_cmp_hidden['fechavenc'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "subtotal" && (!isset($this->NM_cmp_hidden['subtotal']) || $this->NM_cmp_hidden['subtotal'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "valoriva" && (!isset($this->NM_cmp_hidden['valoriva']) || $this->NM_cmp_hidden['valoriva'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "observaciones" && (!isset($this->NM_cmp_hidden['observaciones']) || $this->NM_cmp_hidden['observaciones'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "saldo" && (!isset($this->NM_cmp_hidden['saldo']) || $this->NM_cmp_hidden['saldo'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "adicional" && (!isset($this->NM_cmp_hidden['adicional']) || $this->NM_cmp_hidden['adicional'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "adicional2" && (!isset($this->NM_cmp_hidden['adicional2']) || $this->NM_cmp_hidden['adicional2'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "adicional3" && (!isset($this->NM_cmp_hidden['adicional3']) || $this->NM_cmp_hidden['adicional3'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "vendedor" && (!isset($this->NM_cmp_hidden['vendedor']) || $this->NM_cmp_hidden['vendedor'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "pedido" && (!isset($this->NM_cmp_hidden['pedido']) || $this->NM_cmp_hidden['pedido'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "base_iva_19" && (!isset($this->NM_cmp_hidden['base_iva_19']) || $this->NM_cmp_hidden['base_iva_19'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\" style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+          $tit_lin_sumariza_atu = "&nbsp;";
+          $colspan = 0;
+      }
+      $conteudo =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_base_iva_19_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "valor_iva_19" && (!isset($this->NM_cmp_hidden['valor_iva_19']) || $this->NM_cmp_hidden['valor_iva_19'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\" style=\"text-align: left;\" NOWRAP " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+          $tit_lin_sumariza_atu = "&nbsp;";
+          $colspan = 0;
+      }
+      $conteudo =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][3] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_valor_iva_19_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "base_iva_5" && (!isset($this->NM_cmp_hidden['base_iva_5']) || $this->NM_cmp_hidden['base_iva_5'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\" style=\"text-align: left;\" NOWRAP " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+          $tit_lin_sumariza_atu = "&nbsp;";
+          $colspan = 0;
+      }
+      $conteudo =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][4] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_base_iva_5_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "valor_iva_5" && (!isset($this->NM_cmp_hidden['valor_iva_5']) || $this->NM_cmp_hidden['valor_iva_5'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\" style=\"text-align: left;\" NOWRAP " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+          $tit_lin_sumariza_atu = "&nbsp;";
+          $colspan = 0;
+      }
+      $conteudo =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][5] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_valor_iva_5_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "excento" && (!isset($this->NM_cmp_hidden['excento']) || $this->NM_cmp_hidden['excento'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\" style=\"text-align: left;\" NOWRAP " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+          $tit_lin_sumariza_atu = "&nbsp;";
+          $colspan = 0;
+      }
+      $conteudo =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][6] ; 
+      nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_excento_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "base_con_8" && (!isset($this->NM_cmp_hidden['base_con_8']) || $this->NM_cmp_hidden['base_con_8'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "valor_con_8" && (!isset($this->NM_cmp_hidden['valor_con_8']) || $this->NM_cmp_hidden['valor_con_8'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "t_iva" && (!isset($this->NM_cmp_hidden['t_iva']) || $this->NM_cmp_hidden['t_iva'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "imp_bolsa" && (!isset($this->NM_cmp_hidden['imp_bolsa']) || $this->NM_cmp_hidden['imp_bolsa'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "print" && (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
     {
        $colspan++;
     }
@@ -9899,6 +10794,14 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
        $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_imp_bolsa_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
      }
     if ($Cada_cmp == "print" && (!isset($this->NM_cmp_hidden['print']) || $this->NM_cmp_hidden['print'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "direccion" && (!isset($this->NM_cmp_hidden['direccion']) || $this->NM_cmp_hidden['direccion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "documento" && (!isset($this->NM_cmp_hidden['documento']) || $this->NM_cmp_hidden['documento'] != "off"))
     {
        $colspan++;
     }
@@ -10432,6 +11335,12 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
               $nm_saida->saida("          <img id=\"NM_sep_4\" class=\"NM_toolbar_sep\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
           }
       }
+          if ($this->nmgp_botoes['reload'] == "on")
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "breload", "nm_gp_submit_ajax ('igual', 'breload');", "nm_gp_submit_ajax ('igual', 'breload');", "reload_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
         if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['new'] == "on" && $this->nmgp_botoes['insert'] == "on" && !$this->grid_emb_form)
         {
            $Sc_parent = ($this->grid_emb_form_full) ? "S" : "";
@@ -11540,7 +12449,7 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
    function html_interativ_search()
    {
        global $nm_saida;
-       $bol_refin_use_modal = false;
+       $bol_refin_use_modal = true;
        if($_SESSION['scriptcase']['proc_mobile'])
        {
            $bol_refin_use_modal = false;
@@ -11584,12 +12493,12 @@ if (strlen($conteudo) > 10 && $conteudo != "&nbsp;") {
        $nm_saida->saida("     <input type=\"hidden\" name=\"parm\" value=\"\"/> \r\n");
        $nm_saida->saida("    <div id='id_div_interativ_search' class=''>\r\n");
            $disp_btn_collapse = 'none'; 
-           if('N' == 'S') 
+           if('S' == 'S') 
            { 
                $disp_btn_collapse = ''; 
            } 
 $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSearchCollapse' style='display: " . $disp_btn_collapse . "' onclick='nm_proc_int_search_toggle(false);'><i class='icon_fa " . $this->Ini->scGridRefinedSearchCollapseFAIcon . "'></i></div> \r\n");
-       $nm_saida->saida("        <div id='id_div_interativ_search_content' class='scGridRefinedSearchMoldura' style='min-width:100px;max-width:100px;overflow-x:hidden;'>\r\n");
+       $nm_saida->saida("        <div id='id_div_interativ_search_content' class='scGridRefinedSearchMoldura' style='min-width:120px;max-width:120px;overflow-x:hidden;'>\r\n");
        $nm_saida->saida("            <div id='id_div_interativ_search_fields'>\r\n");
        $lin_obj = $this->interativ_search_credito($bol_refin_use_modal);
        $nm_saida->saida("" . $lin_obj . "\r\n");
@@ -11619,7 +12528,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    }
    function refresh_interativ_search()
    {
-       $bol_refin_use_modal = false;
+       $bol_refin_use_modal = true;
        if($_SESSION['scriptcase']['proc_mobile'])
        {
            $bol_refin_use_modal = false;
@@ -11658,7 +12567,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["credito"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["credito"])) ? "none" : "";
-       $displ_open= false;
+       $displ_open= true;
        $lin_obj  = "    <div id=\"div_int_credito\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
@@ -11831,7 +12740,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj  .= "    <span class='multiplecredito' style='display:"  . (($displ_open)?'':'none') .  ";'>";
            $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['credito']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['credito']['val_sel'])) ? " checked" : "";
            $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_credito_" . md5($dados) . "\" name=\"int_search_credito[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_credito_". md5($dados) ."\" for=\"id_int_search_credito_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\" onclick=\"nm_proc_int_search('chbx', 'nn','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['credito']) . "','credito','id_int_search_credito','credito', '', 'N')\"  id=\"id_int_search_credito_" . md5($dados) . "\" name=\"int_search_credito[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_credito_". md5($dados) ."\" for=\"id_int_search_credito_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
            if(!empty($veja_mais_link))
            {
                $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
@@ -11871,6 +12780,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
+      $lin_obj  .= "    Tab_obj_int_mult['credito'] = 'S';";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
@@ -11878,17 +12788,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_credito\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('credito', false);", "nm_mult_int_search('credito', false);", "mult_int_search_credito", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
+           $disp_multi_btn = '';
            $disp_multi_btn = 'none';
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'nn','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['credito']) . "','credito','id_int_search_credito','credito', '', 'N');", "nm_proc_int_search('chbx', 'nn','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['credito']) . "','credito','id_int_search_credito','credito', '', 'N');", "app_int_search_credito", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('credito');", "nm_single_int_search('credito');", "single_int_search_credito", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "    </div>";
        }
@@ -11902,7 +12804,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["fechaven"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["fechaven"])) ? "none" : "";
-       $displ_open= false;
+       $displ_open= true;
        $lin_obj  = "    <div id=\"div_int_fechaven\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
@@ -12081,7 +12983,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj  .= "    <span class='multiplefechaven' style='display:"  . (($displ_open)?'':'none') .  ";'>";
            $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['fechaven']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['fechaven']['val_sel'])) ? " checked" : "";
            $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_fechaven_" . md5($dados) . "\" name=\"int_search_fechaven[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_fechaven_". md5($dados) ."\" for=\"id_int_search_fechaven_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\" onclick=\"nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['fechaven']) . "','fechaven','id_int_search_fechaven','fechaven', '', 'N')\"  id=\"id_int_search_fechaven_" . md5($dados) . "\" name=\"int_search_fechaven[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_fechaven_". md5($dados) ."\" for=\"id_int_search_fechaven_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
            if(!empty($veja_mais_link))
            {
                $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
@@ -12121,6 +13023,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
+      $lin_obj  .= "    Tab_obj_int_mult['fechaven'] = 'S';";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
@@ -12128,17 +13031,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_fechaven\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('fechaven', false);", "nm_mult_int_search('fechaven', false);", "mult_int_search_fechaven", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
+           $disp_multi_btn = '';
            $disp_multi_btn = 'none';
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['fechaven']) . "','fechaven','id_int_search_fechaven','fechaven', '', 'N');", "nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['fechaven']) . "','fechaven','id_int_search_fechaven','fechaven', '', 'N');", "app_int_search_fechaven", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('fechaven');", "nm_single_int_search('fechaven');", "single_int_search_fechaven", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "    </div>";
        }
@@ -12152,7 +13047,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["fechavenc"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["fechavenc"])) ? "none" : "";
-       $displ_open= false;
+       $displ_open= true;
        $lin_obj  = "    <div id=\"div_int_fechavenc\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
@@ -12331,7 +13226,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj  .= "    <span class='multiplefechavenc' style='display:"  . (($displ_open)?'':'none') .  ";'>";
            $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['fechavenc']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['fechavenc']['val_sel'])) ? " checked" : "";
            $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_fechavenc_" . md5($dados) . "\" name=\"int_search_fechavenc[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_fechavenc_". md5($dados) ."\" for=\"id_int_search_fechavenc_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\" onclick=\"nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['fechavenc']) . "','fechavenc','id_int_search_fechavenc','fechavenc', '', 'N')\"  id=\"id_int_search_fechavenc_" . md5($dados) . "\" name=\"int_search_fechavenc[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_fechavenc_". md5($dados) ."\" for=\"id_int_search_fechavenc_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
            if(!empty($veja_mais_link))
            {
                $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
@@ -12371,6 +13266,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
+      $lin_obj  .= "    Tab_obj_int_mult['fechavenc'] = 'S';";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
@@ -12378,17 +13274,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_fechavenc\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('fechavenc', false);", "nm_mult_int_search('fechavenc', false);", "mult_int_search_fechavenc", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
+           $disp_multi_btn = '';
            $disp_multi_btn = 'none';
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['fechavenc']) . "','fechavenc','id_int_search_fechavenc','fechavenc', '', 'N');", "nm_proc_int_search('chbx', 'dt','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['fechavenc']) . "','fechavenc','id_int_search_fechavenc','fechavenc', '', 'N');", "app_int_search_fechavenc", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('fechavenc');", "nm_single_int_search('fechavenc');", "single_int_search_fechavenc", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "    </div>";
        }
@@ -12402,7 +13290,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["idcli"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["idcli"])) ? "none" : "";
-       $displ_open= false;
+       $displ_open= true;
        $lin_obj  = "    <div id=\"div_int_idcli\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
@@ -12575,7 +13463,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj  .= "    <span class='multipleidcli' style='display:"  . (($displ_open)?'':'none') .  ";'>";
            $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['idcli']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['idcli']['val_sel'])) ? " checked" : "";
            $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_idcli_" . md5($dados) . "\" name=\"int_search_idcli[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_idcli_". md5($dados) ."\" for=\"id_int_search_idcli_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\" onclick=\"nm_proc_int_search('chbx', 'nn','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['idcli']) . "','idcli','id_int_search_idcli','idcli', '', 'N')\"  id=\"id_int_search_idcli_" . md5($dados) . "\" name=\"int_search_idcli[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_idcli_". md5($dados) ."\" for=\"id_int_search_idcli_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
            if(!empty($veja_mais_link))
            {
                $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
@@ -12615,6 +13503,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
+      $lin_obj  .= "    Tab_obj_int_mult['idcli'] = 'S';";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
@@ -12622,17 +13511,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_idcli\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('idcli', false);", "nm_mult_int_search('idcli', false);", "mult_int_search_idcli", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
+           $disp_multi_btn = '';
            $disp_multi_btn = 'none';
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'nn','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['idcli']) . "','idcli','id_int_search_idcli','idcli', '', 'N');", "nm_proc_int_search('chbx', 'nn','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['idcli']) . "','idcli','id_int_search_idcli','idcli', '', 'N');", "app_int_search_idcli", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('idcli');", "nm_single_int_search('idcli');", "single_int_search_idcli", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "    </div>";
        }
@@ -12646,7 +13527,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["total"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["total"])) ? "none" : "";
-       $displ_open= false;
+       $displ_open= true;
        $lin_obj  = "    <div id=\"div_int_total\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
@@ -12812,6 +13693,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
       $lin_obj  .= "            $( '#id_slider_total_values_min' ).html(val_format1);";
       $lin_obj  .= "            $( '#id_slider_total_values_max' ).html(val_format2);";
       $lin_obj  .= "        },";
+      $lin_obj  .= "        stop: function( event, ui ) {";
+      $lin_obj  .= "            $( '#app_int_search_range_total').click();";
+      $lin_obj  .= "        },";
       $lin_obj  .= "    });";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
@@ -12834,6 +13718,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "     <td>";
            $lin_obj .= "      <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_total\" style='display:" .  $cle_disp . "'>";
+           $disp_btn_range = 'none';
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['total']) . "','total','id_int_search_total','total', '', 'S');", "nm_proc_int_search('range', 'bw','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['total']) . "','total','id_int_search_total','total', '', 'S');", "app_int_search_range_total", "", "", "display: $disp_btn_range", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "      </div>";
@@ -12849,7 +13734,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["pagada"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["pagada"])) ? "none" : "";
-       $displ_open= false;
+       $displ_open= true;
        $lin_obj  = "    <div id=\"div_int_pagada\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
@@ -13021,7 +13906,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj  .= "    <span class='multiplepagada' style='display:"  . (($displ_open)?'':'none') .  ";'>";
            $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['pagada']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['pagada']['val_sel'])) ? " checked" : "";
            $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_pagada_" . md5($dados) . "\" name=\"int_search_pagada[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_pagada_". md5($dados) ."\" for=\"id_int_search_pagada_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\" onclick=\"nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['pagada']) . "','pagada','id_int_search_pagada','pagada', '', 'N')\"  id=\"id_int_search_pagada_" . md5($dados) . "\" name=\"int_search_pagada[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_pagada_". md5($dados) ."\" for=\"id_int_search_pagada_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
            if(!empty($veja_mais_link))
            {
                $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
@@ -13061,6 +13946,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
+      $lin_obj  .= "    Tab_obj_int_mult['pagada'] = 'S';";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
@@ -13068,17 +13954,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_pagada\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('pagada', false);", "nm_mult_int_search('pagada', false);", "mult_int_search_pagada", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
+           $disp_multi_btn = '';
            $disp_multi_btn = 'none';
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['pagada']) . "','pagada','id_int_search_pagada','pagada', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['pagada']) . "','pagada','id_int_search_pagada','pagada', '', 'N');", "app_int_search_pagada", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('pagada');", "nm_single_int_search('pagada');", "single_int_search_pagada", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "    </div>";
        }
@@ -13092,7 +13970,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["vendedor"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["vendedor"])) ? "none" : "";
-       $displ_open= false;
+       $displ_open= true;
        $lin_obj  = "    <div id=\"div_int_vendedor\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
@@ -13265,7 +14143,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj  .= "    <span class='multiplevendedor' style='display:"  . (($displ_open)?'':'none') .  ";'>";
            $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['vendedor']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['vendedor']['val_sel'])) ? " checked" : "";
            $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_vendedor_" . md5($dados) . "\" name=\"int_search_vendedor[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_vendedor_". md5($dados) ."\" for=\"id_int_search_vendedor_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\" onclick=\"nm_proc_int_search('chbx', 'nn','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['vendedor']) . "','vendedor','id_int_search_vendedor','vendedor', '', 'N')\"  id=\"id_int_search_vendedor_" . md5($dados) . "\" name=\"int_search_vendedor[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_vendedor_". md5($dados) ."\" for=\"id_int_search_vendedor_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
            if(!empty($veja_mais_link))
            {
                $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
@@ -13305,6 +14183,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
+      $lin_obj  .= "    Tab_obj_int_mult['vendedor'] = 'S';";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
@@ -13312,17 +14191,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_vendedor\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('vendedor', false);", "nm_mult_int_search('vendedor', false);", "mult_int_search_vendedor", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
+           $disp_multi_btn = '';
            $disp_multi_btn = 'none';
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'nn','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['vendedor']) . "','vendedor','id_int_search_vendedor','vendedor', '', 'N');", "nm_proc_int_search('chbx', 'nn','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['vendedor']) . "','vendedor','id_int_search_vendedor','vendedor', '', 'N');", "app_int_search_vendedor", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('vendedor');", "nm_single_int_search('vendedor');", "single_int_search_vendedor", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "    </div>";
        }
@@ -13336,7 +14207,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
    {
        $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["tipo"])) ? "" : "none";
        $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']["tipo"])) ? "none" : "";
-       $displ_open= false;
+       $displ_open= true;
        $lin_obj  = "    <div id=\"div_int_tipo\">";
        $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
        $lin_obj .= "     <tr>";
@@ -13508,7 +14379,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj  .= "    <span class='multipletipo' style='display:"  . (($displ_open)?'':'none') .  ";'>";
            $checked = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['tipo']['val_sel']) && in_array($dados, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['interativ_search']['tipo']['val_sel'])) ? " checked" : "";
            $checked = " checked";
-           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\"  id=\"id_int_search_tipo_" . md5($dados) . "\" name=\"int_search_tipo[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_tipo_". md5($dados) ."\" for=\"id_int_search_tipo_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
+           $lin_obj  .= "        <INPUT class='" . $this->css_scAppDivToolbarInput . "' style='margin:0px' type=\"checkbox\" onclick=\"nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['tipo']) . "','tipo','id_int_search_tipo','tipo', '', 'N')\"  id=\"id_int_search_tipo_" . md5($dados) . "\" name=\"int_search_tipo[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" $checked><span class='scGridRefinedSearchCampoFont'> <label for=\"id_int_search_tipo_". md5($dados) ."\" for=\"id_int_search_tipo_". md5($dados) ."\">" . $formatado_exib . "</label></span>";
            if(!empty($veja_mais_link))
            {
                $lin_obj  .= " <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
@@ -13548,6 +14419,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
       $lin_obj  .= "<SCRIPT>
 ";
       $lin_obj  .= "$( document ).ready(function() {";
+      $lin_obj  .= "    Tab_obj_int_mult['tipo'] = 'S';";
       $lin_obj  .= "});";
       $lin_obj  .= "</SCRIPT>";
        $lin_obj  .= "   </div></td></tr>";
@@ -13555,17 +14427,9 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
            $lin_obj .= "    <tr class='toolbarFields'>";
            $lin_obj .= "    <td style='display:'>";
            $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_tipo\" style='display:none'>";
-           $disp_show_multi_btn = '';
-           if (count($result) < 2)
-           {
-               $disp_show_multi_btn = 'none';
-           }
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('tipo', false);", "nm_mult_int_search('tipo', false);", "mult_int_search_tipo", "", "", "display: $disp_show_multi_btn;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "multiselect", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
+           $disp_multi_btn = '';
            $disp_multi_btn = 'none';
            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['tipo']) . "','tipo','id_int_search_tipo','tipo', '', 'N');", "nm_proc_int_search('chbx', 'tx','" . str_replace(array("'",'"'), array('__sasp__','__dasp__'), $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['int_search_label']['tipo']) . "','tipo','id_int_search_tipo','tipo', '', 'N');", "app_int_search_tipo", "", "", "display: $disp_multi_btn ;", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
-           $lin_obj .= $Cod_Btn; 
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('tipo');", "nm_single_int_search('tipo');", "single_int_search_tipo", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
            $lin_obj .= $Cod_Btn; 
            $lin_obj .= "    </div>";
        }
@@ -13771,7 +14635,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
        $nm_saida->saida("         out_int  += '__DL__' + refresh;\r\n");
        $nm_saida->saida("         ajax_navigate('interativ_search', out_int);\r\n");
        $nm_saida->saida("     }\r\n");
-       $nm_saida->saida("     var submit_checkbox = 'N';\r\n");
+       $nm_saida->saida("     var submit_checkbox = 'S';\r\n");
        $nm_saida->saida("     function nm_proc_check_parent_value(bol_checked, str_cmp, value_md5)\r\n");
        $nm_saida->saida("     {\r\n");
        $nm_saida->saida("        $('#id_int_search_'+ str_cmp +'_' + value_md5).prop('checked', bol_checked);\r\n");

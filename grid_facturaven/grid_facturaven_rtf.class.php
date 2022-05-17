@@ -175,6 +175,14 @@ class grid_facturaven_rtf
               $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][8];
               $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][9];
           }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+          {
+              $this->sum_base_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
+              $this->sum_valor_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][3];
+              $this->sum_base_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][4];
+              $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][5];
+              $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][6];
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_")
           {
               $this->sum_total = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
@@ -651,6 +659,22 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
               $SC_Label = str_replace('>', '&gt;', $SC_Label);
               $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
           }
+          $SC_Label = (isset($this->New_label['direccion'])) ? $this->New_label['direccion'] : "Dirección"; 
+          if ($Cada_col == "direccion" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              $SC_Label = str_replace('<', '&lt;', $SC_Label);
+              $SC_Label = str_replace('>', '&gt;', $SC_Label);
+              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
+          }
+          $SC_Label = (isset($this->New_label['documento'])) ? $this->New_label['documento'] : "NIT/CC"; 
+          if ($Cada_col == "documento" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              $SC_Label = str_replace('<', '&lt;', $SC_Label);
+              $SC_Label = str_replace('>', '&gt;', $SC_Label);
+              $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
+          }
       } 
       $this->Texto_tag .= "</tr>\r\n";
       $this->nm_field_dinamico = array();
@@ -851,6 +875,14 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          $this->Lookup->lookup_tipo_doc($this->tipo_doc, $this->idfacven, $this->array_tipo_doc); 
          $this->tipo_doc = str_replace("<br>", " ", $this->tipo_doc); 
          $this->tipo_doc = ($this->tipo_doc == "&nbsp;") ? "" : $this->tipo_doc; 
+         //----- lookup - direccion
+         $this->Lookup->lookup_direccion($this->direccion, $this->idcli, $this->array_direccion); 
+         $this->direccion = str_replace("<br>", " ", $this->direccion); 
+         $this->direccion = ($this->direccion == "&nbsp;") ? "" : $this->direccion; 
+         //----- lookup - documento
+         $this->Lookup->lookup_documento($this->documento, $this->idcli, $this->array_documento); 
+         $this->documento = str_replace("<br>", " ", $this->documento); 
+         $this->documento = ($this->documento == "&nbsp;") ? "" : $this->documento; 
          $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'on';
 if (!isset($_SESSION['par_numfacventa'])) {$_SESSION['par_numfacventa'] = "";}
 if (!isset($this->sc_temp_par_numfacventa)) {$this->sc_temp_par_numfacventa = (isset($_SESSION['par_numfacventa'])) ? $_SESSION['par_numfacventa'] : "";}
@@ -1430,6 +1462,22 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          $this->print = str_replace('>', '&gt;', $this->print);
          $this->Texto_tag .= "<td>" . $this->print . "</td>\r\n";
    }
+   //----- direccion
+   function NM_export_direccion()
+   {
+         $this->direccion = NM_charset_to_utf8($this->direccion);
+         $this->direccion = str_replace('<', '&lt;', $this->direccion);
+         $this->direccion = str_replace('>', '&gt;', $this->direccion);
+         $this->Texto_tag .= "<td>" . $this->direccion . "</td>\r\n";
+   }
+   //----- documento
+   function NM_export_documento()
+   {
+         $this->documento = NM_charset_to_utf8($this->documento);
+         $this->documento = str_replace('<', '&lt;', $this->documento);
+         $this->documento = str_replace('>', '&gt;', $this->documento);
+         $this->Texto_tag .= "<td>" . $this->documento . "</td>\r\n";
+   }
 
    //----- 
    function grava_arquivo_rtf()
@@ -1516,7 +1564,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta :: RTF</TITLE>
+ <TITLE>Facturas y NC en Ventas :: RTF</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])

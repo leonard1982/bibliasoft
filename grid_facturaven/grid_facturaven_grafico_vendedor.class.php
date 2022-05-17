@@ -36,6 +36,8 @@ class grid_facturaven_grafico
 
    var $reload_as_analytic = false;
    var $array_tipo_doc = array();
+   var $array_direccion = array();
+   var $array_documento = array();
 
    //---- 
    function __construct()

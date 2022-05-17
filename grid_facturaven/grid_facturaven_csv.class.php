@@ -190,6 +190,14 @@ class grid_facturaven_csv
               $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][8];
               $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][9];
           }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+          {
+              $this->sum_base_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
+              $this->sum_valor_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][3];
+              $this->sum_base_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][4];
+              $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][5];
+              $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][6];
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_")
           {
               $this->sum_total = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
@@ -725,6 +733,22 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
+              $SC_Label = (isset($this->New_label['direccion'])) ? $this->New_label['direccion'] : "Dirección"; 
+              if ($Cada_col == "direccion" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['documento'])) ? $this->New_label['documento'] : "NIT/CC"; 
+              if ($Cada_col == "documento" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
           } 
           $this->csv_registro .= $this->Delim_line;
           fwrite($csv_f, $this->csv_registro);
@@ -928,6 +952,14 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          $this->Lookup->lookup_tipo_doc($this->tipo_doc, $this->idfacven, $this->array_tipo_doc); 
          $this->tipo_doc = str_replace("<br>", " ", $this->tipo_doc); 
          $this->tipo_doc = ($this->tipo_doc == "&nbsp;") ? "" : $this->tipo_doc; 
+         //----- lookup - direccion
+         $this->Lookup->lookup_direccion($this->direccion, $this->idcli, $this->array_direccion); 
+         $this->direccion = str_replace("<br>", " ", $this->direccion); 
+         $this->direccion = ($this->direccion == "&nbsp;") ? "" : $this->direccion; 
+         //----- lookup - documento
+         $this->Lookup->lookup_documento($this->documento, $this->idcli, $this->array_documento); 
+         $this->documento = str_replace("<br>", " ", $this->documento); 
+         $this->documento = ($this->documento == "&nbsp;") ? "" : $this->documento; 
          $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'on';
 if (!isset($_SESSION['par_numfacventa'])) {$_SESSION['par_numfacventa'] = "";}
 if (!isset($this->sc_temp_par_numfacventa)) {$this->sc_temp_par_numfacventa = (isset($_SESSION['par_numfacventa'])) ? $_SESSION['par_numfacventa'] : "";}
@@ -1590,6 +1622,22 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
+   //----- direccion
+   function NM_export_direccion()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->direccion);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- documento
+   function NM_export_documento()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->documento);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
 
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {
@@ -1660,7 +1708,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta :: CSV</TITLE>
+ <TITLE>Facturas y NC en Ventas :: CSV</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
  <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?>" GMT">

@@ -425,6 +425,9 @@ class grid_facturaven_res_rtf
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_")
        {
        }
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+       {
+       }
        return $valor_campo;
    }
 
@@ -481,7 +484,7 @@ class grid_facturaven_res_rtf
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta :: RTF</TITLE>
+ <TITLE>Facturas y NC en Ventas :: RTF</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])

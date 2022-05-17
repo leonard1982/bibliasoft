@@ -82,4 +82,8 @@
 .css_imp_bolsa_tot_ger {text-align: right;}
 .css_print_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
 .css_print_grid_line {text-align: left;}
+.css_direccion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_direccion_grid_line {vertical-align: middle;text-align: left;}
+.css_documento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_documento_grid_line {vertical-align: middle;text-align: center;}
 .css_detalleventa_grid_line {text-align: center;}

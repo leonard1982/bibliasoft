@@ -229,9 +229,9 @@ class grid_facturaven_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20171228"; 
       $this->nm_hr_criacao   = "114401"; 
-      $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220505"; 
-      $this->nm_hr_ult_alt   = "111214"; 
+      $this->nm_autor_alt    = "edgar"; 
+      $this->nm_dt_ult_alt   = "20220517"; 
+      $this->nm_hr_ult_alt   = "104712"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -790,6 +790,8 @@ class grid_facturaven_ini
       $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
+      $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -979,7 +981,7 @@ class grid_facturaven_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDQFUHANOD5F7DMrwVcB/HEFYHMFGDcFYZSFaHArYD5XGHgNKHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFaD9XOZSBqHANOZMXGDEBeHArsDuFaZuB/DcBiZ9XGD1veV5FUHuzGV9BUHEFYVorqHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwZSFGHANOD5BqHgrKVcXKV5X7DorqDcBqZ1B/D1rwZMB/DEvsHEJGDWr/DoraD9NmH9X7HABYD5NUDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFUHQJmH9FaD1zGV5X7DMzGHEXeV5FaZuFaDcJeZ9rqZ1zGVWJsHuvmVcB/DWXCVoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNwZkBiHAzGD5BOHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBiHuzGVcXKDur/HMJsD9JmZ1FaDSrYHQFUDEBOHEXeDuFaHMX7D9XsDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQB/HArYHuFUHgrKDkBsHEBmVorqHQBsZ1F7HArYHuBqHgvsHENiDWX7DoJeHQXsDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBiDuFaHIrKHQrqHgvOVcFKV5F/HMXGD9XGZ1B/HAN7D5FaDEvsHEXeDuFYHMBqDcBiDQJsZ1BYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDuFaDoJeD9JKDQX7D1veV5raHgrKVIBODWFaVoBqD9BiZ1rqHArYD5XGDMBYHEJGDWXCVoB/D9XsZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErsH5BmZuXGHQXODQB/HIrwHuNUHuBYVcFCDuX7HMrqD9XOZSBqD1zGD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMFaHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFYDoJeHQJmZSBqHArYHuFUHgBOZSJ3DWXCDoraHQBiH9FGHABYD5FaDMNOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven']['initialize'])  
       { 
@@ -3880,6 +3882,20 @@ FROM facturaven
 WHERE idfacven = '{idfacven}' 
 ORDER BY tipo", $cadapar[0]);
                 } 
+                if ($cadapar[0] == "direccion")  
+                { 
+                    $cadapar[0] = str_replace("direccion", "SELECT direccion
+FROM terceros 
+WHERE idtercero = {idcli} 
+LIMIT 1", $cadapar[0]);
+                } 
+                if ($cadapar[0] == "documento")  
+                { 
+                    $cadapar[0] = str_replace("documento", "SELECT documento
+FROM terceros 
+WHERE idtercero = {idcli} 
+ORDER BY documento, nombres", $cadapar[0]);
+                } 
                 if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "fecha")
                 { 
                     $Temp_parms .= (empty($Temp_parms)) ? "" : " and ";
@@ -4012,6 +4028,24 @@ ORDER BY tipo", $cadapar[0]);
                         $Temp_parms .= $cadapar[0] . " = " . $cadapar[1];
                     }
                 } 
+                if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+                { 
+                    $Temp_parms .= (empty($Temp_parms)) ? "" : " and ";
+                    $Tmp_pos = strpos($cadapar[1], "@aspass@");
+                    $cadapar[1] = str_replace("@aspass@", "", $cadapar[1]);
+                    if ($Tmp_pos !== false)
+                    {
+                        $cadapar[1] = $this->Ini->Db->qstr($cadapar[1]);
+                    }
+                    if ($cadapar[1] == "__SCNULL__" || $cadapar[1] == "'__SCNULL__'")
+                    {
+                        $Temp_parms .= $cadapar[0] . " is null" ;
+                    }
+                    else
+                    {
+                        $Temp_parms .= $cadapar[0] . " = " . $cadapar[1];
+                    }
+                } 
            }
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['where_resumo'] = $Temp_parms;
        } 
@@ -4036,7 +4070,7 @@ ORDER BY tipo", $cadapar[0]);
           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && $this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['grid_facturaven']))
           {
                $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['grid_facturaven']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('grid_facturaven') . "/";
-               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['grid_facturaven']['label'] = "Facturas de Venta";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['grid_facturaven']['label'] = "Facturas y NC en Ventas";
                $this->Change_Menu = true;
           }
           elseif ($this->Ini->sc_page == $this->sc_init_menu)
@@ -4191,7 +4225,7 @@ ORDER BY tipo", $cadapar[0]);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Gb_date_format']['vencimiento']['fechavenc'] = 'YYYYMMDD2';
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Gb_def_sql']['vencimiento']['fechavenc'] = 'fechavenc';
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_All_Groupby'] = array('_NM_SC_' => 'grid', 'fecha' => 'all', 'vencimiento' => 'all', 'credito' => 'all', 'vendedor' => 'all', 'prefijo' => 'all', 'tipo' => 'all');
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_All_Groupby'] = array('_NM_SC_' => 'grid', 'fecha' => 'all', 'vencimiento' => 'all', 'credito' => 'all', 'vendedor' => 'all', 'prefijo' => 'all', 'tipo' => 'all', 'idcli' => 'all');
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Groupby_hide'])) 
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Groupby_hide'] = array();
@@ -4231,6 +4265,10 @@ ORDER BY tipo", $cadapar[0]);
       if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "tipo")
       {
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['Labels_GB'][] = "Tipo";
+      }
+      if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+      {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['Labels_GB'][] = "Cliente";
       }
       if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_")
       {
@@ -5224,6 +5262,8 @@ ORDER BY tipo", $cadapar[0]);
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
       $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
+      $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -5370,6 +5410,8 @@ ORDER BY tipo", $cadapar[0]);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'][] = "t_iva";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'][] = "imp_bolsa";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'][] = "print";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'][] = "direccion";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'][] = "documento";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'];
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['usr_cmp_sel']))
           { 
@@ -5396,6 +5438,8 @@ ORDER BY tipo", $cadapar[0]);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['usr_cmp_sel']['t_iva'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['usr_cmp_sel']['imp_bolsa'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['usr_cmp_sel']['print'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['usr_cmp_sel']['direccion'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['usr_cmp_sel']['documento'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['usr_cmp_sel'];
       } 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven']['exit'] != '')
@@ -6424,7 +6468,7 @@ if ($_SESSION['sc_session'][$script_case_init]['grid_facturaven']['pdf_res'])
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta :: PDF</TITLE>
+ <TITLE>Facturas y NC en Ventas :: PDF</TITLE>
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
  <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?>" GMT">
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
@@ -8183,7 +8227,7 @@ if($vPFe=='FE' and $vEsfac=='SI')
 			$factura = new FacturaGeneral();
 			$cliente= new Cliente();
 			$destinatario = new Destinatario();
-			$direccion = new Direccion();
+			$this->direccion = new Direccion();
 			$det_tributario = new Tributos();
 			$emaildest = new Strings();
 			$vServidor=$this->ds_fv[0][0];
@@ -9432,7 +9476,7 @@ if($vPFe=='FE' and $vPnCR=='SI')
 			$factura = new FacturaGeneral();
 			$cliente= new Cliente();
 			$destinatario = new Destinatario();
-			$direccion = new Direccion();
+			$this->direccion = new Direccion();
 			$det_tributario = new Tributos();
 			$emaildest = new Strings();
 			$vServidor=$this->ds_fv[0][0];
@@ -10603,7 +10647,7 @@ if($vPFe=='FE' and $vPnCR=='SI')
 			$factura = new FacturaGeneral();
 			$cliente= new Cliente();
 			$destinatario = new Destinatario();
-			$direccion = new Direccion();
+			$this->direccion = new Direccion();
 			$det_tributario = new Tributos();
 			$emaildest = new Strings();
 			
@@ -12677,7 +12721,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta :: Doc</TITLE>
+ <TITLE>Facturas y NC en Ventas :: Doc</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
  <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>

@@ -39,8 +39,8 @@ class grid_facturaven_pesq
    {
       global $bprocessa;
       include("../_lib/css/" . $this->Ini->str_schema_filter . "_filter.php");
-      $this->Ini->Str_btn_filter = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
-      $this->Str_btn_filter_css  = trim($str_button) . "/" . trim($str_button) . ".css";
+      $this->Ini->Str_btn_filter = "scriptcase9_BlueBerry/scriptcase9_BlueBerry" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
+      $this->Str_btn_filter_css  = "scriptcase9_BlueBerry/scriptcase9_BlueBerry.css";
       $this->Ini->str_google_fonts = (isset($str_google_fonts) && !empty($str_google_fonts))?$str_google_fonts:'';
       include($this->Ini->path_btn . $this->Ini->Str_btn_filter);
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['path_libs_php'] = $this->Ini->path_lib_php;
@@ -1685,7 +1685,7 @@ class grid_facturaven_pesq
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 <HEAD>
- <TITLE>Facturas de Venta</TITLE>
+ <TITLE>Facturas y NC en Ventas</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -1727,7 +1727,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta</TITLE>
+ <TITLE>Facturas y NC en Ventas</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
@@ -1777,6 +1777,47 @@ $vertical_center = '';
 <BODY id="grid_search" class="scFilterPage" style="<?php echo $vertical_center ?>">
 <?php echo $this->Ini->Ajax_result_set ?>
 <SCRIPT type="text/javascript" src="<?php echo $this->Ini->path_js . "/browserSniffer.js" ?>"></SCRIPT>
+   <script type="text/javascript">
+     var applicationKeys = '';
+     applicationKeys += 'ctrl+k';
+     applicationKeys += ',';
+     applicationKeys += 'ctrl+enter';
+     applicationKeys += ',';
+     applicationKeys += 'ctrl+e';
+     applicationKeys += ',';
+     applicationKeys += 'f1';
+     applicationKeys += ',';
+     applicationKeys += 'alt+q';
+     var hotkeyList = '';
+     function execHotKey(e, h) {
+         var hotkey_fired = false
+         switch (true) {
+             case (['ctrl+k'].indexOf(h.key) > -1):
+                 hotkey_fired = process_hotkeys('sys_format_lim');
+                 break;
+             case (['ctrl+enter'].indexOf(h.key) > -1):
+                 hotkey_fired = process_hotkeys('sys_format_fi2');
+                 break;
+             case (['ctrl+e'].indexOf(h.key) > -1):
+                 hotkey_fired = process_hotkeys('sys_format_edi');
+                 break;
+             case (['f1'].indexOf(h.key) > -1):
+                 hotkey_fired = process_hotkeys('sys_format_webh');
+                 break;
+             case (['alt+q'].indexOf(h.key) > -1):
+                 hotkey_fired = process_hotkeys('sys_format_sai');
+                 break;
+         }
+         if (hotkey_fired) {
+             e.preventDefault();
+             return false;
+         } else {
+             return true;
+         }
+     }
+   </script>
+   <script type="text/javascript" src="../_lib/lib/js/hotkeys.inc.js"></script>
+   <script type="text/javascript" src="../_lib/lib/js/hotkeys_setup.js"></script>
         <script type="text/javascript">
           var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
           var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_close'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
@@ -2489,23 +2530,68 @@ function nm_open_popup(parms)
 ?>
  <TR align="center">
   <TD class="scFilterTableTd">
-<style>
-#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
-#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
-</style>
-
-<div style="width: 100%">
- <div class="scFilterHeader" style="height:11px; display: block; border-width:0px; "></div>
- <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
- 	<table style="width:100%; border-collapse:collapse; padding:0;">
-    	<tr>
-        	<td id="lin1_col1" class="scFilterHeaderFont"><span>Facturas de Venta</span></td>
-            <td id="lin1_col2" class="scFilterHeaderFont"><span><?php echo $nm_data_fixa; ?></span></td>
-        </tr>
-    </table>		 
- </div>
-</div>
-  </TD>
+   <TABLE width="100%" class="scFilterHeader">
+    <TR align="center">
+     <TD style="padding: 0px">
+      <TABLE style="padding: 0px; border-spacing: 0px; border-width: 0px;" width="100%">
+       <TR valign="middle">
+        <TD align="left" rowspan="3" class="scFilterHeaderFont">
+          
+        </TD>
+        <TD align="left" class="scFilterHeaderFont">
+          Facturas y NC en Ventas
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFilterHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFilterHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFilterHeaderFont">
+          <?php echo $nm_data_fixa; ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFilterHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFilterHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFilterHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFilterHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFilterHeaderFont">
+          
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>
+   </TABLE>  </TD>
  </TR>
 <?php
    }
@@ -3600,7 +3686,7 @@ foreach ($Arr_format as $Part_date)
               if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "fil" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
               {
 ?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          <?php echo nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "sc_b_help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
               }
@@ -3612,14 +3698,14 @@ foreach ($Arr_format as $Part_date)
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven']['start'] == 'filter' && $nm_apl_dependente != 1)
    {
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       <?php echo nmButtonOutput($this->arr_buttons, "bsair", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", " ", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }
    else
    {
 ?>
-       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+       <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.form_cancel.submit();", "document.form_cancel.submit();", "sc_b_cancel_bot", "", " ", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }
@@ -3628,7 +3714,7 @@ foreach ($Arr_format as $Part_date)
    if ($this->nmgp_botoes['clear'] == "on")
    {
 ?>
-          <?php echo nmButtonOutput($this->arr_buttons, "blimpar", "limpa_form();", "limpa_form();", "limpa_frm_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          <?php echo nmButtonOutput($this->arr_buttons, "blimpar", "limpa_form();", "limpa_form();", "limpa_frm_bot", "", " ", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + K)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }
@@ -3679,12 +3765,12 @@ foreach ($Arr_format as $Part_date)
    if ($this->nmgp_botoes['save'] == "on")
    {
 ?>
-          <?php echo nmButtonOutput($this->arr_buttons, "bedit_filter", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "Ativa_save_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+          <?php echo nmButtonOutput($this->arr_buttons, "bedit_filter", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "document.getElementById('Salvar_filters_bot').style.display = ''; document.F1.nmgp_save_name_bot.focus();", "Ativa_save_bot", "", " ", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + E)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
 <?php
    }
 ?>
-   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_srch_lone_hint'] . "", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
+   <?php echo nmButtonOutput($this->arr_buttons, "bpesquisa", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "document.F1.bprocessa.value='pesq'; setTimeout(function() {nm_submit_form()}, 200);", "sc_b_pesq_bot", "", "Buscar", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Enter)", "", "", "", "only_text", "text_right", "", "", "", "", "", "", "");
 ?>
     </td>
     <td class="scFilterToolbarPadding" align="right" width="33%" nowrap>
@@ -4028,6 +4114,30 @@ foreach ($Arr_format as $Part_date)
        echo $this->redir_modal;
    }
 ?>
+   function process_hotkeys(hotkey)
+   {
+      if (hotkey == 'sys_format_webh') { 
+         var output =  $('#sc_b_help_bot').click();
+         return (0 < output.length);
+      }
+      if (hotkey == 'sys_format_sai') { 
+         var output =  $('#sc_b_cancel_bot').click();
+         return (0 < output.length);
+      }
+      if (hotkey == 'sys_format_lim') { 
+         var output =  $('#limpa_frm_bot').click();
+         return (0 < output.length);
+      }
+      if (hotkey == 'sys_format_edi') { 
+         var output =  $('#Ativa_save_bot').click();
+         return (0 < output.length);
+      }
+      if (hotkey == 'sys_format_fi2') { 
+         var output =  $('#sc_b_pesq_bot').click();
+         return (0 < output.length);
+      }
+   return false;
+   }
 </SCRIPT>
 </BODY>
 </HTML>

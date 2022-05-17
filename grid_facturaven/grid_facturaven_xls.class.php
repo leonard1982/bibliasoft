@@ -15,6 +15,8 @@ class grid_facturaven_xls
    var $NM_cmp_hidden = array();
    var $NM_ctrl_style = array();
    var $array_tipo_doc = array();
+   var $array_direccion = array();
+   var $array_documento = array();
    var $Arquivo;
    var $Tit_doc;
    var $count_ger;
@@ -132,6 +134,23 @@ class grid_facturaven_xls
    var $sum_tipo_valor_con_8;
    var $sum_tipo_t_iva;
    var $sum_tipo_imp_bolsa;
+   var $idcli_Old;
+   var $arg_sum_idcli;
+   var $Label_idcli;
+   var $sc_proc_quebra_idcli;
+   var $count_idcli;
+   var $sum_idcli_total;
+   var $sum_idcli_subtotal;
+   var $sum_idcli_valoriva;
+   var $sum_idcli_base_iva_19;
+   var $sum_idcli_valor_iva_19;
+   var $sum_idcli_base_iva_5;
+   var $sum_idcli_valor_iva_5;
+   var $sum_idcli_excento;
+   var $sum_idcli_base_con_8;
+   var $sum_idcli_valor_con_8;
+   var $sum_idcli_t_iva;
+   var $sum_idcli_imp_bolsa;
    //---- 
    function __construct()
    {
@@ -382,6 +401,14 @@ class grid_facturaven_xls
           $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][8];
           $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][9];
       }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+      {
+          $this->sum_base_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
+          $this->sum_valor_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][3];
+          $this->sum_base_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][4];
+          $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][5];
+          $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][6];
+      }
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_")
       {
           $this->sum_total = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
@@ -483,6 +510,14 @@ class grid_facturaven_xls
           $this->sum_base_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][7];
           $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][8];
           $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][9];
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+      {
+          $this->sum_base_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
+          $this->sum_valor_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][3];
+          $this->sum_base_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][4];
+          $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][5];
+          $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][6];
       }
    }
    //---- 
@@ -866,6 +901,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          $this->Orig_imp_bolsa = $this->imp_bolsa;
          $this->Orig_tipo = $this->tipo;
          $this->arg_sum_resolucion = ($this->resolucion == "") ? " is null " : " = " . $this->resolucion;
+         $this->arg_sum_idcli = ($this->idcli == "") ? " is null " : " = " . $this->idcli;
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "fecha")
          {
              $Format_tst = $this->Ini->Get_Gb_date_format('fecha', 'fechaven');
@@ -1115,6 +1151,38 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
               }
               $nm_houve_quebra = "S";
           } 
+          if ($this->idcli !== $this->idcli_Old && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli") 
+          {  
+              if (isset($this->idcli_Old) && !$prim_gb)
+              {
+                 $this->quebra_idcli_idcli_bot() ; 
+                 if ($this->groupby_show == "S") {
+                     $this->Xls_col = 0;
+                     $this->Xls_row++;
+                 }
+              }
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'] && !$prim_gb && $this->groupby_show == "S") {
+                  $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                  $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                  $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                  $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+              }
+              $this->idcli_Old = $this->idcli ; 
+              $this->quebra_idcli_idcli($this->idcli) ; 
+              if ($this->groupby_show == "S") {
+                  $this->Xls_col = 0;
+                  $this->Xls_row++;
+              }
+              if (isset($this->idcli_Old))
+              {
+                 $this->quebra_idcli_idcli_top() ; 
+                 if ($this->groupby_show == "S") {
+                     $this->Xls_col = 0;
+                     $this->Xls_row++;
+                 }
+              }
+              $nm_houve_quebra = "S";
+          } 
      if ($this->groupby_show == "S") {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'])
          { 
@@ -1177,6 +1245,14 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          $this->Lookup->lookup_tipo_doc($this->tipo_doc, $this->idfacven, $this->array_tipo_doc); 
          $this->tipo_doc = str_replace("<br>", " ", $this->tipo_doc); 
          $this->tipo_doc = ($this->tipo_doc == "&nbsp;") ? "" : $this->tipo_doc; 
+         //----- lookup - direccion
+         $this->Lookup->lookup_direccion($this->direccion, $this->idcli, $this->array_direccion); 
+         $this->direccion = str_replace("<br>", " ", $this->direccion); 
+         $this->direccion = ($this->direccion == "&nbsp;") ? "" : $this->direccion; 
+         //----- lookup - documento
+         $this->Lookup->lookup_documento($this->documento, $this->idcli, $this->array_documento); 
+         $this->documento = str_replace("<br>", " ", $this->documento); 
+         $this->documento = ($this->documento == "&nbsp;") ? "" : $this->documento; 
          $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'on';
 if (!isset($_SESSION['par_numfacventa'])) {$_SESSION['par_numfacventa'] = "";}
 if (!isset($this->sc_temp_par_numfacventa)) {$this->sc_temp_par_numfacventa = (isset($_SESSION['par_numfacventa'])) ? $_SESSION['par_numfacventa'] : "";}
@@ -1548,6 +1624,20 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
        if (isset($this->tipo_Old) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "tipo")
        {
            $this->quebra_tipo_tipo_bot() ; 
+           if ($this->groupby_show == "S") {
+               $this->Xls_col = 0;
+               $this->Xls_row++;
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+           }
+       }
+       if (isset($this->idcli_Old) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+       {
+           $this->quebra_idcli_idcli_bot() ; 
            if ($this->groupby_show == "S") {
                $this->Xls_col = 0;
                $this->Xls_row++;
@@ -2613,6 +2703,62 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
               }
               $this->Xls_col++;
           }
+          $SC_Label = (isset($this->New_label['direccion'])) ? $this->New_label['direccion'] : "Dirección"; 
+          if ($Cada_col == "direccion" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['documento'])) ? $this->New_label['documento'] : "NIT/CC"; 
+          if ($Cada_col == "documento" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
       } 
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida'])
       { 
@@ -3230,6 +3376,42 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          }
          $this->Xls_col++;
    }
+   //----- direccion
+   function NM_export_direccion()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->direccion = NM_charset_to_utf8($this->direccion);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->direccion, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->direccion, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
+   //----- documento
+   function NM_export_documento()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->documento = NM_charset_to_utf8($this->documento);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->documento, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->documento, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- tipo_doc
    function NM_sub_cons_tipo_doc()
    {
@@ -3620,6 +3802,26 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
+   //----- direccion
+   function NM_sub_cons_direccion()
+   {
+         $this->direccion = NM_charset_to_utf8($this->direccion);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->direccion;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- documento
+   function NM_sub_cons_documento()
+   {
+         $this->documento = NM_charset_to_utf8($this->documento);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->documento;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
    function xls_sub_cons_copy_label($row)
    {
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['nolabel']) || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['nolabel'])
@@ -3848,6 +4050,32 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
    $this->campos_quebra_tipo[0]['lab'] = "Tipo"; 
    }
    $this->sc_proc_quebra_tipo = false; 
+ } 
+ function quebra_idcli_idcli($idcli) 
+ {
+   global $tot_idcli;
+   $this->sc_proc_quebra_idcli = true; 
+   $this->Tot->quebra_idcli_idcli($idcli, $this->arg_sum_idcli);
+   $conteudo = $tot_idcli[0] ;  
+   $this->count_idcli = $tot_idcli[1];
+   $this->sum_idcli_base_iva_19 = $tot_idcli[2];
+   $this->sum_idcli_valor_iva_19 = $tot_idcli[3];
+   $this->sum_idcli_base_iva_5 = $tot_idcli[4];
+   $this->sum_idcli_valor_iva_5 = $tot_idcli[5];
+   $this->sum_idcli_excento = $tot_idcli[6];
+   $this->campos_quebra_idcli = array(); 
+   $conteudo = sc_strip_script($this->idcli); 
+   $this->Lookup->lookup_idcli_idcli($conteudo , $this->idcli) ; 
+   $this->campos_quebra_idcli[0]['cmp'] = $conteudo; 
+   if (isset($this->nmgp_label_quebras['idcli']))
+   {
+       $this->campos_quebra_idcli[0]['lab'] = $this->nmgp_label_quebras['idcli']; 
+   }
+   else
+   {
+   $this->campos_quebra_idcli[0]['lab'] = "Cliente"; 
+   }
+   $this->sc_proc_quebra_idcli = false; 
  } 
    function quebra_fechaven_fecha_top()
    {
@@ -6207,6 +6435,294 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
            }
        }
    }
+   function quebra_idcli_idcli_top()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $lim_col  = 1;
+       $temp_cmp = "";
+       $cont_col = 0;
+       foreach ($this->campos_quebra_idcli as $cada_campo) {
+           if ($cont_col == $lim_col) {
+               $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+               $temp_cmp = strip_tags($temp_cmp);
+               $temp_cmp = NM_charset_to_utf8($temp_cmp);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $temp_cmp = "";
+               $cont_col = 0;
+               $this->Xls_row++;
+           }
+           $temp_cmp .= $cada_campo['lab'] . " => " . $cada_campo['cmp'] . "  ";
+           $cont_col++;
+       }
+       if (!empty($temp_cmp)) {
+           $temp_cmp = html_entity_decode($temp_cmp, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+           $temp_cmp = strip_tags($temp_cmp);
+           $temp_cmp = NM_charset_to_utf8($temp_cmp);
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']       = $temp_cmp;
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']      = "left";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']       = "char";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format']     = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']       = "";
+               $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['col_span_f'] = $this->Xls_tot_col;
+           }
+           else {
+               $current_cell_ref = $this->calc_cell($this->Xls_col);
+               if ($this->Use_phpspreadsheet) {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+               }
+               else {
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+               }
+               $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $temp_cmp);
+               $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+           }
+       }
+   }
+   function quebra_idcli_idcli_bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->xls_set_style();
+       $prim_cmp = true;
+       $mens_tot_base = "";
+       $mens_tot = "";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'] as $Cada_cmp)
+       {
+           if ($Cada_cmp == "base_iva_19" && (!isset($this->NM_cmp_hidden['base_iva_19']) || $this->NM_cmp_hidden['base_iva_19'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Cmp_Tot    = $this->sum_idcli_base_iva_19;
+               $prim_cmp = false;
+               $Cmp_Tot = NM_charset_to_utf8($Cmp_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Cmp_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Cmp_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif ($Cada_cmp == "valor_iva_19" && (!isset($this->NM_cmp_hidden['valor_iva_19']) || $this->NM_cmp_hidden['valor_iva_19'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Cmp_Tot    = $this->sum_idcli_valor_iva_19;
+               $prim_cmp = false;
+               $Cmp_Tot = NM_charset_to_utf8($Cmp_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Cmp_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Cmp_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif ($Cada_cmp == "base_iva_5" && (!isset($this->NM_cmp_hidden['base_iva_5']) || $this->NM_cmp_hidden['base_iva_5'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Cmp_Tot    = $this->sum_idcli_base_iva_5;
+               $prim_cmp = false;
+               $Cmp_Tot = NM_charset_to_utf8($Cmp_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Cmp_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Cmp_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif ($Cada_cmp == "valor_iva_5" && (!isset($this->NM_cmp_hidden['valor_iva_5']) || $this->NM_cmp_hidden['valor_iva_5'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Cmp_Tot    = $this->sum_idcli_valor_iva_5;
+               $prim_cmp = false;
+               $Cmp_Tot = NM_charset_to_utf8($Cmp_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Cmp_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Cmp_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif ($Cada_cmp == "excento" && (!isset($this->NM_cmp_hidden['excento']) || $this->NM_cmp_hidden['excento'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Cmp_Tot    = $this->sum_idcli_excento;
+               $prim_cmp = false;
+               $Cmp_Tot = NM_charset_to_utf8($Cmp_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Cmp_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Cmp_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Cmp_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+   }
    function quebra_geral_fecha_bot()
    {
        if ($this->groupby_show != "S") {
@@ -8217,6 +8733,236 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
            $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
        }
    }
+   function quebra_geral_idcli_bot()
+   {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->Tot->quebra_geral_idcli();
+       $prim_cmp = true;
+       $mens_tot = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][1] . ")";
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['field_order'] as $Cada_cmp)
+       {
+           if ($Cada_cmp == "base_iva_19" && (!isset($this->NM_cmp_hidden['base_iva_19']) || $this->NM_cmp_hidden['base_iva_19'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
+               $prim_cmp = false;
+               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Vl_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Vl_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif ($Cada_cmp == "valor_iva_19" && (!isset($this->NM_cmp_hidden['valor_iva_19']) || $this->NM_cmp_hidden['valor_iva_19'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][3];
+               $prim_cmp = false;
+               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Vl_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Vl_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif ($Cada_cmp == "base_iva_5" && (!isset($this->NM_cmp_hidden['base_iva_5']) || $this->NM_cmp_hidden['base_iva_5'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][4];
+               $prim_cmp = false;
+               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Vl_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Vl_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif ($Cada_cmp == "valor_iva_5" && (!isset($this->NM_cmp_hidden['valor_iva_5']) || $this->NM_cmp_hidden['valor_iva_5'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][5];
+               $prim_cmp = false;
+               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Vl_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Vl_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif ($Cada_cmp == "excento" && (!isset($this->NM_cmp_hidden['excento']) || $this->NM_cmp_hidden['excento'] != "off"))
+           {
+               $Format_Num = "#,##0";
+               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][6];
+               $prim_cmp = false;
+               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Vl_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Vl_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['embutida']) {
+           $this->Xls_row++;
+           $this->Xls_col = 1;
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+       }
+   }
    function quebra_geral__NM_SC__bot()
    {
        if ($this->groupby_show != "S") {
@@ -8782,7 +9528,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta :: Excel</TITLE>
+ <TITLE>Facturas y NC en Ventas :: Excel</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])

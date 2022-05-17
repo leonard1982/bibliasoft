@@ -568,6 +568,14 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          $this->Lookup->lookup_tipo_doc($this->tipo_doc, $this->idfacven, $this->array_tipo_doc); 
          $this->tipo_doc = str_replace("<br>", " ", $this->tipo_doc); 
          $this->tipo_doc = ($this->tipo_doc == "&nbsp;") ? "" : $this->tipo_doc; 
+         //----- lookup - direccion
+         $this->Lookup->lookup_direccion($this->direccion, $this->idcli, $this->array_direccion); 
+         $this->direccion = str_replace("<br>", " ", $this->direccion); 
+         $this->direccion = ($this->direccion == "&nbsp;") ? "" : $this->direccion; 
+         //----- lookup - documento
+         $this->Lookup->lookup_documento($this->documento, $this->idcli, $this->array_documento); 
+         $this->documento = str_replace("<br>", " ", $this->documento); 
+         $this->documento = ($this->documento == "&nbsp;") ? "" : $this->documento; 
          $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'on';
 if (!isset($_SESSION['par_numfacventa'])) {$_SESSION['par_numfacventa'] = "";}
 if (!isset($this->sc_temp_par_numfacventa)) {$this->sc_temp_par_numfacventa = (isset($_SESSION['par_numfacventa'])) ? $_SESSION['par_numfacventa'] : "";}
@@ -1512,6 +1520,36 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->print;
    }
+   //----- direccion
+   function NM_export_direccion()
+   {
+         $this->direccion = NM_charset_to_utf8($this->direccion);
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['direccion'])) ? $this->New_label['direccion'] : "Dirección"; 
+         }
+         else
+         {
+             $SC_Label = "direccion"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->direccion;
+   }
+   //----- documento
+   function NM_export_documento()
+   {
+         $this->documento = NM_charset_to_utf8($this->documento);
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['documento'])) ? $this->New_label['documento'] : "NIT/CC"; 
+         }
+         else
+         {
+             $SC_Label = "documento"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->documento;
+   }
 
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {
@@ -1581,7 +1619,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta :: JSON</TITLE>
+ <TITLE>Facturas y NC en Ventas :: JSON</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])

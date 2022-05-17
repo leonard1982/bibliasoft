@@ -38,6 +38,8 @@ class grid_facturaven_resumo
    var $quant_colunas;
    var $conv_col;
    var $array_tipo_doc = array();
+   var $array_direccion = array();
+   var $array_documento = array();
    var $count_ger;
    var $sum_total;
    var $sum_subtotal;
@@ -763,6 +765,14 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['print']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['print'] = "print"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['direccion']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['direccion'] = "Dirección"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['documento']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['documento'] = "NIT/CC"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['labels']['tipo']))
        {
@@ -3999,7 +4009,7 @@ $nm_saida->saida("            \"http://www.w3.org/TR/1999/REC-html401-19991224/l
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['dashboard_refresh_after_chart'] = 'resumo';
       $nm_saida->saida("<HTML" . $_SESSION['scriptcase']['reg_conf']['html_dir'] . ">\r\n");
       $nm_saida->saida("<HEAD>\r\n");
-      $nm_saida->saida(" <TITLE>Facturas de Venta</TITLE>\r\n");
+      $nm_saida->saida(" <TITLE>Facturas y NC en Ventas</TITLE>\r\n");
       $nm_saida->saida(" <META http-equiv=\"Content-Type\" content=\"text/html; charset=" . $_SESSION['scriptcase']['charset_html'] . "\" />\r\n");
 if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['doc_word'])
 {
@@ -5944,21 +5954,68 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['doc_word']
      else {
           $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\">\r\n");
      }
-      $nm_saida->saida("<style>\r\n");
-      $nm_saida->saida("#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 \r\n");
-      $nm_saida->saida("#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}\r\n");
-      $nm_saida->saida("</style>\r\n");
-      $nm_saida->saida("<div style=\"width: 100%\">\r\n");
-      $nm_saida->saida(" <div class=\"" . $this->css_scGridHeader . "\" style=\"height:11px; display: block; border-width:0px; \"></div>\r\n");
-      $nm_saida->saida(" <div style=\"height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block\">\r\n");
-      $nm_saida->saida(" 	<table style=\"width:100%; border-collapse:collapse; padding:0;\">\r\n");
-      $nm_saida->saida("    	<tr>\r\n");
-      $nm_saida->saida("        	<td id=\"lin1_col1\" class=\"" . $this->css_scGridHeaderFont . "\"><span>Facturas de Venta</span></td>\r\n");
-      $nm_saida->saida("            <td id=\"lin1_col2\" class=\"" . $this->css_scGridHeaderFont . "\"><span></span></td>\r\n");
-      $nm_saida->saida("        </tr>\r\n");
-      $nm_saida->saida("    </table>		 \r\n");
-      $nm_saida->saida(" </div>\r\n");
-      $nm_saida->saida("</div>\r\n");
+      $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+      $nm_saida->saida("    <TR align=\"center\">\r\n");
+      $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+      $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          Facturas y NC en Ventas\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+      $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+      $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+      $nm_saida->saida("          \r\n");
+      $nm_saida->saida("        </TD>\r\n");
+      $nm_saida->saida("       </TR>\r\n");
+      $nm_saida->saida("      </TABLE>\r\n");
+      $nm_saida->saida("     </TD>\r\n");
+      $nm_saida->saida("    </TR>\r\n");
+      $nm_saida->saida("   </TABLE>\r\n");
       $nm_saida->saida("  </TD>\r\n");
       $nm_saida->saida(" </TR>\r\n");
    }
@@ -6326,10 +6383,14 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
             $this->Lookup->lookup_tipo_doc($this->tipo_doc, $this->idfacven, $this->array_tipo_doc); 
             $this->look_resolucion = $this->resolucion; 
             $this->Lookup->lookup_resolucion($this->look_resolucion, $this->resolucion) ; 
+            $this->look_idcli = $this->idcli; 
+            $this->Lookup->lookup_idcli($this->look_idcli, $this->idcli) ; 
             $this->look_credito = $this->credito; 
             $this->Lookup->lookup_credito($this->look_credito); 
             $this->look_vendedor = $this->vendedor; 
             $this->Lookup->lookup_vendedor($this->look_vendedor, $this->vendedor) ; 
+            $this->Lookup->lookup_direccion($this->direccion, $this->idcli, $this->array_direccion); 
+            $this->Lookup->lookup_documento($this->documento, $this->idcli, $this->array_documento); 
             $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'on';
 if (!isset($_SESSION['par_numfacventa'])) {$_SESSION['par_numfacventa'] = "";}
 if (!isset($this->sc_temp_par_numfacventa)) {$this->sc_temp_par_numfacventa = (isset($_SESSION['par_numfacventa'])) ? $_SESSION['par_numfacventa'] : "";}
@@ -6579,6 +6640,7 @@ if (isset($this->sc_temp_par_numfacventa)) {$_SESSION['par_numfacventa'] = $this
 $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off'; 
             $this->credito_orig = $this->credito;
             $this->resolucion = $this->look_resolucion ;
+            $this->idcli = $this->look_idcli ;
             $this->credito = $this->look_credito ;
             $this->vendedor = $this->look_vendedor ;
             if ($nm_tipo == "resumo")

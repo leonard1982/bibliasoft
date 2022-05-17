@@ -228,6 +228,14 @@ class grid_facturaven_xml
               $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][8];
               $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][9];
           }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "idcli")
+          {
+              $this->sum_base_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
+              $this->sum_valor_iva_19 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][3];
+              $this->sum_base_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][4];
+              $this->sum_valor_iva_5 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][5];
+              $this->sum_excento = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][6];
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['SC_Ind_Groupby'] == "_NM_SC_")
           {
               $this->sum_total = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven']['tot_geral'][2];
@@ -700,6 +708,14 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
          $this->Lookup->lookup_tipo_doc($this->tipo_doc, $this->idfacven, $this->array_tipo_doc); 
          $this->tipo_doc = str_replace("<br>", " ", $this->tipo_doc); 
          $this->tipo_doc = ($this->tipo_doc == "&nbsp;") ? "" : $this->tipo_doc; 
+         //----- lookup - direccion
+         $this->Lookup->lookup_direccion($this->direccion, $this->idcli, $this->array_direccion); 
+         $this->direccion = str_replace("<br>", " ", $this->direccion); 
+         $this->direccion = ($this->direccion == "&nbsp;") ? "" : $this->direccion; 
+         //----- lookup - documento
+         $this->Lookup->lookup_documento($this->documento, $this->idcli, $this->array_documento); 
+         $this->documento = str_replace("<br>", " ", $this->documento); 
+         $this->documento = ($this->documento == "&nbsp;") ? "" : $this->documento; 
          $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'on';
 if (!isset($_SESSION['par_numfacventa'])) {$_SESSION['par_numfacventa'] = "";}
 if (!isset($this->sc_temp_par_numfacventa)) {$this->sc_temp_par_numfacventa = (isset($_SESSION['par_numfacventa'])) ? $_SESSION['par_numfacventa'] : "";}
@@ -1936,6 +1952,56 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->print) . "\"";
          }
    }
+   //----- direccion
+   function NM_export_direccion()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->direccion))
+         {
+             $this->direccion = sc_convert_encoding($this->direccion, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['direccion'])) ? $this->New_label['direccion'] : "Dirección"; 
+         }
+         else
+         {
+             $SC_Label = "direccion"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->direccion) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->direccion) . "\"";
+         }
+   }
+   //----- documento
+   function NM_export_documento()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->documento))
+         {
+             $this->documento = sc_convert_encoding($this->documento, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['documento'])) ? $this->New_label['documento'] : "NIT/CC"; 
+         }
+         else
+         {
+             $SC_Label = "documento"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->documento) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->documento) . "\"";
+         }
+   }
 
    //----- 
    function trata_dados($conteudo)
@@ -2042,7 +2108,7 @@ $_SESSION['scriptcase']['grid_facturaven']['contr_erro'] = 'off';
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta :: XML</TITLE>
+ <TITLE>Facturas y NC en Ventas :: XML</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])

@@ -194,6 +194,8 @@ function Sel_cmp_process()
       $tab_ger_campos['t_iva'] = "on";
       $tab_ger_campos['imp_bolsa'] = "on";
       $tab_ger_campos['print'] = "on";
+      $tab_ger_campos['direccion'] = "on";
+      $tab_ger_campos['documento'] = "on";
 
 
       if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_facturaven']['field_display']))
@@ -690,6 +692,7 @@ function proc_btn_sel(btn, proc) {
    }
    $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
    include("../_lib/buttons/" . $Str_btn_grid);
    if (!function_exists("nmButtonOutput"))
@@ -703,7 +706,7 @@ function proc_btn_sel(btn, proc) {
             "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE>Facturas de Venta</TITLE>
+ <TITLE>Facturas y NC en Ventas</TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
