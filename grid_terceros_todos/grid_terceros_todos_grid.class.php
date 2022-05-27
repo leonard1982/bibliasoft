@@ -7350,7 +7350,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pd
           $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'on';
  if($this->estado =="PENDIENTE")
 {
-	$this->NM_field_style["documento"] = "background-color:#33ff99;font-size:13px;color:#000000;font-family:arial;font-weight:sans-serif;";
+	$this->NM_field_style["ccnit"] = "background-color:#33ff99;font-size:13px;color:#000000;font-family:arial;font-weight:sans-serif;";
 }
 $this->sc_asigna_vendedor   = "<select onchange='fAsignarVendedor(\"".$this->idtercero ."\",this.value);'>";
  
@@ -7682,6 +7682,11 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
               $str_tem_display = $this->getFieldHighlight('advanced_search', 'ccnit', $str_tem_display, $conteudo_original); 
           } 
               $conteudo = $str_tem_display; 
+              $Style_ccnit = "";
+          if (isset($this->NM_field_style["ccnit"]) && !empty($this->NM_field_style["ccnit"]))
+          {
+              $Style_ccnit .= $this->NM_field_style["ccnit"];
+          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -7690,7 +7695,7 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
           {
               $this->SC_nowrap = "";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_ccnit_grid_line . "\"  style=\"" . $this->Css_Cmp['css_ccnit_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_ccnit_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_ccnit_grid_line . "\"  style=\"" . $this->Css_Cmp['css_ccnit_grid_line'] . $Style_ccnit . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_ccnit_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_nombres()
@@ -7993,11 +7998,6 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
               $str_tem_display = $this->getFieldHighlight('advanced_search', 'documento', $str_tem_display, $conteudo_original); 
           } 
               $conteudo = $str_tem_display; 
-              $Style_documento = "";
-          if (isset($this->NM_field_style["documento"]) && !empty($this->NM_field_style["documento"]))
-          {
-              $Style_documento .= $this->NM_field_style["documento"];
-          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_terceros_todos']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -8006,7 +8006,7 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
           {
               $this->SC_nowrap = "";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_documento_grid_line . "\"  style=\"" . $this->Css_Cmp['css_documento_grid_line'] . $Style_documento . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_documento_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_documento_grid_line . "\"  style=\"" . $this->Css_Cmp['css_documento_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_documento_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_nacimiento()

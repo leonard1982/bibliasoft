@@ -4292,7 +4292,7 @@ if ($this->Embutida_form)
     "nombre_impre": {"label": "Nombre Impresora de Red", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "contador_pruebas": {"label": "Contador Pruebas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "texto_encabezado": {"label": "Texto Encabezado", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "texto_pie_pagina": {"label": "Texto Pie Pagina", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "texto_pie_pagina": {"label": "Texto Pié Página", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 

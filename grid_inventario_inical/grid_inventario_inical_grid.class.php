@@ -40,6 +40,8 @@ class grid_inventario_inical_grid
    var $Print_All;
    var $NM_field_over;
    var $NM_field_click;
+   var $NM_bg_tot;
+   var $NM_bg_sub_tot;
    var $progress_fp;
    var $progress_tot;
    var $progress_now;
@@ -51,16 +53,19 @@ class grid_inventario_inical_grid
    var $progress_res;
    var $progress_graf;
    var $count_ger;
+   var $sum_valorparcial;
    var $presentacion;
    var $idpro;
-   var $colores;
-   var $tallas;
-   var $sabor;
    var $cantidad;
+   var $costo;
+   var $valorparcial;
    var $idbod;
    var $fecha;
    var $idinv;
    var $tipo;
+   var $colores;
+   var $tallas;
+   var $sabor;
 //--- 
  function monta_grid($linhas = 0)
  {
@@ -711,6 +716,7 @@ class grid_inventario_inical_grid
    } 
 // 
    $this->count_ger = 0;
+   $this->sum_valorparcial = 0;
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][1])) 
    { 
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['sc_total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][1] ;  
@@ -737,6 +743,10 @@ class grid_inventario_inical_grid
    } 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['sc_total'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][1] ;  
    $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][1];
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['SC_Ind_Groupby'] == "sc_free_total")
+       {
+       $this->sum_valorparcial = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][2];
+       }
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['qt_reg_grid'] == "all") 
    { 
         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['qt_reg_grid'] = $this->count_ger;
@@ -797,27 +807,27 @@ class grid_inventario_inical_grid
 //----- 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), idinv, tipo from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, fecha, idinv, tipo from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, fecha, idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, convert(char(23),fecha,121), idinv, tipo from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, convert(char(23),fecha,121), idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, fecha, idinv, tipo from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, fecha, idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, EXTEND(fecha, YEAR TO DAY), idinv, tipo from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, EXTEND(fecha, YEAR TO DAY), idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, fecha, idinv, tipo from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, fecha, idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['where_pesq']; 
    $nmgp_order_by = ""; 
@@ -896,31 +906,36 @@ class grid_inventario_inical_grid
    { 
        $this->idpro = $this->rs_grid->fields[0] ;  
        $this->idpro = (string)$this->idpro;
-       $this->colores = $this->rs_grid->fields[1] ;  
-       $this->colores = (string)$this->colores;
-       $this->tallas = $this->rs_grid->fields[2] ;  
-       $this->tallas = (string)$this->tallas;
-       $this->sabor = $this->rs_grid->fields[3] ;  
-       $this->sabor = (string)$this->sabor;
-       $this->cantidad = $this->rs_grid->fields[4] ;  
+       $this->cantidad = $this->rs_grid->fields[1] ;  
        $this->cantidad =  str_replace(",", ".", $this->cantidad);
-       $this->cantidad = (strpos(strtolower($this->cantidad), "e")) ? (float)$this->cantidad : $this->cantidad; 
        $this->cantidad = (string)$this->cantidad;
-       $this->idbod = $this->rs_grid->fields[5] ;  
+       $this->costo = $this->rs_grid->fields[2] ;  
+       $this->costo =  str_replace(",", ".", $this->costo);
+       $this->costo = (string)$this->costo;
+       $this->valorparcial = $this->rs_grid->fields[3] ;  
+       $this->valorparcial =  str_replace(",", ".", $this->valorparcial);
+       $this->valorparcial = (string)$this->valorparcial;
+       $this->idbod = $this->rs_grid->fields[4] ;  
        $this->idbod = (string)$this->idbod;
-       $this->fecha = $this->rs_grid->fields[6] ;  
-       $this->idinv = $this->rs_grid->fields[7] ;  
+       $this->fecha = $this->rs_grid->fields[5] ;  
+       $this->idinv = $this->rs_grid->fields[6] ;  
        $this->idinv = (string)$this->idinv;
-       $this->tipo = $this->rs_grid->fields[8] ;  
+       $this->tipo = $this->rs_grid->fields[7] ;  
        $this->tipo = (string)$this->tipo;
-       $GLOBALS["colores"] = $this->rs_grid->fields[1] ;  
-       $GLOBALS["colores"] = (string)$GLOBALS["colores"] ;
-       $GLOBALS["tallas"] = $this->rs_grid->fields[2] ;  
-       $GLOBALS["tallas"] = (string)$GLOBALS["tallas"] ;
-       $GLOBALS["sabor"] = $this->rs_grid->fields[3] ;  
-       $GLOBALS["sabor"] = (string)$GLOBALS["sabor"] ;
-       $GLOBALS["idbod"] = $this->rs_grid->fields[5] ;  
+       $this->colores = $this->rs_grid->fields[8] ;  
+       $this->colores = (string)$this->colores;
+       $this->tallas = $this->rs_grid->fields[9] ;  
+       $this->tallas = (string)$this->tallas;
+       $this->sabor = $this->rs_grid->fields[10] ;  
+       $this->sabor = (string)$this->sabor;
+       $GLOBALS["idbod"] = $this->rs_grid->fields[4] ;  
        $GLOBALS["idbod"] = (string)$GLOBALS["idbod"] ;
+       $GLOBALS["colores"] = $this->rs_grid->fields[8] ;  
+       $GLOBALS["colores"] = (string)$GLOBALS["colores"] ;
+       $GLOBALS["tallas"] = $this->rs_grid->fields[9] ;  
+       $GLOBALS["tallas"] = (string)$GLOBALS["tallas"] ;
+       $GLOBALS["sabor"] = $this->rs_grid->fields[10] ;  
+       $GLOBALS["sabor"] = (string)$GLOBALS["sabor"] ;
        $this->SC_seq_register = $this->nmgp_reg_start ; 
        $this->SC_seq_page = 0;
        $this->SC_sep_quebra = false;
@@ -931,14 +946,16 @@ class grid_inventario_inical_grid
            $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['final']; 
            $this->rs_grid->MoveNext(); 
            $this->idpro = $this->rs_grid->fields[0] ;  
-           $this->colores = $this->rs_grid->fields[1] ;  
-           $this->tallas = $this->rs_grid->fields[2] ;  
-           $this->sabor = $this->rs_grid->fields[3] ;  
-           $this->cantidad = $this->rs_grid->fields[4] ;  
-           $this->idbod = $this->rs_grid->fields[5] ;  
-           $this->fecha = $this->rs_grid->fields[6] ;  
-           $this->idinv = $this->rs_grid->fields[7] ;  
-           $this->tipo = $this->rs_grid->fields[8] ;  
+           $this->cantidad = $this->rs_grid->fields[1] ;  
+           $this->costo = $this->rs_grid->fields[2] ;  
+           $this->valorparcial = $this->rs_grid->fields[3] ;  
+           $this->idbod = $this->rs_grid->fields[4] ;  
+           $this->fecha = $this->rs_grid->fields[5] ;  
+           $this->idinv = $this->rs_grid->fields[6] ;  
+           $this->tipo = $this->rs_grid->fields[7] ;  
+           $this->colores = $this->rs_grid->fields[8] ;  
+           $this->tallas = $this->rs_grid->fields[9] ;  
+           $this->sabor = $this->rs_grid->fields[10] ;  
        } 
    } 
    $this->nmgp_reg_inicial = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['final'] + 1;
@@ -1697,6 +1714,34 @@ $nm_saida->saida("}\r\n");
                $NM_css_attr = file($this->Ini->path_css . $NM_css_file);
                foreach ($NM_css_attr as $NM_line_css)
                {
+                   if (substr(trim($NM_line_css), 0, 12) == ".scGridTotal")
+                   {
+                       $tmp_pos = strpos($NM_line_css, "background-color:");
+                       if ($tmp_pos !== false)
+                       {
+                           $tmp_pos += 17;
+                           $tmp_pos1 = strpos($NM_line_css, ";", $tmp_pos);
+                           if ($tmp_pos1 === false)
+                           {
+                               $tmp_pos1 = strpos($NM_line_css, "}", $tmp_pos);
+                           }
+                           $this->NM_bg_tot = trim(substr($NM_line_css, $tmp_pos, ($tmp_pos1 - $tmp_pos)));
+                       }
+                   }
+                   if (substr(trim($NM_line_css), 0, 15) == ".scGridSubtotal")
+                   {
+                       $tmp_pos = strpos($NM_line_css, "background-color:");
+                       if ($tmp_pos !== false)
+                       {
+                           $tmp_pos += 17;
+                           $tmp_pos1 = strpos($NM_line_css, ";", $tmp_pos);
+                           if ($tmp_pos1 === false)
+                           {
+                               $tmp_pos1 = strpos($NM_line_css, "}", $tmp_pos);
+                           }
+                           $this->NM_bg_sub_tot = trim(substr($NM_line_css, $tmp_pos, ($tmp_pos1 - $tmp_pos)));
+                       }
+                   }
                    if (substr(trim($NM_line_css), 0, 16) == ".scGridFieldOver" && strpos($NM_line_css, "background-color:") !== false)
                    {
                        $this->NM_field_over = 1;
@@ -1714,6 +1759,34 @@ $nm_saida->saida("}\r\n");
                $NM_css_attr = file($this->Ini->path_css . $NM_css_dir);
                foreach ($NM_css_attr as $NM_line_css)
                {
+                   if (substr(trim($NM_line_css), 0, 12) == ".scGridTotal")
+                   {
+                       $tmp_pos = strpos($NM_line_css, "background-color:");
+                       if ($tmp_pos !== false)
+                       {
+                           $tmp_pos += 17;
+                           $tmp_pos1 = strpos($NM_line_css, ";", $tmp_pos);
+                           if ($tmp_pos1 === false)
+                           {
+                               $tmp_pos1 = strpos($NM_line_css, "}", $tmp_pos);
+                           }
+                           $this->NM_bg_tot = trim(substr($NM_line_css, $tmp_pos, ($tmp_pos1 - $tmp_pos)));
+                       }
+                   }
+                   if (substr(trim($NM_line_css), 0, 15) == ".scGridSubtotal")
+                   {
+                       $tmp_pos = strpos($NM_line_css, "background-color:");
+                       if ($tmp_pos !== false)
+                       {
+                           $tmp_pos += 17;
+                           $tmp_pos1 = strpos($NM_line_css, ";", $tmp_pos);
+                           if ($tmp_pos1 === false)
+                           {
+                               $tmp_pos1 = strpos($NM_line_css, "}", $tmp_pos);
+                           }
+                           $this->NM_bg_sub_tot = trim(substr($NM_line_css, $tmp_pos, ($tmp_pos1 - $tmp_pos)));
+                       }
+                   }
                    if (substr(trim($NM_line_css), 0, 16) == ".scGridFieldOver" && strpos($NM_line_css, "background-color:") !== false)
                    {
                        $this->NM_field_over = 1;
@@ -1987,14 +2060,12 @@ $nm_saida->saida("}\r\n");
    $this->css_sep = " ";
    $this->css_idpro_label = $compl_css_emb . "css_idpro_label";
    $this->css_idpro_grid_line = $compl_css_emb . "css_idpro_grid_line";
-   $this->css_colores_label = $compl_css_emb . "css_colores_label";
-   $this->css_colores_grid_line = $compl_css_emb . "css_colores_grid_line";
-   $this->css_tallas_label = $compl_css_emb . "css_tallas_label";
-   $this->css_tallas_grid_line = $compl_css_emb . "css_tallas_grid_line";
-   $this->css_sabor_label = $compl_css_emb . "css_sabor_label";
-   $this->css_sabor_grid_line = $compl_css_emb . "css_sabor_grid_line";
    $this->css_cantidad_label = $compl_css_emb . "css_cantidad_label";
    $this->css_cantidad_grid_line = $compl_css_emb . "css_cantidad_grid_line";
+   $this->css_costo_label = $compl_css_emb . "css_costo_label";
+   $this->css_costo_grid_line = $compl_css_emb . "css_costo_grid_line";
+   $this->css_valorparcial_label = $compl_css_emb . "css_valorparcial_label";
+   $this->css_valorparcial_grid_line = $compl_css_emb . "css_valorparcial_grid_line";
    $this->css_presentacion_label = $compl_css_emb . "css_presentacion_label";
    $this->css_presentacion_grid_line = $compl_css_emb . "css_presentacion_grid_line";
    $this->css_idbod_label = $compl_css_emb . "css_idbod_label";
@@ -2166,21 +2237,68 @@ $nm_saida->saida("}\r\n");
            $nm_saida->saida("  <TD class=\"" . $this->css_scGridTabelaTd . "\" style=\"vertical-align: top\">\r\n");
      }
    } 
-   $nm_saida->saida("<style>\r\n");
-   $nm_saida->saida("#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 \r\n");
-   $nm_saida->saida("#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}\r\n");
-   $nm_saida->saida("</style>\r\n");
-   $nm_saida->saida("<div style=\"width: 100%\">\r\n");
-   $nm_saida->saida(" <div class=\"" . $this->css_scGridHeader . "\" style=\"height:11px; display: block; border-width:0px; \"></div>\r\n");
-   $nm_saida->saida(" <div style=\"height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block\">\r\n");
-   $nm_saida->saida(" 	<table style=\"width:100%; border-collapse:collapse; padding:0;\">\r\n");
-   $nm_saida->saida("    	<tr>\r\n");
-   $nm_saida->saida("        	<td id=\"lin1_col1\" class=\"" . $this->css_scGridHeaderFont . "\"><span>Inventario inicial</span></td>\r\n");
-   $nm_saida->saida("            <td id=\"lin1_col2\" class=\"" . $this->css_scGridHeaderFont . "\"><span>" . $nm_data_fixa . "</span></td>\r\n");
-   $nm_saida->saida("        </tr>\r\n");
-   $nm_saida->saida("    </table>		 \r\n");
-   $nm_saida->saida(" </div>\r\n");
-   $nm_saida->saida("</div>\r\n");
+   $nm_saida->saida("   <TABLE width=\"100%\" class=\"" . $this->css_scGridHeader . "\">\r\n");
+   $nm_saida->saida("    <TR align=\"center\">\r\n");
+   $nm_saida->saida("     <TD style=\"padding: 0px\">\r\n");
+   $nm_saida->saida("      <TABLE style=\"padding: 0px; border-spacing: 0px; border-width: 0px;\" width=\"100%\">\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" rowspan=\"3\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          Inventario inicial\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          " . $nm_data_fixa . "\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("       <TR valign=\"middle\">\r\n");
+   $nm_saida->saida("        <TD align=\"left\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"center\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD style=\"font-size: 5px\">\r\n");
+   $nm_saida->saida("          &nbsp; &nbsp;\r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("        <TD align=\"right\" class=\"" . $this->css_scGridHeaderFont . "\">\r\n");
+   $nm_saida->saida("          \r\n");
+   $nm_saida->saida("        </TD>\r\n");
+   $nm_saida->saida("       </TR>\r\n");
+   $nm_saida->saida("      </TABLE>\r\n");
+   $nm_saida->saida("     </TD>\r\n");
+   $nm_saida->saida("    </TR>\r\n");
+   $nm_saida->saida("   </TABLE>\r\n");
    $nm_saida->saida("  </TD>\r\n");
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['ajax_nav'] && $nm_refresch_cab_rod)
    { 
@@ -2351,30 +2469,6 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
- function NM_label_colores()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['colores'])) ? $this->New_label['colores'] : "Color"; 
-   if (!isset($this->NM_cmp_hidden['colores']) || $this->NM_cmp_hidden['colores'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_colores_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_colores_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
- function NM_label_tallas()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['tallas'])) ? $this->New_label['tallas'] : "Talla"; 
-   if (!isset($this->NM_cmp_hidden['tallas']) || $this->NM_cmp_hidden['tallas'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tallas_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tallas_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
- function NM_label_sabor()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['sabor'])) ? $this->New_label['sabor'] : "Sabor"; 
-   if (!isset($this->NM_cmp_hidden['sabor']) || $this->NM_cmp_hidden['sabor'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_sabor_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_sabor_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
  function NM_label_cantidad()
  {
    global $nm_saida;
@@ -2429,6 +2523,22 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
    }
    $nm_saida->saida("</TD>\r\n");
+   } 
+ }
+ function NM_label_costo()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['costo'])) ? $this->New_label['costo'] : "Costo x Und"; 
+   if (!isset($this->NM_cmp_hidden['costo']) || $this->NM_cmp_hidden['costo'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_costo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_costo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
+ function NM_label_valorparcial()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['valorparcial'])) ? $this->New_label['valorparcial'] : "Valor"; 
+   if (!isset($this->NM_cmp_hidden['valorparcial']) || $this->NM_cmp_hidden['valorparcial'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_valorparcial_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_valorparcial_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
  function NM_label_presentacion()
@@ -2695,14 +2805,12 @@ $nm_saida->saida("}\r\n");
 // 
    $SC_Label = (isset($this->New_label['idpro'])) ? $this->New_label['idpro'] : "Producto"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['labels']['idpro'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['colores'])) ? $this->New_label['colores'] : "Color"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['labels']['colores'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['tallas'])) ? $this->New_label['tallas'] : "Talla"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['labels']['tallas'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['sabor'])) ? $this->New_label['sabor'] : "Sabor"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['labels']['sabor'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['cantidad'])) ? $this->New_label['cantidad'] : "Cantidad"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['labels']['cantidad'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['costo'])) ? $this->New_label['costo'] : "Costo x Und"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['labels']['costo'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['valorparcial'])) ? $this->New_label['valorparcial'] : "Valor"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['labels']['valorparcial'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['presentacion'])) ? $this->New_label['presentacion'] : "Presentación"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['labels']['presentacion'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idbod'])) ? $this->New_label['idbod'] : "Ubicación"; 
@@ -2884,7 +2992,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc
    }
    $this->Ini->cor_link_dados = $this->css_scGridFieldEvenLink;
    $this->NM_flag_antigo = FALSE;
-   $ini_grid = true;
    $nm_prog_barr = 0;
    $PB_tot       = "/" . $this->count_ger;;
    while (!$this->rs_grid->EOF && $nm_quant_linhas < $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['qt_reg_grid'] && ($linhas == 0 || $linhas > $this->Lin_impressas)) 
@@ -2934,50 +3041,44 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc
           $this->Lin_impressas++;
           $this->idpro = $this->rs_grid->fields[0] ;  
           $this->idpro = (string)$this->idpro;
-          $this->colores = $this->rs_grid->fields[1] ;  
-          $this->colores = (string)$this->colores;
-          $this->tallas = $this->rs_grid->fields[2] ;  
-          $this->tallas = (string)$this->tallas;
-          $this->sabor = $this->rs_grid->fields[3] ;  
-          $this->sabor = (string)$this->sabor;
-          $this->cantidad = $this->rs_grid->fields[4] ;  
+          $this->cantidad = $this->rs_grid->fields[1] ;  
           $this->cantidad =  str_replace(",", ".", $this->cantidad);
-          $this->cantidad = (strpos(strtolower($this->cantidad), "e")) ? (float)$this->cantidad : $this->cantidad; 
           $this->cantidad = (string)$this->cantidad;
-          $this->idbod = $this->rs_grid->fields[5] ;  
+          $this->costo = $this->rs_grid->fields[2] ;  
+          $this->costo =  str_replace(",", ".", $this->costo);
+          $this->costo = (string)$this->costo;
+          $this->valorparcial = $this->rs_grid->fields[3] ;  
+          $this->valorparcial =  str_replace(",", ".", $this->valorparcial);
+          $this->valorparcial = (string)$this->valorparcial;
+          $this->idbod = $this->rs_grid->fields[4] ;  
           $this->idbod = (string)$this->idbod;
-          $this->fecha = $this->rs_grid->fields[6] ;  
-          $this->idinv = $this->rs_grid->fields[7] ;  
+          $this->fecha = $this->rs_grid->fields[5] ;  
+          $this->idinv = $this->rs_grid->fields[6] ;  
           $this->idinv = (string)$this->idinv;
-          $this->tipo = $this->rs_grid->fields[8] ;  
+          $this->tipo = $this->rs_grid->fields[7] ;  
           $this->tipo = (string)$this->tipo;
-         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['SC_Ind_Groupby'] != "sc_free_total")
-         {
-          if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['opcao'] == "pdf")
-          {
-              $this->Res->nm_acum_res_unit($this->rs_grid);
-          }
-         }
-          $GLOBALS["colores"] = $this->rs_grid->fields[1] ;  
-          $GLOBALS["colores"] = (string)$GLOBALS["colores"];
-          $GLOBALS["tallas"] = $this->rs_grid->fields[2] ;  
-          $GLOBALS["tallas"] = (string)$GLOBALS["tallas"];
-          $GLOBALS["sabor"] = $this->rs_grid->fields[3] ;  
-          $GLOBALS["sabor"] = (string)$GLOBALS["sabor"];
-          $GLOBALS["idbod"] = $this->rs_grid->fields[5] ;  
+          $this->colores = $this->rs_grid->fields[8] ;  
+          $this->colores = (string)$this->colores;
+          $this->tallas = $this->rs_grid->fields[9] ;  
+          $this->tallas = (string)$this->tallas;
+          $this->sabor = $this->rs_grid->fields[10] ;  
+          $this->sabor = (string)$this->sabor;
+          $GLOBALS["idbod"] = $this->rs_grid->fields[4] ;  
           $GLOBALS["idbod"] = (string)$GLOBALS["idbod"];
+          $GLOBALS["colores"] = $this->rs_grid->fields[8] ;  
+          $GLOBALS["colores"] = (string)$GLOBALS["colores"];
+          $GLOBALS["tallas"] = $this->rs_grid->fields[9] ;  
+          $GLOBALS["tallas"] = (string)$GLOBALS["tallas"];
+          $GLOBALS["sabor"] = $this->rs_grid->fields[10] ;  
+          $GLOBALS["sabor"] = (string)$GLOBALS["sabor"];
           $this->SC_seq_page++; 
           $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['final'] + 1; 
-          if (!$ini_grid) {
-              $this->SC_sep_quebra = true;
-          }
-          else {
-              $ini_grid = false;
-          }
+          $this->SC_sep_quebra = true;
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['rows_emb']++;
           $this->sc_proc_grid = true;
           $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'on';
- $sql="select unidmaymen, unimay, unimen from productos where idprod=$this->idpro ";
+ $unidad = '';
+$sql="select unidmaymen, unimay, unimen from productos where idprod=$this->idpro ";
  
       $nm_select = $sql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3006,11 +3107,46 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc
 ;
 if(($this->ds[0][0])=='SI')
 	{
-	$this->presentacion =$this->ds[0][1];
+	$unidad =$this->ds[0][1];
 	}
 else
 	{
-	$this->presentacion =$this->ds[0][2];
+	$unidad =$this->ds[0][2];
+	}
+$sql_um = "SELECT descripcion_um FROM unidades_medida WHERE codigo_um = '".$unidad."'";
+ 
+      $nm_select = $sql_um; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_um = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->ds_um[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_um = false;
+          $this->ds_um_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_um[0][0]))
+	{
+	$this->presentacion  = $this->ds_um[0][0];
+	}
+else
+	{
+	$this->presentacion  = 'UN';
 	}
 $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'])
@@ -3108,12 +3244,14 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
    if ($this->rs_grid->EOF) 
    { 
   
-       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['exibe_total'] == "S")
-       { 
-           $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['SC_Ind_Groupby'] . "_top";
-           $this->$Gb_geral() ;
-       } 
    }  
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['exibe_total'] == "S")
+   { 
+       $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['SC_Ind_Groupby'] . "_top";
+       $this->$Gb_geral() ;
+       $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['SC_Ind_Groupby'] . "_bot";
+       $this->$Gb_geral() ;
+   } 
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida_grid'])
    {
        $nm_saida->saida("X##NM@@X");
@@ -3177,93 +3315,6 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idpro_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idpro_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idpro_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_colores()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['colores']) || $this->NM_cmp_hidden['colores'] != "off") { 
-          $conteudo = sc_strip_script($this->colores); 
-          $conteudo_original = sc_strip_script($this->colores); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $this->Lookup->lookup_colores($conteudo , $this->colores) ; 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'colores', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_colores_grid_line . "\"  style=\"" . $this->Css_Cmp['css_colores_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_colores_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
- function NM_grid_tallas()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['tallas']) || $this->NM_cmp_hidden['tallas'] != "off") { 
-          $conteudo = sc_strip_script($this->tallas); 
-          $conteudo_original = sc_strip_script($this->tallas); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $this->Lookup->lookup_tallas($conteudo , $this->tallas) ; 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'tallas', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_tallas_grid_line . "\"  style=\"" . $this->Css_Cmp['css_tallas_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_tallas_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
- function NM_grid_sabor()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['sabor']) || $this->NM_cmp_hidden['sabor'] != "off") { 
-          $conteudo = sc_strip_script($this->sabor); 
-          $conteudo_original = sc_strip_script($this->sabor); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $this->Lookup->lookup_sabor($conteudo , $this->sabor) ; 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'sabor', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_sabor_grid_line . "\"  style=\"" . $this->Css_Cmp['css_sabor_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_sabor_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
  function NM_grid_cantidad()
  {
       global $nm_saida;
@@ -3294,6 +3345,70 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
               $this->SC_nowrap = "NOWRAP";
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_cantidad_grid_line . "\"  style=\"" . $this->Css_Cmp['css_cantidad_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_cantidad_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_costo()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['costo']) || $this->NM_cmp_hidden['costo'] != "off") { 
+          $conteudo = NM_encode_input(sc_strip_script($this->costo)); 
+          $conteudo_original = NM_encode_input(sc_strip_script($this->costo)); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          else    
+          { 
+              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "2", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'costo', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_costo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_costo_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_costo_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_valorparcial()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['valorparcial']) || $this->NM_cmp_hidden['valorparcial'] != "off") { 
+          $conteudo = NM_encode_input(sc_strip_script($this->valorparcial)); 
+          $conteudo_original = NM_encode_input(sc_strip_script($this->valorparcial)); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          else    
+          { 
+              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "2", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'valorparcial', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_valorparcial_grid_line . "\"  style=\"" . $this->Css_Cmp['css_valorparcial_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_valorparcial_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_presentacion()
@@ -3457,7 +3572,7 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 12;
+   $this->NM_colspan  = 11;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['opc_psq'])
    {
        $this->NM_colspan++;
@@ -3552,10 +3667,128 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
  function quebra_geral_sc_free_total_top() 
  {
    global $nm_saida; 
+   $this->NM_calc_span();
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['rows_emb']++;
+    $nm_saida->saida("<tr>\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida_grid']) {
+        $nm_saida->saida("<td class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . "; height: 10px;\">&nbsp;</td>\r\n");
+   }
+    $nm_saida->saida("<td class=\"" . $this->css_scGridTotal . "\" style=\"height: 10px;\" colspan=\"" . $this->NM_colspan . "\">&nbsp;</td>\r\n");
+    $nm_saida->saida("</tr>\r\n");
  }
  function quebra_geral_sc_free_total_bot() 
  {
- }
+   global 
+          $nm_saida, $nm_data; 
+   $this->Tot->quebra_geral_sc_free_total(); 
+   $NM_cmp_tot['valorparcial']['S'] = 2;
+   $NM_tipos_tot = array('S' => 'Costo Inventario Inicial');
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['rows_emb']++;
+   $nm_nivel_book_pdf = "";
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['opcao'] == "pdf" && !$this->Print_All)
+   {
+      $nm_nivel_book_pdf = "<div style=\"height:1px;overflow:hidden\"><H1 style=\"font-size:0;padding:1px\">" .  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][0] . "</H1></div>";
+   }
+   $tit_lin_sumariza      =  $nm_nivel_book_pdf . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][1] . ")";
+   $tit_lin_sumariza_orig =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][1] . ")";
+       $nm_saida->saida("    <TR class=\"" . $this->css_scGridTotal . "\">\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida_grid']) {
+       $nm_saida->saida("    <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra  . "; display:" . $this->width_tabula_display . ";\">&nbsp;</TD>\r\n");
+   }
+  $prim_lin_tit = true;
+  foreach ($NM_tipos_tot as $Tipo_Sum => $Tit_sum)
+  {
+   if (!$prim_lin_tit)
+   {
+       $nm_saida->saida("    <TR class=\"" . $this->css_scGridTotal . "\">\r\n");
+       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida_grid']) {
+           $nm_saida->saida("    <TD class=\"" . $this->css_scGridBlockBg . "\" style=\"width: " . $this->width_tabula_quebra . "; display:" . $this->width_tabula_display . ";\">&nbsp;</TD>\r\n");
+       }
+   }
+   $prim_lin_tit = false;
+   $tit_lin_sumariza_atu = $tit_lin_sumariza . "&nbsp;-&nbsp;" . $Tit_sum;
+   $colspan  = 1;
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['opc_psq'])
+   {
+       $colspan++;
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['opcao_print'] == "print" || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['opcao'] == "pdf")
+   {
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['exibe_seq'] != "S" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['opcao'] != "pdf")
+       {
+           $colspan--; 
+       }
+   } 
+   foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'] as $Cada_cmp)
+   {
+    if ($Cada_cmp == "idpro" && (!isset($this->NM_cmp_hidden['idpro']) || $this->NM_cmp_hidden['idpro'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "cantidad" && (!isset($this->NM_cmp_hidden['cantidad']) || $this->NM_cmp_hidden['cantidad'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "costo" && (!isset($this->NM_cmp_hidden['costo']) || $this->NM_cmp_hidden['costo'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "valorparcial" && (!isset($this->NM_cmp_hidden['valorparcial']) || $this->NM_cmp_hidden['valorparcial'] != "off"))
+    {
+      if ($colspan > 0)
+      {
+          $NM_css_field = ""; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\" style=\"text-align: left;\"  " . "colspan=\"" . $colspan . "\"" . ">" . $tit_lin_sumariza_atu . "</TD>\r\n");
+          $tit_lin_sumariza_atu = "&nbsp;";
+          $colspan = 0;
+      }
+      $conteudo = "&nbsp;"; 
+      if (isset($NM_cmp_tot['valorparcial'][$Tipo_Sum]))
+      {
+          $conteudo =  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][$NM_cmp_tot['valorparcial'][$Tipo_Sum]] ; 
+          if ($Tipo_Sum == "C" || $Tipo_Sum == "D")
+          {
+              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+          }
+          else
+          {
+              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "2", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+          }
+      }
+          $NM_css_field =  ""; 
+      if ($Tipo_Sum == "S") {$NM_css_field = " css_valorparcial_S_tot_ger";} 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . " css_valorparcial_tot_ger\"  NOWRAP >" . $conteudo . "</TD>\r\n");
+     }
+    if ($Cada_cmp == "presentacion" && (!isset($this->NM_cmp_hidden['presentacion']) || $this->NM_cmp_hidden['presentacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "idbod" && (!isset($this->NM_cmp_hidden['idbod']) || $this->NM_cmp_hidden['idbod'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "fecha" && (!isset($this->NM_cmp_hidden['fecha']) || $this->NM_cmp_hidden['fecha'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "idinv" && (!isset($this->NM_cmp_hidden['idinv']) || $this->NM_cmp_hidden['idinv'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "tipo" && (!isset($this->NM_cmp_hidden['tipo']) || $this->NM_cmp_hidden['tipo'] != "off"))
+    {
+       $colspan++;
+    }
+   }
+   if ($colspan > 0)
+   {
+          $NM_css_field = ""; 
+       $nm_saida->saida("     <TD class=\"" . $this->css_scGridTotalFont . "\"   " . "colspan=\"" . $colspan . "\"" . ">&nbsp;</TD>\r\n");
+   }
+       $nm_saida->saida("    </TR>\r\n");
+    $tit_lin_sumariza = "<span style='opacity: 0;'>" . $tit_lin_sumariza_orig . "</span>";
+   }
+ } 
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {
        $dt_out = $dt_in;

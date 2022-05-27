@@ -121,9 +121,9 @@ function Ord_cmp_init()
    $tab_ger_campos['periodo'] = "on";
    $tab_def_campos['periodo'] = "periodo";
    $tab_labels["periodo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_contabilidad']['labels']["periodo"])) ? $_SESSION['sc_session'][$sc_init]['grid_contabilidad']['labels']["periodo"] : "Periodo";
-   $tab_ger_campos['tercero'] = "on";
-   $tab_def_campos['tercero'] = "tercero";
-   $tab_labels["tercero"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_contabilidad']['labels']["tercero"])) ? $_SESSION['sc_session'][$sc_init]['grid_contabilidad']['labels']["tercero"] : "Tercero";
+   $tab_ger_campos['usuario'] = "on";
+   $tab_def_campos['usuario'] = "usuario";
+   $tab_labels["usuario"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_contabilidad']['labels']["usuario"])) ? $_SESSION['sc_session'][$sc_init]['grid_contabilidad']['labels']["usuario"] : "Usuario";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_contabilidad']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_contabilidad']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_contabilidad']['field_display'] as $NM_cada_field => $NM_cada_opc)

@@ -395,6 +395,8 @@ include_once('form_inventario_inicial_jquery.php');
 
   scJQGeneralAdd();
 
+  scJQPopupAdd('');
+
 <?php
 if ('' == $this->scFormFocusErrorName)
 {
@@ -711,7 +713,7 @@ sc_userSweetAlertDisplayed = false;
 <?php
 }
 ?>
-<table id="main_table_form"  align="center" cellpadding=0 cellspacing=0 >
+<table id="main_table_form"  align="center" cellpadding=0 cellspacing=0  width="50%">
  <tr>
   <td>
   <div class="scFormBorder" style="<?php echo (isset($remove_border) ? $remove_border : ''); ?>">
@@ -721,23 +723,68 @@ sc_userSweetAlertDisplayed = false;
   {
 ?>
 <tr><td>
-<style>
-#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
-#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
-</style>
-
-<div style="width: 100%">
- <div class="scFormHeader" style="height:11px; display: block; border-width:0px; "></div>
- <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
- 	<table style="width:100%; border-collapse:collapse; padding:0;">
-    	<tr>
-        	<td id="lin1_col1" class="scFormHeaderFont"><span><?php if ($this->nmgp_opcao == "novo") { echo "Inventario Inicial"; } else { echo "Actualizar Inventario Inicial"; } ?></span></td>
-            <td id="lin1_col2" class="scFormHeaderFont"><span><?php echo date($this->dateDefaultFormat()); ?></span></td>
-        </tr>
-    </table>		 
- </div>
-</div>
-</td></tr>
+   <TABLE width="100%" class="scFormHeader">
+    <TR align="center">
+     <TD style="padding: 0px">
+      <TABLE style="padding: 0px; border-spacing: 0px; border-width: 0px;" width="100%">
+       <TR valign="middle">
+        <TD align="left" rowspan="3" class="scFormHeaderFont">
+          
+        </TD>
+        <TD align="left" class="scFormHeaderFont">
+          <?php if ($this->nmgp_opcao == "novo") { echo "Inventario Inicial"; } else { echo "Actualizar Inventario Inicial"; } ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          <?php echo date($this->dateDefaultFormat()); ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>
+   </TABLE></td></tr>
 <?php
   }
 ?>
@@ -1044,6 +1091,18 @@ function Form_Table($Table_refresh = false)
    {
        $this->nmgp_cmp_hidden['detalle_'] = 'off';
    }
+   if (!isset($this->nmgp_cmp_hidden['colores_']))
+   {
+       $this->nmgp_cmp_hidden['colores_'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['tallas_']))
+   {
+       $this->nmgp_cmp_hidden['tallas_'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['sabor_']))
+   {
+       $this->nmgp_cmp_hidden['sabor_'] = 'off';
+   }
 ?>
 <TABLE align="center" id="hidden_bloco_0" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php
 $labelRowCount = 0;
@@ -1127,7 +1186,8 @@ $orderColOrient = '';
       if (!isset($this->nm_new_label['sabor_'])) {
           $this->nm_new_label['sabor_'] = "Sabor"; } ?>
 
-    <TD class="scFormLabelOddMult css_sabor__label" id="hidden_field_label_sabor_" style="<?php echo $sStyleHidden_sabor_; ?>" > <?php echo $this->nm_new_label['sabor_'] ?> </TD>
+    <TD class="scFormLabelOddMult css_sabor__label" id="hidden_field_label_sabor_" style="<?php echo $sStyleHidden_sabor_; ?>" > <?php echo $this->nm_new_label['sabor_'] ?><span style="display: inline-block" class="sc-help-in-header-popup"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('sabor_')", "nm_mostra_mens('sabor_')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span><style type="text/css">.sc-help-in-header-popup > a > img { opacity: 100}</style> </TD>
    <?php } ?>
 
    <?php if (isset($this->nmgp_cmp_hidden['cantidad_']) && $this->nmgp_cmp_hidden['cantidad_'] == 'off') { $sStyleHidden_cantidad_ = 'display: none'; }
@@ -1143,7 +1203,8 @@ $orderColOrient = '';
       if (!isset($this->nm_new_label['costo_'])) {
           $this->nm_new_label['costo_'] = "Costo"; } ?>
 
-    <TD class="scFormLabelOddMult css_costo__label" id="hidden_field_label_costo_" style="<?php echo $sStyleHidden_costo_; ?>" > <?php echo $this->nm_new_label['costo_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
+    <TD class="scFormLabelOddMult css_costo__label" id="hidden_field_label_costo_" style="<?php echo $sStyleHidden_costo_; ?>" > <?php echo $this->nm_new_label['costo_'] ?> <span class="scFormRequiredOddMult">*</span><span style="display: inline-block" class="sc-help-in-header-popup"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('costo_')", "nm_mostra_mens('costo_')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span><style type="text/css">.sc-help-in-header-popup > a > img { opacity: 100}</style> </TD>
    <?php } ?>
 
    <?php if (isset($this->nmgp_cmp_hidden['valorparcial_']) && $this->nmgp_cmp_hidden['valorparcial_'] == 'off') { $sStyleHidden_valorparcial_ = 'display: none'; }
@@ -1316,6 +1377,10 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
        }
        $this->colores_ = $this->form_vert_form_inventario_inicial[$sc_seq_vert]['colores_']; 
        $colores_ = $this->colores_; 
+       if (!isset($this->nmgp_cmp_hidden['colores_']))
+       {
+           $this->nmgp_cmp_hidden['colores_'] = 'off';
+       }
        $sStyleHidden_colores_ = '';
        if (isset($sCheckRead_colores_))
        {
@@ -1342,6 +1407,10 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
        }
        $this->tallas_ = $this->form_vert_form_inventario_inicial[$sc_seq_vert]['tallas_']; 
        $tallas_ = $this->tallas_; 
+       if (!isset($this->nmgp_cmp_hidden['tallas_']))
+       {
+           $this->nmgp_cmp_hidden['tallas_'] = 'off';
+       }
        $sStyleHidden_tallas_ = '';
        if (isset($sCheckRead_tallas_))
        {
@@ -1368,6 +1437,10 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
        }
        $this->sabor_ = $this->form_vert_form_inventario_inicial[$sc_seq_vert]['sabor_']; 
        $sabor_ = $this->sabor_; 
+       if (!isset($this->nmgp_cmp_hidden['sabor_']))
+       {
+           $this->nmgp_cmp_hidden['sabor_'] = 'off';
+       }
        $sStyleHidden_sabor_ = '';
        if (isset($sCheckRead_sabor_))
        {
@@ -2378,7 +2451,7 @@ if ($this->idpro_ != "")
 <?php } else { ?>
 <span id="id_read_on_costo_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-costo_<?php echo $sc_seq_vert ?> css_costo__line" style="<?php echo $sStyleReadLab_costo_; ?>"><?php echo $this->form_format_readonly("costo_", $this->form_encode_input($this->costo_)); ?></span><span id="id_read_off_costo_<?php echo $sc_seq_vert ?>" class="css_read_off_costo_<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_costo_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_costo__obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_costo_<?php echo $sc_seq_vert ?>" type=text name="costo_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($costo_) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=12"; } ?> alt="{datatype: 'currency', currencySymbol: '<?php echo $this->field_config['costo_']['symbol_mon']; ?>', currencyPosition: '<?php echo ((1 == $this->field_config['costo_']['format_pos'] || 3 == $this->field_config['costo_']['format_pos']) ? 'left' : 'right'); ?>', maxLength: 12, precision: 0, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['costo_']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['costo_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['costo_']['symbol_fmt']; ?>, manualDecimals: false, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['costo_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=12"; } ?> alt="{datatype: 'currency', currencySymbol: '<?php echo $this->field_config['costo_']['symbol_mon']; ?>', currencyPosition: '<?php echo ((1 == $this->field_config['costo_']['format_pos'] || 3 == $this->field_config['costo_']['format_pos']) ? 'left' : 'right'); ?>', maxLength: 12, precision: 2, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['costo_']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['costo_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['costo_']['symbol_fmt']; ?>, manualDecimals: true, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['costo_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_costo_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_costo_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2394,7 +2467,7 @@ if ($this->idpro_ != "")
 <?php } else { ?>
 <span id="id_read_on_valorparcial_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-valorparcial_<?php echo $sc_seq_vert ?> css_valorparcial__line" style="<?php echo $sStyleReadLab_valorparcial_; ?>"><?php echo $this->form_format_readonly("valorparcial_", $this->form_encode_input($this->valorparcial_)); ?></span><span id="id_read_off_valorparcial_<?php echo $sc_seq_vert ?>" class="css_read_off_valorparcial_<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_valorparcial_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_valorparcial__obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_valorparcial_<?php echo $sc_seq_vert ?>" type=text name="valorparcial_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($valorparcial_) ?>"
- <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=12"; } ?> alt="{datatype: 'currency', currencySymbol: '<?php echo $this->field_config['valorparcial_']['symbol_mon']; ?>', currencyPosition: '<?php echo ((1 == $this->field_config['valorparcial_']['format_pos'] || 3 == $this->field_config['valorparcial_']['format_pos']) ? 'left' : 'right'); ?>', maxLength: 12, precision: 0, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['valorparcial_']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['valorparcial_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['valorparcial_']['symbol_fmt']; ?>, manualDecimals: false, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['valorparcial_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=12"; } ?> alt="{datatype: 'currency', currencySymbol: '<?php echo $this->field_config['valorparcial_']['symbol_mon']; ?>', currencyPosition: '<?php echo ((1 == $this->field_config['valorparcial_']['format_pos'] || 3 == $this->field_config['valorparcial_']['format_pos']) ? 'left' : 'right'); ?>', maxLength: 12, precision: 2, decimalSep: '<?php echo str_replace("'", "\'", $this->field_config['valorparcial_']['symbol_dec']); ?>', thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['valorparcial_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['valorparcial_']['symbol_fmt']; ?>, manualDecimals: true, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['valorparcial_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_valorparcial_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_valorparcial_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 

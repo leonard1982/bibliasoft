@@ -848,7 +848,7 @@ sc_userSweetAlertDisplayed = false;
               }
           } 
 ?>
-<span id="id_imghtml_compras"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_grid_compras_cons . "', '$this->nm_location', '', 'inicio', '_self', '0', '0', 'grid_compras')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $compras ; ?></font></a></span>
+<span id="id_imghtml_compras"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_grid_compras_new_cons . "', '$this->nm_location', 'NMSC_inicial*scininicio*scout', 'inicio', '_blank', '0', '0', 'grid_compras_new')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $compras ; ?></font></a></span>
 <?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["compras"]) &&  $this->nmgp_cmp_readonly["compras"] == "on") { 
 
  ?>

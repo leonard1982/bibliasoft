@@ -272,27 +272,27 @@ class grid_contabilidad_json
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, tercero, id, usuario, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, usuario, id, tercero, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['where_pesq'];
@@ -341,11 +341,11 @@ class grid_contabilidad_json
          $this->total_credito = (string)$this->total_credito;
          $this->periodo = $rs->fields[8] ;  
          $this->periodo = (string)$this->periodo;
-         $this->tercero = $rs->fields[9] ;  
-         $this->tercero = (string)$this->tercero;
+         $this->usuario = $rs->fields[9] ;  
          $this->id = $rs->fields[10] ;  
          $this->id = (string)$this->id;
-         $this->usuario = $rs->fields[11] ;  
+         $this->tercero = $rs->fields[11] ;  
+         $this->tercero = (string)$this->tercero;
          $this->creado = $rs->fields[12] ;  
          $this->actualizado = $rs->fields[13] ;  
          $this->importado = $rs->fields[14] ;  
@@ -658,23 +658,27 @@ class grid_contabilidad_json
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->periodo;
    }
-   //----- tercero
-   function NM_export_tercero()
+   //----- usuario
+   function NM_export_usuario()
    {
          if ($this->Json_format)
          {
-             nmgp_Form_Num_Val($this->tercero, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+             if ($this->usuario !== "&nbsp;") 
+             { 
+                 $this->usuario = sc_strtoupper($this->usuario); 
+             } 
          }
+         $this->usuario = NM_charset_to_utf8($this->usuario);
          if ($this->Json_use_label)
          {
-             $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
+             $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
          }
          else
          {
-             $SC_Label = "tercero"; 
+             $SC_Label = "usuario"; 
          }
          $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->tercero;
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->usuario;
    }
    //----- id
    function NM_export_id()
@@ -694,20 +698,23 @@ class grid_contabilidad_json
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->id;
    }
-   //----- usuario
-   function NM_export_usuario()
+   //----- tercero
+   function NM_export_tercero()
    {
-         $this->usuario = NM_charset_to_utf8($this->usuario);
+         if ($this->Json_format)
+         {
+             nmgp_Form_Num_Val($this->tercero, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         }
          if ($this->Json_use_label)
          {
-             $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
+             $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
          }
          else
          {
-             $SC_Label = "usuario"; 
+             $SC_Label = "tercero"; 
          }
          $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->usuario;
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->tercero;
    }
    //----- creado
    function NM_export_creado()

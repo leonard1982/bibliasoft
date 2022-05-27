@@ -228,8 +228,8 @@ class grid_contabilidad_ini
       $this->nm_dt_criacao   = "20220428"; 
       $this->nm_hr_criacao   = "104117"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220510"; 
-      $this->nm_hr_ult_alt   = "144218"; 
+      $this->nm_dt_ult_alt   = "20220518"; 
+      $this->nm_hr_ult_alt   = "103639"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -891,7 +891,7 @@ class grid_contabilidad_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_contabilidad']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_contabilidad']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQFaZ1BYHuBiHgrwV9FeDuX7HMF7HQXOH9BqHArYZMBqDErKZSXeDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHENiDWXCHIBiHQNwDQJwHIrKHQBqDMBOVcFKV5X7HIBiD9XGZkBiHANOHuJwDMzGDkXKDWXCZuB/D9NwZSX7HIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDuFaDoJeD9JKDQX7D1veV5raHgvsDkBOV5X7DoJsD9BiZ1F7HABYD5F7DEBeHEXeDuFYVoXGDcBwDQJsHArYD5JsDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcJeH9X7DSN7HQF7DMNODkBsH5XCHMX7D9XOZ1B/DSNOZMBqDEBOZSJqDuFaDoF7DcXGDQFGHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqD1vOV5XGDMvOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgrKHErCH5F/HIrqHQXGDuBqHAvCV5BOHuNOVcFeDuFqDoXGHQBiZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYZSFUZ1rwV5FaHuzGVcFeHEBmVoF7HQBiZkFGHArYHuJwDMveHENiDWF/HMJsD9NwZSBiHIrwV5JeDMBOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoBOD9JKDQJsDSzGVWBOHgrwVIB/DWF/HIFUDcBqH9BqHINaD5JeDMvCZSJ3HEFqHMFGHQXODQFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUDcJeZSX7Z1rwD5NUHuBYVcFKDWFaVoBOD9JmZ1B/HIrwV5JeDMzGHEFiDWX7VoFaHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHANKVWJwHgrKVcFCH5B7VErqHQXGH9BOD1rKHuJeDEBOVkXeDWr/HMB/D9FYDQFUHAveHuFUHuvmVIBOV5X7HIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNwZkBiHAvCZMBOHgBeHEFiV5B3DoF7D9XsDuFaHAveV5JeHgrwVcXKDWrmVENUD9XOZSBqDSNOHQFGDEBeHEJGDuJeHIFUD9JKDQJsHABYVWJeDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2363,9 +2363,9 @@ class grid_contabilidad_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "total_debito";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "total_credito";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "periodo";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "tercero";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "id";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "usuario";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "id";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "tercero";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "creado";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "actualizado";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['field_order'][] = "importado";
@@ -2375,7 +2375,7 @@ class grid_contabilidad_apl
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['usr_cmp_sel'] = array();
           } 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['usr_cmp_sel']['id'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['usr_cmp_sel']['usuario'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['usr_cmp_sel']['tercero'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['usr_cmp_sel']['creado'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['usr_cmp_sel']['actualizado'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['usr_cmp_sel']['importado'] = "off";

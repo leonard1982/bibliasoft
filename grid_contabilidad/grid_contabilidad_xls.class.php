@@ -330,27 +330,27 @@ class grid_contabilidad_xls
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, tercero, id, usuario, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, usuario, id, tercero, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['where_pesq'];
@@ -394,11 +394,11 @@ class grid_contabilidad_xls
          $this->total_credito = (string)$this->total_credito;
          $this->periodo = $rs->fields[8] ;  
          $this->periodo = (string)$this->periodo;
-         $this->tercero = $rs->fields[9] ;  
-         $this->tercero = (string)$this->tercero;
+         $this->usuario = $rs->fields[9] ;  
          $this->id = $rs->fields[10] ;  
          $this->id = (string)$this->id;
-         $this->usuario = $rs->fields[11] ;  
+         $this->tercero = $rs->fields[11] ;  
+         $this->tercero = (string)$this->tercero;
          $this->creado = $rs->fields[12] ;  
          $this->actualizado = $rs->fields[13] ;  
          $this->importado = $rs->fields[14] ;  
@@ -853,8 +853,8 @@ class grid_contabilidad_xls
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
-          if ($Cada_col == "tercero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
+          if ($Cada_col == "usuario" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
               $current_cell_ref = $this->calc_cell($this->Xls_col);
@@ -862,18 +862,18 @@ class grid_contabilidad_xls
               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['embutida'])
               { 
                   $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "center";
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
                   $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
                   $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
               }
               else
               { 
                   if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
                   }
                   else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
                   }
                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
@@ -909,8 +909,8 @@ class grid_contabilidad_xls
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
-          if ($Cada_col == "usuario" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
+          if ($Cada_col == "tercero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
               $current_cell_ref = $this->calc_cell($this->Xls_col);
@@ -918,18 +918,18 @@ class grid_contabilidad_xls
               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['embutida'])
               { 
                   $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "center";
                   $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
                   $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
               }
               else
               { 
                   if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
                   }
                   else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
                   }
                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
@@ -1215,8 +1215,8 @@ class grid_contabilidad_xls
          $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->periodo);
          $this->Xls_col++;
    }
-   //----- tercero
-   function NM_export_tercero()
+   //----- usuario
+   function NM_export_usuario()
    {
          $current_cell_ref = $this->calc_cell($this->Xls_col);
          if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
@@ -1224,12 +1224,22 @@ class grid_contabilidad_xls
              $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->tercero = NM_charset_to_utf8($this->tercero);
-         if (is_numeric($this->tercero))
-         {
-             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
+      if (!empty($this->usuario))
+      {
+             if ($this->usuario !== "&nbsp;") 
+             { 
+                 $this->usuario = sc_strtoupper($this->usuario); 
+             } 
+      }
+         $this->usuario = html_entity_decode($this->usuario, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->usuario = strip_tags($this->usuario);
+         $this->usuario = NM_charset_to_utf8($this->usuario);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->usuario, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
          }
-         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->tercero);
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->usuario, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
          $this->Xls_col++;
    }
    //----- id
@@ -1249,8 +1259,8 @@ class grid_contabilidad_xls
          $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->id);
          $this->Xls_col++;
    }
-   //----- usuario
-   function NM_export_usuario()
+   //----- tercero
+   function NM_export_tercero()
    {
          $current_cell_ref = $this->calc_cell($this->Xls_col);
          if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
@@ -1258,15 +1268,12 @@ class grid_contabilidad_xls
              $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
          }
          $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->usuario = html_entity_decode($this->usuario, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->usuario = strip_tags($this->usuario);
-         $this->usuario = NM_charset_to_utf8($this->usuario);
-         if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->usuario, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         $this->tercero = NM_charset_to_utf8($this->tercero);
+         if (is_numeric($this->tercero))
+         {
+             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
          }
-         else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->usuario, PHPExcel_Cell_DataType::TYPE_STRING);
-         }
+         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->tercero);
          $this->Xls_col++;
    }
    //----- creado
@@ -1475,14 +1482,23 @@ class grid_contabilidad_xls
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
          $this->Xls_col++;
    }
-   //----- tercero
-   function NM_sub_cons_tercero()
+   //----- usuario
+   function NM_sub_cons_usuario()
    {
-         $this->tercero = NM_charset_to_utf8($this->tercero);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->tercero;
+      if (!empty($this->usuario))
+      {
+         if ($this->usuario !== "&nbsp;") 
+         { 
+             $this->usuario = sc_strtoupper($this->usuario); 
+         } 
+      }
+         $this->usuario = html_entity_decode($this->usuario, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->usuario = strip_tags($this->usuario);
+         $this->usuario = NM_charset_to_utf8($this->usuario);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->usuario;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
    //----- id
@@ -1495,16 +1511,14 @@ class grid_contabilidad_xls
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
          $this->Xls_col++;
    }
-   //----- usuario
-   function NM_sub_cons_usuario()
+   //----- tercero
+   function NM_sub_cons_tercero()
    {
-         $this->usuario = html_entity_decode($this->usuario, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->usuario = strip_tags($this->usuario);
-         $this->usuario = NM_charset_to_utf8($this->usuario);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->usuario;
+         $this->tercero = NM_charset_to_utf8($this->tercero);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->tercero;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
          $this->Xls_col++;
    }
    //----- creado

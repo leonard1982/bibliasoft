@@ -160,8 +160,7 @@ function Sel_cmp_process()
       $tab_ger_campos = array();
       $tab_blk_campos = array();
 
-            $tab_ger_campos['idusuarios'] = "on";
-      $tab_ger_campos['usuario'] = "on";
+            $tab_ger_campos['usuario'] = "on";
       $tab_ger_campos['password'] = "on";
       $tab_ger_campos['tercero'] = "on";
       $tab_blk_campos[] = "tercero";
@@ -174,6 +173,7 @@ function Sel_cmp_process()
       $tab_blk_campos[] = "activo";
       $tab_ger_campos['grupocomanda'] = "on";
       $tab_blk_campos[] = "grupocomanda";
+      $tab_ger_campos['idusuarios'] = "on";
       $tab_ger_campos['creacion'] = "on";
       $tab_ger_campos['nombre'] = "on";
 
@@ -672,6 +672,7 @@ function proc_btn_sel(btn, proc) {
    }
    $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
    include("../_lib/buttons/" . $Str_btn_grid);
    if (!function_exists("nmButtonOutput"))

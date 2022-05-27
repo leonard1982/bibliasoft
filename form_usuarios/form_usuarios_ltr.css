@@ -18,19 +18,19 @@
 .css_telefono_obj { }
 .css_tercero_label { }
 .css_tercero_line {text-align:left;}
-.css_tercero_obj {text-align:left;}
+.css_tercero_obj {text-align:left;width:200px;}
 .css_resolucion_label { }
 .css_resolucion_line {text-align:left;}
-.css_resolucion_obj {text-align:left;}
+.css_resolucion_obj {text-align:left;width:200px;}
 .css_grupo_label { }
 .css_grupo_line {text-align:left;}
-.css_grupo_obj {text-align:left;}
+.css_grupo_obj {text-align:left;width:200px;}
 .css_activo_label { }
 .css_activo_line { }
 .css_activo_obj { }
 .css_grupocomanda_label { }
 .css_grupocomanda_line {text-align:left;}
-.css_grupocomanda_obj {text-align:left;}
+.css_grupocomanda_obj {text-align:left;width:200px;}
 .css_nombre_pc_label { }
 .css_nombre_pc_line { }
 .css_nombre_pc_obj { }
@@ -60,7 +60,7 @@
 .css_serial_obj { }
 .css_idbod_label { }
 .css_idbod_line {text-align:left;}
-.css_idbod_obj {text-align:left;}
+.css_idbod_obj {text-align:left;width:200px;}
 .css_ocultar_bod_label { }
 .css_ocultar_bod_line { }
 .css_ocultar_bod_obj { }

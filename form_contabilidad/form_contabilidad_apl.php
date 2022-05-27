@@ -330,6 +330,18 @@ class form_contabilidad_apl
       {
           $nmgp_parms = "";
       }
+      if (isset($this->gidtercero) && isset($this->NM_contr_var_session) && $this->NM_contr_var_session == "Yes") 
+      {
+          $_SESSION['gidtercero'] = $this->gidtercero;
+      }
+      if (isset($_POST["gidtercero"]) && isset($this->gidtercero)) 
+      {
+          $_SESSION['gidtercero'] = $this->gidtercero;
+      }
+      if (isset($_GET["gidtercero"]) && isset($this->gidtercero)) 
+      {
+          $_SESSION['gidtercero'] = $this->gidtercero;
+      }
       if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
           $_POST['nmgp_opcao'] = "novo";
           $this->nmgp_opcao    = "novo";
@@ -379,6 +391,10 @@ class form_contabilidad_apl
              }
              $ix++;
           }
+          if (isset($this->gidtercero)) 
+          {
+              $_SESSION['gidtercero'] = $this->gidtercero;
+          }
           if (isset($this->NM_where_filter_form))
           {
               $_SESSION['sc_session'][$script_case_init]['form_contabilidad']['where_filter_form'] = $this->NM_where_filter_form;
@@ -391,6 +407,10 @@ class form_contabilidad_apl
           if (isset($this->sc_redir_insert))
           {
               $_SESSION['sc_session'][$script_case_init]['form_contabilidad']['sc_redir_insert'] = $this->sc_redir_insert;
+          }
+          if (isset($this->gidtercero)) 
+          {
+              $_SESSION['gidtercero'] = $this->gidtercero;
           }
       } 
       elseif (isset($script_case_init) && !empty($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_contabilidad']['parms']))
@@ -1731,7 +1751,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
        if ($this->Db && !$this->Embutida_proc)
        { 
            $this->Db->Close(); 
-           $this->Ini->nm_db_conne_mysql->Close(); 
        } 
    }
    function sc_btn_asentar() 
@@ -4928,17 +4947,21 @@ $_SESSION['scriptcase']['form_contabilidad']['contr_erro'] = 'off';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_fecha = $this->fecha;
+    $original_importado = $this->importado;
     $original_numero = $this->numero;
     $original_periodo = $this->periodo;
     $original_prefijo = $this->prefijo;
+    $original_tercero = $this->tercero;
+    $original_usuario = $this->usuario;
 }
+if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
   $sql_num = "SELECT numero FROM contabilidad WHERE prefijo ='".$this->prefijo ."'";
  
       $nm_select = $sql_num; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->ds_num = array();
-      if ($SCrx = $this->Ini->nm_db_conne_mysql->Execute($nm_select)) 
+      if ($SCrx = $this->Db->Execute($nm_select)) 
       { 
           $SCy = 0; 
           $nm_count = $SCrx->FieldCount();
@@ -4956,7 +4979,7 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
       elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
       { 
           $this->ds_num = false;
-          $this->ds_num_erro = $this->Ini->nm_db_conne_mysql->ErrorMsg();
+          $this->ds_num_erro = $this->Db->ErrorMsg();
       } 
 ;
 if(isset($this->ds_num[0][0]))
@@ -4970,11 +4993,49 @@ else
 $vfe 		= $this->fecha ;
 $vmes 		= date("m", strtotime($vfe));
 $this->periodo  	= $vmes;
+$this->tercero =$this->sc_temp_gidtercero;
+$sql_us = "SELECT usuario FROM usuarios  WHERE tercero = '".$this->tercero ."'";
+ 
+      $nm_select = $sql_us; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_us = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_us[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_us = false;
+          $this->ds_us_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_us[0][0]))
+	{
+	$this->usuario  = $this->ds_us[0][0];
+	}
+$this->importado  = 'NO';
+if (isset($this->sc_temp_gidtercero)) { $_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     if (($original_fecha != $this->fecha || (isset($bFlagRead_fecha) && $bFlagRead_fecha)))
     {
         $this->ajax_return_values_fecha(true);
+    }
+    if (($original_importado != $this->importado || (isset($bFlagRead_importado) && $bFlagRead_importado)))
+    {
+        $this->ajax_return_values_importado(true);
     }
     if (($original_numero != $this->numero || (isset($bFlagRead_numero) && $bFlagRead_numero)))
     {
@@ -4987,6 +5048,14 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     if (($original_prefijo != $this->prefijo || (isset($bFlagRead_prefijo) && $bFlagRead_prefijo)))
     {
         $this->ajax_return_values_prefijo(true);
+    }
+    if (($original_tercero != $this->tercero || (isset($bFlagRead_tercero) && $bFlagRead_tercero)))
+    {
+        $this->ajax_return_values_tercero(true);
+    }
+    if (($original_usuario != $this->usuario || (isset($bFlagRead_usuario) && $bFlagRead_usuario)))
+    {
+        $this->ajax_return_values_usuario(true);
     }
 }
 $_SESSION['scriptcase']['form_contabilidad']['contr_erro'] = 'off'; 

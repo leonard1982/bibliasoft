@@ -3147,6 +3147,9 @@ else
 {
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas']['Lookup_direccion'] = array(); 
 }
+if ($this->idcli != "")
+{ 
+   $this->nm_clear_val("idcli");
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
@@ -3199,7 +3202,7 @@ else
    $unformatted_value_reteiva = $this->reteiva;
    $unformatted_value_imconsumo = $this->imconsumo;
 
-   $nm_comando = "SELECT iddireccion, direc  FROM direccion  ORDER BY direc";
+   $nm_comando = "SELECT iddireccion, direc  FROM direccion  WHERE idter='$this->idcli' ORDER BY direc";
 
    $this->numfacven = $old_value_numfacven;
    $this->fechaven = $old_value_fechaven;
@@ -3240,6 +3243,7 @@ else
        exit; 
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
+} 
    $x = 0; 
    $direccion_look = ""; 
    $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 

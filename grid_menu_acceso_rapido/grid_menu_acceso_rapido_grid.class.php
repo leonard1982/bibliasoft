@@ -2855,8 +2855,8 @@ $_SESSION['scriptcase']['grid_menu_acceso_rapido']['contr_erro'] = 'off';
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_compras_grid_line . "\"  style=\"" . $this->Css_Cmp['css_compras_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\">\r\n");
  if (!$this->Ini->Proc_print && !$this->Ini->SC_Link_View && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_menu_acceso_rapido']['opcao'] != "pdf" && $_SESSION['scriptcase']['contr_link_emb'] != "pdf" && $conteudo != "&nbsp;"){ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_menu_acceso_rapido']['Ind_lig_mult']++;
-       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_compras_@scinf_grid_compras']) ? $this->Ini->sc_lig_target['C_@scinf_compras_@scinf_grid_compras'] : (isset($this->Ini->sc_lig_target['C_@scinf_compras']) ? $this->Ini->sc_lig_target['C_@scinf_compras'] : null);
-       if (isset($this->Ini->sc_lig_md5["grid_compras"]) && $this->Ini->sc_lig_md5["grid_compras"] == "S") {
+       $linkTarget = isset($this->Ini->sc_lig_target['C_@scinf_compras_@scinf_grid_compras_new']) ? $this->Ini->sc_lig_target['C_@scinf_compras_@scinf_grid_compras_new'] : (isset($this->Ini->sc_lig_target['C_@scinf_compras']) ? $this->Ini->sc_lig_target['C_@scinf_compras'] : null);
+       if (isset($this->Ini->sc_lig_md5["grid_compras_new"]) && $this->Ini->sc_lig_md5["grid_compras_new"] == "S") {
            $Parms_Lig = "nmgp_lig_edit_lapis?#?S?@?";
            if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_menu_acceso_rapido']['dashboard_info']['under_dashboard'] && isset($linkTarget))
            {
@@ -2871,7 +2871,7 @@ $_SESSION['scriptcase']['grid_menu_acceso_rapido']['contr_erro'] = 'off';
        } else {
            $Md5_Lig = "nmgp_lig_edit_lapis?#?S?@?";
        }
-   $nm_saida->saida("<a id=\"id_sc_field_compras_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_grid_compras_cons . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : '_blank') . "', 'inicio', '0', '0', '', 'grid_compras', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, 'Compras')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_compras_grid_line . "\" style=\"" . $this->Css_Cmp['css_compras_grid_line'] . "\">" . $conteudo . "</a>\r\n");
+   $nm_saida->saida("<a id=\"id_sc_field_compras_" . $this->SC_seq_page . "\" href=\"javascript:nm_gp_submit5('" . $this->Ini->link_grid_compras_new_cons . "', '$this->nm_location', '$Md5_Lig', '" . (isset($linkTarget) ? $linkTarget : '_blank') . "', 'inicio', '0', '0', '', 'grid_compras_new', '" . $this->SC_ancora . "')\" onMouseover=\"nm_mostra_hint(this, event, 'Compras')\" onMouseOut=\"nm_apaga_hint()\" class=\"" . $this->Ini->cor_link_dados . $this->css_sep . $this->css_compras_grid_line . "\" style=\"" . $this->Css_Cmp['css_compras_grid_line'] . "\">" . $conteudo . "</a>\r\n");
 } else {
    $nm_saida->saida(" <span id=\"id_sc_field_compras_" . $this->SC_seq_page . "\">$conteudo </span>\r\n");
        } 

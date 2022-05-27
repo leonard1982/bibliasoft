@@ -169,9 +169,9 @@ function Sel_cmp_process()
       $tab_ger_campos['total_debito'] = "on";
       $tab_ger_campos['total_credito'] = "on";
       $tab_ger_campos['periodo'] = "on";
-      $tab_ger_campos['tercero'] = "on";
-      $tab_ger_campos['id'] = "on";
       $tab_ger_campos['usuario'] = "on";
+      $tab_ger_campos['id'] = "on";
+      $tab_ger_campos['tercero'] = "on";
       $tab_ger_campos['creado'] = "on";
       $tab_ger_campos['actualizado'] = "on";
       $tab_ger_campos['importado'] = "on";

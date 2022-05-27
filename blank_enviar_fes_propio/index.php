@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220511"; 
-      $this->nm_hr_ult_alt   = "093402"; 
+      $this->nm_dt_ult_alt   = "20220523"; 
+      $this->nm_hr_ult_alt   = "170117"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_enviar_fes_propio_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKZSBiZ1N7D5rqHuNOVIBOV5FYVoBiHQXGZ1F7D1rKHQNUDEBeVkJ3DWX7HMJeHQFYH9FUD1veVWJsHgrwVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJwHQNmDQBOZ1BYHuJwDMBYVIBsDurGVoFGD9XGZ1FGHIrwHuFGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMzGHEXeV5XCZuBOD9JKDQX7HArYV5BOHgrYDkBODWF/DoraD9XOH9BOZ1BeD5BqDErKVkXeV5FaDoBOD9JKDQX7Z1NaD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcXKDWFaVEFGHQXGZkFGDSBOV5X7DErKHEFiDuJeDoJeHQJeDQFaHIrKHuJwHuzGZSNiHEFYHMJsDcFYH9BqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1zGD5BOHgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcBODWF/HMFUD9BiZSBqZ1BeHQFGHgBeZSXeV5FaZuBqHQXOZSFUDSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQB/HAveV5XGHgrwZSJ3V5FYHMB/HQBiH9B/HAN7V5BODMvCHArCV5XCVoFaDcBiDQJsZ1rwHQFaHuBYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMzGVcrsDur/DoJsHQXGZ1BOD1rwV5BqDMveHErCV5FqDorqHQXsH9FGHAN7HuBiHuNOVcXKHEFYDoXGHQNmH9BqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMzGHEXeV5XCZuBOD9JKDQX7HArYV5BOHgrYDkBODWF/DoraD9XOH9BOZ1BeD5BqDErKVkXeV5FaDoBOD9JKDQX7Z1NaD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/HQJKDQX7Z1BYHurqDMvsV9FeV5X7DoXGHQNwZkBiHANOV5BOHgBYHEJGHEFqHMB/DcBiH9BiZ1BYD5JsDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJwDMvOZSNiDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCHEB7DoJeHQNwDQB/HABYHQrqDMBYVIB/DuFGVoX7HQXOZ1BiHAN7V5JsDMzGDkFeV5B7DoXGHQNmZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2102,10 +2102,10 @@ else
 		if(isset($this->vsiplantilla[0][0]) and isset($this->vsiplantilla[0][1]) and isset($this->vsiplantilla[0][2]) and isset($this->vsiplantilla[0][3]))
 		{
 			$vplantilla_existe = true;
-			$vcabecera = $this->vsiplantilla[0][0];
-			$vcuerpo   = $this->vsiplantilla[0][1];
-			$vbotones  = $this->vsiplantilla[0][2];
-			$vpie      = $this->vsiplantilla[0][3];
+			$vcabecera = utf8_decode($this->vsiplantilla[0][0]);
+			$vcuerpo   = utf8_decode($this->vsiplantilla[0][1]);
+			$vbotones  = utf8_decode($this->vsiplantilla[0][2]);
+			$vpie      = utf8_decode($this->vsiplantilla[0][3]);
 		}
 	}
 	
@@ -2260,16 +2260,28 @@ else
 			$vdatos["html_body"] = str_replace("vFechaDocumento",$vfecha.' '.$vhora,$vdatos["html_body"]);
 			$vdatos["html_body"] = str_replace("vTotalDocumento",number_format($vtotal),$vdatos["html_body"]);
 			
-			$vurl_pdf_factura = "https://www.facilwebnube.com/apidian2021/public/index.php/api/download/".$vnit_emisor."/FES-".$vprefijo.$vnumero.".pdf";
-			$vurl_aceptar     = "https://www.facilwebnube.com/apidian2021/public/index.php/accept-reject-document/".$vnit_emisor."/".$vccnit."/".$vprefijo."/".$vnumero."/".$vfecha;
+			$vurl_pdf_factura = $vurl_api_pdfs."/".$vnit_emisor."/FES-".$vprefijo.$vnumero.".pdf";
+			$vurl_aceptar     = "https://www.apifacilweb.com/public/index.php/accept-reject-document/".$vnit_emisor."/".$vccnit."/".$vprefijo."/".$vnumero."/".$vfecha;
 			
-			$vurl_pdf_factura = "https://www.apifacilweb.com/public/index.php/api/download/".$vnit_emisor."/FES-".$vprefijo.$vnumero.".pdf";
+			$vurl_pdf_factura = $vurl_api_pdfs."/".$vnit_emisor."/FES-".$vprefijo.$vnumero.".pdf";
 			$vurl_aceptar     = "https://www.apifacilweb.com/public/index.php/accept-reject-document/".$vnit_emisor."/".$vccnit."/".$vprefijo."/".$vnumero."/".$vfecha;
 			
 			$vdatos["html_buttons"]=  $vbotones;
 			$vdatos["html_buttons"] = str_replace("https://vUrlPdfFactura",$vurl_pdf_factura,$vdatos["html_buttons"]);
 			$vdatos["html_buttons"] = str_replace("https://vUrlPdf",$vurl_pdf_factura,$vdatos["html_buttons"]);
 			$vdatos["html_buttons"] = str_replace("https://vUrlAceptar",$vurl_aceptar,$vdatos["html_buttons"]);
+			
+			$vdatos["html_buttons"] = str_replace("https://vurlpdffactura",$vurl_pdf_factura,$vdatos["html_buttons"]);
+			$vdatos["html_buttons"] = str_replace("https://vurlpdf",$vurl_pdf_factura,$vdatos["html_buttons"]);
+			$vdatos["html_buttons"] = str_replace("https://vurlaceptar",$vurl_aceptar,$vdatos["html_buttons"]);
+			
+			$vdatos["html_buttons"] = str_replace("vUrlPdfFactura",$vurl_pdf_factura,$vdatos["html_buttons"]);
+			$vdatos["html_buttons"] = str_replace("vUrlPdf",$vurl_pdf_factura,$vdatos["html_buttons"]);
+			$vdatos["html_buttons"] = str_replace("vUrlAceptar",$vurl_aceptar,$vdatos["html_buttons"]);
+			
+			$vdatos["html_buttons"] = str_replace("vurlpdffactura",$vurl_pdf_factura,$vdatos["html_buttons"]);
+			$vdatos["html_buttons"] = str_replace("vurlpdf",$vurl_pdf_factura,$vdatos["html_buttons"]);
+			$vdatos["html_buttons"] = str_replace("vurlaceptar",$vurl_aceptar,$vdatos["html_buttons"]);
 			
 			
 			$vdatos["html_footer"] =  $vpie;

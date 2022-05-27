@@ -1,13 +1,12 @@
 .css_idpro_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_idpro_grid_line {vertical-align: middle;text-align: right;}
-.css_colores_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_colores_grid_line {vertical-align: middle;text-align: right;}
-.css_tallas_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_tallas_grid_line {vertical-align: middle;text-align: center;}
-.css_sabor_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_sabor_grid_line {vertical-align: top;text-align: right;}
 .css_cantidad_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_cantidad_grid_line {vertical-align: top;text-align: right;}
+.css_costo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_costo_grid_line {vertical-align: middle;text-align: right;}
+.css_valorparcial_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valorparcial_grid_line {vertical-align: middle;text-align: right;}
+.css_valorparcial_tot_ger {text-align: ;text-align: right;}
 .css_presentacion_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
 .css_presentacion_grid_line {text-align: right;}
 .css_idbod_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
@@ -18,3 +17,4 @@
 .css_idinv_grid_line {vertical-align: top;text-align: right;}
 .css_tipo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_tipo_grid_line {vertical-align: top;text-align: right;}
+.css_valorparcial_S_tot_ger {text-align: right;}

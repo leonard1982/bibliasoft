@@ -118,6 +118,12 @@ if ('' != $miniCalendarFA) {
 <?php
 }
 ?>
+ <style type="text/css">
+  .scSpin_minutos_inactividad_obj {
+   border: 0 !important;
+   margin: 0 20px 0 0 !important;
+  }
+ </style>
 <style type="text/css">
 	.sc.switch {
 		position: relative;
@@ -1283,16 +1289,62 @@ $tmp_form_data = str_replace(';'   , ' '                                       ,
     <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
 <?php } 
 ?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
-   </tr>
-<?php $sc_hidden_no = 1; ?>
-</TABLE></div><!-- bloco_f -->
-   </td>
-   <td width="30%" height="">
-   <a name="bloco_1"></a>
-<div id="div_hidden_bloco_1"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_1" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+   <?php
+    if (!isset($this->nm_new_label['minutos_inactividad']))
+    {
+        $this->nm_new_label['minutos_inactividad'] = "Minutos Inactividad";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $minutos_inactividad = $this->minutos_inactividad;
+   $sStyleHidden_minutos_inactividad = '';
+   if (isset($this->nmgp_cmp_hidden['minutos_inactividad']) && $this->nmgp_cmp_hidden['minutos_inactividad'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['minutos_inactividad']);
+       $sStyleHidden_minutos_inactividad = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_minutos_inactividad = 'display: none;';
+   $sStyleReadInp_minutos_inactividad = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['minutos_inactividad']) && $this->nmgp_cmp_readonly['minutos_inactividad'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['minutos_inactividad']);
+       $sStyleReadLab_minutos_inactividad = '';
+       $sStyleReadInp_minutos_inactividad = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['minutos_inactividad']) && $this->nmgp_cmp_hidden['minutos_inactividad'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="minutos_inactividad" value="<?php echo $this->form_encode_input($minutos_inactividad) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormLabelOdd scUiLabelWidthFix css_minutos_inactividad_label" id="hidden_field_label_minutos_inactividad" style="<?php echo $sStyleHidden_minutos_inactividad; ?>"><span id="id_label_minutos_inactividad"><?php echo $this->nm_new_label['minutos_inactividad']; ?></span></TD>
+    <TD class="scFormDataOdd css_minutos_inactividad_line" id="hidden_field_data_minutos_inactividad" style="<?php echo $sStyleHidden_minutos_inactividad; ?>"><table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_minutos_inactividad_line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["minutos_inactividad"]) &&  $this->nmgp_cmp_readonly["minutos_inactividad"] == "on") { 
+
+ ?>
+<input type="hidden" name="minutos_inactividad" value="<?php echo $this->form_encode_input($minutos_inactividad) . "\">" . $minutos_inactividad . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_minutos_inactividad" class="sc-ui-readonly-minutos_inactividad css_minutos_inactividad_line" style="<?php echo $sStyleReadLab_minutos_inactividad; ?>"><?php echo $this->form_format_readonly("minutos_inactividad", $this->form_encode_input($this->minutos_inactividad)); ?></span><span id="id_read_off_minutos_inactividad" class="css_read_off_minutos_inactividad<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_minutos_inactividad; ?>">
+ <input class="sc-js-input scFormObjectOdd scFormObjectOddSpin scSpin_minutos_inactividad_obj css_minutos_inactividad_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_minutos_inactividad" type=text name="minutos_inactividad" value="<?php echo $this->form_encode_input($minutos_inactividad) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=3"; } ?> alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['minutos_inactividad']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['minutos_inactividad']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['minutos_inactividad']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('minutos_inactividad')", "nm_mostra_mens('minutos_inactividad')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_minutos_inactividad_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_minutos_inactividad_text"></span></td></tr></table></td></tr></table></TD>
+   <?php }?>
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -1371,9 +1423,12 @@ $caja_movil_look = "";
 ?>
 <span id="id_read_on_caja_movil" class="css_caja_movil_line" style="<?php echo $sStyleReadLab_caja_movil; ?>"><?php echo $this->form_format_readonly("caja_movil", $this->form_encode_input($caja_movil_look)); ?></span><span id="id_read_off_caja_movil" class="css_read_off_caja_movil css_caja_movil_line" style="<?php echo $sStyleReadInp_caja_movil; ?>"><?php echo "<div id=\"idAjaxCheckbox_caja_movil\" style=\"display: inline-block\" class=\"css_caja_movil_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
   <TD class="scFormDataFontOdd css_caja_movil_line"><?php $tempOptionId = "id-opt-caja_movil" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
  <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-caja_movil sc-ui-checkbox-caja_movil" name="caja_movil[]" value="SI"
 <?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_caja_movil'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->caja_movil_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
+<?php  if (in_array("SI", $this->caja_movil_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>"></label> </div>
+</TD>
 </TR></TABLE>
 <?php echo "</div>\r\n"; ?></span><?php  }?>
 <span class="scFormPopupBubble" style="display: inline-block"><span class="scFormPopupTrigger"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "return false;", "return false;", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
@@ -1395,7 +1450,16 @@ if (isset($_SESSION['scriptcase']['reg_conf']['html_dir']) && $_SESSION['scriptc
     <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 2; ?>" >&nbsp;</TD>
 <?php } 
 ?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+
+
+   </tr>
+<?php $sc_hidden_no = 1; ?>
+</TABLE></div><!-- bloco_f -->
+   </td>
+   <td width="30%" height="">
+   <a name="bloco_1"></a>
+<div id="div_hidden_bloco_1"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_1" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -1474,9 +1538,12 @@ $pago_automatico_look = "";
 ?>
 <span id="id_read_on_pago_automatico" class="css_pago_automatico_line" style="<?php echo $sStyleReadLab_pago_automatico; ?>"><?php echo $this->form_format_readonly("pago_automatico", $this->form_encode_input($pago_automatico_look)); ?></span><span id="id_read_off_pago_automatico" class="css_read_off_pago_automatico css_pago_automatico_line" style="<?php echo $sStyleReadInp_pago_automatico; ?>"><?php echo "<div id=\"idAjaxCheckbox_pago_automatico\" style=\"display: inline-block\" class=\"css_pago_automatico_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
   <TD class="scFormDataFontOdd css_pago_automatico_line"><?php $tempOptionId = "id-opt-pago_automatico" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
  <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-pago_automatico sc-ui-checkbox-pago_automatico" name="pago_automatico[]" value="SI"
 <?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_pago_automatico'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->pago_automatico_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
+<?php  if (in_array("SI", $this->pago_automatico_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>"></label> </div>
+</TD>
 </TR></TABLE>
 <?php echo "</div>\r\n"; ?></span><?php  }?>
 <span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('pago_automatico')", "nm_mostra_mens('pago_automatico')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
@@ -1677,9 +1744,12 @@ $desactivar_control_sesion_look = "";
 ?>
 <span id="id_read_on_desactivar_control_sesion" class="css_desactivar_control_sesion_line" style="<?php echo $sStyleReadLab_desactivar_control_sesion; ?>"><?php echo $this->form_format_readonly("desactivar_control_sesion", $this->form_encode_input($desactivar_control_sesion_look)); ?></span><span id="id_read_off_desactivar_control_sesion" class="css_read_off_desactivar_control_sesion css_desactivar_control_sesion_line" style="<?php echo $sStyleReadInp_desactivar_control_sesion; ?>"><?php echo "<div id=\"idAjaxCheckbox_desactivar_control_sesion\" style=\"display: inline-block\" class=\"css_desactivar_control_sesion_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
   <TD class="scFormDataFontOdd css_desactivar_control_sesion_line"><?php $tempOptionId = "id-opt-desactivar_control_sesion" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
  <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-desactivar_control_sesion sc-ui-checkbox-desactivar_control_sesion" name="desactivar_control_sesion[]" value="SI"
 <?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones']['Lookup_desactivar_control_sesion'][] = 'SI'; ?>
-<?php  if (in_array("SI", $this->desactivar_control_sesion_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>">SI</label></TD>
+<?php  if (in_array("SI", $this->desactivar_control_sesion_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
 </TR></TABLE>
 <?php echo "</div>\r\n"; ?></span><?php  }?>
 <span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('desactivar_control_sesion')", "nm_mostra_mens('desactivar_control_sesion')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>

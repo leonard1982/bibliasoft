@@ -293,8 +293,8 @@ class form_configuraciones_mob_ini
       $this->nm_dt_criacao   = "20180824"; 
       $this->nm_hr_criacao   = "070459"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220505"; 
-      $this->nm_hr_ult_alt   = "111214"; 
+      $this->nm_dt_ult_alt   = "20220526"; 
+      $this->nm_hr_ult_alt   = "210849"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -527,8 +527,7 @@ class form_configuraciones_mob_ini
           }
       }
       if (isset($_SESSION['scriptcase']['form_configuraciones_mob']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+          $SS_cod_html  = '';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -890,7 +889,7 @@ class form_configuraciones_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsZSX7DSBYVWBODMBOV9FeDurGVEFGD9XOZkBiDSrYHuBODErKZSXeDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErCDWX7ZuBqHQBiDQJsDSrwV5FGHgrKVcrsH5FqDoF7D9BsZ1X7HIBeHuFUHgveHEJGDWr/VoJeHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkXeV5FaDoJeD9XsDQFUZ1rwV5FGHuNODkBOV5F/DorqD9JmZ1B/HIBeZMFaDErKVkXeDWX7DoF7D9JKDQX7Z1rwD5NUHgrKVcFCH5FqVoJwD9BsZ1B/Z1BeD5F7HgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNwZkFGHABYV5BqDMzGHEJGDWF/VoXGHQJeDQBqHAN7HQB/DMBOVIBsHEF/DoNUHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VEraHQNmZkBiHABYHQJwDEBODkFeH5FYVoFGHQJKDQBqHArYHQF7DMvmVcFCDWFaDoBiD9XGZ1FGDSrYV5JeHgvsZSJGH5BmZuFaHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsH9FGHABYVWJwDMBOVcBUDuX7VorqHQXGH9B/D1rKHQJeHgveZSJqDuJeZuBOD9XsDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcXGZSBiHAN7D5BOHuNODkBsV5FGVoF7DcNmZ1FGZ1BeHuX7HgrKDkXKDWr/HINUHQJKH9X7HAN7HQXGHuBOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwH9X7Z1rwV5BOHuNOVcB/V5X7VoBqD9BsH9B/Z1NOV5BqDEBeHEXeDuFaZuB/D9NwH9X7HArYV5FGHuvmVcBOV5X7DoJsDcJUZ1FaD1rwD5BiDEBOHEXeV5FaDorqHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgNKVkJ3V5FaHIX7DcXGH9FUHAvOVWXGHgrwZSJqDur/HIX7HQBiH9BOD1rwV5FGHgvsZSJGHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5FGDoJeHQXOH9BiHAveD5NUHgNKDkBOV5FYHMBiHQBsZSBqD1rKZMJeHgBOVkJqDuFaHIFUHQXODQJwHArYHQF7HgvOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['form_configuraciones_mob']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['form_configuraciones_mob']['initialize'])  
       { 
@@ -1629,6 +1628,11 @@ ob_start();
             $espaciado = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_configuraciones_mob_validate_minutos_inactividad' == $_POST['rs'])
+        {
+            $minutos_inactividad = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_form_configuraciones_mob_validate_caja_movil' == $_POST['rs'])
         {
             $caja_movil = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1866,57 +1870,58 @@ ob_start();
             $fecha = NM_utf8_urldecode($_POST['rsargs'][3]);
             $activo = NM_utf8_urldecode($_POST['rsargs'][4]);
             $espaciado = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $caja_movil = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $pago_automatico = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $dia_limite_pago = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $refresh_grid_doc = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $desactivar_control_sesion = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $nombre_pc = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $nombre_impre = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $essociedad = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $grancontr = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $idconfiguraciones = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $control_diasmora = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $control_costo = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $modificainvpedido = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $tipodoc_pordefecto_pos = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $ver_xml_fe = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $noborrar_tmp_enpos = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $validar_correo_enlinea = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $apertura_caja = NM_utf8_urldecode($_POST['rsargs'][23]);
-            $activar_console_log = NM_utf8_urldecode($_POST['rsargs'][24]);
-            $codproducto_en_facventa = NM_utf8_urldecode($_POST['rsargs'][25]);
-            $valor_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][26]);
-            $columna_imprimir_ticket = NM_utf8_urldecode($_POST['rsargs'][27]);
-            $columna_imprimir_a4 = NM_utf8_urldecode($_POST['rsargs'][28]);
-            $columna_whatsapp = NM_utf8_urldecode($_POST['rsargs'][29]);
-            $columna_npedido = NM_utf8_urldecode($_POST['rsargs'][30]);
-            $columna_reg_pdf_propio = NM_utf8_urldecode($_POST['rsargs'][31]);
-            $ver_busqueda_refinada = NM_utf8_urldecode($_POST['rsargs'][32]);
-            $cal_valores_decimales = NM_utf8_urldecode($_POST['rsargs'][33]);
-            $cal_cantidades_decimales = NM_utf8_urldecode($_POST['rsargs'][34]);
-            $validar_codbarras = NM_utf8_urldecode($_POST['rsargs'][35]);
-            $ver_grupo = NM_utf8_urldecode($_POST['rsargs'][36]);
-            $ver_codigo = NM_utf8_urldecode($_POST['rsargs'][37]);
-            $ver_imagen = NM_utf8_urldecode($_POST['rsargs'][38]);
-            $ver_existencia = NM_utf8_urldecode($_POST['rsargs'][39]);
-            $ver_unidad = NM_utf8_urldecode($_POST['rsargs'][40]);
-            $ver_precio = NM_utf8_urldecode($_POST['rsargs'][41]);
-            $ver_impuesto = NM_utf8_urldecode($_POST['rsargs'][42]);
-            $ver_stock = NM_utf8_urldecode($_POST['rsargs'][43]);
-            $ver_ubicacion = NM_utf8_urldecode($_POST['rsargs'][44]);
-            $ver_costo = NM_utf8_urldecode($_POST['rsargs'][45]);
-            $ver_proveedor = NM_utf8_urldecode($_POST['rsargs'][46]);
-            $ver_combo = NM_utf8_urldecode($_POST['rsargs'][47]);
-            $ver_agregar_nota = NM_utf8_urldecode($_POST['rsargs'][48]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][49]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][50]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][51]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][52]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][53]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][54]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][55]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][56]);
+            $minutos_inactividad = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $caja_movil = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $pago_automatico = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $dia_limite_pago = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $refresh_grid_doc = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $desactivar_control_sesion = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $nombre_pc = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $nombre_impre = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $essociedad = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $grancontr = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $idconfiguraciones = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $control_diasmora = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $control_costo = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $modificainvpedido = NM_utf8_urldecode($_POST['rsargs'][19]);
+            $tipodoc_pordefecto_pos = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $ver_xml_fe = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $noborrar_tmp_enpos = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $validar_correo_enlinea = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $apertura_caja = NM_utf8_urldecode($_POST['rsargs'][24]);
+            $activar_console_log = NM_utf8_urldecode($_POST['rsargs'][25]);
+            $codproducto_en_facventa = NM_utf8_urldecode($_POST['rsargs'][26]);
+            $valor_propina_sugerida = NM_utf8_urldecode($_POST['rsargs'][27]);
+            $columna_imprimir_ticket = NM_utf8_urldecode($_POST['rsargs'][28]);
+            $columna_imprimir_a4 = NM_utf8_urldecode($_POST['rsargs'][29]);
+            $columna_whatsapp = NM_utf8_urldecode($_POST['rsargs'][30]);
+            $columna_npedido = NM_utf8_urldecode($_POST['rsargs'][31]);
+            $columna_reg_pdf_propio = NM_utf8_urldecode($_POST['rsargs'][32]);
+            $ver_busqueda_refinada = NM_utf8_urldecode($_POST['rsargs'][33]);
+            $cal_valores_decimales = NM_utf8_urldecode($_POST['rsargs'][34]);
+            $cal_cantidades_decimales = NM_utf8_urldecode($_POST['rsargs'][35]);
+            $validar_codbarras = NM_utf8_urldecode($_POST['rsargs'][36]);
+            $ver_grupo = NM_utf8_urldecode($_POST['rsargs'][37]);
+            $ver_codigo = NM_utf8_urldecode($_POST['rsargs'][38]);
+            $ver_imagen = NM_utf8_urldecode($_POST['rsargs'][39]);
+            $ver_existencia = NM_utf8_urldecode($_POST['rsargs'][40]);
+            $ver_unidad = NM_utf8_urldecode($_POST['rsargs'][41]);
+            $ver_precio = NM_utf8_urldecode($_POST['rsargs'][42]);
+            $ver_impuesto = NM_utf8_urldecode($_POST['rsargs'][43]);
+            $ver_stock = NM_utf8_urldecode($_POST['rsargs'][44]);
+            $ver_ubicacion = NM_utf8_urldecode($_POST['rsargs'][45]);
+            $ver_costo = NM_utf8_urldecode($_POST['rsargs'][46]);
+            $ver_proveedor = NM_utf8_urldecode($_POST['rsargs'][47]);
+            $ver_combo = NM_utf8_urldecode($_POST['rsargs'][48]);
+            $ver_agregar_nota = NM_utf8_urldecode($_POST['rsargs'][49]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][50]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][51]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][52]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][53]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][54]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][55]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][56]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][57]);
         }
         if ('ajax_form_configuraciones_mob_navigate_form' == $_POST['rs'])
         {
@@ -2540,6 +2545,7 @@ ob_start();
     sajax_export("ajax_form_configuraciones_mob_validate_fecha");
     sajax_export("ajax_form_configuraciones_mob_validate_activo");
     sajax_export("ajax_form_configuraciones_mob_validate_espaciado");
+    sajax_export("ajax_form_configuraciones_mob_validate_minutos_inactividad");
     sajax_export("ajax_form_configuraciones_mob_validate_caja_movil");
     sajax_export("ajax_form_configuraciones_mob_validate_pago_automatico");
     sajax_export("ajax_form_configuraciones_mob_validate_dia_limite_pago");
@@ -2730,6 +2736,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
         exit;
     } // ajax_validate_espaciado
+
+    function ajax_form_configuraciones_mob_validate_minutos_inactividad($minutos_inactividad, $script_case_init)
+    {
+        global $inicial_form_configuraciones_mob;
+        //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_flag          = true;
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_opcao         = 'validate_minutos_inactividad';
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param'] = array(
+                  'minutos_inactividad' => NM_utf8_urldecode($minutos_inactividad),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_configuraciones_mob->contr_form_configuraciones_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_configuraciones_mob->contr_form_configuraciones_mob->controle();
+        exit;
+    } // ajax_validate_minutos_inactividad
 
     function ajax_form_configuraciones_mob_validate_caja_movil($caja_movil, $script_case_init)
     {
@@ -3604,7 +3629,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_serial_onfocus
 
-    function ajax_form_configuraciones_mob_submit_form($lineasporfactura, $consolidararticulos, $serial, $fecha, $activo, $espaciado, $caja_movil, $pago_automatico, $dia_limite_pago, $refresh_grid_doc, $desactivar_control_sesion, $nombre_pc, $nombre_impre, $essociedad, $grancontr, $idconfiguraciones, $control_diasmora, $control_costo, $modificainvpedido, $tipodoc_pordefecto_pos, $ver_xml_fe, $noborrar_tmp_enpos, $validar_correo_enlinea, $apertura_caja, $activar_console_log, $codproducto_en_facventa, $valor_propina_sugerida, $columna_imprimir_ticket, $columna_imprimir_a4, $columna_whatsapp, $columna_npedido, $columna_reg_pdf_propio, $ver_busqueda_refinada, $cal_valores_decimales, $cal_cantidades_decimales, $validar_codbarras, $ver_grupo, $ver_codigo, $ver_imagen, $ver_existencia, $ver_unidad, $ver_precio, $ver_impuesto, $ver_stock, $ver_ubicacion, $ver_costo, $ver_proveedor, $ver_combo, $ver_agregar_nota, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_configuraciones_mob_submit_form($lineasporfactura, $consolidararticulos, $serial, $fecha, $activo, $espaciado, $minutos_inactividad, $caja_movil, $pago_automatico, $dia_limite_pago, $refresh_grid_doc, $desactivar_control_sesion, $nombre_pc, $nombre_impre, $essociedad, $grancontr, $idconfiguraciones, $control_diasmora, $control_costo, $modificainvpedido, $tipodoc_pordefecto_pos, $ver_xml_fe, $noborrar_tmp_enpos, $validar_correo_enlinea, $apertura_caja, $activar_console_log, $codproducto_en_facventa, $valor_propina_sugerida, $columna_imprimir_ticket, $columna_imprimir_a4, $columna_whatsapp, $columna_npedido, $columna_reg_pdf_propio, $ver_busqueda_refinada, $cal_valores_decimales, $cal_cantidades_decimales, $validar_codbarras, $ver_grupo, $ver_codigo, $ver_imagen, $ver_existencia, $ver_unidad, $ver_precio, $ver_impuesto, $ver_stock, $ver_ubicacion, $ver_costo, $ver_proveedor, $ver_combo, $ver_agregar_nota, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_configuraciones_mob;
         //register_shutdown_function("form_configuraciones_mob_pack_ajax_response");
@@ -3617,6 +3642,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'fecha' => NM_utf8_urldecode($fecha),
                   'activo' => NM_utf8_urldecode($activo),
                   'espaciado' => NM_utf8_urldecode($espaciado),
+                  'minutos_inactividad' => NM_utf8_urldecode($minutos_inactividad),
                   'caja_movil' => NM_utf8_urldecode($caja_movil),
                   'pago_automatico' => NM_utf8_urldecode($pago_automatico),
                   'dia_limite_pago' => NM_utf8_urldecode($dia_limite_pago),

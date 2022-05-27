@@ -28,6 +28,7 @@ function scFocusField(sField) {
       case 'fecha':
       case 'activo':
       case 'espaciado':
+      case 'minutos_inactividad':
       case 'caja_movil':
       case 'pago_automatico':
       case 'dia_limite_pago':
@@ -119,6 +120,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["fecha" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["activo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["espaciado" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["minutos_inactividad" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["caja_movil" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["pago_automatico" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["dia_limite_pago" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -199,6 +201,12 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["espaciado" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["minutos_inactividad" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["minutos_inactividad" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["caja_movil" + iSeqRow]["blur"]) {
@@ -596,6 +604,8 @@ function scJQEventsAdd(iSeqRow) {
                                                       .bind('focus', function() { sc_form_configuraciones_cal_cantidades_decimales_onfocus(this, iSeqRow) });
   $('#id_sc_field_validar_codbarras' + iSeqRow).bind('blur', function() { sc_form_configuraciones_validar_codbarras_onblur(this, iSeqRow) })
                                                .bind('focus', function() { sc_form_configuraciones_validar_codbarras_onfocus(this, iSeqRow) });
+  $('#id_sc_field_minutos_inactividad' + iSeqRow).bind('blur', function() { sc_form_configuraciones_minutos_inactividad_onblur(this, iSeqRow) })
+                                                 .bind('focus', function() { sc_form_configuraciones_minutos_inactividad_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-caja_movil' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-pago_automatico' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-desactivar_control_sesion' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -1139,6 +1149,16 @@ function sc_form_configuraciones_validar_codbarras_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_configuraciones_minutos_inactividad_onblur(oThis, iSeqRow) {
+  do_ajax_form_configuraciones_mob_validate_minutos_inactividad();
+  scCssBlur(oThis);
+}
+
+function sc_form_configuraciones_minutos_inactividad_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function displayChange_page(page, status) {
 	if ("0" == page) {
 		displayChange_page_0(status);
@@ -1196,10 +1216,11 @@ function displayChange_block_0(status) {
 	displayChange_field("fecha", "", status);
 	displayChange_field("activo", "", status);
 	displayChange_field("espaciado", "", status);
+	displayChange_field("minutos_inactividad", "", status);
+	displayChange_field("caja_movil", "", status);
 }
 
 function displayChange_block_1(status) {
-	displayChange_field("caja_movil", "", status);
 	displayChange_field("pago_automatico", "", status);
 	displayChange_field("dia_limite_pago", "", status);
 	displayChange_field("refresh_grid_doc", "", status);
@@ -1260,6 +1281,7 @@ function displayChange_row(row, status) {
 	displayChange_field_fecha(row, status);
 	displayChange_field_activo(row, status);
 	displayChange_field_espaciado(row, status);
+	displayChange_field_minutos_inactividad(row, status);
 	displayChange_field_caja_movil(row, status);
 	displayChange_field_pago_automatico(row, status);
 	displayChange_field_dia_limite_pago(row, status);
@@ -1323,6 +1345,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("espaciado" == field) {
 		displayChange_field_espaciado(row, status);
+	}
+	if ("minutos_inactividad" == field) {
+		displayChange_field_minutos_inactividad(row, status);
 	}
 	if ("caja_movil" == field) {
 		displayChange_field_caja_movil(row, status);
@@ -1483,6 +1508,9 @@ function displayChange_field_activo(row, status) {
 }
 
 function displayChange_field_espaciado(row, status) {
+}
+
+function displayChange_field_minutos_inactividad(row, status) {
 }
 
 function displayChange_field_caja_movil(row, status) {
@@ -1761,6 +1789,21 @@ elseif ('' != $miniCalendarButton[0]) {
   });
 } // scJQCalendarAdd
 
+function scJQSpinAdd(iSeqRow) {
+  $("#id_sc_field_minutos_inactividad" + iSeqRow).spinner({
+    max: 1440,
+    min: 1,
+    step: 5,
+    page: 5,
+    change: function(event, ui) {
+      $(this).trigger("change");
+    },
+    stop: function(event, ui) {
+      $(this).trigger("change");
+    }
+  });
+} // scJQSpinAdd
+
 function scJQPopupAdd(iSeqRow) {
   $('.scFormPopupBubble' + iSeqRow).each(function() {
     var distance = 10;
@@ -2011,6 +2054,7 @@ function scJQElementsAdd(iLine) {
   scJQEventsAdd(iLine);
   scEventControl_init(iLine);
   scJQCalendarAdd(iLine);
+  scJQSpinAdd(iLine);
   scJQPopupAdd(iLine);
   scJQUploadAdd(iLine);
   scJQPasswordToggleAdd(iLine);

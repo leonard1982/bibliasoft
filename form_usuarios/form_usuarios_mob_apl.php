@@ -4038,7 +4038,7 @@ else
           $acceso_restaurante_val_str .= "'$Tmp_val_cmp'";
        }
    }
-   $nm_comando = "SELECT Idres, prefijo  FROM resdian  ORDER BY prefijo";
+   $nm_comando = "SELECT Idres, concat(prefijo,' - Vence: ',fec_vencimiento)  FROM resdian  ORDER BY prefijo";
 
    $this->idusuarios = $old_value_idusuarios;
 
@@ -8553,7 +8553,7 @@ else
           $acceso_restaurante_val_str .= "'$Tmp_val_cmp'";
        }
    }
-   $nm_comando = "SELECT Idres, prefijo  FROM resdian  ORDER BY prefijo";
+   $nm_comando = "SELECT Idres, concat(prefijo,' - Vence: ',fec_vencimiento)  FROM resdian  ORDER BY prefijo";
 
    $this->idusuarios = $old_value_idusuarios;
 

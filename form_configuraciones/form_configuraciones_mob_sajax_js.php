@@ -3144,6 +3144,43 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_form_configuraciones_mob_validate_espaciado_cb
 
+  // ---------- Validate minutos_inactividad
+  function do_ajax_form_configuraciones_mob_validate_minutos_inactividad()
+  {
+    var nomeCampo_minutos_inactividad = "minutos_inactividad";
+    var var_minutos_inactividad = scAjaxGetFieldText(nomeCampo_minutos_inactividad);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_configuraciones_mob_validate_minutos_inactividad(var_minutos_inactividad, var_script_case_init, do_ajax_form_configuraciones_mob_validate_minutos_inactividad_cb);
+  } // do_ajax_form_configuraciones_mob_validate_minutos_inactividad
+
+  function do_ajax_form_configuraciones_mob_validate_minutos_inactividad_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "minutos_inactividad";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_configuraciones_mob_validate_minutos_inactividad_cb
+
   // ---------- Validate caja_movil
   function do_ajax_form_configuraciones_mob_validate_caja_movil()
   {
@@ -5169,6 +5206,7 @@ function scJs_sweetalert_params(params) {
     var var_fecha = scAjaxGetFieldHidden("fecha");
     var var_activo = scAjaxGetFieldHidden("activo");
     var var_espaciado = scAjaxGetFieldText("espaciado");
+    var var_minutos_inactividad = scAjaxGetFieldText("minutos_inactividad");
     var var_caja_movil = scAjaxGetFieldCheckbox("caja_movil", ";");
     var var_pago_automatico = scAjaxGetFieldCheckbox("pago_automatico", ";");
     var var_dia_limite_pago = scAjaxGetFieldText("dia_limite_pago");
@@ -5221,7 +5259,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_configuraciones_mob_submit_form(var_lineasporfactura, var_consolidararticulos, var_serial, var_fecha, var_activo, var_espaciado, var_caja_movil, var_pago_automatico, var_dia_limite_pago, var_refresh_grid_doc, var_desactivar_control_sesion, var_nombre_pc, var_nombre_impre, var_essociedad, var_grancontr, var_idconfiguraciones, var_control_diasmora, var_control_costo, var_modificainvpedido, var_tipodoc_pordefecto_pos, var_ver_xml_fe, var_noborrar_tmp_enpos, var_validar_correo_enlinea, var_apertura_caja, var_activar_console_log, var_codproducto_en_facventa, var_valor_propina_sugerida, var_columna_imprimir_ticket, var_columna_imprimir_a4, var_columna_whatsapp, var_columna_npedido, var_columna_reg_pdf_propio, var_ver_busqueda_refinada, var_cal_valores_decimales, var_cal_cantidades_decimales, var_validar_codbarras, var_ver_grupo, var_ver_codigo, var_ver_imagen, var_ver_existencia, var_ver_unidad, var_ver_precio, var_ver_impuesto, var_ver_stock, var_ver_ubicacion, var_ver_costo, var_ver_proveedor, var_ver_combo, var_ver_agregar_nota, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_configuraciones_mob_submit_form_cb);
+    x_ajax_form_configuraciones_mob_submit_form(var_lineasporfactura, var_consolidararticulos, var_serial, var_fecha, var_activo, var_espaciado, var_minutos_inactividad, var_caja_movil, var_pago_automatico, var_dia_limite_pago, var_refresh_grid_doc, var_desactivar_control_sesion, var_nombre_pc, var_nombre_impre, var_essociedad, var_grancontr, var_idconfiguraciones, var_control_diasmora, var_control_costo, var_modificainvpedido, var_tipodoc_pordefecto_pos, var_ver_xml_fe, var_noborrar_tmp_enpos, var_validar_correo_enlinea, var_apertura_caja, var_activar_console_log, var_codproducto_en_facventa, var_valor_propina_sugerida, var_columna_imprimir_ticket, var_columna_imprimir_a4, var_columna_whatsapp, var_columna_npedido, var_columna_reg_pdf_propio, var_ver_busqueda_refinada, var_cal_valores_decimales, var_cal_cantidades_decimales, var_validar_codbarras, var_ver_grupo, var_ver_codigo, var_ver_imagen, var_ver_existencia, var_ver_unidad, var_ver_precio, var_ver_impuesto, var_ver_stock, var_ver_ubicacion, var_ver_costo, var_ver_proveedor, var_ver_combo, var_ver_agregar_nota, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_configuraciones_mob_submit_form_cb);
   } // do_ajax_form_configuraciones_mob_submit_form
 
   function do_ajax_form_configuraciones_mob_submit_form_cb(sResp)
@@ -5251,6 +5289,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("fecha");
       scAjaxHideErrorDisplay("activo");
       scAjaxHideErrorDisplay("espaciado");
+      scAjaxHideErrorDisplay("minutos_inactividad");
       scAjaxHideErrorDisplay("caja_movil");
       scAjaxHideErrorDisplay("pago_automatico");
       scAjaxHideErrorDisplay("dia_limite_pago");
@@ -5358,6 +5397,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_configuraciones_mob
     scAjaxHideErrorDisplay("fecha");
     scAjaxHideErrorDisplay("activo");
     scAjaxHideErrorDisplay("espaciado");
+    scAjaxHideErrorDisplay("minutos_inactividad");
     scAjaxHideErrorDisplay("caja_movil");
     scAjaxHideErrorDisplay("pago_automatico");
     scAjaxHideErrorDisplay("dia_limite_pago");
@@ -5492,49 +5532,50 @@ if ($this->Embutida_form)
   ajax_field_list[3] = "fecha";
   ajax_field_list[4] = "activo";
   ajax_field_list[5] = "espaciado";
-  ajax_field_list[6] = "caja_movil";
-  ajax_field_list[7] = "pago_automatico";
-  ajax_field_list[8] = "dia_limite_pago";
-  ajax_field_list[9] = "refresh_grid_doc";
-  ajax_field_list[10] = "desactivar_control_sesion";
-  ajax_field_list[11] = "nombre_pc";
-  ajax_field_list[12] = "nombre_impre";
-  ajax_field_list[13] = "essociedad";
-  ajax_field_list[14] = "grancontr";
-  ajax_field_list[15] = "idconfiguraciones";
-  ajax_field_list[16] = "control_diasmora";
-  ajax_field_list[17] = "control_costo";
-  ajax_field_list[18] = "modificainvpedido";
-  ajax_field_list[19] = "tipodoc_pordefecto_pos";
-  ajax_field_list[20] = "ver_xml_fe";
-  ajax_field_list[21] = "noborrar_tmp_enpos";
-  ajax_field_list[22] = "validar_correo_enlinea";
-  ajax_field_list[23] = "apertura_caja";
-  ajax_field_list[24] = "activar_console_log";
-  ajax_field_list[25] = "codproducto_en_facventa";
-  ajax_field_list[26] = "valor_propina_sugerida";
-  ajax_field_list[27] = "columna_imprimir_ticket";
-  ajax_field_list[28] = "columna_imprimir_a4";
-  ajax_field_list[29] = "columna_whatsapp";
-  ajax_field_list[30] = "columna_npedido";
-  ajax_field_list[31] = "columna_reg_pdf_propio";
-  ajax_field_list[32] = "ver_busqueda_refinada";
-  ajax_field_list[33] = "cal_valores_decimales";
-  ajax_field_list[34] = "cal_cantidades_decimales";
-  ajax_field_list[35] = "validar_codbarras";
-  ajax_field_list[36] = "ver_grupo";
-  ajax_field_list[37] = "ver_codigo";
-  ajax_field_list[38] = "ver_imagen";
-  ajax_field_list[39] = "ver_existencia";
-  ajax_field_list[40] = "ver_unidad";
-  ajax_field_list[41] = "ver_precio";
-  ajax_field_list[42] = "ver_impuesto";
-  ajax_field_list[43] = "ver_stock";
-  ajax_field_list[44] = "ver_ubicacion";
-  ajax_field_list[45] = "ver_costo";
-  ajax_field_list[46] = "ver_proveedor";
-  ajax_field_list[47] = "ver_combo";
-  ajax_field_list[48] = "ver_agregar_nota";
+  ajax_field_list[6] = "minutos_inactividad";
+  ajax_field_list[7] = "caja_movil";
+  ajax_field_list[8] = "pago_automatico";
+  ajax_field_list[9] = "dia_limite_pago";
+  ajax_field_list[10] = "refresh_grid_doc";
+  ajax_field_list[11] = "desactivar_control_sesion";
+  ajax_field_list[12] = "nombre_pc";
+  ajax_field_list[13] = "nombre_impre";
+  ajax_field_list[14] = "essociedad";
+  ajax_field_list[15] = "grancontr";
+  ajax_field_list[16] = "idconfiguraciones";
+  ajax_field_list[17] = "control_diasmora";
+  ajax_field_list[18] = "control_costo";
+  ajax_field_list[19] = "modificainvpedido";
+  ajax_field_list[20] = "tipodoc_pordefecto_pos";
+  ajax_field_list[21] = "ver_xml_fe";
+  ajax_field_list[22] = "noborrar_tmp_enpos";
+  ajax_field_list[23] = "validar_correo_enlinea";
+  ajax_field_list[24] = "apertura_caja";
+  ajax_field_list[25] = "activar_console_log";
+  ajax_field_list[26] = "codproducto_en_facventa";
+  ajax_field_list[27] = "valor_propina_sugerida";
+  ajax_field_list[28] = "columna_imprimir_ticket";
+  ajax_field_list[29] = "columna_imprimir_a4";
+  ajax_field_list[30] = "columna_whatsapp";
+  ajax_field_list[31] = "columna_npedido";
+  ajax_field_list[32] = "columna_reg_pdf_propio";
+  ajax_field_list[33] = "ver_busqueda_refinada";
+  ajax_field_list[34] = "cal_valores_decimales";
+  ajax_field_list[35] = "cal_cantidades_decimales";
+  ajax_field_list[36] = "validar_codbarras";
+  ajax_field_list[37] = "ver_grupo";
+  ajax_field_list[38] = "ver_codigo";
+  ajax_field_list[39] = "ver_imagen";
+  ajax_field_list[40] = "ver_existencia";
+  ajax_field_list[41] = "ver_unidad";
+  ajax_field_list[42] = "ver_precio";
+  ajax_field_list[43] = "ver_impuesto";
+  ajax_field_list[44] = "ver_stock";
+  ajax_field_list[45] = "ver_ubicacion";
+  ajax_field_list[46] = "ver_costo";
+  ajax_field_list[47] = "ver_proveedor";
+  ajax_field_list[48] = "ver_combo";
+  ajax_field_list[49] = "ver_agregar_nota";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -5550,6 +5591,7 @@ if ($this->Embutida_form)
     "fecha": {"label": "FECHA INICIO:", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "activo": {"label": "ACTIVO:", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "espaciado": {"label": "ESPACIADO DETALLE FACTURA:", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "minutos_inactividad": {"label": "Minutos Inactividad", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "caja_movil": {"label": "LLAMAR CAJA DESDE MÓVIL?:", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "pago_automatico": {"label": "COMPROBANTE DE EGRESO AUTOMÁTICO EN COMPRAS?:", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "dia_limite_pago": {"label": "DÍA LÍMITE DE PAGO", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -5619,6 +5661,7 @@ if ($this->Embutida_form)
     "fecha": new Array(),
     "activo": new Array(),
     "espaciado": new Array(),
+    "minutos_inactividad": new Array(),
     "caja_movil": new Array(),
     "pago_automatico": new Array(),
     "dia_limite_pago": new Array(),
@@ -5669,6 +5712,7 @@ if ($this->Embutida_form)
   ajax_field_mult["fecha"][1] = "fecha";
   ajax_field_mult["activo"][1] = "activo";
   ajax_field_mult["espaciado"][1] = "espaciado";
+  ajax_field_mult["minutos_inactividad"][1] = "minutos_inactividad";
   ajax_field_mult["caja_movil"][1] = "caja_movil";
   ajax_field_mult["pago_automatico"][1] = "pago_automatico";
   ajax_field_mult["dia_limite_pago"][1] = "dia_limite_pago";
@@ -5720,6 +5764,7 @@ if ($this->Embutida_form)
     "fecha": new Array("hidden_field_label_fecha", "hidden_field_data_fecha"),
     "activo": new Array("hidden_field_label_activo", "hidden_field_data_activo"),
     "espaciado": new Array("hidden_field_label_espaciado", "hidden_field_data_espaciado"),
+    "minutos_inactividad": new Array("hidden_field_label_minutos_inactividad", "hidden_field_data_minutos_inactividad"),
     "caja_movil": new Array("hidden_field_label_caja_movil", "hidden_field_data_caja_movil"),
     "pago_automatico": new Array("hidden_field_label_pago_automatico", "hidden_field_data_pago_automatico"),
     "dia_limite_pago": new Array("hidden_field_label_dia_limite_pago", "hidden_field_data_dia_limite_pago"),
@@ -5771,6 +5816,7 @@ if ($this->Embutida_form)
     "fecha": "off",
     "activo": "off",
     "espaciado": "off",
+    "minutos_inactividad": "off",
     "caja_movil": "off",
     "pago_automatico": "off",
     "dia_limite_pago": "off",
@@ -5911,6 +5957,23 @@ if ($this->Embutida_form)
       return;
     }
     if ("espaciado" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("minutos_inactividad" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);

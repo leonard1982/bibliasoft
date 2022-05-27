@@ -269,27 +269,27 @@ class grid_inventario_inical_json
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, fecha, idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, fecha, idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, convert(char(23),fecha,121), idinv, tipo from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, convert(char(23),fecha,121), idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, fecha, idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, fecha, idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, EXTEND(fecha, YEAR TO DAY), idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, EXTEND(fecha, YEAR TO DAY), idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, fecha, idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, fecha, idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['where_pesq'];
@@ -325,46 +325,41 @@ class grid_inventario_inical_json
          }
          $this->idpro = $rs->fields[0] ;  
          $this->idpro = (string)$this->idpro;
-         $this->colores = $rs->fields[1] ;  
-         $this->colores = (string)$this->colores;
-         $this->tallas = $rs->fields[2] ;  
-         $this->tallas = (string)$this->tallas;
-         $this->sabor = $rs->fields[3] ;  
-         $this->sabor = (string)$this->sabor;
-         $this->cantidad = $rs->fields[4] ;  
+         $this->cantidad = $rs->fields[1] ;  
          $this->cantidad =  str_replace(",", ".", $this->cantidad);
-         $this->cantidad = (strpos(strtolower($this->cantidad), "e")) ? (float)$this->cantidad : $this->cantidad; 
          $this->cantidad = (string)$this->cantidad;
-         $this->idbod = $rs->fields[5] ;  
+         $this->costo = $rs->fields[2] ;  
+         $this->costo =  str_replace(",", ".", $this->costo);
+         $this->costo = (string)$this->costo;
+         $this->valorparcial = $rs->fields[3] ;  
+         $this->valorparcial =  str_replace(",", ".", $this->valorparcial);
+         $this->valorparcial = (string)$this->valorparcial;
+         $this->idbod = $rs->fields[4] ;  
          $this->idbod = (string)$this->idbod;
-         $this->fecha = $rs->fields[6] ;  
-         $this->idinv = $rs->fields[7] ;  
+         $this->fecha = $rs->fields[5] ;  
+         $this->idinv = $rs->fields[6] ;  
          $this->idinv = (string)$this->idinv;
-         $this->tipo = $rs->fields[8] ;  
+         $this->tipo = $rs->fields[7] ;  
          $this->tipo = (string)$this->tipo;
+         $this->colores = $rs->fields[8] ;  
+         $this->colores = (string)$this->colores;
+         $this->tallas = $rs->fields[9] ;  
+         $this->tallas = (string)$this->tallas;
+         $this->sabor = $rs->fields[10] ;  
+         $this->sabor = (string)$this->sabor;
          //----- lookup - idpro
          $this->look_idpro = $this->idpro; 
          $this->Lookup->lookup_idpro($this->look_idpro, $this->idpro) ; 
          $this->look_idpro = ($this->look_idpro == "&nbsp;") ? "" : $this->look_idpro; 
-         //----- lookup - colores
-         $this->look_colores = $this->colores; 
-         $this->Lookup->lookup_colores($this->look_colores, $this->colores) ; 
-         $this->look_colores = ($this->look_colores == "&nbsp;") ? "" : $this->look_colores; 
-         //----- lookup - tallas
-         $this->look_tallas = $this->tallas; 
-         $this->Lookup->lookup_tallas($this->look_tallas, $this->tallas) ; 
-         $this->look_tallas = ($this->look_tallas == "&nbsp;") ? "" : $this->look_tallas; 
-         //----- lookup - sabor
-         $this->look_sabor = $this->sabor; 
-         $this->Lookup->lookup_sabor($this->look_sabor, $this->sabor) ; 
-         $this->look_sabor = ($this->look_sabor == "&nbsp;") ? "" : $this->look_sabor; 
          //----- lookup - idbod
          $this->look_idbod = $this->idbod; 
          $this->Lookup->lookup_idbod($this->look_idbod, $this->idbod) ; 
          $this->look_idbod = ($this->look_idbod == "&nbsp;") ? "" : $this->look_idbod; 
          $this->sc_proc_grid = true; 
          $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'on';
- $sql="select unidmaymen, unimay, unimen from productos where idprod=$this->idpro ";
+ $unidad = '';
+
+$sql="select unidmaymen, unimay, unimen from productos where idprod=$this->idpro ";
  
       $nm_select = $sql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -394,11 +389,47 @@ class grid_inventario_inical_json
 
 if(($this->ds[0][0])=='SI')
 	{
-	$this->presentacion =$this->ds[0][1];
+	$unidad =$this->ds[0][1];
 	}
 else
 	{
-	$this->presentacion =$this->ds[0][2];
+	$unidad =$this->ds[0][2];
+	}
+
+$sql_um = "SELECT descripcion_um FROM unidades_medida WHERE codigo_um = '".$unidad."'";
+ 
+      $nm_select = $sql_um; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_um = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->ds_um[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_um = false;
+          $this->ds_um_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_um[0][0]))
+	{
+	$this->presentacion  = $this->ds_um[0][0];
+	}
+else
+	{
+	$this->presentacion  = 'UN';
 	}
 $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off'; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'] as $Cada_col)
@@ -550,63 +581,6 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_idpro;
    }
-   //----- colores
-   function NM_export_colores()
-   {
-         if ($this->look_colores !== "&nbsp;") 
-         { 
-             $this->look_colores = sc_strtoupper($this->look_colores); 
-         } 
-         $this->look_colores = NM_charset_to_utf8($this->look_colores);
-         if ($this->Json_use_label)
-         {
-             $SC_Label = (isset($this->New_label['colores'])) ? $this->New_label['colores'] : "Color"; 
-         }
-         else
-         {
-             $SC_Label = "colores"; 
-         }
-         $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_colores;
-   }
-   //----- tallas
-   function NM_export_tallas()
-   {
-         if ($this->look_tallas !== "&nbsp;") 
-         { 
-             $this->look_tallas = sc_strtoupper($this->look_tallas); 
-         } 
-         $this->look_tallas = NM_charset_to_utf8($this->look_tallas);
-         if ($this->Json_use_label)
-         {
-             $SC_Label = (isset($this->New_label['tallas'])) ? $this->New_label['tallas'] : "Talla"; 
-         }
-         else
-         {
-             $SC_Label = "tallas"; 
-         }
-         $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_tallas;
-   }
-   //----- sabor
-   function NM_export_sabor()
-   {
-         if ($this->look_sabor !== "&nbsp;") 
-         { 
-             $this->look_sabor = sc_strtoupper($this->look_sabor); 
-         } 
-         $this->look_sabor = NM_charset_to_utf8($this->look_sabor);
-         if ($this->Json_use_label)
-         {
-             $SC_Label = (isset($this->New_label['sabor'])) ? $this->New_label['sabor'] : "Sabor"; 
-         }
-         else
-         {
-             $SC_Label = "sabor"; 
-         }
-         $SC_Label = NM_charset_to_utf8($SC_Label); 
-         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->look_sabor;
-   }
    //----- cantidad
    function NM_export_cantidad()
    {
@@ -624,6 +598,42 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
          }
          $SC_Label = NM_charset_to_utf8($SC_Label); 
          $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->cantidad;
+   }
+   //----- costo
+   function NM_export_costo()
+   {
+         if ($this->Json_format)
+         {
+             nmgp_Form_Num_Val($this->costo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "2", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+         }
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['costo'])) ? $this->New_label['costo'] : "Costo x Und"; 
+         }
+         else
+         {
+             $SC_Label = "costo"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->costo;
+   }
+   //----- valorparcial
+   function NM_export_valorparcial()
+   {
+         if ($this->Json_format)
+         {
+             nmgp_Form_Num_Val($this->valorparcial, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "2", "S", "2", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']) ; 
+         }
+         if ($this->Json_use_label)
+         {
+             $SC_Label = (isset($this->New_label['valorparcial'])) ? $this->New_label['valorparcial'] : "Valor"; 
+         }
+         else
+         {
+             $SC_Label = "valorparcial"; 
+         }
+         $SC_Label = NM_charset_to_utf8($SC_Label); 
+         $this->json_registro[$this->SC_seq_json][$SC_Label] = $this->valorparcial;
    }
    //----- presentacion
    function NM_export_presentacion()

@@ -4,6 +4,7 @@ scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png
 img_calendar.gif
 img_move_left.gif
 img_move_right.gif
+nm_help.gif
 icon_cancel.png
 icon_edit.png
 icon_delete.gif

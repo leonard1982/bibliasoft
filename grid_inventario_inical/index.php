@@ -225,13 +225,14 @@ class grid_inventario_inical_ini
       $this->nm_dt_criacao   = "20171213"; 
       $this->nm_hr_criacao   = "172755"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220505"; 
-      $this->nm_hr_ult_alt   = "111214"; 
+      $this->nm_dt_ult_alt   = "20220519"; 
+      $this->nm_hr_ult_alt   = "110502"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0";
+      $this->nm_tp_variance  = "P";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -725,6 +726,8 @@ class grid_inventario_inical_ini
       $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
+      $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -849,7 +852,7 @@ class grid_inventario_inical_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_inventario_inical']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_inventario_inical']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQFGHINaD5F7HuBYVcBUH5FqHMFGHQNwZ1FGZ1NOD5XGDEvsHENiDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZ1BOHAvsZMBODMveHArCDWFGZuBqHQBiZSBiZ1N7HQFaDMNOVIBODWF/VoB/HQFYZ1B/HABYV5FGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeV5JeDEBOVkJGDWXCVoB/D9XsH9FGD1veV5FUHuzGVIBOHEFYVoraDcNwH9B/DSrYV5FUDEBeHEXeH5FYDoraD9XsDQBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBOV9BUDWFaHMFGDcNmZSB/Z1rYZMFaDErKZSJ3H5FYHIFUHQJeDQBqHANOD5F7DMvmVIFCDWF/HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VEraHQNmZkBiHABYHQJwDEBODkFeH5FYVoFGHQJKDQB/HABYHuJeHuBYVcFKV5X7VoBOD9XOZkFGZ1vOD5BODMBYVkXeDWB3DoXGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDQBqHIrwV5BODMvmVcFCDWJeHMBODcFYZ1X7HArKHuB/HgNKZSJ3DuJeDoB/D9XsZSBiD1veHuFUDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveVWJwHgrwVcBUH5XCHMFaHQBsVINUD1rKHQBiHgBeHEXeDWB3DoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSX7DSBYD5NUHuBYVIBODWFYDoJsD9BiZ1F7HABYD5XGDEBeHEXeV5FaDoFUD9JKDQX7Z1N7D5BqHgvsDkBODWFaDoJeHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMzGVIFCH5B7DoXGDcFYZkFGD1rwHQFUHgBOHEFiDuFaVoFGHQXsZSBiZ1BYV5FaDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJwDMvOZSNiDuX7HMBiD9BsVIraD1rwV5X7HgBeHEBUDuXKZuBOD9XsZ9F7HABYHuX7HuNOVcrsHEFYVoJwHQBsZ1BiHIBeHuJeHgNOZSJqHEXCHIBqHQXsZSBiHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2223,6 +2226,8 @@ class grid_inventario_inical_apl
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
       $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
+      $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2312,10 +2317,9 @@ class grid_inventario_inical_apl
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order']))
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "idpro";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "colores";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "tallas";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "sabor";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "cantidad";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "costo";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "valorparcial";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "presentacion";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "idbod";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'][] = "fecha";
@@ -3536,7 +3540,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idinv";$nm_numeric[] = "cantidad";$nm_numeric[] = "idpro";$nm_numeric[] = "idbod";$nm_numeric[] = "tipo";$nm_numeric[] = "idmov";$nm_numeric[] = "idfaccom";$nm_numeric[] = "nufacvta";$nm_numeric[] = "colores";$nm_numeric[] = "tallas";$nm_numeric[] = "sabor";
+      $nm_numeric[] = "idinv";$nm_numeric[] = "cantidad";$nm_numeric[] = "idpro";$nm_numeric[] = "idbod";$nm_numeric[] = "tipo";$nm_numeric[] = "idmov";$nm_numeric[] = "idfaccom";$nm_numeric[] = "nufacvta";$nm_numeric[] = "colores";$nm_numeric[] = "tallas";$nm_numeric[] = "sabor";$nm_numeric[] = "costo";$nm_numeric[] = "valorparcial";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['decimal_db'] == ".")
@@ -5124,6 +5128,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical'][$path_doc
        $Nm_numeric[] = "colores";
        $Nm_numeric[] = "tallas";
        $Nm_numeric[] = "sabor";
+       $Nm_numeric[] = "costo";
+       $Nm_numeric[] = "valorparcial";
        if (in_array($name, $Nm_numeric))
        {
            if (is_array($val))

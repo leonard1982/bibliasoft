@@ -579,23 +579,68 @@ sc_userSweetAlertDisplayed = false;
   {
 ?>
 <tr><td>
-<style>
-#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
-#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
-</style>
-
-<div style="width: 100%">
- <div class="scFormHeader" style="height:11px; display: block; border-width:0px; "></div>
- <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
- 	<table style="width:100%; border-collapse:collapse; padding:0;">
-    	<tr>
-        	<td id="lin1_col1" class="scFormHeaderFont"><span><?php if ($this->nmgp_opcao == "novo") { echo "Nueva Resolución Dian"; } else { echo "Editar Resolución Dian"; } ?></span></td>
-            <td id="lin1_col2" class="scFormHeaderFont"><span><?php echo date($this->dateDefaultFormat()); ?></span></td>
-        </tr>
-    </table>		 
- </div>
-</div>
-</td></tr>
+   <TABLE width="100%" class="scFormHeader">
+    <TR align="center">
+     <TD style="padding: 0px">
+      <TABLE style="padding: 0px; border-spacing: 0px; border-width: 0px;" width="100%">
+       <TR valign="middle">
+        <TD align="left" rowspan="3" class="scFormHeaderFont">
+          
+        </TD>
+        <TD align="left" class="scFormHeaderFont">
+          <?php if ($this->nmgp_opcao == "novo") { echo "Nueva Resolución Dian"; } else { echo "Editar Resolución Dian"; } ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          <?php echo date($this->dateDefaultFormat()); ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>
+   </TABLE></td></tr>
 <?php
   }
 ?>
@@ -2292,7 +2337,7 @@ $texto_encabezado_val = str_replace('<br />', '__SC_BREAK_LINE__', nl2br($texto_
    <?php
     if (!isset($this->nm_new_label['texto_pie_pagina']))
     {
-        $this->nm_new_label['texto_pie_pagina'] = "Texto Pie Pagina";
+        $this->nm_new_label['texto_pie_pagina'] = "Texto Pié Página";
     }
 ?>
 <?php

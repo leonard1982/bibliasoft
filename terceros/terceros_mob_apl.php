@@ -27536,10 +27536,9 @@ if(isset($this->ds_terc[0][0]))
 		$dep = $this->des[0][0];
 		}
 	
-	if($this->cliente =="SI")
-		{
+		$vsql = "insert direccion SET idter = '".$idt."', iddepar = '".$dep."', idmuni = '".$muni."', direc = '".$this->direccion ."', obs = 'PRINCIPAL', telefono = '".$this->tel_cel ."', ciudad = '".$this->ciudad ."',  codigo_postal = '".$this->codigo_postal ."', lenguaje = '".$this->lenguaje ."'";
 		
-     $nm_select ="insert direccion SET idter = '".$idt."', iddepar = '".$dep."', idmuni = '".$muni."', direc = '".$this->direccion ."', obs = 'PRINCIPAL', telefono = '".$this->tel_cel ."', ciudad = '".$this->ciudad ."',  codigo_postal = '".$this->codigo_postal ."', lenguaje = '".$this->lenguaje ."'"; 
+     $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -27555,7 +27554,6 @@ if(isset($this->ds_terc[0][0]))
          }
          $rf->Close();
       ; 
-		}
 
 	
 	$vcod='';
@@ -27735,10 +27733,78 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
       } 
 ;
 $dep=substr($this->des , 7);
-if($this->cliente =="SI")
-	{
+$idt=$this->idtercero ;
+
+$muni = $this->idmuni ;
+$sql2 = "select iddepar from municipio where idmun = '".$muni."'";
+ 
+      $nm_select = $sql2; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->des = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->des[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->des = false;
+          $this->des_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->des[0][0]))
+{
+	$dep = $this->des[0][0];
+}
+
+$vsql = "select iddireccion from direccion where idter='".$idt."' and obs='PRINCIPAL'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiDir = array();
+      $this->vsidir = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiDir[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsidir[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiDir = false;
+          $this->vSiDir_erro = $this->Db->ErrorMsg();
+          $this->vsidir = false;
+          $this->vsidir_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vsidir[0][0]))
+{
+	$vsql = "UPDATE direccion SET iddepar=$dep, idmuni=$muni, direc='".$this->direccion ."', telefono='".$this->tel_cel ."', ciudad='".$this->ciudad ."',  codigo_postal='".$this->codigo_postal ."', lenguaje='".$this->lenguaje ."' where iddireccion='".$this->vsidir[0][0]."'";
 	
-     $nm_select ="UPDATE direccion SET iddepar=$dep, idmuni=$muni, direc='$this->direccion', telefono='$this->tel_cel', ciudad='$this->ciudad',  codigo_postal='$this->codigo_postal', lenguaje='$this->lenguaje' where idter=$this->idtercero  and obs='PRINCIPAL'"; 
+	
+     $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -27754,8 +27820,34 @@ if($this->cliente =="SI")
          }
          $rf->Close();
       ; 
+}
+else
+{
+	$vsql = "insert direccion SET idter = '".$idt."', iddepar = '".$dep."', idmuni = '".$muni."', direc = '".$this->direccion ."', obs = 'PRINCIPAL', telefono = '".$this->tel_cel ."', ciudad = '".$this->ciudad ."',  codigo_postal = '".$this->codigo_postal ."', lenguaje = '".$this->lenguaje ."'";
 	
-	$idt=$this->idtercero ;
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                terceros_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ; 
+}
+
+
+
+if($this->cliente =="SI")
+	{
+	
 	 
       $nm_select = "select id_dt_ter from det_trib_x_tercero where id_tercero=$idt"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 

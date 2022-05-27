@@ -816,7 +816,7 @@ $this->nm_bases_vfp       = array("vfp");
 $this->nm_bases_odbc      = array("odbc");
 $this->nm_bases_progress  = array("pdo_progress_odbc", "progress");
 $_SESSION['scriptcase']['sc_num_page'] = 1;
-$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiH9FUDSBYD5JwHgrKVcFeDur/HMraDcNwH9BqHIBeHQFaDMvCHENiDWXCHMFGHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BqDMzGVkJqDWrGZuBqHQJKDQFGD1veD5B/DMBOVIBOH5FqVErqHQJmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7Z1BYD5JwHuNOVIFCH5XKDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuraDMvOV9BUDWXKVoF7HQBiZ1BiHAzGD5BOHgveHArCH5FGDoBqHQBiDuBqHABYHurqDMBYVIB/H5B3VErqHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXODQJsDSBYHQBqHgrwVcFCH5XCVoBqD9JmZ1F7HAN7HuFGDMzGHErCHEFaDoF7D9NmZSBiHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJwDMvOV9BUDWFaHMBiD9BsVIraD1rwV5X7HgBeHErsDWFqHMBqDcXGDQJsHAN7HuJeHuBOV9BUDWJeDoBiHQBiZ1B/HABYD5F7DEvsHEFiH5FYHIX7DcBwZSX7Z1N7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDuFaHANOVWXGDMzGDkFCH5FqHMJeHQBiZ1FGDSrYHQFaDEBeDkXKDWX7VoBODcBiDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqD1zGD5BOHgveHArsDWX7HMBOHQBiDuBqHAvOV5XGDMNOV9BUDWXKVoF7HQNwZkFGHAN7HuXGDMvCHErsDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcXKDWFYHIBiHQBiZ1BiDSrYHQX7HgNOHArsDuXKZuBqDcBwH9BiD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeV5FqVoB/D9XsH9FGD1vOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/DorqHQXsDuBqHANOVWJeDMBOVcXKDWrmVENUHQBsZkBiHArKD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMFaHgveDkXKDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDuX7HIBiD9BiZkBiD1rwHQrqDEvsHErCDWr/HMXGDcXGZSFUHAN7D5BOHuBOVcBODWFaHMXGHQXOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
  $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
 if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['menu']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['menu']['glo_nm_conexao']))
 { 
@@ -901,6 +901,24 @@ else
 	$vso = "nube";
 }
 
+?>
+
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-1.11.1.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'js.cookie.min.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
+
+<script src="<?php //echo sc_url_library('prj', 'js', 'jquery.idle.js'); ?>"></script>
+
+
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'bootstrap/css/bootstrap.css'); ?>">
+
+
+<?php
+
 if($this->sc_temp_gnit=="88261176-7" and $vso=="nube")
 {
 	
@@ -925,29 +943,6 @@ foreach ($NM_tmp_dis as $Cada_dis)
 }
 
 }
-
-?>
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery-1.11.1.js'); ?>"></script>
-<script src="<?php echo sc_url_library('prj', 'js', 'js.cookie.min.js'); ?>"></script>
-<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
-
-<script src="<?php echo sc_url_library('prj', 'js', 'jquery.idle.js'); ?>"></script>
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
-<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'bootstrap/css/bootstrap.css'); ?>">
-
-<script>
-$(document).idle({
-  onIdle: function(){
-	alertify.alert('Alerta', '¡Su sesión ha caducado por inactividad!', function(){ location.href='../blank_iniciar_sesion'; });
-  },
-  idle: 1800000
-});
-</script>
-
-<?php
 
 unset($_SESSION['scriptcase']['sc_menu_disable']['menu']);if(empty($this->sc_temp_gusuariologueado))
 {
@@ -1437,7 +1432,6 @@ if(isset($this->vcontrolsesion[0][0]))
 
 			if(tiemponotificaciones==60)
 			{
-			getDatabaseMessage();
 			tiemponotificaciones=0;
 			}
 			else
@@ -1880,34 +1874,34 @@ if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("form_productos_f
         $_SESSION['scriptcase']['sc_apl_seg']['form_productos_fast_gcontable'] = "on";
     } 
 }
-if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("fac_compras") . "/fac_compras_ini.txt"))
+if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("fac_compras_new") . "/fac_compras_new_ini.txt"))
 {
-    $sc_teste_seg = file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("fac_compras") . "/fac_compras_ini.txt");
+    $sc_teste_seg = file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("fac_compras_new") . "/fac_compras_new_ini.txt");
     if ((!isset($sc_teste_seg[3]) || trim($sc_teste_seg[3]) == "NAO") || (isset($_SESSION['nm_session']['user']['sec']['flag']) && $_SESSION['nm_session']['user']['sec']['flag'] == "N")) 
     {
-        if (!isset($_SESSION['scriptcase']['sc_apl_seg']['fac_compras']))
+        if (!isset($_SESSION['scriptcase']['sc_apl_seg']['fac_compras_new']))
         {
-            $_SESSION['scriptcase']['sc_apl_seg']['fac_compras'] = "on";
+            $_SESSION['scriptcase']['sc_apl_seg']['fac_compras_new'] = "on";
         }
     }
     if (isset($_SESSION['nm_session']['user']['sec']['flag']) && $_SESSION['nm_session']['user']['sec']['flag'] == "N") 
     { 
-        $_SESSION['scriptcase']['sc_apl_seg']['fac_compras'] = "on";
+        $_SESSION['scriptcase']['sc_apl_seg']['fac_compras_new'] = "on";
     } 
 }
-if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("grid_compras") . "/grid_compras_ini.txt"))
+if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("grid_compras_new") . "/grid_compras_new_ini.txt"))
 {
-    $sc_teste_seg = file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("grid_compras") . "/grid_compras_ini.txt");
+    $sc_teste_seg = file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("grid_compras_new") . "/grid_compras_new_ini.txt");
     if ((!isset($sc_teste_seg[3]) || trim($sc_teste_seg[3]) == "NAO") || (isset($_SESSION['nm_session']['user']['sec']['flag']) && $_SESSION['nm_session']['user']['sec']['flag'] == "N")) 
     {
-        if (!isset($_SESSION['scriptcase']['sc_apl_seg']['grid_compras']))
+        if (!isset($_SESSION['scriptcase']['sc_apl_seg']['grid_compras_new']))
         {
-            $_SESSION['scriptcase']['sc_apl_seg']['grid_compras'] = "on";
+            $_SESSION['scriptcase']['sc_apl_seg']['grid_compras_new'] = "on";
         }
     }
     if (isset($_SESSION['nm_session']['user']['sec']['flag']) && $_SESSION['nm_session']['user']['sec']['flag'] == "N") 
     { 
-        $_SESSION['scriptcase']['sc_apl_seg']['grid_compras'] = "on";
+        $_SESSION['scriptcase']['sc_apl_seg']['grid_compras_new'] = "on";
     } 
 }
 if (is_file($path_apls . $this->tab_grupo[0] . SC_dir_app_name("form_pedido_compra") . "/form_pedido_compra_ini.txt"))
@@ -4556,7 +4550,101 @@ if (!isset($_SESSION['gOS'])) {$_SESSION['gOS'] = "";}
 if (!isset($this->sc_temp_gOS)) {$this->sc_temp_gOS = (isset($_SESSION['gOS'])) ? $_SESSION['gOS'] : "";}
 if (!isset($_SESSION['gtipo_empresa'])) {$_SESSION['gtipo_empresa'] = "";}
 if (!isset($this->sc_temp_gtipo_empresa)) {$this->sc_temp_gtipo_empresa = (isset($_SESSION['gtipo_empresa'])) ? $_SESSION['gtipo_empresa'] : "";}
-  $FILTRO = "WHERE CURDATE() BETWEEN start_date AND end_date ORDER BY id DESC";
+  $vminutos_inactividad = 0;
+$vsql = "select minutos_inactividad from configuraciones where idconfiguraciones='1'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vMinu = array();
+      $this->vminu = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vMinu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vminu[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vMinu = false;
+          $this->vMinu_erro = $this->Db->ErrorMsg();
+          $this->vminu = false;
+          $this->vminu_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vminu[0][0]))
+{
+	$vminutos_inactividad = $this->vminu[0][0];
+}
+
+?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+<script>
+
+var minutos = "<?php echo ($vminutos_inactividad*1000)*60; ?>";
+
+var timeout;
+
+if(parseInt(minutos)>0)
+{
+	var confirmacion = $.confirm({
+		   title: 'Alerta!',
+		   lazyOpen: true,
+		   content: 'La sesión esta por expirar.',
+			autoClose: 'expirar|30000',
+			type: 'red',
+            icon: 'fa fa-spinner fa-spin',
+            buttons: {
+                expirar: {
+                    text: 'Cerrar Sesión',
+                    btnClass: 'btn-red',
+                    action: function () {
+                        location.href='../blank_fin_sesion'; 
+                    }
+                },
+                permanecer: function () {
+					alertify.notify('Sesión reactivada.', 'success', 5, function(){  });
+                    clearTimeout(timeout);
+					timeout = setTimeout(function() {
+						confirmacion.open();
+					}, parseInt(minutos));
+                }
+            }
+	});
+	
+	timeout = setTimeout(function() {
+		confirmacion.open();
+    }, parseInt(minutos));
+	
+	document.onmousemove = function()
+	{
+	  clearTimeout(timeout);
+	  console.log("Minutos parametrizados para inactividad: "+minutos);
+		
+		  timeout = setTimeout(function() {
+			confirmacion.open();
+		  }, parseInt(minutos));
+	}
+}
+	
+</script>
+
+<?php
+
+$FILTRO = "WHERE CURDATE() BETWEEN start_date AND end_date ORDER BY id DESC";
 $sql = "SELECT title as message,start_date, end_date,start_time FROM calendar ". $FILTRO;
 $vmensaje = "";
 
@@ -7313,14 +7401,14 @@ if (isset($_SESSION['scriptcase']['sc_apl_seg']['form_productos_fast_gcontable']
 
 $menu_menuData['data'] .= "item_11|.|" . $nm_var_lab[30] . "||" . $nm_var_hint[30] . "|usr__NM__bg__NM__blue_stock_folder_12352.png|_self|\n";
 $menu_menuData['data'] .= "item_17|..|" . $nm_var_lab[31] . "||" . $nm_var_hint[31] . "|usr__NM__bg__NM__shopping_cart_full_22024.png|_self|\n";
-if (isset($_SESSION['scriptcase']['sc_apl_seg']['fac_compras']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['fac_compras']) == "on")
+if (isset($_SESSION['scriptcase']['sc_apl_seg']['fac_compras_new']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['fac_compras_new']) == "on")
 {
-    $menu_menuData['data'] .= "item_19|...|" . $nm_var_lab[32] . "|menu_form_php.php?sc_item_menu=item_19&sc_apl_menu=fac_compras&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[32] . "|usr__NM__ico__NM__shoppingcart_below_compra_12831.png|" . $this->menu_target('_self') . "|" . "\n";
+    $menu_menuData['data'] .= "item_19|...|" . $nm_var_lab[32] . "|menu_form_php.php?sc_item_menu=item_19&sc_apl_menu=fac_compras_new&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[32] . "|usr__NM__ico__NM__shoppingcart_below_compra_12831.png|" . $this->menu_target('_self') . "|" . "\n";
 }
 
-if (isset($_SESSION['scriptcase']['sc_apl_seg']['grid_compras']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['grid_compras']) == "on")
+if (isset($_SESSION['scriptcase']['sc_apl_seg']['grid_compras_new']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['grid_compras_new']) == "on")
 {
-    $menu_menuData['data'] .= "item_32|...|" . $nm_var_lab[33] . "|menu_form_php.php?sc_item_menu=item_32&sc_apl_menu=grid_compras&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[33] . "|usr__NM__ico__NM__table_1061.png|" . $this->menu_target('_self') . "|" . "\n";
+    $menu_menuData['data'] .= "item_32|...|" . $nm_var_lab[33] . "|menu_form_php.php?sc_item_menu=item_32&sc_apl_menu=grid_compras_new&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "|" . $nm_var_hint[33] . "|usr__NM__ico__NM__table_1061.png|" . $this->menu_target('_self') . "|" . "\n";
 }
 
 if (isset($_SESSION['scriptcase']['sc_apl_seg']['form_pedido_compra']) && strtolower($_SESSION['scriptcase']['sc_apl_seg']['form_pedido_compra']) == "on")
@@ -9422,8 +9510,8 @@ $menu_menuData['data'][] = array(
     'icon_color_disabled'     => "",
 );
 $str_disabled = "N";
-$str_link = "menu_form_php.php?sc_item_menu=item_19&sc_apl_menu=fac_compras&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "";
-if (!isset($_SESSION['scriptcase']['sc_apl_seg']['fac_compras']) || strtolower($_SESSION['scriptcase']['sc_apl_seg']['fac_compras']) != "on")
+$str_link = "menu_form_php.php?sc_item_menu=item_19&sc_apl_menu=fac_compras_new&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "";
+if (!isset($_SESSION['scriptcase']['sc_apl_seg']['fac_compras_new']) || strtolower($_SESSION['scriptcase']['sc_apl_seg']['fac_compras_new']) != "on")
 {
     $str_link = "#";
     $str_disabled = "Y";
@@ -9459,8 +9547,8 @@ if (!isset($_SESSION['scriptcase']['sc_apl_seg']['fac_compras']) || strtolower($
         'icon_color_disabled'     => "",
     );
 $str_disabled = "N";
-$str_link = "menu_form_php.php?sc_item_menu=item_32&sc_apl_menu=grid_compras&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "";
-if (!isset($_SESSION['scriptcase']['sc_apl_seg']['grid_compras']) || strtolower($_SESSION['scriptcase']['sc_apl_seg']['grid_compras']) != "on")
+$str_link = "menu_form_php.php?sc_item_menu=item_32&sc_apl_menu=grid_compras_new&sc_apl_link=" . urlencode($menu_menuData['url']['link']) . "&sc_usa_grupo=" . $_SESSION['scriptcase']['menu']['glo_nm_usa_grupo'] . "";
+if (!isset($_SESSION['scriptcase']['sc_apl_seg']['grid_compras_new']) || strtolower($_SESSION['scriptcase']['sc_apl_seg']['grid_compras_new']) != "on")
 {
     $str_link = "#";
     $str_disabled = "Y";

@@ -217,8 +217,8 @@ class blank_correo_reenvio2_ini
       $this->nm_dt_criacao   = "20210210"; 
       $this->nm_hr_criacao   = "115749"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220511"; 
-      $this->nm_hr_ult_alt   = "104357"; 
+      $this->nm_dt_ult_alt   = "20220525"; 
+      $this->nm_hr_ult_alt   = "105550"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_correo_reenvio2_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKH9FUHAveV5BqHgrKV9FeHEX/VENUD9BiZ1BiHIBeD5JwHgNOHEXeH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErsDWX7HIFGHQBiDQJsHArYHuBODMvmDkFCH5XCVoBiDcFYZ1FGHIBOD5BqHgvCHArsDWFqHMJwD9NmH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYDoraD9XsH9X7DSrwV5raHgvsDkBOV5X7VoX7D9XOZSB/HArYD5FaDMNKZSJGDWr/VoB/DcBwDQX7Z1N7VWJeHuvmVcBOV5FGVoX7HQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgvsDkBsV5F/HIXGHQNwZ1F7D1rwV5X7HgNKHArCV5FaVoJsHQXGDQX7HIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqD1vOV5XGDMvOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDErKZSXeDuFaHIX7D9NwDuBqHAvOV5BOHuNOV9FeDuB7VENUHQJmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsZ9F7HABYHurqDMvOV9BUDWF/VoJwD9BsZ1B/HIBOZMJeHgNKHEJGH5F/HIB/HQNmDuFaHABYD5NUDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmVoFGHQNwZ9XGHAveHQrqHuvmVcBOHEX7DoFUD9BiZ1BiHIveHQBiDMzGHEXeV5FaHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7HABYV5FUDEBeZSJqV5FaDoF7D9XsZSFGHANOV5BOHgrKVcBOV5X7VoJwD9XOZSB/HArYV5FaDEBOVkJGDWXCVoXGD9XsZ9F7HAvmD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcXKDWB3VEFGHQNwZ1F7Z1rYZMJeDEBeHEBUDuJeHMJsHQXOZSFUD1veD5rqHgvOVcFCH5XKVErqHQXGZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1zGD5XGHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrYZSJ3V5FYHMraD9JmH9FaHABYD5XGHgrKHEFiDWFGZuFaDcBiDQFUHIrwVWBqDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1960,6 +1960,9 @@ class blank_correo_reenvio2_apl
 	$vfecha            = "";
 	$vnombre_emisor    = "";
 	$vcorreo_emisor    = "";
+	$vidtercero        = "";
+	$vurl_pdf_factura  = "";
+	$vtipodoc          = "";
 	
 	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_sendmail,url_api_pdfs,envio_credenciales,plantillas_correo,copia_factura_a,plantilla_pordefecto, (select d.razonsoc from datosemp d where d.iddatos='1') as nombre_emisor, (select d.correo from datosemp d where d.iddatos='1') as correo_emisor, (select d.nit from datosemp d where d.iddatos='1') as nit_emisor from webservicefe order by idwebservicefe desc limit 1";
 	 
@@ -2050,14 +2053,14 @@ class blank_correo_reenvio2_apl
 		if(isset($this->vsiplantilla[0][0]) and isset($this->vsiplantilla[0][1]) and isset($this->vsiplantilla[0][2]) and isset($this->vsiplantilla[0][3]))
 		{
 			$vplantilla_existe = true;
-			$vcabecera = $this->vsiplantilla[0][0];
-			$vcuerpo   = $this->vsiplantilla[0][1];
-			$vbotones  = $this->vsiplantilla[0][2];
-			$vpie      = $this->vsiplantilla[0][3];
+			$vcabecera = utf8_decode($this->vsiplantilla[0][0]);
+			$vcuerpo   = utf8_decode($this->vsiplantilla[0][1]);
+			$vbotones  = utf8_decode($this->vsiplantilla[0][2]);
+			$vpie      = utf8_decode($this->vsiplantilla[0][3]);
 		}
 	}
 	
-	$vsql = "select r.prefijo,f.numfacven,c.documento,f.fechaven,c.nombres,f.total,f.fecha_validacion from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros c on f.idcli=c.idtercero where f.idfacven='".$vidfacven."'";
+	$vsql = "select r.prefijo,f.numfacven,c.documento,f.fechaven,c.nombres,f.total,f.fecha_validacion,f.idcli,f.enlacepdf,f.tipo from facturaven f inner join resdian r on f.resolucion=r.Idres inner join terceros c on f.idcli=c.idtercero where f.idfacven='".$vidfacven."'";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2097,6 +2100,9 @@ class blank_correo_reenvio2_apl
 		$vnombre   = $this->vdata[0][4];
 		$vtotal    = $this->vdata[0][5];
 		$vhora     = $this->vdata[0][6];
+		$vidtercero= $this->vdata[0][7];
+		$vurl_pdf_factura = $this->vdata[0][8];
+		$vtipodoc  = $this->vdata[0][9];
 		
 		$vfecha = date_create($vfecha);
 		$vfecha = date_format($vfecha,"Y-m-d");
@@ -2116,84 +2122,246 @@ class blank_correo_reenvio2_apl
 				$vcuerpo   = str_replace("vFechaDocumento",$vfecha.' '.$vhora,$vcuerpo);
 				$vcuerpo   = str_replace("vTotalDocumento",number_format($vtotal),$vcuerpo);
 
-				$vurl_pdf_factura = "https://www.apifacilweb.com/public/index.php/api/download/".$vnit_emisor."/FES-".$vprefijo.$vnumero.".pdf";
 				$vurl_aceptar     = "https://www.apifacilweb.com/public/index.php/accept-reject-document/".$vnit_emisor."/".$vccnit."/".$vprefijo."/".$vnumero."/".$vfecha;
-
+				
 				$vbotones = str_replace("https://vUrlPdfFactura",$vurl_pdf_factura,$vbotones);
 				$vbotones = str_replace("https://vUrlPdf",$vurl_pdf_factura,$vbotones);
 				$vbotones = str_replace("https://vUrlAceptar",$vurl_aceptar,$vbotones);
 
+				$vbotones = str_replace("vUrlPdfFactura",$vurl_pdf_factura,$vbotones);
+				$vbotones = str_replace("vUrlPdf",$vurl_pdf_factura,$vbotones);
+				$vbotones = str_replace("vUrlAceptar",$vurl_aceptar,$vbotones);
+				
+				$vbotones = str_replace("vurlpdffactura",$vurl_pdf_factura,$vbotones);
+				$vbotones = str_replace("vurlpdf",$vurl_pdf_factura,$vbotones);
+				$vbotones = str_replace("vurlaceptar",$vurl_aceptar,$vbotones);
+
 				$vpie     = str_replace("vCorreoEmisor",$vcorreo_emisor,$vpie);
+				
+				if($vtipodoc=="NC")
+				{
+					$vbotones = str_replace("Ver factura","Ver Nota Credito",$vbotones);
+				}
 			}
 		}
 		
+		$valida_correo   = false;
+		$vcorreo_validar = $vemail;
+		
 		if($vvalidar_correo_enlinea=="SI")
 		{
-			$vc = 'curl -s -L -X GET "https://api.usebouncer.com/v1/email/verify?email='.$vemail.'&timeout=10" -H "x-api-key: OF15DwynV2J02VmAdizNQ7dUJFskZx9ewYlq11hJ"';
-			$vr = shell_exec($vc);
-			$this->vdata = json_decode($vr);
-
-			if(isset($this->vdata->reason))
+			
+			$vsql = "select valido from correos_validos where correo='".$vcorreo_validar."' and valido='SI' limit 1";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vValido = array();
+      $this->vvalido = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vValido[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vvalido[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vValido = false;
+          $this->vValido_erro = $this->Db->ErrorMsg();
+          $this->vvalido = false;
+          $this->vvalido_erro = $this->Db->ErrorMsg();
+      } 
+;
+			if(isset($this->vvalido[0][0]))
 			{
-				if($this->vdata->reason=="accepted_email")
+				$valida_correo = true;
+			}
+			else
+			{
+				$vc = 'curl -s -L -X GET "https://api.usebouncer.com/v1/email/verify?email='.$vcorreo_validar.'&timeout=10" -H "x-api-key: OF15DwynV2J02VmAdizNQ7dUJFskZx9ewYlq11hJ"';
+				$vr = shell_exec($vc);
+				$this->vdata = json_decode($vr);
+				
+				if(isset($this->vdata->reason))
 				{
-					$vdatos["prefix"] = $vprefijo;
-					$vdatos["number"] = $vnumero;
-					$vdatos["alternate_email"] = $vemail;
-					$vdatos["html_header"] = $vcabecera;
-					$vdatos["html_body"]   = $vcuerpo;
-					$vdatos["html_buttons"]= $vbotones;
-					$vdatos["html_footer"] = $vpie;
-
-					
-					
-					$vdatos = json_encode($vdatos);
-
-					$curl = curl_init();
-					
-
-					curl_setopt_array($curl, array(
-					  CURLOPT_URL => $vurl_api_sendmail,
-					  CURLOPT_RETURNTRANSFER => true,
-					  CURLOPT_ENCODING => '',
-					  CURLOPT_MAXREDIRS => 10,
-					  CURLOPT_TIMEOUT => 0,
-					  CURLOPT_FOLLOWLOCATION => true,
-					  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-					  CURLOPT_CUSTOMREQUEST => 'POST',
-					  CURLOPT_POSTFIELDS =>$vdatos,
-					  CURLOPT_HTTPHEADER => array(
-						'Content-Type: application/json',
-						'accept: application/json',
-						'Authorization: Bearer '.$vtoken
-					  ),
-					));
-
-					$response = curl_exec($curl);
-
-					curl_close($curl);
-					
-					$vrta = json_decode($response);
-					if(isset($vrta->message))
+					if($this->vdata->reason=="accepted_email" or $this->vdata->reason=="unknown" or $this->vdata->reason=="low_deliverability")
 					{
-						echo $vrta->message;
+						$vdatos["prefix"] = $vprefijo;
+						$vdatos["number"] = $vnumero;
+						$vdatos["alternate_email"] = $vemail;
+						$vdatos["html_header"] = $vcabecera;
+						$vdatos["html_body"]   = $vcuerpo;
+						$vdatos["html_buttons"]= $vbotones;
+						$vdatos["html_footer"] = $vpie;
+
+						
+
+						$vdatos = json_encode($vdatos);
+
+						$curl = curl_init();
+
+
+						curl_setopt_array($curl, array(
+						  CURLOPT_URL => $vurl_api_sendmail,
+						  CURLOPT_RETURNTRANSFER => true,
+						  CURLOPT_ENCODING => '',
+						  CURLOPT_MAXREDIRS => 10,
+						  CURLOPT_TIMEOUT => 0,
+						  CURLOPT_FOLLOWLOCATION => true,
+						  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+						  CURLOPT_CUSTOMREQUEST => 'POST',
+						  CURLOPT_POSTFIELDS =>$vdatos,
+						  CURLOPT_HTTPHEADER => array(
+							'Content-Type: application/json',
+							'accept: application/json',
+							'Authorization: Bearer '.$vtoken
+						  ),
+						));
+
+						$response = curl_exec($curl);
+
+						curl_close($curl);
+
+						$vrta = json_decode($response);
+						if(isset($vrta->message))
+						{
+							echo $vrta->message;
+						}
+						else
+						{
+							print_r($response);
+						}
 					}
 					else
 					{
-						print_r($response);
+						echo "El correo no es válido o algo salió mal, por favor vuelva a intentarlo.";
 					}
+				}
+
+				if(isset($this->vdata->reason))
+				{
+					if($this->vdata->reason=="accepted_email" or $this->vdata->reason=="unknown" or $this->vdata->reason=="low_deliverability")
+					{
+						$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='SI',json='".$vr."'";
+						
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						
+						$valida_correo = true;
+					}
+					else
+					{
+						$valida_correo = false;
+						$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='NO',json='".$vr."'";
+						
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						echo "El correo no es válido o algo salió mal, por favor vuelva a intentarlo.";
+					}
+				}
+			}
+			
+			if($valida_correo)
+			{
+				$vdatos["prefix"] = $vprefijo;
+				$vdatos["number"] = $vnumero;
+				$vdatos["alternate_email"] = $vemail;
+				$vdatos["html_header"] = $vcabecera;
+				$vdatos["html_body"]   = $vcuerpo;
+				$vdatos["html_buttons"]= $vbotones;
+				$vdatos["html_footer"] = $vpie;
+
+				$vdatos = json_encode($vdatos);
+
+				$curl = curl_init();
+
+
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $vurl_api_sendmail,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => '',
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 0,
+				  CURLOPT_FOLLOWLOCATION => true,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => 'POST',
+				  CURLOPT_POSTFIELDS =>$vdatos,
+				  CURLOPT_HTTPHEADER => array(
+					'Content-Type: application/json',
+					'accept: application/json',
+					'Authorization: Bearer '.$vtoken
+				  ),
+				));
+
+				$response = curl_exec($curl);
+
+				curl_close($curl);
+
+				$vrta = json_decode($response);
+				if(isset($vrta->message))
+				{
+					echo $vrta->message;
 				}
 				else
 				{
-					echo "El correo no es válido o algo salió mal, por favor vuelva a intentarlo.";
+					print_r($response);
 				}
 			}
+			
 		}
 		else
 		{
 			
 		
 			$curl = curl_init();
+			
+			$vdatos["prefix"] = $vprefijo;
+			$vdatos["number"] = $vnumero;
+			$vdatos["alternate_email"] = $vemail;
+			$vdatos["html_header"] = $vcabecera;
+			$vdatos["html_body"]   = $vcuerpo;
+			$vdatos["html_buttons"]= $vbotones;
+			$vdatos["html_footer"] = $vpie;
+			
+			$vdatos = json_encode($vdatos);
 
 			curl_setopt_array($curl, array(
 			  CURLOPT_URL => $vurl_api_sendmail,
@@ -2204,12 +2372,7 @@ class blank_correo_reenvio2_apl
 			  CURLOPT_FOLLOWLOCATION => true,
 			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			  CURLOPT_CUSTOMREQUEST => 'POST',
-			  CURLOPT_POSTFIELDS =>'{
-				"prefix": "'.$vprefijo.'",
-				"number": "'.$vnumero.'",
-				"alternate_email": "'.$vemail.'"
-			}
-			',
+			  CURLOPT_POSTFIELDS =>$vdatos,
 			  CURLOPT_HTTPHEADER => array(
 				'Content-Type: application/json',
 				'accept: application/json',

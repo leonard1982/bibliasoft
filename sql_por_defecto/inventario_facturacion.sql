@@ -25406,6 +25406,8 @@ ALTER TABLE `usuarios` ADD `posicion` VARCHAR(60) NULL DEFAULT '0' AFTER `nivel`
 
 ALTER TABLE `usuarios` CHANGE `nivel` `nivel` INT(2) NOT NULL DEFAULT '0' COMMENT 'Nivel del usuario';
 
+ALTER TABLE `configuraciones` ADD `minutos_inactividad` INT NOT NULL DEFAULT '60' COMMENT 'minutos que transcurren para cerrar sesión por inactividad (por defecto se cierra a la hora)' AFTER `validar_codbarras`;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

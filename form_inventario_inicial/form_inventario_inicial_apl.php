@@ -590,7 +590,8 @@ class form_inventario_inicial_apl
           include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
       }
       include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
-      $this->Ini->Str_btn_form    = trim($str_button);
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
@@ -2782,7 +2783,7 @@ class form_inventario_inicial_apl
                   }
                   $this->NM_ajax_info['errList']['costo_'][] = $this->Ini->Nm_lang['lang_errm_size'];
               } 
-              if ($teste_validade->Valor($this->costo_, 12, 0, 0, 0, "N") == false)  
+              if ($teste_validade->Valor($this->costo_, 10, 2, 0, 0, "N") == false)  
               { 
                   $hasError = true;
                   $Campos_Crit .= "Costo; " ; 
@@ -2864,7 +2865,7 @@ class form_inventario_inicial_apl
                   }
                   $this->NM_ajax_info['errList']['valorparcial_'][] = $this->Ini->Nm_lang['lang_errm_size'];
               } 
-              if ($teste_validade->Valor($this->valorparcial_, 12, 0, 0, 0, "N") == false)  
+              if ($teste_validade->Valor($this->valorparcial_, 10, 2, 0, 0, "N") == false)  
               { 
                   $hasError = true;
                   $Campos_Crit .= "Valorparcial; " ; 
@@ -3207,13 +3208,13 @@ class form_inventario_inicial_apl
       }
       if ('' !== $this->costo_ || (!empty($format_fields) && isset($format_fields['costo_'])))
       {
-          nmgp_Form_Num_Val($this->costo_, $this->field_config['costo_']['symbol_grp'], $this->field_config['costo_']['symbol_dec'], "0", "S", $this->field_config['costo_']['format_neg'], "", "", "-", $this->field_config['costo_']['symbol_fmt']) ; 
+          nmgp_Form_Num_Val($this->costo_, $this->field_config['costo_']['symbol_grp'], $this->field_config['costo_']['symbol_dec'], "2", "S", $this->field_config['costo_']['format_neg'], "", "", "-", $this->field_config['costo_']['symbol_fmt']) ; 
           $sMonSymb = $this->field_config['costo_']['symbol_mon'];
           $this->sc_add_currency($this->costo_, $sMonSymb, $this->field_config['costo_']['format_pos']); 
       }
       if ('' !== $this->valorparcial_ || (!empty($format_fields) && isset($format_fields['valorparcial_'])))
       {
-          nmgp_Form_Num_Val($this->valorparcial_, $this->field_config['valorparcial_']['symbol_grp'], $this->field_config['valorparcial_']['symbol_dec'], "0", "S", $this->field_config['valorparcial_']['format_neg'], "", "", "-", $this->field_config['valorparcial_']['symbol_fmt']) ; 
+          nmgp_Form_Num_Val($this->valorparcial_, $this->field_config['valorparcial_']['symbol_grp'], $this->field_config['valorparcial_']['symbol_dec'], "2", "S", $this->field_config['valorparcial_']['format_neg'], "", "", "-", $this->field_config['valorparcial_']['symbol_fmt']) ; 
           $sMonSymb = $this->field_config['valorparcial_']['symbol_mon'];
           $this->sc_add_currency($this->valorparcial_, $sMonSymb, $this->field_config['valorparcial_']['format_pos']); 
       }

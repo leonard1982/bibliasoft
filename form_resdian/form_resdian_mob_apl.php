@@ -530,7 +530,8 @@ class form_resdian_mob_apl
           include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
       }
       include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
-      $this->Ini->Str_btn_form    = trim($str_button);
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
@@ -1947,7 +1948,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
                return "Texto Encabezado";
                break;
            case 'texto_pie_pagina':
-               return "Texto Pie Pagina";
+               return "Texto Pié Página";
                break;
            case 'idres':
                return "Idres";
@@ -2940,7 +2941,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           if (NM_utf8_strlen($this->texto_pie_pagina) > 500) 
           { 
               $hasError = true;
-              $Campos_Crit .= "Texto Pie Pagina " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 500 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= "Texto Pié Página " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 500 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['texto_pie_pagina']))
               {
                   $Campos_Erros['texto_pie_pagina'] = array();

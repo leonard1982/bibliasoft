@@ -284,8 +284,8 @@ class grid_contabilidad_rtf
               $SC_Label = str_replace('>', '&gt;', $SC_Label);
               $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
           }
-          $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
-          if ($Cada_col == "tercero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
+          if ($Cada_col == "usuario" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $SC_Label = NM_charset_to_utf8($SC_Label);
               $SC_Label = str_replace('<', '&lt;', $SC_Label);
@@ -300,8 +300,8 @@ class grid_contabilidad_rtf
               $SC_Label = str_replace('>', '&gt;', $SC_Label);
               $this->Texto_tag .= "<td>" . $SC_Label . "</td>\r\n";
           }
-          $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
-          if ($Cada_col == "usuario" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
+          if ($Cada_col == "tercero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $SC_Label = NM_charset_to_utf8($SC_Label);
               $SC_Label = str_replace('<', '&lt;', $SC_Label);
@@ -339,27 +339,27 @@ class grid_contabilidad_rtf
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, tercero, id, usuario, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, usuario, id, tercero, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['where_pesq'];
@@ -407,11 +407,11 @@ class grid_contabilidad_rtf
          $this->total_credito = (string)$this->total_credito;
          $this->periodo = $rs->fields[8] ;  
          $this->periodo = (string)$this->periodo;
-         $this->tercero = $rs->fields[9] ;  
-         $this->tercero = (string)$this->tercero;
+         $this->usuario = $rs->fields[9] ;  
          $this->id = $rs->fields[10] ;  
          $this->id = (string)$this->id;
-         $this->usuario = $rs->fields[11] ;  
+         $this->tercero = $rs->fields[11] ;  
+         $this->tercero = (string)$this->tercero;
          $this->creado = $rs->fields[12] ;  
          $this->actualizado = $rs->fields[13] ;  
          $this->importado = $rs->fields[14] ;  
@@ -544,14 +544,19 @@ class grid_contabilidad_rtf
          $this->periodo = str_replace('>', '&gt;', $this->periodo);
          $this->Texto_tag .= "<td>" . $this->periodo . "</td>\r\n";
    }
-   //----- tercero
-   function NM_export_tercero()
+   //----- usuario
+   function NM_export_usuario()
    {
-             nmgp_Form_Num_Val($this->tercero, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         $this->tercero = NM_charset_to_utf8($this->tercero);
-         $this->tercero = str_replace('<', '&lt;', $this->tercero);
-         $this->tercero = str_replace('>', '&gt;', $this->tercero);
-         $this->Texto_tag .= "<td>" . $this->tercero . "</td>\r\n";
+             if ($this->usuario !== "&nbsp;") 
+             { 
+                 $this->usuario = sc_strtoupper($this->usuario); 
+             } 
+         $this->usuario = html_entity_decode($this->usuario, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->usuario = strip_tags($this->usuario);
+         $this->usuario = NM_charset_to_utf8($this->usuario);
+         $this->usuario = str_replace('<', '&lt;', $this->usuario);
+         $this->usuario = str_replace('>', '&gt;', $this->usuario);
+         $this->Texto_tag .= "<td>" . $this->usuario . "</td>\r\n";
    }
    //----- id
    function NM_export_id()
@@ -562,15 +567,14 @@ class grid_contabilidad_rtf
          $this->id = str_replace('>', '&gt;', $this->id);
          $this->Texto_tag .= "<td>" . $this->id . "</td>\r\n";
    }
-   //----- usuario
-   function NM_export_usuario()
+   //----- tercero
+   function NM_export_tercero()
    {
-         $this->usuario = html_entity_decode($this->usuario, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->usuario = strip_tags($this->usuario);
-         $this->usuario = NM_charset_to_utf8($this->usuario);
-         $this->usuario = str_replace('<', '&lt;', $this->usuario);
-         $this->usuario = str_replace('>', '&gt;', $this->usuario);
-         $this->Texto_tag .= "<td>" . $this->usuario . "</td>\r\n";
+             nmgp_Form_Num_Val($this->tercero, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         $this->tercero = NM_charset_to_utf8($this->tercero);
+         $this->tercero = str_replace('<', '&lt;', $this->tercero);
+         $this->tercero = str_replace('>', '&gt;', $this->tercero);
+         $this->Texto_tag .= "<td>" . $this->tercero . "</td>\r\n";
    }
    //----- creado
    function NM_export_creado()

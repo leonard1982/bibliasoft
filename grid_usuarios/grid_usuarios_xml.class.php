@@ -295,27 +295,27 @@ class grid_usuarios_xml
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT idusuarios, usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT idusuarios, usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT idusuarios, usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, creacion, nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT idusuarios, usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), nombre from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT idusuarios, usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT idusuarios, usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['where_pesq'];
@@ -360,20 +360,20 @@ class grid_usuarios_xml
          {
              $this->xml_registro = "<grid_usuarios";
          }
-         $this->idusuarios = $rs->fields[0] ;  
-         $this->idusuarios = (string)$this->idusuarios;
-         $this->usuario = $rs->fields[1] ;  
-         $this->password = $rs->fields[2] ;  
-         $this->tercero = $rs->fields[3] ;  
+         $this->usuario = $rs->fields[0] ;  
+         $this->password = $rs->fields[1] ;  
+         $this->tercero = $rs->fields[2] ;  
          $this->tercero = (string)$this->tercero;
-         $this->correo = $rs->fields[4] ;  
-         $this->resolucion = $rs->fields[5] ;  
+         $this->correo = $rs->fields[3] ;  
+         $this->resolucion = $rs->fields[4] ;  
          $this->resolucion = (string)$this->resolucion;
-         $this->grupo = $rs->fields[6] ;  
+         $this->grupo = $rs->fields[5] ;  
          $this->grupo = (string)$this->grupo;
-         $this->activo = $rs->fields[7] ;  
-         $this->grupocomanda = $rs->fields[8] ;  
+         $this->activo = $rs->fields[6] ;  
+         $this->grupocomanda = $rs->fields[7] ;  
          $this->grupocomanda = (string)$this->grupocomanda;
+         $this->idusuarios = $rs->fields[8] ;  
+         $this->idusuarios = (string)$this->idusuarios;
          $this->creacion = $rs->fields[9] ;  
          $this->nombre = $rs->fields[10] ;  
          //----- lookup - tercero
@@ -628,28 +628,6 @@ class grid_usuarios_xml
       }
       $rs->Close();
    }
-   //----- idusuarios
-   function NM_export_idusuarios()
-   {
-             nmgp_Form_Num_Val($this->idusuarios, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         if ($this->Xml_tag_label)
-         {
-             $SC_Label = (isset($this->New_label['idusuarios'])) ? $this->New_label['idusuarios'] : "Id"; 
-         }
-         else
-         {
-             $SC_Label = "idusuarios"; 
-         }
-         $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->idusuarios) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->idusuarios) . "\"";
-         }
-   }
    //----- usuario
    function NM_export_usuario()
    {
@@ -852,6 +830,28 @@ class grid_usuarios_xml
          else
          {
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_grupocomanda) . "\"";
+         }
+   }
+   //----- idusuarios
+   function NM_export_idusuarios()
+   {
+             nmgp_Form_Num_Val($this->idusuarios, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['idusuarios'])) ? $this->New_label['idusuarios'] : "Id"; 
+         }
+         else
+         {
+             $SC_Label = "idusuarios"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->idusuarios) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->idusuarios) . "\"";
          }
    }
    //----- creacion

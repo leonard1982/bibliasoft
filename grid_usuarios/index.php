@@ -226,8 +226,8 @@ class grid_usuarios_ini
       $this->nm_dt_criacao   = "20180717"; 
       $this->nm_hr_criacao   = "164144"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220505"; 
-      $this->nm_hr_ult_alt   = "111214"; 
+      $this->nm_dt_ult_alt   = "20220518"; 
+      $this->nm_hr_ult_alt   = "100718"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -765,6 +765,8 @@ class grid_usuarios_ini
       $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
+      $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -898,7 +900,7 @@ class grid_usuarios_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_usuarios']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_usuarios']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsZ9XGHABYHQJwHgrwVcBUDuX7HMFUHQBqZ1FGHIBeD5rqHgNKDkXKH5FYHIXGHQJKZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXsDQB/HArYD5BqHgrKVIB/DurGVEraHQBiVINUD1rKHQX7DENOHErCHEFaDorqD9NwDQFGHAveHuJeHuBYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwZSFGHANOD5BqHgrKVcXKV5X7VEraD9XOH9FaHArYD5NUDErKVkXeHEFqDoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFiHEFaVoJsD9NmDQJsD1BeD5JwHgrwVcBODWJeDoNUHQNwZ1rqHANOHQFUHgrKZSJGDWFqHMBqD9XsDQFaDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqD1vOV5XGDMvOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMNKZSXeH5F/DoBODcBwZSX7DSBYHuF7DMzGVcBOHEBmVoX7HQFYZ1BOZ1BeHuBqHgBOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOZ9XGD1veHQJeHuzGVIB/H5FqHMB/D9XOZkFGHArYHQFUHgveHEFiH5BmZuJeHQFYZSX7HAN7D5BODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKVWJeDMBYZSJqDWFYHMFUD9BiH9BqHAN7HQJsHgNKZSJqH5X/DoBOD9JKH9FGHArYV5raHuvmDkBOHEFYVoraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9FaHArYD5JeDEvsHEXeDWX7DoJeD9JKDQX7Z1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNwH9FUD1veVWBOHuvmVIB/V5X7DoX7DcJUZkFGHIrwHuXGDMBYDkB/HEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5FGDoJeHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQXOZ1X7HAzGV5X7HgNOHEXeDWXCHIBODcJeH9FGDSBYD5FaHuBOVcFCH5XKVoFGHQNwZkBiHArYHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2238,6 +2240,8 @@ class grid_usuarios_apl
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
       $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
+      $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -2313,7 +2317,6 @@ class grid_usuarios_apl
       } 
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order']))
       { 
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "idusuarios";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "usuario";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "password";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "tercero";
@@ -2322,6 +2325,7 @@ class grid_usuarios_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "grupo";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "activo";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "grupocomanda";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "idusuarios";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "creacion";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'][] = "nombre";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'];
@@ -2329,6 +2333,7 @@ class grid_usuarios_apl
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['usr_cmp_sel'] = array();
           } 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['usr_cmp_sel']['idusuarios'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['usr_cmp_sel']['creacion'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['usr_cmp_sel']['nombre'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['usr_cmp_sel_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['usr_cmp_sel'];

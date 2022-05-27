@@ -44,7 +44,6 @@
    $_SESSION['scriptcase']['form_contabilidad_mob']['glo_nm_path_imag_temp']  = "";
    $_SESSION['scriptcase']['form_contabilidad_mob']['glo_nm_path_cache']  = "";
    $_SESSION['scriptcase']['form_contabilidad_mob']['glo_nm_path_doc']        = "";
-   $_SESSION['scriptcase']['form_contabilidad_mob']['glo_con_conne_mysql']         = "conne_mysql";
    $NM_dir_atual = getcwd();
    if (empty($NM_dir_atual))
    {
@@ -217,8 +216,6 @@ class form_contabilidad_mob_ini
    var $nm_bases_vfp;
    var $nm_bases_odbc;
    var $nm_bases_progress;
-   var $nm_db_conne_mysql;
-   var $nm_con_conne_mysql = array();
    var $sc_page;
    var $sc_lig_md5 = array();
    var $sc_lig_target = array();
@@ -297,8 +294,8 @@ class form_contabilidad_mob_ini
       $this->nm_dt_criacao   = "20220428"; 
       $this->nm_hr_criacao   = "104116"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220505"; 
-      $this->nm_hr_ult_alt   = "170155"; 
+      $this->nm_dt_ult_alt   = "20220518"; 
+      $this->nm_hr_ult_alt   = "103239"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -897,10 +894,9 @@ class form_contabilidad_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODQFGDSN7HQBqHuBOV9FeV5FYVEBiHQNwZSFaHABYD5BqDMvCVkJ3DWFqHMFGDcBwZSFUDSBYD5NUDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHENiDWXCDoraD9FYH9X7DSN7HQJeHuvmDkB/H5B7VENUHQBsVINUHArKHQF7HgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKVIBOV5X7VoX7D9BsZ1BOZ1BeD5rqDEBOZSXeV5XCZuFaDcJeDQX7HANOD5BqHuNOVcFKHEFYDoNUDcBqZ1B/D1rKD5BiDEBOHEXeV5FaDorqHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGHgvOVcFKHEX7HIrqD9BsZ1FGD1rKZMJwDMvCVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsH5FGDoBqHQBiDuFaHAveD5NUHgNKDkBOV5FYHMBiDcNmZ1F7HArYD5JwDEBOHEJqDWF/VoFGD9JKDQFGD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQFUHArYHuBqDMBYVIFCDWFaDoNUDcJUH9B/Z1NOD5NUDErKHEXeDWr/HIBOHQXsH9FUDSBYHuFUHgrwDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOVcFeHEX/VEF7D9BiZSBODSrYZMJeDEBeHEBUHEB3DoJeD9JKZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkXeV5FaDoJeD9XsDQFUZ1rwV5FGHuNODkBOV5F/VENUDcBqZ1B/HAN7V5JeDEBOHEFiHEFqVoFaDcJeDQX7D1veV5raHuNOVcBOV5X7VoBOHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvODkB/DWJeVoX7HQXOZSBqD1rKV5JeHgBODkXKDuJeHIFUHQXOZSX7D1veHuNUDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJwDMvOZSNiDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCHEFqZuJsHQNmZSX7HANOV5X7HgrKVIB/DWF/HIFUHQXGZSBqZ1vOZMBqHgNOZSXeDuFYDoJeHQNwZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
-      $this->conectExtra();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
       {
           echo "<tr>";
@@ -951,16 +947,6 @@ class form_contabilidad_mob_ini
       }
       if (isset($_SESSION['scriptcase']['form_contabilidad_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_contabilidad_mob']['glo_nm_conexao']))
       {
-          db_conect_devel('conne_mysql', $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
-          $this->nm_con_conne_mysql['servidor'] = $_SESSION['scriptcase']['glo_servidor'];
-          $this->nm_con_conne_mysql['usuario']  = $_SESSION['scriptcase']['glo_usuario'];
-          $this->nm_con_conne_mysql['banco']    = $_SESSION['scriptcase']['glo_banco'];
-          $this->nm_con_conne_mysql['senha']    = $_SESSION['scriptcase']['glo_senha'];
-          $this->nm_con_conne_mysql['tpbanco']  = $_SESSION['scriptcase']['glo_tpbanco'];
-          $this->nm_con_conne_mysql['decimal']  = $_SESSION['scriptcase']['glo_decimal_db'];
-          $this->nm_con_conne_mysql['SC_sep_date'] = $_SESSION['scriptcase']['glo_date_separator'];
-          $this->nm_con_conne_mysql['protect']  = "S";
-          $this->nm_con_conne_mysql['database_encoding']  = isset($_SESSION['scriptcase']['glo_database_encoding'])?$_SESSION['scriptcase']['glo_database_encoding']:'';
           db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
           {
@@ -978,17 +964,6 @@ class form_contabilidad_mob_ini
       if (!empty($perfil_trab))
       {
           $_SESSION['scriptcase']['glo_senha_protect'] = "";
-          carrega_perfil($_SESSION['scriptcase']['form_contabilidad_mob']['glo_con_conne_mysql'], $this->path_libs, "S");
-          $this->nm_con_conne_mysql['servidor'] = $_SESSION['scriptcase']['glo_servidor'];
-          $this->nm_con_conne_mysql['usuario']  = $_SESSION['scriptcase']['glo_usuario'];
-          $this->nm_con_conne_mysql['banco']    = $_SESSION['scriptcase']['glo_banco'];
-          $this->nm_con_conne_mysql['senha']    = $_SESSION['scriptcase']['glo_senha'];
-          $this->nm_con_conne_mysql['tpbanco']  = $_SESSION['scriptcase']['glo_tpbanco'];
-          $this->nm_con_conne_mysql['decimal']  = $_SESSION['scriptcase']['glo_decimal_db'];
-          $this->nm_con_conne_mysql['SC_sep_date'] = $_SESSION['scriptcase']['glo_date_separator'];
-          $this->nm_con_conne_mysql['protect']  = $_SESSION['scriptcase']['glo_senha_protect'];
-          $this->nm_con_conne_mysql['database_encoding']  = isset($_SESSION['scriptcase']['glo_database_encoding'])?$_SESSION['scriptcase']['glo_database_encoding']:'';
-          $_SESSION['scriptcase']['glo_senha_protect'] = "";
           carrega_perfil($perfil_trab, $this->path_libs, "S");
           if (empty($_SESSION['scriptcase']['glo_senha_protect']))
           {
@@ -998,6 +973,13 @@ class form_contabilidad_mob_ini
       else
       {
           $perfil_trab = $con_devel;
+      }
+      if (!$_SESSION['sc_session'][$this->sc_page]['form_contabilidad_mob']['embutida_form'] || !$_SESSION['sc_session'][$this->sc_page]['form_contabilidad_mob']['embutida_proc']) 
+      {
+          if (!isset($_SESSION['gidtercero'])) 
+          {
+              $this->nm_falta_var .= "gidtercero; ";
+          }
       }
 // 
       if (!isset($_SESSION['scriptcase']['glo_tpbanco']))
@@ -1329,40 +1311,6 @@ class form_contabilidad_mob_ini
           $_SESSION['sc_session'][$this->sc_page]['form_contabilidad_mob']['decimal_db'] = "."; 
       } 
   }
-// 
-   function conectExtra()
-   {
-      $database_encodding = $this->force_db_utf8 ? 'utf8' : $this->nm_con_conne_mysql['database_encoding'];
-      $this->nm_db_conne_mysql = db_conect($this->nm_con_conne_mysql['tpbanco'], $this->nm_con_conne_mysql['servidor'], $this->nm_con_conne_mysql['usuario'], $this->nm_con_conne_mysql['senha'], $this->nm_con_conne_mysql['banco'], $this->nm_con_conne_mysql['protect'], 'S', 'N', '', $database_encodding);
-      if (in_array(strtolower($this->nm_con_conne_mysql['tpbanco']), $this->nm_bases_ibase))
-      {
-          if (function_exists('ibase_timefmt'))
-          {
-              ibase_timefmt('%Y-%m-%d %H:%M:%S');
-          } 
-          $GLOBALS["NM_ERRO_IBASE"] = 1;  
-      } 
-      if (in_array(strtolower($this->nm_con_conne_mysql['tpbanco']), $this->nm_bases_sybase))
-      {
-          $this->nm_db_conne_mysql->fetchMode = ADODB_FETCH_BOTH;
-          $this->nm_db_conne_mysql->Execute("set dateformat ymd");
-          $this->nm_db_conne_mysql->Execute("set quoted_identifier ON");
-      } 
-      if (in_array(strtolower($this->nm_con_conne_mysql['tpbanco']), $this->nm_bases_db2))
-      {
-          $this->nm_db_conne_mysql->fetchMode = ADODB_FETCH_NUM;
-      } 
-      if (in_array(strtolower($this->nm_con_conne_mysql['tpbanco']), $this->nm_bases_mssql))
-      {
-          $this->nm_db_conne_mysql->Execute("set dateformat ymd");
-      } 
-      if (in_array(strtolower($this->nm_con_conne_mysql['tpbanco']), $this->nm_bases_oracle))
-      {
-          $this->nm_db_conne_mysql->Execute("alter session set nls_date_format = 'yyyy-mm-dd hh24:mi:ss'");
-          $this->nm_db_conne_mysql->Execute("alter session set nls_numeric_characters = '.,'");
-          $this->nm_con_conne_mysql['decimal'] = "."; 
-      } 
-   }
 
   function setConnectionHash() {
     if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['form_contabilidad_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_contabilidad_mob']['glo_nm_conexao'])) {
@@ -1890,6 +1838,10 @@ ob_start();
            }
            $ix++;
         }
+        if (isset($gidtercero)) 
+        {
+            $_SESSION['gidtercero'] = $gidtercero;
+        }
     } 
     elseif (isset($script_case_init) && !empty($script_case_init) && !is_array($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_contabilidad_mob']['parms']))
     {
@@ -2107,6 +2059,16 @@ ob_start();
         if (!empty($nmgp_opcao))  
         {
             $_SESSION['sc_session'][$script_case_init]['form_contabilidad_mob']['opcao'] = $nmgp_opcao ; 
+        }
+        if (isset($_POST["gidtercero"])) 
+        {
+            $_SESSION['gidtercero'] = $_POST["gidtercero"];
+            nm_limpa_str_form_contabilidad_mob($_SESSION['gidtercero']);
+        }
+        if (isset($_GET["gidtercero"])) 
+        {
+            $_SESSION['gidtercero'] = $_GET["gidtercero"];
+            nm_limpa_str_form_contabilidad_mob($_SESSION['gidtercero']);
         }
         if (!empty($_SESSION['sc_session'][$script_case_init]['form_contabilidad_mob']['volta_redirect_apl']))
         {

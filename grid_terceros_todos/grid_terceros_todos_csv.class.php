@@ -1061,7 +1061,7 @@ $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'off';
          $_SESSION['scriptcase']['grid_terceros_todos']['contr_erro'] = 'on';
  if($this->estado =="PENDIENTE")
 {
-	$this->NM_field_style["documento"] = "background-color:#33ff99;font-size:13px;color:#000000;font-family:arial;font-weight:sans-serif;";
+	$this->NM_field_style["ccnit"] = "background-color:#33ff99;font-size:13px;color:#000000;font-family:arial;font-weight:sans-serif;";
 }
 
 $this->sc_asigna_vendedor   = "<select onchange='fAsignarVendedor(\"".$this->idtercero ."\",this.value);'>";

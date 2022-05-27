@@ -7,7 +7,6 @@ scriptcase__NM__ico__NM__user_information_32.png
 scriptcase__NM__ico__NM__gears_32.png
 scriptcase__NM__ico__NM__printer3_32.png
 scriptcase__NM__ico__NM__earth_location_32.png
-scriptcase__NM__ico__NM__user_32.png
 nm_edite.gif
 nm_help.gif
 nm_te.gif
@@ -25,7 +24,6 @@ scriptcase__NM__ico__NM__user_information_32.png
 scriptcase__NM__ico__NM__gears_32.png
 scriptcase__NM__ico__NM__printer3_32.png
 scriptcase__NM__ico__NM__earth_location_32.png
-scriptcase__NM__ico__NM__user_32.png
 nm_edite.gif
 nm_help.gif
 nm_te.gif

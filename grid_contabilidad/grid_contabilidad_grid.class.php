@@ -62,9 +62,9 @@ class grid_contabilidad_grid
    var $total_debito;
    var $total_credito;
    var $periodo;
-   var $tercero;
-   var $id;
    var $usuario;
+   var $id;
+   var $tercero;
    var $creado;
    var $actualizado;
    var $importado;
@@ -459,9 +459,9 @@ class grid_contabilidad_grid
    $this->Cmps_ord_def['total_debito'] = " desc";
    $this->Cmps_ord_def['total_credito'] = " desc";
    $this->Cmps_ord_def['periodo'] = " desc";
-   $this->Cmps_ord_def['tercero'] = " desc";
-   $this->Cmps_ord_def['id'] = " desc";
    $this->Cmps_ord_def['usuario'] = " asc";
+   $this->Cmps_ord_def['id'] = " desc";
+   $this->Cmps_ord_def['tercero'] = " desc";
    $this->Cmps_ord_def['creado'] = " desc";
    $this->Cmps_ord_def['actualizado'] = " desc";
    $this->Cmps_ord_def['importado'] = " asc";
@@ -900,27 +900,27 @@ class grid_contabilidad_grid
 //----- 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, tercero, id, usuario, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, usuario, id, tercero, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['where_pesq']; 
    $nmgp_order_by = ""; 
@@ -1012,11 +1012,11 @@ class grid_contabilidad_grid
        $this->total_credito = (string)$this->total_credito;
        $this->periodo = $this->rs_grid->fields[8] ;  
        $this->periodo = (string)$this->periodo;
-       $this->tercero = $this->rs_grid->fields[9] ;  
-       $this->tercero = (string)$this->tercero;
+       $this->usuario = $this->rs_grid->fields[9] ;  
        $this->id = $this->rs_grid->fields[10] ;  
        $this->id = (string)$this->id;
-       $this->usuario = $this->rs_grid->fields[11] ;  
+       $this->tercero = $this->rs_grid->fields[11] ;  
+       $this->tercero = (string)$this->tercero;
        $this->creado = $this->rs_grid->fields[12] ;  
        $this->actualizado = $this->rs_grid->fields[13] ;  
        $this->importado = $this->rs_grid->fields[14] ;  
@@ -1038,9 +1038,9 @@ class grid_contabilidad_grid
            $this->total_debito = $this->rs_grid->fields[6] ;  
            $this->total_credito = $this->rs_grid->fields[7] ;  
            $this->periodo = $this->rs_grid->fields[8] ;  
-           $this->tercero = $this->rs_grid->fields[9] ;  
+           $this->usuario = $this->rs_grid->fields[9] ;  
            $this->id = $this->rs_grid->fields[10] ;  
-           $this->usuario = $this->rs_grid->fields[11] ;  
+           $this->tercero = $this->rs_grid->fields[11] ;  
            $this->creado = $this->rs_grid->fields[12] ;  
            $this->actualizado = $this->rs_grid->fields[13] ;  
            $this->importado = $this->rs_grid->fields[14] ;  
@@ -2286,12 +2286,12 @@ $nm_saida->saida("}\r\n");
    $this->css_total_credito_grid_line = $compl_css_emb . "css_total_credito_grid_line";
    $this->css_periodo_label = $compl_css_emb . "css_periodo_label";
    $this->css_periodo_grid_line = $compl_css_emb . "css_periodo_grid_line";
-   $this->css_tercero_label = $compl_css_emb . "css_tercero_label";
-   $this->css_tercero_grid_line = $compl_css_emb . "css_tercero_grid_line";
-   $this->css_id_label = $compl_css_emb . "css_id_label";
-   $this->css_id_grid_line = $compl_css_emb . "css_id_grid_line";
    $this->css_usuario_label = $compl_css_emb . "css_usuario_label";
    $this->css_usuario_grid_line = $compl_css_emb . "css_usuario_grid_line";
+   $this->css_id_label = $compl_css_emb . "css_id_label";
+   $this->css_id_grid_line = $compl_css_emb . "css_id_grid_line";
+   $this->css_tercero_label = $compl_css_emb . "css_tercero_label";
+   $this->css_tercero_grid_line = $compl_css_emb . "css_tercero_grid_line";
    $this->css_creado_label = $compl_css_emb . "css_creado_label";
    $this->css_creado_grid_line = $compl_css_emb . "css_creado_grid_line";
    $this->css_actualizado_label = $compl_css_emb . "css_actualizado_label";
@@ -3156,17 +3156,17 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
- function NM_label_tercero()
+ function NM_label_usuario()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
-   if (!isset($this->NM_cmp_hidden['tercero']) || $this->NM_cmp_hidden['tercero'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tercero_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tercero_label'] . "\" >\r\n");
+   $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
+   if (!isset($this->NM_cmp_hidden['usuario']) || $this->NM_cmp_hidden['usuario'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_usuario_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_usuario_label'] . "\" >\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['opcao'] != "pdf")
    {
       $link_img = "";
       $nome_img = $this->Ini->Label_sort;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['ordem_cmp'] == 'tercero')
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['ordem_cmp'] == 'usuario')
       {
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['ordem_label'] == "desc")
           {
@@ -3203,7 +3203,7 @@ $nm_saida->saida("}\r\n");
       {
           $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
       }
-   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('tercero')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('usuario')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
    }
    else
    {
@@ -3268,17 +3268,17 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
- function NM_label_usuario()
+ function NM_label_tercero()
  {
    global $nm_saida;
-   $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
-   if (!isset($this->NM_cmp_hidden['usuario']) || $this->NM_cmp_hidden['usuario'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_usuario_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_usuario_label'] . "\" >\r\n");
+   $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
+   if (!isset($this->NM_cmp_hidden['tercero']) || $this->NM_cmp_hidden['tercero'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_tercero_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_tercero_label'] . "\" >\r\n");
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['opcao'] != "pdf")
    {
       $link_img = "";
       $nome_img = $this->Ini->Label_sort;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['ordem_cmp'] == 'usuario')
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['ordem_cmp'] == 'tercero')
       {
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['ordem_label'] == "desc")
           {
@@ -3315,7 +3315,7 @@ $nm_saida->saida("}\r\n");
       {
           $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
       }
-   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('usuario')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('tercero')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
    }
    else
    {
@@ -3540,12 +3540,12 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['labels']['total_credito'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['periodo'])) ? $this->New_label['periodo'] : "Periodo"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['labels']['periodo'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['labels']['tercero'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['id'])) ? $this->New_label['id'] : "Id"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['labels']['id'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['labels']['usuario'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['id'])) ? $this->New_label['id'] : "Id"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['labels']['id'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['labels']['tercero'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['creado'])) ? $this->New_label['creado'] : "Creado"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['labels']['creado'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['actualizado'])) ? $this->New_label['actualizado'] : "Actualizado"; 
@@ -3826,11 +3826,11 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['proc_pdf'
           $this->total_credito = (string)$this->total_credito;
           $this->periodo = $this->rs_grid->fields[8] ;  
           $this->periodo = (string)$this->periodo;
-          $this->tercero = $this->rs_grid->fields[9] ;  
-          $this->tercero = (string)$this->tercero;
+          $this->usuario = $this->rs_grid->fields[9] ;  
           $this->id = $this->rs_grid->fields[10] ;  
           $this->id = (string)$this->id;
-          $this->usuario = $this->rs_grid->fields[11] ;  
+          $this->tercero = $this->rs_grid->fields[11] ;  
+          $this->tercero = (string)$this->tercero;
           $this->creado = $this->rs_grid->fields[12] ;  
           $this->actualizado = $this->rs_grid->fields[13] ;  
           $this->importado = $this->rs_grid->fields[14] ;  
@@ -4356,37 +4356,37 @@ if (strlen($conteudo) > 50 && $conteudo != "&nbsp;") {
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_periodo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_periodo_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_periodo_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_tercero()
+ function NM_grid_usuario()
  {
       global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['tercero']) || $this->NM_cmp_hidden['tercero'] != "off") { 
-          $conteudo = NM_encode_input(sc_strip_script($this->tercero)); 
-          $conteudo_original = NM_encode_input(sc_strip_script($this->tercero)); 
+      if (!isset($this->NM_cmp_hidden['usuario']) || $this->NM_cmp_hidden['usuario'] != "off") { 
+          $conteudo = sc_strip_script($this->usuario); 
+          $conteudo_original = sc_strip_script($this->usuario); 
           if ($conteudo === "") 
           { 
               $conteudo = "&nbsp;" ;  
               $graf = "" ;  
           } 
-          else    
+          if ($conteudo !== "&nbsp;") 
           { 
-              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+              $conteudo = sc_strtoupper($conteudo); 
           } 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['embutida'] && !empty($conteudo)) 
           { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'tercero', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'tercero', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'usuario', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'usuario', $str_tem_display, $conteudo_original); 
           } 
               $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['proc_pdf'])
           {
-              $this->SC_nowrap = "NOWRAP";
+              $this->SC_nowrap = "";
           }
           else
           {
-              $this->SC_nowrap = "NOWRAP";
+              $this->SC_nowrap = "";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_tercero_grid_line . "\"  style=\"" . $this->Css_Cmp['css_tercero_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_tercero_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_usuario_grid_line . "\"  style=\"" . $this->Css_Cmp['css_usuario_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_usuario_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_id()
@@ -4422,33 +4422,37 @@ if (strlen($conteudo) > 50 && $conteudo != "&nbsp;") {
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_id_grid_line . "\"  style=\"" . $this->Css_Cmp['css_id_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_id_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_usuario()
+ function NM_grid_tercero()
  {
       global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['usuario']) || $this->NM_cmp_hidden['usuario'] != "off") { 
-          $conteudo = sc_strip_script($this->usuario); 
-          $conteudo_original = sc_strip_script($this->usuario); 
+      if (!isset($this->NM_cmp_hidden['tercero']) || $this->NM_cmp_hidden['tercero'] != "off") { 
+          $conteudo = NM_encode_input(sc_strip_script($this->tercero)); 
+          $conteudo_original = NM_encode_input(sc_strip_script($this->tercero)); 
           if ($conteudo === "") 
           { 
               $conteudo = "&nbsp;" ;  
               $graf = "" ;  
           } 
+          else    
+          { 
+              nmgp_Form_Num_Val($conteudo, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+          } 
           $str_tem_display = $conteudo;
           if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['embutida'] && !empty($conteudo)) 
           { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'usuario', $str_tem_display, $conteudo_original); 
-              $str_tem_display = $this->getFieldHighlight('advanced_search', 'usuario', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'tercero', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'tercero', $str_tem_display, $conteudo_original); 
           } 
               $conteudo = $str_tem_display; 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['proc_pdf'])
           {
-              $this->SC_nowrap = "";
+              $this->SC_nowrap = "NOWRAP";
           }
           else
           {
-              $this->SC_nowrap = "";
+              $this->SC_nowrap = "NOWRAP";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_usuario_grid_line . "\"  style=\"" . $this->Css_Cmp['css_usuario_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_usuario_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_tercero_grid_line . "\"  style=\"" . $this->Css_Cmp['css_tercero_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_tercero_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_creado()

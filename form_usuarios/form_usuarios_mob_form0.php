@@ -725,23 +725,68 @@ sc_userSweetAlertDisplayed = false;
   {
 ?>
 <tr><td>
-<style>
-#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
-#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
-</style>
-
-<div style="width: 100%">
- <div class="scFormHeader" style="height:11px; display: block; border-width:0px; "></div>
- <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
- 	<table style="width:100%; border-collapse:collapse; padding:0;">
-    	<tr>
-        	<td id="lin1_col1" class="scFormHeaderFont"><span><?php if ($this->nmgp_opcao == "novo") { echo "Usuario"; } else { echo "Usuario"; } ?></span></td>
-            <td id="lin1_col2" class="scFormHeaderFont"><span><?php if ($this->Ini->Export_img_zip) {$this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . '/scriptcase__NM__ico__NM__user_32.png';echo '<IMG SRC="scriptcase__NM__ico__NM__user_32.png';}else{ echo '<IMG SRC="' . $this->Ini->path_imag_cab  . '/scriptcase__NM__ico__NM__user_32.png';}?>" BORDER="0"/></span></td>
-        </tr>
-    </table>		 
- </div>
-</div>
-</td></tr>
+   <TABLE width="100%" class="scFormHeader">
+    <TR align="center">
+     <TD style="padding: 0px">
+      <TABLE style="padding: 0px; border-spacing: 0px; border-width: 0px;" width="100%">
+       <TR valign="middle">
+        <TD align="left" rowspan="3" class="scFormHeaderFont">
+          
+        </TD>
+        <TD align="left" class="scFormHeaderFont">
+          <?php if ($this->nmgp_opcao == "novo") { echo "Usuario"; } else { echo "Usuario"; } ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          <?php echo date($this->dateDefaultFormat()); ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>
+   </TABLE></td></tr>
 <?php
   }
 ?>
@@ -1963,7 +2008,7 @@ else
           $acceso_restaurante_val_str .= "'$Tmp_val_cmp'";
        }
    }
-   $nm_comando = "SELECT Idres, prefijo  FROM resdian  ORDER BY prefijo";
+   $nm_comando = "SELECT Idres, concat(prefijo,' - Vence: ',fec_vencimiento)  FROM resdian  ORDER BY prefijo";
 
    $this->idusuarios = $old_value_idusuarios;
 

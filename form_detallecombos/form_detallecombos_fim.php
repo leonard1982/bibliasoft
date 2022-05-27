@@ -145,17 +145,7 @@
 <SCRIPT LANGUAGE="Javascript">
     function closeModal()
     {
-<?php
-if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && isset($_SESSION['scriptcase']['display_mobile']) && $_SESSION['scriptcase']['display_mobile']) {
-?>
-        history.go(-3);
-<?php
-} else {
-?>
         self.parent.tb_remove();
-<?php
-}
-?>
     }
 <?php
 if (isset($fecha_aba_menu) && $fecha_aba_menu)

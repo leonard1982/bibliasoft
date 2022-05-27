@@ -472,6 +472,10 @@ function nm_mostra_img(imagem, altura, largura)
     });
     viewer.show();
 }
+function nm_mostra_mens(campo)
+{
+    NovaJanela = window.open ("form_inventario_inicial_help.php?nm_cod_campo=" + campo + "&language=<?php echo $this->Ini->path_lang . $this->Ini->str_lang?>&help_css=<?php echo '../_lib/css/' . $this->Ini->str_schema_all . '_form.css'; ?>", "ScriptCase", "height=100, width=300, resizable, scrollbars");
+}
 function nm_recarga_form(nm_ult_ancora, nm_ult_page) 
 { 
     document.F1.target = "_self";

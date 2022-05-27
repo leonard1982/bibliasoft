@@ -97,18 +97,15 @@ function Ord_cmp_init()
    $tab_ger_campos['idpro'] = "on";
    $tab_def_campos['idpro'] = "idpro";
    $tab_labels["idpro"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["idpro"])) ? $_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["idpro"] : "Producto";
-   $tab_ger_campos['colores'] = "on";
-   $tab_def_campos['colores'] = "colores";
-   $tab_labels["colores"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["colores"])) ? $_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["colores"] : "Color";
-   $tab_ger_campos['tallas'] = "on";
-   $tab_def_campos['tallas'] = "tallas";
-   $tab_labels["tallas"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["tallas"])) ? $_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["tallas"] : "Talla";
-   $tab_ger_campos['sabor'] = "on";
-   $tab_def_campos['sabor'] = "sabor";
-   $tab_labels["sabor"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["sabor"])) ? $_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["sabor"] : "Sabor";
    $tab_ger_campos['cantidad'] = "on";
    $tab_def_campos['cantidad'] = "cantidad";
    $tab_labels["cantidad"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["cantidad"])) ? $_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["cantidad"] : "Cantidad";
+   $tab_ger_campos['costo'] = "on";
+   $tab_def_campos['costo'] = "costo";
+   $tab_labels["costo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["costo"])) ? $_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["costo"] : "Costo x Und";
+   $tab_ger_campos['valorparcial'] = "on";
+   $tab_def_campos['valorparcial'] = "valorparcial";
+   $tab_labels["valorparcial"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["valorparcial"])) ? $_SESSION['sc_session'][$sc_init]['grid_inventario_inical']['labels']["valorparcial"] : "Valor";
    $tab_ger_campos['presentacion'] = "on";
    if ($use_alias == "S")
    {
@@ -251,6 +248,7 @@ function Sel_processa_form()
    }
    $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
    include("../_lib/buttons/" . $Str_btn_grid);
    if (!function_exists("nmButtonOutput"))

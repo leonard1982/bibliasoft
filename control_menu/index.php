@@ -181,7 +181,7 @@ class control_menu_ini
    var $link_grid_productos_cons;
    var $link_grid_terceros_todos_cons;
    var $link_grid_facturaven_pos_cons;
-   var $link_grid_compras_cons;
+   var $link_grid_compras_new_cons;
    var $link_blank_hacer_backup;
    var $link_form_datosemp_edit;
    var $link_grid_cuentaspagar_cons;
@@ -309,8 +309,8 @@ class control_menu_ini
       $this->nm_dt_criacao   = "20200907"; 
       $this->nm_hr_criacao   = "180617"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220425"; 
-      $this->nm_hr_ult_alt   = "155927"; 
+      $this->nm_dt_ult_alt   = "20220520"; 
+      $this->nm_hr_ult_alt   = "090530"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -700,38 +700,21 @@ class control_menu_ini
               $this->sc_lig_md5["grid_facturaven_pos"] = 'S';
           }
       }
-      $Tmp_apl_lig = "grid_compras";
-      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_ini.txt"))
+      $Tmp_apl_lig = "grid_compras_new";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt"))
       {
-          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_ini.txt");
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt");
           if (isset($Friendly[0]) && !empty($Friendly[0]))
           {
               $Tmp_apl_lig = trim($Friendly[0]);
           }
       }
-      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_ini.txt"))
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt"))
       {
-          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_ini.txt");
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt");
           if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
           {
-              $this->sc_lig_md5["grid_compras"] = 'S';
-          }
-      }
-      $Tmp_apl_lig = "grid_compras";
-      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_ini.txt"))
-      {
-          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_ini.txt");
-          if (isset($Friendly[0]) && !empty($Friendly[0]))
-          {
-              $Tmp_apl_lig = trim($Friendly[0]);
-          }
-      }
-      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_ini.txt"))
-      {
-          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_ini.txt");
-          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
-          {
-              $this->sc_lig_md5["grid_compras"] = 'S';
+              $this->sc_lig_md5["grid_compras_new"] = 'S';
           }
       }
       $Tmp_apl_lig = "blank_hacer_backup";
@@ -1114,9 +1097,9 @@ class control_menu_ini
       $this->link_grid_facturaven_pos_cons = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_facturaven_pos') . "/";
       $this->sc_lig_target["C_@scinf_ventas"] = 'nmsc_iframe_liga_grid_facturaven_pos';
       $this->sc_lig_iframe["nmsc_iframe_liga_grid_facturaven_pos"] = 'nmsc_iframe_liga_grid_facturaven_pos';
-      $this->link_grid_compras_cons = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_compras') . "/";
-      $this->sc_lig_target["C_@scinf_compras"] = 'nmsc_iframe_liga_grid_compras';
-      $this->sc_lig_iframe["nmsc_iframe_liga_grid_compras"] = 'nmsc_iframe_liga_grid_compras';
+      $this->link_grid_compras_new_cons = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_compras_new') . "/";
+      $this->sc_lig_target["C_@scinf_compras"] = 'nmsc_iframe_liga_grid_compras_new';
+      $this->sc_lig_iframe["nmsc_iframe_liga_grid_compras_new"] = 'nmsc_iframe_liga_grid_compras_new';
       $this->link_blank_hacer_backup = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('blank_hacer_backup') . "/";
       $this->sc_lig_target["C_@scinf_copias"] = 'nmsc_iframe_liga_blank_hacer_backup';
       $this->sc_lig_iframe["nmsc_iframe_liga_blank_hacer_backup"] = 'nmsc_iframe_liga_blank_hacer_backup';
@@ -1204,7 +1187,7 @@ class control_menu_ini
       $this->Img_export_zip  = array();
       $this->regionalDefault();
       $this->sc_tem_trans_banco = false;
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODuFaDSrwD5JwHuvmDkB/DWF/DoNUHQXOZ1BiHArYHQFUHgvsHArsDWXCVoBqD9NwDQFGHIrKHQNUHuBOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIBOHQXODQFGHIrKV5FaDMvOVIBsDuX7HMJwHQNwZ1BOHAN7V5JwHgrKDkXKH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBqD9BsH9B/Z1NOZMB/DErKVkXeV5FaVoX7DcXOZSX7Z1BYD5JwHuNOVIFCH5XKDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HIveV5JwDMBYZSJ3DuJeVoJsHQBiDQFaZ1rwD5XGHuBYDkBOV5X/VEraHQXOZSFaD1rKHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMFaHgveHArsDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEFYHIJeD9JmH9B/HAN7HQraDEBOZSJ3H5FYHMJeDcBiDQFaHANOD5B/DMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQFaDSN7HuB/DMBYDkBOHEBmVErqHQXGVIJsHANOHQJeHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcrsH5FqDoraHQJmZ1BOHAN7HuJeDEBODkXKHEFqDoJsD9NmZSX7HAvCVWJeHgrKVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeH5FYDoB/D9XsH9FGD1veV5BOHuNODkBODuFqVoJwD9BsZ1B/HArYV5FUDEvsHAFKV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBiDQFUDSBYHuBqHuvmVIB/Dur/DoF7HQNwZ1rqHIBeD5JeDEvsZSJGDuJeHIJwDcXGH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqD1vOV5BODMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDEBeHEFiDWr/VoFGHQXOH9X7D1BeHQXGDMvODkB/DuFGVEX7HQXGZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['control_menu']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['control_menu']['initialize'])  
       { 

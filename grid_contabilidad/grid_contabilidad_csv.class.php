@@ -346,8 +346,8 @@ class grid_contabilidad_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
-              if ($Cada_col == "tercero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
+              if ($Cada_col == "usuario" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
                   $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
@@ -362,8 +362,8 @@ class grid_contabilidad_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
-              if ($Cada_col == "usuario" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
+              if ($Cada_col == "tercero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
                   $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
@@ -403,27 +403,27 @@ class grid_contabilidad_csv
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, convert(char(23),fecha,121), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, tercero, id, usuario, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, TO_DATE(TO_CHAR(asentada, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), total_debito, total_credito, periodo, usuario, id, tercero, TO_DATE(TO_CHAR(creado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), TO_DATE(TO_CHAR(actualizado, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), importado from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, EXTEND(fecha, YEAR TO DAY), asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, tercero, id, usuario, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT tipodoc, prefijo, numero, notas, fecha, asentada, total_debito, total_credito, periodo, usuario, id, tercero, creado, actualizado, importado from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_contabilidad']['where_pesq'];
@@ -472,11 +472,11 @@ class grid_contabilidad_csv
          $this->total_credito = (string)$this->total_credito;
          $this->periodo = $rs->fields[8] ;  
          $this->periodo = (string)$this->periodo;
-         $this->tercero = $rs->fields[9] ;  
-         $this->tercero = (string)$this->tercero;
+         $this->usuario = $rs->fields[9] ;  
          $this->id = $rs->fields[10] ;  
          $this->id = (string)$this->id;
-         $this->usuario = $rs->fields[11] ;  
+         $this->tercero = $rs->fields[11] ;  
+         $this->tercero = (string)$this->tercero;
          $this->creado = $rs->fields[12] ;  
          $this->actualizado = $rs->fields[13] ;  
          $this->importado = $rs->fields[14] ;  
@@ -700,12 +700,15 @@ class grid_contabilidad_csv
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
-   //----- tercero
-   function NM_export_tercero()
+   //----- usuario
+   function NM_export_usuario()
    {
-             nmgp_Form_Num_Val($this->tercero, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
+             if ($this->usuario !== "&nbsp;") 
+             { 
+                 $this->usuario = sc_strtoupper($this->usuario); 
+             } 
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->tercero);
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->usuario);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
@@ -718,11 +721,12 @@ class grid_contabilidad_csv
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
-   //----- usuario
-   function NM_export_usuario()
+   //----- tercero
+   function NM_export_tercero()
    {
+             nmgp_Form_Num_Val($this->tercero, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->usuario);
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->tercero);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }

@@ -16,6 +16,8 @@ class grid_inventario_inical_xls
    var $NM_ctrl_style = array();
    var $Arquivo;
    var $Tit_doc;
+   var $count_ger;
+   var $sum_valorparcial;
    //---- 
    function __construct()
    {
@@ -185,6 +187,10 @@ class grid_inventario_inical_xls
       $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['SC_Ind_Groupby'];
       $this->Tot->$Gb_geral();
       $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][1];
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['SC_Ind_Groupby'] == "sc_free_total")
+      {
+          $this->sum_valorparcial = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][2];
+      }
       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'] && !$this->Ini->sc_export_ajax) {
           require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
           $this->pb = new scProgressBar();
@@ -327,27 +333,27 @@ class grid_inventario_inical_xls
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, str_replace (convert(char(10),fecha,102), '.', '-') + ' ' + convert(char(8),fecha,20), idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, fecha, idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, fecha, idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, convert(char(23),fecha,121), idinv, tipo from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, convert(char(23),fecha,121), idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, fecha, idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, fecha, idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, EXTEND(fecha, YEAR TO DAY), idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, EXTEND(fecha, YEAR TO DAY), idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT idpro, colores, tallas, sabor, cantidad, idbod, fecha, idinv, tipo from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT idpro, cantidad, costo, valorparcial, idbod, fecha, idinv, tipo, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['where_pesq'];
@@ -378,23 +384,28 @@ class grid_inventario_inical_xls
          $this->Xls_row++;
          $this->idpro = $rs->fields[0] ;  
          $this->idpro = (string)$this->idpro;
-         $this->colores = $rs->fields[1] ;  
-         $this->colores = (string)$this->colores;
-         $this->tallas = $rs->fields[2] ;  
-         $this->tallas = (string)$this->tallas;
-         $this->sabor = $rs->fields[3] ;  
-         $this->sabor = (string)$this->sabor;
-         $this->cantidad = $rs->fields[4] ;  
+         $this->cantidad = $rs->fields[1] ;  
          $this->cantidad =  str_replace(",", ".", $this->cantidad);
-         $this->cantidad = (strpos(strtolower($this->cantidad), "e")) ? (float)$this->cantidad : $this->cantidad; 
          $this->cantidad = (string)$this->cantidad;
-         $this->idbod = $rs->fields[5] ;  
+         $this->costo = $rs->fields[2] ;  
+         $this->costo =  str_replace(",", ".", $this->costo);
+         $this->costo = (string)$this->costo;
+         $this->valorparcial = $rs->fields[3] ;  
+         $this->valorparcial =  str_replace(",", ".", $this->valorparcial);
+         $this->valorparcial = (string)$this->valorparcial;
+         $this->idbod = $rs->fields[4] ;  
          $this->idbod = (string)$this->idbod;
-         $this->fecha = $rs->fields[6] ;  
-         $this->idinv = $rs->fields[7] ;  
+         $this->fecha = $rs->fields[5] ;  
+         $this->idinv = $rs->fields[6] ;  
          $this->idinv = (string)$this->idinv;
-         $this->tipo = $rs->fields[8] ;  
+         $this->tipo = $rs->fields[7] ;  
          $this->tipo = (string)$this->tipo;
+         $this->colores = $rs->fields[8] ;  
+         $this->colores = (string)$this->colores;
+         $this->tallas = $rs->fields[9] ;  
+         $this->tallas = (string)$this->tallas;
+         $this->sabor = $rs->fields[10] ;  
+         $this->sabor = (string)$this->sabor;
      if ($this->groupby_show == "S") {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'])
          { 
@@ -436,25 +447,15 @@ class grid_inventario_inical_xls
          $this->look_idpro = $this->idpro; 
          $this->Lookup->lookup_idpro($this->look_idpro, $this->idpro) ; 
          $this->look_idpro = ($this->look_idpro == "&nbsp;") ? "" : $this->look_idpro; 
-         //----- lookup - colores
-         $this->look_colores = $this->colores; 
-         $this->Lookup->lookup_colores($this->look_colores, $this->colores) ; 
-         $this->look_colores = ($this->look_colores == "&nbsp;") ? "" : $this->look_colores; 
-         //----- lookup - tallas
-         $this->look_tallas = $this->tallas; 
-         $this->Lookup->lookup_tallas($this->look_tallas, $this->tallas) ; 
-         $this->look_tallas = ($this->look_tallas == "&nbsp;") ? "" : $this->look_tallas; 
-         //----- lookup - sabor
-         $this->look_sabor = $this->sabor; 
-         $this->Lookup->lookup_sabor($this->look_sabor, $this->sabor) ; 
-         $this->look_sabor = ($this->look_sabor == "&nbsp;") ? "" : $this->look_sabor; 
          //----- lookup - idbod
          $this->look_idbod = $this->idbod; 
          $this->Lookup->lookup_idbod($this->look_idbod, $this->idbod) ; 
          $this->look_idbod = ($this->look_idbod == "&nbsp;") ? "" : $this->look_idbod; 
          $this->sc_proc_grid = true; 
          $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'on';
- $sql="select unidmaymen, unimay, unimen from productos where idprod=$this->idpro ";
+ $unidad = '';
+
+$sql="select unidmaymen, unimay, unimen from productos where idprod=$this->idpro ";
  
       $nm_select = $sql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -484,11 +485,47 @@ class grid_inventario_inical_xls
 
 if(($this->ds[0][0])=='SI')
 	{
-	$this->presentacion =$this->ds[0][1];
+	$unidad =$this->ds[0][1];
 	}
 else
 	{
-	$this->presentacion =$this->ds[0][2];
+	$unidad =$this->ds[0][2];
+	}
+
+$sql_um = "SELECT descripcion_um FROM unidades_medida WHERE codigo_um = '".$unidad."'";
+ 
+      $nm_select = $sql_um; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_um = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->ds_um[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_um = false;
+          $this->ds_um_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_um[0][0]))
+	{
+	$this->presentacion  = $this->ds_um[0][0];
+	}
+else
+	{
+	$this->presentacion  = 'UN';
 	}
 $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off'; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'] as $Cada_col)
@@ -537,6 +574,10 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
           } 
       } 
       if ($this->groupby_show == "S") {
+          $this->Xls_col = 0;
+          $this->Xls_row++;
+          $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['SC_Ind_Groupby'] . "_bot";
+          $this->$Gb_geral();
       }
       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'])
       { 
@@ -680,8 +721,8 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['colores'])) ? $this->New_label['colores'] : "Color"; 
-          if ($Cada_col == "colores" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          $SC_Label = (isset($this->New_label['cantidad'])) ? $this->New_label['cantidad'] : "Cantidad"; 
+          if ($Cada_col == "cantidad" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
               $current_cell_ref = $this->calc_cell($this->Xls_col);
@@ -708,8 +749,8 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['tallas'])) ? $this->New_label['tallas'] : "Talla"; 
-          if ($Cada_col == "tallas" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          $SC_Label = (isset($this->New_label['costo'])) ? $this->New_label['costo'] : "Costo x Und"; 
+          if ($Cada_col == "costo" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
               $current_cell_ref = $this->calc_cell($this->Xls_col);
@@ -736,8 +777,8 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['sabor'])) ? $this->New_label['sabor'] : "Sabor"; 
-          if ($Cada_col == "sabor" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          $SC_Label = (isset($this->New_label['valorparcial'])) ? $this->New_label['valorparcial'] : "Valor"; 
+          if ($Cada_col == "valorparcial" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
               $current_cell_ref = $this->calc_cell($this->Xls_col);
@@ -745,46 +786,18 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'])
               { 
                   $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "right";
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
                   $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
                   $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
               }
               else
               { 
                   if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
                   }
                   else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
-          $SC_Label = (isset($this->New_label['cantidad'])) ? $this->New_label['cantidad'] : "Cantidad"; 
-          if ($Cada_col == "cantidad" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "right";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
                   }
                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
@@ -956,87 +969,6 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
          }
          $this->Xls_col++;
    }
-   //----- colores
-   function NM_export_colores()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-      if (!empty($this->colores))
-      {
-         if ($this->look_colores !== "&nbsp;") 
-         { 
-             $this->look_colores = sc_strtoupper($this->look_colores); 
-         } 
-      }
-         $this->look_colores = html_entity_decode($this->look_colores, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->look_colores = strip_tags($this->look_colores);
-         $this->look_colores = NM_charset_to_utf8($this->look_colores);
-         if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_colores, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-         }
-         else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_colores, PHPExcel_Cell_DataType::TYPE_STRING);
-         }
-         $this->Xls_col++;
-   }
-   //----- tallas
-   function NM_export_tallas()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "CENTER"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-      if (!empty($this->tallas))
-      {
-         if ($this->look_tallas !== "&nbsp;") 
-         { 
-             $this->look_tallas = sc_strtoupper($this->look_tallas); 
-         } 
-      }
-         $this->look_tallas = html_entity_decode($this->look_tallas, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->look_tallas = strip_tags($this->look_tallas);
-         $this->look_tallas = NM_charset_to_utf8($this->look_tallas);
-         if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_tallas, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-         }
-         else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_tallas, PHPExcel_Cell_DataType::TYPE_STRING);
-         }
-         $this->Xls_col++;
-   }
-   //----- sabor
-   function NM_export_sabor()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "RIGHT"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-      if (!empty($this->sabor))
-      {
-         if ($this->look_sabor !== "&nbsp;") 
-         { 
-             $this->look_sabor = sc_strtoupper($this->look_sabor); 
-         } 
-      }
-         $this->look_sabor = html_entity_decode($this->look_sabor, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->look_sabor = strip_tags($this->look_sabor);
-         $this->look_sabor = NM_charset_to_utf8($this->look_sabor);
-         if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_sabor, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-         }
-         else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->look_sabor, PHPExcel_Cell_DataType::TYPE_STRING);
-         }
-         $this->Xls_col++;
-   }
    //----- cantidad
    function NM_export_cantidad()
    {
@@ -1052,6 +984,40 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
              $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0.00';
          }
          $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->cantidad);
+         $this->Xls_col++;
+   }
+   //----- costo
+   function NM_export_costo()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "RIGHT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->costo = NM_charset_to_utf8($this->costo);
+         if (is_numeric($this->costo))
+         {
+             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0.00';
+         }
+         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->costo);
+         $this->Xls_col++;
+   }
+   //----- valorparcial
+   function NM_export_valorparcial()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "RIGHT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->valorparcial = NM_charset_to_utf8($this->valorparcial);
+         if (is_numeric($this->valorparcial))
+         {
+             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0.00';
+         }
+         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->valorparcial);
          $this->Xls_col++;
    }
    //----- presentacion
@@ -1163,68 +1129,31 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
-   //----- colores
-   function NM_sub_cons_colores()
-   {
-      if (!empty($this->colores))
-      {
-         if ($this->look_colores !== "&nbsp;") 
-         { 
-             $this->look_colores = sc_strtoupper($this->look_colores); 
-         } 
-      }
-         $this->look_colores = html_entity_decode($this->look_colores, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->look_colores = strip_tags($this->look_colores);
-         $this->look_colores = NM_charset_to_utf8($this->look_colores);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_colores;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-         $this->Xls_col++;
-   }
-   //----- tallas
-   function NM_sub_cons_tallas()
-   {
-      if (!empty($this->tallas))
-      {
-         if ($this->look_tallas !== "&nbsp;") 
-         { 
-             $this->look_tallas = sc_strtoupper($this->look_tallas); 
-         } 
-      }
-         $this->look_tallas = html_entity_decode($this->look_tallas, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->look_tallas = strip_tags($this->look_tallas);
-         $this->look_tallas = NM_charset_to_utf8($this->look_tallas);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_tallas;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-         $this->Xls_col++;
-   }
-   //----- sabor
-   function NM_sub_cons_sabor()
-   {
-      if (!empty($this->sabor))
-      {
-         if ($this->look_sabor !== "&nbsp;") 
-         { 
-             $this->look_sabor = sc_strtoupper($this->look_sabor); 
-         } 
-      }
-         $this->look_sabor = html_entity_decode($this->look_sabor, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->look_sabor = strip_tags($this->look_sabor);
-         $this->look_sabor = NM_charset_to_utf8($this->look_sabor);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_sabor;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-         $this->Xls_col++;
-   }
    //----- cantidad
    function NM_sub_cons_cantidad()
    {
          $this->cantidad = NM_charset_to_utf8($this->cantidad);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->cantidad;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0.00";
+         $this->Xls_col++;
+   }
+   //----- costo
+   function NM_sub_cons_costo()
+   {
+         $this->costo = NM_charset_to_utf8($this->costo);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->costo;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0.00";
+         $this->Xls_col++;
+   }
+   //----- valorparcial
+   function NM_sub_cons_valorparcial()
+   {
+         $this->valorparcial = NM_charset_to_utf8($this->valorparcial);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->valorparcial;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0.00";
@@ -1328,8 +1257,113 @@ $_SESSION['scriptcase']['grid_inventario_inical']['contr_erro'] = 'off';
            $this->NM_ctrl_style = array();
        }
    }
-   function quebra_geral_sc_free_total_bot() 
+   function quebra_geral_sc_free_total_bot()
    {
+       if ($this->groupby_show != "S") {
+           return;
+       }
+       $this->Tot->quebra_geral_sc_free_total();
+       $prim_cmp = true;
+       $NM_cmp_tot['valorparcial']['S'] = 2;
+       $NM_tipos_tot = array('S' => 'Costo Inventario Inicial');
+       $mens_tot_base = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][0] . "(" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][1] . ")";
+       $prim_lin_tot  = true;
+     foreach ($NM_tipos_tot as $Tipo_Sum => $Tit_sum)
+     {
+       $mens_tot      = $mens_tot_base . " - " . $Tit_sum;
+       $prim_cmp      = true;
+       $this->Xls_col = 0;
+       if (!$prim_lin_tot) {
+           $this->Xls_row++;
+       }
+       $prim_lin_tot  = false;
+       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['field_order'] as $Cada_cmp)
+       {
+           if (isset($NM_cmp_tot['valorparcial'][$Tipo_Sum]) && $Cada_cmp == "valorparcial" && (!isset($this->NM_cmp_hidden['valorparcial']) || $this->NM_cmp_hidden['valorparcial'] != "off"))
+           {
+               if ($Tipo_Sum == "C" || $Tipo_Sum == "D") {
+                   $Format_Num = "#,##0";
+               }
+               else {
+                   $Format_Num = "#,##0.00";
+               }
+               $Vl_Tot = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['tot_geral'][$NM_cmp_tot['valorparcial'][$Tipo_Sum]];
+               $prim_cmp = false;
+               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
+               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida']) {
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
+                   if (is_numeric($Vl_Tot)) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
+                   }
+                   else {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                   }
+                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+               }
+               else {
+                   $current_cell_ref = $this->calc_cell($this->Xls_col);
+                   if ($this->Use_phpspreadsheet) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+                   }
+                   else {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                   }
+                   if (is_numeric($Vl_Tot)) {
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
+                   }
+                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
+                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+               }
+               $this->Xls_col++;
+           }
+           elseif (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
+           {
+               if ($prim_cmp)
+               {
+                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+                   $mens_tot = strip_tags($mens_tot);
+                   $mens_tot = NM_charset_to_utf8($mens_tot);
+                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
+                   }
+                   else {
+                       $current_cell_ref = $this->calc_cell($this->Xls_col);
+                       if ($this->Use_phpspreadsheet) {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                       }
+                       else {
+                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                       }
+                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
+                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                   }
+               }
+               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida']) {
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+               }
+               $this->Xls_col++;
+               $prim_cmp = false;
+           }
+       }
+     }
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_inical']['embutida']) {
+           $this->Xls_row++;
+           $this->Xls_col = 1;
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+       }
    }
 
    function calc_cell($col)

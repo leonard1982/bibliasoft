@@ -9072,6 +9072,9 @@ else
 {
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['Lookup_direccion'] = array(); 
 }
+if ($this->idcli != "")
+{ 
+   $this->nm_clear_val("idcli");
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
@@ -9116,7 +9119,7 @@ else
    $unformatted_value_reteiva = $this->reteiva;
    $unformatted_value_imconsumo = $this->imconsumo;
 
-   $nm_comando = "SELECT iddireccion, direc  FROM direccion  ORDER BY direc";
+   $nm_comando = "SELECT iddireccion, direc  FROM direccion  WHERE idter='$this->idcli' ORDER BY direc";
 
    $this->numfacven = $old_value_numfacven;
    $this->fechaven = $old_value_fechaven;
@@ -9158,6 +9161,7 @@ else
        exit; 
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
+} 
           $aLookupOrig = $aLookup;
           $sSelComp = "name=\"direccion\"";
           if (isset($this->NM_ajax_info['select_html']['direccion']) && !empty($this->NM_ajax_info['select_html']['direccion']))
@@ -12749,7 +12753,6 @@ $vGrupo="";
 $vCambiaVal='NO';
 $vControl='NO';
 $vsql = "select * from detalleventa where numfac='".$vLafac."'";
-echo $vsql;
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -15944,6 +15947,212 @@ if(!empty($this->prefijo_fac ))
 	{
 		$this->idcli      = $this->ds[0][0];
 		$vDir       = $this->ds[0][1];
+		
+		if($vDir==0 or empty($vDir))
+		{
+			$vsql = "select iddireccion from direccion where idter='".$this->idcli ."'";
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDirec = array();
+      $this->vdirec = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vDirec[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vdirec[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDirec = false;
+          $this->vDirec_erro = $this->Db->ErrorMsg();
+          $this->vdirec = false;
+          $this->vdirec_erro = $this->Db->ErrorMsg();
+      } 
+;
+			if(isset($this->vdirec[0][0]))
+			{
+				$vDir = $this->vdirec[0][0];
+				$vsql = "update facturaven set dircliente='".$this->vdirec[0][0]."' where idfacven='".$vIdfac."'";
+				
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			}
+			else
+			{
+				$idt  = $this->idcli ;
+				$vsql = "select idmuni, direccion, tel_cel, ciudad, codigo_postal, lenguaje from terceros where idtercero='".$idt."'";
+				 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDTer = array();
+      $this->vdter = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vDTer[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vdter[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDTer = false;
+          $this->vDTer_erro = $this->Db->ErrorMsg();
+          $this->vdter = false;
+          $this->vdter_erro = $this->Db->ErrorMsg();
+      } 
+;
+				if(isset($this->vdter[0][0]))
+				{
+					$muni   = $this->vdter[0][0];
+					$this->vdirec = $this->vdter[0][1];
+					$vtel_c = $this->vdter[0][2];
+					$vciudad= $this->vdter[0][3];
+					$vcodpos= $this->vdter[0][4];
+					$vlengua= $this->vdter[0][5];
+					
+					$sql2 = "select iddepar from municipio where idmun = '".$muni."'";
+					 
+      $nm_select = $sql2; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->des = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->des[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->des = false;
+          $this->des_erro = $this->Db->ErrorMsg();
+      } 
+;
+					if(isset($this->des[0][0]))
+					{
+						$dep = $this->des[0][0];
+					}
+					$vsql = "insert direccion SET idter = '".$idt."', iddepar = '".$dep."', idmuni = '".$muni."', direc = '".$vdirec."', obs = 'PRINCIPAL', telefono = '".$vtel_c."', ciudad = '".$vciudad."',  codigo_postal = '".$vcodpos."', lenguaje = '".$vlengua."'";
+					
+     $nm_select = $vsq; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ; 
+					
+					$vsql = "select iddireccion from direccion where idter='".$idt."'";
+					 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDirec2 = array();
+      $this->vdirec2 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vDirec2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vdirec2[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDirec2 = false;
+          $this->vDirec2_erro = $this->Db->ErrorMsg();
+          $this->vdirec2 = false;
+          $this->vdirec2_erro = $this->Db->ErrorMsg();
+      } 
+;
+					if(isset($this->vdirec2[0][0]))
+					{
+						$vDir = $this->vdirec2[0][0];
+						$vsql = "update facturaven set dircliente='".$this->vdirec2[0][0]."' where idfacven='".$vIdfac."'";
+						
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                form_notas_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					}
+				}
+			}
+		}
+		
 		if(isset($this->ds[0][1]))
 			{
 			$this->dircliente =$vDir;
@@ -17855,6 +18064,9 @@ else
 {
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_notas_mob']['Lookup_direccion'] = array(); 
 }
+if ($this->idcli != "")
+{ 
+   $this->nm_clear_val("idcli");
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
    { 
        $GLOBALS["NM_ERRO_IBASE"] = 1;  
@@ -17907,7 +18119,7 @@ else
    $unformatted_value_reteiva = $this->reteiva;
    $unformatted_value_imconsumo = $this->imconsumo;
 
-   $nm_comando = "SELECT iddireccion, direc  FROM direccion  ORDER BY direc";
+   $nm_comando = "SELECT iddireccion, direc  FROM direccion  WHERE idter='$this->idcli' ORDER BY direc";
 
    $this->numfacven = $old_value_numfacven;
    $this->fechaven = $old_value_fechaven;
@@ -17948,6 +18160,7 @@ else
        exit; 
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
+} 
    $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
    $todo  = explode("?@?", $todox) ; 
    return $todo;

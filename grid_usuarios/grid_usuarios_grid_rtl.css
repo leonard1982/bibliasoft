@@ -1,5 +1,3 @@
-.css_idusuarios_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_idusuarios_grid_line {vertical-align: top;text-align: right;}
 .css_usuario_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_usuario_grid_line {vertical-align: top;text-align: right;}
 .css_password_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
@@ -16,6 +14,8 @@
 .css_activo_grid_line {vertical-align: top;text-align: right;}
 .css_grupocomanda_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_grupocomanda_grid_line {vertical-align: top;text-align: right;}
+.css_idusuarios_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_idusuarios_grid_line {vertical-align: top;text-align: right;}
 .css_creacion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
 .css_creacion_grid_line {vertical-align: top;text-align: center;}
 .css_nombre_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
