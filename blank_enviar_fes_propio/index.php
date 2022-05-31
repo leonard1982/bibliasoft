@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220523"; 
-      $this->nm_hr_ult_alt   = "170117"; 
+      $this->nm_dt_ult_alt   = "20220531"; 
+      $this->nm_hr_ult_alt   = "074201"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_enviar_fes_propio_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQB/HAveV5XGHgrwZSJ3V5FYHMB/HQBiH9B/HAN7V5BODMvCHArCV5XCVoFaDcBiDQJsZ1rwHQFaHuBYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMzGVcrsDur/DoJsHQXGZ1BOD1rwV5BqDMveHErCV5FqDorqHQXsH9FGHAN7HuBiHuNOVcXKHEFYDoXGHQNmH9BqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsVIBODuFqVoB/D9BsZSB/DSBeD5BiDMzGHEXeV5XCZuBOD9JKDQX7HArYV5BOHgrYDkBODWF/DoraD9XOH9BOZ1BeD5BqDErKVkXeV5FaDoBOD9JKDQX7Z1NaD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/HQJKDQX7Z1BYHurqDMvsV9FeV5X7DoXGHQNwZkBiHANOV5BOHgBYHEJGHEFqHMB/DcBiH9BiZ1BYD5JsDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJwDMvOZSNiDuX7HMBiD9BsVIraD1rwV5X7HgBeHErCHEB7DoJeHQNwDQB/HABYHQrqDMBYVIB/DuFGVoX7HQXOZ1BiHAN7V5JsDMzGDkFeV5B7DoXGHQNmZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXOZSBiHIBeD5XGDMBOV9BUDuX7VoB/DcNwH9BqHIveD5BqHgBOVkXeV5FqZuFaHQXsDQBOZ1BYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBeVkJGH5X/DoJeD9NwH9BiZ1BYV5XGHuBYVIBODur/DoF7HQXGZkFGZ1BeHQJeHgNKDkB/DWXCHMBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwDQX7Z1N7VWJeHuvmVcBODWFaVoX7DcNwH9B/HANOV5FaDErKZSJqV5FaDoBOD9NwH9X7Z1rwV5JeHuvmVcBOV5FGDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1BiD1zGZMJeDMBYVkJGDWX7VoJwDcJeZSFGHArYHQJwDMrYVcFeDuX7VoBiHQBsZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1zGD5JeHgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaHuvmVIB/HEFYHIFUHQXOZSBOHArYHuJeDMveHArCDuFYHIX7D9NwZSBiD1veV5raDMrYVcXKH5XCHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2102,10 +2102,53 @@ else
 		if(isset($this->vsiplantilla[0][0]) and isset($this->vsiplantilla[0][1]) and isset($this->vsiplantilla[0][2]) and isset($this->vsiplantilla[0][3]))
 		{
 			$vplantilla_existe = true;
-			$vcabecera = utf8_decode($this->vsiplantilla[0][0]);
-			$vcuerpo   = utf8_decode($this->vsiplantilla[0][1]);
-			$vbotones  = utf8_decode($this->vsiplantilla[0][2]);
-			$vpie      = utf8_decode($this->vsiplantilla[0][3]);
+			
+			$mystring = $this->vsiplantilla[0][0];
+			$findme   = 'ó';
+			$pos = strpos($mystring, $findme);
+
+			if ($pos === false)
+			{
+				$vcabecera = utf8_decode($this->vsiplantilla[0][0]);
+				$vcuerpo   = utf8_decode($this->vsiplantilla[0][1]);
+				$vbotones  = utf8_decode($this->vsiplantilla[0][2]);
+				$vpie      = utf8_decode($this->vsiplantilla[0][3]);
+			}
+			else
+			{
+				$vcabecera = $this->vsiplantilla[0][0];
+				$vcabecera = str_replace("á","a",$vcabecera);
+				$vcabecera = str_replace("é","e",$vcabecera);
+				$vcabecera = str_replace("í","i",$vcabecera);
+				$vcabecera = str_replace("ó","o",$vcabecera);
+				$vcabecera = str_replace("ú","u",$vcabecera);
+				$vcabecera = str_replace("ñ","n",$vcabecera);
+				
+				$vcuerpo   = $this->vsiplantilla[0][1];
+				$vcuerpo   = str_replace("á","a",$vcuerpo);
+				$vcuerpo   = str_replace("é","e",$vcuerpo);
+				$vcuerpo   = str_replace("í","i",$vcuerpo);
+				$vcuerpo   = str_replace("ó","o",$vcuerpo);
+				$vcuerpo   = str_replace("ú","u",$vcuerpo);
+				$vcuerpo   = str_replace("ñ","n",$vcuerpo);
+				
+				$vbotones  = $this->vsiplantilla[0][2];
+				$vbotones  = str_replace("á","a",$vbotones);
+				$vbotones  = str_replace("é","e",$vbotones);
+				$vbotones  = str_replace("í","i",$vbotones);
+				$vbotones  = str_replace("ó","o",$vbotones);
+				$vbotones  = str_replace("ú","u",$vbotones);
+				$vbotones  = str_replace("ñ","n",$vbotones);
+				
+				$vpie      = $this->vsiplantilla[0][3];
+				$vpie      = str_replace("á","a",$vpie);
+				$vpie      = str_replace("é","e",$vpie);
+				$vpie      = str_replace("í","i",$vpie);
+				$vpie      = str_replace("ó","o",$vpie);
+				$vpie      = str_replace("ú","u",$vpie);
+				$vpie      = str_replace("ñ","n",$vpie);
+			}
+
 		}
 	}
 	
@@ -2511,6 +2554,7 @@ else
 	$vdatos["legal_monetary_totals"]["allowance_total_amount"] =  "0.00";
 	$vdatos["legal_monetary_totals"]["charge_total_amount"] =  "0.00";
 	$vdatos["legal_monetary_totals"]["payable_amount"] =  $vtotal;
+	
 	
 	
 	$vcorreo_validar = $vdatos["customer"]["email"];
