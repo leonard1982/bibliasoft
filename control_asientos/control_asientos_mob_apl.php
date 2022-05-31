@@ -2015,7 +2015,7 @@ if(isset($this->vsigcp6[0][0]))
 	$vtrue    = false;
 }
 
-$vsql = "select t.idtercero from facturaven_contratos f left join terceros t on f.idcli=t.idtercero where t.puc_auxiliar_proveedores is null and f.fechaven between '".$this->desde ."' and '".$this->hasta ."'  limit 1";
+$vsql = "select t.idtercero,t.documento,t.nombres from facturaven_contratos f left join terceros t on f.idcli=t.idtercero where t.puc_auxiliar_deudores is not null and f.fechaven between '".$this->desde ."' and '".$this->hasta ."'  and f.credito='1' limit 1";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
