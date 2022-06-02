@@ -193,6 +193,148 @@ if ('' != $miniCalculatorFA) {
 <?php
 }
 ?>
+<style type="text/css">
+	.sc.switch {
+		position: relative;
+		display: inline-flex;
+	}
+
+	.sc.switch span {
+		display: inline-block;
+		margin-right: 5px;
+	}
+
+	.sc.switch span {
+		background: #DFDFDF;
+		width: 22px;
+		height: 14px;
+		display: block;
+		position: relative;
+		top: 0px;
+		left: 0;
+		border-radius: 15px;
+		padding: 0 3px;
+		transition: all .2s linear;
+		box-shadow: 0px 0px 2px rgba(164, 164, 164, 0.8) inset;
+	}
+
+	.sc.switch span:before {
+		content: '\2713';
+		display: inline-block;
+		color: white;
+		font-size: 10px;
+		z-index: 0;
+		position: absolute;
+		top: 0;
+		left: 4px;
+	}
+
+	.sc.switch span:after {
+		content: '';
+		background: white;
+		width: 12px;
+		height: 12px;
+		display: block;
+		position: absolute;
+		top: 1px;
+		left: 1px;
+		border-radius: 15px;
+		transition: all .2s linear;
+		z-index: 1;
+	}
+
+	.sc.switch input {
+		margin-right: 10px;
+		cursor: pointer;
+		z-index: 2;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	.sc.switch input:disabled + span {
+		opacity: 0.35;
+	}
+
+	.sc.switch input:checked + span {
+		background: #66AFE9;
+	}
+
+	.sc.switch input:checked + span:after {
+		left: calc(100% - 1px);
+		transform: translateX(-100%);
+	}
+
+	.sc.radio {
+		position: relative;
+		display: inline-flex;
+	}
+
+	.sc.radio span {
+		display: inline-block;
+		margin-right: 5px;
+	}
+
+	.sc.radio span {
+		background: #ffffff;
+		border: 1px solid #66AFE9;
+		width: 12px;
+		height: 12px;
+		display: block;
+		position: relative;
+		top: 0px;
+		left: 0;
+		border-radius: 15px;
+		transition: all .2s;
+		box-shadow: 0px 0px 2px rgba(164, 164, 164, 0.8) inset;
+	}
+
+	.sc.radio span:after {
+		content: '';
+		background: #66AFE9;
+		width: 12px;
+		height: 12px;
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: 15px;
+		transition: all .2s;
+		z-index: 1;
+		transform: scale(0);
+	}
+
+	.sc.radio input {
+		cursor: pointer;
+		z-index: 2;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	.sc.radio input:disabled + span {
+		opacity: 0.35;
+	}
+
+	.sc.radio input:checked + span {
+		background: #66AFE9;
+	}
+
+	.sc.radio input:checked + span:after {
+		transform: translateX(-100%);
+		transform: scale(1);
+	}
+</style>
 <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/select2/css/select2.min.css" type="text/css" />
 <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/select2/js/select2.full.min.js"></script>
  <SCRIPT type="text/javascript" src="<?php echo $this->Ini->url_lib_js; ?>scInput.js"></SCRIPT>
@@ -1409,6 +1551,27 @@ else
    $unformatted_value_numfacven = $this->numfacven;
    $unformatted_value_idfacven = $this->idfacven;
 
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    $nm_comando = "SELECT id, descripcion  FROM facturaven_clasificacion  ORDER BY descripcion";
 
    $this->fechaven = $old_value_fechaven;
@@ -1623,6 +1786,27 @@ else
    $unformatted_value_numfacven = $this->numfacven;
    $unformatted_value_idfacven = $this->idfacven;
 
+   $activo_val_str = "''";
+   if (!empty($this->activo))
+   {
+       if (is_array($this->activo))
+       {
+           $Tmp_array = $this->activo;
+       }
+       else
+       {
+           $Tmp_array = explode(";", $this->activo);
+       }
+       $activo_val_str = "";
+       foreach ($Tmp_array as $Tmp_val_cmp)
+       {
+          if ("" != $activo_val_str)
+          {
+             $activo_val_str .= ", ";
+          }
+          $activo_val_str .= "'$Tmp_val_cmp'";
+       }
+   }
    $nm_comando = "SELECT idtercero, nombres  FROM terceros  ORDER BY nombres";
 
    $this->fechaven = $old_value_fechaven;
@@ -2574,6 +2758,109 @@ else
 }
 ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_detalle_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_detalle_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['activo']))
+   {
+       $this->nm_new_label['activo'] = "Activo";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $activo = $this->activo;
+   $sStyleHidden_activo = '';
+   if (isset($this->nmgp_cmp_hidden['activo']) && $this->nmgp_cmp_hidden['activo'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['activo']);
+       $sStyleHidden_activo = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_activo = 'display: none;';
+   $sStyleReadInp_activo = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['activo']) && $this->nmgp_cmp_readonly['activo'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['activo']);
+       $sStyleReadLab_activo = '';
+       $sStyleReadInp_activo = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['activo']) && $this->nmgp_cmp_hidden['activo'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="activo" value="<?php echo $this->form_encode_input($this->activo) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->activo_1 = explode(";", trim($this->activo));
+  } 
+  else
+  {
+      if (empty($this->activo))
+      {
+          $this->activo_1= array(); 
+          $this->activo= "NO";
+      } 
+      else
+      {
+          $this->activo_1= $this->activo; 
+          $this->activo= ""; 
+          foreach ($this->activo_1 as $cada_activo)
+          {
+             if (!empty($activo))
+             {
+                 $this->activo.= ";"; 
+             } 
+             $this->activo.= $cada_activo; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_activo_line" id="hidden_field_data_activo" style="<?php echo $sStyleHidden_activo; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_activo_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_activo_label" style=""><span id="id_label_activo"><?php echo $this->nm_new_label['activo']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["activo"]) &&  $this->nmgp_cmp_readonly["activo"] == "on") { 
+
+$activo_look = "";
+ if ($this->activo == "SI") { $activo_look .= "SI" ;} 
+ if (empty($activo_look)) { $activo_look = $this->activo; }
+?>
+<input type="hidden" name="activo" value="<?php echo $this->form_encode_input($activo) . "\">" . $activo_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$activo_look = "";
+ if ($this->activo == "SI") { $activo_look .= "SI" ;} 
+ if (empty($activo_look)) { $activo_look = $this->activo; }
+?>
+<span id="id_read_on_activo" class="css_activo_line" style="<?php echo $sStyleReadLab_activo; ?>"><?php echo $this->form_format_readonly("activo", $this->form_encode_input($activo_look)); ?></span><span id="id_read_off_activo" class="css_read_off_activo css_activo_line" style="<?php echo $sStyleReadInp_activo; ?>"><?php echo "<div id=\"idAjaxCheckbox_activo\" style=\"display: inline-block\" class=\"css_activo_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_activo_line"><?php $tempOptionId = "id-opt-activo" . $sc_seq_vert . "-1"; ?>
+ <div class="sc switch">
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-activo sc-ui-checkbox-activo" name="activo[]" value="SI"
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_facturaven_automaticas']['Lookup_activo'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->activo_1))  { echo " checked" ;} ?> onClick="" ><span></span>
+<label for="<?php echo $tempOptionId ?>">SI</label> </div>
+</TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_activo_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_activo_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 

@@ -293,8 +293,8 @@ class form_grupos_contables_mob_ini
       $this->nm_dt_criacao   = "20190920"; 
       $this->nm_hr_criacao   = "162146"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220511"; 
-      $this->nm_hr_ult_alt   = "110652"; 
+      $this->nm_dt_ult_alt   = "20220527"; 
+      $this->nm_hr_ult_alt   = "091228"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -873,7 +873,7 @@ class form_grupos_contables_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsZSBiHIBeHQB/HgrwVcFeHEFYDoNUD9JmH9B/Z1BeV5BODEvsHEXeH5F/DoBqHQBiZSX7Z1NaVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHENiHEXCDoB/DcBiDQFaZ1rwHQXGDMzGVcBOV5FYHINUDcBqZSBqHANOHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5JeHuNODkFCDWJeDoXGDcNwH9B/HIBeD5XGDEvsHEJGDWF/DoB/D9NwZSFUZ1rwV5FGHuNODkBOV5F/VENUDcBqZ1B/HAN7V5FGDMzGHEJGH5FYDoFUD9XsDQX7Z1rwV5X7DMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFaDcBqZ1B/HIveHuFUHgNKHErCHEFqZuFaD9NmDuBqHArYV5X7DMvmDkFCDWXCHIXGDcBqH9B/HArYHQFGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgNKHArsDWrGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoFUD9BsH9B/Z1rYD5JwDEBOHErCDuFaVoBqHQXOZSX7HIrwD5NUDMBYV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDuFaD1veV5JwDMzGVcB/DWFaHMF7DcJUZSB/HIveV5BqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5JeDMvCHEJqH5F/HIFUDcJeDQFGHANKVWBODMBYDkBODWJeHMraD9XGZ1BiHArKHuX7DMBYVkXeDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HANOD5FaDErKVkXeV5FqDoFUDcBwZSFGHANOVWJwHuzGVcFKV5X7VoFGDcNwH9B/D1rwD5FaDEBOVkJGH5F/DoraDcJeH9X7HIBeD5JwHuzGDkB/V5X7DoXGD9BsH9B/HAvCV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMraDcFYH9BqZ1NOV5B/DMzGVkJGDWrGDoBOHQFYZSBiDSN7VWBqDMNODkBOHEF/HMXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VErqHQNmZ1BiHABYHQJwDEBODkFeH5FYVoFGHQJKDQBqD1BeVWJwDMrYVIBOH5FqVoBiD9BsZ1FaHAN7ZMBqDErKZSXeDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1591,6 +1591,11 @@ ob_start();
             $puc_costo_ventas = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_grupos_contables_mob_validate_puc_ingresos_terceros' == $_POST['rs'])
+        {
+            $puc_ingresos_terceros = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_form_grupos_contables_mob_autocomp_puc_inventario' == $_POST['rs'])
         {
             $puc_inventario = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1616,6 +1621,11 @@ ob_start();
             $puc_costo_ventas = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_grupos_contables_mob_autocomp_puc_ingresos_terceros' == $_POST['rs'])
+        {
+            $puc_ingresos_terceros = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_form_grupos_contables_mob_submit_form' == $_POST['rs'])
         {
             $codigo = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1625,15 +1635,16 @@ ob_start();
             $puc_ingresos = NM_utf8_urldecode($_POST['rsargs'][4]);
             $puc_devolucion_ventas = NM_utf8_urldecode($_POST['rsargs'][5]);
             $puc_costo_ventas = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $id_grupo_contable = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $puc_ingresos_terceros = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $id_grupo_contable = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][16]);
         }
         if ('ajax_form_grupos_contables_mob_navigate_form' == $_POST['rs'])
         {
@@ -2108,11 +2119,13 @@ ob_start();
     sajax_export("ajax_form_grupos_contables_mob_validate_puc_ingresos");
     sajax_export("ajax_form_grupos_contables_mob_validate_puc_devolucion_ventas");
     sajax_export("ajax_form_grupos_contables_mob_validate_puc_costo_ventas");
+    sajax_export("ajax_form_grupos_contables_mob_validate_puc_ingresos_terceros");
     sajax_export("ajax_form_grupos_contables_mob_autocomp_puc_inventario");
     sajax_export("ajax_form_grupos_contables_mob_autocomp_puc_devolucion_compra");
     sajax_export("ajax_form_grupos_contables_mob_autocomp_puc_ingresos");
     sajax_export("ajax_form_grupos_contables_mob_autocomp_puc_devolucion_ventas");
     sajax_export("ajax_form_grupos_contables_mob_autocomp_puc_costo_ventas");
+    sajax_export("ajax_form_grupos_contables_mob_autocomp_puc_ingresos_terceros");
     sajax_export("ajax_form_grupos_contables_mob_submit_form");
     sajax_export("ajax_form_grupos_contables_mob_navigate_form");
     sajax_handle_client_request();
@@ -2277,6 +2290,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_puc_costo_ventas
 
+    function ajax_form_grupos_contables_mob_validate_puc_ingresos_terceros($puc_ingresos_terceros, $script_case_init)
+    {
+        global $inicial_form_grupos_contables_mob;
+        //register_shutdown_function("form_grupos_contables_mob_pack_ajax_response");
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_flag          = true;
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_opcao         = 'validate_puc_ingresos_terceros';
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_info['param'] = array(
+                  'puc_ingresos_terceros' => NM_utf8_urldecode($puc_ingresos_terceros),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->controle();
+        exit;
+    } // ajax_validate_puc_ingresos_terceros
+
     function ajax_form_grupos_contables_mob_autocomp_puc_inventario($puc_inventario, $script_case_init)
     {
         global $inicial_form_grupos_contables_mob;
@@ -2377,7 +2409,28 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_autocomp_puc_costo_ventas
 
-    function ajax_form_grupos_contables_mob_submit_form($codigo, $descripcion, $puc_inventario, $puc_devolucion_compra, $puc_ingresos, $puc_devolucion_ventas, $puc_costo_ventas, $id_grupo_contable, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_grupos_contables_mob_autocomp_puc_ingresos_terceros($puc_ingresos_terceros, $script_case_init)
+    {
+        global $inicial_form_grupos_contables_mob;
+        //register_shutdown_function("form_grupos_contables_mob_pack_ajax_response");
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_flag          = true;
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_opcao         = 'autocomp_puc_ingresos_terceros';
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_info['param'] = array(
+                  'puc_ingresos_terceros' => NM_utf8_urldecode($puc_ingresos_terceros),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_info['param']['puc_ingresos'] = utf8_decode(urldecode($inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_info['param']['puc_ingresos']));
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_info['param']['puc_ingresos_terceros'] = utf8_decode(urldecode($inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_info['param']['puc_ingresos_terceros']));
+        if ($inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_grupos_contables_mob->contr_form_grupos_contables_mob->controle();
+        exit;
+    } // ajax_autocomp_puc_ingresos_terceros
+
+    function ajax_form_grupos_contables_mob_submit_form($codigo, $descripcion, $puc_inventario, $puc_devolucion_compra, $puc_ingresos, $puc_devolucion_ventas, $puc_costo_ventas, $puc_ingresos_terceros, $id_grupo_contable, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_grupos_contables_mob;
         //register_shutdown_function("form_grupos_contables_mob_pack_ajax_response");
@@ -2391,6 +2444,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'puc_ingresos' => NM_utf8_urldecode($puc_ingresos),
                   'puc_devolucion_ventas' => NM_utf8_urldecode($puc_devolucion_ventas),
                   'puc_costo_ventas' => NM_utf8_urldecode($puc_costo_ventas),
+                  'puc_ingresos_terceros' => NM_utf8_urldecode($puc_ingresos_terceros),
                   'id_grupo_contable' => NM_utf8_urldecode($id_grupo_contable),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),

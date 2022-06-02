@@ -118,6 +118,9 @@ function Ord_cmp_init()
    $tab_ger_campos['id_clasificacion'] = "on";
    $tab_def_campos['id_clasificacion'] = "id_clasificacion";
    $tab_labels["id_clasificacion"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["id_clasificacion"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["id_clasificacion"] : "Tipo";
+   $tab_ger_campos['activo'] = "on";
+   $tab_def_campos['activo'] = "activo";
+   $tab_labels["activo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["activo"])) ? $_SESSION['sc_session'][$sc_init]['grid_facturaven_automatica']['labels']["activo"] : "Activo";
    $tab_ger_campos['copiar'] = "on";
    if ($use_alias == "S")
    {

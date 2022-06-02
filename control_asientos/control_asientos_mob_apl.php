@@ -3205,7 +3205,7 @@ if($vtrue)
 					$vvalor = $this->vcaja[$a][7]; 
 					$vobs   = $this->vcaja[$a][8]; 
 
-					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and tipocd='".$vtipocd."' and cuenta='".$vcuenta."'";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3240,7 +3240,7 @@ if($vtrue)
 					{
 						if($this->regenerar =="RE")
 						{
-							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and tipocd='".$vtipocd."' and cuenta='".$vcuenta."'";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3315,8 +3315,10 @@ if($vtrue)
 					left join detalleventa d on d.numfac=f.idfacven
 					left join productos p on d.idpro=p.idprod
 					left join grupos_contables gc on p.cod_cuenta=gc.codigo
-					where f.idfacven='".$vid."'
-					group by d.adicional";
+					where f.idfacven='".$vid."' and p.tipo_producto != 'RE'
+					group by concat(r.prefijo,f.numfacven),gc.puc_ingresos
+					order by f.idfacven asc
+					";
 
 			 
       $nm_select = $vsql; 
@@ -3362,7 +3364,7 @@ if($vtrue)
 					$vvalor = $this->vingresos[$a][7]; 
 					$vobs   = $this->vingresos[$a][8]; 
 
-					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and tipocd='".$vtipocd."' and cuenta='".$vcuenta."'";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3397,7 +3399,7 @@ if($vtrue)
 					{
 						if($this->regenerar =="RE")
 						{
-							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and tipocd='".$vtipocd."' and cuenta='".$vcuenta."'";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3467,12 +3469,13 @@ if($vtrue)
 			$vsql = "select 
 					f.tipo, r.prefijo as prefijo, f.numfacven as numero, f.fechaven as fecha,if(t.dv is null, t.documento,if(t.dv='', t.documento,concat(t.documento,'-',t.dv))) as nit, i.puc as cuenta,'C' as tipocd, sum(d.iva) as valor, concat('Factura de Venta No. ',if(r.prefijo='.','00',r.prefijo),f.numfacven) as observaciones
 					from facturaven_contratos f 
-					left join resdian r on f.resolucion=r.Idres 
-					left join terceros t on f.idcli=t.idtercero 
-					left join detalleventa d on d.numfac=f.idfacven
-					left join iva i on d.adicional=i.trifa
-					where f.idfacven='".$vid."' and d.adicional>0
-					group by d.adicional";
+					inner join resdian r on f.resolucion=r.Idres 
+					inner join terceros t on f.idcli=t.idtercero 
+					inner join detalleventa d on d.numfac=f.idfacven
+					inner join iva i on d.adicional=i.trifa
+					where d.iva > 0 and f.idfacven='".$vid."'
+					group by concat(r.prefijo,f.numfacven),i.puc
+                    order by f.idfacven asc";
 
 			 
       $nm_select = $vsql; 
@@ -3518,7 +3521,7 @@ if($vtrue)
 					$vvalor = $this->vimpuestos[$a][7]; 
 					$vobs   = $this->vimpuestos[$a][8]; 
 
-					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and tipocd='".$vtipocd."' and cuenta='".$vcuenta."'";
 					 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -3553,7 +3556,7 @@ if($vtrue)
 					{
 						if($this->regenerar =="RE")
 						{
-							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."'";
+							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and tipocd='".$vtipocd."' and cuenta='".$vcuenta."'";
 							
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3619,6 +3622,169 @@ if($vtrue)
 					}
 				}
 			}
+			
+			
+			$vsql = "select 
+					f.tipo, r.prefijo as prefijo, f.numfacven as numero, f.fechaven as fecha,if(t.dv is null, t.documento,if(t.dv='', t.documento,concat(t.documento,'-',t.dv))) as nit, gc.puc_ingresos_terceros as cuenta,'C' as tipocd, sum(d.valorpar) as valor, concat('Factura de Venta No. ',if(r.prefijo='.','00',r.prefijo),f.numfacven) as observaciones
+					from facturaven_contratos f 
+					inner join resdian r on f.resolucion=r.Idres 
+					inner join terceros t on f.idcli=t.idtercero 
+					inner join detalleventa d on d.numfac=f.idfacven
+					inner join productos p on d.idpro=p.idprod
+					inner join grupos_contables gc on p.cod_cuenta=gc.codigo
+                    where gc.puc_ingresos_terceros is not null and f.idfacven='".$vid."' and 
+                    p.tipo_producto='RE'
+					group by concat(r.prefijo,f.numfacven),gc.puc_ingresos_terceros
+					order by f.idfacven asc
+					";
+
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vIngresosT = array();
+      $this->vingresost = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vIngresosT[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vingresost[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vIngresosT = false;
+          $this->vIngresosT_erro = $this->Db->ErrorMsg();
+          $this->vingresost = false;
+          $this->vingresost_erro = $this->Db->ErrorMsg();
+      } 
+;
+			if(isset($this->vingresost[0][0]))
+			{
+				for($a=0;$a<count($this->vingresost );$a++)
+				{
+					$vtipo = $this->vingresost[$a][0];
+					$vpj   = $this->vingresost[$a][1];
+					$vnum  = $this->vingresost[$a][2]; 
+					$vfecha= $this->vingresost[$a][3];
+					$vnit  = $this->vingresost[$a][4];
+					$vcuenta= $this->vingresost[$a][5];
+					$vtipocd= $this->vingresost[$a][6]; 
+					$vvalor = $this->vingresost[$a][7]; 
+					$vobs   = $this->vingresost[$a][8]; 
+
+					$vsql = "select * from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and tipocd='".$vtipocd."' and cuenta='".$vcuenta."'";
+					 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiYaT = array();
+      $this->vsiyat = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vSiYaT[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vsiyat[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiYaT = false;
+          $this->vSiYaT_erro = $this->Db->ErrorMsg();
+          $this->vsiyat = false;
+          $this->vsiyat_erro = $this->Db->ErrorMsg();
+      } 
+;
+					if(isset($this->vsiyat[0][0]))
+					{
+						if($this->regenerar =="RE")
+						{
+							$vsql = "delete from asientos where tipo='".$vtipo."' and prefijo='".$vpj."' and numero='".$vnum."' and tipocd='".$vtipocd."' and cuenta='".$vcuenta."'";
+							
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                control_asientos_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							
+							$vsql = "INSERT INTO asientos SET tipo='".$vtipo."',prefijo='".$vpj."',numero='".$vnum."',fecha='".$vfecha."',nit='".$vnit."',cuenta='".$vcuenta."',tipocd='".$vtipocd."',valor='".$vvalor."',observaciones='".$vobs."',iddoc='".$vid."'";
+							
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                control_asientos_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+						}
+						else
+						{
+							echo "Asiento de bases $vtipo/$vpj/$vnum ya existe!...<br>";
+						}
+					}
+					else
+					{
+						$vsql = "INSERT INTO asientos SET tipo='".$vtipo."',prefijo='".$vpj."',numero='".$vnum."',fecha='".$vfecha."',nit='".$vnit."',cuenta='".$vcuenta."',tipocd='".$vtipocd."',valor='".$vvalor."',observaciones='".$vobs."',iddoc='".$vid."'";
+						
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                control_asientos_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					}
+				}
+			}
+			
+			
 		}
 	}
 	$this->nm_mens_alert[] = "Registros generados correctamente."; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("Registros generados correctamente."); }}

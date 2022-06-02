@@ -1428,10 +1428,6 @@ var pag_ativa = "form_productos_mob_form0";
    {
        $this->nmgp_cmp_hidden['idpro2'] = 'off';
    }
-   if (!isset($this->nmgp_cmp_hidden['cod_cuenta']))
-   {
-       $this->nmgp_cmp_hidden['cod_cuenta'] = 'off';
-   }
    if (!isset($this->nmgp_cmp_hidden['multiple_escala']))
    {
        $this->nmgp_cmp_hidden['multiple_escala'] = 'off';

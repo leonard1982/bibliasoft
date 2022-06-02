@@ -3160,6 +3160,39 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetMaster();
     scAjaxSetFocus();
   } // do_ajax_form_grupos_contables_mob_validate_puc_costo_ventas_cb
+
+  // ---------- Validate puc_ingresos_terceros
+  function do_ajax_form_grupos_contables_mob_validate_puc_ingresos_terceros()
+  {
+  } // do_ajax_form_grupos_contables_mob_validate_puc_ingresos_terceros
+
+  function do_ajax_form_grupos_contables_mob_validate_puc_ingresos_terceros_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "puc_ingresos_terceros";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_grupos_contables_mob_validate_puc_ingresos_terceros_cb
 function scAjaxShowErrorDisplay(sErrorId, sErrorMsg) {
 	if ("table" != sErrorId && !$("id_error_display_" + sErrorId + "_frame").hasClass('scFormToastDivFixed')) {
 		scAjaxShowErrorDisplay_default(sErrorId, sErrorMsg);
@@ -3462,6 +3495,7 @@ function scJs_sweetalert_params(params) {
     var var_puc_ingresos = scAjaxGetFieldText("puc_ingresos");
     var var_puc_devolucion_ventas = scAjaxGetFieldText("puc_devolucion_ventas");
     var var_puc_costo_ventas = scAjaxGetFieldText("puc_costo_ventas");
+    var var_puc_ingresos_terceros = scAjaxGetFieldText("puc_ingresos_terceros");
     var var_id_grupo_contable = scAjaxGetFieldText("id_grupo_contable");
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
@@ -3472,7 +3506,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_grupos_contables_mob_submit_form(var_codigo, var_descripcion, var_puc_inventario, var_puc_devolucion_compra, var_puc_ingresos, var_puc_devolucion_ventas, var_puc_costo_ventas, var_id_grupo_contable, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_grupos_contables_mob_submit_form_cb);
+    x_ajax_form_grupos_contables_mob_submit_form(var_codigo, var_descripcion, var_puc_inventario, var_puc_devolucion_compra, var_puc_ingresos, var_puc_devolucion_ventas, var_puc_costo_ventas, var_puc_ingresos_terceros, var_id_grupo_contable, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_grupos_contables_mob_submit_form_cb);
   } // do_ajax_form_grupos_contables_mob_submit_form
 
   function do_ajax_form_grupos_contables_mob_submit_form_cb(sResp)
@@ -3503,6 +3537,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("puc_ingresos");
       scAjaxHideErrorDisplay("puc_devolucion_ventas");
       scAjaxHideErrorDisplay("puc_costo_ventas");
+      scAjaxHideErrorDisplay("puc_ingresos_terceros");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables_mob']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables_mob']['dashboard_info']['under_dashboard']) {
@@ -3568,6 +3603,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables_mo
     scAjaxHideErrorDisplay("puc_ingresos");
     scAjaxHideErrorDisplay("puc_devolucion_ventas");
     scAjaxHideErrorDisplay("puc_costo_ventas");
+    scAjaxHideErrorDisplay("puc_ingresos_terceros");
     var var_id_grupo_contable = document.F2.id_grupo_contable.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -3662,6 +3698,7 @@ if ($this->Embutida_form)
   ajax_field_list[4] = "puc_ingresos";
   ajax_field_list[5] = "puc_devolucion_ventas";
   ajax_field_list[6] = "puc_costo_ventas";
+  ajax_field_list[7] = "puc_ingresos_terceros";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -3673,7 +3710,8 @@ if ($this->Embutida_form)
     "puc_devolucion_compra": {"label": "Puc Devolucion Compra", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "puc_ingresos": {"label": "Puc Ingresos", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "puc_devolucion_ventas": {"label": "Puc Devolucion Ventas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "puc_costo_ventas": {"label": "Puc Costo Ventas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "puc_costo_ventas": {"label": "Puc Costo Ventas", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "puc_ingresos_terceros": {"label": "Puc Ingresos Terceros", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
@@ -3692,7 +3730,8 @@ if ($this->Embutida_form)
     "puc_devolucion_compra": new Array(),
     "puc_ingresos": new Array(),
     "puc_devolucion_ventas": new Array(),
-    "puc_costo_ventas": new Array()
+    "puc_costo_ventas": new Array(),
+    "puc_ingresos_terceros": new Array()
   };
   ajax_field_mult["codigo"][1] = "codigo";
   ajax_field_mult["descripcion"][1] = "descripcion";
@@ -3701,6 +3740,7 @@ if ($this->Embutida_form)
   ajax_field_mult["puc_ingresos"][1] = "puc_ingresos";
   ajax_field_mult["puc_devolucion_ventas"][1] = "puc_devolucion_ventas";
   ajax_field_mult["puc_costo_ventas"][1] = "puc_costo_ventas";
+  ajax_field_mult["puc_ingresos_terceros"][1] = "puc_ingresos_terceros";
 
   var ajax_field_id = {
     "codigo": new Array("hidden_field_label_codigo", "hidden_field_data_codigo"),
@@ -3709,7 +3749,8 @@ if ($this->Embutida_form)
     "puc_devolucion_compra": new Array("hidden_field_label_puc_devolucion_compra", "hidden_field_data_puc_devolucion_compra"),
     "puc_ingresos": new Array("hidden_field_label_puc_ingresos", "hidden_field_data_puc_ingresos"),
     "puc_devolucion_ventas": new Array("hidden_field_label_puc_devolucion_ventas", "hidden_field_data_puc_devolucion_ventas"),
-    "puc_costo_ventas": new Array("hidden_field_label_puc_costo_ventas", "hidden_field_data_puc_costo_ventas")
+    "puc_costo_ventas": new Array("hidden_field_label_puc_costo_ventas", "hidden_field_data_puc_costo_ventas"),
+    "puc_ingresos_terceros": new Array("hidden_field_label_puc_ingresos_terceros", "hidden_field_data_puc_ingresos_terceros")
   };
 
   var ajax_read_only = {
@@ -3719,7 +3760,8 @@ if ($this->Embutida_form)
     "puc_devolucion_compra": "off",
     "puc_ingresos": "off",
     "puc_devolucion_ventas": "off",
-    "puc_costo_ventas": "off"
+    "puc_costo_ventas": "off",
+    "puc_ingresos_terceros": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -3834,6 +3876,23 @@ if ($this->Embutida_form)
       return;
     }
     if ("puc_costo_ventas" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("puc_ingresos_terceros" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);

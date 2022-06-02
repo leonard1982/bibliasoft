@@ -75,6 +75,7 @@ function ajax_save_filter(save_name, save_opt, parm, pos)
 var Table_sv_fil = new Array();
 Table_sv_fil[0] = "idcli";
 Table_sv_fil[1] = "resolucion";
+Table_sv_fil[2] = "activo";
 function ajax_select_filter(parm)
 {
     nmAjaxProcOn();

@@ -16,6 +16,8 @@
 .css_clasificacion_grid_line {vertical-align: top;text-align: left;}
 .css_id_clasificacion_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_id_clasificacion_grid_line {vertical-align: top;text-align: left;}
+.css_activo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_activo_grid_line {vertical-align: top;text-align: left;}
 .css_copiar_label {text-align:;vertical-align:middle;justify-content:;font-weight:bold;}
 .css_copiar_grid_line {text-align: center;}
 .css_fechaven_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}

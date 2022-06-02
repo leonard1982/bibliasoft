@@ -160,6 +160,7 @@ class grid_facturaven_automatica_grid
    var $total;
    var $clasificacion;
    var $id_clasificacion;
+   var $activo;
    var $fechaven;
    var $fechavenc;
    var $subtotal;
@@ -576,6 +577,12 @@ class grid_facturaven_automatica_grid
        if ($tmp_pos !== false && !is_array($this->resolucion))
        {
            $this->resolucion = substr($this->resolucion, 0, $tmp_pos);
+       }
+       $this->activo = $Busca_temp['activo']; 
+       $tmp_pos = strpos($this->activo, "##@@");
+       if ($tmp_pos !== false && !is_array($this->activo))
+       {
+           $this->activo = substr($this->activo, 0, $tmp_pos);
        }
    } 
    $this->nm_field_dinamico = array();
@@ -1159,7 +1166,7 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
    $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['tot_geral'][1];
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_resumo'])) 
    { 
-       $nmgp_select = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion,      f.activo FROM      facturaven_automaticas f ) nm_sel_esp"; 
        $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_pesq']; 
        if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_pesq'])) 
        { 
@@ -1240,27 +1247,27 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, activo, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion,      f.activo FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, activo, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion,      f.activo FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, convert(char(23),fechaven,121), convert(char(23),fechavenc,121), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, activo, convert(char(23),fechaven,121), convert(char(23),fechavenc,121), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion,      f.activo FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, activo, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion,      f.activo FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, EXTEND(fechaven, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, activo, EXTEND(fechaven, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion,      f.activo FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion FROM      facturaven_automaticas f ) nm_sel_esp"; 
+       $nmgp_select = "SELECT numfacven, resolucion, credito, idcli, direccion2, total, clasificacion, id_clasificacion, activo, fechaven, fechavenc, subtotal, valoriva, observaciones, vendedor, banco, dias_decredito, idfacven, pagada, asentada, adicional, tipo, nomcliente from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nomcliente,      idcli as clasificacion,      id_clasificacion,      f.activo FROM      facturaven_automaticas f ) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['where_resumo'])) 
@@ -1368,31 +1375,32 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
        $this->clasificacion = (string)$this->clasificacion;
        $this->id_clasificacion = $this->rs_grid->fields[7] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fechaven = $this->rs_grid->fields[8] ;  
-       $this->fechavenc = $this->rs_grid->fields[9] ;  
-       $this->subtotal = $this->rs_grid->fields[10] ;  
+       $this->activo = $this->rs_grid->fields[8] ;  
+       $this->fechaven = $this->rs_grid->fields[9] ;  
+       $this->fechavenc = $this->rs_grid->fields[10] ;  
+       $this->subtotal = $this->rs_grid->fields[11] ;  
        $this->subtotal =  str_replace(",", ".", $this->subtotal);
        $this->subtotal = (string)$this->subtotal;
-       $this->valoriva = $this->rs_grid->fields[11] ;  
+       $this->valoriva = $this->rs_grid->fields[12] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->observaciones = $this->rs_grid->fields[12] ;  
-       $this->vendedor = $this->rs_grid->fields[13] ;  
+       $this->observaciones = $this->rs_grid->fields[13] ;  
+       $this->vendedor = $this->rs_grid->fields[14] ;  
        $this->vendedor = (string)$this->vendedor;
-       $this->banco = $this->rs_grid->fields[14] ;  
+       $this->banco = $this->rs_grid->fields[15] ;  
        $this->banco = (string)$this->banco;
-       $this->dias_decredito = $this->rs_grid->fields[15] ;  
+       $this->dias_decredito = $this->rs_grid->fields[16] ;  
        $this->dias_decredito = (string)$this->dias_decredito;
-       $this->idfacven = $this->rs_grid->fields[16] ;  
+       $this->idfacven = $this->rs_grid->fields[17] ;  
        $this->idfacven = (string)$this->idfacven;
-       $this->pagada = $this->rs_grid->fields[17] ;  
-       $this->asentada = $this->rs_grid->fields[18] ;  
+       $this->pagada = $this->rs_grid->fields[18] ;  
+       $this->asentada = $this->rs_grid->fields[19] ;  
        $this->asentada = (string)$this->asentada;
-       $this->adicional = $this->rs_grid->fields[19] ;  
+       $this->adicional = $this->rs_grid->fields[20] ;  
        $this->adicional =  str_replace(",", ".", $this->adicional);
        $this->adicional = (string)$this->adicional;
-       $this->tipo = $this->rs_grid->fields[20] ;  
-       $this->nomcliente = $this->rs_grid->fields[21] ;  
+       $this->tipo = $this->rs_grid->fields[21] ;  
+       $this->nomcliente = $this->rs_grid->fields[22] ;  
        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig']))
        {
            foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -1429,9 +1437,9 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
        $GLOBALS["clasificacion"] = (string)$GLOBALS["clasificacion"] ;
        $GLOBALS["id_clasificacion"] = $this->rs_grid->fields[7] ;  
        $GLOBALS["id_clasificacion"] = (string)$GLOBALS["id_clasificacion"] ;
-       $GLOBALS["vendedor"] = $this->rs_grid->fields[13] ;  
+       $GLOBALS["vendedor"] = $this->rs_grid->fields[14] ;  
        $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"] ;
-       $GLOBALS["banco"] = $this->rs_grid->fields[14] ;  
+       $GLOBALS["banco"] = $this->rs_grid->fields[15] ;  
        $GLOBALS["banco"] = (string)$GLOBALS["banco"] ;
        $this->arg_sum_resolucion = ($this->resolucion == "") ? " is null " : " = " . $this->resolucion;
        $this->arg_sum_credito = ($this->credito == "") ? " is null " : " = " . $this->credito;
@@ -1597,20 +1605,21 @@ $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
            $this->total = $this->rs_grid->fields[5] ;  
            $this->clasificacion = $this->rs_grid->fields[6] ;  
            $this->id_clasificacion = $this->rs_grid->fields[7] ;  
-           $this->fechaven = $this->rs_grid->fields[8] ;  
-           $this->fechavenc = $this->rs_grid->fields[9] ;  
-           $this->subtotal = $this->rs_grid->fields[10] ;  
-           $this->valoriva = $this->rs_grid->fields[11] ;  
-           $this->observaciones = $this->rs_grid->fields[12] ;  
-           $this->vendedor = $this->rs_grid->fields[13] ;  
-           $this->banco = $this->rs_grid->fields[14] ;  
-           $this->dias_decredito = $this->rs_grid->fields[15] ;  
-           $this->idfacven = $this->rs_grid->fields[16] ;  
-           $this->pagada = $this->rs_grid->fields[17] ;  
-           $this->asentada = $this->rs_grid->fields[18] ;  
-           $this->adicional = $this->rs_grid->fields[19] ;  
-           $this->tipo = $this->rs_grid->fields[20] ;  
-           $this->nomcliente = $this->rs_grid->fields[21] ;  
+           $this->activo = $this->rs_grid->fields[8] ;  
+           $this->fechaven = $this->rs_grid->fields[9] ;  
+           $this->fechavenc = $this->rs_grid->fields[10] ;  
+           $this->subtotal = $this->rs_grid->fields[11] ;  
+           $this->valoriva = $this->rs_grid->fields[12] ;  
+           $this->observaciones = $this->rs_grid->fields[13] ;  
+           $this->vendedor = $this->rs_grid->fields[14] ;  
+           $this->banco = $this->rs_grid->fields[15] ;  
+           $this->dias_decredito = $this->rs_grid->fields[16] ;  
+           $this->idfacven = $this->rs_grid->fields[17] ;  
+           $this->pagada = $this->rs_grid->fields[18] ;  
+           $this->asentada = $this->rs_grid->fields[19] ;  
+           $this->adicional = $this->rs_grid->fields[20] ;  
+           $this->tipo = $this->rs_grid->fields[21] ;  
+           $this->nomcliente = $this->rs_grid->fields[22] ;  
            if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig']))
            {
                foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -2829,6 +2838,8 @@ $nm_saida->saida("}\r\n");
    $this->css_clasificacion_grid_line = $compl_css_emb . "css_clasificacion_grid_line";
    $this->css_id_clasificacion_label = $compl_css_emb . "css_id_clasificacion_label";
    $this->css_id_clasificacion_grid_line = $compl_css_emb . "css_id_clasificacion_grid_line";
+   $this->css_activo_label = $compl_css_emb . "css_activo_label";
+   $this->css_activo_grid_line = $compl_css_emb . "css_activo_grid_line";
    $this->css_copiar_label = $compl_css_emb . "css_copiar_label";
    $this->css_copiar_grid_line = $compl_css_emb . "css_copiar_grid_line";
    $this->css_fechaven_label = $compl_css_emb . "css_fechaven_label";
@@ -3579,6 +3590,14 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
+ function NM_label_activo()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['activo'])) ? $this->New_label['activo'] : "Activo"; 
+   if (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_activo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_activo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
  function NM_label_copiar()
  {
    global $nm_saida;
@@ -4081,6 +4100,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['labels']['clasificacion'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['id_clasificacion'])) ? $this->New_label['id_clasificacion'] : "Tipo"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['labels']['id_clasificacion'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['activo'])) ? $this->New_label['activo'] : "Activo"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['labels']['activo'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['copiar'])) ? $this->New_label['copiar'] : "Duplicar"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['labels']['copiar'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['fechaven'])) ? $this->New_label['fechaven'] : "Fecha"; 
@@ -4528,31 +4549,32 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
           $this->clasificacion = (string)$this->clasificacion;
           $this->id_clasificacion = $this->rs_grid->fields[7] ;  
           $this->id_clasificacion = (string)$this->id_clasificacion;
-          $this->fechaven = $this->rs_grid->fields[8] ;  
-          $this->fechavenc = $this->rs_grid->fields[9] ;  
-          $this->subtotal = $this->rs_grid->fields[10] ;  
+          $this->activo = $this->rs_grid->fields[8] ;  
+          $this->fechaven = $this->rs_grid->fields[9] ;  
+          $this->fechavenc = $this->rs_grid->fields[10] ;  
+          $this->subtotal = $this->rs_grid->fields[11] ;  
           $this->subtotal =  str_replace(",", ".", $this->subtotal);
           $this->subtotal = (string)$this->subtotal;
-          $this->valoriva = $this->rs_grid->fields[11] ;  
+          $this->valoriva = $this->rs_grid->fields[12] ;  
           $this->valoriva =  str_replace(",", ".", $this->valoriva);
           $this->valoriva = (string)$this->valoriva;
-          $this->observaciones = $this->rs_grid->fields[12] ;  
-          $this->vendedor = $this->rs_grid->fields[13] ;  
+          $this->observaciones = $this->rs_grid->fields[13] ;  
+          $this->vendedor = $this->rs_grid->fields[14] ;  
           $this->vendedor = (string)$this->vendedor;
-          $this->banco = $this->rs_grid->fields[14] ;  
+          $this->banco = $this->rs_grid->fields[15] ;  
           $this->banco = (string)$this->banco;
-          $this->dias_decredito = $this->rs_grid->fields[15] ;  
+          $this->dias_decredito = $this->rs_grid->fields[16] ;  
           $this->dias_decredito = (string)$this->dias_decredito;
-          $this->idfacven = $this->rs_grid->fields[16] ;  
+          $this->idfacven = $this->rs_grid->fields[17] ;  
           $this->idfacven = (string)$this->idfacven;
-          $this->pagada = $this->rs_grid->fields[17] ;  
-          $this->asentada = $this->rs_grid->fields[18] ;  
+          $this->pagada = $this->rs_grid->fields[18] ;  
+          $this->asentada = $this->rs_grid->fields[19] ;  
           $this->asentada = (string)$this->asentada;
-          $this->adicional = $this->rs_grid->fields[19] ;  
+          $this->adicional = $this->rs_grid->fields[20] ;  
           $this->adicional =  str_replace(",", ".", $this->adicional);
           $this->adicional = (string)$this->adicional;
-          $this->tipo = $this->rs_grid->fields[20] ;  
-          $this->nomcliente = $this->rs_grid->fields[21] ;  
+          $this->tipo = $this->rs_grid->fields[21] ;  
+          $this->nomcliente = $this->rs_grid->fields[22] ;  
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig']))
           {
               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -4589,9 +4611,9 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
           $GLOBALS["clasificacion"] = (string)$GLOBALS["clasificacion"];
           $GLOBALS["id_clasificacion"] = $this->rs_grid->fields[7] ;  
           $GLOBALS["id_clasificacion"] = (string)$GLOBALS["id_clasificacion"];
-          $GLOBALS["vendedor"] = $this->rs_grid->fields[13] ;  
+          $GLOBALS["vendedor"] = $this->rs_grid->fields[14] ;  
           $GLOBALS["vendedor"] = (string)$GLOBALS["vendedor"];
-          $GLOBALS["banco"] = $this->rs_grid->fields[14] ;  
+          $GLOBALS["banco"] = $this->rs_grid->fields[15] ;  
           $GLOBALS["banco"] = (string)$GLOBALS["banco"];
           $this->arg_sum_resolucion = ($this->resolucion == "") ? " is null " : " = " . $this->resolucion;
           $this->arg_sum_credito = ($this->credito == "") ? " is null " : " = " . $this->credito;
@@ -4969,6 +4991,12 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
               $nm_houve_quebra = "S";
           } 
           $this->sc_proc_grid = true;
+          $_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'on';
+  if($this->activo =="NO")
+{
+	$this->NM_field_style["activo"] = "background-color:#dc3545;font-size:13;color:#ffffff;font-family:arial;font-weight:sans-serif;";
+}
+$_SESSION['scriptcase']['grid_facturaven_automatica']['contr_erro'] = 'off';
           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['proc_pdf'])
           {
               if ($nm_houve_quebra == "S" || $this->nm_inicio_pag == 0)
@@ -5503,6 +5531,40 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_id_clasificacion_grid_line . "\"  style=\"" . $this->Css_Cmp['css_id_clasificacion_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_id_clasificacion_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_activo()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off") { 
+          $conteudo = sc_strip_script($this->activo); 
+          $conteudo_original = sc_strip_script($this->activo); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'activo', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'activo', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+              $Style_activo = "";
+          if (isset($this->NM_field_style["activo"]) && !empty($this->NM_field_style["activo"]))
+          {
+              $Style_activo .= $this->NM_field_style["activo"];
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_activo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_activo_grid_line'] . $Style_activo . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_activo_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_copiar()
  {
       global $nm_saida;
@@ -5840,7 +5902,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 19;
+   $this->NM_colspan  = 20;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['opc_psq'] || $this->NM_btn_run_show)
    {
        $this->NM_colspan++;
@@ -6620,6 +6682,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -6809,6 +6875,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
         $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
         $colspan++;
     }
@@ -7004,6 +7074,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -7193,6 +7267,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
         $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
         $colspan++;
     }
@@ -7388,6 +7466,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -7577,6 +7659,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
         $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
         $colspan++;
     }
@@ -7770,6 +7856,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -7957,6 +8047,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
         $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
         $colspan++;
     }
@@ -8150,6 +8244,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -8340,6 +8438,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -8518,6 +8620,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
         $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
         $colspan++;
     }
@@ -8702,6 +8808,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -8880,6 +8990,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
         $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
         $colspan++;
     }
@@ -9064,6 +9178,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -9242,6 +9360,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
         $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
         $colspan++;
     }
@@ -9426,6 +9548,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -9604,6 +9730,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
         $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+        $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
         $colspan++;
     }
@@ -9788,6 +9918,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
         $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+        $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
         $colspan++;
@@ -9933,6 +10067,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
        $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -10070,6 +10208,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
        $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
        $colspan++;
     }
@@ -10213,6 +10355,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
        $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -10350,6 +10496,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
        $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
        $colspan++;
     }
@@ -10493,6 +10643,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
        $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -10630,6 +10784,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
        $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
        $colspan++;
     }
@@ -10773,6 +10931,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
        $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -10910,6 +11072,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
        $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
        $colspan++;
     }
@@ -11053,6 +11219,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
        $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -11193,6 +11363,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
     {
        $colspan++;
     }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
+    {
+       $colspan++;
+    }
     if ($Cada_cmp == "copiar" && (!isset($this->NM_cmp_hidden['copiar']) || $this->NM_cmp_hidden['copiar'] != "off"))
     {
        $colspan++;
@@ -11330,6 +11504,10 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['
        $colspan++;
     }
     if ($Cada_cmp == "id_clasificacion" && (!isset($this->NM_cmp_hidden['id_clasificacion']) || $this->NM_cmp_hidden['id_clasificacion'] != "off"))
+    {
+       $colspan++;
+    }
+    if ($Cada_cmp == "activo" && (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off"))
     {
        $colspan++;
     }

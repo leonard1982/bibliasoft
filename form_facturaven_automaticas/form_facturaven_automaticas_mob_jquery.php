@@ -68,6 +68,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["idfacven" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["tipo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["detalle" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["activo" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -173,6 +174,12 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["detalle" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["activo" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["activo" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -262,8 +269,11 @@ function scJQEventsAdd(iSeqRow) {
                                   .bind('focus', function() { sc_form_facturaven_automaticas_tipo_onfocus(this, iSeqRow) });
   $('#id_sc_field_id_clasificacion' + iSeqRow).bind('blur', function() { sc_form_facturaven_automaticas_id_clasificacion_onblur(this, iSeqRow) })
                                               .bind('focus', function() { sc_form_facturaven_automaticas_id_clasificacion_onfocus(this, iSeqRow) });
+  $('#id_sc_field_activo' + iSeqRow).bind('blur', function() { sc_form_facturaven_automaticas_activo_onblur(this, iSeqRow) })
+                                    .bind('focus', function() { sc_form_facturaven_automaticas_activo_onfocus(this, iSeqRow) });
   $('#id_sc_field_detalle' + iSeqRow).bind('blur', function() { sc_form_facturaven_automaticas_detalle_onblur(this, iSeqRow) })
                                      .bind('focus', function() { sc_form_facturaven_automaticas_detalle_onfocus(this, iSeqRow) });
+  $('.sc-ui-checkbox-activo' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
 } // scJQEventsAdd
 
 function sc_form_facturaven_automaticas_idfacven_onblur(oThis, iSeqRow) {
@@ -430,6 +440,16 @@ function sc_form_facturaven_automaticas_id_clasificacion_onfocus(oThis, iSeqRow)
   scCssFocus(oThis);
 }
 
+function sc_form_facturaven_automaticas_activo_onblur(oThis, iSeqRow) {
+  do_ajax_form_facturaven_automaticas_mob_validate_activo();
+  scCssBlur(oThis);
+}
+
+function sc_form_facturaven_automaticas_activo_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_facturaven_automaticas_detalle_onblur(oThis, iSeqRow) {
   do_ajax_form_facturaven_automaticas_mob_validate_detalle();
   scCssBlur(oThis);
@@ -488,6 +508,7 @@ function displayChange_block_3(status) {
 
 function displayChange_block_4(status) {
 	displayChange_field("detalle", "", status);
+	displayChange_field("activo", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -508,6 +529,7 @@ function displayChange_row(row, status) {
 	displayChange_field_idfacven(row, status);
 	displayChange_field_tipo(row, status);
 	displayChange_field_detalle(row, status);
+	displayChange_field_activo(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -561,6 +583,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("detalle" == field) {
 		displayChange_field_detalle(row, status);
+	}
+	if ("activo" == field) {
+		displayChange_field_activo(row, status);
 	}
 }
 
@@ -676,6 +701,9 @@ function displayChange_field_detalle(row, status) {
 	if ("on" == status && typeof $("#nmsc_iframe_liga_form_facturaven_automaticas_detalleventa_mob")[0].contentWindow.scRecreateSelect2 === "function") {
 		$("#nmsc_iframe_liga_form_facturaven_automaticas_detalleventa_mob")[0].contentWindow.scRecreateSelect2();
 	}
+}
+
+function displayChange_field_activo(row, status) {
 }
 
 function scRecreateSelect2() {

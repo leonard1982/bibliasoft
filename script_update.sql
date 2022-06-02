@@ -186,3 +186,7 @@ ALTER TABLE `usuarios` CHANGE `nivel` `nivel` INT(2) NOT NULL DEFAULT '0' COMMEN
 
 ALTER TABLE `configuraciones` ADD `minutos_inactividad` INT NOT NULL DEFAULT '60' COMMENT 'minutos que transcurren para cerrar sesión por inactividad (por defecto se cierra a la hora)' AFTER `validar_codbarras`;
 
+ALTER TABLE `facturaven_automaticas` ADD `activo` SET('SI','NO') NOT NULL DEFAULT 'SI' AFTER `id_clasificacion`;
+
+ALTER TABLE `grupos_contables` ADD `puc_ingresos_terceros` VARCHAR(16) NULL DEFAULT NULL COMMENT 'Ingresos para terceros' AFTER `puc_costo_ventas`;
+

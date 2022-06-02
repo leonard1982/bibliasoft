@@ -58,6 +58,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["puc_ingresos" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_devolucion_ventas" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["puc_costo_ventas" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["puc_ingresos_terceros" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -103,6 +104,12 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["puc_costo_ventas" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["puc_ingresos_terceros" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["puc_ingresos_terceros" + iSeqRow]["change"]) {
+    return true;
+  }
   if (scEventControl_data["puc_inventario" + iSeqRow]["autocomp"]) {
     return true;
   }
@@ -116,6 +123,9 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["puc_costo_ventas" + iSeqRow]["autocomp"]) {
+    return true;
+  }
+  if (scEventControl_data["puc_ingresos_terceros" + iSeqRow]["autocomp"]) {
     return true;
   }
   return false;
@@ -171,6 +181,9 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_puc_costo_ventas' + iSeqRow).bind('blur', function() { sc_form_grupos_contables_puc_costo_ventas_onblur(this, iSeqRow) })
                                               .bind('change', function() { sc_form_grupos_contables_puc_costo_ventas_onchange(this, iSeqRow) })
                                               .bind('focus', function() { sc_form_grupos_contables_puc_costo_ventas_onfocus(this, iSeqRow) });
+  $('#id_sc_field_puc_ingresos_terceros' + iSeqRow).bind('blur', function() { sc_form_grupos_contables_puc_ingresos_terceros_onblur(this, iSeqRow) })
+                                                   .bind('change', function() { sc_form_grupos_contables_puc_ingresos_terceros_onchange(this, iSeqRow) })
+                                                   .bind('focus', function() { sc_form_grupos_contables_puc_ingresos_terceros_onfocus(this, iSeqRow) });
 } // scJQEventsAdd
 
 function sc_form_grupos_contables_id_grupo_contable_onchange(oThis, iSeqRow) {
@@ -270,6 +283,19 @@ function sc_form_grupos_contables_puc_costo_ventas_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_grupos_contables_puc_ingresos_terceros_onblur(oThis, iSeqRow) {
+  do_ajax_form_grupos_contables_validate_puc_ingresos_terceros();
+  scCssBlur(oThis);
+}
+
+function sc_form_grupos_contables_puc_ingresos_terceros_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_grupos_contables_puc_ingresos_terceros_onfocus(oThis, iSeqRow) {
+  scCssFocus(oThis);
+}
+
 function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
@@ -284,6 +310,7 @@ function displayChange_block_0(status) {
 	displayChange_field("puc_ingresos", "", status);
 	displayChange_field("puc_devolucion_ventas", "", status);
 	displayChange_field("puc_costo_ventas", "", status);
+	displayChange_field("puc_ingresos_terceros", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -294,6 +321,7 @@ function displayChange_row(row, status) {
 	displayChange_field_puc_ingresos(row, status);
 	displayChange_field_puc_devolucion_ventas(row, status);
 	displayChange_field_puc_costo_ventas(row, status);
+	displayChange_field_puc_ingresos_terceros(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -318,6 +346,9 @@ function displayChange_field(field, row, status) {
 	if ("puc_costo_ventas" == field) {
 		displayChange_field_puc_costo_ventas(row, status);
 	}
+	if ("puc_ingresos_terceros" == field) {
+		displayChange_field_puc_ingresos_terceros(row, status);
+	}
 }
 
 function displayChange_field_codigo(row, status) {
@@ -339,6 +370,9 @@ function displayChange_field_puc_devolucion_ventas(row, status) {
 }
 
 function displayChange_field_puc_costo_ventas(row, status) {
+}
+
+function displayChange_field_puc_ingresos_terceros(row, status) {
 }
 
 function scRecreateSelect2() {

@@ -229,8 +229,8 @@ class grid_facturaven_automatica_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220511"; 
-      $this->nm_hr_ult_alt   = "110652"; 
+      $this->nm_dt_ult_alt   = "20220601"; 
+      $this->nm_hr_ult_alt   = "100324"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -998,7 +998,7 @@ class grid_facturaven_automatica_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_automatica']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_automatica']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDQBqD1BeD5F7HuBYV9FeHEX/VEF7D9XOZSB/HANOD5FaHgNKHErCHEXCVoX7D9NmDQB/HArYHuXGDMBYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMXGHQXsZSFUHAvCV5BqHuNOV9FeV5X7HMBOHQNwZ1X7DSNOD5F7HgvsVkJqDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoF7D9XOZSB/DSrYV5B/DMNKZSXeDWXCDoraDcJeZSFGD1veVWJwHuzGVIBODWFaVErqDcJUZ1B/Z1NOD5BiDMBYHEJGDWFqZuFaD9XsZSX7Z1BYV5FUHuBYVcFKHEFYVoBqDcBqZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDENOHEBUDWX7VoFGDcXGDQJsHIBeHQJsDMBYVIBsDWFaHIraDcNmZSBqD1rwZMBOHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgNKHArsDWrGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoJwHQXGZ1X7DSNOHQrqDEBeHENiHEFqHIX7HQFYZSX7HIrKHQJeHgrKDkBOHEX7DoJsHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDuBqHAN7HQB/DMBOVcrsHEFYVEraDcNmZkBiHArKHuFaHgNKZSXeDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1BiHABYHQFGDMzGZSXeDWr/HIBOHQFYDQJsHArYHQFaHuBYVcBUDWrmVoX7DcJUZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9B/HANOD5NUDMBYZSJGH5F/ZuB/D9NwH9X7HArYVWJeHgrKVcBOV5F/VoJwDcBqZ1FaHArYZMB/DEBOZSXeV5FqDoraD9NmDQJsDSBYV5FGHgvsV9FiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiD9BsZSBqD1rwD5FaHgrKHArCDWXCHIrqD9XsDQX7Z1vCVWJsHuNOVcrsDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VErqHQNmZ1BiHABYHQJwDEBODkFeH5FYVoFGHQJKDQJsHIrwHQJeDMrYVIBsHEX7DoX7HQNwZSBOD1rwZMJeDEBOHEBUH5FYHMX7HQNmZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -5265,6 +5265,7 @@ class grid_facturaven_automatica_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "total";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "clasificacion";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "id_clasificacion";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "activo";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "copiar";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "fechaven";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['field_order'][] = "fechavenc";
@@ -6297,31 +6298,32 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automat
        $this->clasificacion = (string)$this->clasificacion;
        $this->id_clasificacion = $this->rs_grid->fields[7] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fechaven = $this->rs_grid->fields[8] ;  
-       $this->fechavenc = $this->rs_grid->fields[9] ;  
-       $this->subtotal = $this->rs_grid->fields[10] ;  
+       $this->activo = $this->rs_grid->fields[8] ;  
+       $this->fechaven = $this->rs_grid->fields[9] ;  
+       $this->fechavenc = $this->rs_grid->fields[10] ;  
+       $this->subtotal = $this->rs_grid->fields[11] ;  
        $this->subtotal =  str_replace(",", ".", $this->subtotal);
        $this->subtotal = (string)$this->subtotal;
-       $this->valoriva = $this->rs_grid->fields[11] ;  
+       $this->valoriva = $this->rs_grid->fields[12] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->observaciones = $this->rs_grid->fields[12] ;  
-       $this->vendedor = $this->rs_grid->fields[13] ;  
+       $this->observaciones = $this->rs_grid->fields[13] ;  
+       $this->vendedor = $this->rs_grid->fields[14] ;  
        $this->vendedor = (string)$this->vendedor;
-       $this->banco = $this->rs_grid->fields[14] ;  
+       $this->banco = $this->rs_grid->fields[15] ;  
        $this->banco = (string)$this->banco;
-       $this->dias_decredito = $this->rs_grid->fields[15] ;  
+       $this->dias_decredito = $this->rs_grid->fields[16] ;  
        $this->dias_decredito = (string)$this->dias_decredito;
-       $this->idfacven = $this->rs_grid->fields[16] ;  
+       $this->idfacven = $this->rs_grid->fields[17] ;  
        $this->idfacven = (string)$this->idfacven;
-       $this->pagada = $this->rs_grid->fields[17] ;  
-       $this->asentada = $this->rs_grid->fields[18] ;  
+       $this->pagada = $this->rs_grid->fields[18] ;  
+       $this->asentada = $this->rs_grid->fields[19] ;  
        $this->asentada = (string)$this->asentada;
-       $this->adicional = $this->rs_grid->fields[19] ;  
+       $this->adicional = $this->rs_grid->fields[20] ;  
        $this->adicional =  str_replace(",", ".", $this->adicional);
        $this->adicional = (string)$this->adicional;
-       $this->tipo = $this->rs_grid->fields[20] ;  
-       $this->nomcliente = $this->rs_grid->fields[21] ;  
+       $this->tipo = $this->rs_grid->fields[21] ;  
+       $this->nomcliente = $this->rs_grid->fields[22] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -6474,31 +6476,32 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automat
        $this->clasificacion = (string)$this->clasificacion;
        $this->id_clasificacion = $this->rs_grid->fields[7] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fechaven = $this->rs_grid->fields[8] ;  
-       $this->fechavenc = $this->rs_grid->fields[9] ;  
-       $this->subtotal = $this->rs_grid->fields[10] ;  
+       $this->activo = $this->rs_grid->fields[8] ;  
+       $this->fechaven = $this->rs_grid->fields[9] ;  
+       $this->fechavenc = $this->rs_grid->fields[10] ;  
+       $this->subtotal = $this->rs_grid->fields[11] ;  
        $this->subtotal =  str_replace(",", ".", $this->subtotal);
        $this->subtotal = (string)$this->subtotal;
-       $this->valoriva = $this->rs_grid->fields[11] ;  
+       $this->valoriva = $this->rs_grid->fields[12] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->observaciones = $this->rs_grid->fields[12] ;  
-       $this->vendedor = $this->rs_grid->fields[13] ;  
+       $this->observaciones = $this->rs_grid->fields[13] ;  
+       $this->vendedor = $this->rs_grid->fields[14] ;  
        $this->vendedor = (string)$this->vendedor;
-       $this->banco = $this->rs_grid->fields[14] ;  
+       $this->banco = $this->rs_grid->fields[15] ;  
        $this->banco = (string)$this->banco;
-       $this->dias_decredito = $this->rs_grid->fields[15] ;  
+       $this->dias_decredito = $this->rs_grid->fields[16] ;  
        $this->dias_decredito = (string)$this->dias_decredito;
-       $this->idfacven = $this->rs_grid->fields[16] ;  
+       $this->idfacven = $this->rs_grid->fields[17] ;  
        $this->idfacven = (string)$this->idfacven;
-       $this->pagada = $this->rs_grid->fields[17] ;  
-       $this->asentada = $this->rs_grid->fields[18] ;  
+       $this->pagada = $this->rs_grid->fields[18] ;  
+       $this->asentada = $this->rs_grid->fields[19] ;  
        $this->asentada = (string)$this->asentada;
-       $this->adicional = $this->rs_grid->fields[19] ;  
+       $this->adicional = $this->rs_grid->fields[20] ;  
        $this->adicional =  str_replace(",", ".", $this->adicional);
        $this->adicional = (string)$this->adicional;
-       $this->tipo = $this->rs_grid->fields[20] ;  
-       $this->nomcliente = $this->rs_grid->fields[21] ;  
+       $this->tipo = $this->rs_grid->fields[21] ;  
+       $this->nomcliente = $this->rs_grid->fields[22] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -6701,31 +6704,32 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automat
        $this->clasificacion = (string)$this->clasificacion;
        $this->id_clasificacion = $this->rs_grid->fields[7] ;  
        $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fechaven = $this->rs_grid->fields[8] ;  
-       $this->fechavenc = $this->rs_grid->fields[9] ;  
-       $this->subtotal = $this->rs_grid->fields[10] ;  
+       $this->activo = $this->rs_grid->fields[8] ;  
+       $this->fechaven = $this->rs_grid->fields[9] ;  
+       $this->fechavenc = $this->rs_grid->fields[10] ;  
+       $this->subtotal = $this->rs_grid->fields[11] ;  
        $this->subtotal =  str_replace(",", ".", $this->subtotal);
        $this->subtotal = (string)$this->subtotal;
-       $this->valoriva = $this->rs_grid->fields[11] ;  
+       $this->valoriva = $this->rs_grid->fields[12] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->observaciones = $this->rs_grid->fields[12] ;  
-       $this->vendedor = $this->rs_grid->fields[13] ;  
+       $this->observaciones = $this->rs_grid->fields[13] ;  
+       $this->vendedor = $this->rs_grid->fields[14] ;  
        $this->vendedor = (string)$this->vendedor;
-       $this->banco = $this->rs_grid->fields[14] ;  
+       $this->banco = $this->rs_grid->fields[15] ;  
        $this->banco = (string)$this->banco;
-       $this->dias_decredito = $this->rs_grid->fields[15] ;  
+       $this->dias_decredito = $this->rs_grid->fields[16] ;  
        $this->dias_decredito = (string)$this->dias_decredito;
-       $this->idfacven = $this->rs_grid->fields[16] ;  
+       $this->idfacven = $this->rs_grid->fields[17] ;  
        $this->idfacven = (string)$this->idfacven;
-       $this->pagada = $this->rs_grid->fields[17] ;  
-       $this->asentada = $this->rs_grid->fields[18] ;  
+       $this->pagada = $this->rs_grid->fields[18] ;  
+       $this->asentada = $this->rs_grid->fields[19] ;  
        $this->asentada = (string)$this->asentada;
-       $this->adicional = $this->rs_grid->fields[19] ;  
+       $this->adicional = $this->rs_grid->fields[20] ;  
        $this->adicional =  str_replace(",", ".", $this->adicional);
        $this->adicional = (string)$this->adicional;
-       $this->tipo = $this->rs_grid->fields[20] ;  
-       $this->nomcliente = $this->rs_grid->fields[21] ;  
+       $this->tipo = $this->rs_grid->fields[21] ;  
+       $this->nomcliente = $this->rs_grid->fields[22] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->qr_base64))
@@ -6760,7 +6764,7 @@ $vfecha_validacion = "NULL";
 $vfechaven = date("Y-m-d");
 
 $vidfacven_nuevo = "";
-$vsql = "INSERT INTO facturaven(numfacven, nremision, credito, fechaven, fechavenc, idcli, subtotal, valoriva, total, pagada, asentada, observaciones, saldo, adicional, formapago, adicional2, adicional3, obspago, vendedor, pedido, resolucion, dircliente, imconsumo, retefuente, reteiva, reteica, cree, espos, cufe, enlacepdf, estado, avisos, dias_decredito, banco, tipo, id_fact, enviada_a_tns, fecha_a_tns, factura_tns, creado_en_movil, disponible_en_movil, mot_nc, mot_nd, creado, editado, usuario_crea, cod_cuenta, qr_base64, fecha_validacion, id_trans_fe,id_clasificacion)(SELECT coalesce((select max(f2.numfacven)+1 from facturaven f2 where f2.resolucion='".$this->resolucion ."'),(select r.primerfactura from resdian r where r.Idres='".$this->resolucion ."')), f.nremision, f.credito, '".$vfechaven."', (if(f.credito=1,(date_add(NOW(),interval f.dias_decredito day)),NOW())), if('".$vcliente."' <> '','".$vcliente."',f.idcli), f.subtotal, f.valoriva, f.total, 'NO', '1',f.observaciones, f.total, f.adicional, f.formapago, 0, 0, f.obspago, f.vendedor, f.pedido, '".$this->resolucion ."', f.dircliente, f.imconsumo, f.retefuente, f.reteiva, f.reteica, f.cree, 'SI',".$vcufe.",'".$venlacepdf."', ".$vestado.", ".$vavisos.", f.dias_decredito, f.banco, f.tipo, '".$vid_fact."', '".$venviada_a_tns."',".$vfecha_a_tns.",".$vfactura_tns.", '".$vcreado_en_movil."','".$vdisponible_en_movil."', ".$vmot_nc.", ".$vmot_nd.", NOW(), NOW(),'".$this->sc_temp_gidtercero."', f.cod_cuenta, ".$vqr_base64.", ".$vfecha_validacion.", ".$vid_trans_fe.",f.id_clasificacion  from facturaven_automaticas f where f.idfacven='".$vidfacven."')";
+$vsql = "INSERT INTO facturaven(numfacven, nremision, credito, fechaven, fechavenc, idcli, subtotal, valoriva, total, pagada, asentada, observaciones, saldo, adicional, formapago, adicional2, adicional3, obspago, vendedor, pedido, resolucion, dircliente, imconsumo, retefuente, reteiva, reteica, cree, espos, cufe, enlacepdf, estado, avisos, dias_decredito, banco, tipo, id_fact, enviada_a_tns, fecha_a_tns, factura_tns, creado_en_movil, disponible_en_movil, mot_nc, mot_nd, creado, editado, usuario_crea, cod_cuenta, qr_base64, fecha_validacion, id_trans_fe,id_clasificacion)(SELECT coalesce((select max(f2.numfacven)+1 from facturaven f2 where f2.resolucion='".$this->resolucion ."'),(select r.primerfactura from resdian r where r.Idres='".$this->resolucion ."')), f.nremision, f.credito, '".$vfechaven."', (if(f.credito=1,(date_add(NOW(),interval f.dias_decredito day)),NOW())), if('".$vcliente."' <> '','".$vcliente."',f.idcli), f.subtotal, f.valoriva, f.total, 'NO', '1',f.observaciones, f.total, f.adicional, f.formapago, 0, 0, f.obspago, f.vendedor, f.pedido, '".$this->resolucion ."', f.dircliente, f.imconsumo, f.retefuente, f.reteiva, f.reteica, f.cree, 'SI',".$vcufe.",'".$venlacepdf."', ".$vestado.", ".$vavisos.", f.dias_decredito, f.banco, f.tipo, '".$vid_fact."', '".$venviada_a_tns."',".$vfecha_a_tns.",".$vfactura_tns.", '".$vcreado_en_movil."','".$vdisponible_en_movil."', ".$vmot_nc.", ".$vmot_nd.", NOW(), NOW(),'".$this->sc_temp_gidtercero."', f.cod_cuenta, ".$vqr_base64.", ".$vfecha_validacion.", ".$vid_trans_fe.",f.id_clasificacion  from facturaven_automaticas f where f.idfacven='".$vidfacven."' and f.activo='SI')";
 
 
      $nm_select = $vsql; 

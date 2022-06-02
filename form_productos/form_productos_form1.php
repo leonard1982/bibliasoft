@@ -20,10 +20,6 @@
    {
        $this->nmgp_cmp_hidden['idpro2'] = 'off';
    }
-   if (!isset($this->nmgp_cmp_hidden['cod_cuenta']))
-   {
-       $this->nmgp_cmp_hidden['cod_cuenta'] = 'off';
-   }
    if (!isset($this->nmgp_cmp_hidden['multiple_escala']))
    {
        $this->nmgp_cmp_hidden['multiple_escala'] = 'off';
@@ -120,10 +116,6 @@
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
    $cod_cuenta = $this->cod_cuenta;
-   if (!isset($this->nmgp_cmp_hidden['cod_cuenta']))
-   {
-       $this->nmgp_cmp_hidden['cod_cuenta'] = 'off';
-   }
    $sStyleHidden_cod_cuenta = '';
    if (isset($this->nmgp_cmp_hidden['cod_cuenta']) && $this->nmgp_cmp_hidden['cod_cuenta'] == 'off')
    {
@@ -348,7 +340,8 @@ else
    echo "</span>";
 ?> 
 <?php  }?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cod_cuenta_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cod_cuenta_text"></span></td></tr></table></td></tr></table> </TD>
+<span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('cod_cuenta')", "nm_mostra_mens('cod_cuenta')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_cod_cuenta_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_cod_cuenta_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 

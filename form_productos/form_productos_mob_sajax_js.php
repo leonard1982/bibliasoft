@@ -7261,6 +7261,7 @@ if ($this->Embutida_form)
     "preciomen2": new Array("hidden_field_label_preciomen2", "hidden_field_data_preciomen2"),
     "preciomen3": new Array("hidden_field_label_preciomen3", "hidden_field_data_preciomen3"),
     "imagen": new Array("hidden_field_label_imagen", "hidden_field_data_imagen"),
+    "cod_cuenta": new Array("hidden_field_label_cod_cuenta", "hidden_field_data_cod_cuenta"),
     "id_pucaux_inventario": new Array("hidden_field_label_id_pucaux_inventario", "hidden_field_data_id_pucaux_inventario"),
     "id_pucaux_ncc": new Array("hidden_field_label_id_pucaux_ncc", "hidden_field_data_id_pucaux_ncc"),
     "id_pucaux_ndc": new Array("hidden_field_label_id_pucaux_ndc", "hidden_field_data_id_pucaux_ndc"),

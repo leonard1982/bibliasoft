@@ -295,8 +295,8 @@ class form_facturaven_automaticas_ini
       $this->nm_dt_criacao   = "20201203"; 
       $this->nm_hr_criacao   = "102005"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220511"; 
-      $this->nm_hr_ult_alt   = "110652"; 
+      $this->nm_dt_ult_alt   = "20220527"; 
+      $this->nm_hr_ult_alt   = "091228"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -974,7 +974,7 @@ class form_facturaven_automaticas_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKZSFUHABYHuJwHgvsVcBODWFaHMFaDcFYZkBiHIBeHQrqDEvsZSJGHEFqHIFGD9FYZ9XGHANKV5XGDMzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFCDWJeDoFGDcFYZ1F7HIrwHQJeDEBOZSJGHEFqHMFaHQFYDQJsDSNaVWBqDMvmVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwH9X7Z1rwV5BOHuNOVcB/V5X7DorqDcBqZ1B/D1rwZMB/DEvsHEJGDWr/DoraD9NmH9X7HABYD5NUHgrYDkBODWFaVEraD9BiZ1F7Z1BeV5X7DMBYHEJGH5F/VoXGDcJeZSX7HArYV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwZSX7HIBeVWXGHuNOZSJqDWXCHMJsDcNmZ1BOHAN7HuFGHgveHENiDuJeHINUHQNmZSFGHIrKV5FUHgvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYV9BUDWrmVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuXGHQNwDQB/D1BeD5BODMzGVcFKH5FqHIJsD9XOZSBODSrYD5FaHgveZSXeDuXKDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSFGD1BeHuNUHgrKDkB/H5FqVoraHQNmZ1FaHArYZMB/DMveHEJGDWX7HMJsD9FYDQJsDSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJwHAN7VWJsDMBYVcrsDWF/HMFUD9BsZ1BiD1rKD5NUHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DorqD9BsH9FaHAN7V5X7DMNKZSXeDWXCDoraDcJeZSFGD1veVWJwHuzGVIBODWFaVErqDcJUZ1B/Z1NOD5BiDMBYHEJGDWFqZuFaD9XsZSX7Z1BYV5FUHuBYVcFKHEFYVoBqDcBqZ1FaD1NaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFaDcFYZ1FGD1rKZMBqDEBeZSXeHEXKZuBqHQXODQJsDSrwD5XGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJeDMvOVcBUDWFaHMBiD9BsVIraD1rwV5X7HgBeHErsH5X/ZuXGHQNwH9X7HAN7HuBiHgrwVIBsDWFYHMFUDcJUZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1820,6 +1820,11 @@ ob_start();
             $detalle = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_facturaven_automaticas_validate_activo' == $_POST['rs'])
+        {
+            $activo = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_form_facturaven_automaticas_refresh_idcli' == $_POST['rs'])
         {
             $idcli = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1844,14 +1849,15 @@ ob_start();
             $numfacven = NM_utf8_urldecode($_POST['rsargs'][13]);
             $idfacven = NM_utf8_urldecode($_POST['rsargs'][14]);
             $tipo = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $activo = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][19]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][24]);
         }
         if ('ajax_form_facturaven_automaticas_navigate_form' == $_POST['rs'])
         {
@@ -2313,6 +2319,7 @@ ob_start();
     $inicial_form_facturaven_automaticas->contr_form_facturaven_automaticas->NM_ajax_info['select_html']['id_clasificacion'] = "class=\"sc-js-input scFormObjectOdd css_id_clasificacion_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_id_clasificacion\" name=\"id_clasificacion\" size=\"1\" alt=\"{type: 'select', enterTab: false}\"";
     $inicial_form_facturaven_automaticas->contr_form_facturaven_automaticas->NM_ajax_info['select_html']['idcli'] = "class=\"sc-js-input scFormObjectOdd css_idcli_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_idcli\" name=\"idcli\" size=\"1\" alt=\"{type: 'select', enterTab: false}\"";
     $inicial_form_facturaven_automaticas->contr_form_facturaven_automaticas->NM_ajax_info['select_html']['dircliente'] = "class=\"sc-js-input scFormObjectOdd css_dircliente_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_dircliente\" name=\"dircliente\" size=\"1\" alt=\"{type: 'select', enterTab: false}\"";
+    $inicial_form_facturaven_automaticas->contr_form_facturaven_automaticas->NM_ajax_info['select_html']['activo'] = " onClick=\"\" ";
 
     if (!defined('SC_SAJAX_LOADED'))
     {
@@ -2343,6 +2350,7 @@ ob_start();
     sajax_export("ajax_form_facturaven_automaticas_validate_idfacven");
     sajax_export("ajax_form_facturaven_automaticas_validate_tipo");
     sajax_export("ajax_form_facturaven_automaticas_validate_detalle");
+    sajax_export("ajax_form_facturaven_automaticas_validate_activo");
     sajax_export("ajax_form_facturaven_automaticas_refresh_idcli");
     sajax_export("ajax_form_facturaven_automaticas_submit_form");
     sajax_export("ajax_form_facturaven_automaticas_navigate_form");
@@ -2698,6 +2706,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_detalle
 
+    function ajax_form_facturaven_automaticas_validate_activo($activo, $script_case_init)
+    {
+        global $inicial_form_facturaven_automaticas;
+        //register_shutdown_function("form_facturaven_automaticas_pack_ajax_response");
+        $inicial_form_facturaven_automaticas->contr_form_facturaven_automaticas->NM_ajax_flag          = true;
+        $inicial_form_facturaven_automaticas->contr_form_facturaven_automaticas->NM_ajax_opcao         = 'validate_activo';
+        $inicial_form_facturaven_automaticas->contr_form_facturaven_automaticas->NM_ajax_info['param'] = array(
+                  'activo' => NM_utf8_urldecode($activo),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_facturaven_automaticas->contr_form_facturaven_automaticas->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_facturaven_automaticas->contr_form_facturaven_automaticas->controle();
+        exit;
+    } // ajax_validate_activo
+
     function ajax_form_facturaven_automaticas_refresh_idcli($idcli, $nmgp_refresh_fields, $script_case_init)
     {
         global $inicial_form_facturaven_automaticas;
@@ -2718,7 +2745,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_refresh_idcli
 
-    function ajax_form_facturaven_automaticas_submit_form($resolucion, $formapago, $fechaven, $credito, $dias_decredito, $id_clasificacion, $idcli, $dircliente, $subtotal, $valoriva, $total, $observaciones, $vendedor, $numfacven, $idfacven, $tipo, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_facturaven_automaticas_submit_form($resolucion, $formapago, $fechaven, $credito, $dias_decredito, $id_clasificacion, $idcli, $dircliente, $subtotal, $valoriva, $total, $observaciones, $vendedor, $numfacven, $idfacven, $tipo, $activo, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_facturaven_automaticas;
         //register_shutdown_function("form_facturaven_automaticas_pack_ajax_response");
@@ -2741,6 +2768,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'numfacven' => NM_utf8_urldecode($numfacven),
                   'idfacven' => NM_utf8_urldecode($idfacven),
                   'tipo' => NM_utf8_urldecode($tipo),
+                  'activo' => NM_utf8_urldecode($activo),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),
                   'nmgp_opcao' => NM_utf8_urldecode($nmgp_opcao),

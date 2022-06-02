@@ -170,6 +170,8 @@ function Sel_cmp_process()
       $tab_blk_campos[] = "clasificacion";
       $tab_ger_campos['id_clasificacion'] = "on";
       $tab_blk_campos[] = "id_clasificacion";
+      $tab_ger_campos['activo'] = "on";
+      $tab_blk_campos[] = "activo";
       $tab_ger_campos['copiar'] = "on";
       $tab_ger_campos['fechaven'] = "on";
       $tab_ger_campos['fechavenc'] = "on";

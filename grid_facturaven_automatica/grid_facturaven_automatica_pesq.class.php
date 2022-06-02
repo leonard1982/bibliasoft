@@ -1799,6 +1799,8 @@ var nmdg_Form = "F1";
   str_out += 'id_ac_idcli#NMF#' + search_get_text('id_ac_idcli') + '@NMF@';
   str_out += 'SC_resolucion_cond#NMF#' + search_get_sel_txt('SC_resolucion_cond') + '@NMF@';
   str_out += 'SC_resolucion#NMF#' + search_get_select('SC_resolucion') + '@NMF@';
+  str_out += 'SC_activo_cond#NMF#' + search_get_sel_txt('SC_activo_cond') + '@NMF@';
+  str_out += 'SC_activo#NMF#' + search_get_select('SC_activo') + '@NMF@';
   str_out += 'SC_NM_operador#NMF#' + search_get_text('SC_NM_operador');
   str_out  = str_out.replace(/[+]/g, "__NM_PLUS__");
   str_out  = str_out.replace(/[&]/g, "__NM_AMP__");
@@ -2062,6 +2064,7 @@ function nm_open_popup(parms)
       global 
              $idcli_cond, $idcli, $idcli_autocomp,
              $resolucion_cond, $resolucion,
+             $activo_cond, $activo,
              $nm_url_saida, $nm_apl_dependente, $nmgp_parms, $bprocessa, $nmgp_save_name, $NM_operador, $NM_filters, $nmgp_save_option, $NM_filters_del, $Script_BI;
       $Script_BI = "";
       $this->nmgp_botoes['clear'] = "on";
@@ -2104,6 +2107,8 @@ function nm_open_popup(parms)
           $idcli_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['idcli_cond']; 
           $resolucion = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['resolucion']; 
           $resolucion_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['resolucion_cond']; 
+          $activo = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['activo']; 
+          $activo_cond = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['activo_cond']; 
           $this->NM_operador = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['NM_operador']; 
       } 
       if (!isset($idcli_cond) || empty($idcli_cond))
@@ -2114,11 +2119,16 @@ function nm_open_popup(parms)
       {
          $resolucion_cond = "eq";
       }
+      if (!isset($activo_cond) || empty($activo_cond))
+      {
+         $activo_cond = "eq";
+      }
       $display_aberto  = "style=display:";
       $display_fechado = "style=display:none";
       $opc_hide_input = array("nu","nn","ep","ne");
       $str_hide_idcli = (in_array($idcli_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
       $str_hide_resolucion = (in_array($resolucion_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
+      $str_hide_activo = (in_array($activo_cond, $opc_hide_input)) ? $display_fechado : $display_aberto;
 
       if (!isset($idcli) || $idcli == "")
       {
@@ -2146,6 +2156,20 @@ function nm_open_popup(parms)
          else
          {
          $resolucion = substr($resolucion, 0, $tmp_pos);
+         }
+      }
+      if (!isset($activo) || $activo == "")
+      {
+          $activo = "";
+      }
+      if (isset($activo) && !empty($activo))
+      {
+         $tmp_pos = strpos($activo, "##@@");
+         if ($tmp_pos === false)
+         { }
+         else
+         {
+         $activo = substr($activo, 0, $tmp_pos);
          }
       }
 ?>
@@ -2327,6 +2351,46 @@ function nm_open_popup(parms)
 <?php
 ?>
         
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+
+   </tr><tr>
+
+
+
+
+
+      <TD id='SC_activo_label' class="scFilterLabelOdd"><?php echo (isset($this->New_label['activo'])) ? $this->New_label['activo'] : "Activo"; ?></TD>
+      
+      <INPUT type="hidden" id="SC_activo_cond" name="activo_cond" value="eq">
+ 
+     <TD colspan=2 class="scFilterFieldOdd">
+      <TABLE  border="0" cellpadding="0" cellspacing="0">
+       <TR id="id_hide_activo" <?php echo $str_hide_activo?> valign="top">
+        <TD class="scFilterFieldFontOdd">
+           <?php
+ $SC_Label = (isset($this->New_label['activo'])) ? $this->New_label['activo'] : "Activo";
+ $nmgp_tab_label .= "activo?#?" . $SC_Label . "?@?";
+ $date_sep_bw = " " . $this->Ini->Nm_lang['lang_srch_between_values'] . " ";
+ if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
+ {
+     $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
+ }
+?>
+ 
+<?php
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['psq_check_ret']['activo'] = array();
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['psq_check_ret']['activo'][] = "SI";
+  $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['psq_check_ret']['activo'][] = "NO";
+ ?>
+
+ <SELECT class="scFilterObjectOdd" id="SC_activo"  name="activo"  size="1">
+ <OPTION value="SI##@@SI"<?php if ($activo == "SI") { echo " selected" ;} ?><?php  if (empty($activo)) { echo " selected" ;} ?>>SI</option>
+ <OPTION value="NO##@@NO"<?php if ($activo == "NO") { echo " selected" ;} ?>>NO</option>
+ </SELECT>
+
         </TD>
        </TR>
       </TABLE>
@@ -2620,6 +2684,8 @@ function nm_open_popup(parms)
  {
     document.F1.submit();
  }
+ Arr_def_activo = new Array();
+ Arr_def_activo[0] = 'SI';
  function limpa_form()
  {
    document.F1.reset();
@@ -2635,6 +2701,23 @@ function nm_open_popup(parms)
    document.F1.resolucion_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_resolucion'), document.F1.resolucion_cond, 'resolucion');
    document.F1.resolucion.value = "";
+   document.F1.activo_cond.value = 'eq';
+   nm_campos_between(document.getElementById('id_vis_activo'), document.F1.activo_cond, 'activo');
+   document.F1.activo.value = "";
+   if  (Arr_def_activo[0]) {
+       obj_sel =  document.getElementById('SC_activo');
+       for (ix = 0; ix < obj_sel.length; ix++) {
+            for (iz = 0; iz < Arr_def_activo.length; iz++) {
+                 Arr_def_test = Arr_def_activo[iz] + "##@@"
+                 Arr_def_len  = Arr_def_test.length;
+                 Obj_val      = obj_sel.options[ix].value;
+                 if (Arr_def_test == Obj_val.substring(0,Arr_def_len)) {
+                     obj_sel.options[ix].selected = true;
+                     break;
+                 }
+            }
+       }
+   }
    Sc_carga_select2('all');
  }
  function Sc_carga_select2(Field)
@@ -2796,6 +2879,8 @@ function nm_open_popup(parms)
       $tp_fields['id_ac_idcli'] = 'text_aut';
       $tp_fields['SC_resolucion_cond'] = 'cond';
       $tp_fields['SC_resolucion'] = 'select';
+      $tp_fields['SC_activo_cond'] = 'cond';
+      $tp_fields['SC_activo'] = 'select';
       $tp_fields['SC_NM_operador'] = 'text';
       if (is_file($NM_patch))
       {
@@ -2940,7 +3025,8 @@ function nm_open_popup(parms)
    function trata_campos()
    {
       global $idcli_cond, $idcli, $idcli_autocomp,
-             $resolucion_cond, $resolucion, $nmgp_tab_label;
+             $resolucion_cond, $resolucion,
+             $activo_cond, $activo, $nmgp_tab_label;
 
       $C_formatado = true;
       $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
@@ -2960,6 +3046,11 @@ function nm_open_popup(parms)
       {
           $resolucion_input_2 = $resolucion;
       }
+      $activo_cond_salva = $activo_cond; 
+      if (!isset($activo_input_2) || $activo_input_2 == "")
+      {
+          $activo_input_2 = $activo;
+      }
       $tmp_pos = strpos($resolucion, "##@@");
       if ($tmp_pos === false) {
           $L_lookup = $resolucion;
@@ -2970,12 +3061,25 @@ function nm_open_popup(parms)
       if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['psq_check_ret']['resolucion'])) {
           if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Prefijo : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
       }
+      $tmp_pos = strpos($activo, "##@@");
+      if ($tmp_pos === false) {
+          $L_lookup = $activo;
+      }
+      else {
+          $L_lookup = substr($activo, 0, $tmp_pos);
+      }
+      if ($this->NM_ajax_opcao != "ajax_grid_search_change_fil" && !empty($L_lookup) && !in_array($L_lookup, $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['psq_check_ret']['activo'])) {
+          if (!empty($this->Campos_Mens_erro)) {$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Activo : " . $this->Ini->Nm_lang['lang_errm_ajax_data'];
+      }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['idcli'] = $idcli; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['idcli_cond'] = $idcli_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['resolucion'] = $resolucion; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['resolucion_cond'] = $resolucion_cond_salva; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['dyn_search']  = array(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['activo'] = $activo; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['activo_cond'] = $activo_cond_salva; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['dyn_search']  = array(); 
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_automatica']['campos_busca']['NM_operador'] = $this->NM_operador; 
       if ($this->NM_ajax_flag && $this->NM_ajax_opcao == "ajax_grid_search")
@@ -3064,6 +3168,12 @@ function nm_open_popup(parms)
           $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
       }
       $this->cmp_formatado['resolucion'] = $Conteudo;
+      $Conteudo = $activo;
+      if (strpos($Conteudo, "##@@") !== false)
+      {
+          $Conteudo = substr($Conteudo, strpos($Conteudo, "##@@") + 4);
+      }
+      $this->cmp_formatado['activo'] = $Conteudo;
 
       //----- $idcli
       $this->Date_part = false;
@@ -3077,6 +3187,13 @@ function nm_open_popup(parms)
       if (isset($resolucion))
       {
          $this->monta_condicao("resolucion", $resolucion_cond, $resolucion, "", "resolucion");
+      }
+
+      //----- $activo
+      $this->Date_part = false;
+      if (isset($activo))
+      {
+         $this->monta_condicao("activo", $activo_cond, $activo, "", "activo");
       }
    }
 

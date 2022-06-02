@@ -59,6 +59,7 @@ class form_grupos_contables_apl
    var $puc_ingresos;
    var $puc_devolucion_ventas;
    var $puc_costo_ventas;
+   var $puc_ingresos_terceros;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -167,6 +168,10 @@ class form_grupos_contables_apl
           if (isset($this->NM_ajax_info['param']['puc_ingresos']))
           {
               $this->puc_ingresos = $this->NM_ajax_info['param']['puc_ingresos'];
+          }
+          if (isset($this->NM_ajax_info['param']['puc_ingresos_terceros']))
+          {
+              $this->puc_ingresos_terceros = $this->NM_ajax_info['param']['puc_ingresos_terceros'];
           }
           if (isset($this->NM_ajax_info['param']['puc_inventario']))
           {
@@ -1042,6 +1047,7 @@ class form_grupos_contables_apl
       if (isset($this->puc_ingresos)) { $this->nm_limpa_alfa($this->puc_ingresos); }
       if (isset($this->puc_devolucion_ventas)) { $this->nm_limpa_alfa($this->puc_devolucion_ventas); }
       if (isset($this->puc_costo_ventas)) { $this->nm_limpa_alfa($this->puc_costo_ventas); }
+      if (isset($this->puc_ingresos_terceros)) { $this->nm_limpa_alfa($this->puc_ingresos_terceros); }
       $Campos_Crit       = "";
       $Campos_erro       = "";
       $Campos_Falta      = array();
@@ -1133,6 +1139,10 @@ class form_grupos_contables_apl
           if ('validate_puc_costo_ventas' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_costo_ventas');
+          }
+          if ('validate_puc_ingresos_terceros' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'puc_ingresos_terceros');
           }
           form_grupos_contables_pack_ajax_response();
           exit;
@@ -1554,6 +1564,95 @@ class form_grupos_contables_apl
               $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
               $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_costo_ventas'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+              $AjaxLim = 0;
+              $aResponse = array();
+              foreach ($aLookup as $sLkpIndex => $aLkpList)
+              {
+                  $AjaxLim++;
+                  if ($AjaxLim > 10)
+                  {
+                      break;
+                  }
+                  foreach ($aLkpList as $sLkpIndex => $sLkpValue)
+                  {
+                      $sLkpIndex = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpIndex);
+                      $sLkpValue = str_replace(array("\r", "\n"), array('', '<br />'), $sLkpValue);
+                      $aResponse[] = array('text' => $sLkpValue, 'id' => $sLkpIndex);
+                  }
+              }
+              $oJson = new Services_JSON();
+              echo $oJson->encode(array('results' => $aResponse));
+              exit;
+          }
+          if ('autocomp_puc_ingresos_terceros' == $this->NM_ajax_opcao)
+          {
+              if (isset($_GET['term'])) {
+                  $this->puc_ingresos_terceros = ($_SESSION['scriptcase']['charset'] != "UTF-8") ? NM_utf8_decode(sc_convert_encoding($_GET['term'], $_SESSION['scriptcase']['charset'], 'UTF-8')) : $_GET['term'];
+              } else {
+                  $this->puc_ingresos_terceros = '';
+              }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros'] = array(); 
+    }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "%' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE concat(codigo,' - ',nombre) LIKE '%" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "%' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo&' - '&nombre LIKE '%" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "%' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "%' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo + ' - ' + nombre LIKE '%" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "%' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "%' ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo||' - '||nombre LIKE '%" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "%' ORDER BY codigo, nombre";
+   }
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_grupos_contables_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_grupos_contables_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros'][] = $rs->fields[0];
               $rs->MoveNext() ; 
        } 
        $rs->Close() ; 
@@ -2130,6 +2229,9 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
            case 'puc_costo_ventas':
                return "Puc Costo Ventas";
                break;
+           case 'puc_ingresos_terceros':
+               return "Puc Ingresos Terceros";
+               break;
            case 'id_grupo_contable':
                return "Id Grupo Contable";
                break;
@@ -2195,6 +2297,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_puc_devolucion_ventas($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'puc_costo_ventas' == $filtro)) || (is_array($filtro) && in_array('puc_costo_ventas', $filtro)))
         $this->ValidateField_puc_costo_ventas($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'puc_ingresos_terceros' == $filtro)) || (is_array($filtro) && in_array('puc_ingresos_terceros', $filtro)))
+        $this->ValidateField_puc_ingresos_terceros($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
           if (!empty($this->sc_force_zero))
@@ -2468,6 +2572,38 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         }
     } // ValidateField_puc_costo_ventas
 
+    function ValidateField_puc_ingresos_terceros(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->puc_ingresos_terceros) > 16) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Puc Ingresos Terceros " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['puc_ingresos_terceros']))
+              {
+                  $Campos_Erros['puc_ingresos_terceros'] = array();
+              }
+              $Campos_Erros['puc_ingresos_terceros'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['puc_ingresos_terceros']) || !is_array($this->NM_ajax_info['errList']['puc_ingresos_terceros']))
+              {
+                  $this->NM_ajax_info['errList']['puc_ingresos_terceros'] = array();
+              }
+              $this->NM_ajax_info['errList']['puc_ingresos_terceros'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 16 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'puc_ingresos_terceros';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_puc_ingresos_terceros
+
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -2498,6 +2634,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     $this->nmgp_dados_form['puc_ingresos'] = $this->puc_ingresos;
     $this->nmgp_dados_form['puc_devolucion_ventas'] = $this->puc_devolucion_ventas;
     $this->nmgp_dados_form['puc_costo_ventas'] = $this->puc_costo_ventas;
+    $this->nmgp_dados_form['puc_ingresos_terceros'] = $this->puc_ingresos_terceros;
     $this->nmgp_dados_form['id_grupo_contable'] = $this->id_grupo_contable;
     $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['dados_form'] = $this->nmgp_dados_form;
    }
@@ -2972,6 +3109,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $this->ajax_return_values_puc_ingresos();
           $this->ajax_return_values_puc_devolucion_ventas();
           $this->ajax_return_values_puc_costo_ventas();
+          $this->ajax_return_values_puc_ingresos_terceros();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
@@ -3038,34 +3176,32 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_inventario), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_inventario), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_inventario), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_inventario), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_inventario), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_inventario), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_inventario), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_inventario), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_inventario), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_inventario), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_inventario), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_inventario), 1, -1) . "' ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_inventario), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_inventario), 1, -1) . "' ORDER BY codigo, nombre";
    }
-   if ('' != $this->puc_inventario && '' != $this->puc_inventario && '' != $this->puc_inventario && '' != $this->puc_inventario && '' != $this->puc_inventario && '' != $this->puc_inventario && '' != $this->puc_inventario)
-   {
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
    if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
@@ -3085,7 +3221,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
        $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
        exit; 
    } 
-   }
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
           $this->NM_ajax_info['fldList']['puc_inventario'] = array(
@@ -3140,34 +3275,32 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . "' ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1) . "' ORDER BY codigo, nombre";
    }
-   if ('' != $this->puc_devolucion_compra && '' != $this->puc_devolucion_compra && '' != $this->puc_devolucion_compra && '' != $this->puc_devolucion_compra && '' != $this->puc_devolucion_compra && '' != $this->puc_devolucion_compra && '' != $this->puc_devolucion_compra)
-   {
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
    if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
@@ -3187,7 +3320,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
        $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
        exit; 
    } 
-   }
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
           $this->NM_ajax_info['fldList']['puc_devolucion_compra'] = array(
@@ -3242,34 +3374,32 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . "' ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos), 1, -1) . "' ORDER BY codigo, nombre";
    }
-   if ('' != $this->puc_ingresos && '' != $this->puc_ingresos && '' != $this->puc_ingresos && '' != $this->puc_ingresos && '' != $this->puc_ingresos && '' != $this->puc_ingresos && '' != $this->puc_ingresos)
-   {
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
    if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
@@ -3289,7 +3419,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
        $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
        exit; 
    } 
-   }
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
           $this->NM_ajax_info['fldList']['puc_ingresos'] = array(
@@ -3344,34 +3473,32 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
-   if ('' != $this->puc_devolucion_ventas && '' != $this->puc_devolucion_ventas && '' != $this->puc_devolucion_ventas && '' != $this->puc_devolucion_ventas && '' != $this->puc_devolucion_ventas && '' != $this->puc_devolucion_ventas && '' != $this->puc_devolucion_ventas)
-   {
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
    if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
@@ -3391,7 +3518,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
        $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
        exit; 
    } 
-   }
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
           $this->NM_ajax_info['fldList']['puc_devolucion_ventas'] = array(
@@ -3446,34 +3572,32 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     }
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    {
-       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
    {
-       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    {
-       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
    else
    {
-       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = " . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . " ORDER BY codigo, nombre";
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_costo_ventas), 1, -1) . "' ORDER BY codigo, nombre";
    }
-   if ('' != $this->puc_costo_ventas && '' != $this->puc_costo_ventas && '' != $this->puc_costo_ventas && '' != $this->puc_costo_ventas && '' != $this->puc_costo_ventas && '' != $this->puc_costo_ventas && '' != $this->puc_costo_ventas)
-   {
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
    if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
@@ -3493,7 +3617,6 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
        $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
        exit; 
    } 
-   }
    $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
           $this->NM_ajax_info['fldList']['puc_costo_ventas'] = array(
@@ -3517,6 +3640,105 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $this->NM_ajax_info['fldList']['puc_costo_ventas']['labList'] = $aLabel;
           $val_output = isset($aLookup[0][form_grupos_contables_pack_protect_string(NM_charset_to_utf8($this->puc_costo_ventas))]) ? $aLookup[0][form_grupos_contables_pack_protect_string(NM_charset_to_utf8($this->puc_costo_ventas))] : "";
           $this->NM_ajax_info['fldList']['puc_costo_ventas_autocomp'] = array(
+               'type'    => 'text',
+               'valList' => array($val_output),
+              );
+          }
+   }
+
+          //----- puc_ingresos_terceros
+   function ajax_return_values_puc_ingresos_terceros($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("puc_ingresos_terceros", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->puc_ingresos_terceros);
+              $aLookup = array();
+              $this->_tmp_lookup_puc_ingresos_terceros = $this->puc_ingresos_terceros;
+
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros'] = array(); 
+    }
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+   {
+       $nm_comando = "SELECT codigo, concat(codigo,' - ',nombre) FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+   {
+       $nm_comando = "SELECT codigo, codigo&' - '&nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+   {
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+   {
+       $nm_comando = "SELECT codigo, codigo + ' - ' + nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "' ORDER BY codigo, nombre";
+   }
+   elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+   {
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "' ORDER BY codigo, nombre";
+   }
+   else
+   {
+       $nm_comando = "SELECT codigo, codigo||' - '||nombre FROM plancuentas WHERE codigo = '" . substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1) . "' ORDER BY codigo, nombre";
+   }
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->SelectLimit($nm_comando, 10, 0))
+   {
+       while (!$rs->EOF) 
+       { 
+              $aLookup[] = array(form_grupos_contables_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_grupos_contables_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['Lookup_puc_ingresos_terceros'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['puc_ingresos_terceros'] = array(
+                       'row'    => '',
+               'type'    => 'select2_ac',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['puc_ingresos_terceros']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['puc_ingresos_terceros']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['puc_ingresos_terceros']['labList'] = $aLabel;
+          $val_output = isset($aLookup[0][form_grupos_contables_pack_protect_string(NM_charset_to_utf8($this->puc_ingresos_terceros))]) ? $aLookup[0][form_grupos_contables_pack_protect_string(NM_charset_to_utf8($this->puc_ingresos_terceros))] : "";
+          $this->NM_ajax_info['fldList']['puc_ingresos_terceros_autocomp'] = array(
                'type'    => 'text',
                'valList' => array($val_output),
               );
@@ -3679,35 +3901,11 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
       $NM_val_form['puc_ingresos'] = $this->puc_ingresos;
       $NM_val_form['puc_devolucion_ventas'] = $this->puc_devolucion_ventas;
       $NM_val_form['puc_costo_ventas'] = $this->puc_costo_ventas;
+      $NM_val_form['puc_ingresos_terceros'] = $this->puc_ingresos_terceros;
       $NM_val_form['id_grupo_contable'] = $this->id_grupo_contable;
       if ($this->id_grupo_contable === "" || is_null($this->id_grupo_contable))  
       { 
           $this->id_grupo_contable = 0;
-      } 
-      if ($this->puc_inventario === "" || is_null($this->puc_inventario))  
-      { 
-          $this->puc_inventario = 0;
-          $this->sc_force_zero[] = 'puc_inventario';
-      } 
-      if ($this->puc_devolucion_compra === "" || is_null($this->puc_devolucion_compra))  
-      { 
-          $this->puc_devolucion_compra = 0;
-          $this->sc_force_zero[] = 'puc_devolucion_compra';
-      } 
-      if ($this->puc_ingresos === "" || is_null($this->puc_ingresos))  
-      { 
-          $this->puc_ingresos = 0;
-          $this->sc_force_zero[] = 'puc_ingresos';
-      } 
-      if ($this->puc_devolucion_ventas === "" || is_null($this->puc_devolucion_ventas))  
-      { 
-          $this->puc_devolucion_ventas = 0;
-          $this->sc_force_zero[] = 'puc_devolucion_ventas';
-      } 
-      if ($this->puc_costo_ventas === "" || is_null($this->puc_costo_ventas))  
-      { 
-          $this->puc_costo_ventas = 0;
-          $this->sc_force_zero[] = 'puc_costo_ventas';
       } 
       $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
       if ($this->nmgp_opcao == "alterar" || $this->nmgp_opcao == "incluir") 
@@ -3725,6 +3923,48 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           { 
               $this->descripcion = "null"; 
               $NM_val_null[] = "descripcion";
+          } 
+          $this->puc_inventario_before_qstr = $this->puc_inventario;
+          $this->puc_inventario = substr($this->Db->qstr($this->puc_inventario), 1, -1); 
+          if ($this->puc_inventario == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->puc_inventario = "null"; 
+              $NM_val_null[] = "puc_inventario";
+          } 
+          $this->puc_devolucion_compra_before_qstr = $this->puc_devolucion_compra;
+          $this->puc_devolucion_compra = substr($this->Db->qstr($this->puc_devolucion_compra), 1, -1); 
+          if ($this->puc_devolucion_compra == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->puc_devolucion_compra = "null"; 
+              $NM_val_null[] = "puc_devolucion_compra";
+          } 
+          $this->puc_ingresos_before_qstr = $this->puc_ingresos;
+          $this->puc_ingresos = substr($this->Db->qstr($this->puc_ingresos), 1, -1); 
+          if ($this->puc_ingresos == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->puc_ingresos = "null"; 
+              $NM_val_null[] = "puc_ingresos";
+          } 
+          $this->puc_devolucion_ventas_before_qstr = $this->puc_devolucion_ventas;
+          $this->puc_devolucion_ventas = substr($this->Db->qstr($this->puc_devolucion_ventas), 1, -1); 
+          if ($this->puc_devolucion_ventas == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->puc_devolucion_ventas = "null"; 
+              $NM_val_null[] = "puc_devolucion_ventas";
+          } 
+          $this->puc_costo_ventas_before_qstr = $this->puc_costo_ventas;
+          $this->puc_costo_ventas = substr($this->Db->qstr($this->puc_costo_ventas), 1, -1); 
+          if ($this->puc_costo_ventas == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->puc_costo_ventas = "null"; 
+              $NM_val_null[] = "puc_costo_ventas";
+          } 
+          $this->puc_ingresos_terceros_before_qstr = $this->puc_ingresos_terceros;
+          $this->puc_ingresos_terceros = substr($this->Db->qstr($this->puc_ingresos_terceros), 1, -1); 
+          if ($this->puc_ingresos_terceros == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->puc_ingresos_terceros = "null"; 
+              $NM_val_null[] = "puc_ingresos_terceros";
           } 
       }
       if ($this->nmgp_opcao == "alterar") 
@@ -3792,37 +4032,37 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = $this->puc_inventario, puc_devolucion_compra = $this->puc_devolucion_compra, puc_ingresos = $this->puc_ingresos, puc_devolucion_ventas = $this->puc_devolucion_ventas, puc_costo_ventas = $this->puc_costo_ventas"; 
+                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = '$this->puc_inventario', puc_devolucion_compra = '$this->puc_devolucion_compra', puc_ingresos = '$this->puc_ingresos', puc_devolucion_ventas = '$this->puc_devolucion_ventas', puc_costo_ventas = '$this->puc_costo_ventas', puc_ingresos_terceros = '$this->puc_ingresos_terceros'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = $this->puc_inventario, puc_devolucion_compra = $this->puc_devolucion_compra, puc_ingresos = $this->puc_ingresos, puc_devolucion_ventas = $this->puc_devolucion_ventas, puc_costo_ventas = $this->puc_costo_ventas"; 
+                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = '$this->puc_inventario', puc_devolucion_compra = '$this->puc_devolucion_compra', puc_ingresos = '$this->puc_ingresos', puc_devolucion_ventas = '$this->puc_devolucion_ventas', puc_costo_ventas = '$this->puc_costo_ventas', puc_ingresos_terceros = '$this->puc_ingresos_terceros'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = $this->puc_inventario, puc_devolucion_compra = $this->puc_devolucion_compra, puc_ingresos = $this->puc_ingresos, puc_devolucion_ventas = $this->puc_devolucion_ventas, puc_costo_ventas = $this->puc_costo_ventas"; 
+                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = '$this->puc_inventario', puc_devolucion_compra = '$this->puc_devolucion_compra', puc_ingresos = '$this->puc_ingresos', puc_devolucion_ventas = '$this->puc_devolucion_ventas', puc_costo_ventas = '$this->puc_costo_ventas', puc_ingresos_terceros = '$this->puc_ingresos_terceros'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = $this->puc_inventario, puc_devolucion_compra = $this->puc_devolucion_compra, puc_ingresos = $this->puc_ingresos, puc_devolucion_ventas = $this->puc_devolucion_ventas, puc_costo_ventas = $this->puc_costo_ventas"; 
+                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = '$this->puc_inventario', puc_devolucion_compra = '$this->puc_devolucion_compra', puc_ingresos = '$this->puc_ingresos', puc_devolucion_ventas = '$this->puc_devolucion_ventas', puc_costo_ventas = '$this->puc_costo_ventas', puc_ingresos_terceros = '$this->puc_ingresos_terceros'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = $this->puc_inventario, puc_devolucion_compra = $this->puc_devolucion_compra, puc_ingresos = $this->puc_ingresos, puc_devolucion_ventas = $this->puc_devolucion_ventas, puc_costo_ventas = $this->puc_costo_ventas"; 
+                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = '$this->puc_inventario', puc_devolucion_compra = '$this->puc_devolucion_compra', puc_ingresos = '$this->puc_ingresos', puc_devolucion_ventas = '$this->puc_devolucion_ventas', puc_costo_ventas = '$this->puc_costo_ventas', puc_ingresos_terceros = '$this->puc_ingresos_terceros'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = $this->puc_inventario, puc_devolucion_compra = $this->puc_devolucion_compra, puc_ingresos = $this->puc_ingresos, puc_devolucion_ventas = $this->puc_devolucion_ventas, puc_costo_ventas = $this->puc_costo_ventas"; 
+                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = '$this->puc_inventario', puc_devolucion_compra = '$this->puc_devolucion_compra', puc_ingresos = '$this->puc_ingresos', puc_devolucion_ventas = '$this->puc_devolucion_ventas', puc_costo_ventas = '$this->puc_costo_ventas', puc_ingresos_terceros = '$this->puc_ingresos_terceros'"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = $this->puc_inventario, puc_devolucion_compra = $this->puc_devolucion_compra, puc_ingresos = $this->puc_ingresos, puc_devolucion_ventas = $this->puc_devolucion_ventas, puc_costo_ventas = $this->puc_costo_ventas"; 
+                  $SC_fields_update[] = "codigo = '$this->codigo', descripcion = '$this->descripcion', puc_inventario = '$this->puc_inventario', puc_devolucion_compra = '$this->puc_devolucion_compra', puc_ingresos = '$this->puc_ingresos', puc_devolucion_ventas = '$this->puc_devolucion_ventas', puc_costo_ventas = '$this->puc_costo_ventas', puc_ingresos_terceros = '$this->puc_ingresos_terceros'"; 
               } 
               $aDoNotUpdate = array();
               $comando .= implode(",", $SC_fields_update);  
@@ -3885,6 +4125,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               }   
               $this->codigo = $this->codigo_before_qstr;
               $this->descripcion = $this->descripcion_before_qstr;
+              $this->puc_inventario = $this->puc_inventario_before_qstr;
+              $this->puc_devolucion_compra = $this->puc_devolucion_compra_before_qstr;
+              $this->puc_ingresos = $this->puc_ingresos_before_qstr;
+              $this->puc_devolucion_ventas = $this->puc_devolucion_ventas_before_qstr;
+              $this->puc_costo_ventas = $this->puc_costo_ventas_before_qstr;
+              $this->puc_ingresos_terceros = $this->puc_ingresos_terceros_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
               }   
@@ -3916,6 +4162,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               elseif (isset($this->puc_devolucion_ventas)) { $this->nm_limpa_alfa($this->puc_devolucion_ventas); }
               if     (isset($NM_val_form) && isset($NM_val_form['puc_costo_ventas'])) { $this->puc_costo_ventas = $NM_val_form['puc_costo_ventas']; }
               elseif (isset($this->puc_costo_ventas)) { $this->nm_limpa_alfa($this->puc_costo_ventas); }
+              if     (isset($NM_val_form) && isset($NM_val_form['puc_ingresos_terceros'])) { $this->puc_ingresos_terceros = $NM_val_form['puc_ingresos_terceros']; }
+              elseif (isset($this->puc_ingresos_terceros)) { $this->nm_limpa_alfa($this->puc_ingresos_terceros); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -3923,7 +4171,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('codigo', 'descripcion', 'puc_inventario', 'puc_devolucion_compra', 'puc_ingresos', 'puc_devolucion_ventas', 'puc_costo_ventas'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('codigo', 'descripcion', 'puc_inventario', 'puc_devolucion_compra', 'puc_ingresos', 'puc_devolucion_ventas', 'puc_costo_ventas', 'puc_ingresos_terceros'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -3971,39 +4219,39 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas) VALUES ('$this->codigo', '$this->descripcion', $this->puc_inventario, $this->puc_devolucion_compra, $this->puc_ingresos, $this->puc_devolucion_ventas, $this->puc_costo_ventas)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros) VALUES ('$this->codigo', '$this->descripcion', '$this->puc_inventario', '$this->puc_devolucion_compra', '$this->puc_ingresos', '$this->puc_devolucion_ventas', '$this->puc_costo_ventas', '$this->puc_ingresos_terceros')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', $this->puc_inventario, $this->puc_devolucion_compra, $this->puc_ingresos, $this->puc_devolucion_ventas, $this->puc_costo_ventas)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', '$this->puc_inventario', '$this->puc_devolucion_compra', '$this->puc_ingresos', '$this->puc_devolucion_ventas', '$this->puc_costo_ventas', '$this->puc_ingresos_terceros')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', $this->puc_inventario, $this->puc_devolucion_compra, $this->puc_ingresos, $this->puc_devolucion_ventas, $this->puc_costo_ventas)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', '$this->puc_inventario', '$this->puc_devolucion_compra', '$this->puc_ingresos', '$this->puc_devolucion_ventas', '$this->puc_costo_ventas', '$this->puc_ingresos_terceros')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', $this->puc_inventario, $this->puc_devolucion_compra, $this->puc_ingresos, $this->puc_devolucion_ventas, $this->puc_costo_ventas)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', '$this->puc_inventario', '$this->puc_devolucion_compra', '$this->puc_ingresos', '$this->puc_devolucion_ventas', '$this->puc_costo_ventas', '$this->puc_ingresos_terceros')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', $this->puc_inventario, $this->puc_devolucion_compra, $this->puc_ingresos, $this->puc_devolucion_ventas, $this->puc_costo_ventas)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', '$this->puc_inventario', '$this->puc_devolucion_compra', '$this->puc_ingresos', '$this->puc_devolucion_ventas', '$this->puc_costo_ventas', '$this->puc_ingresos_terceros')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', $this->puc_inventario, $this->puc_devolucion_compra, $this->puc_ingresos, $this->puc_devolucion_ventas, $this->puc_costo_ventas)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', '$this->puc_inventario', '$this->puc_devolucion_compra', '$this->puc_ingresos', '$this->puc_devolucion_ventas', '$this->puc_costo_ventas', '$this->puc_ingresos_terceros')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', $this->puc_inventario, $this->puc_devolucion_compra, $this->puc_ingresos, $this->puc_devolucion_ventas, $this->puc_costo_ventas)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', '$this->puc_inventario', '$this->puc_devolucion_compra', '$this->puc_ingresos', '$this->puc_devolucion_ventas', '$this->puc_costo_ventas', '$this->puc_ingresos_terceros')"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', $this->puc_inventario, $this->puc_devolucion_compra, $this->puc_ingresos, $this->puc_devolucion_ventas, $this->puc_costo_ventas)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', '$this->puc_inventario', '$this->puc_devolucion_compra', '$this->puc_ingresos', '$this->puc_devolucion_ventas', '$this->puc_costo_ventas', '$this->puc_ingresos_terceros')"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', $this->puc_inventario, $this->puc_devolucion_compra, $this->puc_ingresos, $this->puc_devolucion_ventas, $this->puc_costo_ventas)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros) VALUES (" . $NM_seq_auto . "'$this->codigo', '$this->descripcion', '$this->puc_inventario', '$this->puc_devolucion_compra', '$this->puc_ingresos', '$this->puc_devolucion_ventas', '$this->puc_costo_ventas', '$this->puc_ingresos_terceros')"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -4149,6 +4397,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               } 
               $this->codigo = $this->codigo_before_qstr;
               $this->descripcion = $this->descripcion_before_qstr;
+              $this->puc_inventario = $this->puc_inventario_before_qstr;
+              $this->puc_devolucion_compra = $this->puc_devolucion_compra_before_qstr;
+              $this->puc_ingresos = $this->puc_ingresos_before_qstr;
+              $this->puc_devolucion_ventas = $this->puc_devolucion_ventas_before_qstr;
+              $this->puc_costo_ventas = $this->puc_costo_ventas_before_qstr;
+              $this->puc_ingresos_terceros = $this->puc_ingresos_terceros_before_qstr;
               }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['db_changed'] = true;
@@ -4161,6 +4415,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->sc_evento = "insert"; 
               $this->codigo = $this->codigo_before_qstr;
               $this->descripcion = $this->descripcion_before_qstr;
+              $this->puc_inventario = $this->puc_inventario_before_qstr;
+              $this->puc_devolucion_compra = $this->puc_devolucion_compra_before_qstr;
+              $this->puc_ingresos = $this->puc_ingresos_before_qstr;
+              $this->puc_devolucion_ventas = $this->puc_devolucion_ventas_before_qstr;
+              $this->puc_costo_ventas = $this->puc_costo_ventas_before_qstr;
+              $this->puc_ingresos_terceros = $this->puc_ingresos_terceros_before_qstr;
               $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
@@ -4515,23 +4775,23 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT id_grupo_contable, codigo, descripcion, puc_inventario, puc_devolucion_compra, puc_ingresos, puc_devolucion_ventas, puc_costo_ventas, puc_ingresos_terceros from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -4686,13 +4946,10 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->nmgp_dados_select['puc_devolucion_ventas'] = $this->puc_devolucion_ventas;
               $this->puc_costo_ventas = $rs->fields[7] ; 
               $this->nmgp_dados_select['puc_costo_ventas'] = $this->puc_costo_ventas;
+              $this->puc_ingresos_terceros = $rs->fields[8] ; 
+              $this->nmgp_dados_select['puc_ingresos_terceros'] = $this->puc_ingresos_terceros;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->id_grupo_contable = (string)$this->id_grupo_contable; 
-              $this->puc_inventario = (string)$this->puc_inventario; 
-              $this->puc_devolucion_compra = (string)$this->puc_devolucion_compra; 
-              $this->puc_ingresos = (string)$this->puc_ingresos; 
-              $this->puc_devolucion_ventas = (string)$this->puc_devolucion_ventas; 
-              $this->puc_costo_ventas = (string)$this->puc_costo_ventas; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['parms'] = "id_grupo_contable?#?$this->id_grupo_contable?@?";
           } 
           $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['dados_select'] = $this->nmgp_dados_select;
@@ -4730,6 +4987,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               $this->nmgp_dados_form["puc_devolucion_ventas"] = $this->puc_devolucion_ventas;
               $this->puc_costo_ventas = "";  
               $this->nmgp_dados_form["puc_costo_ventas"] = $this->puc_costo_ventas;
+              $this->puc_ingresos_terceros = "";  
+              $this->nmgp_dados_form["puc_ingresos_terceros"] = $this->puc_ingresos_terceros;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
@@ -5676,7 +5935,7 @@ function sc_file_size($file, $format = false)
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "id_grupo_contable";$nm_numeric[] = "puc_inventario";$nm_numeric[] = "puc_devolucion_compra";$nm_numeric[] = "puc_ingresos";$nm_numeric[] = "puc_devolucion_ventas";$nm_numeric[] = "puc_costo_ventas";
+      $nm_numeric[] = "id_grupo_contable";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_grupos_contables']['decimal_db'] == ".")
