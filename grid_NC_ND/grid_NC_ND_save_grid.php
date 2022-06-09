@@ -879,6 +879,7 @@ class grid_NC_ND_Save_Grid
          $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
          include("../_lib/css/" . $str_schema_all . "_grid.php");
          $str_toolbar_separator     = trim($str_toolbar_separator);
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
          $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
          include("../_lib/buttons/" . $Str_btn_grid);
          if (!function_exists("nmButtonOutput"))

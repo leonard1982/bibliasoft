@@ -231,9 +231,9 @@ class grid_compras_new_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20171216"; 
       $this->nm_hr_criacao   = "171013"; 
-      $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220527"; 
-      $this->nm_hr_ult_alt   = "091228"; 
+      $this->nm_autor_alt    = "edgar"; 
+      $this->nm_dt_ult_alt   = "20220608"; 
+      $this->nm_hr_ult_alt   = "160529"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -986,7 +986,7 @@ class grid_compras_new_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_compras_new']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_compras_new']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQFGHINaV5BqHuvmVIBOH5B7VEF7HQBiZ1F7DSBOD5BqDMveHErCH5FYDoJsD9NmZSX7HIBeD5B/HuvmV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuNOVcFeV5F/VEF7HQNwZSBODSvmZMBqHgNKVkXeV5XCVoFGHQNmZSBiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGZSJGDWr/VoXGDcBwDQB/Z1rwV5FGHuNODkBOV5FYVorqD9XOZSB/HABYD5JeDMNKZSXeV5XCVoB/D9NmZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCH5BmZuJeHQXsH9FGHIvsV5XGHuzGVcBOH5FqDoJsDcJUZSBqHABYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiHAvmD5BqHgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaHuNOV9BUHEFYVoBiD9JmZSBqZ1rYV5FUHgBOVkJGDuJeHMB/D9XsDuFaHIrwHQXGHuNOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsH9BiZ1rwV5BOHuNOVcFCDWrmVorqHQBiVINUHANOHuXGDMBYDkB/DWXCHMB/DcXOZSX7HAvmV5BODMBYV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMFGHQFYZSBiZ1rwVWJsDMzGVIFCDWJeVoB/HQJmZ1BOHArKV5B/HgNOZSJqHEXCHIX7D9JKDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUDcJeZSX7Z1rwD5F7HuzGVcrsDWJeVoB/D9XOH9BOZ1BeV5FUDMzGHEJGDuXKVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBOVWBODMvmVcBOV5X7HIF7HQBsZkFGHIveD5XGHgveHErsDWB3ZuBqHQXOH9FGHABYV5raDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYZSNiDWB3VEX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/ZuBOD9FYDQX7HIrwVWBODMBODkB/DWF/HMX7D9BsZSBODSNOV5FGHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1013,7 +1013,7 @@ class grid_compras_new_ini
       } 
       if (empty($this->nm_tabela))
       {
-          $this->nm_tabela = "facturacom"; 
+          $this->nm_tabela = ""; 
       }
       $_SESSION['sc_session'][$script_case_init]['grid_detallecompra_new']['ind_tree'] = 0;
       if (!isset($_SESSION['sc_session'][$script_case_init]['grid_compras_new']['emb_linha']))
@@ -3754,24 +3754,6 @@ class grid_compras_new_apl
                         $Temp_parms .= $cadapar[0] . " = " . $cadapar[1];
                     }
                 } 
-                if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_Ind_Groupby'] == "total")
-                { 
-                    $Temp_parms .= (empty($Temp_parms)) ? "" : " and ";
-                    $Tmp_pos = strpos($cadapar[1], "@aspass@");
-                    $cadapar[1] = str_replace("@aspass@", "", $cadapar[1]);
-                    if ($Tmp_pos !== false)
-                    {
-                        $cadapar[1] = $this->Ini->Db->qstr($cadapar[1]);
-                    }
-                    if ($cadapar[1] == "__SCNULL__" || $cadapar[1] == "'__SCNULL__'")
-                    {
-                        $Temp_parms .= $cadapar[0] . " is null" ;
-                    }
-                    else
-                    {
-                        $Temp_parms .= $cadapar[0] . " = " . $cadapar[1];
-                    }
-                } 
                 if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_Ind_Groupby'] == "fecha")
                 { 
                     $Temp_parms .= (empty($Temp_parms)) ? "" : " and ";
@@ -4084,7 +4066,7 @@ class grid_compras_new_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_Gb_date_format']['fecha']['fechacom'] = 'YYYYMMDD2';
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_Gb_def_sql']['fecha']['fechacom'] = 'fechacom';
       }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_All_Groupby'] = array('_NM_SC_' => 'grid', 'proveedor' => 'all', 'total' => 'all', 'fecha' => 'all', 'pagada' => 'all', 'asentada' => 'all', 'tipo_com' => 'all', 'prefijo_com' => 'all');
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_All_Groupby'] = array('_NM_SC_' => 'grid', 'proveedor' => 'all', 'total' => 'grid', 'fecha' => 'all', 'pagada' => 'all', 'asentada' => 'all', 'tipo_com' => 'all', 'prefijo_com' => 'all');
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_Groupby_hide'])) 
       { 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_Groupby_hide'] = array();
@@ -4107,7 +4089,6 @@ class grid_compras_new_apl
       }
       if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_Ind_Groupby'] == "total")
       {
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['Labels_GB'][] = "Total";
       }
       if  ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['SC_Ind_Groupby'] == "fecha")
       {
@@ -4136,20 +4117,14 @@ class grid_compras_new_apl
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][2] = array('label' => "" .  $this->Ini->Nm_lang['lang_btns_smry_msge_cnt'] . "", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['proveedor'][] = 2;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][3] = array('label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][3] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['proveedor'][] = 3;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][4] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][4] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['proveedor'][] = 4;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][5] = array('label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][5] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['proveedor'][] = 5;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][6] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][6] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['proveedor'][] = 6;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][7] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['proveedor'][] = 7;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][8] = array('label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['proveedor'][] = 8;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['proveedor'][9] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['proveedor'][] = 9;
       }
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_control']['proveedor']))
       {
@@ -4164,67 +4139,40 @@ class grid_compras_new_apl
                    'select' => "<select class=\"sc-ui-select-NM_Count\" onChange=\"scSummChange($(this))\" style=\"display: none\"><option value=\"2\" class=\"sc-ui-select-option-C\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_count'] . "</option></select>",
                ),
                array(
-                   'cmp_res' => "total",
-                   'label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Total",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-total\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
                    'cmp_res' => "val_ret",
                    'label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ Retención",
                    'options' => array(
-                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "valoriva",
-                   'label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Valoriva",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-valoriva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_ica",
                    'label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteICA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_retiva",
                    'label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteIVA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '7', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"7\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "subtotal",
-                   'label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Subtotal",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '8', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-subtotal\" onChange=\"scSummChange($(this))\"><option value=\"8\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "a_pagar",
                    'label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "Val a Pagar",
                    'options' => array(
-                       array('op' => 'S', 'index' => '9', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"9\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
            );
       }
@@ -4232,20 +4180,14 @@ class grid_compras_new_apl
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][2] = array('label' => "" .  $this->Ini->Nm_lang['lang_btns_smry_msge_cnt'] . "", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['total'][] = 2;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][3] = array('label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][3] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['total'][] = 3;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][4] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][4] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['total'][] = 4;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][5] = array('label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][5] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['total'][] = 5;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][6] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][6] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['total'][] = 6;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][7] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['total'][] = 7;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][8] = array('label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['total'][] = 8;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['total'][9] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['total'][] = 9;
       }
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_control']['total']))
       {
@@ -4260,67 +4202,40 @@ class grid_compras_new_apl
                    'select' => "<select class=\"sc-ui-select-NM_Count\" onChange=\"scSummChange($(this))\" style=\"display: none\"><option value=\"2\" class=\"sc-ui-select-option-C\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_count'] . "</option></select>",
                ),
                array(
-                   'cmp_res' => "total",
-                   'label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Total",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-total\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
                    'cmp_res' => "val_ret",
                    'label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ Retención",
                    'options' => array(
-                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "valoriva",
-                   'label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Valoriva",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-valoriva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_ica",
                    'label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteICA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_retiva",
                    'label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteIVA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '7', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"7\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "subtotal",
-                   'label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Subtotal",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '8', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-subtotal\" onChange=\"scSummChange($(this))\"><option value=\"8\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "a_pagar",
                    'label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "Val a Pagar",
                    'options' => array(
-                       array('op' => 'S', 'index' => '9', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"9\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
            );
       }
@@ -4328,20 +4243,14 @@ class grid_compras_new_apl
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][2] = array('label' => "" .  $this->Ini->Nm_lang['lang_btns_smry_msge_cnt'] . "", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['fecha'][] = 2;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][3] = array('label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][3] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['fecha'][] = 3;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][4] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][4] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['fecha'][] = 4;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][5] = array('label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][5] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['fecha'][] = 5;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][6] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][6] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['fecha'][] = 6;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][7] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['fecha'][] = 7;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][8] = array('label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['fecha'][] = 8;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['fecha'][9] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['fecha'][] = 9;
       }
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_control']['fecha']))
       {
@@ -4356,67 +4265,40 @@ class grid_compras_new_apl
                    'select' => "<select class=\"sc-ui-select-NM_Count\" onChange=\"scSummChange($(this))\" style=\"display: none\"><option value=\"2\" class=\"sc-ui-select-option-C\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_count'] . "</option></select>",
                ),
                array(
-                   'cmp_res' => "total",
-                   'label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Total",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-total\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
                    'cmp_res' => "val_ret",
                    'label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ Retención",
                    'options' => array(
-                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "valoriva",
-                   'label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Valoriva",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-valoriva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_ica",
                    'label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteICA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_retiva",
                    'label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteIVA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '7', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"7\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "subtotal",
-                   'label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Subtotal",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '8', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-subtotal\" onChange=\"scSummChange($(this))\"><option value=\"8\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "a_pagar",
                    'label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "Val a Pagar",
                    'options' => array(
-                       array('op' => 'S', 'index' => '9', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"9\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
            );
       }
@@ -4424,20 +4306,14 @@ class grid_compras_new_apl
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][2] = array('label' => "" .  $this->Ini->Nm_lang['lang_btns_smry_msge_cnt'] . "", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['pagada'][] = 2;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][3] = array('label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][3] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['pagada'][] = 3;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][4] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][4] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['pagada'][] = 4;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][5] = array('label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][5] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['pagada'][] = 5;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][6] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][6] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['pagada'][] = 6;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][7] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['pagada'][] = 7;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][8] = array('label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['pagada'][] = 8;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['pagada'][9] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['pagada'][] = 9;
       }
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_control']['pagada']))
       {
@@ -4452,67 +4328,40 @@ class grid_compras_new_apl
                    'select' => "<select class=\"sc-ui-select-NM_Count\" onChange=\"scSummChange($(this))\" style=\"display: none\"><option value=\"2\" class=\"sc-ui-select-option-C\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_count'] . "</option></select>",
                ),
                array(
-                   'cmp_res' => "total",
-                   'label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Total",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-total\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
                    'cmp_res' => "val_ret",
                    'label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ Retención",
                    'options' => array(
-                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "valoriva",
-                   'label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Valoriva",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-valoriva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_ica",
                    'label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteICA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_retiva",
                    'label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteIVA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '7', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"7\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "subtotal",
-                   'label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Subtotal",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '8', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-subtotal\" onChange=\"scSummChange($(this))\"><option value=\"8\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "a_pagar",
                    'label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "Val a Pagar",
                    'options' => array(
-                       array('op' => 'S', 'index' => '9', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"9\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
            );
       }
@@ -4520,20 +4369,14 @@ class grid_compras_new_apl
       {
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][2] = array('label' => "" .  $this->Ini->Nm_lang['lang_btns_smry_msge_cnt'] . "", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['asentada'][] = 2;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][3] = array('label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][3] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['asentada'][] = 3;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][4] = array('label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][4] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['asentada'][] = 4;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][5] = array('label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][5] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['asentada'][] = 5;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][6] = array('label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][6] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['asentada'][] = 6;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][7] = array('label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['asentada'][] = 7;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][8] = array('label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['asentada'][] = 8;
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_display']['asentada'][9] = array('label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")", 'display' => true);
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['asentada'][] = 9;
       }
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_control']['asentada']))
       {
@@ -4548,67 +4391,40 @@ class grid_compras_new_apl
                    'select' => "<select class=\"sc-ui-select-NM_Count\" onChange=\"scSummChange($(this))\" style=\"display: none\"><option value=\"2\" class=\"sc-ui-select-option-C\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_count'] . "</option></select>",
                ),
                array(
-                   'cmp_res' => "total",
-                   'label' => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Total",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-total\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
                    'cmp_res' => "val_ret",
                    'label' => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ Retención",
                    'options' => array(
-                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '3', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "valoriva",
-                   'label' => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Valoriva",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-valoriva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ret\" onChange=\"scSummChange($(this))\"><option value=\"3\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_ica",
                    'label' => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteICA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '4', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_ica\" onChange=\"scSummChange($(this))\"><option value=\"4\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "val_retiva",
                    'label' => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "$ ReteIVA",
                    'options' => array(
-                       array('op' => 'S', 'index' => '7', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '5', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"7\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
-               ),
-               array(
-                   'cmp_res' => "subtotal",
-                   'label' => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-                   'label_field' => "Subtotal",
-                   'options' => array(
-                       array('op' => 'S', 'index' => '8', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
-                   ),
-                   'select' => "<select class=\"sc-ui-select-subtotal\" onChange=\"scSummChange($(this))\"><option value=\"8\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-val_retiva\" onChange=\"scSummChange($(this))\"><option value=\"5\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
                array(
                    'cmp_res' => "a_pagar",
                    'label' => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
                    'label_field' => "Val a Pagar",
                    'options' => array(
-                       array('op' => 'S', 'index' => '9', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
+                       array('op' => 'S', 'index' => '6', 'label' => "" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "", 'abbrev' => "Sum"),
                    ),
-                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"9\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
+                   'select' => "<select class=\"sc-ui-select-a_pagar\" onChange=\"scSummChange($(this))\"><option value=\"6\" class=\"sc-ui-select-option-S\">" . $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . "</option></select>",
                ),
            );
       }
@@ -5025,14 +4841,16 @@ class grid_compras_new_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "reteica";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "reteiva";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "cod_cuenta";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "excento";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "base_iva_19";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "valor_iva_19";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "base_iva_5";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "valor_iva_5";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "base_con_8";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "valor_con_8";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "t_iva";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "a_pagar";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "base0";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "base19";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "base5";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "devolucion";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "iva_0";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "iva_19";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "iva_5";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "val_ica";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "val_ret";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['field_order'][] = "val_retiva";
@@ -5051,14 +4869,16 @@ class grid_compras_new_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['reteica'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['reteiva'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['cod_cuenta'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['excento'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['base_iva_19'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['valor_iva_19'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['base_iva_5'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['valor_iva_5'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['base_con_8'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['valor_con_8'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['t_iva'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['a_pagar'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['base0'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['base19'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['base5'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['devolucion'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['iva_0'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['iva_19'] = "off";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['iva_5'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['val_ica'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['val_ret'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['usr_cmp_sel']['val_retiva'] = "off";
@@ -6294,7 +6114,7 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idfaccom";$nm_numeric[] = "idprov";$nm_numeric[] = "subtotal";$nm_numeric[] = "valoriva";$nm_numeric[] = "total";$nm_numeric[] = "asentada";$nm_numeric[] = "saldo";$nm_numeric[] = "id_pedidocom";$nm_numeric[] = "retencion";$nm_numeric[] = "reteica";$nm_numeric[] = "reteiva";$nm_numeric[] = "numero_com";$nm_numeric[] = "";
+      $nm_numeric[] = "idfaccom";$nm_numeric[] = "idprov";$nm_numeric[] = "subtotal";$nm_numeric[] = "valoriva";$nm_numeric[] = "total";$nm_numeric[] = "asentada";$nm_numeric[] = "saldo";$nm_numeric[] = "id_pedidocom";$nm_numeric[] = "retencion";$nm_numeric[] = "reteica";$nm_numeric[] = "reteiva";$nm_numeric[] = "numero_com";$nm_numeric[] = "excento";$nm_numeric[] = "base_iva_19";$nm_numeric[] = "valor_iva_19";$nm_numeric[] = "base_iva_5";$nm_numeric[] = "valor_iva_5";$nm_numeric[] = "base_con_8";$nm_numeric[] = "valor_con_8";$nm_numeric[] = "t_iva";$nm_numeric[] = "";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['decimal_db'] == ".")
@@ -6712,7 +6532,6 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
        $Parms = str_replace("__NM_PRC__", "%", $Parms);
        $cmps_numeric = array();
        $cmps_numeric[] = "idprov";
-       $cmps_numeric[] = "total";
        $range_bw = array();
        if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($Parms))
        {
@@ -8106,6 +7925,14 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new'][$path_doc_md5][
        $Nm_numeric[] = "reteica";
        $Nm_numeric[] = "reteiva";
        $Nm_numeric[] = "numero_com";
+       $Nm_numeric[] = "excento";
+       $Nm_numeric[] = "base_iva_19";
+       $Nm_numeric[] = "valor_iva_19";
+       $Nm_numeric[] = "base_iva_5";
+       $Nm_numeric[] = "valor_iva_5";
+       $Nm_numeric[] = "base_con_8";
+       $Nm_numeric[] = "valor_con_8";
+       $Nm_numeric[] = "t_iva";
        $Nm_numeric[] = "";
        if (in_array($name, $Nm_numeric))
        {

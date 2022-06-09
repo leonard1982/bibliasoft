@@ -535,7 +535,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
       $nm_esp_postgres = array();
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $Nm_numeric[] = "idfacven";$Nm_numeric[] = "numfacven";$Nm_numeric[] = "credito";$Nm_numeric[] = "idcli";$Nm_numeric[] = "subtotal";$Nm_numeric[] = "valoriva";$Nm_numeric[] = "total";$Nm_numeric[] = "asentada";$Nm_numeric[] = "saldo";$Nm_numeric[] = "adicional";$Nm_numeric[] = "adicional2";$Nm_numeric[] = "adicional3";$Nm_numeric[] = "resolucion";$Nm_numeric[] = "vendedor";$Nm_numeric[] = "usuario_crea";$Nm_numeric[] = "banco";$Nm_numeric[] = "dias_decredito";$Nm_numeric[] = "pedido";$Nm_numeric[] = "dircliente";$Nm_numeric[] = "id_clasificacion";
+      $Nm_numeric[] = "idfacven";$Nm_numeric[] = "numfacven";$Nm_numeric[] = "credito";$Nm_numeric[] = "idcli";$Nm_numeric[] = "subtotal";$Nm_numeric[] = "valoriva";$Nm_numeric[] = "total";$Nm_numeric[] = "asentada";$Nm_numeric[] = "saldo";$Nm_numeric[] = "adicional";$Nm_numeric[] = "adicional2";$Nm_numeric[] = "adicional3";$Nm_numeric[] = "resolucion";$Nm_numeric[] = "vendedor";$Nm_numeric[] = "usuario_crea";$Nm_numeric[] = "banco";$Nm_numeric[] = "dias_decredito";$Nm_numeric[] = "pedido";$Nm_numeric[] = "dircliente";$Nm_numeric[] = "id_clasificacion";$Nm_numeric[] = "tiene_nc";
       $campo_join = strtolower(str_replace(".", "_", $nome));
       if (in_array($campo_join, $Nm_numeric))
       {

@@ -38,18 +38,12 @@ class grid_compras_new_resumo
    var $quant_colunas;
    var $conv_col;
    var $count_ger;
-   var $sum_total;
-   var $sum_subtotal;
-   var $sum_valoriva;
    var $sum_a_pagar;
    var $sum_val_ica;
    var $sum_val_ret;
    var $sum_val_retiva;
    var $sc_proc_quebra_fechacom;
    var $count_fechacom;
-   var $sum_fechacom_total;
-   var $sum_fechacom_subtotal;
-   var $sum_fechacom_valoriva;
    var $sum_fechacom_a_pagar;
    var $sum_fechacom_val_ica;
    var $sum_fechacom_val_ret;
@@ -436,13 +430,10 @@ class grid_compras_new_resumo
       }
       $this->array_total_geral = array();
       $this->array_total_geral[0] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][1];
-      $this->array_total_geral[1] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][2];
-      $this->array_total_geral[2] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][7];
-      $this->array_total_geral[3] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][4];
-      $this->array_total_geral[4] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][6];
-      $this->array_total_geral[5] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][8];
-      $this->array_total_geral[6] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][3];
-      $this->array_total_geral[7] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][5];
+      $this->array_total_geral[1] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][4];
+      $this->array_total_geral[2] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][3];
+      $this->array_total_geral[3] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][5];
+      $this->array_total_geral[4] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][2];
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][1]) || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][1] == 0)
       {
           $this->NM_res_sem_reg = true;
@@ -627,9 +618,57 @@ class grid_compras_new_resumo
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['cod_cuenta'] = "Cod Cuenta"; 
        }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['excento']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['excento'] = "Excento"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['base_iva_19']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['base_iva_19'] = "Base Iva 19"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['valor_iva_19']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['valor_iva_19'] = "Valor Iva 19"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['base_iva_5']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['base_iva_5'] = "Base Iva 5"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['valor_iva_5']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['valor_iva_5'] = "Valor Iva 5"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['base_con_8']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['base_con_8'] = "Base Con 8"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['valor_con_8']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['valor_con_8'] = "Valor Con 8"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['t_iva']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['t_iva'] = "T Iva"; 
+       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['a_pagar']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['a_pagar'] = "Val a Pagar"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['devolucion']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['devolucion'] = "Devolución"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_ica']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_ica'] = "$ ReteICA"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_ret']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_ret'] = "$ Retención"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_retiva']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_retiva'] = "$ ReteIVA"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['base0']))
        {
@@ -643,10 +682,6 @@ class grid_compras_new_resumo
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['base5'] = "Base 5%"; 
        }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['devolucion']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['devolucion'] = "Devolución"; 
-       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['iva_0']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['iva_0'] = "IVA 0%"; 
@@ -658,18 +693,6 @@ class grid_compras_new_resumo
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['iva_5']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['iva_5'] = "IVA 5%"; 
-       }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_ica']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_ica'] = "$ ReteICA"; 
-       }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_ret']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_ret'] = "$ Retención"; 
-       }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_retiva']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['val_retiva'] = "$ ReteIVA"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['tasa']))
        {
@@ -685,13 +708,10 @@ class grid_compras_new_resumo
        //-----
        $this->comp_sum = array(
            2 => "" .  $this->Ini->Nm_lang['lang_btns_smry_msge_cnt'] . "",
-           3 => "Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-           4 => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-           5 => "Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-           6 => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-           7 => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-           8 => "Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
-           9 => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
+           3 => "Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
+           4 => "$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
+           5 => "$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
+           6 => "Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")",
        );
 
        //-----
@@ -701,9 +721,6 @@ class grid_compras_new_resumo
            4,
            5,
            6,
-           7,
-           8,
-           9,
        );
 
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['summarizing_fields_order']['fecha']))
@@ -725,9 +742,6 @@ class grid_compras_new_resumo
            4 => true,
            5 => true,
            6 => true,
-           7 => true,
-           8 => true,
-           9 => true,
        );
 
            foreach ($this->comp_sum as $i_sum => $l_sum)
@@ -761,9 +775,6 @@ class grid_compras_new_resumo
            0,
            0,
            0,
-           0,
-           0,
-           0,
        );
 
        //-----
@@ -773,52 +784,40 @@ class grid_compras_new_resumo
            4 => "S",
            5 => "S",
            6 => "S",
-           7 => "S",
-           8 => "S",
-           9 => "S",
        );
 
        //-----
        $this->comp_sum_lnk = array(
            2 => array('field' => "nm_count", 'show' => false),
-           3 => array('field' => "total", 'show' => true),
-           4 => array('field' => "val_ret", 'show' => true),
-           5 => array('field' => "valoriva", 'show' => true),
-           6 => array('field' => "val_ica", 'show' => true),
-           7 => array('field' => "val_retiva", 'show' => true),
-           8 => array('field' => "subtotal", 'show' => true),
-           9 => array('field' => "a_pagar", 'show' => true),
+           3 => array('field' => "val_ret", 'show' => true),
+           4 => array('field' => "val_ica", 'show' => true),
+           5 => array('field' => "val_retiva", 'show' => true),
+           6 => array('field' => "a_pagar", 'show' => true),
        );
 
        //-----
        $this->comp_sum_css = array(
            2 => "css___nm_count_nm___cnt",
-           3 => "css_total_sum",
-           4 => "css_val_ret_sum",
-           5 => "css_valoriva_sum",
-           6 => "css_val_ica_sum",
-           7 => "css_val_retiva_sum",
-           8 => "css_subtotal_sum",
-           9 => "css_a_pagar_sum",
+           3 => "css_val_ret_sum",
+           4 => "css_val_ica_sum",
+           5 => "css_val_retiva_sum",
+           6 => "css_a_pagar_sum",
        );
 
        //-----
        $this->comp_sum_nm = array(
            2 => "__nm_count_nm___cnt",
-           3 => "total_sum",
-           4 => "val_ret_sum",
-           5 => "valoriva_sum",
-           6 => "val_ica_sum",
-           7 => "val_retiva_sum",
-           8 => "subtotal_sum",
-           9 => "a_pagar_sum",
+           3 => "val_ret_sum",
+           4 => "val_ica_sum",
+           5 => "val_retiva_sum",
+           6 => "a_pagar_sum",
        );
 
        //-----
        foreach ($this->array_total_fechacom as $i_fechacom => $d_fechacom) {
            if (!in_array($i_fechacom, $this->comp_label[0], true)) {
-               $this->comp_index[0][ $d_fechacom[10] ] = $d_fechacom[9];
-               $this->comp_label[0][ $d_fechacom[10] ] = $d_fechacom[9];
+               $this->comp_index[0][ $d_fechacom[7] ] = $d_fechacom[6];
+               $this->comp_label[0][ $d_fechacom[7] ] = $d_fechacom[6];
            }
        }
 
@@ -2173,74 +2172,44 @@ class grid_compras_new_resumo
                'format'   => $this->formatChartValue(1),
            ),
            '0|2' => array(
-               'title'    => $this->getChartText(strip_tags("Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
+               'title'    => $this->getChartText(strip_tags("Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
                'show_sub' => true,
                'subtitle' => "",
                'field_x'  => 'fechacom',
                'field_y'  => $this->comp_sum_nm[3],
                'label_x'  => $this->getChartText(strip_tags($Lab_fechacom)),
-               'label_y'  => $this->getChartText(strip_tags("Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
+               'label_y'  => $this->getChartText(strip_tags("Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
                'format'   => $this->formatChartValue(2),
            ),
            '0|3' => array(
-               'title'    => $this->getChartText(strip_tags("Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
+               'title'    => $this->getChartText(strip_tags("$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
                'show_sub' => true,
                'subtitle' => "",
                'field_x'  => 'fechacom',
                'field_y'  => $this->comp_sum_nm[4],
                'label_x'  => $this->getChartText(strip_tags($Lab_fechacom)),
-               'label_y'  => $this->getChartText(strip_tags("Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
+               'label_y'  => $this->getChartText(strip_tags("$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
                'format'   => $this->formatChartValue(3),
            ),
            '0|4' => array(
-               'title'    => $this->getChartText(strip_tags("Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
+               'title'    => $this->getChartText(strip_tags("$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
                'show_sub' => true,
                'subtitle' => "",
                'field_x'  => 'fechacom',
                'field_y'  => $this->comp_sum_nm[5],
                'label_x'  => $this->getChartText(strip_tags($Lab_fechacom)),
-               'label_y'  => $this->getChartText(strip_tags("Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
+               'label_y'  => $this->getChartText(strip_tags("$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
                'format'   => $this->formatChartValue(4),
            ),
            '0|5' => array(
-               'title'    => $this->getChartText(strip_tags("$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
+               'title'    => $this->getChartText(strip_tags("Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
                'show_sub' => true,
                'subtitle' => "",
                'field_x'  => 'fechacom',
                'field_y'  => $this->comp_sum_nm[6],
                'label_x'  => $this->getChartText(strip_tags($Lab_fechacom)),
-               'label_y'  => $this->getChartText(strip_tags("$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
-               'format'   => $this->formatChartValue(5),
-           ),
-           '0|6' => array(
-               'title'    => $this->getChartText(strip_tags("$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
-               'show_sub' => true,
-               'subtitle' => "",
-               'field_x'  => 'fechacom',
-               'field_y'  => $this->comp_sum_nm[7],
-               'label_x'  => $this->getChartText(strip_tags($Lab_fechacom)),
-               'label_y'  => $this->getChartText(strip_tags("$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
-               'format'   => $this->formatChartValue(6),
-           ),
-           '0|7' => array(
-               'title'    => $this->getChartText(strip_tags("Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
-               'show_sub' => true,
-               'subtitle' => "",
-               'field_x'  => 'fechacom',
-               'field_y'  => $this->comp_sum_nm[8],
-               'label_x'  => $this->getChartText(strip_tags($Lab_fechacom)),
-               'label_y'  => $this->getChartText(strip_tags("Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
-               'format'   => $this->formatChartValue(7),
-           ),
-           '0|8' => array(
-               'title'    => $this->getChartText(strip_tags("Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
-               'show_sub' => true,
-               'subtitle' => "",
-               'field_x'  => 'fechacom',
-               'field_y'  => $this->comp_sum_nm[9],
-               'label_x'  => $this->getChartText(strip_tags($Lab_fechacom)),
                'label_y'  => $this->getChartText(strip_tags("Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")")),
-               'format'   => $this->formatChartValue(8),
+               'format'   => $this->formatChartValue(5),
            ),
            'T|1' => array(
                'title'    => $this->getChartText(""),
@@ -2281,30 +2250,6 @@ class grid_compras_new_resumo
                'label_x'  => $this->getChartText(""),
                'label_y'  => $this->getChartText(""),
                'format'   => $this->formatChartValue(5),
-           ),
-           'T|6' => array(
-               'title'    => $this->getChartText(""),
-               'show_sub' => true,
-               'subtitle' => "",
-               'label_x'  => $this->getChartText(""),
-               'label_y'  => $this->getChartText(""),
-               'format'   => $this->formatChartValue(6),
-           ),
-           'T|7' => array(
-               'title'    => $this->getChartText(""),
-               'show_sub' => true,
-               'subtitle' => "",
-               'label_x'  => $this->getChartText(""),
-               'label_y'  => $this->getChartText(""),
-               'format'   => $this->formatChartValue(7),
-           ),
-           'T|8' => array(
-               'title'    => $this->getChartText(""),
-               'show_sub' => true,
-               'subtitle' => "",
-               'label_x'  => $this->getChartText(""),
-               'label_y'  => $this->getChartText(""),
-               'format'   => $this->formatChartValue(8),
            ),
        );
 
@@ -2455,10 +2400,10 @@ class grid_compras_new_resumo
        if ($total == 2)
        {
            $arr_param = array(
-               'decimals'          => "2",
+               'decimals'          => "0",
                'decimalSeparator'  => "" . $_SESSION['scriptcase']['reg_conf']['dec_num'] . "",
                'thousandSeparator' => "" . $_SESSION['scriptcase']['reg_conf']['grup_num'] . "",
-               'trailingZeros'     => "2",
+               'trailingZeros'     => "0",
                'monetarySymbol'    => "" . $this->getChartText($_SESSION['scriptcase']['reg_conf']['monet_simb']) . "",
                'monetaryPosition'  => "" . (in_array($_SESSION['scriptcase']['reg_conf']['monet_f_pos'], array(1, 3)) ? 'left' : 'right') . "",
                'monetarySpace'     => "" . (in_array($_SESSION['scriptcase']['reg_conf']['monet_f_pos'], array(3, 4)) ? ' '    : ''     ) . "",
@@ -2501,54 +2446,6 @@ class grid_compras_new_resumo
            );
        }
        if ($total == 5)
-       {
-           $arr_param = array(
-               'decimals'          => "0",
-               'decimalSeparator'  => "" . $_SESSION['scriptcase']['reg_conf']['dec_num'] . "",
-               'thousandSeparator' => "" . $_SESSION['scriptcase']['reg_conf']['grup_num'] . "",
-               'trailingZeros'     => "0",
-               'monetarySymbol'    => "" . $this->getChartText($_SESSION['scriptcase']['reg_conf']['monet_simb']) . "",
-               'monetaryPosition'  => "" . (in_array($_SESSION['scriptcase']['reg_conf']['monet_f_pos'], array(1, 3)) ? 'left' : 'right') . "",
-               'monetarySpace'     => "" . (in_array($_SESSION['scriptcase']['reg_conf']['monet_f_pos'], array(3, 4)) ? ' '    : ''     ) . "",
-               'monetaryDecimal'   => "" . $_SESSION['scriptcase']['reg_conf']['dec_val'] . "",
-               'monetaryThousands' => "" . $_SESSION['scriptcase']['reg_conf']['grup_val'] . "",
-               'formatNumberScale' => "0",
-               'forceDecimals'     => "1",
-           );
-       }
-       if ($total == 6)
-       {
-           $arr_param = array(
-               'decimals'          => "0",
-               'decimalSeparator'  => "" . $_SESSION['scriptcase']['reg_conf']['dec_num'] . "",
-               'thousandSeparator' => "" . $_SESSION['scriptcase']['reg_conf']['grup_num'] . "",
-               'trailingZeros'     => "0",
-               'monetarySymbol'    => "" . $this->getChartText($_SESSION['scriptcase']['reg_conf']['monet_simb']) . "",
-               'monetaryPosition'  => "" . (in_array($_SESSION['scriptcase']['reg_conf']['monet_f_pos'], array(1, 3)) ? 'left' : 'right') . "",
-               'monetarySpace'     => "" . (in_array($_SESSION['scriptcase']['reg_conf']['monet_f_pos'], array(3, 4)) ? ' '    : ''     ) . "",
-               'monetaryDecimal'   => "" . $_SESSION['scriptcase']['reg_conf']['dec_val'] . "",
-               'monetaryThousands' => "" . $_SESSION['scriptcase']['reg_conf']['grup_val'] . "",
-               'formatNumberScale' => "0",
-               'forceDecimals'     => "1",
-           );
-       }
-       if ($total == 7)
-       {
-           $arr_param = array(
-               'decimals'          => "0",
-               'decimalSeparator'  => "" . $_SESSION['scriptcase']['reg_conf']['dec_num'] . "",
-               'thousandSeparator' => "" . $_SESSION['scriptcase']['reg_conf']['grup_num'] . "",
-               'trailingZeros'     => "0",
-               'monetarySymbol'    => "" . $this->getChartText($_SESSION['scriptcase']['reg_conf']['monet_simb']) . "",
-               'monetaryPosition'  => "" . (in_array($_SESSION['scriptcase']['reg_conf']['monet_f_pos'], array(1, 3)) ? 'left' : 'right') . "",
-               'monetarySpace'     => "" . (in_array($_SESSION['scriptcase']['reg_conf']['monet_f_pos'], array(3, 4)) ? ' '    : ''     ) . "",
-               'monetaryDecimal'   => "" . $_SESSION['scriptcase']['reg_conf']['dec_val'] . "",
-               'monetaryThousands' => "" . $_SESSION['scriptcase']['reg_conf']['grup_val'] . "",
-               'formatNumberScale' => "0",
-               'forceDecimals'     => "1",
-           );
-       }
-       if ($total == 8)
        {
            $arr_param = array(
                'decimals'          => "0",
@@ -3352,135 +3249,6 @@ if($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['proc_pdf'] 
            }
        }
 
-       if (6 == $col) {
-           $sortIconValue = $this->Ini->Label_summary_sort;
-           $sortOrder = 'a';
-           if (isset($this->comp_order_col) && $this->comp_order_col == $col + 1) {
-               if ($this->comp_order_sort == 'd') {
-                   $sortIconValue = $this->Ini->Label_summary_sort_desc;
-                   $sortOrder = '';
-               } else {
-                   $sortIconValue = $this->Ini->Label_summary_sort_asc;
-                   $sortOrder = 'd';
-               }
-           }
-           $linkIni = "<a href=\"javascript: changeSort(" . ($col + 1) . ", '" . $sortOrder . "', true)\" class=\"scGridLabelLink" . $css . "\">";
-           $linkEnd = "</a>";
-           $labelValue = nl2br($label);
-           $labelLink = $linkIni . $labelValue . $linkEnd;
-           $labelChart = $chartLeft ? $chartValue . $labelLink : $labelLink . $chartValue;
-           if (!$this->Ini->Export_html_zip) {
-               $sortIconLink = $linkIni . "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $sortIconValue . "\" BORDER=\"0\"/>" . $linkEnd;
-           } else {
-               $sortIconLink = $linkIni . "<IMG SRC=\"" . $sortIconValue . "\" BORDER=\"0\"/>" . $linkEnd;
-           }
-           if (empty($this->Ini->Label_summary_sort_pos) || $this->Ini->Label_summary_sort_pos == "right") {
-               $this->Ini->Label_summary_sort_pos = "right_field";
-           }
-           if (empty($sortIconValue)) {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
-               return $labelChart;
-           } elseif ($this->Ini->Label_summary_sort_pos == "right_field") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
-               return $labelChart . $sortIconLink;
-           } elseif ($this->Ini->Label_summary_sort_pos == "left_field") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
-               return $sortIconLink . $labelChart;
-           } elseif ($this->Ini->Label_summary_sort_pos == "right_cell") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: space-between' : 'justify-content: right';
-               return '<span>' . $labelChart . '</span>' . $sortIconLink;
-           } elseif ($this->Ini->Label_summary_sort_pos == "left_cell") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: space-between';
-               return $sortIconLink . '<span>' . $labelChart . '</span>';
-           }
-       }
-
-       if (7 == $col) {
-           $sortIconValue = $this->Ini->Label_summary_sort;
-           $sortOrder = 'a';
-           if (isset($this->comp_order_col) && $this->comp_order_col == $col + 1) {
-               if ($this->comp_order_sort == 'd') {
-                   $sortIconValue = $this->Ini->Label_summary_sort_desc;
-                   $sortOrder = '';
-               } else {
-                   $sortIconValue = $this->Ini->Label_summary_sort_asc;
-                   $sortOrder = 'd';
-               }
-           }
-           $linkIni = "<a href=\"javascript: changeSort(" . ($col + 1) . ", '" . $sortOrder . "', true)\" class=\"scGridLabelLink" . $css . "\">";
-           $linkEnd = "</a>";
-           $labelValue = nl2br($label);
-           $labelLink = $linkIni . $labelValue . $linkEnd;
-           $labelChart = $chartLeft ? $chartValue . $labelLink : $labelLink . $chartValue;
-           if (!$this->Ini->Export_html_zip) {
-               $sortIconLink = $linkIni . "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $sortIconValue . "\" BORDER=\"0\"/>" . $linkEnd;
-           } else {
-               $sortIconLink = $linkIni . "<IMG SRC=\"" . $sortIconValue . "\" BORDER=\"0\"/>" . $linkEnd;
-           }
-           if (empty($this->Ini->Label_summary_sort_pos) || $this->Ini->Label_summary_sort_pos == "right") {
-               $this->Ini->Label_summary_sort_pos = "right_field";
-           }
-           if (empty($sortIconValue)) {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
-               return $labelChart;
-           } elseif ($this->Ini->Label_summary_sort_pos == "right_field") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
-               return $labelChart . $sortIconLink;
-           } elseif ($this->Ini->Label_summary_sort_pos == "left_field") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
-               return $sortIconLink . $labelChart;
-           } elseif ($this->Ini->Label_summary_sort_pos == "right_cell") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: space-between' : 'justify-content: right';
-               return '<span>' . $labelChart . '</span>' . $sortIconLink;
-           } elseif ($this->Ini->Label_summary_sort_pos == "left_cell") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: space-between';
-               return $sortIconLink . '<span>' . $labelChart . '</span>';
-           }
-       }
-
-       if (8 == $col) {
-           $sortIconValue = $this->Ini->Label_summary_sort;
-           $sortOrder = 'a';
-           if (isset($this->comp_order_col) && $this->comp_order_col == $col + 1) {
-               if ($this->comp_order_sort == 'd') {
-                   $sortIconValue = $this->Ini->Label_summary_sort_desc;
-                   $sortOrder = '';
-               } else {
-                   $sortIconValue = $this->Ini->Label_summary_sort_asc;
-                   $sortOrder = 'd';
-               }
-           }
-           $linkIni = "<a href=\"javascript: changeSort(" . ($col + 1) . ", '" . $sortOrder . "', true)\" class=\"scGridLabelLink" . $css . "\">";
-           $linkEnd = "</a>";
-           $labelValue = nl2br($label);
-           $labelLink = $linkIni . $labelValue . $linkEnd;
-           $labelChart = $chartLeft ? $chartValue . $labelLink : $labelLink . $chartValue;
-           if (!$this->Ini->Export_html_zip) {
-               $sortIconLink = $linkIni . "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $sortIconValue . "\" BORDER=\"0\"/>" . $linkEnd;
-           } else {
-               $sortIconLink = $linkIni . "<IMG SRC=\"" . $sortIconValue . "\" BORDER=\"0\"/>" . $linkEnd;
-           }
-           if (empty($this->Ini->Label_summary_sort_pos) || $this->Ini->Label_summary_sort_pos == "right") {
-               $this->Ini->Label_summary_sort_pos = "right_field";
-           }
-           if (empty($sortIconValue)) {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
-               return $labelChart;
-           } elseif ($this->Ini->Label_summary_sort_pos == "right_field") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
-               return $labelChart . $sortIconLink;
-           } elseif ($this->Ini->Label_summary_sort_pos == "left_field") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
-               return $sortIconLink . $labelChart;
-           } elseif ($this->Ini->Label_summary_sort_pos == "right_cell") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: space-between' : 'justify-content: right';
-               return '<span>' . $labelChart . '</span>' . $sortIconLink;
-           } elseif ($this->Ini->Label_summary_sort_pos == "left_cell") {
-               $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: space-between';
-               return $sortIconLink . '<span>' . $labelChart . '</span>';
-           }
-       }
-
        $tdStyleTags[] = $labelLeft ? 'justify-content: left' : 'justify-content: right';
        return $chartLeft ? $chartValue . $label : $label . $chartValue;
    }
@@ -3494,7 +3262,7 @@ if($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['proc_pdf'] 
        }
        if ($total == 2)
        {
-           nmgp_Form_Num_Val($valor_campo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "2", "S", "", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']);
+           nmgp_Form_Num_Val($valor_campo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']);
        }
        if ($total == 3)
        {
@@ -3505,18 +3273,6 @@ if($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['proc_pdf'] 
            nmgp_Form_Num_Val($valor_campo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']);
        }
        if ($total == 5)
-       {
-           nmgp_Form_Num_Val($valor_campo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']);
-       }
-       if ($total == 6)
-       {
-           nmgp_Form_Num_Val($valor_campo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']);
-       }
-       if ($total == 7)
-       {
-           nmgp_Form_Num_Val($valor_campo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']);
-       }
-       if ($total == 8)
        {
            nmgp_Form_Num_Val($valor_campo, $_SESSION['scriptcase']['reg_conf']['grup_val'], $_SESSION['scriptcase']['reg_conf']['dec_val'], "0", "S", "", $_SESSION['scriptcase']['reg_conf']['monet_simb'], "V:" . $_SESSION['scriptcase']['reg_conf']['monet_f_pos'] . ":" . $_SESSION['scriptcase']['reg_conf']['monet_f_neg'], $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['unid_mont_group_digit']);
        }
@@ -5790,59 +5546,47 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['doc_word'
    }
 
    //---- 
-   function adiciona_registro($sum_total, $sum_subtotal, $sum_valoriva, $sum_a_pagar, $sum_val_ica, $sum_val_ret, $sum_val_retiva, $quebra_fechacom, $quebra_fechacom_orig)
+   function adiciona_registro($sum_a_pagar, $sum_val_ica, $sum_val_ret, $sum_val_retiva, $quebra_fechacom, $quebra_fechacom_orig)
    {
       //----- " . $this->Ini->Nm_lang['lang_othr_cons_title_YYYYMMDD2'] . "
       if (!isset($this->array_total_fechacom[$quebra_fechacom_orig]))
       {
          $this->array_total_fechacom[$quebra_fechacom_orig][0] = 1;
-         $this->array_total_fechacom[$quebra_fechacom_orig][1] = $sum_total;
-         $this->array_total_fechacom[$quebra_fechacom_orig][2] = $sum_subtotal;
-         $this->array_total_fechacom[$quebra_fechacom_orig][3] = $sum_valoriva;
-         $this->array_total_fechacom[$quebra_fechacom_orig][4] = $sum_a_pagar;
-         $this->array_total_fechacom[$quebra_fechacom_orig][5] = $sum_val_ica;
-         $this->array_total_fechacom[$quebra_fechacom_orig][6] = $sum_val_ret;
-         $this->array_total_fechacom[$quebra_fechacom_orig][7] = $sum_val_retiva;
-         $this->array_total_fechacom[$quebra_fechacom_orig][8] = 1;
-         $this->array_total_fechacom[$quebra_fechacom_orig][9] = $quebra_fechacom;
-         $this->array_total_fechacom[$quebra_fechacom_orig][10] = $quebra_fechacom_orig;
+         $this->array_total_fechacom[$quebra_fechacom_orig][1] = $sum_a_pagar;
+         $this->array_total_fechacom[$quebra_fechacom_orig][2] = $sum_val_ica;
+         $this->array_total_fechacom[$quebra_fechacom_orig][3] = $sum_val_ret;
+         $this->array_total_fechacom[$quebra_fechacom_orig][4] = $sum_val_retiva;
+         $this->array_total_fechacom[$quebra_fechacom_orig][5] = 1;
+         $this->array_total_fechacom[$quebra_fechacom_orig][6] = $quebra_fechacom;
+         $this->array_total_fechacom[$quebra_fechacom_orig][7] = $quebra_fechacom_orig;
       }
       else
       {
          $this->array_total_fechacom[$quebra_fechacom_orig][0]++;
-         $this->array_total_fechacom[$quebra_fechacom_orig][1] += $sum_total;
-         $this->array_total_fechacom[$quebra_fechacom_orig][2] += $sum_subtotal;
-         $this->array_total_fechacom[$quebra_fechacom_orig][3] += $sum_valoriva;
-         $this->array_total_fechacom[$quebra_fechacom_orig][4] += $sum_a_pagar;
-         $this->array_total_fechacom[$quebra_fechacom_orig][5] += $sum_val_ica;
-         $this->array_total_fechacom[$quebra_fechacom_orig][6] += $sum_val_ret;
-         $this->array_total_fechacom[$quebra_fechacom_orig][7] += $sum_val_retiva;
-         $this->array_total_fechacom[$quebra_fechacom_orig][8]++;
+         $this->array_total_fechacom[$quebra_fechacom_orig][1] += $sum_a_pagar;
+         $this->array_total_fechacom[$quebra_fechacom_orig][2] += $sum_val_ica;
+         $this->array_total_fechacom[$quebra_fechacom_orig][3] += $sum_val_ret;
+         $this->array_total_fechacom[$quebra_fechacom_orig][4] += $sum_val_retiva;
+         $this->array_total_fechacom[$quebra_fechacom_orig][5]++;
       }
       //----- Total
       if (empty($this->array_total_geral))
       {
          $this->array_total_geral[0] = 1;
-         $this->array_total_geral[1] = $sum_total;
-         $this->array_total_geral[2] = $sum_subtotal;
-         $this->array_total_geral[3] = $sum_valoriva;
-         $this->array_total_geral[4] = $sum_a_pagar;
-         $this->array_total_geral[5] = $sum_val_ica;
-         $this->array_total_geral[6] = $sum_val_ret;
-         $this->array_total_geral[7] = $sum_val_retiva;
-         $this->array_total_geral[8] = 1;
+         $this->array_total_geral[1] = $sum_a_pagar;
+         $this->array_total_geral[2] = $sum_val_ica;
+         $this->array_total_geral[3] = $sum_val_ret;
+         $this->array_total_geral[4] = $sum_val_retiva;
+         $this->array_total_geral[5] = 1;
       }
       else
       {
          $this->array_total_geral[0]++;
-         $this->array_total_geral[1] += $sum_total;
-         $this->array_total_geral[2] += $sum_subtotal;
-         $this->array_total_geral[3] += $sum_valoriva;
-         $this->array_total_geral[4] += $sum_a_pagar;
-         $this->array_total_geral[5] += $sum_val_ica;
-         $this->array_total_geral[6] += $sum_val_ret;
-         $this->array_total_geral[7] += $sum_val_retiva;
-         $this->array_total_geral[8]++;
+         $this->array_total_geral[1] += $sum_a_pagar;
+         $this->array_total_geral[2] += $sum_val_ica;
+         $this->array_total_geral[3] += $sum_val_ret;
+         $this->array_total_geral[4] += $sum_val_retiva;
+         $this->array_total_geral[5]++;
       }
    }
 
@@ -5851,14 +5595,11 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['doc_word'
    {
       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['arr_total']['fechacom'] as $campo_fechacom => $dados_fechacom)
       {
-         $this->array_total_fechacom[$campo_fechacom][2] = $dados_fechacom[1];
-         $this->array_total_fechacom[$campo_fechacom][7] = $dados_fechacom[2];
-         $this->array_total_fechacom[$campo_fechacom][4] = $dados_fechacom[3];
-         $this->array_total_fechacom[$campo_fechacom][8] = $dados_fechacom[4];
-         $this->array_total_fechacom[$campo_fechacom][5] = $dados_fechacom[5];
-         $this->array_total_fechacom[$campo_fechacom][3] = $dados_fechacom[6];
-         $this->array_total_fechacom[$campo_fechacom][6] = $dados_fechacom[7];
-         $this->array_total_fechacom[$campo_fechacom][1] = $dados_fechacom[8];
+         $this->array_total_fechacom[$campo_fechacom][5] = $dados_fechacom[1];
+         $this->array_total_fechacom[$campo_fechacom][3] = $dados_fechacom[2];
+         $this->array_total_fechacom[$campo_fechacom][2] = $dados_fechacom[3];
+         $this->array_total_fechacom[$campo_fechacom][4] = $dados_fechacom[4];
+         $this->array_total_fechacom[$campo_fechacom][1] = $dados_fechacom[5];
       }
    }
    //---- 
@@ -5930,19 +5671,19 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['doc_word'
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ""; 
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
      { 
-         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, str_replace (convert(char(10),fechacom,102), '.', '-') + ' ' + convert(char(8),fechacom,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, str_replace (convert(char(10),fechacom,102), '.', '-') + ' ' + convert(char(8),fechacom,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta, excento, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, base_con_8, valor_con_8, t_iva from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
      { 
-         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, fechacom, fechavenc, pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, fechacom, fechavenc, pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta, excento, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, base_con_8, valor_con_8, t_iva from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      { 
-         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, convert(char(23),fechacom,121), convert(char(23),fechavenc,121), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, convert(char(23),fechacom,121), convert(char(23),fechavenc,121), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta, excento, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, base_con_8, valor_con_8, t_iva from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp"; 
      } 
      else 
      { 
-         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, fechacom, fechavenc, pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, fechacom, fechavenc, pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta, excento, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, base_con_8, valor_con_8, t_iva from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp"; 
      } 
      $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['where_pesq']; 
      $campos_order = "";
@@ -6031,6 +5772,22 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['doc_word'
             $this->reteica = $rs_res->fields[18] ;  
             $this->reteiva = $rs_res->fields[19] ;  
             $this->cod_cuenta = $rs_res->fields[20] ;  
+            $this->excento = $rs_res->fields[21] ;  
+            $this->excento =  str_replace(",", ".", $this->excento);
+            $this->base_iva_19 = $rs_res->fields[22] ;  
+            $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
+            $this->valor_iva_19 = $rs_res->fields[23] ;  
+            $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
+            $this->base_iva_5 = $rs_res->fields[24] ;  
+            $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
+            $this->valor_iva_5 = $rs_res->fields[25] ;  
+            $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
+            $this->base_con_8 = $rs_res->fields[26] ;  
+            $this->base_con_8 =  str_replace(",", ".", $this->base_con_8);
+            $this->valor_con_8 = $rs_res->fields[27] ;  
+            $this->valor_con_8 =  str_replace(",", ".", $this->valor_con_8);
+            $this->t_iva = $rs_res->fields[28] ;  
+            $this->t_iva =  str_replace(",", ".", $this->t_iva);
             $this->look_idprov = $this->idprov; 
             $this->Lookup->lookup_idprov($this->look_idprov) ; 
             $this->look_asentada = $this->asentada; 
@@ -6236,11 +5993,10 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
             $this->fechacom = $this->Ini->GB_date_format($TP_Time . $this->fechacom, $Format_tst, $Prefix_dat);
             $this->idprov = $this->look_idprov ;
             $this->asentada = $this->look_asentada ;
-            nmgp_Form_Num_Val($this->total, "", "", "", "", "", "", "V::", "") ; 
             nmgp_Form_Num_Val($this->asentada, "", "", "0", "", "", "", "N:", "") ; 
             if ($nm_tipo == "resumo")
             {
-                $this->adiciona_registro($this->total, $this->subtotal, $this->valoriva, $this->a_pagar, $this->val_ica, $this->val_ret, $this->val_retiva, $this->fechacom, $this->fechacom_orig);
+                $this->adiciona_registro($this->a_pagar, $this->val_ica, $this->val_ret, $this->val_retiva, $this->fechacom, $this->fechacom_orig);
             }
    }
 //
@@ -6371,23 +6127,23 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
       //----- 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, str_replace (convert(char(10),fechacom,102), '.', '-') + ' ' + convert(char(8),fechacom,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, str_replace (convert(char(10),fechacom,102), '.', '-') + ' ' + convert(char(8),fechacom,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta, excento, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, base_con_8, valor_con_8, t_iva from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, convert(char(23),fechacom,121), convert(char(23),fechavenc,121), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, convert(char(23),fechacom,121), convert(char(23),fechavenc,121), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta, excento, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, base_con_8, valor_con_8, t_iva from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, fechacom, fechavenc, pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, fechacom, fechavenc, pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta, excento, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, base_con_8, valor_con_8, t_iva from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, EXTEND(fechacom, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, EXTEND(fechacom, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta, excento, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, base_con_8, valor_con_8, t_iva from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp"; 
       } 
       else 
       { 
-         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, fechacom, fechavenc, pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta from " . $this->Ini->nm_tabela; 
+         $nmgp_select = "SELECT tipo_com, prefijo_com, numero_com, numfacom, formapago, fechacom, fechavenc, pagada, idprov, total, asentada, idfaccom, subtotal, valoriva, observaciones, saldo, id_pedidocom, retencion, reteica, reteiva, cod_cuenta, excento, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, base_con_8, valor_con_8, t_iva from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['where_pesq'] ; 
    $nmgp_order_by = ""; 
@@ -6487,11 +6243,34 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $this->reteiva = $this->rs_grid->fields[19] ;  
          $this->reteiva = (string)$this->reteiva;  
          $this->cod_cuenta = $this->rs_grid->fields[20] ;  
+         $this->rs_grid->fields[21] =  str_replace(",", ".", $this->rs_grid->fields[21]);  
+         $this->excento = $this->rs_grid->fields[21] ;  
+         $this->excento = (string)$this->excento;  
+         $this->rs_grid->fields[22] =  str_replace(",", ".", $this->rs_grid->fields[22]);  
+         $this->base_iva_19 = $this->rs_grid->fields[22] ;  
+         $this->base_iva_19 = (string)$this->base_iva_19;  
+         $this->rs_grid->fields[23] =  str_replace(",", ".", $this->rs_grid->fields[23]);  
+         $this->valor_iva_19 = $this->rs_grid->fields[23] ;  
+         $this->valor_iva_19 = (string)$this->valor_iva_19;  
+         $this->rs_grid->fields[24] =  str_replace(",", ".", $this->rs_grid->fields[24]);  
+         $this->base_iva_5 = $this->rs_grid->fields[24] ;  
+         $this->base_iva_5 = (string)$this->base_iva_5;  
+         $this->rs_grid->fields[25] =  str_replace(",", ".", $this->rs_grid->fields[25]);  
+         $this->valor_iva_5 = $this->rs_grid->fields[25] ;  
+         $this->valor_iva_5 = (string)$this->valor_iva_5;  
+         $this->rs_grid->fields[26] =  str_replace(",", ".", $this->rs_grid->fields[26]);  
+         $this->base_con_8 = $this->rs_grid->fields[26] ;  
+         $this->base_con_8 = (string)$this->base_con_8;  
+         $this->rs_grid->fields[27] =  str_replace(",", ".", $this->rs_grid->fields[27]);  
+         $this->valor_con_8 = $this->rs_grid->fields[27] ;  
+         $this->valor_con_8 = (string)$this->valor_con_8;  
+         $this->rs_grid->fields[28] =  str_replace(",", ".", $this->rs_grid->fields[28]);  
+         $this->t_iva = $this->rs_grid->fields[28] ;  
+         $this->t_iva = (string)$this->t_iva;  
          $Format_tst = $this->Ini->Get_Gb_date_format('fecha', 'fechacom');
          $fechacom_SV = $this->fechacom;
          $this->fechacom = $this->Ini->Get_arg_groupby($this->fechacom, $Format_tst);
          $idprov_orig = $this->idprov;
-         $total_orig = $this->total;
          $fechacom_orig = $this->fechacom;
          $pagada_orig = $this->pagada;
          $asentada_orig = $this->asentada;
@@ -6696,7 +6475,6 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $this->arg_sum_fechacom = " = " . $this->Db->qstr($this->fechacom);
          $this->arg_sum_pagada = " = " . $this->Db->qstr($this->pagada);
          $this->arg_sum_idprov = " = " . $this->idprov;
-         $this->arg_sum_total = " = " . $this->total;
          $this->arg_sum_asentada = " = " . $this->asentada;
          $this->Lookup->lookup_idprov($this->idprov) ; 
          $this->Lookup->lookup_asentada($this->asentada); 
@@ -6714,11 +6492,9 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
      $Prefix_dat = $this->Ini->Get_Gb_prefix_date_format('fecha', 'fechacom');
      $TP_Time    = (in_array('fechacom', $this->Ini->Cmp_Sql_Time)) ? "0000-00-00 " : "";
      $this->fechacom = $this->Ini->GB_date_format($TP_Time . $fechacom_SV, $Format_tst, $Prefix_dat); 
-         $this->GB_total = $this->total;
-         nmgp_Form_Num_Val($this->GB_total, "", "", "", "", "", "", "V::", "") ; 
          $this->GB_asentada = $this->asentada;
          nmgp_Form_Num_Val($this->GB_asentada, "", "", "0", "", "", "", "N:", "") ; 
-         $this->adiciona_registro(NM_encode_input(sc_strip_script($this->total)), NM_encode_input(sc_strip_script($this->subtotal)), NM_encode_input(sc_strip_script($this->valoriva)), NM_encode_input(sc_strip_script($this->a_pagar)), NM_encode_input(sc_strip_script($this->val_ica)), NM_encode_input(sc_strip_script($this->val_ret)), NM_encode_input(sc_strip_script($this->val_retiva)), NM_encode_input(sc_strip_script($this->fechacom)), NM_encode_input(sc_strip_script($fechacom_orig)));
+         $this->adiciona_registro(NM_encode_input(sc_strip_script($this->a_pagar)), NM_encode_input(sc_strip_script($this->val_ica)), NM_encode_input(sc_strip_script($this->val_ret)), NM_encode_input(sc_strip_script($this->val_retiva)), NM_encode_input(sc_strip_script($this->fechacom)), NM_encode_input(sc_strip_script($fechacom_orig)));
          $this->rs_grid->MoveNext();
       }
       $this->finaliza_arrays();
@@ -6727,9 +6503,6 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][3] = $this->array_total_geral[2];
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][4] = $this->array_total_geral[3];
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][5] = $this->array_total_geral[4];
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][6] = $this->array_total_geral[5];
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][7] = $this->array_total_geral[6];
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][8] = $this->array_total_geral[7];
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['contr_array_resumo'] = "OK";
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][0] = "Total compras";
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['tot_geral'][1] = $this->array_total_geral[0];

@@ -701,6 +701,15 @@ class fac_compras_new_mob_apl
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
       $this->Db = $this->Ini->Db; 
+      if ($this->NM_ajax_flag && (!isset($this->NM_ajax_info['param']['buffer_output']) || !$this->NM_ajax_info['param']['buffer_output'] || 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9)))
+      {
+      $this->Db->debug = false;
+      }
+      $this->nm_new_label['fechacom'] = 'FECHA COMPRA:';
+      $this->nm_new_label['total'] = 'COSTO TOTAL COMPRA:';
+      $this->nm_new_label['asentada'] = 'ASENTAR COMPRA:';
+      $this->nm_new_label['numfacom'] = 'REFERENCIA  DE LA COMPRA:';
+
       $this->Ini->str_google_fonts = isset($str_google_fonts)?$str_google_fonts:'';
       $this->Ini->Img_sep_form    = "/" . trim($str_toolbar_separator);
       $this->Ini->Color_bg_ajax   = "" == trim($str_ajax_bg)         ? "#000" : $str_ajax_bg;
@@ -1660,6 +1669,10 @@ class fac_compras_new_mob_apl
           {
               $this->hdetalle_onFocus();
           }
+          if ('event_id_comafec_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->id_comafec_onChange();
+          }
           if ('event_id_pedidocom_onchange' == $this->NM_ajax_opcao)
           {
               $this->id_pedidocom_onChange();
@@ -2339,7 +2352,7 @@ if ($this->total <>0)
   $this->NM_ajax_info['errList'][$sErrorIndex][] = "";
  }
 ;
-	echo "<script>alertify.alert('Alerta', '¡Compra Tiene Items asociados, por favor elimine datalle primero!', function(){ window.location.href='../grid_compras'; });</script>";
+	echo "<script>alertify.alert('Alerta', '¡Compra Tiene Items asociados, por favor elimine datalle primero!', function(){ window.location.href='../grid_compras_new'; });</script>";
 	}
 else
 	{
@@ -2432,7 +2445,7 @@ else
          $rf->Close();
       ;
 	
-	echo "<script>alertify.alert('Alerta', '¡Compra eliminada con éxito!', function(){ window.location.href='../grid_compras'; });</script>";
+	echo "<script>alertify.alert('Alerta', '¡Compra eliminada con éxito!', function(){ window.location.href='../grid_compras_new'; });</script>";
 	}
 if (isset($this->sc_temp_gidtercero)) { $_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off'; 
@@ -7071,7 +7084,9 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     $original_id_pedidocom = $this->id_pedidocom;
     $original_idfaccom = $this->idfaccom;
     $original_numfacom = $this->numfacom;
+    $original_pagada = $this->pagada;
     $original_prefijo_delpedido = $this->prefijo_delpedido;
+    $original_saldo = $this->saldo;
     $original_tipo_com = $this->tipo_com;
 }
 if (!isset($this->sc_temp_par_idfaccom)) {$this->sc_temp_par_idfaccom = (isset($_SESSION['par_idfaccom'])) ? $_SESSION['par_idfaccom'] : "";}
@@ -7294,6 +7309,33 @@ else
 		$this->nmgp_cmp_hidden["id_pedidocom"] = "off"; $this->NM_ajax_info['fieldDisplay']['id_pedidocom'] = 'off';
 		}
 	}
+
+if($this->tipo_com =='NC' or $this->tipo_com =='ND')
+	{
+	$this->nmgp_cmp_hidden["saldo"] = "off"; $this->NM_ajax_info['fieldDisplay']['saldo'] = 'off';
+	$this->nmgp_cmp_hidden["pagada"] = "off"; $this->NM_ajax_info['fieldDisplay']['pagada'] = 'off';
+	$sc_tmp_field_name = 'fechacom';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="FECHA DE LA NOTA:";
+	$sc_tmp_field_name = 'total';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="COSTO TOTAL:";
+	$sc_tmp_field_name = 'asentada';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="ASENTAR NOTA:";
+	$sc_tmp_field_name = 'numfacom';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="REFERENCIA DE LA NOTA:";
+	}
+else
+	{
+	$this->nmgp_cmp_hidden["saldo"] = "on"; $this->NM_ajax_info['fieldDisplay']['saldo'] = 'on';
+	$this->nmgp_cmp_hidden["pagada"] = "on"; $this->NM_ajax_info['fieldDisplay']['pagada'] = 'on';
+	$sc_tmp_field_name = 'fechacom';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="FECHA DE LA COMPRA:";
+	$sc_tmp_field_name = 'total';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="COSTO TOTAL DE LA COMPRA:";
+	$sc_tmp_field_name = 'asentada';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="ASENTAR COMPRA:";
+	$sc_tmp_field_name = 'numfacom';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="REFERENCIA DE LA COMPRA:";
+	}
 if (isset($this->sc_temp_par_idfaccom)) { $_SESSION['par_idfaccom'] = $this->sc_temp_par_idfaccom;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
@@ -7329,9 +7371,17 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     {
         $this->ajax_return_values_numfacom(true);
     }
+    if (($original_pagada != $this->pagada || (isset($bFlagRead_pagada) && $bFlagRead_pagada)))
+    {
+        $this->ajax_return_values_pagada(true);
+    }
     if (($original_prefijo_delpedido != $this->prefijo_delpedido || (isset($bFlagRead_prefijo_delpedido) && $bFlagRead_prefijo_delpedido)))
     {
         $this->ajax_return_values_prefijo_delpedido(true);
+    }
+    if (($original_saldo != $this->saldo || (isset($bFlagRead_saldo) && $bFlagRead_saldo)))
+    {
+        $this->ajax_return_values_saldo(true);
     }
     if (($original_tipo_com != $this->tipo_com || (isset($bFlagRead_tipo_com) && $bFlagRead_tipo_com)))
     {
@@ -8835,10 +8885,15 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_fechacom = $this->fechacom;
+    $original_id_comafec = $this->id_comafec;
     $original_id_pedidocom = $this->id_pedidocom;
     $original_idfaccom = $this->idfaccom;
     $original_idprov = $this->idprov;
     $original_numfacom = $this->numfacom;
+    $original_subtotal = $this->subtotal;
+    $original_tipo_com = $this->tipo_com;
+    $original_total = $this->total;
+    $original_valoriva = $this->valoriva;
 }
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
   
@@ -9162,13 +9217,188 @@ $existencia=substr($this->das , 8);
 		{
 		$this->nm_mens_alert[] = "¡Pedido no tiene detalle!"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("¡Pedido no tiene detalle!"); }}
 	}
-$this->sc_set_focus('hdetalle');
+
+if($this->tipo_com =='NC')
+	{
+	$idproducto=0;
+	$bod=0;
+	$cantidad=0;
+	$vunit=0;
+	$vparcial=0;
+	$iva=0;
+	$desc=0;
+	$tiva=0;
+	$tdes=0;
+	$pdec=0;
+	$ti_doc='NC';
+	$to_tra='DEV';
+	$id_nta=$this->idfaccom ;
+	
+	$sql_det = "SELECT  idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, porc_desc FROM detallecompra WHERE idfaccom = '".$this->id_comafec ."'";
+	 
+      $nm_select = $sql_det; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_det = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_det[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_det = false;
+          $this->ds_det_erro = $this->Db->ErrorMsg();
+      } 
+;
+	
+	if(isset($this->ds_det[0][0]))
+		{
+		$j = 0;
+		foreach($this->ds_det  as $det)
+			{
+			$j = $j+1;
+			
+			$idproducto.= $det[0];
+			$bod.=		  $det[1];
+			$cantidad.=   $det[2];
+			$vunit.=	  $det[3];
+			$vparcial.=	  $det[4];
+			$iva.=		  $det[5];
+			$desc.=		  $det[6];
+			$tiva.=		  $det[7];
+			$tdes.=		  $det[8];
+			$pdec.=		  $det[9];
+			
+			
+     $nm_select ="insert detallecompra set idfaccom='".$id_nta."', idpro='".$idproducto."', idbod='".$bod."', cantidad='".$cantidad."', valorunit='".$vunit."', valorpar='".$vparcial."', iva='".$iva."', descuento='".$desc."', tasaiva='".$tiva."', tasadesc='".$tdes."', tipo_docu='".$ti_doc."', tipo_trans='".$to_tra."', id_nota='".$id_nta."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ; 
+			
+			$idproducto =0;
+			$bod		=0;
+			$cantidad	=0;
+			$vunit		=0;
+			$vparcial	=0;
+			$iva		=0;
+			$desc		=0;
+			$tiva		=0;
+			$tdes		=0;
+			$pdec		=0;
+			}
+		echo $sql_tot="SELECT sum(valorpar), sum(iva) FROM detallecompra WHERE idfaccom = '".$this->idfaccom ."' ";
+		 
+      $nm_select = $sql_tot; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_tot = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_tot[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_tot = false;
+          $this->ds_tot_erro = $this->Db->ErrorMsg();
+      } 
+;
+		if(isset($this->ds_tot[0][0]))
+			{echo "Unooooo";
+			$stotal=$this->ds_tot[0][0];
+			$siva=$this->ds_tot[0][1];
+			$tota=$stotal+$siva;
+			$this->total  = $tota;
+			$this->subtotal  = $stotal;
+			$this->valoriva  = $siva;
+			}
+		if(isset($this->ds_tot[0][0]))
+			{echo "<br>Uno.Dossssssss";
+			echo $sqlupd = "UPDATE facturacom SET subtotal='".$stotal."', valoriva='".$siva."', total='".$tota."', saldo=0 WHERE idfaccom='".$this->idfaccom ."'";
+			
+     $nm_select = $sqlupd; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			}
+		else
+			{echo "<br>Tresssssss";
+			$sqlupd = "UPDATE facturacom SET subtotal=0, valoriva=0, total=0, saldo=0 WHERE idfaccom = '".$this->idfaccom ."'";
+			
+     $nm_select = $sqlupd; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+			}
+		}
+	}
 if (isset($this->sc_temp_gidtercero)) { $_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     if (($original_fechacom != $this->fechacom || (isset($bFlagRead_fechacom) && $bFlagRead_fechacom)))
     {
         $this->ajax_return_values_fechacom(true);
+    }
+    if (($original_id_comafec != $this->id_comafec || (isset($bFlagRead_id_comafec) && $bFlagRead_id_comafec)))
+    {
+        $this->ajax_return_values_id_comafec(true);
     }
     if (($original_id_pedidocom != $this->id_pedidocom || (isset($bFlagRead_id_pedidocom) && $bFlagRead_id_pedidocom)))
     {
@@ -9185,6 +9415,22 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     if (($original_numfacom != $this->numfacom || (isset($bFlagRead_numfacom) && $bFlagRead_numfacom)))
     {
         $this->ajax_return_values_numfacom(true);
+    }
+    if (($original_subtotal != $this->subtotal || (isset($bFlagRead_subtotal) && $bFlagRead_subtotal)))
+    {
+        $this->ajax_return_values_subtotal(true);
+    }
+    if (($original_tipo_com != $this->tipo_com || (isset($bFlagRead_tipo_com) && $bFlagRead_tipo_com)))
+    {
+        $this->ajax_return_values_tipo_com(true);
+    }
+    if (($original_total != $this->total || (isset($bFlagRead_total) && $bFlagRead_total)))
+    {
+        $this->ajax_return_values_total(true);
+    }
+    if (($original_valoriva != $this->valoriva || (isset($bFlagRead_valoriva) && $bFlagRead_valoriva)))
+    {
+        $this->ajax_return_values_valoriva(true);
     }
 }
 $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off'; 
@@ -10145,6 +10391,7 @@ $original_subtotal = $this->subtotal;
 $original_valoriva = $this->valoriva;
 $original_cod_cuenta = $this->cod_cuenta;
 $original_asentada = $this->asentada;
+$original_tipo_com = $this->tipo_com;
 $original_idfaccom = $this->idfaccom;
 $original_banco = $this->banco;
 $original_formapago = $this->formapago;
@@ -10231,6 +10478,8 @@ if(isset($this->vsidoc[0][0]))
 }
 else
 {
+if($this->tipo_com =='FC' or $this->tipo_com =='AF')
+	{
 	if($this->idfaccom >0)
 		{
 		 
@@ -10628,12 +10877,192 @@ else
 		{
 		$this->nm_mens_alert[] = "No tiene compra registrada, NO puede Asentar"; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert("No tiene compra registrada, NO puede Asentar"); }$this->asentada =0;
 		}
+	}
 }
+
+if ($this->asentada ==1)
+	{
+	if($this->tipo_com =='NC')
+		{
+		$idproducto=0;
+		$bod=0;
+		$cantidad=0;
+		$vunit=0;
+		$vparcial=0;
+		$iva=0;
+		$desc=0;
+		$tiva=0;
+		$tdes=0;
+		$pdec=0;
+		$ti_doc='NC';
+		$to_tra='';
+		$id_nta=$this->idfaccom ;
+		$ideta=0;
+
+		$sql_det = "SELECT  idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, porc_desc, tipo_trans, iddet FROM detallecompra WHERE idfaccom = '".$id_nta."'";
+		 
+      $nm_select = $sql_det; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_det = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_det[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_det = false;
+          $this->ds_det_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+		if(isset($this->ds_det[0][0]))
+			{
+			$j = 0;
+			foreach($this->ds_det  as $det)
+				{
+				$j = $j+1;
+
+				$idproducto.= $det[0];
+				$bod.=		  $det[1];
+				$cantidad.=   $det[2];
+				$vunit.=	  $det[3];
+				$vparcial.=	  $det[4];
+				$iva.=		  $det[5];
+				$desc.=		  $det[6];
+				$tiva.=		  $det[7];
+				$tdes.=		  $det[8];
+				$pdec.=		  $det[9];
+				$to_tra.=	  $det[10];
+				$ideta.= 	  $det[11];
+
+				if($to_tra=='DEV')
+					{
+					 $sql_dev = "INSERT INTO inventario (fecha, cantidad, idpro, costo, valorparcial, idbod, tipo, detalle, idmov, idfaccom, nufacvta, remision, nupro, iddetalle) VALUES ('".$this->fechacom ."', '".-$cantidad."', '".$idproducto."', '".$vunit."', '".$vparcial."', '".$bod."', 2, 'DEV EN COMPRA', 1, '".$id_nta."', '0', '0', '0', '".$ideta."')";
+					
+     $nm_select = $sql_dev; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					}
+				else
+					{
+					
+					}
+
+				$idproducto =0;
+				$bod		=0;
+				$cantidad	=0;
+				$vunit		=0;
+				$vparcial	=0;
+				$iva		=0;
+				$desc		=0;
+				$tiva		=0;
+				$tdes		=0;
+				$pdec		=0;
+				$to_tra		='';
+				$to_tra='';
+				$ideta=0;
+				}
+			}
+		$this->sc_ajax_javascript('nm_field_disabled', array("anulada=disabled;observaciones=disabled;banco=disabled", ""));
+;
+		$this->Ini->nm_hidden_blocos[5] = "off"; $this->NM_ajax_info['blockDisplay']['5'] = 'off';
+		$idt=$this->idprov ; 
+		
+     $nm_select ="update facturacom set pagada='SI', asentada='1', saldo='0' where idfaccom='".$this->idfaccom ."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+		$this->pagada ='SI';
+		$this->asentada =1;
+		$this->saldo =0;
+		}
+	}
+else
+	{
+	$sql_del =  "DELETE FROM inventario WHERE idfaccom = '".$this->idfaccom ."'";
+	
+     $nm_select = $sql_del; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	
+	$this->sc_ajax_javascript('nm_field_disabled', array("anulada=;observaciones=;banco=", ""));
+;
+	$this->Ini->nm_hidden_blocos[5] = "on"; $this->NM_ajax_info['blockDisplay']['5'] = 'on';
+	$idt=$this->idprov ;
+	
+     $nm_select ="update facturacom set asentada=0,pagada='NO' where idfaccom=$this->idfaccom "; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	}
 
 $modificado_subtotal = $this->subtotal;
 $modificado_valoriva = $this->valoriva;
 $modificado_cod_cuenta = $this->cod_cuenta;
 $modificado_asentada = $this->asentada;
+$modificado_tipo_com = $this->tipo_com;
 $modificado_idfaccom = $this->idfaccom;
 $modificado_banco = $this->banco;
 $modificado_formapago = $this->formapago;
@@ -10647,7 +11076,7 @@ $modificado_numfacom = $this->numfacom;
 $modificado_usuario = $this->usuario;
 $modificado_pagada = $this->pagada;
 $modificado_saldo = $this->saldo;
-$this->nm_formatar_campos('subtotal', 'valoriva', 'cod_cuenta', 'asentada', 'idfaccom', 'banco', 'formapago', 'total', 'idprov', 'retencion', 'reteica', 'reteiva', 'fechacom', 'numfacom', 'usuario', 'pagada', 'saldo');
+$this->nm_formatar_campos('subtotal', 'valoriva', 'cod_cuenta', 'asentada', 'tipo_com', 'idfaccom', 'banco', 'formapago', 'total', 'idprov', 'retencion', 'reteica', 'reteiva', 'fechacom', 'numfacom', 'usuario', 'pagada', 'saldo');
 if ($original_subtotal !== $modificado_subtotal || isset($this->nmgp_cmp_readonly['subtotal']) || (isset($bFlagRead_subtotal) && $bFlagRead_subtotal))
 {
     $this->ajax_return_values_subtotal(true);
@@ -10663,6 +11092,10 @@ if ($original_cod_cuenta !== $modificado_cod_cuenta || isset($this->nmgp_cmp_rea
 if ($original_asentada !== $modificado_asentada || isset($this->nmgp_cmp_readonly['asentada']) || (isset($bFlagRead_asentada) && $bFlagRead_asentada))
 {
     $this->ajax_return_values_asentada(true);
+}
+if ($original_tipo_com !== $modificado_tipo_com || isset($this->nmgp_cmp_readonly['tipo_com']) || (isset($bFlagRead_tipo_com) && $bFlagRead_tipo_com))
+{
+    $this->ajax_return_values_tipo_com(true);
 }
 if ($original_idfaccom !== $modificado_idfaccom || isset($this->nmgp_cmp_readonly['idfaccom']) || (isset($bFlagRead_idfaccom) && $bFlagRead_idfaccom))
 {
@@ -10827,6 +11260,68 @@ if ($original_idfaccom !== $modificado_idfaccom || isset($this->nmgp_cmp_readonl
 $this->NM_ajax_info['event_field'] = 'hdetalle';
 fac_compras_new_mob_pack_ajax_response();
 exit;
+}
+function id_comafec_onChange()
+{
+$_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'on';
+  
+$original_id_comafec = $this->id_comafec;
+$original_idprov = $this->idprov;
+$original_numfacom = $this->numfacom;
+
+$sql_dacomp = "SELECT idprov, numfacom FROM facturacom WHERE idfaccom = '".$this->id_comafec ."'";
+ 
+      $nm_select = $sql_dacomp; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_d = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_d[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_d = false;
+          $this->ds_d_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds_d[0][0]))
+	{
+	$this->idprov    = $this->ds_d[0][0];
+	$this->numfacom  = $this->ds_d[0][1];
+	}
+
+$modificado_id_comafec = $this->id_comafec;
+$modificado_idprov = $this->idprov;
+$modificado_numfacom = $this->numfacom;
+$this->nm_formatar_campos('id_comafec', 'idprov', 'numfacom');
+if ($original_id_comafec !== $modificado_id_comafec || isset($this->nmgp_cmp_readonly['id_comafec']) || (isset($bFlagRead_id_comafec) && $bFlagRead_id_comafec))
+{
+    $this->ajax_return_values_id_comafec(true);
+}
+if ($original_idprov !== $modificado_idprov || isset($this->nmgp_cmp_readonly['idprov']) || (isset($bFlagRead_idprov) && $bFlagRead_idprov))
+{
+    $this->ajax_return_values_idprov(true);
+}
+if ($original_numfacom !== $modificado_numfacom || isset($this->nmgp_cmp_readonly['numfacom']) || (isset($bFlagRead_numfacom) && $bFlagRead_numfacom))
+{
+    $this->ajax_return_values_numfacom(true);
+}
+$this->NM_ajax_info['event_field'] = 'id';
+fac_compras_new_mob_pack_ajax_response();
+exit;
+$_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
 }
 function id_pedidocom_onChange()
 {
@@ -11069,6 +11564,8 @@ $original_tipo_com = $this->tipo_com;
 $original_id_comafec = $this->id_comafec;
 $original_es_remision = $this->es_remision;
 $original_id_pedidocom = $this->id_pedidocom;
+$original_saldo = $this->saldo;
+$original_pagada = $this->pagada;
 $original_idfaccom = $this->idfaccom;
 $original_tipo_com = $this->tipo_com;
 
@@ -11079,6 +11576,16 @@ if($this->total  == 0)
 		$this->nmgp_cmp_hidden["id_comafec"] = "on"; $this->NM_ajax_info['fieldDisplay']['id_comafec'] = 'on';
 		$this->nmgp_cmp_hidden["es_remision"] = "off"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'off';
 		$this->nmgp_cmp_hidden["id_pedidocom"] = "off"; $this->NM_ajax_info['fieldDisplay']['id_pedidocom'] = 'off';
+		$this->nmgp_cmp_hidden["saldo"] = "off"; $this->NM_ajax_info['fieldDisplay']['saldo'] = 'off';
+		$this->nmgp_cmp_hidden["pagada"] = "off"; $this->NM_ajax_info['fieldDisplay']['pagada'] = 'off';
+		$sc_tmp_field_name = 'fechacom';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="FECHA DE LA NOTA:";
+		$sc_tmp_field_name = 'total';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="COSTO TOTAL:";
+		$sc_tmp_field_name = 'asentada';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="ASENTAR NOTA:";
+		$sc_tmp_field_name = 'numfacom';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="REFERENCIA DE LA NOTA:";
 		}
 	else
 		{
@@ -11096,6 +11603,16 @@ if($this->total  == 0)
 			$this->nmgp_cmp_hidden["es_remision"] = "on"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'on';
 			$this->nmgp_cmp_hidden["id_pedidocom"] = "off"; $this->NM_ajax_info['fieldDisplay']['id_pedidocom'] = 'off';
 			}
+		$this->nmgp_cmp_hidden["saldo"] = "on"; $this->NM_ajax_info['fieldDisplay']['saldo'] = 'on';
+		$this->nmgp_cmp_hidden["pagada"] = "on"; $this->NM_ajax_info['fieldDisplay']['pagada'] = 'on';
+		$sc_tmp_field_name = 'fechacom';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="FECHA DE LA COMPRA:";
+		$sc_tmp_field_name = 'total';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="COSTO TOTAL DE LA COMPRA:";
+		$sc_tmp_field_name = 'asentada';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="ASENTAR COMPRA:";
+		$sc_tmp_field_name = 'numfacom';
+$this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] ="REFERENCIA DE LA COMPRA:";
 		}
 	}
 elseif($this->total >1)
@@ -11151,14 +11668,17 @@ elseif($this->total >1)
 		}
 	}
 
+
 $modificado_total = $this->total;
 $modificado_tipo_com = $this->tipo_com;
 $modificado_id_comafec = $this->id_comafec;
 $modificado_es_remision = $this->es_remision;
 $modificado_id_pedidocom = $this->id_pedidocom;
+$modificado_saldo = $this->saldo;
+$modificado_pagada = $this->pagada;
 $modificado_idfaccom = $this->idfaccom;
 $modificado_tipo_com = $this->tipo_com;
-$this->nm_formatar_campos('total', 'tipo_com', 'id_comafec', 'es_remision', 'id_pedidocom', 'idfaccom');
+$this->nm_formatar_campos('total', 'tipo_com', 'id_comafec', 'es_remision', 'id_pedidocom', 'saldo', 'pagada', 'idfaccom');
 if ($original_total !== $modificado_total || isset($this->nmgp_cmp_readonly['total']) || (isset($bFlagRead_total) && $bFlagRead_total))
 {
     $this->ajax_return_values_total(true);
@@ -11178,6 +11698,14 @@ if ($original_es_remision !== $modificado_es_remision || isset($this->nmgp_cmp_r
 if ($original_id_pedidocom !== $modificado_id_pedidocom || isset($this->nmgp_cmp_readonly['id_pedidocom']) || (isset($bFlagRead_id_pedidocom) && $bFlagRead_id_pedidocom))
 {
     $this->ajax_return_values_id_pedidocom(true);
+}
+if ($original_saldo !== $modificado_saldo || isset($this->nmgp_cmp_readonly['saldo']) || (isset($bFlagRead_saldo) && $bFlagRead_saldo))
+{
+    $this->ajax_return_values_saldo(true);
+}
+if ($original_pagada !== $modificado_pagada || isset($this->nmgp_cmp_readonly['pagada']) || (isset($bFlagRead_pagada) && $bFlagRead_pagada))
+{
+    $this->ajax_return_values_pagada(true);
 }
 if ($original_idfaccom !== $modificado_idfaccom || isset($this->nmgp_cmp_readonly['idfaccom']) || (isset($bFlagRead_idfaccom) && $bFlagRead_idfaccom))
 {

@@ -6,8 +6,8 @@
 .css_factura_grid_line {text-align: left;}
 .css_fechaven_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
 .css_fechaven_grid_line {vertical-align: middle;text-align: center;}
-.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_observaciones_grid_line {vertical-align: middle;text-align: left;}
+.css_motivo_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_motivo_grid_line {vertical-align: top;text-align: left;}
 .css_total_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
 .css_total_grid_line {font-weight:bold;vertical-align: middle;text-align: center;}
 .css_total_sub_tot {text-align: center;}
@@ -38,6 +38,8 @@
 .css_valoriva_grid_line {vertical-align: top;text-align: right;}
 .css_valoriva_sub_tot {text-align: right;}
 .css_valoriva_tot_ger {text-align: right;}
+.css_observaciones_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_observaciones_grid_line {vertical-align: middle;text-align: left;}
 .css_saldo_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_saldo_grid_line {vertical-align: top;text-align: right;}
 .css_adicional_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}

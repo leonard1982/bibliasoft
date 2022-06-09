@@ -833,6 +833,8 @@ $(function() {
 <?php
      if (!in_array("total", $_SESSION['sc_session'][$sc_init]['grid_compras_new']['SC_Groupby_hide']))
      {
+        if ($opc_ret != "resumo")
+        {
         if ($groupby_atual == "total")
         {
             $check = " checked";
@@ -850,7 +852,6 @@ $(function() {
         Por Valor Compra
 <?php
     $prep_labels = array();
-    $prep_labels[] = "Total";
 ?>
         <span>
         <?php echo implode($prep_labels, ', ');?>
@@ -858,6 +859,7 @@ $(function() {
       </label>
       </div>
 <?php
+        }
      }
 ?>
 <?php

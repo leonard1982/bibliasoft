@@ -3,7 +3,7 @@
 .css_prefijo_com_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_prefijo_com_grid_line {vertical-align: top;text-align: right;}
 .css_numero_com_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_numero_com_grid_line {vertical-align: top;text-align: right;}
+.css_numero_com_grid_line {vertical-align: middle;text-align: right;}
 .css_numfacom_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_numfacom_grid_line {vertical-align: middle;width: 2%;text-align: right;}
 .css_formapago_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
@@ -19,7 +19,7 @@
 .css_idprov_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_idprov_grid_line {vertical-align: middle;width: 5%;text-align: right;}
 .css_total_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_total_grid_line {font-weight:bold;vertical-align: middle;width: 1%;text-align: right;}
+.css_total_grid_line {vertical-align: middle;text-align: right;}
 .css_asentada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_asentada_grid_line {vertical-align: top;width: 50%;text-align: right;}
 .css_idfaccom_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
@@ -42,22 +42,26 @@
 .css_reteiva_grid_line {vertical-align: top;text-align: right;}
 .css_cod_cuenta_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_cod_cuenta_grid_line {vertical-align: top;text-align: right;}
+.css_excento_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_excento_grid_line {vertical-align: middle;text-align: right;}
+.css_base_iva_19_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_base_iva_19_grid_line {vertical-align: middle;text-align: right;}
+.css_valor_iva_19_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_valor_iva_19_grid_line {vertical-align: middle;text-align: right;}
+.css_base_iva_5_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
+.css_base_iva_5_grid_line {vertical-align: middle;text-align: right;}
+.css_valor_iva_5_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valor_iva_5_grid_line {vertical-align: middle;text-align: right;}
+.css_base_con_8_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_base_con_8_grid_line {vertical-align: middle;text-align: right;}
+.css_valor_con_8_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_valor_con_8_grid_line {vertical-align: middle;text-align: right;}
+.css_t_iva_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
+.css_t_iva_grid_line {vertical-align: middle;text-align: right;}
 .css_a_pagar_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_a_pagar_grid_line {width: 1%;text-align: right;}
-.css_base0_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_base0_grid_line {text-align: right;}
-.css_base19_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_base19_grid_line {text-align: right;}
-.css_base5_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_base5_grid_line {text-align: right;}
 .css_devolucion_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
 .css_devolucion_grid_line {width: 8%;}
-.css_iva_0_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_iva_0_grid_line {text-align: right;}
-.css_iva_19_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_iva_19_grid_line {text-align: right;}
-.css_iva_5_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
-.css_iva_5_grid_line {text-align: right;}
 .css_val_ica_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_val_ica_grid_line {width: 2%;text-align: right;}
 .css_val_ret_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}

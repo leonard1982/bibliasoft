@@ -4102,6 +4102,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     var var_valoriva = scAjaxGetFieldHidden("valoriva");
     var var_cod_cuenta = scAjaxGetFieldText("cod_cuenta");
     var var_asentada = scAjaxGetFieldSelect("asentada");
+    var var_tipo_com = scAjaxGetFieldSelect("tipo_com");
     var var_idfaccom = scAjaxGetFieldHidden("idfaccom");
     var var_banco = scAjaxGetFieldSelect("banco");
     var var_formapago = scAjaxGetFieldSelect("formapago");
@@ -4117,7 +4118,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     var var_saldo = scAjaxGetFieldHidden("saldo");
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn(true);
-    x_ajax_fac_compras_new_event_asentada_onchange(var_subtotal, var_valoriva, var_cod_cuenta, var_asentada, var_idfaccom, var_banco, var_formapago, var_total, var_idprov, var_retencion, var_reteica, var_reteiva, var_fechacom, var_numfacom, var_usuario, var_pagada, var_saldo, var_script_case_init, do_ajax_fac_compras_new_event_asentada_onchange_cb);
+    x_ajax_fac_compras_new_event_asentada_onchange(var_subtotal, var_valoriva, var_cod_cuenta, var_asentada, var_tipo_com, var_idfaccom, var_banco, var_formapago, var_total, var_idprov, var_retencion, var_reteica, var_reteiva, var_fechacom, var_numfacom, var_usuario, var_pagada, var_saldo, var_script_case_init, do_ajax_fac_compras_new_event_asentada_onchange_cb);
   } // do_ajax_fac_compras_new_event_asentada_onchange
 
   function do_ajax_fac_compras_new_event_asentada_onchange_cb(sResp)
@@ -4247,6 +4248,54 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxRedir();
   } // do_ajax_fac_compras_new_event_hdetalle_onfocus_cb_after_alert
 
+  // ---------- Event onchange id_comafec
+  function do_ajax_fac_compras_new_event_id_comafec_onchange()
+  {
+    var var_id_comafec = scAjaxGetFieldSelect("id_comafec");
+    var var_idprov = scAjaxGetFieldText("id_ac_idprov");
+    var var_numfacom = scAjaxGetFieldText("numfacom");
+    var var_script_case_init = document.F2.script_case_init.value;
+    scAjaxProcOn(true);
+    x_ajax_fac_compras_new_event_id_comafec_onchange(var_id_comafec, var_idprov, var_numfacom, var_script_case_init, do_ajax_fac_compras_new_event_id_comafec_onchange_cb);
+  } // do_ajax_fac_compras_new_event_id_comafec_onchange
+
+  function do_ajax_fac_compras_new_event_id_comafec_onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    sFieldValid = "id_comafec";
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_fac_compras_new_event_id_comafec_onchange_cb_after_alert);
+  } // do_ajax_fac_compras_new_event_id_comafec_onchange_cb
+  function do_ajax_fac_compras_new_event_id_comafec_onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    scAjaxRedir();
+  } // do_ajax_fac_compras_new_event_id_comafec_onchange_cb_after_alert
+
   // ---------- Event onchange id_pedidocom
   function do_ajax_fac_compras_new_event_id_pedidocom_onchange()
   {
@@ -4358,10 +4407,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     var var_id_comafec = scAjaxGetFieldSelect("id_comafec");
     var var_es_remision = scAjaxGetFieldSelect("es_remision");
     var var_id_pedidocom = scAjaxGetFieldSelect("id_pedidocom");
+    var var_saldo = scAjaxGetFieldHidden("saldo");
+    var var_pagada = scAjaxGetFieldHidden("pagada");
     var var_idfaccom = scAjaxGetFieldHidden("idfaccom");
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn(true);
-    x_ajax_fac_compras_new_event_tipo_com_onchange(var_total, var_tipo_com, var_id_comafec, var_es_remision, var_id_pedidocom, var_idfaccom, var_script_case_init, do_ajax_fac_compras_new_event_tipo_com_onchange_cb);
+    x_ajax_fac_compras_new_event_tipo_com_onchange(var_total, var_tipo_com, var_id_comafec, var_es_remision, var_id_pedidocom, var_saldo, var_pagada, var_idfaccom, var_script_case_init, do_ajax_fac_compras_new_event_tipo_com_onchange_cb);
   } // do_ajax_fac_compras_new_event_tipo_com_onchange
 
   function do_ajax_fac_compras_new_event_tipo_com_onchange_cb(sResp)

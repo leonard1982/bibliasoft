@@ -233,8 +233,8 @@ class grid_facturaven_pos_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220601"; 
-      $this->nm_hr_ult_alt   = "185501"; 
+      $this->nm_dt_ult_alt   = "20220609"; 
+      $this->nm_hr_ult_alt   = "124612"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -1220,7 +1220,7 @@ class grid_facturaven_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmZSX7HArYHQJwDMvmVcB/DWFYHIJsDcFYZ1BiHIBeHQJeHgvsHErCDWXCZuXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1rqD1rwD5JeDEvsHENiDWFGDoJeHQXsDQFUHANOHuBOHuvmVIBODuX7HMX7D9BsH9BqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HIrwV5BOHuvmVcBOH5XCVoJwDcJUZSB/HABYD5rqDEvsHEBUDWFqDoJeDcJeDQFGHAN7D5JwHuNOVIB/V5X7VorqD9BsH9FaD1NaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFiHEFqDoBqD9FYDQFUHAveHQBqHgvOV9BUDuFGVoX7HQBiZSBOD1rwHQBqDMveVkJ3DWXCHIF7HQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWrGDoBOHQXOZ9XGHANKVWBqDMvmVcFKV5BmVoBqD9BsZkFGHArKV5JwDMzGHEXeDWB3DoBqD9JKH9FUD1veHuJwDMzGVcFeH5FqHMraD9BsH9FaD1NaD5JeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKH9X7HIrwVWXGDMBYV9FeDuFqVoBqD9XOVINUHArYHQFGDErKVkJ3HEXKZuXGHQNwDQBqHArYHQNUDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuXGDMvmVIFCH5XCHMFGDcFYZ1F7DSNOHuFaDMveVkJGDWFqVoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSX7HAN7V5FUHgvsDkFCH5XCVEraD9XOZSB/HABYZMBqDMzGHEXeV5XCDoFUD9NwDQJsZ1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcXGZSFGHIrKHuJwHuzGVIBsH5FqHINUDcFYH9B/HArYV5X7HgrKHEXeDuFaVoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveDkXKDWBmZuBOHQBiDQBqDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7DSrYD5XGDEBeZSJ3DuJeVoB/DcJeZSFGD1BeHuJeDMBOVcFKV5X7VoFGHQBsH9BOHANOD5BOHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize'])  
       { 
@@ -1511,6 +1511,10 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
       }
       if (!isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['embutida_init']) 
       {
+          if (!isset($_SESSION['gnit'])) 
+          {
+              $this->nm_falta_var .= "gnit; ";
+          }
           if (!isset($_SESSION['gtipo_negocio'])) 
           {
               $this->nm_falta_var .= "gtipo_negocio; ";
@@ -1530,10 +1534,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           if (!isset($_SESSION['gIdfac'])) 
           {
               $this->nm_falta_var .= "gIdfac; ";
-          }
-          if (!isset($_SESSION['gnit'])) 
-          {
-              $this->nm_falta_var .= "gnit; ";
           }
       }
 // 
@@ -4124,6 +4124,11 @@ class grid_facturaven_pos_apl
               $_SESSION['gproveedor'] = $gproveedor;
               nm_limpa_str_grid_facturaven_pos($_SESSION["gproveedor"]);
           }
+          if (isset($gnit)) 
+          {
+              $_SESSION['gnit'] = $gnit;
+              nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
+          }
           if (isset($gtipo_negocio)) 
           {
               $_SESSION['gtipo_negocio'] = $gtipo_negocio;
@@ -4152,11 +4157,6 @@ class grid_facturaven_pos_apl
           {
               $_SESSION['gIdfac'] = $gIdfac;
               nm_limpa_str_grid_facturaven_pos($_SESSION["gIdfac"]);
-          }
-          if (isset($gnit)) 
-          {
-              $_SESSION['gnit'] = $gnit;
-              nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
           }
       } 
       if ($Parms_form_pdf)
@@ -6984,7 +6984,26 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->pagada = $this->rs_grid->fields[13] ;  
        $this->asentada = $this->rs_grid->fields[14] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[15] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[15])) 
+           { 
+               $this->observaciones = file_get_contents($this->rs_grid->fields[15]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       else 
+       { 
+           $this->observaciones = $this->rs_grid->fields[15] ;  
+       } 
        $this->saldo = $this->rs_grid->fields[16] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
@@ -7064,9 +7083,15 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_clasificacion = (string)$this->id_clasificacion;
        $this->fecha_pago = $this->rs_grid->fields[42] ;  
        $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = (string)$this->tiene_nc;
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->qr_base64))
            { 
                $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
@@ -7601,7 +7626,26 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->pagada = $this->rs_grid->fields[13] ;  
        $this->asentada = $this->rs_grid->fields[14] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[15] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[15])) 
+           { 
+               $this->observaciones = file_get_contents($this->rs_grid->fields[15]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       else 
+       { 
+           $this->observaciones = $this->rs_grid->fields[15] ;  
+       } 
        $this->saldo = $this->rs_grid->fields[16] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
@@ -7681,9 +7725,15 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_clasificacion = (string)$this->id_clasificacion;
        $this->fecha_pago = $this->rs_grid->fields[42] ;  
        $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = (string)$this->tiene_nc;
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->qr_base64))
            { 
                $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
@@ -8069,7 +8119,26 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->pagada = $this->rs_grid->fields[13] ;  
        $this->asentada = $this->rs_grid->fields[14] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[15] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[15])) 
+           { 
+               $this->observaciones = file_get_contents($this->rs_grid->fields[15]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       else 
+       { 
+           $this->observaciones = $this->rs_grid->fields[15] ;  
+       } 
        $this->saldo = $this->rs_grid->fields[16] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
@@ -8149,9 +8218,15 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_clasificacion = (string)$this->id_clasificacion;
        $this->fecha_pago = $this->rs_grid->fields[42] ;  
        $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = (string)$this->tiene_nc;
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->qr_base64))
            { 
                $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
@@ -8464,7 +8539,26 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->pagada = $this->rs_grid->fields[13] ;  
        $this->asentada = $this->rs_grid->fields[14] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[15] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[15])) 
+           { 
+               $this->observaciones = file_get_contents($this->rs_grid->fields[15]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       else 
+       { 
+           $this->observaciones = $this->rs_grid->fields[15] ;  
+       } 
        $this->saldo = $this->rs_grid->fields[16] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
@@ -8544,9 +8638,15 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_clasificacion = (string)$this->id_clasificacion;
        $this->fecha_pago = $this->rs_grid->fields[42] ;  
        $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = (string)$this->tiene_nc;
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->qr_base64))
            { 
                $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
@@ -10103,7 +10203,26 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->pagada = $this->rs_grid->fields[13] ;  
        $this->asentada = $this->rs_grid->fields[14] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[15] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[15])) 
+           { 
+               $this->observaciones = file_get_contents($this->rs_grid->fields[15]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       else 
+       { 
+           $this->observaciones = $this->rs_grid->fields[15] ;  
+       } 
        $this->saldo = $this->rs_grid->fields[16] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
@@ -10183,9 +10302,15 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_clasificacion = (string)$this->id_clasificacion;
        $this->fecha_pago = $this->rs_grid->fields[42] ;  
        $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = (string)$this->tiene_nc;
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->qr_base64))
            { 
                $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
@@ -10483,7 +10608,26 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->pagada = $this->rs_grid->fields[13] ;  
        $this->asentada = $this->rs_grid->fields[14] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[15] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[15])) 
+           { 
+               $this->observaciones = file_get_contents($this->rs_grid->fields[15]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       else 
+       { 
+           $this->observaciones = $this->rs_grid->fields[15] ;  
+       } 
        $this->saldo = $this->rs_grid->fields[16] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
@@ -10563,9 +10707,15 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_clasificacion = (string)$this->id_clasificacion;
        $this->fecha_pago = $this->rs_grid->fields[42] ;  
        $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = (string)$this->tiene_nc;
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->qr_base64))
            { 
                $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
@@ -11905,7 +12055,26 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->pagada = $this->rs_grid->fields[13] ;  
        $this->asentada = $this->rs_grid->fields[14] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[15] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[15])) 
+           { 
+               $this->observaciones = file_get_contents($this->rs_grid->fields[15]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       else 
+       { 
+           $this->observaciones = $this->rs_grid->fields[15] ;  
+       } 
        $this->saldo = $this->rs_grid->fields[16] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
@@ -11985,9 +12154,15 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_clasificacion = (string)$this->id_clasificacion;
        $this->fecha_pago = $this->rs_grid->fields[42] ;  
        $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = (string)$this->tiene_nc;
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->qr_base64))
            { 
                $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
@@ -13220,7 +13395,26 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->pagada = $this->rs_grid->fields[13] ;  
        $this->asentada = $this->rs_grid->fields[14] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[15] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[15])) 
+           { 
+               $this->observaciones = file_get_contents($this->rs_grid->fields[15]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       else 
+       { 
+           $this->observaciones = $this->rs_grid->fields[15] ;  
+       } 
        $this->saldo = $this->rs_grid->fields[16] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
@@ -13300,9 +13494,15 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_clasificacion = (string)$this->id_clasificacion;
        $this->fecha_pago = $this->rs_grid->fields[42] ;  
        $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = (string)$this->tiene_nc;
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->qr_base64))
            { 
                $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
@@ -13783,7 +13983,26 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->pagada = $this->rs_grid->fields[13] ;  
        $this->asentada = $this->rs_grid->fields[14] ;  
        $this->asentada = (string)$this->asentada;
-       $this->observaciones = $this->rs_grid->fields[15] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[15])) 
+           { 
+               $this->observaciones = file_get_contents($this->rs_grid->fields[15]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[15]) ;  
+       } 
+       else 
+       { 
+           $this->observaciones = $this->rs_grid->fields[15] ;  
+       } 
        $this->saldo = $this->rs_grid->fields[16] ;  
        $this->saldo =  str_replace(",", ".", $this->saldo);
        $this->saldo = (string)$this->saldo;
@@ -13863,9 +14082,15 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->id_clasificacion = (string)$this->id_clasificacion;
        $this->fecha_pago = $this->rs_grid->fields[42] ;  
        $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->numfe = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = $this->rs_grid->fields[44] ;  
+       $this->tiene_nc = (string)$this->tiene_nc;
+       $this->numfe = $this->rs_grid->fields[45] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->qr_base64))
            { 
                $this->qr_base64 = $this->Db->BlobDecode($this->qr_base64, false, true, "BLOB");
@@ -17818,10 +18043,6 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           {
               $this->SC_monta_condicao($comando, "direccion2", $arg_search, $data_search);
           }
-          if ($field == "SC_all_Cmp" || $field == "observaciones") 
-          {
-              $this->SC_monta_condicao($comando, "observaciones", $arg_search, $data_search);
-          }
       }
       if (empty($comando)) 
       {
@@ -17871,7 +18092,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idfacven";$nm_numeric[] = "numfacven";$nm_numeric[] = "credito";$nm_numeric[] = "idcli";$nm_numeric[] = "subtotal";$nm_numeric[] = "valoriva";$nm_numeric[] = "total";$nm_numeric[] = "asentada";$nm_numeric[] = "saldo";$nm_numeric[] = "adicional";$nm_numeric[] = "adicional2";$nm_numeric[] = "adicional3";$nm_numeric[] = "resolucion";$nm_numeric[] = "vendedor";$nm_numeric[] = "usuario_crea";$nm_numeric[] = "banco";$nm_numeric[] = "dias_decredito";$nm_numeric[] = "pedido";$nm_numeric[] = "dircliente";$nm_numeric[] = "id_clasificacion";
+      $nm_numeric[] = "idfacven";$nm_numeric[] = "numfacven";$nm_numeric[] = "credito";$nm_numeric[] = "idcli";$nm_numeric[] = "subtotal";$nm_numeric[] = "valoriva";$nm_numeric[] = "total";$nm_numeric[] = "asentada";$nm_numeric[] = "saldo";$nm_numeric[] = "adicional";$nm_numeric[] = "adicional2";$nm_numeric[] = "adicional3";$nm_numeric[] = "resolucion";$nm_numeric[] = "vendedor";$nm_numeric[] = "usuario_crea";$nm_numeric[] = "banco";$nm_numeric[] = "dias_decredito";$nm_numeric[] = "pedido";$nm_numeric[] = "dircliente";$nm_numeric[] = "id_clasificacion";$nm_numeric[] = "tiene_nc";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['decimal_db'] == ".")
@@ -18849,6 +19070,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
    {
        $_SESSION['gproveedor'] = $gproveedor;
    }
+   if (isset($gnit)) 
+   {
+       $_SESSION['gnit'] = $gnit;
+   }
    if (isset($gtipo_negocio)) 
    {
        $_SESSION['gtipo_negocio'] = $gtipo_negocio;
@@ -18868,10 +19093,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
    if (isset($gIdfac)) 
    {
        $_SESSION['gIdfac'] = $gIdfac;
-   }
-   if (isset($gnit)) 
-   {
-       $_SESSION['gnit'] = $gnit;
    }
    if (!empty($glo_perfil))  
    { 
@@ -18995,6 +19216,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
                $_SESSION['gproveedor'] = $gproveedor;
                nm_limpa_str_grid_facturaven_pos($_SESSION["gproveedor"]);
            }
+           if (isset($gnit)) 
+           {
+               $_SESSION['gnit'] = $gnit;
+               nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
+           }
            if (isset($gtipo_negocio)) 
            {
                $_SESSION['gtipo_negocio'] = $gtipo_negocio;
@@ -19023,11 +19249,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
            {
                $_SESSION['gIdfac'] = $gIdfac;
                nm_limpa_str_grid_facturaven_pos($_SESSION["gIdfac"]);
-           }
-           if (isset($gnit)) 
-           {
-               $_SESSION['gnit'] = $gnit;
-               nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -19276,6 +19497,20 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
        {
            $_SESSION["gproveedor"] = "";
        }
+       if (isset($_POST["gnit"])) 
+       {
+           $_SESSION["gnit"] = $_POST["gnit"];
+           nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
+       }
+       if (isset($_GET["gnit"])) 
+       {
+           $_SESSION["gnit"] = $_GET["gnit"];
+           nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
+       }
+       if (!isset($_SESSION["gnit"])) 
+       {
+           $_SESSION["gnit"] = "";
+       }
        if (isset($_POST["gtipo_negocio"])) 
        {
            $_SESSION["gtipo_negocio"] = $_POST["gtipo_negocio"];
@@ -19355,20 +19590,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
        if (!isset($_SESSION["gIdfac"])) 
        {
            $_SESSION["gIdfac"] = "";
-       }
-       if (isset($_POST["gnit"])) 
-       {
-           $_SESSION["gnit"] = $_POST["gnit"];
-           nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
-       }
-       if (isset($_GET["gnit"])) 
-       {
-           $_SESSION["gnit"] = $_GET["gnit"];
-           nm_limpa_str_grid_facturaven_pos($_SESSION["gnit"]);
-       }
-       if (!isset($_SESSION["gnit"])) 
-       {
-           $_SESSION["gnit"] = "";
        }
        if (isset($nmgp_lig_edit_lapis)) 
        {
@@ -19563,6 +19784,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
        $Nm_numeric[] = "pedido";
        $Nm_numeric[] = "dircliente";
        $Nm_numeric[] = "id_clasificacion";
+       $Nm_numeric[] = "tiene_nc";
        if (in_array($name, $Nm_numeric))
        {
            if (is_array($val))

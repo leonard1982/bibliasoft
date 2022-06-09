@@ -365,7 +365,45 @@ class grid_NC_ND_xml
       $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'on';
 if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
 if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
-  ?>
+  $vvalidar_correo_enlinea = "NO";
+
+$vsql = "select validar_correo_enlinea from configuraciones  where idconfiguraciones=1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vVEmail = array();
+      $this->vvemail = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vVEmail[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vvemail[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vVEmail = false;
+          $this->vVEmail_erro = $this->Db->ErrorMsg();
+          $this->vvemail = false;
+          $this->vvemail_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vvemail[0][0]))
+{
+	$vvalidar_correo_enlinea = $this->vvemail[0][0];
+}
+
+?>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
 <?php
@@ -586,6 +624,8 @@ switch($this->sc_temp_gproveedor)
 
 ?>
 <script>
+
+	
 function fEnviarPropio(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
@@ -603,25 +643,150 @@ function fEnviarPropio(idfacven)
 			}
 		});
 		
-		$.post("../blank_envio_propio_nc/index.php",{
-			
-			idfacven:idfacven
-			   
+		var vvalidar_correo_enlinea = "<?php echo $vvalidar_correo_enlinea; ?>";
+		
+		if(vvalidar_correo_enlinea=="SI")
+		{
+			$.post("../blank_correo_reenvio_validador/index.php",{
+
+				idfacven:idfacven
+
 			},function(r){
 
-			$.unblockUI();
-			console.log(r);
-			
-			if(confirm(r))
-			{
-			   location.href = '../grid_NC_ND';
-			}
-			else
-			{
-			   location.href = '../grid_NC_ND';
-			}
-			
-		});
+				console.log(r);
+				var em = JSON.parse(r);
+				
+				var email    = em.email;
+				var validado = em.validado;
+				
+				if(validado=="NO")
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.get("../valida_email.php",{
+
+							email:email
+
+						},function(r2){
+
+							console.log(r2);
+							var obj = JSON.parse(r2);
+
+							if(obj.error=="")
+							{
+								$.post("../blank_envio_propio_nc/index.php",{
+
+									idfacven:idfacven,
+									reason:obj.reason,
+									json_valida_email:obj.json
+
+									},function(r3){
+
+									$.unblockUI();
+									console.log(r3);
+
+									if(r3=="Documento enviado con éxito!!!")
+									{
+										nm_gp_submit_ajax ('igual', 'breload');
+									}
+									else
+									{
+										if(confirm(r3))
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+										else
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+									}
+								});
+							}
+							else
+							{
+								if(confirm(obj.error))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El cliente no tiene correo electrónico.");
+					}
+				}
+				else
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.post("../blank_envio_propio_nc/index.php",{
+
+							idfacven:idfacven,
+							reason:'accepted_email',
+							json_valida_email:''
+
+							},function(r3){
+
+							$.unblockUI();
+							console.log(r3);
+
+							if(r3=="Documento enviado con éxito!!!")
+							{
+								nm_gp_submit_ajax ('igual', 'breload');
+							}
+							else
+							{
+								if(confirm(r3))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El cliente no tiene correo electrónico...");
+					}
+				}
+			});
+		}
+		else
+		{
+			$.post("../blank_envio_propio_nc/index.php",{
+
+				idfacven:idfacven
+
+				},function(r){
+
+				$.unblockUI();
+				console.log(r);
+
+				if(r=="Documento enviado con éxito!!!")
+				{
+					nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+					if(confirm(r))
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+					else
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+				}
+			});
+		}
 	}
 }
 	
@@ -725,30 +890,30 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
       }
       $this->nm_field_dinamico = array();
       $this->nm_order_dinamico = array();
-      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+      $nmgp_select_count = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT num, idcli, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), observaciones, total, pagada, asentada, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+          $nmgp_select = "SELECT num, idcli, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), motivo, total, pagada, asentada, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT num, idcli, fechaven, observaciones, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+          $nmgp_select = "SELECT num, idcli, fechaven, motivo, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT num, idcli, convert(char(23),fechaven,121), observaciones, total, pagada, asentada, idfacven, numfacven, credito, convert(char(23),fechavenc,121), subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+          $nmgp_select = "SELECT num, idcli, convert(char(23),fechaven,121), motivo, total, pagada, asentada, idfacven, numfacven, credito, convert(char(23),fechavenc,121), subtotal, valoriva, observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT num, idcli, fechaven, observaciones, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+          $nmgp_select = "SELECT num, idcli, fechaven, motivo, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
        } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT num, idcli, EXTEND(fechaven, YEAR TO DAY), observaciones, total, pagada, asentada, idfacven, numfacven, credito, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, LOTOFILE(enlacepdf, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+          $nmgp_select = "SELECT num, idcli, EXTEND(fechaven, YEAR TO DAY), motivo, total, pagada, asentada, idfacven, numfacven, credito, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, LOTOFILE(observaciones, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, LOTOFILE(enlacepdf, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
        } 
       else 
       { 
-          $nmgp_select = "SELECT num, idcli, fechaven, observaciones, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+          $nmgp_select = "SELECT num, idcli, fechaven, motivo, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['where_pesq'];
@@ -817,7 +982,7 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
          $this->idcli = $rs->fields[1] ;  
          $this->idcli = (string)$this->idcli;
          $this->fechaven = $rs->fields[2] ;  
-         $this->observaciones = $rs->fields[3] ;  
+         $this->motivo = $rs->fields[3] ;  
          $this->total = $rs->fields[4] ;  
          $this->total =  str_replace(",", ".", $this->total);
          $this->total = (string)$this->total;
@@ -837,65 +1002,85 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
          $this->valoriva = $rs->fields[12] ;  
          $this->valoriva =  str_replace(",", ".", $this->valoriva);
          $this->valoriva = (string)$this->valoriva;
-         $this->saldo = $rs->fields[13] ;  
-         $this->saldo =  str_replace(",", ".", $this->saldo);
-         $this->saldo = (string)$this->saldo;
-         $this->adicional = $rs->fields[14] ;  
-         $this->adicional = (string)$this->adicional;
-         $this->adicional2 = $rs->fields[15] ;  
-         $this->adicional2 = (string)$this->adicional2;
-         $this->adicional3 = $rs->fields[16] ;  
-         $this->adicional3 = (string)$this->adicional3;
-         $this->vendedor = $rs->fields[17] ;  
-         $this->vendedor = (string)$this->vendedor;
-         $this->pedido = $rs->fields[18] ;  
-         $this->pedido = (string)$this->pedido;
-         $this->resolucion = $rs->fields[19] ;  
-         $this->resolucion = (string)$this->resolucion;
-         $this->base_iva_19 = $rs->fields[20] ;  
-         $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
-         $this->base_iva_19 = (string)$this->base_iva_19;
-         $this->valor_iva_19 = $rs->fields[21] ;  
-         $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
-         $this->valor_iva_19 = (string)$this->valor_iva_19;
-         $this->base_iva_5 = $rs->fields[22] ;  
-         $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
-         $this->base_iva_5 = (string)$this->base_iva_5;
-         $this->valor_iva_5 = $rs->fields[23] ;  
-         $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
-         $this->valor_iva_5 = (string)$this->valor_iva_5;
-         $this->excento = $rs->fields[24] ;  
-         $this->excento =  str_replace(",", ".", $this->excento);
-         $this->excento = (string)$this->excento;
-         $this->tipo = $rs->fields[25] ;  
-         $this->id_fact = $rs->fields[26] ;  
-         $this->id_fact = (string)$this->id_fact;
-         $this->cufe = $rs->fields[27] ;  
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $this->enlacepdf = "";  
-              if (is_file($rs_grid->fields[28])) 
+              $this->observaciones = "";  
+              if (is_file($rs_grid->fields[13])) 
               { 
-                  $this->enlacepdf = file_get_contents($rs_grid->fields[28]);  
+                  $this->observaciones = file_get_contents($rs_grid->fields[13]);  
               } 
           } 
          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
          { 
-             $this->enlacepdf = $this->Db->BlobDecode($rs->fields[28]) ;  
+             $this->observaciones = $this->Db->BlobDecode($rs->fields[13]) ;  
          } 
          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
          { 
-             $this->enlacepdf = $this->Db->BlobDecode($rs->fields[28]) ;  
+             $this->observaciones = $this->Db->BlobDecode($rs->fields[13]) ;  
          } 
          else
          { 
-             $this->enlacepdf = $rs->fields[28] ;  
+             $this->observaciones = $rs->fields[13] ;  
          } 
-         $this->estado = $rs->fields[29] ;  
+         $this->saldo = $rs->fields[14] ;  
+         $this->saldo =  str_replace(",", ".", $this->saldo);
+         $this->saldo = (string)$this->saldo;
+         $this->adicional = $rs->fields[15] ;  
+         $this->adicional = (string)$this->adicional;
+         $this->adicional2 = $rs->fields[16] ;  
+         $this->adicional2 = (string)$this->adicional2;
+         $this->adicional3 = $rs->fields[17] ;  
+         $this->adicional3 = (string)$this->adicional3;
+         $this->vendedor = $rs->fields[18] ;  
+         $this->vendedor = (string)$this->vendedor;
+         $this->pedido = $rs->fields[19] ;  
+         $this->pedido = (string)$this->pedido;
+         $this->resolucion = $rs->fields[20] ;  
+         $this->resolucion = (string)$this->resolucion;
+         $this->base_iva_19 = $rs->fields[21] ;  
+         $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
+         $this->base_iva_19 = (string)$this->base_iva_19;
+         $this->valor_iva_19 = $rs->fields[22] ;  
+         $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
+         $this->valor_iva_19 = (string)$this->valor_iva_19;
+         $this->base_iva_5 = $rs->fields[23] ;  
+         $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
+         $this->base_iva_5 = (string)$this->base_iva_5;
+         $this->valor_iva_5 = $rs->fields[24] ;  
+         $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
+         $this->valor_iva_5 = (string)$this->valor_iva_5;
+         $this->excento = $rs->fields[25] ;  
+         $this->excento =  str_replace(",", ".", $this->excento);
+         $this->excento = (string)$this->excento;
+         $this->tipo = $rs->fields[26] ;  
+         $this->id_fact = $rs->fields[27] ;  
+         $this->id_fact = (string)$this->id_fact;
+         $this->cufe = $rs->fields[28] ;  
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+          { 
+              $this->enlacepdf = "";  
+              if (is_file($rs_grid->fields[29])) 
+              { 
+                  $this->enlacepdf = file_get_contents($rs_grid->fields[29]);  
+              } 
+          } 
+         elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+         { 
+             $this->enlacepdf = $this->Db->BlobDecode($rs->fields[29]) ;  
+         } 
+         elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+         { 
+             $this->enlacepdf = $this->Db->BlobDecode($rs->fields[29]) ;  
+         } 
+         else
+         { 
+             $this->enlacepdf = $rs->fields[29] ;  
+         } 
+         $this->estado = $rs->fields[30] ;  
          $this->Orig_num = $this->num;
          $this->Orig_idcli = $this->idcli;
          $this->Orig_fechaven = $this->fechaven;
-         $this->Orig_observaciones = $this->observaciones;
+         $this->Orig_motivo = $this->motivo;
          $this->Orig_total = $this->total;
          $this->Orig_pagada = $this->pagada;
          $this->Orig_asentada = $this->asentada;
@@ -905,6 +1090,7 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
          $this->Orig_fechavenc = $this->fechavenc;
          $this->Orig_subtotal = $this->subtotal;
          $this->Orig_valoriva = $this->valoriva;
+         $this->Orig_observaciones = $this->observaciones;
          $this->Orig_saldo = $this->saldo;
          $this->Orig_adicional = $this->adicional;
          $this->Orig_adicional2 = $this->adicional2;
@@ -926,6 +1112,10 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
          $this->look_idcli = $this->idcli; 
          $this->Lookup->lookup_idcli($this->look_idcli, $this->idcli) ; 
          $this->look_idcli = ($this->look_idcli == "&nbsp;") ? "" : $this->look_idcli; 
+         //----- lookup - motivo
+         $this->look_motivo = $this->motivo; 
+         $this->Lookup->lookup_motivo($this->look_motivo, $this->motivo) ; 
+         $this->look_motivo = ($this->look_motivo == "&nbsp;") ? "" : $this->look_motivo; 
          //----- lookup - asentada
          $this->look_asentada = $this->asentada; 
          $this->Lookup->lookup_asentada($this->look_asentada); 
@@ -1550,34 +1740,29 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->fechaven) . "\"";
          }
    }
-   //----- observaciones
-   function NM_export_observaciones()
+   //----- motivo
+   function NM_export_motivo()
    {
-             if ($this->observaciones !== "&nbsp;") 
-             { 
-                 $this->observaciones = sc_strtolower($this->observaciones); 
-                 $this->observaciones = ucfirst($this->observaciones); 
-             } 
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->observaciones))
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_motivo))
          {
-             $this->observaciones = sc_convert_encoding($this->observaciones, "UTF-8", $_SESSION['scriptcase']['charset']);
+             $this->look_motivo = sc_convert_encoding($this->look_motivo, "UTF-8", $_SESSION['scriptcase']['charset']);
          }
          if ($this->Xml_tag_label)
          {
-             $SC_Label = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Motivo Nota"; 
+             $SC_Label = (isset($this->New_label['motivo'])) ? $this->New_label['motivo'] : "Motivo"; 
          }
          else
          {
-             $SC_Label = "observaciones"; 
+             $SC_Label = "motivo"; 
          }
          $this->clear_tag($SC_Label); 
          if ($this->New_Format)
          {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->observaciones) . "</" . $SC_Label . ">\r\n";
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_motivo) . "</" . $SC_Label . ">\r\n";
          }
          else
          {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->observaciones) . "\"";
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_motivo) . "\"";
          }
    }
    //----- total
@@ -1866,6 +2051,36 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
          else
          {
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->valoriva) . "\"";
+         }
+   }
+   //----- observaciones
+   function NM_export_observaciones()
+   {
+             if ($this->observaciones !== "&nbsp;") 
+             { 
+                 $this->observaciones = sc_strtolower($this->observaciones); 
+                 $this->observaciones = ucfirst($this->observaciones); 
+             } 
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->observaciones))
+         {
+             $this->observaciones = sc_convert_encoding($this->observaciones, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Observaciones"; 
+         }
+         else
+         {
+             $SC_Label = "observaciones"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->observaciones) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->observaciones) . "\"";
          }
    }
    //----- saldo

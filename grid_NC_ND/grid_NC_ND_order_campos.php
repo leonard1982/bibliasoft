@@ -113,9 +113,9 @@ function Ord_cmp_init()
    $tab_ger_campos['fechaven'] = "on";
    $tab_def_campos['fechaven'] = "fechaven";
    $tab_labels["fechaven"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["fechaven"])) ? $_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["fechaven"] : "Fecha";
-   $tab_ger_campos['observaciones'] = "on";
-   $tab_def_campos['observaciones'] = "observaciones";
-   $tab_labels["observaciones"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["observaciones"])) ? $_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["observaciones"] : "Motivo Nota";
+   $tab_ger_campos['motivo'] = "on";
+   $tab_def_campos['motivo'] = "motivo";
+   $tab_labels["motivo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["motivo"])) ? $_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["motivo"] : "Motivo";
    $tab_ger_campos['total'] = "on";
    $tab_def_campos['total'] = "total";
    $tab_labels["total"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["total"])) ? $_SESSION['sc_session'][$sc_init]['grid_NC_ND']['labels']["total"] : "Total";
@@ -284,6 +284,7 @@ function Sel_processa_form()
    }
    $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
    include("../_lib/css/" . $str_schema_all . "_grid.php");
+   $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
    $Str_btn_grid = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
    include("../_lib/buttons/" . $Str_btn_grid);
    if (!function_exists("nmButtonOutput"))

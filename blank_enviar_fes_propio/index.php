@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220531"; 
-      $this->nm_hr_ult_alt   = "074201"; 
+      $this->nm_dt_ult_alt   = "20220609"; 
+      $this->nm_hr_ult_alt   = "110936"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_enviar_fes_propio_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXOZSBiHIBeD5XGDMBOV9BUDuX7VoB/DcNwH9BqHIveD5BqHgBOVkXeV5FqZuFaHQXsDQBOZ1BYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBeVkJGH5X/DoJeD9NwH9BiZ1BYV5XGHuBYVIBODur/DoF7HQXGZkFGZ1BeHQJeHgNKDkB/DWXCHMBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUDcBwDQX7Z1N7VWJeHuvmVcBODWFaVoX7DcNwH9B/HANOV5FaDErKZSJqV5FaDoBOD9NwH9X7Z1rwV5JeHuvmVcBOV5FGDoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1BiD1zGZMJeDMBYVkJGDWX7VoJwDcJeZSFGHArYHQJwDMrYVcFeDuX7VoBiHQBsZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiD1zGD5JeHgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaHuvmVIB/HEFYHIFUHQXOZSBOHArYHuJeDMveHArCDuFYHIX7D9NwZSBiD1veV5raDMrYVcXKH5XCHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQBqD1BeVWJeHgrwV9FeV5X/VEFGHQBsZ1rqHArKHuJwHgBOHEXeDWXCZuJeDcBiDQFUHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeVWJeDMvmDkBsDWF/VEF7D9JmH9B/D1rKHQFUHgNOHErCDuJeDoBqHQBiDQFaDSrwD5BODMvsVcBUDWF/HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHgvsVcBOV5F/DoFUDcNwH9B/HArYV5FUDEvsVkXeHEFqDoraD9NwH9FUZ1rwD5JeHgrKVcFCH5FqVoJwD9XOZ1rqHAN7D5FaDErKHEFiHEFqDoB/HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgNOHEBUH5F/HIJeHQBiDQB/HABYHuJeDMzGVcBUHEFYVoBiHQXOZ1X7HIveHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiHAvmD5BqHgBYHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBODkBsH5XCHMBOHQXGZ1FaD1rKHuFaHgNOVkJGDWXCHIJwDcXGDQJwHArYHQJsDMvsVcB/HEFYHMJsHQXOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1995,6 +1995,19 @@ $vnombre_emisor = "";
 $vcorreo_emisor = "";
 $vnit_emisor    = "";
 
+$vreason            = "";
+$vjson_valida_email = "";
+
+if(isset($_POST['reason']))
+{
+	$vreason = $_POST['reason'];
+}
+
+if(isset($_POST['json_valida_email']))
+{
+	$vreason = $_POST['json_valida_email'];
+}
+
 
 
 $vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_pdfs, url_api_sendmail,envio_credenciales,plantillas_correo,copia_factura_a,plantilla_pordefecto, (select d.razonsoc from datosemp d where d.iddatos='1') as nombre_emisor, (select d.correo from datosemp d where d.iddatos='1') as correo_emisor, (select d.nit from datosemp d where d.iddatos='1') as nit_emisor from webservicefe order by idwebservicefe desc limit 1";
@@ -2570,6 +2583,8 @@ else
 		if(!empty($vcorreo_validar))
 		{
 			$vsql = "select valido from correos_validos where correo='".$vcorreo_validar."' and valido='SI' limit 1";
+			
+			
 			 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2606,16 +2621,13 @@ else
 			}
 			else
 			{
-				$vc = 'curl -s -L -X GET "https://api.usebouncer.com/v1/email/verify?email='.$vcorreo_validar.'&timeout=10" -H "x-api-key: OF15DwynV2J02VmAdizNQ7dUJFskZx9ewYlq11hJ"';
-				$vr = shell_exec($vc);
-				$vdata = json_decode($vr);
+				
 
-				if(isset($vdata->reason))
+
+				if($vreason=="accepted_email" or $vreason=="unknown" or $vreason=="low_deliverability")
 				{
-					if($vdata->reason=="accepted_email" or $vdata->reason=="unknown" or $vdata->reason=="low_deliverability")
-					{
-						$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='SI',json='".$vr."'";
-						
+					$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='SI',json='".$vjson_valida_email."'";
+					
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2632,33 +2644,33 @@ else
          }
          $rf->Close();
       ;
-						
-						$valida_correo = true;
-					}
-					else
-					{
-						$valida_correo = false;
-						$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='NO',json='".$vr."'";
-						
-     $nm_select = $vsql; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
-						echo "El correo no es válido o algo salió mal, por favor vuelva a intentarlo.";
-					}
+
+					$valida_correo = true;
 				}
+				else
+				{
+					$valida_correo = false;
+					$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='NO',json='".$vjson_valida_email."'";
+					
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					echo "El correo no es válido o algo salió mal, por favor vuelva a intentarlo.";
+				}
+				
 			}
 			
 			if($valida_correo)

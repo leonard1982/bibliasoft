@@ -304,27 +304,18 @@ class grid_compras_new_grafico
       $this->NM_tit_val[0]     = strip_tags("" .  $this->Ini->Nm_lang['lang_btns_smry_msge_cnt'] . "");
       $this->NM_ind_val[0]     = 1;
       $this->array_decimais[0] = 0;
-      $this->NM_tit_val[1]     = strip_tags("Total(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
-      $this->NM_ind_val[1]     = 2;
-      $this->array_decimais[1] = 2;
-      $this->NM_tit_val[6]     = strip_tags("Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
-      $this->NM_ind_val[6]     = 3;
-      $this->array_decimais[6] = 0;
-      $this->NM_tit_val[3]     = strip_tags("Valoriva(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
-      $this->NM_ind_val[3]     = 4;
+      $this->NM_tit_val[3]     = strip_tags("Valor Retención(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
+      $this->NM_ind_val[3]     = 2;
       $this->array_decimais[3] = 0;
-      $this->NM_tit_val[5]     = strip_tags("$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
-      $this->NM_ind_val[5]     = 5;
-      $this->array_decimais[5] = 0;
-      $this->NM_tit_val[7]     = strip_tags("$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
-      $this->NM_ind_val[7]     = 6;
-      $this->array_decimais[7] = 0;
-      $this->NM_tit_val[2]     = strip_tags("Subtotal(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
-      $this->NM_ind_val[2]     = 7;
+      $this->NM_tit_val[2]     = strip_tags("$ ReteICA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
+      $this->NM_ind_val[2]     = 3;
       $this->array_decimais[2] = 0;
-      $this->NM_tit_val[4]     = strip_tags("Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
-      $this->NM_ind_val[4]     = 8;
+      $this->NM_tit_val[4]     = strip_tags("$ ReteIVA(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
+      $this->NM_ind_val[4]     = 4;
       $this->array_decimais[4] = 0;
+      $this->NM_tit_val[1]     = strip_tags("Val a Pagar(" .  $this->Ini->Nm_lang['lang_btns_smry_msge_sumt'] . ")");
+      $this->NM_ind_val[1]     = 5;
+      $this->array_decimais[1] = 0;
       $this->campo     = (isset($campo))        ? $campo        : 0;
       $this->nivel     = (isset($nivel_quebra)) ? $nivel_quebra : 0;
       $this->campo_val = (isset($campo_val))    ? $campo_val    : 1;
@@ -377,7 +368,7 @@ class grid_compras_new_grafico
       {
           foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['graf_total'] as $label => $valor)
           {
-              $this->array_label[] = $valor[8];
+              $this->array_label[] = $valor[5];
               if ($this->campo == 0 && $this->nivel == 0)
               {
                   if ($this->sc_graf_sint)

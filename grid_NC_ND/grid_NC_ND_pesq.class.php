@@ -315,38 +315,6 @@ class grid_NC_ND_pesq
           $this->Db->Close(); 
           exit;
       }
-      if ($this->NM_ajax_opcao == 'autocomp_observaciones')
-      {
-          $observaciones = ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($_GET['q'])) ? sc_convert_encoding($_GET['q'], $_SESSION['scriptcase']['charset'], "UTF-8") : $_GET['q'];
-          $nmgp_def_dados = $this->lookup_ajax_observaciones($observaciones);
-          ob_end_clean();
-          ob_end_clean();
-          $count_aut_comp = 0;
-          $resp_aut_comp  = array();
-          foreach ($nmgp_def_dados as $Ind => $Lista)
-          {
-             if (is_array($Lista))
-             {
-                 foreach ($Lista as $Cod => $Valor)
-                 {
-                     if ($_GET['cod_desc'] == "S")
-                     {
-                         $Valor = $Cod . " - " . $Valor;
-                     }
-                     $resp_aut_comp[] = array('text' => $Valor , 'id' => $Cod);
-                     $count_aut_comp++;
-                 }
-             }
-             if ($count_aut_comp == $_GET['max_itens'])
-             {
-                 break;
-             }
-          }
-          $oJson = new Services_JSON();
-          echo $oJson->encode(array('results' => $resp_aut_comp));
-          $this->Db->Close(); 
-          exit;
-      }
    }
    function lookup_ajax_numfacven($numfacven)
    {
@@ -356,15 +324,15 @@ class grid_NC_ND_pesq
       $nmgp_def_dados = array(); 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
       {
-          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where   CAST (numfacven AS TEXT)  like '%" . $numfacven . "%'"; 
+          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where   CAST (numfacven AS TEXT)  like '%" . $numfacven . "%'"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       {
-          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where   CAST (numfacven AS VARCHAR)  like '%" . $numfacven . "%'"; 
+          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where   CAST (numfacven AS VARCHAR)  like '%" . $numfacven . "%'"; 
       }
       else
       {
-          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where  numfacven like '%" . $numfacven . "%'"; 
+          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where  numfacven like '%" . $numfacven . "%'"; 
       }
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
@@ -468,38 +436,6 @@ class grid_NC_ND_pesq
             $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
             $cmp2 = NM_charset_to_utf8(trim($rs->fields[1]));
             $nmgp_def_dados[] = array($cmp1 => $cmp2); 
-            $rs->MoveNext() ; 
-         } 
-         $rs->Close() ; 
-      } 
-      else  
-      {  
-         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-         exit; 
-      } 
-
-      return $nmgp_def_dados;
-   }
-   
-   function lookup_ajax_observaciones($observaciones)
-   {
-      $observaciones = substr($this->Db->qstr($observaciones), 1, -1);
-            $observaciones_look = substr($this->Db->qstr($observaciones), 1, -1); 
-      $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct observaciones from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where  observaciones like '%" . $observaciones . "%'"; 
-      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
-      {
-          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
-      }
-      unset($cmp1,$cmp2);
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($rs = $this->Db->Execute($nm_comando)) 
-      { 
-         while (!$rs->EOF) 
-         { 
-            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
-            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
             $rs->MoveNext() ; 
          } 
          $rs->Close() ; 
@@ -2113,7 +2049,6 @@ function scJQCalendarAdd() {
   str_out += 'id_ac_vendedor#NMF#' + search_get_text('id_ac_vendedor') + '@NMF@';
   str_out += 'SC_observaciones_cond#NMF#' + search_get_sel_txt('SC_observaciones_cond') + '@NMF@';
   str_out += 'SC_observaciones#NMF#' + search_get_text('SC_observaciones') + '@NMF@';
-  str_out += 'id_ac_observaciones#NMF#' + search_get_title('select2-id_ac_observaciones-container') + '@NMF@';
   str_out += 'SC_asentada_cond#NMF#' + search_get_sel_txt('SC_asentada_cond') + '@NMF@';
   str_out += 'SC_asentada#NMF#' + search_get_select('SC_asentada') + '@NMF@';
   str_out += 'SC_pagada_cond#NMF#' + search_get_sel_txt('SC_pagada_cond') + '@NMF@';
@@ -2293,54 +2228,6 @@ function nm_open_popup(parms)
        }
      }
    });
-  $(".sc-ui-autocomp-observaciones").on("focus", function() {
-  }).on("blur", function() {
-  }).on("keydown", function(e) {
-   if(e.keyCode == $.ui.keyCode.TAB && $(".ui-autocomplete").filter(":visible").length) {
-    e.keyCode = $.ui.keyCode.DOWN;
-    $(this).trigger(e);
-    e.keyCode = $.ui.keyCode.ENTER;
-    $(this).trigger(e);
-   }
-  }).select2({
-   minimumInputLength: 1,
-   language: {
-    inputTooShort: function() {
-     return "<?php echo sprintf($this->Ini->Nm_lang['lang_autocomp_tooshort'], 1) ?>";
-    },
-    containerCssClass: 'scGridFilterDivResult',
-    dropdownCssClass: 'scGridFilterDivDropdown',
-    noResults: function() {
-     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
-    },
-    searching: function() {
-     return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
-    }
-   },
-   width: "300px",
-   ajax: {
-    url: "index.php",
-    dataType: "json",
-    processResults: function (data) {
-      if (data == "ss_time_out") {
-          nm_move();
-      }
-      return data;
-    },
-    data: function (params) {
-     var query = {
-      q: params.term,
-      nmgp_opcao: "ajax_autocomp",
-      nmgp_parms: "NM_ajax_opcao?#?autocomp_observaciones",
-      max_itens: "10",
-      script_case_init: <?php echo $this->Ini->sc_page ?>
-     }
-     return query;
-    }
-   }
-  }).on("select2:select", function(e) {;
-   $("#SC_observaciones").val(e.params.data.id);
-  });
   $(".sc-ui-autocomp-numfacven").on("focus", function() {
   }).on("blur", function() {
   }).on("keydown", function(e) {
@@ -2523,7 +2410,7 @@ function nm_open_popup(parms)
              $numfacven_cond, $numfacven, $numfacven_autocomp,
              $idcli_cond, $idcli, $idcli_autocomp,
              $vendedor_cond, $vendedor, $vendedor_autocomp,
-             $observaciones_cond, $observaciones, $observaciones_autocomp,
+             $observaciones_cond, $observaciones,
              $asentada_cond, $asentada,
              $pagada_cond, $pagada,
              $credito_cond, $credito,
@@ -3080,15 +2967,15 @@ foreach ($Arr_format as $Part_date)
    { 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
       {
-          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
+          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       {
-          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
+          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
       }
       else
       {
-          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
+          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
       }
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
@@ -3309,7 +3196,7 @@ foreach ($Arr_format as $Part_date)
 
 
 
-      <TD id='SC_observaciones_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Motivo Nota"; ?></TD>
+      <TD id='SC_observaciones_label' class="scFilterLabelEven"><?php echo (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Observaciones"; ?></TD>
       
       <INPUT type="hidden" id="SC_observaciones_cond" name="observaciones_cond" value="qp">
  
@@ -3318,7 +3205,7 @@ foreach ($Arr_format as $Part_date)
        <TR id="id_hide_observaciones" <?php echo $str_hide_observaciones?> valign="top">
         <TD class="scFilterFieldFontEven">
            <?php
- $SC_Label = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Motivo Nota";
+ $SC_Label = (isset($this->New_label['observaciones'])) ? $this->New_label['observaciones'] : "Observaciones";
  $nmgp_tab_label .= "observaciones?#?" . $SC_Label . "?@?";
  $date_sep_bw = " ";
  if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($date_sep_bw))
@@ -3326,46 +3213,7 @@ foreach ($Arr_format as $Part_date)
      $date_sep_bw = sc_convert_encoding($date_sep_bw, $_SESSION['scriptcase']['charset'], "UTF-8");
  }
 ?>
-<?php
-      if ($observaciones != "")
-      {
-      $observaciones_look = substr($this->Db->qstr($observaciones), 1, -1); 
-      $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct observaciones from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where observaciones = '$observaciones_look'"; 
-      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
-      {
-          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
-      }
-      unset($cmp1,$cmp2);
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($rs = $this->Db->Execute($nm_comando)) 
-      { 
-         while (!$rs->EOF) 
-         { 
-            $cmp1 = trim($rs->fields[0]);
-            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
-            $rs->MoveNext() ; 
-         } 
-         $rs->Close() ; 
-      } 
-      else  
-      {  
-         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-         exit; 
-      } 
-      }
-      if (isset($nmgp_def_dados[0][$observaciones]))
-      {
-          $sAutocompValue = $nmgp_def_dados[0][$observaciones];
-      }
-      else
-      {
-          $sAutocompValue = $observaciones;
-      }
-?>
-<INPUT  type="text" id="SC_observaciones" name="observaciones" value="<?php echo NM_encode_input($observaciones) ?>"  size=60 alt="{datatype: 'text', maxLength: 200, allowedChars: '', lettersCase: '', autoTab: false, enterTab: true}" style="display: none">
-<select class="sc-js-input scFilterObjectEven sc-ui-autocomp-observaciones" id="id_ac_observaciones" name="observaciones_autocomp"><?php if ('' !=  $observaciones) { ?><option value="<?php echo $observaciones ?>" selected><?php echo $sAutocompValue ?></option><?php } ?></select>
+<INPUT  type="text" id="SC_observaciones" name="observaciones" value="<?php echo NM_encode_input($observaciones) ?>"  size=60 alt="{datatype: 'text', maxLength: 200, allowedChars: '', lettersCase: '', autoTab: false, enterTab: true}" class="sc-js-input scFilterObjectEven">
 
         </TD>
        </TR>
@@ -3818,8 +3666,6 @@ foreach ($Arr_format as $Part_date)
    document.F1.observaciones_cond.value = 'qp';
    nm_campos_between(document.getElementById('id_vis_observaciones'), document.F1.observaciones_cond, 'observaciones');
    document.F1.observaciones.value = "";
-   document.F1.observaciones_autocomp.value = "";
-   $('#select2-id_ac_observaciones-container').html('<?php echo $this->Val_init_observaciones['desc'] ?>');;
    document.F1.asentada_cond.value = 'eq';
    nm_campos_between(document.getElementById('id_vis_asentada'), document.F1.asentada_cond, 'asentada');
    document.F1.asentada.value = "";
@@ -4088,8 +3934,7 @@ foreach ($Arr_format as $Part_date)
       $tp_fields['SC_vendedor'] = 'text_aut';
       $tp_fields['id_ac_vendedor'] = 'text_aut';
       $tp_fields['SC_observaciones_cond'] = 'cond';
-      $tp_fields['SC_observaciones'] = 'text_aut';
-      $tp_fields['id_ac_observaciones'] = 'select2_aut';
+      $tp_fields['SC_observaciones'] = 'text';
       $tp_fields['SC_asentada_cond'] = 'cond';
       $tp_fields['SC_asentada'] = 'select';
       $tp_fields['SC_pagada_cond'] = 'cond';
@@ -4244,7 +4089,7 @@ foreach ($Arr_format as $Part_date)
              $numfacven_cond, $numfacven, $numfacven_autocomp,
              $idcli_cond, $idcli, $idcli_autocomp,
              $vendedor_cond, $vendedor, $vendedor_autocomp,
-             $observaciones_cond, $observaciones, $observaciones_autocomp,
+             $observaciones_cond, $observaciones,
              $asentada_cond, $asentada,
              $pagada_cond, $pagada,
              $credito_cond, $credito, $nmgp_tab_label;
@@ -4264,10 +4109,6 @@ foreach ($Arr_format as $Part_date)
       if (!empty($vendedor_autocomp) && empty($vendedor))
       {
           $vendedor = $vendedor_autocomp;
-      }
-      if (!empty($observaciones_autocomp) && empty($observaciones))
-      {
-          $observaciones = $observaciones_autocomp;
       }
       $fechaven_cond_salva = $fechaven_cond; 
       if (!isset($fechaven_input_2_dia) || $fechaven_input_2_dia == "")
@@ -4446,15 +4287,15 @@ foreach ($Arr_format as $Part_date)
    { 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
       {
-          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
+          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
       }
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       {
-          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
+          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
       }
       else
       {
-          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
+          $nm_comando = "select distinct numfacven from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where numfacven = $numfacven_look"; 
       }
       foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
       {
@@ -4632,55 +4473,13 @@ foreach ($Arr_format as $Part_date)
       {
           $this->cmp_formatado['vendedor'] = $vendedor;
       }
-      $nmgp_def_dados = array();
-    if ($observaciones != '') {
-      $observaciones_look = substr($this->Db->qstr($observaciones), 1, -1); 
-      $nmgp_def_dados = array(); 
-      $nm_comando = "select distinct observaciones from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp where observaciones = '$observaciones_look'"; 
-      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
-      {
-          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
-      }
-      unset($cmp1,$cmp2);
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($rs = $this->Db->Execute($nm_comando)) 
+      $Conteudo = $observaciones;
+      if ($Conteudo != "") 
       { 
-         while (!$rs->EOF) 
-         { 
-            $cmp1 = NM_charset_to_utf8(trim($rs->fields[0]));
-            $nmgp_def_dados[] = array($cmp1 => $cmp1); 
-            $rs->MoveNext() ; 
-         } 
-         $rs->Close() ; 
+          $Conteudo = sc_strtolower($Conteudo); 
+          $Conteudo = ucfirst($Conteudo); 
       } 
-      else  
-      {  
-         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-         exit; 
-      } 
-
-    }
-      if (!empty($nmgp_def_dados) && isset($cmp2) && !empty($cmp2))
-      {
-          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
-          {
-             $cmp2 = NM_conv_charset($cmp2, $_SESSION['scriptcase']['charset'], "UTF-8");
-          }
-          $this->cmp_formatado['observaciones'] = $cmp2;
-      }
-      elseif (!empty($nmgp_def_dados) && isset($cmp1) && !empty($cmp1))
-      {
-          if ($_SESSION['scriptcase']['charset'] != "UTF-8")
-          {
-             $cmp1 = NM_conv_charset($cmp1, $_SESSION['scriptcase']['charset'], "UTF-8");
-          }
-          $this->cmp_formatado['observaciones'] = $cmp1;
-      }
-      else
-      {
-          $this->cmp_formatado['observaciones'] = $observaciones;
-      }
+      $this->cmp_formatado['observaciones'] = $Conteudo;
       $Conteudo = $asentada;
       if (strpos($Conteudo, "##@@") !== false)
       {

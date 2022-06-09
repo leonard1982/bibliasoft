@@ -423,7 +423,45 @@ class grid_NC_ND_resumo
       $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'on';
 if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
 if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
-  ?>
+  $vvalidar_correo_enlinea = "NO";
+
+$vsql = "select validar_correo_enlinea from configuraciones  where idconfiguraciones=1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vVEmail = array();
+      $this->vvemail = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vVEmail[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vvemail[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vVEmail = false;
+          $this->vVEmail_erro = $this->Db->ErrorMsg();
+          $this->vvemail = false;
+          $this->vvemail_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vvemail[0][0]))
+{
+	$vvalidar_correo_enlinea = $this->vvemail[0][0];
+}
+
+?>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
 <?php
@@ -644,6 +682,8 @@ switch($this->sc_temp_gproveedor)
 
 ?>
 <script>
+
+	
 function fEnviarPropio(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
@@ -661,25 +701,150 @@ function fEnviarPropio(idfacven)
 			}
 		});
 		
-		$.post("../blank_envio_propio_nc/index.php",{
-			
-			idfacven:idfacven
-			   
+		var vvalidar_correo_enlinea = "<?php echo $vvalidar_correo_enlinea; ?>";
+		
+		if(vvalidar_correo_enlinea=="SI")
+		{
+			$.post("../blank_correo_reenvio_validador/index.php",{
+
+				idfacven:idfacven
+
 			},function(r){
 
-			$.unblockUI();
-			console.log(r);
-			
-			if(confirm(r))
-			{
-			   location.href = '../grid_NC_ND';
-			}
-			else
-			{
-			   location.href = '../grid_NC_ND';
-			}
-			
-		});
+				console.log(r);
+				var em = JSON.parse(r);
+				
+				var email    = em.email;
+				var validado = em.validado;
+				
+				if(validado=="NO")
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.get("../valida_email.php",{
+
+							email:email
+
+						},function(r2){
+
+							console.log(r2);
+							var obj = JSON.parse(r2);
+
+							if(obj.error=="")
+							{
+								$.post("../blank_envio_propio_nc/index.php",{
+
+									idfacven:idfacven,
+									reason:obj.reason,
+									json_valida_email:obj.json
+
+									},function(r3){
+
+									$.unblockUI();
+									console.log(r3);
+
+									if(r3=="Documento enviado con éxito!!!")
+									{
+										nm_gp_submit_ajax ('igual', 'breload');
+									}
+									else
+									{
+										if(confirm(r3))
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+										else
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+									}
+								});
+							}
+							else
+							{
+								if(confirm(obj.error))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El cliente no tiene correo electrónico.");
+					}
+				}
+				else
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.post("../blank_envio_propio_nc/index.php",{
+
+							idfacven:idfacven,
+							reason:'accepted_email',
+							json_valida_email:''
+
+							},function(r3){
+
+							$.unblockUI();
+							console.log(r3);
+
+							if(r3=="Documento enviado con éxito!!!")
+							{
+								nm_gp_submit_ajax ('igual', 'breload');
+							}
+							else
+							{
+								if(confirm(r3))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El cliente no tiene correo electrónico...");
+					}
+				}
+			});
+		}
+		else
+		{
+			$.post("../blank_envio_propio_nc/index.php",{
+
+				idfacven:idfacven
+
+				},function(r){
+
+				$.unblockUI();
+				console.log(r);
+
+				if(r=="Documento enviado con éxito!!!")
+				{
+					nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+					if(confirm(r))
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+					else
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+				}
+			});
+		}
 	}
 }
 	
@@ -905,9 +1070,9 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['fechaven'] = "Fecha"; 
        }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['observaciones']))
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['motivo']))
        {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['observaciones'] = "Motivo Nota"; 
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['motivo'] = "Motivo"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['total']))
        {
@@ -960,6 +1125,10 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['valoriva']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['valoriva'] = "IVA"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['observaciones']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['observaciones'] = "Observaciones"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['saldo']))
        {
@@ -6447,7 +6616,45 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['doc_word'])
      $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'on';
 if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
 if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
-  ?>
+  $vvalidar_correo_enlinea = "NO";
+
+$vsql = "select validar_correo_enlinea from configuraciones  where idconfiguraciones=1";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vVEmail = array();
+      $this->vvemail = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vVEmail[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vvemail[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vVEmail = false;
+          $this->vVEmail_erro = $this->Db->ErrorMsg();
+          $this->vvemail = false;
+          $this->vvemail_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vvemail[0][0]))
+{
+	$vvalidar_correo_enlinea = $this->vvemail[0][0];
+}
+
+?>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
 <script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
 <?php
@@ -6668,6 +6875,8 @@ switch($this->sc_temp_gproveedor)
 
 ?>
 <script>
+
+	
 function fEnviarPropio(idfacven)
 {
 	if(confirm('¿Desea Enviar el documento?'))
@@ -6685,25 +6894,150 @@ function fEnviarPropio(idfacven)
 			}
 		});
 		
-		$.post("../blank_envio_propio_nc/index.php",{
-			
-			idfacven:idfacven
-			   
+		var vvalidar_correo_enlinea = "<?php echo $vvalidar_correo_enlinea; ?>";
+		
+		if(vvalidar_correo_enlinea=="SI")
+		{
+			$.post("../blank_correo_reenvio_validador/index.php",{
+
+				idfacven:idfacven
+
 			},function(r){
 
-			$.unblockUI();
-			console.log(r);
-			
-			if(confirm(r))
-			{
-			   location.href = '../grid_NC_ND';
-			}
-			else
-			{
-			   location.href = '../grid_NC_ND';
-			}
-			
-		});
+				console.log(r);
+				var em = JSON.parse(r);
+				
+				var email    = em.email;
+				var validado = em.validado;
+				
+				if(validado=="NO")
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.get("../valida_email.php",{
+
+							email:email
+
+						},function(r2){
+
+							console.log(r2);
+							var obj = JSON.parse(r2);
+
+							if(obj.error=="")
+							{
+								$.post("../blank_envio_propio_nc/index.php",{
+
+									idfacven:idfacven,
+									reason:obj.reason,
+									json_valida_email:obj.json
+
+									},function(r3){
+
+									$.unblockUI();
+									console.log(r3);
+
+									if(r3=="Documento enviado con éxito!!!")
+									{
+										nm_gp_submit_ajax ('igual', 'breload');
+									}
+									else
+									{
+										if(confirm(r3))
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+										else
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+									}
+								});
+							}
+							else
+							{
+								if(confirm(obj.error))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El cliente no tiene correo electrónico.");
+					}
+				}
+				else
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.post("../blank_envio_propio_nc/index.php",{
+
+							idfacven:idfacven,
+							reason:'accepted_email',
+							json_valida_email:''
+
+							},function(r3){
+
+							$.unblockUI();
+							console.log(r3);
+
+							if(r3=="Documento enviado con éxito!!!")
+							{
+								nm_gp_submit_ajax ('igual', 'breload');
+							}
+							else
+							{
+								if(confirm(r3))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El cliente no tiene correo electrónico...");
+					}
+				}
+			});
+		}
+		else
+		{
+			$.post("../blank_envio_propio_nc/index.php",{
+
+				idfacven:idfacven
+
+				},function(r){
+
+				$.unblockUI();
+				console.log(r);
+
+				if(r=="Documento enviado con éxito!!!")
+				{
+					nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+					if(confirm(r))
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+					else
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+				}
+			});
+		}
 	}
 }
 	
@@ -6768,19 +7102,19 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ""; 
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
      { 
-         $nmgp_select = "SELECT num, idcli, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), observaciones, total, pagada, asentada, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+         $nmgp_select = "SELECT num, idcli, str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), motivo, total, pagada, asentada, idfacven, numfacven, credito, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
      { 
-         $nmgp_select = "SELECT num, idcli, fechaven, observaciones, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+         $nmgp_select = "SELECT num, idcli, fechaven, motivo, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
      } 
      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
      { 
-         $nmgp_select = "SELECT num, idcli, convert(char(23),fechaven,121), observaciones, total, pagada, asentada, idfacven, numfacven, credito, convert(char(23),fechavenc,121), subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+         $nmgp_select = "SELECT num, idcli, convert(char(23),fechaven,121), motivo, total, pagada, asentada, idfacven, numfacven, credito, convert(char(23),fechavenc,121), subtotal, valoriva, observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
      } 
      else 
      { 
-         $nmgp_select = "SELECT num, idcli, fechaven, observaciones, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
+         $nmgp_select = "SELECT num, idcli, fechaven, motivo, total, pagada, asentada, idfacven, numfacven, credito, fechavenc, subtotal, valoriva, observaciones, saldo, adicional, adicional2, adicional3, vendedor, pedido, resolucion, base_iva_19, valor_iva_19, base_iva_5, valor_iva_5, excento, tipo, id_fact, cufe, enlacepdf, estado from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,      vendedor,     pedido,      resolucion,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as base_iva_19,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='19'),0) as valor_iva_19,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as base_iva_5,     coalesce((select sum(v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='5'),0) as valor_iva_5,     coalesce((select sum(v.valorpar-v.iva) from detalleventa v where v.numfac=idfacven and v.adicional='0'),0) as excento, tipo, id_fact,    cufe,    enlacepdf,     id_trans_fe,     estado,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion limit 1),'/',f.numfacven) as num,     if(f.mot_nc is not null, f.mot_nc, f.mot_nd) as motivo FROM      facturaven f WHERE     numfacven!=0 and (tipo='ND' or tipo='NC') ) nm_sel_esp"; 
      } 
      $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['where_pesq']; 
      $campos_order = "";
@@ -6885,7 +7219,7 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
             $this->num = $rs_res->fields[0] ;  
             $this->idcli = $rs_res->fields[1] ;  
             $this->fechaven = $rs_res->fields[2] ;  
-            $this->observaciones = $rs_res->fields[3] ;  
+            $this->motivo = $rs_res->fields[3] ;  
             $this->total = $rs_res->fields[4] ;  
             $this->total =  str_replace(",", ".", $this->total);
             $this->pagada = $rs_res->fields[5] ;  
@@ -6898,29 +7232,30 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
             $this->subtotal =  str_replace(",", ".", $this->subtotal);
             $this->valoriva = $rs_res->fields[12] ;  
             $this->valoriva =  str_replace(",", ".", $this->valoriva);
-            $this->saldo = $rs_res->fields[13] ;  
+            $this->observaciones = $rs_res->fields[13] ;  
+            $this->saldo = $rs_res->fields[14] ;  
             $this->saldo =  str_replace(",", ".", $this->saldo);
-            $this->adicional = $rs_res->fields[14] ;  
-            $this->adicional2 = $rs_res->fields[15] ;  
-            $this->adicional3 = $rs_res->fields[16] ;  
-            $this->vendedor = $rs_res->fields[17] ;  
-            $this->pedido = $rs_res->fields[18] ;  
-            $this->resolucion = $rs_res->fields[19] ;  
-            $this->base_iva_19 = $rs_res->fields[20] ;  
+            $this->adicional = $rs_res->fields[15] ;  
+            $this->adicional2 = $rs_res->fields[16] ;  
+            $this->adicional3 = $rs_res->fields[17] ;  
+            $this->vendedor = $rs_res->fields[18] ;  
+            $this->pedido = $rs_res->fields[19] ;  
+            $this->resolucion = $rs_res->fields[20] ;  
+            $this->base_iva_19 = $rs_res->fields[21] ;  
             $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
-            $this->valor_iva_19 = $rs_res->fields[21] ;  
+            $this->valor_iva_19 = $rs_res->fields[22] ;  
             $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
-            $this->base_iva_5 = $rs_res->fields[22] ;  
+            $this->base_iva_5 = $rs_res->fields[23] ;  
             $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
-            $this->valor_iva_5 = $rs_res->fields[23] ;  
+            $this->valor_iva_5 = $rs_res->fields[24] ;  
             $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
-            $this->excento = $rs_res->fields[24] ;  
+            $this->excento = $rs_res->fields[25] ;  
             $this->excento =  str_replace(",", ".", $this->excento);
-            $this->tipo = $rs_res->fields[25] ;  
-            $this->id_fact = $rs_res->fields[26] ;  
-            $this->cufe = $rs_res->fields[27] ;  
-            $this->enlacepdf = $rs_res->fields[28] ;  
-            $this->estado = $rs_res->fields[29] ;  
+            $this->tipo = $rs_res->fields[26] ;  
+            $this->id_fact = $rs_res->fields[27] ;  
+            $this->cufe = $rs_res->fields[28] ;  
+            $this->enlacepdf = $rs_res->fields[29] ;  
+            $this->estado = $rs_res->fields[30] ;  
             $this->look_credito = $this->credito; 
             $this->Lookup->lookup_credito($this->look_credito); 
             $this->look_vendedor = $this->vendedor; 

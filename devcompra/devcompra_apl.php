@@ -1825,6 +1825,7 @@ if($asen==1)
                  $SCrx->fields[14] = str_replace(',', '.', $SCrx->fields[14]);
                  $SCrx->fields[20] = str_replace(',', '.', $SCrx->fields[20]);
                  $SCrx->fields[22] = str_replace(',', '.', $SCrx->fields[22]);
+                 $SCrx->fields[25] = str_replace(',', '.', $SCrx->fields[25]);
                  $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
                  $SCrx->fields[0] = (string)$SCrx->fields[0];
                  $SCrx->fields[1] = (strpos(strtolower($SCrx->fields[1]), "e")) ? (float)$SCrx->fields[1] : $SCrx->fields[1];
@@ -1859,6 +1860,8 @@ if($asen==1)
                  $SCrx->fields[20] = (string)$SCrx->fields[20];
                  $SCrx->fields[22] = (strpos(strtolower($SCrx->fields[22]), "e")) ? (float)$SCrx->fields[22] : $SCrx->fields[22];
                  $SCrx->fields[22] = (string)$SCrx->fields[22];
+                 $SCrx->fields[25] = (strpos(strtolower($SCrx->fields[25]), "e")) ? (float)$SCrx->fields[25] : $SCrx->fields[25];
+                 $SCrx->fields[25] = (string)$SCrx->fields[25];
                  for ($SCx = 0; $SCx < $nm_count; $SCx++)
                  { 
                       $this->ds[$SCy] [$SCx] = $SCrx->fields[$SCx];

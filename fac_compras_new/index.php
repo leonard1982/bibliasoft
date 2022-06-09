@@ -299,9 +299,9 @@ class fac_compras_new_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20180212"; 
       $this->nm_hr_criacao   = "100855"; 
-      $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220527"; 
-      $this->nm_hr_ult_alt   = "091228"; 
+      $this->nm_autor_alt    = "edgar"; 
+      $this->nm_dt_ult_alt   = "20220609"; 
+      $this->nm_hr_ult_alt   = "105127"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -1008,7 +1008,7 @@ class fac_compras_new_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDuBqHAvmVWJsHgvOVcBUDWFYDoNUDcBqVIJsDSrYHQJwDEBODkFeH5FYVoFGHQJKDQBqHArYHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMNOV9BUDWF/HMJeHQBiZSBqHIveV5JwDEBeVkJqDuJeVoJsHQJeDQFGHABYHQXGHgvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWXCDoraDcJeZSFUZ1rwV5FGHuNODkBOV5FYVorqD9XOZSB/HABYD5JeDMNKZSXeV5XCVoB/D9NmZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMzGV9BUH5B7VoX7HQBqZ1X7HArKV5BODMBYVkXeDuFYHIJwHQXsZSBiHIrwHQJwHuvmVIBsDWJeHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VErqHQNmZ1BiHABYHQJwDEBODkFeH5FYVoFGHQJKDQJwDSN7VWBqHgrKDkBODWFaHMF7HQNwZ1F7DSBOZMB/DMBYHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDuFaHIBeD5BqHuzGDkBOHEFYDoJeDcBqZSBqD1vsZMJeHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDuFqHMFaDcFYH9FaDSNOZMB/HgveHEJGDuXKZuXGDcBwDQFUHAveHQB/HuBYV9BUH5XCHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBODcJeDQX7D1BeV5raHgvsDkBOV5X7DoXGD9XOZ1rqHAN7D5NUDErKZSJqV5FaVoBiDcBwDQFGHINaD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWF/VEX7HQXOH9BqZ1rYZMBqDEBOHEXeDuFaHIBqDcBwDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqHAvCV5JeDMvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHEXeV5FaHMJsD9NwDQX7DSBYHQBODMBOVIBsHEF/HIJeD9XOZ1rqD1rwV5FGHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1424,6 +1424,7 @@ class fac_compras_new_ini
           $this->Db->Execute("alter session set nls_numeric_characters  = '.,'");
           $_SESSION['sc_session'][$this->sc_page]['fac_compras_new']['decimal_db'] = "."; 
       } 
+      $this->Db->debug = true;
   }
 
   function setConnectionHash() {
@@ -1889,20 +1890,21 @@ ob_start();
             $valoriva = NM_utf8_urldecode($_POST['rsargs'][1]);
             $cod_cuenta = NM_utf8_urldecode($_POST['rsargs'][2]);
             $asentada = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $idfaccom = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $banco = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $formapago = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $total = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $idprov = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $retencion = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $reteica = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $reteiva = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $fechacom = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $numfacom = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $usuario = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $pagada = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $saldo = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $tipo_com = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $idfaccom = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $banco = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $formapago = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $total = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $idprov = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $retencion = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $reteica = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $reteiva = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $fechacom = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $numfacom = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $usuario = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $pagada = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $saldo = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][18]);
         }
         if ('ajax_fac_compras_new_event_hdetalle_onclick' == $_POST['rs'])
         {
@@ -1913,6 +1915,13 @@ ob_start();
         {
             $idfaccom = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_fac_compras_new_event_id_comafec_onchange' == $_POST['rs'])
+        {
+            $id_comafec = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $idprov = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $numfacom = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][3]);
         }
         if ('ajax_fac_compras_new_event_id_pedidocom_onchange' == $_POST['rs'])
         {
@@ -1942,8 +1951,10 @@ ob_start();
             $id_comafec = NM_utf8_urldecode($_POST['rsargs'][2]);
             $es_remision = NM_utf8_urldecode($_POST['rsargs'][3]);
             $id_pedidocom = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $idfaccom = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $saldo = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $pagada = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $idfaccom = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][8]);
         }
         if ('ajax_fac_compras_new_autocomp_idprov' == $_POST['rs'])
         {
@@ -2551,6 +2562,7 @@ ob_start();
     sajax_export("ajax_fac_compras_new_event_asentada_onchange");
     sajax_export("ajax_fac_compras_new_event_hdetalle_onclick");
     sajax_export("ajax_fac_compras_new_event_hdetalle_onfocus");
+    sajax_export("ajax_fac_compras_new_event_id_comafec_onchange");
     sajax_export("ajax_fac_compras_new_event_id_pedidocom_onchange");
     sajax_export("ajax_fac_compras_new_event_idprov_onchange");
     sajax_export("ajax_fac_compras_new_event_tipo_com_onchange");
@@ -3275,7 +3287,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_lkpedt_refresh_reteica
 
-    function ajax_fac_compras_new_event_asentada_onchange($subtotal, $valoriva, $cod_cuenta, $asentada, $idfaccom, $banco, $formapago, $total, $idprov, $retencion, $reteica, $reteiva, $fechacom, $numfacom, $usuario, $pagada, $saldo, $script_case_init)
+    function ajax_fac_compras_new_event_asentada_onchange($subtotal, $valoriva, $cod_cuenta, $asentada, $tipo_com, $idfaccom, $banco, $formapago, $total, $idprov, $retencion, $reteica, $reteiva, $fechacom, $numfacom, $usuario, $pagada, $saldo, $script_case_init)
     {
         global $inicial_fac_compras_new;
         //register_shutdown_function("fac_compras_new_pack_ajax_response");
@@ -3286,6 +3298,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'valoriva' => NM_utf8_urldecode($valoriva),
                   'cod_cuenta' => NM_utf8_urldecode($cod_cuenta),
                   'asentada' => NM_utf8_urldecode($asentada),
+                  'tipo_com' => NM_utf8_urldecode($tipo_com),
                   'idfaccom' => NM_utf8_urldecode($idfaccom),
                   'banco' => NM_utf8_urldecode($banco),
                   'formapago' => NM_utf8_urldecode($formapago),
@@ -3348,6 +3361,27 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_hdetalle_onfocus
 
+    function ajax_fac_compras_new_event_id_comafec_onchange($id_comafec, $idprov, $numfacom, $script_case_init)
+    {
+        global $inicial_fac_compras_new;
+        //register_shutdown_function("fac_compras_new_pack_ajax_response");
+        $inicial_fac_compras_new->contr_fac_compras_new->NM_ajax_flag          = true;
+        $inicial_fac_compras_new->contr_fac_compras_new->NM_ajax_opcao         = 'event_id_comafec_onchange';
+        $inicial_fac_compras_new->contr_fac_compras_new->NM_ajax_info['param'] = array(
+                  'id_comafec' => NM_utf8_urldecode($id_comafec),
+                  'idprov' => NM_utf8_urldecode($idprov),
+                  'numfacom' => NM_utf8_urldecode($numfacom),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_fac_compras_new->contr_fac_compras_new->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_fac_compras_new->contr_fac_compras_new->controle();
+        exit;
+    } // ajax_event_id_comafec_onchange
+
     function ajax_fac_compras_new_event_id_pedidocom_onchange($id_pedidocom, $idprov, $prefijo_delpedido, $observaciones, $formapago, $subtotal, $valoriva, $total, $saldo, $script_case_init)
     {
         global $inicial_fac_compras_new;
@@ -3397,7 +3431,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_idprov_onchange
 
-    function ajax_fac_compras_new_event_tipo_com_onchange($total, $tipo_com, $id_comafec, $es_remision, $id_pedidocom, $idfaccom, $script_case_init)
+    function ajax_fac_compras_new_event_tipo_com_onchange($total, $tipo_com, $id_comafec, $es_remision, $id_pedidocom, $saldo, $pagada, $idfaccom, $script_case_init)
     {
         global $inicial_fac_compras_new;
         //register_shutdown_function("fac_compras_new_pack_ajax_response");
@@ -3409,6 +3443,8 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'id_comafec' => NM_utf8_urldecode($id_comafec),
                   'es_remision' => NM_utf8_urldecode($es_remision),
                   'id_pedidocom' => NM_utf8_urldecode($id_pedidocom),
+                  'saldo' => NM_utf8_urldecode($saldo),
+                  'pagada' => NM_utf8_urldecode($pagada),
                   'idfaccom' => NM_utf8_urldecode($idfaccom),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,

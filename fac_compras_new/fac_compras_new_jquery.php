@@ -361,6 +361,12 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["calculated"] = $(oField).val();
     return;
   }
+  if ("id_comafec" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
   if ("id_pedidocom" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
     scEventControl_data[fieldName]["original"] = $(oField).val();
@@ -939,6 +945,7 @@ function sc_fac_compras_new_id_comafec_onblur(oThis, iSeqRow) {
 
 function sc_fac_compras_new_id_comafec_onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
+  do_ajax_fac_compras_new_event_id_comafec_onchange();
 }
 
 function sc_fac_compras_new_id_comafec_onfocus(oThis, iSeqRow) {

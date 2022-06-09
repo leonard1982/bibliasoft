@@ -230,8 +230,8 @@ class grid_NC_ND_ini
       $this->nm_dt_criacao   = "20171228"; 
       $this->nm_hr_criacao   = "114401"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220527"; 
-      $this->nm_hr_ult_alt   = "091228"; 
+      $this->nm_dt_ult_alt   = "20220609"; 
+      $this->nm_hr_ult_alt   = "121658"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -809,6 +809,8 @@ class grid_NC_ND_ini
       $this->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
       $this->Tree_img_type   = "kie";
+      $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $_SESSION['scriptcase']['nmamd'] = array();
       perfil_lib($this->path_libs);
       if (!isset($_SESSION['sc_session'][$this->sc_page]['SC_Check_Perfil']))
@@ -990,7 +992,7 @@ class grid_NC_ND_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwDQBqHABYV5FaDMBYVcFCDuFGVoX7HQJmZ1BOHIBeHuX7HgBeZSJqDWF/HIraD9NmDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FGDErKDkXKH5FYZuJeD9XsDQJsHAvmVWJsDMzGVcBUH5FqHMJeHQNmZ1FGDSrYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9BqZ1NOHQX7DMNKZSJ3V5XCHIBiHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJsHgrwVIBODuFqHMFUHQJmH9BqDSBeZMBqHgNOHEJqDuJeDoBqHQFYZ9XGHArYHQJwDMNOVIFCDuX7VEraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNwVINUHAvsD5BOHgBeHEFiV5B3DoF7D9XsDuFaHAveHQrqDMBODkB/HEF/HMXGHQBsVINUHArKHQFUHgveHEJGDurmZuB/D9NwDQX7Z1rwV5BOHgvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuFaDSN7HuJwDMvOVcBUDWF/VoBqDcFYH9FaHArYHQF7DEBeVkJGDWF/HIJeDcBwH9BiD1veHuBqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJsDMNOVcBOHEF/HIBiDcJUH9BqHIBeD5BOHgBODkBsV5B7ZuFaHQXODuFaD1veVWBqDMBOVcFCH5FqHINUHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9BqZ1NOHQX7DMNKZSJ3V5XCHIBiHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeZSJGH5FYHMJeHQXODuBqHABYHuJeDMNOVIBODWJeVENUHQBqZ1X7HAvmD5XGHgNKHArsH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDWB3DoBOHQJeDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBqZ1BiDSrYHuJsDEvsVkJqHEB7ZuFaD9JKZSBiDSBYHuFGHgvsVIBOV5F/DoBiD9BiZSFaD1rKV5JwDEvsZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4807,6 +4809,8 @@ class grid_NC_ND_apl
       $this->Ini->Tree_img_exp    = trim($str_tree_exp);
       $this->Ini->scGridRefinedSearchExpandFAIcon    = trim($scGridRefinedSearchExpandFAIcon);
       $this->Ini->scGridRefinedSearchCollapseFAIcon    = trim($scGridRefinedSearchCollapseFAIcon);
+      $str_button = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $str_button;
       $this->Ini->str_chart_theme = (isset($str_chart_theme)?$str_chart_theme:'');
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
@@ -4912,7 +4916,7 @@ class grid_NC_ND_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "idcli";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "factura";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "fechaven";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "observaciones";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "motivo";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "total";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "pagada";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "asentada";
@@ -4925,6 +4929,7 @@ class grid_NC_ND_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "fechavenc";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "subtotal";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "valoriva";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "observaciones";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "saldo";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "adicional";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['field_order'][] = "adicional2";
@@ -4950,6 +4955,7 @@ class grid_NC_ND_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['usr_cmp_sel']['fechavenc'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['usr_cmp_sel']['subtotal'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['usr_cmp_sel']['valoriva'] = "off";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['usr_cmp_sel']['observaciones'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['usr_cmp_sel']['saldo'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['usr_cmp_sel']['adicional'] = "off";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['usr_cmp_sel']['adicional2'] = "off";
@@ -6108,7 +6114,7 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->idcli = $this->rs_grid->fields[1] ;  
        $this->idcli = (string)$this->idcli;
        $this->fechaven = $this->rs_grid->fields[2] ;  
-       $this->observaciones = $this->rs_grid->fields[3] ;  
+       $this->motivo = $this->rs_grid->fields[3] ;  
        $this->total = $this->rs_grid->fields[4] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
@@ -6128,63 +6134,87 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->valoriva = $this->rs_grid->fields[12] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->saldo = $this->rs_grid->fields[13] ;  
-       $this->saldo =  str_replace(",", ".", $this->saldo);
-       $this->saldo = (string)$this->saldo;
-       $this->adicional = $this->rs_grid->fields[14] ;  
-       $this->adicional = (string)$this->adicional;
-       $this->adicional2 = $this->rs_grid->fields[15] ;  
-       $this->adicional2 = (string)$this->adicional2;
-       $this->adicional3 = $this->rs_grid->fields[16] ;  
-       $this->adicional3 = (string)$this->adicional3;
-       $this->vendedor = $this->rs_grid->fields[17] ;  
-       $this->vendedor = (string)$this->vendedor;
-       $this->pedido = $this->rs_grid->fields[18] ;  
-       $this->pedido = (string)$this->pedido;
-       $this->resolucion = $this->rs_grid->fields[19] ;  
-       $this->resolucion = (string)$this->resolucion;
-       $this->base_iva_19 = $this->rs_grid->fields[20] ;  
-       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
-       $this->base_iva_19 = (string)$this->base_iva_19;
-       $this->valor_iva_19 = $this->rs_grid->fields[21] ;  
-       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
-       $this->valor_iva_19 = (string)$this->valor_iva_19;
-       $this->base_iva_5 = $this->rs_grid->fields[22] ;  
-       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
-       $this->base_iva_5 = (string)$this->base_iva_5;
-       $this->valor_iva_5 = $this->rs_grid->fields[23] ;  
-       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
-       $this->valor_iva_5 = (string)$this->valor_iva_5;
-       $this->excento = $this->rs_grid->fields[24] ;  
-       $this->excento =  str_replace(",", ".", $this->excento);
-       $this->excento = (string)$this->excento;
-       $this->tipo = $this->rs_grid->fields[25] ;  
-       $this->id_fact = $this->rs_grid->fields[26] ;  
-       $this->id_fact = (string)$this->id_fact;
-       $this->cufe = $this->rs_grid->fields[27] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
-           $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[28])) 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[13])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[28]);  
+               $this->observaciones = file_get_contents($this->rs_grid->fields[13]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[28] ;  
+           $this->observaciones = $this->rs_grid->fields[13] ;  
        } 
-       $this->estado = $this->rs_grid->fields[29] ;  
+       $this->saldo = $this->rs_grid->fields[14] ;  
+       $this->saldo =  str_replace(",", ".", $this->saldo);
+       $this->saldo = (string)$this->saldo;
+       $this->adicional = $this->rs_grid->fields[15] ;  
+       $this->adicional = (string)$this->adicional;
+       $this->adicional2 = $this->rs_grid->fields[16] ;  
+       $this->adicional2 = (string)$this->adicional2;
+       $this->adicional3 = $this->rs_grid->fields[17] ;  
+       $this->adicional3 = (string)$this->adicional3;
+       $this->vendedor = $this->rs_grid->fields[18] ;  
+       $this->vendedor = (string)$this->vendedor;
+       $this->pedido = $this->rs_grid->fields[19] ;  
+       $this->pedido = (string)$this->pedido;
+       $this->resolucion = $this->rs_grid->fields[20] ;  
+       $this->resolucion = (string)$this->resolucion;
+       $this->base_iva_19 = $this->rs_grid->fields[21] ;  
+       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
+       $this->base_iva_19 = (string)$this->base_iva_19;
+       $this->valor_iva_19 = $this->rs_grid->fields[22] ;  
+       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
+       $this->valor_iva_19 = (string)$this->valor_iva_19;
+       $this->base_iva_5 = $this->rs_grid->fields[23] ;  
+       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
+       $this->base_iva_5 = (string)$this->base_iva_5;
+       $this->valor_iva_5 = $this->rs_grid->fields[24] ;  
+       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
+       $this->valor_iva_5 = (string)$this->valor_iva_5;
+       $this->excento = $this->rs_grid->fields[25] ;  
+       $this->excento =  str_replace(",", ".", $this->excento);
+       $this->excento = (string)$this->excento;
+       $this->tipo = $this->rs_grid->fields[26] ;  
+       $this->id_fact = $this->rs_grid->fields[27] ;  
+       $this->id_fact = (string)$this->id_fact;
+       $this->cufe = $this->rs_grid->fields[28] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->enlacepdf = "";  
+           if (is_file($this->rs_grid->fields[29])) 
+           { 
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[29]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       else 
+       { 
+           $this->enlacepdf = $this->rs_grid->fields[29] ;  
+       } 
+       $this->estado = $this->rs_grid->fields[30] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->enlacepdf))
            { 
                $this->enlacepdf = $this->Db->BlobDecode($this->enlacepdf, false, true, "BLOB");
@@ -6346,7 +6376,7 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->idcli = $this->rs_grid->fields[1] ;  
        $this->idcli = (string)$this->idcli;
        $this->fechaven = $this->rs_grid->fields[2] ;  
-       $this->observaciones = $this->rs_grid->fields[3] ;  
+       $this->motivo = $this->rs_grid->fields[3] ;  
        $this->total = $this->rs_grid->fields[4] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
@@ -6366,63 +6396,87 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->valoriva = $this->rs_grid->fields[12] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->saldo = $this->rs_grid->fields[13] ;  
-       $this->saldo =  str_replace(",", ".", $this->saldo);
-       $this->saldo = (string)$this->saldo;
-       $this->adicional = $this->rs_grid->fields[14] ;  
-       $this->adicional = (string)$this->adicional;
-       $this->adicional2 = $this->rs_grid->fields[15] ;  
-       $this->adicional2 = (string)$this->adicional2;
-       $this->adicional3 = $this->rs_grid->fields[16] ;  
-       $this->adicional3 = (string)$this->adicional3;
-       $this->vendedor = $this->rs_grid->fields[17] ;  
-       $this->vendedor = (string)$this->vendedor;
-       $this->pedido = $this->rs_grid->fields[18] ;  
-       $this->pedido = (string)$this->pedido;
-       $this->resolucion = $this->rs_grid->fields[19] ;  
-       $this->resolucion = (string)$this->resolucion;
-       $this->base_iva_19 = $this->rs_grid->fields[20] ;  
-       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
-       $this->base_iva_19 = (string)$this->base_iva_19;
-       $this->valor_iva_19 = $this->rs_grid->fields[21] ;  
-       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
-       $this->valor_iva_19 = (string)$this->valor_iva_19;
-       $this->base_iva_5 = $this->rs_grid->fields[22] ;  
-       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
-       $this->base_iva_5 = (string)$this->base_iva_5;
-       $this->valor_iva_5 = $this->rs_grid->fields[23] ;  
-       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
-       $this->valor_iva_5 = (string)$this->valor_iva_5;
-       $this->excento = $this->rs_grid->fields[24] ;  
-       $this->excento =  str_replace(",", ".", $this->excento);
-       $this->excento = (string)$this->excento;
-       $this->tipo = $this->rs_grid->fields[25] ;  
-       $this->id_fact = $this->rs_grid->fields[26] ;  
-       $this->id_fact = (string)$this->id_fact;
-       $this->cufe = $this->rs_grid->fields[27] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
-           $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[28])) 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[13])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[28]);  
+               $this->observaciones = file_get_contents($this->rs_grid->fields[13]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[28] ;  
+           $this->observaciones = $this->rs_grid->fields[13] ;  
        } 
-       $this->estado = $this->rs_grid->fields[29] ;  
+       $this->saldo = $this->rs_grid->fields[14] ;  
+       $this->saldo =  str_replace(",", ".", $this->saldo);
+       $this->saldo = (string)$this->saldo;
+       $this->adicional = $this->rs_grid->fields[15] ;  
+       $this->adicional = (string)$this->adicional;
+       $this->adicional2 = $this->rs_grid->fields[16] ;  
+       $this->adicional2 = (string)$this->adicional2;
+       $this->adicional3 = $this->rs_grid->fields[17] ;  
+       $this->adicional3 = (string)$this->adicional3;
+       $this->vendedor = $this->rs_grid->fields[18] ;  
+       $this->vendedor = (string)$this->vendedor;
+       $this->pedido = $this->rs_grid->fields[19] ;  
+       $this->pedido = (string)$this->pedido;
+       $this->resolucion = $this->rs_grid->fields[20] ;  
+       $this->resolucion = (string)$this->resolucion;
+       $this->base_iva_19 = $this->rs_grid->fields[21] ;  
+       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
+       $this->base_iva_19 = (string)$this->base_iva_19;
+       $this->valor_iva_19 = $this->rs_grid->fields[22] ;  
+       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
+       $this->valor_iva_19 = (string)$this->valor_iva_19;
+       $this->base_iva_5 = $this->rs_grid->fields[23] ;  
+       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
+       $this->base_iva_5 = (string)$this->base_iva_5;
+       $this->valor_iva_5 = $this->rs_grid->fields[24] ;  
+       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
+       $this->valor_iva_5 = (string)$this->valor_iva_5;
+       $this->excento = $this->rs_grid->fields[25] ;  
+       $this->excento =  str_replace(",", ".", $this->excento);
+       $this->excento = (string)$this->excento;
+       $this->tipo = $this->rs_grid->fields[26] ;  
+       $this->id_fact = $this->rs_grid->fields[27] ;  
+       $this->id_fact = (string)$this->id_fact;
+       $this->cufe = $this->rs_grid->fields[28] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->enlacepdf = "";  
+           if (is_file($this->rs_grid->fields[29])) 
+           { 
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[29]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       else 
+       { 
+           $this->enlacepdf = $this->rs_grid->fields[29] ;  
+       } 
+       $this->estado = $this->rs_grid->fields[30] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->enlacepdf))
            { 
                $this->enlacepdf = $this->Db->BlobDecode($this->enlacepdf, false, true, "BLOB");
@@ -7919,7 +7973,7 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->idcli = $this->rs_grid->fields[1] ;  
        $this->idcli = (string)$this->idcli;
        $this->fechaven = $this->rs_grid->fields[2] ;  
-       $this->observaciones = $this->rs_grid->fields[3] ;  
+       $this->motivo = $this->rs_grid->fields[3] ;  
        $this->total = $this->rs_grid->fields[4] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
@@ -7939,63 +7993,87 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->valoriva = $this->rs_grid->fields[12] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->saldo = $this->rs_grid->fields[13] ;  
-       $this->saldo =  str_replace(",", ".", $this->saldo);
-       $this->saldo = (string)$this->saldo;
-       $this->adicional = $this->rs_grid->fields[14] ;  
-       $this->adicional = (string)$this->adicional;
-       $this->adicional2 = $this->rs_grid->fields[15] ;  
-       $this->adicional2 = (string)$this->adicional2;
-       $this->adicional3 = $this->rs_grid->fields[16] ;  
-       $this->adicional3 = (string)$this->adicional3;
-       $this->vendedor = $this->rs_grid->fields[17] ;  
-       $this->vendedor = (string)$this->vendedor;
-       $this->pedido = $this->rs_grid->fields[18] ;  
-       $this->pedido = (string)$this->pedido;
-       $this->resolucion = $this->rs_grid->fields[19] ;  
-       $this->resolucion = (string)$this->resolucion;
-       $this->base_iva_19 = $this->rs_grid->fields[20] ;  
-       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
-       $this->base_iva_19 = (string)$this->base_iva_19;
-       $this->valor_iva_19 = $this->rs_grid->fields[21] ;  
-       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
-       $this->valor_iva_19 = (string)$this->valor_iva_19;
-       $this->base_iva_5 = $this->rs_grid->fields[22] ;  
-       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
-       $this->base_iva_5 = (string)$this->base_iva_5;
-       $this->valor_iva_5 = $this->rs_grid->fields[23] ;  
-       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
-       $this->valor_iva_5 = (string)$this->valor_iva_5;
-       $this->excento = $this->rs_grid->fields[24] ;  
-       $this->excento =  str_replace(",", ".", $this->excento);
-       $this->excento = (string)$this->excento;
-       $this->tipo = $this->rs_grid->fields[25] ;  
-       $this->id_fact = $this->rs_grid->fields[26] ;  
-       $this->id_fact = (string)$this->id_fact;
-       $this->cufe = $this->rs_grid->fields[27] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
-           $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[28])) 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[13])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[28]);  
+               $this->observaciones = file_get_contents($this->rs_grid->fields[13]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[28] ;  
+           $this->observaciones = $this->rs_grid->fields[13] ;  
        } 
-       $this->estado = $this->rs_grid->fields[29] ;  
+       $this->saldo = $this->rs_grid->fields[14] ;  
+       $this->saldo =  str_replace(",", ".", $this->saldo);
+       $this->saldo = (string)$this->saldo;
+       $this->adicional = $this->rs_grid->fields[15] ;  
+       $this->adicional = (string)$this->adicional;
+       $this->adicional2 = $this->rs_grid->fields[16] ;  
+       $this->adicional2 = (string)$this->adicional2;
+       $this->adicional3 = $this->rs_grid->fields[17] ;  
+       $this->adicional3 = (string)$this->adicional3;
+       $this->vendedor = $this->rs_grid->fields[18] ;  
+       $this->vendedor = (string)$this->vendedor;
+       $this->pedido = $this->rs_grid->fields[19] ;  
+       $this->pedido = (string)$this->pedido;
+       $this->resolucion = $this->rs_grid->fields[20] ;  
+       $this->resolucion = (string)$this->resolucion;
+       $this->base_iva_19 = $this->rs_grid->fields[21] ;  
+       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
+       $this->base_iva_19 = (string)$this->base_iva_19;
+       $this->valor_iva_19 = $this->rs_grid->fields[22] ;  
+       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
+       $this->valor_iva_19 = (string)$this->valor_iva_19;
+       $this->base_iva_5 = $this->rs_grid->fields[23] ;  
+       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
+       $this->base_iva_5 = (string)$this->base_iva_5;
+       $this->valor_iva_5 = $this->rs_grid->fields[24] ;  
+       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
+       $this->valor_iva_5 = (string)$this->valor_iva_5;
+       $this->excento = $this->rs_grid->fields[25] ;  
+       $this->excento =  str_replace(",", ".", $this->excento);
+       $this->excento = (string)$this->excento;
+       $this->tipo = $this->rs_grid->fields[26] ;  
+       $this->id_fact = $this->rs_grid->fields[27] ;  
+       $this->id_fact = (string)$this->id_fact;
+       $this->cufe = $this->rs_grid->fields[28] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->enlacepdf = "";  
+           if (is_file($this->rs_grid->fields[29])) 
+           { 
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[29]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       else 
+       { 
+           $this->enlacepdf = $this->rs_grid->fields[29] ;  
+       } 
+       $this->estado = $this->rs_grid->fields[30] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->enlacepdf))
            { 
                $this->enlacepdf = $this->Db->BlobDecode($this->enlacepdf, false, true, "BLOB");
@@ -9260,7 +9338,7 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->idcli = $this->rs_grid->fields[1] ;  
        $this->idcli = (string)$this->idcli;
        $this->fechaven = $this->rs_grid->fields[2] ;  
-       $this->observaciones = $this->rs_grid->fields[3] ;  
+       $this->motivo = $this->rs_grid->fields[3] ;  
        $this->total = $this->rs_grid->fields[4] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
@@ -9280,63 +9358,87 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->valoriva = $this->rs_grid->fields[12] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->saldo = $this->rs_grid->fields[13] ;  
-       $this->saldo =  str_replace(",", ".", $this->saldo);
-       $this->saldo = (string)$this->saldo;
-       $this->adicional = $this->rs_grid->fields[14] ;  
-       $this->adicional = (string)$this->adicional;
-       $this->adicional2 = $this->rs_grid->fields[15] ;  
-       $this->adicional2 = (string)$this->adicional2;
-       $this->adicional3 = $this->rs_grid->fields[16] ;  
-       $this->adicional3 = (string)$this->adicional3;
-       $this->vendedor = $this->rs_grid->fields[17] ;  
-       $this->vendedor = (string)$this->vendedor;
-       $this->pedido = $this->rs_grid->fields[18] ;  
-       $this->pedido = (string)$this->pedido;
-       $this->resolucion = $this->rs_grid->fields[19] ;  
-       $this->resolucion = (string)$this->resolucion;
-       $this->base_iva_19 = $this->rs_grid->fields[20] ;  
-       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
-       $this->base_iva_19 = (string)$this->base_iva_19;
-       $this->valor_iva_19 = $this->rs_grid->fields[21] ;  
-       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
-       $this->valor_iva_19 = (string)$this->valor_iva_19;
-       $this->base_iva_5 = $this->rs_grid->fields[22] ;  
-       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
-       $this->base_iva_5 = (string)$this->base_iva_5;
-       $this->valor_iva_5 = $this->rs_grid->fields[23] ;  
-       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
-       $this->valor_iva_5 = (string)$this->valor_iva_5;
-       $this->excento = $this->rs_grid->fields[24] ;  
-       $this->excento =  str_replace(",", ".", $this->excento);
-       $this->excento = (string)$this->excento;
-       $this->tipo = $this->rs_grid->fields[25] ;  
-       $this->id_fact = $this->rs_grid->fields[26] ;  
-       $this->id_fact = (string)$this->id_fact;
-       $this->cufe = $this->rs_grid->fields[27] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
-           $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[28])) 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[13])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[28]);  
+               $this->observaciones = file_get_contents($this->rs_grid->fields[13]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[28] ;  
+           $this->observaciones = $this->rs_grid->fields[13] ;  
        } 
-       $this->estado = $this->rs_grid->fields[29] ;  
+       $this->saldo = $this->rs_grid->fields[14] ;  
+       $this->saldo =  str_replace(",", ".", $this->saldo);
+       $this->saldo = (string)$this->saldo;
+       $this->adicional = $this->rs_grid->fields[15] ;  
+       $this->adicional = (string)$this->adicional;
+       $this->adicional2 = $this->rs_grid->fields[16] ;  
+       $this->adicional2 = (string)$this->adicional2;
+       $this->adicional3 = $this->rs_grid->fields[17] ;  
+       $this->adicional3 = (string)$this->adicional3;
+       $this->vendedor = $this->rs_grid->fields[18] ;  
+       $this->vendedor = (string)$this->vendedor;
+       $this->pedido = $this->rs_grid->fields[19] ;  
+       $this->pedido = (string)$this->pedido;
+       $this->resolucion = $this->rs_grid->fields[20] ;  
+       $this->resolucion = (string)$this->resolucion;
+       $this->base_iva_19 = $this->rs_grid->fields[21] ;  
+       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
+       $this->base_iva_19 = (string)$this->base_iva_19;
+       $this->valor_iva_19 = $this->rs_grid->fields[22] ;  
+       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
+       $this->valor_iva_19 = (string)$this->valor_iva_19;
+       $this->base_iva_5 = $this->rs_grid->fields[23] ;  
+       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
+       $this->base_iva_5 = (string)$this->base_iva_5;
+       $this->valor_iva_5 = $this->rs_grid->fields[24] ;  
+       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
+       $this->valor_iva_5 = (string)$this->valor_iva_5;
+       $this->excento = $this->rs_grid->fields[25] ;  
+       $this->excento =  str_replace(",", ".", $this->excento);
+       $this->excento = (string)$this->excento;
+       $this->tipo = $this->rs_grid->fields[26] ;  
+       $this->id_fact = $this->rs_grid->fields[27] ;  
+       $this->id_fact = (string)$this->id_fact;
+       $this->cufe = $this->rs_grid->fields[28] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->enlacepdf = "";  
+           if (is_file($this->rs_grid->fields[29])) 
+           { 
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[29]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       else 
+       { 
+           $this->enlacepdf = $this->rs_grid->fields[29] ;  
+       } 
+       $this->estado = $this->rs_grid->fields[30] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->enlacepdf))
            { 
                $this->enlacepdf = $this->Db->BlobDecode($this->enlacepdf, false, true, "BLOB");
@@ -10561,7 +10663,7 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->idcli = $this->rs_grid->fields[1] ;  
        $this->idcli = (string)$this->idcli;
        $this->fechaven = $this->rs_grid->fields[2] ;  
-       $this->observaciones = $this->rs_grid->fields[3] ;  
+       $this->motivo = $this->rs_grid->fields[3] ;  
        $this->total = $this->rs_grid->fields[4] ;  
        $this->total =  str_replace(",", ".", $this->total);
        $this->total = (string)$this->total;
@@ -10581,63 +10683,87 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['sc_sql_bt
        $this->valoriva = $this->rs_grid->fields[12] ;  
        $this->valoriva =  str_replace(",", ".", $this->valoriva);
        $this->valoriva = (string)$this->valoriva;
-       $this->saldo = $this->rs_grid->fields[13] ;  
-       $this->saldo =  str_replace(",", ".", $this->saldo);
-       $this->saldo = (string)$this->saldo;
-       $this->adicional = $this->rs_grid->fields[14] ;  
-       $this->adicional = (string)$this->adicional;
-       $this->adicional2 = $this->rs_grid->fields[15] ;  
-       $this->adicional2 = (string)$this->adicional2;
-       $this->adicional3 = $this->rs_grid->fields[16] ;  
-       $this->adicional3 = (string)$this->adicional3;
-       $this->vendedor = $this->rs_grid->fields[17] ;  
-       $this->vendedor = (string)$this->vendedor;
-       $this->pedido = $this->rs_grid->fields[18] ;  
-       $this->pedido = (string)$this->pedido;
-       $this->resolucion = $this->rs_grid->fields[19] ;  
-       $this->resolucion = (string)$this->resolucion;
-       $this->base_iva_19 = $this->rs_grid->fields[20] ;  
-       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
-       $this->base_iva_19 = (string)$this->base_iva_19;
-       $this->valor_iva_19 = $this->rs_grid->fields[21] ;  
-       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
-       $this->valor_iva_19 = (string)$this->valor_iva_19;
-       $this->base_iva_5 = $this->rs_grid->fields[22] ;  
-       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
-       $this->base_iva_5 = (string)$this->base_iva_5;
-       $this->valor_iva_5 = $this->rs_grid->fields[23] ;  
-       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
-       $this->valor_iva_5 = (string)$this->valor_iva_5;
-       $this->excento = $this->rs_grid->fields[24] ;  
-       $this->excento =  str_replace(",", ".", $this->excento);
-       $this->excento = (string)$this->excento;
-       $this->tipo = $this->rs_grid->fields[25] ;  
-       $this->id_fact = $this->rs_grid->fields[26] ;  
-       $this->id_fact = (string)$this->id_fact;
-       $this->cufe = $this->rs_grid->fields[27] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
        { 
-           $this->enlacepdf = "";  
-           if (is_file($this->rs_grid->fields[28])) 
+           $this->observaciones = "";  
+           if (is_file($this->rs_grid->fields[13])) 
            { 
-               $this->enlacepdf = file_get_contents($this->rs_grid->fields[28]);  
+               $this->observaciones = file_get_contents($this->rs_grid->fields[13]);  
            } 
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
        { 
-           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[28]) ;  
+           $this->observaciones = $this->Db->BlobDecode($this->rs_grid->fields[13]) ;  
        } 
        else 
        { 
-           $this->enlacepdf = $this->rs_grid->fields[28] ;  
+           $this->observaciones = $this->rs_grid->fields[13] ;  
        } 
-       $this->estado = $this->rs_grid->fields[29] ;  
+       $this->saldo = $this->rs_grid->fields[14] ;  
+       $this->saldo =  str_replace(",", ".", $this->saldo);
+       $this->saldo = (string)$this->saldo;
+       $this->adicional = $this->rs_grid->fields[15] ;  
+       $this->adicional = (string)$this->adicional;
+       $this->adicional2 = $this->rs_grid->fields[16] ;  
+       $this->adicional2 = (string)$this->adicional2;
+       $this->adicional3 = $this->rs_grid->fields[17] ;  
+       $this->adicional3 = (string)$this->adicional3;
+       $this->vendedor = $this->rs_grid->fields[18] ;  
+       $this->vendedor = (string)$this->vendedor;
+       $this->pedido = $this->rs_grid->fields[19] ;  
+       $this->pedido = (string)$this->pedido;
+       $this->resolucion = $this->rs_grid->fields[20] ;  
+       $this->resolucion = (string)$this->resolucion;
+       $this->base_iva_19 = $this->rs_grid->fields[21] ;  
+       $this->base_iva_19 =  str_replace(",", ".", $this->base_iva_19);
+       $this->base_iva_19 = (string)$this->base_iva_19;
+       $this->valor_iva_19 = $this->rs_grid->fields[22] ;  
+       $this->valor_iva_19 =  str_replace(",", ".", $this->valor_iva_19);
+       $this->valor_iva_19 = (string)$this->valor_iva_19;
+       $this->base_iva_5 = $this->rs_grid->fields[23] ;  
+       $this->base_iva_5 =  str_replace(",", ".", $this->base_iva_5);
+       $this->base_iva_5 = (string)$this->base_iva_5;
+       $this->valor_iva_5 = $this->rs_grid->fields[24] ;  
+       $this->valor_iva_5 =  str_replace(",", ".", $this->valor_iva_5);
+       $this->valor_iva_5 = (string)$this->valor_iva_5;
+       $this->excento = $this->rs_grid->fields[25] ;  
+       $this->excento =  str_replace(",", ".", $this->excento);
+       $this->excento = (string)$this->excento;
+       $this->tipo = $this->rs_grid->fields[26] ;  
+       $this->id_fact = $this->rs_grid->fields[27] ;  
+       $this->id_fact = (string)$this->id_fact;
+       $this->cufe = $this->rs_grid->fields[28] ;  
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+       { 
+           $this->enlacepdf = "";  
+           if (is_file($this->rs_grid->fields[29])) 
+           { 
+               $this->enlacepdf = file_get_contents($this->rs_grid->fields[29]);  
+           } 
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+       { 
+           $this->enlacepdf = $this->Db->BlobDecode($this->rs_grid->fields[29]) ;  
+       } 
+       else 
+       { 
+           $this->enlacepdf = $this->rs_grid->fields[29] ;  
+       } 
+       $this->estado = $this->rs_grid->fields[30] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
+           if (!empty($this->observaciones))
+           { 
+               $this->observaciones = $this->Db->BlobDecode($this->observaciones, false, true, "BLOB");
+           }
            if (!empty($this->enlacepdf))
            { 
                $this->enlacepdf = $this->Db->BlobDecode($this->enlacepdf, false, true, "BLOB");
@@ -11446,10 +11572,6 @@ if ($_SESSION['scriptcase']['proc_mobile'])
               {
                   $this->SC_monta_condicao($comando, "vendedor", $arg_search, $data_lookup);
               }
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "observaciones", $arg_search, $data_search);
           }
       }
       if (empty($comando)) 
