@@ -217,8 +217,8 @@ class frm_pos_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "163114"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220601"; 
-      $this->nm_hr_ult_alt   = "185501"; 
+      $this->nm_dt_ult_alt   = "20220614"; 
+      $this->nm_hr_ult_alt   = "162026"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -832,7 +832,7 @@ class frm_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwZSBiHIrwHuFUHuBOVcXKDWJeVoBOD9XOH9B/HIrwHQFUDENOHEFiDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZ1B/DSrYZMB/HgNOHErCHEXKDoBqD9XsZSX7Z1vCV5BqDMNOVIFCH5B7VorqHQBsZ1B/Z1rYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKVIFCDWJeDoXGDcNwH9FaHArKD5FaDErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQFYH9BiHABYHuXGDMNOVIBOV5FYVoBOHQBiZ1BiHAvCZMBODENOHErsDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveDkXKDWBmZuBOHQBiDQBqDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HIrwZMBqHgBOHENiH5FYHIFUHQFYZSBiDSBYHuBOHgvsVcB/DWBmVENUHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDQB/D1BeHQFaHuBYVcBOV5X7HMF7HQBqZ1FaHIveHuFGDMzGZSJ3V5FqVoJwDcBiH9FGD1BeD5JeDMzGV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMB/HQXsH9X7Z1rwHuBqDMBYVIBOH5XCVEF7D9BsZ1B/DSrYZMXGDEBeHEJqHEFqHIBiD9JKZSBiHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HANOD5XGDEBOHEJqV5FaDoBOD9XsZSFGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUH5XCHIJeDcJUZkBiHAN7D5FaHgBOHEJGDWXCVoBiHQNwDQBqHAveVWBOHuNOVcBUDWFYHMrqDcJUH9BOHABYHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMBqHgveHArsH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKV5FYVoJwDcJUH9BOZ1BeV5JwHgBYHErsDWX7HIJwDcXGZSBiZ1rwHQJwHuvmDkFCDWBmVoF7DcFYZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1849,6 +1849,9 @@ if(isset($this->vconfiguraciones[0][0]))
 
 ;
 
+;
+;
+
 ?>
 <head>
 <!--
@@ -1926,13 +1929,13 @@ $this->JS();
 			<label>TÁCTIL</label>
 		</td>
 
-		<td width='60px'  style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
+		<td width='100px'  style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
 			<label>UNIDAD</label>
 		</td>
-		<td  style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
+		<td width='120px'  style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
 			<label>PRECIO</label>
 		</td>
-		<td width='200px'>
+		<td width='150px'>
 			<input type="hidden" id="idproductoseleccionado" />
 			<input type="hidden" id="ivaproductoseleccionado" />
 			<input type="hidden" id="iventaunidad" />
@@ -1973,23 +1976,23 @@ $this->JS();
 		</td>
 
 		<td style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
-			<select id="ventaunidad" style="width:100px;">
+			<select id="ventaunidad" style="width:120px;" class="form-control">
 				<option>MENOR</option>
 				<option>MAYOR</option>
 			</select>
 		</td>
 		<td  style="<?php if(isset($vvalidar_codbarras)){ if($vvalidar_codbarras=='SI'){ echo 'display:none;';}} ?>">
-			<select id="sc_precio" style="width:100px;">
+			<select id="sc_precio" style="width:120px;" class="form-control">
 				<option value='1'>PRECIO1</option>
 				<option value='2'>PRECIO2</option>
 				<option value='3'>PRECIO3</option>
 			</select>
 		</td>
 		<td>
-			<input id="txt_articulo" name="txt_articulo" class="inputingreso" type="text"  style="width:200px;" autocomplete="off" autofocus/>
+			<input id="txt_articulo" name="txt_articulo" class="inputingreso form-control" type="text"  style="width:200px;" autocomplete="off" autofocus/>
 		</td>
 		<td style="width:100%;">
-			<input id="ventaarticulomanual" name="ventaarticulomanual" class="inputingreso" type="text" autocomplete="off" style="width:100%;"/>
+			<input id="ventaarticulomanual" name="ventaarticulomanual" class="inputingreso form-control" type="text" autocomplete="off" style="width:100%;"/>
 		</td>
 	</tr>
 </table>
@@ -1998,12 +2001,14 @@ $this->JS();
 <table class="formatotabla" id="detallefactura">
 	<thead>
 		<tr>
-			<th width="40px">#</th>
+			<th width="20px">#</th>
+			<th width="40px"></th>
 			<th>PRODUCTO</th>
 			<th width="100px">CANT.</th>
 			<th width="150px" style="text-align:center;" >UNITARIO</th>
 			<th width="150px" style="text-align:center;" >DTO.</th>
 			<th width="100px" style="text-align:center;" >TOTAL</th>
+			<th width="40px"></th>
 			<th width="40px"></th>
 			<th width="40px"></th>
 			<th width="40px"></th>
@@ -2482,12 +2487,12 @@ input[type=text]{
 
 .inputingreso{
 
-	font-size: 30px;
+	font-size: 18px;
 }
 	
 .inputingreso2{
 
-	font-size: 20px;
+	font-size: 18px;
 }
 
 .inputcenter{
@@ -2623,6 +2628,7 @@ $_SESSION['scriptcase']['frm_pos']['contr_erro'] = 'on';
   
 ?>
 <script>
+
 
 function redirect_blank(url) {
   var a = document.createElement('a');
@@ -3722,24 +3728,28 @@ function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,des
 		var	datosnuevos = "";
 		var idfacven    = $("#idfactura").val();
 											 
-		datosnuevos += "<tr id='"+iditem+"'>";
+		datosnuevos += "<tr id='"+iditem+"' class='color_selection"+fila+"'>";
 											 
-		datosnuevos += "<td>";
-		datosnuevos += fila;
-		datosnuevos += "<input id='itemsagregados"+fila+"' type='radio' value='"+iddet+"' onkeyup='fEliminarItem(event,\""+iditem+"\",this.id);' name='itemsagregados' />";
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		datosnuevos += "<b style='margin-right:8px;'>"+fila+"</b>";
 		datosnuevos += "</td>";
-		datosnuevos += "<td>"+descripcionproducto+"</td>";
 	
-		datosnuevos += "<td>";
-		datosnuevos += "<input size='7' id='editarcantidad"+fila+"' class='inputcenter' value='"+formatNumber(cantidad,2)+"' onkeypress='fEditarCantidad(\""+fila+"\",false,event,\""+iddet+"\",\""+idfacven+"\",this.value);' type='text' />";
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		datosnuevos += "<input id='itemsagregados"+fila+"' style='display:inline-block;' class='form-control' type='radio' value='"+iddet+"' onkeyup='fEliminarItem(event,\""+iditem+"\",this.id);' name='itemsagregados' />";
+		datosnuevos += "</td>";
+	
+		datosnuevos += "<td class='color_selection"+fila+"'>"+descripcionproducto+"</td>";
+	
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		datosnuevos += "<input size='7' id='editarcantidad"+fila+"' class='inputcenter form-control' value='"+formatNumber(cantidad,2)+"' onkeypress='fEditarCantidad(\""+fila+"\",false,event,\""+iddet+"\",\""+idfacven+"\",this.value);' type='text' />";
 		datosnuevos += "</td>";
 											 
-		datosnuevos += "<td>";
-		datosnuevos += "<input size='12' class='inputcenter' style='text-align:right;' id='autorizarprecio"+fila+"' value='"+formatNumber(preciounitario)+"' type='text' />";
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		datosnuevos += "<input size='12' class='inputcenter form-control' style='text-align:right;' id='autorizarprecio"+fila+"' value='"+formatNumber(preciounitario)+"' type='text' />";
 		datosnuevos += "</td>";
 											 
-		datosnuevos += "<td>";
-		datosnuevos += "<input size='7' class='inputcenter' style='text-align:right;' type='text' value='"+descuento+"' />";
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		datosnuevos += "<input size='7' class='inputcenter form-control' style='text-align:right;' type='text' value='"+descuento+"' />";
 		datosnuevos += "</td>";
 											 
 		if(!$.isEmptyObject(descuento))
@@ -3749,20 +3759,42 @@ function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,des
 				total = total-(total*(descuento/100));					 
 			}
 		}
-		datosnuevos += "<td>";
-		datosnuevos += "<input  class='inputcenter' id='autorizartotal"+fila+"'  style='text-align:right;'  type='text' value='"+formatNumber(total)+"' />";
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		datosnuevos += "<input  class='inputcenter form-control' id='autorizartotal"+fila+"'  style='text-align:right;'  type='text' value='"+formatNumber(total)+"' />";
 		datosnuevos += "</td>";
 											 
-		datosnuevos += "<td>";
+		datosnuevos += "<td class='color_selection"+fila+"'>";
 		datosnuevos += "<img  src='../_lib/img/scriptcase__NM__ico__NM__barcode_32.png' onclick='fVerDetalleItem($(\"#itemsagregados"+fila+"\").val());' width='30px' />";
 		datosnuevos += "</td>";
 	
-		datosnuevos += "<td>";
+		datosnuevos += "<td class='color_selection"+fila+"'>";
 		datosnuevos += "<img src='../_lib/img/scriptcase__NM__ico__NM__text_marked_32.png' onclick='fVerObservacionItem($(\"#itemsagregados"+fila+"\").val());' width='30px' />";
 		datosnuevos += "</td>";
 	
-		datosnuevos += "<td>";
-		datosnuevos += "<img src='../_lib/img/scriptcase__NM__ico__NM__garbage_delete_32.png' onclick='fEliminarItem2(\""+fila+"\");' width='30px' />";
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		datosnuevos += "<img src='../_lib/img/grp__NM__ico__NM__icon_borrar2_32x32.png' onclick='fEliminarItem2(\""+fila+"\");' width='30px' />";
+		datosnuevos += "</td>";
+	
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		
+		datosnuevos += "<div class='dropdown'>";
+		datosnuevos += "<div type='button' class='mis_dropdowns' id='dropdownMenuButton"+fila+"' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>";
+		datosnuevos += "<i><img src='../_lib/img/grp__NM__ico__NM__ico_colores_32x32.png' width='30px'/></i>";
+		datosnuevos += "</div>";
+		datosnuevos += "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>";
+	
+		datosnuevos += "<a class='dropdown-item' href='#' >";
+
+		datosnuevos += "<div style='width:30px;height:30px;background:#abb1d9;display:inline-block;margin-right:8px;'  onclick='$(\".color_selection"+fila+"\").css(\"background-color\",\"#abb1d9\");'></div>";
+		datosnuevos += "<div style='width:30px;height:30px;background:#f5a7a2;display:inline-block;margin-right:8px;'  onclick='$(\".color_selection"+fila+"\").css(\"background-color\",\"#f5a7a2\");'></div>";
+		datosnuevos += "<div style='width:30px;height:30px;background:#aac6aa;display:inline-block;margin-right:8px;'  onclick='$(\".color_selection"+fila+"\").css(\"background-color\",\"#aac6aa\");'></div>";
+		datosnuevos += "<div style='width:30px;height:30px;background:#ffffff;display:inline-block;margin-right:8px;border:1px solid #eff1ee;'  onclick='$(\".color_selection"+fila+"\").css(\"background-color\",\"#ffffff\");'></div>";
+		datosnuevos += "<div style='width:30px;height:30px;background:#ffd07c;display:inline-block;margin-right:8px;'  onclick='$(\".color_selection"+fila+"\").css(\"background-color\",\"#ffd07c\");'></div>";
+
+	    datosnuevos += "</a>";
+	    datosnuevos += "</div>";
+		datosnuevos += "</div>";
+	
 		datosnuevos += "</td>";
 											 
 		datosnuevos += "</tr>";

@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220609"; 
-      $this->nm_hr_ult_alt   = "110936"; 
+      $this->nm_dt_ult_alt   = "20220614"; 
+      $this->nm_hr_ult_alt   = "173837"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_enviar_fes_propio_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQBqD1BeVWJeHgrwV9FeV5X/VEFGHQBsZ1rqHArKHuJwHgBOHEXeDWXCZuJeDcBiDQFUHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeVWJeDMvmDkBsDWF/VEF7D9JmH9B/D1rKHQFUHgNOHErCDuJeDoBqHQBiDQFaDSrwD5BODMvsVcBUDWF/HMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHgvsVcBOV5F/DoFUDcNwH9B/HArYV5FUDEvsVkXeHEFqDoraD9NwH9FUZ1rwD5JeHgrKVcFCH5FqVoJwD9XOZ1rqHAN7D5FaDErKHEFiHEFqDoB/HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgNOHEBUH5F/HIJeHQBiDQB/HABYHuJeDMzGVcBUHEFYVoBiHQXOZ1X7HIveHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiHAvmD5BqHgBYHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBODkBsH5XCHMBOHQXGZ1FaD1rKHuFaHgNOVkJGDWXCHIJwDcXGDQJwHArYHQJsDMvsVcB/HEFYHMJsHQXOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQFUD1veD5NUHgvsVIBODWFaVoJwHQBsH9FaDSrYZMFaDErKHEFKV5FqDoraD9NwZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKD5NUHgBYHErsHEFqHMX7HQNwZSFGHIrKHQBqHgvsDkBsDWF/DoBiD9JmZSB/DSBeHQNUDMveHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWJeDoJeDcBqZ1B/Z1NOV5JsDMNKZSXeDWFqVoBiD9NmH9X7DSBYV5FUHuzGVIB/V5X7DorqDcJUZ1FaD1rwD5BiDErKHEBUDWr/DoB/D9NwDQJsDSBYV5JwDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFGD9XGZkBiHArYV5BOHgvsHEJGDWX7ZuXGHQXODQB/D1veVWJwHuBYVIFCDWXCHMJwD9BiZ1FaHArYHQFGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgNKDkXKDWFGZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoF7HQJmZ1FaHANOHQFUHgBOHEJGDuXKZuBqHQXsZ9XGHABYV5BqHuBYVcXKDWF/VoB/D9JmH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1034,6 +1034,14 @@ class blank_enviar_fes_propio_ini
       }
       if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['embutida_init']) 
       {
+          if (!isset($_SESSION['gusuariologueado'])) 
+          {
+              $this->nm_falta_var .= "gusuariologueado; ";
+          }
+          if (!isset($_SESSION['gidtercero'])) 
+          {
+              $this->nm_falta_var .= "gidtercero; ";
+          }
       }
 // 
       if (!isset($_SESSION['scriptcase']['glo_tpbanco']))
@@ -1933,6 +1941,10 @@ class blank_enviar_fes_propio_apl
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
       $_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'on';
+if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
+if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
+if (!isset($_SESSION['gusuariologueado'])) {$_SESSION['gusuariologueado'] = "";}
+if (!isset($this->sc_temp_gusuariologueado)) {$this->sc_temp_gusuariologueado = (isset($_SESSION['gusuariologueado'])) ? $_SESSION['gusuariologueado'] : "";}
   date_default_timezone_set('America/Bogota');
 setlocale(LC_ALL, 'es_CO');
 setlocale(LC_MONETARY, 'es_CO');
@@ -2005,8 +2017,9 @@ if(isset($_POST['reason']))
 
 if(isset($_POST['json_valida_email']))
 {
-	$vreason = $_POST['json_valida_email'];
+	$vjson_valida_email = $_POST['json_valida_email'];
 }
+
 
 
 
@@ -2626,7 +2639,7 @@ else
 
 				if($vreason=="accepted_email" or $vreason=="unknown" or $vreason=="low_deliverability")
 				{
-					$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='SI',json='".$vjson_valida_email."'";
+					$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='SI',json='".json_encode($vjson_valida_email)."'";
 					
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -2650,7 +2663,7 @@ else
 				else
 				{
 					$valida_correo = false;
-					$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='NO',json='".$vjson_valida_email."'";
+					$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='NO',json='".json_encode($vjson_valida_email)."'";
 					
      $nm_select = $vsql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -3068,6 +3081,11 @@ else
 									if(!empty($this->r4[0][0]))
 									{
 										echo "Documento enviado con éxito!!!";
+										
+										$vfec = $vfecha." ".date("H:i:s");
+										$vfec = date_create($vfec);
+										$vfec = date_format($vfec,"Y-m-d H:i:s");
+										$this->fAgregarConsumoFolio('FV',$vprefijo.$vnumero,$this->sc_temp_gusuariologueado,$this->sc_temp_gidtercero,'FACILWEB','NO',"$vfec");
 									}
 									else
 									{
@@ -3387,6 +3405,10 @@ else
 						if(!empty($this->r4[0][0]))
 						{
 							echo "Documento enviado con éxito!!!";
+							$vfec = $vfecha." ".date("H:i:s");
+							$vfec = date_create($vfec);
+							$vfec = date_format($vfec,"Y-m-d H:i:s");
+							$this->fAgregarConsumoFolio('FV',$vprefijo.$vnumero,$this->sc_temp_gusuariologueado,$this->sc_temp_gidtercero,'FACILWEB','NO',"$vfec");
 						}
 						else
 						{
@@ -3733,7 +3755,9 @@ else
 	}
 }
 
-sleep(8);
+sleep(2);
+if (isset($this->sc_temp_gusuariologueado)) {$_SESSION['gusuariologueado'] = $this->sc_temp_gusuariologueado;}
+if (isset($this->sc_temp_gidtercero)) {$_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 $_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 
@@ -3882,6 +3906,54 @@ $_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'on';
 	break;
 	}
 
+$_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'off';
+}
+function fAgregarConsumoFolio($vtipo_documento,$vdocumento,$vusuario,$vtercero,$vproveedor='FACILWEB',$vprueba='NO',$vfecha)
+{
+$_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'on';
+  
+	$vsql = "insert into folios SET fecha='".$vfecha."',tipo_documento='".$vtipo_documento."',documento='".$vdocumento."',usuario='".$vusuario."',tercero_usuario='".$vtercero."',prueba='".$vprueba."',proveedor='".$vproveedor."'";
+	
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+$_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'off';
+}
+function fQuitarConsumoFolio($vtipo_documento,$vdocumento)
+{
+$_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'on';
+  
+	$vsql = "DELETE from folios where tipo_documento='".$vtipo_documento."' and documento='".$vdocumento."'";
+	
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
 $_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'off';
 }
 function fPagarFacVen($idfactura,$formapago=1,$retorno=true,$vidrecibo=0,$sipropina="NO")
@@ -6557,6 +6629,34 @@ $_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'off';
    {
        $_SESSION['sc_session']['SC_parm_violation'] = true;
    }
+   if (isset($_POST["gusuariologueado"])) 
+   {
+       $_SESSION["gusuariologueado"] = $_POST["gusuariologueado"];
+       nm_limpa_str_blank_enviar_fes_propio($_SESSION["gusuariologueado"]);
+   }
+   if (isset($_GET["gusuariologueado"])) 
+   {
+       $_SESSION["gusuariologueado"] = $_GET["gusuariologueado"];
+       nm_limpa_str_blank_enviar_fes_propio($_SESSION["gusuariologueado"]);
+   }
+   if (!isset($_SESSION["gusuariologueado"])) 
+   {
+       $_SESSION["gusuariologueado"] = "";
+   }
+   if (isset($_POST["gidtercero"])) 
+   {
+       $_SESSION["gidtercero"] = $_POST["gidtercero"];
+       nm_limpa_str_blank_enviar_fes_propio($_SESSION["gidtercero"]);
+   }
+   if (isset($_GET["gidtercero"])) 
+   {
+       $_SESSION["gidtercero"] = $_GET["gidtercero"];
+       nm_limpa_str_blank_enviar_fes_propio($_SESSION["gidtercero"]);
+   }
+   if (!isset($_SESSION["gidtercero"])) 
+   {
+       $_SESSION["gidtercero"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -6711,6 +6811,16 @@ $_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'off';
                 $$Tmp_par = $cadapar[1];
             }
             $ix++;
+       }
+       if (isset($gusuariologueado)) 
+       {
+           $_SESSION['gusuariologueado'] = $gusuariologueado;
+           nm_limpa_str_blank_enviar_fes_propio($_SESSION["gusuariologueado"]);
+       }
+       if (isset($gidtercero)) 
+       {
+           $_SESSION['gidtercero'] = $gidtercero;
+           nm_limpa_str_blank_enviar_fes_propio($_SESSION["gidtercero"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

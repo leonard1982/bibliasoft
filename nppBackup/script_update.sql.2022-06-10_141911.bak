@@ -257,6 +257,34 @@ INSERT IGNORE `seg_app_type` (`idapptype`, `app_type`, `description`) VALUES
 (6, 'calend', 'Calendario'),
 (7, 'dash', 'DashBoard');
 
-ALTER TABLE `inventario` CHANGE `costo` `costo` DECIMAL(12,2) NOT NULL DEFAULT '0', CHANGE `valorparcial` `valorparcial` DECIMAL(12,2) NOT NULL DEFAULT '0'; 
-
-ALTER TABLE `detallecompra` ADD `tipo_docu` VARCHAR(4) NOT NULL DEFAULT 'FC' COMMENT 'Indica el tipo documento al que pertenece el ítem: FC factura de Compra, AF auto factura, NC nota de crédito, etc' AFTER `num_ndevolucion`, ADD `tipo_trans` VARCHAR(4) NOT NULL DEFAULT 'COM' COMMENT 'COM COMPRA, AFAC AUTO FACTURA, DEV DEVILUCION, DESC DESCUENTO, ETC' AFTER `tipo_docu`, ADD `id_nota` BIGINT NOT NULL DEFAULT '0' COMMENT 'cuando es NC o ND se guarda iddetalle origen' AFTER `tipo_trans`;
+INSERT IGNORE `seg_apps` (`idapp`, `app_name`, `app_name2`, `idapptype`, `description`, `app_order`, `app_parentid`, `app_link`, `app_icon`, `app_badge`, `create_in`, `level`, `color`) VALUES
+(1, '', '', 5, 'Contabilidad', 10, NULL, '', 'contabilidad', '', '2022-05-27 22:34:16', 0, 'warning'),
+(23, 'grid_terceros_todos', '', 1, 'Terceros', 11, 1, '../grid_terceros_todos ', 'tercero', '', '2022-05-27 22:37:25', 1, 'primary'),
+(24, 'grid_puc', '', 3, 'Plan de Cuentas', 12, 1, '../grid_puc', 'plan-cuentas', '', '2022-05-27 22:39:00', 1, 'primary'),
+(25, 'form_conceptos_dian', '', 3, 'Conceptos', 13, 1, '../form_conceptos_dian', 'concepto-dian', '', '2022-05-27 22:39:47', 1, 'primary'),
+(26, 'grid_contabilidad', '', 3, 'Comprobantes', 14, 1, '../grid_contabilidad', 'comodin', '', '2022-05-27 22:40:39', 1, 'primary'),
+(28, '', '', 5, 'Tesoreria', 20, NULL, '', 'tesoreria', '', '2022-05-27 22:52:55', 0, 'success'),
+(29, 'grid_terceros_todos', '', 1, 'Terceros', 21, 28, '../grid_terceros_todos', 'tercero', '', '2022-05-27 22:54:07', 1, 'primary'),
+(30, 'grid_cuentaspagar', '', 1, 'Cuentas por Pagar', 22, 28, '../grid_cuentaspagar', 'cuentas-x-pagar', '', '2022-05-27 22:55:03', 1, 'primary'),
+(31, 'grid_bancos', '', 1, 'Bancos', 23, 28, '../grid_bancos', 'banco', '', '2022-05-27 22:56:04', 1, 'primary'),
+(32, 'form_pagos_conceptos', '', 4, 'Conceptos (RC y CE)', 24, 28, '../form_pagos_conceptos', 'comodin', '', '2022-05-27 22:57:38', 1, 'primary'),
+(33, 'grid_recibos', '', 1, 'Recibos de Caja', 25, 28, '../grid_recibos', 'recibo-caja', '', '2022-05-27 22:58:34', 1, 'primary'),
+(34, 'grid_saldo_terceros', '', 1, 'Saldo Clientes', 26, 28, '../grid_saldo_terceros', 'comodin', '', '2022-05-27 22:59:19', 1, 'primary'),
+(35, 'grid_terceros_cartera_por_edades', '', 1, 'Cartera Por Edades', 27, 28, '../grid_terceros_cartera_por_edades', 'comodin', '', '2022-05-27 23:00:04', 1, 'primary'),
+(36, '', '', 5, 'Inventario', 30, NULL, '', 'inventario', '', '2022-05-27 23:00:40', 0, 'info'),
+(37, 'grid_terceros_todos', '', 1, 'Terceros', 31, 36, '../grid_terceros_todos', 'tercero', '', '2022-05-27 23:02:58', 1, 'primary'),
+(38, 'grid_grupo', '', 1, 'Familias/Grupos', 32, 36, '../grid_grupo', 'inventario', '', '2022-05-27 23:03:47', 1, 'primary'),
+(39, 'grid_productos', '', 5, 'Productos', 33, 36, '../grid_productos', 'producto', '', '2022-05-27 23:04:37', 1, 'primary'),
+(40, '', '', 4, 'Balance de Comprobación', 105, 1, '../form_pagos_conceptos', 'balance-comprobacion', '', '2022-05-28 13:18:28', 1, 'primary'),
+(41, '', '', 1, 'Libro Auxiliar', 106, 1, '../grid_terceros_todos', 'libro-aux', '', '2022-05-28 13:19:03', 1, 'primary'),
+(42, '', '', 5, 'Nuevo modulo', 40, NULL, '', 'tesoreria', 'Pro', '2022-06-02 18:21:42', 0, 'purple'),
+(43, 'grid_terceros_todos', '', 1, 'Prueba', 41, 42, '../grid_terceros_todos', 'tercero', '', '2022-06-02 18:24:21', 1, ''),
+(44, 'grid_terceros_todos', '', 1, 'Terceros test', 46, 42, '../grid_terceros_todos', 'tercero', '', '2022-06-02 19:43:10', 1, ''),
+(47, '', '', 5, 'Ajustes', 90, NULL, '', 'martillo', '', '2022-06-03 18:05:15', 0, 'teal'),
+(48, 'form_mensajes_aleatorios', '', 4, 'Mensajes Aleatorios', 91, 47, '../form_mensajes_aleatorios', 'carta', '', '2022-06-03 18:21:56', 1, ''),
+(49, '', '', 5, 'Parking', 80, NULL, '', 'cono', '', '2022-06-06 14:56:39', 0, 'red'),
+(50, 'blk_parking', '', 7, 'Panel de Control', 51, 49, '../blk_parking', 'ctrl_parking', '', '2022-06-06 14:58:37', 1, ''),
+(51, 'form_tarifas', '', 4, 'Tarifas', 55, 49, '../form_tarifas', 'tarifas', '', '2022-06-06 15:01:00', 1, ''),
+(52, '', '', 5, 'Seguridad', 90, NULL, '', 'candado', '', '2022-06-07 02:45:03', 0, 'lime'),
+(53, '', '', 4, 'Permisos', 95, 52, '../seg_permisos_group', 'lista_permisos', '', '2022-06-07 02:45:46', 1, ''),
+(54, '', 'seg_apps', 4, 'Aplicaciones', 92, 52, '../form_seg_apps', 'app', '', '2022-06-07 04:27:36', 1, '');

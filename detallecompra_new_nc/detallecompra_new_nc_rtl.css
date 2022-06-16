@@ -46,6 +46,15 @@
 .css_porc_desc__label { }
 .css_porc_desc__line {text-align:left;}
 .css_porc_desc__obj {text-align:center;}
+.css_tipo_docu__label { }
+.css_tipo_docu__line { }
+.css_tipo_docu__obj { }
+.css_tipo_trans__label { }
+.css_tipo_trans__line { }
+.css_tipo_trans__obj { }
+.css_id_nota__label { }
+.css_id_nota__line {text-align:left;}
+.css_id_nota__obj {text-align:left;}
 .css_cod_barras__label {text-align:right;}
 .css_cod_barras__line {text-align:right;}
 .css_cod_barras__obj {text-align:right;}

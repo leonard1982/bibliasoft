@@ -59,9 +59,6 @@ function ajax_save_filter(save_name, save_opt, parm, pos)
                $("#" + oResp["setValue"][i]["field"]).html(oResp["setValue"][i]["value"]);
           }
         }
-        if (oResp["htmOutput"]) {
-            nmAjaxShowDebug(oResp);
-         }
         document.getElementById('sel_recup_filters_' + pos).selectedIndex = -1;
         document.getElementById('sel_filters_del_' + pos).selectedIndex = -1;
         document.getElementById('SC_nmgp_save_name_' + pos).value = '';

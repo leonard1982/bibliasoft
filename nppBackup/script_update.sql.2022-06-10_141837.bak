@@ -256,7 +256,3 @@ INSERT IGNORE `seg_app_type` (`idapptype`, `app_type`, `description`) VALUES
 (5, 'menu', 'Menú'),
 (6, 'calend', 'Calendario'),
 (7, 'dash', 'DashBoard');
-
-ALTER TABLE `inventario` CHANGE `costo` `costo` DECIMAL(12,2) NOT NULL DEFAULT '0', CHANGE `valorparcial` `valorparcial` DECIMAL(12,2) NOT NULL DEFAULT '0'; 
-
-ALTER TABLE `detallecompra` ADD `tipo_docu` VARCHAR(4) NOT NULL DEFAULT 'FC' COMMENT 'Indica el tipo documento al que pertenece el ítem: FC factura de Compra, AF auto factura, NC nota de crédito, etc' AFTER `num_ndevolucion`, ADD `tipo_trans` VARCHAR(4) NOT NULL DEFAULT 'COM' COMMENT 'COM COMPRA, AFAC AUTO FACTURA, DEV DEVILUCION, DESC DESCUENTO, ETC' AFTER `tipo_docu`, ADD `id_nota` BIGINT NOT NULL DEFAULT '0' COMMENT 'cuando es NC o ND se guarda iddetalle origen' AFTER `tipo_trans`;

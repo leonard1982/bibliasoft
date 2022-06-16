@@ -16,10 +16,6 @@ class grid_detallecompra_new_nc_xls
    var $NM_ctrl_style = array();
    var $Arquivo;
    var $Tit_doc;
-   var $count_ger;
-   var $sum_valorpar;
-   var $sum_iva;
-   var $sum_total;
    //---- 
    function __construct()
    {
@@ -36,10 +32,6 @@ class grid_detallecompra_new_nc_xls
               $this->Arr_result['file_export']  = NM_charset_to_utf8($this->Xls_f);
               $this->Arr_result['title_export'] = NM_charset_to_utf8($this->Tit_doc);
               $Temp = ob_get_clean();
-              if ($Temp !== false && trim($Temp) != "")
-              {
-                  $this->Arr_result['htmOutput'] = NM_charset_to_utf8($Temp);
-              }
               $oJson = new Services_JSON();
               echo $oJson->encode($this->Arr_result);
               exit;
@@ -188,33 +180,12 @@ class grid_detallecompra_new_nc_xls
               $this->Nm_ActiveSheet->setRightToLeft(true);
           }
       }
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['SC_Ind_Groupby'] == "sc_free_total")
-      {
-          require_once($this->Ini->path_aplicacao . $this->Ini->Apl_resumo); 
-          $this->Res = new grid_detallecompra_new_nc_resumo("out");
-          $this->prep_modulos("Res");
-      }
-      $this->GB_tot_php = array('sc_free_total');
-      if (in_array($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['SC_Ind_Groupby'], $this->GB_tot_php))
-      {
-          $Tot_Gb = "totaliza_php_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['SC_Ind_Groupby'];
-          $this->$Tot_Gb();
-      }
-      else
-      {
-          require_once($this->Ini->path_aplicacao . "grid_detallecompra_new_nc_total.class.php"); 
-          $this->Tot = new grid_detallecompra_new_nc_total($this->Ini->sc_page);
-          $this->prep_modulos("Tot");
-          $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['SC_Ind_Groupby'];
-          $this->Tot->$Gb_geral();
-      }
+      require_once($this->Ini->path_aplicacao . "grid_detallecompra_new_nc_total.class.php"); 
+      $this->Tot = new grid_detallecompra_new_nc_total($this->Ini->sc_page);
+      $this->prep_modulos("Tot");
+      $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['SC_Ind_Groupby'];
+      $this->Tot->$Gb_geral();
       $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][1];
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['SC_Ind_Groupby'] == "sc_free_total")
-      {
-          $this->sum_valorpar = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][2];
-          $this->sum_iva = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][3];
-          $this->sum_total = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][4];
-      }
       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['embutida'] && !$this->Ini->sc_export_ajax) {
           require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
           $this->pb = new scProgressBar();
@@ -409,23 +380,18 @@ class grid_detallecompra_new_nc_xls
          $this->idpro = $rs->fields[0] ;  
          $this->idpro = (string)$this->idpro;
          $this->cantidad = $rs->fields[1] ;  
-         $this->cantidad = (strpos(strtolower($this->cantidad), "e")) ? (float)$this->cantidad : $this->cantidad; 
          $this->cantidad = (string)$this->cantidad;
          $this->valorunit = $rs->fields[2] ;  
          $this->valorunit =  str_replace(",", ".", $this->valorunit);
-         $this->valorunit = (strpos(strtolower($this->valorunit), "e")) ? (float)$this->valorunit : $this->valorunit; 
          $this->valorunit = (string)$this->valorunit;
          $this->porc_desc = $rs->fields[3] ;  
          $this->porc_desc =  str_replace(",", ".", $this->porc_desc);
-         $this->porc_desc = (strpos(strtolower($this->porc_desc), "e")) ? (float)$this->porc_desc : $this->porc_desc; 
          $this->porc_desc = (string)$this->porc_desc;
          $this->descuento = $rs->fields[4] ;  
          $this->descuento =  str_replace(",", ".", $this->descuento);
-         $this->descuento = (strpos(strtolower($this->descuento), "e")) ? (float)$this->descuento : $this->descuento; 
          $this->descuento = (string)$this->descuento;
          $this->valorpar = $rs->fields[5] ;  
          $this->valorpar =  str_replace(",", ".", $this->valorpar);
-         $this->valorpar = (strpos(strtolower($this->valorpar), "e")) ? (float)$this->valorpar : $this->valorpar; 
          $this->valorpar = (string)$this->valorpar;
          $this->tasaiva = $rs->fields[6] ;  
          $this->tasaiva = (string)$this->tasaiva;
@@ -595,10 +561,6 @@ $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'off';
           } 
       } 
       if ($this->groupby_show == "S") {
-          $this->Xls_col = 0;
-          $this->Xls_row++;
-          $Gb_geral = "quebra_geral_" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['SC_Ind_Groupby'] . "_bot";
-          $this->$Gb_geral();
       }
       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['embutida'])
       { 
@@ -1424,164 +1386,8 @@ $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'off';
            $this->NM_ctrl_style = array();
        }
    }
-   function quebra_geral_sc_free_total_bot()
+   function quebra_geral_sc_free_total_bot() 
    {
-       if ($this->groupby_show != "S") {
-           return;
-       }
-       $prim_cmp = true;
-       $mens_tot = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][0];
-       foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['field_order'] as $Cada_cmp)
-       {
-           if ($Cada_cmp == "valorpar" && (!isset($this->NM_cmp_hidden['valorpar']) || $this->NM_cmp_hidden['valorpar'] != "off"))
-           {
-               $Format_Num = "#,##0.00";
-               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][2];
-               $prim_cmp = false;
-               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
-               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['embutida']) {
-                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
-                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
-                   if (is_numeric($Vl_Tot)) {
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
-                   }
-                   else {
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-                   }
-                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
-               }
-               else {
-                   $current_cell_ref = $this->calc_cell($this->Xls_col);
-                   if ($this->Use_phpspreadsheet) {
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                   }
-                   else {
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-                   }
-                   if (is_numeric($Vl_Tot)) {
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
-                   }
-                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
-                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-               }
-               $this->Xls_col++;
-           }
-           elseif ($Cada_cmp == "iva" && (!isset($this->NM_cmp_hidden['iva']) || $this->NM_cmp_hidden['iva'] != "off"))
-           {
-               $Format_Num = "#,##0.00";
-               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][3];
-               $prim_cmp = false;
-               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
-               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['embutida']) {
-                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
-                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
-                   if (is_numeric($Vl_Tot)) {
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
-                   }
-                   else {
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-                   }
-                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
-               }
-               else {
-                   $current_cell_ref = $this->calc_cell($this->Xls_col);
-                   if ($this->Use_phpspreadsheet) {
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                   }
-                   else {
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-                   }
-                   if (is_numeric($Vl_Tot)) {
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
-                   }
-                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
-                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-               }
-               $this->Xls_col++;
-           }
-           elseif ($Cada_cmp == "total" && (!isset($this->NM_cmp_hidden['total']) || $this->NM_cmp_hidden['total'] != "off"))
-           {
-               $Format_Num = "#,##0.00";
-               $Vl_Tot     = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][4];
-               $prim_cmp = false;
-               $Vl_Tot = NM_charset_to_utf8($Vl_Tot);
-               if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['embutida']) {
-                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $Vl_Tot;
-                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "right";
-                   if (is_numeric($Vl_Tot)) {
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = $Format_Num;
-                   }
-                   else {
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-                   }
-                   $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
-               }
-               else {
-                   $current_cell_ref = $this->calc_cell($this->Xls_col);
-                   if ($this->Use_phpspreadsheet) {
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-                   }
-                   else {
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-                   }
-                   if (is_numeric($Vl_Tot)) {
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getNumberFormat()->setFormatCode($Format_Num);
-                   }
-                   $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $Vl_Tot);
-                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-               }
-               $this->Xls_col++;
-           }
-           elseif (!isset($this->NM_cmp_hidden[$Cada_cmp]) || $this->NM_cmp_hidden[$Cada_cmp] != "off")
-           {
-               if ($prim_cmp)
-               {
-                   $mens_tot = html_entity_decode($mens_tot, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-                   $mens_tot = strip_tags($mens_tot);
-                   $mens_tot = NM_charset_to_utf8($mens_tot);
-                   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['embutida']) {
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $mens_tot;
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['bold']   = "";
-                   }
-                   else {
-                       $current_cell_ref = $this->calc_cell($this->Xls_col);
-                       if ($this->Use_phpspreadsheet) {
-                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
-                       }
-                       else {
-                           $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-                       }
-                       $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $mens_tot);
-                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                   }
-               }
-               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['embutida']) {
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-                       $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-               }
-               $this->Xls_col++;
-               $prim_cmp = false;
-           }
-       }
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['embutida']) {
-           $this->Xls_row++;
-           $this->Xls_col = 1;
-           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = "";
-           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
-           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-           $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-       }
    }
 
    function calc_cell($col)
@@ -1636,230 +1442,6 @@ $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'off';
            return $dt_out;
        }
    }
-
-   function totaliza_php_sc_free_total()
-   {
-      $this->sc_proc_grid = true;
-      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_orig'];
-      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_pesq'];
-      $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_pesq_filtro'];
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['contr_total_geral'] == "OK")
-      {
-          return;
-      }
-      //----- 
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-      { 
-         $nmgp_select = "SELECT idpro, cantidad, valorunit, porc_desc, descuento, valorpar, tasaiva, iva, iddet, idfaccom, idbod, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-      { 
-         $nmgp_select = "SELECT idpro, cantidad, valorunit, porc_desc, descuento, valorpar, tasaiva, iva, iddet, idfaccom, idbod, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
-      { 
-         $nmgp_select = "SELECT idpro, cantidad, valorunit, porc_desc, descuento, valorpar, tasaiva, iva, iddet, idfaccom, idbod, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
-      } 
-      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
-      { 
-         $nmgp_select = "SELECT idpro, cantidad, valorunit, porc_desc, descuento, valorpar, tasaiva, iva, iddet, idfaccom, idbod, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
-      } 
-      else 
-      { 
-         $nmgp_select = "SELECT idpro, cantidad, valorunit, porc_desc, descuento, valorpar, tasaiva, iva, iddet, idfaccom, idbod, colores, tallas, sabor from " . $this->Ini->nm_tabela; 
-      } 
-      $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_pesq'] ; 
-   $nmgp_order_by = ""; 
-   $campos_order_select = "";
-   foreach($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['ordem_select'] as $campo => $ordem) 
-   {
-        if ($campo != $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['ordem_grid']) 
-        {
-           if (!empty($campos_order_select)) 
-           {
-               $campos_order_select .= ", ";
-           }
-           $campos_order_select .= $campo . " " . $ordem;
-        }
-   }
-   $campos_order = "";
-   foreach($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['ordem_quebra'] as $campo => $resto) 
-   {
-       foreach($resto as $sqldef => $ordem) 
-       {
-           $format       = $this->Ini->Get_Gb_date_format($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['SC_Ind_Groupby'], $campo);
-           $campos_order = $this->Ini->Get_date_order_groupby($sqldef, $ordem, $format, $campos_order);
-       }
-   }
-   if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['ordem_grid'])) 
-   { 
-       if (!empty($campos_order)) 
-       { 
-           $campos_order .= ", ";
-       } 
-       $nmgp_order_by = " order by " . $campos_order . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['ordem_grid'] . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['ordem_desc']; 
-   } 
-   elseif (!empty($campos_order_select)) 
-   { 
-       if (!empty($campos_order)) 
-       { 
-           $campos_order .= ", ";
-       } 
-       $nmgp_order_by = " order by " . $campos_order . $campos_order_select; 
-   } 
-   elseif (!empty($campos_order)) 
-   { 
-       $nmgp_order_by = " order by " . $campos_order; 
-   } 
-   if (substr(trim($nmgp_order_by), -1) == ",")
-   {
-       $nmgp_order_by = " " . substr(trim($nmgp_order_by), 0, -1);
-   }
-   if (trim($nmgp_order_by) == "order by")
-   {
-       $nmgp_order_by = "";
-   }
-   if (empty($nmgp_order_by))
-   {
-       $nmgp_order_by = " order by idpro";
-   }
-   $nmgp_select .= $nmgp_order_by; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['order_grid'] = $nmgp_order_by;
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
-      $this->rs_grid = $this->Db->Execute($nmgp_select) ; 
-      if ($this->rs_grid === false && !$this->rs_grid->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
-      { 
-         $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-         exit ; 
-      }  
-      if ($this->rs_grid->EOF || ($this->rs_grid === false && $GLOBALS["NM_ERRO_IBASE"] == 1)) 
-      { 
-         $this->nm_grid_sem_reg = $this->Ini->Nm_lang['lang_errm_empt']; 
-         return;
-      }  
-      $this->Res->inicializa_arrays();
-      $this->nm_grid_colunas = 0;
-      while (!$this->rs_grid->EOF) 
-      {
-         $this->idpro = $this->rs_grid->fields[0] ;  
-         $this->idpro = (string)$this->idpro;  
-         $this->cantidad = $this->rs_grid->fields[1] ;  
-         $this->cantidad = (strpos(strtolower($this->cantidad), "e")) ? (float)$this->cantidad : $this->cantidad; 
-         $this->cantidad = (string)$this->cantidad;  
-         $this->rs_grid->fields[2] =  str_replace(",", ".", $this->rs_grid->fields[2]);  
-         $this->valorunit = $this->rs_grid->fields[2] ;  
-         $this->valorunit = (strpos(strtolower($this->valorunit), "e")) ? (float)$this->valorunit : $this->valorunit; 
-         $this->valorunit = (string)$this->valorunit;  
-         $this->rs_grid->fields[3] =  str_replace(",", ".", $this->rs_grid->fields[3]);  
-         $this->porc_desc = $this->rs_grid->fields[3] ;  
-         $this->porc_desc = (strpos(strtolower($this->porc_desc), "e")) ? (float)$this->porc_desc : $this->porc_desc; 
-         $this->porc_desc = (string)$this->porc_desc;  
-         $this->rs_grid->fields[4] =  str_replace(",", ".", $this->rs_grid->fields[4]);  
-         $this->descuento = $this->rs_grid->fields[4] ;  
-         $this->descuento = (strpos(strtolower($this->descuento), "e")) ? (float)$this->descuento : $this->descuento; 
-         $this->descuento = (string)$this->descuento;  
-         $this->rs_grid->fields[5] =  str_replace(",", ".", $this->rs_grid->fields[5]);  
-         $this->valorpar = $this->rs_grid->fields[5] ;  
-         $this->valorpar = (strpos(strtolower($this->valorpar), "e")) ? (float)$this->valorpar : $this->valorpar; 
-         $this->valorpar = (string)$this->valorpar;  
-         $this->tasaiva = $this->rs_grid->fields[6] ;  
-         $this->tasaiva = (string)$this->tasaiva;  
-         $this->rs_grid->fields[7] =  str_replace(",", ".", $this->rs_grid->fields[7]);  
-         $this->iva = $this->rs_grid->fields[7] ;  
-         $this->iva = (string)$this->iva;  
-         $this->iddet = $this->rs_grid->fields[8] ;  
-         $this->iddet = (string)$this->iddet;  
-         $this->idfaccom = $this->rs_grid->fields[9] ;  
-         $this->idfaccom = (string)$this->idfaccom;  
-         $this->idbod = $this->rs_grid->fields[10] ;  
-         $this->idbod = (string)$this->idbod;  
-         $this->colores = $this->rs_grid->fields[11] ;  
-         $this->colores = (string)$this->colores;  
-         $this->tallas = $this->rs_grid->fields[12] ;  
-         $this->tallas = (string)$this->tallas;  
-         $this->sabor = $this->rs_grid->fields[13] ;  
-         $this->sabor = (string)$this->sabor;  
-         $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'on';
- $this->total =$this->valorpar +$this->iva ;
-if($this->colores <1)
-	{
-	$this->colores ='';
-	}
-else
-	{
-	 
-      $nm_select = "SELECT color FROM colores WHERE idcolores =$this->colores  "; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-	$this->colores =substr($this->ds , 5);
-	}
-if($this->tallas <1)
-	{
-	$this->tallas ='';
-	}
-else
-	{
-	 
-      $nm_select = "SELECT tamaño FROM tallas WHERE idtallas =$this->tallas  "; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-	$this->tallas =substr($this->ds , 7);
-	}
-if($this->sabor <1)
-	{
-	$this->sabor ='';
-	}
-else
-	{
-	 
-      $nm_select = "SELECT tamaño FROM tallas WHERE idtallas =$this->tallas  "; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      if ($this->ds = $this->Db->Execute($nm_select)) 
-      { }
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->ds = false;
-          $this->ds_erro = $this->Db->ErrorMsg();
-      } 
-;
-	$this->sabor =substr($this->ds , 7);
-	}
-$_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'off';
-         $this->GB_idpro = $this->idpro;
-         $this->Lookup->lookup_idpro($this->GB_idpro, $this->idpro) ; 
-         $this->total = (strpos(strtolower($this->total), "e")) ? (float)$this->total : $this->total; 
-         $this->total = (string)$this->total;  
-         $this->Res->adiciona_registro(NM_encode_input(sc_strip_script($this->valorpar)), NM_encode_input(sc_strip_script($this->iva)), NM_encode_input(sc_strip_script($this->total)));
-         $this->rs_grid->MoveNext();
-      }
-      $this->Res->finaliza_arrays();
-      $this->rs_grid->Close();
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][2] = $this->Res->array_total_geral[1];
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][3] = $this->Res->array_total_geral[2];
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][4] = $this->Res->array_total_geral[3];
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['contr_array_resumo'] = "OK";
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][0] = "" . $this->Ini->Nm_lang['lang_msgs_totl'] . "";
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][1] = $this->Res->array_total_geral[0];
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['contr_total_geral'] = "OK";
-   }
-
    function progress_bar_end()
    {
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['xls_file']);

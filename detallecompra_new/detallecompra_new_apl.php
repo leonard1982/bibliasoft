@@ -1690,9 +1690,12 @@ $this->sc_temp_gSw_1=0;
 $this->sc_temp_gSw_2=0;
 $this->sc_temp_gSw_3=0;
 
-if($this->des[0][1] == 'NC')
-	{
-	 if (isset($this->sc_temp_par_idfaccom)) { $_SESSION['par_idfaccom'] = $this->sc_temp_par_idfaccom;}
+
+
+
+	if($this->des[0][1] == 'NC')
+		{
+		 if (isset($this->sc_temp_par_idfaccom)) { $_SESSION['par_idfaccom'] = $this->sc_temp_par_idfaccom;}
  if (isset($this->sc_temp_gNFac)) { $_SESSION['gNFac'] = $this->sc_temp_gNFac;}
  if (isset($this->sc_temp_gSw_1)) { $_SESSION['gSw_1'] = $this->sc_temp_gSw_1;}
  if (isset($this->sc_temp_gSw_2)) { $_SESSION['gSw_2'] = $this->sc_temp_gSw_2;}
@@ -1701,7 +1704,7 @@ if($this->des[0][1] == 'NC')
  {
 $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('grid_detallecompra_new_nc') . "/", $this->nm_location, "", "_self", "ret_self", 440, 630);
  };
-	}
+		}
 if (isset($this->sc_temp_par_idfaccom)) { $_SESSION['par_idfaccom'] = $this->sc_temp_par_idfaccom;}
 if (isset($this->sc_temp_gNFac)) { $_SESSION['gNFac'] = $this->sc_temp_gNFac;}
 if (isset($this->sc_temp_gSw_1)) { $_SESSION['gSw_1'] = $this->sc_temp_gSw_1;}

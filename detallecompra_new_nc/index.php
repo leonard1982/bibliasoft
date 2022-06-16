@@ -286,8 +286,8 @@ class detallecompra_new_nc_ini
       $this->nm_dt_criacao   = "20180216"; 
       $this->nm_hr_criacao   = "062845"; 
       $this->nm_autor_alt    = "edgar"; 
-      $this->nm_dt_ult_alt   = "20220606"; 
-      $this->nm_hr_ult_alt   = "110449"; 
+      $this->nm_dt_ult_alt   = "20220616"; 
+      $this->nm_hr_ult_alt   = "084008"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -884,7 +884,7 @@ class detallecompra_new_nc_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYZ9F7HAveV5JeHgrwVcXKDWFYHIFUD9JmZSBqZ1NOD5JwHgBYHErsDuJeHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHENiH5F/VoBODcBwZSBiHAN7HQJwHuNOVcFCHEFYHIF7HQBqZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKVcFKDWFYVENUDcBqZ1B/HIrwV5FGDMzGHEXeH5FYDoB/D9XsDQFGHAveV5BOHgvsVcB/V5X7DoJsDcJUZ1FaHIBeD5BiDEBOVkXeH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKV5B/DEvsZSXeDuFYZuJsDcXGDQBqHArYHuJeHgrKZSNiH5FqHMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDWBmVorqHQBqZkFGHArKV5FUDMrYZSXeV5FqHIJsDcXGDQJwHAveHuFGDMzGDkFCHEBmVEF7HQBqZ1FaD1rKZMBOHgNKZSXeH5X/ZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsZSBiD1veD5B/HgrwVcFKDWrmVENUD9XGZ1FaDSNOHQFGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvmVcFKV5BmVoBqD9BsZkFGHArKHQFaHgBeDkXKDWr/VoFGD9XsH9FUDSN7VWJeDMvOVcXKDWFaHMF7HQXOZSFaDSrYHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBOH5XCDoraD9BiZ1F7HABYV5FGDEBOHEFiDWFqDoF7D9XsZSX7Z1BYV5JeHuzGVIBODWFaVoJwD9BsZSB/HArYZMBODMNKZSXeV5XCDoF7HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHEFiH5X/ZuBqDcBwDQBqDSBYHQJeDMBOV9FeV5FGVEX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VErqHQNmZkBiHANOHQJwDEBODkFeH5FYVoFGHQJKDQFaD1BeHQB/DMzGDkBsDWF/HMF7HQBqZ1BODSNOZMBqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['detallecompra_new_nc']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['detallecompra_new_nc']['ordem_cmp'] = ""; 
@@ -1474,6 +1474,9 @@ ob_start();
     $sc_conv_var['porc_desc'] = "porc_desc_";
     $sc_conv_var['unidad_c'] = "unidad_c_";
     $sc_conv_var['num_ndevolucion'] = "num_ndevolucion_";
+    $sc_conv_var['tipo_docu'] = "tipo_docu_";
+    $sc_conv_var['tipo_trans'] = "tipo_trans_";
+    $sc_conv_var['id_nota'] = "id_nota_";
     $sc_conv_var['cod_barras'] = "cod_barras_";
     $sc_conv_var['presentacion'] = "presentacion_";
     $sc_conv_var['ver'] = "ver_";
@@ -1741,6 +1744,24 @@ ob_start();
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
+        if ('ajax_detallecompra_new_nc_validate_tipo_docu_' == $_POST['rs'])
+        {
+            $tipo_docu_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_detallecompra_new_nc_validate_tipo_trans_' == $_POST['rs'])
+        {
+            $tipo_trans_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_detallecompra_new_nc_validate_id_nota_' == $_POST['rs'])
+        {
+            $id_nota_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
         if ('ajax_detallecompra_new_nc_refresh_idpro_' == $_POST['rs'])
         {
             $idpro_ = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1896,15 +1917,18 @@ ob_start();
             $serial_codbarra_ = NM_utf8_urldecode($_POST['rsargs'][16]);
             $iddet_ = NM_utf8_urldecode($_POST['rsargs'][17]);
             $idfaccom_ = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][23]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][24]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][25]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][26]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][27]);
+            $tipo_docu_ = NM_utf8_urldecode($_POST['rsargs'][19]);
+            $tipo_trans_ = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $id_nota_ = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][24]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][25]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][26]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][27]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][28]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][29]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][30]);
         }
         if ('ajax_detallecompra_new_nc_navigate_form' == $_POST['rs'])
         {
@@ -2739,6 +2763,9 @@ ob_start();
     sajax_export("ajax_detallecompra_new_nc_validate_serial_codbarra_");
     sajax_export("ajax_detallecompra_new_nc_validate_iddet_");
     sajax_export("ajax_detallecompra_new_nc_validate_idfaccom_");
+    sajax_export("ajax_detallecompra_new_nc_validate_tipo_docu_");
+    sajax_export("ajax_detallecompra_new_nc_validate_tipo_trans_");
+    sajax_export("ajax_detallecompra_new_nc_validate_id_nota_");
     sajax_export("ajax_detallecompra_new_nc_refresh_idpro_");
     sajax_export("ajax_detallecompra_new_nc_lkpedt_refresh_idpro_");
     sajax_export("ajax_detallecompra_new_nc_event_cantidad__onchange");
@@ -3169,6 +3196,66 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->controle();
         exit;
     } // ajax_validate_idfaccom_
+
+    function ajax_detallecompra_new_nc_validate_tipo_docu_($tipo_docu_, $nmgp_refresh_row, $script_case_init)
+    {
+        global $inicial_detallecompra_new_nc;
+        //register_shutdown_function("detallecompra_new_nc_pack_ajax_response");
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_flag          = true;
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_opcao         = 'validate_tipo_docu_';
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_info['param'] = array(
+                  'tipo_docu_' => NM_utf8_urldecode($tipo_docu_),
+                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->controle();
+        exit;
+    } // ajax_validate_tipo_docu_
+
+    function ajax_detallecompra_new_nc_validate_tipo_trans_($tipo_trans_, $nmgp_refresh_row, $script_case_init)
+    {
+        global $inicial_detallecompra_new_nc;
+        //register_shutdown_function("detallecompra_new_nc_pack_ajax_response");
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_flag          = true;
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_opcao         = 'validate_tipo_trans_';
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_info['param'] = array(
+                  'tipo_trans_' => NM_utf8_urldecode($tipo_trans_),
+                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->controle();
+        exit;
+    } // ajax_validate_tipo_trans_
+
+    function ajax_detallecompra_new_nc_validate_id_nota_($id_nota_, $nmgp_refresh_row, $script_case_init)
+    {
+        global $inicial_detallecompra_new_nc;
+        //register_shutdown_function("detallecompra_new_nc_pack_ajax_response");
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_flag          = true;
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_opcao         = 'validate_id_nota_';
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_info['param'] = array(
+                  'id_nota_' => NM_utf8_urldecode($id_nota_),
+                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_detallecompra_new_nc->contr_detallecompra_new_nc->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_detallecompra_new_nc->contr_detallecompra_new_nc->controle();
+        exit;
+    } // ajax_validate_id_nota_
 
     function ajax_detallecompra_new_nc_refresh_idpro_($idpro_, $nmgp_refresh_row, $nmgp_refresh_fields, $script_case_init)
     {
@@ -4999,7 +5086,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_autocomp_idpro_80
 
-    function ajax_detallecompra_new_nc_submit_form($cod_barras_, $idpro_, $ver_, $presentacion_, $cantidad_, $valorunit_, $porc_desc_, $descuento_, $valorpar_, $iva_, $idbod_, $tasaiva_, $tasadesc_, $devuelto_, $vencimiento_, $lote_, $serial_codbarra_, $iddet_, $idfaccom_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_detallecompra_new_nc_submit_form($cod_barras_, $idpro_, $ver_, $presentacion_, $cantidad_, $valorunit_, $porc_desc_, $descuento_, $valorpar_, $iva_, $idbod_, $tasaiva_, $tasadesc_, $devuelto_, $vencimiento_, $lote_, $serial_codbarra_, $iddet_, $idfaccom_, $tipo_docu_, $tipo_trans_, $id_nota_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_detallecompra_new_nc;
         //register_shutdown_function("detallecompra_new_nc_pack_ajax_response");
@@ -5025,6 +5112,9 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'serial_codbarra_' => NM_utf8_urldecode($serial_codbarra_),
                   'iddet_' => NM_utf8_urldecode($iddet_),
                   'idfaccom_' => NM_utf8_urldecode($idfaccom_),
+                  'tipo_docu_' => NM_utf8_urldecode($tipo_docu_),
+                  'tipo_trans_' => NM_utf8_urldecode($tipo_trans_),
+                  'id_nota_' => NM_utf8_urldecode($id_nota_),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),

@@ -70,6 +70,9 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["serial_codbarra_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["iddet_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["idfaccom_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["tipo_docu_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["tipo_trans_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["id_nota_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -185,6 +188,24 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["idfaccom_" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["tipo_docu_" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["tipo_docu_" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["tipo_trans_" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["tipo_trans_" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["id_nota_" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["id_nota_" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["idpro_" + iSeqRow]["autocomp"]) {
@@ -351,6 +372,15 @@ function scJQEventsAdd(iSeqRow) {
                                         .bind('focus', function() { sc_detallecompra_new_nc_porc_desc__onfocus(this, iSeqRow) });
   $('#id_sc_field_unidad_c_' + iSeqRow).bind('change', function() { sc_detallecompra_new_nc_unidad_c__onchange(this, iSeqRow) });
   $('#id_sc_field_num_ndevolucion_' + iSeqRow).bind('change', function() { sc_detallecompra_new_nc_num_ndevolucion__onchange(this, iSeqRow) });
+  $('#id_sc_field_tipo_docu_' + iSeqRow).bind('blur', function() { sc_detallecompra_new_nc_tipo_docu__onblur(this, iSeqRow) })
+                                        .bind('change', function() { sc_detallecompra_new_nc_tipo_docu__onchange(this, iSeqRow) })
+                                        .bind('focus', function() { sc_detallecompra_new_nc_tipo_docu__onfocus(this, iSeqRow) });
+  $('#id_sc_field_tipo_trans_' + iSeqRow).bind('blur', function() { sc_detallecompra_new_nc_tipo_trans__onblur(this, iSeqRow) })
+                                         .bind('change', function() { sc_detallecompra_new_nc_tipo_trans__onchange(this, iSeqRow) })
+                                         .bind('focus', function() { sc_detallecompra_new_nc_tipo_trans__onfocus(this, iSeqRow) });
+  $('#id_sc_field_id_nota_' + iSeqRow).bind('blur', function() { sc_detallecompra_new_nc_id_nota__onblur(this, iSeqRow) })
+                                      .bind('change', function() { sc_detallecompra_new_nc_id_nota__onchange(this, iSeqRow) })
+                                      .bind('focus', function() { sc_detallecompra_new_nc_id_nota__onfocus(this, iSeqRow) });
   $('#id_sc_field_cod_barras_' + iSeqRow).bind('blur', function() { sc_detallecompra_new_nc_cod_barras__onblur(this, iSeqRow) })
                                          .bind('change', function() { sc_detallecompra_new_nc_cod_barras__onchange(this, iSeqRow) })
                                          .bind('focus', function() { sc_detallecompra_new_nc_cod_barras__onfocus(this, iSeqRow) });
@@ -636,6 +666,51 @@ function sc_detallecompra_new_nc_num_ndevolucion__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 
+function sc_detallecompra_new_nc_tipo_docu__onblur(oThis, iSeqRow) {
+  do_ajax_detallecompra_new_nc_validate_tipo_docu_(iSeqRow);
+  scCssBlur(oThis, iSeqRow);
+}
+
+function sc_detallecompra_new_nc_tipo_docu__onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+  nm_check_insert(iSeqRow);
+}
+
+function sc_detallecompra_new_nc_tipo_docu__onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis, iSeqRow);
+}
+
+function sc_detallecompra_new_nc_tipo_trans__onblur(oThis, iSeqRow) {
+  do_ajax_detallecompra_new_nc_validate_tipo_trans_(iSeqRow);
+  scCssBlur(oThis, iSeqRow);
+}
+
+function sc_detallecompra_new_nc_tipo_trans__onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+  nm_check_insert(iSeqRow);
+}
+
+function sc_detallecompra_new_nc_tipo_trans__onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis, iSeqRow);
+}
+
+function sc_detallecompra_new_nc_id_nota__onblur(oThis, iSeqRow) {
+  do_ajax_detallecompra_new_nc_validate_id_nota_(iSeqRow);
+  scCssBlur(oThis, iSeqRow);
+}
+
+function sc_detallecompra_new_nc_id_nota__onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+  nm_check_insert(iSeqRow);
+}
+
+function sc_detallecompra_new_nc_id_nota__onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis, iSeqRow);
+}
+
 function sc_detallecompra_new_nc_cod_barras__onblur(oThis, iSeqRow) {
   do_ajax_detallecompra_new_nc_validate_cod_barras_(iSeqRow);
   scCssBlur(oThis, iSeqRow);
@@ -709,6 +784,9 @@ function displayChange_block_0(status) {
 	displayChange_field("serial_codbarra_", "", status);
 	displayChange_field("iddet_", "", status);
 	displayChange_field("idfaccom_", "", status);
+	displayChange_field("tipo_docu_", "", status);
+	displayChange_field("tipo_trans_", "", status);
+	displayChange_field("id_nota_", "", status);
 }
 
 function displayChange_row(row, status) {
@@ -731,6 +809,9 @@ function displayChange_row(row, status) {
 	displayChange_field_serial_codbarra_(row, status);
 	displayChange_field_iddet_(row, status);
 	displayChange_field_idfaccom_(row, status);
+	displayChange_field_tipo_docu_(row, status);
+	displayChange_field_tipo_trans_(row, status);
+	displayChange_field_id_nota_(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -790,6 +871,15 @@ function displayChange_field(field, row, status) {
 	}
 	if ("idfaccom_" == field) {
 		displayChange_field_idfaccom_(row, status);
+	}
+	if ("tipo_docu_" == field) {
+		displayChange_field_tipo_docu_(row, status);
+	}
+	if ("tipo_trans_" == field) {
+		displayChange_field_tipo_trans_(row, status);
+	}
+	if ("id_nota_" == field) {
+		displayChange_field_id_nota_(row, status);
 	}
 }
 
@@ -860,6 +950,15 @@ function displayChange_field_iddet_(row, status) {
 }
 
 function displayChange_field_idfaccom_(row, status) {
+}
+
+function displayChange_field_tipo_docu_(row, status) {
+}
+
+function displayChange_field_tipo_trans_(row, status) {
+}
+
+function displayChange_field_id_nota_(row, status) {
 }
 
 function scRecreateSelect2() {

@@ -1,37 +1,3 @@
-  function nmAjaxShowDebug(oTemp)
-  {
-    if (!document.getElementById("id_debug_window")) {
-      return;
-    }
-    if (oTemp && oTemp != null) {
-        oResp = oTemp;
-    }
-    if (oResp["htmOutput"] && "" != oResp["htmOutput"]) {
-      document.getElementById("id_debug_window").style.display = "";
-      document.getElementById("id_debug_text").innerHTML = nmAjaxFormatDebug(oResp["htmOutput"]) + document.getElementById("id_debug_text").innerHTML;
-      nmCenterElement(document.getElementById("id_debug_window"));
-    }
-  }
-  function nmAjaxFormatDebug(sDebugMsg)
-  {
-    return "<table class=\"scFormMessageTable\" style=\"margin: 1px; width: 100%\"><tr><td class=\"scFormMessageMessage\">" + nmAjaxSpecCharParser(sDebugMsg) + "</td></tr></table>";
-  }
-  function nmAjaxHideDebug()
-  {
-    if (document.getElementById("id_debug_window")) {
-      document.getElementById("id_debug_window").style.display = "none";
-      document.getElementById("id_debug_text").innerHTML = "";
-    }
-  }
-  function nmCenterElement(oElem)
-  {
-    var $oElem    = $(oElem),
-        $oWindow  = $(this),
-        x         = Math.round(($oWindow.height() - $oElem.height()) / 2),
-        iElemTop  = document.documentElement.scrollTop + x,
-        iElemLeft = Math.round(($oWindow.width()  - $oElem.width())  / 2);
-    $oElem.offset({top: iElemTop, left: iElemLeft});
-  }
   function nmAjaxShowAutocomp(sFrameId)
   {
     if (document.getElementById("id_ac_frame_" + sFrameId)) {

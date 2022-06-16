@@ -1290,6 +1290,30 @@ $orderColOrient = '';
     <TD class="scFormLabelOddMult css_idfaccom__label" id="hidden_field_label_idfaccom_" style="<?php echo $sStyleHidden_idfaccom_; ?>" > <?php echo $this->nm_new_label['idfaccom_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
    <?php } ?>
 
+   <?php if (isset($this->nmgp_cmp_hidden['tipo_docu_']) && $this->nmgp_cmp_hidden['tipo_docu_'] == 'off') { $sStyleHidden_tipo_docu_ = 'display: none'; }
+      if (1 || !isset($this->nmgp_cmp_hidden['tipo_docu_']) || $this->nmgp_cmp_hidden['tipo_docu_'] == 'on') {
+      if (!isset($this->nm_new_label['tipo_docu_'])) {
+          $this->nm_new_label['tipo_docu_'] = "Tipo Docu"; } ?>
+
+    <TD class="scFormLabelOddMult css_tipo_docu__label" id="hidden_field_label_tipo_docu_" style="<?php echo $sStyleHidden_tipo_docu_; ?>" > <?php echo $this->nm_new_label['tipo_docu_'] ?> </TD>
+   <?php } ?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['tipo_trans_']) && $this->nmgp_cmp_hidden['tipo_trans_'] == 'off') { $sStyleHidden_tipo_trans_ = 'display: none'; }
+      if (1 || !isset($this->nmgp_cmp_hidden['tipo_trans_']) || $this->nmgp_cmp_hidden['tipo_trans_'] == 'on') {
+      if (!isset($this->nm_new_label['tipo_trans_'])) {
+          $this->nm_new_label['tipo_trans_'] = "Tipo Trans"; } ?>
+
+    <TD class="scFormLabelOddMult css_tipo_trans__label" id="hidden_field_label_tipo_trans_" style="<?php echo $sStyleHidden_tipo_trans_; ?>" > <?php echo $this->nm_new_label['tipo_trans_'] ?> </TD>
+   <?php } ?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['id_nota_']) && $this->nmgp_cmp_hidden['id_nota_'] == 'off') { $sStyleHidden_id_nota_ = 'display: none'; }
+      if (1 || !isset($this->nmgp_cmp_hidden['id_nota_']) || $this->nmgp_cmp_hidden['id_nota_'] == 'on') {
+      if (!isset($this->nm_new_label['id_nota_'])) {
+          $this->nm_new_label['id_nota_'] = "Id Nota"; } ?>
+
+    <TD class="scFormLabelOddMult css_id_nota__label" id="hidden_field_label_id_nota_" style="<?php echo $sStyleHidden_id_nota_; ?>" > <?php echo $this->nm_new_label['id_nota_'] ?> </TD>
+   <?php } ?>
+
 
 
 
@@ -1352,6 +1376,9 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            $this->nmgp_cmp_readonly['serial_codbarra_'] = true;
            $this->nmgp_cmp_readonly['iddet_'] = true;
            $this->nmgp_cmp_readonly['idfaccom_'] = true;
+           $this->nmgp_cmp_readonly['tipo_docu_'] = true;
+           $this->nmgp_cmp_readonly['tipo_trans_'] = true;
+           $this->nmgp_cmp_readonly['id_nota_'] = true;
        }
        elseif ($Line_Add)
        {
@@ -1374,6 +1401,9 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            if (!isset($this->nmgp_cmp_readonly['serial_codbarra_']) || $this->nmgp_cmp_readonly['serial_codbarra_'] != "on") {$this->nmgp_cmp_readonly['serial_codbarra_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['iddet_']) || $this->nmgp_cmp_readonly['iddet_'] != "on") {$this->nmgp_cmp_readonly['iddet_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['idfaccom_']) || $this->nmgp_cmp_readonly['idfaccom_'] != "on") {$this->nmgp_cmp_readonly['idfaccom_'] = false;}
+           if (!isset($this->nmgp_cmp_readonly['tipo_docu_']) || $this->nmgp_cmp_readonly['tipo_docu_'] != "on") {$this->nmgp_cmp_readonly['tipo_docu_'] = false;}
+           if (!isset($this->nmgp_cmp_readonly['tipo_trans_']) || $this->nmgp_cmp_readonly['tipo_trans_'] != "on") {$this->nmgp_cmp_readonly['tipo_trans_'] = false;}
+           if (!isset($this->nmgp_cmp_readonly['id_nota_']) || $this->nmgp_cmp_readonly['id_nota_'] != "on") {$this->nmgp_cmp_readonly['id_nota_'] = false;}
        }
             if (isset($this->form_vert_form_preenchimento[$sc_seq_vert])) {
               foreach ($this->form_vert_form_preenchimento[$sc_seq_vert] as $sCmpNome => $mCmpVal)
@@ -1911,6 +1941,84 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            $sStyleReadLab_idfaccom_ = '';
            $sStyleReadInp_idfaccom_ = 'display: none;';
        }
+       $this->tipo_docu_ = $this->form_vert_detallecompra_new_nc[$sc_seq_vert]['tipo_docu_']; 
+       $tipo_docu_ = $this->tipo_docu_; 
+       $sStyleHidden_tipo_docu_ = '';
+       if (isset($sCheckRead_tipo_docu_))
+       {
+           unset($sCheckRead_tipo_docu_);
+       }
+       if (isset($this->nmgp_cmp_readonly['tipo_docu_']))
+       {
+           $sCheckRead_tipo_docu_ = $this->nmgp_cmp_readonly['tipo_docu_'];
+       }
+       if (isset($this->nmgp_cmp_hidden['tipo_docu_']) && $this->nmgp_cmp_hidden['tipo_docu_'] == 'off')
+       {
+           unset($this->nmgp_cmp_hidden['tipo_docu_']);
+           $sStyleHidden_tipo_docu_ = 'display: none;';
+       }
+       $bTestReadOnly_tipo_docu_ = true;
+       $sStyleReadLab_tipo_docu_ = 'display: none;';
+       $sStyleReadInp_tipo_docu_ = '';
+       if (isset($this->nmgp_cmp_readonly['tipo_docu_']) && $this->nmgp_cmp_readonly['tipo_docu_'] == 'on')
+       {
+           $bTestReadOnly_tipo_docu_ = false;
+           unset($this->nmgp_cmp_readonly['tipo_docu_']);
+           $sStyleReadLab_tipo_docu_ = '';
+           $sStyleReadInp_tipo_docu_ = 'display: none;';
+       }
+       $this->tipo_trans_ = $this->form_vert_detallecompra_new_nc[$sc_seq_vert]['tipo_trans_']; 
+       $tipo_trans_ = $this->tipo_trans_; 
+       $sStyleHidden_tipo_trans_ = '';
+       if (isset($sCheckRead_tipo_trans_))
+       {
+           unset($sCheckRead_tipo_trans_);
+       }
+       if (isset($this->nmgp_cmp_readonly['tipo_trans_']))
+       {
+           $sCheckRead_tipo_trans_ = $this->nmgp_cmp_readonly['tipo_trans_'];
+       }
+       if (isset($this->nmgp_cmp_hidden['tipo_trans_']) && $this->nmgp_cmp_hidden['tipo_trans_'] == 'off')
+       {
+           unset($this->nmgp_cmp_hidden['tipo_trans_']);
+           $sStyleHidden_tipo_trans_ = 'display: none;';
+       }
+       $bTestReadOnly_tipo_trans_ = true;
+       $sStyleReadLab_tipo_trans_ = 'display: none;';
+       $sStyleReadInp_tipo_trans_ = '';
+       if (isset($this->nmgp_cmp_readonly['tipo_trans_']) && $this->nmgp_cmp_readonly['tipo_trans_'] == 'on')
+       {
+           $bTestReadOnly_tipo_trans_ = false;
+           unset($this->nmgp_cmp_readonly['tipo_trans_']);
+           $sStyleReadLab_tipo_trans_ = '';
+           $sStyleReadInp_tipo_trans_ = 'display: none;';
+       }
+       $this->id_nota_ = $this->form_vert_detallecompra_new_nc[$sc_seq_vert]['id_nota_']; 
+       $id_nota_ = $this->id_nota_; 
+       $sStyleHidden_id_nota_ = '';
+       if (isset($sCheckRead_id_nota_))
+       {
+           unset($sCheckRead_id_nota_);
+       }
+       if (isset($this->nmgp_cmp_readonly['id_nota_']))
+       {
+           $sCheckRead_id_nota_ = $this->nmgp_cmp_readonly['id_nota_'];
+       }
+       if (isset($this->nmgp_cmp_hidden['id_nota_']) && $this->nmgp_cmp_hidden['id_nota_'] == 'off')
+       {
+           unset($this->nmgp_cmp_hidden['id_nota_']);
+           $sStyleHidden_id_nota_ = 'display: none;';
+       }
+       $bTestReadOnly_id_nota_ = true;
+       $sStyleReadLab_id_nota_ = 'display: none;';
+       $sStyleReadInp_id_nota_ = '';
+       if (isset($this->nmgp_cmp_readonly['id_nota_']) && $this->nmgp_cmp_readonly['id_nota_'] == 'on')
+       {
+           $bTestReadOnly_id_nota_ = false;
+           unset($this->nmgp_cmp_readonly['id_nota_']);
+           $sStyleReadLab_id_nota_ = '';
+           $sStyleReadInp_id_nota_ = 'display: none;';
+       }
 
        $this->lookup_presentacion_($look_rpc_presentacion_);
        $nm_cor_fun_vert = (isset($nm_cor_fun_vert) && $nm_cor_fun_vert == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
@@ -2049,6 +2157,7 @@ $aLookup = array();
    $old_value_vencimiento_ = $this->vencimiento_;
    $old_value_iddet_ = $this->iddet_;
    $old_value_idfaccom_ = $this->idfaccom_;
+   $old_value_id_nota_ = $this->id_nota_;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -2065,6 +2174,7 @@ $aLookup = array();
    $unformatted_value_vencimiento_ = $this->vencimiento_;
    $unformatted_value_iddet_ = $this->iddet_;
    $unformatted_value_idfaccom_ = $this->idfaccom_;
+   $unformatted_value_id_nota_ = $this->id_nota_;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -2107,6 +2217,7 @@ $aLookup = array();
    $this->vencimiento_ = $old_value_vencimiento_;
    $this->iddet_ = $old_value_iddet_;
    $this->idfaccom_ = $old_value_idfaccom_;
+   $this->id_nota_ = $old_value_id_nota_;
 
    if ('' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'])
    {
@@ -2170,6 +2281,7 @@ $aLookup = array();
    $old_value_vencimiento_ = $this->vencimiento_;
    $old_value_iddet_ = $this->iddet_;
    $old_value_idfaccom_ = $this->idfaccom_;
+   $old_value_id_nota_ = $this->id_nota_;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -2186,6 +2298,7 @@ $aLookup = array();
    $unformatted_value_vencimiento_ = $this->vencimiento_;
    $unformatted_value_iddet_ = $this->iddet_;
    $unformatted_value_idfaccom_ = $this->idfaccom_;
+   $unformatted_value_id_nota_ = $this->id_nota_;
 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    {
@@ -2228,6 +2341,7 @@ $aLookup = array();
    $this->vencimiento_ = $old_value_vencimiento_;
    $this->iddet_ = $old_value_iddet_;
    $this->idfaccom_ = $old_value_idfaccom_;
+   $this->id_nota_ = $old_value_id_nota_;
 
    if ('' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'] && '' != $aRecData['idpro_'])
    {
@@ -2422,6 +2536,7 @@ else
    $old_value_vencimiento_ = $this->vencimiento_;
    $old_value_iddet_ = $this->iddet_;
    $old_value_idfaccom_ = $this->idfaccom_;
+   $old_value_id_nota_ = $this->id_nota_;
    $this->nm_tira_formatacao();
    $this->nm_converte_datas(false);
 
@@ -2438,6 +2553,7 @@ else
    $unformatted_value_vencimiento_ = $this->vencimiento_;
    $unformatted_value_iddet_ = $this->iddet_;
    $unformatted_value_idfaccom_ = $this->idfaccom_;
+   $unformatted_value_id_nota_ = $this->id_nota_;
 
    $nm_comando = "SELECT idbodega, bodega  FROM bodegas  ORDER BY bodega";
 
@@ -2453,6 +2569,7 @@ else
    $this->vencimiento_ = $old_value_vencimiento_;
    $this->iddet_ = $old_value_iddet_;
    $this->idfaccom_ = $old_value_idfaccom_;
+   $this->id_nota_ = $old_value_id_nota_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -2686,6 +2803,54 @@ $tmp_form_data = str_replace(';'   , ' '                                       ,
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_idfaccom_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_idfaccom_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
+   <?php if (isset($this->nmgp_cmp_hidden['tipo_docu_']) && $this->nmgp_cmp_hidden['tipo_docu_'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="tipo_docu_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($tipo_docu_) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOddMult css_tipo_docu__line" id="hidden_field_data_tipo_docu_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_tipo_docu_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_tipo_docu__line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly_tipo_docu_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["tipo_docu_"]) &&  $this->nmgp_cmp_readonly["tipo_docu_"] == "on") { 
+
+ ?>
+<input type="hidden" name="tipo_docu_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($tipo_docu_) . "\">" . $tipo_docu_ . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_tipo_docu_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-tipo_docu_<?php echo $sc_seq_vert ?> css_tipo_docu__line" style="<?php echo $sStyleReadLab_tipo_docu_; ?>"><?php echo $this->form_format_readonly("tipo_docu_", $this->form_encode_input($this->tipo_docu_)); ?></span><span id="id_read_off_tipo_docu_<?php echo $sc_seq_vert ?>" class="css_read_off_tipo_docu_<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_tipo_docu_; ?>">
+ <input class="sc-js-input scFormObjectOddMult css_tipo_docu__obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_tipo_docu_<?php echo $sc_seq_vert ?>" type=text name="tipo_docu_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($tipo_docu_) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=4"; } ?> maxlength=4 alt="{datatype: 'text', maxLength: 4, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_tipo_docu_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_tipo_docu_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['tipo_trans_']) && $this->nmgp_cmp_hidden['tipo_trans_'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="tipo_trans_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($tipo_trans_) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOddMult css_tipo_trans__line" id="hidden_field_data_tipo_trans_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_tipo_trans_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_tipo_trans__line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly_tipo_trans_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["tipo_trans_"]) &&  $this->nmgp_cmp_readonly["tipo_trans_"] == "on") { 
+
+ ?>
+<input type="hidden" name="tipo_trans_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($tipo_trans_) . "\">" . $tipo_trans_ . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_tipo_trans_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-tipo_trans_<?php echo $sc_seq_vert ?> css_tipo_trans__line" style="<?php echo $sStyleReadLab_tipo_trans_; ?>"><?php echo $this->form_format_readonly("tipo_trans_", $this->form_encode_input($this->tipo_trans_)); ?></span><span id="id_read_off_tipo_trans_<?php echo $sc_seq_vert ?>" class="css_read_off_tipo_trans_<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_tipo_trans_; ?>">
+ <input class="sc-js-input scFormObjectOddMult css_tipo_trans__obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_tipo_trans_<?php echo $sc_seq_vert ?>" type=text name="tipo_trans_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($tipo_trans_) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=4"; } ?> maxlength=4 alt="{datatype: 'text', maxLength: 4, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_tipo_trans_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_tipo_trans_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['id_nota_']) && $this->nmgp_cmp_hidden['id_nota_'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="id_nota_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($id_nota_) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOddMult css_id_nota__line" id="hidden_field_data_id_nota_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_id_nota_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_id_nota__line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly_id_nota_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["id_nota_"]) &&  $this->nmgp_cmp_readonly["id_nota_"] == "on") { 
+
+ ?>
+<input type="hidden" name="id_nota_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($id_nota_) . "\">" . $id_nota_ . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_id_nota_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-id_nota_<?php echo $sc_seq_vert ?> css_id_nota__line" style="<?php echo $sStyleReadLab_id_nota_; ?>"><?php echo $this->form_format_readonly("id_nota_", $this->form_encode_input($this->id_nota_)); ?></span><span id="id_read_off_id_nota_<?php echo $sc_seq_vert ?>" class="css_read_off_id_nota_<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_id_nota_; ?>">
+ <input class="sc-js-input scFormObjectOddMult css_id_nota__obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_id_nota_<?php echo $sc_seq_vert ?>" type=text name="id_nota_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($id_nota_) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=19"; } ?> alt="{datatype: 'integer', maxLength: 19, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['id_nota_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['id_nota_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['id_nota_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: true, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_id_nota_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_id_nota_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
 
 
 
@@ -2843,6 +3008,30 @@ $tmp_form_data = str_replace(';'   , ' '                                       ,
        if ('display: none;' == $sStyleHidden_idfaccom_)
        {
            $this->nmgp_cmp_hidden['idfaccom_'] = 'off';
+       }
+       if (isset($sCheckRead_tipo_docu_))
+       {
+           $this->nmgp_cmp_readonly['tipo_docu_'] = $sCheckRead_tipo_docu_;
+       }
+       if ('display: none;' == $sStyleHidden_tipo_docu_)
+       {
+           $this->nmgp_cmp_hidden['tipo_docu_'] = 'off';
+       }
+       if (isset($sCheckRead_tipo_trans_))
+       {
+           $this->nmgp_cmp_readonly['tipo_trans_'] = $sCheckRead_tipo_trans_;
+       }
+       if ('display: none;' == $sStyleHidden_tipo_trans_)
+       {
+           $this->nmgp_cmp_hidden['tipo_trans_'] = 'off';
+       }
+       if (isset($sCheckRead_id_nota_))
+       {
+           $this->nmgp_cmp_readonly['id_nota_'] = $sCheckRead_id_nota_;
+       }
+       if ('display: none;' == $sStyleHidden_id_nota_)
+       {
+           $this->nmgp_cmp_hidden['id_nota_'] = 'off';
        }
 
    }

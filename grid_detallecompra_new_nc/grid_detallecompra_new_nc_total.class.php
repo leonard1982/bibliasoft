@@ -56,96 +56,39 @@ class grid_detallecompra_new_nc_total
       } 
    }
 
-   function Ajust_statistic($comando)
+   //---- 
+   function quebra_geral_sc_free_total($res_limit=false)
    {
-      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_vfp) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_odbc))
-      {
-          $comando = str_replace(array('count(distinct ','varp(','stdevp(','variance(','stddev('), array('sum(','sum(','sum(','sum(','sum('), $comando);
+      global $nada, $nm_lang , $idpro;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['contr_total_geral'] == "OK") 
+      { 
+          return; 
+      } 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'] = array() ;  
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+      { 
+          $nm_comando = "select count(*) from " . $this->Ini->nm_tabela . " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_pesq']; 
+      } 
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+          $nm_comando = "select count(*) from " . $this->Ini->nm_tabela . " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_pesq']; 
+      } 
+      else 
+      { 
+          $nm_comando = "select count(*) from " . $this->Ini->nm_tabela . " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_pesq']; 
+      } 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+      if (!$rt = $this->Db->Execute($nm_comando)) 
+      { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
       }
-      if ($this->Ini->nm_tp_variance == "P")
-      {
-          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-          { 
-              $comando = str_replace(array('count(distinct ','varp(','stdevp('), array('count(','var(','stdev('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite) && $this->Ini->sqlite_version == "old")
-          {
-              $comando = str_replace(array('variance(','stddev('), array('sum(','sum('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase) && $this->Ini->Ibase_version == "old")
-          {
-              $comando = str_replace(array('variance(','stddev('), array('sum(','sum('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-          {
-              $comando = str_replace(array('variance(','stddev('), array('var_pop(','stddev_pop('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-          {
-                  $comando = str_replace(array('variance(','stddev('), array('var_pop(','stddev_pop('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
-          {
-              $comando = str_replace(array('variance(','stddev('), array('sum(','sum('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-          {
-              $comando = str_replace(array('variance(','stddev('), array('var_pop(','stddev_pop('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
-          {
-              $comando = str_replace(array('variance(','stddev('), array('var_pop(','stddev_pop('), $comando);
-          }
-      }
-      if ($this->Ini->nm_tp_variance == "A")
-      {
-          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-          { 
-              $comando = str_replace(array('count(distinct ','varp(','stdevp('), array('count(','var(','stdev('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite) && $this->Ini->sqlite_version == "old")
-          {
-              $comando = str_replace(array('variance(','stddev('), array('sum(','sum('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
-          {
-              $comando = str_replace(array('variance(','stddev('), array('var_samp(','stddev_samp('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-          {
-              $comando = str_replace(array('variance(','stddev('), array('var_samp(','stddev_samp('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase) && $this->Ini->Ibase_version == "old")
-          {
-              $comando = str_replace(array('variance(','stddev('), array('sum(','sum('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-          {
-                  $comando = str_replace(array('variance(','stddev('), array('var_samp(','stddev_samp('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
-          {
-              $comando = str_replace(array('variance(','stddev('), array('var_samp(','stddev_samp('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
-          { 
-              $comando = str_replace(array('varp(','stdevp('), array('var(','stdev('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
-          {
-              $comando = str_replace('stddev(', 'stdev(', $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
-          {
-              $comando = str_replace(array('variance(','stddev('), array('variance_samp(','stddev_samp('), $comando);
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
-          {
-              $comando = str_replace(array('variance(','stddev('), array('var_samp(','stddev_samp('), $comando);
-          }
-      }
-      return $comando;
-   }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][0] = "" . $this->Ini->Nm_lang['lang_msgs_totl'] . ""; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][1] = $rt->fields[0] ; 
+      $rt->Close(); 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['contr_total_geral'] = "OK";
+   } 
 
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {

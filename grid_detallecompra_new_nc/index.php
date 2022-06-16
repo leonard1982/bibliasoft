@@ -224,15 +224,14 @@ class grid_detallecompra_new_nc_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20180219"; 
       $this->nm_hr_criacao   = "104235"; 
-      $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220606"; 
-      $this->nm_hr_ult_alt   = "111049"; 
+      $this->nm_autor_alt    = "edgar"; 
+      $this->nm_dt_ult_alt   = "20220616"; 
+      $this->nm_hr_ult_alt   = "110029"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0";
-      $this->nm_tp_variance  = "P";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -892,7 +891,7 @@ class grid_detallecompra_new_nc_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_detallecompra_new_nc']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_detallecompra_new_nc']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYZ9XGHAvCV5BqHgrKDkBODWFYDoJeDcJUVINUDSrYHuX7DMNKZSJGDuFaDorqDcXGZ9XGD1veHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMvCHErsDWF/ZuBqHQNwZSFGD1veHQBODMBOV9FeDWF/HMF7DcJUZ1BiD1rKHuX7HgNOHEBUDWBmVoFGHQXOH9BiHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUDcBwDQJsHABYVWJsHgvsVcBODuFqDoJeDcJUZ1B/D1rwD5FaDEBOHEJGDWF/DoJeDcJeDQFUZ1rwD5NUHgrKVcFCDuX7VoJwD9BsZSB/D1NaV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCH5FYHIX7HQNmH9FUHIrKV5FUDMvmVIBODWJeVoX7DcBqH9BqD1rwHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMBqHgveHErsHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcrsDWXCHMX7HQBqZ1F7HIveZMBqDMzGHArCH5FYVoJwDcJeH9X7D1veHuXGDMBYVcBOV5X7HMJsDcJUZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDuFaHIrKV5JwDMNOVcBODWFaDoF7HQBsZ1BOD1rwV5FUDMzGVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIXGHQXGZ1BiHANOHQNUDMvCZSJ3H5FYHMBqDcXGDQJwHANOHuBqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGZSJGDWr/VoXGDcBwDQB/Z1rwD5JsHgrKVcFCH5XCVoB/D9BsZ1F7HIrwV5FaDMBYZSXeV5FaVoFGD9NwDQJwHANOV5FUHgrYDkBOV5F/DoraD9BiH9BOZ1BeV5FUDMBYDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXsZ9XGHABYHQJwDMBOVcB/DWBmVErqHQXOZ1FGHArYD5JwDEBeZSXeHEFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveDkXKDWBmZuBOHQBiDuBqHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1F7HABYHuX7DEBeHErCHEFqHMBiD9NwZSX7Z1BYV5FaHgvOVcB/DWFYVoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2667,7 +2666,7 @@ class grid_detallecompra_new_nc_apl
       { 
          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['use_pass_pdf']);
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['prim_cons'] = true;  
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_orig'] = " where idfaccom=" . $_SESSION['par_idfaccom'] . "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_orig'] = " where idfaccom='" . $_SESSION['par_idfaccom'] . "'";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_pesq']        = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_orig'];  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_pesq_ant']    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['where_orig'];  
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['cond_pesq']         = ""; 
@@ -3024,10 +3023,6 @@ class grid_detallecompra_new_nc_apl
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['ajax_nav'])
          {
              $Temp = ob_get_clean();
-             if ($Temp !== false && trim($Temp) != "")
-             {
-                 $this->Ini->Arr_result['htmOutput'] = $Temp;
-             }
              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['opcao'] != "ajax_detalhe")  
              {
                  $this->Ini->Arr_result['setVar'][] = array('var' => 'scQtReg', 'value' => $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['qt_reg_grid']);
@@ -3061,10 +3056,6 @@ class grid_detallecompra_new_nc_apl
              $this->Arr_result['file_export']  = NM_charset_to_utf8($this->Ini->root . $this->Ini->path_imag_temp . $nm_arquivo_print . ".html");
              $this->Arr_result['title_export'] = NM_charset_to_utf8($nm_arquivo_print);
              $Temp = ob_get_clean();
-             if ($Temp !== false && trim($Temp) != "")
-             {
-                 $this->Arr_result['htmOutput'] = NM_charset_to_utf8($Temp);
-             }
              $oJson = new Services_JSON();
              echo $oJson->encode($this->Arr_result);
              exit;
@@ -3311,10 +3302,6 @@ class grid_detallecompra_new_nc_apl
                 $this->Arr_result['file_export']  = NM_charset_to_utf8($nm_arquivo_pdf_serv);
                 $this->Arr_result['title_export'] = NM_charset_to_utf8(substr($nm_arquivo_pdf_base, 1));
                 $Temp = ob_get_clean();
-                if ($Temp !== false && trim($Temp) != "")
-                {
-                    $this->Arr_result['htmOutput'] = NM_charset_to_utf8($Temp);
-                }
                 $oJson = new Services_JSON();
                 echo $oJson->encode($this->Arr_result);
                 exit;
@@ -3489,23 +3476,18 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_
        $this->idpro = $this->rs_grid->fields[0] ;  
        $this->idpro = (string)$this->idpro;
        $this->cantidad = $this->rs_grid->fields[1] ;  
-       $this->cantidad = (strpos(strtolower($this->cantidad), "e")) ? (float)$this->cantidad : $this->cantidad; 
        $this->cantidad = (string)$this->cantidad;
        $this->valorunit = $this->rs_grid->fields[2] ;  
        $this->valorunit =  str_replace(",", ".", $this->valorunit);
-       $this->valorunit = (strpos(strtolower($this->valorunit), "e")) ? (float)$this->valorunit : $this->valorunit; 
        $this->valorunit = (string)$this->valorunit;
        $this->porc_desc = $this->rs_grid->fields[3] ;  
        $this->porc_desc =  str_replace(",", ".", $this->porc_desc);
-       $this->porc_desc = (strpos(strtolower($this->porc_desc), "e")) ? (float)$this->porc_desc : $this->porc_desc; 
        $this->porc_desc = (string)$this->porc_desc;
        $this->descuento = $this->rs_grid->fields[4] ;  
        $this->descuento =  str_replace(",", ".", $this->descuento);
-       $this->descuento = (strpos(strtolower($this->descuento), "e")) ? (float)$this->descuento : $this->descuento; 
        $this->descuento = (string)$this->descuento;
        $this->valorpar = $this->rs_grid->fields[5] ;  
        $this->valorpar =  str_replace(",", ".", $this->valorpar);
-       $this->valorpar = (strpos(strtolower($this->valorpar), "e")) ? (float)$this->valorpar : $this->valorpar; 
        $this->valorpar = (string)$this->valorpar;
        $this->tasaiva = $this->rs_grid->fields[6] ;  
        $this->tasaiva = (string)$this->tasaiva;
@@ -3525,28 +3507,12 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_
        $this->sabor = $this->rs_grid->fields[13] ;  
        $this->sabor = (string)$this->sabor;
       $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'on';
- $sql_del =  "DELETE FROM detallecompra WHERE iddet = '".$this->iddet ."'";
+ 
 
-     $nm_select = $sql_del; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             if ($this->Ini->sc_tem_trans_banco)
-             {
-                 $this->Db->RollbackTrans(); 
-                 $this->Ini->sc_tem_trans_banco = false;
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
 $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'off'; 
     }  
     $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'on';
- 
+ echo "Recargue el formulario...";
 $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'off'; 
 }  
     $this->NM_buffer = ob_get_contents();
@@ -4149,10 +4115,6 @@ $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'off';
           $this->Arr_result['file_export']  = NM_charset_to_utf8($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['word_file']);
           $this->Arr_result['title_export'] = NM_charset_to_utf8($nm_arquivo_doc_word);
           $Temp = ob_get_clean();
-          if ($Temp !== false && trim($Temp) != "")
-          {
-              $this->Arr_result['htmOutput'] = NM_charset_to_utf8($Temp);
-          }
           $oJson = new Services_JSON();
           echo $oJson->encode($this->Arr_result);
           exit;

@@ -188,9 +188,6 @@ class grid_detallecompra_new_nc_res_rtf
 
    function formatValue($group, $valor_campo)
    {
-       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['SC_Ind_Groupby'] == "sc_free_total")
-       {
-       }
        return $valor_campo;
    }
 

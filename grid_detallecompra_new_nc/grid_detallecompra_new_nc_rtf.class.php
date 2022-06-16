@@ -31,10 +31,6 @@ class grid_detallecompra_new_nc_rtf
           $this->Arr_result['file_export']  = NM_charset_to_utf8($this->Rtf_f);
           $this->Arr_result['title_export'] = NM_charset_to_utf8($this->Tit_doc);
           $Temp = ob_get_clean();
-          if ($Temp !== false && trim($Temp) != "")
-          {
-              $this->Arr_result['htmOutput'] = NM_charset_to_utf8($Temp);
-          }
           $oJson = new Services_JSON();
           echo $oJson->encode($this->Arr_result);
           exit;
@@ -100,9 +96,6 @@ class grid_detallecompra_new_nc_rtf
       {
           $this->Tot->$Gb_geral();
           $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][1];
-          $this->sum_valorpar = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][2];
-          $this->sum_iva = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][3];
-          $this->sum_total = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['tot_geral'][4];
       }
       if (!$this->Ini->sc_export_ajax) {
           require_once($this->Ini->path_lib_php . "/sc_progress_bar.php");
@@ -376,23 +369,18 @@ class grid_detallecompra_new_nc_rtf
          $this->idpro = $rs->fields[0] ;  
          $this->idpro = (string)$this->idpro;
          $this->cantidad = $rs->fields[1] ;  
-         $this->cantidad = (strpos(strtolower($this->cantidad), "e")) ? (float)$this->cantidad : $this->cantidad; 
          $this->cantidad = (string)$this->cantidad;
          $this->valorunit = $rs->fields[2] ;  
          $this->valorunit =  str_replace(",", ".", $this->valorunit);
-         $this->valorunit = (strpos(strtolower($this->valorunit), "e")) ? (float)$this->valorunit : $this->valorunit; 
          $this->valorunit = (string)$this->valorunit;
          $this->porc_desc = $rs->fields[3] ;  
          $this->porc_desc =  str_replace(",", ".", $this->porc_desc);
-         $this->porc_desc = (strpos(strtolower($this->porc_desc), "e")) ? (float)$this->porc_desc : $this->porc_desc; 
          $this->porc_desc = (string)$this->porc_desc;
          $this->descuento = $rs->fields[4] ;  
          $this->descuento =  str_replace(",", ".", $this->descuento);
-         $this->descuento = (strpos(strtolower($this->descuento), "e")) ? (float)$this->descuento : $this->descuento; 
          $this->descuento = (string)$this->descuento;
          $this->valorpar = $rs->fields[5] ;  
          $this->valorpar =  str_replace(",", ".", $this->valorpar);
-         $this->valorpar = (strpos(strtolower($this->valorpar), "e")) ? (float)$this->valorpar : $this->valorpar; 
          $this->valorpar = (string)$this->valorpar;
          $this->tasaiva = $rs->fields[6] ;  
          $this->tasaiva = (string)$this->tasaiva;

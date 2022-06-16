@@ -3811,6 +3811,147 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_detallecompra_new_nc_validate_idfaccom__cb
 
+  // ---------- Validate tipo_docu_
+  function do_ajax_detallecompra_new_nc_validate_tipo_docu_(iNumLinha)
+  {
+    var nomeCampo_tipo_docu_ = "tipo_docu_" + iNumLinha;
+    var var_tipo_docu_ = scAjaxGetFieldText(nomeCampo_tipo_docu_);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_detallecompra_new_nc_validate_tipo_docu_(var_tipo_docu_, iNumLinha, var_script_case_init, do_ajax_detallecompra_new_nc_validate_tipo_docu__cb);
+  } // do_ajax_detallecompra_new_nc_validate_tipo_docu_
+
+  function do_ajax_detallecompra_new_nc_validate_tipo_docu__cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    iLineNumber = scAjaxGetLineNumber();
+    if ("" != iLineNumber)
+    {
+      sFieldValid = "tipo_docu_" + iLineNumber;
+    }
+    else
+    {
+      sFieldValid = "tipo_docu_";
+    }
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+      scErrorLineOff(iLineNumber, "tipo_docu_");
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+      scErrorLineOn(iLineNumber, "tipo_docu_");
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_detallecompra_new_nc_validate_tipo_docu__cb
+
+  // ---------- Validate tipo_trans_
+  function do_ajax_detallecompra_new_nc_validate_tipo_trans_(iNumLinha)
+  {
+    var nomeCampo_tipo_trans_ = "tipo_trans_" + iNumLinha;
+    var var_tipo_trans_ = scAjaxGetFieldText(nomeCampo_tipo_trans_);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_detallecompra_new_nc_validate_tipo_trans_(var_tipo_trans_, iNumLinha, var_script_case_init, do_ajax_detallecompra_new_nc_validate_tipo_trans__cb);
+  } // do_ajax_detallecompra_new_nc_validate_tipo_trans_
+
+  function do_ajax_detallecompra_new_nc_validate_tipo_trans__cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    iLineNumber = scAjaxGetLineNumber();
+    if ("" != iLineNumber)
+    {
+      sFieldValid = "tipo_trans_" + iLineNumber;
+    }
+    else
+    {
+      sFieldValid = "tipo_trans_";
+    }
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+      scErrorLineOff(iLineNumber, "tipo_trans_");
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+      scErrorLineOn(iLineNumber, "tipo_trans_");
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_detallecompra_new_nc_validate_tipo_trans__cb
+
+  // ---------- Validate id_nota_
+  function do_ajax_detallecompra_new_nc_validate_id_nota_(iNumLinha)
+  {
+    var nomeCampo_id_nota_ = "id_nota_" + iNumLinha;
+    var var_id_nota_ = scAjaxGetFieldText(nomeCampo_id_nota_);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_detallecompra_new_nc_validate_id_nota_(var_id_nota_, iNumLinha, var_script_case_init, do_ajax_detallecompra_new_nc_validate_id_nota__cb);
+  } // do_ajax_detallecompra_new_nc_validate_id_nota_
+
+  function do_ajax_detallecompra_new_nc_validate_id_nota__cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    iLineNumber = scAjaxGetLineNumber();
+    if ("" != iLineNumber)
+    {
+      sFieldValid = "id_nota_" + iLineNumber;
+    }
+    else
+    {
+      sFieldValid = "id_nota_";
+    }
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+      scErrorLineOff(iLineNumber, "id_nota_");
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+      scErrorLineOn(iLineNumber, "id_nota_");
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_detallecompra_new_nc_validate_id_nota__cb
+
   // ---------- Refresh idpro_
   function do_ajax_detallecompra_new_nc_refresh_idpro_(iSeqForm)
   {
@@ -5063,6 +5204,9 @@ function scJs_sweetalert_params(params) {
     var var_serial_codbarra_ = scAjaxGetFieldText("serial_codbarra_" + iNumLinha);
     var var_iddet_ = scAjaxGetFieldHidden("iddet_" + iNumLinha);
     var var_idfaccom_ = scAjaxGetFieldText("idfaccom_" + iNumLinha);
+    var var_tipo_docu_ = scAjaxGetFieldText("tipo_docu_" + iNumLinha);
+    var var_tipo_trans_ = scAjaxGetFieldText("tipo_trans_" + iNumLinha);
+    var var_id_nota_ = scAjaxGetFieldText("id_nota_" + iNumLinha);
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -5095,7 +5239,7 @@ function scJs_sweetalert_params(params) {
 <?php
     }
 ?>
-    x_ajax_detallecompra_new_nc_submit_form(var_cod_barras_, var_idpro_, var_ver_, var_presentacion_, var_cantidad_, var_valorunit_, var_porc_desc_, var_descuento_, var_valorpar_, var_iva_, var_idbod_, var_tasaiva_, var_tasadesc_, var_devuelto_, var_vencimiento_, var_lote_, var_serial_codbarra_, var_iddet_, var_idfaccom_, var_nmgp_refresh_row, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_detallecompra_new_nc_submit_form_cb);
+    x_ajax_detallecompra_new_nc_submit_form(var_cod_barras_, var_idpro_, var_ver_, var_presentacion_, var_cantidad_, var_valorunit_, var_porc_desc_, var_descuento_, var_valorpar_, var_iva_, var_idbod_, var_tasaiva_, var_tasadesc_, var_devuelto_, var_vencimiento_, var_lote_, var_serial_codbarra_, var_iddet_, var_idfaccom_, var_tipo_docu_, var_tipo_trans_, var_id_nota_, var_nmgp_refresh_row, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_detallecompra_new_nc_submit_form_cb);
   } // do_ajax_detallecompra_new_nc_submit_form
 
   function do_ajax_detallecompra_new_nc_submit_form_cb(sResp)
@@ -5208,6 +5352,9 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("serial_codbarra_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("iddet_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("idfaccom_" + sc_num_ult_line);
+      scAjaxHideErrorDisplay("tipo_docu_" + sc_num_ult_line);
+      scAjaxHideErrorDisplay("tipo_trans_" + sc_num_ult_line);
+      scAjaxHideErrorDisplay("id_nota_" + sc_num_ult_line);
 <?php
 if (isset($this->Embutida_form) && $this->Embutida_form) {
 ?>
@@ -5303,6 +5450,9 @@ if (isset($this->Embutida_form) && $this->Embutida_form) {
       scAjaxHideErrorDisplay("serial_codbarra_" + iNavForm);
       scAjaxHideErrorDisplay("iddet_" + iNavForm);
       scAjaxHideErrorDisplay("idfaccom_" + iNavForm);
+      scAjaxHideErrorDisplay("tipo_docu_" + iNavForm);
+      scAjaxHideErrorDisplay("tipo_trans_" + iNavForm);
+      scAjaxHideErrorDisplay("id_nota_" + iNavForm);
     }
     var var_iddet_ = document.F2.iddet_.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
@@ -5466,6 +5616,12 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     iTotCampos++;
     ajax_field_list[iTotCampos] = "idfaccom_" + iNumLinha;
     iTotCampos++;
+    ajax_field_list[iTotCampos] = "tipo_docu_" + iNumLinha;
+    iTotCampos++;
+    ajax_field_list[iTotCampos] = "tipo_trans_" + iNumLinha;
+    iTotCampos++;
+    ajax_field_list[iTotCampos] = "id_nota_" + iNumLinha;
+    iTotCampos++;
     ajax_error_list["cod_barras_" + iNumLinha] = {"label": "Código Prod.<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["idpro_" + iNumLinha] = {"label": "Producto<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["ver_" + iNumLinha] = {"label": "Ver<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
@@ -5485,6 +5641,9 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_error_list["serial_codbarra_" + iNumLinha] = {"label": "Serial o CodBarras<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["iddet_" + iNumLinha] = {"label": "Iddet<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["idfaccom_" + iNumLinha] = {"label": "Idfaccom<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["tipo_docu_" + iNumLinha] = {"label": "Tipo Docu<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["tipo_trans_" + iNumLinha] = {"label": "Tipo Trans<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["id_nota_" + iNumLinha] = {"label": "Id Nota<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_field_mult["cod_barras_"][iNumLinha] = "cod_barras_" + iNumLinha;
     ajax_field_mult["idpro_"][iNumLinha] = "idpro_" + iNumLinha;
     ajax_field_mult["ver_"][iNumLinha] = "ver_" + iNumLinha;
@@ -5504,6 +5663,9 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_field_mult["serial_codbarra_"][iNumLinha] = "serial_codbarra_" + iNumLinha;
     ajax_field_mult["iddet_"][iNumLinha] = "iddet_" + iNumLinha;
     ajax_field_mult["idfaccom_"][iNumLinha] = "idfaccom_" + iNumLinha;
+    ajax_field_mult["tipo_docu_"][iNumLinha] = "tipo_docu_" + iNumLinha;
+    ajax_field_mult["tipo_trans_"][iNumLinha] = "tipo_trans_" + iNumLinha;
+    ajax_field_mult["id_nota_"][iNumLinha] = "id_nota_" + iNumLinha;
     ajax_field_id["cod_barras_" + iNumLinha] = new Array("hidden_field_label_cod_barras_", "hidden_field_data_cod_barras_" + iNumLinha);
     ajax_field_id["idpro_" + iNumLinha] = new Array("hidden_field_label_idpro_", "hidden_field_data_idpro_" + iNumLinha);
     ajax_field_id["presentacion_" + iNumLinha] = new Array("hidden_field_label_presentacion_", "hidden_field_data_presentacion_" + iNumLinha);
@@ -5514,6 +5676,9 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_field_id["valorpar_" + iNumLinha] = new Array("hidden_field_label_valorpar_", "hidden_field_data_valorpar_" + iNumLinha);
     ajax_field_id["iva_" + iNumLinha] = new Array("hidden_field_label_iva_", "hidden_field_data_iva_" + iNumLinha);
     ajax_field_id["idbod_" + iNumLinha] = new Array("hidden_field_label_idbod_", "hidden_field_data_idbod_" + iNumLinha);
+    ajax_field_id["tipo_docu_" + iNumLinha] = new Array("hidden_field_label_tipo_docu_", "hidden_field_data_tipo_docu_" + iNumLinha);
+    ajax_field_id["tipo_trans_" + iNumLinha] = new Array("hidden_field_label_tipo_trans_", "hidden_field_data_tipo_trans_" + iNumLinha);
+    ajax_field_id["id_nota_" + iNumLinha] = new Array("hidden_field_label_id_nota_", "hidden_field_data_id_nota_" + iNumLinha);
     ajax_error_count["cod_barras_" + iNumLinha] = "off";
     ajax_error_count["idpro_" + iNumLinha] = "off";
     ajax_error_count["ver_" + iNumLinha] = "off";
@@ -5533,6 +5698,9 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_error_count["serial_codbarra_" + iNumLinha] = "off";
     ajax_error_count["iddet_" + iNumLinha] = "off";
     ajax_error_count["idfaccom_" + iNumLinha] = "off";
+    ajax_error_count["tipo_docu_" + iNumLinha] = "off";
+    ajax_error_count["tipo_trans_" + iNumLinha] = "off";
+    ajax_error_count["id_nota_" + iNumLinha] = "off";
 <?php
 if (!$this->Grid_editavel)
 {
@@ -5556,6 +5724,9 @@ if (!$this->Grid_editavel)
     ajax_read_only["serial_codbarra_" + iNumLinha] = "off";
     ajax_read_only["iddet_" + iNumLinha] = "on";
     ajax_read_only["idfaccom_" + iNumLinha] = "off";
+    ajax_read_only["tipo_docu_" + iNumLinha] = "off";
+    ajax_read_only["tipo_trans_" + iNumLinha] = "off";
+    ajax_read_only["id_nota_" + iNumLinha] = "off";
 <?php
 }
 else
@@ -5580,6 +5751,9 @@ else
     ajax_read_only["serial_codbarra_" + iNumLinha] = "on";
     ajax_read_only["iddet_" + iNumLinha] = "on";
     ajax_read_only["idfaccom_" + iNumLinha] = "on";
+    ajax_read_only["tipo_docu_" + iNumLinha] = "on";
+    ajax_read_only["tipo_trans_" + iNumLinha] = "on";
+    ajax_read_only["id_nota_" + iNumLinha] = "on";
 <?php
 }
 ?>
@@ -5605,6 +5779,9 @@ else
     ajax_error_list["serial_codbarra_" + iNumLinha] = null;
     ajax_error_list["iddet_" + iNumLinha] = null;
     ajax_error_list["idfaccom_" + iNumLinha] = null;
+    ajax_error_list["tipo_docu_" + iNumLinha] = null;
+    ajax_error_list["tipo_trans_" + iNumLinha] = null;
+    ajax_error_list["id_nota_" + iNumLinha] = null;
   }
 
   var ajax_error_geral = "";
@@ -5649,7 +5826,10 @@ else
     "lote_": new Array(),
     "serial_codbarra_": new Array(),
     "iddet_": new Array(),
-    "idfaccom_": new Array()
+    "idfaccom_": new Array(),
+    "tipo_docu_": new Array(),
+    "tipo_trans_": new Array(),
+    "id_nota_": new Array()
   };
 
   var ajax_field_id = {};
@@ -5763,6 +5943,21 @@ else
       ajax_error_list["idfaccom_" + iNumLinha]["onchange"] = new Array();
       ajax_error_list["idfaccom_" + iNumLinha]["onclick"] = new Array();
       ajax_error_list["idfaccom_" + iNumLinha]["onfocus"] = new Array();
+      ajax_error_list["tipo_docu_" + iNumLinha]["valid"] = new Array();
+      ajax_error_list["tipo_docu_" + iNumLinha]["onblur"] = new Array();
+      ajax_error_list["tipo_docu_" + iNumLinha]["onchange"] = new Array();
+      ajax_error_list["tipo_docu_" + iNumLinha]["onclick"] = new Array();
+      ajax_error_list["tipo_docu_" + iNumLinha]["onfocus"] = new Array();
+      ajax_error_list["tipo_trans_" + iNumLinha]["valid"] = new Array();
+      ajax_error_list["tipo_trans_" + iNumLinha]["onblur"] = new Array();
+      ajax_error_list["tipo_trans_" + iNumLinha]["onchange"] = new Array();
+      ajax_error_list["tipo_trans_" + iNumLinha]["onclick"] = new Array();
+      ajax_error_list["tipo_trans_" + iNumLinha]["onfocus"] = new Array();
+      ajax_error_list["id_nota_" + iNumLinha]["valid"] = new Array();
+      ajax_error_list["id_nota_" + iNumLinha]["onblur"] = new Array();
+      ajax_error_list["id_nota_" + iNumLinha]["onchange"] = new Array();
+      ajax_error_list["id_nota_" + iNumLinha]["onclick"] = new Array();
+      ajax_error_list["id_nota_" + iNumLinha]["onfocus"] = new Array();
     }
   }
 
@@ -5875,6 +6070,18 @@ else
   $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['idfaccom_'])) ? $this->nmgp_cmp_readonly['idfaccom_'] : 'off';
 ?>
     scAjaxFieldRead("idfaccom_" + iSeq, "<?php echo $NM_contr_readonly ?>");
+<?php
+  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['tipo_docu_'])) ? $this->nmgp_cmp_readonly['tipo_docu_'] : 'off';
+?>
+    scAjaxFieldRead("tipo_docu_" + iSeq, "<?php echo $NM_contr_readonly ?>");
+<?php
+  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['tipo_trans_'])) ? $this->nmgp_cmp_readonly['tipo_trans_'] : 'off';
+?>
+    scAjaxFieldRead("tipo_trans_" + iSeq, "<?php echo $NM_contr_readonly ?>");
+<?php
+  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['id_nota_'])) ? $this->nmgp_cmp_readonly['id_nota_'] : 'off';
+?>
+    scAjaxFieldRead("id_nota_" + iSeq, "<?php echo $NM_contr_readonly ?>");
   }
 
   function mdCloseObjects(iSeq)
@@ -5898,6 +6105,9 @@ else
     scAjaxFieldRead("serial_codbarra_" + iSeq, "on");
     scAjaxFieldRead("iddet_" + iSeq, "on");
     scAjaxFieldRead("idfaccom_" + iSeq, "on");
+    scAjaxFieldRead("tipo_docu_" + iSeq, "on");
+    scAjaxFieldRead("tipo_trans_" + iSeq, "on");
+    scAjaxFieldRead("id_nota_" + iSeq, "on");
     rerunHeaderDisplay = 1;
     scSetFixedHeaders(true);
   }
@@ -5967,7 +6177,7 @@ else
     {
       ajax_error_count[sIdError + iRow] = "on";
     }
-    if (bErrorRow || ("on" == ajax_error_count["cod_barras_" + iRow] || "on" == ajax_error_count["idpro_" + iRow] || "on" == ajax_error_count["ver_" + iRow] || "on" == ajax_error_count["presentacion_" + iRow] || "on" == ajax_error_count["cantidad_" + iRow] || "on" == ajax_error_count["valorunit_" + iRow] || "on" == ajax_error_count["porc_desc_" + iRow] || "on" == ajax_error_count["descuento_" + iRow] || "on" == ajax_error_count["valorpar_" + iRow] || "on" == ajax_error_count["iva_" + iRow] || "on" == ajax_error_count["idbod_" + iRow] || "on" == ajax_error_count["tasaiva_" + iRow] || "on" == ajax_error_count["tasadesc_" + iRow] || "on" == ajax_error_count["devuelto_" + iRow] || "on" == ajax_error_count["vencimiento_" + iRow] || "on" == ajax_error_count["lote_" + iRow] || "on" == ajax_error_count["serial_codbarra_" + iRow] || "on" == ajax_error_count["iddet_" + iRow] || "on" == ajax_error_count["idfaccom_" + iRow]))
+    if (bErrorRow || ("on" == ajax_error_count["cod_barras_" + iRow] || "on" == ajax_error_count["idpro_" + iRow] || "on" == ajax_error_count["ver_" + iRow] || "on" == ajax_error_count["presentacion_" + iRow] || "on" == ajax_error_count["cantidad_" + iRow] || "on" == ajax_error_count["valorunit_" + iRow] || "on" == ajax_error_count["porc_desc_" + iRow] || "on" == ajax_error_count["descuento_" + iRow] || "on" == ajax_error_count["valorpar_" + iRow] || "on" == ajax_error_count["iva_" + iRow] || "on" == ajax_error_count["idbod_" + iRow] || "on" == ajax_error_count["tasaiva_" + iRow] || "on" == ajax_error_count["tasadesc_" + iRow] || "on" == ajax_error_count["devuelto_" + iRow] || "on" == ajax_error_count["vencimiento_" + iRow] || "on" == ajax_error_count["lote_" + iRow] || "on" == ajax_error_count["serial_codbarra_" + iRow] || "on" == ajax_error_count["iddet_" + iRow] || "on" == ajax_error_count["idfaccom_" + iRow] || "on" == ajax_error_count["tipo_docu_" + iRow] || "on" == ajax_error_count["tipo_trans_" + iRow] || "on" == ajax_error_count["id_nota_" + iRow]))
     {
       $("#hidden_field_data_sc_seq" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_sc_actions" + iRow).addClass("scFormErrorLine");
@@ -5990,6 +6200,9 @@ else
       $("#hidden_field_data_serial_codbarra_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_iddet_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_idfaccom_" + iRow).addClass("scFormErrorLine");
+      $("#hidden_field_data_tipo_docu_" + iRow).addClass("scFormErrorLine");
+      $("#hidden_field_data_tipo_trans_" + iRow).addClass("scFormErrorLine");
+      $("#hidden_field_data_id_nota_" + iRow).addClass("scFormErrorLine");
     }
   }
 
@@ -6004,7 +6217,7 @@ else
     {
       ajax_error_count[sIdError + iRow] = "off";
     }
-    if (bErrorRow || ("off" == ajax_error_count["cod_barras_" + iRow] && "off" == ajax_error_count["idpro_" + iRow] && "off" == ajax_error_count["ver_" + iRow] && "off" == ajax_error_count["presentacion_" + iRow] && "off" == ajax_error_count["cantidad_" + iRow] && "off" == ajax_error_count["valorunit_" + iRow] && "off" == ajax_error_count["porc_desc_" + iRow] && "off" == ajax_error_count["descuento_" + iRow] && "off" == ajax_error_count["valorpar_" + iRow] && "off" == ajax_error_count["iva_" + iRow] && "off" == ajax_error_count["idbod_" + iRow] && "off" == ajax_error_count["tasaiva_" + iRow] && "off" == ajax_error_count["tasadesc_" + iRow] && "off" == ajax_error_count["devuelto_" + iRow] && "off" == ajax_error_count["vencimiento_" + iRow] && "off" == ajax_error_count["lote_" + iRow] && "off" == ajax_error_count["serial_codbarra_" + iRow] && "off" == ajax_error_count["iddet_" + iRow] && "off" == ajax_error_count["idfaccom_" + iRow]))
+    if (bErrorRow || ("off" == ajax_error_count["cod_barras_" + iRow] && "off" == ajax_error_count["idpro_" + iRow] && "off" == ajax_error_count["ver_" + iRow] && "off" == ajax_error_count["presentacion_" + iRow] && "off" == ajax_error_count["cantidad_" + iRow] && "off" == ajax_error_count["valorunit_" + iRow] && "off" == ajax_error_count["porc_desc_" + iRow] && "off" == ajax_error_count["descuento_" + iRow] && "off" == ajax_error_count["valorpar_" + iRow] && "off" == ajax_error_count["iva_" + iRow] && "off" == ajax_error_count["idbod_" + iRow] && "off" == ajax_error_count["tasaiva_" + iRow] && "off" == ajax_error_count["tasadesc_" + iRow] && "off" == ajax_error_count["devuelto_" + iRow] && "off" == ajax_error_count["vencimiento_" + iRow] && "off" == ajax_error_count["lote_" + iRow] && "off" == ajax_error_count["serial_codbarra_" + iRow] && "off" == ajax_error_count["iddet_" + iRow] && "off" == ajax_error_count["idfaccom_" + iRow] && "off" == ajax_error_count["tipo_docu_" + iRow] && "off" == ajax_error_count["tipo_trans_" + iRow] && "off" == ajax_error_count["id_nota_" + iRow]))
     {
       if (bErrorRow)
       {
@@ -6027,6 +6240,9 @@ else
         ajax_error_count["serial_codbarra_" + iRow] = "off";
         ajax_error_count["iddet_" + iRow] = "off";
         ajax_error_count["idfaccom_" + iRow] = "off";
+        ajax_error_count["tipo_docu_" + iRow] = "off";
+        ajax_error_count["tipo_trans_" + iRow] = "off";
+        ajax_error_count["id_nota_" + iRow] = "off";
       }
       var sCssLine = scErrorLineCss(iRow);
       $("#hidden_field_data_sc_seq" + iRow).removeClass("scFormErrorLine");
@@ -6050,6 +6266,9 @@ else
       $("#hidden_field_data_serial_codbarra_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_iddet_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_idfaccom_" + iRow).removeClass("scFormErrorLine");
+      $("#hidden_field_data_tipo_docu_" + iRow).removeClass("scFormErrorLine");
+      $("#hidden_field_data_tipo_trans_" + iRow).removeClass("scFormErrorLine");
+      $("#hidden_field_data_id_nota_" + iRow).removeClass("scFormErrorLine");
     }
   }
 
@@ -6388,6 +6607,57 @@ else
       return;
     }
     if ("idfaccom_" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("tipo_docu_" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("tipo_trans_" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("id_nota_" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);

@@ -7149,7 +7149,7 @@ else
 	$this->NM_ajax_info['buttonDisplay']['delete'] = $this->nmgp_botoes["delete"] = "off";;
 	$this->NM_ajax_info['buttonDisplay']['new'] = $this->nmgp_botoes["new"] = "on";;
 	}
-	
+
 
 if($this->asentada ==1)
 	{
@@ -7207,12 +7207,12 @@ $vcd = $this->cod_cuenta ;
 ;
 
 if(isset($this->vsidoc[0][0]))
-{
+	{
 	$vdoc = $this->vsidoc[0][0];
 	$vfec = $this->vsidoc[0][1];
 	$vmensaje = "No se puede desasentar la compra porque tiene un documento de pago en tesoreria: ".$vdoc.", fecha: ".$vfec;
 	$this->nm_mens_alert[] = $vmensaje; $this->nm_params_alert[] = array(); if ($this->NM_ajax_flag) { $this->sc_ajax_alert($vmensaje); }$vsitiene = "SI";
-}
+	}
 
  
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
@@ -9239,8 +9239,9 @@ if($this->tipo_com =='NC')
 	$ti_doc='NC';
 	$to_tra='DEV';
 	$id_nta=$this->idfaccom ;
+	$ideta = 0;
 	
-	$sql_det = "SELECT  idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, porc_desc FROM detallecompra WHERE idfaccom = '".$this->id_comafec ."'";
+	$sql_det = "SELECT  idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, porc_desc, iddet FROM detallecompra WHERE idfaccom = '".$this->id_comafec ."'";
 	 
       $nm_select = $sql_det; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -9285,9 +9286,10 @@ if($this->tipo_com =='NC')
 			$tiva.=		  $det[7];
 			$tdes.=		  $det[8];
 			$pdec.=		  $det[9];
+			$ideta.=	  $det[10];
 			
 			
-     $nm_select ="insert detallecompra set idfaccom='".$id_nta."', idpro='".$idproducto."', idbod='".$bod."', cantidad='".$cantidad."', valorunit='".$vunit."', valorpar='".$vparcial."', iva='".$iva."', descuento='".$desc."', tasaiva='".$tiva."', tasadesc='".$tdes."', tipo_docu='".$ti_doc."', tipo_trans='".$to_tra."', id_nota='".$id_nta."'"; 
+     $nm_select ="insert detallecompra set idfaccom='".$id_nta."', idpro='".$idproducto."', idbod='".$bod."', cantidad='".$cantidad."', valorunit='".$vunit."', valorpar='".$vparcial."', iva='".$iva."', descuento='".$desc."', tasaiva='".$tiva."', tasadesc='".$tdes."', tipo_docu='".$ti_doc."', tipo_trans='".$to_tra."', id_nota='".$ideta."'"; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -9314,8 +9316,9 @@ if($this->tipo_com =='NC')
 			$tiva		=0;
 			$tdes		=0;
 			$pdec		=0;
+			$ideta 		=0;
 			}
-		echo $sql_tot="SELECT sum(valorpar), sum(iva) FROM detallecompra WHERE idfaccom = '".$this->idfaccom ."' ";
+		$sql_tot="SELECT sum(valorpar), sum(iva) FROM detallecompra WHERE idfaccom = '".$this->idfaccom ."' ";
 		 
       $nm_select = $sql_tot; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -9343,17 +9346,14 @@ if($this->tipo_com =='NC')
       } 
 ;
 		if(isset($this->ds_tot[0][0]))
-			{echo "Unooooo";
+			{
 			$stotal=$this->ds_tot[0][0];
 			$siva=$this->ds_tot[0][1];
 			$tota=$stotal+$siva;
 			$this->total  = $tota;
 			$this->subtotal  = $stotal;
 			$this->valoriva  = $siva;
-			}
-		if(isset($this->ds_tot[0][0]))
-			{echo "<br>Uno.Dossssssss";
-			echo $sqlupd = "UPDATE facturacom SET subtotal='".$stotal."', valoriva='".$siva."', total='".$tota."', saldo=0 WHERE idfaccom='".$this->idfaccom ."'";
+			$sqlupd = "UPDATE facturacom SET subtotal='".$stotal."', valoriva='".$siva."', total='".$tota."', saldo=0 WHERE idfaccom='".$this->idfaccom ."'";
 			
      $nm_select = $sqlupd; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -9373,7 +9373,7 @@ if($this->tipo_com =='NC')
       ;
 			}
 		else
-			{echo "<br>Tresssssss";
+			{
 			$sqlupd = "UPDATE facturacom SET subtotal=0, valoriva=0, total=0, saldo=0 WHERE idfaccom = '".$this->idfaccom ."'";
 			
      $nm_select = $sqlupd; 
@@ -10905,7 +10905,7 @@ if ($this->asentada ==1)
 		$id_nta=$this->idfaccom ;
 		$ideta=0;
 
-		$sql_det = "SELECT  idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, porc_desc, tipo_trans, iddet FROM detallecompra WHERE idfaccom = '".$id_nta."'";
+		$sql_det = "SELECT  idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, porc_desc, tipo_trans, iddet, (select idgrup from productos where idprod = idpro) as tipop FROM detallecompra WHERE idfaccom = '".$id_nta."'";
 		 
       $nm_select = $sql_det; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -10932,7 +10932,7 @@ if ($this->asentada ==1)
           $this->ds_det_erro = $this->Db->ErrorMsg();
       } 
 ;
-
+		
 		if(isset($this->ds_det[0][0]))
 			{
 			$j = 0;
@@ -10952,11 +10952,14 @@ if ($this->asentada ==1)
 				$pdec.=		  $det[9];
 				$to_tra.=	  $det[10];
 				$ideta.= 	  $det[11];
-
-				if($to_tra=='DEV')
+				
+				if($det[12]!=1)
 					{
-					 $sql_dev = "INSERT INTO inventario (fecha, cantidad, idpro, costo, valorparcial, idbod, tipo, detalle, idmov, idfaccom, nufacvta, remision, nupro, iddetalle) VALUES ('".$this->fechacom ."', '".-$cantidad."', '".$idproducto."', '".$vunit."', '".$vparcial."', '".$bod."', 2, 'DEV EN COMPRA', 1, '".$id_nta."', '0', '0', '0', '".$ideta."')";
-					
+
+					if($to_tra=='DEV')
+						{
+						 $sql_dev = "INSERT INTO inventario (fecha, cantidad, idpro, costo, valorparcial, idbod, tipo, detalle, idmov, idfaccom, nufacvta, remision, nupro, iddetalle) VALUES ('".$this->fechacom ."', '".-$cantidad."', '".$idproducto."', '".$vunit."', '".$vparcial."', '".$bod."', 2, 'DEV EN COMPRA', 1, '".$id_nta."', '0', '0', '0', '".$ideta."')";
+						
      $nm_select = $sql_dev; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -10973,10 +10976,11 @@ if ($this->asentada ==1)
          }
          $rf->Close();
       ;
-					}
-				else
-					{
-					
+						}
+					else
+						{
+
+						}
 					}
 
 				$idproducto =0;
