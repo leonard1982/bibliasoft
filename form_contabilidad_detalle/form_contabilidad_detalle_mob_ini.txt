@@ -1,5 +1,5 @@
 form_contabilidad_detalle_mob.php
-FACILWEBv2
+FACILWEBv_2022
 form_contabilidad_detalle_mob
 NAO
 form

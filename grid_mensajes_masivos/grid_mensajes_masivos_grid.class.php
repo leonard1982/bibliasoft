@@ -5845,7 +5845,7 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_mensajes_masivos']['proc_
        $this->NM_fil_ant = array();
        $pos_path = strrpos($this->Ini->path_prod, "/");
        $this->NM_path_filter = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/filters/";
-       $NM_patch   = "FACILWEBv2/grid_mensajes_masivos";
+       $NM_patch   = "FACILWEBv_2022/grid_mensajes_masivos";
        if (is_dir($this->NM_path_filter . $NM_patch))
        {
            $NM_dir = @opendir($this->NM_path_filter . $NM_patch);

@@ -217,7 +217,7 @@ class grid_inventario_fisico_porproducto_ini
       $this->nm_cod_apl      = "grid_inventario_fisico_porproducto"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "admin"; 
       $this->nm_script_by    = "netmake";
@@ -227,13 +227,13 @@ class grid_inventario_fisico_porproducto_ini
       $this->nm_dt_criacao   = "20190814"; 
       $this->nm_hr_criacao   = "152314"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220601"; 
-      $this->nm_hr_ult_alt   = "185501"; 
+      $this->nm_dt_ult_alt   = "20220622"; 
+      $this->nm_hr_ult_alt   = "203739"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0.0";
+      $this->nm_app_version  = "1.0";
       $this->nm_tp_variance  = "P";
 // 
 // 
@@ -324,7 +324,7 @@ class grid_inventario_fisico_porproducto_ini
       }
       elseif (!isset($_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['actual_lang']) || $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
       {
@@ -931,7 +931,7 @@ class grid_inventario_fisico_porproducto_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_inventario_fisico_porproducto']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_inventario_fisico_porproducto']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQFUHABYD5BODMBODkFCH5XCVoBqDcJUH9BOHAN7V5BOHgrKZSJGH5F/VoB/D9NmZSBiDSrwVWBODMBYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMNOVIBODur/HMBOD9BsZ1B/HIrwD5BqHgBOHEBUDWFqVoJwD9JKDQJsHABYD5FaDMvOVcB/Dur/VoB/HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9B/DSrYV5FUDEvsVkXeDWFqVoBiD9NmDQJsHArYV5BOHuvmVcBOV5X7VoJwDcJUZSB/DSrYD5JeDEBeHEXeH5FYDoB/DcXOZSFGHAveV5JwHuzGVIFCDWXCVoX7D9BsH9B/D1rKZMFaDMBYZSJGH5F/DoB/HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHArCV5XCZuBOHQJKZSFGHIrwHQBqHuNODkBOV5F/HMFGDcBqZkBiHAvmD5JeHgBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgNKDkXKDWBmZuXGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMraHQXGH9FaHAN7HQFGDErKZSJ3HEFaHMXGD9FYDQB/HIvsVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGDuBqHArYD5rqDMBODkB/HEFYVEFGDcNmZ1F7HIBeHQFUHgrKVkJqHEFqHMB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGD9XsZSBiZ1N7HuFGDMvmVcBODWJeVoF7DcFYZ1rqHAvCD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoF7D9XOZSB/DSrYV5B/DMNKZSXeHEFqVoBiD9NmH9X7HABYD5NUHuBYVcFKDWFaVoX7D9JmZ1B/Z1BeD5BiDMzGVkXeHEFqDoXGD9JKDQX7D1BeV5JwHgrYDkFCDWXCVoraD9XOZSFaHArKD5XGDEBOZSXeH5F/ZuB/DcJeZSFGD1veV5JwDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NmDQFUD1veV5JeHgvOVcFKDur/HMraD9JmZ1FaHABYHuFaDMvCVkXeV5FaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDuXKDoBOHQXOH9BiHAveD5NUHgNKDkBOV5FYHMBiHQXOH9B/DSrYHQraDMzGVkJqDWFqHIF7HQBiDuFaHIrKV5FGDMNODkBsV5F/DoraD9JmZ1FGDSBeHQBOHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1024,7 +1024,7 @@ class grid_inventario_fisico_porproducto_ini
               }
               
           }
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
@@ -1422,7 +1422,7 @@ class grid_inventario_fisico_porproducto_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -6207,7 +6207,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_fisico_porproducto
    {
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
-   SC_dir_app_ini('FACILWEBv2');
+   SC_dir_app_ini('FACILWEBv_2022');
    $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['contr_erro'] = 'off';
    $sc_conv_var = array();
    $Sc_lig_md5 = false;
@@ -6347,11 +6347,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_fisico_porproducto
    $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
    $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
    if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-       if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+       if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
        }
        if (isset($apl_def)) {
            if ($apl_def[0] != "grid_inventario_fisico_porproducto") {
@@ -6365,8 +6365,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_inventario_fisico_porproducto
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['session_timeout']['redir_tp'] = $Redir_tp;
            }
-           if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-               $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+           if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+               $_SESSION['scriptcase']['grid_inventario_fisico_porproducto']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
            }
        }
    }

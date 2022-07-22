@@ -207,7 +207,7 @@ class blank_correo_reenvio2_ini
       $this->nm_cod_apl      = "blank_correo_reenvio2"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "admin"; 
       $this->nm_script_by    = "netmake";
@@ -217,8 +217,8 @@ class blank_correo_reenvio2_ini
       $this->nm_dt_criacao   = "20210210"; 
       $this->nm_hr_criacao   = "115749"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220531"; 
-      $this->nm_hr_ult_alt   = "075858"; 
+      $this->nm_dt_ult_alt   = "20220720"; 
+      $this->nm_hr_ult_alt   = "210000"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -312,7 +312,7 @@ class blank_correo_reenvio2_ini
       }
       elseif (!isset($_SESSION['scriptcase']['blank_correo_reenvio2']['actual_lang']) || $_SESSION['scriptcase']['blank_correo_reenvio2']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['blank_correo_reenvio2']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
       {
@@ -822,7 +822,7 @@ class blank_correo_reenvio2_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -910,7 +910,7 @@ class blank_correo_reenvio2_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_correo_reenvio2']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKH9X7D1BeVWJwHgrKVcFCDuX7HIJsHQJmVIJsHAN7D5BiDEvsHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIFGDcJUZkFGZ1NOHuJeHgveHEJGH5F/DorqHQFYDuFaHIrKD5F7DMBOVcFKV5FYHIFGD9JmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHgvsVcBOV5F/DoFUDcNwH9B/D1rwD5FaDErKVkJGDWr/VoB/D9XsZSFUZ1rwV5BOHgrKVcBODWFYDoJsD9BiZSB/DSrYD5FaHgveDkFeV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmZSFGHABYHQBODMrYVcXKDWXCHMraHQNwZ1F7DSNOV5FaDEBODkB/DWFqVoJwD9XsH9FUHANOV5XGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYZSNiDWB3VEFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIBODcBwDQB/DSN7HuraDMBYVIBsDuX7VENUD9BsZ1X7DSrYD5XGDEBeZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZ9XGHIrwHuFUDMvsVcrsHEFYVoFGD9XGZ1B/D1zGD5JeHgveZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBsZ1BOD1rKHuBODMveVkJ3V5XCHMJeHQNwDQX7HANOD5JsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYDoraD9XsH9X7DSrwV5raHgvsDkBOV5X7VoX7D9XOZSB/HArYD5FaDMNKZSJGDWr/VoB/DcBwDQX7Z1N7VWJeHuvmVcBOV5FGVoX7HQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKHuFUDMvCHArsDWr/DoraDcJeZSBiHIrwV5raHuzGDkB/Dur/HMJsD9BsZSBqZ1rYZMFaHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDuXKDoJeHQBiDQFaHAveD5NUHgNKDkBOV5FYHMBiD9XGZ1rqDSrYHQFGDMBYZSXeH5BmDoXGHQXODQJsHAN7HQF7HgrKDkB/HEFYVoraD9JmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1003,7 +1003,7 @@ class blank_correo_reenvio2_ini
               }
               
           }
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
@@ -1401,7 +1401,7 @@ class blank_correo_reenvio2_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['blank_correo_reenvio2']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_correo_reenvio2']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_correo_reenvio2']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_correo_reenvio2']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1964,6 +1964,14 @@ class blank_correo_reenvio2_apl
 	$vurl_pdf_factura  = "";
 	$vtipodoc          = "";
 	
+	$vdatos["prefix"]  = "";
+	$vdatos["number"]  = "";
+	$vdatos["alternate_email"] = "";
+	$vdatos["html_header"] = "";
+	$vdatos["html_body"]   = "";
+	$vdatos["html_buttons"]= "";
+	$vdatos["html_footer"] = "";
+	
 	$vsql = "select servidor1, servidor2, tokenempresa, tokenpassword, modo,(select c.validar_correo_enlinea from configuraciones c where c.idconfiguraciones=1) as validar_correo_enlinea, url_api_sendmail,url_api_pdfs,envio_credenciales,plantillas_correo,copia_factura_a,plantilla_pordefecto, (select d.razonsoc from datosemp d where d.iddatos='1') as nombre_emisor, (select d.correo from datosemp d where d.iddatos='1') as correo_emisor, (select d.nit from datosemp d where d.iddatos='1') as nit_emisor from webservicefe order by idwebservicefe desc limit 1";
 	 
       $nm_select = $vsql; 
@@ -2177,6 +2185,28 @@ class blank_correo_reenvio2_apl
 				$vbotones = str_replace("vurlpdffactura",$vurl_pdf_factura,$vbotones);
 				$vbotones = str_replace("vurlpdf",$vurl_pdf_factura,$vbotones);
 				$vbotones = str_replace("vurlaceptar",$vurl_aceptar,$vbotones);
+				
+$vbotones = str_replace("font-weight:bold;text-decoration:none;border:2px solid #0880e8;padding:10px 32px;color:#0880e8;border-radius:50px;background:#fff;text-align:center","",$vbotones);
+$vbotones = str_replace("font-weight:bold;text-decoration:none;border:2px solid #0880e8;padding:10px 32px;color:#0880e8;border-radius:50px;background:#fff;text-align:center","",$vbotones);
+$vbotones = str_replace("font-weight:bold;text-decoration:none;border:2px solid #0880e8;padding:10px 32px;color:#0880e8;border-radius:50px;background:#fff;text-align:center","",$vbotones);
+$vbotones = str_replace("font-weight:bold;text-decoration:none;border:2px solid #0880e8;padding:10px 32px;color:#0880e8;border-radius:50px;background:#fff;text-align:center","",$vbotones);
+
+				$vbotones = str_replace("Aceptar y/o Rechazar documento","",$vbotones);
+				$vbotones = str_replace("Aceptar y/o Rechazar documento","",$vbotones);
+				$vbotones = str_replace("Aceptar y/o Rechazar documento","",$vbotones);
+				$vbotones = str_replace("Aceptar y/o Rechazar documento","",$vbotones);
+
+				$vbotones = str_replace("style=","",$vbotones);
+				$vbotones = str_replace("style=","",$vbotones);
+				$vbotones = str_replace("style=","",$vbotones);
+				$vbotones = str_replace("style=","",$vbotones);
+
+				$vbotones = str_replace("Ver factura","",$vbotones);
+				$vbotones = str_replace("Ver factura","",$vbotones);
+				$vbotones = str_replace("Ver factura","",$vbotones);
+				$vbotones = str_replace("Ver factura","",$vbotones);
+			
+			    $vcuerpo = str_replace("Si requiere consultar el documento en línea haga clic en el siguiente enlace.","",$vcuerpo);
 
 				$vpie     = str_replace("vCorreoEmisor",$vcorreo_emisor,$vpie);
 				
@@ -2519,7 +2549,7 @@ $_SESSION['scriptcase']['blank_correo_reenvio2']['contr_erro'] = 'off';
    {
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
-   SC_dir_app_ini('FACILWEBv2');
+   SC_dir_app_ini('FACILWEBv_2022');
    $_SESSION['scriptcase']['blank_correo_reenvio2']['contr_erro'] = 'off';
    $Sc_lig_md5 = false;
    $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
@@ -2598,11 +2628,11 @@ $_SESSION['scriptcase']['blank_correo_reenvio2']['contr_erro'] = 'off';
    $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
    $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
    if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-       if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+       if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['blank_correo_reenvio2']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_correo_reenvio2']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['blank_correo_reenvio2']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_correo_reenvio2']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
        }
        if (isset($apl_def)) {
            if ($apl_def[0] != "blank_correo_reenvio2") {
@@ -2616,8 +2646,8 @@ $_SESSION['scriptcase']['blank_correo_reenvio2']['contr_erro'] = 'off';
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                $_SESSION['scriptcase']['blank_correo_reenvio2']['session_timeout']['redir_tp'] = $Redir_tp;
            }
-           if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-               $_SESSION['scriptcase']['blank_correo_reenvio2']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+           if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+               $_SESSION['scriptcase']['blank_correo_reenvio2']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
            }
        }
    }

@@ -34,7 +34,7 @@ if(!$bol_run_save_grid_as_class)
     $str_path_web    = str_replace("\\", '/', $str_path_web);
     $str_path_web    = str_replace('//', '/', $str_path_web);
     $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
-    if (is_file($root . $_SESSION['scriptcase']['grid_asientos']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"))
+    if (is_file($root . $_SESSION['scriptcase']['grid_asientos']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"))
     {
 ?>
         <script language="javascript">
@@ -441,7 +441,7 @@ class grid_asientos_Save_Grid
             {
                 $NMdir = mkdir($NM_patch, 0755);
             }
-            $NM_patch .= "FACILWEBv2/";
+            $NM_patch .= "FACILWEBv_2022/";
             if (!is_dir($NM_patch))
             {
                 $NMdir = mkdir($NM_patch, 0755);
@@ -1509,7 +1509,7 @@ function buttonunselectedSG() {
        $this->NM_grid_save_levels = array();
        $this->NM_grid_save        = array();
        $_SESSION['sc_session'][$this->sc_init]['grid_asientos']['path_grid_sv_list'] = array();
-       $NM_patch   = "FACILWEBv2/grid_asientos";
+       $NM_patch   = "FACILWEBv_2022/grid_asientos";
        if (is_dir($this->path_grid_sv . $NM_patch))
        {
            $NM_dir = @opendir($this->path_grid_sv . $NM_patch);

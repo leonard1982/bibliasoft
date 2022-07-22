@@ -207,7 +207,7 @@ class cEditarClasificacion_ini
       $this->nm_cod_apl      = "cEditarClasificacion"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "admin"; 
       $this->nm_script_by    = "netmake";
@@ -217,13 +217,13 @@ class cEditarClasificacion_ini
       $this->nm_dt_criacao   = "20211027"; 
       $this->nm_hr_criacao   = "210737"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220601"; 
-      $this->nm_hr_ult_alt   = "185501"; 
+      $this->nm_dt_ult_alt   = "20220622"; 
+      $this->nm_hr_ult_alt   = "203706"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0.0";
+      $this->nm_app_version  = "1.0";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -312,7 +312,7 @@ class cEditarClasificacion_ini
       }
       elseif (!isset($_SESSION['scriptcase']['cEditarClasificacion']['actual_lang']) || $_SESSION['scriptcase']['cEditarClasificacion']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['cEditarClasificacion']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
       {
@@ -832,7 +832,7 @@ class cEditarClasificacion_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['cEditarClasificacion']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['cEditarClasificacion']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDQFUDSzGD5F7HuBOVcFCH5FqHMrqDcNwH9BqHAvCD5BqDEvsHEXeDWXCDoXGD9JKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFGHArYHQFaDMBYVcB/DuX7HMFaHQNwZ1F7HAN7HuFUHgNOHENiH5F/HIB/HQFYZ9F7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeH5FYHIFUDcBwDQJsDSBYVWJsHgvsVcFCDWJeHMXGD9BsZ1F7HABYD5JeDEBeHEXeDWXCVoXGDcJeZSX7HArYV5FGHuvmVcBOV5X7DoJsHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrwDkB/DWFYVoBqD9BiVIJsHAvCZMBODEvsVkJ3HEXKVoFGHQBiDQBqHAveHuFUDMzGDkBsDuB7VErqD9BsZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNwVINUHAvsZMJeHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBiHgrKVIBsDWFYHIJsDcFYZ1F7D1NaD5JeDErKZSXeV5FaDoBqHQJKZSX7HABYD5JeHgvOVcBOV5FYHIJsHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsH9FUDSN7HuJwHuvmV9BUHEFYHIFUHQNwVIJsHIveHuJwHgBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHEBUDWF/HIB/DcXGDuFaHABYHuBiDMBYDkBODWF/HMX7DcNwH9BOD1rwD5FaHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBqHQBsZ1B/D1rKV5JeDEvsHEFiDWX7DoJeHQJKZSX7HIBeV5FUHuzGDkBOHEFYDorqD9JmZ1B/D1rwD5NUDMBYZSXeHEFqDoB/D9XsZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCHEXCHIrqHQNwZ9F7HAveHuX7DMNOVcBOV5F/DoF7D9BiZ1X7HArYHuFUDMvCZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgNKDkB/DWBmZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQNwVIJsHAzGZMJeDErKVkXeH5F/ZuB/HQBiDQJsHINaVWJsDMBYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -925,7 +925,7 @@ class cEditarClasificacion_ini
               }
               
           }
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
@@ -1245,7 +1245,7 @@ class cEditarClasificacion_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['cEditarClasificacion']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['cEditarClasificacion']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['cEditarClasificacion']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['cEditarClasificacion']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1891,7 +1891,7 @@ $_SESSION['scriptcase']['cEditarClasificacion']['contr_erro'] = 'off';
    {
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
-   SC_dir_app_ini('FACILWEBv2');
+   SC_dir_app_ini('FACILWEBv_2022');
    $_SESSION['scriptcase']['cEditarClasificacion']['contr_erro'] = 'off';
    $Sc_lig_md5 = false;
    $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
@@ -1970,11 +1970,11 @@ $_SESSION['scriptcase']['cEditarClasificacion']['contr_erro'] = 'off';
    $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
    $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
    if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-       if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+       if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['cEditarClasificacion']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['cEditarClasificacion']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['cEditarClasificacion']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['cEditarClasificacion']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
        }
        if (isset($apl_def)) {
            if ($apl_def[0] != "cEditarClasificacion") {
@@ -1988,8 +1988,8 @@ $_SESSION['scriptcase']['cEditarClasificacion']['contr_erro'] = 'off';
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                $_SESSION['scriptcase']['cEditarClasificacion']['session_timeout']['redir_tp'] = $Redir_tp;
            }
-           if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-               $_SESSION['scriptcase']['cEditarClasificacion']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+           if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+               $_SESSION['scriptcase']['cEditarClasificacion']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
            }
        }
    }

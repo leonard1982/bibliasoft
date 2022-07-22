@@ -3696,7 +3696,7 @@ $style_cond_in = ($rotacion_cond != "in") ? " style=\"display: none;\"" : "";
    function gera_array_filtros()
    {
        $this->NM_fil_ant = array();
-       $NM_patch   = "FACILWEBv2/grid_rotacion_inventario";
+       $NM_patch   = "FACILWEBv_2022/grid_rotacion_inventario";
        if (is_dir($this->NM_path_filter . $NM_patch))
        {
            $NM_dir = @opendir($this->NM_path_filter . $NM_patch);
@@ -3785,7 +3785,7 @@ $style_cond_in = ($rotacion_cond != "in") ? " style=\"display: none;\"" : "";
           {
               $NMdir = mkdir($NM_patch, 0755);
           }
-          $NM_patch .= "FACILWEBv2/";
+          $NM_patch .= "FACILWEBv_2022/";
           if (!is_dir($NM_patch))
           {
               $NMdir = mkdir($NM_patch, 0755);

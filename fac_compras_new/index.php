@@ -183,6 +183,7 @@ class fac_compras_new_ini
    var $link_form_tiporetefuente_edit;
    var $link_form_tipoica_edit;
    var $link_detallecompra_new_edit;
+   var $link_grid_detallecompra_new_nc_cons;
    var $link_blank_compras;
    var $link_fac_compras_new_inline;
    var $nm_cont_lin;
@@ -290,7 +291,7 @@ class fac_compras_new_ini
       $this->nm_cod_apl      = "fac_compras_new"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "edgar"; 
       $this->nm_script_by    = "netmake"; 
@@ -299,12 +300,12 @@ class fac_compras_new_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20180212"; 
       $this->nm_hr_criacao   = "100855"; 
-      $this->nm_autor_alt    = "edgar"; 
-      $this->nm_dt_ult_alt   = "20220616"; 
-      $this->nm_hr_ult_alt   = "110741"; 
+      $this->nm_autor_alt    = "admin"; 
+      $this->nm_dt_ult_alt   = "20220622"; 
+      $this->nm_hr_ult_alt   = "203751"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0.0"; 
+      $this->nm_app_version  = "1.0"; 
 // 
       $this->border_grid           = ""; 
       $this->cor_bg_grid           = ""; 
@@ -440,7 +441,7 @@ class fac_compras_new_ini
       }
       elseif (!isset($_SESSION['scriptcase']['fac_compras_new']['actual_lang']) || $_SESSION['scriptcase']['fac_compras_new']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['fac_compras_new']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       global $inicial_fac_compras_new;
       if (isset($_SESSION['scriptcase']['user_logout']))
@@ -759,6 +760,23 @@ class fac_compras_new_ini
               $this->sc_lig_md5["form_prefijos"] = 'S';
           }
       }
+      $Tmp_apl_lig = "grid_detallecompra_new_nc";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_detallecompra_new_nc_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_detallecompra_new_nc_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_detallecompra_new_nc_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_detallecompra_new_nc_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["grid_detallecompra_new_nc"] = 'S';
+          }
+      }
       $PHP_ver = str_replace(".", "", phpversion()); 
       if (substr($PHP_ver, 0, 3) < 434)
       {
@@ -939,6 +957,9 @@ class fac_compras_new_ini
       $this->link_detallecompra_new_edit = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('detallecompra_new') . "/";
       $this->sc_lig_target["C_@scinf_detalle"] = 'nmsc_iframe_liga_detallecompra_new';
       $this->sc_lig_iframe["nmsc_iframe_liga_detallecompra_new"] = 'nmsc_iframe_liga_detallecompra_new';
+      $this->link_grid_detallecompra_new_nc_cons = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_detallecompra_new_nc') . "/";
+      $this->sc_lig_target["C_@scinf_detalleNC"] = 'nmsc_iframe_liga_grid_detallecompra_new_nc';
+      $this->sc_lig_iframe["nmsc_iframe_liga_grid_detallecompra_new_nc"] = 'nmsc_iframe_liga_grid_detallecompra_new_nc';
       $this->link_blank_compras = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('blank_compras') . "/";
       $this->link_fac_compras_new_inline = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('fac_compras_new') . "/fac_compras_new_inline.php";
       if ($_SESSION['sc_session'][$this->sc_page]['fac_compras_new']['dashboard_info']['under_dashboard'])
@@ -1008,7 +1029,7 @@ class fac_compras_new_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODQFaHIrwHuJwHgrKVcFKDWFYDoraD9JmZkBiD1zGZMJeHgrKZSJqHEB3ZuFaD9NwDQB/DSN7VWXGHuBOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoBqHQNmDuFaHIrwHuNUDMrYVcXKH5XCHMB/DcBqZSFaHABYZMJwHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKVIBODWFaVoBqDcNwH9B/D1rwD5FaDEBOHEJGDWF/DoJeDcJeDQFGD1BeV5raHuNOVIBODWFYVEF7HQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKHuJwDMvCHEJGDWFqHIX7HQNwZSX7HAvmV5BODMvOVcBUDWB3VENUHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQNwVINUHAzGZMBqHgBeHEFiV5B3DoF7D9XsDuFaHAveD5B/HgrwVcBUH5XCHMJwDcJUH9BqHIveHuFUHgNOHENiHEXCVoBOD9FYDQX7DSrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQBqD1BOV5BOHgvOVcrsH5B7VoFGHQXOZSBqHAN7D5F7HgveDkB/DWr/VoFaHQXOZSFGHABYD5F7HuNOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMzGVIBsDWFaDorqHQNwZ1X7D1rKD5JwHgBOVkJ3DWr/DoraHQXsZ9XGDSBYHuB/DMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBODcJeDQX7D1BeV5raHgvsDkBOV5X7DoXGD9XOZ1rqHAN7D5NUDErKZSJqV5FaVoBiDcBwDQFGHINaD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuBqHQNwDuBqDSBYV5FGDMBOV9FeDuFqDorqHQBiH9BODSrYHQJwDEBODkFeH5FYVoFGHQJKDQFaZ1zGVWFaDMrYVIBsDWFYHIFUHQJmZ1BOHIBOV5X7HgBYHEJqDWX7HIXGHQJKH9BiD1vOD5F7HgrwZSJqDuX7HMXGHQXOZSBqHAvCV5X7DMveHEJqDWr/HIFUDcBiDuFaDSNaV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgBYHErsDWFqHIFGHQJKH9BiHIvsD5F7DMzGVIB/H5XCHMraDcNmZkBiHAvmV5X7HgBeVkJ3HEFaHMJeHQFYZSFUHIvsD5F7DMvsVcXKDur/HIXGHQBiZSBODSvOD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIBOVWFaDMzGDkBsDuFqHMFUDcNmZSBOD1vsV5X7HgrKVkJ3DWFqHMBqHQXsH9BiHIvsD5F7DMBOZSNiHEFYHMFUDcFYH9BqHAvCV5X7HgBOZSJ3V5B7ZuBODcXGDQFaHAvCV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSJGDWF/DoraD9NmDQJsHIrKV5raDMrwDkFCDWF/VoB/D9XOVIraZ1BeZMBODEvsZSJGDuXKDoB/D9JKDQJwD1veD5F7HuNOVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoFGD9XOZ1FUZ1vOD5BOHgNKDkB/DWrGVoFGHQBiZ9F7HAvOD5F7DMrYVcBUDurGDoXGHQNmZkBiHAzGZMBOHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiHIBOD5BqHgNKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuzGVIBsHEFYHMBODcNmZ1B/HAN7D5NUDEBOZSJ3V5FqHIJwHQBiH9FUDSzGV5BODMrYZSNiDWJeVErqDcJUH9BqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1061,7 +1082,7 @@ class fac_compras_new_ini
       }
       if (isset($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao']))
       {
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
           {
               $nm_crit_perfil = true;
@@ -1367,7 +1388,7 @@ class fac_compras_new_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1424,12 +1445,11 @@ class fac_compras_new_ini
           $this->Db->Execute("alter session set nls_numeric_characters  = '.,'");
           $_SESSION['sc_session'][$this->sc_page]['fac_compras_new']['decimal_db'] = "."; 
       } 
-      $this->Db->debug = true;
   }
 
   function setConnectionHash() {
     if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao'])) {
-      list($connectionDbms, $connectionHost, $connectionUser, $connectionPassword, $connectionDatabase) = db_conect_devel($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8);
+      list($connectionDbms, $connectionHost, $connectionUser, $connectionPassword, $connectionDatabase) = db_conect_devel($_SESSION['scriptcase']['fac_compras_new']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8);
     }
     else {
       $connectionDbms     = $this->nm_tpbanco;
@@ -1547,7 +1567,7 @@ ob_start();
     {
         include_once("../_lib/lib/php/nm_ctrl_app_name.php");
     }
-    SC_dir_app_ini('FACILWEBv2');
+    SC_dir_app_ini('FACILWEBv_2022');
     $sc_conv_var = array();
     if (!empty($_FILES))
     {
@@ -1661,11 +1681,11 @@ ob_start();
     $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
     $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
     if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-        if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-            $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+        if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+            $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
         }
-        elseif (is_file($root . $_SESSION['scriptcase']['fac_compras_new']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-            $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['fac_compras_new']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+        elseif (is_file($root . $_SESSION['scriptcase']['fac_compras_new']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+            $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['fac_compras_new']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
         }
         if (isset($apl_def)) {
             if ($apl_def[0] != "fac_compras_new") {
@@ -1679,8 +1699,8 @@ ob_start();
                 $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                 $_SESSION['scriptcase']['fac_compras_new']['session_timeout']['redir_tp'] = $Redir_tp;
             }
-            if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-                $_SESSION['scriptcase']['fac_compras_new']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+            if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+                $_SESSION['scriptcase']['fac_compras_new']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
             }
         }
     }
@@ -1852,6 +1872,11 @@ ob_start();
         if ('ajax_fac_compras_new_validate_detalle' == $_POST['rs'])
         {
             $detalle = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_fac_compras_new_validate_detallenc' == $_POST['rs'])
+        {
+            $detallenc = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
         if ('ajax_fac_compras_new_refresh_tipo_com' == $_POST['rs'])
@@ -2554,6 +2579,7 @@ ob_start();
     sajax_export("ajax_fac_compras_new_validate_creado");
     sajax_export("ajax_fac_compras_new_validate_editado");
     sajax_export("ajax_fac_compras_new_validate_detalle");
+    sajax_export("ajax_fac_compras_new_validate_detallenc");
     sajax_export("ajax_fac_compras_new_refresh_tipo_com");
     sajax_export("ajax_fac_compras_new_lkpedt_refresh_prefijo_com");
     sajax_export("ajax_fac_compras_new_lkpedt_refresh_idprov");
@@ -3186,6 +3212,25 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_fac_compras_new->contr_fac_compras_new->controle();
         exit;
     } // ajax_validate_detalle
+
+    function ajax_fac_compras_new_validate_detallenc($detallenc, $script_case_init)
+    {
+        global $inicial_fac_compras_new;
+        //register_shutdown_function("fac_compras_new_pack_ajax_response");
+        $inicial_fac_compras_new->contr_fac_compras_new->NM_ajax_flag          = true;
+        $inicial_fac_compras_new->contr_fac_compras_new->NM_ajax_opcao         = 'validate_detallenc';
+        $inicial_fac_compras_new->contr_fac_compras_new->NM_ajax_info['param'] = array(
+                  'detallenc' => NM_utf8_urldecode($detallenc),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_fac_compras_new->contr_fac_compras_new->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_fac_compras_new->contr_fac_compras_new->controle();
+        exit;
+    } // ajax_validate_detallenc
 
     function ajax_fac_compras_new_refresh_tipo_com($tipo_com, $nmgp_refresh_fields, $script_case_init)
     {

@@ -207,7 +207,7 @@ class blank_probando_ini
       $this->nm_cod_apl      = "blank_probando"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "admin"; 
       $this->nm_script_by    = "netmake";
@@ -217,8 +217,8 @@ class blank_probando_ini
       $this->nm_dt_criacao   = "20210417"; 
       $this->nm_hr_criacao   = "121629"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220601"; 
-      $this->nm_hr_ult_alt   = "185501"; 
+      $this->nm_dt_ult_alt   = "20220720"; 
+      $this->nm_hr_ult_alt   = "200816"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -312,7 +312,7 @@ class blank_probando_ini
       }
       elseif (!isset($_SESSION['scriptcase']['blank_probando']['actual_lang']) || $_SESSION['scriptcase']['blank_probando']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['blank_probando']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
       {
@@ -822,7 +822,7 @@ class blank_probando_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -910,7 +910,7 @@ class blank_probando_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_probando']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_probando']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQJsDSBYHuBiDMBOVcB/Dur/VoB/D9BiZ1F7DSrYHQraHgveZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoBiD9BsZSB/DSrYV5XGHgBYHEFKV5FqDoJsDcXOZSX7D1BeHuFUDMvsVcrsDur/HMFGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcJeH9X7HIBeV5FUHuNOVIBOHEX7VoJwD9XOZ1rqHAN7D5FaDMBYVkXeDWX7VoBiDcBwDQJsZ1NaD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcXKDWF/HMFaD9BiZSBqHIBeHuJwHgNOHENiH5FGZuBOHQBiZSFUD1veD5NUDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYZSNiDWB3VEFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIXGHQFYH9BiHIrKV5FaDMvmVIBsHEBmDoXGD9JmZSBOHArYHQJsDEBeHArCHEFaDoF7DcJeH9BiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsH9FGHIvsVWXGDMNOVcB/DWJeHIFUDcFYZSBqHAvmD5BqHgrKHErCV5FqDoFUDcBiH9FUHINaVWJsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDuJeHIraDcBiDQJwD1BeD5F7HuNOV9FeDWJeHIJeHQBqZ1rqHANOHQFUHgBOZSJ3HEXCZuB/HQFYDQBqD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwV5JeHuzGVIBOV5X7VoBODcBqZ1B/Z1NOV5B/DEBODkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBiDQJsHANOHuJwHuzGVIBsDWF/HMBOHQXGH9BOHArYD5FaDMvCZSXeV5FqHIFGDcJeDuFaD1veHQXGDMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDuFGVoX7HQNmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQBiZSBiDSrwV5X7HgrwDkBsHEX/VEraD9BsH9BqDSNOV5XGHgNOHENiDWFqHMJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1003,7 +1003,7 @@ class blank_probando_ini
               }
               
           }
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
@@ -1401,7 +1401,7 @@ class blank_probando_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['blank_probando']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_probando']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_probando']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_probando']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1881,6 +1881,10 @@ class blank_probando_apl
 
       $this->Ini->sc_Include($this->Ini->path_libs . "/nm_gc.php", "F", "nm_gc") ; 
       nm_gc($this->Ini->path_libs);
+      if (!function_exists("SC_Mail_Image"))
+      {
+          include_once("blank_probando_sc_mail_image.php");
+      }
       $this->nm_data = new nm_data("es");
       $_SESSION['scriptcase']['sc_tab_meses']['int'] = array(
                                   $this->Ini->Nm_lang['lang_mnth_janu'],
@@ -1932,60 +1936,105 @@ class blank_probando_apl
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
       $_SESSION['scriptcase']['blank_probando']['contr_erro'] = 'on';
- $vmensaje = date("d-m-Y H:i:s")." Tiene una factura pendiente por pagar de FACILWEB, si ya pagó por favor ignore el mensaje. Para ver la factura abra el siguiente enlace: https://www.facilwebnube.com/facilweb/facturafe/?id=702";
+ $vpuerto      = 587;
+$vserver      = "smtp.mailgun.org";
+$vusuario     = "postmaster@noreply.facilwebpropio.com";
+$vpassword    = "be2568b2f089eb0294ebee265b395786-787e6567-c65de640";
+$vemailemisor = "info@facilweb.com.co";
+$vreceptor    = "leo2904.trabajo@gmail.com";
 
-$curl = curl_init();
+$vfecha      = date("d-m-Y H:i:s");
+$vasunto     = "Prueba de envio desde sandbox 3";
+$vmensaje    = "Si llegó el correo electrónico.";
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://api103.hablame.co/api/sms/v3/send/priority',
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => '',
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 0,
-  CURLOPT_FOLLOWLOCATION => true,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS =>'{
-    "toNumber":"573133103272",
-    "sms": "'.$vmensaje.'",
-    "flash":"",
-    "sc":"",
-    "request_dlvr_rcpt":""
-}',
-  CURLOPT_HTTPHEADER => array(
-    'account: 10014120',
-    'apiKey: qBCuHvMtf8L7vGSRCgJ3t32ECXr1dk',
-    'token: a9b759ec32a0b10156b97f824a1fc7c9',
-    'Content-Type: application/json'
-  ),
-));
+    include_once($this->Ini->path_third . "/swift/swift_required.php");
+    $sc_mail_port     = "$vpuerto";
+    $sc_mail_tp_port  = "T";
+    $sc_mail_tp_mens  = "H";
+    $sc_mail_tp_copy  = "";
+    $this->sc_mail_count = 0;
+    $this->sc_mail_erro  = "";
+    $this->sc_mail_ok    = true;
+    if ($sc_mail_tp_port == "S" || $sc_mail_tp_port == "Y")
+    {
+        $sc_mail_port = !empty($sc_mail_port) ? $sc_mail_port : 465;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'ssl');
+    }
+    elseif ($sc_mail_tp_port == "T")
+    {
+        $sc_mail_port = !empty($sc_mail_port) ? $sc_mail_port : 587;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'tls');
+    }
+    else
+    {
+        $sc_mail_port = !empty($sc_mail_port) ? $sc_mail_port : 25;
+        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port);
+    }
+    $Con_Mail->setUsername($vusuario);
+    $Con_Mail->setpassword($vpassword);
+    $Send_Mail = Swift_Mailer::newInstance($Con_Mail);
+    if ($sc_mail_tp_mens == "H")
+    {
+        $Mens_Mail = Swift_Message::newInstance($vasunto)->setBody($vmensaje)->setContentType("text/html");
+    }
+    else
+    {
+        $Mens_Mail = Swift_Message::newInstance($vasunto)->setBody($vmensaje);
+    }
+    if (!empty($_SESSION['scriptcase']['charset']))
+    {
+        $Mens_Mail->setCharset($_SESSION['scriptcase']['charset']);
+    }
+    $Temp_mail = $vreceptor;
+    if (!is_array($Temp_mail))
+    {
+        $Temp_mail = explode(";", $vreceptor);
+    }
+    foreach ($Temp_mail as $NM_dest)
+    {
+        if (!empty($NM_dest))
+        {
+            $Arr_addr = SC_Mail_Address($NM_dest);
+            $Mens_Mail->addTo($Arr_addr[0], $Arr_addr[1]);
+        }
+    }
+    $Temp_mail = explode(";", "facilweb@solucionesnavarro.com");
+    foreach ($Temp_mail as $NM_dest)
+    {
+        if (!empty($NM_dest))
+        {
+            $Arr_addr = SC_Mail_Address($NM_dest);
+            if (strtoupper(substr($sc_mail_tp_copy, 0, 2)) == "CC")
+            {
+                $Mens_Mail->addCc($Arr_addr[0], $Arr_addr[1]);
+            }
+            else
+            {
+                $Mens_Mail->addBcc($Arr_addr[0], $Arr_addr[1]);
+            }
+        }
+    }
+    $Arr_addr = SC_Mail_Address($vemailemisor);
+    $Err_mail = array();
+    $this->sc_mail_count = $Send_Mail->send($Mens_Mail->setFrom($Arr_addr[0], $Arr_addr[1]), $Err_mail);
+    if (!empty($Err_mail))
+    {
+        $this->sc_mail_erro = $Err_mail;
+        $this->sc_mail_ok   = false;
+    }
+;
 
-$response = curl_exec($curl);
-$response = json_decode($response);
-
-
-curl_close($curl);
-
-if(isset($response->status))
+if ($this->sc_mail_ok )
 {
-	if($response->status=="1x000")
-	{
-		echo "Mensaje enviado con éxito.<br>";
-	}
-	else
-	{
-		echo "No se pudo enviar el mensaje.<br>";
-		echo $response."<br>";
-	}
+	echo "Se envi el correo";
 }
 else
 {
-	echo "Hubo un error al enviar el mensaje.<br>";
+	
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->sc_mail_erro ;
+;
 }
-
-
-
-
 $_SESSION['scriptcase']['blank_probando']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 
@@ -2076,7 +2125,7 @@ $_SESSION['scriptcase']['blank_probando']['contr_erro'] = 'off';
    {
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
-   SC_dir_app_ini('FACILWEBv2');
+   SC_dir_app_ini('FACILWEBv_2022');
    $_SESSION['scriptcase']['blank_probando']['contr_erro'] = 'off';
    $Sc_lig_md5 = false;
    $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
@@ -2155,11 +2204,11 @@ $_SESSION['scriptcase']['blank_probando']['contr_erro'] = 'off';
    $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
    $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
    if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-       if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+       if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['blank_probando']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_probando']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['blank_probando']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_probando']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
        }
        if (isset($apl_def)) {
            if ($apl_def[0] != "blank_probando") {
@@ -2173,8 +2222,8 @@ $_SESSION['scriptcase']['blank_probando']['contr_erro'] = 'off';
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                $_SESSION['scriptcase']['blank_probando']['session_timeout']['redir_tp'] = $Redir_tp;
            }
-           if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-               $_SESSION['scriptcase']['blank_probando']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+           if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+               $_SESSION['scriptcase']['blank_probando']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
            }
        }
    }

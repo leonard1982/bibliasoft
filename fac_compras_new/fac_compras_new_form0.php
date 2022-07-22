@@ -599,6 +599,9 @@ if (!$this->NM_ajax_flag && isset($this->NM_non_ajax_info['ajaxJavascript']) && 
     if ("hidden_bloco_5" == block_id) {
       scAjaxDetailHeight("detallecompra_new", "600");
     }
+    if ("hidden_bloco_6" == block_id) {
+      scAjaxDetailHeight("grid_detallecompra_new_nc", "600");
+    }
   }
  }
 
@@ -1255,6 +1258,10 @@ var pag_ativa = "fac_compras_new_form0";
             'title' => "Detalle Compra",
             'class' => $nmgp_num_form == "fac_compras_new_form1" ? "scTabActive" : "scTabInactive",
         ),
+        'fac_compras_new_form2' => array(
+            'title' => "Detalle Nota Crédito",
+            'class' => $nmgp_num_form == "fac_compras_new_form2" ? "scTabActive" : "scTabInactive",
+        ),
     );
         if (!empty($this->Ini->nm_hidden_pages)) {
                 foreach ($this->Ini->nm_hidden_pages as $pageName => $pageStatus) {
@@ -1263,6 +1270,9 @@ var pag_ativa = "fac_compras_new_form0";
                         }
                         if ('Detalle Compra' == $pageName && 'off' == $pageStatus) {
                                 $this->tabCssClass['fac_compras_new_form1']['class'] = 'scTabInactive';
+                        }
+                        if ('Detalle Nota Crédito' == $pageName && 'off' == $pageStatus) {
+                                $this->tabCssClass['fac_compras_new_form2']['class'] = 'scTabInactive';
                         }
                 }
                 $displayingPage = false;
@@ -1296,6 +1306,14 @@ var pag_ativa = "fac_compras_new_form0";
    <li id="id_fac_compras_new_form1" class="<?php echo $css_celula; ?> sc-form-page">
     <a href="javascript: sc_exib_ocult_pag ('fac_compras_new_form1')">
      Detalle Compra
+    </a>
+   </li>
+<?php
+    $css_celula = $this->tabCssClass["fac_compras_new_form2"]['class'];
+?>
+   <li id="id_fac_compras_new_form2" class="<?php echo $css_celula; ?> sc-form-page">
+    <a href="javascript: sc_exib_ocult_pag ('fac_compras_new_form2')">
+     Detalle Nota Crédito
     </a>
    </li>
 </ul>

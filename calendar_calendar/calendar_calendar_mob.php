@@ -287,7 +287,7 @@ class calendar_calendar_mob_ini
       $this->nm_cod_apl      = "calendar_calendar"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "admin"; 
       $this->nm_script_by    = "netmake"; 
@@ -297,11 +297,11 @@ class calendar_calendar_mob_ini
       $this->nm_dt_criacao   = "20210115"; 
       $this->nm_hr_criacao   = "113332"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220601"; 
-      $this->nm_hr_ult_alt   = "185501"; 
+      $this->nm_dt_ult_alt   = "20220622"; 
+      $this->nm_hr_ult_alt   = "203800"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0.0"; 
+      $this->nm_app_version  = "1.0"; 
 // 
       $this->border_grid           = ""; 
       $this->cor_bg_grid           = ""; 
@@ -437,7 +437,7 @@ class calendar_calendar_mob_ini
       }
       elseif (!isset($_SESSION['scriptcase']['calendar_calendar_mob']['actual_lang']) || $_SESSION['scriptcase']['calendar_calendar_mob']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['calendar_calendar_mob']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       global $inicial_calendar_calendar_mob;
       if (isset($_SESSION['scriptcase']['user_logout']))
@@ -951,7 +951,7 @@ class calendar_calendar_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsZ9XGD1BeHuJeHgvsVIBOV5FYHIraHQBiZkBiHAzGD5JeHgNKZSJGDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQXOZkFGZ1rYV5BODErKVkJ3HEB3DoBqD9JKZSX7HIBeV5JeDMvmVIFCHEFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDoF7DcJeDQX7HIBeD5JwHuNOVIBOH5XCVoB/D9XOZSBOZ1BeD5rqDMBYHEXeDuFYVoB/D9XsH9X7D1veV5FUHuzGVIB/V5X7DoXGD9BsH9B/HAvCV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCV5FqZuJeHQNmDQFGHIrKD5JeDMzGDkB/HEFYVENUD9JmZSB/Z1rYV5B/DENOHEBUDWr/DoBqDcXGDuFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqHAvCV5JeDMvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDEvsHEJGDWrGZuBqDcBiDQX7DSrwVWXGDMNOVcFCDWFYVorqHQNmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDQFUD1BeD5JwHgvsV9BUDur/VENUHQNmZSBqDSBeV5X7DMBYZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMrqDcFYH9BqD1rwHuFUDErKZSJGH5F/HMBiDcXGDQFaDSrwD5JsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYZSXeDWX7VoX7DcBwDQX7Z1N7D5JsHgvsVcFCDWJeVoJwDcBqH9B/HABYV5FGDMzGHEXeV5XCVoFaDcJeDQFGHANOV5raHuNOVcBOV5X7VoBOHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKZMFaHgvsHArsHEFqVoJsHQFYDQB/HANOD5JwHgvOVcB/DWFaHMBqHQBqZ1FGZ1NOV5FUHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgNKDkB/DWBmZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBiVIJsHIBeHQJeHgNOVkXeDWFqVoJsDcJeZSX7Z1rwVWBqDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1004,7 +1004,7 @@ class calendar_calendar_mob_ini
       }
       if (isset($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao']))
       {
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
           {
               $nm_crit_perfil = true;
@@ -1381,7 +1381,7 @@ class calendar_calendar_mob_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1442,7 +1442,7 @@ class calendar_calendar_mob_ini
 
   function setConnectionHash() {
     if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao'])) {
-      list($connectionDbms, $connectionHost, $connectionUser, $connectionPassword, $connectionDatabase) = db_conect_devel($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8);
+      list($connectionDbms, $connectionHost, $connectionUser, $connectionPassword, $connectionDatabase) = db_conect_devel($_SESSION['scriptcase']['calendar_calendar_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8);
     }
     else {
       $connectionDbms     = $this->nm_tpbanco;
@@ -1560,7 +1560,7 @@ ob_start();
     {
         include_once("../_lib/lib/php/nm_ctrl_app_name.php");
     }
-    SC_dir_app_ini('FACILWEBv2');
+    SC_dir_app_ini('FACILWEBv_2022');
     $sc_conv_var = array();
     if (!empty($_FILES))
     {
@@ -1674,11 +1674,11 @@ ob_start();
     $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
     $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
     if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-        if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-            $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+        if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+            $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
         }
-        elseif (is_file($root . $_SESSION['scriptcase']['calendar_calendar']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-            $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['calendar_calendar']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+        elseif (is_file($root . $_SESSION['scriptcase']['calendar_calendar']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+            $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['calendar_calendar']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
         }
         if (isset($apl_def)) {
             if ($apl_def[0] != "calendar_calendar") {
@@ -1692,8 +1692,8 @@ ob_start();
                 $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                 $_SESSION['scriptcase']['calendar_calendar']['session_timeout']['redir_tp'] = $Redir_tp;
             }
-            if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-                $_SESSION['scriptcase']['calendar_calendar']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+            if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+                $_SESSION['scriptcase']['calendar_calendar']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
             }
         }
     }

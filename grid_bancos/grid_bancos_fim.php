@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____grid_bancos"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____grid_bancos"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____grid_bancos"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____grid_bancos"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

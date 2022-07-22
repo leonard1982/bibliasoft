@@ -562,7 +562,7 @@ $_SESSION['scriptcase']['control_menu']['contr_erro'] = 'off';
       $_SESSION['sc_session'][$script_case_init]['control_menu']['upload_field_info'] = array();
 
       $this->Ini->Init_apl_lig = array();
-      $this->List_apl_lig = array('grid_productos'=>array('type'=>'cons', 'lab'=>'Productos', 'hint'=>'Productos', 'img_on'=>'', 'img_off'=>''),'grid_terceros_todos'=>array('type'=>'cons', 'lab'=>'Terceros', 'hint'=>'Terceros', 'img_on'=>'', 'img_off'=>''),'grid_facturaven_pos'=>array('type'=>'cons', 'lab'=>'Venta Rápida', 'hint'=>'Venta Rápida', 'img_on'=>'', 'img_off'=>''),'grid_compras_new'=>array('type'=>'cons', 'lab'=>'Lista de documentos en compras', 'hint'=>'Lista los documentos de compras', 'img_on'=>'', 'img_off'=>''),'blank_hacer_backup'=>array('type'=>'blank', 'lab'=>'Copias de Seguridad', 'hint'=>'Copias de Seguridad', 'img_on'=>'', 'img_off'=>''),'form_datosemp'=>array('type'=>'form', 'lab'=>'Datos Empresa', 'hint'=>'Datos Empresa', 'img_on'=>'', 'img_off'=>''),'grid_cartera'=>array('type'=>'cons', 'lab'=>'Por Cobrar', 'hint'=>'Por Cobrar', 'img_on'=>'', 'img_off'=>''),'grid_cuentaspagar'=>array('type'=>'cons', 'lab'=>'Por Pagar', 'hint'=>'Por Pagar', 'img_on'=>'', 'img_off'=>''),'grid_NC_ND'=>array('type'=>'cons', 'lab'=>'Notas crédito', 'hint'=>'Notas crédito', 'img_on'=>'', 'img_off'=>''),'grid_terceros_contratos'=>array('type'=>'cons', 'lab'=>'Lista contratos', 'hint'=>'Lista contratos', 'img_on'=>'', 'img_off'=>''),'dash_ventas'=>array('type'=>'container', 'lab'=>'Índices', 'hint'=>'Índices', 'img_on'=>'', 'img_off'=>''),'grid_inventario'=>array('type'=>'cons', 'lab'=>'grid_inventario', 'hint'=>'', 'img_on'=>'', 'img_off'=>''),'grid_inventario'=>array('type'=>'cons', 'lab'=>'Rotación de Inventario', 'hint'=>'Rotación de Inventario', 'img_on'=>'', 'img_off'=>''),'grid_gestor_archivos'=>array('type'=>'cons', 'lab'=>'Gestión Documental', 'hint'=>'Gestión Documental', 'img_on'=>'', 'img_off'=>''),'calendar_calendar'=>array('type'=>'calendar', 'lab'=>'Agenda', 'hint'=>'Agenda', 'img_on'=>'', 'img_off'=>''));
+      $this->List_apl_lig = array('grid_productos'=>array('type'=>'cons', 'lab'=>'Productos', 'hint'=>'Productos', 'img_on'=>'', 'img_off'=>''),'grid_terceros_todos'=>array('type'=>'cons', 'lab'=>'Terceros', 'hint'=>'Terceros', 'img_on'=>'', 'img_off'=>''),'grid_facturaven_pos'=>array('type'=>'cons', 'lab'=>'Venta Rápida', 'hint'=>'Venta Rápida', 'img_on'=>'', 'img_off'=>''),'grid_compras_new'=>array('type'=>'cons', 'lab'=>'Lista de documentos en compras', 'hint'=>'Lista los documentos de compras', 'img_on'=>'', 'img_off'=>''),'blank_hacer_backup'=>array('type'=>'blank', 'lab'=>'Copias de Seguridad', 'hint'=>'Copias de Seguridad', 'img_on'=>'', 'img_off'=>''),'form_datosemp'=>array('type'=>'form', 'lab'=>'Datos Empresa', 'hint'=>'Datos Empresa', 'img_on'=>'', 'img_off'=>''),'grid_cartera'=>array('type'=>'cons', 'lab'=>'Por Cobrar', 'hint'=>'Por Cobrar', 'img_on'=>'', 'img_off'=>''),'grid_cuentaspagar'=>array('type'=>'cons', 'lab'=>'Por Pagar', 'hint'=>'Por Pagar', 'img_on'=>'', 'img_off'=>''),'grid_NC_ND'=>array('type'=>'cons', 'lab'=>'Notas crédito', 'hint'=>'Notas crédito', 'img_on'=>'', 'img_off'=>''),'grid_terceros_contratos'=>array('type'=>'cons', 'lab'=>'Lista contratos', 'hint'=>'Lista contratos', 'img_on'=>'', 'img_off'=>''),'control_radian'=>array('type'=>'contr', 'lab'=>'Índices', 'hint'=>'Índices', 'img_on'=>'', 'img_off'=>''),'grid_inventario'=>array('type'=>'cons', 'lab'=>'grid_inventario', 'hint'=>'', 'img_on'=>'', 'img_off'=>''),'grid_inventario'=>array('type'=>'cons', 'lab'=>'Rotación de Inventario', 'hint'=>'Rotación de Inventario', 'img_on'=>'', 'img_off'=>''),'grid_gestor_archivos'=>array('type'=>'cons', 'lab'=>'Gestión Documental', 'hint'=>'Gestión Documental', 'img_on'=>'', 'img_off'=>''),'calendar_calendar'=>array('type'=>'calendar', 'lab'=>'Agenda', 'hint'=>'Agenda', 'img_on'=>'', 'img_off'=>''));
       if (isset($_SESSION['scriptcase']['menu_atual']) && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['control_menu']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['control_menu']['sc_outra_jan']))
       {
           foreach ($this->List_apl_lig as $apl_name => $Lig_parms)
@@ -1979,7 +1979,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
                return "Agenda";
                break;
            case 'indices':
-               return "Indices";
+               return "RADIAN";
                break;
            case 'inventario':
                return "Rotación Inventario";
@@ -3341,7 +3341,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           {
               $sTmpValue = NM_charset_to_utf8($this->indices);
               $aLookup = array();
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__menu_img__NM__INDICES.png"))
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__RADIAN.png"))
           { 
               $indices = "&nbsp;" ;  
           } 
@@ -3351,10 +3351,10 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           } 
           else 
           { 
-              $in_indices = $this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__menu_img__NM__INDICES.png"; 
-              $img_time = filemtime($this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__menu_img__NM__INDICES.png"); 
+              $in_indices = $this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__RADIAN.png"; 
+              $img_time = filemtime($this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__RADIAN.png"); 
               $out_indices = str_replace("/", "_", $this->Ini->path_imag_cab); 
-              $out_indices = $this->Ini->path_imag_temp . "/sc_" . $out_indices . "_indices_130130_" . $img_time . "_grp__NM__menu_img__NM__INDICES.png";
+              $out_indices = $this->Ini->path_imag_temp . "/sc_" . $out_indices . "_indices_130130_" . $img_time . "_grp__NM__ico__NM__RADIAN.png";
               if (!is_file($this->Ini->root . $out_indices)) 
               {  
                   $sc_obj_img = new nm_trata_img($in_indices, true);
@@ -3365,7 +3365,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
               } 
               $indices = "<img border=\"1\" src=\"" . $out_indices . "\"/>" ; 
           } 
-    $sTmpImgHtml = "<a href=\"javascript:nm_gp_submit('" . $this->Ini->link_dash_ventas_cons . "', '$this->nm_location', '', 'inicio', '_blank', '0', '0', 'dash_ventas')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $indices . "</font></a>";
+    $sTmpImgHtml = "<a href=\"javascript:nm_gp_submit('" . $this->Ini->link_control_radian_edit . "', '$this->nm_location', 'NM_btn_insert*scinN*scoutNM_btn_update*scinN*scoutNM_btn_delete*scinN*scoutNM_btn_navega*scinN*scout', '', '_blank', '0', '0', 'control_radian')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $indices . "</font></a>";
           $aLookupOrig = $aLookup;
           $this->NM_ajax_info['fldList']['indices'] = array(
                        'row'    => '',
@@ -3780,78 +3780,14 @@ $_SESSION['scriptcase']['control_menu']['contr_erro'] = 'off';
 		
 		
 		
+		
 		var tour = new Tour({
 			steps: [
 				{
-					element: "#hidden_field_data_copias",
-					title: "Copias de seguridad",
-					content: "Realiza copias de seguridad de tu base de datos todos los días.",
-					placement: "left",
-					template: botones,
-					backdrop: true
-
-				}
-				,
-				{
-					element: "#hidden_field_data_productos",
-					title: "Lista de productos",
-					content: "Puedes ver una lista de productos y puedes crear o editar un producto.",
+					element: "#id_imghtml_indices",
+					title: "Ir portal RADIAN",
+					content: "Puedes ingresar al portal de RADIAN para dar aceptación a las facturas de compra y convertir a título valor.",
 					placement: "right",
-					template: botones,
-					backdrop: true
-
-				},
-				{
-					element: "#hidden_field_data_terceros",
-					title: "Lista de terceros",
-					content: "Gestiona clientes, proveedores, empleados, asesores...",
-					placement: "right",
-					template: botones,
-					backdrop: true
-
-				},
-				{
-					element: "#hidden_field_data_compras",
-					title: "Compras",
-					content: "Puedes registrar tus compras.",
-					placement: "right",
-					template: botones,
-					backdrop: true
-
-				},
-				{
-					
-					element: "#hidden_field_data_ventas",
-					title: "Lista de facturas de venta",
-					content: "Puedes ver las facturas de venta realizadas y puedes crear una factura.",
-					placement: "left",
-					template: botones,
-					backdrop: true
-
-				},
-				{
-					element: "#hidden_field_data_notas_credito",
-					title: "Lista de notas crédito",
-					content: "Puedes ver las notas crédito resalizadas y puedes crear una nota crédito.",
-					placement: "left",
-					template: botones,
-					backdrop: true
-
-				},
-				{
-					element: "#hidden_field_data_agenda",
-					title: "Agenda",
-					content: "Ahora puedes usar el calendario y agenda.",
-					placement: "right",
-					template: botones,
-					backdrop: true
-
-				},
-				{
-					element: "#rod_col2",
-					title: "Chat de soporte",
-					content: "Chat de soporte en línea.",
-					placement: "left",
 					template: botones,
 					backdrop: true
 

@@ -285,7 +285,7 @@ class form_movimiento_mob_ini
       $this->nm_cod_apl      = "form_movimiento"; 
       $this->nm_nome_apl     = "Form de traslado entre bodegas"; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "admin"; 
       $this->nm_script_by    = "netmake"; 
@@ -295,11 +295,11 @@ class form_movimiento_mob_ini
       $this->nm_dt_criacao   = "20180106"; 
       $this->nm_hr_criacao   = "140555"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220601"; 
-      $this->nm_hr_ult_alt   = "185501"; 
+      $this->nm_dt_ult_alt   = "20220622"; 
+      $this->nm_hr_ult_alt   = "203752"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0.0"; 
+      $this->nm_app_version  = "1.0"; 
 // 
       $this->border_grid           = ""; 
       $this->cor_bg_grid           = ""; 
@@ -435,7 +435,7 @@ class form_movimiento_mob_ini
       }
       elseif (!isset($_SESSION['scriptcase']['form_movimiento_mob']['actual_lang']) || $_SESSION['scriptcase']['form_movimiento_mob']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['form_movimiento_mob']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       global $inicial_form_movimiento_mob;
       if (isset($_SESSION['scriptcase']['user_logout']))
@@ -913,7 +913,7 @@ class form_movimiento_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXOZSBiDSNaV5BODMrYZSJqDWFYVorqHQXOZ1F7D1rKV5BOHgNKHErsH5F/VoFaHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSrYV5BOHgveVkJGH5FYVoJwHQXODQX7HIrKHQJeDMNOVcFCDWB3VoFGHQNwH9BOHArKD5rqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKVIBOV5X7VoX7D9BsZ1BOZ1BeV5X7DEBOZSJGDWXCVoXGD9XsDQX7DSBYD5JwHuNOVIFCH5XCVoraDcNwH9B/Z1rYD5FaDMBYDkFeV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXsH9BiHAN7D5FaHgrwDkBsDWF/VErqD9JmZ1FGDSrYHuFGHgNOVkJqHEFqHIJwD9JKH9FUHArYD5JwDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYZSNiDWB3VEFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMFaDcBiDQBqHANOV5JeDMNOVcFeDWJeVoBiHQNmZ1rqHArKHQF7DEBeDkXKDWF/ZuXGHQFYZSX7DSrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiH9BiD1vOVWXGDMBYV9FeDWFaVoBOD9BsZ1FGHABYHQJeHgveVkJ3DWFGZuBqD9JKDQJwDSN7HQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEBUDWX7ZuJeHQBiDQFUHArYHuJeDMvOZSNiDWF/HMBOD9BiZSBOHIBeHQF7DMzGDkXKHEFqHMX7HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSB/Z1BeD5XGDEBOHEJqV5FaVoFGD9XsZSFGHAN7D5BqHuNOVcBOHEFYDoraD9BsZSFaD1rKD5FaDMNKZSXeV5FqDoB/DcJeZ9JeZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgvsV9FeDuX7VEFGD9BsH9BqZ1NOHQNUHgNKZSJ3H5FYZuFaHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWrGDoBOHQXOZ9F7HANKVWJeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgNOZSJqDuXKZuBqD9JKH9FGD1vOVWJsHgvOVcrsDWJeHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -966,7 +966,7 @@ class form_movimiento_mob_ini
       }
       if (isset($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao']))
       {
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
           {
               $nm_crit_perfil = true;
@@ -1268,7 +1268,7 @@ class form_movimiento_mob_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1329,7 +1329,7 @@ class form_movimiento_mob_ini
 
   function setConnectionHash() {
     if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao'])) {
-      list($connectionDbms, $connectionHost, $connectionUser, $connectionPassword, $connectionDatabase) = db_conect_devel($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8);
+      list($connectionDbms, $connectionHost, $connectionUser, $connectionPassword, $connectionDatabase) = db_conect_devel($_SESSION['scriptcase']['form_movimiento_mob']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8);
     }
     else {
       $connectionDbms     = $this->nm_tpbanco;
@@ -1447,7 +1447,7 @@ ob_start();
     {
         include_once("../_lib/lib/php/nm_ctrl_app_name.php");
     }
-    SC_dir_app_ini('FACILWEBv2');
+    SC_dir_app_ini('FACILWEBv_2022');
     $sc_conv_var = array();
     if (!empty($_FILES))
     {
@@ -1561,11 +1561,11 @@ ob_start();
     $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
     $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
     if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-        if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-            $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+        if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+            $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
         }
-        elseif (is_file($root . $_SESSION['scriptcase']['form_movimiento']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-            $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['form_movimiento']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+        elseif (is_file($root . $_SESSION['scriptcase']['form_movimiento']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+            $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['form_movimiento']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
         }
         if (isset($apl_def)) {
             if ($apl_def[0] != "form_movimiento") {
@@ -1579,8 +1579,8 @@ ob_start();
                 $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                 $_SESSION['scriptcase']['form_movimiento']['session_timeout']['redir_tp'] = $Redir_tp;
             }
-            if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-                $_SESSION['scriptcase']['form_movimiento']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+            if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+                $_SESSION['scriptcase']['form_movimiento']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
             }
         }
     }

@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____grid_aplicaciones_menu_asignarpermisos"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____grid_aplicaciones_menu_asignarpermisos"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____grid_aplicaciones_menu_asignarpermisos"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____grid_aplicaciones_menu_asignarpermisos"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

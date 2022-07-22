@@ -12,7 +12,7 @@ grp__NM__menu_img__NM__POR COBRAR.png
 grp__NM__menu_img__NM__NOTAS CREDITO.png
 grp__NM__menu_img__NM__CONTRATOS.png
 grp__NM__menu_img__NM__AGENDA.png
-grp__NM__menu_img__NM__INDICES.png
+grp__NM__ico__NM__RADIAN.png
 grp__NM__menu_img__NM__ROTACION INVENTARIO.png
 grp__NM__menu_img__NM__GESTION DOCUMENTOS.png
 nm_te.gif

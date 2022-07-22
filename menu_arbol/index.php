@@ -336,7 +336,7 @@ if (isset($_SESSION['scriptcase']['menu_arbol']['session_timeout']['lang'])) {
 }
 elseif (!isset($_SESSION['scriptcase']['menu_arbol']['actual_lang']) || $_SESSION['scriptcase']['menu_arbol']['actual_lang'] != $this->str_lang) {
     $_SESSION['scriptcase']['menu_arbol']['actual_lang'] = $this->str_lang;
-    setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+    setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
 }
 if (!function_exists("NM_is_utf8"))
  {
@@ -346,7 +346,7 @@ if (!function_exists("SC_dir_app_ini"))
 {
     include_once("../_lib/lib/php/nm_ctrl_app_name.php");
 }
-SC_dir_app_ini('FACILWEBv2');
+SC_dir_app_ini('FACILWEBv_2022');
 $this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
 if ($_SESSION['scriptcase']['menu_arbol']['glo_nm_usa_grupo'] == "S")
 {
@@ -385,7 +385,7 @@ $this->css_menutab_active_close_icon    = trim($css_menutab_active_close_icon);
 $this->css_menutab_inactive_close_icon  = trim($css_menutab_inactive_close_icon);
 $this->breadcrumbline_separator  = trim($breadcrumbline_separator);
 asort($this->Nm_lang_conf_region);
-$this->tab_grupo[0] = "FACILWEBv2/";
+$this->tab_grupo[0] = "FACILWEBv_2022/";
 if ($_SESSION['scriptcase']['menu_arbol']['glo_nm_usa_grupo'] != "S")
 {
     $this->tab_grupo[0] = "";
@@ -621,7 +621,7 @@ $nm_falta_var    = "";
 $nm_falta_var_db = ""; 
 if (isset($_SESSION['scriptcase']['menu_arbol']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['menu_arbol']['glo_nm_conexao']))
 {
-    db_conect_devel($_SESSION['scriptcase']['menu_arbol']['glo_nm_conexao'], $str_root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_prod'], 'FACILWEBv2', 2); 
+    db_conect_devel($_SESSION['scriptcase']['menu_arbol']['glo_nm_conexao'], $str_root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_prod'], 'FACILWEBv_2022', 2); 
 }
 if (isset($_SESSION['scriptcase']['menu_arbol']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['menu_arbol']['glo_nm_perfil']))
 {
@@ -818,11 +818,11 @@ $this->nm_bases_vfp       = array("vfp");
 $this->nm_bases_odbc      = array("odbc");
 $this->nm_bases_progress  = array("pdo_progress_odbc", "progress");
 $_SESSION['scriptcase']['sc_num_page'] = 1;
-$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKDuBqHAvCV5XGDMBYVIFCDWJeDoJeDcNmZ1B/DSBeD5NUHgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7D9XOH9B/DSNOHQFaHgvsZSJqDWX7HIrqDcJeDuBqHAveV5raDMBYVIFCDWXCHIX7HQBiH9B/HABYD5NUHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHuNOVcBODWFYDoJsD9BiZ1BOZ1BeD5NUDErKVkXeDWr/DoB/D9XsDQBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCH5FGDoBqHQBiDuBqHArYHQJeDMvOV9BUDWXKVoF7HQBsZkBiHAzGD5BOHgNKHArCDWr/HMJeDcXGDQBqHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGD1vsD5XGDEvsZSJGHEFqZuBqHQFYDQB/HABYD5BqHuvmVcFeDurGVoF7DcNwH9B/HIrwHQBiDEBOHErsDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveDkXKDWBmZuBOHQBiDQBqDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1FGD1rKV5JeDEvsHEJGDWFqVoBOD9JKDQB/HABYVWJwDMvsVcBODuFqDoraHQBiZ1F7HIveZMFaHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDuBqHABYHuraDMvsVcFKV5X7VoBiD9XGZ1BOHArYD5JeDMBYZSJ3HEFaDoJsHQXGDQFUDSvCVWBqHgvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3H5FGDoBqHQBiDuBqHArYHQJeDMvOV9BUDWXKVoF7HQBsZkBiHAzGD5BOHgNKHArCDWr/HMJeDcXGDQBqHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HuJeHgNKDkXKH5FGDoBqD9JKDQFUHAveV5raHuBYV9FeDWXKVErqD9BsH9BqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHuNOVcBODWFYDoJsD9BiZ1BOZ1BeD5NUDErKVkXeDWr/DoB/D9XsDQBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFiDWrGZuB/HQBiDuFaHAN7V5BODMNOVcBOV5FGVEFGHQBqZ1FUZ1rYV5FGDMBYVkXeV5XCHMBOD9XsH9BiHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqHINaV5JeDMrYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNKZSJqDuJeVoJsD9NmZSFGDSBYD5JwHgrwZSJqH5XKDoXGHQFYZ1B/HIveHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
  $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
 if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['menu_arbol']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['menu_arbol']['glo_nm_conexao']))
 { 
-   $this->Db = db_conect_devel($_SESSION['scriptcase']['menu_arbol']['glo_nm_conexao'], $str_root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_prod'], 'FACILWEBv2'); 
+   $this->Db = db_conect_devel($_SESSION['scriptcase']['menu_arbol']['glo_nm_conexao'], $str_root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_prod'], 'FACILWEBv_2022'); 
 } 
 else 
 { 
@@ -2762,11 +2762,11 @@ $path_aplicacao  = substr($str_path_web, 0, strrpos($str_path_web, '/'));
 $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
 $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
 if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-    if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-        $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+    if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+        $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
     }
-    elseif (is_file($root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-        $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+    elseif (is_file($root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+        $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
     }
     if (isset($apl_def)) {
         if ($apl_def[0] != "menu_arbol") {
@@ -2780,8 +2780,8 @@ if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
             $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
             $_SESSION['scriptcase']['menu_arbol']['session_timeout']['redir_tp'] = $Redir_tp;
         }
-        if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-            $_SESSION['scriptcase']['menu_arbol']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+        if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+            $_SESSION['scriptcase']['menu_arbol']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
         }
     }
 }

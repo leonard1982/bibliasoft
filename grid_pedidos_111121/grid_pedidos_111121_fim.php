@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____grid_pedidos_111121"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____grid_pedidos_111121"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____grid_pedidos_111121"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____grid_pedidos_111121"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

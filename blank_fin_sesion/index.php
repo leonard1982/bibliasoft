@@ -207,7 +207,7 @@ class blank_fin_sesion_ini
       $this->nm_cod_apl      = "blank_fin_sesion"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "admin"; 
       $this->nm_script_by    = "netmake";
@@ -216,9 +216,9 @@ class blank_fin_sesion_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20181228"; 
       $this->nm_hr_criacao   = "062322"; 
-      $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220601"; 
-      $this->nm_hr_ult_alt   = "185501"; 
+      $this->nm_autor_alt    = "desarrollo3"; 
+      $this->nm_dt_ult_alt   = "20220715"; 
+      $this->nm_hr_ult_alt   = "215508"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -312,7 +312,7 @@ class blank_fin_sesion_ini
       }
       elseif (!isset($_SESSION['scriptcase']['blank_fin_sesion']['actual_lang']) || $_SESSION['scriptcase']['blank_fin_sesion']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['blank_fin_sesion']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
       {
@@ -910,7 +910,7 @@ class blank_fin_sesion_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_fin_sesion']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_fin_sesion']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQBOZ1zGVWBODMrYVIBsV5F/HIraDcBqH9BqDSBeHuB/DMveHErsDWF/HIX7HQNmZSBiZ1rwHurqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveV5XGHuvmDkBsH5XCHMBOHQXOZkFGDSBeD5rqHgNKHEFiDWX7HIFGDcXOZSFUHIrKV5raDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDorqD9XsDQJsHArYD5NUHuvmDkB/V5X7DorqD9JmZ1B/Z1NOD5BiDErKZSXeDWFqDoXGD9JKDQX7Z1rwD5NUDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcXGDuFaHANOHQJwDMBYVcFKV5X/VEX7D9BiH9FaD1rKD5NUDEBODkFeV5B7ZuJeHQJeDuBqHABYHuJwDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJeDMvOVcBUHEFYHMBiD9BsVIraD1rwV5X7HgBeHEFiH5FYHMJsHQXOH9FGHAN7HQFaHuNOVIBsH5XCDoJsDcFYZ1BOD1rKHQrqHgvsHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDQX7DSBYD5JwDMvOVcBOHEX7HMrqDcBqZ1FaHAN7HuFGDMveHArCH5FYHIXGD9XsZSX7HABYVWJeDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHQBqDMvOVcBOHEFYVoX7D9JmZ1F7DSBeZMBqHgveHArsDWr/DoJeHQXsZSFGHArYVWBqDMvODkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcJeH9X7HIBeV5FUHuNOVIBOHEX7VoJwDcJUZSB/DSrYV5FUDMNKZSJGH5FYVoB/D9NwZSX7DSBYV5JwHuNOZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsZ1N7V5FUDMvsVcFeDWF/VoX7HQBiZ1rqD1rKD5NUHgNOHEFiHEFaDoJeDcBwDQX7HIrwHQrqDMzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYZSJqDWXKVEraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIBiHQXODuFaHAN7HQFaDMBOVIBOHEF/DoF7D9XOZ1FGHIveD5NUDMvCZSJGDWXCDoBOHQNwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1003,7 +1003,7 @@ class blank_fin_sesion_ini
               }
               
           }
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
@@ -1421,7 +1421,7 @@ class blank_fin_sesion_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['blank_fin_sesion']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_fin_sesion']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_fin_sesion']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_fin_sesion']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1996,7 +1996,7 @@ if (!isset($_SESSION['gusuario_logueo'])) {$_SESSION['gusuario_logueo'] = "";}
 if (!isset($this->sc_temp_gusuario_logueo)) {$this->sc_temp_gusuario_logueo = (isset($_SESSION['gusuario_logueo'])) ? $_SESSION['gusuario_logueo'] : "";}
 if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
- if(!isset($_GET["noborrarsesionenbd"]))
+  if(!isset($_GET["noborrarsesionenbd"]))
 {
 	if(isset($this->sc_temp_gusuario_logueo) and isset($this->sc_temp_gpassword_logueo) and isset($this->sc_temp_gidtercero))
 	{
@@ -2060,6 +2060,12 @@ if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SES
 		}
 	}
 }
+
+$this->sc_logged_out($this->sc_temp_gusuario_logueo);
+
+$this->sc_logged_in($this->sc_temp_gusuario_logueo);
+
+$_SESSION['scriptcase']['user_logout'][] = array('V' => 'logged_user', 'U' => 'logout', 'R' => 'seg_Login', 'T' => '_top');;
 
 $this->sc_temp_gPermisosUsuario = "";
 $this->sc_temp_gnombreusuario = "";
@@ -2202,6 +2208,648 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
        } 
        exit;
    } 
+function sc_logged($user, $ip = '')
+{
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+  
+	$str_sql = "SELECT date_login, ip FROM ".$this->sc_temp_usr_database.".seg_logged WHERE login = '". $user ."' AND sc_session <> '_SC_FAIL_SC_'";
+
+	 
+      $nm_select = $str_sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($data = $this->Db->Execute($nm_select)) 
+      { }
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $data = false;
+          $data_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if($data  === FALSE || !isset($data->fields[0]))
+	{
+		$ip = ($ip == '') ? $_SERVER['REMOTE_ADDR'] : $ip;
+		$this->sc_logged_in($user, $ip);
+		return true;
+	}
+	else
+	{
+		if (isset($_SESSION['scriptcase']['sc_apl_conf']['seg_logged']))
+{
+unset($_SESSION['scriptcase']['sc_apl_conf']['seg_logged']);
+}
+;
+		$_SESSION['scriptcase']['sc_apl_seg']['seg_logged'] = "on";;
+		 if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('seg_logged') . "/", $this->nm_location, "user?#?" . NM_encode_input($user) . "?@?","modal", 400, 424);;
+
+		return false;
+	}
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
+}
+function sc_verify_logged()
+{
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['logged_date_login'])) {$_SESSION['logged_date_login'] = "";}
+if (!isset($this->sc_temp_logged_date_login)) {$this->sc_temp_logged_date_login = (isset($_SESSION['logged_date_login'])) ? $_SESSION['logged_date_login'] : "";}
+if (!isset($_SESSION['logged_user'])) {$_SESSION['logged_user'] = "";}
+if (!isset($this->sc_temp_logged_user)) {$this->sc_temp_logged_user = (isset($_SESSION['logged_user'])) ? $_SESSION['logged_user'] : "";}
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+  
+	$str_sql = "SELECT count(*) FROM ".$this->sc_temp_usr_database.".seg_logged WHERE login = '". $this->sc_temp_logged_user . "' AND date_login = '". $this->sc_temp_logged_date_login ."' AND sc_session <> '_SC_FAIL_SC_'";
+	 
+      $nm_select = $str_sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs_logged = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs_logged[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs_logged = false;
+          $rs_logged_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if($rs_logged[0][0] != 1)
+	{
+		 if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+ if (isset($this->sc_temp_logged_user)) {$_SESSION['logged_user'] = $this->sc_temp_logged_user;}
+ if (isset($this->sc_temp_logged_date_login)) {$_SESSION['logged_date_login'] = $this->sc_temp_logged_date_login;}
+ if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
+ {
+$this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('seg_login') . "/", $this->nm_location, "","_parent", 440, 630);
+ };
+	}
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+if (isset($this->sc_temp_logged_user)) {$_SESSION['logged_user'] = $this->sc_temp_logged_user;}
+if (isset($this->sc_temp_logged_date_login)) {$_SESSION['logged_date_login'] = $this->sc_temp_logged_date_login;}
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
+}
+function sc_logged_in($user, $ip = '')
+{
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+if (!isset($_SESSION['logged_date_login'])) {$_SESSION['logged_date_login'] = "";}
+if (!isset($this->sc_temp_logged_date_login)) {$this->sc_temp_logged_date_login = (isset($_SESSION['logged_date_login'])) ? $_SESSION['logged_date_login'] : "";}
+if (!isset($_SESSION['logged_user'])) {$_SESSION['logged_user'] = "";}
+if (!isset($this->sc_temp_logged_user)) {$this->sc_temp_logged_user = (isset($_SESSION['logged_user'])) ? $_SESSION['logged_user'] : "";}
+  
+	$ip = ($ip == '') ? $_SERVER['REMOTE_ADDR'] : $ip;
+	$this->sc_temp_logged_user = $user;
+	$this->sc_temp_logged_date_login = microtime(true);
+
+	$str_sql = "DELETE FROM ".$this->sc_temp_usr_database.".seg_logged WHERE login = '". $user . "' AND sc_session = '_SC_FAIL_SC_' AND ip = '".$ip."'";
+	
+     $nm_select = $str_sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+	$str_sql = "INSERT INTO ".$this->sc_temp_usr_database.".seg_logged(login, date_login, sc_session, ip) VALUES ('". $user ."', '". $this->sc_temp_logged_date_login ."', '". session_id() ."', '". $ip ."')";
+	
+     $nm_select = $str_sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+if (isset($this->sc_temp_logged_user)) {$_SESSION['logged_user'] = $this->sc_temp_logged_user;}
+if (isset($this->sc_temp_logged_date_login)) {$_SESSION['logged_date_login'] = $this->sc_temp_logged_date_login;}
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
+}
+function sc_logged_in_fail($user, $ip = '')
+{
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+  
+	$ip = ($ip == '') ? $_SERVER['REMOTE_ADDR'] : $ip;
+	$str_sql = "INSERT INTO ".$this->sc_temp_usr_database.".seg_logged(login, date_login, sc_session, ip) VALUES ('" . $user . "', '" . microtime(true) . "', '_SC_FAIL_SC_', '" . $ip . "')";
+	
+     $nm_select = $str_sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	return true;
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
+}
+function sc_logged_is_blocked($ip = '')
+{
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+  
+	$ip = ($ip == '') ? $_SERVER['REMOTE_ADDR'] : $ip;
+	$minutes_ago = strtotime("-10 minutes");
+	$str_select = "SELECT count(*) FROM ".$this->sc_temp_usr_database.".seg_logged WHERE sc_session = '_SC_BLOCKED_SC_' AND ip = '".$ip."' AND date_login > '". $minutes_ago ."'";
+	 
+      $nm_select = $str_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs_logged = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs_logged[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs_logged = false;
+          $rs_logged_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if($rs_logged  !== FALSE && $rs_logged[0][0] == 1)
+	{
+		$message = $this->Ini->Nm_lang['lang_user_blocked'];
+		$message = sprintf($message, 10);
+		
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $message;
+;
+		return true;
+	}
+
+	$str_select = "SELECT count(*) FROM ".$this->sc_temp_usr_database.".seg_logged WHERE sc_session = '_SC_FAIL_SC_' AND ip = '".$ip."' AND date_login > '". $minutes_ago ."'";
+	 
+      $nm_select = $str_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs_logged = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs_logged[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs_logged = false;
+          $rs_logged_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if($rs_logged  !== FALSE && $rs_logged[0][0] == 10)
+	{
+		$str_sql = "INSERT INTO ".$this->sc_temp_usr_database.".seg_logged(login, date_login, sc_session, ip) VALUES ('blocked', '". microtime(true) ."', '_SC_BLOCKED_SC_', '". $ip ."')";
+		
+     $nm_select = $str_sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+		$message = $this->Ini->Nm_lang['lang_user_blocked'];
+		$message = sprintf($message, 10);
+		
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $message;
+;
+		return true;
+	}
+	return false;
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
+}
+function sc_logged_out($user, $date_login = '',$pardatabase='')
+{
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['logged_user'])) {$_SESSION['logged_user'] = "";}
+if (!isset($this->sc_temp_logged_user)) {$this->sc_temp_logged_user = (isset($_SESSION['logged_user'])) ? $_SESSION['logged_user'] : "";}
+if (!isset($_SESSION['logged_date_login'])) {$_SESSION['logged_date_login'] = "";}
+if (!isset($this->sc_temp_logged_date_login)) {$this->sc_temp_logged_date_login = (isset($_SESSION['logged_date_login'])) ? $_SESSION['logged_date_login'] : "";}
+  
+	$tabla = 'seg_logged';	
+	if (!empty($pardatabase)) {
+		$tabla = $pardatabase.'.seg_logged';
+	}
+	$date_login = ($date_login == '' ? "" : " AND date_login = '". $date_login ."'");
+
+	$str_sql = "SELECT sc_session FROM $tabla WHERE login = '". $user ."' ". $date_login . " AND sc_session <> '_SC_FAIL_SC_'";
+	 
+      $nm_select = $str_sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $data = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $data[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $data = false;
+          $data_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($data[0][0]) && !empty($data[0][0]))
+	{
+		$session_bkp = $_SESSION;
+		$sessionid = session_id();
+		session_write_close();
+
+		session_id($data[0][0]);
+		session_start();
+		$_SESSION['logged_user'] = 'logout';
+		session_write_close();
+
+		session_id($sessionid);
+		session_start();
+		$_SESSION = $session_bkp;
+	}
+
+
+	$str_sql = "DELETE FROM $tabla WHERE login = '". $user . "' " . $date_login;
+	
+     $nm_select = $str_sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	 unset($_SESSION['logged_date_login']);
+ unset($this->sc_temp_logged_date_login);
+ unset($_SESSION['logged_user']);
+ unset($this->sc_temp_logged_user);
+;
+if (isset($this->sc_temp_logged_date_login)) {$_SESSION['logged_date_login'] = $this->sc_temp_logged_date_login;}
+if (isset($this->sc_temp_logged_user)) {$_SESSION['logged_user'] = $this->sc_temp_logged_user;}
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
+}
+function sc_looged_check_logout()  {
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_email'])) {$_SESSION['usr_email'] = "";}
+if (!isset($this->sc_temp_usr_email)) {$this->sc_temp_usr_email = (isset($_SESSION['usr_email'])) ? $_SESSION['usr_email'] : "";}
+if (!isset($_SESSION['logged_date_login'])) {$_SESSION['logged_date_login'] = "";}
+if (!isset($this->sc_temp_logged_date_login)) {$this->sc_temp_logged_date_login = (isset($_SESSION['logged_date_login'])) ? $_SESSION['logged_date_login'] : "";}
+if (!isset($_SESSION['logged_user'])) {$_SESSION['logged_user'] = "";}
+if (!isset($this->sc_temp_logged_user)) {$this->sc_temp_logged_user = (isset($_SESSION['logged_user'])) ? $_SESSION['logged_user'] : "";}
+if (!isset($_SESSION['usr_login'])) {$_SESSION['usr_login'] = "";}
+if (!isset($this->sc_temp_usr_login)) {$this->sc_temp_usr_login = (isset($_SESSION['usr_login'])) ? $_SESSION['usr_login'] : "";}
+  
+	if(isset($this->sc_temp_logged_user) && ($this->sc_temp_logged_user == 'logout' || empty($this->sc_temp_logged_user)))
+	{
+		 unset($_SESSION['usr_login']);
+ unset($this->sc_temp_usr_login);
+ unset($_SESSION['logged_user']);
+ unset($this->sc_temp_logged_user);
+ unset($_SESSION['logged_date_login']);
+ unset($this->sc_temp_logged_date_login);
+ unset($_SESSION['usr_email']);
+ unset($this->sc_temp_usr_email);
+;
+	}
+if (isset($this->sc_temp_usr_login)) {$_SESSION['usr_login'] = $this->sc_temp_usr_login;}
+if (isset($this->sc_temp_logged_user)) {$_SESSION['logged_user'] = $this->sc_temp_logged_user;}
+if (isset($this->sc_temp_logged_date_login)) {$_SESSION['logged_date_login'] = $this->sc_temp_logged_date_login;}
+if (isset($this->sc_temp_usr_email)) {$_SESSION['usr_email'] = $this->sc_temp_usr_email;}
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
+}
+function seginsertApp($app_name, $idapptype, $description, $orden) {
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+  
+
+	$str_sql = "SELECT idapp, idapptype, description, orden, app_name FROM ".$this->sc_temp_usr_database.".seg_apps WHERE app_name = '". $app_name . "';";
+	 
+      $nm_select = $str_sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs_app = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs_app[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs_app = false;
+          $rs_app_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if (!isset($rs_app[0][0]))	{ 
+		unset($rs_app);
+		$str_sql = "SELECT idapp, idapptype, description, orden, app_name FROM ".$this->sc_temp_usr_database.".seg_apps WHERE orden = '". $orden . "';";
+		 
+      $nm_select = $str_sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs_app = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs_app[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs_app = false;
+          $rs_app_erro = $this->Db->ErrorMsg();
+      } 
+;
+	}
+
+	if (!isset($rs_app[0][0]))	{ 
+		$str_sql = 'INSERT INTO '.$this->sc_temp_usr_database.'.seg_apps(app_name, idapptype, description, orden)'
+			." VALUES ('$app_name', '$idapptype', '$description', '$orden')";
+		
+     $nm_select = $str_sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	} elseif ( $rs_app[0][1]!=$idapptype || $rs_app[0][2]!=$description || $rs_app[0][3]!=$orden ) {
+		$var_idapp = $rs_app[0][0];
+		$str_sql = 'UPDATE '.$this->sc_temp_usr_database.'.seg_apps'
+			." SET idapptype= '$idapptype'"
+			.", app_name='$app_name'"
+			.", description='$description'"
+			.", orden='$orden'"
+			." WHERE idapp = $var_idapp";
+		
+     $nm_select = $str_sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	}
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+$_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
+}
+   function nmgp_redireciona_form($nm_apl_dest, $nm_apl_retorno, $nm_apl_parms, $nm_target="", $alt_modal=0, $larg_modal=0, $opc="")
+   {
+      if (is_array($nm_apl_parms))
+      {
+          $tmp_parms = "";
+          foreach ($nm_apl_parms as $par => $val)
+          {
+              $par = trim($par);
+              $val = trim($val);
+              $tmp_parms .= str_replace(".", "_", $par) . "?#?";
+              if (substr($val, 0, 1) == "$")
+              {
+                  $tmp_parms .= $$val;
+              }
+              elseif (substr($val, 0, 1) == "{")
+              {
+                  $val        = substr($val, 1, -1);
+                  $tmp_parms .= $this->$val;
+              }
+              elseif (substr($val, 0, 1) == "[")
+              {
+                  $tmp_parms .= $_SESSION['sc_session'][$this->Ini->sc_page]['blank_fin_sesion'][substr($val, 1, -1)];
+              }
+              else
+              {
+                  $tmp_parms .= $val;
+              }
+              $tmp_parms .= "?@?";
+          }
+          $nm_apl_parms = $tmp_parms;
+      }
+      $target = (empty($nm_target)) ? "_self" : $nm_target;
+      if (strtolower(substr($nm_apl_dest, -4)) != ".php" && (strtolower(substr($nm_apl_dest, 0, 7)) == "http://" || strtolower(substr($nm_apl_dest, 0, 8)) == "https://" || strtolower(substr($nm_apl_dest, 0, 3)) == "../"))
+      {
+          echo "<SCRIPT language=\"javascript\">";
+          if (strtolower($target) == "_blank")
+          {
+              echo "window.open ('" . $nm_apl_dest . "');";
+          }
+          else
+          {
+              echo "window.location='" . $nm_apl_dest . "';";
+          }
+          echo "</SCRIPT>";
+          exit;
+      }
+      $dir = explode("/", $nm_apl_dest);
+      if (count($dir) == 1)
+      {
+          $nm_apl_dest = str_replace(".php", "", $nm_apl_dest);
+          $nm_apl_dest = $this->Ini->path_link . $nm_apl_dest . "/" . $nm_apl_dest . ".php";
+      }
+      if ($nm_target == "modal")
+      {
+          if (!empty($nm_apl_parms))
+          {
+              $nm_apl_parms = str_replace("?#?", "*scin", $nm_apl_parms);
+              $nm_apl_parms = str_replace("?@?", "*scout", $nm_apl_parms);
+              $nm_apl_parms = "nmgp_parms=" . $nm_apl_parms . "&";
+          }
+          $par_modal = "?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_outra_jan=true&nmgp_url_saida=modal&NMSC_modal=ok&";
+          $this->redir_modal = "$(function() { tb_show('', '" . $nm_apl_dest . $par_modal . $nm_apl_parms . "TB_iframe=true&modal=true&height=" . $alt_modal . "&width=" . $larg_modal . "', '') })";
+          return;
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['blank_fin_sesion']['iframe_print']) && $_SESSION['sc_session'][$this->Ini->sc_page]['blank_fin_sesion']['iframe_print'] )
+      {
+          $target = "_parent";
+      }
+   ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+      <HTML>
+      <HEAD>
+      <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+      if ($_SESSION['scriptcase']['proc_mobile'])
+      {
+?>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+      }
+?>
+       <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+       <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+       <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+       <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+       <META http-equiv="Pragma" content="no-cache"/>
+       <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+      </HEAD>
+      <BODY>
+   <form name="Fredir" method="post" 
+                     target="_self"> 
+     <input type="hidden" name="nmgp_parms" value="<?php echo NM_encode_input($nm_apl_parms) ?>"/>
+<?php
+   if ($target == "_blank")
+   {
+?>
+       <input type="hidden" name="nmgp_outra_jan" value="true"/> 
+<?php
+   }
+   else
+   {
+?>
+     <input type="hidden" name="nmgp_url_saida" value="<?php echo NM_encode_input($nm_apl_retorno) ?>">
+     <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($this->Ini->sc_page) ?>"/> 
+<?php
+   }
+?>
+   </form> 
+      <SCRIPT language="javascript">
+          window.onload = function(){
+             submit_Fredir();
+          };
+          function submit_Fredir()
+          {
+              document.Fredir.target = "<?php echo $target ?>"; 
+              document.Fredir.action = "<?php echo $nm_apl_dest ?>";
+              document.Fredir.submit();
+          }
+      </SCRIPT>
+      </BODY>
+      </HTML>
+   <?php
+      if ($target != "_blank")
+      {
+          exit;
+      }
+   }
    function nm_conv_data_db($dt_in, $form_in, $form_out)
    {
        $dt_out = $dt_in;
@@ -2245,7 +2893,7 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
    {
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
-   SC_dir_app_ini('FACILWEBv2');
+   SC_dir_app_ini('FACILWEBv_2022');
    $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
    $Sc_lig_md5 = false;
    $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
@@ -2324,11 +2972,11 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
    $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
    $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
    if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-       if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+       if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['blank_fin_sesion']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_fin_sesion']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['blank_fin_sesion']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_fin_sesion']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
        }
        if (isset($apl_def)) {
            if ($apl_def[0] != "blank_fin_sesion") {
@@ -2342,8 +2990,8 @@ $_SESSION['scriptcase']['blank_fin_sesion']['contr_erro'] = 'off';
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                $_SESSION['scriptcase']['blank_fin_sesion']['session_timeout']['redir_tp'] = $Redir_tp;
            }
-           if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-               $_SESSION['scriptcase']['blank_fin_sesion']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+           if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+               $_SESSION['scriptcase']['blank_fin_sesion']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
            }
        }
    }

@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____Grid_ajuste_Inv_fisico"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____Grid_ajuste_Inv_fisico"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____Grid_ajuste_Inv_fisico"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____Grid_ajuste_Inv_fisico"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

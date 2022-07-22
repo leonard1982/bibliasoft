@@ -6710,7 +6710,7 @@ if (strlen($conteudo) > 50 && $conteudo != "&nbsp;") {
        $this->NM_fil_ant = array();
        $pos_path = strrpos($this->Ini->path_prod, "/");
        $this->NM_path_filter = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/filters/";
-       $NM_patch   = "FACILWEBv2/grid_contabilidad";
+       $NM_patch   = "FACILWEBv_2022/grid_contabilidad";
        if (is_dir($this->NM_path_filter . $NM_patch))
        {
            $NM_dir = @opendir($this->NM_path_filter . $NM_patch);

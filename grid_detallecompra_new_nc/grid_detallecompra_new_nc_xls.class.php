@@ -90,6 +90,11 @@ class grid_detallecompra_new_nc_xls
           $_SESSION['par_idfaccom'] = $par_idfaccom;
           nm_limpa_str_grid_detallecompra_new_nc($_SESSION["par_idfaccom"]);
       }
+      if (isset($gidtercero)) 
+      {
+          $_SESSION['gidtercero'] = $gidtercero;
+          nm_limpa_str_grid_detallecompra_new_nc($_SESSION["gidtercero"]);
+      }
       $this->Use_phpspreadsheet = (phpversion() >=  "7.3.9" && is_dir($this->Ini->path_third . '/phpspreadsheet')) ? true : false;
       $this->Xls_tot_col = 0;
       $this->Xls_row     = 0;

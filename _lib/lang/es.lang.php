@@ -779,7 +779,7 @@
   $this->Nm_lang['lang_btns_calc'] = "Calculadora";
   $this->Nm_lang['lang_btns_calc_hint'] = "Usar Calculadora";
   $this->Nm_lang['lang_btns_cfrm'] = "Aceptar";
-  $this->Nm_lang['lang_btns_cfrm_hint'] = "Conferma";
+  $this->Nm_lang['lang_btns_cfrm_hint'] = "Ingresar";
   $this->Nm_lang['lang_btns_chrt'] = "Gráficas";
   $this->Nm_lang['lang_btns_chrt_gantt'] = "Gantt";
   $this->Nm_lang['lang_btns_chrt_gantt_hint'] = "Mostra il Gantt chart";

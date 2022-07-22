@@ -210,7 +210,7 @@ class blank_valida_sesion_ajax_ini
       $this->nm_cod_apl      = "blank_valida_sesion_ajax"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "admin"; 
       $this->nm_script_by    = "netmake";
@@ -220,8 +220,8 @@ class blank_valida_sesion_ajax_ini
       $this->nm_dt_criacao   = "20181008"; 
       $this->nm_hr_criacao   = "163540"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220601"; 
-      $this->nm_hr_ult_alt   = "185501"; 
+      $this->nm_dt_ult_alt   = "20220706"; 
+      $this->nm_hr_ult_alt   = "114018"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -315,7 +315,7 @@ class blank_valida_sesion_ajax_ini
       }
       elseif (!isset($_SESSION['scriptcase']['blank_valida_sesion_ajax']['actual_lang']) || $_SESSION['scriptcase']['blank_valida_sesion_ajax']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['blank_valida_sesion_ajax']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
       {
@@ -913,7 +913,7 @@ class blank_valida_sesion_ajax_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_valida_sesion_ajax']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_valida_sesion_ajax']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQB/HANOHuBiHuzGV9FeDWFYVorqD9BiZSBqDSNOZMFaDMzGHEBUDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErsHEFqVoJwDcBiDQFUD1BeD5FaDMrYVcFCH5XCDoF7D9BiZSB/Z1BeHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWJeDoJeDcBqZ1B/Z1NOV5JsDMNKZSJGDWXCDoraD9XsDQJsDSBYD5JsHgvsVcB/V5X7VoFGDcJUZ1FaD1rwV5JeDEBOZSXeV5XCDoFUDcJeDQX7DSN7V5FUHuBOVcFiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQB/HArYHuJwDMrwVcBODWJeVoBOD9JmZSFaDSrYHQF7HgBOHErCDuXKDoJeHQJKZSBiHIvsVWJwDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWJeDMvOVcBUHEFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWXCVoB/HQNmDuBqD1vOD5F7HuNODkBODuFGVoF7D9JmZ1BOHArYZMB/DEBOHEJGDWXCVoBOHQNmH9BiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYZ9F7D1BeHurqHgvOV9FeHEFYVoF7D9BsZ1F7HIveHuXGHgrKZSJ3DWXCHMXGHQXsDQFUHABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaDSBYHQXGHuzGV9FiV5FYVoF7HQNmZ1FGDSNOD5BODMNKZSJqHEXCDoFUD9NmH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYDoraD9XsH9X7DSrwV5raHuBYVIBODWFaDoJeD9JmZ1B/D1rKD5NUDMNKZSJGH5FYVoB/D9NwZSX7DSBYV5JwHuNOVIB/V5X7VoB/D9JmZSB/HABYZMXGHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArYV5JwHgvCHEJqDWr/DoJeHQFYDQJwHABYD5rqDMBODkBODWFYHMX7DcJUZ1rqHArYZMBOHgvsHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgNKDkB/DWFGDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVEX7HQXOH9B/D1rKZMJeDEvsVkJ3DWFqHIraD9JKZSX7HIrwV5BOHgrwDkBODuFqHMJeD9BsZ1FaD1rwHQJeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -1007,7 +1007,7 @@ class blank_valida_sesion_ajax_ini
               }
               
           }
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
@@ -1024,7 +1024,7 @@ class blank_valida_sesion_ajax_ini
           $NM_SV_Parms['SC_sep_date'] = $_SESSION['scriptcase']['glo_date_separator'];
           $NM_SV_Parms['protect']     = $_SESSION['scriptcase']['glo_senha_protect'];
           $NM_SV_Parms['glo_database_encoding'] = isset($_SESSION['scriptcase']['glo_database_encoding'])?$_SESSION['scriptcase']['glo_database_encoding']:'';
-          db_conect_devel('conn_facilweb', $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel('conn_facilweb', $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           $this->nm_con_conn_facilweb['servidor']    = $_SESSION['scriptcase']['glo_servidor'];
           $this->nm_con_conn_facilweb['usuario']     = $_SESSION['scriptcase']['glo_usuario'];
           $this->nm_con_conn_facilweb['banco']       = $_SESSION['scriptcase']['glo_banco'];
@@ -1145,6 +1145,10 @@ class blank_valida_sesion_ajax_ini
           if (!isset($_SESSION['g_password'])) 
           {
               $this->nm_falta_var .= "g_password; ";
+          }
+          if (!isset($_SESSION['gnit_empresa'])) 
+          {
+              $this->nm_falta_var .= "gnit_empresa; ";
           }
       }
 // 
@@ -1513,7 +1517,7 @@ class blank_valida_sesion_ajax_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['blank_valida_sesion_ajax']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['blank_valida_sesion_ajax']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_valida_sesion_ajax']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['blank_valida_sesion_ajax']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -2163,6 +2167,8 @@ if (!isset($_SESSION['g_usuario'])) {$_SESSION['g_usuario'] = "";}
 if (!isset($this->sc_temp_g_usuario)) {$this->sc_temp_g_usuario = (isset($_SESSION['g_usuario'])) ? $_SESSION['g_usuario'] : "";}
 if (!isset($_SESSION['g_recordarme'])) {$_SESSION['g_recordarme'] = "";}
 if (!isset($this->sc_temp_g_recordarme)) {$this->sc_temp_g_recordarme = (isset($_SESSION['g_recordarme'])) ? $_SESSION['g_recordarme'] : "";}
+if (!isset($_SESSION['gnit_empresa'])) {$_SESSION['gnit_empresa'] = "";}
+if (!isset($this->sc_temp_gnit_empresa)) {$this->sc_temp_gnit_empresa = (isset($_SESSION['gnit_empresa'])) ? $_SESSION['gnit_empresa'] : "";}
 if (!isset($_SESSION['gtipo_negocio'])) {$_SESSION['gtipo_negocio'] = "";}
 if (!isset($this->sc_temp_gtipo_negocio)) {$this->sc_temp_gtipo_negocio = (isset($_SESSION['gtipo_negocio'])) ? $_SESSION['gtipo_negocio'] : "";}
 if (!isset($_SESSION['gpassword_logueo'])) {$_SESSION['gpassword_logueo'] = "";}
@@ -2228,7 +2234,7 @@ if(isset($this->vlic[0][0]))
 	}
 }
 
-$vsql = "select tipo_negocio from empresas where nombre='".$this->sc_temp_gbd_seleccionada."'";
+$vsql = "select tipo_negocio, nit from empresas where nombre='".$this->sc_temp_gbd_seleccionada."'";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2262,6 +2268,7 @@ $vsql = "select tipo_negocio from empresas where nombre='".$this->sc_temp_gbd_se
 if(isset($this->vtnegocio[0][0]))
 {
 	$this->sc_temp_gtipo_negocio = $this->vtnegocio[0][0];
+	$this->sc_temp_gnit_empresa  = $this->vtnegocio[0][1];
 }
 
 $vsql = "SELECT ccnit, url_pagos, monto_arriendo, fecha_inicio, public_key, modo_pruebas, modo_externo, auto_click, url_respuesta, url_confirmacion, url_aceptado, url_rechazado, url_pendiente, activo, nombre, dia_aviso, dia_corte, webservice, fecha_instalacion FROM suscripcion WHERE id_suscripcion='1'";
@@ -3437,6 +3444,7 @@ if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $th
 if (isset($this->sc_temp_gusuario_logueo)) {$_SESSION['gusuario_logueo'] = $this->sc_temp_gusuario_logueo;}
 if (isset($this->sc_temp_gpassword_logueo)) {$_SESSION['gpassword_logueo'] = $this->sc_temp_gpassword_logueo;}
 if (isset($this->sc_temp_gtipo_negocio)) {$_SESSION['gtipo_negocio'] = $this->sc_temp_gtipo_negocio;}
+if (isset($this->sc_temp_gnit_empresa)) {$_SESSION['gnit_empresa'] = $this->sc_temp_gnit_empresa;}
 if (isset($this->sc_temp_g_recordarme)) {$_SESSION['g_recordarme'] = $this->sc_temp_g_recordarme;}
 if (isset($this->sc_temp_g_usuario)) {$_SESSION['g_usuario'] = $this->sc_temp_g_usuario;}
 if (isset($this->sc_temp_g_password)) {$_SESSION['g_password'] = $this->sc_temp_g_password;}
@@ -3961,7 +3969,7 @@ $_SESSION['scriptcase']['blank_valida_sesion_ajax']['contr_erro'] = 'off';
    {
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
-   SC_dir_app_ini('FACILWEBv2');
+   SC_dir_app_ini('FACILWEBv_2022');
    $_SESSION['scriptcase']['blank_valida_sesion_ajax']['contr_erro'] = 'off';
    $Sc_lig_md5 = false;
    $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
@@ -4040,11 +4048,11 @@ $_SESSION['scriptcase']['blank_valida_sesion_ajax']['contr_erro'] = 'off';
    $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
    $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
    if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-       if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+       if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['blank_valida_sesion_ajax']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_valida_sesion_ajax']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['blank_valida_sesion_ajax']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['blank_valida_sesion_ajax']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
        }
        if (isset($apl_def)) {
            if ($apl_def[0] != "blank_valida_sesion_ajax") {
@@ -4058,8 +4066,8 @@ $_SESSION['scriptcase']['blank_valida_sesion_ajax']['contr_erro'] = 'off';
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                $_SESSION['scriptcase']['blank_valida_sesion_ajax']['session_timeout']['redir_tp'] = $Redir_tp;
            }
-           if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-               $_SESSION['scriptcase']['blank_valida_sesion_ajax']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+           if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+               $_SESSION['scriptcase']['blank_valida_sesion_ajax']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
            }
        }
    }
@@ -4729,6 +4737,20 @@ $_SESSION['scriptcase']['blank_valida_sesion_ajax']['contr_erro'] = 'off';
    {
        $_SESSION["g_password"] = "";
    }
+   if (isset($_POST["gnit_empresa"])) 
+   {
+       $_SESSION["gnit_empresa"] = $_POST["gnit_empresa"];
+       nm_limpa_str_blank_valida_sesion_ajax($_SESSION["gnit_empresa"]);
+   }
+   if (isset($_GET["gnit_empresa"])) 
+   {
+       $_SESSION["gnit_empresa"] = $_GET["gnit_empresa"];
+       nm_limpa_str_blank_valida_sesion_ajax($_SESSION["gnit_empresa"]);
+   }
+   if (!isset($_SESSION["gnit_empresa"])) 
+   {
+       $_SESSION["gnit_empresa"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -5122,6 +5144,11 @@ $_SESSION['scriptcase']['blank_valida_sesion_ajax']['contr_erro'] = 'off';
        {
            $_SESSION['g_password'] = $g_password;
            nm_limpa_str_blank_valida_sesion_ajax($_SESSION["g_password"]);
+       }
+       if (isset($gnit_empresa)) 
+       {
+           $_SESSION['gnit_empresa'] = $gnit_empresa;
+           nm_limpa_str_blank_valida_sesion_ajax($_SESSION["gnit_empresa"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

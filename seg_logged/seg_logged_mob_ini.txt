@@ -1,0 +1,7 @@
+seg_logged_mob.php
+FACILWEBv_2022
+seg_logged_mob
+NAO
+contr
+seg_logged
+LigMd5

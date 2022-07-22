@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____mfactura"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____mfactura"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____mfactura"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____mfactura"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

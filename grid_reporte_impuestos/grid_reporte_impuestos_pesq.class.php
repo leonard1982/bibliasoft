@@ -3209,7 +3209,7 @@ foreach ($Arr_format as $Part_date)
    function gera_array_filtros()
    {
        $this->NM_fil_ant = array();
-       $NM_patch   = "FACILWEBv2/grid_reporte_impuestos";
+       $NM_patch   = "FACILWEBv_2022/grid_reporte_impuestos";
        if (is_dir($this->NM_path_filter . $NM_patch))
        {
            $NM_dir = @opendir($this->NM_path_filter . $NM_patch);
@@ -3309,7 +3309,7 @@ foreach ($Arr_format as $Part_date)
           {
               $NMdir = mkdir($NM_patch, 0755);
           }
-          $NM_patch .= "FACILWEBv2/";
+          $NM_patch .= "FACILWEBv_2022/";
           if (!is_dir($NM_patch))
           {
               $NMdir = mkdir($NM_patch, 0755);

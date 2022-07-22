@@ -253,7 +253,7 @@ INSERT IGNORE `seg_app_type` (`idapptype`, `app_type`, `description`) VALUES
 (2, 'contr', 'Control'),
 (3, 'filter', 'Busqueda'),
 (4, 'form', 'Formulario'),
-(5, 'menu', 'Menú'),
+(5, 'menu', 'Menu'),
 (6, 'calend', 'Calendario'),
 (7, 'dash', 'DashBoard');
 

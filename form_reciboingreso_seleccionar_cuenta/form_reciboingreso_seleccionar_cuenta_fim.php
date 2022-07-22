@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____form_reciboingreso_seleccionar_cuenta"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____form_reciboingreso_seleccionar_cuenta"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____form_reciboingreso_seleccionar_cuenta"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____form_reciboingreso_seleccionar_cuenta"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

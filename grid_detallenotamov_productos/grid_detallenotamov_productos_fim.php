@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____grid_detallenotamov_productos"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____grid_detallenotamov_productos"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____grid_detallenotamov_productos"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____grid_detallenotamov_productos"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

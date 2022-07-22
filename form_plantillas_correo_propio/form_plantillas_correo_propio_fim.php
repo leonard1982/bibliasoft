@@ -58,9 +58,9 @@
             $$nmgp_var = $nmgp_val;
        }
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____form_plantillas_correo_propio"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____form_plantillas_correo_propio"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____form_plantillas_correo_propio"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____form_plantillas_correo_propio"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

@@ -92,6 +92,11 @@ class grid_detallecompra_new_nc_json
           $_SESSION['par_idfaccom'] = $par_idfaccom;
           nm_limpa_str_grid_detallecompra_new_nc($_SESSION["par_idfaccom"]);
       }
+      if (isset($gidtercero)) 
+      {
+          $_SESSION['gidtercero'] = $gidtercero;
+          nm_limpa_str_grid_detallecompra_new_nc($_SESSION["gidtercero"]);
+      }
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->Json_use_label = false;

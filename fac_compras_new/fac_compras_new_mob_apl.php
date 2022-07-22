@@ -97,6 +97,7 @@ class fac_compras_new_mob_apl
    var $detalle;
    var $hdetalle;
    var $prefijo_delpedido;
+   var $detallenc;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -173,6 +174,10 @@ class fac_compras_new_mob_apl
           if (isset($this->NM_ajax_info['param']['detalle']))
           {
               $this->detalle = $this->NM_ajax_info['param']['detalle'];
+          }
+          if (isset($this->NM_ajax_info['param']['detallenc']))
+          {
+              $this->detallenc = $this->NM_ajax_info['param']['detallenc'];
           }
           if (isset($this->NM_ajax_info['param']['editado']))
           {
@@ -701,10 +706,6 @@ class fac_compras_new_mob_apl
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
       $this->Db = $this->Ini->Db; 
-      if ($this->NM_ajax_flag && (!isset($this->NM_ajax_info['param']['buffer_output']) || !$this->NM_ajax_info['param']['buffer_output'] || 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9)))
-      {
-      $this->Db->debug = false;
-      }
       $this->nm_new_label['fechacom'] = 'FECHA COMPRA:';
       $this->nm_new_label['total'] = 'COSTO TOTAL COMPRA:';
       $this->nm_new_label['asentada'] = 'ASENTAR COMPRA:';
@@ -1360,6 +1361,7 @@ class fac_compras_new_mob_apl
       if (isset($this->numero_com)) { $this->nm_limpa_alfa($this->numero_com); }
       if (isset($this->id_comafec)) { $this->nm_limpa_alfa($this->id_comafec); }
       if (isset($this->detalle)) { $this->nm_limpa_alfa($this->detalle); }
+      if (isset($this->detallenc)) { $this->nm_limpa_alfa($this->detallenc); }
       if ($nm_opc_form_php == "formphp")
       { 
           if ($nm_call_php == "Eliminar")
@@ -1649,6 +1651,10 @@ class fac_compras_new_mob_apl
           if ('validate_detalle' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'detalle');
+          }
+          if ('validate_detallenc' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'detallenc');
           }
           fac_compras_new_mob_pack_ajax_response();
           exit;
@@ -2760,6 +2766,9 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
            case 'detalle':
                return "detalle";
                break;
+           case 'detallenc':
+               return "detalleNC";
+               break;
            case 'num_ndevolucion':
                return "Num Ndevolucion";
                break;
@@ -2876,6 +2885,8 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
         $this->ValidateField_editado($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'detalle' == $filtro)) || (is_array($filtro) && in_array('detalle', $filtro)))
         $this->ValidateField_detalle($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'detallenc' == $filtro)) || (is_array($filtro) && in_array('detallenc', $filtro)))
+        $this->ValidateField_detallenc($Campos_Crit, $Campos_Falta, $Campos_Erros);
 //-- converter datas   
           $this->nm_converte_datas();
 //---
@@ -4255,6 +4266,26 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
         }
     } // ValidateField_detalle
 
+    function ValidateField_detallenc(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (trim($this->detallenc) != "")  
+          { 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'detallenc';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_detallenc
+
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -4309,6 +4340,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['creado'] = (strlen(trim($this->creado)) > 19) ? str_replace(".", ":", $this->creado) : trim($this->creado);
     $this->nmgp_dados_form['editado'] = (strlen(trim($this->editado)) > 19) ? str_replace(".", ":", $this->editado) : trim($this->editado);
     $this->nmgp_dados_form['detalle'] = $this->detalle;
+    $this->nmgp_dados_form['detallenc'] = $this->detallenc;
     $this->nmgp_dados_form['num_ndevolucion'] = $this->num_ndevolucion;
     $this->nmgp_dados_form['hdetalle'] = $this->hdetalle;
     $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dados_form'] = $this->nmgp_dados_form;
@@ -5203,6 +5235,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
           $this->ajax_return_values_creado();
           $this->ajax_return_values_editado();
           $this->ajax_return_values_detalle();
+          $this->ajax_return_values_detallenc();
           if ('navigate_form' == $this->NM_ajax_opcao)
           {
               $this->NM_ajax_info['clearUpload']      = 'S';
@@ -5225,6 +5258,20 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               if (isset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['detallecompra_new_mob_script_case_init'] ]['detallecompra_new_mob']['total']))
               {
                   unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['detallecompra_new_mob_script_case_init'] ]['detallecompra_new_mob']['total']);
+              }
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc']['embutida_form_full'] = true;
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc']['embutida_form']       = true;
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc']['embutida_pai']        = "fac_compras_new_mob";
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc']['embutida_form_parms'] = "par_idfaccom*scin" . $this->nmgp_dados_form['idfaccom'] . "*scoutNMSC_inicial*scininicio*scoutNMSC_paginacao*scinFULL*scout";
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc']['reg_start'] = "";
+              unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc']['total']);
+              foreach ($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc'] as $i => $v)
+              {
+                  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc'][$i] = $v;
+              }
+              if (isset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc']['total']))
+              {
+                  unset($_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['grid_detallecompra_new_nc_script_case_init'] ]['grid_detallecompra_new_nc']['total']);
               }
           }
    } // ajax_return_values
@@ -6989,6 +7036,22 @@ else
           }
    }
 
+          //----- detallenc
+   function ajax_return_values_detallenc($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("detallenc", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->detallenc);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['detallenc'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($sTmpValue),
+              );
+          }
+   }
+
     function fetchUniqueUploadName($originalName, $uploadDir, $fieldName)
     {
         $originalName = trim($originalName);
@@ -7147,13 +7210,22 @@ else
 
 if($this->asentada ==1)
 	{
+		$this->Ini->nm_hidden_blocos[6] = "off"; $this->NM_ajax_info['blockDisplay']['6'] = 'off';
 		$this->Ini->nm_hidden_blocos[5] = "off"; $this->NM_ajax_info['blockDisplay']['5'] = 'off';
 		$this->NM_ajax_info['buttonDisplay']['new'] = $this->nmgp_botoes["new"] = "on";;
 	}
 else
 	{
+	if($this->tipo_com =='NC' or $this->tipo_com =='ND')
+		{
+		$this->Ini->nm_hidden_blocos[6] = "on"; $this->NM_ajax_info['blockDisplay']['6'] = 'on';
+		$this->Ini->nm_hidden_blocos[5] = "off"; $this->NM_ajax_info['blockDisplay']['5'] = 'off';
+		}
+	else
+		{
 		$this->Ini->nm_hidden_blocos[5] = "on"; $this->NM_ajax_info['blockDisplay']['5'] = 'on';
-		
+		$this->Ini->nm_hidden_blocos[6] = "off"; $this->NM_ajax_info['blockDisplay']['6'] = 'off';
+		}
 	}
 
 $vsitiene = "NO";
@@ -7954,6 +8026,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
       $NM_val_form['creado'] = $this->creado;
       $NM_val_form['editado'] = $this->editado;
       $NM_val_form['detalle'] = $this->detalle;
+      $NM_val_form['detallenc'] = $this->detallenc;
       $NM_val_form['num_ndevolucion'] = $this->num_ndevolucion;
       $NM_val_form['hdetalle'] = $this->hdetalle;
       if ($this->idfaccom === "" || is_null($this->idfaccom))  
@@ -8135,6 +8208,13 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->detalle = "null"; 
               $NM_val_null[] = "detalle";
           } 
+          $this->detallenc_before_qstr = $this->detallenc;
+          $this->detallenc = substr($this->Db->qstr($this->detallenc), 1, -1); 
+          if ($this->detallenc == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->detallenc = "null"; 
+              $NM_val_null[] = "detallenc";
+          } 
       }
       if ($this->nmgp_opcao == "alterar") 
       {
@@ -8314,6 +8394,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->cod_cuenta = $this->cod_cuenta_before_qstr;
               $this->prefijo_com = $this->prefijo_com_before_qstr;
               $this->detalle = $this->detalle_before_qstr;
+              $this->detallenc = $this->detallenc_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
               }   
@@ -8375,6 +8456,8 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               elseif (isset($this->id_comafec)) { $this->nm_limpa_alfa($this->id_comafec); }
               if     (isset($NM_val_form) && isset($NM_val_form['detalle'])) { $this->detalle = $NM_val_form['detalle']; }
               elseif (isset($this->detalle)) { $this->nm_limpa_alfa($this->detalle); }
+              if     (isset($NM_val_form) && isset($NM_val_form['detallenc'])) { $this->detallenc = $NM_val_form['detallenc']; }
+              elseif (isset($this->detallenc)) { $this->nm_limpa_alfa($this->detallenc); }
 
               $this->nm_formatar_campos();
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
@@ -8382,7 +8465,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('es_remision', 'id_pedidocom', 'tipo_com', 'prefijo_com', 'numero_com', 'id_comafec', 'numfacom', 'idprov', 'formapago', 'fechacom', 'fechavenc', 'total', 'saldo', 'pagada', 'anulada', 'asentada', 'subtotal', 'valoriva', 'retencion', 'reteica', 'reteiva', 'banco', 'idfaccom', 'prefijo_delpedido', 'observaciones', 'control', 'usuario', 'cod_cuenta', 'creado', 'editado', 'detalle'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('es_remision', 'id_pedidocom', 'tipo_com', 'prefijo_com', 'numero_com', 'id_comafec', 'numfacom', 'idprov', 'formapago', 'fechacom', 'fechavenc', 'total', 'saldo', 'pagada', 'anulada', 'asentada', 'subtotal', 'valoriva', 'retencion', 'reteica', 'reteiva', 'banco', 'idfaccom', 'prefijo_delpedido', 'observaciones', 'control', 'usuario', 'cod_cuenta', 'creado', 'editado', 'detalle', 'detallenc'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -8684,6 +8767,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->cod_cuenta = $this->cod_cuenta_before_qstr;
               $this->prefijo_com = $this->prefijo_com_before_qstr;
               $this->detalle = $this->detalle_before_qstr;
+              $this->detallenc = $this->detallenc_before_qstr;
               }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['db_changed'] = true;
@@ -8700,6 +8784,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->cod_cuenta = $this->cod_cuenta_before_qstr;
               $this->prefijo_com = $this->prefijo_com_before_qstr;
               $this->detalle = $this->detalle_before_qstr;
+              $this->detallenc = $this->detallenc_before_qstr;
               $this->sc_insert_on = true; 
               if (empty($this->sc_erro_insert)) {
                   $this->record_insert_ok = true;
@@ -10034,6 +10119,8 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["hdetalle"] = $this->hdetalle;
               $this->prefijo_delpedido = "";  
               $this->nmgp_dados_form["prefijo_delpedido"] = $this->prefijo_delpedido;
+              $this->detallenc = "";  
+              $this->nmgp_dados_form["detallenc"] = $this->detallenc;
               $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
@@ -10060,6 +10147,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
           $this->nm_proc_onload();
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new_mob']['embutida_parms'] = "par_idfaccom*scin" . $this->nmgp_dados_form['idfaccom'] . "*scoutSC_glo_par_gidtercero*scingidtercero*scoutcost_ant*scin*scoutNM_btn_insert*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc']['embutida_parms'] = "par_idfaccom*scin" . $this->nmgp_dados_form['idfaccom'] . "*scoutNMSC_inicial*scininicio*scoutNMSC_paginacao*scinFULL*scout";
   }
 // 
 //-- 
@@ -10970,6 +11058,82 @@ if ($this->asentada ==1)
          }
          $rf->Close();
       ;
+						$proid=$idproducto;
+						$cant=-$cantidad;
+						$cost=$vunit;
+						
+						 
+      $nm_select = "SELECT SUM(cantidad) FROM inventario WHERE idpro='".$proid."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds = false;
+          $this->ds_erro = $this->Db->ErrorMsg();
+      } 
+;
+						if(isset($this->ds[0][0]))
+							{
+							$cant=$this->ds[0][0];
+							$sql_p="UPDATE productos SET stockmen = '".$cant."', costomen = '".$cost."' WHERE idprod='".$proid."'";
+							
+     $nm_select = $sql_p; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						else
+							{
+							$sql="UPDATE productos SET stockmen = '".$cant."', costomen = '".$cost."' WHERE idprod='".$proid."'";
+							
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
 						}
 					else
 						{
@@ -10995,6 +11159,7 @@ if ($this->asentada ==1)
 		$this->sc_ajax_javascript('nm_field_disabled', array("anulada=disabled;observaciones=disabled;banco=disabled", ""));
 ;
 		$this->Ini->nm_hidden_blocos[5] = "off"; $this->NM_ajax_info['blockDisplay']['5'] = 'off';
+		$this->Ini->nm_hidden_blocos[6] = "off"; $this->NM_ajax_info['blockDisplay']['6'] = 'off';
 		$idt=$this->idprov ; 
 		
      $nm_select ="update facturacom set pagada='SI', asentada='1', saldo='0' where idfaccom='".$this->idfaccom ."'"; 
@@ -11020,8 +11185,78 @@ if ($this->asentada ==1)
 	}
 else
 	{
-	$sql_del =  "DELETE FROM inventario WHERE idfaccom = '".$this->idfaccom ."'";
-	
+	if($this->tipo_com =='NC')
+		{
+		$idproducto=0;
+		$bod=0;
+		$cantidad=0;
+		$vunit=0;
+		$vparcial=0;
+		$iva=0;
+		$desc=0;
+		$tiva=0;
+		$tdes=0;
+		$pdec=0;
+		$ti_doc='NC';
+		$to_tra='';
+		$id_nta=$this->idfaccom ;
+		$ideta=0;
+
+		$sql_det = "SELECT  idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, porc_desc, tipo_trans, iddet, (select idgrup from productos where idprod = idpro) as tipop FROM detallecompra WHERE idfaccom = '".$id_nta."'";
+		 
+      $nm_select = $sql_det; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds_det = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds_det[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds_det = false;
+          $this->ds_det_erro = $this->Db->ErrorMsg();
+      } 
+;
+		
+		if(isset($this->ds_det[0][0]))
+			{
+			$j = 0;
+			foreach($this->ds_det  as $det)
+				{
+				$j = $j+1;
+
+				$idproducto.= $det[0];
+				$bod.=		  $det[1];
+				$cantidad.=   $det[2];
+				$vunit.=	  $det[3];
+				$vparcial.=	  $det[4];
+				$iva.=		  $det[5];
+				$desc.=		  $det[6];
+				$tiva.=		  $det[7];
+				$tdes.=		  $det[8];
+				$pdec.=		  $det[9];
+				$to_tra.=	  $det[10];
+				$ideta.= 	  $det[11];
+				
+				if($det[12]!=1)
+					{
+
+					if($to_tra=='DEV')
+						{
+						$sql_del =  "DELETE FROM inventario WHERE idfaccom = '".$this->idfaccom ."' and iddetalle = '".$ideta."'";
+						
      $nm_select = $sql_del; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -11038,13 +11273,45 @@ else
          }
          $rf->Close();
       ;
-	
-	$this->sc_ajax_javascript('nm_field_disabled', array("anulada=;observaciones=;banco=", ""));
+						$proid=$idproducto;
+						$cant=-$cantidad;
+						$cost=$vunit;
+						
+						 
+      $nm_select = "SELECT SUM(cantidad) FROM inventario WHERE idpro='".$proid."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds = false;
+          $this->ds_erro = $this->Db->ErrorMsg();
+      } 
 ;
-	$this->Ini->nm_hidden_blocos[5] = "on"; $this->NM_ajax_info['blockDisplay']['5'] = 'on';
-	$idt=$this->idprov ;
-	
-     $nm_select ="update facturacom set asentada=0,pagada='NO' where idfaccom=$this->idfaccom "; 
+						if(isset($this->ds[0][0]))
+							{
+							$cant=$this->ds[0][0];
+							$sql_p="UPDATE productos SET stockmen = '".$cant."', costomen = '".$cost."' WHERE idprod='".$proid."'";
+							
+     $nm_select = $sql_p; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
          $rf = $this->Db->Execute($nm_select);
@@ -11060,6 +11327,83 @@ else
          }
          $rf->Close();
       ;
+							}
+						else
+							{
+							$sql="UPDATE productos SET stockmen = 0, costomen = '".$cost."' WHERE idprod='".$proid."'";
+							
+     $nm_select = $sql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+							}
+						}
+					else
+						{
+
+						}
+					}
+
+				$idproducto =0;
+				$bod		=0;
+				$cantidad	=0;
+				$vunit		=0;
+				$vparcial	=0;
+				$iva		=0;
+				$desc		=0;
+				$tiva		=0;
+				$tdes		=0;
+				$pdec		=0;
+				$to_tra		='';
+				$to_tra='';
+				$ideta=0;
+				}
+			}
+		$this->sc_ajax_javascript('nm_field_disabled', array("anulada=disabled;observaciones=disabled;banco=disabled", ""));
+;
+		$this->Ini->nm_hidden_blocos[5] = "off"; $this->NM_ajax_info['blockDisplay']['5'] = 'off';
+		$this->Ini->nm_hidden_blocos[6] = "on"; $this->NM_ajax_info['blockDisplay']['6'] = 'on';
+		$idt=$this->idprov ; 
+		
+     $nm_select ="update facturacom set pagada='NO', asentada=0, saldo='0' where idfaccom='".$this->idfaccom ."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             $this->NM_rollback_db(); 
+             if ($this->NM_ajax_flag)
+             {
+                fac_compras_new_mob_pack_ajax_response();
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+		$this->pagada ='NO';
+		$this->asentada =0;
+		$this->saldo =0;
+		}
+	else
+		{
+		$this->Ini->nm_hidden_blocos[5] = "on"; $this->NM_ajax_info['blockDisplay']['5'] = 'on';
+		$idt=$this->idprov ;
+		}
+	$this->sc_ajax_javascript('nm_field_disabled', array("anulada=;observaciones=;banco=", ""));
+;
 	}
 
 $modificado_subtotal = $this->subtotal;
@@ -11884,6 +12228,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
         $this->initFormPages();
         include_once("fac_compras_new_mob_form0.php");
         include_once("fac_compras_new_mob_form1.php");
+        include_once("fac_compras_new_mob_form2.php");
         $this->hideFormPages();
  }
 
@@ -11891,6 +12236,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                 $this->Ini->nm_page_names = array(
                         'master' => '0',
                         'detalle' => '1',
+                        'detallenc' => '2',
                 );
 
                 $this->Ini->nm_page_blocks = array(
@@ -11904,6 +12250,9 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                         'detalle' => array(
                                 5 => 'on',
                         ),
+                        'detallenc' => array(
+                                6 => 'on',
+                        ),
                 );
 
                 $this->Ini->nm_block_page = array(
@@ -11913,6 +12262,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                         3 => 'master',
                         4 => 'master',
                         5 => 'detalle',
+                        6 => 'detallenc',
                 );
 
                 if (!empty($this->Ini->nm_hidden_blocos)) {
@@ -14044,6 +14394,7 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
                         'creado' => 'creado',
                         'editado' => 'editado',
                         'detalle' => 'detalle',
+                        'detallenc' => 'detallenc',
                        );
         if (isset($aFocus[$sFieldName]))
         {

@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____chart_facturaven"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____chart_facturaven"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____chart_facturaven"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____chart_facturaven"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

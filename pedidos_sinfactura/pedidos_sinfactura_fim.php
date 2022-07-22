@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____pedidos_sinfactura"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____pedidos_sinfactura"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____pedidos_sinfactura"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____pedidos_sinfactura"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

@@ -132,7 +132,7 @@ class menu_form_php
       }
       elseif (!isset($_SESSION['scriptcase']['menu']['actual_lang']) || $_SESSION['scriptcase']['menu']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['menu']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       $this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_BlueBerry/Sc9_BlueBerry";
        if (isset($_SESSION['scriptcase']['user_logout']))
@@ -172,7 +172,7 @@ class menu_form_php
       {
           include_once("../_lib/lib/php/nm_ctrl_app_name.php");
       }
-      SC_dir_app_ini('FACILWEBv2');
+      SC_dir_app_ini('FACILWEBv_2022');
       if (!defined("SC_ERROR_HANDLER"))
       {
           define("SC_ERROR_HANDLER", 1);
@@ -317,7 +317,7 @@ $nm_falta_var    = "";
 $nm_falta_var_db = ""; 
 if (isset($_SESSION['scriptcase']['menu']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['menu']['glo_nm_conexao']))
 {
-    db_conect_devel('conn_facilweb', $str_root . $_SESSION['scriptcase']['menu']['glo_nm_path_prod'], 'FACILWEBv2', 2); 
+    db_conect_devel('conn_facilweb', $str_root . $_SESSION['scriptcase']['menu']['glo_nm_path_prod'], 'FACILWEBv_2022', 2); 
     $this->nm_con_conn_facilweb['servidor']    = $_SESSION['scriptcase']['glo_servidor'];
     $this->nm_con_conn_facilweb['usuario']     = $_SESSION['scriptcase']['glo_usuario'];
     $this->nm_con_conn_facilweb['banco']       = $_SESSION['scriptcase']['glo_banco'];
@@ -327,7 +327,7 @@ if (isset($_SESSION['scriptcase']['menu']['glo_nm_conexao']) && !empty($_SESSION
     $this->nm_con_conn_facilweb['SC_sep_date'] = $_SESSION['scriptcase']['glo_date_separator'];
     $this->nm_con_conn_facilweb['protect']     = "S";
     $this->nm_con_conn_facilweb['database_encoding']  = isset($_SESSION['scriptcase']['glo_database_encoding'])?$_SESSION['scriptcase']['glo_database_encoding']:'';
-    db_conect_devel($_SESSION['scriptcase']['menu']['glo_nm_conexao'], $str_root . $_SESSION['scriptcase']['menu']['glo_nm_path_prod'], 'FACILWEBv2', 2); 
+    db_conect_devel($_SESSION['scriptcase']['menu']['glo_nm_conexao'], $str_root . $_SESSION['scriptcase']['menu']['glo_nm_path_prod'], 'FACILWEBv_2022', 2); 
 }
 if (isset($_SESSION['scriptcase']['menu']['glo_nm_perfil']) && !empty($_SESSION['scriptcase']['menu']['glo_nm_perfil']))
 {
@@ -535,11 +535,11 @@ $this->nm_bases_vfp       = array("vfp");
 $this->nm_bases_odbc      = array("odbc");
 $this->nm_bases_progress  = array("pdo_progress_odbc", "progress");
 $_SESSION['scriptcase']['sc_num_page'] = 1;
-$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKZ9F7HArYV5X7DMzGDkFCH5FqDoNUD9XOZSBqDSvmD5BODEvsHEBUDWr/HMB/HQXOZSBiHArYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQBiHgveHArsDWFGDoBqHQNmDQBqHAvOV5XGDMvOV9FeH5XKVoF7HQNmZkBiHArYHQFGHgvsVkJqH5BmZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMrqD9JmZ1BiHAvsZMFaDEBeDkXKDWr/ZuB/DcXGDQJsHAvOVWBqHgrwVIB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7Z1BYD5JwHuNOVIFCDWFYVoJwDcJUZSB/Z1BeD5XGDEBOHEJqV5FaDoBOD9JKDQJwHANKD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoJeD9FYDQB/HABYHQJsHuBYVcBODWrmVEraHQBsZ1B/DSvmD5BqHgBYHEJGDWFGDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveDkXKDWBmZuBOHQBiDQBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSrYHuFUHgBYHErCH5F/VoB/HQJeDuBqHINaVWJwHuzGDkBsDuFqVoraD9BsZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+$_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmZSFUHAveVWXGDMvmV9BUDWFYHIXGHQFYZkFGD1rwD5NUHgBYHENiHEXCHMXGHQJeDQFaZ1N7HuFUDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3H5FGDoBqHQBiDuBqHArYHQJeDMvOV9BUDWXKVoF7HQBsZkBiHAzGD5BOHgNKHArCDWr/HMJeDcXGDQBqHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiD1rwHuBqDMveVkJqDWB3DoXGD9XsDQFUHArYHQJsHuBOVcB/DWJeVEraD9JmZ1FGHIrwHQrqHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoXGDcJUZ1B/Z1NOZMFaDMNKZSXeDWXCDoB/D9NwH9X7Z1BYV5raHuzGVcFKDur/VorqHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMNOVcBUH5FqHMFUD9JmZ1BODSrYV5BqHgveZSXeDuFYHMBqHQFYZ9F7HArYVWBOHgvOZSNiDWFaHMX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBqHQJeZ9XGHAN7HuraDMBOV9FeDWFaHMF7HQFYZkBiDSrYHuJsDMveHArCDWr/HIFUHQXGDQFUHINaVWXGDMvmDkBsHEF/HMJeHQFYZ1BODSrYHuFGHgBOHEJqHEFqHMB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqVINUHINKZMFaHgBeZSJ3DWr/HIrqHQXGDuFaDSN7HQNUHgrwVcB/HEX/VErqHQFYZkFGHAN7HuFaHgvsVkJqH5FYHIJeHQXGDuBqHIrKHuBODMBODkBsV5F/HMFGDcBwH9B/HIrwV5JeDMBYDkBsH5FYHMBOHQJeH9BiDSrwHQJeDMvmVcB/HEF/HIJsHQFYZkFGDSNOHQBiHgvsHArCDWXCHIrqHQXGDQFUHAvmVWBqDMvmVcB/DuX7HMJeHQFYZkFGHIBeHuBOHgNKVkJqH5F/HINUDcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeD5BqDMBYHEJGH5F/VoJeDcXOZ9rqZ1rwVWJeHgvsVcFCDWrmVoraD9BiH9FaHIBeZMBOHgvCZSXeDuJeZuFaD9XsDQX7HIBOV5JwHuzGDkBOH5FqVoX7D9JmZ1FaHArKZMB/DMBYZSXeDWX7DoXGDcBwDuBOZ1NaV5FGHuNOVcFKHEFYVoBqDcBwH9FaD1rwD5rqDMNKZSXeDuJeDoB/D9NwZSFGD1veV5raHuvmVcFCDWB3DoXGHQNmZkBiHIBOD5XGHgvCHArsH5X/DoBqHQXGDuBqD1NKVWBODMrwV9BUDWXKVoF7HQNwH9BqHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VEF7HQNmZkBiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQB/HArYVWBODMBOVcBOHEFYVorqD9XGZ1X7DSrYHuJwHgBYHErsH5FYHMXGHQBiZ9F7HAveV5JeDMvOV9FeDur/HMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
  $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
 if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['menu']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['menu']['glo_nm_conexao']))
 { 
-   $this->Db = db_conect_devel($_SESSION['scriptcase']['menu']['glo_nm_conexao'], $str_root . $_SESSION['scriptcase']['menu']['glo_nm_path_prod'], 'FACILWEBv2'); 
+   $this->Db = db_conect_devel($_SESSION['scriptcase']['menu']['glo_nm_conexao'], $str_root . $_SESSION['scriptcase']['menu']['glo_nm_path_prod'], 'FACILWEBv_2022'); 
 } 
 else 
 { 
@@ -598,7 +598,7 @@ if (in_array(strtolower($this->nm_con_conn_facilweb['tpbanco']), $this->nm_bases
    $this->nm_con_conn_facilweb['decimal']  = ".";
 } 
 //
-      $this->tab_grupo[0] = "FACILWEBv2/";
+      $this->tab_grupo[0] = "FACILWEBv_2022/";
       if ($_SESSION['scriptcase']['sc_usa_grupo'] != "S")
       {
           $this->tab_grupo[0] = "";
@@ -998,6 +998,10 @@ if ($this->nm_db_conn_facilweb)
       if ($_SESSION['scriptcase']['sc_item_menu'] == "item_261")
       {
           $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("blank_notificar_cobro_suscripcion_sms") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_274")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("control_radian") . "/?nm_run_menu=1&nm_apl_menu=menu&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "";
       }
       if ($_SESSION['scriptcase']['sc_item_menu'] == "item_177")
       {
@@ -1749,7 +1753,7 @@ if (!function_exists("SC_dir_app_ini"))
 {
     include_once("../_lib/lib/php/nm_ctrl_app_name.php");
 }
-SC_dir_app_ini('FACILWEBv2');
+SC_dir_app_ini('FACILWEBv_2022');
 $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
 $_SESSION['scriptcase']['sem_session'] = false;
 $NM_dir_atual = getcwd();
@@ -1768,11 +1772,11 @@ $path_aplicacao  = substr($str_path_web, 0, strrpos($str_path_web, '/'));
 $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
 $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
 if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-    if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-        $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+    if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+        $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
     }
-    elseif (is_file($root . $_SESSION['scriptcase']['menu']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-        $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['menu']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+    elseif (is_file($root . $_SESSION['scriptcase']['menu']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+        $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['menu']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
     }
     if (isset($apl_def)) {
         if ($apl_def[0] != "menu") {
@@ -1786,8 +1790,8 @@ if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
             $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
             $_SESSION['scriptcase']['menu']['session_timeout']['redir_tp'] = $Redir_tp;
         }
-        if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-            $_SESSION['scriptcase']['menu']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+        if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+            $_SESSION['scriptcase']['menu']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
         }
     }
 }

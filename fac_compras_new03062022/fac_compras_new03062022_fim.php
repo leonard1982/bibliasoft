@@ -58,9 +58,9 @@
             $$nmgp_var = $nmgp_val;
        }
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____fac_compras_new03062022"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____fac_compras_new03062022"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____fac_compras_new03062022"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____fac_compras_new03062022"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

@@ -2753,7 +2753,7 @@ function nm_open_popup(parms)
    function gera_array_filtros()
    {
        $this->NM_fil_ant = array();
-       $NM_patch   = "FACILWEBv2/grid_facturaven_automatica";
+       $NM_patch   = "FACILWEBv_2022/grid_facturaven_automatica";
        if (is_dir($this->NM_path_filter . $NM_patch))
        {
            $NM_dir = @opendir($this->NM_path_filter . $NM_patch);
@@ -2842,7 +2842,7 @@ function nm_open_popup(parms)
           {
               $NMdir = mkdir($NM_patch, 0755);
           }
-          $NM_patch .= "FACILWEBv2/";
+          $NM_patch .= "FACILWEBv_2022/";
           if (!is_dir($NM_patch))
           {
               $NMdir = mkdir($NM_patch, 0755);

@@ -4073,6 +4073,43 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_fac_compras_new_mob_validate_detalle_cb
 
+  // ---------- Validate detallenc
+  function do_ajax_fac_compras_new_mob_validate_detallenc()
+  {
+    var nomeCampo_detallenc = "detallenc";
+    var var_detallenc = scAjaxGetFieldText(nomeCampo_detallenc);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_fac_compras_new_mob_validate_detallenc(var_detallenc, var_script_case_init, do_ajax_fac_compras_new_mob_validate_detallenc_cb);
+  } // do_ajax_fac_compras_new_mob_validate_detallenc
+
+  function do_ajax_fac_compras_new_mob_validate_detallenc_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "detallenc";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_fac_compras_new_mob_validate_detallenc_cb
+
   // ---------- Refresh tipo_com
   function do_ajax_fac_compras_new_mob_refresh_tipo_com()
   {
@@ -4841,6 +4878,7 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("creado");
       scAjaxHideErrorDisplay("editado");
       scAjaxHideErrorDisplay("detalle");
+      scAjaxHideErrorDisplay("detallenc");
       scLigEditLookupCall();
 <?php
 if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard']) {
@@ -4886,6 +4924,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['d
 
   var scStatusDetail = {};
   scStatusDetail["detallecompra_new_mob"] = "off";
+  scStatusDetail["grid_detallecompra_new_nc"] = "off";
 
   function do_ajax_fac_compras_new_mob_navigate_form()
   {
@@ -4935,6 +4974,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['d
     scAjaxHideErrorDisplay("creado");
     scAjaxHideErrorDisplay("editado");
     scAjaxHideErrorDisplay("detalle");
+    scAjaxHideErrorDisplay("detallenc");
     var var_idfaccom = document.F2.idfaccom.value;
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
@@ -4943,6 +4983,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['d
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn();
     scStatusDetail["detallecompra_new_mob"] = "on";
+    scStatusDetail["grid_detallecompra_new_nc"] = "on";
     x_ajax_fac_compras_new_mob_navigate_form(var_idfaccom, var_nm_form_submit, var_nmgp_opcao, var_nmgp_ordem, var_nmgp_arg_dyn_search, var_script_case_init, do_ajax_fac_compras_new_mob_navigate_form_cb);
   } // do_ajax_fac_compras_new_mob_navigate_form
 
@@ -4965,6 +5006,16 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
         document.F5.nmgp_opcao.value = "inicio";
         document.F5.nmgp_parms.value = "";
         document.F5.submit();
+    }
+    if ("ERROR" == oResp.result)
+    {
+        scAjaxShowErrorDisplay("table", oResp.errList[0].msgText);
+        scAjaxProcOff();
+        return;
+    }
+    else if (oResp["navSummary"].reg_tot == 0)
+    {
+       scAjax_displayEmptyForm();
     }
     scAjaxClearErrors()
     scResetFormChanges()
@@ -4989,6 +5040,14 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
         document.getElementById('nmsc_iframe_liga_detallecompra_new_mob').style.height = "600";
         document.getElementById('nmsc_iframe_liga_detallecompra_new_mob').style.display = "none";
     }
+    if (scMasterDetailIframe && scMasterDetailIframe["nmsc_iframe_liga_grid_detallecompra_new_nc"] && "nmsc_iframe_liga_grid_detallecompra_new_nc" != scMasterDetailIframe["nmsc_iframe_liga_grid_detallecompra_new_nc"]) {
+        scMoveMasterDetail(scMasterDetailIframe["nmsc_iframe_liga_grid_detallecompra_new_nc"]);
+    }
+    else {
+        if (oResp["navSummary"].reg_tot != 0) {
+            document.getElementById('nmsc_iframe_liga_grid_detallecompra_new_nc').contentWindow.nm_move('apl_detalhe', true, '600');
+        }
+    }
     scAjaxSetBtnVars();
     $('.sc-js-ui-statusimg').css('display', 'none');
     scAjaxAlert(do_ajax_fac_compras_new_mob_navigate_form_cb_after_alert);
@@ -5011,6 +5070,7 @@ if ($this->Embutida_form)
     {
       sc_form_onload();
     }
+    scAjaxProcOff();
   } // do_ajax_fac_compras_new_mob_navigate_form_cb_after_alert
   function sc_hide_fac_compras_new_mob_form()
   {
@@ -5118,7 +5178,7 @@ if ($this->Embutida_form)
 
   function scAjaxDetailProc()
   {
-    if ("off" == scStatusDetail["detallecompra_new_mob"])
+    if ("off" == scStatusDetail["detallecompra_new_mob"] && "off" == scStatusDetail["grid_detallecompra_new_nc"])
     {
       return true;
     }
@@ -5163,6 +5223,7 @@ if ($this->Embutida_form)
   ajax_field_list[28] = "creado";
   ajax_field_list[29] = "editado";
   ajax_field_list[30] = "detalle";
+  ajax_field_list[31] = "detallenc";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -5171,6 +5232,7 @@ if ($this->Embutida_form)
   ajax_block_list[3] = "3";
   ajax_block_list[4] = "4";
   ajax_block_list[5] = "5";
+  ajax_block_list[6] = "6";
 
   var ajax_error_list = {
     "es_remision": {"label": "ES REMISIÓN?:", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -5203,7 +5265,8 @@ if ($this->Embutida_form)
     "cod_cuenta": {"label": "Cod Cuenta", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "creado": {"label": "Creado", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "editado": {"label": "Editado", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "detalle": {"label": "detalle", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
+    "detalle": {"label": "detalle", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "detallenc": {"label": "detalleNC", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5}
   };
   var ajax_error_timeout = 5;
 
@@ -5213,7 +5276,8 @@ if ($this->Embutida_form)
     "2": "hidden_bloco_2",
     "3": "hidden_bloco_3",
     "4": "hidden_bloco_4",
-    "5": "hidden_bloco_5"
+    "5": "hidden_bloco_5",
+    "6": "hidden_bloco_6"
   };
 
   var ajax_block_tab = {
@@ -5222,7 +5286,8 @@ if ($this->Embutida_form)
     "hidden_bloco_2": "",
     "hidden_bloco_3": "",
     "hidden_bloco_4": "",
-    "hidden_bloco_5": ""
+    "hidden_bloco_5": "",
+    "hidden_bloco_6": ""
   };
 
   var ajax_field_mult = {
@@ -5256,7 +5321,8 @@ if ($this->Embutida_form)
     "cod_cuenta": new Array(),
     "creado": new Array(),
     "editado": new Array(),
-    "detalle": new Array()
+    "detalle": new Array(),
+    "detallenc": new Array()
   };
   ajax_field_mult["es_remision"][1] = "es_remision";
   ajax_field_mult["id_pedidocom"][1] = "id_pedidocom";
@@ -5289,6 +5355,7 @@ if ($this->Embutida_form)
   ajax_field_mult["creado"][1] = "creado";
   ajax_field_mult["editado"][1] = "editado";
   ajax_field_mult["detalle"][1] = "detalle";
+  ajax_field_mult["detallenc"][1] = "detallenc";
 
   var ajax_field_id = {
     "es_remision": new Array("hidden_field_label_es_remision", "hidden_field_data_es_remision"),
@@ -5315,7 +5382,8 @@ if ($this->Embutida_form)
     "banco": new Array("hidden_field_label_banco", "hidden_field_data_banco"),
     "prefijo_delpedido": new Array("hidden_field_label_prefijo_delpedido", "hidden_field_data_prefijo_delpedido"),
     "observaciones": new Array("hidden_field_label_observaciones", "hidden_field_data_observaciones"),
-    "detalle": new Array("hidden_field_label_detalle", "hidden_field_data_detalle")
+    "detalle": new Array("hidden_field_label_detalle", "hidden_field_data_detalle"),
+    "detallenc": new Array("hidden_field_label_detallenc", "hidden_field_data_detallenc")
   };
 
   var ajax_read_only = {
@@ -5349,7 +5417,8 @@ if ($this->Embutida_form)
     "cod_cuenta": "off",
     "creado": "off",
     "editado": "off",
-    "detalle": "off"
+    "detalle": "off",
+    "detallenc": "off"
   };
   var bRefreshTable = false;
   function scRefreshTable()
@@ -5872,6 +5941,23 @@ if ($this->Embutida_form)
       return;
     }
     if ("detalle" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("detallenc" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);

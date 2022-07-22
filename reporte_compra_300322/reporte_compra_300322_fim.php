@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____reporte_compra_300322"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____reporte_compra_300322"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____reporte_compra_300322"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____reporte_compra_300322"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

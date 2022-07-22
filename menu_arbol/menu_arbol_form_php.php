@@ -130,7 +130,7 @@ class menu_arbol_form_php
       }
       elseif (!isset($_SESSION['scriptcase']['menu_arbol']['actual_lang']) || $_SESSION['scriptcase']['menu_arbol']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['menu_arbol']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       $this->str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
        if (isset($_SESSION['scriptcase']['user_logout']))
@@ -170,7 +170,7 @@ class menu_arbol_form_php
       {
           include_once("../_lib/lib/php/nm_ctrl_app_name.php");
       }
-      SC_dir_app_ini('FACILWEBv2');
+      SC_dir_app_ini('FACILWEBv_2022');
       if (!defined("SC_ERROR_HANDLER"))
       {
           define("SC_ERROR_HANDLER", 1);
@@ -288,7 +288,7 @@ class menu_arbol_form_php
           echo $SS_cod_html;
           exit;
       }
-      $this->tab_grupo[0] = "FACILWEBv2/";
+      $this->tab_grupo[0] = "FACILWEBv_2022/";
       if ($_SESSION['scriptcase']['sc_usa_grupo'] != "S")
       {
           $this->tab_grupo[0] = "";
@@ -436,7 +436,7 @@ if (!function_exists("SC_dir_app_ini"))
 {
     include_once("../_lib/lib/php/nm_ctrl_app_name.php");
 }
-SC_dir_app_ini('FACILWEBv2');
+SC_dir_app_ini('FACILWEBv_2022');
 $Sem_Session = (!isset($_SESSION['sc_session'])) ? true : false;
 $_SESSION['scriptcase']['sem_session'] = false;
 $NM_dir_atual = getcwd();
@@ -455,11 +455,11 @@ $path_aplicacao  = substr($str_path_web, 0, strrpos($str_path_web, '/'));
 $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
 $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
 if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-    if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-        $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+    if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+        $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
     }
-    elseif (is_file($root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-        $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+    elseif (is_file($root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+        $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['menu_arbol']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
     }
     if (isset($apl_def)) {
         if ($apl_def[0] != "menu_arbol") {
@@ -473,8 +473,8 @@ if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
             $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
             $_SESSION['scriptcase']['menu_arbol']['session_timeout']['redir_tp'] = $Redir_tp;
         }
-        if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-            $_SESSION['scriptcase']['menu_arbol']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+        if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+            $_SESSION['scriptcase']['menu_arbol']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
         }
     }
 }

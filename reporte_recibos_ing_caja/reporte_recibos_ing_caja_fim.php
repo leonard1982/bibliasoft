@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____reporte_recibos_ing_caja"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____reporte_recibos_ing_caja"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____reporte_recibos_ing_caja"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____reporte_recibos_ing_caja"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

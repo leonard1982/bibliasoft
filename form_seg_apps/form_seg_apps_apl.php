@@ -1,0 +1,7433 @@
+<?php
+//
+class form_seg_apps_apl
+{
+   var $has_where_params = false;
+   var $NM_is_redirected = false;
+   var $NM_non_ajax_info = false;
+   var $formatado = false;
+   var $use_100perc_fields = false;
+   var $classes_100perc_fields = array();
+   var $NM_ajax_flag    = false;
+   var $NM_ajax_opcao   = '';
+   var $NM_ajax_retorno = '';
+   var $NM_ajax_info    = array('result'            => '',
+                                'param'             => array(),
+                                'autoComp'          => '',
+                                'rsSize'            => '',
+                                'msgDisplay'        => '',
+                                'errList'           => array(),
+                                'fldList'           => array(),
+                                'varList'           => array(),
+                                'focus'             => '',
+                                'navStatus'         => array(),
+                                'navSummary'        => array(),
+                                'navPage'           => array(),
+                                'redir'             => array(),
+                                'blockDisplay'      => array(),
+                                'fieldDisplay'      => array(),
+                                'fieldLabel'        => array(),
+                                'readOnly'          => array(),
+                                'btnVars'           => array(),
+                                'ajaxAlert'         => array(),
+                                'ajaxMessage'       => array(),
+                                'ajaxJavascript'    => array(),
+                                'buttonDisplay'     => array(),
+                                'buttonDisplayVert' => array(),
+                                'calendarReload'    => false,
+                                'quickSearchRes'    => false,
+                                'displayMsg'        => false,
+                                'displayMsgTxt'     => '',
+                                'dyn_search'        => array(),
+                                'empty_filter'      => '',
+                                'event_field'       => '',
+                                'fieldsWithErrors'  => array(),
+                               );
+   var $NM_ajax_force_values = false;
+   var $Nav_permite_ava     = true;
+   var $Nav_permite_ret     = true;
+   var $Apl_com_erro        = false;
+   var $app_is_initializing = false;
+   var $Ini;
+   var $Erro;
+   var $Db;
+   var $idapp;
+   var $app_name;
+   var $app_name2;
+   var $idapptype;
+   var $idapptype_1;
+   var $description;
+   var $app_order;
+   var $app_parentid;
+   var $app_parentid_1;
+   var $app_link;
+   var $app_icon;
+   var $app_badge;
+   var $create_in;
+   var $create_in_hora;
+   var $level;
+   var $color;
+   var $nm_data;
+   var $nmgp_opcao;
+   var $nmgp_opc_ant;
+   var $sc_evento;
+   var $sc_insert_on;
+   var $nmgp_clone;
+   var $nmgp_return_img = array();
+   var $nmgp_dados_form = array();
+   var $nmgp_dados_select = array();
+   var $nm_location;
+   var $nm_flag_iframe;
+   var $nm_flag_saida_novo;
+   var $nmgp_botoes = array();
+   var $nmgp_url_saida;
+   var $nmgp_form_show;
+   var $nmgp_form_empty;
+   var $nmgp_cmp_readonly = array();
+   var $nmgp_cmp_hidden = array();
+   var $form_paginacao = 'parcial';
+   var $lig_edit_lookup      = false;
+   var $lig_edit_lookup_call = false;
+   var $lig_edit_lookup_cb   = '';
+   var $lig_edit_lookup_row  = '';
+   var $is_calendar_app = false;
+   var $Embutida_call  = false;
+   var $Embutida_ronly = false;
+   var $Embutida_proc  = false;
+   var $Embutida_form  = false;
+   var $Grid_editavel  = false;
+   var $url_webhelp = '';
+   var $nm_todas_criticas;
+   var $Campos_Mens_erro;
+   var $nm_new_label = array();
+   var $record_insert_ok = false;
+   var $record_delete_ok = false;
+//
+//----- 
+   function ini_controle()
+   {
+        global $nm_url_saida, $teste_validade, $script_case_init, 
+               $glo_senha_protect, $nm_apl_dependente, $nm_form_submit, $sc_check_excl, $nm_opc_form_php, $nm_call_php, $nm_opc_lookup;
+
+
+      if ($this->NM_ajax_flag)
+      {
+          if (isset($this->NM_ajax_info['param']['app_badge']))
+          {
+              $this->app_badge = $this->NM_ajax_info['param']['app_badge'];
+          }
+          if (isset($this->NM_ajax_info['param']['app_icon']))
+          {
+              $this->app_icon = $this->NM_ajax_info['param']['app_icon'];
+          }
+          if (isset($this->NM_ajax_info['param']['app_link']))
+          {
+              $this->app_link = $this->NM_ajax_info['param']['app_link'];
+          }
+          if (isset($this->NM_ajax_info['param']['app_name']))
+          {
+              $this->app_name = $this->NM_ajax_info['param']['app_name'];
+          }
+          if (isset($this->NM_ajax_info['param']['app_name2']))
+          {
+              $this->app_name2 = $this->NM_ajax_info['param']['app_name2'];
+          }
+          if (isset($this->NM_ajax_info['param']['app_order']))
+          {
+              $this->app_order = $this->NM_ajax_info['param']['app_order'];
+          }
+          if (isset($this->NM_ajax_info['param']['app_parentid']))
+          {
+              $this->app_parentid = $this->NM_ajax_info['param']['app_parentid'];
+          }
+          if (isset($this->NM_ajax_info['param']['color']))
+          {
+              $this->color = $this->NM_ajax_info['param']['color'];
+          }
+          if (isset($this->NM_ajax_info['param']['csrf_token']))
+          {
+              $this->csrf_token = $this->NM_ajax_info['param']['csrf_token'];
+          }
+          if (isset($this->NM_ajax_info['param']['description']))
+          {
+              $this->description = $this->NM_ajax_info['param']['description'];
+          }
+          if (isset($this->NM_ajax_info['param']['idapp']))
+          {
+              $this->idapp = $this->NM_ajax_info['param']['idapp'];
+          }
+          if (isset($this->NM_ajax_info['param']['idapptype']))
+          {
+              $this->idapptype = $this->NM_ajax_info['param']['idapptype'];
+          }
+          if (isset($this->NM_ajax_info['param']['nm_form_submit']))
+          {
+              $this->nm_form_submit = $this->NM_ajax_info['param']['nm_form_submit'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_ancora']))
+          {
+              $this->nmgp_ancora = $this->NM_ajax_info['param']['nmgp_ancora'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_arg_dyn_search']))
+          {
+              $this->nmgp_arg_dyn_search = $this->NM_ajax_info['param']['nmgp_arg_dyn_search'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_arg_fast_search']))
+          {
+              $this->nmgp_arg_fast_search = $this->NM_ajax_info['param']['nmgp_arg_fast_search'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_cond_fast_search']))
+          {
+              $this->nmgp_cond_fast_search = $this->NM_ajax_info['param']['nmgp_cond_fast_search'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_fast_search']))
+          {
+              $this->nmgp_fast_search = $this->NM_ajax_info['param']['nmgp_fast_search'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_num_form']))
+          {
+              $this->nmgp_num_form = $this->NM_ajax_info['param']['nmgp_num_form'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_opcao']))
+          {
+              $this->nmgp_opcao = $this->NM_ajax_info['param']['nmgp_opcao'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_ordem']))
+          {
+              $this->nmgp_ordem = $this->NM_ajax_info['param']['nmgp_ordem'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_parms']))
+          {
+              $this->nmgp_parms = $this->NM_ajax_info['param']['nmgp_parms'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_url_saida']))
+          {
+              $this->nmgp_url_saida = $this->NM_ajax_info['param']['nmgp_url_saida'];
+          }
+          if (isset($this->NM_ajax_info['param']['script_case_init']))
+          {
+              $this->script_case_init = $this->NM_ajax_info['param']['script_case_init'];
+          }
+          if (isset($this->nmgp_refresh_fields))
+          {
+              $this->nmgp_refresh_fields = explode('_#fld#_', $this->nmgp_refresh_fields);
+              $this->nmgp_opcao          = 'recarga';
+          }
+          if (!isset($this->nmgp_refresh_row))
+          {
+              $this->nmgp_refresh_row = '';
+          }
+      }
+
+      $this->sc_conv_var = array();
+      if (!empty($_FILES))
+      {
+          foreach ($_FILES as $nmgp_campo => $nmgp_valores)
+          {
+               if (isset($this->sc_conv_var[$nmgp_campo]))
+               {
+                   $nmgp_campo = $this->sc_conv_var[$nmgp_campo];
+               }
+               elseif (isset($this->sc_conv_var[strtolower($nmgp_campo)]))
+               {
+                   $nmgp_campo = $this->sc_conv_var[strtolower($nmgp_campo)];
+               }
+               $tmp_scfile_name     = $nmgp_campo . "_scfile_name";
+               $tmp_scfile_type     = $nmgp_campo . "_scfile_type";
+               $this->$nmgp_campo = is_array($nmgp_valores['tmp_name']) ? $nmgp_valores['tmp_name'][0] : $nmgp_valores['tmp_name'];
+               $this->$tmp_scfile_type   = is_array($nmgp_valores['type'])     ? $nmgp_valores['type'][0]     : $nmgp_valores['type'];
+               $this->$tmp_scfile_name   = is_array($nmgp_valores['name'])     ? $nmgp_valores['name'][0]     : $nmgp_valores['name'];
+          }
+      }
+      $Sc_lig_md5 = false;
+      if (!empty($_POST))
+      {
+          foreach ($_POST as $nmgp_var => $nmgp_val)
+          {
+               if (substr($nmgp_var, 0, 11) == "SC_glo_par_")
+               {
+                   $nmgp_var = substr($nmgp_var, 11);
+                   $nmgp_val = $_SESSION[$nmgp_val];
+               }
+              if ($nmgp_var == "nmgp_parms" && substr($nmgp_val, 0, 8) == "@SC_par@")
+              {
+                  $SC_Ind_Val = explode("@SC_par@", $nmgp_val);
+                  if (count($SC_Ind_Val) == 4 && isset($_SESSION['sc_session'][$SC_Ind_Val[1]][$SC_Ind_Val[2]]['Lig_Md5'][$SC_Ind_Val[3]]))
+                  {
+                      $nmgp_val = $_SESSION['sc_session'][$SC_Ind_Val[1]][$SC_Ind_Val[2]]['Lig_Md5'][$SC_Ind_Val[3]];
+                      $Sc_lig_md5 = true;
+                  }
+                  else
+                  {
+                      $_SESSION['sc_session']['SC_parm_violation'] = true;
+                  }
+              }
+               if (isset($this->sc_conv_var[$nmgp_var]))
+               {
+                   $nmgp_var = $this->sc_conv_var[$nmgp_var];
+               }
+               elseif (isset($this->sc_conv_var[strtolower($nmgp_var)]))
+               {
+                   $nmgp_var = $this->sc_conv_var[strtolower($nmgp_var)];
+               }
+               $nmgp_val = NM_decode_input($nmgp_val);
+               $this->$nmgp_var = $nmgp_val;
+          }
+      }
+      if (!empty($_GET))
+      {
+          foreach ($_GET as $nmgp_var => $nmgp_val)
+          {
+               if (substr($nmgp_var, 0, 11) == "SC_glo_par_")
+               {
+                   $nmgp_var = substr($nmgp_var, 11);
+                   $nmgp_val = $_SESSION[$nmgp_val];
+               }
+              if ($nmgp_var == "nmgp_parms" && substr($nmgp_val, 0, 8) == "@SC_par@")
+              {
+                  $SC_Ind_Val = explode("@SC_par@", $nmgp_val);
+                  if (count($SC_Ind_Val) == 4 && isset($_SESSION['sc_session'][$SC_Ind_Val[1]][$SC_Ind_Val[2]]['Lig_Md5'][$SC_Ind_Val[3]]))
+                  {
+                      $nmgp_val = $_SESSION['sc_session'][$SC_Ind_Val[1]][$SC_Ind_Val[2]]['Lig_Md5'][$SC_Ind_Val[3]];
+                      $Sc_lig_md5 = true;
+                  }
+                  else
+                  {
+                       $_SESSION['sc_session']['SC_parm_violation'] = true;
+                  }
+              }
+               if (isset($this->sc_conv_var[$nmgp_var]))
+               {
+                   $nmgp_var = $this->sc_conv_var[$nmgp_var];
+               }
+               elseif (isset($this->sc_conv_var[strtolower($nmgp_var)]))
+               {
+                   $nmgp_var = $this->sc_conv_var[strtolower($nmgp_var)];
+               }
+               $nmgp_val = NM_decode_input($nmgp_val);
+               $this->$nmgp_var = $nmgp_val;
+          }
+      }
+      if (isset($SC_lig_apl_orig) && !$Sc_lig_md5 && (!isset($nmgp_parms) || ($nmgp_parms != "SC_null" && substr($nmgp_parms, 0, 8) != "OrScLink")))
+      {
+          $_SESSION['sc_session']['SC_parm_violation'] = true;
+      }
+      if (isset($nmgp_parms) && $nmgp_parms == "SC_null")
+      {
+          $nmgp_parms = "";
+      }
+      if (isset($this->nmgp_opcao) && $this->nmgp_opcao == "reload_novo") {
+          $_POST['nmgp_opcao'] = "novo";
+          $this->nmgp_opcao    = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['opcao']   = "novo";
+          $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['opc_ant'] = "inicio";
+      }
+      if (isset($_SESSION['sc_session'][$script_case_init]['form_seg_apps']['embutida_parms']))
+      { 
+          $this->nmgp_parms = $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['embutida_parms'];
+          unset($_SESSION['sc_session'][$script_case_init]['form_seg_apps']['embutida_parms']);
+      } 
+      if (isset($this->nmgp_parms) && !empty($this->nmgp_parms)) 
+      { 
+          if (isset($_SESSION['nm_aba_bg_color'])) 
+          { 
+              unset($_SESSION['nm_aba_bg_color']);
+          }   
+          $nmgp_parms = NM_decode_input($nmgp_parms);
+          $nmgp_parms = str_replace("@aspass@", "'", $this->nmgp_parms);
+          $nmgp_parms = str_replace("*scout", "?@?", $nmgp_parms);
+          $nmgp_parms = str_replace("*scin", "?#?", $nmgp_parms);
+          $todox = str_replace("?#?@?@?", "?#?@ ?@?", $nmgp_parms);
+          $todo  = explode("?@?", $todox);
+          $ix = 0;
+          while (!empty($todo[$ix]))
+          {
+             $cadapar = explode("?#?", $todo[$ix]);
+             if (1 < sizeof($cadapar))
+             {
+                if (substr($cadapar[0], 0, 11) == "SC_glo_par_")
+                {
+                    $cadapar[0] = substr($cadapar[0], 11);
+                    $cadapar[1] = $_SESSION[$cadapar[1]];
+                }
+                 if (isset($this->sc_conv_var[$cadapar[0]]))
+                 {
+                     $cadapar[0] = $this->sc_conv_var[$cadapar[0]];
+                 }
+                 elseif (isset($this->sc_conv_var[strtolower($cadapar[0])]))
+                 {
+                     $cadapar[0] = $this->sc_conv_var[strtolower($cadapar[0])];
+                 }
+                 nm_limpa_str_form_seg_apps($cadapar[1]);
+                 if ($cadapar[1] == "@ ") {$cadapar[1] = trim($cadapar[1]); }
+                 $Tmp_par = $cadapar[0];
+                 $this->$Tmp_par = $cadapar[1];
+             }
+             $ix++;
+          }
+          if (isset($this->NM_where_filter_form))
+          {
+              $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['where_filter_form'] = $this->NM_where_filter_form;
+              unset($_SESSION['sc_session'][$script_case_init]['form_seg_apps']['total']);
+          }
+          if (isset($this->sc_redir_atualiz))
+          {
+              $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['sc_redir_atualiz'] = $this->sc_redir_atualiz;
+          }
+          if (isset($this->sc_redir_insert))
+          {
+              $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['sc_redir_insert'] = $this->sc_redir_insert;
+          }
+      } 
+      elseif (isset($script_case_init) && !empty($script_case_init) && isset($_SESSION['sc_session'][$script_case_init]['form_seg_apps']['parms']))
+      {
+          if ((!isset($this->nmgp_opcao) || ($this->nmgp_opcao != "incluir" && $this->nmgp_opcao != "alterar" && $this->nmgp_opcao != "excluir" && $this->nmgp_opcao != "novo" && $this->nmgp_opcao != "recarga" && $this->nmgp_opcao != "muda_form")) && (!isset($this->NM_ajax_opcao) || $this->NM_ajax_opcao == ""))
+          {
+              $todox = str_replace("?#?@?@?", "?#?@ ?@?", $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['parms']);
+              $todo  = explode("?@?", $todox);
+              $ix = 0;
+              while (!empty($todo[$ix]))
+              {
+                 $cadapar = explode("?#?", $todo[$ix]);
+                 if (substr($cadapar[0], 0, 11) == "SC_glo_par_")
+                 {
+                     $cadapar[0] = substr($cadapar[0], 11);
+                     $cadapar[1] = $_SESSION[$cadapar[1]];
+                 }
+                 if ($cadapar[1] == "@ ") {$cadapar[1] = trim($cadapar[1]); }
+                 $Tmp_par = $cadapar[0];
+                 $this->$Tmp_par = $cadapar[1];
+                 $ix++;
+              }
+          }
+      } 
+
+      if (isset($this->nm_run_menu) && $this->nm_run_menu == 1)
+      { 
+          $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['nm_run_menu'] = 1;
+      } 
+      if (!$this->NM_ajax_flag && 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9))
+      {
+          $this->NM_ajax_flag = true;
+      }
+
+      $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
+      $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
+      if (isset($this->nm_evt_ret_edit) && '' != $this->nm_evt_ret_edit)
+      {
+          $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['lig_edit_lookup']     = true;
+          $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['lig_edit_lookup_cb']  = $this->nm_evt_ret_edit;
+          $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['lig_edit_lookup_row'] = isset($this->nm_evt_ret_row) ? $this->nm_evt_ret_row : '';
+      }
+      if (isset($_SESSION['sc_session'][$script_case_init]['form_seg_apps']['lig_edit_lookup']) && $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['lig_edit_lookup'])
+      {
+          $this->lig_edit_lookup     = true;
+          $this->lig_edit_lookup_cb  = $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['lig_edit_lookup_cb'];
+          $this->lig_edit_lookup_row = $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['lig_edit_lookup_row'];
+      }
+      if (!$this->Ini)
+      { 
+          $this->Ini = new form_seg_apps_ini(); 
+          $this->Ini->init();
+          $this->nm_data = new nm_data("es");
+          $this->app_is_initializing = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['initialize'];
+      } 
+      else 
+      { 
+         $this->nm_data = new nm_data("es");
+      } 
+      $_SESSION['sc_session'][$script_case_init]['form_seg_apps']['upload_field_info'] = array();
+
+      unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['masterValue']);
+      $this->Change_Menu = false;
+      $run_iframe = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe']) && ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "R")) ? true : false;
+      if (!$run_iframe && isset($_SESSION['scriptcase']['menu_atual']) && !$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_call'] && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['sc_outra_jan']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['sc_outra_jan']))
+      {
+          $this->sc_init_menu = "x";
+          if (isset($_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['form_seg_apps']))
+          {
+              $this->sc_init_menu = $_SESSION['scriptcase'][$_SESSION['scriptcase']['menu_atual']]['sc_init']['form_seg_apps'];
+          }
+          elseif (isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']]))
+          {
+              foreach ($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']] as $init => $resto)
+              {
+                  if ($this->Ini->sc_page == $init)
+                  {
+                      $this->sc_init_menu = $init;
+                      break;
+                  }
+              }
+          }
+          if ($this->Ini->sc_page == $this->sc_init_menu && !isset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_seg_apps']))
+          {
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_seg_apps']['link'] = $this->Ini->sc_protocolo . $this->Ini->server . $this->Ini->path_link . "" . SC_dir_app_name('form_seg_apps') . "/";
+               $_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu]['form_seg_apps']['label'] = "Aplicación";
+               $this->Change_Menu = true;
+          }
+          elseif ($this->Ini->sc_page == $this->sc_init_menu)
+          {
+              $achou = false;
+              foreach ($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu] as $apl => $parms)
+              {
+                  if ($apl == "form_seg_apps")
+                  {
+                      $achou = true;
+                  }
+                  elseif ($achou)
+                  {
+                      unset($_SESSION['scriptcase']['menu_apls'][$_SESSION['scriptcase']['menu_atual']][$this->sc_init_menu][$apl]);
+                      $this->Change_Menu = true;
+                  }
+              }
+          }
+      }
+      if (!function_exists("nmButtonOutput"))
+      {
+          include_once($this->Ini->path_lib_php . "nm_gp_config_btn.php");
+      }
+      include("../_lib/css/" . $this->Ini->str_schema_all . "_form.php");
+      $this->Ini->Str_btn_form = (isset($_SESSION['scriptcase']['str_button_all'])) ? $_SESSION['scriptcase']['str_button_all'] : "scriptcase9_BlueBerry";
+      $_SESSION['scriptcase']['str_button_all'] = $this->Ini->Str_btn_form;
+      include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
+      $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
+      $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
+      $this->Db = $this->Ini->Db; 
+      $this->Ini->str_google_fonts = isset($str_google_fonts)?$str_google_fonts:'';
+      $this->Ini->Img_sep_form    = "/" . trim($str_toolbar_separator);
+      $this->Ini->Color_bg_ajax   = "" == trim($str_ajax_bg)         ? "#000" : $str_ajax_bg;
+      $this->Ini->Border_c_ajax   = "" == trim($str_ajax_border_c)   ? ""     : $str_ajax_border_c;
+      $this->Ini->Border_s_ajax   = "" == trim($str_ajax_border_s)   ? ""     : $str_ajax_border_s;
+      $this->Ini->Border_w_ajax   = "" == trim($str_ajax_border_w)   ? ""     : $str_ajax_border_w;
+      $this->Ini->Block_img_exp   = "" == trim($str_block_exp)       ? ""     : $str_block_exp;
+      $this->Ini->Block_img_col   = "" == trim($str_block_col)       ? ""     : $str_block_col;
+      $this->Ini->Msg_ico_title   = "" == trim($str_msg_ico_title)   ? ""     : $str_msg_ico_title;
+      $this->Ini->Msg_ico_body    = "" == trim($str_msg_ico_body)    ? ""     : $str_msg_ico_body;
+      $this->Ini->Err_ico_title   = "" == trim($str_err_ico_title)   ? ""     : $str_err_ico_title;
+      $this->Ini->Err_ico_body    = "" == trim($str_err_ico_body)    ? ""     : $str_err_ico_body;
+      $this->Ini->Cal_ico_back    = "" == trim($str_cal_ico_back)    ? ""     : $str_cal_ico_back;
+      $this->Ini->Cal_ico_for     = "" == trim($str_cal_ico_for)     ? ""     : $str_cal_ico_for;
+      $this->Ini->Cal_ico_close   = "" == trim($str_cal_ico_close)   ? ""     : $str_cal_ico_close;
+      $this->Ini->Tab_space       = "" == trim($str_tab_space)       ? ""     : $str_tab_space;
+      $this->Ini->Bubble_tail     = "" == trim($str_bubble_tail)     ? ""     : $str_bubble_tail;
+      $this->Ini->Label_sort_pos  = "" == trim($str_label_sort_pos)  ? ""     : $str_label_sort_pos;
+      $this->Ini->Label_sort      = "" == trim($str_label_sort)      ? ""     : $str_label_sort;
+      $this->Ini->Label_sort_asc  = "" == trim($str_label_sort_asc)  ? ""     : $str_label_sort_asc;
+      $this->Ini->Label_sort_desc = "" == trim($str_label_sort_desc) ? ""     : $str_label_sort_desc;
+      $this->Ini->Img_status_ok       = "" == trim($str_img_status_ok)   ? ""     : $str_img_status_ok;
+      $this->Ini->Img_status_err      = "" == trim($str_img_status_err)  ? ""     : $str_img_status_err;
+      $this->Ini->Css_status          = "scFormInputError";
+      $this->Ini->Css_status_pwd_box  = "scFormInputErrorPwdBox";
+      $this->Ini->Css_status_pwd_text = "scFormInputErrorPwdText";
+      $this->Ini->Error_icon_span = "" == trim($str_error_icon_span) ? false  : "message" == $str_error_icon_span;
+      $this->Ini->Img_qs_search        = "" == trim($img_qs_search)        ? "scriptcase__NM__qs_lupa.png"  : $img_qs_search;
+      $this->Ini->Img_qs_clean         = "" == trim($img_qs_clean)         ? "scriptcase__NM__qs_close.png" : $img_qs_clean;
+      $this->Ini->Str_qs_image_padding = "" == trim($str_qs_image_padding) ? "0"                            : $str_qs_image_padding;
+      $this->Ini->App_div_tree_img_col = trim($app_div_str_tree_col);
+      $this->Ini->App_div_tree_img_exp = trim($app_div_str_tree_exp);
+      $this->Ini->form_table_width     = isset($str_form_table_width) && '' != trim($str_form_table_width) ? $str_form_table_width : '';
+
+        $this->classes_100perc_fields['table'] = '';
+        $this->classes_100perc_fields['input'] = '';
+        $this->classes_100perc_fields['span_input'] = '';
+        $this->classes_100perc_fields['span_select'] = '';
+        $this->classes_100perc_fields['style_category'] = '';
+        $this->classes_100perc_fields['keep_field_size'] = true;
+
+
+
+      $_SESSION['scriptcase']['error_icon']['form_seg_apps']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
+      $_SESSION['scriptcase']['error_close']['form_seg_apps'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
+
+      $this->Embutida_proc = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_proc']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_proc'] : $this->Embutida_proc;
+      $this->Embutida_form = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_form']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_form'] : $this->Embutida_form;
+      $this->Embutida_call = isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_call']) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_call'] : $this->Embutida_call;
+
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['table_refresh'] = false;
+
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_grid_edit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_grid_edit'])
+      {
+          $this->Grid_editavel = ('on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_grid_edit']) ? true : false;
+      }
+      if (isset($this->Grid_editavel) && $this->Grid_editavel)
+      {
+          $this->Embutida_form  = true;
+          $this->Embutida_ronly = true;
+      }
+      $this->Embutida_multi = false;
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_multi']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_multi'])
+      {
+          $this->Grid_editavel  = false;
+          $this->Embutida_form  = false;
+          $this->Embutida_ronly = false;
+          $this->Embutida_multi = true;
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_tp_pag']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_tp_pag'])
+      {
+          $this->form_paginacao = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_tp_pag'];
+      }
+
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_form']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_form'])
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_form'] = $this->Embutida_form;
+      }
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_grid_edit']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_grid_edit'])
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_grid_edit'] = $this->Grid_editavel ? 'on' : 'off';
+      }
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_grid_edit']) || '' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_grid_edit'])
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_grid_edit'] = $this->Embutida_call;
+      }
+
+      $this->Ini->cor_grid_par = $this->Ini->cor_grid_impar;
+      $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
+      $this->nmgp_url_saida  = $nm_url_saida;
+      $this->nmgp_form_show  = "on";
+      $this->nmgp_form_empty = false;
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_valida.php", "C", "NM_Valida") ; 
+      $teste_validade = new NM_Valida ;
+
+      $this->loadFieldConfig();
+
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['first_time'])
+      {
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['insert']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['new']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['update']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['delete']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['first']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['back']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['forward']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['last']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['qsearch']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['dynsearch']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['summary']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['navpage']);
+          unset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['goto']);
+      }
+      $this->NM_cancel_return_new = (isset($this->NM_cancel_return_new) && $this->NM_cancel_return_new == 1) ? "1" : "";
+      $this->NM_cancel_insert_new = ((isset($this->NM_cancel_insert_new) && $this->NM_cancel_insert_new == 1) || $this->NM_cancel_return_new == 1) ? "document.F5.action='" . $nm_url_saida . "';" : "";
+      if (isset($this->NM_btn_insert) && '' != $this->NM_btn_insert && (!isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['insert']) || '' == $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['insert']))
+      {
+          if ('N' == $this->NM_btn_insert)
+          {
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['insert'] = 'off';
+          }
+          else
+          {
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['insert'] = 'on';
+          }
+      }
+      if (isset($this->NM_btn_new) && 'N' == $this->NM_btn_new)
+      {
+          $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['new'] = 'off';
+      }
+      if (isset($this->NM_btn_update) && '' != $this->NM_btn_update && (!isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['update']) || '' == $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['update']))
+      {
+          if ('N' == $this->NM_btn_update)
+          {
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['update'] = 'off';
+          }
+          else
+          {
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['update'] = 'on';
+          }
+      }
+      if (isset($this->NM_btn_delete) && '' != $this->NM_btn_delete && (!isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['delete']) || '' == $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['delete']))
+      {
+          if ('N' == $this->NM_btn_delete)
+          {
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['delete'] = 'off';
+          }
+          else
+          {
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['delete'] = 'on';
+          }
+      }
+      if (isset($this->NM_btn_navega) && '' != $this->NM_btn_navega)
+      {
+          if ('N' == $this->NM_btn_navega)
+          {
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['first']     = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['back']      = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['forward']   = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['last']      = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['qsearch']   = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['dynsearch'] = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['summary']   = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['navpage']   = 'off';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['goto']      = 'off';
+              $this->Nav_permite_ava = false;
+              $this->Nav_permite_ret = false;
+          }
+          else
+          {
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['first']     = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['back']      = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['forward']   = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['last']      = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['qsearch']   = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['dynsearch'] = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['summary']   = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['navpage']   = 'on';
+              $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['goto']      = 'on';
+          }
+      }
+
+      $this->nmgp_botoes['cancel'] = "on";
+      $this->nmgp_botoes['exit'] = "on";
+      $this->nmgp_botoes['qsearch'] = "on";
+      $this->nmgp_botoes['new'] = "on";
+      $this->nmgp_botoes['insert'] = "on";
+      $this->nmgp_botoes['copy'] = "off";
+      $this->nmgp_botoes['update'] = "on";
+      $this->nmgp_botoes['delete'] = "on";
+      $this->nmgp_botoes['first'] = "on";
+      $this->nmgp_botoes['back'] = "on";
+      $this->nmgp_botoes['forward'] = "on";
+      $this->nmgp_botoes['last'] = "on";
+      $this->nmgp_botoes['summary'] = "on";
+      $this->nmgp_botoes['navpage'] = "on";
+      $this->nmgp_botoes['goto'] = "on";
+      $this->nmgp_botoes['qtline'] = "off";
+      $this->nmgp_botoes['reload'] = "off";
+      if (isset($this->NM_btn_cancel) && 'N' == $this->NM_btn_cancel)
+      {
+          $this->nmgp_botoes['cancel'] = "off";
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_orig'] = "";
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_pesq']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_pesq'] = "";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_pesq_filtro'] = "";
+      }
+      $this->sc_where_orig   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_orig'];
+      $this->sc_where_atual  = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_pesq'];
+      $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_pesq_filtro'];
+      if ($this->NM_ajax_flag && 'event_' == substr($this->NM_ajax_opcao, 0, 6)) {
+          $this->nmgp_botoes = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['buttonStatus'];
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['iframe_filtro']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['iframe_filtro'] == "S")
+      {
+          $this->nmgp_botoes['exit'] = "off";
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['btn_display']))
+      {
+          foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['btn_display'] as $NM_cada_btn => $NM_cada_opc)
+          {
+              $this->nmgp_botoes[$NM_cada_btn] = $NM_cada_opc;
+          }
+      }
+
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['insert']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['insert'] != '')
+      {
+          $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['insert'];
+          $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['insert'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['new']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['new'] != '')
+      {
+          $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['new'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['update']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['update'] != '')
+      {
+          $this->nmgp_botoes['update'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['update'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['delete']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['delete'] != '')
+      {
+          $this->nmgp_botoes['delete'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['delete'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['first']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['first'] != '')
+      {
+          $this->nmgp_botoes['first'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['first'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['back']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['back'] != '')
+      {
+          $this->nmgp_botoes['back'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['back'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['forward']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['forward'] != '')
+      {
+          $this->nmgp_botoes['forward'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['forward'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['last']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['last'] != '')
+      {
+          $this->nmgp_botoes['last'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['last'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['qsearch']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['qsearch'] != '')
+      {
+          $this->nmgp_botoes['qsearch'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['qsearch'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['dynsearch']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['dynsearch'] != '')
+      {
+          $this->nmgp_botoes['dynsearch'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['dynsearch'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['summary']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['summary'] != '')
+      {
+          $this->nmgp_botoes['summary'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['summary'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['navpage']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['navpage'] != '')
+      {
+          $this->nmgp_botoes['navpage'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['navpage'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['goto']) && $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['goto'] != '')
+      {
+          $this->nmgp_botoes['goto'] = $_SESSION['scriptcase']['sc_apl_conf_lig']['form_seg_apps']['goto'];
+      }
+
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_insert']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_insert'] != '')
+      {
+          $this->nmgp_botoes['new']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_insert'];
+          $this->nmgp_botoes['insert'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_insert'];
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_update']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_update'] != '')
+      {
+          $this->nmgp_botoes['update'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_update'];
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_delete']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_delete'] != '')
+      {
+          $this->nmgp_botoes['delete'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_delete'];
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_btn_nav']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_btn_nav'] != '')
+      {
+          $this->nmgp_botoes['first']   = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_btn_nav'];
+          $this->nmgp_botoes['back']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_btn_nav'];
+          $this->nmgp_botoes['forward'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_btn_nav'];
+          $this->nmgp_botoes['last']    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['embutida_liga_form_btn_nav'];
+      }
+
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dashboard_info']['under_dashboard'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dashboard_info']['maximized']) {
+          $tmpDashboardApp = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dashboard_info']['dashboard_app'];
+          if (isset($_SESSION['scriptcase']['dashboard_toolbar'][$tmpDashboardApp]['form_seg_apps'])) {
+              $tmpDashboardButtons = $_SESSION['scriptcase']['dashboard_toolbar'][$tmpDashboardApp]['form_seg_apps'];
+
+              $this->nmgp_botoes['update']     = $tmpDashboardButtons['form_update']    ? 'on' : 'off';
+              $this->nmgp_botoes['new']        = $tmpDashboardButtons['form_insert']    ? 'on' : 'off';
+              $this->nmgp_botoes['insert']     = $tmpDashboardButtons['form_insert']    ? 'on' : 'off';
+              $this->nmgp_botoes['delete']     = $tmpDashboardButtons['form_delete']    ? 'on' : 'off';
+              $this->nmgp_botoes['copy']       = $tmpDashboardButtons['form_copy']      ? 'on' : 'off';
+              $this->nmgp_botoes['first']      = $tmpDashboardButtons['form_navigate']  ? 'on' : 'off';
+              $this->nmgp_botoes['back']       = $tmpDashboardButtons['form_navigate']  ? 'on' : 'off';
+              $this->nmgp_botoes['last']       = $tmpDashboardButtons['form_navigate']  ? 'on' : 'off';
+              $this->nmgp_botoes['forward']    = $tmpDashboardButtons['form_navigate']  ? 'on' : 'off';
+              $this->nmgp_botoes['navpage']    = $tmpDashboardButtons['form_navpage']   ? 'on' : 'off';
+              $this->nmgp_botoes['goto']       = $tmpDashboardButtons['form_goto']      ? 'on' : 'off';
+              $this->nmgp_botoes['qtline']     = $tmpDashboardButtons['form_lineqty']   ? 'on' : 'off';
+              $this->nmgp_botoes['summary']    = $tmpDashboardButtons['form_summary']   ? 'on' : 'off';
+              $this->nmgp_botoes['qsearch']    = $tmpDashboardButtons['form_qsearch']   ? 'on' : 'off';
+              $this->nmgp_botoes['dynsearch']  = $tmpDashboardButtons['form_dynsearch'] ? 'on' : 'off';
+              $this->nmgp_botoes['reload']     = $tmpDashboardButtons['form_reload']    ? 'on' : 'off';
+          }
+      }
+
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['insert']) && $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['insert'] != '')
+      {
+          $this->nmgp_botoes['new']    = $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['insert'];
+          $this->nmgp_botoes['insert'] = $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['insert'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['update']) && $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['update'] != '')
+      {
+          $this->nmgp_botoes['update'] = $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['update'];
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['delete']) && $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['delete'] != '')
+      {
+          $this->nmgp_botoes['delete'] = $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['delete'];
+      }
+
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['field_display']))
+      {
+          foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['field_display'] as $NM_cada_field => $NM_cada_opc)
+          {
+              $this->nmgp_cmp_hidden[$NM_cada_field] = $NM_cada_opc;
+              $this->NM_ajax_info['fieldDisplay'][$NM_cada_field] = $NM_cada_opc;
+          }
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['field_readonly']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['field_readonly']))
+      {
+          foreach ($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['field_readonly'] as $NM_cada_field => $NM_cada_opc)
+          {
+              $this->nmgp_cmp_readonly[$NM_cada_field] = "on";
+              $this->NM_ajax_info['readOnly'][$NM_cada_field] = $NM_cada_opc;
+          }
+      }
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['exit']) && $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['exit'] != '')
+      {
+          $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page]       = $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['exit'];
+          $_SESSION['scriptcase']['sc_force_url_saida'][$this->Ini->sc_page] = true;
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dados_form']))
+      {
+          $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dados_form'];
+          if (!isset($this->create_in)){$this->create_in = $this->nmgp_dados_form['create_in'];} 
+          if (!isset($this->level)){$this->level = $this->nmgp_dados_form['level'];} 
+      }
+      $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
+      $this->aba_iframe = false;
+      if (isset($_SESSION['scriptcase']['sc_aba_iframe']))
+      {
+          foreach ($_SESSION['scriptcase']['sc_aba_iframe'] as $aba => $apls_aba)
+          {
+              if (in_array("form_seg_apps", $apls_aba))
+              {
+                  $this->aba_iframe = true;
+                  break;
+              }
+          }
+      }
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['iframe_menu'] && (!isset($_SESSION['scriptcase']['menu_mobile']) || empty($_SESSION['scriptcase']['menu_mobile'])))
+      {
+          $this->aba_iframe = true;
+      }
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_gp_limpa.php", "F", "nm_limpa_valor") ; 
+      $this->Ini->sc_Include($this->Ini->path_libs . "/nm_gc.php", "F", "nm_gc") ; 
+      $_SESSION['scriptcase']['sc_tab_meses']['int'] = array(
+                                      $this->Ini->Nm_lang['lang_mnth_janu'],
+                                      $this->Ini->Nm_lang['lang_mnth_febr'],
+                                      $this->Ini->Nm_lang['lang_mnth_marc'],
+                                      $this->Ini->Nm_lang['lang_mnth_apri'],
+                                      $this->Ini->Nm_lang['lang_mnth_mayy'],
+                                      $this->Ini->Nm_lang['lang_mnth_june'],
+                                      $this->Ini->Nm_lang['lang_mnth_july'],
+                                      $this->Ini->Nm_lang['lang_mnth_augu'],
+                                      $this->Ini->Nm_lang['lang_mnth_sept'],
+                                      $this->Ini->Nm_lang['lang_mnth_octo'],
+                                      $this->Ini->Nm_lang['lang_mnth_nove'],
+                                      $this->Ini->Nm_lang['lang_mnth_dece']);
+      $_SESSION['scriptcase']['sc_tab_meses']['abr'] = array(
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_janu'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_febr'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_marc'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_apri'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_mayy'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_june'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_july'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_augu'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_sept'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_octo'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_nove'],
+                                      $this->Ini->Nm_lang['lang_shrt_mnth_dece']);
+      $_SESSION['scriptcase']['sc_tab_dias']['int'] = array(
+                                      $this->Ini->Nm_lang['lang_days_sund'],
+                                      $this->Ini->Nm_lang['lang_days_mond'],
+                                      $this->Ini->Nm_lang['lang_days_tued'],
+                                      $this->Ini->Nm_lang['lang_days_wend'],
+                                      $this->Ini->Nm_lang['lang_days_thud'],
+                                      $this->Ini->Nm_lang['lang_days_frid'],
+                                      $this->Ini->Nm_lang['lang_days_satd']);
+      $_SESSION['scriptcase']['sc_tab_dias']['abr'] = array(
+                                      $this->Ini->Nm_lang['lang_shrt_days_sund'],
+                                      $this->Ini->Nm_lang['lang_shrt_days_mond'],
+                                      $this->Ini->Nm_lang['lang_shrt_days_tued'],
+                                      $this->Ini->Nm_lang['lang_shrt_days_wend'],
+                                      $this->Ini->Nm_lang['lang_shrt_days_thud'],
+                                      $this->Ini->Nm_lang['lang_shrt_days_frid'],
+                                      $this->Ini->Nm_lang['lang_shrt_days_satd']);
+      nm_gc($this->Ini->path_libs);
+      $this->Ini->Gd_missing  = true;
+      if(function_exists("getProdVersion"))
+      {
+         $_SESSION['scriptcase']['sc_prod_Version'] = str_replace(".", "", getProdVersion($this->Ini->path_libs));
+         if(function_exists("gd_info"))
+         {
+            $this->Ini->Gd_missing = false;
+         }
+      }
+      $this->Ini->sc_Include($this->Ini->path_lib_php . "/nm_trata_img.php", "C", "nm_trata_img") ; 
+
+      if (is_file($this->Ini->path_aplicacao . 'form_seg_apps_help.txt'))
+      {
+          $arr_link_webhelp = file($this->Ini->path_aplicacao . 'form_seg_apps_help.txt');
+          if ($arr_link_webhelp)
+          {
+              foreach ($arr_link_webhelp as $str_link_webhelp)
+              {
+                  $str_link_webhelp = trim($str_link_webhelp);
+                  if ('form:' == substr($str_link_webhelp, 0, 5))
+                  {
+                      $arr_link_parts = explode(':', $str_link_webhelp);
+                      if ('' != $arr_link_parts[1] && is_file($this->Ini->root . $this->Ini->path_help . $arr_link_parts[1]))
+                      {
+                          $this->url_webhelp = $this->Ini->path_help . $arr_link_parts[1];
+                      }
+                  }
+              }
+          }
+      }
+
+      if (is_dir($this->Ini->path_aplicacao . 'img'))
+      {
+          $Res_dir_img = @opendir($this->Ini->path_aplicacao . 'img');
+          if ($Res_dir_img)
+          {
+              while (FALSE !== ($Str_arquivo = @readdir($Res_dir_img))) 
+              {
+                 if (@is_file($this->Ini->path_aplicacao . 'img/' . $Str_arquivo) && '.' != $Str_arquivo && '..' != $this->Ini->path_aplicacao . 'img/' . $Str_arquivo)
+                 {
+                     @unlink($this->Ini->path_aplicacao . 'img/' . $Str_arquivo);
+                 }
+              }
+          }
+          @closedir($Res_dir_img);
+          rmdir($this->Ini->path_aplicacao . 'img');
+      }
+
+      if ($this->Embutida_proc)
+      { 
+          require_once($this->Ini->path_embutida . 'form_seg_apps/form_seg_apps_erro.class.php');
+      }
+      else
+      { 
+          require_once($this->Ini->path_aplicacao . "form_seg_apps_erro.class.php"); 
+      }
+      $this->Erro      = new form_seg_apps_erro();
+      $this->Erro->Ini = $this->Ini;
+      $this->proc_fast_search = false;
+      if ($this->nmgp_opcao == "fast_search")  
+      {
+          $this->SC_fast_search($this->nmgp_fast_search, $this->nmgp_cond_fast_search, $this->nmgp_arg_fast_search);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opcao'] = "inicio";
+          $this->nmgp_opcao = "inicio";
+          $this->proc_fast_search = true;
+      } 
+      if ($nm_opc_lookup != "lookup" && $nm_opc_php != "formphp")
+      { 
+         if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opcao']))
+         { 
+             if ($this->idapp != "")   
+             { 
+                 $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opcao'] = "igual" ;  
+             }   
+         }   
+      } 
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opcao']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opcao']) && empty($this->nmgp_refresh_fields))
+      {
+          $this->nmgp_opcao = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opcao'];  
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opcao'] = "" ;  
+          if ($this->nmgp_opcao == "edit_novo")  
+          {
+             $this->nmgp_opcao = "novo";
+             $this->nm_flag_saida_novo = "S";
+          }
+      } 
+      $this->nm_Start_new = false;
+      if (isset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['start']) && $_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['start'] == 'new')
+      {
+          $this->nmgp_opcao = "novo";
+          $this->nm_Start_new = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opcao'] = "novo";
+          unset($_SESSION['scriptcase']['sc_apl_conf']['form_seg_apps']['start']);
+      }
+      if ($this->nmgp_opcao == "igual")  
+      {
+          $this->nmgp_opc_ant = $this->nmgp_opcao;
+      } 
+      else
+      {
+          $this->nmgp_opc_ant = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opc_ant'];
+      } 
+      if ($this->nmgp_opcao == "recarga" || $this->nmgp_opcao == "muda_form")  
+      {
+          $this->nmgp_botoes = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['botoes'];
+          $this->Nav_permite_ret = 0 != $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['inicio'];
+          $this->Nav_permite_ava = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total'] != $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['final'];
+      }
+      else
+      {
+      }
+      $this->nm_flag_iframe = false;
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dados_form'])) 
+      {
+         $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dados_form'];
+      }
+      if ($this->nmgp_opcao == "edit_novo")  
+      {
+          $this->nmgp_opcao = "novo";
+          $this->nm_flag_saida_novo = "S";
+      }
+//
+      $this->NM_case_insensitive = false;
+      $this->sc_evento = $this->nmgp_opcao;
+      $this->sc_insert_on = false;
+      if (!isset($this->NM_ajax_flag) || ('validate_' != substr($this->NM_ajax_opcao, 0, 9) && 'add_new_line' != $this->NM_ajax_opcao && 'autocomp_' != substr($this->NM_ajax_opcao, 0, 9)))
+      {
+      $_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'on';
+  $icons_html = 'No hay iconos, ingresa iconos en Ajustes -> Iconos del Menu.';
+$data_icon = $this->getIcon();
+if( $data_icon['code'] == 200 ){
+	$icons_html = $data_icon['data'];
+}
+
+echo '
+<div class="contenedor card mt-5 p-4 d-none">
+	<div class="card-header justify-content-between">
+		<div class="search-element">
+			<input id="buscar_icon" type="search" class="form-control header-search" placeholder="¿Que Buscas?" aria-label="Search" tabindex="1" autofocus="autofocus" />
+		</div>
+		<summary class="fas fa-times fa-2x text-muted"></summary>
+	</div>
+	<div class="card-body">
+		<div id="noFound" class="d-none">No hemos encontrado resultados...</div>
+		<div class="row">
+			'.$icons_html.'
+		</div>
+	</div>
+</div>
+';
+
+?>
+
+<!-- Bootstrap css -->
+<link href="<?php echo sc_url_library('prj', 'menu', 'assets/plugins/bootstrap/css/bootstrap.css') ?>" rel="stylesheet">
+
+<!-- Style css -->
+<link href="<?php echo sc_url_library('prj', 'menu', 'assets/css/style.css') ?>" rel="stylesheet">
+
+<style>
+	
+	
+
+	.float-hover {
+		-webkit-transform: perspective(1px) translateZ(0);
+		transform: perspective(1px) translateZ(0);
+		-webkit-transition-duration: 0.2s;
+		transition-duration: 0.2s;
+		-webkit-transition-property: transform;
+		transition-property: transform;
+		-webkit-transition-timing-function: ease-out;
+		transition-timing-function: ease-out;
+	}
+	.float-hover:hover,
+	.float-hover:focus,
+	.float-hover:active {
+		-webkit-transform: translateY(-4px);
+		transform: translateY(-4px);
+	}		
+
+	.contenedor.card .item-icon{cursor:pointer}
+	.contenedor.card img{width: 45px; height: 45px}
+	.contenedor.card{
+		max-width: 450px;
+		margin: 0 auto;
+		position: absolute;
+		z-index: 999
+	}
+	.contenedor.card > .card-body{
+		max-height: 350px;
+		overflow-y: auto;
+	}
+</style>
+<style>
+	.d-block {
+		min-width: 45px;
+		text-align: center;
+	}
+
+	.bg-primary {
+		background-color: #4454c3 !important;
+	}
+
+	.bg-dark {
+		background-color: #343a40 !important;
+	}
+	.bg-blue {
+		background-color: #083dc1 !important;
+		color: #fff !important;
+	}
+
+	a.bg-blue:hover,
+	a.bg-blue:focus {
+		background-color: #1747bd !important;
+	}
+
+	button.bg-blue:hover,
+	button.bg-blue:focus {
+		background-color: #1747bd !important;
+	}
+
+	.text-blue {
+		color: #083dc1 !important;
+	}
+
+	.bg-indigo {
+		background-color: #6574cd !important;
+		color: #fff !important;
+	}
+
+	a.bg-indigo:hover,
+	a.bg-indigo:focus {
+		background-color: #3f51c1 !important;
+	}
+
+	button.bg-indigo:hover,
+	button.bg-indigo:focus {
+		background-color: #3f51c1 !important;
+	}
+
+	.text-indigo {
+		color: #6574cd !important;
+	}
+
+	.bg-purple {
+		background-color: #aa4cf2 !important;
+		color: #fff !important;
+	}
+
+	a.bg-purple:hover,
+	a.bg-purple:focus {
+		background-color: #8c31e4 !important;
+	}
+
+	button.bg-purple:hover,
+	button.bg-purple:focus {
+		background-color: #8c31e4 !important;
+	}
+
+	.text-purple {
+		color: #aa4cf2 !important;
+	}
+
+	.text-lightpink-red {
+		color: #ff7088 !important;
+	}
+
+	.text-lightgreen {
+		color: #26eda2 !important;
+	}
+
+	.bg-pink {
+		background-color: #ec82ef !important;
+		color: #fff !important;
+	}
+
+	.bg-darkpink {
+		background-color: #14A485 !important;
+		color: #fff !important;
+	}
+
+	a.bg-pink:hover,
+	a.bg-pink:focus {
+		background-color: #f33d7a !important;
+	}
+
+	button.bg-pink:hover,
+	button.bg-pink:focus {
+		background-color: #f33d7a !important;
+	}
+
+	.text-pink {
+		color: #ec82ef !important;
+	}
+
+	.bg-red {
+		background-color: #dc0441 !important;
+		color: #fff !important;
+	}
+
+	a.bg-red:hover,
+	a.bg-red:focus {
+		background-color: #a11918 !important;
+	}
+
+	button.bg-red:hover,
+	button.bg-red:focus {
+		background-color: #a11918 !important;
+	}
+
+	.text-red {
+		color: #dc0441 !important;
+	}
+
+	.bg-orange {
+		background-color: #fc7303 !important;
+		color: #fff !important;
+	}
+
+	a.bg-orange:hover,
+	a.bg-orange:focus {
+		background-color: #fc7a12 !important;
+	}
+
+	button.bg-orange:hover,
+	button.bg-orange:focus {
+		background-color: #fc7a12 !important;
+	}
+
+	.text-orange {
+		color: #fc7303 !important;
+	}
+
+	.bg-yellow {
+		background-color: #ecb403 !important;
+		color: #fff !important;
+	}
+
+	a.bg-yellow:hover,
+	a.bg-yellow:focus {
+		background-color: #c29d0b !important;
+	}
+
+	button.bg-yellow:hover,
+	button.bg-yellow:focus {
+		background-color: #c29d0b !important;
+	}
+
+	.text-yellow {
+		color: #ecb403 !important;
+	}
+
+	.bg-green {
+		background-color: #2dce89 !important;
+		color: #000 !important;
+	}
+
+	a.bg-green:hover,
+	a.bg-green:focus {
+		background-color: #15ca7c !important;
+	}
+
+	button.bg-green:hover,
+	button.bg-green:focus {
+		background-color: #15ca7c !important;
+	}
+
+	.text-green {
+		color: #2dce89 !important;
+	}
+
+	.bg-teal {
+		background-color: #2bcbba !important;
+	}
+
+	a.bg-teal:hover,
+	a.bg-teal:focus {
+		background-color: #22a193 !important;
+	}
+
+	button.bg-teal:hover,
+	button.bg-teal:focus {
+		background-color: #22a193 !important;
+	}
+
+	.text-teal {
+		color: #2bcbba !important;
+	}
+
+	.bg-cyan {
+		background-color: #17a2b8 !important;
+		color: #fff !important;
+	}
+
+	a.bg-cyan:hover,
+	a.bg-cyan:focus {
+		background-color: #117a8b !important;
+	}
+
+	button.bg-cyan:hover,
+	button.bg-cyan:focus {
+		background-color: #117a8b !important;
+	}
+
+	.text-cyan {
+		color: #17a2b8 !important;
+	}
+
+	.bg-white {
+		background-color: #fff !important;
+	}
+
+	a.bg-white:hover,
+	a.bg-white:focus {
+		background-color: #f3f4f5 !important;
+	}
+
+	button.bg-white:hover,
+	button.bg-white:focus {
+		background-color: #f3f4f5 !important;
+	}
+
+	.text-white {
+		color: #fff !important;
+	}
+
+	.bg-gray {
+		background-color: #868e96 !important;
+	}
+
+	a.bg-gray:hover,
+	a.bg-gray:focus {
+		background-color: #6c757d !important;
+	}
+
+	button.bg-gray:hover,
+	button.bg-gray:focus {
+		background-color: #6c757d !important;
+	}
+
+	.text-gray {
+		color: #969696 !important;
+	}
+
+	.bg-lightpink-red {
+		color: #ff7088 !important;
+	}
+
+	.bg-gray-dark {
+		background-color: #343a40 !important;
+	}
+
+	a.bg-gray-dark:hover,
+	a.bg-gray-dark:focus {
+		background-color: #1d2124 !important;
+	}
+
+	button.bg-gray-dark:hover,
+	button.bg-gray-dark:focus {
+		background-color: #1d2124 !important;
+	}
+
+	.text-gray-dark {
+		color: #343a40 !important;
+	}
+
+	.bg-azure {
+		background-color: #45aaf2 !important;
+	}
+
+	a.bg-azure:hover,
+	a.bg-azure:focus {
+		background-color: #1594ef !important;
+	}
+
+	button.bg-azure:hover,
+	button.bg-azure:focus {
+		background-color: #1594ef !important;
+	}
+
+	.text-azure {
+		color: #45aaf2 !important;
+	}
+
+	.bg-lime {
+		background-color: #1e74a0 !important;
+	}
+
+	a.bg-lime:hover,
+	a.bg-lime:focus {
+		background-color: #63ad27 !important;
+	}
+
+	button.bg-lime:hover,
+	button.bg-lime:focus {
+		background-color: #63ad27 !important;
+	}
+
+	.text-lime {
+		color: #1e74a0 !important;
+	}
+
+	bg-primary {
+		background-color: #4454c3 !important;
+	}
+
+	a.bg-primary:hover,
+	a.bg-primary:focus {
+		background-color: #24987E !important;
+	}
+
+	button.bg-primary:hover,
+	button.bg-primary:focus {
+		background-color: #24987E !important;
+	}
+
+	.bg-secondary {
+		background-color: #f72d66 !important;
+	}
+
+	a.bg-secondary:hover,
+	a.bg-secondary:focus {
+		background-color: #f72d66 !important;
+	}
+
+	button.bg-secondary:hover,
+	button.bg-secondary:focus {
+		background-color: #f72d66 !important;
+	}
+
+	.bg-success {
+		background-color: #2dce89 !important;
+	}
+
+	a.bg-success:hover,
+	a.bg-success:focus {
+		background-color: #15ca7c !important;
+	}
+
+	button.bg-success:hover,
+	button.bg-success:focus {
+		background-color: #15ca7c !important;
+	}
+
+	.bg-info {
+		background-color: #45aaf2 !important;
+	}
+
+	a.bg-info:hover,
+	a.bg-info:focus {
+		background-color: #1594ef !important;
+	}
+
+	button.bg-info:hover,
+	button.bg-info:focus {
+		background-color: #1594ef !important;
+	}
+
+	.bg-warning {
+		background-color: #ecb403 !important;
+	}
+
+	a.bg-warning:hover,
+	a.bg-warning:focus {
+		background-color: #c29d0b !important;
+	}
+
+	button.bg-warning:hover,
+	button.bg-warning:focus {
+		background-color: #c29d0b !important;
+	}
+
+	.bg-danger {
+		background-color: #ff5b51 !important;
+	}
+</style>
+
+
+<?php
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off'; 
+      }
+            if ('ajax_check_file' == $this->nmgp_opcao ){
+                 ob_start(); 
+                 include_once("../_lib/lib/php/nm_api.php"); 
+            switch( $_POST['rsargs'] ){
+               default:
+                   echo 0;exit;
+               break;
+               }
+
+            $out1_img_cache = $_SESSION['scriptcase']['form_seg_apps']['glo_nm_path_imag_temp'] . $file_name;
+            $orig_img = $_SESSION['scriptcase']['form_seg_apps']['glo_nm_path_imag_temp']. '/sc_'.md5(date('YmdHis').basename($_POST['AjaxCheckImg'])).'.gif';
+            copy($__file_download, $_SERVER['DOCUMENT_ROOT'].$orig_img);
+            echo $orig_img . '_@@NM@@_';
+
+            if(file_exists($out1_img_cache)){
+                echo $out1_img_cache;
+                exit;
+            }
+            copy($__file_download, $_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            $sc_obj_img = new nm_trata_img($_SERVER['DOCUMENT_ROOT'].$out1_img_cache, true);
+
+            if(!empty($img_width) && !empty($img_height)){
+                $sc_obj_img->setWidth($img_width);
+                $sc_obj_img->setHeight($img_height);
+            }
+                $sc_obj_img->setManterAspecto(true);
+            $sc_obj_img->createImg($_SERVER['DOCUMENT_ROOT'].$out1_img_cache);
+            echo $out1_img_cache;
+               exit;
+            }
+      if (isset($this->idapp)) { $this->nm_limpa_alfa($this->idapp); }
+      if (isset($this->app_name)) { $this->nm_limpa_alfa($this->app_name); }
+      if (isset($this->app_name2)) { $this->nm_limpa_alfa($this->app_name2); }
+      if (isset($this->idapptype)) { $this->nm_limpa_alfa($this->idapptype); }
+      if (isset($this->description)) { $this->nm_limpa_alfa($this->description); }
+      if (isset($this->app_order)) { $this->nm_limpa_alfa($this->app_order); }
+      if (isset($this->app_parentid)) { $this->nm_limpa_alfa($this->app_parentid); }
+      if (isset($this->app_link)) { $this->nm_limpa_alfa($this->app_link); }
+      if (isset($this->app_icon)) { $this->nm_limpa_alfa($this->app_icon); }
+      if (isset($this->app_badge)) { $this->nm_limpa_alfa($this->app_badge); }
+      if (isset($this->color)) { $this->nm_limpa_alfa($this->color); }
+      $Campos_Crit       = "";
+      $Campos_erro       = "";
+      $Campos_Falta      = array();
+      $Campos_Erros      = array();
+      $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
+      $dir_raiz          =  substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
+      $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opc_edit'] = true;  
+     if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dados_select'])) 
+     {
+        $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dados_select'];
+     }
+   }
+
+   function loadFieldConfig()
+   {
+      $this->field_config = array();
+      //-- idapp
+      $this->field_config['idapp']               = array();
+      $this->field_config['idapp']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['idapp']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['idapp']['symbol_dec'] = '';
+      $this->field_config['idapp']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['idapp']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- app_order
+      $this->field_config['app_order']               = array();
+      $this->field_config['app_order']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['app_order']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['app_order']['symbol_dec'] = '';
+      $this->field_config['app_order']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['app_order']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- create_in
+      $this->field_config['create_in']                 = array();
+      $this->field_config['create_in']['date_format']  = $_SESSION['scriptcase']['reg_conf']['date_format'] . ';' . $_SESSION['scriptcase']['reg_conf']['time_format'];
+      $this->field_config['create_in']['date_sep']     = $_SESSION['scriptcase']['reg_conf']['date_sep'];
+      $this->field_config['create_in']['time_sep']     = $_SESSION['scriptcase']['reg_conf']['time_sep'];
+      $this->field_config['create_in']['date_display'] = "ddmmaaaa;hhiiss";
+      $this->new_date_format('DH', 'create_in');
+      //-- level
+      $this->field_config['level']               = array();
+      $this->field_config['level']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['level']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['level']['symbol_dec'] = '';
+      $this->field_config['level']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['level']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+   }
+
+   function controle()
+   {
+        global $nm_url_saida, $teste_validade, 
+               $glo_senha_protect, $nm_apl_dependente, $nm_form_submit, $sc_check_excl, $nm_opc_form_php, $nm_call_php, $nm_opc_lookup;
+
+
+      $this->ini_controle();
+
+      if ('' != $_SESSION['scriptcase']['change_regional_old'])
+      {
+          $_SESSION['scriptcase']['str_conf_reg'] = $_SESSION['scriptcase']['change_regional_old'];
+          $this->Ini->regionalDefault($_SESSION['scriptcase']['str_conf_reg']);
+          $this->loadFieldConfig();
+          $this->nm_tira_formatacao();
+
+          $_SESSION['scriptcase']['str_conf_reg'] = $_SESSION['scriptcase']['change_regional_new'];
+          $this->Ini->regionalDefault($_SESSION['scriptcase']['str_conf_reg']);
+          $this->loadFieldConfig();
+          $guarda_formatado = $this->formatado;
+          $this->nm_formatar_campos();
+          $this->formatado = $guarda_formatado;
+
+          $_SESSION['scriptcase']['change_regional_old'] = '';
+          $_SESSION['scriptcase']['change_regional_new'] = '';
+      }
+
+      if ($nm_form_submit == 1 && ($this->nmgp_opcao == 'inicio' || $this->nmgp_opcao == 'igual'))
+      {
+          $this->nm_tira_formatacao();
+      }
+      if (!$this->NM_ajax_flag || 'alterar' != $this->nmgp_opcao || 'submit_form' != $this->NM_ajax_opcao)
+      {
+      }
+//
+//-----> 
+//
+      if ($this->NM_ajax_flag && 'validate_' == substr($this->NM_ajax_opcao, 0, 9))
+      {
+          if ('validate_idapp' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'idapp');
+          }
+          if ('validate_app_name' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'app_name');
+          }
+          if ('validate_app_name2' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'app_name2');
+          }
+          if ('validate_app_link' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'app_link');
+          }
+          if ('validate_idapptype' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'idapptype');
+          }
+          if ('validate_description' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'description');
+          }
+          if ('validate_app_parentid' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'app_parentid');
+          }
+          if ('validate_app_order' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'app_order');
+          }
+          if ('validate_app_icon' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'app_icon');
+          }
+          if ('validate_app_badge' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'app_badge');
+          }
+          if ('validate_color' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'color');
+          }
+          form_seg_apps_pack_ajax_response();
+          exit;
+      }
+      if ($this->NM_ajax_flag && 'event_' == substr($this->NM_ajax_opcao, 0, 6))
+      {
+          $this->nm_tira_formatacao();
+          if ('event_app_name_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->app_name_onChange();
+          }
+          if ('event_app_parentid_onchange' == $this->NM_ajax_opcao)
+          {
+              $this->app_parentid_onChange();
+          }
+          form_seg_apps_pack_ajax_response();
+          exit;
+      }
+      if (isset($this->sc_inline_call) && 'Y' == $this->sc_inline_call)
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['inline_form_seq'] = $this->sc_seq_row;
+          $this->nm_tira_formatacao();
+      }
+      if ($this->nmgp_opcao == "recarga" || $this->nmgp_opcao == "recarga_mobile" || $this->nmgp_opcao == "muda_form") 
+      {
+          $this->nm_tira_formatacao();
+          $nm_sc_sv_opcao = $this->nmgp_opcao; 
+          $this->nmgp_opcao = "nada"; 
+          $this->nm_acessa_banco();
+          if ($this->NM_ajax_flag)
+          {
+              $this->ajax_return_values();
+              form_seg_apps_pack_ajax_response();
+              exit;
+          }
+          $this->nm_formatar_campos();
+          $this->nmgp_opcao = $nm_sc_sv_opcao; 
+          $this->nm_gera_html();
+          $this->NM_close_db(); 
+          $this->nmgp_opcao = ""; 
+          exit; 
+      }
+      if ($this->nmgp_opcao == "incluir" || $this->nmgp_opcao == "alterar" || $this->nmgp_opcao == "excluir") 
+      {
+          $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros) ; 
+          $_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off';
+          if ($Campos_Crit != "") 
+          {
+              $Campos_Crit = $this->Ini->Nm_lang['lang_errm_flds'] . ' ' . $Campos_Crit ; 
+          }
+          if ($Campos_Crit != "" || !empty($Campos_Falta) || $this->Campos_Mens_erro != "")
+          {
+              if ($this->NM_ajax_flag)
+              {
+                  form_seg_apps_pack_ajax_response();
+                  exit;
+              }
+              $campos_erro = $this->Formata_Erros($Campos_Crit, $Campos_Falta, $Campos_Erros, 4);
+              $this->Campos_Mens_erro = ""; 
+              $this->Erro->mensagem(__FILE__, __LINE__, "critica", $campos_erro); 
+              $this->nmgp_opc_ant = $this->nmgp_opcao ; 
+              if ($this->nmgp_opcao == "incluir" && $nm_apl_dependente == 1) 
+              { 
+                  $this->nm_flag_saida_novo = "S";; 
+              }
+              if ($this->nmgp_opcao == "incluir") 
+              { 
+                  $GLOBALS["erro_incl"] = 1; 
+              }
+              $this->nmgp_opcao = "nada" ; 
+          }
+      }
+      elseif (isset($nm_form_submit) && 1 == $nm_form_submit && $this->nmgp_opcao != "menu_link" && $this->nmgp_opcao != "recarga_mobile")
+      {
+      }
+//
+      if ($this->nmgp_opcao != "nada")
+      {
+          $this->nm_acessa_banco();
+      }
+      else
+      {
+           if ($this->nmgp_opc_ant == "incluir") 
+           { 
+               $this->nm_proc_onload(false);
+           }
+           else
+           { 
+              $this->nm_guardar_campos();
+           }
+      }
+      if ($this->nmgp_opcao != "recarga" && $this->nmgp_opcao != "muda_form" && !$this->Apl_com_erro)
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['recarga'] = $this->nmgp_opcao;
+          if ($this->sc_evento == "update")
+          {
+              $this->NM_close_db(); 
+              $this->nmgp_redireciona(2); 
+          }
+          if ($this->sc_evento == "insert" || ($this->nmgp_opc_ant == "novo" && $this->nmgp_opcao == "novo" && $this->sc_evento == "novo"))
+          {
+              $this->NM_close_db(); 
+              $this->nmgp_redireciona(2); 
+          }
+          if ($this->sc_evento == "delete")
+          {
+              $this->NM_close_db(); 
+              $this->nmgp_redireciona(2); 
+          }
+      }
+      if ($this->NM_ajax_flag && 'navigate_form' == $this->NM_ajax_opcao)
+      {
+          $this->ajax_return_values();
+          $this->ajax_add_parameters();
+          form_seg_apps_pack_ajax_response();
+          exit;
+      }
+      $this->nm_formatar_campos();
+      if ($this->NM_ajax_flag)
+      {
+          $this->NM_ajax_info['result'] = 'OK';
+          if ('alterar' == $this->NM_ajax_info['param']['nmgp_opcao'])
+          {
+              $this->NM_ajax_info['msgDisplay'] = NM_charset_to_utf8($this->Ini->Nm_lang['lang_othr_ajax_frmu']);
+          }
+          form_seg_apps_pack_ajax_response();
+          exit;
+      }
+      $this->nm_gera_html();
+      $this->NM_close_db(); 
+      $this->nmgp_opcao = ""; 
+      if ($this->Change_Menu)
+      {
+          $apl_menu  = $_SESSION['scriptcase']['menu_atual'];
+          $Arr_rastro = array();
+          if (isset($_SESSION['scriptcase']['menu_apls'][$apl_menu][$this->sc_init_menu]) && count($_SESSION['scriptcase']['menu_apls'][$apl_menu][$this->sc_init_menu]) > 1)
+          {
+              foreach ($_SESSION['scriptcase']['menu_apls'][$apl_menu][$this->sc_init_menu] as $menu => $apls)
+              {
+                 $Arr_rastro[] = "'<a href=\"" . $apls['link'] . "?script_case_init=" . $this->sc_init_menu . "\" target=\"#NMIframe#\">" . $apls['label'] . "</a>'";
+              }
+              $ult_apl = count($Arr_rastro) - 1;
+              unset($Arr_rastro[$ult_apl]);
+              $rastro = implode(",", $Arr_rastro);
+?>
+  <script type="text/javascript">
+     link_atual = new Array (<?php echo $rastro ?>);
+     parent.writeFastMenu(link_atual);
+  </script>
+<?php
+          }
+          else
+          {
+?>
+  <script type="text/javascript">
+     parent.clearFastMenu();
+  </script>
+<?php
+          }
+      }
+   }
+  function html_export_print($nm_arquivo_html, $nmgp_password)
+  {
+      $Html_password = "";
+          $Arq_base  = $this->Ini->root . $this->Ini->path_imag_temp . $nm_arquivo_html;
+          $Parm_pass = ($Html_password != "") ? " -p" : "";
+          $Zip_name = "sc_prt_" . date("YmdHis") . "_" . rand(0, 1000) . "form_seg_apps.zip";
+          $Arq_htm = $this->Ini->path_imag_temp . "/" . $Zip_name;
+          $Arq_zip = $this->Ini->root . $Arq_htm;
+          $Zip_f     = (FALSE !== strpos($Arq_zip, ' ')) ? " \"" . $Arq_zip . "\"" :  $Arq_zip;
+          $Arq_input = (FALSE !== strpos($Arq_base, ' ')) ? " \"" . $Arq_base . "\"" :  $Arq_base;
+           if (is_file($Arq_zip)) {
+               unlink($Arq_zip);
+           }
+           $str_zip = "";
+           if (FALSE !== strpos(strtolower(php_uname()), 'windows')) 
+           {
+               chdir($this->Ini->path_third . "/zip/windows");
+               $str_zip = "zip.exe " . strtoupper($Parm_pass) . " -j " . $Html_password . " " . $Zip_f . " " . $Arq_input;
+           }
+           elseif (FALSE !== strpos(strtolower(php_uname()), 'linux')) 
+           {
+                if (FALSE !== strpos(strtolower(php_uname()), 'i686')) 
+                {
+                    chdir($this->Ini->path_third . "/zip/linux-i386/bin");
+                }
+                else
+                {
+                    chdir($this->Ini->path_third . "/zip/linux-amd64/bin");
+                }
+               $str_zip = "./7za " . $Parm_pass . $Html_password . " a " . $Zip_f . " " . $Arq_input;
+           }
+           elseif (FALSE !== strpos(strtolower(php_uname()), 'darwin'))
+           {
+               chdir($this->Ini->path_third . "/zip/mac/bin");
+               $str_zip = "./7za " . $Parm_pass . $Html_password . " a " . $Zip_f . " " . $Arq_input;
+           }
+           if (!empty($str_zip)) {
+               exec($str_zip);
+           }
+           // ----- ZIP log
+           $fp = @fopen(trim(str_replace(array(".zip",'"'), array(".log",""), $Zip_f)), 'w');
+           if ($fp)
+           {
+               @fwrite($fp, $str_zip . "\r\n\r\n");
+               @fclose($fp);
+           }
+           foreach ($this->Ini->Img_export_zip as $cada_img_zip)
+           {
+               $str_zip      = "";
+              $cada_img_zip = '"' . $cada_img_zip . '"';
+               if (FALSE !== strpos(strtolower(php_uname()), 'windows')) 
+               {
+                   $str_zip = "zip.exe " . strtoupper($Parm_pass) . " -j -u " . $Html_password . " " . $Zip_f . " " . $cada_img_zip;
+               }
+               elseif (FALSE !== strpos(strtolower(php_uname()), 'linux')) 
+               {
+                   $str_zip = "./7za " . $Parm_pass . $Html_password . " a " . $Zip_f . " " . $cada_img_zip;
+               }
+               elseif (FALSE !== strpos(strtolower(php_uname()), 'darwin'))
+               {
+                   $str_zip = "./7za " . $Parm_pass . $Html_password . " a " . $Zip_f . " " . $cada_img_zip;
+               }
+               if (!empty($str_zip)) {
+                   exec($str_zip);
+               }
+               // ----- ZIP log
+               $fp = @fopen(trim(str_replace(array(".zip",'"'), array(".log",""), $Zip_f)), 'a');
+               if ($fp)
+               {
+                   @fwrite($fp, $str_zip . "\r\n\r\n");
+                   @fclose($fp);
+               }
+           }
+           if (is_file($Arq_zip)) {
+               unlink($Arq_base);
+           } 
+          $path_doc_md5 = md5($Arq_htm);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps'][$path_doc_md5][0] = $Arq_htm;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps'][$path_doc_md5][1] = $Zip_name;
+?>
+<HTML<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
+<HEAD>
+ <TITLE><?php echo strip_tags("Aplicación") ?></TITLE>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+{
+?>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+}
+
+?>
+ <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+ <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+ <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+ <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+ <META http-equiv="Pragma" content="no-cache"/>
+  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
+  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+  <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form ?>.css" /> 
+  <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_prod; ?>/third/font-awesome/css/all.min.css" /> 
+  <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
+</HEAD>
+<BODY class="scExportPage">
+<table style="border-collapse: collapse; border-width: 0; height: 100%; width: 100%"><tr><td style="padding: 0; text-align: center; vertical-align: top">
+ <table class="scExportTable" align="center">
+  <tr>
+   <td class="scExportTitle" style="height: 25px">PRINT</td>
+  </tr>
+  <tr>
+   <td class="scExportLine" style="width: 100%">
+    <table style="border-collapse: collapse; border-width: 0; width: 100%"><tr><td class="scExportLineFont" style="padding: 3px 0 0 0" id="idMessage">
+    <?php echo $this->Ini->Nm_lang['lang_othr_file_msge'] ?>
+    </td><td class="scExportLineFont" style="text-align:right; padding: 3px 0 0 0">
+   <?php echo nmButtonOutput($this->arr_buttons, "bexportview", "document.Fview.submit()", "document.Fview.submit()", "idBtnView", "", "", "", "absmiddle", "", "0", $this->Ini->path_botoes, "", "", "", "", "");?>
+
+   <?php echo nmButtonOutput($this->arr_buttons, "bdownload", "document.Fdown.submit()", "document.Fdown.submit()", "idBtnDown", "", "", "", "absmiddle", "", "0", $this->Ini->path_botoes, "", "", "", "", "");?>
+
+   <?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "document.F0.submit()", "document.F0.submit()", "idBtnBack", "", "", "", "absmiddle", "", "0", $this->Ini->path_botoes, "", "", "", "", "");?>
+
+    </td></tr></table>
+   </td>
+  </tr>
+ </table>
+</td></tr></table>
+<form name="Fview" method="get" action="<?php echo  $this->form_encode_input($Arq_htm) ?>" target="_self" style="display: none"> 
+</form>
+<form name="Fdown" method="get" action="form_seg_apps_download.php" target="_self" style="display: none"> 
+<input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"> 
+<input type="hidden" name="nm_tit_doc" value="form_seg_apps"> 
+<input type="hidden" name="nm_name_doc" value="<?php echo $path_doc_md5 ?>"> 
+</form>
+<form name="F0" method=post action="./" target="_self" style="display: none"> 
+<input type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"> 
+<input type="hidden" name="nmgp_opcao" value="<?php echo $this->nmgp_opcao ?>"> 
+</form> 
+         </BODY>
+         </HTML>
+<?php
+          exit;
+  }
+//
+//--------------------------------------------------------------------------------------
+   function NM_has_trans()
+   {
+       return !in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access);
+   }
+//
+//--------------------------------------------------------------------------------------
+   function NM_commit_db()
+   {
+       if ($this->Ini->sc_tem_trans_banco && !$this->Embutida_proc)
+       { 
+           $this->Db->CommitTrans(); 
+           $this->Ini->sc_tem_trans_banco = false;
+       } 
+   }
+//
+//--------------------------------------------------------------------------------------
+   function NM_rollback_db()
+   {
+       if ($this->Ini->sc_tem_trans_banco && !$this->Embutida_proc)
+       { 
+           $this->Db->RollbackTrans(); 
+           $this->Ini->sc_tem_trans_banco = false;
+       } 
+   }
+//
+//--------------------------------------------------------------------------------------
+   function NM_close_db()
+   {
+       if ($this->Db && !$this->Embutida_proc)
+       { 
+           $this->Db->Close(); 
+       } 
+   }
+//
+//--------------------------------------------------------------------------------------
+   function Formata_Erros($Campos_Crit, $Campos_Falta, $Campos_Erros, $mode = 3) 
+   {
+       switch ($mode)
+       {
+           case 1:
+               $campos_erro = array();
+               if (!empty($Campos_Crit))
+               {
+                   $campos_erro[] = $Campos_Crit;
+               }
+               if (!empty($Campos_Falta))
+               {
+                   $campos_erro[] = $this->Formata_Campos_Falta($Campos_Falta);
+               }
+               if (!empty($this->Campos_Mens_erro))
+               {
+                   $campos_erro[] = $this->Campos_Mens_erro;
+               }
+               return implode('<br />', $campos_erro);
+               break;
+
+           case 2:
+               $campos_erro = array();
+               if (!empty($Campos_Crit))
+               {
+                   $campos_erro[] = $Campos_Crit;
+               }
+               if (!empty($Campos_Falta))
+               {
+                   $campos_erro[] = $this->Formata_Campos_Falta($Campos_Falta, true);
+               }
+               if (!empty($this->Campos_Mens_erro))
+               {
+                   $campos_erro[] = $this->Campos_Mens_erro;
+               }
+               return implode('<br />', $campos_erro);
+               break;
+
+           case 3:
+               $campos_erro = array();
+               if (!empty($Campos_Erros))
+               {
+                   $campos_erro[] = $this->Formata_Campos_Erros($Campos_Erros);
+               }
+               if (!empty($this->Campos_Mens_erro))
+               {
+                   $campos_mens_erro = str_replace(array('<br />', '<br>', '<BR />'), array('<BR>', '<BR>', '<BR>'), $this->Campos_Mens_erro);
+                   $campos_mens_erro = explode('<BR>', $campos_mens_erro);
+                   foreach ($campos_mens_erro as $msg_erro)
+                   {
+                       if ('' != $msg_erro && !in_array($msg_erro, $campos_erro))
+                       {
+                           $campos_erro[] = $msg_erro;
+                       }
+                   }
+               }
+               return implode('<br />', $campos_erro);
+               break;
+
+           case 4:
+               $campos_erro = array();
+               if (!empty($Campos_Erros))
+               {
+                   $campos_erro[] = $this->Formata_Campos_Erros_SweetAlert($Campos_Erros);
+               }
+               if (!empty($this->Campos_Mens_erro))
+               {
+                   $campos_mens_erro = str_replace(array('<br />', '<br>', '<BR />'), array('<BR>', '<BR>', '<BR>'), $this->Campos_Mens_erro);
+                   $campos_mens_erro = explode('<BR>', $campos_mens_erro);
+                   foreach ($campos_mens_erro as $msg_erro)
+                   {
+                       if ('' != $msg_erro && !in_array($msg_erro, $campos_erro))
+                       {
+                           $campos_erro[] = $msg_erro;
+                       }
+                   }
+               }
+               return implode('<br />', $campos_erro);
+               break;
+       }
+   }
+
+   function Formata_Campos_Falta($Campos_Falta, $table = false) 
+   {
+       $Campos_Falta = array_unique($Campos_Falta);
+
+       if (!$table)
+       {
+           return $this->Ini->Nm_lang['lang_errm_reqd'] . ' ' . implode('; ', $Campos_Falta);
+       }
+
+       $aCols  = array();
+       $iTotal = sizeof($Campos_Falta);
+       $iCols  = 6 > $iTotal ? 1 : (11 > $iTotal ? 2 : (16 > $iTotal ? 3 : 4));
+       $iItems = ceil($iTotal / $iCols);
+       $iNowC  = 0;
+       $iNowI  = 0;
+
+       foreach ($Campos_Falta as $campo)
+       {
+           $aCols[$iNowC][] = $campo;
+           if ($iItems == ++$iNowI)
+           {
+               $iNowC++;
+               $iNowI = 0;
+           }
+       }
+
+       $sError  = '<table style="border-collapse: collapse; border-width: 0px">';
+       $sError .= '<tr>';
+       $sError .= '<td class="scFormErrorMessageFont" style="padding: 0; vertical-align: top; white-space: nowrap">' . $this->Ini->Nm_lang['lang_errm_reqd'] . '</td>';
+       foreach ($aCols as $aCol)
+       {
+           $sError .= '<td class="scFormErrorMessageFont" style="padding: 0 6px; vertical-align: top; white-space: nowrap">' . implode('<br />', $aCol) . '</td>';
+       }
+       $sError .= '</tr>';
+       $sError .= '</table>';
+
+       return $sError;
+   }
+
+   function Formata_Campos_Crit($Campos_Crit, $table = false) 
+   {
+       $Campos_Crit = array_unique($Campos_Crit);
+
+       if (!$table)
+       {
+           return $this->Ini->Nm_lang['lang_errm_flds'] . ' ' . implode('; ', $Campos_Crit);
+       }
+
+       $aCols  = array();
+       $iTotal = sizeof($Campos_Crit);
+       $iCols  = 6 > $iTotal ? 1 : (11 > $iTotal ? 2 : (16 > $iTotal ? 3 : 4));
+       $iItems = ceil($iTotal / $iCols);
+       $iNowC  = 0;
+       $iNowI  = 0;
+
+       foreach ($Campos_Crit as $campo)
+       {
+           $aCols[$iNowC][] = $campo;
+           if ($iItems == ++$iNowI)
+           {
+               $iNowC++;
+               $iNowI = 0;
+           }
+       }
+
+       $sError  = '<table style="border-collapse: collapse; border-width: 0px">';
+       $sError .= '<tr>';
+       $sError .= '<td class="scFormErrorMessageFont" style="padding: 0; vertical-align: top; white-space: nowrap">' . $this->Ini->Nm_lang['lang_errm_flds'] . '</td>';
+       foreach ($aCols as $aCol)
+       {
+           $sError .= '<td class="scFormErrorMessageFont" style="padding: 0 6px; vertical-align: top; white-space: nowrap">' . implode('<br />', $aCol) . '</td>';
+       }
+       $sError .= '</tr>';
+       $sError .= '</table>';
+
+       return $sError;
+   }
+
+   function Formata_Campos_Erros($Campos_Erros) 
+   {
+       $sError  = '<table style="border-collapse: collapse; border-width: 0px">';
+
+       foreach ($Campos_Erros as $campo => $erros)
+       {
+           $sError .= '<tr>';
+           $sError .= '<td class="scFormErrorMessageFont" style="padding: 0; vertical-align: top; white-space: nowrap">' . $this->Recupera_Nome_Campo($campo) . ':</td>';
+           $sError .= '<td class="scFormErrorMessageFont" style="padding: 0 6px; vertical-align: top; white-space: nowrap">' . implode('<br />', array_unique($erros)) . '</td>';
+           $sError .= '</tr>';
+       }
+
+       $sError .= '</table>';
+
+       return $sError;
+   }
+
+   function Formata_Campos_Erros_SweetAlert($Campos_Erros) 
+   {
+       $sError  = '';
+
+       foreach ($Campos_Erros as $campo => $erros)
+       {
+           $sError .= $this->Recupera_Nome_Campo($campo) . ': ' . implode('<br />', array_unique($erros)) . '<br />';
+       }
+
+       return $sError;
+   }
+
+   function Recupera_Nome_Campo($campo) 
+   {
+       switch($campo)
+       {
+           case 'idapp':
+               return "Idapp";
+               break;
+           case 'app_name':
+               return "App Name";
+               break;
+           case 'app_name2':
+               return "App Name 2";
+               break;
+           case 'app_link':
+               return "App Link";
+               break;
+           case 'idapptype':
+               return "Tipo Aplicación";
+               break;
+           case 'description':
+               return "Description";
+               break;
+           case 'app_parentid':
+               return "Modulo";
+               break;
+           case 'app_order':
+               return "App Order";
+               break;
+           case 'app_icon':
+               return "App Icon";
+               break;
+           case 'app_badge':
+               return "App Badge";
+               break;
+           case 'color':
+               return "Color";
+               break;
+           case 'create_in':
+               return "Create In";
+               break;
+           case 'level':
+               return "Level";
+               break;
+       }
+
+       return $campo;
+   }
+
+   function dateDefaultFormat()
+   {
+       if (isset($this->Ini->Nm_conf_reg[$this->Ini->str_conf_reg]['data_format']))
+       {
+           $sDate = str_replace('yyyy', 'Y', $this->Ini->Nm_conf_reg[$this->Ini->str_conf_reg]['data_format']);
+           $sDate = str_replace('mm',   'm', $sDate);
+           $sDate = str_replace('dd',   'd', $sDate);
+           return substr(chunk_split($sDate, 1, $this->Ini->Nm_conf_reg[$this->Ini->str_conf_reg]['data_sep']), 0, -1);
+       }
+       elseif ('en_us' == $this->Ini->str_lang)
+       {
+           return 'm/d/Y';
+       }
+       else
+       {
+           return 'd/m/Y';
+       }
+   } // dateDefaultFormat
+
+//
+//--------------------------------------------------------------------------------------
+   function Valida_campos(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros, $filtro = '') 
+   {
+     global $nm_browser, $teste_validade;
+     if (is_array($filtro) && empty($filtro)) {
+         $filtro = '';
+     }
+//---------------------------------------------------------
+     $this->sc_force_zero = array();
+
+     if (!is_array($filtro) && '' == $filtro && isset($this->nm_form_submit) && '1' == $this->nm_form_submit && $this->scCsrfGetToken() != $this->csrf_token)
+     {
+          $this->Campos_Mens_erro .= (empty($this->Campos_Mens_erro)) ? "" : "<br />";
+          $this->Campos_Mens_erro .= "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
+          if ($this->NM_ajax_flag)
+          {
+              if (!isset($this->NM_ajax_info['errList']['geral_form_seg_apps']) || !is_array($this->NM_ajax_info['errList']['geral_form_seg_apps']))
+              {
+                  $this->NM_ajax_info['errList']['geral_form_seg_apps'] = array();
+              }
+              $this->NM_ajax_info['errList']['geral_form_seg_apps'][] = "CSRF: " . $this->Ini->Nm_lang['lang_errm_ajax_csrf'];
+          }
+     }
+      if ((!is_array($filtro) && ('' == $filtro || 'idapp' == $filtro)) || (is_array($filtro) && in_array('idapp', $filtro)))
+        $this->ValidateField_idapp($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'app_name' == $filtro)) || (is_array($filtro) && in_array('app_name', $filtro)))
+        $this->ValidateField_app_name($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'app_name2' == $filtro)) || (is_array($filtro) && in_array('app_name2', $filtro)))
+        $this->ValidateField_app_name2($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'app_link' == $filtro)) || (is_array($filtro) && in_array('app_link', $filtro)))
+        $this->ValidateField_app_link($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'idapptype' == $filtro)) || (is_array($filtro) && in_array('idapptype', $filtro)))
+        $this->ValidateField_idapptype($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'description' == $filtro)) || (is_array($filtro) && in_array('description', $filtro)))
+        $this->ValidateField_description($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'app_parentid' == $filtro)) || (is_array($filtro) && in_array('app_parentid', $filtro)))
+        $this->ValidateField_app_parentid($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'app_order' == $filtro)) || (is_array($filtro) && in_array('app_order', $filtro)))
+        $this->ValidateField_app_order($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'app_icon' == $filtro)) || (is_array($filtro) && in_array('app_icon', $filtro)))
+        $this->ValidateField_app_icon($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'app_badge' == $filtro)) || (is_array($filtro) && in_array('app_badge', $filtro)))
+        $this->ValidateField_app_badge($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'color' == $filtro)) || (is_array($filtro) && in_array('color', $filtro)))
+        $this->ValidateField_color($Campos_Crit, $Campos_Falta, $Campos_Erros);
+
+      if (!isset($this->NM_ajax_flag) || 'validate_' != substr($this->NM_ajax_opcao, 0, 9))
+      {
+      $_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_app_parentid = $this->app_parentid;
+}
+  if($this->app_parentid  == 'NULL') {
+	$this->level  = 0;
+} else {
+	$this->level  = 1;
+}
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_app_parentid != $this->app_parentid || (isset($bFlagRead_app_parentid) && $bFlagRead_app_parentid)))
+    {
+        $this->ajax_return_values_app_parentid(true);
+    }
+}
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off'; 
+      }
+      if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
+      {
+          if (!empty($this->sc_force_zero))
+          {
+              foreach ($this->sc_force_zero as $i_force_zero => $sc_force_zero_field)
+              {
+                  eval('$this->' . $sc_force_zero_field . ' = "";');
+                  unset($this->sc_force_zero[$i_force_zero]);
+              }
+          }
+      }
+   }
+
+    function ValidateField_idapp(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->idapp === "" || is_null($this->idapp))  
+      { 
+          $this->idapp = 0;
+      } 
+      nm_limpa_numero($this->idapp, $this->field_config['idapp']['symbol_grp']) ; 
+      if ($this->nmgp_opcao == "incluir")
+      { 
+          if ($this->idapp != '')  
+          { 
+              $iTestSize = 11;
+              if (strlen($this->idapp) > $iTestSize)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Idapp: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['idapp']))
+                  {
+                      $Campos_Erros['idapp'] = array();
+                  }
+                  $Campos_Erros['idapp'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['idapp']) || !is_array($this->NM_ajax_info['errList']['idapp']))
+                  {
+                      $this->NM_ajax_info['errList']['idapp'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['idapp'][] = $this->Ini->Nm_lang['lang_errm_size'];
+              } 
+              if ($teste_validade->Valor($this->idapp, 11, 0, 0, 0, "N") == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "Idapp; " ; 
+                  if (!isset($Campos_Erros['idapp']))
+                  {
+                      $Campos_Erros['idapp'] = array();
+                  }
+                  $Campos_Erros['idapp'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['idapp']) || !is_array($this->NM_ajax_info['errList']['idapp']))
+                  {
+                      $this->NM_ajax_info['errList']['idapp'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['idapp'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'idapp';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_idapp
+
+    function ValidateField_app_name(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->app_name) > 128) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "App Name " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 128 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['app_name']))
+              {
+                  $Campos_Erros['app_name'] = array();
+              }
+              $Campos_Erros['app_name'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 128 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['app_name']) || !is_array($this->NM_ajax_info['errList']['app_name']))
+              {
+                  $this->NM_ajax_info['errList']['app_name'] = array();
+              }
+              $this->NM_ajax_info['errList']['app_name'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 128 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'app_name';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_app_name
+
+    function ValidateField_app_name2(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->app_name2) > 128) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "App Name 2 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 128 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['app_name2']))
+              {
+                  $Campos_Erros['app_name2'] = array();
+              }
+              $Campos_Erros['app_name2'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 128 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['app_name2']) || !is_array($this->NM_ajax_info['errList']['app_name2']))
+              {
+                  $this->NM_ajax_info['errList']['app_name2'] = array();
+              }
+              $this->NM_ajax_info['errList']['app_name2'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 128 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'app_name2';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_app_name2
+
+    function ValidateField_app_link(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->app_link) > 255) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "App Link " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 255 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['app_link']))
+              {
+                  $Campos_Erros['app_link'] = array();
+              }
+              $Campos_Erros['app_link'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 255 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['app_link']) || !is_array($this->NM_ajax_info['errList']['app_link']))
+              {
+                  $this->NM_ajax_info['errList']['app_link'] = array();
+              }
+              $this->NM_ajax_info['errList']['app_link'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 255 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'app_link';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_app_link
+
+    function ValidateField_idapptype(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->idapptype) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype']) && !in_array($this->idapptype, $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['idapptype']))
+                   {
+                       $Campos_Erros['idapptype'] = array();
+                   }
+                   $Campos_Erros['idapptype'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['idapptype']) || !is_array($this->NM_ajax_info['errList']['idapptype']))
+                   {
+                       $this->NM_ajax_info['errList']['idapptype'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['idapptype'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'idapptype';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_idapptype
+
+    function ValidateField_description(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->description) > 255) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "Description " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 255 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['description']))
+              {
+                  $Campos_Erros['description'] = array();
+              }
+              $Campos_Erros['description'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 255 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['description']) || !is_array($this->NM_ajax_info['errList']['description']))
+              {
+                  $this->NM_ajax_info['errList']['description'] = array();
+              }
+              $this->NM_ajax_info['errList']['description'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 255 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'description';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_description
+
+    function ValidateField_app_parentid(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+               if (!empty($this->app_parentid) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid']) && !in_array($this->app_parentid, $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid']))
+               {
+                   $hasError = true;
+                   $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($Campos_Erros['app_parentid']))
+                   {
+                       $Campos_Erros['app_parentid'] = array();
+                   }
+                   $Campos_Erros['app_parentid'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+                   if (!isset($this->NM_ajax_info['errList']['app_parentid']) || !is_array($this->NM_ajax_info['errList']['app_parentid']))
+                   {
+                       $this->NM_ajax_info['errList']['app_parentid'] = array();
+                   }
+                   $this->NM_ajax_info['errList']['app_parentid'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+               }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'app_parentid';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_app_parentid
+
+    function ValidateField_app_order(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao == "alterar")
+      {
+      }
+      nm_limpa_numero($this->app_order, $this->field_config['app_order']['symbol_grp']) ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if ($this->app_order != '')  
+          { 
+              $iTestSize = 3;
+              if (strlen($this->app_order) > $iTestSize)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "App Order: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['app_order']))
+                  {
+                      $Campos_Erros['app_order'] = array();
+                  }
+                  $Campos_Erros['app_order'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['app_order']) || !is_array($this->NM_ajax_info['errList']['app_order']))
+                  {
+                      $this->NM_ajax_info['errList']['app_order'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['app_order'][] = $this->Ini->Nm_lang['lang_errm_size'];
+              } 
+              if ($teste_validade->Valor($this->app_order, 3, 0, 0, 0, "N") == false)  
+              { 
+                  $hasError = true;
+                  $Campos_Crit .= "App Order; " ; 
+                  if (!isset($Campos_Erros['app_order']))
+                  {
+                      $Campos_Erros['app_order'] = array();
+                  }
+                  $Campos_Erros['app_order'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['app_order']) || !is_array($this->NM_ajax_info['errList']['app_order']))
+                  {
+                      $this->NM_ajax_info['errList']['app_order'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['app_order'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+           elseif (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['php_cmp_required']['app_order']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['php_cmp_required']['app_order'] == "on") 
+           { 
+              $hasError = true;
+              $Campos_Falta[] = "App Order" ; 
+              if (!isset($Campos_Erros['app_order']))
+              {
+                  $Campos_Erros['app_order'] = array();
+              }
+              $Campos_Erros['app_order'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+                  if (!isset($this->NM_ajax_info['errList']['app_order']) || !is_array($this->NM_ajax_info['errList']['app_order']))
+                  {
+                      $this->NM_ajax_info['errList']['app_order'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['app_order'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+           } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'app_order';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_app_order
+
+    function ValidateField_app_icon(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['php_cmp_required']['app_icon']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['php_cmp_required']['app_icon'] == "on")) 
+      { 
+          if ($this->app_icon == "")  
+          { 
+              $hasError = true;
+              $Campos_Falta[] =  "App Icon" ; 
+              if (!isset($Campos_Erros['app_icon']))
+              {
+                  $Campos_Erros['app_icon'] = array();
+              }
+              $Campos_Erros['app_icon'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+                  if (!isset($this->NM_ajax_info['errList']['app_icon']) || !is_array($this->NM_ajax_info['errList']['app_icon']))
+                  {
+                      $this->NM_ajax_info['errList']['app_icon'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['app_icon'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+          } 
+      } 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->app_icon) > 255) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "App Icon " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 255 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['app_icon']))
+              {
+                  $Campos_Erros['app_icon'] = array();
+              }
+              $Campos_Erros['app_icon'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 255 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['app_icon']) || !is_array($this->NM_ajax_info['errList']['app_icon']))
+              {
+                  $this->NM_ajax_info['errList']['app_icon'] = array();
+              }
+              $this->NM_ajax_info['errList']['app_icon'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 255 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'app_icon';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_app_icon
+
+    function ValidateField_app_badge(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->app_badge) > 10) 
+          { 
+              $hasError = true;
+              $Campos_Crit .= "App Badge " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['app_badge']))
+              {
+                  $Campos_Erros['app_badge'] = array();
+              }
+              $Campos_Erros['app_badge'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['app_badge']) || !is_array($this->NM_ajax_info['errList']['app_badge']))
+              {
+                  $this->NM_ajax_info['errList']['app_badge'] = array();
+              }
+              $this->NM_ajax_info['errList']['app_badge'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'app_badge';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_app_badge
+
+    function ValidateField_color(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->color == "" && $this->nmgp_opcao != "excluir")
+      { 
+      } 
+      if ($this->color != "")
+      { 
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color']) && !in_array($this->color, $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color']))
+          {
+              $hasError = true;
+              $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+              if (!isset($Campos_Erros['color']))
+              {
+                  $Campos_Erros['color'] = array();
+              }
+              $Campos_Erros['color'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+              if (!isset($this->NM_ajax_info['errList']['color']) || !is_array($this->NM_ajax_info['errList']['color']))
+              {
+                  $this->NM_ajax_info['errList']['color'] = array();
+              }
+              $this->NM_ajax_info['errList']['color'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+          }
+      }
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'color';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_color
+
+    function removeDuplicateDttmError($aErrDate, &$aErrTime)
+    {
+        if (empty($aErrDate) || empty($aErrTime))
+        {
+            return;
+        }
+
+        foreach ($aErrDate as $sErrDate)
+        {
+            foreach ($aErrTime as $iErrTime => $sErrTime)
+            {
+                if ($sErrDate == $sErrTime)
+                {
+                    unset($aErrTime[$iErrTime]);
+                }
+            }
+        }
+    } // removeDuplicateDttmError
+
+   function nm_guardar_campos()
+   {
+    global
+           $sc_seq_vert;
+    $this->nmgp_dados_form['idapp'] = $this->idapp;
+    $this->nmgp_dados_form['app_name'] = $this->app_name;
+    $this->nmgp_dados_form['app_name2'] = $this->app_name2;
+    $this->nmgp_dados_form['app_link'] = $this->app_link;
+    $this->nmgp_dados_form['idapptype'] = $this->idapptype;
+    $this->nmgp_dados_form['description'] = $this->description;
+    $this->nmgp_dados_form['app_parentid'] = $this->app_parentid;
+    $this->nmgp_dados_form['app_order'] = $this->app_order;
+    $this->nmgp_dados_form['app_icon'] = $this->app_icon;
+    $this->nmgp_dados_form['app_badge'] = $this->app_badge;
+    $this->nmgp_dados_form['color'] = $this->color;
+    $this->nmgp_dados_form['create_in'] = $this->create_in;
+    $this->nmgp_dados_form['level'] = $this->level;
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dados_form'] = $this->nmgp_dados_form;
+   }
+   function nm_tira_formatacao()
+   {
+      global $nm_form_submit;
+         $this->Before_unformat = array();
+         $this->formatado = false;
+      $this->Before_unformat['idapp'] = $this->idapp;
+      nm_limpa_numero($this->idapp, $this->field_config['idapp']['symbol_grp']) ; 
+      $this->Before_unformat['app_order'] = $this->app_order;
+      nm_limpa_numero($this->app_order, $this->field_config['app_order']['symbol_grp']) ; 
+      $this->Before_unformat['create_in'] = $this->create_in;
+      $this->Before_unformat['create_in_hora'] = $this->create_in_hora;
+      nm_limpa_data($this->create_in, $this->field_config['create_in']['date_sep']) ; 
+      nm_limpa_hora($this->create_in_hora, $this->field_config['create_in']['time_sep']) ; 
+      $this->Before_unformat['level'] = $this->level;
+      nm_limpa_numero($this->level, $this->field_config['level']['symbol_grp']) ; 
+   }
+   function sc_add_currency(&$value, $symbol, $pos)
+   {
+       if ('' == $value)
+       {
+           return;
+       }
+       $value = (1 == $pos || 3 == $pos) ? $symbol . ' ' . $value : $value . ' ' . $symbol;
+   }
+   function sc_remove_currency(&$value, $symbol_dec, $symbol_tho, $symbol_mon)
+   {
+       $value = preg_replace('~&#x0*([0-9a-f]+);~i', '', $value);
+       $sNew  = str_replace($symbol_mon, '', $value);
+       if ($sNew != $value)
+       {
+           $value = str_replace(' ', '', $sNew);
+           return;
+       }
+       $aTest = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', $symbol_dec, $symbol_tho);
+       $sNew  = '';
+       for ($i = 0; $i < strlen($value); $i++)
+       {
+           if ($this->sc_test_currency_char($value[$i], $aTest))
+           {
+               $sNew .= $value[$i];
+           }
+       }
+       $value = $sNew;
+   }
+   function sc_test_currency_char($char, $test)
+   {
+       $found = false;
+       foreach ($test as $test_char)
+       {
+           if ($char === $test_char)
+           {
+               $found = true;
+           }
+       }
+       return $found;
+   }
+   function nm_clear_val($Nome_Campo)
+   {
+      if ($Nome_Campo == "idapp")
+      {
+          nm_limpa_numero($this->idapp, $this->field_config['idapp']['symbol_grp']) ; 
+      }
+      if ($Nome_Campo == "app_order")
+      {
+          nm_limpa_numero($this->app_order, $this->field_config['app_order']['symbol_grp']) ; 
+      }
+      if ($Nome_Campo == "level")
+      {
+          nm_limpa_numero($this->level, $this->field_config['level']['symbol_grp']) ; 
+      }
+   }
+   function nm_formatar_campos($format_fields = array())
+   {
+      global $nm_form_submit;
+     if (isset($this->formatado) && $this->formatado)
+     {
+         return;
+     }
+     $this->formatado = true;
+      if ('' !== $this->idapp || (!empty($format_fields) && isset($format_fields['idapp'])))
+      {
+          nmgp_Form_Num_Val($this->idapp, $this->field_config['idapp']['symbol_grp'], $this->field_config['idapp']['symbol_dec'], "0", "S", $this->field_config['idapp']['format_neg'], "", "", "-", $this->field_config['idapp']['symbol_fmt']) ; 
+      }
+      if ('' !== $this->app_order || (!empty($format_fields) && isset($format_fields['app_order'])))
+      {
+          nmgp_Form_Num_Val($this->app_order, $this->field_config['app_order']['symbol_grp'], $this->field_config['app_order']['symbol_dec'], "0", "S", $this->field_config['app_order']['format_neg'], "", "", "-", $this->field_config['app_order']['symbol_fmt']) ; 
+      }
+   }
+   function nm_gera_mask(&$nm_campo, $nm_mask)
+   { 
+      $trab_campo = $nm_campo;
+      $trab_mask  = $nm_mask;
+      $tam_campo  = strlen($nm_campo);
+      $trab_saida = "";
+
+      if (false !== strpos($nm_mask, '9') || false !== strpos($nm_mask, 'a') || false !== strpos($nm_mask, '*'))
+      {
+          $new_campo = '';
+          $a_mask_ord  = array();
+          $i_mask_size = -1;
+
+          foreach (explode(';', $nm_mask) as $str_mask)
+          {
+              $a_mask_ord[ $this->nm_conta_mask_chars($str_mask) ] = $str_mask;
+          }
+          ksort($a_mask_ord);
+
+          foreach ($a_mask_ord as $i_size => $s_mask)
+          {
+              if (-1 == $i_mask_size)
+              {
+                  $i_mask_size = $i_size;
+              }
+              elseif (strlen($nm_campo) >= $i_size && strlen($nm_campo) > $i_mask_size)
+              {
+                  $i_mask_size = $i_size;
+              }
+          }
+          $nm_mask = $a_mask_ord[$i_mask_size];
+
+          for ($i = 0; $i < strlen($nm_mask); $i++)
+          {
+              $test_mask = substr($nm_mask, $i, 1);
+              
+              if ('9' == $test_mask || 'a' == $test_mask || '*' == $test_mask)
+              {
+                  $new_campo .= substr($nm_campo, 0, 1);
+                  $nm_campo   = substr($nm_campo, 1);
+              }
+              else
+              {
+                  $new_campo .= $test_mask;
+              }
+          }
+
+                  $nm_campo = $new_campo;
+
+          return;
+      }
+
+      $mask_num = false;
+      for ($x=0; $x < strlen($trab_mask); $x++)
+      {
+          if (substr($trab_mask, $x, 1) == "#")
+          {
+              $mask_num = true;
+              break;
+          }
+      }
+      if ($mask_num )
+      {
+          $ver_duas = explode(";", $trab_mask);
+          if (isset($ver_duas[1]) && !empty($ver_duas[1]))
+          {
+              $cont1 = count(explode("#", $ver_duas[0])) - 1;
+              $cont2 = count(explode("#", $ver_duas[1])) - 1;
+              if ($cont1 < $cont2 && $tam_campo <= $cont2 && $tam_campo > $cont1)
+              {
+                  $trab_mask = $ver_duas[1];
+              }
+              elseif ($cont1 > $cont2 && $tam_campo <= $cont2)
+              {
+                  $trab_mask = $ver_duas[1];
+              }
+              else
+              {
+                  $trab_mask = $ver_duas[0];
+              }
+          }
+          $tam_mask = strlen($trab_mask);
+          $xdados = 0;
+          for ($x=0; $x < $tam_mask; $x++)
+          {
+              if (substr($trab_mask, $x, 1) == "#" && $xdados < $tam_campo)
+              {
+                  $trab_saida .= substr($trab_campo, $xdados, 1);
+                  $xdados++;
+              }
+              elseif ($xdados < $tam_campo)
+              {
+                  $trab_saida .= substr($trab_mask, $x, 1);
+              }
+          }
+          if ($xdados < $tam_campo)
+          {
+              $trab_saida .= substr($trab_campo, $xdados);
+          }
+          $nm_campo = $trab_saida;
+          return;
+      }
+      for ($ix = strlen($trab_mask); $ix > 0; $ix--)
+      {
+           $char_mask = substr($trab_mask, $ix - 1, 1);
+           if ($char_mask != "x" && $char_mask != "z")
+           {
+               $trab_saida = $char_mask . $trab_saida;
+           }
+           else
+           {
+               if ($tam_campo != 0)
+               {
+                   $trab_saida = substr($trab_campo, $tam_campo - 1, 1) . $trab_saida;
+                   $tam_campo--;
+               }
+               else
+               {
+                   $trab_saida = "0" . $trab_saida;
+               }
+           }
+      }
+      if ($tam_campo != 0)
+      {
+          $trab_saida = substr($trab_campo, 0, $tam_campo) . $trab_saida;
+          $trab_mask  = str_repeat("z", $tam_campo) . $trab_mask;
+      }
+   
+      $iz = 0; 
+      for ($ix = 0; $ix < strlen($trab_mask); $ix++)
+      {
+           $char_mask = substr($trab_mask, $ix, 1);
+           if ($char_mask != "x" && $char_mask != "z")
+           {
+               if ($char_mask == "." || $char_mask == ",")
+               {
+                   $trab_saida = substr($trab_saida, 0, $iz) . substr($trab_saida, $iz + 1);
+               }
+               else
+               {
+                   $iz++;
+               }
+           }
+           elseif ($char_mask == "x" || substr($trab_saida, $iz, 1) != "0")
+           {
+               $ix = strlen($trab_mask) + 1;
+           }
+           else
+           {
+               $trab_saida = substr($trab_saida, 0, $iz) . substr($trab_saida, $iz + 1);
+           }
+      }
+      $nm_campo = $trab_saida;
+   } 
+   function nm_conta_mask_chars($sMask)
+   {
+       $iLength = 0;
+
+       for ($i = 0; $i < strlen($sMask); $i++)
+       {
+           if (in_array($sMask[$i], array('9', 'a', '*')))
+           {
+               $iLength++;
+           }
+       }
+
+       return $iLength;
+   }
+   function nm_tira_mask(&$nm_campo, $nm_mask, $nm_chars = '')
+   { 
+      $mask_dados = $nm_campo;
+      $trab_mask  = $nm_mask;
+      $tam_campo  = strlen($nm_campo);
+      $tam_mask   = strlen($nm_mask);
+      $trab_saida = "";
+
+      if (false !== strpos($nm_mask, '9') || false !== strpos($nm_mask, 'a') || false !== strpos($nm_mask, '*'))
+      {
+          $raw_campo = $this->sc_clear_mask($nm_campo, $nm_chars);
+          $raw_mask  = $this->sc_clear_mask($nm_mask, $nm_chars);
+          $new_campo = '';
+
+          $test_mask = substr($raw_mask, 0, 1);
+          $raw_mask  = substr($raw_mask, 1);
+
+          while ('' != $raw_campo)
+          {
+              $test_val  = substr($raw_campo, 0, 1);
+              $raw_campo = substr($raw_campo, 1);
+              $ord       = ord($test_val);
+              $found     = false;
+
+              switch ($test_mask)
+              {
+                  case '9':
+                      if (48 <= $ord && 57 >= $ord)
+                      {
+                          $new_campo .= $test_val;
+                          $found      = true;
+                      }
+                      break;
+
+                  case 'a':
+                      if ((65 <= $ord && 90 >= $ord) || (97 <= $ord && 122 >= $ord))
+                      {
+                          $new_campo .= $test_val;
+                          $found      = true;
+                      }
+                      break;
+
+                  case '*':
+                      if ((48 <= $ord && 57 >= $ord) || (65 <= $ord && 90 >= $ord) || (97 <= $ord && 122 >= $ord))
+                      {
+                          $new_campo .= $test_val;
+                          $found      = true;
+                      }
+                      break;
+              }
+
+              if ($found)
+              {
+                  $test_mask = substr($raw_mask, 0, 1);
+                  $raw_mask  = substr($raw_mask, 1);
+              }
+          }
+
+          $nm_campo = $new_campo;
+
+          return;
+      }
+
+      $mask_num = false;
+      for ($x=0; $x < strlen($trab_mask); $x++)
+      {
+          if (substr($trab_mask, $x, 1) == "#")
+          {
+              $mask_num = true;
+              break;
+          }
+      }
+      if ($mask_num )
+      {
+          for ($x=0; $x < strlen($mask_dados); $x++)
+          {
+              if (is_numeric(substr($mask_dados, $x, 1)))
+              {
+                  $trab_saida .= substr($mask_dados, $x, 1);
+              }
+          }
+          $nm_campo = $trab_saida;
+          return;
+      }
+      if ($tam_mask > $tam_campo)
+      {
+         $mask_desfaz = "";
+         for ($mask_ind = 0; $tam_mask > $tam_campo; $mask_ind++)
+         {
+              $mask_char = substr($trab_mask, $mask_ind, 1);
+              if ($mask_char == "z")
+              {
+                  $tam_mask--;
+              }
+              else
+              {
+                  $mask_desfaz .= $mask_char;
+              }
+              if ($mask_ind == $tam_campo)
+              {
+                  $tam_mask = $tam_campo;
+              }
+         }
+         $trab_mask = $mask_desfaz . substr($trab_mask, $mask_ind);
+      }
+      $mask_saida = "";
+      for ($mask_ind = strlen($trab_mask); $mask_ind > 0; $mask_ind--)
+      {
+          $mask_char = substr($trab_mask, $mask_ind - 1, 1);
+          if ($mask_char == "x" || $mask_char == "z")
+          {
+              if ($tam_campo > 0)
+              {
+                  $mask_saida = substr($mask_dados, $tam_campo - 1, 1) . $mask_saida;
+              }
+          }
+          else
+          {
+              if ($mask_char != substr($mask_dados, $tam_campo - 1, 1) && $tam_campo > 0)
+              {
+                  $mask_saida = substr($mask_dados, $tam_campo - 1, 1) . $mask_saida;
+                  $mask_ind--;
+              }
+          }
+          $tam_campo--;
+      }
+      if ($tam_campo > 0)
+      {
+         $mask_saida = substr($mask_dados, 0, $tam_campo) . $mask_saida;
+      }
+      $nm_campo = $mask_saida;
+   }
+
+   function sc_clear_mask($value, $chars)
+   {
+       $new = '';
+
+       for ($i = 0; $i < strlen($value); $i++)
+       {
+           if (false === strpos($chars, $value[$i]))
+           {
+               $new .= $value[$i];
+           }
+       }
+
+       return $new;
+   }
+//
+   function nm_limpa_alfa(&$str)
+   {
+       if (get_magic_quotes_gpc())
+       {
+           if (is_array($str))
+           {
+               $x = 0;
+               foreach ($str as $cada_str)
+               {
+                   $str[$x] = stripslashes($str[$x]);
+                   $x++;
+               }
+           }
+           else
+           {
+               $str = stripslashes($str);
+           }
+       }
+   }
+   function nm_conv_data_db($dt_in, $form_in, $form_out, $replaces = array())
+   {
+       $dt_out = $dt_in;
+       if (strtoupper($form_in) == "DB_FORMAT") {
+           if ($dt_out == "null" || $dt_out == "")
+           {
+               $dt_out = "";
+               return $dt_out;
+           }
+           $form_in = "AAAA-MM-DD";
+       }
+       if (strtoupper($form_out) == "DB_FORMAT") {
+           if (empty($dt_out))
+           {
+               $dt_out = "null";
+               return $dt_out;
+           }
+           $form_out = "AAAA-MM-DD";
+       }
+       if (strtoupper($form_out) == "SC_FORMAT_REGION") {
+           $this->nm_data->SetaData($dt_in, strtoupper($form_in));
+           $prep_out  = (strpos(strtolower($form_in), "dd") !== false) ? "dd" : "";
+           $prep_out .= (strpos(strtolower($form_in), "mm") !== false) ? "mm" : "";
+           $prep_out .= (strpos(strtolower($form_in), "aa") !== false) ? "aaaa" : "";
+           $prep_out .= (strpos(strtolower($form_in), "yy") !== false) ? "aaaa" : "";
+           return $this->nm_data->FormataSaida($this->nm_data->FormatRegion("DT", $prep_out));
+       }
+       else {
+           nm_conv_form_data($dt_out, $form_in, $form_out, $replaces);
+           return $dt_out;
+       }
+   }
+
+   function returnWhere($aCond, $sOp = 'AND')
+   {
+       $aWhere = array();
+       foreach ($aCond as $sCond)
+       {
+           $this->handleWhereCond($sCond);
+           if ('' != $sCond)
+           {
+               $aWhere[] = $sCond;
+           }
+       }
+       if (empty($aWhere))
+       {
+           return '';
+       }
+       else
+       {
+           return ' WHERE (' . implode(') ' . $sOp . ' (', $aWhere) . ')';
+       }
+   } // returnWhere
+
+   function handleWhereCond(&$sCond)
+   {
+       $sCond = trim($sCond);
+       if ('where' == strtolower(substr($sCond, 0, 5)))
+       {
+           $sCond = trim(substr($sCond, 5));
+       }
+   } // handleWhereCond
+
+   function ajax_return_values()
+   {
+          $this->ajax_return_values_idapp();
+          $this->ajax_return_values_app_name();
+          $this->ajax_return_values_app_name2();
+          $this->ajax_return_values_app_link();
+          $this->ajax_return_values_idapptype();
+          $this->ajax_return_values_description();
+          $this->ajax_return_values_app_parentid();
+          $this->ajax_return_values_app_order();
+          $this->ajax_return_values_app_icon();
+          $this->ajax_return_values_app_badge();
+          $this->ajax_return_values_color();
+          if ('navigate_form' == $this->NM_ajax_opcao)
+          {
+              $this->NM_ajax_info['clearUpload']      = 'S';
+              $this->NM_ajax_info['navStatus']['ret'] = $this->Nav_permite_ret ? 'S' : 'N';
+              $this->NM_ajax_info['navStatus']['ava'] = $this->Nav_permite_ava ? 'S' : 'N';
+              $this->NM_ajax_info['fldList']['idapp']['keyVal'] = form_seg_apps_pack_protect_string($this->nmgp_dados_form['idapp']);
+          }
+   } // ajax_return_values
+
+          //----- idapp
+   function ajax_return_values_idapp($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("idapp", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->idapp);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['idapp'] = array(
+                       'row'    => '',
+               'type'    => 'label',
+               'valList' => array($sTmpValue),
+               'labList' => array($this->form_format_readonly("idapp", $this->form_encode_input($sTmpValue))),
+              );
+          }
+   }
+
+          //----- app_name
+   function ajax_return_values_app_name($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("app_name", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->app_name);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['app_name'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- app_name2
+   function ajax_return_values_app_name2($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("app_name2", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->app_name2);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['app_name2'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- app_link
+   function ajax_return_values_app_link($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("app_link", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->app_link);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['app_link'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- idapptype
+   function ajax_return_values_idapptype($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("idapptype", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->idapptype);
+              $aLookup = array();
+              $this->_tmp_lookup_idapptype = $this->idapptype;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_idapp = $this->idapp;
+   $old_value_app_order = $this->app_order;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_idapp = $this->idapp;
+   $unformatted_value_app_order = $this->app_order;
+
+   $nm_comando = "SELECT idapptype, description  FROM seg_app_type  ORDER BY description";
+
+   $this->idapp = $old_value_idapp;
+   $this->app_order = $old_value_app_order;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $aLookup[] = array(form_seg_apps_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_seg_apps_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"idapptype\"";
+          if (isset($this->NM_ajax_info['select_html']['idapptype']) && !empty($this->NM_ajax_info['select_html']['idapptype']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['idapptype']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->idapptype == $sValue)
+                  {
+                      $this->_tmp_lookup_idapptype = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['idapptype'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['idapptype']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['idapptype']['valList'][$i] = form_seg_apps_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['idapptype']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['idapptype']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['idapptype']['labList'] = $aLabel;
+          }
+   }
+
+          //----- description
+   function ajax_return_values_description($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("description", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->description);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['description'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- app_parentid
+   function ajax_return_values_app_parentid($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("app_parentid", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->app_parentid);
+              $aLookup = array();
+              $this->_tmp_lookup_app_parentid = $this->app_parentid;
+
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid'] = array(); 
+}
+$aLookup[] = array(form_seg_apps_pack_protect_string('NULL') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string('--- seleccione ---')));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid'][] = 'NULL';
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_idapp = $this->idapp;
+   $old_value_app_order = $this->app_order;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_idapp = $this->idapp;
+   $unformatted_value_app_order = $this->app_order;
+
+   $nm_comando = "SELECT idapp, description FROM seg_apps WHERE level = 0 ORDER BY idapp";
+
+   $this->idapp = $old_value_idapp;
+   $this->app_order = $old_value_app_order;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $aLookup[] = array(form_seg_apps_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_seg_apps_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"app_parentid\"";
+          if (isset($this->NM_ajax_info['select_html']['app_parentid']) && !empty($this->NM_ajax_info['select_html']['app_parentid']))
+          {
+              $sSelComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['app_parentid']);
+          }
+          $sLookup = '';
+          if (empty($aLookup))
+          {
+              $aLookup[] = array('' => '');
+          }
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+
+                  if ($this->app_parentid == $sValue)
+                  {
+                      $this->_tmp_lookup_app_parentid = $sLabel;
+                  }
+
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+          $this->NM_ajax_info['fldList']['app_parentid'] = array(
+                       'row'    => '',
+               'type'    => 'select',
+               'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['app_parentid']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['app_parentid']['valList'][$i] = form_seg_apps_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['app_parentid']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['app_parentid']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['app_parentid']['labList'] = $aLabel;
+          }
+   }
+
+          //----- app_order
+   function ajax_return_values_app_order($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("app_order", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->app_order);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['app_order'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($sTmpValue),
+              );
+          }
+   }
+
+          //----- app_icon
+   function ajax_return_values_app_icon($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("app_icon", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->app_icon);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['app_icon'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- app_badge
+   function ajax_return_values_app_badge($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("app_badge", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->app_badge);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['app_badge'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
+              );
+          }
+   }
+
+          //----- color
+   function ajax_return_values_color($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("color", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->color);
+              $aLookup = array();
+              $this->_tmp_lookup_color = $this->color;
+
+$aLookup[] = array(form_seg_apps_pack_protect_string('success') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("success")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('warning') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("warning")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('danger') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("danger")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('info') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("info")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('primary') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("primary")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('blue') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("blue")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('indigo') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("indigo")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('purple') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("purple")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('pink') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("pink")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('red') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("red")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('orange') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("orange")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('yellow') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("yellow")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('green') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("green")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('teal') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("teal")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('cyan') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("cyan")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('gray') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("gray")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('azure') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("azure")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('dark') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("dark")));
+$aLookup[] = array(form_seg_apps_pack_protect_string('lime') => str_replace('<', '&lt;',form_seg_apps_pack_protect_string("lime")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'success';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'warning';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'danger';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'info';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'primary';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'blue';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'indigo';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'purple';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'pink';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'red';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'orange';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'yellow';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'green';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'teal';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'cyan';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'gray';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'azure';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'dark';
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_color'][] = 'lime';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['color']) && !empty($this->NM_ajax_info['select_html']['color']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['color']);
+          }
+          $this->NM_ajax_info['fldList']['color'] = array(
+                       'row'    => '',
+               'type'    => 'radio',
+               'switch'  => true,
+               'valList' => array($sTmpValue),
+               'colNum'  => 8,
+               'optComp'  => $sOptComp,
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['color']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['color']['valList'][$i] = form_seg_apps_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['color']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['color']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['color']['labList'] = $aLabel;
+          }
+   }
+
+    function fetchUniqueUploadName($originalName, $uploadDir, $fieldName)
+    {
+        $originalName = trim($originalName);
+        if ('' == $originalName)
+        {
+            return $originalName;
+        }
+        if (!@is_dir($uploadDir))
+        {
+            return $originalName;
+        }
+        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['upload_dir'][$fieldName]))
+        {
+            $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['upload_dir'][$fieldName] = array();
+            $resDir = @opendir($uploadDir);
+            if (!$resDir)
+            {
+                return $originalName;
+            }
+            while (false !== ($fileName = @readdir($resDir)))
+            {
+                if (@is_file($uploadDir . $fileName))
+                {
+                    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['upload_dir'][$fieldName][] = $fileName;
+                }
+            }
+            @closedir($resDir);
+        }
+        if (!in_array($originalName, $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['upload_dir'][$fieldName]))
+        {
+            $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['upload_dir'][$fieldName][] = $originalName;
+            return $originalName;
+        }
+        else
+        {
+            $newName = $this->fetchFileNextName($originalName, $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['upload_dir'][$fieldName]);
+            $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['upload_dir'][$fieldName][] = $newName;
+            return $newName;
+        }
+    } // fetchUniqueUploadName
+
+    function fetchFileNextName($uniqueName, $uniqueList)
+    {
+        $aPathinfo     = pathinfo($uniqueName);
+        $fileExtension = $aPathinfo['extension'];
+        $fileName      = $aPathinfo['filename'];
+        $foundName     = false;
+        $nameIt        = 1;
+        if ('' != $fileExtension)
+        {
+            $fileExtension = '.' . $fileExtension;
+        }
+        while (!$foundName)
+        {
+            $testName = $fileName . '(' . $nameIt . ')' . $fileExtension;
+            if (in_array($testName, $uniqueList))
+            {
+                $nameIt++;
+            }
+            else
+            {
+                $foundName = true;
+                return $testName;
+            }
+        }
+    } // fetchFileNextName
+
+   function ajax_add_parameters()
+   {
+   } // ajax_add_parameters
+  function nm_proc_onload($bFormat = true)
+  {
+      if (!$this->NM_ajax_flag || !isset($this->nmgp_refresh_fields)) {
+      $_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_color = $this->color;
+}
+  if( $this->level  == 0 ) {
+	$this->nmgp_cmp_hidden["color"] = "on"; $this->NM_ajax_info['fieldDisplay']['color'] = 'on';
+} else {
+	$this->nmgp_cmp_hidden["color"] = "off"; $this->NM_ajax_info['fieldDisplay']['color'] = 'off';
+}
+
+?>
+
+<script>
+
+	$("#buscar_icon").on("keyup", function(e){
+		console.log(e.keyCode);
+		let flag = false;
+		let patron = $(this).val().toLowerCase();
+
+		patron = patron.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		if( patron == "" ){
+			return false;
+		} else {
+
+			let expresion = new RegExp(patron+`.*`, "i");
+			$('.item-icon').each(function(){
+				console.log($(this).data('name'))
+				if(expresion.test($(this).data('name'))){
+					$(this).removeClass('d-none')
+					flag = true;
+				} else{
+					$(this).addClass('d-none')
+				}
+			})
+			console.log(flag);
+			if(!flag){
+
+				$('#noFound').removeClass('d-none');
+				$('.item-icon').addClass('d-none');
+
+			} else{
+
+				$('#noFound').addClass('d-none');
+			}
+
+		}
+	})
+
+</script>
+<?php
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_color != $this->color || (isset($bFlagRead_color) && $bFlagRead_color)))
+    {
+        $this->ajax_return_values_color(true);
+    }
+}
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off'; 
+      }
+      if (empty($this->create_in))
+      {
+          $this->create_in_hora = $this->create_in;
+      }
+      $this->nm_guardar_campos();
+      if ($bFormat) $this->nm_formatar_campos();
+  }
+//
+//----------------------------------------------------
+//-----> 
+//----------------------------------------------------
+//----------- 
+
+
+   function temRegistros($sWhere)
+   {
+       if ('' == $sWhere)
+       {
+           return false;
+       }
+       $nmgp_sel_count = 'SELECT COUNT(*) AS countTest FROM ' . $this->Ini->nm_tabela . ' WHERE ' . $sWhere;
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_sel_count; 
+       $rsc = $this->Db->Execute($nmgp_sel_count); 
+       if ($rsc === false && !$rsc->EOF)
+       {
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg());
+           exit; 
+       }
+       $iTotal = $rsc->fields[0];
+       $rsc->Close();
+       return 0 < $iTotal;
+   } // temRegistros
+
+   function deletaRegistros($sWhere)
+   {
+       if ('' == $sWhere)
+       {
+           return false;
+       }
+       $nmgp_sel_count = 'DELETE FROM ' . $this->Ini->nm_tabela . ' WHERE ' . $sWhere;
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_sel_count; 
+       $rsc = $this->Db->Execute($nmgp_sel_count); 
+       $bResult = $rsc;
+       $rsc->Close();
+       return $bResult == true;
+   } // deletaRegistros
+    function handleDbErrorMessage(&$dbErrorMessage, $dbErrorCode)
+    {
+        if (1267 == $dbErrorCode) {
+            $dbErrorMessage = $this->Ini->Nm_lang['lang_errm_db_invalid_collation'];
+        }
+    }
+
+
+   function nm_acessa_banco() 
+   { 
+      global  $nm_form_submit, $teste_validade, $sc_where;
+ 
+      $NM_val_null = array();
+      $NM_val_form = array();
+      $this->sc_erro_insert = "";
+      $this->sc_erro_update = "";
+      $this->sc_erro_delete = "";
+      if (!empty($this->sc_force_zero))
+      {
+          foreach ($this->sc_force_zero as $i_force_zero => $sc_force_zero_field)
+          {
+              eval('if ($this->' . $sc_force_zero_field . ' == 0) {$this->' . $sc_force_zero_field . ' = "";}');
+          }
+      }
+      $this->sc_force_zero = array();
+    if ("incluir" == $this->nmgp_opcao) {
+      $this->sc_evento = $this->nmgp_opcao;
+      $_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_app_link = $this->app_link;
+    $original_app_name = $this->app_name;
+}
+  if(empty($this->app_link ) and !empty($this->app_name ))
+{
+	$this->app_link  = "../".$this->app_name ;
+}
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_app_link != $this->app_link || (isset($bFlagRead_app_link) && $bFlagRead_app_link)))
+    {
+        $this->ajax_return_values_app_link(true);
+    }
+    if (($original_app_name != $this->app_name || (isset($bFlagRead_app_name) && $bFlagRead_app_name)))
+    {
+        $this->ajax_return_values_app_name(true);
+    }
+}
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off'; 
+    }
+    if ("alterar" == $this->nmgp_opcao) {
+      $this->sc_evento = $this->nmgp_opcao;
+      $_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_app_link = $this->app_link;
+    $original_app_name = $this->app_name;
+}
+  if(empty($this->app_link ) and !empty($this->app_name ))
+{
+	$this->app_link  = "../".$this->app_name ;
+}
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_app_link != $this->app_link || (isset($bFlagRead_app_link) && $bFlagRead_app_link)))
+    {
+        $this->ajax_return_values_app_link(true);
+    }
+    if (($original_app_name != $this->app_name || (isset($bFlagRead_app_name) && $bFlagRead_app_name)))
+    {
+        $this->ajax_return_values_app_name(true);
+    }
+}
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off'; 
+    }
+    if ("excluir" == $this->nmgp_opcao) {
+      $this->sc_evento = $this->nmgp_opcao;
+      $_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_idapp = $this->idapp;
+}
+              /* seg_apps */
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+      {
+          $sc_cmd_dependency = "SELECT COUNT(*) AS countTest FROM seg_apps WHERE app_parentid = " . $this->idapp ;
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      {
+          $sc_cmd_dependency = "SELECT COUNT(*) AS countTest FROM seg_apps WHERE app_parentid = " . $this->idapp ;
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+      {
+          $sc_cmd_dependency = "SELECT COUNT(*) AS countTest FROM seg_apps WHERE app_parentid = " . $this->idapp ;
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+      {
+          $sc_cmd_dependency = "SELECT COUNT(*) AS countTest FROM seg_apps WHERE app_parentid = " . $this->idapp ;
+      }
+      else
+      {
+          $sc_cmd_dependency = "SELECT COUNT(*) AS countTest FROM seg_apps WHERE app_parentid = " . $this->idapp ;
+      }
+       
+      $nm_select = $sc_cmd_dependency; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dataset_seg_apps = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dataset_seg_apps[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dataset_seg_apps = false;
+          $this->dataset_seg_apps_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+      if($this->dataset_seg_apps[0][0] > 0)
+      {
+          
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_form_seg_apps';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_form_seg_apps';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "" . $this->Ini->Nm_lang['lang_errm_dele_rhcr'] . "";
+ }
+;
+      }
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_idapp != $this->idapp || (isset($bFlagRead_idapp) && $bFlagRead_idapp)))
+    {
+        $this->ajax_return_values_idapp(true);
+    }
+}
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off'; 
+    }
+      if (!empty($this->Campos_Mens_erro)) 
+      {
+          $this->Erro->mensagem(__FILE__, __LINE__, "critica", $this->Campos_Mens_erro); 
+          $this->Campos_Mens_erro = ""; 
+          $this->nmgp_opc_ant = $this->nmgp_opcao ; 
+          if ($this->nmgp_opcao == "incluir") 
+          { 
+              $GLOBALS["erro_incl"] = 1; 
+          }
+          else
+          { 
+              $this->sc_evento = ""; 
+          }
+          if ($this->nmgp_opcao == "alterar" || $this->nmgp_opcao == "incluir" || $this->nmgp_opcao == "excluir") 
+          {
+              $this->nmgp_opcao = "nada"; 
+          } 
+          $this->NM_rollback_db(); 
+          $this->Campos_Mens_erro = ""; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $salva_opcao = $this->nmgp_opcao; 
+      if ($this->sc_evento != "novo" && $this->sc_evento != "incluir") 
+      { 
+          $this->sc_evento = ""; 
+      } 
+      if (!in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access) && !$this->Ini->sc_tem_trans_banco && in_array($this->nmgp_opcao, array('excluir', 'incluir', 'alterar')))
+      { 
+          $this->Ini->sc_tem_trans_banco = $this->Db->BeginTrans(); 
+      } 
+      $NM_val_form['idapp'] = $this->idapp;
+      $NM_val_form['app_name'] = $this->app_name;
+      $NM_val_form['app_name2'] = $this->app_name2;
+      $NM_val_form['app_link'] = $this->app_link;
+      $NM_val_form['idapptype'] = $this->idapptype;
+      $NM_val_form['description'] = $this->description;
+      $NM_val_form['app_parentid'] = $this->app_parentid;
+      $NM_val_form['app_order'] = $this->app_order;
+      $NM_val_form['app_icon'] = $this->app_icon;
+      $NM_val_form['app_badge'] = $this->app_badge;
+      $NM_val_form['color'] = $this->color;
+      $NM_val_form['create_in'] = $this->create_in;
+      $NM_val_form['level'] = $this->level;
+      if ($this->idapp === "" || is_null($this->idapp))  
+      { 
+          $this->idapp = 0;
+      } 
+      if ($this->idapptype === "" || is_null($this->idapptype))  
+      { 
+          $this->idapptype = 0;
+          $this->sc_force_zero[] = 'idapptype';
+      } 
+      if ($this->nmgp_opcao == "alterar")
+      {
+      if ($this->app_order === "" || is_null($this->app_order))  
+      { 
+          $this->app_order = 0;
+          $this->sc_force_zero[] = 'app_order';
+      } 
+      }
+      if ($this->app_parentid === "" || is_null($this->app_parentid))  
+      { 
+          $this->app_parentid = 0;
+          $this->sc_force_zero[] = 'app_parentid';
+      } 
+      if ($this->nmgp_opcao == "alterar")
+      {
+      }
+      if ($this->level === "" || is_null($this->level))  
+      { 
+          $this->level = 0;
+          $this->sc_force_zero[] = 'level';
+      } 
+      $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
+      if ($this->nmgp_opcao == "alterar" || $this->nmgp_opcao == "incluir") 
+      {
+          $this->app_name_before_qstr = $this->app_name;
+          $this->app_name = substr($this->Db->qstr($this->app_name), 1, -1); 
+          if ($this->app_name == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->app_name = "null"; 
+              $NM_val_null[] = "app_name";
+          } 
+          $this->app_name2_before_qstr = $this->app_name2;
+          $this->app_name2 = substr($this->Db->qstr($this->app_name2), 1, -1); 
+          if ($this->app_name2 == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->app_name2 = "null"; 
+              $NM_val_null[] = "app_name2";
+          } 
+          $this->description_before_qstr = $this->description;
+          $this->description = substr($this->Db->qstr($this->description), 1, -1); 
+          if ($this->description == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->description = "null"; 
+              $NM_val_null[] = "description";
+          } 
+          if ($this->nmgp_opcao == "alterar") 
+          {
+          }
+          $this->app_link_before_qstr = $this->app_link;
+          $this->app_link = substr($this->Db->qstr($this->app_link), 1, -1); 
+          if ($this->app_link == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->app_link = "null"; 
+              $NM_val_null[] = "app_link";
+          } 
+          $this->app_icon_before_qstr = $this->app_icon;
+          $this->app_icon = substr($this->Db->qstr($this->app_icon), 1, -1); 
+          if ($this->app_icon == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->app_icon = "null"; 
+              $NM_val_null[] = "app_icon";
+          } 
+          $this->app_badge_before_qstr = $this->app_badge;
+          $this->app_badge = substr($this->Db->qstr($this->app_badge), 1, -1); 
+          if ($this->app_badge == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->app_badge = "null"; 
+              $NM_val_null[] = "app_badge";
+          } 
+          if ($this->nmgp_opcao == "alterar") 
+          {
+              if ($this->create_in == "")  
+              { 
+                  $this->create_in = "null"; 
+                  $NM_val_null[] = "create_in";
+              } 
+              if ($this->create_in == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+              { 
+                  $this->create_in = "null"; 
+                  $NM_val_null[] = "create_in";
+              } 
+          }
+          $this->color_before_qstr = $this->color;
+          $this->color = substr($this->Db->qstr($this->color), 1, -1); 
+          if ($this->color == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->color = "null"; 
+              $NM_val_null[] = "color";
+          } 
+      }
+      if ($this->nmgp_opcao == "alterar") 
+      {
+          $SC_fields_update = array(); 
+          if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['foreign_key']))
+          {
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['foreign_key'] as $sFKName => $sFKValue)
+              {
+                   if (isset($this->sc_conv_var[$sFKName]))
+                   {
+                       $sFKName = $this->sc_conv_var[$sFKName];
+                   }
+                  eval("\$this->" . $sFKName . " = \"" . $sFKValue . "\";");
+              }
+          }
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          else  
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp ";
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          if ($rs1 === false)  
+          { 
+              $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+              if ($this->NM_ajax_flag)
+              {
+                 form_seg_apps_pack_ajax_response();
+              }
+              exit; 
+          }  
+          $bUpdateOk = true;
+          $tmp_result = (int) $rs1->fields[0]; 
+          if ($tmp_result != 1) 
+          { 
+              $this->Erro->mensagem (__FILE__, __LINE__, "critica", $this->Ini->Nm_lang['lang_errm_nfnd']); 
+              $this->nmgp_opcao = "nada"; 
+              $bUpdateOk = false;
+              $this->sc_evento = 'update';
+          } 
+          $aUpdateOk = array();
+          $bUpdateOk = $bUpdateOk && empty($aUpdateOk);
+          if ($bUpdateOk)
+          { 
+              $rs1->Close(); 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+              { 
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
+                  $SC_fields_update[] = "app_name = '$this->app_name', app_name2 = '$this->app_name2', idapptype = $this->idapptype, description = '$this->description', app_order = $this->app_order, app_parentid = $this->app_parentid, app_link = '$this->app_link', app_icon = '$this->app_icon', app_badge = '$this->app_badge', color = '$this->color'"; 
+              } 
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+              { 
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
+                  $SC_fields_update[] = "app_name = '$this->app_name', app_name2 = '$this->app_name2', idapptype = $this->idapptype, description = '$this->description', app_order = $this->app_order, app_parentid = $this->app_parentid, app_link = '$this->app_link', app_icon = '$this->app_icon', app_badge = '$this->app_badge', color = '$this->color'"; 
+              } 
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+              { 
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
+                  $SC_fields_update[] = "app_name = '$this->app_name', app_name2 = '$this->app_name2', idapptype = $this->idapptype, description = '$this->description', app_order = $this->app_order, app_parentid = $this->app_parentid, app_link = '$this->app_link', app_icon = '$this->app_icon', app_badge = '$this->app_badge', color = '$this->color'"; 
+              } 
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              { 
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
+                  $SC_fields_update[] = "app_name = '$this->app_name', app_name2 = '$this->app_name2', idapptype = $this->idapptype, description = '$this->description', app_order = $this->app_order, app_parentid = $this->app_parentid, app_link = '$this->app_link', app_icon = '$this->app_icon', app_badge = '$this->app_badge', color = '$this->color'"; 
+              } 
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+              { 
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
+                  $SC_fields_update[] = "app_name = '$this->app_name', app_name2 = '$this->app_name2', idapptype = $this->idapptype, description = '$this->description', app_order = $this->app_order, app_parentid = $this->app_parentid, app_link = '$this->app_link', app_icon = '$this->app_icon', app_badge = '$this->app_badge', color = '$this->color'"; 
+              } 
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+              { 
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
+                  $SC_fields_update[] = "app_name = '$this->app_name', app_name2 = '$this->app_name2', idapptype = $this->idapptype, description = '$this->description', app_order = $this->app_order, app_parentid = $this->app_parentid, app_link = '$this->app_link', app_icon = '$this->app_icon', app_badge = '$this->app_badge', color = '$this->color'"; 
+              } 
+              else 
+              { 
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
+                  $SC_fields_update[] = "app_name = '$this->app_name', app_name2 = '$this->app_name2', idapptype = $this->idapptype, description = '$this->description', app_order = $this->app_order, app_parentid = $this->app_parentid, app_link = '$this->app_link', app_icon = '$this->app_icon', app_badge = '$this->app_badge', color = '$this->color'"; 
+              } 
+              if (isset($NM_val_form['create_in']) && $NM_val_form['create_in'] != $this->nmgp_dados_select['create_in']) 
+              { 
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+                  { 
+                      $SC_fields_update[] = "create_in = TO_DATE('$this->create_in', 'yyyy-mm-dd hh24:mi:ss')"; 
+                  } 
+                  else
+                  { 
+                      $SC_fields_update[] = "create_in = '$this->create_in'"; 
+                  } 
+              } 
+              if (isset($NM_val_form['level']) && $NM_val_form['level'] != $this->nmgp_dados_select['level']) 
+              { 
+                  $SC_fields_update[] = "level = $this->level"; 
+              } 
+              $aDoNotUpdate = array();
+              $comando .= implode(",", $SC_fields_update);  
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+              {
+                  $comando .= " WHERE idapp = $this->idapp ";  
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+              {
+                  $comando .= " WHERE idapp = $this->idapp ";  
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+              {
+                  $comando .= " WHERE idapp = $this->idapp ";  
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              {
+                  $comando .= " WHERE idapp = $this->idapp ";  
+              }  
+              else  
+              {
+                  $comando .= " WHERE idapp = $this->idapp ";  
+              }  
+              $comando = str_replace("N'null'", "null", $comando) ; 
+              $comando = str_replace("'null'", "null", $comando) ; 
+              $comando = str_replace("#null#", "null", $comando) ; 
+              $comando = str_replace($this->Ini->date_delim . "null" . $this->Ini->date_delim1, "null", $comando) ; 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              {
+                $comando = str_replace("EXTEND('', YEAR TO FRACTION)", "null", $comando) ; 
+                $comando = str_replace("EXTEND(null, YEAR TO FRACTION)", "null", $comando) ; 
+                $comando = str_replace("EXTEND('', YEAR TO DAY)", "null", $comando) ; 
+                $comando = str_replace("EXTEND(null, YEAR TO DAY)", "null", $comando) ; 
+              }  
+              $useUpdateProcedure = false;
+              if (!empty($SC_fields_update) || $useUpdateProcedure)
+              { 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = $comando; 
+                  $rs = $this->Db->Execute($comando);  
+                  if ($rs === false) 
+                  { 
+                      if (FALSE === strpos(strtoupper($this->Db->ErrorMsg()), "MAIL SENT") && FALSE === strpos(strtoupper($this->Db->ErrorMsg()), "WARNING"))
+                      {
+                          $dbErrorMessage = $this->Db->ErrorMsg();
+                          $dbErrorCode = $this->Db->ErrorNo();
+                          $this->handleDbErrorMessage($dbErrorMessage, $dbErrorCode);
+                          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_updt'], $dbErrorMessage, true);
+                          if (isset($_SESSION['scriptcase']['erro_handler']) && $_SESSION['scriptcase']['erro_handler']) 
+                          { 
+                              $this->sc_erro_update = $dbErrorMessage;
+                              $this->NM_rollback_db(); 
+                              if ($this->NM_ajax_flag)
+                              {
+                                  form_seg_apps_pack_ajax_response();
+                              }
+                              exit;  
+                          }   
+                      }   
+                  }   
+              }   
+              $this->app_name = $this->app_name_before_qstr;
+              $this->app_name2 = $this->app_name2_before_qstr;
+              $this->description = $this->description_before_qstr;
+              $this->app_link = $this->app_link_before_qstr;
+              $this->app_icon = $this->app_icon_before_qstr;
+              $this->app_badge = $this->app_badge_before_qstr;
+              $this->color = $this->color_before_qstr;
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
+              { 
+              }   
+              $this->sc_evento = "update"; 
+              $this->nmgp_opcao = "igual"; 
+              $this->nm_flag_iframe = true;
+              if ($this->lig_edit_lookup)
+              {
+                  $this->lig_edit_lookup_call = true;
+              }
+
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['db_changed'] = true;
+              if ($this->NM_ajax_flag) {
+                  $this->NM_ajax_info['clearUpload'] = 'S';
+              }
+
+
+              if     (isset($NM_val_form) && isset($NM_val_form['idapp'])) { $this->idapp = $NM_val_form['idapp']; }
+              elseif (isset($this->idapp)) { $this->nm_limpa_alfa($this->idapp); }
+              if     (isset($NM_val_form) && isset($NM_val_form['app_name'])) { $this->app_name = $NM_val_form['app_name']; }
+              elseif (isset($this->app_name)) { $this->nm_limpa_alfa($this->app_name); }
+              if     (isset($NM_val_form) && isset($NM_val_form['app_name2'])) { $this->app_name2 = $NM_val_form['app_name2']; }
+              elseif (isset($this->app_name2)) { $this->nm_limpa_alfa($this->app_name2); }
+              if     (isset($NM_val_form) && isset($NM_val_form['idapptype'])) { $this->idapptype = $NM_val_form['idapptype']; }
+              elseif (isset($this->idapptype)) { $this->nm_limpa_alfa($this->idapptype); }
+              if     (isset($NM_val_form) && isset($NM_val_form['description'])) { $this->description = $NM_val_form['description']; }
+              elseif (isset($this->description)) { $this->nm_limpa_alfa($this->description); }
+              if     (isset($NM_val_form) && isset($NM_val_form['app_order'])) { $this->app_order = $NM_val_form['app_order']; }
+              elseif (isset($this->app_order)) { $this->nm_limpa_alfa($this->app_order); }
+              if     (isset($NM_val_form) && isset($NM_val_form['app_parentid'])) { $this->app_parentid = $NM_val_form['app_parentid']; }
+              elseif (isset($this->app_parentid)) { $this->nm_limpa_alfa($this->app_parentid); }
+              if     (isset($NM_val_form) && isset($NM_val_form['app_link'])) { $this->app_link = $NM_val_form['app_link']; }
+              elseif (isset($this->app_link)) { $this->nm_limpa_alfa($this->app_link); }
+              if     (isset($NM_val_form) && isset($NM_val_form['app_icon'])) { $this->app_icon = $NM_val_form['app_icon']; }
+              elseif (isset($this->app_icon)) { $this->nm_limpa_alfa($this->app_icon); }
+              if     (isset($NM_val_form) && isset($NM_val_form['app_badge'])) { $this->app_badge = $NM_val_form['app_badge']; }
+              elseif (isset($this->app_badge)) { $this->nm_limpa_alfa($this->app_badge); }
+              if     (isset($NM_val_form) && isset($NM_val_form['color'])) { $this->color = $NM_val_form['color']; }
+              elseif (isset($this->color)) { $this->nm_limpa_alfa($this->color); }
+
+              $this->nm_formatar_campos();
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+              {
+              }
+
+              $aOldRefresh               = $this->nmgp_refresh_fields;
+              $this->nmgp_refresh_fields = array_diff(array('idapp', 'app_name', 'app_name2', 'app_link', 'idapptype', 'description', 'app_parentid', 'app_order', 'app_icon', 'app_badge', 'color'), $aDoNotUpdate);
+              $this->ajax_return_values();
+              $this->nmgp_refresh_fields = $aOldRefresh;
+
+              $this->nm_tira_formatacao();
+          }  
+      }  
+      if ($this->nmgp_opcao == "incluir") 
+      { 
+          $NM_cmp_auto = "";
+          $NM_seq_auto = "";
+          if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['foreign_key']))
+          {
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['foreign_key'] as $sFKName => $sFKValue)
+              {
+                   if (isset($this->sc_conv_var[$sFKName]))
+                   {
+                       $sFKName = $this->sc_conv_var[$sFKName];
+                   }
+                  eval("\$this->" . $sFKName . " = \"" . $sFKValue . "\";");
+              }
+          }
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+          { 
+              $NM_seq_auto = "NULL, ";
+              $NM_cmp_auto = "idapp, ";
+          } 
+          $bInsertOk = true;
+          $aInsertOk = array(); 
+          $bInsertOk = $bInsertOk && empty($aInsertOk);
+          if (!isset($_POST['nmgp_ins_valid']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['insert_validation'] != $_POST['nmgp_ins_valid'])
+          {
+              $bInsertOk = false;
+              $this->Erro->mensagem(__FILE__, __LINE__, 'security', $this->Ini->Nm_lang['lang_errm_inst_vald']);
+              if (isset($_SESSION['scriptcase']['erro_handler']) && $_SESSION['scriptcase']['erro_handler'])
+              {
+                  $this->nmgp_opcao = 'refresh_insert';
+                  if ($this->NM_ajax_flag)
+                  {
+                      form_seg_apps_pack_ajax_response();
+                      exit;
+                  }
+              }
+          }
+          if ($bInsertOk)
+          { 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+              { 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->app_order != "")
+                  { 
+                       $compl_insert     .= ", app_order";
+                       $compl_insert_val .= ", $this->app_order";
+                  } 
+                  if ($this->create_in != "")
+                  { 
+                       $compl_insert     .= ", create_in";
+                       $compl_insert_val .= ", '$this->create_in'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (app_name, app_name2, idapptype, description, app_parentid, app_link, app_icon, app_badge, level, color $compl_insert) VALUES ('$this->app_name', '$this->app_name2', $this->idapptype, '$this->description', $this->app_parentid, '$this->app_link', '$this->app_icon', '$this->app_badge', $this->level, '$this->color' $compl_insert_val)"; 
+              }
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+              { 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->app_order != "")
+                  { 
+                       $compl_insert     .= ", app_order";
+                       $compl_insert_val .= ", $this->app_order";
+                  } 
+                  if ($this->create_in != "")
+                  { 
+                       $compl_insert     .= ", create_in";
+                       $compl_insert_val .= ", '$this->create_in'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "app_name, app_name2, idapptype, description, app_parentid, app_link, app_icon, app_badge, level, color $compl_insert) VALUES (" . $NM_seq_auto . "'$this->app_name', '$this->app_name2', $this->idapptype, '$this->description', $this->app_parentid, '$this->app_link', '$this->app_icon', '$this->app_badge', $this->level, '$this->color' $compl_insert_val)"; 
+              }
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+              { 
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->app_order != "")
+                  { 
+                       $compl_insert     .= ", app_order";
+                       $compl_insert_val .= ", $this->app_order";
+                  } 
+                  if ($this->create_in != "")
+                  { 
+                       $compl_insert     .= ", create_in";
+                       $compl_insert_val .= ", '$this->create_in'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "app_name, app_name2, idapptype, description, app_parentid, app_link, app_icon, app_badge, level, color $compl_insert) VALUES (" . $NM_seq_auto . "'$this->app_name', '$this->app_name2', $this->idapptype, '$this->description', $this->app_parentid, '$this->app_link', '$this->app_icon', '$this->app_badge', $this->level, '$this->color' $compl_insert_val)"; 
+              }
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+              {
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->app_order != "")
+                  { 
+                       $compl_insert     .= ", app_order";
+                       $compl_insert_val .= ", $this->app_order";
+                  } 
+                  if ($this->create_in != "")
+                  { 
+                       $compl_insert     .= ", create_in";
+                       $compl_insert_val .= ", TO_DATE('$this->create_in', 'yyyy-mm-dd hh24:mi:ss')";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "app_name, app_name2, idapptype, description, app_parentid, app_link, app_icon, app_badge, level, color $compl_insert) VALUES (" . $NM_seq_auto . "'$this->app_name', '$this->app_name2', $this->idapptype, '$this->description', $this->app_parentid, '$this->app_link', '$this->app_icon', '$this->app_badge', $this->level, '$this->color' $compl_insert_val)"; 
+              }
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              {
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->app_order != "")
+                  { 
+                       $compl_insert     .= ", app_order";
+                       $compl_insert_val .= ", $this->app_order";
+                  } 
+                  if ($this->create_in != "")
+                  { 
+                       $compl_insert     .= ", create_in";
+                       $compl_insert_val .= ", '$this->create_in'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "app_name, app_name2, idapptype, description, app_parentid, app_link, app_icon, app_badge, level, color $compl_insert) VALUES (" . $NM_seq_auto . "'$this->app_name', '$this->app_name2', $this->idapptype, '$this->description', $this->app_parentid, '$this->app_link', '$this->app_icon', '$this->app_badge', $this->level, '$this->color' $compl_insert_val)"; 
+              }
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+              {
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->app_order != "")
+                  { 
+                       $compl_insert     .= ", app_order";
+                       $compl_insert_val .= ", $this->app_order";
+                  } 
+                  if ($this->create_in != "")
+                  { 
+                       $compl_insert     .= ", create_in";
+                       $compl_insert_val .= ", '$this->create_in'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "app_name, app_name2, idapptype, description, app_parentid, app_link, app_icon, app_badge, level, color $compl_insert) VALUES (" . $NM_seq_auto . "'$this->app_name', '$this->app_name2', $this->idapptype, '$this->description', $this->app_parentid, '$this->app_link', '$this->app_icon', '$this->app_badge', $this->level, '$this->color' $compl_insert_val)"; 
+              }
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+              {
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->app_order != "")
+                  { 
+                       $compl_insert     .= ", app_order";
+                       $compl_insert_val .= ", $this->app_order";
+                  } 
+                  if ($this->create_in != "")
+                  { 
+                       $compl_insert     .= ", create_in";
+                       $compl_insert_val .= ", '$this->create_in'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "app_name, app_name2, idapptype, description, app_parentid, app_link, app_icon, app_badge, level, color $compl_insert) VALUES (" . $NM_seq_auto . "'$this->app_name', '$this->app_name2', $this->idapptype, '$this->description', $this->app_parentid, '$this->app_link', '$this->app_icon', '$this->app_badge', $this->level, '$this->color' $compl_insert_val)"; 
+              }
+              elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
+              {
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->app_order != "")
+                  { 
+                       $compl_insert     .= ", app_order";
+                       $compl_insert_val .= ", $this->app_order";
+                  } 
+                  if ($this->create_in != "")
+                  { 
+                       $compl_insert     .= ", create_in";
+                       $compl_insert_val .= ", TO_DATE('$this->create_in', 'yyyy-mm-dd hh24:mi:ss')";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "app_name, app_name2, idapptype, description, app_parentid, app_link, app_icon, app_badge, level, color $compl_insert) VALUES (" . $NM_seq_auto . "'$this->app_name', '$this->app_name2', $this->idapptype, '$this->description', $this->app_parentid, '$this->app_link', '$this->app_icon', '$this->app_badge', $this->level, '$this->color' $compl_insert_val)"; 
+              }
+              else
+              {
+                  $compl_insert     = ""; 
+                  $compl_insert_val = ""; 
+                  if ($this->app_order != "")
+                  { 
+                       $compl_insert     .= ", app_order";
+                       $compl_insert_val .= ", $this->app_order";
+                  } 
+                  if ($this->create_in != "")
+                  { 
+                       $compl_insert     .= ", create_in";
+                       $compl_insert_val .= ", '$this->create_in'";
+                  } 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "app_name, app_name2, idapptype, description, app_parentid, app_link, app_icon, app_badge, level, color $compl_insert) VALUES (" . $NM_seq_auto . "'$this->app_name', '$this->app_name2', $this->idapptype, '$this->description', $this->app_parentid, '$this->app_link', '$this->app_icon', '$this->app_badge', $this->level, '$this->color' $compl_insert_val)"; 
+              }
+              $comando = str_replace("N'null'", "null", $comando) ; 
+              $comando = str_replace("'null'", "null", $comando) ; 
+              $comando = str_replace("#null#", "null", $comando) ; 
+              $comando = str_replace($this->Ini->date_delim . "null" . $this->Ini->date_delim1, "null", $comando) ; 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              {
+                $comando = str_replace("EXTEND('', YEAR TO FRACTION)", "null", $comando) ; 
+                $comando = str_replace("EXTEND(null, YEAR TO FRACTION)", "null", $comando) ; 
+                $comando = str_replace("EXTEND('', YEAR TO DAY)", "null", $comando) ; 
+                $comando = str_replace("EXTEND(null, YEAR TO DAY)", "null", $comando) ; 
+              }  
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = $comando; 
+              $rs = $this->Db->Execute($comando); 
+              if ($rs === false)  
+              { 
+                  if (FALSE === strpos(strtoupper($this->Db->ErrorMsg()), "MAIL SENT") && FALSE === strpos(strtoupper($this->Db->ErrorMsg()), "WARNING"))
+                  {
+                      $dbErrorMessage = $this->Db->ErrorMsg();
+                      $dbErrorCode = $this->Db->ErrorNo();
+                      $this->handleDbErrorMessage($dbErrorMessage, $dbErrorCode);
+                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_inst'], $dbErrorMessage, true);
+                      if (isset($_SESSION['scriptcase']['erro_handler']) && $_SESSION['scriptcase']['erro_handler'])
+                      { 
+                          $this->sc_erro_insert = $dbErrorMessage;
+                          $this->nmgp_opcao     = 'refresh_insert';
+                          $this->NM_rollback_db(); 
+                          if ($this->NM_ajax_flag)
+                          {
+                              form_seg_apps_pack_ajax_response();
+                              exit; 
+                          }
+                      }  
+                  }  
+              }  
+              if ('refresh_insert' != $this->nmgp_opcao)
+              {
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase)) 
+              { 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select @@identity"; 
+                  $rsy = $this->Db->Execute($_SESSION['scriptcase']['sc_sql_ult_comando']); 
+                  if ($rsy === false && !$rsy->EOF)  
+                  { 
+                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                      $this->NM_rollback_db(); 
+                      if ($this->NM_ajax_flag)
+                      {
+                          form_seg_apps_pack_ajax_response();
+                      }
+                      exit; 
+                  } 
+                  $this->idapp =  $rsy->fields[0];
+                 $rsy->Close(); 
+              } 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
+              { 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select last_insert_id()"; 
+                  $rsy = $this->Db->Execute($_SESSION['scriptcase']['sc_sql_ult_comando']); 
+                  if ($rsy === false && !$rsy->EOF)  
+                  { 
+                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                      exit; 
+                  } 
+                  $this->idapp = $rsy->fields[0];
+                  $rsy->Close(); 
+              } 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              { 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SELECT dbinfo('sqlca.sqlerrd1') FROM " . $this->Ini->nm_tabela; 
+                  $rsy = $this->Db->Execute($_SESSION['scriptcase']['sc_sql_ult_comando']); 
+                  if ($rsy === false && !$rsy->EOF)  
+                  { 
+                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                      exit; 
+                  } 
+                  $this->idapp = $rsy->fields[0];
+                  $rsy->Close(); 
+              } 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+              { 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select .currval from dual"; 
+                  $rsy = $this->Db->Execute($_SESSION['scriptcase']['sc_sql_ult_comando']); 
+                  if ($rsy === false && !$rsy->EOF)  
+                  { 
+                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                      exit; 
+                  } 
+                  $this->idapp = $rsy->fields[0];
+                  $rsy->Close(); 
+              } 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+              { 
+                  $str_tabela = "SYSIBM.SYSDUMMY1"; 
+                  if($this->Ini->nm_con_use_schema == "N") 
+                  { 
+                          $str_tabela = "SYSDUMMY1"; 
+                  } 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SELECT IDENTITY_VAL_LOCAL() FROM " . $str_tabela; 
+                  $rsy = $this->Db->Execute($_SESSION['scriptcase']['sc_sql_ult_comando']); 
+                  if ($rsy === false && !$rsy->EOF)  
+                  { 
+                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                      exit; 
+                  } 
+                  $this->idapp = $rsy->fields[0];
+                  $rsy->Close(); 
+              } 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+              { 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select CURRVAL('')"; 
+                  $rsy = $this->Db->Execute($_SESSION['scriptcase']['sc_sql_ult_comando']); 
+                  if ($rsy === false && !$rsy->EOF)  
+                  { 
+                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                      exit; 
+                  } 
+                  $this->idapp = $rsy->fields[0];
+                  $rsy->Close(); 
+              } 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+              { 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select gen_id(, 0) from " . $this->Ini->nm_tabela; 
+                  $rsy = $this->Db->Execute($_SESSION['scriptcase']['sc_sql_ult_comando']); 
+                  if ($rsy === false && !$rsy->EOF)  
+                  { 
+                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                      exit; 
+                  } 
+                  $this->idapp = $rsy->fields[0];
+                  $rsy->Close(); 
+              } 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
+              { 
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select last_insert_rowid()"; 
+                  $rsy = $this->Db->Execute($_SESSION['scriptcase']['sc_sql_ult_comando']); 
+                  if ($rsy === false && !$rsy->EOF)  
+                  { 
+                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+                      exit; 
+                  } 
+                  $this->idapp = $rsy->fields[0];
+                  $rsy->Close(); 
+              } 
+              $this->app_name = $this->app_name_before_qstr;
+              $this->app_name2 = $this->app_name2_before_qstr;
+              $this->description = $this->description_before_qstr;
+              $this->app_link = $this->app_link_before_qstr;
+              $this->app_icon = $this->app_icon_before_qstr;
+              $this->app_badge = $this->app_badge_before_qstr;
+              $this->color = $this->color_before_qstr;
+              }
+
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['db_changed'] = true;
+
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total']))
+              {
+                  unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total']);
+              }
+
+              $this->sc_evento = "insert"; 
+              $this->app_name = $this->app_name_before_qstr;
+              $this->app_name2 = $this->app_name2_before_qstr;
+              $this->description = $this->description_before_qstr;
+              $this->app_link = $this->app_link_before_qstr;
+              $this->app_icon = $this->app_icon_before_qstr;
+              $this->app_badge = $this->app_badge_before_qstr;
+              $this->color = $this->color_before_qstr;
+              $this->sc_insert_on = true; 
+              if (empty($this->sc_erro_insert)) {
+                  $this->record_insert_ok = true;
+              } 
+              if ('refresh_insert' != $this->nmgp_opcao && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['sc_redir_insert']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['sc_redir_insert'] != "S"))
+              {
+              $this->nmgp_opcao = "novo"; 
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "R")
+              { 
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['return_edit'] = "new";
+              } 
+              }
+              $this->nm_flag_iframe = true;
+          } 
+          if ($this->lig_edit_lookup)
+          {
+              $this->lig_edit_lookup_call = true;
+          }
+      } 
+      if ($this->nmgp_opcao == "excluir") 
+      { 
+          $this->idapp = substr($this->Db->qstr($this->idapp), 1, -1); 
+
+          $bDelecaoOk = true;
+          $sMsgErro   = '';
+
+          if ($bDelecaoOk)
+          {
+
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          else  
+          {
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp"; 
+              $rs1 = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+          }  
+          if ($rs1 === false)  
+          { 
+              $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+              exit; 
+          }  
+          if ($rs1 === false)  
+          { 
+              $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dbas'], $this->Db->ErrorMsg()); 
+              exit; 
+          }  
+          $tmp_result = (int) $rs1->fields[0]; 
+          if ($tmp_result != 1) 
+          { 
+              $this->Erro->mensagem (__FILE__, __LINE__, "critica", $this->Ini->Nm_lang['lang_errm_dele_nfnd']); 
+              $this->nmgp_opcao = "nada"; 
+              $this->sc_evento = 'delete';
+          } 
+          else 
+          { 
+              $rs1->Close(); 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+              {
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+              {
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+              {
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              {
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+              }  
+              else  
+              {
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = "DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "; 
+                  $rs = $this->Db->Execute("DELETE FROM " . $this->Ini->nm_tabela . " where idapp = $this->idapp "); 
+              }  
+              if ($rs === false) 
+              { 
+                  $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dele'], $this->Db->ErrorMsg(), true); 
+                  if (isset($_SESSION['scriptcase']['erro_handler']) && $_SESSION['scriptcase']['erro_handler']) 
+                  { 
+                      $this->sc_erro_delete = $this->Db->ErrorMsg();  
+                      $this->NM_rollback_db(); 
+                      if ($this->NM_ajax_flag)
+                      {
+                          form_seg_apps_pack_ajax_response();
+                          exit; 
+                      }
+                  } 
+              } 
+              $this->sc_evento = "delete"; 
+              if (empty($this->sc_erro_delete)) {
+                  $this->record_delete_ok = true;
+              }
+              $this->nmgp_opcao = "avanca"; 
+              $this->nm_flag_iframe = true;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start']--; 
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] < 0)
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] = 0; 
+              }
+
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['db_changed'] = true;
+
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total']))
+              {
+                  unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total']);
+              }
+
+              if ($this->lig_edit_lookup)
+              {
+                  $this->lig_edit_lookup_call = true;
+              }
+          }
+
+          }
+          else
+          {
+              $this->sc_evento = "delete"; 
+              $this->nmgp_opcao = "igual"; 
+              $this->Erro->mensagem(__FILE__, __LINE__, "critica", $sMsgErro); 
+          }
+
+      }  
+      if (!empty($this->sc_force_zero))
+      {
+          foreach ($this->sc_force_zero as $i_force_zero => $sc_force_zero_field)
+          {
+              eval('if ($this->' . $sc_force_zero_field . ' == 0) {$this->' . $sc_force_zero_field . ' = "";}');
+          }
+      }
+      $this->sc_force_zero = array();
+      if (!empty($NM_val_null))
+      {
+          foreach ($NM_val_null as $i_val_null => $sc_val_null_field)
+          {
+              eval('$this->' . $sc_val_null_field . ' = "";');
+          }
+      }
+      if ($salva_opcao == "incluir" && $GLOBALS["erro_incl"] != 1) 
+      { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['parms'] = "idapp?#?$this->idapp?@?"; 
+      }
+      $this->NM_commit_db(); 
+      if ($this->sc_evento != "insert" && $this->sc_evento != "update" && $this->sc_evento != "delete")
+      { 
+          $this->idapp = null === $this->idapp ? null : substr($this->Db->qstr($this->idapp), 1, -1); 
+      } 
+      if (isset($this->NM_where_filter))
+      {
+          $this->NM_where_filter = str_replace("@percent@", "%", $this->NM_where_filter);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter'] = trim($this->NM_where_filter);
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total']))
+          {
+              unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total']);
+          }
+      }
+      $sc_where_filter = '';
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter_form']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter_form'])
+      {
+          $sc_where_filter = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter_form'];
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter'] && $sc_where_filter != $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter'])
+      {
+          if (empty($sc_where_filter))
+          {
+              $sc_where_filter = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter'];
+          }
+          else
+          {
+              $sc_where_filter .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter'] . ")";
+          }
+      }
+//------------ 
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "R")
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['iframe_evento'] == "insert") 
+          { 
+               $this->nmgp_opcao = "novo"; 
+               $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['select'] = "";
+          } 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['iframe_evento'] = $this->sc_evento; 
+      } 
+      if (!isset($this->nmgp_opcao) || empty($this->nmgp_opcao)) 
+      { 
+          if (empty($this->idapp)) 
+          { 
+              $this->nmgp_opcao = "inicio"; 
+          } 
+          else 
+          { 
+              $this->nmgp_opcao = "igual"; 
+          } 
+      } 
+      if (isset($_POST['master_nav']) && 'on' == $_POST['master_nav']) 
+      { 
+          $this->nmgp_opcao = "inicio";
+      } 
+      if ($this->nmgp_opcao != "nada" && (trim($this->idapp) == "")) 
+      { 
+          if ($this->nmgp_opcao == "avanca")  
+          { 
+              $this->nmgp_opcao = "final"; 
+          } 
+          elseif ($this->nmgp_opcao != "novo")
+          { 
+              $this->nmgp_opcao = "inicio"; 
+          } 
+      } 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+      { 
+          $GLOBALS["NM_ERRO_IBASE"] = 1;  
+      } 
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "F" && $this->sc_evento == "insert")
+      {
+          $this->nmgp_opcao = "final";
+      }
+      $sc_where = trim("");
+      if (substr(strtolower($sc_where), 0, 5) == "where")
+      {
+          $sc_where  = substr($sc_where , 5);
+      }
+      if (!empty($sc_where))
+      {
+          $sc_where = " where " . $sc_where . " ";
+      }
+      if ('' != $sc_where_filter)
+      {
+          $sc_where = ('' != $sc_where) ? $sc_where . ' and (' . $sc_where_filter . ')' : ' where ' . $sc_where_filter;
+      }
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total']))
+      { 
+          $nmgp_select = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela . $sc_where; 
+          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
+          $rt = $this->Db->Execute($nmgp_select) ; 
+          if ($rt === false && !$rt->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+          { 
+              $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+              exit ; 
+          }  
+          $qt_geral_reg_form_seg_apps = isset($rt->fields[0]) ? $rt->fields[0] - 1 : 0; 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total'] = $qt_geral_reg_form_seg_apps;
+          $rt->Close(); 
+          if ($this->nmgp_opcao == "igual" && isset($this->NM_btn_navega) && 'S' == $this->NM_btn_navega && !empty($this->idapp))
+          {
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+              {
+                  $Key_Where = "idapp < $this->idapp "; 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+              {
+                  $Key_Where = "idapp < $this->idapp "; 
+              }
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+              {
+                  $Key_Where = "idapp < $this->idapp "; 
+              }
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              {
+                  $Key_Where = "idapp < $this->idapp "; 
+              }
+              else  
+              {
+                  $Key_Where = "idapp < $this->idapp "; 
+              }
+              $Where_Start = (empty($sc_where)) ? " where " . $Key_Where :  $sc_where . " and (" . $Key_Where . ")";
+              $nmgp_select = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela . $Where_Start; 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
+              $rt = $this->Db->Execute($nmgp_select) ; 
+              if ($rt === false && !$rt->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+              { 
+                  $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+                  exit ; 
+              }  
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] = $rt->fields[0];
+              $rt->Close(); 
+          }
+      } 
+      else 
+      { 
+          $qt_geral_reg_form_seg_apps = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total'];
+      } 
+      if ($this->nmgp_opcao == "inicio") 
+      { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] = 0; 
+      } 
+      if ($this->nmgp_opcao == "avanca")  
+      { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start']++; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] > $qt_geral_reg_form_seg_apps)
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] = $qt_geral_reg_form_seg_apps; 
+          }
+      } 
+      if ($this->nmgp_opcao == "retorna") 
+      { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start']--; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] < 0)
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] = 0; 
+          }
+      } 
+      if ($this->nmgp_opcao == "final") 
+      { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] = $qt_geral_reg_form_seg_apps; 
+      } 
+      if ($this->nmgp_opcao == "navpage" && ($this->nmgp_ordem - 1) <= $qt_geral_reg_form_seg_apps) 
+      { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] = $this->nmgp_ordem - 1; 
+      } 
+      if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start']) || empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start']))
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] = 0;
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] + 1;
+      $this->NM_ajax_info['navSummary']['reg_ini'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] + 1; 
+      $this->NM_ajax_info['navSummary']['reg_qtd'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_qtd']; 
+      $this->NM_ajax_info['navSummary']['reg_tot'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total'] + 1; 
+      $this->NM_gera_nav_page(); 
+      $this->NM_ajax_info['navPage'] = $this->SC_nav_page; 
+      $GLOBALS["NM_ERRO_IBASE"] = 0;  
+//---------- 
+      if ($this->nmgp_opcao != "novo" && $this->nmgp_opcao != "nada" && $this->nmgp_opcao != "refresh_insert") 
+      { 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['parms'] = ""; 
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+          { 
+              $GLOBALS["NM_ERRO_IBASE"] = 1;  
+          } 
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+          { 
+              $nmgp_select = "SELECT idapp, app_name, app_name2, idapptype, description, app_order, app_parentid, app_link, app_icon, app_badge, create_in, level, color from " . $this->Ini->nm_tabela ; 
+          } 
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+          { 
+              $nmgp_select = "SELECT idapp, app_name, app_name2, idapptype, description, app_order, app_parentid, app_link, app_icon, app_badge, create_in, level, color from " . $this->Ini->nm_tabela ; 
+          } 
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+          { 
+              $nmgp_select = "SELECT idapp, app_name, app_name2, idapptype, description, app_order, app_parentid, app_link, app_icon, app_badge, TO_DATE(TO_CHAR(create_in, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), level, color from " . $this->Ini->nm_tabela ; 
+          } 
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+          { 
+              $nmgp_select = "SELECT idapp, app_name, app_name2, idapptype, description, app_order, app_parentid, app_link, app_icon, app_badge, create_in, level, color from " . $this->Ini->nm_tabela ; 
+          } 
+          else 
+          { 
+              $nmgp_select = "SELECT idapp, app_name, app_name2, idapptype, description, app_order, app_parentid, app_link, app_icon, app_badge, create_in, level, color from " . $this->Ini->nm_tabela ; 
+          } 
+          $aWhere = array();
+          $aWhere[] = $sc_where_filter;
+          if ($this->nmgp_opcao == "igual" || (($_SESSION['sc_session'][$this->Ini->sc_page]['form_adm_clientes']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_adm_clientes']['run_iframe'] == "R") && ($this->sc_evento == "insert" || $this->sc_evento == "update")) )
+          { 
+              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+              {
+                  $aWhere[] = "idapp = $this->idapp"; 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+              {
+                  $aWhere[] = "idapp = $this->idapp"; 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+              {
+                  $aWhere[] = "idapp = $this->idapp"; 
+              }  
+              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+              {
+                  $aWhere[] = "idapp = $this->idapp"; 
+              }  
+              else  
+              {
+                  $aWhere[] = "idapp = $this->idapp"; 
+              }  
+              if (!empty($sc_where_filter))  
+              {
+                  $teste_select = $nmgp_select . $this->returnWhere($aWhere);
+                  $_SESSION['scriptcase']['sc_sql_ult_comando'] = $teste_select; 
+                  $rs = $this->Db->Execute($teste_select); 
+                  if ($rs->EOF)
+                  {
+                     $aWhere = array($sc_where_filter);
+                  }  
+                  $rs->Close(); 
+              }  
+          } 
+          $nmgp_select .= $this->returnWhere($aWhere) . ' ';
+          $sc_order_by = "";
+          $sc_order_by = "idapp";
+          $sc_order_by = str_replace("order by ", "", $sc_order_by);
+          $sc_order_by = str_replace("ORDER BY ", "", trim($sc_order_by));
+          if (!empty($sc_order_by))
+          {
+              $nmgp_select .= " order by $sc_order_by "; 
+          }
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "R")
+          {
+              if ($this->sc_evento == "update")
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['select'] = $nmgp_select;
+                  $this->nm_gera_html();
+              } 
+              elseif (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['select']))
+              { 
+                  $nmgp_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['select'];
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['select'] = ""; 
+              } 
+          } 
+          if ($this->nmgp_opcao == "igual") 
+          { 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
+              $rs = $this->Db->Execute($nmgp_select) ; 
+          } 
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase) || in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_db2))
+          { 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] . ")" ; 
+              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start']) ; 
+          } 
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+          { 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] . ")" ; 
+              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start']) ; 
+          } 
+          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+          { 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = "SelectLimit($nmgp_select, 1, " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] . ")" ; 
+              $rs = $this->Db->SelectLimit($nmgp_select, 1, $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start']) ; 
+          } 
+          else  
+          { 
+              $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
+              $rs = $this->Db->Execute($nmgp_select) ; 
+              if (!$rs === false && !$rs->EOF) 
+              { 
+                  $rs->Move($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start']) ;  
+              } 
+          } 
+          if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+          { 
+              $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+              exit ; 
+          }  
+          if ($rs === false && $GLOBALS["NM_ERRO_IBASE"] == 1) 
+          { 
+              $GLOBALS["NM_ERRO_IBASE"] = 0; 
+              $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_nfnd_extr'], $this->Db->ErrorMsg()); 
+              exit ; 
+          }  
+          if ($rs->EOF) 
+          { 
+              if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter']))
+              {
+                  $this->nmgp_form_empty        = true;
+                  $this->NM_ajax_info['buttonDisplay']['first']   = $this->nmgp_botoes['first']   = "off";
+                  $this->NM_ajax_info['buttonDisplay']['back']    = $this->nmgp_botoes['back']    = "off";
+                  $this->NM_ajax_info['buttonDisplay']['forward'] = $this->nmgp_botoes['forward'] = "off";
+                  $this->NM_ajax_info['buttonDisplay']['last']    = $this->nmgp_botoes['last']    = "off";
+                  $this->NM_ajax_info['buttonDisplay']['update']  = $this->nmgp_botoes['update']  = "off";
+                  $this->NM_ajax_info['buttonDisplay']['delete']  = $this->nmgp_botoes['delete']  = "off";
+                  $this->NM_ajax_info['buttonDisplay']['first']   = $this->nmgp_botoes['insert']  = "off";
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['empty_filter'] = true;
+                  return; 
+              }
+              if ($this->nmgp_botoes['insert'] != "on")
+              {
+                  $this->nmgp_form_empty        = true;
+                  $this->NM_ajax_info['buttonDisplay']['first']   = $this->nmgp_botoes['first']   = "off";
+                  $this->NM_ajax_info['buttonDisplay']['back']    = $this->nmgp_botoes['back']    = "off";
+                  $this->NM_ajax_info['buttonDisplay']['forward'] = $this->nmgp_botoes['forward'] = "off";
+                  $this->NM_ajax_info['buttonDisplay']['last']    = $this->nmgp_botoes['last']    = "off";
+              }
+              $this->nmgp_opcao = "novo"; 
+              $this->nm_flag_saida_novo = "S"; 
+              $rs->Close(); 
+              if ($this->aba_iframe)
+              {
+                  $this->NM_ajax_info['buttonDisplay']['exit'] = $this->nmgp_botoes['exit'] = 'off';
+              }
+          } 
+          if ($rs === false && $GLOBALS["NM_ERRO_IBASE"] == 1) 
+          { 
+              $GLOBALS["NM_ERRO_IBASE"] = 0; 
+              $this->Erro->mensagem (__FILE__, __LINE__, "critica", $this->Ini->Nm_lang['lang_errm_nfnd_extr']); 
+              $this->nmgp_opcao = "novo"; 
+          }  
+          if ($this->nmgp_opcao != "novo") 
+          { 
+              $this->idapp = $rs->fields[0] ; 
+              $this->nmgp_dados_select['idapp'] = $this->idapp;
+              $this->app_name = $rs->fields[1] ; 
+              $this->nmgp_dados_select['app_name'] = $this->app_name;
+              $this->app_name2 = $rs->fields[2] ; 
+              $this->nmgp_dados_select['app_name2'] = $this->app_name2;
+              $this->idapptype = $rs->fields[3] ; 
+              $this->nmgp_dados_select['idapptype'] = $this->idapptype;
+              $this->description = $rs->fields[4] ; 
+              $this->nmgp_dados_select['description'] = $this->description;
+              $this->app_order = $rs->fields[5] ; 
+              $this->nmgp_dados_select['app_order'] = $this->app_order;
+              $this->app_parentid = $rs->fields[6] ; 
+              $this->nmgp_dados_select['app_parentid'] = $this->app_parentid;
+              $this->app_link = $rs->fields[7] ; 
+              $this->nmgp_dados_select['app_link'] = $this->app_link;
+              $this->app_icon = $rs->fields[8] ; 
+              $this->nmgp_dados_select['app_icon'] = $this->app_icon;
+              $this->app_badge = $rs->fields[9] ; 
+              $this->nmgp_dados_select['app_badge'] = $this->app_badge;
+              $this->create_in = $rs->fields[10] ; 
+              if (substr($this->create_in, 10, 1) == "-") 
+              { 
+                 $this->create_in = substr($this->create_in, 0, 10) . " " . substr($this->create_in, 11);
+              } 
+              if (substr($this->create_in, 13, 1) == ".") 
+              { 
+                 $this->create_in = substr($this->create_in, 0, 13) . ":" . substr($this->create_in, 14, 2) . ":" . substr($this->create_in, 17);
+              } 
+              $this->nmgp_dados_select['create_in'] = $this->create_in;
+              $this->level = $rs->fields[11] ; 
+              $this->nmgp_dados_select['level'] = $this->level;
+              $this->color = $rs->fields[12] ; 
+              $this->nmgp_dados_select['color'] = $this->color;
+          $GLOBALS["NM_ERRO_IBASE"] = 0; 
+              $this->idapp = (string)$this->idapp; 
+              $this->idapptype = (string)$this->idapptype; 
+              $this->app_order = (string)$this->app_order; 
+              $this->app_parentid = (string)$this->app_parentid; 
+              $this->level = (string)$this->level; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['parms'] = "idapp?#?$this->idapp?@?";
+          } 
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dados_select'] = $this->nmgp_dados_select;
+          if (!$this->NM_ajax_flag || 'backup_line' != $this->NM_ajax_opcao)
+          {
+              $this->Nav_permite_ret = 0 != $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'];
+              $this->Nav_permite_ava = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] < $qt_geral_reg_form_seg_apps;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opcao']   = '';
+          }
+      } 
+      if ($this->nmgp_opcao == "novo" || $this->nmgp_opcao == "refresh_insert") 
+      { 
+          $this->sc_evento_old = $this->sc_evento;
+          $this->sc_evento = "novo";
+          if ('refresh_insert' == $this->nmgp_opcao)
+          {
+              $this->nmgp_opcao = 'novo';
+          }
+          else
+          {
+              $this->nm_formatar_campos();
+              $this->idapp = "";  
+              $this->nmgp_dados_form["idapp"] = $this->idapp;
+              $this->app_name = "";  
+              $this->nmgp_dados_form["app_name"] = $this->app_name;
+              $this->app_name2 = "";  
+              $this->nmgp_dados_form["app_name2"] = $this->app_name2;
+              $this->idapptype = "";  
+              $this->nmgp_dados_form["idapptype"] = $this->idapptype;
+              $this->description = "";  
+              $this->nmgp_dados_form["description"] = $this->description;
+              $this->app_order = "";  
+              $this->nmgp_dados_form["app_order"] = $this->app_order;
+              $this->app_parentid = "";  
+              $this->nmgp_dados_form["app_parentid"] = $this->app_parentid;
+              $this->app_link = "";  
+              $this->nmgp_dados_form["app_link"] = $this->app_link;
+              $this->app_icon = "";  
+              $this->nmgp_dados_form["app_icon"] = $this->app_icon;
+              $this->app_badge = "";  
+              $this->nmgp_dados_form["app_badge"] = $this->app_badge;
+              $this->create_in = "";  
+              $this->create_in_hora = "" ;  
+              $this->nmgp_dados_form["create_in"] = $this->create_in;
+              $this->level = "";  
+              $this->nmgp_dados_form["level"] = $this->level;
+              $this->color = "";  
+              $this->nmgp_dados_form["color"] = $this->color;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dados_form'] = $this->nmgp_dados_form;
+              $this->formatado = false;
+          }
+          if (($this->Embutida_form || $this->Embutida_multi) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['foreign_key']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['foreign_key']))
+          {
+              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['foreign_key'] as $sFKName => $sFKValue)
+              {
+                   if (isset($this->sc_conv_var[$sFKName]))
+                   {
+                       $sFKName = $this->sc_conv_var[$sFKName];
+                   }
+                  eval("\$this->" . $sFKName . " = \"" . $sFKValue . "\";");
+              }
+          }
+      }  
+//
+//
+//-- 
+      if ($this->nmgp_opcao != "novo") 
+      {
+      }
+      if (!isset($this->nmgp_refresh_fields)) 
+      { 
+          $this->nm_proc_onload();
+      }
+  }
+// 
+//-- 
+   function nm_db_retorna($str_where_param = '') 
+   {  
+     $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+     $str_where_filter = ('' != $str_where_param) ? ' and ' . $str_where_param : '';
+     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter); 
+     }  
+     else  
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " where idapp < $this->idapp" . $str_where_filter); 
+     }  
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if (isset($rs->fields[0]) && $rs->fields[0] != "") 
+     { 
+         $this->idapp = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+         $rs->Close();  
+         $this->nmgp_opcao = "igual";  
+         return ;  
+     } 
+     else 
+     { 
+        $this->nmgp_opcao = "inicio";  
+        $rs->Close();  
+        return ; 
+     } 
+   } 
+// 
+//-- 
+   function nm_db_avanca($str_where_param = '') 
+   {  
+     $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+     $str_where_filter = ('' != $str_where_param) ? ' and ' . $str_where_param : '';
+     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter); 
+     }  
+     else  
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " where idapp > $this->idapp" . $str_where_filter); 
+     }  
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if (isset($rs->fields[0]) && $rs->fields[0] != "") 
+     { 
+         $this->idapp = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+         $rs->Close();  
+         $this->nmgp_opcao = "igual";  
+         return ;  
+     } 
+     else 
+     { 
+        $this->nmgp_opcao = "final";  
+        $rs->Close();  
+        return ; 
+     } 
+   } 
+// 
+//-- 
+   function nm_db_inicio($str_where_param = '') 
+   {   
+     $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+     $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select count(*) AS countTest from " . $this->Ini->nm_tabela; 
+     $rs = $this->Db->Execute("select count(*) AS countTest from " . $this->Ini->nm_tabela);
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if ($rs->fields[0] == 0) 
+     { 
+         $this->nmgp_opcao = "novo"; 
+         $this->nm_flag_saida_novo = "S"; 
+         $rs->Close(); 
+         if ($this->aba_iframe)
+         {
+             $this->nmgp_botoes['exit'] = 'off';
+         }
+         return;
+     }
+     $str_where_filter = ('' != $str_where_param) ? ' where ' . $str_where_param : '';
+     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     else  
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select min(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if (!isset($rs->fields[0]) || $rs->EOF) 
+     { 
+         if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter']))
+         { 
+             $rs->Close();  
+             return ; 
+         } 
+         $this->nm_flag_saida_novo = "S"; 
+         $this->nmgp_opcao = "novo";  
+         $rs->Close();  
+         if ($this->aba_iframe)
+         {
+             $this->nmgp_botoes['exit'] = 'off';
+         }
+         return ; 
+     } 
+     $this->idapp = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+     $rs->Close();  
+     $this->nmgp_opcao = "igual";  
+     return ;  
+   } 
+// 
+//-- 
+   function nm_db_final($str_where_param = '') 
+   { 
+     $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+     $str_where_filter = ('' != $str_where_param) ? ' where ' . $str_where_param : '';
+     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     else  
+     {
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = "select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter; 
+         $rs = $this->Db->Execute("select max(idapp) from " . $this->Ini->nm_tabela . " " . $str_where_filter); 
+     }  
+     if ($rs === false && !$rs->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+     { 
+         $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+         exit ; 
+     }  
+     if (!isset($rs->fields[0]) || $rs->EOF) 
+     { 
+         $this->nm_flag_saida_novo = "S"; 
+         $this->nmgp_opcao = "novo";  
+         $rs->Close();  
+         if ($this->aba_iframe)
+         {
+             $this->nmgp_botoes['exit'] = 'off';
+         }
+         return ; 
+     } 
+     $this->idapp = substr($this->Db->qstr($rs->fields[0]), 1, -1); 
+     $rs->Close();  
+     $this->nmgp_opcao = "igual";  
+     return ;  
+   } 
+   function NM_gera_nav_page() 
+   {
+       $this->SC_nav_page = "";
+       $Arr_result        = array();
+       $Ind_result        = 0;
+       $Reg_Page   = 1;
+       $Max_link   = 5;
+       $Mid_link   = ceil($Max_link / 2);
+       $Corr_link  = (($Max_link % 2) == 0) ? 0 : 1;
+       $rec_tot    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total'] + 1;
+       $rec_fim    = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['reg_start'] + 1;
+       $rec_fim    = ($rec_fim > $rec_tot) ? $rec_tot : $rec_fim;
+       if ($rec_tot == 0)
+       {
+           return;
+       }
+       $Qtd_Pages  = ceil($rec_tot / $Reg_Page);
+       $Page_Atu   = ceil($rec_fim / $Reg_Page);
+       $Link_ini   = 1;
+       if ($Page_Atu > $Max_link)
+       {
+           $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+       }
+       elseif ($Page_Atu > $Mid_link)
+       {
+           $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+       }
+       if (($Qtd_Pages - $Link_ini) < $Max_link)
+       {
+           $Link_ini = ($Qtd_Pages - $Max_link) + 1;
+       }
+       if ($Link_ini < 1)
+       {
+           $Link_ini = 1;
+       }
+       for ($x = 0; $x < $Max_link && $Link_ini <= $Qtd_Pages; $x++)
+       {
+           $rec = (($Link_ini - 1) * $Reg_Page) + 1;
+           if ($Link_ini == $Page_Atu)
+           {
+               $Arr_result[$Ind_result] = '<span class="scFormToolbarNavOpen" style="vertical-align: middle;">' . $Link_ini . '</span>';
+           }
+           else
+           {
+               $Arr_result[$Ind_result] = '<a class="scFormToolbarNav" style="vertical-align: middle;" href="javascript: nm_navpage(' . $rec . ')">' . $Link_ini . '</a>';
+           }
+           $Link_ini++;
+           $Ind_result++;
+           if (($x + 1) < $Max_link && $Link_ini <= $Qtd_Pages && '' != $this->Ini->Str_toolbarnav_separator && @is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator))
+           {
+               $Arr_result[$Ind_result] = '<img src="' . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator . '" align="absmiddle" style="vertical-align: middle;">';
+               $Ind_result++;
+           }
+       }
+       if ($_SESSION['scriptcase']['reg_conf']['css_dir'] == "RTL")
+       {
+           krsort($Arr_result);
+       }
+       foreach ($Arr_result as $Ind_result => $Lin_result)
+       {
+           $this->SC_nav_page .= $Lin_result;
+       }
+   }
+        function initializeRecordState() {
+                $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'] = array();
+        }
+
+        function storeRecordState($sc_seq_vert = 0) {
+                if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'])) {
+                        $this->initializeRecordState();
+                }
+                if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'][$sc_seq_vert])) {
+                        $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'][$sc_seq_vert] = array();
+                }
+
+                $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'][$sc_seq_vert]['buttons'] = array(
+                        'delete' => $this->nmgp_botoes['delete'],
+                        'update' => $this->nmgp_botoes['update']
+                );
+        }
+
+        function loadRecordState($sc_seq_vert = 0) {
+                if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state']) || !isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'][$sc_seq_vert])) {
+                        return;
+                }
+
+                if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'][$sc_seq_vert]['buttons']['delete'])) {
+                        $this->nmgp_botoes['delete'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'][$sc_seq_vert]['buttons']['delete'];
+                }
+                if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'][$sc_seq_vert]['buttons']['update'])) {
+                        $this->nmgp_botoes['update'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['record_state'][$sc_seq_vert]['buttons']['update'];
+                }
+        }
+
+//
+function app_name_onChange()
+{
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'on';
+  
+$original_app_link = $this->app_link;
+$original_app_name = $this->app_name;
+
+if(empty($this->app_link ) and !empty($this->app_name ))
+{
+	$this->app_link  = "../".$this->app_name ;
+}
+
+$modificado_app_link = $this->app_link;
+$modificado_app_name = $this->app_name;
+$this->nm_formatar_campos('app_link', 'app_name');
+if ($original_app_link !== $modificado_app_link || isset($this->nmgp_cmp_readonly['app_link']) || (isset($bFlagRead_app_link) && $bFlagRead_app_link))
+{
+    $this->ajax_return_values_app_link(true);
+}
+if ($original_app_name !== $modificado_app_name || isset($this->nmgp_cmp_readonly['app_name']) || (isset($bFlagRead_app_name) && $bFlagRead_app_name))
+{
+    $this->ajax_return_values_app_name(true);
+}
+$this->NM_ajax_info['event_field'] = 'app';
+form_seg_apps_pack_ajax_response();
+exit;
+
+
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off';
+}
+function app_parentid_onChange()
+{
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'on';
+  
+$original_app_parentid = $this->app_parentid;
+$original_app_order = $this->app_order;
+
+$vnum = 1;
+$vsql = "SELECT app_order FROM seg_apps WHERE idapp = '".$this->app_parentid ."'";
+ 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vnOrden = array();
+      $this->vnorden = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vnOrden[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vnorden[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vnOrden = false;
+          $this->vnOrden_erro = $this->Db->ErrorMsg();
+          $this->vnorden = false;
+          $this->vnorden_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->vnorden[0][0]))
+{
+	$vnum = $this->vnorden[0][0];
+	
+	$vsql = "SELECT app_order FROM seg_apps WHERE app_parentid = '".$this->app_parentid ."' ORDER BY app_order DESC limit 1";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vUltimo = array();
+      $this->vultimo = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->vUltimo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                      $this->vultimo[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vUltimo = false;
+          $this->vUltimo_erro = $this->Db->ErrorMsg();
+          $this->vultimo = false;
+          $this->vultimo_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vultimo[0][0]))
+	{
+		$vnum = $this->vultimo[0][0]+1;
+	}
+	else
+	{
+		$vnum = $vnum+1;
+	}
+}
+
+$this->app_order  = $vnum;
+
+
+$modificado_app_parentid = $this->app_parentid;
+$modificado_app_order = $this->app_order;
+$this->nm_formatar_campos('app_parentid', 'app_order');
+if ($original_app_parentid !== $modificado_app_parentid || isset($this->nmgp_cmp_readonly['app_parentid']) || (isset($bFlagRead_app_parentid) && $bFlagRead_app_parentid))
+{
+    $this->ajax_return_values_app_parentid(true);
+}
+if ($original_app_order !== $modificado_app_order || isset($this->nmgp_cmp_readonly['app_order']) || (isset($bFlagRead_app_order) && $bFlagRead_app_order))
+{
+    $this->ajax_return_values_app_order(true);
+}
+$this->NM_ajax_info['event_field'] = 'app';
+form_seg_apps_pack_ajax_response();
+exit;
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off';
+}
+function getIcon()
+{
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'on';
+  
+$icons_html = '';
+$sql = "SELECT * FROM facilweb.menu_icons WHERE palabra_clave is not null ORDER BY id_icon DESC";
+$this->Db->fetchMode = ADODB_FETCH_BOTH;
+ 
+      $nm_select = $sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($this->ds = $this->Db->Execute($nm_select)) 
+      { }
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds = false;
+          $this->ds_erro = $this->Db->ErrorMsg();
+      } 
+;
+$data = [];
+
+if (false == $this->ds ) {
+
+	$status = "error";
+	$message=$this->ds_erro ;
+	$code =  500;
+
+} elseif ($this->ds->EOF) {
+
+	$status = "warning";
+	$message='Not record Found!';
+	$code = 300;
+	$this->ds->Close();
+
+} else {
+	$directory = $this->Ini->path_imagens . '/menu-icons/';
+	while (!$this->ds->EOF){
+
+		$item = $this->ds->getRowAssoc(false);
+
+		$nombre = $item['descripcion'];
+		$keyword = $item['palabra_clave'];
+		$src = $directory."/".$nombre;
+
+		$icons_html .= '<div class="col-xl-3 item-icon" data-name="'.$keyword.'" data-nombre="'.$nombre.'">';
+		$icons_html .= '	<div class="card float-hover bg-light" href="javascript:void(0)">';
+		$icons_html .= '		<div class="card-body d-flex justify-content-center p-2">';
+		$icons_html .= '			<img src="'.$src.'" alt="'.$nombre.'">';
+		$icons_html .= '		</div>';
+		$icons_html .= '	</div>';
+		$icons_html .= '</div>';
+
+		$this->ds->moveNext();
+
+	}
+
+	$status = "success";
+	$message="record found!";
+	$code = 200;
+
+	$this->ds->Close();
+}
+
+
+$res = [
+	"status" => $status,
+	"msg" => $message,
+	"code" => $code,
+	"data" => $icons_html,
+	"sql" => $sql
+];
+
+return $res;
+$_SESSION['scriptcase']['form_seg_apps']['contr_erro'] = 'off';
+}
+//
+ function nm_gera_html()
+ {
+    global
+           $nm_url_saida, $nmgp_url_saida, $nm_saida_global, $nm_apl_dependente, $glo_subst, $sc_check_excl, $sc_check_incl, $nmgp_num_form, $NM_run_iframe;
+     if ($this->Embutida_proc)
+     {
+         return;
+     }
+     if ($this->nmgp_form_show == 'off')
+     {
+         exit;
+     }
+      if (isset($NM_run_iframe) && $NM_run_iframe == 1)
+      {
+          $this->nmgp_botoes['exit'] = "off";
+      }
+     $HTTP_REFERER = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : ""; 
+     $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+     $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['botoes'] = $this->nmgp_botoes;
+     if ($this->nmgp_opcao != "recarga" && $this->nmgp_opcao != "muda_form")
+     {
+         $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opc_ant'] = $this->nmgp_opcao;
+     }
+     else
+     {
+         $this->nmgp_opcao = $this->nmgp_opc_ant;
+     }
+     if (!empty($this->Campos_Mens_erro)) 
+     {
+         $this->Erro->mensagem(__FILE__, __LINE__, "critica", $this->Campos_Mens_erro); 
+         $this->Campos_Mens_erro = "";
+     }
+     if (($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "R") && $this->nm_flag_iframe && empty($this->nm_todas_criticas))
+     {
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe_ajax']))
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['retorno_edit'] = array("edit", "");
+          }
+          else
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['retorno_edit'] .= "&nmgp_opcao=edit";
+          }
+          if ($this->sc_evento == "insert" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "F")
+          {
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe_ajax']))
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['retorno_edit'] = array("edit", "fim");
+              }
+              else
+              {
+                  $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['retorno_edit'] .= "&rec=fim";
+              }
+          }
+          $this->NM_close_db(); 
+          $sJsParent = '';
+          if ($this->NM_ajax_flag && isset($this->NM_ajax_info['param']['buffer_output']) && $this->NM_ajax_info['param']['buffer_output'])
+          {
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe_ajax']))
+              {
+                  $this->NM_ajax_info['ajaxJavascript'][] = array("parent.ajax_navigate", $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['retorno_edit']);
+              }
+              else
+              {
+                  $sJsParent .= 'parent';
+                  $this->NM_ajax_info['redir']['metodo'] = 'location';
+                  $this->NM_ajax_info['redir']['action'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['retorno_edit'];
+                  $this->NM_ajax_info['redir']['target'] = $sJsParent;
+              }
+              form_seg_apps_pack_ajax_response();
+              exit;
+          }
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+         <html><body>
+         <script type="text/javascript">
+<?php
+    
+    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe_ajax']))
+    {
+        $opc = ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['run_iframe'] == "F" && $this->sc_evento == "insert") ? "fim" : "";
+        echo "parent.ajax_navigate('edit', '" .$opc . "');";
+    }
+    else
+    {
+        echo $sJsParent . "parent.location = '" . $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['retorno_edit'] . "';";
+    }
+?>
+         </script>
+         </body></html>
+<?php
+         exit;
+     }
+        $this->initFormPages();
+    include_once("form_seg_apps_form0.php");
+        $this->hideFormPages();
+ }
+
+        function initFormPages() {
+        } // initFormPages
+
+        function hideFormPages() {
+        } // hideFormPages
+
+    function form_format_readonly($field, $value)
+    {
+        $result = $value;
+
+        $this->form_highlight_search($result, $field, $value);
+
+        return $result;
+    }
+
+    function form_highlight_search(&$result, $field, $value)
+    {
+        if ($this->proc_fast_search) {
+            $this->form_highlight_search_quicksearch($result, $field, $value);
+        }
+    }
+
+    function form_highlight_search_quicksearch(&$result, $field, $value)
+    {
+        $searchOk = false;
+        if ('SC_all_Cmp' == $this->nmgp_fast_search && in_array($field, array("idapp", "app_name", "app_name2", "idapptype", "description", "app_order", "app_parentid", "app_link", "app_icon", "app_badge", "create_in", "level"))) {
+            $searchOk = true;
+        }
+        elseif ($field == $this->nmgp_fast_search && in_array($field, array(""))) {
+            $searchOk = true;
+        }
+
+        if (!$searchOk || '' == $this->nmgp_arg_fast_search) {
+            return;
+        }
+
+        $htmlIni = '<div class="highlight" style="background-color: #fafaca; display: inline-block">';
+        $htmlFim = '</div>';
+
+        if ('qp' == $this->nmgp_cond_fast_search) {
+            $keywords = preg_quote($this->nmgp_arg_fast_search, '/');
+            $result = preg_replace('/'. $keywords .'/i', $htmlIni . '$0' . $htmlFim, $result);
+        } elseif ('eq' == $this->nmgp_cond_fast_search) {
+            if (strcasecmp($this->nmgp_arg_fast_search, $value) == 0) {
+                $result = $htmlIni. $result .$htmlFim;
+            }
+        }
+    }
+
+
+    function form_encode_input($string)
+    {
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['table_refresh']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['table_refresh'])
+        {
+            return NM_encode_input(NM_encode_input($string));
+        }
+        else
+        {
+            return NM_encode_input($string);
+        }
+    } // form_encode_input
+
+   function jqueryCalendarDtFormat($sFormat, $sSep)
+   {
+       $sFormat = chunk_split(str_replace('yyyy', 'yy', $sFormat), 2, $sSep);
+
+       if ($sSep == substr($sFormat, -1))
+       {
+           $sFormat = substr($sFormat, 0, -1);
+       }
+
+       return $sFormat;
+   } // jqueryCalendarDtFormat
+
+   function jqueryCalendarTimeStart($sFormat)
+   {
+       $aDateParts = explode(';', $sFormat);
+
+       if (2 == sizeof($aDateParts))
+       {
+           $sTime = $aDateParts[1];
+       }
+       else
+       {
+           $sTime = 'hh:mm:ss';
+       }
+
+       return str_replace(array('h', 'm', 'i', 's'), array('0', '0', '0', '0'), $sTime);
+   } // jqueryCalendarTimeStart
+
+   function jqueryCalendarWeekInit($sDay)
+   {
+       switch ($sDay) {
+           case 'MO': return 1; break;
+           case 'TU': return 2; break;
+           case 'WE': return 3; break;
+           case 'TH': return 4; break;
+           case 'FR': return 5; break;
+           case 'SA': return 6; break;
+           default  : return 7; break;
+       }
+   } // jqueryCalendarWeekInit
+
+   function jqueryIconFile($sModule)
+   {
+       $sImage = '';
+       if ('calendar' == $sModule)
+       {
+           if (isset($this->arr_buttons['bcalendario']) && isset($this->arr_buttons['bcalendario']['type']) && 'image' == $this->arr_buttons['bcalendario']['type'] && 'only_fontawesomeicon' != $this->arr_buttons['bcalendario']['display'])
+           {
+               $sImage = $this->arr_buttons['bcalendario']['image'];
+           }
+       }
+       elseif ('calculator' == $sModule)
+       {
+           if (isset($this->arr_buttons['bcalculadora']) && isset($this->arr_buttons['bcalculadora']['type']) && 'image' == $this->arr_buttons['bcalculadora']['type'] && 'only_fontawesomeicon' != $this->arr_buttons['bcalculadora']['display'])
+           {
+               $sImage = $this->arr_buttons['bcalculadora']['image'];
+           }
+       }
+
+       return '' == $sImage ? '' : $this->Ini->path_icones . '/' . $sImage;
+   } // jqueryIconFile
+
+   function jqueryFAFile($sModule)
+   {
+       $sFA = '';
+       if ('calendar' == $sModule)
+       {
+           if (isset($this->arr_buttons['bcalendario']) && isset($this->arr_buttons['bcalendario']['type']) && ('image' == $this->arr_buttons['bcalendario']['type'] || 'button' == $this->arr_buttons['bcalendario']['type']) && 'only_fontawesomeicon' == $this->arr_buttons['bcalendario']['display'])
+           {
+               $sFA = $this->arr_buttons['bcalendario']['fontawesomeicon'];
+           }
+       }
+       elseif ('calculator' == $sModule)
+       {
+           if (isset($this->arr_buttons['bcalculadora']) && isset($this->arr_buttons['bcalculadora']['type']) && ('image' == $this->arr_buttons['bcalculadora']['type'] || 'button' == $this->arr_buttons['bcalculadora']['type']) && 'only_fontawesomeicon' == $this->arr_buttons['bcalculadora']['display'])
+           {
+               $sFA = $this->arr_buttons['bcalculadora']['fontawesomeicon'];
+           }
+       }
+
+       return '' == $sFA ? '' : "<span class='scButton_fontawesome " . $sFA . "'></span>";
+   } // jqueryFAFile
+
+   function jqueryButtonText($sModule)
+   {
+       $sClass = '';
+       $sText  = '';
+       if ('calendar' == $sModule)
+       {
+           if (isset($this->arr_buttons['bcalendario']) && isset($this->arr_buttons['bcalendario']['type']) && ('image' == $this->arr_buttons['bcalendario']['type'] || 'button' == $this->arr_buttons['bcalendario']['type']))
+           {
+               if ('only_text' == $this->arr_buttons['bcalendario']['display'])
+               {
+                   $sClass = 'scButton_' . $this->arr_buttons['bcalendario']['style'];
+                   $sText  = $this->arr_buttons['bcalendario']['value'];
+               }
+               elseif ('text_fontawesomeicon' == $this->arr_buttons['bcalendario']['display'])
+               {
+                   $sClass = 'scButton_' . $this->arr_buttons['bcalendario']['style'];
+                   if ('text_right' == $this->arr_buttons['bcalendario']['display_position'])
+                   {
+                       $sText = "<i class='icon_fa " . $this->arr_buttons['bcalendario']['fontawesomeicon'] . "'></i> " . $this->arr_buttons['bcalendario']['value'];
+                   }
+                   else
+                   {
+                       $sText = $this->arr_buttons['bcalendario']['value'] . " <i class='icon_fa " . $this->arr_buttons['bcalendario']['fontawesomeicon'] . "'></i>";
+                   }
+               }
+           }
+       }
+       elseif ('calculator' == $sModule)
+       {
+           if (isset($this->arr_buttons['bcalculadora']) && isset($this->arr_buttons['bcalculadora']['type']) && ('image' == $this->arr_buttons['bcalculadora']['type'] || 'button' == $this->arr_buttons['bcalculadora']['type']))
+           {
+               if ('only_text' == $this->arr_buttons['bcalculadora']['display'])
+               {
+                   $sClass = 'scButton_' . $this->arr_buttons['bcalendario']['style'];
+                   $sText  = $this->arr_buttons['bcalculadora']['value'];
+               }
+               elseif ('text_fontawesomeicon' == $this->arr_buttons['bcalculadora']['display'])
+               {
+                   $sClass = 'scButton_' . $this->arr_buttons['bcalendario']['style'];
+                   if ('text_right' == $this->arr_buttons['bcalendario']['display_position'])
+                   {
+                       $sText = "<i class='icon_fa " . $this->arr_buttons['bcalculadora']['fontawesomeicon'] . "'></i> " . $this->arr_buttons['bcalculadora']['value'];
+                   }
+                   else
+                   {
+                       $sText = $this->arr_buttons['bcalculadora']['value'] . " <i class='icon_fa " . $this->arr_buttons['bcalculadora']['fontawesomeicon'] . "'></i> ";
+                   }
+               }
+           }
+       }
+
+       return '' == $sText ? array('', '') : array($sText, $sClass);
+   } // jqueryButtonText
+
+
+    function scCsrfGetToken()
+    {
+        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['csrf_token']))
+        {
+            $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['csrf_token'] = $this->scCsrfGenerateToken();
+        }
+
+        return $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['csrf_token'];
+    }
+
+    function scCsrfGenerateToken()
+    {
+        $aSources = array(
+            'abcdefghijklmnopqrstuvwxyz',
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            '1234567890',
+            '!@$*()-_[]{},.;:'
+        );
+
+        $sRandom = '';
+
+        $aSourcesSizes = array();
+        $iSourceSize   = sizeof($aSources) - 1;
+        for ($i = 0; $i <= $iSourceSize; $i++)
+        {
+            $aSourcesSizes[$i] = strlen($aSources[$i]) - 1;
+        }
+
+        for ($i = 0; $i < 64; $i++)
+        {
+            $iSource = $this->scCsrfRandom(0, $iSourceSize);
+            $sRandom .= substr($aSources[$iSource], $this->scCsrfRandom(0, $aSourcesSizes[$iSource]), 1);
+        }
+
+        return $sRandom;
+    }
+
+    function scCsrfRandom($iMin, $iMax)
+    {
+        return mt_rand($iMin, $iMax);
+    }
+
+        function addUrlParam($url, $param, $value) {
+                $urlParts  = explode('?', $url);
+                $urlParams = isset($urlParts[1]) ? explode('&', $urlParts[1]) : array();
+                $objParams = array();
+                foreach ($urlParams as $paramInfo) {
+                        $paramParts = explode('=', $paramInfo);
+                        $objParams[ $paramParts[0] ] = isset($paramParts[1]) ? $paramParts[1] : '';
+                }
+                $objParams[$param] = $value;
+                $urlParams = array();
+                foreach ($objParams as $paramName => $paramValue) {
+                        $urlParams[] = $paramName . '=' . $paramValue;
+                }
+                return $urlParts[0] . '?' . implode('&', $urlParams);
+        }
+ function allowedCharsCharset($charlist)
+ {
+     if ($_SESSION['scriptcase']['charset'] != 'UTF-8')
+     {
+         $charlist = NM_conv_charset($charlist, $_SESSION['scriptcase']['charset'], 'UTF-8');
+     }
+     return str_replace("'", "\'", $charlist);
+ }
+
+function sc_file_size($file, $format = false)
+{
+    if ('' == $file) {
+        return '';
+    }
+    if (!@is_file($file)) {
+        return '';
+    }
+    $fileSize = @filesize($file);
+    if ($format) {
+        $suffix = '';
+        if (1024 >= $fileSize) {
+            $fileSize /= 1024;
+            $suffix    = ' KB';
+        }
+        if (1024 >= $fileSize) {
+            $fileSize /= 1024;
+            $suffix    = ' MB';
+        }
+        if (1024 >= $fileSize) {
+            $fileSize /= 1024;
+            $suffix    = ' GB';
+        }
+        $fileSize = $fileSize . $suffix;
+    }
+    return $fileSize;
+}
+
+
+ function new_date_format($type, $field)
+ {
+     $new_date_format_out = '';
+
+     if ('DT' == $type)
+     {
+         $date_format  = $this->field_config[$field]['date_format'];
+         $date_sep     = $this->field_config[$field]['date_sep'];
+         $date_display = $this->field_config[$field]['date_display'];
+         $time_format  = '';
+         $time_sep     = '';
+         $time_display = '';
+     }
+     elseif ('DH' == $type)
+     {
+         $date_format  = false !== strpos($this->field_config[$field]['date_format'] , ';') ? substr($this->field_config[$field]['date_format'] , 0, strpos($this->field_config[$field]['date_format'] , ';')) : $this->field_config[$field]['date_format'];
+         $date_sep     = $this->field_config[$field]['date_sep'];
+         $date_display = false !== strpos($this->field_config[$field]['date_display'], ';') ? substr($this->field_config[$field]['date_display'], 0, strpos($this->field_config[$field]['date_display'], ';')) : $this->field_config[$field]['date_display'];
+         $time_format  = false !== strpos($this->field_config[$field]['date_format'] , ';') ? substr($this->field_config[$field]['date_format'] , strpos($this->field_config[$field]['date_format'] , ';') + 1) : '';
+         $time_sep     = $this->field_config[$field]['time_sep'];
+         $time_display = false !== strpos($this->field_config[$field]['date_display'], ';') ? substr($this->field_config[$field]['date_display'], strpos($this->field_config[$field]['date_display'], ';') + 1) : '';
+     }
+     elseif ('HH' == $type)
+     {
+         $date_format  = '';
+         $date_sep     = '';
+         $date_display = '';
+         $time_format  = $this->field_config[$field]['date_format'];
+         $time_sep     = $this->field_config[$field]['time_sep'];
+         $time_display = $this->field_config[$field]['date_display'];
+     }
+
+     if ('DT' == $type || 'DH' == $type)
+     {
+         $date_array = array();
+         $date_index = 0;
+         $date_ult   = '';
+         for ($i = 0; $i < strlen($date_format); $i++)
+         {
+             $char = strtolower(substr($date_format, $i, 1));
+             if (in_array($char, array('d', 'm', 'y', 'a')))
+             {
+                 if ('a' == $char)
+                 {
+                     $char = 'y';
+                 }
+                 if ($char == $date_ult)
+                 {
+                     $date_array[$date_index] .= $char;
+                 }
+                 else
+                 {
+                     if ('' != $date_ult)
+                     {
+                         $date_index++;
+                     }
+                     $date_array[$date_index] = $char;
+                 }
+             }
+             $date_ult = $char;
+         }
+
+         $disp_array = array();
+         $date_index = 0;
+         $date_ult   = '';
+         for ($i = 0; $i < strlen($date_display); $i++)
+         {
+             $char = strtolower(substr($date_display, $i, 1));
+             if (in_array($char, array('d', 'm', 'y', 'a')))
+             {
+                 if ('a' == $char)
+                 {
+                     $char = 'y';
+                 }
+                 if ($char == $date_ult)
+                 {
+                     $disp_array[$date_index] .= $char;
+                 }
+                 else
+                 {
+                     if ('' != $date_ult)
+                     {
+                         $date_index++;
+                     }
+                     $disp_array[$date_index] = $char;
+                 }
+             }
+             $date_ult = $char;
+         }
+
+         $date_final = array();
+         foreach ($date_array as $date_part)
+         {
+             if (in_array($date_part, $disp_array))
+             {
+                 $date_final[] = $date_part;
+             }
+         }
+
+         $date_format = implode($date_sep, $date_final);
+     }
+     if ('HH' == $type || 'DH' == $type)
+     {
+         $time_array = array();
+         $time_index = 0;
+         $time_ult   = '';
+         for ($i = 0; $i < strlen($time_format); $i++)
+         {
+             $char = strtolower(substr($time_format, $i, 1));
+             if (in_array($char, array('h', 'i', 's')))
+             {
+                 if ($char == $time_ult)
+                 {
+                     $time_array[$time_index] .= $char;
+                 }
+                 else
+                 {
+                     if ('' != $time_ult)
+                     {
+                         $time_index++;
+                     }
+                     $time_array[$time_index] = $char;
+                 }
+             }
+             $time_ult = $char;
+         }
+
+         $disp_array = array();
+         $time_index = 0;
+         $time_ult   = '';
+         for ($i = 0; $i < strlen($time_display); $i++)
+         {
+             $char = strtolower(substr($time_display, $i, 1));
+             if (in_array($char, array('h', 'i', 's')))
+             {
+                 if ($char == $time_ult)
+                 {
+                     $disp_array[$time_index] .= $char;
+                 }
+                 else
+                 {
+                     if ('' != $time_ult)
+                     {
+                         $time_index++;
+                     }
+                     $disp_array[$time_index] = $char;
+                 }
+             }
+             $time_ult = $char;
+         }
+
+         $time_final = array();
+         foreach ($time_array as $time_part)
+         {
+             if (in_array($time_part, $disp_array))
+             {
+                 $time_final[] = $time_part;
+             }
+         }
+
+         $time_format = implode($time_sep, $time_final);
+     }
+
+     if ('DT' == $type)
+     {
+         $old_date_format = $date_format;
+     }
+     elseif ('DH' == $type)
+     {
+         $old_date_format = $date_format . ';' . $time_format;
+     }
+     elseif ('HH' == $type)
+     {
+         $old_date_format = $time_format;
+     }
+
+     for ($i = 0; $i < strlen($old_date_format); $i++)
+     {
+         $char = substr($old_date_format, $i, 1);
+         if ('/' == $char)
+         {
+             $new_date_format_out .= $date_sep;
+         }
+         elseif (':' == $char)
+         {
+             $new_date_format_out .= $time_sep;
+         }
+         else
+         {
+             $new_date_format_out .= $char;
+         }
+     }
+
+     $this->field_config[$field]['date_format'] = $new_date_format_out;
+     if ('DH' == $type)
+     {
+         $new_date_format_out                                  = explode(';', $new_date_format_out);
+         $this->field_config[$field]['date_format_js']        = $new_date_format_out[0];
+         $this->field_config[$field . '_hora']['date_format'] = $new_date_format_out[1];
+         $this->field_config[$field . '_hora']['time_sep']    = $this->field_config[$field]['time_sep'];
+     }
+ } // new_date_format
+
+   function Form_lookup_idapptype()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype'] = array(); 
+    }
+
+   $old_value_idapp = $this->idapp;
+   $old_value_app_order = $this->app_order;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_idapp = $this->idapp;
+   $unformatted_value_app_order = $this->app_order;
+
+   $nm_comando = "SELECT idapptype, description  FROM seg_app_type  ORDER BY description";
+
+   $this->idapp = $old_value_idapp;
+   $this->app_order = $old_value_app_order;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_idapptype'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_app_parentid()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid'] = array(); 
+    }
+
+   $old_value_idapp = $this->idapp;
+   $old_value_app_order = $this->app_order;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_idapp = $this->idapp;
+   $unformatted_value_app_order = $this->app_order;
+
+   $nm_comando = "SELECT idapp, description FROM seg_apps WHERE level = 0 ORDER BY idapp";
+
+   $this->idapp = $old_value_idapp;
+   $this->app_order = $old_value_app_order;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['Lookup_app_parentid'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_color()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "success?#?success?#??@?";
+       $nmgp_def_dados .= "warning?#?warning?#??@?";
+       $nmgp_def_dados .= "danger?#?danger?#??@?";
+       $nmgp_def_dados .= "info?#?info?#??@?";
+       $nmgp_def_dados .= "primary?#?primary?#??@?";
+       $nmgp_def_dados .= "blue?#?blue?#??@?";
+       $nmgp_def_dados .= "indigo?#?indigo?#??@?";
+       $nmgp_def_dados .= "purple?#?purple?#??@?";
+       $nmgp_def_dados .= "pink?#?pink?#??@?";
+       $nmgp_def_dados .= "red?#?red?#??@?";
+       $nmgp_def_dados .= "orange?#?orange?#??@?";
+       $nmgp_def_dados .= "yellow?#?yellow?#??@?";
+       $nmgp_def_dados .= "green?#?green?#??@?";
+       $nmgp_def_dados .= "teal?#?teal?#??@?";
+       $nmgp_def_dados .= "cyan?#?cyan?#??@?";
+       $nmgp_def_dados .= "gray?#?gray?#??@?";
+       $nmgp_def_dados .= "azure?#?azure?#?N?@?";
+       $nmgp_def_dados .= "dark?#?dark?#??@?";
+       $nmgp_def_dados .= "lime?#?lime?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function SC_fast_search($in_fields, $arg_search, $data_search)
+   {
+      $fields = (strpos($in_fields, "SC_all_Cmp") !== false) ? array("SC_all_Cmp") : explode(";", $in_fields);
+      $this->NM_case_insensitive = false;
+      if (empty($data_search)) 
+      {
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter']);
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total']);
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['fast_search']);
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_detal']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_detal'])) 
+          {
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter'] = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_detal'];
+          }
+          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['empty_filter']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['empty_filter'])
+          {
+              unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['empty_filter']);
+              $this->NM_ajax_info['empty_filter'] = 'ok';
+              form_seg_apps_pack_ajax_response();
+              exit;
+          }
+          return;
+      }
+      $comando = "";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($data_search))
+      {
+          $data_search = NM_conv_charset($data_search, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+      $sv_data = $data_search;
+      foreach ($fields as $field) {
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "idapp", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "app_name", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "app_name2", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $data_lookup = $this->SC_lookup_idapptype($arg_search, $data_search);
+              if (is_array($data_lookup) && !empty($data_lookup)) 
+              {
+                  $this->SC_monta_condicao($comando, "idapptype", $arg_search, $data_lookup);
+              }
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "description", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "app_order", $arg_search, str_replace(",", ".", $data_search));
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $data_lookup = $this->SC_lookup_app_parentid($arg_search, $data_search);
+              if (is_array($data_lookup) && !empty($data_lookup)) 
+              {
+                  $this->SC_monta_condicao($comando, "app_parentid", $arg_search, $data_lookup);
+              }
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "app_link", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "app_icon", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "app_badge", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "create_in", $arg_search, $data_search);
+          }
+          if ($field == "SC_all_Cmp") 
+          {
+              $this->SC_monta_condicao($comando, "level", $arg_search, str_replace(",", ".", $data_search));
+          }
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_detal']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_detal']) && !empty($comando)) 
+      {
+          $comando = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_detal'] . " and (" .  $comando . ")";
+      }
+      if (empty($comando)) 
+      {
+          $comando = " 1 <> 1 "; 
+      }
+      if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter_form']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter_form'])
+      {
+          $sc_where = " where " . $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter_form'] . " and (" . $comando . ")";
+      }
+      else
+      {
+         $sc_where = " where " . $comando;
+      }
+      $nmgp_select = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela . $sc_where; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
+      $rt = $this->Db->Execute($nmgp_select) ; 
+      if ($rt === false && !$rt->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
+      { 
+          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+          exit ; 
+      }  
+      $qt_geral_reg_form_seg_apps = isset($rt->fields[0]) ? $rt->fields[0] - 1 : 0; 
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['total'] = $qt_geral_reg_form_seg_apps;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['where_filter'] = $comando;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['fast_search'][0] = $field;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['fast_search'][1] = $arg_search;
+      $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['fast_search'][2] = $sv_data;
+      $rt->Close(); 
+      if (isset($rt->fields[0]) && $rt->fields[0] > 0 &&  isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['empty_filter']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['empty_filter'])
+      {
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['empty_filter']);
+          $this->NM_ajax_info['empty_filter'] = 'ok';
+          form_seg_apps_pack_ajax_response();
+          exit;
+      }
+      elseif (!isset($rt->fields[0]) || $rt->fields[0] == 0)
+      {
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['empty_filter'] = true;
+          $this->NM_ajax_info['empty_filter'] = 'ok';
+          form_seg_apps_pack_ajax_response();
+          exit;
+      }
+   }
+   function SC_monta_condicao(&$comando, $nome, $condicao, $campo, $tp_campo="")
+   {
+      $nm_aspas   = "'";
+      $nm_aspas1  = "'";
+      $nm_numeric = array();
+      $Nm_datas   = array();
+      $nm_esp_postgres = array();
+      $campo_join = strtolower(str_replace(".", "_", $nome));
+      $nm_ini_lower = "";
+      $nm_fim_lower = "";
+      $nm_numeric[] = "idapp";$nm_numeric[] = "idapptype";$nm_numeric[] = "app_order";$nm_numeric[] = "app_parentid";$nm_numeric[] = "level";
+      if (in_array($campo_join, $nm_numeric))
+      {
+         if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['decimal_db'] == ".")
+         {
+             $nm_aspas  = "";
+             $nm_aspas1 = "";
+         }
+         if (is_array($campo))
+         {
+             foreach ($campo as $Ind => $Cmp)
+             {
+                if (!is_numeric($Cmp))
+                {
+                    return;
+                }
+                if ($Cmp == "")
+                {
+                    $campo[$Ind] = 0;
+                }
+             }
+         }
+         else
+         {
+             if (!is_numeric($campo))
+             {
+                 return;
+             }
+             if ($campo == "")
+             {
+                $campo = 0;
+             }
+         }
+      }
+         if (in_array($campo_join, $nm_numeric) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && (strtoupper($condicao) == "II" || strtoupper($condicao) == "QP" || strtoupper($condicao) == "NP"))
+         {
+             $nome      = "CAST ($nome AS TEXT)";
+             $nm_aspas  = "'";
+             $nm_aspas1 = "'";
+         }
+         if (in_array($campo_join, $nm_esp_postgres) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+         {
+             $nome      = "CAST ($nome AS TEXT)";
+             $nm_aspas  = "'";
+             $nm_aspas1 = "'";
+         }
+         if (in_array($campo_join, $nm_numeric) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase) && (strtoupper($condicao) == "II" || strtoupper($condicao) == "QP" || strtoupper($condicao) == "NP"))
+         {
+             $nome      = "CAST ($nome AS VARCHAR)";
+             $nm_aspas  = "'";
+             $nm_aspas1 = "'";
+         }
+      $Nm_datas['create_in'] = "timestamp";
+         if (isset($Nm_datas[$campo_join]))
+         {
+             for ($x = 0; $x < strlen($campo); $x++)
+             {
+                 $tst = substr($campo, $x, 1);
+                 if (!is_numeric($tst) && ($tst != "-" && $tst != ":" && $tst != " "))
+                 {
+                     return;
+                 }
+             }
+         }
+          if (isset($Nm_datas[$campo_join]))
+          {
+          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+          {
+             $nm_aspas  = "#";
+             $nm_aspas1 = "#";
+          }
+              if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['SC_sep_date']))
+              {
+                  $nm_aspas  = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['SC_sep_date'];
+                  $nm_aspas1 = $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['SC_sep_date1'];
+              }
+          }
+      if (isset($Nm_datas[$campo_join]) && (strtoupper($condicao) == "II" || strtoupper($condicao) == "QP" || strtoupper($condicao) == "NP" || strtoupper($condicao) == "DF"))
+      {
+          if (strtoupper($condicao) == "DF")
+          {
+              $condicao = "NP";
+          }
+          if (($Nm_datas[$campo_join] == "datetime" || $Nm_datas[$campo_join] == "timestamp") && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+          {
+              $nome = "to_char (" . $nome . ", 'YYYY-MM-DD hh24:mi:ss')";
+          }
+          elseif ($Nm_datas[$campo_join] == "date" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+          {
+              $nome = "to_char (" . $nome . ", 'YYYY-MM-DD')";
+          }
+          elseif ($Nm_datas[$campo_join] == "time" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
+          {
+              $nome = "to_char (" . $nome . ", 'hh24:mi:ss')";
+          }
+          elseif ($Nm_datas[$campo_join] == "date" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+          {
+              $nome = "convert(char(10)," . $nome . ",121)";
+          }
+          elseif (($Nm_datas[$campo_join] == "datetime" || $Nm_datas[$campo_join] == "timestamp") && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+          {
+              $nome = "convert(char(19)," . $nome . ",121)";
+          }
+          elseif (($Nm_datas[$campo_join] == "times" || $Nm_datas[$campo_join] == "datetime" || $Nm_datas[$campo_join] == "timestamp") && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
+          {
+              $nome  = "TO_DATE(TO_CHAR(" . $nome . ", 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss')";
+          }
+          elseif ($Nm_datas[$campo_join] == "datetime" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+          {
+              $nome = "EXTEND(" . $nome . ", YEAR TO FRACTION)";
+          }
+          elseif ($Nm_datas[$campo_join] == "date" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+          {
+              $nome = "EXTEND(" . $nome . ", YEAR TO DAY)";
+          }
+      }
+         $comando .= (!empty($comando) ? " or " : "");
+         if (is_array($campo))
+         {
+             $prep = "";
+             foreach ($campo as $Ind => $Cmp)
+             {
+                 $prep .= (!empty($prep)) ? "," : "";
+                 $Cmp   = substr($this->Db->qstr($Cmp), 1, -1);
+                 $prep .= $nm_ini_lower . $nm_aspas . $Cmp . $nm_aspas1 . $nm_fim_lower;
+             }
+             $prep .= (empty($prep)) ? $nm_aspas . $nm_aspas1 : "";
+             $comando .= $nm_ini_lower . $nome . $nm_fim_lower . " in (" . $prep . ")";
+             return;
+         }
+         $campo  = substr($this->Db->qstr($campo), 1, -1);
+         $cond_tst = strtoupper($condicao);
+         if ($cond_tst == "II" || $cond_tst == "QP" || $cond_tst == "NP")
+         {
+             if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && $this->NM_case_insensitive)
+             {
+                 $op_like      = " ilike ";
+                 $nm_ini_lower = "";
+                 $nm_fim_lower = "";
+             }
+             else
+             {
+                 $op_like = " like ";
+             }
+         }
+         switch ($cond_tst)
+         {
+            case "EQ":     // 
+               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " = " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+            break;
+            case "II":     // 
+               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . $op_like . $nm_ini_lower . "'" . $campo . "%'" . $nm_fim_lower;
+            break;
+            case "QP":     // 
+               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . $op_like . $nm_ini_lower . "'%" . $campo . "%'" . $nm_fim_lower;
+            break;
+            case "NP":     // 
+               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " not" . $op_like . $nm_ini_lower . "'%" . $campo . "%'" . $nm_fim_lower;
+            break;
+            case "DF":     // 
+               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " <> " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+            break;
+            case "GT":     // 
+               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " > " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+            break;
+            case "GE":     // 
+               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " >= " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+            break;
+            case "LT":     // 
+               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " < " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+            break;
+            case "LE":     // 
+               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " <= " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
+            break;
+         }
+   }
+   function SC_lookup_idapptype($condicao, $campo)
+   {
+       $result = array();
+       $campo_orig = $campo;
+       $campo  = substr($this->Db->qstr($campo), 1, -1);
+       $nm_comando = "SELECT description, idapptype FROM seg_app_type WHERE (description LIKE '%$campo%')" ; 
+       if ($condicao == "ii")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
+       }
+       if ($condicao == "df" || $condicao == "np")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
+       }
+       if ($condicao == "gt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
+       }
+       if ($condicao == "ge")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
+       }
+       if ($condicao == "lt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
+       }
+       if ($condicao == "le")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
+       }
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+       if ($rx = $this->Db->Execute($nm_comando)) 
+       { 
+           $campo = $campo_orig;
+           while (!$rx->EOF) 
+           { 
+               $chave = $rx->fields[1];
+               $label = $rx->fields[0];
+               if ($condicao == "eq" && $campo == $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "qp" && strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "np" && !strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "df" && $campo != $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "gt" && $label > $campo )
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ge" && $label >= $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "lt" && $label < $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "le" && $label <= $campo)
+               {
+                   $result[] = $chave;
+               }
+               $rx->MoveNext() ;
+           }  
+           return $result;
+       }  
+       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+       { 
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+           exit; 
+       } 
+   }
+   function SC_lookup_app_parentid($condicao, $campo)
+   {
+       $result = array();
+       $campo_orig = $campo;
+       $campo  = substr($this->Db->qstr($campo), 1, -1);
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && ($condicao == "eq" || $condicao == "qp" || $condicao == "np" || $condicao == "ii" || $condicao == "df"))
+       {
+           $nm_comando = "SELECT description, idapp FROM seg_apps WHERE (CAST (idapp AS TEXT) LIKE '%$campo%') AND (level = 0)" ; 
+       }
+       else
+       {
+           $nm_comando = "SELECT description, idapp FROM seg_apps WHERE (description LIKE '%$campo%') AND (level = 0)" ; 
+       }
+       if ($condicao == "ii")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
+       }
+       if ($condicao == "df" || $condicao == "np")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
+       }
+       if ($condicao == "gt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
+       }
+       if ($condicao == "ge")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
+       }
+       if ($condicao == "lt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
+       }
+       if ($condicao == "le")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
+       }
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+       if ($rx = $this->Db->Execute($nm_comando)) 
+       { 
+           $campo = $campo_orig;
+           while (!$rx->EOF) 
+           { 
+               $chave = $rx->fields[1];
+               $label = $rx->fields[0];
+               if ($condicao == "eq" && $campo == $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "qp" && strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "np" && !strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "df" && $campo != $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "gt" && $label > $campo )
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ge" && $label >= $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "lt" && $label < $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "le" && $label <= $campo)
+               {
+                   $result[] = $chave;
+               }
+               $rx->MoveNext() ;
+           }  
+           return $result;
+       }  
+       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+       { 
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+           exit; 
+       } 
+   }
+function nmgp_redireciona($tipo=0)
+{
+   global $nm_apl_dependente;
+   if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && $_SESSION['scriptcase']['sc_tp_saida'] != "D" && $nm_apl_dependente != 1) 
+   {
+       $nmgp_saida_form = $_SESSION['scriptcase']['nm_sc_retorno'];
+   }
+   else
+   {
+       $nmgp_saida_form = $_SESSION['scriptcase']['sc_url_saida'][$this->Ini->sc_page];
+   }
+   if ($tipo == 2)
+   {
+       $nmgp_saida_form = "form_seg_apps_fim.php";
+   }
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['redir']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['redir'] == 'redir')
+   {
+       unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']);
+   }
+   unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['opc_ant']);
+   if ($tipo == 2 && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['nm_run_menu']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['nm_run_menu'] == 1)
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['nm_run_menu'] = 2;
+       $nmgp_saida_form = "form_seg_apps_fim.php";
+   }
+   $diretorio = explode("/", $nmgp_saida_form);
+   $cont = count($diretorio);
+   $apl = $diretorio[$cont - 1];
+   $apl = str_replace(".php", "", $apl);
+   $pos = strpos($apl, "?");
+   if ($pos !== false)
+   {
+       $apl = substr($apl, 0, $pos);
+   }
+   if ($tipo != 1 && $tipo != 2)
+   {
+       unset($_SESSION['sc_session'][$this->Ini->sc_page][$apl]['where_orig']);
+   }
+   if ($this->NM_ajax_flag)
+   {
+       $sTarget = '_self';
+       $this->NM_ajax_info['redir']['metodo']              = 'post';
+       $this->NM_ajax_info['redir']['action']              = $nmgp_saida_form;
+       $this->NM_ajax_info['redir']['target']              = $sTarget;
+       $this->NM_ajax_info['redir']['script_case_init']    = $this->Ini->sc_page;
+       if (0 == $tipo)
+       {
+           $this->NM_ajax_info['redir']['nmgp_url_saida'] = $this->nm_location;
+       }
+       form_seg_apps_pack_ajax_response();
+       exit;
+   }
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+   <HTML>
+   <HEAD>
+    <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+   if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+   {
+?>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+   }
+
+?>
+    <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+    <META http-equiv="Last-Modified" content="<?php echo gmdate("D, d M Y H:i:s"); ?> GMT"/>
+    <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+    <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+    <META http-equiv="Pragma" content="no-cache"/>
+    <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
+   </HEAD>
+   <BODY>
+   <FORM name="form_ok" method="POST" action="<?php echo $this->form_encode_input($nmgp_saida_form); ?>" target="_self">
+<?php
+   if ($tipo == 0)
+   {
+?>
+     <INPUT type="hidden" name="nmgp_url_saida" value="<?php echo $this->form_encode_input($this->nm_location); ?>"> 
+<?php
+   }
+?>
+     <INPUT type="hidden" name="script_case_init" value="<?php echo $this->form_encode_input($this->Ini->sc_page); ?>"> 
+   </FORM>
+   <SCRIPT type="text/javascript">
+      bLigEditLookupCall = <?php if ($this->lig_edit_lookup_call) { ?>true<?php } else { ?>false<?php } ?>;
+      function scLigEditLookupCall()
+      {
+<?php
+   if ($this->lig_edit_lookup && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['sc_modal'])
+   {
+?>
+        parent.<?php echo $this->lig_edit_lookup_cb; ?>(<?php echo $this->lig_edit_lookup_row; ?>);
+<?php
+   }
+   elseif ($this->lig_edit_lookup)
+   {
+?>
+        opener.<?php echo $this->lig_edit_lookup_cb; ?>(<?php echo $this->lig_edit_lookup_row; ?>);
+<?php
+   }
+?>
+      }
+      if (bLigEditLookupCall)
+      {
+        scLigEditLookupCall();
+      }
+<?php
+if ($tipo == 2 && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['masterValue']))
+{
+    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dashboard_info']['under_dashboard']) {
+?>
+var dbParentFrame = $(parent.document).find("[name='<?php echo $_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['dashboard_info']['parent_widget']; ?>']");
+if (dbParentFrame && dbParentFrame[0] && dbParentFrame[0].contentWindow.scAjaxDetailValue)
+{
+<?php
+        foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['masterValue'] as $cmp_master => $val_master)
+        {
+?>
+    dbParentFrame[0].contentWindow.scAjaxDetailValue('<?php echo $cmp_master ?>', '<?php echo $val_master ?>');
+<?php
+        }
+        unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['masterValue']);
+?>
+}
+<?php
+    }
+    else {
+?>
+if (parent && parent.scAjaxDetailValue)
+{
+<?php
+        foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['masterValue'] as $cmp_master => $val_master)
+        {
+?>
+    parent.scAjaxDetailValue('<?php echo $cmp_master ?>', '<?php echo $val_master ?>');
+<?php
+        }
+        unset($_SESSION['sc_session'][$this->Ini->sc_page]['form_seg_apps']['masterValue']);
+?>
+}
+<?php
+    }
+}
+?>
+      document.form_ok.submit();
+   </SCRIPT>
+   </BODY>
+   </HTML>
+<?php
+  exit;
+}
+    function getButtonIds($buttonName) {
+        switch ($buttonName) {
+            case "new":
+                return array("sc_b_new_t.sc-unique-btn-1");
+                break;
+            case "insert":
+                return array("sc_b_ins_t.sc-unique-btn-2");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-3");
+                break;
+            case "update":
+                return array("sc_b_upd_t.sc-unique-btn-4");
+                break;
+            case "delete":
+                return array("sc_b_del_t.sc-unique-btn-5");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
+                break;
+            case "exit":
+                return array("sc_b_sai_t.sc-unique-btn-6", "sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10");
+                break;
+            case "birpara":
+                return array("brec_b");
+                break;
+            case "first":
+                return array("sc_b_ini_b.sc-unique-btn-11");
+                break;
+            case "back":
+                return array("sc_b_ret_b.sc-unique-btn-12");
+                break;
+            case "forward":
+                return array("sc_b_avc_b.sc-unique-btn-13");
+                break;
+            case "last":
+                return array("sc_b_fim_b.sc-unique-btn-14");
+                break;
+        }
+
+        return array($buttonName);
+    } // getButtonIds
+
+}
+?>

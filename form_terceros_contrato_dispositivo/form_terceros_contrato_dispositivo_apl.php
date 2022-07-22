@@ -7046,14 +7046,14 @@ function ajax_add_dyn_search(str_field, str_origem)
                }
                if ($dados['cond'] != "IN")
                {
-                   $dados['vls'][0] = str_replace(".", "", $dados['vls'][0]);
+                   $dados['vls'][0] = str_replace("", "", $dados['vls'][0]);
                    if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_terceros_contrato_dispositivo']['decimal_db'] == ".")
                    {
                        $dados['vls'][0] = str_replace(",", ".", $dados['vls'][0]);
                    }
                    if ($dados['cond'] == "BW")
                    {
-                       $dados['vls'][1] = str_replace(".", "", $dados['vls'][1]);
+                       $dados['vls'][1] = str_replace("", "", $dados['vls'][1]);
                        if ($_SESSION['sc_session'][$this->Ini->sc_page]['form_terceros_contrato_dispositivo']['decimal_db'] == ".")
                        {
                            $dados['vls'][1] = str_replace(",", ".", $dados['vls'][1]);

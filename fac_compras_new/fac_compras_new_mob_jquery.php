@@ -57,6 +57,9 @@ function scFocusField(sField) {
       case 'detalle':
         sc_exib_ocult_pag('fac_compras_new_mob_form1');
         break;
+      case 'detallenc':
+        sc_exib_ocult_pag('fac_compras_new_mob_form2');
+        break;
     }
   }
 
@@ -122,6 +125,7 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["creado" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["editado" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["detalle" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["detallenc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -311,6 +315,12 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["detalle" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["detallenc" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["detallenc" + iSeqRow]["change"]) {
+    return true;
+  }
   if (scEventControl_data["idprov" + iSeqRow]["autocomp"]) {
     return true;
   }
@@ -479,6 +489,8 @@ function scJQEventsAdd(iSeqRow) {
                                      .bind('focus', function() { sc_fac_compras_new_detalle_onfocus(this, iSeqRow) });
   $('#id_sc_field_prefijo_delpedido' + iSeqRow).bind('blur', function() { sc_fac_compras_new_prefijo_delpedido_onblur(this, iSeqRow) })
                                                .bind('focus', function() { sc_fac_compras_new_prefijo_delpedido_onfocus(this, iSeqRow) });
+  $('#id_sc_field_detallenc' + iSeqRow).bind('blur', function() { sc_fac_compras_new_detallenc_onblur(this, iSeqRow) })
+                                       .bind('focus', function() { sc_fac_compras_new_detallenc_onfocus(this, iSeqRow) });
 } // scJQEventsAdd
 
 function sc_fac_compras_new_idfaccom_onblur(oThis, iSeqRow) {
@@ -830,12 +842,25 @@ function sc_fac_compras_new_prefijo_delpedido_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_fac_compras_new_detallenc_onblur(oThis, iSeqRow) {
+  do_ajax_fac_compras_new_mob_validate_detallenc();
+  scCssBlur(oThis);
+}
+
+function sc_fac_compras_new_detallenc_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function displayChange_page(page, status) {
 	if ("0" == page) {
 		displayChange_page_0(status);
 	}
 	if ("1" == page) {
 		displayChange_page_1(status);
+	}
+	if ("2" == page) {
+		displayChange_page_2(status);
 	}
 }
 
@@ -849,6 +874,10 @@ function displayChange_page_0(status) {
 
 function displayChange_page_1(status) {
 	displayChange_block("5", status);
+}
+
+function displayChange_page_2(status) {
+	displayChange_block("6", status);
 }
 
 function displayChange_block(block, status) {
@@ -869,6 +898,9 @@ function displayChange_block(block, status) {
 	}
 	if ("5" == block) {
 		displayChange_block_5(status);
+	}
+	if ("6" == block) {
+		displayChange_block_6(status);
 	}
 }
 
@@ -921,6 +953,10 @@ function displayChange_block_5(status) {
 	displayChange_field("detalle", "", status);
 }
 
+function displayChange_block_6(status) {
+	displayChange_field("detallenc", "", status);
+}
+
 function displayChange_row(row, status) {
 	displayChange_field_es_remision(row, status);
 	displayChange_field_id_pedidocom(row, status);
@@ -953,6 +989,7 @@ function displayChange_row(row, status) {
 	displayChange_field_creado(row, status);
 	displayChange_field_editado(row, status);
 	displayChange_field_detalle(row, status);
+	displayChange_field_detallenc(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -1048,6 +1085,9 @@ function displayChange_field(field, row, status) {
 	}
 	if ("detalle" == field) {
 		displayChange_field_detalle(row, status);
+	}
+	if ("detallenc" == field) {
+		displayChange_field_detallenc(row, status);
 	}
 }
 
@@ -1276,6 +1316,12 @@ function displayChange_field_editado(row, status) {
 function displayChange_field_detalle(row, status) {
 	if ("on" == status && typeof $("#nmsc_iframe_liga_detallecompra_new_mob")[0].contentWindow.scRecreateSelect2 === "function") {
 		$("#nmsc_iframe_liga_detallecompra_new_mob")[0].contentWindow.scRecreateSelect2();
+	}
+}
+
+function displayChange_field_detallenc(row, status) {
+	if ("on" == status && typeof $("#nmsc_iframe_liga_grid_detallecompra_new_nc")[0].contentWindow.scRecreateSelect2 === "function") {
+		$("#nmsc_iframe_liga_grid_detallecompra_new_nc")[0].contentWindow.scRecreateSelect2();
 	}
 }
 

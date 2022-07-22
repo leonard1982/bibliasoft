@@ -602,6 +602,10 @@ function sc_exib_ocult_pag(N_pagina)
     document.getElementById('fac_compras_new_form1').style.height='0px';
     document.getElementById('fac_compras_new_form1').style.display='none';
     document.getElementById('fac_compras_new_form1').style.overflow='scroll';
+    document.getElementById('fac_compras_new_form2').style.width='1px';
+    document.getElementById('fac_compras_new_form2').style.height='0px';
+    document.getElementById('fac_compras_new_form2').style.display='none';
+    document.getElementById('fac_compras_new_form2').style.overflow='scroll';
 <?php
     if (!$_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new']['pdf_view']) {
 ?>
@@ -623,6 +627,9 @@ function sc_exib_ocult_pag(N_pagina)
     displayChange_page(pag_ativa.substr(20), 'on');
    if ("fac_compras_new_form1" == N_pagina) {
      scAjaxDetailHeight("detallecompra_new", "600");
+    }
+   if ("fac_compras_new_form2" == N_pagina) {
+     scAjaxDetailHeight("grid_detallecompra_new_nc", "600");
     }
 }
 function sc_tab_pag(N_pagina, C_class)

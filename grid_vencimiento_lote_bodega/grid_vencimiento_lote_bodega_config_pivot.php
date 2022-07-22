@@ -17,7 +17,7 @@ if(empty($_SESSION['scriptcase']['grid_vencimiento_lote_bodega']['glo_nm_path_im
     $str_path_apl_url = substr($str_path_apl_url, 0, strrpos($str_path_apl_url, "/")+1);
     /*check tmp*/$_SESSION['scriptcase']['grid_vencimiento_lote_bodega']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
 }
-$SC_cod_proj = "FACILWEBv2";
+$SC_cod_proj = "FACILWEBv_2022";
 $SC_apl_proc = "grid_vencimiento_lote_bodega";
 /* sc_apl_default */
 if (!isset($_SESSION['sc_session']))

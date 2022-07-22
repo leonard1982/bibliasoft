@@ -27,7 +27,7 @@ if (!isset($_SESSION['sc_session']))
     $str_path_web    = str_replace("\\", '/', $str_path_web);
     $str_path_web    = str_replace('//', '/', $str_path_web);
     $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
-    if (is_file($root . $_SESSION['scriptcase']['grid_log_pedidos_borrados']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"))
+    if (is_file($root . $_SESSION['scriptcase']['grid_log_pedidos_borrados']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"))
     {
 ?>
 <html>

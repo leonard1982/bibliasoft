@@ -1606,7 +1606,7 @@ unset($NM_ult_sep);
    <?php
     if (!isset($this->nm_new_label['indices']))
     {
-        $this->nm_new_label['indices'] = "Indices";
+        $this->nm_new_label['indices'] = "RADIAN";
     }
 ?>
 <?php
@@ -1635,7 +1635,7 @@ unset($NM_ult_sep);
 <?php } else { $sc_hidden_no++; ?>
 
     <TD class="scFormDataOdd css_indices_line" id="hidden_field_data_indices" style="<?php echo $sStyleHidden_indices; ?>"> <span class="scFormLabelOddFormat css_indices_label" style=""><span id="id_label_indices"><?php echo $this->nm_new_label['indices']; ?></span></span><br><?php
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__menu_img__NM__INDICES.png"))
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__RADIAN.png"))
           { 
               $indices = "&nbsp;" ;  
           } 
@@ -1645,11 +1645,11 @@ unset($NM_ult_sep);
           } 
           else 
           { 
-              $in_indices = $this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__menu_img__NM__INDICES.png"; 
-              $img_time = filemtime($this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__menu_img__NM__INDICES.png"); 
+              $in_indices = $this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__RADIAN.png"; 
+              $img_time = filemtime($this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__RADIAN.png"); 
               $out_indices = str_replace("/", "_", $this->Ini->path_imag_cab); 
-              $prt_indices = "sc_" . $out_indices . "_indices_130130_" . $img_time . "_grp__NM__menu_img__NM__INDICES.png";
-              $out_indices = $this->Ini->path_imag_temp . "/sc_" . $out_indices . "_indices_130130_" . $img_time . "_grp__NM__menu_img__NM__INDICES.png";
+              $prt_indices = "sc_" . $out_indices . "_indices_130130_" . $img_time . "_grp__NM__ico__NM__RADIAN.png";
+              $out_indices = $this->Ini->path_imag_temp . "/sc_" . $out_indices . "_indices_130130_" . $img_time . "_grp__NM__ico__NM__RADIAN.png";
               if (!is_file($this->Ini->root . $out_indices)) 
               {  
                   $sc_obj_img = new nm_trata_img($in_indices, true);
@@ -1667,7 +1667,7 @@ unset($NM_ult_sep);
               }
           } 
 ?>
-<span id="id_imghtml_indices"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_dash_ventas_cons . "', '$this->nm_location', '', 'inicio', '_blank', '0', '0', 'dash_ventas')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $indices ; ?></font></a></span>
+<span id="id_imghtml_indices"><a href="javascript:nm_gp_submit('<?php echo $this->Ini->link_control_radian_edit . "', '$this->nm_location', 'NM_btn_insert*scinN*scoutNM_btn_update*scinN*scoutNM_btn_delete*scinN*scoutNM_btn_navega*scinN*scout', '', '_blank', '0', '0', 'control_radian')\"><font color=\"" . $this->Ini->cor_link_dados . "\">" . $indices ; ?></font></a></span>
 <?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["indices"]) &&  $this->nmgp_cmp_readonly["indices"] == "on") { 
 
  ?>

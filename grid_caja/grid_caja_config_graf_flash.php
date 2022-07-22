@@ -20,7 +20,7 @@
         $str_path_apl_url = substr($str_path_apl_url, 0, strrpos($str_path_apl_url, "/")+1);
         /*check tmp*/$_SESSION['scriptcase']['grid_caja']['glo_nm_path_imag_temp'] = $str_path_apl_url . "_lib/tmp";
     }
-    $SC_cod_proj = "FACILWEBv2";
+    $SC_cod_proj = "FACILWEBv_2022";
     $SC_apl_proc = "grid_caja";
 /* sc_apl_default */
     if (!isset($_SESSION['sc_session']))

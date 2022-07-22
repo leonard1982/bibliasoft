@@ -62,9 +62,9 @@
    {
       exit;
    }
-   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____control_copiar_documento_como_grid"]))
+   if (isset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____control_copiar_documento_como_grid"]))
    {
-      unset($_SESSION['session_sec_aplicacao']["FACILWEBv2_____control_copiar_documento_como_grid"]);
+      unset($_SESSION['session_sec_aplicacao']["FACILWEBv_2022_____control_copiar_documento_como_grid"]);
    }
 
    if (isset($_SESSION['session_sec_aplicacao']) && empty($_SESSION['session_sec_aplicacao']))

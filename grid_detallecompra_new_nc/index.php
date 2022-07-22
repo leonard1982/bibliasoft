@@ -215,7 +215,7 @@ class grid_detallecompra_new_nc_ini
       $this->nm_cod_apl      = "grid_detallecompra_new_nc"; 
       $this->nm_nome_apl     = ""; 
       $this->nm_seguranca    = ""; 
-      $this->nm_grupo        = "FACILWEBv2"; 
+      $this->nm_grupo        = "FACILWEBv_2022"; 
       $this->nm_grupo_versao = "1"; 
       $this->nm_autor        = "edgar"; 
       $this->nm_script_by    = "netmake";
@@ -224,14 +224,14 @@ class grid_detallecompra_new_nc_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20180219"; 
       $this->nm_hr_criacao   = "104235"; 
-      $this->nm_autor_alt    = "edgar"; 
-      $this->nm_dt_ult_alt   = "20220616"; 
-      $this->nm_hr_ult_alt   = "110029"; 
+      $this->nm_autor_alt    = "admin"; 
+      $this->nm_dt_ult_alt   = "20220622"; 
+      $this->nm_hr_ult_alt   = "203739"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0.0";
+      $this->nm_app_version  = "1.0";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -320,7 +320,7 @@ class grid_detallecompra_new_nc_ini
       }
       elseif (!isset($_SESSION['scriptcase']['grid_detallecompra_new_nc']['actual_lang']) || $_SESSION['scriptcase']['grid_detallecompra_new_nc']['actual_lang'] != $this->str_lang) {
           $_SESSION['scriptcase']['grid_detallecompra_new_nc']['actual_lang'] = $this->str_lang;
-          setcookie('sc_actual_lang_FACILWEBv2',$this->str_lang,'0','/');
+          setcookie('sc_actual_lang_FACILWEBv_2022',$this->str_lang,'0','/');
       }
       if (!isset($_SESSION['scriptcase']['fusioncharts_new']))
       {
@@ -891,7 +891,7 @@ class grid_detallecompra_new_nc_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_detallecompra_new_nc']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_detallecompra_new_nc']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDuFaHIrKV5JwDMNOVcBODWFaDoF7HQBsZ1BOD1rwV5FUDMzGVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIXGHQXGZ1BiHANOHQNUDMvCZSJ3H5FYHMBqDcXGDQJwHANOHuBqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGZSJGDWr/VoXGDcBwDQB/Z1rwD5JsHgrKVcFCH5XCVoB/D9BsZ1F7HIrwV5FaDMBYZSXeV5FaVoFGD9NwDQJwHANOV5FUHgrYDkBOV5F/DoraD9BiH9BOZ1BeV5FUDMBYDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXsZ9XGHABYHQJwDMBOVcB/DWBmVErqHQXOZ1FGHArYD5JwDEBeZSXeHEFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveDkXKDWBmZuBOHQBiDuBqHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1F7HABYHuX7DEBeHErCHEFqHMBiD9NwZSX7Z1BYV5FaHgvOVcB/DWFYVoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQFYDQBqDSBYD5XGDMzGVIBsV5X7VErqD9JmZ1rqD1NaD5BqDErKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOV9FeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoB/D9JmZkFGDSrYHuBODErKHEFiH5F/DoJeHQNmZSX7HArYV5JeDMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDuFaDoJeD9JKDQX7D1veV5raHgrKVcFKDWFYVENUDcBqZ1B/HIrwV5FGDMzGHEXeH5FYDoB/D9XsDQFGHAveV5BOHgvsVcB/V5X7DoJsDcJUZ1FaHIBeD5BiDEBOVkXeH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsZ1rwV5BODMNOVIB/Dur/VoBODcBqZkFGHIveHuBOHgvsZSXeHEFqHMJeDcBwH9BiD1BOVWJsDMvmV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDuFGVorqHQNwZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNwDQJsHArYHuNUHgvOVcFCH5XCHMFGDcNmZ1FaHIveZMBqDMvCVkJGH5F/HMFaHQFYZSBiZ1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -984,7 +984,7 @@ class grid_detallecompra_new_nc_ini
               }
               
           }
-          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv2', 2, $this->force_db_utf8); 
+          db_conect_devel($con_devel, $this->root . $this->path_prod, 'FACILWEBv_2022', 2, $this->force_db_utf8); 
           if (!isset($this->Ajax_result_set)) {$this->Ajax_result_set = ob_get_contents();}
           ob_end_clean();
           if (empty($_SESSION['scriptcase']['glo_tpbanco']) && empty($_SESSION['scriptcase']['glo_banco']))
@@ -1018,6 +1018,10 @@ class grid_detallecompra_new_nc_ini
           if (!isset($_SESSION['par_idfaccom'])) 
           {
               $this->nm_falta_var .= "par_idfaccom; ";
+          }
+          if (!isset($_SESSION['gidtercero'])) 
+          {
+              $this->nm_falta_var .= "gidtercero; ";
           }
       }
 // 
@@ -1308,7 +1312,7 @@ class grid_detallecompra_new_nc_ini
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && isset($_SESSION['scriptcase']['grid_detallecompra_new_nc']['glo_nm_conexao']) && !empty($_SESSION['scriptcase']['grid_detallecompra_new_nc']['glo_nm_conexao']))
       { 
-          $this->Db = db_conect_devel($_SESSION['scriptcase']['grid_detallecompra_new_nc']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv2', 1, $this->force_db_utf8); 
+          $this->Db = db_conect_devel($_SESSION['scriptcase']['grid_detallecompra_new_nc']['glo_nm_conexao'], $this->root . $this->path_prod, 'FACILWEBv_2022', 1, $this->force_db_utf8); 
       } 
       else 
       { 
@@ -1808,6 +1812,11 @@ class grid_detallecompra_new_nc_apl
           {
               $_SESSION['par_idfaccom'] = $par_idfaccom;
               nm_limpa_str_grid_detallecompra_new_nc($_SESSION["par_idfaccom"]);
+          }
+          if (isset($gidtercero)) 
+          {
+              $_SESSION['gidtercero'] = $gidtercero;
+              nm_limpa_str_grid_detallecompra_new_nc($_SESSION["gidtercero"]);
           }
       } 
       if ($Parms_form_pdf)
@@ -3507,8 +3516,204 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_
        $this->sabor = $this->rs_grid->fields[13] ;  
        $this->sabor = (string)$this->sabor;
       $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'on';
- 
+if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
+if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
+  
+      $nm_select = "select numfacom from facturacom where idfaccom='".$this->idfaccom  ."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDatosFactura = array();
+      $this->vdatosfactura = array();
+     if ($this->idfaccom !== "")
+     { 
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vDatosFactura[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdatosfactura[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDatosFactura = false;
+          $this->vDatosFactura_erro = $this->Db->ErrorMsg();
+          $this->vdatosfactura = false;
+          $this->vdatosfactura_erro = $this->Db->ErrorMsg();
+      } 
+     } 
+;
 
+if(isset($this->vdatosfactura[0][0]))
+	{
+	$vnumfacom = $this->vdatosfactura[0][0];
+	
+	 
+      $nm_select = "select codigobar, nompro from productos where idprod='".$this->idpro  ."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vProducto = array();
+      $this->vproducto = array();
+     if ($this->idpro !== "")
+     { 
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vProducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vproducto[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vProducto = false;
+          $this->vProducto_erro = $this->Db->ErrorMsg();
+          $this->vproducto = false;
+          $this->vproducto_erro = $this->Db->ErrorMsg();
+      } 
+     } 
+;
+	
+	if(isset($this->vproducto[0][0]))
+	{
+		$vprod = $this->vproducto[0][0].' - '.$this->vproducto[0][1];
+		
+		
+     $nm_select = "insert into log set usuario='".$this->sc_temp_gidtercero."',accion='ELIMINAR', observaciones='EL USUARIO ELIMINÓ EL PRODUCTO: ".$vprod.", CANTIDAD: $this->cantidad  , COSTO/U: ".number_format($this->valorunit  ).", TOTAL LINEA: ".number_format($this->valorpar  )." A LA COMPRA NO: ".$vnumfacom.".' "; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	}	
+	}
+
+$sql_del =  "DELETE FROM detallecompra WHERE iddet = '".$this->iddet ."'";
+
+     $nm_select = $sql_del; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+$sql="SELECT sum(valorpar), sum(iva) FROM detallecompra WHERE idfaccom='".$this->idfaccom ."'";
+ 
+      $nm_select = $sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->ds[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds = false;
+          $this->ds_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds[0][0]))
+	{
+	$stotal=$this->ds[0][0];
+	$siva=$this->ds[0][1];
+	$total=$stotal+$siva;
+	}
+
+if(!empty($this->ds[0][0]))
+	{
+	$sqlupd = "UPDATE facturacom SET subtotal='".$stotal."', valoriva='".$siva."', total='".$total."', saldo= 0 WHERE idfaccom='".$this->idfaccom ."'";
+	
+     $nm_select = $sqlupd; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	}
+
+else
+	{
+	$sqlupd = "UPDATE facturacom SET subtotal=0, valoriva=0, total=0, saldo=0 WHERE idfaccom='".$this->idfaccom ."'";
+	
+     $nm_select = $sqlupd; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+	$stotal= 0;
+	$siva=0;
+	$total=0;
+	}
+if (isset($this->sc_temp_gidtercero)) {$_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'off'; 
     }  
     $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'on';
@@ -4345,7 +4550,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc'][$path_
    {
        include_once("../_lib/lib/php/nm_ctrl_app_name.php");
    }
-   SC_dir_app_ini('FACILWEBv2');
+   SC_dir_app_ini('FACILWEBv_2022');
    $_SESSION['scriptcase']['grid_detallecompra_new_nc']['contr_erro'] = 'off';
    $sc_conv_var = array();
    $Sc_lig_md5 = false;
@@ -4485,11 +4690,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc'][$path_
    $path_aplicacao  = substr($path_aplicacao, 0, strrpos($path_aplicacao, '/'));
    $root            = substr($str_path_sys, 0, -1 * strlen($str_path_web));
    if ($Sem_Session && (!isset($nmgp_start) || $nmgp_start != "SC")) {
-       if (isset($_COOKIE['sc_apl_default_FACILWEBv2'])) {
-           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv2']);
+       if (isset($_COOKIE['sc_apl_default_FACILWEBv_2022'])) {
+           $apl_def = explode(",", $_COOKIE['sc_apl_default_FACILWEBv_2022']);
        }
-       elseif (is_file($root . $_SESSION['scriptcase']['grid_detallecompra_new_nc']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt")) {
-           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['grid_detallecompra_new_nc']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv2.txt"));
+       elseif (is_file($root . $_SESSION['scriptcase']['grid_detallecompra_new_nc']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt")) {
+           $apl_def = explode(",", file_get_contents($root . $_SESSION['scriptcase']['grid_detallecompra_new_nc']['glo_nm_path_imag_temp'] . "/sc_apl_default_FACILWEBv_2022.txt"));
        }
        if (isset($apl_def)) {
            if ($apl_def[0] != "grid_detallecompra_new_nc") {
@@ -4503,8 +4708,8 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc'][$path_
                $Redir_tp = (isset($apl_def[1])) ? trim(strtoupper($apl_def[1])) : "";
                $_SESSION['scriptcase']['grid_detallecompra_new_nc']['session_timeout']['redir_tp'] = $Redir_tp;
            }
-           if (isset($_COOKIE['sc_actual_lang_FACILWEBv2'])) {
-               $_SESSION['scriptcase']['grid_detallecompra_new_nc']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv2'];
+           if (isset($_COOKIE['sc_actual_lang_FACILWEBv_2022'])) {
+               $_SESSION['scriptcase']['grid_detallecompra_new_nc']['session_timeout']['lang'] = $_COOKIE['sc_actual_lang_FACILWEBv_2022'];
            }
        }
    }
@@ -4519,6 +4724,10 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc'][$path_
    if (isset($par_idfaccom)) 
    {
        $_SESSION['par_idfaccom'] = $par_idfaccom;
+   }
+   if (isset($gidtercero)) 
+   {
+       $_SESSION['gidtercero'] = $gidtercero;
    }
    if (!empty($glo_perfil))  
    { 
@@ -4641,6 +4850,11 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc'][$path_
            {
                $_SESSION['par_idfaccom'] = $par_idfaccom;
                nm_limpa_str_grid_detallecompra_new_nc($_SESSION["par_idfaccom"]);
+           }
+           if (isset($gidtercero)) 
+           {
+               $_SESSION['gidtercero'] = $gidtercero;
+               nm_limpa_str_grid_detallecompra_new_nc($_SESSION["gidtercero"]);
            }
            $NMSC_conf_apl = array();
            if (isset($NMSC_inicial))
@@ -4888,6 +5102,20 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detallecompra_new_nc'][$path_
        if (!isset($_SESSION["par_idfaccom"])) 
        {
            $_SESSION["par_idfaccom"] = "";
+       }
+       if (isset($_POST["gidtercero"])) 
+       {
+           $_SESSION["gidtercero"] = $_POST["gidtercero"];
+           nm_limpa_str_grid_detallecompra_new_nc($_SESSION["gidtercero"]);
+       }
+       if (isset($_GET["gidtercero"])) 
+       {
+           $_SESSION["gidtercero"] = $_GET["gidtercero"];
+           nm_limpa_str_grid_detallecompra_new_nc($_SESSION["gidtercero"]);
+       }
+       if (!isset($_SESSION["gidtercero"])) 
+       {
+           $_SESSION["gidtercero"] = "";
        }
        if (isset($nmgp_lig_edit_lapis)) 
        {

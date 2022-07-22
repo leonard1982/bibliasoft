@@ -1108,10 +1108,6 @@ $_SESSION['scriptcase']['detallecompra_new_nc']['contr_erro'] = 'off';
       $_SESSION['scriptcase']['css_form_help'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form.css";
       $_SESSION['scriptcase']['css_form_help_dir'] = '../_lib/css/' . $this->Ini->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css";
       $this->Db = $this->Ini->Db; 
-      if ($this->NM_ajax_flag && (!isset($this->NM_ajax_info['param']['buffer_output']) || !$this->NM_ajax_info['param']['buffer_output'] || 'autocomp_' == substr($this->NM_ajax_opcao, 0, 9)))
-      {
-      $this->Db->debug = false;
-      }
       $this->Ini->str_google_fonts = isset($str_google_fonts)?$str_google_fonts:'';
       $this->Ini->Img_sep_form    = "/" . trim($str_toolbar_separator);
       $this->Ini->Color_bg_ajax   = "" == trim($str_ajax_bg)         ? "#000" : $str_ajax_bg;
@@ -6605,6 +6601,55 @@ if($this->idpro_ >0)
 $this->tipo_docu_   = 'NC';
 $this->tipo_trans_  = 'DESC';
 $this->id_nota_  = 0;
+
+$sql_tp = "select idgrup from productos where idprod = '".$this->idpro_ ."'";
+ 
+      $nm_select = $sql_tp; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dtp = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dtp[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dtp = false;
+          $this->dtp_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->dtp[0][0]))
+	{
+	if($this->dtp[0][0]!=1)
+		{
+		
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "No se puede agregar producto diferentes a los Registrasdos <br>en la compra a la NC, excepto, ítem de descuento general a la compra";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "No se puede agregar producto diferentes a los Registrasdos <br>en la compra a la NC, excepto, ítem de descuento general a la compra";
+ }
+;
+		}
+	}
 if (isset($this->sc_temp_cost_ant)) { $_SESSION['cost_ant'] = $this->sc_temp_cost_ant;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
@@ -6659,33 +6704,131 @@ $_SESSION['scriptcase']['detallecompra_new_nc']['contr_erro'] = 'off';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_cantidad_ = $this->cantidad_;
-    $original_idbod_ = $this->idbod_;
-    $original_iddet_ = $this->iddet_;
-    $original_idfaccom_ = $this->idfaccom_;
-    $original_idpro_ = $this->idpro_;
-    $original_valorpar_ = $this->valorpar_;
+    $original_id_nota_ = $this->id_nota_;
+    $original_tipo_trans_ = $this->tipo_trans_;
     $original_valorunit_ = $this->valorunit_;
 }
-  $this->actualiza_stock_edita();
-$idfaco=$this->idfaccom_ ;
-
-
-     $nm_select ="UPDATE inventario SET cantidad=$this->cantidad_ , idpro=$this->idpro_ , costo=$this->valorunit_ , valorparcial=$this->valorpar_ , idbod=$this->idbod_  WHERE detalle like'%Compra%' and idfaccom=$idfaco and iddetalle=$this->iddet_ "; 
-         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+  
+$sql_det = "SELECT cantidad, valorunit FROM detallecompra WHERE iddet = '".$this->id_nota_ ."'";
+ 
+      $nm_select = $sql_det; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-         $rf = $this->Db->Execute($nm_select);
-         if ($rf === false)
-         {
-             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
-             $this->NM_rollback_db(); 
-             if ($this->NM_ajax_flag)
-             {
-                detallecompra_new_nc_pack_ajax_response();
-             }
-             exit;
-         }
-         $rf->Close();
-      ;
+      $this->det = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->det[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->det = false;
+          $this->det_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->det[0][0]))
+	{
+	if($this->cantidad_ ==$this->det[0][0])
+		{
+		if($this->valorunit_ ==$this->det[0][0])
+			{
+			$this->tipo_trans_  = 'DEV';
+			}
+		elseif($this->valorunit_ <$this->det[0][0])
+			{
+			$this->tipo_trans_  = 'DESC';
+			}
+		else
+			{
+			
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Es Nota de Devolución, Valor Unitario NO puede ser mayor, <br>que el registrado en Compra!!!";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "Es Nota de Devolución, Valor Unitario NO puede ser mayor, <br>que el registrado en Compra!!!";
+ }
+;
+			}
+		}
+	elseif($this->cantidad_ <$this->det[0][0])
+		{
+		if($this->valorunit_ ==$this->det[0][0])
+			{
+			$this->tipo_trans_  = 'DEV';
+			}
+		else
+			{
+			
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Es Nota de Devolución, Valor Unitario NO puede ser diferente, <br> para una parte del ítem registrado en Compra!!!";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "Es Nota de Devolución, Valor Unitario NO puede ser diferente, <br> para una parte del ítem registrado en Compra!!!";
+ }
+;
+			}
+		}
+	else
+		{
+		
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Es Nota de Devolución, Cantidad NO puede ser mayor, <br>que el registrado en Compra!!!";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "Es Nota de Devolución, Cantidad NO puede ser mayor, <br>que el registrado en Compra!!!";
+ }
+;
+		}
+	}
+else
+	{
+	
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Ítem no relacionado con lo registrado en Compra!!!";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_detallecompra_new_nc';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "Ítem no relacionado con lo registrado en Compra!!!";
+ }
+;
+	}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     if (($original_cantidad_ != $this->cantidad_ || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))&& isset($this->nmgp_refresh_row))
@@ -6694,35 +6837,17 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->cantidad_);
         $this->NM_ajax_changed['cantidad_'] = true;
     }
-    if (($original_idbod_ != $this->idbod_ || (isset($bFlagRead_idbod_) && $bFlagRead_idbod_))&& isset($this->nmgp_refresh_row))
+    if (($original_id_nota_ != $this->id_nota_ || (isset($bFlagRead_id_nota_) && $bFlagRead_id_nota_))&& isset($this->nmgp_refresh_row))
     {
-        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['type']    = 'select';
-        $this->NM_ajax_info['fldList']['idbod_' . $this->nmgp_refresh_row]['valList'] = array($this->idbod_);
-        $this->NM_ajax_changed['idbod_'] = true;
+        $this->NM_ajax_info['fldList']['id_nota_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['id_nota_' . $this->nmgp_refresh_row]['valList'] = array($this->id_nota_);
+        $this->NM_ajax_changed['id_nota_'] = true;
     }
-    if (($original_iddet_ != $this->iddet_ || (isset($bFlagRead_iddet_) && $bFlagRead_iddet_))&& isset($this->nmgp_refresh_row))
+    if (($original_tipo_trans_ != $this->tipo_trans_ || (isset($bFlagRead_tipo_trans_) && $bFlagRead_tipo_trans_))&& isset($this->nmgp_refresh_row))
     {
-        $this->NM_ajax_info['fldList']['iddet_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['iddet_' . $this->nmgp_refresh_row]['valList'] = array($this->iddet_);
-        $this->NM_ajax_changed['iddet_'] = true;
-    }
-    if (($original_idfaccom_ != $this->idfaccom_ || (isset($bFlagRead_idfaccom_) && $bFlagRead_idfaccom_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idfaccom_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['idfaccom_' . $this->nmgp_refresh_row]['valList'] = array($this->idfaccom_);
-        $this->NM_ajax_changed['idfaccom_'] = true;
-    }
-    if (($original_idpro_ != $this->idpro_ || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['idpro_' . $this->nmgp_refresh_row]['valList'] = array($this->idpro_);
-        $this->NM_ajax_changed['idpro_'] = true;
-    }
-    if (($original_valorpar_ != $this->valorpar_ || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['valorpar_' . $this->nmgp_refresh_row]['type']    = 'label';
-        $this->NM_ajax_info['fldList']['valorpar_' . $this->nmgp_refresh_row]['valList'] = array($this->valorpar_);
-        $this->NM_ajax_changed['valorpar_'] = true;
+        $this->NM_ajax_info['fldList']['tipo_trans_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['tipo_trans_' . $this->nmgp_refresh_row]['valList'] = array($this->tipo_trans_);
+        $this->NM_ajax_changed['tipo_trans_'] = true;
     }
     if (($original_valorunit_ != $this->valorunit_ || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))&& isset($this->nmgp_refresh_row))
     {
@@ -9554,7 +9679,7 @@ if (!isset($this->sc_temp_valorpar)) {$this->sc_temp_valorpar = (isset($_SESSION
 $proid=$this->idpro_ ;
 $cant=$this->cantidad_ ;
 $cost=$this->valorunit_ ;
-$this->sc_temp_valorpar=round(($this->cantidad_ *$this->valorunit_ ), 0);
+$this->sc_temp_valorpar=round(($this->cantidad_ *$this->valorunit_ ), 2);
  
       $nm_select = "SELECT cantidad FROM inventario WHERE idpro=$proid"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
