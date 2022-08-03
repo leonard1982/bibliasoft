@@ -1,7 +1,6 @@
-scriptcase__NM__ico__NM__favicon.ico
+grp__NM__ico__NM__favicon.ico
 scriptcase__NM__ajax_load.gif
 scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png
-usr__NM__bg__NM__apps_printer_15747.png
 img_calendar.gif
 img_move_left.gif
 img_move_right.gif
@@ -14,10 +13,9 @@ nm_td.gif
 nm_esq.gif
 nm_dir.gif
 scriptcase__NM__nm_transparent.gif
-scriptcase__NM__ico__NM__favicon.ico
+grp__NM__ico__NM__favicon.ico
 scriptcase__NM__ajax_load.gif
 scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png
-usr__NM__bg__NM__apps_printer_15747.png
 img_calendar.gif
 img_move_left.gif
 img_move_right.gif

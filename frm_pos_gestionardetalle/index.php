@@ -217,13 +217,13 @@ class frm_pos_gestionardetalle_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "174314"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220622"; 
-      $this->nm_hr_ult_alt   = "203708"; 
+      $this->nm_dt_ult_alt   = "20220802"; 
+      $this->nm_hr_ult_alt   = "224447"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0";
+      $this->nm_app_version  = "1.0.0";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -744,7 +744,7 @@ class frm_pos_gestionardetalle_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -832,7 +832,7 @@ class frm_pos_gestionardetalle_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_gestionardetalle']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos_gestionardetalle']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsZSBiDSN7HuFUHuBOVcBUH5XCHIFUD9JmZkBiDSrYV5FaDMzGVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGVkXeHEFaDoF7DcXGH9X7HIrwV5XGHgrKDkB/DWXKVEF7DcBqVIJsHAvsD5JeHgveHEXeDWrGZuJeHQNmH9BiHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMzGVkJGDWr/VoFGDcXOZSFGHAveV5JwHuzGDkB/V5X7DoF7DcJUZ1FaD1rwZMB/DEBeHEXeV5FaVoBiDcJeDQFGHANOD5JsHgrKVcFCH5XCVoB/D9BsZ1F7HIrwV5FaHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNwZkBiHANOD5BOHgNKHErsH5FGZuXGD9NwDQBqHAN7HQXGHgrwZSJ3V5FYDoraHQBiH9BODSrYZMXGDEvsVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgNKDkB/DWBmZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoBiHQBsZ1B/HIBeV5FUDEBOHArCDWXCVoJwDcXOZSX7DSN7HuFGHuvmVcFCDWXCHMJwHQNmZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQFGHAveHQBqDMBOV9BUDWF/VEF7DcNmZ1B/HIveHuJwHgNKVkXeDuFaDoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/DorqHQNwDuFaZ1rwHuNUDMBYDkB/H5XKVoF7DcFYZkFGHANOHuFaHgveVkJ3DWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HANOD5XGDEBOHEJqV5FaDoBOD9XsZSFGD1BeV5raHgrKDkBODWFYVoFGD9BiZ1F7DSrYD5FaDEBOVkXeDWX7DoJeDcBwDQJsHABYVWJsHgvsVcBODuFqDoJeDcJUZkFUZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMF7HQNmZkFGD1rwD5rqDErKHErCHEB3ZuBqHQXOZ9F7HIrKD5B/DMNOVIFCDur/HMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDurGVorqHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcXGZ9F7HAveHuBiDMNOV9FeDWJeVEX7HQXOZ1BOHArYHuJsHgveHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2241,6 +2241,522 @@ if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SES
 	));
 }
 
+
+if(isset($_POST['updateitem']))
+{
+    
+    $idfactura  = $_POST['idfactura'];
+	$iddet      = $_POST['id_detalle'];
+	$precio     = floatval($_POST['precio']);
+	$cantidad   = floatval($_POST['cantidad']);
+	
+	
+	$articulo   = "";
+	$unidmaymen = "";
+	$vventaunidad = "";
+	$costo      = 0;
+	$iva        = 0;
+	$descuento  = 0;
+	$descuento2 = 0;
+	$tasaiva    = 0;
+	$idbodega   = 0;
+	$recmayamen = "";
+	$vvence     = "";
+	$vlote      = "";
+	
+	$vsipropina = "NO";
+	
+	$vsql = "select p.idprod, p.unidmaymen, d.unidadmayor, p.costomen, d.iva, i.trifa, d.idbod, p.recmayamen, d.vencimiento, d.lote from productos p inner join detalleventa d on d.idpro=p.idprod inner join iva i on p.idiva=i.idiva where d.iddet='".$iddet."'";
+	
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDatosProd = array();
+      $this->vdatosprod = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vDatosProd[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdatosprod[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDatosProd = false;
+          $this->vDatosProd_erro = $this->Db->ErrorMsg();
+          $this->vdatosprod = false;
+          $this->vdatosprod_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vdatosprod[0][0]))
+	{
+		$articulo   = $this->vdatosprod[0][0];
+		$unidmaymen = $this->vdatosprod[0][1];
+		$vventaunidad = $this->vdatosprod[0][2];
+		if($vventaunidad=="NO")
+		{
+			$vventaunidad=="MENOR";
+		}
+		else
+		{
+			$vventaunidad=="MAYOR";
+		}
+		$costo      = $this->vdatosprod[0][3];
+		$iva        = $this->vdatosprod[0][4];
+		$descuento  = 0;
+		$descuento2 = 0;
+		$tasaiva    = $this->vdatosprod[0][5];
+		$idbodega   = $this->vdatosprod[0][6];
+		$recmayamen = $this->vdatosprod[0][7];
+		$vvence     = $this->vdatosprod[0][8];
+		$vlote      = $this->vdatosprod[0][9];
+	}
+	
+	$vsql = "select aplica_propina from facturaven where idfacven='".$idfactura."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vPropin = array();
+      $this->vpropin = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vPropin[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vpropin[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vPropin = false;
+          $this->vPropin_erro = $this->Db->ErrorMsg();
+          $this->vpropin = false;
+          $this->vpropin_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vpropin[0][0]))
+	{
+		$vsipropina = $this->vpropin[0][0];
+	}
+	
+	$precio_anterior = $precio;
+	$vval_propina = 0;
+	$descuento3   = 0;
+	$vdesgeneral  = "NO";
+	$vsqld = "select porcentaje,activo from programar_descuentos_generales where desde <= '".date("Y-m-d H:i:s")."' and hasta>'".date("Y-m-d H:i:s")."' and activo='SI' and cajas_afectadas like '%".$this->sc_temp_gidbanco."%'";
+
+	 
+      $nm_select = $vsqld; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vDGeneral = array();
+      $this->vdgeneral = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vDGeneral[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vdgeneral[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vDGeneral = false;
+          $this->vDGeneral_erro = $this->Db->ErrorMsg();
+          $this->vdgeneral = false;
+          $this->vdgeneral_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if(isset($this->vdgeneral[0][0]))
+	{
+		$vdesgeneral="SI";
+		$this->sc_temp_gdescuento_general = $this->vdgeneral[0][0];
+		$descuento  = $this->sc_temp_gdescuento_general;
+		$descuento3 = $descuento;
+	}
+	else
+	{
+		$descuento3 = number_format($descuento,1,'.',',');
+	}
+	
+	
+	$valoriva   = 0;
+	$gru        = "";
+	$vsql3      = "";
+	$vneto      = 0;
+	$valordescuento = 0;
+	$vnetocondescuento = 0;
+	
+	$valorparcial = $precio*$cantidad;
+	$vneto = $valorparcial;
+	if($descuento>0)
+	{
+	$valordescuento = round($vneto*($descuento/100));
+	$valorparcial   = $valorparcial-$valordescuento;
+	
+	$vnetocondescuento = $valorparcial;
+	}
+	else
+	{
+	$vnetocondescuento = $valorparcial;	
+	}
+	
+	if($tasaiva>0)
+	{
+	$valoriva     = $valorparcial-($valorparcial/(($tasaiva/100)+1));
+	$valorparcial = $valorparcial/(($tasaiva/100)+1);
+	}
+	
+	$maneja_tcs_lfs = "NA";
+	$maneja_disponible = "NO";
+	$vserial = "";
+	
+	if($unidmaymen=="SI" and $vventaunidad=="MENOR")
+	{
+		$cantidad = $cantidad/100;
+	}
+	
+	if($vvence>0)
+	{
+		$vvence = "'".$vvence."' ";
+	}
+	else
+	{
+		$vvence = "null";
+	}
+	if(!empty($vlote))
+	{
+		$vlote = "'".$vlote."' ";
+	}
+	else
+	{
+		$vlote = "null";
+	}
+	if(!empty($vserial))
+	{
+		$vserial = "'".$vserial."' ";
+	}
+	else
+	{
+		$vserial = "null";
+	}
+	
+	$vvls_envarias_bodegas = "NO";
+	$vcodigoproducto = "";
+	$vnomproducto    = "";
+	
+	 
+      $nm_select = "select maneja_tcs_lfs,codigobar,nompro  from productos where idprod='".$articulo."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiManeja = array();
+      $this->vsimaneja = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiManeja[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsimaneja[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiManeja = false;
+          $this->vSiManeja_erro = $this->Db->ErrorMsg();
+          $this->vsimaneja = false;
+          $this->vsimaneja_erro = $this->Db->ErrorMsg();
+      } 
+;
+	
+	if(isset($this->vsimaneja[0][0]))
+	{
+		$maneja_tcs_lfs  = $this->vsimaneja[0][0];
+		$vcodigoproducto = $this->vsimaneja[0][1];
+		$vnomproducto    = $this->vsimaneja[0][2];
+		
+		 
+      $nm_select = "select count(*) from vencimiento_lote where existencia>0 and idproducto='".$articulo."'"; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vSiEnVariasBodegas = array();
+      $this->vsienvariasbodegas = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 $SCrx->fields[0] = str_replace(',', '.', $SCrx->fields[0]);
+                 $SCrx->fields[0] = (strpos(strtolower($SCrx->fields[0]), "e")) ? (float)$SCrx->fields[0] : $SCrx->fields[0];
+                 $SCrx->fields[0] = (string)$SCrx->fields[0];
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vSiEnVariasBodegas[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vsienvariasbodegas[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vSiEnVariasBodegas = false;
+          $this->vSiEnVariasBodegas_erro = $this->Db->ErrorMsg();
+          $this->vsienvariasbodegas = false;
+          $this->vsienvariasbodegas_erro = $this->Db->ErrorMsg();
+      } 
+;
+		
+		if(isset($this->vsienvariasbodegas[0][0]))
+		{
+			if($this->vsienvariasbodegas[0][0]>1)
+			{
+				$vvls_envarias_bodegas = "SI";
+			}
+			else
+			{
+				 
+      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
+      { 
+          $nm_select = "select str_replace (convert(char(10),fecha_vencimiento,102), '.', '-') + ' ' + convert(char(8),fecha_vencimiento,20),lote,serial_codbarra from vencimiento_lote where idbodega='".$idbodega."' and existencia>0 and idproducto='".$articulo."'"; 
+      }
+      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
+      { 
+          $nm_select = "select convert(char(23),fecha_vencimiento,121),lote,serial_codbarra from vencimiento_lote where idbodega='".$idbodega."' and existencia>0 and idproducto='".$articulo."'"; 
+      }
+      else
+      { 
+          $nm_select = "select fecha_vencimiento,lote,serial_codbarra from vencimiento_lote where idbodega='".$idbodega."' and existencia>0 and idproducto='".$articulo."'"; 
+      }
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vlvs = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vlvs[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vlvs = false;
+          $this->vlvs_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+				if(isset($this->vlvs[0][0]))
+				{
+					$maneja_disponible = "SI";
+					$vvence  = $this->vlvs[0][0];
+					$vlote   = $this->vlvs[0][1];
+					$vserial = $this->vlvs[0][2];
+
+					if($vvence>0)
+					{
+						$vvence = "'".$vvence."' ";
+					}
+					else
+					{
+						$vvence = "null";
+					}
+
+					if(!empty($vlote))
+					{
+						$vlote = "'".$vlote."'";
+					}
+					else
+					{
+						$vlote = "null";
+					}
+
+					if(!empty($vserial))
+					{
+						$vserial = "'".$vserial."'";
+					}
+					else
+					{
+						$vserial = "null";
+					}
+				}
+			}
+		}	
+	}
+	
+	$vsql = "UPDATE  detalleventa SET unidadmayor='".$unidmaymen."',factor='".$recmayamen."',idbod='".$idbodega."',costop='".$costo."',cantidad='".$cantidad."',valorunit='".$precio."',valorpar='".$vneto."',iva='".$valoriva."',descuento='".$valordescuento."',adicional='".$tasaiva."',vencimiento=".$vvence.",lote=".$vlote.",serial_codbarra=".$vserial.",adicional1='".$descuento."',tbase='".$valorparcial."',tneto='".$vnetocondescuento."' WHERE iddet='".$iddet."'";
+	
+	echo $vsql;
+	
+	
+	if($vvls_envarias_bodegas=="NO" or (!empty($vlote) or $vvence>0))
+	{
+		
+		if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->BeginTrans();
+    $this->Ini->sc_tem_trans_banco = true;
+}
+
+		
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+		if ($this->Ini->sc_tem_trans_banco)
+{
+    $this->Db->CommitTrans();
+    $this->Ini->sc_tem_trans_banco = false;
+}
+
+		
+		
+		
+		$this->fGestionaStock($iddet,2);
+
+		$vval_propina = $this->fActualizarTotalFactura($idfactura,$vsipropina);
+		
+	}
+	
+	$vsql5 = "select v.idfacven,c.nombres,v.total,concat(p.prefijo,'/',v.numfacven) as numero,v.fechaven from facturaven v left join terceros c on v.idcli=c.idtercero left join resdian p on v.resolucion=p.Idres where v.idfacven='".$idfactura."'";
+
+	 
+      $nm_select = $vsql5; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vInfoDoc = array();
+      $this->vinfodoc = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vInfoDoc[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vinfodoc[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vInfoDoc = false;
+          $this->vInfoDoc_erro = $this->Db->ErrorMsg();
+          $this->vinfodoc = false;
+          $this->vinfodoc_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if(isset($this->vinfodoc[0][0]))
+	{
+
+		$vidfacven = $this->vinfodoc[0][0];
+		$vnomcli   = $this->vinfodoc[0][1];
+		$vtot      = $this->vinfodoc[0][2];
+		$vnumdoc   = $this->vinfodoc[0][3];
+		$vfechaven = $this->vinfodoc[0][4];
+
+		
+     $nm_select = "insert into log set usuario='".$this->sc_temp_gidtercero."',accion='EDITAR',observaciones='EL USUARIO EDITÓ UN ITEM A LA VENTA: ".$vnumdoc.", CLIENTE: ".$vnomcli.", FECHA VENTA: ".$vfechaven.", PRODUCTO: ".$vcodigoproducto." - ".$vnomproducto.", CANTIDAD: ".$cantidad.", TOTAL LINEA: ".$vneto."'"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+		
+	}
+
+	echo json_encode(array(
+		
+		"accion"=>"update",
+		"iddetallefactura"=>$iddet,
+		"idgrupo"=>$gru,
+		"idfactura"=>$idfactura,
+		"sql3"=>$vsql3,
+		"vence"=>$vvence,
+		"lote"=>$vlote,
+		"serial"=>$vserial,
+		"maneja_tcs_lfs"=>$maneja_tcs_lfs,
+		"disponibilidad_tcs_lfs"=>$maneja_disponible,
+		"idbodega"=>$idbodega,
+		"vls_envarias_bodegas"=>$vvls_envarias_bodegas,
+		"sql_insert"=>$vsql,
+		"descuento_general"=>$descuento3,
+		"dgeneral"=>$vdesgeneral,
+		"valor_propina"=>$vval_propina
+	));
+}
+
 if(isset($_POST['iddetalle'])){
     
     $iddet     = $_POST['iddetalle'];
@@ -2601,6 +3117,7 @@ if(isset($_POST['cargardetalle']))
 	$nompro     = "";
 	$registros  = [];
 	$contador   = 0;
+	$vobs2      = "";
 		
 	$vsql = "select 
 			 d.iddet,
@@ -2611,7 +3128,8 @@ if(isset($_POST['cargardetalle']))
 			 d.descuento,
 			 d.adicional,
 			 d.adicional1,
-			 concat(".$vtipocodigo.",' - ',p.nompro,if(d.unidadmayor='SI',if(p.unimay <> '',concat(' -- ',coalesce((select um.descripcion_um from  unidades_medida um where um.codigo_um=p.unimay limit 1),p.unimay)),''),if(p.unimen <>'',concat(' -- ',coalesce((select um.descripcion_um from  unidades_medida um where um.codigo_um=p.unimen limit 1),p.unimen)),''))) as nompro
+			 concat(".$vtipocodigo.",' - ',p.nompro,if(d.unidadmayor='SI',if(p.unimay <> '',concat(' -- ',coalesce((select um.descripcion_um from  unidades_medida um where um.codigo_um=p.unimay limit 1),p.unimay)),''),if(p.unimen <>'',concat(' -- ',coalesce((select um.descripcion_um from  unidades_medida um where um.codigo_um=p.unimen limit 1),p.unimen)),''))) as nompro,
+			 obs
 			 from 
 			 detalleventa d 
 			 inner join productos p on d.idpro=p.idprod 
@@ -2663,6 +3181,12 @@ if(isset($_POST['cargardetalle']))
 			$adicional  = $this->vdatos[$i][6];
 			$adicional1 = number_format($this->vdatos[$i][7],1,'.',',');
 			$nompro     = $this->vdatos[$i][8];
+			$vobs2      = $this->vdatos[$i][9];
+			
+			if(!empty($vobs2))
+			{
+				$nompro .= " <p style='font-size:11px;color:white;background:#5877b9;padding:5px;margin-top:2px;border-radius:3px;margin-left:5px;text-align: justify;'>".$vobs2."</p>";
+			}
 			
 			$neto       = $valorunit*$cantidad;
 			

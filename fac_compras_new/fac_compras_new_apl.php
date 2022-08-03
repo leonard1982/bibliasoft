@@ -2148,7 +2148,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form ?>.css" /> 
   <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_prod; ?>/third/font-awesome/css/all.min.css" /> 
-  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+  <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 </HEAD>
 <BODY class="scExportPage">
 <table style="border-collapse: collapse; border-width: 0; height: 100%; width: 100%"><tr><td style="padding: 0; text-align: center; vertical-align: top">
@@ -2246,7 +2246,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
       }
 
 ?>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
     <SCRIPT type="text/javascript">
       var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
       var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_close"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";
@@ -7739,6 +7739,11 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     $original_idfaccom = $this->idfaccom;
     $original_idprov = $this->idprov;
     $original_numfacom = $this->numfacom;
+    $original_saldo = $this->saldo;
+    $original_subtotal = $this->subtotal;
+    $original_tipo_com = $this->tipo_com;
+    $original_total = $this->total;
+    $original_valoriva = $this->valoriva;
 }
   $vnum   = $this->numfacom ;
 $vprov  = $this->idprov ;
@@ -7792,6 +7797,8 @@ if(isset($this->vsiexi[0][0]))
  }
 ;
 }
+
+$this->fActualizaCampos();
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     if (($original_idfaccom != $this->idfaccom || (isset($bFlagRead_idfaccom) && $bFlagRead_idfaccom)))
@@ -7805,6 +7812,26 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     if (($original_numfacom != $this->numfacom || (isset($bFlagRead_numfacom) && $bFlagRead_numfacom)))
     {
         $this->ajax_return_values_numfacom(true);
+    }
+    if (($original_saldo != $this->saldo || (isset($bFlagRead_saldo) && $bFlagRead_saldo)))
+    {
+        $this->ajax_return_values_saldo(true);
+    }
+    if (($original_subtotal != $this->subtotal || (isset($bFlagRead_subtotal) && $bFlagRead_subtotal)))
+    {
+        $this->ajax_return_values_subtotal(true);
+    }
+    if (($original_tipo_com != $this->tipo_com || (isset($bFlagRead_tipo_com) && $bFlagRead_tipo_com)))
+    {
+        $this->ajax_return_values_tipo_com(true);
+    }
+    if (($original_total != $this->total || (isset($bFlagRead_total) && $bFlagRead_total)))
+    {
+        $this->ajax_return_values_total(true);
+    }
+    if (($original_valoriva != $this->valoriva || (isset($bFlagRead_valoriva) && $bFlagRead_valoriva)))
+    {
+        $this->ajax_return_values_valoriva(true);
     }
 }
 $_SESSION['scriptcase']['fac_compras_new']['contr_erro'] = 'off'; 
@@ -11500,6 +11527,65 @@ fac_compras_new_pack_ajax_response();
 exit;
 $_SESSION['scriptcase']['fac_compras_new']['contr_erro'] = 'off';
 }
+function fActualizaCampos()
+{
+$_SESSION['scriptcase']['fac_compras_new']['contr_erro'] = 'on';
+  
+$sql="SELECT sum(valorpar), sum(iva) FROM detallecompra WHERE idfaccom='".$this->idfaccom ."'";
+ 
+      $nm_select = $sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->ds = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->ds[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->ds = false;
+          $this->ds_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->ds[0][0]))
+	{
+	$stotal=$this->ds[0][0];
+	$siva=$this->ds[0][1];
+	$vtotal=$stotal+$siva;
+	}
+
+if(!empty($this->ds[0][0]) and $this->tipo_com  == 'FC')
+	{
+	$this->subtotal  = $stotal;
+	$this->valoriva  = $siva;
+	$this->total 	   = $vtotal;
+	$this->saldo 	   = $vtotal;
+	}
+
+elseif($this->tipo_com  == 'FC')
+	{
+	$stotal= 0;
+	$siva=0;
+	$vtotal=0;
+	
+	$this->subtotal  = $stotal;
+	$this->valoriva  = $siva;
+	$this->total 	   = $vtotal;
+	$this->saldo 	   = $vtotal;
+	}
+$_SESSION['scriptcase']['fac_compras_new']['contr_erro'] = 'off';
+}
 function fSiAsentada()
 {
 $_SESSION['scriptcase']['fac_compras_new']['contr_erro'] = 'on';
@@ -14063,7 +14149,7 @@ function nmgp_redireciona($tipo=0)
     <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
     <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
     <META http-equiv="Pragma" content="no-cache"/>
-    <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
    </HEAD>
    <BODY>
    <FORM name="form_ok" method="POST" action="<?php echo $this->form_encode_input($nmgp_saida_form); ?>" target="_self">
@@ -14293,7 +14379,7 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
     <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
     <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
     <META http-equiv="Pragma" content="no-cache"/>
-    <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
     <SCRIPT type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></SCRIPT>
    </HEAD>
    <BODY>

@@ -233,13 +233,13 @@ class grid_facturaven_pos_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220622"; 
-      $this->nm_hr_ult_alt   = "203739"; 
+      $this->nm_dt_ult_alt   = "20220802"; 
+      $this->nm_hr_ult_alt   = "171118"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0";
+      $this->nm_app_version  = "1.0.0";
       $this->nm_tp_variance  = "P";
 // 
 // 
@@ -1132,7 +1132,7 @@ class grid_facturaven_pos_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -1220,7 +1220,7 @@ class grid_facturaven_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmZSBiHIBeV5BOHuNOZSJ3V5FYDoJsD9BiH9B/HIveV5XGDMvCHEJGDWr/HIBqD9JKH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsD9JKDuFaHAvCVWJeHgrKVcFeDWJeVoX7D9BsZ1X7Z1BeHQJsDMzGDkB/DurmZuBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSX7HAN7V5FUHgvsDkFCH5XCVEraD9XOZSB/HABYZMBqDMzGHEXeV5XCDoFUD9NwDQJsZ1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcJeZSFGDSBYVWBODMBOVIFCDWJeVoF7HQBsZSFaHABYHuJsHgvsVkJ3DWX7DoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveDkXKDWBmZuBqHQBiDQBqHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1X7DSNOV5FaDMBYHEJGDWBmVoFGD9JKZSBiD1veHuXGHuBOV9FeDur/HMFaHQBsZ1FGD1rKHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDQX7HAN7V5X7DMNOVcFeDWFYVENUD9JmZkFGD1rKHQF7DEBeDkXKDuFaDoJeD9FYDQJwHAveHQFaDMBOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvmVIB/H5FqDorqD9XOZ1X7Z1BeD5JwHgvsZSJ3H5F/DorqHQFYH9BiZ1rwHuXGDMBOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwZSFGHANOD5BqHgrKVcXKV5X7DorqDcBqZ1B/D1rwZMB/DEvsHEJGDWr/DoraD9NmH9X7HABYD5NUHgrYDkFCDWXCVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDuFGVErqHQXGZSBqZ1BeHQFGDErKHArCHEXCHMXGD9NmDuFaZ1rwV5JeDMrwVcBOHEF/HMJwHQXGZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQBqZ1BiHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveV5raHgrKVcFKV5FYHMBOHQXOZSB/DSNOD5F7HgBODkXKHEB7DoJeDcBwH9FUHAveHQF7DMrwV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize'])  
       { 
@@ -6940,7 +6940,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -7079,13 +7079,9 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->observaciones))
@@ -7582,7 +7578,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -7721,13 +7717,9 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->observaciones))
@@ -8075,7 +8067,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -8214,13 +8206,9 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->observaciones))
@@ -8495,7 +8483,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -8634,13 +8622,9 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->observaciones))
@@ -10159,7 +10143,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -10298,13 +10282,9 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->observaciones))
@@ -10564,7 +10544,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -10703,13 +10683,9 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->observaciones))
@@ -12011,7 +11987,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -12150,13 +12126,9 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->observaciones))
@@ -13351,7 +13323,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -13490,13 +13462,9 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->observaciones))
@@ -13807,7 +13775,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -13939,7 +13907,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
           var sc_tbLangEsc = "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_tb_esc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']) ?>";
         </script>
         <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox-compressed.js"></script>
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
         <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
@@ -14078,13 +14046,9 @@ if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
        { 
            if (!empty($this->observaciones))
@@ -17895,7 +17859,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
        <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
        <META http-equiv="Pragma" content="no-cache"/>
       </HEAD>
-      <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+      <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
       <BODY>
    <?php
       }
@@ -18092,7 +18056,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "idfacven";$nm_numeric[] = "numfacven";$nm_numeric[] = "credito";$nm_numeric[] = "idcli";$nm_numeric[] = "subtotal";$nm_numeric[] = "valoriva";$nm_numeric[] = "total";$nm_numeric[] = "asentada";$nm_numeric[] = "saldo";$nm_numeric[] = "adicional";$nm_numeric[] = "adicional2";$nm_numeric[] = "adicional3";$nm_numeric[] = "resolucion";$nm_numeric[] = "vendedor";$nm_numeric[] = "usuario_crea";$nm_numeric[] = "banco";$nm_numeric[] = "dias_decredito";$nm_numeric[] = "pedido";$nm_numeric[] = "dircliente";$nm_numeric[] = "id_clasificacion";$nm_numeric[] = "tiene_nc";
+      $nm_numeric[] = "idfacven";$nm_numeric[] = "numfacven";$nm_numeric[] = "credito";$nm_numeric[] = "idcli";$nm_numeric[] = "subtotal";$nm_numeric[] = "valoriva";$nm_numeric[] = "total";$nm_numeric[] = "asentada";$nm_numeric[] = "saldo";$nm_numeric[] = "adicional";$nm_numeric[] = "adicional2";$nm_numeric[] = "adicional3";$nm_numeric[] = "resolucion";$nm_numeric[] = "vendedor";$nm_numeric[] = "usuario_crea";$nm_numeric[] = "banco";$nm_numeric[] = "dias_decredito";$nm_numeric[] = "pedido";$nm_numeric[] = "dircliente";$nm_numeric[] = "id_clasificacion";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['decimal_db'] == ".")
@@ -18716,7 +18680,7 @@ $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/font-awesome/css/all.min.css" type="text/css" media="screen" />
@@ -19784,7 +19748,6 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos'][$path_doc_md
        $Nm_numeric[] = "pedido";
        $Nm_numeric[] = "dircliente";
        $Nm_numeric[] = "id_clasificacion";
-       $Nm_numeric[] = "tiene_nc";
        if (in_array($name, $Nm_numeric))
        {
            if (is_array($val))

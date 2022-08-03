@@ -5029,6 +5029,7 @@ $_SESSION['scriptcase']['seg_login']['contr_erro'] = 'off';
 function sc_validate_success()
 {
 $_SESSION['scriptcase']['seg_login']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
 if (!isset($this->sc_temp_usr_grupo)) {$this->sc_temp_usr_grupo = (isset($_SESSION['usr_grupo'])) ? $_SESSION['usr_grupo'] : "";}
 if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
 if (!isset($this->sc_temp_usr_iduser)) {$this->sc_temp_usr_iduser = (isset($_SESSION['usr_iduser'])) ? $_SESSION['usr_iduser'] : "";}
@@ -5251,11 +5252,12 @@ else {
 		$_SESSION['scriptcase']['user_logout'][] = array('V' => 'logged_user', 'U' => 'logout', 'R' => 'seg_login.php', 'T' => '_top');;
 	endif;	
 
-	
+	$this->sc_temp_gbd_seleccionada = $var_database;
 	$_SESSION['scriptcase']['sc_apl_seg']['blk_menu'] = "on";;
 	 if (isset($this->sc_temp_usr_iduser)) { $_SESSION['usr_iduser'] = $this->sc_temp_usr_iduser;}
  if (isset($this->sc_temp_usr_database)) { $_SESSION['usr_database'] = $this->sc_temp_usr_database;}
  if (isset($this->sc_temp_usr_grupo)) { $_SESSION['usr_grupo'] = $this->sc_temp_usr_grupo;}
+ if (isset($this->sc_temp_gbd_seleccionada)) { $_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
  if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
  {
 $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('blk_menu') . "/", $this->nm_location, "", "_parent", "ret_self", 440, 630);
@@ -5281,6 +5283,7 @@ $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('blk_m
  if (isset($this->sc_temp_usr_iduser)) { $_SESSION['usr_iduser'] = $this->sc_temp_usr_iduser;}
  if (isset($this->sc_temp_usr_database)) { $_SESSION['usr_database'] = $this->sc_temp_usr_database;}
  if (isset($this->sc_temp_usr_grupo)) { $_SESSION['usr_grupo'] = $this->sc_temp_usr_grupo;}
+ if (isset($this->sc_temp_gbd_seleccionada)) { $_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
     $_SESSION['scriptcase']['seg_login']['contr_erro'] = 'off';
     return;
 }
@@ -5288,6 +5291,7 @@ $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('blk_m
 if (isset($this->sc_temp_usr_iduser)) { $_SESSION['usr_iduser'] = $this->sc_temp_usr_iduser;}
 if (isset($this->sc_temp_usr_database)) { $_SESSION['usr_database'] = $this->sc_temp_usr_database;}
 if (isset($this->sc_temp_usr_grupo)) { $_SESSION['usr_grupo'] = $this->sc_temp_usr_grupo;}
+if (isset($this->sc_temp_gbd_seleccionada)) { $_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['seg_login']['contr_erro'] = 'off';
 }
 function setGlobales($usuario, $password, $database)

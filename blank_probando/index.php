@@ -217,8 +217,8 @@ class blank_probando_ini
       $this->nm_dt_criacao   = "20210417"; 
       $this->nm_hr_criacao   = "121629"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220720"; 
-      $this->nm_hr_ult_alt   = "200816"; 
+      $this->nm_dt_ult_alt   = "20220725"; 
+      $this->nm_hr_ult_alt   = "100644"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_probando_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_probando']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_probando']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsH9FGHIvsVWXGDMNOVcB/DWJeHIFUDcFYZSBqHAvmD5BqHgrKHErCV5FqDoFUDcBiH9FUHINaVWJsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDuJeHIraDcBiDQJwD1BeD5F7HuNOV9FeDWJeHIJeHQBqZ1rqHANOHQFUHgBOZSJ3HEXCZuB/HQFYDQBqD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiDWX7VoBiD9JKZSFUZ1rwV5JeHuzGVIBOV5X7VoBODcBqZ1B/Z1NOV5B/DEBODkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBiDQJsHANOHuJwHuzGVIBsDWF/HMBOHQXGH9BOHArYD5FaDMvCZSXeV5FqHIFGDcJeDuFaD1veHQXGDMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDuFGVoX7HQNmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQBiZSBiDSrwV5X7HgrwDkBsHEX/VEraD9BsH9BqDSNOV5XGHgNOHENiDWFqHMJeHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmDQJwHIrKHQB/DMBYVcFKV5X7HMX7HQNmZ1BiDSrYZMFaHgNOHEBUH5F/VoX7HQXODuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsZMXGDEBeVkXeDuJeVoXGDcBwH9BiHIrwD5rqDMrYVIBODWrmDoXGD9BiZ1BiD1rwHuFGDMveHEFiDWFqDoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcBqZSB/HIrwD5NUDEBOVkXeHEFaDoFUD9NwDQJwHANOV5JwHgvsVIBODWFaDoJsDcJUZ1F7Z1BOV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHEBUH5FYZuBOHQFYH9FUHINaV5XGHuNOVIB/DWFaVoJwHQNwZ1FaHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMBOHgveDkXKDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcrsH5XCHMF7HQXOVIJsHIveHuBOHgBeHEJqDuFaHMX7D9NwDQFaD1BeD5BOHgrKDkB/DWF/HIFGHQBsZ1BOHAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1881,10 +1881,6 @@ class blank_probando_apl
 
       $this->Ini->sc_Include($this->Ini->path_libs . "/nm_gc.php", "F", "nm_gc") ; 
       nm_gc($this->Ini->path_libs);
-      if (!function_exists("SC_Mail_Image"))
-      {
-          include_once("blank_probando_sc_mail_image.php");
-      }
       $this->nm_data = new nm_data("es");
       $_SESSION['scriptcase']['sc_tab_meses']['int'] = array(
                                   $this->Ini->Nm_lang['lang_mnth_janu'],
@@ -1936,105 +1932,13 @@ class blank_probando_apl
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
       $_SESSION['scriptcase']['blank_probando']['contr_erro'] = 'on';
- $vpuerto      = 587;
-$vserver      = "smtp.mailgun.org";
-$vusuario     = "postmaster@noreply.facilwebpropio.com";
-$vpassword    = "be2568b2f089eb0294ebee265b395786-787e6567-c65de640";
-$vemailemisor = "info@facilweb.com.co";
-$vreceptor    = "leo2904.trabajo@gmail.com";
+ $envio = "curl -s --user 'api:pubkey-c12f5707d0a44e908e1f32ff3a6ff96a' https://api.mailgun.net/v3/noreply.facilwebpropio.com/messages -F from='Soluciones Navarro <facturaelectronica@noreply.facilwebpropio.com>' -F to='LEONARDO NAVARRO <info@facilweb.com.co>' -F subject='Comunicado Soluciones Navarro - Factura Electrónica' -F template='comunicado_validar_correos' -F h:X-Mailgun-Variables='{\"test\":\"test\"}'";
+echo shell_exec($envio);
 
-$vfecha      = date("d-m-Y H:i:s");
-$vasunto     = "Prueba de envio desde sandbox 3";
-$vmensaje    = "Si llegó el correo electrónico.";
 
-    include_once($this->Ini->path_third . "/swift/swift_required.php");
-    $sc_mail_port     = "$vpuerto";
-    $sc_mail_tp_port  = "T";
-    $sc_mail_tp_mens  = "H";
-    $sc_mail_tp_copy  = "";
-    $this->sc_mail_count = 0;
-    $this->sc_mail_erro  = "";
-    $this->sc_mail_ok    = true;
-    if ($sc_mail_tp_port == "S" || $sc_mail_tp_port == "Y")
-    {
-        $sc_mail_port = !empty($sc_mail_port) ? $sc_mail_port : 465;
-        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'ssl');
-    }
-    elseif ($sc_mail_tp_port == "T")
-    {
-        $sc_mail_port = !empty($sc_mail_port) ? $sc_mail_port : 587;
-        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port, 'tls');
-    }
-    else
-    {
-        $sc_mail_port = !empty($sc_mail_port) ? $sc_mail_port : 25;
-        $Con_Mail = Swift_SmtpTransport::newInstance($vserver, $sc_mail_port);
-    }
-    $Con_Mail->setUsername($vusuario);
-    $Con_Mail->setpassword($vpassword);
-    $Send_Mail = Swift_Mailer::newInstance($Con_Mail);
-    if ($sc_mail_tp_mens == "H")
-    {
-        $Mens_Mail = Swift_Message::newInstance($vasunto)->setBody($vmensaje)->setContentType("text/html");
-    }
-    else
-    {
-        $Mens_Mail = Swift_Message::newInstance($vasunto)->setBody($vmensaje);
-    }
-    if (!empty($_SESSION['scriptcase']['charset']))
-    {
-        $Mens_Mail->setCharset($_SESSION['scriptcase']['charset']);
-    }
-    $Temp_mail = $vreceptor;
-    if (!is_array($Temp_mail))
-    {
-        $Temp_mail = explode(";", $vreceptor);
-    }
-    foreach ($Temp_mail as $NM_dest)
-    {
-        if (!empty($NM_dest))
-        {
-            $Arr_addr = SC_Mail_Address($NM_dest);
-            $Mens_Mail->addTo($Arr_addr[0], $Arr_addr[1]);
-        }
-    }
-    $Temp_mail = explode(";", "facilweb@solucionesnavarro.com");
-    foreach ($Temp_mail as $NM_dest)
-    {
-        if (!empty($NM_dest))
-        {
-            $Arr_addr = SC_Mail_Address($NM_dest);
-            if (strtoupper(substr($sc_mail_tp_copy, 0, 2)) == "CC")
-            {
-                $Mens_Mail->addCc($Arr_addr[0], $Arr_addr[1]);
-            }
-            else
-            {
-                $Mens_Mail->addBcc($Arr_addr[0], $Arr_addr[1]);
-            }
-        }
-    }
-    $Arr_addr = SC_Mail_Address($vemailemisor);
-    $Err_mail = array();
-    $this->sc_mail_count = $Send_Mail->send($Mens_Mail->setFrom($Arr_addr[0], $Arr_addr[1]), $Err_mail);
-    if (!empty($Err_mail))
-    {
-        $this->sc_mail_erro = $Err_mail;
-        $this->sc_mail_ok   = false;
-    }
-;
 
-if ($this->sc_mail_ok )
-{
-	echo "Se envi el correo";
-}
-else
-{
-	
- if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
- if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= $this->sc_mail_erro ;
-;
-}
+
+
 $_SESSION['scriptcase']['blank_probando']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 

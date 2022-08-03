@@ -207,10 +207,8 @@ class grid_facturaven_pos_grid
    var $nombre_cliente;
    var $celular_ws;
    var $dircliente;
-   var $id_clasificacion;
    var $fecha_pago;
    var $fec_pago;
-   var $tiene_nc;
    var $numfe;
    var $look_credito;
    var $look_asentada;
@@ -1035,6 +1033,17 @@ $this->sc_temp_gcontador_grid_fe=1;
 ;
 ;
 ;
+;
+;
+
+;
+;
+;
+;
+;
+
+;
+;
 
 
      $nm_select = "delete from facturaven where espos='SI' and (total='0' or total is null) and vendedor='".$this->sc_temp_gidtercero."' and (select d.iddet from detalleventa d where d.numfac=idfacven limit 1) is null and observaciones='TEMPORAL' and (select c.noborrar_tmp_enpos from configuraciones c order by c.idconfiguraciones desc limit 1)='NO'"; 
@@ -1193,6 +1202,7 @@ function fEnviarPropio(idfacven,bd)
 
 			},function(r){
 
+				console.log("Se busca el correo del cliente: ");
 				console.log(r);
 				var em = JSON.parse(r);
 				
@@ -1209,6 +1219,7 @@ function fEnviarPropio(idfacven,bd)
 
 						},function(r2){
 
+							console.log("Si no esta validado: ");
 							console.log(r2);
 							var obj = JSON.parse(r2);
 
@@ -1273,6 +1284,7 @@ function fEnviarPropio(idfacven,bd)
 
 							},function(r3){
 
+							console.log("Si ya esta validado: ");
 							$.unblockUI();
 							console.log(r3);
 
@@ -1309,6 +1321,7 @@ function fEnviarPropio(idfacven,bd)
 
 				},function(r){
 
+				console.log("Si no se va a validar: ");
 				$.unblockUI();
 				console.log(r);
 
@@ -2372,7 +2385,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
    $this->count_ger = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['tot_geral'][1];
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo'])) 
    { 
-       $nmgp_select = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT count(*) AS countTest from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
        $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']; 
        if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'])) 
        { 
@@ -2453,27 +2466,27 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
 //----- 
     if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), usuario_crea, str_replace (convert(char(10),inicio,102), '.', '-') + ' ' + convert(char(8),inicio,20), str_replace (convert(char(10),fin,102), '.', '-') + ' ' + convert(char(8),fin,20), banco, dias_decredito, cod_cuenta, qr_base64, str_replace (convert(char(10),fecha_validacion,102), '.', '-') + ' ' + convert(char(8),fecha_validacion,20), cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, id_clasificacion, str_replace (convert(char(10),fecha_pago,102), '.', '-') + ' ' + convert(char(8),fecha_pago,20), fec_pago, tiene_nc, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT str_replace (convert(char(10),fechaven,102), '.', '-') + ' ' + convert(char(8),fechaven,20), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), usuario_crea, str_replace (convert(char(10),inicio,102), '.', '-') + ' ' + convert(char(8),inicio,20), str_replace (convert(char(10),fin,102), '.', '-') + ' ' + convert(char(8),fin,20), banco, dias_decredito, cod_cuenta, qr_base64, str_replace (convert(char(10),fecha_validacion,102), '.', '-') + ' ' + convert(char(8),fecha_validacion,20), cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, str_replace (convert(char(10),fecha_pago,102), '.', '-') + ' ' + convert(char(8),fecha_pago,20), fec_pago, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, id_clasificacion, fecha_pago, fec_pago, tiene_nc, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, fecha_pago, fec_pago, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT convert(char(23),fechaven,121), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, convert(char(23),fechavenc,121), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, convert(char(23),creado,121), convert(char(23),editado,121), usuario_crea, convert(char(23),inicio,121), convert(char(23),fin,121), banco, dias_decredito, cod_cuenta, qr_base64, convert(char(23),fecha_validacion,121), cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, id_clasificacion, convert(char(23),fecha_pago,121), fec_pago, tiene_nc, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT convert(char(23),fechaven,121), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, convert(char(23),fechavenc,121), subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, convert(char(23),creado,121), convert(char(23),editado,121), usuario_crea, convert(char(23),inicio,121), convert(char(23),fin,121), banco, dias_decredito, cod_cuenta, qr_base64, convert(char(23),fecha_validacion,121), cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, convert(char(23),fecha_pago,121), fec_pago, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, id_clasificacion, fecha_pago, fec_pago, tiene_nc, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, fecha_pago, fec_pago, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
     elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT EXTEND(fechaven, YEAR TO DAY), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, pagada, asentada, LOTOFILE(observaciones, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), usuario_crea, EXTEND(inicio, YEAR TO FRACTION), EXTEND(fin, YEAR TO FRACTION), banco, dias_decredito, cod_cuenta, LOTOFILE(qr_base64, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as qr_base64, EXTEND(fecha_validacion, YEAR TO FRACTION), cufe, estado, LOTOFILE(enlacepdf, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, id_clasificacion, EXTEND(fecha_pago, YEAR TO FRACTION), fec_pago, tiene_nc, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT EXTEND(fechaven, YEAR TO DAY), tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, EXTEND(fechavenc, YEAR TO DAY), subtotal, valoriva, pagada, asentada, LOTOFILE(observaciones, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), usuario_crea, EXTEND(inicio, YEAR TO FRACTION), EXTEND(fin, YEAR TO FRACTION), banco, dias_decredito, cod_cuenta, LOTOFILE(qr_base64, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as qr_base64, EXTEND(fecha_validacion, YEAR TO FRACTION), cufe, estado, LOTOFILE(enlacepdf, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_informix', 'client') as enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, EXTEND(fecha_pago, YEAR TO FRACTION), fec_pago, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, id_clasificacion, fecha_pago, fec_pago, tiene_nc, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
+       $nmgp_select = "SELECT fechaven, tipo, credito, numero2, idcli, direccion2, total, pedido, idfacven, numfacven, fechavenc, subtotal, valoriva, pagada, asentada, observaciones, saldo, adicional, adicional2, adicional3, resolucion, vendedor, creado, editado, usuario_crea, inicio, fin, banco, dias_decredito, cod_cuenta, qr_base64, fecha_validacion, cufe, estado, enlacepdf, id_trans_fe, nomcli, si_electronica, nombre_cliente, celular_ws, dircliente, fecha_pago, fec_pago, numfe from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp"; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']; 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_resumo'])) 
@@ -2687,13 +2700,9 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        $this->celular_ws = $this->rs_grid->fields[39] ;  
        $this->dircliente = $this->rs_grid->fields[40] ;  
        $this->dircliente = (string)$this->dircliente;
-       $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-       $this->id_clasificacion = (string)$this->id_clasificacion;
-       $this->fecha_pago = $this->rs_grid->fields[42] ;  
-       $this->fec_pago = $this->rs_grid->fields[43] ;  
-       $this->tiene_nc = $this->rs_grid->fields[44] ;  
-       $this->tiene_nc = (string)$this->tiene_nc;
-       $this->numfe = $this->rs_grid->fields[45] ;  
+       $this->fecha_pago = $this->rs_grid->fields[41] ;  
+       $this->fec_pago = $this->rs_grid->fields[42] ;  
+       $this->numfe = $this->rs_grid->fields[43] ;  
        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig']))
        {
            foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -2990,11 +2999,9 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
            $this->nombre_cliente = $this->rs_grid->fields[38] ;  
            $this->celular_ws = $this->rs_grid->fields[39] ;  
            $this->dircliente = $this->rs_grid->fields[40] ;  
-           $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-           $this->fecha_pago = $this->rs_grid->fields[42] ;  
-           $this->fec_pago = $this->rs_grid->fields[43] ;  
-           $this->tiene_nc = $this->rs_grid->fields[44] ;  
-           $this->numfe = $this->rs_grid->fields[45] ;  
+           $this->fecha_pago = $this->rs_grid->fields[41] ;  
+           $this->fec_pago = $this->rs_grid->fields[42] ;  
+           $this->numfe = $this->rs_grid->fields[43] ;  
            if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig']))
            {
                foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -3094,7 +3101,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0">
  <META http-equiv="Pragma" content="no-cache">
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <?php 
@@ -3192,7 +3199,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("   <META http-equiv=\"Cache-Control\" content=\"post-check=0, pre-check=0\"/>\r\n");
            $nm_saida->saida("   <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
        }
-       $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
+       $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n");
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida'])
        { 
            $css_body = "";
@@ -5798,13 +5805,9 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pd
           $this->celular_ws = $this->rs_grid->fields[39] ;  
           $this->dircliente = $this->rs_grid->fields[40] ;  
           $this->dircliente = (string)$this->dircliente;
-          $this->id_clasificacion = $this->rs_grid->fields[41] ;  
-          $this->id_clasificacion = (string)$this->id_clasificacion;
-          $this->fecha_pago = $this->rs_grid->fields[42] ;  
-          $this->fec_pago = $this->rs_grid->fields[43] ;  
-          $this->tiene_nc = $this->rs_grid->fields[44] ;  
-          $this->tiene_nc = (string)$this->tiene_nc;
-          $this->numfe = $this->rs_grid->fields[45] ;  
+          $this->fecha_pago = $this->rs_grid->fields[41] ;  
+          $this->fec_pago = $this->rs_grid->fields[42] ;  
+          $this->numfe = $this->rs_grid->fields[43] ;  
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig']))
           {
               foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -6234,10 +6237,6 @@ if (!isset($this->sc_temp_gtipo_negocio)) {$this->sc_temp_gtipo_negocio = (isset
 {
 	$this->NM_field_style["total"] = "background-color:#cad9e9;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
 }
-if($this->tiene_nc >0)
-{
-	$this->NM_field_style["idcli"] = "background-color:#fcb4af;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
-}
 if($this->sc_temp_gtipo_negocio=="RESTAURANTE")
 {
 	if($this->asentada =="1")
@@ -6287,7 +6286,7 @@ if($this->asentada =="1")
           $nm_saida->saida("	}\r\n");
           $nm_saida->saida("	</script>\r\n");
 	
-	$this->imprimircopia  = "<a href='../frm_pos_impresion_html/index.php?idfactura=".$this->idfacven ."' target='_blank'><img src='../_lib/img/usr__NM__bg__NM__apps_printer_15747.png' /></a>";
+	$this->imprimircopia  = "<a href='../frm_pos_impresion_html/index.php?idfactura=".$this->idfacven ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_impresora_32x32.png' /></a>";
 	
 	$this->imprimir  = "<a href='../frm_pos_impresion_html_cmd/index.php?idfactura=".$this->idfacven ."' target='_blank'><img src='../_lib/img/scriptcase__NM__ico__NM__sc_menu_pdf2_e.png' /></a>";
 	
@@ -6393,7 +6392,7 @@ if($this->asentada =="1")
 				if(!empty($this->enlacepdf ))
 				{
 					$this->editarpos  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png'   id=pdf_".$this->idfacven ."' name='pdf_".$this->idfacven ."' /></a>";
-					$this->enviar_propio  = "<a style='cursor:pointer;' onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /></a>";
+					$this->enviar_propio  = "<a style='cursor:pointer;' onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'><img src='../_lib/img/grp__NM__ico__NM__ico_enviando_32x32.png' /></a>";
 				}
 				else
 				{
@@ -6406,7 +6405,7 @@ if($this->asentada =="1")
 				if(!empty($this->enlacepdf ))
 				{
 					$this->editarpos  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png'   id=pdf_".$this->idfacven ."' name='pdf_".$this->idfacven ."' /></a>";
-					$this->envio_dataico  = "<a style='cursor:pointer;' onclick='fReenviarDataico(\"".$this->idfacven ."\");' title='Reenviar Correo'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /></a>";
+					$this->envio_dataico  = "<a style='cursor:pointer;' onclick='fReenviarDataico(\"".$this->idfacven ."\");' title='Reenviar Correo'><img src='../_lib/img/grp__NM__ico__NM__ico_enviando_32x32.png' /></a>";
 				}
 				else
 				{
@@ -6441,7 +6440,7 @@ else
 {
 	$this->editarpos  = "<a href='../frm_pos/index.php?gidfactura=".$this->idfacven ."' ><img src='../_lib/img/scriptcase__NM__ico__NM__address_book_edit_32.png' /></a>";
 	
-	$this->imprimircopia  = "<a href='../frm_pos_impresion_html/index.php?idfactura=".$this->idfacven ."' target='_blank'><img src='../_lib/img/usr__NM__bg__NM__apps_printer_15747.png' /></a>";
+	$this->imprimircopia  = "<a href='../frm_pos_impresion_html/index.php?idfactura=".$this->idfacven ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_impresora_32x32.png' /></a>";
 	
 	$this->enviar_tech  = "";
 	$this->enviar_propio  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' title='Asentar documento'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /></a>";
@@ -6449,7 +6448,7 @@ else
 	$this->envio_dataico  = "<a onclick='fAsentarDoc(\"".$this->idfacven ."\");' title='Asentar documento'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__data_into_32.png' /></a>";
 }
 $vurl = sc_url_library("prj", "factura", "index.php");
-$this->a4  = "<a href='".$vurl."?idempresa=".$this->sc_temp_gbd_seleccionada."&id=".$this->idfacven ."' target='_blank'><img src='../_lib/img/scriptcase__NM__ico__NM__printer3_32.png'  style='width:32px;'/></a>";
+$this->a4  = "<a href='".$vurl."?idempresa=".$this->sc_temp_gbd_seleccionada."&id=".$this->idfacven ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_impresora_32x32.png'  style='width:32px;'/></a>";
 if($this->estado =='200' or $this->estado =='201')
 {
 	$this->NM_field_style["numero2"] = "background-color:#33ff99;font-size:12px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -6458,26 +6457,31 @@ $vver_json = "";
 $vregenerar_pdf_propio = "";
 $vmandar_whatsapp = "";
 $vduplicar = $this->Ini->path_link . "" . SC_dir_app_name('control_copiar_facturapos') . "/?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_url_saida=" . $this->nm_location . "&nmgp_parms=" . "gdoc*scin" . $this->numero2  . "*scout" . "gidfacven*scin" . $this->idfacven  . "*scout" . "gidtercero*scin" . $this->idcli  . "*scout";
-$vduplicar = "<a class='dropdown-item' href='".$vduplicar."' >Duplicar Documento</a>";
+$vduplicar = "<a class='dropdown-item' href='".$vduplicar."' ><img src='../_lib/img/grp__NM__ico__NM__ico_duplicar_32x32.png' /> Duplicar Documento</a>";
 $vsoporte_pago = $this->Ini->path_link . "" . SC_dir_app_name('form_facturaven_soporte_pago') . "/?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_url_saida=" . $this->nm_location . "&nmgp_parms=" . "gidventa*scin" . $this->idfacven  . "*scout" . "gnumfacven*scin" . $this->numero2  . "*scout";
-$vsoporte_pago = "<a class='dropdown-item' href='".$vsoporte_pago."' target='_self'>Soportes de Pago</a>";
+$vsoporte_pago = "<a class='dropdown-item' href='".$vsoporte_pago."' target='_self'><img src='../_lib/img/grp__NM__ico__NM__ico_soporte_pago_32x32.png' /> Soportes de Pago</a>";
 $vdatosfe      = $this->Ini->path_link . "" . SC_dir_app_name('form_facturaven_datos_fe') . "/?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_url_saida=" . $this->nm_location . "&nmgp_parms=" . "gidfacven*scin" . $this->idfacven  . "*scout" . "gnumerodoc*scin" . $this->numero2  . "*scout";
-$vdatosfe      = "<a class='dropdown-item' href='".$vdatosfe."' >Datos FE</a>";
-$vformatofa    = $this->Ini->path_link . "" . SC_dir_app_name('mfactura') . "/?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_url_saida=" . $this->nm_location . "&nmgp_parms=" . "gidfacven*scin" . $this->idfacven  . "*scout";
-$vformatofa    = "<a class='dropdown-item' href='".$vformatofa."' >Ver</a>";
+$vdatosfe      = "<a class='dropdown-item' href='".$vdatosfe."' ><img src='../_lib/img/grp__NM__ico__NM__ico_datos_factura_32x32.png' /> Datos FE</a>";
+$vconsultardian= "";
+if(!empty($this->cufe ))
+{
+	$vconsultardian= "<a class='dropdown-item'  style='font-weight: bolder;' href='https://catalogo-vpfe.dian.gov.co/document/ShowDocumentToPublic/".$this->cufe ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_dian_32x32.png' /> Consultar en la DIAN</a>";
+}
+$vadjuntos = $this->Ini->path_link . "" . SC_dir_app_name('form_facturaven_adjuntos') . "/?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_url_saida=" . $this->nm_location . "&nmgp_parms=" . "gidfacven*scin" . $this->idfacven  . "*scout" . "gnumfacven*scin" . $this->numero2  . "*scout";
+$vadjuntos = "<a class='dropdown-item' href='".$vadjuntos."' target='_self'><img src='../_lib/img/grp__NM__ico__NM__ico_adjuntos_factura_32x32.png' /> Adjuntos</a>";
 switch($this->sc_temp_gproveedor)
 {
 	case 'FACILWEB':
 		
-		$vver_json = "<a class='dropdown-item' href='#' onclick='fJSONPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);'>Ver JSON</a>";
+		$vver_json = "<a class='dropdown-item' href='#' onclick='fJSONPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);'><img src='../_lib/img/grp__NM__ico__NM__icon_json_32x32.png' /> Ver JSON</a>";
 		
 		
-		$vregenerar_pdf_propio = "<a class='dropdown-item' href='#' onclick='fRegenerarPDFPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",\"".$this->cufe ."\");'>Regenerar PDF Propio</a>";
+		$vregenerar_pdf_propio = "<a class='dropdown-item' href='#' onclick='fRegenerarPDFPropio(\"".$this->idfacven ."\",\"".$this->sc_temp_gbd_seleccionada."\",\"".$this->cufe ."\");'><img src='../_lib/img/scriptcase__NM__ico__NM__sc_menu_pdf2_e.png' /> Regenerar PDF FE</a>";
 		
 		if(!empty($this->enlacepdf ))
 		{
 			$vmandar_whatsapp = $this->Ini->path_link . "" . SC_dir_app_name('control_mandar_whatsapp_propio') . "/?script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&nmgp_url_saida=" . $this->nm_location . "&nmgp_parms=" . "genlace_pdf*scin" . $this->enlacepdf  . "*scout" . "gcelular*scin" . $this->celular_ws  . "*scout" . "gnumero*scin" . $this->numero2  . "*scout" . "gnom_cliente*scin" . $this->nombre_cliente  . "*scout" . "giddireccion*scin" . $this->dircliente  . "*scout";
-			$vmandar_whatsapp = "<a class='dropdown-item' href='".$vmandar_whatsapp."' target='_self'>Enviar a WhatsApp</a>";
+			$vmandar_whatsapp = "<a class='dropdown-item' href='".$vmandar_whatsapp."' target='_self'><img src='../_lib/img/grp__NM__ico__NM__ico_whatsapp_32x32.png' /> Enviar a WhatsApp</a>";
 		}
 		else
 		{
@@ -6493,62 +6497,16 @@ $this->opciones  = "<div class='dropdown'>
     <i class='fas fa-ellipsis-v'></i>
   </button>
   <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+  	$vconsultardian
   	$vduplicar
     $vmandar_whatsapp
 	$vregenerar_pdf_propio
 	$vver_json
 	$vsoporte_pago
 	$vdatosfe
-	$vformatofa
+	$vadjuntos
   </div>
 </div>";
-$vsql = "select id,descripcion from facturaven_clasificacion";
- 
-      $nm_select = $vsql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vClasi = array();
-      $this->vclasi = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $this->vClasi[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $this->vclasi[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->vClasi = false;
-          $this->vClasi_erro = $this->Db->ErrorMsg();
-          $this->vclasi = false;
-          $this->vclasi_erro = $this->Db->ErrorMsg();
-      } 
-;
-if(isset($this->vclasi[0][0]))
-{
-	$this->sc_clasificacion  = "<select class='form-control' style='font-size:11px;' onchange='fEditarClasificacion(\"".$this->idfacven ."\",this.value);'>";
-	for($i=0;$i<count($this->vclasi );$i++)
-	{
-		if($this->vclasi[$i][0]==$this->id_clasificacion )
-		{
-			$this->sc_clasificacion  .= "<option value='".$this->vclasi[$i][0]."' selected='selected'>".$this->vclasi[$i][1]."</option>";
-		}
-		else
-		{
-			$this->sc_clasificacion  .= "<option value='".$this->vclasi[$i][0]."'>".$this->vclasi[$i][1]."</option>";
-		}
-	}
-	$this->sc_clasificacion  .= "</select>";
-}
 if (isset($this->sc_temp_gtipo_negocio)) {$_SESSION['gtipo_negocio'] = $this->sc_temp_gtipo_negocio;}
 if (isset($this->sc_temp_gproveedor)) {$_SESSION['gproveedor'] = $this->sc_temp_gproveedor;}
 if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
@@ -7009,11 +6967,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
               $str_tem_display = $this->getFieldHighlight('advanced_search', 'idcli', $str_tem_display, $conteudo_original); 
           } 
               $conteudo = $str_tem_display; 
-              $Style_idcli = "";
-          if (isset($this->NM_field_style["idcli"]) && !empty($this->NM_field_style["idcli"]))
-          {
-              $Style_idcli .= $this->NM_field_style["idcli"];
-          }
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['proc_pdf'])
           {
               $this->SC_nowrap = "";
@@ -7022,7 +6975,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           {
               $this->SC_nowrap = "";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idcli_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idcli_grid_line'] . $Style_idcli . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idcli_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_idcli_grid_line . "\"  style=\"" . $this->Css_Cmp['css_idcli_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_idcli_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_direccion2()
@@ -7374,20 +7327,37 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
       if (!isset($this->NM_cmp_hidden['reenviar']) || $this->NM_cmp_hidden['reenviar'] != "off") { 
           $conteudo = $this->reenviar; 
           $conteudo_original = $this->reenviar; 
-          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__mail_forward_all_32.png"))
+          if (!is_file($this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_enviando_32x32.png"))
           { 
               $conteudo = "&nbsp;" ;  
           } 
+          elseif ($this->Ini->Gd_missing)
+          { 
+              $conteudo = "<span class=\"scErrorLine\">" . $this->Ini->Nm_lang['lang_errm_gd'] . "</span>";
+          } 
           else 
           { 
+              $in_reenviar = $this->Ini->root  . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_enviando_32x32.png"; 
+              $img_time = filemtime($this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_enviando_32x32.png"); 
+              $out_reenviar = str_replace("/", "_", $this->Ini->path_imag_cab); 
+              $out_reenviar = $this->Ini->path_imag_temp . "/sc_" . $out_reenviar . "_reenviar_3232_" . $img_time . "_grp__NM__ico__NM__ico_enviando_32x32.png";
+              if (!is_file($this->Ini->root . $out_reenviar)) 
+              {  
+                  $sc_obj_img = new nm_trata_img($in_reenviar);
+                  $sc_obj_img->setWidth(32);
+                  $sc_obj_img->setHeight(32);
+                  $sc_obj_img->setManterAspecto(true);
+                  $sc_obj_img->createImg($this->Ini->root . $out_reenviar);
+              } 
               if ($this->Ini->Export_img_zip)
               {
-                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__mail_forward_all_32.png";
-                  $conteudo = "<img border=\"\" src=\"scriptcase__NM__ico__NM__mail_forward_all_32.png\"/>"; 
+                  $this->Ini->Img_export_zip[] = $this->Ini->root . "/" . $out_reenviar;
+                  $Clear_path_img = str_replace($this->Ini->path_imag_temp . "/", "", $out_reenviar);
+                  $conteudo = "<img border=\"\" src=\"" . $Clear_path_img . "\"/>"; 
               }
               elseif ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['doc_word'] || $this->Img_embbed || $this->Ini->sc_export_ajax_img) 
               { 
-                  $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__mail_forward_all_32.png";
+                  $loc_img_word = $this->Ini->root . $this->Ini->path_imag_cab . "/grp__NM__ico__NM__ico_enviando_32x32.png";
                   $tmp_reenviar = fopen($loc_img_word, "rb"); 
                   $reg_reenviar = fread($tmp_reenviar, filesize($loc_img_word)); 
                   fclose($tmp_reenviar);  
@@ -7395,7 +7365,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
               } 
               else 
               { 
-                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img  . $this->Ini->path_imag_cab . "/scriptcase__NM__ico__NM__mail_forward_all_32.png\"/>" ; 
+                  $conteudo = "<img border=\"0\" src=\"" . $this->NM_raiz_img . $out_reenviar . "\"/>" ; 
               } 
           } 
           $str_tem_display = $conteudo;
@@ -20307,7 +20277,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
        $lin_obj .= "        </table>";
        $lin_obj .= "     </td></tr>";
        $Cmps_where = "";
-       $Cmps_apl = array('idfacven','numfacven','credito','fechaven','fechavenc','idcli','subtotal','valoriva','total','pagada','asentada','observaciones','saldo','adicional','adicional2','adicional3','resolucion','vendedor','creado','editado','usuario_crea','inicio','fin','banco','dias_decredito','enviada_a_tns','fecha_a_tns','factura_tns','tipo','cod_cuenta','numero2','qr_base64','fecha_validacion','cufe','direccion2','enlacepdf','id_trans_fe','estado','cel','nomcli','numfe','si_electronica','correosuc','pedido','nombre_cliente','tel_cliente','celular_ws','dircliente','id_clasificacion','fecha_pago','fec_pago','tiene_nc');
+       $Cmps_apl = array('idfacven','numfacven','credito','fechaven','fechavenc','idcli','subtotal','valoriva','total','pagada','asentada','observaciones','saldo','adicional','adicional2','adicional3','resolucion','vendedor','creado','editado','usuario_crea','inicio','fin','banco','dias_decredito','enviada_a_tns','fecha_a_tns','factura_tns','tipo','cod_cuenta','numero2','qr_base64','fecha_validacion','cufe','direccion2','enlacepdf','id_trans_fe','estado','cel','nomcli','numfe','si_electronica','correosuc','pedido','nombre_cliente','tel_cliente','celular_ws','dircliente','id_clasificacion','fecha_pago','fec_pago');
        foreach ($Cmps_apl as $cada_cmp_apl)
        { 
            if (strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'], $cada_cmp_apl) !== false)
@@ -20323,7 +20293,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
                }
            }
        }
-       $nm_comando = "select asentada, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp";
+       $nm_comando = "select asentada, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp";
        $tmp_where = "";
        if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']))
        {
@@ -20553,7 +20523,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
        $lin_obj .= "        </table>";
        $lin_obj .= "     </td></tr>";
        $Cmps_where = "";
-       $Cmps_apl = array('idfacven','numfacven','credito','fechaven','fechavenc','idcli','subtotal','valoriva','total','pagada','asentada','observaciones','saldo','adicional','adicional2','adicional3','resolucion','vendedor','creado','editado','usuario_crea','inicio','fin','banco','dias_decredito','enviada_a_tns','fecha_a_tns','factura_tns','tipo','cod_cuenta','numero2','qr_base64','fecha_validacion','cufe','direccion2','enlacepdf','id_trans_fe','estado','cel','nomcli','numfe','si_electronica','correosuc','pedido','nombre_cliente','tel_cliente','celular_ws','dircliente','id_clasificacion','fecha_pago','fec_pago','tiene_nc');
+       $Cmps_apl = array('idfacven','numfacven','credito','fechaven','fechavenc','idcli','subtotal','valoriva','total','pagada','asentada','observaciones','saldo','adicional','adicional2','adicional3','resolucion','vendedor','creado','editado','usuario_crea','inicio','fin','banco','dias_decredito','enviada_a_tns','fecha_a_tns','factura_tns','tipo','cod_cuenta','numero2','qr_base64','fecha_validacion','cufe','direccion2','enlacepdf','id_trans_fe','estado','cel','nomcli','numfe','si_electronica','correosuc','pedido','nombre_cliente','tel_cliente','celular_ws','dircliente','id_clasificacion','fecha_pago','fec_pago');
        foreach ($Cmps_apl as $cada_cmp_apl)
        { 
            if (strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'], $cada_cmp_apl) !== false)
@@ -20569,7 +20539,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
                }
            }
        }
-       $nm_comando = "select vendedor, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp";
+       $nm_comando = "select vendedor, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp";
        $tmp_where = "";
        if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']))
        {
@@ -20798,7 +20768,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
        $lin_obj .= "        </table>";
        $lin_obj .= "     </td></tr>";
        $Cmps_where = "";
-       $Cmps_apl = array('idfacven','numfacven','credito','fechaven','fechavenc','idcli','subtotal','valoriva','total','pagada','asentada','observaciones','saldo','adicional','adicional2','adicional3','resolucion','vendedor','creado','editado','usuario_crea','inicio','fin','banco','dias_decredito','enviada_a_tns','fecha_a_tns','factura_tns','tipo','cod_cuenta','numero2','qr_base64','fecha_validacion','cufe','direccion2','enlacepdf','id_trans_fe','estado','cel','nomcli','numfe','si_electronica','correosuc','pedido','nombre_cliente','tel_cliente','celular_ws','dircliente','id_clasificacion','fecha_pago','fec_pago','tiene_nc');
+       $Cmps_apl = array('idfacven','numfacven','credito','fechaven','fechavenc','idcli','subtotal','valoriva','total','pagada','asentada','observaciones','saldo','adicional','adicional2','adicional3','resolucion','vendedor','creado','editado','usuario_crea','inicio','fin','banco','dias_decredito','enviada_a_tns','fecha_a_tns','factura_tns','tipo','cod_cuenta','numero2','qr_base64','fecha_validacion','cufe','direccion2','enlacepdf','id_trans_fe','estado','cel','nomcli','numfe','si_electronica','correosuc','pedido','nombre_cliente','tel_cliente','celular_ws','dircliente','id_clasificacion','fecha_pago','fec_pago');
        foreach ($Cmps_apl as $cada_cmp_apl)
        { 
            if (strpos($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq'], $cada_cmp_apl) !== false)
@@ -20814,7 +20784,7 @@ $nm_saida->saida("        <div id='app_int_search_toggle' class='scGridRefinedSe
                }
            }
        }
-       $nm_comando = "select idcli, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago,    (select nc.idfacven from facturaven nc where nc.id_fact=f.idfacven limit 1) as tiene_nc FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp";
+       $nm_comando = "select idcli, COUNT(*) AS countTest" . $Cmps_where . " from (SELECT      idfacven,     numfacven,     credito,     fechaven,     fechavenc,     idcli,     subtotal,     valoriva,     total,     pagada,     asentada,     observaciones,     saldo,     adicional,     adicional2,     adicional3,     resolucion,     vendedor,     creado,     editado,     usuario_crea,     creado as inicio,     creado as fin,     banco,     dias_decredito,     enviada_a_tns,     fecha_a_tns,     factura_tns,     tipo,     cod_cuenta,     concat((select r.prefijo from resdian r where r.Idres=f.resolucion),'/',numfacven) as numero2,     qr_base64,     fecha_validacion,     cufe,      if((select dr.direc from direccion dr where f.dircliente=dr.iddireccion) is not null,(select dr.direc from direccion dr where f.dircliente=dr.iddireccion),(select t.direccion from terceros t where t.idtercero=f.idcli)) as direccion2,      enlacepdf,      id_trans_fe,      estado,      (select t.tel_cel from terceros t where t.idtercero=f.idcli) as cel,       (select t.nombres from terceros t where t.idtercero=f.idcli) as nomcli,      concat((select r.prefijo from resdian r where r.Idres=f.resolucion),numfacven) as numfe,     (select r.prefijo_fe from resdian r where r.Idres=f.resolucion) as si_electronica,     (select dr.correo from direccion dr  where dr.iddireccion=f.dircliente limit 1) as correosuc,     f.pedido,     (select t.nombres from terceros t where t.idtercero=f.idcli limit 1) as nombre_cliente,     (select t.tel_cel from terceros t where t.idtercero=f.idcli limit 1) as tel_cliente,     (select if(t.celular_notificafe is not null or t.celular_notificafe>0,t.celular_notificafe,t.tel_cel) from terceros t where t.idtercero=f.idcli limit 1) as celular_ws,     f.dircliente,     f.id_clasificacion,    f.fecha_pago,    coalesce(f.fecha_pago,'') as fec_pago FROM      facturaven f WHERE           espos = 'SI' ) nm_sel_esp";
        $tmp_where = "";
        if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['where_pesq']))
        {
@@ -21623,7 +21593,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
        <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
        <META http-equiv="Pragma" content="no-cache"/>
       </HEAD>
-      <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+      <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
       <BODY>
    <?php
       }

@@ -217,8 +217,8 @@ class blk_menu_icons_ws_ini
       $this->nm_dt_criacao   = "20220716"; 
       $this->nm_hr_criacao   = "193005"; 
       $this->nm_autor_alt    = "desarrollo3"; 
-      $this->nm_dt_ult_alt   = "20220721"; 
-      $this->nm_hr_ult_alt   = "183841"; 
+      $this->nm_dt_ult_alt   = "20220726"; 
+      $this->nm_hr_ult_alt   = "094438"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blk_menu_icons_ws_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blk_menu_icons_ws']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blk_menu_icons_ws']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDQB/HIrwHuNUHuBOV9FiV5FYHIFUDcBqZkBiHArKHuXGHgveHEXeDWXCHIB/HQBiDuBqD1NKVWXGHgrwV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMrYV9BUDWFaVoF7DcBqZ1FaHArKHuJeHgNKZSJ3DWFqVoBODcXGDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYVoJwDcXOZSX7Z1BYD5JwHuNOVIFCDWFYVoJwD9JmZ1B/D1rwD5FaDEBOVkJGH5FYDoFUD9NmZSFGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJeHQXODuFaHABYHQFaDMBOVIBsDuX7HMX7DcFYZ1B/Z1rYZMBODErKVkXeHEFaVoJwD9XsDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWrGDoBOHQXOZ9F7HAvmV5XGDMvmVcFKV5BmVoBqD9BsZkFGHArKHQBiDMzGZSJGDuFaDoraD9NwDuFaDSBYV5raDMzGVcBUDWFYDoX7D9XOZSBOD1NaZMXGDMvCHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9JKDuBqHAN7D5B/DMNOV9BUDur/HIBiD9JmZ1B/HIveHuFUHgBOHAFKV5B7DoJeHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7Z1rYD5JeDEBOHErCHEXCHIBiHQBiDQJsZ1rwHuJeDMvsVcB/V5X7VorqHQXOH9FaHABYV5BqDEBeZSJ3H5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7DSBeD5BiDEBOHEXeDWFqVoBiD9NmDQFUZ1rwD5BqHgvsDkBOV5X7DoJsD9XOH9BOZ1BeZMBODErKDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwZ9XGHArYD5F7HuNOVcB/H5B7VEraDcJUZkBiHAvCZMXGDEBOVkJqDWF/ZuBOHQNwZSBiDSBYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWXGDMvOZSNiDWF/HMBiD9BsVIraD1rwV5X7HgBeHEBUDuJeZuXGD9NwDQBqHIrKHQBODMrYVIBOH5XCDoBiHQNmZ1B/HABYD5XGHgNOHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1034,6 +1034,10 @@ class blk_menu_icons_ws_ini
       }
       if (!isset($_SESSION['sc_session'][$this->sc_page]['blk_menu_icons_ws']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['blk_menu_icons_ws']['embutida_init']) 
       {
+          if (!isset($_SESSION['usr_database'])) 
+          {
+              $this->nm_falta_var .= "usr_database; ";
+          }
       }
 // 
       if (!isset($_SESSION['scriptcase']['glo_tpbanco']))
@@ -1934,7 +1938,6 @@ class blk_menu_icons_ws_apl
       $_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'on';
   if( isset( $_POST['action'] ) &&  $_POST['action'] == "getIcon" ){
 
-	
 	$response = [
 		'code' => 200,
 		'data_icon_tmp' => $this->get_icon('all'),
@@ -1946,15 +1949,28 @@ class blk_menu_icons_ws_apl
 
 	$idIcon = $_POST['idIcon'];
 	$svg = $_POST['svg'];
+	$in_use = $this->in_use_icon($svg);
 
-	$res_delete = $this->deleteIcon($idIcon, $svg);
-	
+	if( $in_use ) {
+
+		$code = 300;
+		$res_delete = [
+			'status' => 'error',
+			'msg'    => 'No es posible eliminar, Icono esta en Uso.'
+		];
+	} else{
+
+		$code = 200;
+		$res_delete = $this->deleteIcon($idIcon, $svg);
+	}
+
 	$response = [
-		'code' => 200,
+		'code' => $code,
 		'data_delete' => $res_delete,
-		'data_icon_bank' => $this->get_icon()
+		'data_icon_bank' => $this->get_icon(),
+		'in_use' => $in_use
 	];
-	
+
 	echo json_encode($response);
 
 }elseif( isset( $_POST['action'] ) &&  $_POST['action'] == "setIcon" ){
@@ -1962,14 +1978,14 @@ class blk_menu_icons_ws_apl
 	$idIcon = $_POST['idIcon'];
 	$keyword = $_POST['keyword'];
 	$this->update_icon($idIcon, $keyword);
-	
+
 	$response = [
 		'code' => 200,
 		'msg' => 'Registro Éxitoso!',
 		'status' => 'success',
 		'data_icon_bank' => $this->get_icon()
 	];
-	
+
 	echo json_encode($response);
 
 } elseif(!empty($_FILES)) {
@@ -1998,10 +2014,10 @@ class blk_menu_icons_ws_apl
 			$name = $_FILES["files"]["name"][$i];
 			$filename = $path_doc . $name;
 
-			if ( file_exists($filename) ) {
+			if ( file_exists($filename) && $this->exist_icon($name) ) {
 				$code = 300;
 				$msg = "Ya existe un icono con este nombre $name";
-					$icono = $this->Ini->path_imagens . '/menu-icons/' . $name;
+				$icono = $this->Ini->path_imagens . '/menu-icons/' . $name;
 			} else {
 
 				if ( move_uploaded_file($tmpFile, $filename) ) {
@@ -2034,7 +2050,6 @@ class blk_menu_icons_ws_apl
 	];
 	echo json_encode($response);
 }
-
 
 
 $_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'off'; 
@@ -2133,6 +2148,45 @@ $response = [
 return $response;
 $_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'off';
 }
+function exist_icon($icon)
+{
+$_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'on';
+  
+$sql = "SELECT COUNT(*) FROM facilweb.menu_icons WHERE descripcion = '$icon'";
+ 
+      $nm_select = $sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs = false;
+          $rs_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+if ($rs[0][0] > 0) {
+	return true;
+} else {
+	return false;
+}
+$_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'off';
+}
 function get_icon($uniq='bank')
 {
 $_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'on';
@@ -2175,6 +2229,10 @@ if (false == $ds ) {
 		
 		$item['code'] = 200;
 		$item['icono'] = $this->Ini->path_imagens . '/menu-icons/' . $item['descripcion'];
+		
+		if( $uniq == 'bank' ) {
+			$item['in_use'] = $this->in_use_icon($item['descripcion']);
+		}
 		$data[] = $item;
 
 		$ds->moveNext();
@@ -2198,6 +2256,48 @@ $res = [
 ];
 
 return $res;
+$_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'off';
+}
+function in_use_icon($icon)
+{
+$_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+  
+$sql = "SELECT count(*) FROM $this->sc_temp_usr_database.seg_apps WHERE app_icon = '$icon'";
+ 
+      $nm_select = $sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs = false;
+          $rs_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+if ($rs[0][0] > 0) {
+	return true;
+} else {
+	return false;
+}
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
 $_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'off';
 }
 function insert_icon($filename)
@@ -2438,6 +2538,20 @@ $_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'off';
    {
        $_SESSION['sc_session']['SC_parm_violation'] = true;
    }
+   if (isset($_POST["usr_database"])) 
+   {
+       $_SESSION["usr_database"] = $_POST["usr_database"];
+       nm_limpa_str_blk_menu_icons_ws($_SESSION["usr_database"]);
+   }
+   if (isset($_GET["usr_database"])) 
+   {
+       $_SESSION["usr_database"] = $_GET["usr_database"];
+       nm_limpa_str_blk_menu_icons_ws($_SESSION["usr_database"]);
+   }
+   if (!isset($_SESSION["usr_database"])) 
+   {
+       $_SESSION["usr_database"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -2592,6 +2706,11 @@ $_SESSION['scriptcase']['blk_menu_icons_ws']['contr_erro'] = 'off';
                 $$Tmp_par = $cadapar[1];
             }
             $ix++;
+       }
+       if (isset($usr_database)) 
+       {
+           $_SESSION['usr_database'] = $usr_database;
+           nm_limpa_str_blk_menu_icons_ws($_SESSION["usr_database"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

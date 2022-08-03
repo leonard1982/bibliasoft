@@ -2149,7 +2149,7 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0">
  <META http-equiv="Pragma" content="no-cache">
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <?php 
@@ -2247,7 +2247,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("   <META http-equiv=\"Cache-Control\" content=\"post-check=0, pre-check=0\"/>\r\n");
            $nm_saida->saida("   <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
        }
-       $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
+       $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n");
        $css_body = "margin-top:0px;margin-bottom:0px;";
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['embutida'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['ajax_nav'] && !$this->Ini->sc_export_ajax)
        { 
@@ -4969,7 +4969,7 @@ if($this->asentada ==1)
 			if(!empty($this->cufe ))
 			{
 				$this->enviar_propio  = "<a href='".$this->enlacepdf ."' target='_blank'><img src='../_lib/img/grp__NM__ico__NM__ico_pdf_32x32.png'   id=pdf_".$this->idfacven ."' name='pdf_".$this->idfacven ."' /></a>";
-				$this->reenviar  = "<a style='cursor:pointer;' onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'><img src='../_lib/img/scriptcase__NM__ico__NM__mail_forward_all_32.png' /></a>";
+				$this->reenviar  = "<a style='cursor:pointer;' onclick='fReenviarPropio(\"".$this->idfacven ."\");' title='Reenviar Al Correo'><img src='../_lib/img/grp__NM__ico__NM__ico_enviando_32x32.png' /></a>";
 			}
 			else
 			{
@@ -12541,7 +12541,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
        <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
        <META http-equiv="Pragma" content="no-cache"/>
       </HEAD>
-      <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+      <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
       <BODY>
    <?php
       }

@@ -217,13 +217,13 @@ class frm_pos_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "163114"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220622"; 
-      $this->nm_hr_ult_alt   = "203708"; 
+      $this->nm_dt_ult_alt   = "20220802"; 
+      $this->nm_hr_ult_alt   = "225630"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0";
+      $this->nm_app_version  = "1.0.0";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -744,7 +744,7 @@ class frm_pos_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -832,7 +832,7 @@ class frm_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['frm_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXGDuBOZ1BYHQB/HuBYVcFKHEF/HMrqHQFYZkBiHAvsZMXGDErKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGZSJqV5FaHMB/HQXODQJsD1BeHuF7HuzGDkBOHEBmVEF7DcJUZ1B/HINKD5XGHgNOVkJqDWFqVoBiHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDErKVkXeV5FqDoFUD9NwDQJsZ1rwV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9JKDQJwHAN7HQNUHuzGVcBOV5FGVEraDcBqZSBqHAzGZMBODMvCZSXeV5XCHMFaHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5XGHgveDkXKDWBmZuBqHQBiDQBqHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiD1rKHuB/HgvsVkJqV5FaHMX7HQFYDQJsHAN7D5rqHuBOVcBUHEFYDoBiD9JmZkFGZ1rYV5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsH9FGHIvsVWJeHuzGV9BUDWF/HMFGD9JmZ1X7HArYZMBOHgNKVkJGDWX7DoXGD9JKH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FUHgvsHErCV5FqHMXGHQNmZSX7HAvmV5BODMNODkB/DWrmVoX7HQNmZkBiHIBeZMFaDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMrwDkBODWF/VoX7D9BsZ1BOZ1BeD5BqDEBOZSJGH5X/VoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaDSBYHQJwDMBODkBsDWBmVEraHQXGZ1B/Z1vOV5X7DMzGDkXKDWF/VoBiHQBiZSBiHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWBODMvOVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHErCH5X/DoXGD9NmZSBiD1BeHuXGDMBYVcB/DWJeVoB/D9BiZ1FaHIBeZMJeDEvsVkXeDWXCDoF7HQNmDQJsZ1rwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1852,6 +1852,8 @@ if(isset($this->vconfiguraciones[0][0]))
 ;
 ;
 
+;
+
 ?>
 <head>
 <!--
@@ -2008,6 +2010,8 @@ $this->JS();
 			<th width="150px" style="text-align:center;" >UNITARIO</th>
 			<th width="150px" style="text-align:center;" >DTO.</th>
 			<th width="100px" style="text-align:center;" >TOTAL</th>
+			<th width="100px" style="text-align:center;" >IMPTO.</th>
+			<th width="40px"></th>
 			<th width="40px"></th>
 			<th width="40px"></th>
 			<th width="40px"></th>
@@ -2658,6 +2662,75 @@ function fReemplazarCaracter(cadena,caracter)
 	return cadena;
 }
 	
+
+function fGuardarItemDocumento(idfacven,iddet,cantidad,valor_unitario)
+{
+	console.log("fGuardarItemDocumento:");
+	console.log("idfacven: "+idfacven+", iddet: "+iddet+", cantidad: "+cantidad+", valor: "+valor_unitario);
+	
+	var cantidad = cantidad.replace(",","");
+	var valor_unitario = valor_unitario.replace(",","");
+	
+	$.post("../frm_pos_gestionardetalle/index.php",{
+
+			idfactura: idfacven,
+			id_detalle: iddet,
+			cantidad: cantidad,
+			precio: valor_unitario,
+			updateitem: ""
+
+		},function(r){
+
+			console.log(r);
+			
+			var filas = $("#detallefactura tr").length;
+
+			if(filas > 1){
+
+				for(i=1;i<=filas;i++){
+
+					$("#detallefactura tr").eq(1).remove();
+				}
+			}
+
+			$.post("../frm_pos_gestionardetalle/index.php",{
+
+				idfactura: $("#idfactura").val(),
+				cargardetalle: ""
+
+			},function(r2){
+
+				console.log("Cargar Detalle: ");
+				console.log(r2);
+
+				var o = JSON.parse(r2);
+
+				if(o.length>0){
+
+					for(i=0;i<o.length;i++){
+
+						var filas = $("#detallefactura tr").length;
+
+						fAgregarFilaTabla(filas, o[ i].descripcionproducto,o[ i].cantidad,o[ i].valorunit,o[ i].descuento,o[ i].valorpar,o[ i].iddet,o[ i].adicional);
+					}
+
+					SORTER.sort('#detallefactura tbody','desc');
+
+					fRecalcular();
+
+
+					$("#txt_articulo").val("");
+					$("#txt_articulo").focus();
+				}
+
+				$.unblockUI();
+			});
+		
+			alertify.set('notifier','position', 'top-center');
+ 			alertify.success("Item modificado con éxito.");
+	});
+}
+	
 	
 function fVerDetalleItem(viddet2)
 {
@@ -2743,6 +2816,49 @@ function fCambiarObservacionItem(viddet2,observaciones)
 			},function(r){
 
 				console.log(r);
+			
+				var filas = $("#detallefactura tr").length;
+
+				if(filas > 1){
+
+					for(i=1;i<=filas;i++){
+
+						$("#detallefactura tr").eq(1).remove();
+					}
+				}
+			
+				$.post("../frm_pos_gestionardetalle/index.php",{
+
+					idfactura: $("#idfactura").val(),
+					cargardetalle: ""
+
+				},function(r2){
+
+					console.log("Cargar Detalle: ");
+					console.log(r2);
+
+					var o = JSON.parse(r2);
+
+					if(o.length>0){
+
+						for(i=0;i<o.length;i++){
+
+							var filas = $("#detallefactura tr").length;
+
+							fAgregarFilaTabla(filas, o[ i].descripcionproducto,o[ i].cantidad,o[ i].valorunit,o[ i].descuento,o[ i].valorpar,o[ i].iddet,o[ i].adicional);
+						}
+
+						SORTER.sort('#detallefactura tbody','desc');
+
+						fRecalcular();
+
+
+						$("#txt_articulo").val("");
+						$("#txt_articulo").focus();
+					}
+
+					$.unblockUI();
+				});
 		});
 	}
 }
@@ -3353,7 +3469,7 @@ function fAgregarItemDetalle(idfactura,articulo,precio,cantidad=1,iva=0,descuent
 
 							var filas = $("#detallefactura tr").length;
 
-							fAgregarFilaTabla(filas, r2[ i].descripcionproducto,r2[ i].cantidad,r2[ i].valorunit,r2[ i].descuento,r2[ i].valorpar,r2[ i].iddet);
+							fAgregarFilaTabla(filas, r2[ i].descripcionproducto,r2[ i].cantidad,r2[ i].valorunit,r2[ i].descuento,r2[ i].valorpar,r2[ i].iddet,r2[ i].adicional);
 						}
 
 							SORTER.sort('#detallefactura tbody','desc');
@@ -3721,7 +3837,7 @@ function fAutocompletarArticulos(indicio,ventaunidad,tipoprecio)
 	}
 }
 											 
-function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,descuento,total,iddet="")
+function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,descuento,total,iddet="",adicional=0)
 {
 
 		var iditem      = "items"+fila;
@@ -3749,7 +3865,7 @@ function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,des
 		datosnuevos += "</td>";
 											 
 		datosnuevos += "<td class='color_selection"+fila+"'>";
-		datosnuevos += "<input size='7' class='inputcenter form-control' style='text-align:right;' type='text' value='"+descuento+"' />";
+		datosnuevos += "<input size='7' class='inputcenter form-control' id='autorizardescuento"+fila+"' style='text-align:right;' type='text' value='"+descuento+"' />";
 		datosnuevos += "</td>";
 											 
 		if(!$.isEmptyObject(descuento))
@@ -3761,6 +3877,14 @@ function fAgregarFilaTabla(fila, descripcionproducto,cantidad,preciounitario,des
 		}
 		datosnuevos += "<td class='color_selection"+fila+"'>";
 		datosnuevos += "<input  class='inputcenter form-control' id='autorizartotal"+fila+"'  style='text-align:right;'  type='text' value='"+formatNumber(total)+"' />";
+		datosnuevos += "</td>";
+	
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		datosnuevos += "<input size='7' class='inputcenter form-control' id='autorizarimpuesto"+fila+"' style='text-align:right;' type='text' value='"+adicional+"' />";
+		datosnuevos += "</td>";
+	
+		datosnuevos += "<td class='color_selection"+fila+"'>";
+		datosnuevos += "<img  src='../_lib/img/grp__NM__ico__NM__ico_guardar2_32x32.png' onclick='fGuardarItemDocumento("+idfacven+",$(\"#itemsagregados"+fila+"\").val(),$(\"#editarcantidad"+fila+"\").val(),$(\"#autorizarprecio"+fila+"\").val());' width='30px' />";
 		datosnuevos += "</td>";
 											 
 		datosnuevos += "<td class='color_selection"+fila+"'>";
@@ -4518,7 +4642,7 @@ $(document).ready(function(){
 
 									var filas = $("#detallefactura tr").length;
 
-									fAgregarFilaTabla(filas, o[ i].descripcionproducto,o[ i].cantidad,o[ i].valorunit,o[ i].descuento,o[ i].valorpar,o[ i].iddet);
+									fAgregarFilaTabla(filas, o[ i].descripcionproducto,o[ i].cantidad,o[ i].valorunit,o[ i].descuento,o[ i].valorpar,o[ i].iddet,o[ i].adicional);
 								}
 
 								SORTER.sort('#detallefactura tbody','desc');

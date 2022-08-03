@@ -295,27 +295,27 @@ class grid_usuarios_xml
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['where_pesq'];
@@ -361,21 +361,22 @@ class grid_usuarios_xml
              $this->xml_registro = "<grid_usuarios";
          }
          $this->usuario = $rs->fields[0] ;  
-         $this->password = $rs->fields[1] ;  
-         $this->tercero = $rs->fields[2] ;  
+         $this->tercero = $rs->fields[1] ;  
          $this->tercero = (string)$this->tercero;
-         $this->correo = $rs->fields[3] ;  
+         $this->correo = $rs->fields[2] ;  
+         $this->telefono = $rs->fields[3] ;  
          $this->resolucion = $rs->fields[4] ;  
          $this->resolucion = (string)$this->resolucion;
          $this->grupo = $rs->fields[5] ;  
          $this->grupo = (string)$this->grupo;
          $this->activo = $rs->fields[6] ;  
-         $this->grupocomanda = $rs->fields[7] ;  
-         $this->grupocomanda = (string)$this->grupocomanda;
-         $this->idusuarios = $rs->fields[8] ;  
+         $this->idusuarios = $rs->fields[7] ;  
          $this->idusuarios = (string)$this->idusuarios;
-         $this->creacion = $rs->fields[9] ;  
+         $this->creacion = $rs->fields[8] ;  
+         $this->password = $rs->fields[9] ;  
          $this->nombre = $rs->fields[10] ;  
+         $this->grupocomanda = $rs->fields[11] ;  
+         $this->grupocomanda = (string)$this->grupocomanda;
          //----- lookup - tercero
          $this->look_tercero = $this->tercero; 
          $this->Lookup->lookup_tercero($this->look_tercero, $this->tercero) ; 
@@ -388,10 +389,6 @@ class grid_usuarios_xml
          $this->look_grupo = $this->grupo; 
          $this->Lookup->lookup_grupo($this->look_grupo, $this->grupo) ; 
          $this->look_grupo = ($this->look_grupo == "&nbsp;") ? "" : $this->look_grupo; 
-         //----- lookup - grupocomanda
-         $this->look_grupocomanda = $this->grupocomanda; 
-         $this->Lookup->lookup_grupocomanda($this->look_grupocomanda, $this->grupocomanda) ; 
-         $this->look_grupocomanda = ($this->look_grupocomanda == "&nbsp;") ? "" : $this->look_grupocomanda; 
          $this->sc_proc_grid = true; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'] as $Cada_col)
          { 
@@ -653,31 +650,6 @@ class grid_usuarios_xml
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->usuario) . "\"";
          }
    }
-   //----- password
-   function NM_export_password()
-   {
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->password))
-         {
-             $this->password = sc_convert_encoding($this->password, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-         if ($this->Xml_tag_label)
-         {
-             $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
-         }
-         else
-         {
-             $SC_Label = "password"; 
-         }
-         $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->password) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->password) . "\"";
-         }
-   }
    //----- tercero
    function NM_export_tercero()
    {
@@ -727,6 +699,31 @@ class grid_usuarios_xml
          else
          {
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->correo) . "\"";
+         }
+   }
+   //----- telefono
+   function NM_export_telefono()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->telefono))
+         {
+             $this->telefono = sc_convert_encoding($this->telefono, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['telefono'])) ? $this->New_label['telefono'] : "Telefono"; 
+         }
+         else
+         {
+             $SC_Label = "telefono"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->telefono) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->telefono) . "\"";
          }
    }
    //----- resolucion
@@ -806,32 +803,6 @@ class grid_usuarios_xml
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->activo) . "\"";
          }
    }
-   //----- grupocomanda
-   function NM_export_grupocomanda()
-   {
-         nmgp_Form_Num_Val($this->look_grupocomanda, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->look_grupocomanda))
-         {
-             $this->look_grupocomanda = sc_convert_encoding($this->look_grupocomanda, "UTF-8", $_SESSION['scriptcase']['charset']);
-         }
-         if ($this->Xml_tag_label)
-         {
-             $SC_Label = (isset($this->New_label['grupocomanda'])) ? $this->New_label['grupocomanda'] : "Grupo Comanda"; 
-         }
-         else
-         {
-             $SC_Label = "grupocomanda"; 
-         }
-         $this->clear_tag($SC_Label); 
-         if ($this->New_Format)
-         {
-             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->look_grupocomanda) . "</" . $SC_Label . ">\r\n";
-         }
-         else
-         {
-             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->look_grupocomanda) . "\"";
-         }
-   }
    //----- idusuarios
    function NM_export_idusuarios()
    {
@@ -892,6 +863,31 @@ class grid_usuarios_xml
          else
          {
              $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->creacion) . "\"";
+         }
+   }
+   //----- password
+   function NM_export_password()
+   {
+         if ($_SESSION['scriptcase']['charset'] == "UTF-8" && !NM_is_utf8($this->password))
+         {
+             $this->password = sc_convert_encoding($this->password, "UTF-8", $_SESSION['scriptcase']['charset']);
+         }
+         if ($this->Xml_tag_label)
+         {
+             $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
+         }
+         else
+         {
+             $SC_Label = "password"; 
+         }
+         $this->clear_tag($SC_Label); 
+         if ($this->New_Format)
+         {
+             $this->xml_registro .= " <" . $SC_Label . ">" . $this->trata_dados($this->password) . "</" . $SC_Label . ">\r\n";
+         }
+         else
+         {
+             $this->xml_registro .= " " . $SC_Label . " =\"" . $this->trata_dados($this->password) . "\"";
          }
    }
    //----- nombre
@@ -1040,7 +1036,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
  <META http-equiv="Pragma" content="no-cache"/>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <?php

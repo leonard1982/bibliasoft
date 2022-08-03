@@ -277,14 +277,6 @@ class grid_usuarios_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
-              if ($Cada_col == "password" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
               $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
               if ($Cada_col == "tercero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
@@ -295,6 +287,14 @@ class grid_usuarios_csv
               }
               $SC_Label = (isset($this->New_label['correo'])) ? $this->New_label['correo'] : "Correo"; 
               if ($Cada_col == "correo" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['telefono'])) ? $this->New_label['telefono'] : "Telefono"; 
+              if ($Cada_col == "telefono" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
                   $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
@@ -325,14 +325,6 @@ class grid_usuarios_csv
                   $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
                   $this->NM_prim_col++;
               }
-              $SC_Label = (isset($this->New_label['grupocomanda'])) ? $this->New_label['grupocomanda'] : "Grupo Comanda"; 
-              if ($Cada_col == "grupocomanda" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-              {
-                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
-                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-                  $this->NM_prim_col++;
-              }
               $SC_Label = (isset($this->New_label['idusuarios'])) ? $this->New_label['idusuarios'] : "Id"; 
               if ($Cada_col == "idusuarios" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
@@ -343,6 +335,14 @@ class grid_usuarios_csv
               }
               $SC_Label = (isset($this->New_label['creacion'])) ? $this->New_label['creacion'] : "Creacion"; 
               if ($Cada_col == "creacion" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+              {
+                  $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+                  $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
+                  $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+                  $this->NM_prim_col++;
+              }
+              $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
+              if ($Cada_col == "password" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
               {
                   $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
                   $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $SC_Label);
@@ -366,27 +366,27 @@ class grid_usuarios_csv
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['where_pesq'];
@@ -421,21 +421,22 @@ class grid_usuarios_csv
          $this->csv_registro = "";
          $this->NM_prim_col  = 0;
          $this->usuario = $rs->fields[0] ;  
-         $this->password = $rs->fields[1] ;  
-         $this->tercero = $rs->fields[2] ;  
+         $this->tercero = $rs->fields[1] ;  
          $this->tercero = (string)$this->tercero;
-         $this->correo = $rs->fields[3] ;  
+         $this->correo = $rs->fields[2] ;  
+         $this->telefono = $rs->fields[3] ;  
          $this->resolucion = $rs->fields[4] ;  
          $this->resolucion = (string)$this->resolucion;
          $this->grupo = $rs->fields[5] ;  
          $this->grupo = (string)$this->grupo;
          $this->activo = $rs->fields[6] ;  
-         $this->grupocomanda = $rs->fields[7] ;  
-         $this->grupocomanda = (string)$this->grupocomanda;
-         $this->idusuarios = $rs->fields[8] ;  
+         $this->idusuarios = $rs->fields[7] ;  
          $this->idusuarios = (string)$this->idusuarios;
-         $this->creacion = $rs->fields[9] ;  
+         $this->creacion = $rs->fields[8] ;  
+         $this->password = $rs->fields[9] ;  
          $this->nombre = $rs->fields[10] ;  
+         $this->grupocomanda = $rs->fields[11] ;  
+         $this->grupocomanda = (string)$this->grupocomanda;
          //----- lookup - tercero
          $this->look_tercero = $this->tercero; 
          $this->Lookup->lookup_tercero($this->look_tercero, $this->tercero) ; 
@@ -448,10 +449,6 @@ class grid_usuarios_csv
          $this->look_grupo = $this->grupo; 
          $this->Lookup->lookup_grupo($this->look_grupo, $this->grupo) ; 
          $this->look_grupo = ($this->look_grupo == "&nbsp;") ? "" : $this->look_grupo; 
-         //----- lookup - grupocomanda
-         $this->look_grupocomanda = $this->grupocomanda; 
-         $this->Lookup->lookup_grupocomanda($this->look_grupocomanda, $this->grupocomanda) ; 
-         $this->look_grupocomanda = ($this->look_grupocomanda == "&nbsp;") ? "" : $this->look_grupocomanda; 
          $this->sc_proc_grid = true; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'] as $Cada_col)
          { 
@@ -582,14 +579,6 @@ class grid_usuarios_csv
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
-   //----- password
-   function NM_export_password()
-   {
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->password);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
    //----- tercero
    function NM_export_tercero()
    {
@@ -604,6 +593,14 @@ class grid_usuarios_csv
    {
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
       $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->correo);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- telefono
+   function NM_export_telefono()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->telefono);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
@@ -630,15 +627,6 @@ class grid_usuarios_csv
    {
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
       $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->activo);
-      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
-      $this->NM_prim_col++;
-   }
-   //----- grupocomanda
-   function NM_export_grupocomanda()
-   {
-         nmgp_Form_Num_Val($this->look_grupocomanda, $_SESSION['scriptcase']['reg_conf']['grup_num'], $_SESSION['scriptcase']['reg_conf']['dec_num'], "0", "S", "2", "", "N:" . $_SESSION['scriptcase']['reg_conf']['neg_num'] , $_SESSION['scriptcase']['reg_conf']['simb_neg'], $_SESSION['scriptcase']['reg_conf']['num_group_digit']) ; 
-      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
-      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->look_grupocomanda);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
@@ -671,6 +659,14 @@ class grid_usuarios_csv
              } 
       $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
       $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->creacion);
+      $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
+      $this->NM_prim_col++;
+   }
+   //----- password
+   function NM_export_password()
+   {
+      $col_sep = ($this->NM_prim_col > 0) ? $this->Delim_col : "";
+      $conteudo = str_replace($this->Delim_dados, $this->Delim_dados . $this->Delim_dados, $this->password);
       $this->csv_registro .= $col_sep . $this->Delim_dados . $conteudo . $this->Delim_dados;
       $this->NM_prim_col++;
    }
@@ -759,7 +755,7 @@ class grid_usuarios_csv
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0">
  <META http-equiv="Pragma" content="no-cache">
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 <?php
 if ($_SESSION['scriptcase']['proc_mobile'])
 {

@@ -216,9 +216,9 @@ class blk_menu_icons_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20220716"; 
       $this->nm_hr_criacao   = "192855"; 
-      $this->nm_autor_alt    = "desarrollo3"; 
-      $this->nm_dt_ult_alt   = "20220722"; 
-      $this->nm_hr_ult_alt   = "074202"; 
+      $this->nm_autor_alt    = "admin"; 
+      $this->nm_dt_ult_alt   = "20220726"; 
+      $this->nm_hr_ult_alt   = "102937"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blk_menu_icons_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blk_menu_icons']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blk_menu_icons']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuFaHIBeV5JeHgrKDkBODuX7HIXGDcJUZSB/D1zGZMB/HgvsVkJ3DWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9BsZSBOHANOHQFUHgNOHEFiDWFqVoJsHQNwH9X7DSNaVWBOHuNOVIB/H5FqDoNUHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HANOD5rqHuvmDkB/V5X7DoXGDcJUZ1B/Z1NOZMFaDMNKZSXeHEFqDoF7D9XsZSX7Z1N7V5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEraD9JmZ1FaD1vsV5X7HgNODkB/DWBmVoFGHQXGDQX7HArYHuBiHuzGVcrsH5XCHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VEF7HQNmVINUHAN7HQJwDEBODkFeH5FYVoFGHQJKDQB/D1veD5JeDMzGVIBsHEF/VEF7HQJmZSBqZ1BeHuBqDMzGHEXeHEFqHIJwD9XsDQFaDSrwHuXGHuBYV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDQJsHANOHQJwHuzGVcrsH5XCVorqHQBiH9BqZ1BeZMB/DEvsHENiH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9BiZ1FaD1rwD5NUDEBOHEFiHEFaHIFGDcXGDQFaHANOHQJwDMvOVIB/DWFaDoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcJeH9X7HIBeD5B/HgrYDkBOV5FYDoraD9BsZSFaHArYD5BiDEBeHEXeH5FYDoB/D9XsH9FGD1BOD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcXKV5X7VoraHQBiZkBiD1zGD5BOHgNOHArsDWXCHIrqD9NwH9BiZ1vCV5BODMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYZSJqDWrmVErqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIF7DcBwZSBiDSN7V5FUDMNOVcXKHEX/DoXGDcBqZkFGHAN7ZMB/DEBeDkXKHEB7ZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1947,6 +1947,9 @@ class blk_menu_icons_apl
 		<!-- Style css -->
 		<link href="<?php echo sc_url_library('prj', 'menu', 'assets/css/style.css') ?>" rel="stylesheet">
 
+		<!-- P-scroll bar css-->
+		<link href="<?php echo sc_url_library('prj', 'menu', 'assets/plugins/p-scrollbar/p-scrollbar.css') ?>" rel="stylesheet">
+
 		<style>
 			#form_icon{
 				max-height: calc(100vh - (105px + 2rem));
@@ -1958,6 +1961,10 @@ class blk_menu_icons_apl
 				max-height: calc(100vh - (56px + 3rem));
 				overflow-x: hidden;
 				overflow-y: auto;
+			}
+			.bank{
+				position: fixed;
+				right: 0
 			}
 			.card {
 				margin: 1rem auto 0 auto;
@@ -1978,6 +1985,57 @@ class blk_menu_icons_apl
 				text-align: center;
 				margin-top: 1.2rem;
 			}
+
+			.ribbon-top-right::before {
+				top: 0;
+				left: 0;
+			}
+			.ribbon-top-right::after {
+				bottom: 0;
+				right: 0;
+			}
+			.ribbon-top-right::before, .ribbon-top-right::after {
+				border-top-color: transparent;
+				border-right-color: transparent;
+			}
+			.ribbon::before, .ribbon::after {
+				position: absolute;
+				z-index: -1;
+				content: '';
+				display: block;
+				border: 2px solid rgba(0,0,0,0.2);
+			}
+			.ribbon-top-right {
+				top: -4px;
+				right: -4px;
+			}
+			.ribbon {
+				width: 44px;
+				height: 44px;
+				overflow: hidden;
+				position: absolute;
+			}	
+			.ribbon-top-right span {
+				right: -12px;
+				top: 11px;
+				transform: rotate(45deg);
+			}
+			.ribbon span {
+				position: absolute;
+				display: block;
+				width: 60px;
+				padding: 2px 0;
+				background-color: #60A8DD;
+				box-shadow: 0 5px 10px rgba(0,0,0,.1);
+				color: #fff;
+				font: 600 .45rem 'Lato', sans-serif;
+				text-shadow: 0 1px 1px rgba(0,0,0,.2);
+				text-transform: uppercase;
+				text-align: center;
+				letter-spacing: 1px;
+				z-index: 1
+			}
+
 		</style>
 
 		<style>
@@ -2001,8 +2059,8 @@ class blk_menu_icons_apl
 				transform: translateY(-4px);
 			}		
 
-			.contenedor.card .item-icon-bank{cursor:pointer}
-			.contenedor.card img{width: 45px; height: 45px}
+			.container-bank.card .item-icon-bank{cursor:pointer}
+			.container-bank.card img{width: 45px; height: 45px}
 
 		</style>
 	</head>
@@ -2019,7 +2077,10 @@ class blk_menu_icons_apl
 								<div class="card-title">Iconos del Menu</div>
 								<div role="group" aria-label="" class="btn-group">
 									<input id="files" type="file" name="files[]" multiple="multiple" class="btn btn-sm btn-light">
-									<button id="upload" type="button" class="btn btn-sm btn-light">Subir</button>
+									<button id="upload" type="button" class="btn btn-sm btn-light">
+										<span>Subir</span>
+										<i class="fas fa-spinner fa-spin d-none"></i>
+									</button>
 								</div>
 							</div>
 							<div>
@@ -2041,10 +2102,11 @@ class blk_menu_icons_apl
 					</div>
 				</div>
 
-				<div class="col-md-4 p-0">
+				<div class="col-md-4 p-0 bank">
 					<div class="container">
-						<div class="contenedor card">
+						<div class="container-bank card">
 							<div class="card-header justify-content-between">
+								<div class="card-title">Banco de Iconos</div>
 								<div class="search-element">
 									<input id="buscar_icon" type="search" class="form-control header-search" placeholder="¿Que Buscas?" aria-label="Search" tabindex="1" autofocus="autofocus" />
 								</div>
@@ -2063,9 +2125,10 @@ class blk_menu_icons_apl
 		</div>
 
 		<template id="item_bank_icon">
-			<div class="col-xl-3 item-icon-bank p1" data-toggle="tooltip" data-placement="top">
-				<div class="card float-hover bg-light" href="javascript:void(0)">
-					<div class="card-body d-flex justify-content-center p-2">
+			<div class="col-xl-3 item-icon-bank px-3 py-1">
+				<div class="card float-hover bg-light m-0" data-toggle="tooltip" data-placement="top">
+					<div class="ribbon ribbon-top-right"><span>En Uso</span></div>
+					<div class="card-body d-flex justify-content-center px-1 py-2">
 						<img src="" alt="">
 					</div>
 				</div>
@@ -2107,13 +2170,38 @@ class blk_menu_icons_apl
 		</template>
 		<!-- Cargar Libreria jQuery v3.6.0 -->
 		<script src="<?=$this->Ini->path_prod;?>/third/jquery/js/jquery-3.6.0.min.js"></script> 
+
+		<!-- Bootstrap4 js-->
+		<script src="<?php echo sc_url_library('prj', 'menu', 'assets/plugins/bootstrap/popper.min.js') ?>"></script>
+		<script src="<?php echo sc_url_library('prj', 'menu', 'assets/plugins/bootstrap/js/bootstrap.min.js') ?>"></script>
 		<script src="<?php echo sc_url_library('prj', 'menu', 'assets/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
-		<script src="https://preview.keenthemes.com/start/assets/plugins/global/plugins.bundle.js"></script>
+
+		<!-- P-scroll js-->
+		<script src="<?php echo sc_url_library('prj', 'menu', 'assets/plugins/p-scrollbar/p-scrollbar.js') ?>"></script>
 
 		<script type="text/javascript">
 
+			const Toast = Swal.mixin({
+				toast: true,
+				position: 'bottom-end',
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			})
+
+			var ps;
+
 			$(window).ready(function(){
 				getIcon(true);
+
+				ps = new PerfectScrollbar('.container-bank', {
+					useBothWheelAxes:true,
+					suppressScrollX:true,
+				});
 
 				$("#buscar_icon").on("keyup", function(e){
 					console.log(e.keyCode);
@@ -2154,6 +2242,7 @@ class blk_menu_icons_apl
 
 				$('#upload').on('click', function () {
 
+					let that = $(this);
 					if(document.getElementById('files').value == '') {
 
 						Toast.fire({
@@ -2162,6 +2251,8 @@ class blk_menu_icons_apl
 						})
 					} else {
 
+						that.find('span').addClass('d-none');
+						that.find('i').removeClass('d-none');
 						var form_data = new FormData();
 						var input_file = document.getElementById('files');
 						var ins = input_file.files.length;
@@ -2181,33 +2272,25 @@ class blk_menu_icons_apl
 								renderIcon(data);
 								iniIcons();
 								input_file.value = '';
+
+								that.find('span').removeClass('d-none');
+								that.find('i').addClass('d-none');
 							},
 							error: function (data) {
 								input_file.value = '';
 								$('#msg').html(data);
+								that.find('span').removeClass('d-none');
+								that.find('i').addClass('d-none');
 							}
 						});
 					}
 				});
 			})
-			const Toast = Swal.mixin({
-				toast: true,
-				position: 'bottom-end',
-				showConfirmButton: false,
-				timer: 3000,
-				timerProgressBar: true,
-				didOpen: (toast) => {
-					toast.addEventListener('mouseenter', Swal.stopTimer)
-					toast.addEventListener('mouseleave', Swal.resumeTimer)
-				}
-			})
-
-			
 
 
 			function iniIconsBank() {
-				$('.item-icon-bank').off();
-				$('.item-icon-bank').on('click', function(){
+				$('#bank_icon > div > .card').off();
+				$('#bank_icon > div > .card').on('click', function(){
 					let id = $(this).data('id');
 					let svg = $(this).data('svg');
 					Swal.fire({
@@ -2224,10 +2307,11 @@ class blk_menu_icons_apl
 					})
 				})
 
-				$('[data-toggle="tooltip"]').tooltip()
-				
+				$('#bank_icon [data-toggle="tooltip"]').tooltip();
+				ps.update();
+
 			}
-			
+
 			function iniIcons() {
 
 				$('.fa-times').closest('button').off();
@@ -2267,10 +2351,9 @@ class blk_menu_icons_apl
 					})
 				})
 
-				$('[data-toggle="tooltip"]').tooltip()
 			}
 
-			
+
 			function deleteIcon(idIcon, svg){
 
 				let datos = {"action" : "deleteIcon", idIcon : idIcon, 'svg' : svg};
@@ -2286,7 +2369,9 @@ class blk_menu_icons_apl
 
 				})
 					.done(function(data){
+
 					console.log(data);
+					let data_del = data.data_delete;
 
 					if($('#icon_'+idIcon).length > 0) {
 
@@ -2297,14 +2382,15 @@ class blk_menu_icons_apl
 
 						renderIconBank(data.data_icon_bank);
 						iniIconsBank();
-						$('div[id^=tooltip]').remove();
 
 					} else {
 
-						$('#icon_bank_'+idIcon).remove();
+						if(data.code == 200){
+							$('#icon_bank_'+idIcon).remove();
+							ps.update();
+						}
 					}
 
-					let data_del = data.data_delete;
 					Toast.fire({
 						icon: data_del.status,
 						title: data_del.msg
@@ -2332,7 +2418,6 @@ class blk_menu_icons_apl
 					console.log(data);
 
 					$('#icon_'+idIcon).closest('tr').remove();
-					$('div[id^=tooltip]').remove()
 					if( $( "input[id^='icon_']" ).length == 0 ){
 						renderIcon({'code' : 300})
 					}
@@ -2456,13 +2541,19 @@ class blk_menu_icons_apl
 
 					data.data.forEach( item => {
 
+						template.find('.ribbon').addClass('d-none');
+						template.find('img').prop('src', item.icono);
 						template.find('img').prop('src', item.icono);
 						template.find('img').prop('alt', item.descripcion);
 						template.data('name', item.palabra_clave);
-						template.prop('title', item.palabra_clave);
 						template.prop('id', 'icon_bank_'+item.id_icon);
-						template.data('id', item.id_icon);
-						template.data('svg', item.descripcion);
+						template.find('.card').prop('title', item.palabra_clave);
+						template.find('.card').data('id', item.id_icon);
+						template.find('.card').data('svg', item.descripcion);
+
+						if(item.in_use) {
+							template.find('.ribbon').removeClass('d-none');
+						}
 
 						template.clone(true).appendTo(fragment);
 
@@ -2476,6 +2567,7 @@ class blk_menu_icons_apl
 				}
 
 			}
+
 		</script>
 	</body>
 </html>

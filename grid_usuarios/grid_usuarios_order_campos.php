@@ -97,15 +97,15 @@ function Ord_cmp_init()
    $tab_ger_campos['usuario'] = "on";
    $tab_def_campos['usuario'] = "usuario";
    $tab_labels["usuario"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["usuario"])) ? $_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["usuario"] : "Usuario";
-   $tab_ger_campos['password'] = "on";
-   $tab_def_campos['password'] = "password";
-   $tab_labels["password"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["password"])) ? $_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["password"] : "Password";
    $tab_ger_campos['tercero'] = "on";
    $tab_def_campos['tercero'] = "tercero";
    $tab_labels["tercero"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["tercero"])) ? $_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["tercero"] : "Tercero";
    $tab_ger_campos['correo'] = "on";
    $tab_def_campos['correo'] = "correo";
    $tab_labels["correo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["correo"])) ? $_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["correo"] : "Correo";
+   $tab_ger_campos['telefono'] = "on";
+   $tab_def_campos['telefono'] = "telefono";
+   $tab_labels["telefono"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["telefono"])) ? $_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["telefono"] : "Telefono";
    $tab_ger_campos['resolucion'] = "on";
    $tab_def_campos['resolucion'] = "resolucion";
    $tab_labels["resolucion"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["resolucion"])) ? $_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["resolucion"] : "Resolucion";
@@ -115,9 +115,6 @@ function Ord_cmp_init()
    $tab_ger_campos['activo'] = "on";
    $tab_def_campos['activo'] = "activo";
    $tab_labels["activo"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["activo"])) ? $_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["activo"] : "Activo";
-   $tab_ger_campos['grupocomanda'] = "on";
-   $tab_def_campos['grupocomanda'] = "grupocomanda";
-   $tab_labels["grupocomanda"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["grupocomanda"])) ? $_SESSION['sc_session'][$sc_init]['grid_usuarios']['labels']["grupocomanda"] : "Grupo Comanda";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_usuarios']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_usuarios']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_usuarios']['field_display'] as $NM_cada_field => $NM_cada_opc)
@@ -272,7 +269,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 }
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $_SESSION['scriptcase']['css_popup'] ?>" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $_SESSION['scriptcase']['css_popup_dir'] ?>" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $_SESSION['scriptcase']['css_popup_div'] ?>" /> 

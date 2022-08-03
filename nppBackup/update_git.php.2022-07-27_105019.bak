@@ -1,0 +1,55 @@
+<?php
+//traemos las librerias
+include_once 'baseDeDatos.php';
+
+$vso = "escritorio";
+if(strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') 
+{  
+	$vso = "escritorio";
+}
+else
+{
+	$vso = "nube";
+}
+
+if($vso=="escritorio")
+{
+	Shell_exec("cd\ && cd facilweb/htdocs && git add . && git commit -m '.'");
+	Shell_exec("cd\ && cd facilweb/htdocs && git reset --hard");
+	Shell_exec("cd\ && cd facilweb/htdocs && git reset --hard");
+	$vconsulta = Shell_exec("cd\ && cd facilweb/htdocs && git pull");
+	//echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
+	//echo $vconsulta;
+	//echo "</div>";
+
+	$conexion = new dbMysql("127.0.0.1","root",",.Facilweb2020",'facilweb',3311);
+	$vsql = "select nombre from empresas";
+	$consulta = $conexion->consulta($vsql);
+	while($r = mysqli_fetch_array($consulta))
+	{
+		//echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
+		Shell_exec("cd c:/facilweb/htdocs/mysql/bin && mysql -h localhost --port=3311 -u root -p,.Facilweb2020 -f -D ".$r[0]." < c:/facilweb/htdocs/script_update.sql");
+		//echo "</div>";
+	}
+}
+else
+{
+	$conexion = new dbMysql("127.0.0.1","root",",.Facilweb2020",'facilweb',3306);
+	$vsql = "select nombre from empresas where nombre like 'inventario_%'";
+	$consulta = $conexion->consulta($vsql);
+	
+	//primero actualizamos la de copia
+	Shell_exec("cd /var/www/html/facilweb | mysql -h localhost --port=3306 -u root -p,.Facilweb2020 -f -D inventario_copia < /var/www/html/facilweb/script_update.sql");
+	
+	while($r = mysqli_fetch_array($consulta))
+	{
+		//echo "<div style='padding:8px;color:white;background:#5868a6;border-radius:5px;'>";
+		Shell_exec("cd /var/www/html/facilweb | mysql -h localhost --port=3306 -u root -p,.Facilweb2020 -f -D ".$r[0]." < /var/www/html/facilweb/htdocs/script_update.sql");
+		//echo "</div>";
+	}
+}
+
+echo "<center><div style='padding:8px;color:white;background:#5868a6;border-radius:5px;width:600px;'>";
+echo "<h1>Actualizado con éxito!!!. </h1><br><br><a href='../' style='color:white;'>Aquí para volver<a/>";
+echo "</div></center>";
+?>

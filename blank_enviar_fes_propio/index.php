@@ -1,8 +1,8 @@
 <?php
    include_once('blank_enviar_fes_propio_session.php');
-   @ini_set('session.cookie_httponly', 1);
+   @ini_set('session.cookie_httponly', 0);
    @ini_set('session.use_only_cookies', 1);
-   @ini_set('session.cookie_secure', 0);
+   @ini_set('session.cookie_secure', 1);
    @session_start() ;
    $_SESSION['scriptcase']['blank_enviar_fes_propio']['glo_nm_perfil']          = "conn_mysql";
    $_SESSION['scriptcase']['blank_enviar_fes_propio']['glo_nm_path_prod']       = "";
@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220712"; 
-      $this->nm_hr_ult_alt   = "213050"; 
+      $this->nm_dt_ult_alt   = "20220802"; 
+      $this->nm_hr_ult_alt   = "233958"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -822,7 +822,7 @@ class blank_enviar_fes_propio_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -910,7 +910,7 @@ class blank_enviar_fes_propio_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmH9FUDSzGV5BqHgrKZSJqDur/VEX7HQBsH9BOHIBeHQF7HgvsHEJqDWrGDoBOHQNwDQB/HAN7HuBODMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMBOVIBOHEX/VorqHQBqZkBiDSrYV5BODMveHErsH5FGDoBqHQJeDQJsDSBYHQFaDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaDorqD9XsDQJsHArYD5NUHuvmDkB/V5X7DoraD9BsZSFaHANOV5JeDMBYHEJGDWr/DoFUDcBwH9X7HABYV5BqHgrYDkFCDWXCVoX7D9BsH9FaHArKV5JeDEBODkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1X7HArYV5BqDEvsVkJ3DuJeDoB/HQFYDQJwHABYHuBiDMzGVIBsDuFqHMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDuFGVoF7HQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBiDQB/HIrwV5JwHuBOV9FeH5XCVoJwDcJUZ1X7HIveHuXGDEBOHEJqDWX7HMJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwDuBqHANOHuF7DMNOVcBUH5FqHIrqHQXGZSFaHArYHQJsDEvsHEFiH5FYHMFaHQNmDQJsZ1BYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkB/HEFqDoJeDcXGZSFUHArYD5JwDMNOVIB/DWFaDoJeHQBsZkBiD1rKD5BOHgrKVkXeDuJeVoX7D9XsZSBiHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDMBYHEXeV5XCVoJwDcXOZSX7HABYD5NUHuBYVIBOHEFYVoB/D9XOZSBOZ1BeV5BqDMzGHEJGH5FYDoFUD9NwDQJwHANOV5JwHuzGVcFKHEFYVoraHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKZMJeHgrKZSJ3V5XCVoJeHQNwDQFGHAN7HuXGDMvmDkBODWF/VoBqD9BsVIJsHIveD5BqDENOHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDurmDoBOHQBiH9BiHAveD5NUHgNKDkBOV5FYHMBiD9JmH9FaHINKZMFaHgBYHArsDuJeZuB/HQNwDQJwHIrwV5FGDMBOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1041,6 +1041,10 @@ class blank_enviar_fes_propio_ini
           if (!isset($_SESSION['gidtercero'])) 
           {
               $this->nm_falta_var .= "gidtercero; ";
+          }
+          if (!isset($_SESSION['gnit'])) 
+          {
+              $this->nm_falta_var .= "gnit; ";
           }
       }
 // 
@@ -1945,6 +1949,8 @@ if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
 if (!isset($_SESSION['gusuariologueado'])) {$_SESSION['gusuariologueado'] = "";}
 if (!isset($this->sc_temp_gusuariologueado)) {$this->sc_temp_gusuariologueado = (isset($_SESSION['gusuariologueado'])) ? $_SESSION['gusuariologueado'] : "";}
+if (!isset($_SESSION['gnit'])) {$_SESSION['gnit'] = "";}
+if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
   date_default_timezone_set('America/Bogota');
 setlocale(LC_ALL, 'es_CO');
 setlocale(LC_MONETARY, 'es_CO');
@@ -2314,6 +2320,51 @@ else
 	$vdatos["payment_form"]["payment_method_id"] =  $vmetodopago;
 	$vdatos["payment_form"]["payment_due_date"] =  $vvencimiento;
 	$vdatos["payment_form"]["duration_measure"] =  $vdiascredito;
+	
+	$vsql = "select adjunto from facturaven_adjuntos where idfacven='".$vidfacven."'";
+	 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vAdjun = array();
+      $this->vadjun = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vAdjun[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vadjun[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vAdjun = false;
+          $this->vAdjun_erro = $this->Db->ErrorMsg();
+          $this->vadjun = false;
+          $this->vadjun_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->vadjun[0][0]))
+	{
+		for($i=0;$i<count($this->vadjun );$i++)
+		{
+			$vnom_adjunto = $this->vadjun[$i][0];
+			$vnom_adjunto = "../_lib/file/doc/adjuntos/".$this->sc_temp_gnit."/".$vidfacven."/".$vnom_adjunto;
+			$contenidoBinario = file_get_contents($vnom_adjunto);
+			$archivoComoBase64 = base64_encode($contenidoBinario);
+			$vdatos["annexes"][$i]["document"]  = $archivoComoBase64;
+			$vext = pathinfo($vnom_adjunto, PATHINFO_EXTENSION);
+			$vdatos["annexes"][$i]["extension"] = $vext;
+		}
+	}
 	
 	if($vplantillas_correo=="SI" and $vplantilla_pordefecto>0)
 	{
@@ -3777,6 +3828,7 @@ else
 
 	}
 }
+if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 if (isset($this->sc_temp_gusuariologueado)) {$_SESSION['gusuariologueado'] = $this->sc_temp_gusuariologueado;}
 if (isset($this->sc_temp_gidtercero)) {$_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 $_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'off'; 
@@ -6678,6 +6730,20 @@ $_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'off';
    {
        $_SESSION["gidtercero"] = "";
    }
+   if (isset($_POST["gnit"])) 
+   {
+       $_SESSION["gnit"] = $_POST["gnit"];
+       nm_limpa_str_blank_enviar_fes_propio($_SESSION["gnit"]);
+   }
+   if (isset($_GET["gnit"])) 
+   {
+       $_SESSION["gnit"] = $_GET["gnit"];
+       nm_limpa_str_blank_enviar_fes_propio($_SESSION["gnit"]);
+   }
+   if (!isset($_SESSION["gnit"])) 
+   {
+       $_SESSION["gnit"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -6842,6 +6908,11 @@ $_SESSION['scriptcase']['blank_enviar_fes_propio']['contr_erro'] = 'off';
        {
            $_SESSION['gidtercero'] = $gidtercero;
            nm_limpa_str_blank_enviar_fes_propio($_SESSION["gidtercero"]);
+       }
+       if (isset($gnit)) 
+       {
+           $_SESSION['gnit'] = $gnit;
+           nm_limpa_str_blank_enviar_fes_propio($_SESSION["gnit"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

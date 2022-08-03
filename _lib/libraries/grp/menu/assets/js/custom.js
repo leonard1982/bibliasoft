@@ -1,5 +1,5 @@
 (function($) {
-    "use strict";
+	"use strict";
 	$('.fc-month-button').addClass('fc-state-active');
 	$('.fc-agendaWeek-button').removeClass('fc-state-active');
 	// ______________Cover Image
@@ -9,49 +9,49 @@
 			$(this).css('background', 'url(' + attr + ') center center');
 		}
 	});
-	
+
 	$('.table-subheader').click(function(){
 		$(this).nextUntil('tr.table-subheader').slideToggle(100);
 	});
-	
+
 	// ______________ Horizonatl
 	$(document).ready(function() {
-      $("a[data-theme]").click(function() {
-        $("head link#theme").attr("href", $(this).data("theme"));
-        $(this).toggleClass('active').siblings().removeClass('active');
-      });
-      $("a[data-effect]").click(function() {
-        $("head link#effect").attr("href", $(this).data("effect"));
-        $(this).toggleClass('active').siblings().removeClass('active');
-      });
-    });
-	
-	
+		$("a[data-theme]").click(function() {
+			$("head link#theme").attr("href", $(this).data("theme"));
+			$(this).toggleClass('active').siblings().removeClass('active');
+		});
+		$("a[data-effect]").click(function() {
+			$("head link#effect").attr("href", $(this).data("effect"));
+			$(this).toggleClass('active').siblings().removeClass('active');
+		});
+	});
+
+
 	// ______________Full screen
 	$("#fullscreen-button").on("click", function toggleFullScreen() {
-      if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
-        if (document.documentElement.requestFullScreen) {
-          document.documentElement.requestFullScreen();
-        } else if (document.documentElement.mozRequestFullScreen) {
-          document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullScreen) {
-          document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-        } else if (document.documentElement.msRequestFullscreen) {
-          document.documentElement.msRequestFullscreen();
-        }
-      } else {
-        if (document.cancelFullScreen) {
-          document.cancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-          document.mozCancelFullScreen();
-        } else if (document.webkitCancelFullScreen) {
-          document.webkitCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      }
-    })
-	
+		if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+			if (document.documentElement.requestFullScreen) {
+				document.documentElement.requestFullScreen();
+			} else if (document.documentElement.mozRequestFullScreen) {
+				document.documentElement.mozRequestFullScreen();
+			} else if (document.documentElement.webkitRequestFullScreen) {
+				document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+			} else if (document.documentElement.msRequestFullscreen) {
+				document.documentElement.msRequestFullscreen();
+			}
+		} else {
+			if (document.cancelFullScreen) {
+				document.cancelFullScreen();
+			} else if (document.mozCancelFullScreen) {
+				document.mozCancelFullScreen();
+			} else if (document.webkitCancelFullScreen) {
+				document.webkitCancelFullScreen();
+			} else if (document.msExitFullscreen) {
+				document.msExitFullscreen();
+			}
+		}
+	})
+
 	// ______________Active Class
 	$(document).ready(function() {
 		$(".horizontalMenu-list li a").each(function() {
@@ -82,7 +82,7 @@
 			}
 		});
 	});
-	
+
 	// ___________TOOLTIP	
 	$('[data-toggle="tooltip"]').tooltip();
 	// colored tooltip
@@ -92,7 +92,7 @@
 	$('[data-toggle="tooltip-secondary"]').tooltip({
 		template: '<div class="tooltip tooltip-secondary" role="tooltip"><div class="arrow"><\/div><div class="tooltip-inner"><\/div><\/div>'
 	});
-	
+
 	// __________POPOVER
 	$('[data-toggle="popover"]').popover();
 	$('[data-popover-color="head-primary"]').popover({
@@ -116,7 +116,7 @@
 			}
 		});
 	});
-	
+
 	// __________MODAL
 	// showing modal with effect
 	$('.modal-effect').on('click', function(e) {
@@ -130,7 +130,7 @@
 			return (className.match(/(^|\s)effect-\S+/g) || []).join(' ');
 		});
 	});
-	
+
 	// ______________ Page Loading
 	$(window).on("load", function(e) {
 		$("#global-loader").fadeOut("slow");
@@ -138,31 +138,31 @@
 
 	// ______________Back to top Button
 	$(window).on("scroll", function(e) {
-    	if ($(this).scrollTop() > 0) {
+		if ($(this).scrollTop() > 0) {
 			$('body').addClass('side-shadow');
-            $('#back-to-top').fadeIn('slow');
-        } else {
+			$('#back-to-top').fadeIn('slow');
+		} else {
 			$('body').removeClass('side-shadow');
-            $('#back-to-top').fadeOut('slow');
-        }
-    });
-    $("#back-to-top").on("click", function(e){
-        $("html, body").animate({
-            scrollTop: 0
-        }, 600);
-        return false;
-    });
-	
-	
+			$('#back-to-top').fadeOut('slow');
+		}
+	});
+	$("#back-to-top").on("click", function(e){
+		$("html, body").animate({
+			scrollTop: 0
+		}, 600);
+		return false;
+	});
+
+
 	const DIV_CARD = 'div.card';
 	// ______________ Tooltip
 	$('[data-toggle="tooltip"]').tooltip();
-	
+
 	// ______________ Popover
 	$('[data-toggle="popover"]').popover({
 		html: true
 	});
-	
+
 	// ______________ Card Remove
 	$(document).on('click', '[data-toggle="card-remove"]', function(e) {
 		let $card = $(this).closest(DIV_CARD);
@@ -170,7 +170,7 @@
 		e.preventDefault();
 		return false;
 	});
-	
+
 	// ______________ Card Collapse
 	$(document).on('click', '[data-toggle="card-collapse"]', function(e) {
 		let $card = $(this).closest(DIV_CARD);
@@ -178,7 +178,7 @@
 		e.preventDefault();
 		return false;
 	});
-	
+
 	// ______________ Card Fullscreen
 	$(document).on('click', '[data-toggle="card-fullscreen"]', function(e) {
 		let $card = $(this).closest(DIV_CARD);
@@ -186,8 +186,8 @@
 		e.preventDefault();
 		return false;
 	});
-	
-	
-	
+
+
+
 })(jQuery);
 

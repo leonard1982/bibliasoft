@@ -161,20 +161,20 @@ function Sel_cmp_process()
       $tab_blk_campos = array();
 
             $tab_ger_campos['usuario'] = "on";
-      $tab_ger_campos['password'] = "on";
       $tab_ger_campos['tercero'] = "on";
       $tab_blk_campos[] = "tercero";
       $tab_ger_campos['correo'] = "on";
+      $tab_ger_campos['telefono'] = "on";
+      $tab_blk_campos[] = "telefono";
       $tab_ger_campos['resolucion'] = "on";
       $tab_blk_campos[] = "resolucion";
       $tab_ger_campos['grupo'] = "on";
       $tab_blk_campos[] = "grupo";
       $tab_ger_campos['activo'] = "on";
       $tab_blk_campos[] = "activo";
-      $tab_ger_campos['grupocomanda'] = "on";
-      $tab_blk_campos[] = "grupocomanda";
       $tab_ger_campos['idusuarios'] = "on";
       $tab_ger_campos['creacion'] = "on";
+      $tab_ger_campos['password'] = "on";
       $tab_ger_campos['nombre'] = "on";
 
 
@@ -701,7 +701,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
  <META http-equiv="Pragma" content="no-cache"/>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 </HEAD>
 <BODY class="scGridPage" style="margin: 0px; overflow-x: hidden">
 <script language="javascript" type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>

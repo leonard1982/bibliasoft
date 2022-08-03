@@ -535,7 +535,7 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
       $nm_esp_postgres = array();
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $Nm_numeric[] = "idfacven";$Nm_numeric[] = "numfacven";$Nm_numeric[] = "credito";$Nm_numeric[] = "idcli";$Nm_numeric[] = "subtotal";$Nm_numeric[] = "valoriva";$Nm_numeric[] = "total";$Nm_numeric[] = "asentada";$Nm_numeric[] = "saldo";$Nm_numeric[] = "adicional";$Nm_numeric[] = "adicional2";$Nm_numeric[] = "adicional3";$Nm_numeric[] = "resolucion";$Nm_numeric[] = "vendedor";$Nm_numeric[] = "usuario_crea";$Nm_numeric[] = "banco";$Nm_numeric[] = "dias_decredito";$Nm_numeric[] = "pedido";$Nm_numeric[] = "dircliente";$Nm_numeric[] = "id_clasificacion";$Nm_numeric[] = "tiene_nc";
+      $Nm_numeric[] = "idfacven";$Nm_numeric[] = "numfacven";$Nm_numeric[] = "credito";$Nm_numeric[] = "idcli";$Nm_numeric[] = "subtotal";$Nm_numeric[] = "valoriva";$Nm_numeric[] = "total";$Nm_numeric[] = "asentada";$Nm_numeric[] = "saldo";$Nm_numeric[] = "adicional";$Nm_numeric[] = "adicional2";$Nm_numeric[] = "adicional3";$Nm_numeric[] = "resolucion";$Nm_numeric[] = "vendedor";$Nm_numeric[] = "usuario_crea";$Nm_numeric[] = "banco";$Nm_numeric[] = "dias_decredito";$Nm_numeric[] = "pedido";$Nm_numeric[] = "dircliente";$Nm_numeric[] = "id_clasificacion";
       $campo_join = strtolower(str_replace(".", "_", $nome));
       if (in_array($campo_join, $Nm_numeric))
       {
@@ -1648,7 +1648,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
  <META http-equiv="Pragma" content="no-cache"/>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 </HEAD>
 <BODY id="grid_search" class="scGridPage">
 <FORM style="display:none;" name="form_ok" method="POST" action="<?php echo $NM_retorno; ?>" target="_self">
@@ -1690,7 +1690,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
  <META http-equiv="Pragma" content="no-cache" />
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
@@ -4974,7 +4974,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
        <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
        <META http-equiv="Pragma" content="no-cache"/>
       </HEAD>
-      <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+      <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
       <BODY>
    <?php
       }

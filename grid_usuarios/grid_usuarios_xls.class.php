@@ -325,27 +325,27 @@ class grid_usuarios_xls
       $nmgp_select_count = "SELECT count(*) AS countTest from " . $this->Ini->nm_tabela; 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+          $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
       } 
       $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['where_pesq'];
       $nmgp_select_count .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['where_pesq'];
@@ -375,21 +375,22 @@ class grid_usuarios_xls
          $this->Xls_col = 0;
          $this->Xls_row++;
          $this->usuario = $rs->fields[0] ;  
-         $this->password = $rs->fields[1] ;  
-         $this->tercero = $rs->fields[2] ;  
+         $this->tercero = $rs->fields[1] ;  
          $this->tercero = (string)$this->tercero;
-         $this->correo = $rs->fields[3] ;  
+         $this->correo = $rs->fields[2] ;  
+         $this->telefono = $rs->fields[3] ;  
          $this->resolucion = $rs->fields[4] ;  
          $this->resolucion = (string)$this->resolucion;
          $this->grupo = $rs->fields[5] ;  
          $this->grupo = (string)$this->grupo;
          $this->activo = $rs->fields[6] ;  
-         $this->grupocomanda = $rs->fields[7] ;  
-         $this->grupocomanda = (string)$this->grupocomanda;
-         $this->idusuarios = $rs->fields[8] ;  
+         $this->idusuarios = $rs->fields[7] ;  
          $this->idusuarios = (string)$this->idusuarios;
-         $this->creacion = $rs->fields[9] ;  
+         $this->creacion = $rs->fields[8] ;  
+         $this->password = $rs->fields[9] ;  
          $this->nombre = $rs->fields[10] ;  
+         $this->grupocomanda = $rs->fields[11] ;  
+         $this->grupocomanda = (string)$this->grupocomanda;
      if ($this->groupby_show == "S") {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'])
          { 
@@ -439,10 +440,6 @@ class grid_usuarios_xls
          $this->look_grupo = $this->grupo; 
          $this->Lookup->lookup_grupo($this->look_grupo, $this->grupo) ; 
          $this->look_grupo = ($this->look_grupo == "&nbsp;") ? "" : $this->look_grupo; 
-         //----- lookup - grupocomanda
-         $this->look_grupocomanda = $this->grupocomanda; 
-         $this->Lookup->lookup_grupocomanda($this->look_grupocomanda, $this->grupocomanda) ; 
-         $this->look_grupocomanda = ($this->look_grupocomanda == "&nbsp;") ? "" : $this->look_grupocomanda; 
          $this->sc_proc_grid = true; 
          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['field_order'] as $Cada_col)
          { 
@@ -633,34 +630,6 @@ class grid_usuarios_xls
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
-          if ($Cada_col == "password" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
           $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
           if ($Cada_col == "tercero" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -691,6 +660,34 @@ class grid_usuarios_xls
           }
           $SC_Label = (isset($this->New_label['correo'])) ? $this->New_label['correo'] : "Correo"; 
           if ($Cada_col == "correo" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['telefono'])) ? $this->New_label['telefono'] : "Telefono"; 
+          if ($Cada_col == "telefono" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
               $this->count_span++;
               $current_cell_ref = $this->calc_cell($this->Xls_col);
@@ -801,34 +798,6 @@ class grid_usuarios_xls
               }
               $this->Xls_col++;
           }
-          $SC_Label = (isset($this->New_label['grupocomanda'])) ? $this->New_label['grupocomanda'] : "Grupo Comanda"; 
-          if ($Cada_col == "grupocomanda" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
-          {
-              $this->count_span++;
-              $current_cell_ref = $this->calc_cell($this->Xls_col);
-              $SC_Label = NM_charset_to_utf8($SC_Label);
-              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'])
-              { 
-                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
-              }
-              else
-              { 
-                  if ($this->Use_phpspreadsheet) {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-                  }
-                  else {
-                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
-                  }
-                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
-                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
-              }
-              $this->Xls_col++;
-          }
           $SC_Label = (isset($this->New_label['idusuarios'])) ? $this->New_label['idusuarios'] : "Id"; 
           if ($Cada_col == "idusuarios" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
           {
@@ -878,6 +847,34 @@ class grid_usuarios_xls
                   }
                   else {
                       $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
+                  }
+                  $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
+                  $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
+              }
+              $this->Xls_col++;
+          }
+          $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
+          if ($Cada_col == "password" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
+          {
+              $this->count_span++;
+              $current_cell_ref = $this->calc_cell($this->Xls_col);
+              $SC_Label = NM_charset_to_utf8($SC_Label);
+              if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'])
+              { 
+                  $this->arr_export['label'][$this->Xls_col]['data']     = $SC_Label;
+                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
+                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
+                  $this->arr_export['label'][$this->Xls_col]['bold']     = "s";
+              }
+              else
+              { 
+                  if ($this->Use_phpspreadsheet) {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+                      $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                  }
+                  else {
+                      $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                       $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $SC_Label, PHPExcel_Cell_DataType::TYPE_STRING);
                   }
                   $this->Nm_ActiveSheet->getStyle($current_cell_ref . $this->Xls_row)->getFont()->setBold(true);
@@ -937,26 +934,6 @@ class grid_usuarios_xls
          }
          $this->Xls_col++;
    }
-   //----- password
-   function NM_export_password()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->password = html_entity_decode($this->password, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->password = strip_tags($this->password);
-         $this->password = NM_charset_to_utf8($this->password);
-         if ($this->Use_phpspreadsheet) {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->password, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
-         }
-         else {
-             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->password, PHPExcel_Cell_DataType::TYPE_STRING);
-         }
-         $this->Xls_col++;
-   }
    //----- tercero
    function NM_export_tercero()
    {
@@ -991,6 +968,26 @@ class grid_usuarios_xls
          }
          else {
              $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->correo, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
+   //----- telefono
+   function NM_export_telefono()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->telefono = html_entity_decode($this->telefono, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->telefono = strip_tags($this->telefono);
+         $this->telefono = NM_charset_to_utf8($this->telefono);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->telefono, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->telefono, PHPExcel_Cell_DataType::TYPE_STRING);
          }
          $this->Xls_col++;
    }
@@ -1048,23 +1045,6 @@ class grid_usuarios_xls
          }
          $this->Xls_col++;
    }
-   //----- grupocomanda
-   function NM_export_grupocomanda()
-   {
-         $current_cell_ref = $this->calc_cell($this->Xls_col);
-         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
-             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
-             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
-         }
-         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
-         $this->look_grupocomanda = NM_charset_to_utf8($this->look_grupocomanda);
-         if (is_numeric($this->look_grupocomanda))
-         {
-             $this->NM_ctrl_style[$current_cell_ref]['format'] = '#,##0';
-         }
-         $this->Nm_ActiveSheet->setCellValue($current_cell_ref . $this->Xls_row, $this->look_grupocomanda);
-         $this->Xls_col++;
-   }
    //----- idusuarios
    function NM_export_idusuarios()
    {
@@ -1118,6 +1098,26 @@ class grid_usuarios_xls
          }
          $this->Xls_col++;
    }
+   //----- password
+   function NM_export_password()
+   {
+         $current_cell_ref = $this->calc_cell($this->Xls_col);
+         if (!isset($this->NM_ctrl_style[$current_cell_ref])) {
+             $this->NM_ctrl_style[$current_cell_ref]['ini'] = $this->Xls_row;
+             $this->NM_ctrl_style[$current_cell_ref]['align'] = "LEFT"; 
+         }
+         $this->NM_ctrl_style[$current_cell_ref]['end'] = $this->Xls_row;
+         $this->password = html_entity_decode($this->password, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->password = strip_tags($this->password);
+         $this->password = NM_charset_to_utf8($this->password);
+         if ($this->Use_phpspreadsheet) {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->password, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+         }
+         else {
+             $this->Nm_ActiveSheet->setCellValueExplicit($current_cell_ref . $this->Xls_row, $this->password, PHPExcel_Cell_DataType::TYPE_STRING);
+         }
+         $this->Xls_col++;
+   }
    //----- nombre
    function NM_export_nombre()
    {
@@ -1150,18 +1150,6 @@ class grid_usuarios_xls
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
-   //----- password
-   function NM_sub_cons_password()
-   {
-         $this->password = html_entity_decode($this->password, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
-         $this->password = strip_tags($this->password);
-         $this->password = NM_charset_to_utf8($this->password);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->password;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-         $this->Xls_col++;
-   }
    //----- tercero
    function NM_sub_cons_tercero()
    {
@@ -1179,6 +1167,18 @@ class grid_usuarios_xls
          $this->correo = strip_tags($this->correo);
          $this->correo = NM_charset_to_utf8($this->correo);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->correo;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- telefono
+   function NM_sub_cons_telefono()
+   {
+         $this->telefono = html_entity_decode($this->telefono, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->telefono = strip_tags($this->telefono);
+         $this->telefono = NM_charset_to_utf8($this->telefono);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->telefono;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
@@ -1216,16 +1216,6 @@ class grid_usuarios_xls
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
    }
-   //----- grupocomanda
-   function NM_sub_cons_grupocomanda()
-   {
-         $this->look_grupocomanda = NM_charset_to_utf8($this->look_grupocomanda);
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->look_grupocomanda;
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "num";
-         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "#,##0";
-         $this->Xls_col++;
-   }
    //----- idusuarios
    function NM_sub_cons_idusuarios()
    {
@@ -1260,6 +1250,18 @@ class grid_usuarios_xls
          $this->creacion = NM_charset_to_utf8($this->creacion);
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->creacion;
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "center";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
+         $this->Xls_col++;
+   }
+   //----- password
+   function NM_sub_cons_password()
+   {
+         $this->password = html_entity_decode($this->password, ENT_COMPAT, $_SESSION['scriptcase']['charset']);
+         $this->password = strip_tags($this->password);
+         $this->password = NM_charset_to_utf8($this->password);
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['data']   = $this->password;
+         $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
          $this->Xls_col++;
@@ -1430,7 +1432,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
  <META http-equiv="Pragma" content="no-cache"/>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <?php

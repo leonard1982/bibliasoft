@@ -52,16 +52,17 @@ class grid_usuarios_grid
    var $progress_graf;
    var $count_ger;
    var $usuario;
-   var $password;
    var $tercero;
    var $correo;
+   var $telefono;
    var $resolucion;
    var $grupo;
    var $activo;
-   var $grupocomanda;
    var $idusuarios;
    var $creacion;
+   var $password;
    var $nombre;
+   var $grupocomanda;
 //--- 
  function monta_grid($linhas = 0)
  {
@@ -325,10 +326,10 @@ class grid_usuarios_grid
    $this->nmgp_botoes['reload'] = "on";
    $this->nmgp_botoes['permisos'] = "on";
    $this->Cmps_ord_def['usuario'] = " asc";
-   $this->Cmps_ord_def['password'] = " asc";
    $this->Cmps_ord_def['correo'] = " asc";
    $this->Cmps_ord_def['idusuarios'] = " desc";
    $this->Cmps_ord_def['creacion'] = " desc";
+   $this->Cmps_ord_def['password'] = " asc";
    $this->Cmps_ord_def['nombre'] = " asc";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_usuarios']['btn_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_usuarios']['btn_display']))
    {
@@ -758,27 +759,27 @@ class grid_usuarios_grid
 //----- 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, TO_DATE(TO_CHAR(creacion, 'yyyy-mm-dd hh24:mi:ss'), 'yyyy-mm-dd hh24:mi:ss'), password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT usuario, password, tercero, correo, resolucion, grupo, activo, grupocomanda, idusuarios, creacion, nombre from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT usuario, tercero, correo, telefono, resolucion, grupo, activo, idusuarios, creacion, password, nombre, grupocomanda from " . $this->Ini->nm_tabela; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['where_pesq']; 
    $nmgp_order_by = ""; 
@@ -856,28 +857,29 @@ class grid_usuarios_grid
    else 
    { 
        $this->usuario = $this->rs_grid->fields[0] ;  
-       $this->password = $this->rs_grid->fields[1] ;  
-       $this->tercero = $this->rs_grid->fields[2] ;  
+       $this->tercero = $this->rs_grid->fields[1] ;  
        $this->tercero = (string)$this->tercero;
-       $this->correo = $this->rs_grid->fields[3] ;  
+       $this->correo = $this->rs_grid->fields[2] ;  
+       $this->telefono = $this->rs_grid->fields[3] ;  
        $this->resolucion = $this->rs_grid->fields[4] ;  
        $this->resolucion = (string)$this->resolucion;
        $this->grupo = $this->rs_grid->fields[5] ;  
        $this->grupo = (string)$this->grupo;
        $this->activo = $this->rs_grid->fields[6] ;  
-       $this->grupocomanda = $this->rs_grid->fields[7] ;  
-       $this->grupocomanda = (string)$this->grupocomanda;
-       $this->idusuarios = $this->rs_grid->fields[8] ;  
+       $this->idusuarios = $this->rs_grid->fields[7] ;  
        $this->idusuarios = (string)$this->idusuarios;
-       $this->creacion = $this->rs_grid->fields[9] ;  
+       $this->creacion = $this->rs_grid->fields[8] ;  
+       $this->password = $this->rs_grid->fields[9] ;  
        $this->nombre = $this->rs_grid->fields[10] ;  
-       $GLOBALS["tercero"] = $this->rs_grid->fields[2] ;  
+       $this->grupocomanda = $this->rs_grid->fields[11] ;  
+       $this->grupocomanda = (string)$this->grupocomanda;
+       $GLOBALS["tercero"] = $this->rs_grid->fields[1] ;  
        $GLOBALS["tercero"] = (string)$GLOBALS["tercero"] ;
        $GLOBALS["resolucion"] = $this->rs_grid->fields[4] ;  
        $GLOBALS["resolucion"] = (string)$GLOBALS["resolucion"] ;
        $GLOBALS["grupo"] = $this->rs_grid->fields[5] ;  
        $GLOBALS["grupo"] = (string)$GLOBALS["grupo"] ;
-       $GLOBALS["grupocomanda"] = $this->rs_grid->fields[7] ;  
+       $GLOBALS["grupocomanda"] = $this->rs_grid->fields[11] ;  
        $GLOBALS["grupocomanda"] = (string)$GLOBALS["grupocomanda"] ;
        $this->SC_seq_register = $this->nmgp_reg_start ; 
        $this->SC_seq_page = 0;
@@ -889,16 +891,17 @@ class grid_usuarios_grid
            $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['final']; 
            $this->rs_grid->MoveNext(); 
            $this->usuario = $this->rs_grid->fields[0] ;  
-           $this->password = $this->rs_grid->fields[1] ;  
-           $this->tercero = $this->rs_grid->fields[2] ;  
-           $this->correo = $this->rs_grid->fields[3] ;  
+           $this->tercero = $this->rs_grid->fields[1] ;  
+           $this->correo = $this->rs_grid->fields[2] ;  
+           $this->telefono = $this->rs_grid->fields[3] ;  
            $this->resolucion = $this->rs_grid->fields[4] ;  
            $this->grupo = $this->rs_grid->fields[5] ;  
            $this->activo = $this->rs_grid->fields[6] ;  
-           $this->grupocomanda = $this->rs_grid->fields[7] ;  
-           $this->idusuarios = $this->rs_grid->fields[8] ;  
-           $this->creacion = $this->rs_grid->fields[9] ;  
+           $this->idusuarios = $this->rs_grid->fields[7] ;  
+           $this->creacion = $this->rs_grid->fields[8] ;  
+           $this->password = $this->rs_grid->fields[9] ;  
            $this->nombre = $this->rs_grid->fields[10] ;  
+           $this->grupocomanda = $this->rs_grid->fields[11] ;  
        } 
    } 
    $this->nmgp_reg_inicial = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['final'] + 1;
@@ -974,7 +977,7 @@ class grid_usuarios_grid
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0">
  <META http-equiv="Pragma" content="no-cache">
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <?php 
@@ -1072,7 +1075,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("   <META http-equiv=\"Cache-Control\" content=\"post-check=0, pre-check=0\"/>\r\n");
            $nm_saida->saida("   <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
        }
-       $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
+       $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n");
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'])
        { 
            $css_body = "";
@@ -2068,24 +2071,24 @@ $nm_saida->saida("}\r\n");
    $this->css_sep = " ";
    $this->css_usuario_label = $compl_css_emb . "css_usuario_label";
    $this->css_usuario_grid_line = $compl_css_emb . "css_usuario_grid_line";
-   $this->css_password_label = $compl_css_emb . "css_password_label";
-   $this->css_password_grid_line = $compl_css_emb . "css_password_grid_line";
    $this->css_tercero_label = $compl_css_emb . "css_tercero_label";
    $this->css_tercero_grid_line = $compl_css_emb . "css_tercero_grid_line";
    $this->css_correo_label = $compl_css_emb . "css_correo_label";
    $this->css_correo_grid_line = $compl_css_emb . "css_correo_grid_line";
+   $this->css_telefono_label = $compl_css_emb . "css_telefono_label";
+   $this->css_telefono_grid_line = $compl_css_emb . "css_telefono_grid_line";
    $this->css_resolucion_label = $compl_css_emb . "css_resolucion_label";
    $this->css_resolucion_grid_line = $compl_css_emb . "css_resolucion_grid_line";
    $this->css_grupo_label = $compl_css_emb . "css_grupo_label";
    $this->css_grupo_grid_line = $compl_css_emb . "css_grupo_grid_line";
    $this->css_activo_label = $compl_css_emb . "css_activo_label";
    $this->css_activo_grid_line = $compl_css_emb . "css_activo_grid_line";
-   $this->css_grupocomanda_label = $compl_css_emb . "css_grupocomanda_label";
-   $this->css_grupocomanda_grid_line = $compl_css_emb . "css_grupocomanda_grid_line";
    $this->css_idusuarios_label = $compl_css_emb . "css_idusuarios_label";
    $this->css_idusuarios_grid_line = $compl_css_emb . "css_idusuarios_grid_line";
    $this->css_creacion_label = $compl_css_emb . "css_creacion_label";
    $this->css_creacion_grid_line = $compl_css_emb . "css_creacion_grid_line";
+   $this->css_password_label = $compl_css_emb . "css_password_label";
+   $this->css_password_grid_line = $compl_css_emb . "css_password_grid_line";
    $this->css_nombre_label = $compl_css_emb . "css_nombre_label";
    $this->css_nombre_grid_line = $compl_css_emb . "css_nombre_grid_line";
  }  
@@ -2481,62 +2484,6 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
- function NM_label_password()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
-   if (!isset($this->NM_cmp_hidden['password']) || $this->NM_cmp_hidden['password'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_password_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_password_label'] . "\" >\r\n");
-   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['opcao'] != "pdf")
-   {
-      $link_img = "";
-      $nome_img = $this->Ini->Label_sort;
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['ordem_cmp'] == 'password')
-      {
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['ordem_label'] == "desc")
-          {
-              $nome_img = $this->Ini->Label_sort_desc;
-          }
-          else
-          {
-              $nome_img = $this->Ini->Label_sort_asc;
-          }
-      }
-      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
-      {
-          $this->Ini->Label_sort_pos = "right_field";
-      }
-      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
-      if (empty($nome_img))
-      {
-          $link_img = nl2br($SC_Label);
-          $Css_compl_sort = "";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_field")
-      {
-          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_field")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "right_cell")
-      {
-          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
-      }
-      elseif ($this->Ini->Label_sort_pos == "left_cell")
-      {
-          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
-      }
-   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('password')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
-   }
-   else
-   {
-   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
-   }
-   $nm_saida->saida("</TD>\r\n");
-   } 
- }
  function NM_label_tercero()
  {
    global $nm_saida;
@@ -2601,6 +2548,14 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
+ function NM_label_telefono()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['telefono'])) ? $this->New_label['telefono'] : "Telefono"; 
+   if (!isset($this->NM_cmp_hidden['telefono']) || $this->NM_cmp_hidden['telefono'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_telefono_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_telefono_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
  function NM_label_resolucion()
  {
    global $nm_saida;
@@ -2623,14 +2578,6 @@ $nm_saida->saida("}\r\n");
    $SC_Label = (isset($this->New_label['activo'])) ? $this->New_label['activo'] : "Activo"; 
    if (!isset($this->NM_cmp_hidden['activo']) || $this->NM_cmp_hidden['activo'] != "off") { 
    $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_activo_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_activo_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
-   } 
- }
- function NM_label_grupocomanda()
- {
-   global $nm_saida;
-   $SC_Label = (isset($this->New_label['grupocomanda'])) ? $this->New_label['grupocomanda'] : "Grupo Comanda"; 
-   if (!isset($this->NM_cmp_hidden['grupocomanda']) || $this->NM_cmp_hidden['grupocomanda'] != "off") { 
-   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_grupocomanda_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_grupocomanda_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
    } 
  }
  function NM_label_idusuarios()
@@ -2745,6 +2692,62 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
+ function NM_label_password()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
+   if (!isset($this->NM_cmp_hidden['password']) || $this->NM_cmp_hidden['password'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_password_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_password_label'] . "\" >\r\n");
+   if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['opcao_print'] != "print" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['opcao'] != "pdf")
+   {
+      $link_img = "";
+      $nome_img = $this->Ini->Label_sort;
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['ordem_cmp'] == 'password')
+      {
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['ordem_label'] == "desc")
+          {
+              $nome_img = $this->Ini->Label_sort_desc;
+          }
+          else
+          {
+              $nome_img = $this->Ini->Label_sort_asc;
+          }
+      }
+      if (empty($this->Ini->Label_sort_pos) || $this->Ini->Label_sort_pos == "right")
+      {
+          $this->Ini->Label_sort_pos = "right_field";
+      }
+      $Css_compl_sort = " style=\"display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center;justify-content:inherit;\"";
+      if (empty($nome_img))
+      {
+          $link_img = nl2br($SC_Label);
+          $Css_compl_sort = "";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_field")
+      {
+          $link_img = "<span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_field")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "right_cell")
+      {
+          $link_img = "<span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span><IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/>";
+      }
+      elseif ($this->Ini->Label_sort_pos == "left_cell")
+      {
+          $link_img = "<IMG SRC=\"" . $this->Ini->path_img_global . "/" . $nome_img . "\" BORDER=\"0\"/><span style='display: inline-block; flex-grow: 1; white-space: normal; word-break: normal;'>" . nl2br($SC_Label) . "</span>";
+      }
+   $nm_saida->saida("<a href=\"javascript:nm_gp_submit2('password')\" class=\"" . $this->css_scGridLabelLink . "\"" . $Css_compl_sort . ">" . $link_img . "</a>\r\n");
+   }
+   else
+   {
+   $nm_saida->saida("" . nl2br($SC_Label) . "\r\n");
+   }
+   $nm_saida->saida("</TD>\r\n");
+   } 
+ }
  function NM_label_nombre()
  {
    global $nm_saida;
@@ -2833,24 +2836,24 @@ $nm_saida->saida("}\r\n");
 // 
    $SC_Label = (isset($this->New_label['usuario'])) ? $this->New_label['usuario'] : "Usuario"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['usuario'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['password'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['tercero'])) ? $this->New_label['tercero'] : "Tercero"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['tercero'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['correo'])) ? $this->New_label['correo'] : "Correo"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['correo'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['telefono'])) ? $this->New_label['telefono'] : "Telefono"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['telefono'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['resolucion'])) ? $this->New_label['resolucion'] : "Resolucion"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['resolucion'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['grupo'])) ? $this->New_label['grupo'] : "Grupo"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['grupo'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['activo'])) ? $this->New_label['activo'] : "Activo"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['activo'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['grupocomanda'])) ? $this->New_label['grupocomanda'] : "Grupo Comanda"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['grupocomanda'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idusuarios'])) ? $this->New_label['idusuarios'] : "Id"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['idusuarios'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['creacion'])) ? $this->New_label['creacion'] : "Creacion"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['creacion'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['password'])) ? $this->New_label['password'] : "Password"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['password'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['nombre'])) ? $this->New_label['nombre'] : "Nombre"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['labels']['nombre'] = $SC_Label; 
    if (!$this->grid_emb_form && isset($_SESSION['scriptcase']['sc_apl_conf']['grid_usuarios']['lig_edit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_usuarios']['lig_edit'] != '')
@@ -3109,28 +3112,29 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf']) {
           }
           $this->Lin_impressas++;
           $this->usuario = $this->rs_grid->fields[0] ;  
-          $this->password = $this->rs_grid->fields[1] ;  
-          $this->tercero = $this->rs_grid->fields[2] ;  
+          $this->tercero = $this->rs_grid->fields[1] ;  
           $this->tercero = (string)$this->tercero;
-          $this->correo = $this->rs_grid->fields[3] ;  
+          $this->correo = $this->rs_grid->fields[2] ;  
+          $this->telefono = $this->rs_grid->fields[3] ;  
           $this->resolucion = $this->rs_grid->fields[4] ;  
           $this->resolucion = (string)$this->resolucion;
           $this->grupo = $this->rs_grid->fields[5] ;  
           $this->grupo = (string)$this->grupo;
           $this->activo = $this->rs_grid->fields[6] ;  
-          $this->grupocomanda = $this->rs_grid->fields[7] ;  
-          $this->grupocomanda = (string)$this->grupocomanda;
-          $this->idusuarios = $this->rs_grid->fields[8] ;  
+          $this->idusuarios = $this->rs_grid->fields[7] ;  
           $this->idusuarios = (string)$this->idusuarios;
-          $this->creacion = $this->rs_grid->fields[9] ;  
+          $this->creacion = $this->rs_grid->fields[8] ;  
+          $this->password = $this->rs_grid->fields[9] ;  
           $this->nombre = $this->rs_grid->fields[10] ;  
-          $GLOBALS["tercero"] = $this->rs_grid->fields[2] ;  
+          $this->grupocomanda = $this->rs_grid->fields[11] ;  
+          $this->grupocomanda = (string)$this->grupocomanda;
+          $GLOBALS["tercero"] = $this->rs_grid->fields[1] ;  
           $GLOBALS["tercero"] = (string)$GLOBALS["tercero"];
           $GLOBALS["resolucion"] = $this->rs_grid->fields[4] ;  
           $GLOBALS["resolucion"] = (string)$GLOBALS["resolucion"];
           $GLOBALS["grupo"] = $this->rs_grid->fields[5] ;  
           $GLOBALS["grupo"] = (string)$GLOBALS["grupo"];
-          $GLOBALS["grupocomanda"] = $this->rs_grid->fields[7] ;  
+          $GLOBALS["grupocomanda"] = $this->rs_grid->fields[11] ;  
           $GLOBALS["grupocomanda"] = (string)$GLOBALS["grupocomanda"];
           $this->SC_seq_page++; 
           $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['final'] + 1; 
@@ -3354,34 +3358,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf']) {
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_usuario_grid_line . "\"  style=\"" . $this->Css_Cmp['css_usuario_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_usuario_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_password()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['password']) || $this->NM_cmp_hidden['password'] != "off") { 
-          $conteudo = sc_strip_script($this->password); 
-          $conteudo_original = sc_strip_script($this->password); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'password', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf'])
-          {
-              $this->SC_nowrap = "";
-          }
-          else
-          {
-              $this->SC_nowrap = "";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_password_grid_line . "\"  style=\"" . $this->Css_Cmp['css_password_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_password_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
  function NM_grid_tercero()
  {
       global $nm_saida;
@@ -3437,6 +3413,34 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf']) {
               $this->SC_nowrap = "";
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_correo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_correo_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_correo_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_telefono()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['telefono']) || $this->NM_cmp_hidden['telefono'] != "off") { 
+          $conteudo = sc_strip_script($this->telefono); 
+          $conteudo_original = sc_strip_script($this->telefono); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'telefono', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_telefono_grid_line . "\"  style=\"" . $this->Css_Cmp['css_telefono_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_telefono_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_resolucion()
@@ -3525,35 +3529,6 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf']) {
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_activo_grid_line . "\"  style=\"" . $this->Css_Cmp['css_activo_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_activo_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
- function NM_grid_grupocomanda()
- {
-      global $nm_saida;
-      if (!isset($this->NM_cmp_hidden['grupocomanda']) || $this->NM_cmp_hidden['grupocomanda'] != "off") { 
-          $conteudo = NM_encode_input(sc_strip_script($this->grupocomanda)); 
-          $conteudo_original = NM_encode_input(sc_strip_script($this->grupocomanda)); 
-          if ($conteudo === "") 
-          { 
-              $conteudo = "&nbsp;" ;  
-              $graf = "" ;  
-          } 
-          $this->Lookup->lookup_grupocomanda($conteudo , $this->grupocomanda) ; 
-          $str_tem_display = $conteudo;
-          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'] && !empty($conteudo)) 
-          { 
-              $str_tem_display = $this->getFieldHighlight('quicksearch', 'grupocomanda', $str_tem_display, $conteudo_original); 
-          } 
-              $conteudo = $str_tem_display; 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf'])
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-          else
-          {
-              $this->SC_nowrap = "NOWRAP";
-          }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_grupocomanda_grid_line . "\"  style=\"" . $this->Css_Cmp['css_grupocomanda_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_grupocomanda_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
-      }
- }
  function NM_grid_idusuarios()
  {
       global $nm_saida;
@@ -3630,6 +3605,34 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf']) {
               $this->SC_nowrap = "NOWRAP";
           }
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_creacion_grid_line . "\"  style=\"" . $this->Css_Cmp['css_creacion_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_creacion_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
+ function NM_grid_password()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['password']) || $this->NM_cmp_hidden['password'] != "off") { 
+          $conteudo = sc_strip_script($this->password); 
+          $conteudo_original = sc_strip_script($this->password); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'password', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_usuarios']['proc_pdf'])
+          {
+              $this->SC_nowrap = "";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_password_grid_line . "\"  style=\"" . $this->Css_Cmp['css_password_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_password_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_nombre()

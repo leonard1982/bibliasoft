@@ -25485,6 +25485,8 @@ ALTER TABLE `inventario` CHANGE `costo` `costo` DECIMAL(12,2) NOT NULL DEFAULT '
 ALTER TABLE `detallecompra` ADD `tipo_docu` VARCHAR(4) NOT NULL DEFAULT 'FC' COMMENT 'Indica el tipo documento al que pertenece el ítem: FC factura de Compra, AF auto factura, NC nota de crédito, etc' AFTER `num_ndevolucion`, ADD `tipo_trans` VARCHAR(4) NOT NULL DEFAULT 'COM' COMMENT 'COM COMPRA, AFAC AUTO FACTURA, DEV DEVILUCION, DESC DESCUENTO, ETC' AFTER `tipo_docu`, ADD `id_nota` BIGINT NOT NULL DEFAULT '0' COMMENT 'cuando es NC o ND se guarda iddetalle origen' AFTER `tipo_trans`;
 
 
+CREATE TABLE `facturaven_adjuntos` ( `id` INT NOT NULL AUTO_INCREMENT , `idfacven` INT NOT NULL DEFAULT '0' , `adjunto` TEXT NULL DEFAULT NULL , `creado` DATETIME NULL DEFAULT NULL , `actualizado` DATETIME NULL DEFAULT NULL , `usuario` INT NOT NULL DEFAULT '0' , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
