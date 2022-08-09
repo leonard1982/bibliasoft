@@ -134,7 +134,7 @@ class grid_compras_new_total
    //----- 
    function Calc_resumo_tipo_com($destino_resumo)
    {
-      global $nm_lang, $pagos, $a_pagar, $devolucion, $val_ica, $val_ret, $val_retiva, $base0, $base19, $base5, $iva_0, $iva_19, $iva_5, $tasa;
+      global $nm_lang, $pagos, $acciones, $a_pagar, $devolucion, $val_ica, $val_ret, $val_retiva, $base0, $base19, $base5, $iva_0, $iva_19, $iva_5, $tasa;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['campos_busca']))
@@ -465,7 +465,7 @@ class grid_compras_new_total
    //----- 
    function Calc_resumo_prefijo_com($destino_resumo)
    {
-      global $nm_lang, $pagos, $a_pagar, $devolucion, $val_ica, $val_ret, $val_retiva, $base0, $base19, $base5, $iva_0, $iva_19, $iva_5, $tasa;
+      global $nm_lang, $pagos, $acciones, $a_pagar, $devolucion, $val_ica, $val_ret, $val_retiva, $base0, $base19, $base5, $iva_0, $iva_19, $iva_5, $tasa;
       $this->nm_data = new nm_data("es");
       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['sql_tot_res']);
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['campos_busca']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['campos_busca']))

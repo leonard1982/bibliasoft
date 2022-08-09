@@ -217,8 +217,8 @@ class blk_dashboard_ini
       $this->nm_dt_criacao   = "20220729"; 
       $this->nm_hr_criacao   = "170736"; 
       $this->nm_autor_alt    = "desarrollo3"; 
-      $this->nm_dt_ult_alt   = "20220803"; 
-      $this->nm_hr_ult_alt   = "172233"; 
+      $this->nm_dt_ult_alt   = "20220805"; 
+      $this->nm_hr_ult_alt   = "092735"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blk_dashboard_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blk_dashboard']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blk_dashboard']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiH9X7Z1rwHuNUHuNOVIB/DWF/DorqD9BiZSBODSNOHuJsHgBeHArsDWF/HMFGD9NwDuFaHABYV5BODMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuBOVcBOH5XCHIraHQNmZ1F7DSBOZMFaHgBOHEJGDWX7HIBOHQXsDQFGHAN7HQNUHgrKVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcJeH9X7HIBeD5B/HgrYDkBOH5XCVoB/D9XOH9B/HIveD5F7DEBOZSXeDWX7DoJeDcBwDQBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHEFiH5F/HIFUHQJeDQBqHANOD5NUHgvOVcFKDuFqDoFUHQBsZ1FGDSNOD5NUHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMXGHgveHErsH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcrsH5B7VorqDcNwH9FaHANOZMB/HgvsVkJ3DuFaZuXGHQBiZSFGHIrKVWJeHuvmDkBsDWF/DoFGD9XGZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwH9FGHIrwV5FUHgvOVcFCHEFYVoJwHQXGH9B/DSBeV5JeDENOHArCDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHENiV5FaHIBOHQXOZSFGHABYVWJsDMvmV9FeV5FYHIFGHQXOZ1X7D1NaZMFaHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7DSBeD5BiDMzGHEFiDWX7DoXGD9JKDQJsHANOV5JwHgvsVcFCDWJeDoNUHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgvsVIBODuX7HMFGD9XOZSB/D1rKHQXGHgvsHENiH5F/DoBqDcBiH9X7D1veV5JwDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWBODMvOVcBUDWFYHMBiD9BsVIraD1rwV5X7HgBeHEFiDWB3DoBqD9NwH9BiDSN7HQB/DMvsVcXKH5XKVENUHQBiZSB/HArYV5JwDEvsZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1034,6 +1034,10 @@ class blk_dashboard_ini
       }
       if (!isset($_SESSION['sc_session'][$this->sc_page]['blk_dashboard']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['blk_dashboard']['embutida_init']) 
       {
+          if (!isset($_SESSION['usr_database'])) 
+          {
+              $this->nm_falta_var .= "usr_database; ";
+          }
       }
 // 
       if (!isset($_SESSION['scriptcase']['glo_tpbanco']))
@@ -1934,7 +1938,10 @@ class blk_dashboard_apl
       $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'on';
   $data = $this->getData();
 $data_ventas = $this->getDataVentas();
+$data_ventas_credito = $this->getDataVentasCredito();
+$data_ventas_contado = $this->getDataVentasContado();
 $data_compras = $this->getDataCompras();
+$data_cliente = $this->getDataCliente();
 
 ?>
 <!DOCTYPE html>
@@ -1950,20 +1957,8 @@ $data_compras = $this->getDataCompras();
 		<?= $this->loader(); ?>
 		<div class="container-fluid main-container">
 			<div class="side-app">
-
-
-				<div class="page-header">
-					<div class="page-leftheader">
-						<h4 class="page-title">Dashboard</h4>
-					</div>
-					<div class="page-rightheader ms-auto d-lg-flex d-none">
-						<div class="ms-5 mb-0">
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-xl-4 col-md-12">
+				<div class="row pt-4">
+					<div class="col-lg-4 col-md-12">
 
 						<div class="card expenses-card overflow-hidden"> 
 							<div class="card-body"> 
@@ -1981,7 +1976,7 @@ $data_compras = $this->getDataCompras();
 						</div>
 
 					</div>
-					<div class="col-xl-8 col-md-12">
+					<div class="col-lg-8 col-md-12">
 
 						<div id="indicadores_deck" class="card">
 							<div class="card-body">
@@ -2073,10 +2068,10 @@ $data_compras = $this->getDataCompras();
 
 				<div class="row row-deck">
 
-					<div class="col-xl-8 col-md-12 col-lg-7">
-						<div class="card">
+					<div class="col-xl-8 col-md-12 col-lg-8">
+						<div id="chart_ventas_contado_credito" class="card">
 							<div class="card-header">
-								<h3 class="card-title">Ventas por mes</h3>
+								<h3 class="card-title">Ventas Credito X Ventas Contado</h3>
 							</div>
 							<div class="card-body">
 								<div id="projectTracked" class="h-300 overflow-hidden">
@@ -2084,43 +2079,34 @@ $data_compras = $this->getDataCompras();
 							</div>
 							<div class="card-footer text-start">
 								<div class="row">
-									<div class="col-xl-4 col-lg-4 col-sm-4 mb-4 mb-sm-0 text-center">
+									<div class="t_cre col-xl-6 col-lg-6 col-sm-6 mb-4 mb-sm-0 text-center">
 										<h2 class="font-weight-normal text-dark mb-0">
 											2.900.450
 										</h2>
 										<div class="text-muted mb-1 fs-13 d-inline-flex">
 											<div class="w-3 h-3 bg-primary mr-2 mt-1 mr-3"></div>
-											Efectivo
+											Credito
 										</div>
 									</div>
-									<div class="col-xl-4 col-lg-4 col-sm-4 mb-4 mb-sm-0 text-center">
+									<div class="t_cont col-xl-6 col-lg-6 col-sm-6 mb-4 mb-sm-0 text-center">
 										<h2 class="font-weight-normal text-dark mb-0">
 											5.780.630
 										</h2>
 										<div class="text-muted mb-1 fs-13 d-inline-flex">
 											<div class="w-3 h-3 bg-secondary mr-2 mt-1 mr-3"></div>
-											Credito
-										</div>
-									</div>
-									<div class="col-xl-4 col-lg-4 col-sm-4 mb-4 mb-sm-0 text-center">
-										<h2 class="font-weight-normal text-dark mb-0">
-											10.301.500
-										</h2>
-										<div class="text-muted mb-1 fs-13 d-inline-flex">
-											<div class="w-3 h-3 bg-light-color mr-2 mt-1 mr-3"></div>
-											Transferencia
+											Contado
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-4 col-md-12 col-lg-5">
+					<div class="col-xl-4 col-md-12 col-lg-4">
 						<div class="card">
 							<div class="card-header">
-								<h3 class="card-title">Project Status</h3>
+								<h3 class="card-title">Consolidado de Folios</h3>
 								<div class="d-flex ml-auto">
-									<div class="btn-group mb-0">
+									<div class="btn-group mb-0 d-none">
 										<div class="dropdown">
 											<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												Año Actual
@@ -2142,50 +2128,7 @@ $data_compras = $this->getDataCompras();
 							</div>
 							<div class="card-body p-0">
 								<table class="table table-hover mb-0">
-									<tbody>
-										<tr class="border-bottom">
-											<td class="p-3 d-flex">
-												<div class="w-3 h-3 bg-primary mr-2 mt-1 brround"></div>
-												Applications
-											</td>
-											<td class="p-3">4,678</td>
-											<td class="p-3">68%</td>
-										</tr>
-										<tr class="border-bottom">
-											<td class="p-3 d-flex">
-												<div class="w-3 h-3 bg-secondary mr-2 mt-1 brround">
-
-
-												</div>
-												Shortlisted
-											</td>
-											<td class="p-3">3,789</td>
-											<td class="p-3">55%</td>
-										</tr>
-										<tr class="border-bottom">
-											<td class="p-3 d-flex">
-												<div class="w-3 h-3 bg-success mr-2 mt-1 brround"></div>
-												Rejected
-											</td>
-											<td class="p-3">2,137</td>
-											<td class="p-3">45%</td>
-										</tr>
-										<tr class="border-bottom">
-											<td class="p-3 d-flex">
-												<div class="w-3 h-3 bg-info mr-2 mt-1 brround"></div>
-												On Hold
-											</td>
-											<td class="p-3">1,786</td>
-											<td class="p-3">34%</td>
-										</tr>
-										<tr class="border-bottom">
-											<td class="p-3 d-flex">
-												<div class="w-3 h-3 bg-warning mr-2 mt-1 brround"></div> 
-												Finalised
-											</td>
-											<td class="p-3">897</td>
-											<td class="p-3">27%</td>
-										</tr>
+									<tbody id="list_folios">
 									</tbody>
 								</table>
 							</div>
@@ -2194,70 +2137,18 @@ $data_compras = $this->getDataCompras();
 				</div>
 
 				<div class="row row-deck">
-					<div class="col-xl-4 col-lg-12 col-md-12">
+					<div class="col-xl-4 col-lg-4 col-md-12">
 						<div class="card">
 							<div class="card-header">
-								<div class="h3 card-title">
-									Project Payment Status
+								<div class="card-title">
+									Top 10 Clientes
 								</div>
 							</div>
-							<div class="card-body p-5">
-								<div class="d-flex align-items-end justify-content-between mg-b-5">
-									<h6 class="">Angular Project</h6>
-									<h6 class="font-weight-bold mb-1">25%</h6>
-								</div>
-								<div class="progress progress-sm mb-5 bg-primary-transparent">
-									<div style="width: 25%" class="progress-bar bg-primary  progress-bar-striped progress-bar-animated"></div>
-								</div>
-
-								<div class="d-flex align-items-end justify-content-between mg-b-5">
-									<h6 class="">Vue Project</h6>
-									<h6 class="font-weight-bold mb-1">50%</h6>
-								</div>
-
-								<div class="progress progress-sm mb-5 bg-success-transparent">
-									<div style="width: 50%" class="progress-bar bg-success  progress-bar-striped progress-bar-animated"></div>
-								</div>
-
-								<div class="d-flex align-items-end justify-content-between mg-b-5">
-									<h6 class="">Reat Project</h6>
-									<h6 class="font-weight-bold mb-1">75%</h6>
-								</div>
-
-								<div class="progress progress-sm mb-5 bg-warning-transparent">
-									<div style="width: 75%" class="progress-bar bg-warning  progress-bar-striped progress-bar-animated"></div>
-								</div>
-
-								<div class="d-flex align-items-end justify-content-between mg-b-5">
-									<h6 class="">Flutter Project</h6>
-									<h6 class="font-weight-bold mb-1">30%</h6>
-								</div>
-
-								<div class="progress progress-sm mb-5 bg-info-transparent">
-									<div style="width: 30%" class="progress-bar bg-info  progress-bar-striped progress-bar-animated"></div>
-								</div>
-
-								<div class="d-flex align-items-end justify-content-between mg-b-5">
-									<h6 class="">Scriptcase Project</h6>
-									<h6 class="font-weight-bold mb-1">100%</h6>
-								</div>
-
-								<div class="progress progress-sm mb-5 bg-dark-transparent">
-									<div style="width: 100%" class="progress-bar bg-dark  progress-bar-striped progress-bar-animated"></div>
-								</div>
-
-								<div class="d-flex align-items-end justify-content-between mg-b-5">
-									<h6 class="">Sql Project</h6>
-									<h6 class="font-weight-bold mb-1">15%</h6>
-								</div>
-
-								<div class="progress progress-sm mb-5 bg-danger-transparent">
-									<div style="width: 75%" class="progress-bar bg-danger  progress-bar-striped progress-bar-animated"></div>
-								</div>
+							<div id="top_ten_clientes" class="card-body p-5">
 							</div>
 						</div>
 					</div>
-					<div class="col-xl-8 col-lg-7 col-md-12">
+					<div class="col-xl-8 col-lg-8 col-md-12">
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title">Project Investment</h3>
@@ -2267,11 +2158,9 @@ $data_compras = $this->getDataCompras();
 								</div>
 							</div>
 							<div class="card-body">
-								<div id="projectInvestment" class="h-330" style="user-select: none; position: relative; background: transparent none repeat scroll 0% 0%;" _echarts_instance_="ec_1659155492518">
-									<div style="position: relative; overflow: hidden; width: 656px; height: 330px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;">
-										<canvas style="position: absolute; left: 0px; top: 0px; width: 656px; height: 330px; user-select: none; padding: 0px; margin: 0px; border-width: 0px;" data-zr-dom-id="zr_0" width="656" height="330">
-
-										</canvas>
+								<div id="projectInvestment" class="h-330">
+									<div>
+										<canvas width="656" height="330"></canvas>
 									</div>
 									<div>
 
@@ -2285,7 +2174,39 @@ $data_compras = $this->getDataCompras();
 			</div>
 		</div>
 
+		<template id="item_list_folios">
+			<tr class="border-bottom">
+				<td class="p-3 d-flex">
+					<div class="w-3 h-3 mr-2 mt-1 brround"></div>
+					<span class="name-folio"></span>
+				</td>
+				<td class="p-3 n-folio"></td>
+				<td class="p-3 porc-folio"></td>
+			</tr>
+		</template>
 
+		<template id="item_top_ten">
+			<div>
+				<div class="d-flex align-items-end justify-content-between mg-b-5">
+					<h6 class="name-cliente text-capitalize"></h6>
+					<h6 class="porc-cliente font-weight-bold mb-1"></h6>
+				</div>
+				<div class="progress progress-sm mb-5">
+					<div style="" class="progress-bar  progress-bar-striped progress-bar-animated"></div>
+				</div>
+			</div>
+		</template>
+
+		<template id="empty">
+			<tr>
+				<td colspan="3">
+					<div class="container-empty">
+						<img src="<?php echo sc_url_library('prj', 'menu', 'assets/images/icon-menu/box-empty.svg') ?>" alt="">
+						<h5>No hay data</h5>
+					</div>
+				</td>
+			</tr>
+		</template>
 		<!-- Cargar Libreria jQuery v3.6.0 -->
 		<script src="<?=$this->Ini->path_prod;?>/third/jquery/js/jquery-3.6.0.min.js"></script> 
 		<script src="<?php echo sc_url_library('prj', 'menu', 'assets/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
@@ -2313,6 +2234,13 @@ $data_compras = $this->getDataCompras();
 
 		<script>
 
+
+
+			const colors = ['#4454c3', '#f72d66', '#2dce89', '#45aaf2', '#ecb403', '#6f42c1', '#17a2b8', '#e83e8c', '#fd7e14', '#007bff'];
+			const class_bg = ['bg-success', 'bg-info', 'bg-danger', 'bg-primary', 'bg-warning', 'bg-secondary'];
+			const class_bg_trans = ['bg-success-transparent-2', 'bg-info-transparent-2', 'bg-danger-transparent-2', 'bg-primary-transparent-2', 'bg-warning-transparent-2', 'bg-secondary-transparent-2'];
+			const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+								"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 			var myVarVal = '#4454c3';
 			const arrayColumn = (arr, n) => arr.map((x) => x[ n]);
 
@@ -2322,19 +2250,130 @@ $data_compras = $this->getDataCompras();
 			var data_ventas = '<?php echo json_encode($data_ventas); ?>';
 			data_ventas = JSON.parse(data_ventas)
 
+			var data_ventas_credito = '<?php echo json_encode($data_ventas_credito); ?>';
+			data_ventas_credito = JSON.parse(data_ventas_credito)
+
+			var data_ventas_contado = '<?php echo json_encode($data_ventas_contado); ?>';
+			data_ventas_contado = JSON.parse(data_ventas_contado)
+
 			var data_compras = '<?php echo json_encode($data_compras); ?>';
 			data_compras = JSON.parse(data_compras)
 
-			
-			
+			var data_cliente = '<?php echo json_encode($data_cliente); ?>';
+			data_cliente = JSON.parse(data_cliente)
+
+
+
 			$(document).ready(function(){
 
 				renderVentasXMes();
 				renderIndicadores();
 				projectInvestment();
+				projectTracked();
+				renderTopTenClientes();
+				canvasDoughnut3();
+				renderListFolios();
 				loader_remove();
-				
+
 			})
+
+
+
+			function renderTopTenClientes(){
+
+				let container_main = $('#top_ten_clientes');
+
+				const fragment = $(document.createDocumentFragment());
+
+				if(data_cliente.code == 200) {
+					var datox = data_cliente.data.sort((a, b, i) => {
+						return b.values - a.values;
+					});
+					let template = $('#item_top_ten').contents();
+
+					let n = 0;
+					let total_values = 0;
+					let total_counter = 0;
+					datox.slice(0, 10).forEach( item => {
+
+						let porcentaje = item.values * 100 / sum(data_cliente.data, 'values');
+						let cliente = item.nombres;
+						let clase_bg = class_bg[ n];
+						let clase_bg_transparent = class_bg_trans[ n];
+						let obliga = item.A_TIPODR;
+
+						template.find('.progress').removeClass(class_bg_trans.join(' ')).addClass(clase_bg_transparent);
+						template.find('.progress-bar').removeClass(class_bg.join(' ')).addClass(clase_bg);
+						template.find('.name-cliente').text(cliente);
+						template.find('.porc-cliente').text(porcentaje.toFixed(2) + '%');
+						template.find('.progress-bar').css('width', porcentaje.toFixed(2) + '%');
+
+						template.clone(true).appendTo(fragment);
+						total_counter += porcentaje 
+						n = (n >= class_bg.length - 1)? 0 : n+1;
+
+					})
+
+
+					let all_cus = 'Otros ' + datox.filter(item => item.total > 0).length + ' Cientes';
+					let all_porc = 100 - total_counter;
+					template.find('.progress').removeClass(class_bg_trans.join(' ')).addClass(class_bg_trans[ n]);
+					template.find('.progress-bar').removeClass(class_bg.join(' ')).addClass(class_bg[ n]);
+					template.find('.name-cliente').text(all_cus);
+					template.find('.porc-cliente').text(all_porc.toFixed(2) + '%');
+					template.find('.progress-bar').css('width', all_porc.toFixed(2) + '%');
+
+					template.clone(true).appendTo(fragment);
+
+					container_main.prepend(fragment)
+
+				} else if(data.code == 300){
+
+					let template = $('#empty').contents();
+					template.clone(true).appendTo(fragment);
+					container_main.html(fragment)
+
+				}
+
+			}
+
+
+
+
+			function renderListFolios(){
+
+				let container_main = $('#list_folios');
+
+				const fragment = $(document.createDocumentFragment());
+
+				let datox = data.data.sort((a, b, i) => {
+					return b.value - a.value;
+				});
+				let template = $('#item_list_folios').contents();
+
+				let n = 0;
+
+				datox.forEach( item => {
+
+					let porcentaje = item.value * 100 / sum(data.data, 'value') ;
+					let folio = item.name;
+					let color = colors[ n];
+
+					template.find('.brround').css('background-color', color);
+					template.find('.name-folio').text(folio);
+					template.find('.porc-folio').text(porcentaje.toFixed(2) + '%');
+					template.find('.n-folio').text(formatNumber(item.value));
+
+					template.clone(true).appendTo(fragment);
+
+					n = (n >= colors.length - 1)? 0 : n+1;
+
+				})
+
+				container_main.append(fragment)
+
+
+			}
 
 
 
@@ -2342,11 +2381,13 @@ $data_compras = $this->getDataCompras();
 
 				$('#indicadores_deck .indica h3').each(function(i, indica){
 					let count = data.hasOwnProperty(indica.id)? data[indica.id] : 0;
-					$('#'+indica.id).jQuerySimpleCounter({end: count,duration: 3000});
+					$('#'+indica.id).jQuerySimpleCounter({end: count,duration: 1500});
 				})
-				$('#indicadores_card h2').each(function(){
-					$(this).jQuerySimpleCounter({end: 999,duration: 3000});
+				$('#indicadores_card h2').each(function(i, indica){
+					let count = data.hasOwnProperty(indica.id)? data[indica.id] : 0;
+					$(this).jQuerySimpleCounter({end: count,duration: 1500});
 				})
+
 
 			}
 
@@ -2490,14 +2531,28 @@ $data_compras = $this->getDataCompras();
 
 			function projectInvestment() {
 
-				let ventas = data_ventas.data
-				let labels = arrayColumn(ventas , 'labels');
-				let values_ventas = arrayColumn(ventas , 'valventas');
-				
-				let compras = data_compras.data
-				let values_compras = arrayColumn(compras , 'valcompras');
-				
-				var chartdata3 = [
+				let hoy = new Date();
+				let mes = hoy.getMonth()
+				let arrData = new Array()
+				for(let i = 0; i <= mes; i++){
+					let item = {name_mes: getLongMonthName(i), mes : i + 1, total_ventas : 0, total_compras : 0};	
+					arrData.push(item);
+				}
+				console.log(arrData)
+
+
+				data_compras.data.forEach(function(el){
+					arrData.filter(filter => filter.mes == el.mes)[0].total_compras = el.values
+				})
+				data_ventas.data.forEach(function(el){
+					arrData.filter(filter => filter.mes == el.mes)[0].total_ventas = el.values
+				})
+
+				let labels = arrayColumn(arrData , 'name_mes');
+				let values_ventas = arrayColumn(arrData , 'total_ventas');
+				let values_compras = arrayColumn(arrData , 'total_compras');
+
+				let chartdata3 = [
 					{
 						name: 'Ventas',
 						type: 'line',
@@ -2526,7 +2581,7 @@ $data_compras = $this->getDataCompras();
 					}
 				];
 
-				var option5 = {
+				let option5 = {
 					grid: {
 						top: '6',
 						right: '0',
@@ -2578,12 +2633,180 @@ $data_compras = $this->getDataCompras();
 					series: chartdata3,
 					color:[ myVarVal, '#f72d66']
 				};
-				var chart5 = document.getElementById('projectInvestment');
-				var barChart5 = echarts.init(chart5);
+				let chart5 = document.getElementById('projectInvestment');
+				let barChart5 = echarts.init(chart5);
 				barChart5.setOption(option5);
 				window.addEventListener('resize',function(){
 					barChart5.resize();
 				})
+			}
+
+
+
+			function projectTracked() {
+
+				let hoy = new Date();
+				let mes = hoy.getMonth()
+				let arrData = new Array()
+				for(let i = 0; i <= mes; i++){
+					let item = {name_mes: getLongMonthName(i), mes : i + 1, total_credito : 0, total_contado : 0};	
+					arrData.push(item);
+				}
+				console.log(arrData)
+
+				data_ventas_credito.data.forEach(function(el){
+					arrData.filter(filter => filter.mes == el.mes)[0].total_credito = el.values
+				})
+				data_ventas_contado.data.forEach(function(el){
+					arrData.filter(filter => filter.mes == el.mes)[0].total_contado = el.values
+				})
+
+				let labels = arrayColumn(arrData , 'name_mes');
+				let values_credito = arrayColumn(arrData , 'total_credito');
+				let values_contado = arrayColumn(arrData , 'total_contado');
+
+				let sum_total_credito = values_credito.reduce(function(preVal, currentVal, i, v){
+					return preVal + currentVal;
+				});
+				$('#chart_ventas_contado_credito .t_cre > h2').text(formatNumber(sum_total_credito));
+				let sum_total_contado = values_contado.reduce(function(preVal, currentVal, i, v){
+					return preVal + currentVal;
+				});
+				$('#chart_ventas_contado_credito .t_cont > h2').text(formatNumber(sum_total_contado));
+
+				let chartdata3 = [
+					{
+						name: 'Ventas Credito',
+						type: 'bar',
+						stack: 'Stack',
+						barMaxWidth: 18,
+						data: values_credito,
+						itemStyle: {
+							normal: {
+								barBorderRadius: [0] ,
+							}
+						}
+					},
+					{
+						name: 'Ventas Contado',
+						type: 'bar',
+						stack: 'Stack',
+						barMaxWidth:18,
+						data: values_contado,
+						itemStyle: {
+							normal: {
+								barBorderRadius: [0] ,
+							}
+						}
+					}
+				];
+
+				let option5 = {
+					grid: {
+						top: '6',
+						right: '0',
+						bottom: '17',
+						left: '40',
+					},
+					tooltip: {
+						show: true,
+						showContent: true,
+						alwaysShowContent: true,
+						triggerOn: 'mousemove',
+						trigger: 'axis',
+						axisPointer:
+						{
+							label: {
+								show: false,
+							}
+						}
+
+					},
+					xAxis: {
+						data: labels,
+						axisLine: {
+							lineStyle: {
+								color: 'rgba(67, 87, 133, .09)'
+							}
+						},
+						axisLabel: {
+							fontSize: 10,
+							color: '#8e9cad'
+						}
+					},
+					yAxis: {
+						splitLine: {
+							lineStyle: {
+								color: 'rgba(67, 87, 133, .09)'
+							}
+						},
+						axisLine: {
+							lineStyle: {
+								color: 'rgba(67, 87, 133, .09)'
+							}
+						},
+						axisLabel: {
+							fontSize: 10,
+							color: '#8e9cad'
+						}
+					},
+					series: chartdata3,
+					color:[ myVarVal, '#f72d66','#cedbfd']
+				};
+				let chart5 = document.getElementById('projectTracked');
+				let barChart5 = echarts.init(chart5);
+				barChart5.setOption(option5);
+				window.addEventListener('resize',function(){
+					barChart5.resize();
+				})
+
+			}
+
+
+
+
+			function canvasDoughnut3() {
+				let labels = arrayColumn(data.data,'name');
+				let values = arrayColumn(data.data,'value');
+				document.querySelector("#canvasDoughnut3.chart-container").innerHTML = '<canvas class="canvasDoughnut3" height="200" width="200"></canvas>';
+				if ($('.canvasDoughnut3').length){
+
+					var chart_doughnut_settings = {
+						type: 'doughnut',
+						tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+						data: {
+							labels: labels,
+							datasets: [{
+								data: values,
+								backgroundColor: colors,
+								hoverBackgroundColor: colors
+							}]
+						},
+						options: {
+							legend: {
+								display: false,
+							},
+							cutout: "70%",
+							responsive: true,
+						},
+					}
+
+					$('.canvasDoughnut3').each(function(){
+
+						var chart_element = $(this);
+						var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
+
+					});
+				}
+				
+			}
+
+
+
+
+			const getLongMonthName = function(mes) {
+				return monthNames[ mes];
+				return monthNames[date.getMonth()].substring(0, 3);
 			}
 		</script>
 
@@ -2645,8 +2868,10 @@ $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'off';
 function getData()
 {
 $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
   
-$check_sql = "SELECT count(*) FROM inventario_sn_facilweb.facturaven where asentada = 1 AND cufe != '' AND year(fechaven) = year(curdate())";
+$check_sql = "SELECT count(*) FROM $this->sc_temp_usr_database.facturaven where asentada = 1 AND cufe != '' AND year(fechaven) = year(curdate())";
  
       $nm_select = $check_sql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2674,13 +2899,14 @@ $check_sql = "SELECT count(*) FROM inventario_sn_facilweb.facturaven where asent
       } 
 ;
 
-$data_fe = 0;
+$value_fe = 0;
 if (isset($rs[0][0]))     
 {
-	$data_fe = $rs[0][0];
+	$value_fe = $rs[0][0];
 }
+$data_fe = ['name' => 'Factura Electronica', 'value'=> intval($value_fe)];
 
-$check_sql = "SELECT count(*) FROM inventario_sn_facilweb.facturaven where asentada = 1 AND tipo = 'FV' AND cufe is null AND year(fechaven) = year(curdate())";
+$check_sql = "SELECT count(*) FROM $this->sc_temp_usr_database.facturaven where asentada = 1 AND tipo = 'FV' AND cufe is null AND year(fechaven) = year(curdate())";
  
       $nm_select = $check_sql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2708,14 +2934,13 @@ $check_sql = "SELECT count(*) FROM inventario_sn_facilweb.facturaven where asent
       } 
 ;
 
-$data_pos = 0;
+$value_pos = 0;
 if (isset($rs[0][0]))     
 {
-	$data_pos = $rs[0][0];
+	$value_pos = $rs[0][0];
 }
 
-
-$check_sql = "SELECT count(*) FROM inventario_sn_facilweb.facturaven where asentada = 1  AND tipo = 'NC' AND year(fechaven) = year(curdate())";
+$check_sql = "SELECT count(*) FROM $this->sc_temp_usr_database.facturaven where asentada = 1 AND tipo = 'NC' AND cufe is null AND year(fechaven) = year(curdate())";
  
       $nm_select = $check_sql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2743,28 +2968,181 @@ $check_sql = "SELECT count(*) FROM inventario_sn_facilweb.facturaven where asent
       } 
 ;
 
-$data_ncr = 0;
+$value_nota_pos = 0;
 if (isset($rs[0][0]))     
 {
-	$data_ncr = $rs[0][0];
+	$value_nota_pos = $rs[0][0];
 }
 
-$default = rand(250,999);
+$check_sql = "SELECT count(*) FROM $this->sc_temp_usr_database.facturaven where asentada = 1  AND tipo = 'NC' AND year(fechaven) = year(curdate())";
+ 
+      $nm_select = $check_sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs = false;
+          $rs_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+$value_ncr = 0;
+if (isset($rs[0][0]))     
+{
+	$value_ncr = $rs[0][0];
+}
+$data_ncr = ['name' => 'Nota Credito', 'value'=> intval($value_ncr)];
+
+
+
+
+$check_sql = "SELECT * FROM information_schema.tables WHERE table_schema = 'nomina_akt' AND table_name = 'reporte_nomina' LIMIT 1;";
+ 
+      $nm_select = $check_sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs = false;
+          $rs_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+$value_nomina = 0;
+$value_nomina_ajuste = 0;
+if (isset($rs[0][0]))     
+{
+
+	$check_sql = "select count(*) from nomina_agropquimicos_sas.reporte_nomina where tipo = 'NE'";
+	 
+      $nm_select = $check_sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs = false;
+          $rs_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if (isset($rs[0][0]))     
+	{
+		$value_nomina = 0;
+	}
+	$check_sql = "select count(*) from nomina_agropquimicos_sas.reporte_nomina where tipo = 'NA'";
+	 
+      $nm_select = $check_sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $rs = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $rs[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $rs = false;
+          $rs_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+	if (isset($rs[0][0]))     
+	{
+		$value_nomina_ajuste = 0;
+	}
+
+}
+$data_nomina = ['name' => 'Nomina', 'value'=> intval($value_nomina)];
+$data_nomina_ajuste = ['name' => 'Ajuste Nomina', 'value'=> intval($value_nomina_ajuste)];
+
+
+$value_aj_dsoporte = 0;
+$value_dsoporte = 0;
+
+$total_folios = $value_fe + $value_ncr + $value_nomina + $value_nomina_ajuste + $value_aj_dsoporte + $value_dsoporte;
+
+$data_dsoporte = ['name' => 'Documento Soporte', 'value'=> intval($value_dsoporte)];
+$data_aj_dsoporte = ['name' => 'Ajuste Documento Soporte', 'value'=> intval($value_aj_dsoporte)];
 
 return [
-	'i_fe' => $data_fe,
-	'i_pos' => $data_pos,
-	'i_ncredito' => $data_ncr,
-	'i_n_pos' => $default,
-	'i_aj_dsoporte' => $default,
-	'i_dsoporte' => $default,
-	'i_nomina' => $default
+	'i_fe' => $value_fe,
+	'i_pos' => $value_pos,
+	'i_ncredito' => $value_ncr,
+	'i_n_pos' => $value_nota_pos,
+	'i_aj_dsoporte' => $value_aj_dsoporte,
+	'i_dsoporte' => $value_dsoporte,
+	'i_nomina' => $value_nomina,
+	'i_aj_nomina' => $value_nomina_ajuste,
+	'i_folios' => $total_folios,
+	'data' => [$data_fe, $data_ncr, $data_nomina, $data_nomina_ajuste, $data_dsoporte, $data_aj_dsoporte]
 ];
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
 $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'off';
 }
-function getDataCompras()
+function getDataCliente()
 {
 $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
   
 
      $nm_select = "SET lc_time_names = 'es_CO';"; 
@@ -2784,8 +3162,102 @@ $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'on';
          $rf->Close();
       ;
 
-$sql = "SELECT CONCAT(UCASE(LEFT(MONTHNAME(fechacom), 1)), LCASE(SUBSTRING(MONTHNAME(fechacom), 2))) AS labels,
-       SUM(total) AS total FROM inventario_sn_facilweb.facturacom 
+$sql = "SELECT fac.idcli as cliente, lower(ter.nombres) as nombres,
+       SUM(fac.total) AS total, count(*) AS count
+       FROM $this->sc_temp_usr_database.facturaven fac inner join $this->sc_temp_usr_database.terceros ter 
+       on fac.idcli = ter.idtercero
+	   WHERE fac.asentada = 1 AND year(fac.fechaven) = year(curdate())
+GROUP BY fac.idcli";
+
+$this->Db->fetchMode = ADODB_FETCH_BOTH;
+ 
+      $nm_select = $sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($ds = $this->Db->Execute($nm_select)) 
+      { }
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $ds = false;
+          $ds_erro = $this->Db->ErrorMsg();
+      } 
+;
+$data = [];
+
+if (false == $ds ) {
+
+	$status = "error";
+	$message=$ds_erro ;
+	$code =  500;
+
+} elseif ($ds->EOF) {
+
+	$status = "warning";
+	$message='Not record Found!';
+	$code = 300;
+	$ds->Close();
+
+} else {
+
+	while (!$ds->EOF){
+
+		$item = $ds->getRowAssoc(false);
+		
+		$format_count = $item['count'];
+		$format_total = $item['total'];
+		$item['values'] = intval($format_total);
+		$item['counter'] = intval($format_count);
+
+		$data[] = $item;
+
+		$ds->moveNext();
+
+	}
+
+	$status = "success";
+	$message="record found!";
+	$code = 200;
+
+	$ds->Close();
+}
+
+$res = [
+"status" => $status,
+"msg" => $message,
+"code" => $code,
+"data" => $data
+];
+
+return $res;
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+$_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'off';
+}
+function getDataCompras()
+{
+$_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+  
+
+     $nm_select = "SET lc_time_names = 'es_CO';"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+$sql = "SELECT MONTH(fechacom) AS mes,  CONCAT(UCASE(LEFT(MONTHNAME(fechacom), 1)), LCASE(SUBSTRING(MONTHNAME(fechacom), 2))) AS labels,
+       SUM(total) AS total FROM $this->sc_temp_usr_database.facturacom 
 	   WHERE asentada = 1 AND year(fechacom) = year(curdate())
 GROUP BY labels
 ORDER BY fechacom ASC";
@@ -2847,9 +3319,192 @@ $res = [
 ];
 
 return $res;
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
 $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'off';
 }
 function getDataVentas()
+{
+$_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+  
+
+     $nm_select = "SET lc_time_names = 'es_CO';"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+$sql = "SELECT MONTH(fechaven) AS mes, CONCAT(UCASE(LEFT(MONTHNAME(fechaven), 1)), LCASE(SUBSTRING(MONTHNAME(fechaven), 2))) AS labels,
+       SUM(total) AS total FROM $this->sc_temp_usr_database.facturaven 
+	   WHERE asentada = 1 AND tipo = 'FV' AND year(fechaven) = year(curdate())
+GROUP BY labels
+ORDER BY fechaven ASC";
+
+$this->Db->fetchMode = ADODB_FETCH_BOTH;
+ 
+      $nm_select = $sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($ds = $this->Db->Execute($nm_select)) 
+      { }
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $ds = false;
+          $ds_erro = $this->Db->ErrorMsg();
+      } 
+;
+$data = [];
+
+if (false == $ds ) {
+
+	$status = "error";
+	$message=$ds_erro ;
+	$code =  500;
+
+} elseif ($ds->EOF) {
+
+	$status = "warning";
+	$message='Not record Found!';
+	$code = 300;
+	$ds->Close();
+
+} else {
+
+	while (!$ds->EOF){
+
+		$item = $ds->getRowAssoc(false);
+		
+		$format_total = $item['total'];
+		$item['values'] = intval($format_total);
+
+		$data[] = $item;
+
+		$ds->moveNext();
+
+	}
+
+	$status = "success";
+	$message="record found!";
+	$code = 200;
+
+	$ds->Close();
+}
+
+$res = [
+"status" => $status,
+"msg" => $message,
+"code" => $code,
+"data" => $data
+];
+
+return $res;
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+$_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'off';
+}
+function getDataVentasContado()
+{
+$_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'on';
+if (!isset($_SESSION['usr_database'])) {$_SESSION['usr_database'] = "";}
+if (!isset($this->sc_temp_usr_database)) {$this->sc_temp_usr_database = (isset($_SESSION['usr_database'])) ? $_SESSION['usr_database'] : "";}
+  
+
+     $nm_select = "SET lc_time_names = 'es_CO';"; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+$sql = "SELECT MONTH(fechaven) AS mes, CONCAT(UCASE(LEFT(MONTHNAME(fechaven), 1)), LCASE(SUBSTRING(MONTHNAME(fechaven), 2))) AS labels,
+       SUM(total) AS total FROM $this->sc_temp_usr_database.facturaven 
+	   WHERE credito = 2 AND tipo = 'FV' AND asentada = 1 AND year(fechaven) = year(curdate())
+GROUP BY labels
+ORDER BY fechaven ASC";
+
+$this->Db->fetchMode = ADODB_FETCH_BOTH;
+ 
+      $nm_select = $sql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      if ($ds = $this->Db->Execute($nm_select)) 
+      { }
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $ds = false;
+          $ds_erro = $this->Db->ErrorMsg();
+      } 
+;
+$data = [];
+
+if (false == $ds ) {
+
+	$status = "error";
+	$message=$ds_erro ;
+	$code =  500;
+
+} elseif ($ds->EOF) {
+
+	$status = "warning";
+	$message='Not record Found!';
+	$code = 300;
+	$ds->Close();
+
+} else {
+
+	while (!$ds->EOF){
+
+		$item = $ds->getRowAssoc(false);
+		
+		$format_total = $item['total'];
+		$item['values'] = intval($format_total);
+
+		$data[] = $item;
+
+		$ds->moveNext();
+
+	}
+
+	$status = "success";
+	$message="record found!";
+	$code = 200;
+
+	$ds->Close();
+}
+
+$res = [
+"status" => $status,
+"msg" => $message,
+"code" => $code,
+"data" => $data
+];
+
+return $res;
+if (isset($this->sc_temp_usr_database)) {$_SESSION['usr_database'] = $this->sc_temp_usr_database;}
+$_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'off';
+}
+function getDataVentasCredito()
 {
 $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'on';
   
@@ -2871,11 +3526,12 @@ $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'on';
          $rf->Close();
       ;
 
-$sql = "SELECT CONCAT(UCASE(LEFT(MONTHNAME(fechaven), 1)), LCASE(SUBSTRING(MONTHNAME(fechaven), 2))) AS labels,
+$sql = "SELECT MONTH(fechaven) AS mes, CONCAT(UCASE(LEFT(MONTHNAME(fechaven), 1)), LCASE(SUBSTRING(MONTHNAME(fechaven), 2))) AS labels,
        SUM(total) AS total FROM inventario_sn_facilweb.facturaven 
-	   WHERE asentada = 1 AND year(fechaven) = year(curdate())
+	   WHERE credito = 1 AND tipo = 'FV' AND asentada = 1 AND year(fechaven) = year(curdate())
 GROUP BY labels
 ORDER BY fechaven ASC";
+
 $this->Db->fetchMode = ADODB_FETCH_BOTH;
  
       $nm_select = $sql; 
@@ -3241,6 +3897,20 @@ $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'off';
    {
        $_SESSION['sc_session']['SC_parm_violation'] = true;
    }
+   if (isset($_POST["usr_database"])) 
+   {
+       $_SESSION["usr_database"] = $_POST["usr_database"];
+       nm_limpa_str_blk_dashboard($_SESSION["usr_database"]);
+   }
+   if (isset($_GET["usr_database"])) 
+   {
+       $_SESSION["usr_database"] = $_GET["usr_database"];
+       nm_limpa_str_blk_dashboard($_SESSION["usr_database"]);
+   }
+   if (!isset($_SESSION["usr_database"])) 
+   {
+       $_SESSION["usr_database"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -3395,6 +4065,11 @@ $_SESSION['scriptcase']['blk_dashboard']['contr_erro'] = 'off';
                 $$Tmp_par = $cadapar[1];
             }
             $ix++;
+       }
+       if (isset($usr_database)) 
+       {
+           $_SESSION['usr_database'] = $usr_database;
+           nm_limpa_str_blk_dashboard($_SESSION["usr_database"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

@@ -137,7 +137,18 @@ function Ord_cmp_init()
    $tab_ger_campos['asentada'] = "on";
    $tab_def_campos['asentada'] = "asentada";
    $tab_labels["asentada"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_compras_new']['labels']["asentada"])) ? $_SESSION['sc_session'][$sc_init]['grid_compras_new']['labels']["asentada"] : "Asentada";
+   $tab_ger_campos['acciones'] = "on";
+   if ($use_alias == "S")
+   {
+       $tab_def_campos['acciones'] = "acciones";
+   }
+   else
+   {
+       $tab_def_campos['acciones'] = "";
+   }
+   $tab_labels["acciones"]   = (isset($_SESSION['sc_session'][$sc_init]['grid_compras_new']['labels']["acciones"])) ? $_SESSION['sc_session'][$sc_init]['grid_compras_new']['labels']["acciones"] : "Acciones";
    $tab_ger_campos['pagos'] = "none";
+   $tab_ger_campos['acciones'] = "none";
    if (isset($_SESSION['scriptcase']['sc_apl_conf']['grid_compras_new']['field_display']) && !empty($_SESSION['scriptcase']['sc_apl_conf']['grid_compras_new']['field_display']))
    {
        foreach ($_SESSION['scriptcase']['sc_apl_conf']['grid_compras_new']['field_display'] as $NM_cada_field => $NM_cada_opc)
@@ -292,7 +303,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
 <?php
 }
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $_SESSION['scriptcase']['css_popup'] ?>" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $_SESSION['scriptcase']['css_popup_dir'] ?>" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $_SESSION['scriptcase']['css_popup_div'] ?>" /> 

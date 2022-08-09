@@ -242,7 +242,6 @@ class grid_facturaven_pos_xls
       $this->SC_top[] = "tipo";
       $this->Xls_tot_col = 0;
       $this->Xls_row     = 0;
-      $this->New_Xls_row = 1;
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
@@ -803,32 +802,6 @@ else
 }
 
 $this->sc_temp_gcontador_grid_fe=1;
-;
-
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-
-;
-;
-;
-;
-;
-
-;
-;
 
 
      $nm_select = "delete from facturaven where espos='SI' and (total='0' or total is null) and vendedor='".$this->sc_temp_gidtercero."' and (select d.iddet from detalleventa d where d.numfac=idfacven limit 1) is null and observaciones='TEMPORAL' and (select c.noborrar_tmp_enpos from configuraciones c order by c.idconfiguraciones desc limit 1)='NO'"; 
@@ -1635,7 +1608,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
       $this->arr_export = array('label' => array(), 'lines' => array());
       $this->arr_span   = array();
 
-      $this->NM_cmp_hidden['detalle'] = "off";
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida_label']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida_label'])
       { 
           $this->count_span = 0;
@@ -1706,7 +1678,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
       $prim_reg = true;
       $prim_gb  = true;
       $nm_houve_quebra = "N";
-      $this->New_Xls_row = $this->Xls_row;
       $PB_tot = (isset($this->count_ger) && $this->count_ger > 0) ? "/" . $this->count_ger : "";
       while (!$rs->EOF)
       {
@@ -1718,9 +1689,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
              $this->pb->addSteps(1);
          }
          $this->Xls_col = 0;
-         if ($this->New_Xls_row > $this->Xls_row) {
-             $this->Xls_row = $this->New_Xls_row;
-         }
          $this->Xls_row++;
          $this->fechaven = $rs->fields[0] ;  
          $this->tipo = $rs->fields[1] ;  
@@ -1847,50 +1815,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
          $this->fecha_pago = $rs->fields[41] ;  
          $this->fec_pago = $rs->fields[42] ;  
          $this->numfe = $rs->fields[43] ;  
-         $this->Orig_fechaven = $this->fechaven;
-         $this->Orig_tipo = $this->tipo;
-         $this->Orig_credito = $this->credito;
-         $this->Orig_numero2 = $this->numero2;
-         $this->Orig_idcli = $this->idcli;
-         $this->Orig_direccion2 = $this->direccion2;
-         $this->Orig_total = $this->total;
-         $this->Orig_pedido = $this->pedido;
-         $this->Orig_idfacven = $this->idfacven;
-         $this->Orig_numfacven = $this->numfacven;
-         $this->Orig_fechavenc = $this->fechavenc;
-         $this->Orig_subtotal = $this->subtotal;
-         $this->Orig_valoriva = $this->valoriva;
-         $this->Orig_pagada = $this->pagada;
-         $this->Orig_asentada = $this->asentada;
-         $this->Orig_observaciones = $this->observaciones;
-         $this->Orig_saldo = $this->saldo;
-         $this->Orig_adicional = $this->adicional;
-         $this->Orig_adicional2 = $this->adicional2;
-         $this->Orig_adicional3 = $this->adicional3;
-         $this->Orig_resolucion = $this->resolucion;
-         $this->Orig_vendedor = $this->vendedor;
-         $this->Orig_creado = $this->creado;
-         $this->Orig_editado = $this->editado;
-         $this->Orig_usuario_crea = $this->usuario_crea;
-         $this->Orig_inicio = $this->inicio;
-         $this->Orig_fin = $this->fin;
-         $this->Orig_banco = $this->banco;
-         $this->Orig_dias_decredito = $this->dias_decredito;
-         $this->Orig_cod_cuenta = $this->cod_cuenta;
-         $this->Orig_qr_base64 = $this->qr_base64;
-         $this->Orig_fecha_validacion = $this->fecha_validacion;
-         $this->Orig_cufe = $this->cufe;
-         $this->Orig_estado = $this->estado;
-         $this->Orig_enlacepdf = $this->enlacepdf;
-         $this->Orig_id_trans_fe = $this->id_trans_fe;
-         $this->Orig_nomcli = $this->nomcli;
-         $this->Orig_si_electronica = $this->si_electronica;
-         $this->Orig_nombre_cliente = $this->nombre_cliente;
-         $this->Orig_celular_ws = $this->celular_ws;
-         $this->Orig_dircliente = $this->dircliente;
-         $this->Orig_fecha_pago = $this->fecha_pago;
-         $this->Orig_fec_pago = $this->fec_pago;
-         $this->Orig_numfe = $this->numfe;
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig']))
          {
              foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Gb_Free_orig'] as $Cmp_clone => $Cmp_orig)
@@ -2721,7 +2645,7 @@ switch($this->sc_temp_gproveedor)
 		}
 		else
 		{
-			$vmandar_whatsapp = "<a class='dropdown-item' href='#' onclick='alert(\"El documento no ha sido enviado.\");'>Enviar a WhatsApp</a>";
+			$vmandar_whatsapp = "";
 		}
 	break;
 
@@ -2730,8 +2654,8 @@ switch($this->sc_temp_gproveedor)
 	break;
 }
 
-$this->opciones  = "<div class='dropdown'>
-  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+$this->opciones  = "<div class='btn-group dropleft'>
+  <button class='btn btn-primary' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
     <i class='fas fa-ellipsis-v'></i>
   </button>
   <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
@@ -2795,9 +2719,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
           } 
       } 
       if ($this->groupby_show == "S") {
-          if ($this->New_Xls_row > $this->Xls_row) {
-              $this->Xls_row = $this->New_Xls_row;
-          }
           $this->Xls_col = 0;
           $this->Xls_row++;
        if (isset($this->fechaven_Old) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['SC_Ind_Groupby'] == "fecha")
@@ -3375,45 +3296,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
                   $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
               }
               $this->Xls_col++;
-          }
-          $SC_Label = (isset($this->New_label['detalle'])) ? $this->New_label['detalle'] : ""; 
-          if (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off")
-          {
-              $this->arr_span['detalle'] = $this->count_span;
-              $this->Emb_label_cols_detalle = 0;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos_detalle']['embutida'] = true;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos_detalle']['embutida_label'] = true;
-              $GLOBALS["script_case_init"] = $this->Ini->sc_page;
-              $GLOBALS["nmgp_parms"] = "nmgp_opcao?#?xls?@?";
-              if (method_exists($this->grid_facturaven_pos_detalle, "controle"))
-              {
-                  $this->grid_facturaven_pos_detalle->controle();
-                  if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-                  {
-                      $this->Ini->conectDB();
-                      $this->Db = $this->Ini->Db;
-                      if ($this->Tot) {
-                          $this->Tot->Db = $this->Db;
-                      }
-                  }
-                  if (isset($_SESSION['scriptcase']['export_return']))
-                  {
-                     foreach ($_SESSION['scriptcase']['export_return']['label'] as $col => $dados)
-                     {
-                         if (isset($dados['col_span_i'])) {
-                             $this->Emb_label_cols_detalle += $dados['col_span_i'];
-                         }
-                         elseif (isset($dados['col_span_f'])) {
-                             $this->Emb_label_cols_detalle += $dados['col_span_f'];
-                         }
-                         else {
-                             $this->Emb_label_cols_detalle++;
-                         }
-                     }
-                  }
-              }
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos_detalle']['embutida'] = false;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos_detalle']['embutida_label'] = false;
           }
           $SC_Label = (isset($this->New_label['enviar_tech'])) ? $this->New_label['enviar_tech'] : "Envío"; 
           if ($Cada_col == "enviar_tech" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
@@ -4452,20 +4334,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
               $this->Xls_col++;
           }
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['embutida'])
-      { 
-          if (!isset($this->NM_cmp_hidden[$detalle]) || $this->NM_cmp_hidden[$detalle] != "off")
-          {
-              while ($this->count_span < $this->Emb_label_cols_detalle)
-              {
-                  $this->arr_export['label'][$this->Xls_col]['data']     = " ";
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->count_span++;
-                  $this->Xls_col++;
-              }
-          }
-      }
       $this->Xls_col = 0;
       $this->Xls_row++;
    } 
@@ -5572,34 +5440,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "left";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-         $this->Xls_col++;
-   }
-   //----- detalle
-   function NM_sub_cons_detalle()
-   {
-         $this->Rows_sub_detalle = array();
-         $GLOBALS["script_case_init"] = $this->Ini->sc_page;
-         $GLOBALS["nmgp_parms"] = "nmgp_opcao?#?xls?@?par_numfacventa?#?" . str_replace("'", "@aspass@", $this->Orig_idfacven) . "?@?";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos_detalle']['embutida'] = true;
-         if (method_exists($this->grid_facturaven_pos_detalle, "controle"))
-         {
-             $this->grid_facturaven_pos_detalle->controle();
-             if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-             {
-                 $this->Ini->conectDB();
-                 $this->Db = $this->Ini->Db;
-                 if ($this->Tot) {
-                     $this->Tot->Db = $this->Db;
-                 }
-             }
-             if (isset($_SESSION['scriptcase']['export_return']))
-             {
-                 $this->row_sub = 1;
-             $this->Rows_sub_detalle = $_SESSION['scriptcase']['export_return'];
-             return;
-             }
-         }
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos_detalle']['embutida'] = false;
          $this->Xls_col++;
    }
    //----- enviar_tech

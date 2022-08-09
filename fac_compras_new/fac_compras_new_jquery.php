@@ -512,16 +512,28 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_id_comafec' + iSeqRow).bind('blur', function() { sc_fac_compras_new_id_comafec_onblur(this, iSeqRow) })
                                         .bind('change', function() { sc_fac_compras_new_id_comafec_onchange(this, iSeqRow) })
                                         .bind('focus', function() { sc_fac_compras_new_id_comafec_onfocus(this, iSeqRow) });
+  $('#id_sc_field_cufe' + iSeqRow).bind('change', function() { sc_fac_compras_new_cufe_onchange(this, iSeqRow) });
+  $('#id_sc_field_enlacepdf' + iSeqRow).bind('change', function() { sc_fac_compras_new_enlacepdf_onchange(this, iSeqRow) });
+  $('#id_sc_field_estado' + iSeqRow).bind('change', function() { sc_fac_compras_new_estado_onchange(this, iSeqRow) });
+  $('#id_sc_field_qr_base64' + iSeqRow).bind('change', function() { sc_fac_compras_new_qr_base64_onchange(this, iSeqRow) });
+  $('#id_sc_field_fecha_validacion' + iSeqRow).bind('change', function() { sc_fac_compras_new_fecha_validacion_onchange(this, iSeqRow) });
+  $('#id_sc_field_fecha_validacion_hora' + iSeqRow).bind('change', function() { sc_fac_compras_new_fecha_validacion_hora_onchange(this, iSeqRow) });
+  $('#id_sc_field_avisos' + iSeqRow).bind('change', function() { sc_fac_compras_new_avisos_onchange(this, iSeqRow) });
+  $('#id_sc_field_proveedor' + iSeqRow).bind('change', function() { sc_fac_compras_new_proveedor_onchange(this, iSeqRow) });
+  $('#id_sc_field_token' + iSeqRow).bind('change', function() { sc_fac_compras_new_token_onchange(this, iSeqRow) });
+  $('#id_sc_field_password' + iSeqRow).bind('change', function() { sc_fac_compras_new_password_onchange(this, iSeqRow) });
+  $('#id_sc_field_servidor' + iSeqRow).bind('change', function() { sc_fac_compras_new_servidor_onchange(this, iSeqRow) });
+  $('#id_sc_field_resolucion' + iSeqRow).bind('change', function() { sc_fac_compras_new_resolucion_onchange(this, iSeqRow) });
   $('#id_sc_field_detalle' + iSeqRow).bind('blur', function() { sc_fac_compras_new_detalle_onblur(this, iSeqRow) })
                                      .bind('change', function() { sc_fac_compras_new_detalle_onchange(this, iSeqRow) })
                                      .bind('focus', function() { sc_fac_compras_new_detalle_onfocus(this, iSeqRow) });
+  $('#id_sc_field_detallenc' + iSeqRow).bind('blur', function() { sc_fac_compras_new_detallenc_onblur(this, iSeqRow) })
+                                       .bind('change', function() { sc_fac_compras_new_detallenc_onchange(this, iSeqRow) })
+                                       .bind('focus', function() { sc_fac_compras_new_detallenc_onfocus(this, iSeqRow) });
   $('#id_sc_field_hdetalle' + iSeqRow).bind('change', function() { sc_fac_compras_new_hdetalle_onchange(this, iSeqRow) });
   $('#id_sc_field_prefijo_delpedido' + iSeqRow).bind('blur', function() { sc_fac_compras_new_prefijo_delpedido_onblur(this, iSeqRow) })
                                                .bind('change', function() { sc_fac_compras_new_prefijo_delpedido_onchange(this, iSeqRow) })
                                                .bind('focus', function() { sc_fac_compras_new_prefijo_delpedido_onfocus(this, iSeqRow) });
-  $('#id_sc_field_detallenc' + iSeqRow).bind('blur', function() { sc_fac_compras_new_detallenc_onblur(this, iSeqRow) })
-                                       .bind('change', function() { sc_fac_compras_new_detallenc_onchange(this, iSeqRow) })
-                                       .bind('focus', function() { sc_fac_compras_new_detallenc_onfocus(this, iSeqRow) });
 } // scJQEventsAdd
 
 function sc_fac_compras_new_idfaccom_onblur(oThis, iSeqRow) {
@@ -966,6 +978,54 @@ function sc_fac_compras_new_id_comafec_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_fac_compras_new_cufe_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_enlacepdf_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_estado_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_qr_base64_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_fecha_validacion_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_fecha_validacion_hora_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_avisos_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_proveedor_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_token_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_password_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_servidor_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_resolucion_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
 function sc_fac_compras_new_detalle_onblur(oThis, iSeqRow) {
   do_ajax_fac_compras_new_validate_detalle();
   scCssBlur(oThis);
@@ -976,6 +1036,20 @@ function sc_fac_compras_new_detalle_onchange(oThis, iSeqRow) {
 }
 
 function sc_fac_compras_new_detalle_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_fac_compras_new_detallenc_onblur(oThis, iSeqRow) {
+  do_ajax_fac_compras_new_validate_detallenc();
+  scCssBlur(oThis);
+}
+
+function sc_fac_compras_new_detallenc_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_fac_compras_new_detallenc_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
@@ -994,20 +1068,6 @@ function sc_fac_compras_new_prefijo_delpedido_onchange(oThis, iSeqRow) {
 }
 
 function sc_fac_compras_new_prefijo_delpedido_onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis);
-}
-
-function sc_fac_compras_new_detallenc_onblur(oThis, iSeqRow) {
-  do_ajax_fac_compras_new_validate_detallenc();
-  scCssBlur(oThis);
-}
-
-function sc_fac_compras_new_detallenc_onchange(oThis, iSeqRow) {
-  scMarkFormAsChanged();
-}
-
-function sc_fac_compras_new_detallenc_onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis);
 }
@@ -1697,6 +1757,61 @@ elseif ('' != $miniCalendarButton[0]) {
     weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_days_sem'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>",
     firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
     dateFormat: "<?php echo $this->jqueryCalendarDtFormat("" . str_replace(array('/', 'aaaa', 'hh', 'ii', 'ss', ':', ';', $_SESSION['scriptcase']['reg_conf']['date_sep'], $_SESSION['scriptcase']['reg_conf']['time_sep']), array('', 'yyyy', '','','', '', '', '', ''), $this->field_config['editado']['date_format']) . "", "" . $_SESSION['scriptcase']['reg_conf']['date_sep'] . ""); ?>",
+    showOtherMonths: true,
+    showOn: "button",
+<?php
+$miniCalendarIcon   = $this->jqueryIconFile('calendar');
+$miniCalendarFA     = $this->jqueryFAFile('calendar');
+$miniCalendarButton = $this->jqueryButtonText('calendar');
+if ('' != $miniCalendarIcon) {
+?>
+    buttonImage: "<?php echo $miniCalendarIcon; ?>",
+    buttonImageOnly: true,
+<?php
+}
+elseif ('' != $miniCalendarFA) {
+?>
+    buttonText: "<?php echo $miniCalendarFA; ?>",
+<?php
+}
+elseif ('' != $miniCalendarButton[0]) {
+?>
+    buttonText: "<?php echo $miniCalendarButton[0]; ?>",
+<?php
+}
+?>
+    currentText: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_per_today"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);       ?>",
+    closeText: "<?php  echo html_entity_decode($this->Ini->Nm_lang["lang_btns_mess_clse"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);       ?>",
+  });
+  $("#id_sc_field_fecha_validacion" + iSeqRow).datepicker({
+    beforeShow: function(input, inst) {
+      var $oField = $(this),
+          aParts  = $oField.val().split(" "),
+          sTime   = "";
+      sc_jq_calendar_value["#id_sc_field_fecha_validacion" + iSeqRow] = $oField.val();
+      if (2 == aParts.length) {
+        sTime = " " + aParts[1];
+      }
+      if ('' == sTime || ' ' == sTime) {
+        sTime = ' <?php echo $this->jqueryCalendarTimeStart($this->field_config['fecha_validacion']['date_format']); ?>';
+      }
+      $oField.datepicker("option", "dateFormat", "<?php echo $this->jqueryCalendarDtFormat("" . str_replace(array('/', 'aaaa', 'hh', 'ii', 'ss', ':', ';', $_SESSION['scriptcase']['reg_conf']['date_sep'], $_SESSION['scriptcase']['reg_conf']['time_sep']), array('', 'yyyy', '','','', '', '', '', ''), $this->field_config['fecha_validacion']['date_format']) . "", "" . $_SESSION['scriptcase']['reg_conf']['date_sep'] . ""); ?>" + sTime);
+    },
+    onClose: function(dateText, inst) {
+      do_ajax_fac_compras_new_validate_fecha_validacion(iSeqRow);
+    },
+    showWeek: true,
+    numberOfMonths: 1,
+    changeMonth: true,
+    changeYear: true,
+    yearRange: 'c-5:c+5',
+    dayNames: ["<?php        echo html_entity_decode($this->Ini->Nm_lang['lang_days_sund'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_mond'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_tued'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_wend'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_thud'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_frid'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_days_satd'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);        ?>"],
+    dayNamesMin: ["<?php     echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_sund'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_mond'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_tued'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_wend'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_thud'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_frid'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_substr_days_satd'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>"],
+    monthNames: ["<?php      echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_janu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_febr"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_marc"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_apri"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_mayy"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_june"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_july"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_augu"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_sept"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_octo"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_nove"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>","<?php echo html_entity_decode($this->Ini->Nm_lang["lang_mnth_dece"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]);      ?>"],
+    monthNamesShort: ["<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_janu'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_febr'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_marc'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_apri'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_mayy'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_june'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_july'], ENT_COMPAT, $_SESSION['scriptcase']['charset']);   ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_augu'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_sept'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_octo'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_nove'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>","<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_mnth_dece'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>"],
+    weekHeader: "<?php echo html_entity_decode($this->Ini->Nm_lang['lang_shrt_days_sem'], ENT_COMPAT, $_SESSION['scriptcase']['charset']); ?>",
+    firstDay: <?php echo $this->jqueryCalendarWeekInit("" . $_SESSION['scriptcase']['reg_conf']['date_week_ini'] . ""); ?>,
+    dateFormat: "<?php echo $this->jqueryCalendarDtFormat("" . str_replace(array('/', 'aaaa', 'hh', 'ii', 'ss', ':', ';', $_SESSION['scriptcase']['reg_conf']['date_sep'], $_SESSION['scriptcase']['reg_conf']['time_sep']), array('', 'yyyy', '','','', '', '', '', ''), $this->field_config['fecha_validacion']['date_format']) . "", "" . $_SESSION['scriptcase']['reg_conf']['date_sep'] . ""); ?>",
     showOtherMonths: true,
     showOn: "button",
 <?php

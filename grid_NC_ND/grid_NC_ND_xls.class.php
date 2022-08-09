@@ -172,7 +172,6 @@ class grid_NC_ND_xls
       $this->Use_phpspreadsheet = (phpversion() >=  "7.3.9" && is_dir($this->Ini->path_third . '/phpspreadsheet')) ? true : false;
       $this->Xls_tot_col = 0;
       $this->Xls_row     = 0;
-      $this->New_Xls_row = 1;
       $dir_raiz          = strrpos($_SERVER['PHP_SELF'],"/") ;  
       $dir_raiz          = substr($_SERVER['PHP_SELF'], 0, $dir_raiz + 1) ;  
       $this->nm_location = $this->Ini->sc_protocolo . $this->Ini->server . $dir_raiz; 
@@ -1008,7 +1007,6 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
       $this->arr_export = array('label' => array(), 'lines' => array());
       $this->arr_span   = array();
 
-      $this->NM_cmp_hidden['detalleventa'] = "off";
       if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['embutida_label']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['embutida_label'])
       { 
           $this->count_span = 0;
@@ -1079,7 +1077,6 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
       $prim_reg = true;
       $prim_gb  = true;
       $nm_houve_quebra = "N";
-      $this->New_Xls_row = $this->Xls_row;
       $PB_tot = (isset($this->count_ger) && $this->count_ger > 0) ? "/" . $this->count_ger : "";
       while (!$rs->EOF)
       {
@@ -1091,9 +1088,6 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
              $this->pb->addSteps(1);
          }
          $this->Xls_col = 0;
-         if ($this->New_Xls_row > $this->Xls_row) {
-             $this->Xls_row = $this->New_Xls_row;
-         }
          $this->Xls_row++;
          $this->num = $rs->fields[0] ;  
          $this->idcli = $rs->fields[1] ;  
@@ -1194,37 +1188,6 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
              $this->enlacepdf = $rs->fields[29] ;  
          } 
          $this->estado = $rs->fields[30] ;  
-         $this->Orig_num = $this->num;
-         $this->Orig_idcli = $this->idcli;
-         $this->Orig_fechaven = $this->fechaven;
-         $this->Orig_motivo = $this->motivo;
-         $this->Orig_total = $this->total;
-         $this->Orig_pagada = $this->pagada;
-         $this->Orig_asentada = $this->asentada;
-         $this->Orig_idfacven = $this->idfacven;
-         $this->Orig_numfacven = $this->numfacven;
-         $this->Orig_credito = $this->credito;
-         $this->Orig_fechavenc = $this->fechavenc;
-         $this->Orig_subtotal = $this->subtotal;
-         $this->Orig_valoriva = $this->valoriva;
-         $this->Orig_observaciones = $this->observaciones;
-         $this->Orig_saldo = $this->saldo;
-         $this->Orig_adicional = $this->adicional;
-         $this->Orig_adicional2 = $this->adicional2;
-         $this->Orig_adicional3 = $this->adicional3;
-         $this->Orig_vendedor = $this->vendedor;
-         $this->Orig_pedido = $this->pedido;
-         $this->Orig_resolucion = $this->resolucion;
-         $this->Orig_base_iva_19 = $this->base_iva_19;
-         $this->Orig_valor_iva_19 = $this->valor_iva_19;
-         $this->Orig_base_iva_5 = $this->base_iva_5;
-         $this->Orig_valor_iva_5 = $this->valor_iva_5;
-         $this->Orig_excento = $this->excento;
-         $this->Orig_tipo = $this->tipo;
-         $this->Orig_id_fact = $this->id_fact;
-         $this->Orig_cufe = $this->cufe;
-         $this->Orig_enlacepdf = $this->enlacepdf;
-         $this->Orig_estado = $this->estado;
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['SC_Ind_Groupby'] == "fecha")
          {
              $Format_tst = $this->Ini->Get_Gb_date_format('fecha', 'fechaven');
@@ -1786,9 +1749,6 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
           } 
       } 
       if ($this->groupby_show == "S") {
-          if ($this->New_Xls_row > $this->Xls_row) {
-              $this->Xls_row = $this->New_Xls_row;
-          }
           $this->Xls_col = 0;
           $this->Xls_row++;
        if (isset($this->fechaven_Old) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['SC_Ind_Groupby'] == "fecha")
@@ -2189,45 +2149,6 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
                   $this->Nm_ActiveSheet->getColumnDimension($current_cell_ref)->setAutoSize(true);
               }
               $this->Xls_col++;
-          }
-          $SC_Label = (isset($this->New_label['detalleventa'])) ? $this->New_label['detalleventa'] : "Nota"; 
-          if (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off")
-          {
-              $this->arr_span['detalleventa'] = $this->count_span;
-              $this->Emb_label_cols_detalleventa = 0;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida'] = true;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida_label'] = true;
-              $GLOBALS["script_case_init"] = $this->Ini->sc_page;
-              $GLOBALS["nmgp_parms"] = "nmgp_opcao?#?xls?@?";
-              if (method_exists($this->grid_detalleventa, "controle"))
-              {
-                  $this->grid_detalleventa->controle();
-                  if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-                  {
-                      $this->Ini->conectDB();
-                      $this->Db = $this->Ini->Db;
-                      if ($this->Tot) {
-                          $this->Tot->Db = $this->Db;
-                      }
-                  }
-                  if (isset($_SESSION['scriptcase']['export_return']))
-                  {
-                     foreach ($_SESSION['scriptcase']['export_return']['label'] as $col => $dados)
-                     {
-                         if (isset($dados['col_span_i'])) {
-                             $this->Emb_label_cols_detalleventa += $dados['col_span_i'];
-                         }
-                         elseif (isset($dados['col_span_f'])) {
-                             $this->Emb_label_cols_detalleventa += $dados['col_span_f'];
-                         }
-                         else {
-                             $this->Emb_label_cols_detalleventa++;
-                         }
-                     }
-                  }
-              }
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida'] = false;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida_label'] = false;
           }
           $SC_Label = (isset($this->New_label['pdf2'])) ? $this->New_label['pdf2'] : "PDF"; 
           if ($Cada_col == "pdf2" && (!isset($this->NM_cmp_hidden[$Cada_col]) || $this->NM_cmp_hidden[$Cada_col] != "off"))
@@ -2902,20 +2823,6 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
               $this->Xls_col++;
           }
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['embutida'])
-      { 
-          if (!isset($this->NM_cmp_hidden[$detalleventa]) || $this->NM_cmp_hidden[$detalleventa] != "off")
-          {
-              while ($this->count_span < $this->Emb_label_cols_detalleventa)
-              {
-                  $this->arr_export['label'][$this->Xls_col]['data']     = " ";
-                  $this->arr_export['label'][$this->Xls_col]['align']    = "left";
-                  $this->arr_export['label'][$this->Xls_col]['autosize'] = "s";
-                  $this->count_span++;
-                  $this->Xls_col++;
-              }
-          }
-      }
       $this->Xls_col = 0;
       $this->Xls_row++;
    } 
@@ -3630,34 +3537,6 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['align']  = "";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['type']   = "char";
          $this->arr_export['lines'][$this->Xls_row][$this->Xls_col]['format'] = "";
-         $this->Xls_col++;
-   }
-   //----- detalleventa
-   function NM_sub_cons_detalleventa()
-   {
-         $this->Rows_sub_detalleventa = array();
-         $GLOBALS["script_case_init"] = $this->Ini->sc_page;
-         $GLOBALS["nmgp_parms"] = "nmgp_opcao?#?xls?@?par_numfacventa?#?" . str_replace("'", "@aspass@", $this->Orig_idfacven) . "?@?";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida'] = true;
-         if (method_exists($this->grid_detalleventa, "controle"))
-         {
-             $this->grid_detalleventa->controle();
-             if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-             {
-                 $this->Ini->conectDB();
-                 $this->Db = $this->Ini->Db;
-                 if ($this->Tot) {
-                     $this->Tot->Db = $this->Db;
-                 }
-             }
-             if (isset($_SESSION['scriptcase']['export_return']))
-             {
-                 $this->row_sub = 1;
-             $this->Rows_sub_detalleventa = $_SESSION['scriptcase']['export_return'];
-             return;
-             }
-         }
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida'] = false;
          $this->Xls_col++;
    }
    //----- pdf2

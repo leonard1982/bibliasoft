@@ -517,32 +517,6 @@ else
 }
 
 $this->sc_temp_gcontador_grid_fe=1;
-;
-
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-
-;
-;
-;
-;
-;
-
-;
-;
 
 
      $nm_select = "delete from facturaven where espos='SI' and (total='0' or total is null) and vendedor='".$this->sc_temp_gidtercero."' and (select d.iddet from detalleventa d where d.numfac=idfacven limit 1) is null and observaciones='TEMPORAL' and (select c.noborrar_tmp_enpos from configuraciones c order by c.idconfiguraciones desc limit 1)='NO'"; 
@@ -1933,50 +1907,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
          $this->fecha_pago = $rs->fields[41] ;  
          $this->fec_pago = $rs->fields[42] ;  
          $this->numfe = $rs->fields[43] ;  
-         $this->Orig_fechaven = $this->fechaven;
-         $this->Orig_tipo = $this->tipo;
-         $this->Orig_credito = $this->credito;
-         $this->Orig_numero2 = $this->numero2;
-         $this->Orig_idcli = $this->idcli;
-         $this->Orig_direccion2 = $this->direccion2;
-         $this->Orig_total = $this->total;
-         $this->Orig_pedido = $this->pedido;
-         $this->Orig_idfacven = $this->idfacven;
-         $this->Orig_numfacven = $this->numfacven;
-         $this->Orig_fechavenc = $this->fechavenc;
-         $this->Orig_subtotal = $this->subtotal;
-         $this->Orig_valoriva = $this->valoriva;
-         $this->Orig_pagada = $this->pagada;
-         $this->Orig_asentada = $this->asentada;
-         $this->Orig_observaciones = $this->observaciones;
-         $this->Orig_saldo = $this->saldo;
-         $this->Orig_adicional = $this->adicional;
-         $this->Orig_adicional2 = $this->adicional2;
-         $this->Orig_adicional3 = $this->adicional3;
-         $this->Orig_resolucion = $this->resolucion;
-         $this->Orig_vendedor = $this->vendedor;
-         $this->Orig_creado = $this->creado;
-         $this->Orig_editado = $this->editado;
-         $this->Orig_usuario_crea = $this->usuario_crea;
-         $this->Orig_inicio = $this->inicio;
-         $this->Orig_fin = $this->fin;
-         $this->Orig_banco = $this->banco;
-         $this->Orig_dias_decredito = $this->dias_decredito;
-         $this->Orig_cod_cuenta = $this->cod_cuenta;
-         $this->Orig_qr_base64 = $this->qr_base64;
-         $this->Orig_fecha_validacion = $this->fecha_validacion;
-         $this->Orig_cufe = $this->cufe;
-         $this->Orig_estado = $this->estado;
-         $this->Orig_enlacepdf = $this->enlacepdf;
-         $this->Orig_id_trans_fe = $this->id_trans_fe;
-         $this->Orig_nomcli = $this->nomcli;
-         $this->Orig_si_electronica = $this->si_electronica;
-         $this->Orig_nombre_cliente = $this->nombre_cliente;
-         $this->Orig_celular_ws = $this->celular_ws;
-         $this->Orig_dircliente = $this->dircliente;
-         $this->Orig_fecha_pago = $this->fecha_pago;
-         $this->Orig_fec_pago = $this->fec_pago;
-         $this->Orig_numfe = $this->numfe;
          //----- lookup - credito
          $this->look_credito = $this->credito; 
          $this->Lookup->lookup_credito($this->look_credito); 
@@ -2304,7 +2234,7 @@ switch($this->sc_temp_gproveedor)
 		}
 		else
 		{
-			$vmandar_whatsapp = "<a class='dropdown-item' href='#' onclick='alert(\"El documento no ha sido enviado.\");'>Enviar a WhatsApp</a>";
+			$vmandar_whatsapp = "";
 		}
 	break;
 
@@ -2313,8 +2243,8 @@ switch($this->sc_temp_gproveedor)
 	break;
 }
 
-$this->opciones  = "<div class='dropdown'>
-  <button class='btn btn-success' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+$this->opciones  = "<div class='btn-group dropleft'>
+  <button class='btn btn-primary' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
     <i class='fas fa-ellipsis-v'></i>
   </button>
   <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>

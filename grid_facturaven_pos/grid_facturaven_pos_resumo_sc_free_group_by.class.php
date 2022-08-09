@@ -662,32 +662,6 @@ else
 }
 
 $this->sc_temp_gcontador_grid_fe=1;
-;
-
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-
-;
-;
-;
-;
-;
-
-;
-;
 
 
      $nm_select = "delete from facturaven where espos='SI' and (total='0' or total is null) and vendedor='".$this->sc_temp_gidtercero."' and (select d.iddet from detalleventa d where d.numfac=idfacven limit 1) is null and observaciones='TEMPORAL' and (select c.noborrar_tmp_enpos from configuraciones c order by c.idconfiguraciones desc limit 1)='NO'"; 
@@ -1718,10 +1692,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['pdf']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['pdf'] = "PDF"; 
-       }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['detalle']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['detalle'] = ""; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['labels']['enviar_tech']))
        {
@@ -8294,32 +8264,6 @@ else
 }
 
 $this->sc_temp_gcontador_grid_fe=1;
-;
-
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-;
-
-;
-;
-;
-;
-;
-
-;
-;
 
 
      $nm_select = "delete from facturaven where espos='SI' and (total='0' or total is null) and vendedor='".$this->sc_temp_gidtercero."' and (select d.iddet from detalleventa d where d.numfac=idfacven limit 1) is null and observaciones='TEMPORAL' and (select c.noborrar_tmp_enpos from configuraciones c order by c.idconfiguraciones desc limit 1)='NO'"; 

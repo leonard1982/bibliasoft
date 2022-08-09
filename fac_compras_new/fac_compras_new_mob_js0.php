@@ -98,6 +98,36 @@ function sc_btn_sc_btn_0_ok()
 {
   nm_gp_submit('<?php echo $this->Ini->link_blank_compras; ?>', '<?php echo $this->nm_location; ?>', '<?php echo "gpidcompra*scin' + var_btn_sc_btn_0_gpidcompra + '*scout"; ?>', '', '_blank', '0', '0', 'blank_compras');
 }
+function sc_btn_regresar()
+{
+    if (scEventControl_active("")) {
+      setTimeout(function() { sc_btn_regresar(); }, 500);
+      return;
+    }
+    sc_btn_regresar_ok();
+}
+function sc_btn_regresar_cancel()
+{
+}
+function sc_btn_regresar_ok()
+{
+  nm_gp_submit('<?php echo $this->Ini->link_grid_compras_new_cons; ?>', '<?php echo $this->nm_location; ?>', '<?php echo "NMSC_inicial*scininicio*scout"; ?>', 'inicio', '_self', '0', '0', 'grid_compras_new');
+}
+function sc_btn_cancela()
+{
+    if (scEventControl_active("")) {
+      setTimeout(function() { sc_btn_cancela(); }, 500);
+      return;
+    }
+    sc_btn_cancela_ok();
+}
+function sc_btn_cancela_cancel()
+{
+}
+function sc_btn_cancela_ok()
+{
+  nm_gp_submit('<?php echo $this->Ini->link_grid_compras_new_cons; ?>', '<?php echo $this->nm_location; ?>', '<?php echo "NMSC_inicial*scininicio*scout"; ?>', 'inicio', '_self', '0', '0', 'grid_compras_new');
+}
  NM_tp_critica(1);
 Tab_lig_apls    = new Array();
 Tab_lig_init    = new Array();

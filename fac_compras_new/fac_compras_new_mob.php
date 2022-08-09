@@ -185,6 +185,7 @@ class fac_compras_new_mob_ini
    var $link_detallecompra_new_mob_edit;
    var $link_grid_detallecompra_new_nc_cons;
    var $link_blank_compras;
+   var $link_grid_compras_new_cons;
    var $nm_cont_lin;
    var $nm_limite_lin;
    var $nm_limite_lin_prt;
@@ -300,8 +301,8 @@ class fac_compras_new_mob_ini
       $this->nm_dt_criacao   = "20180212"; 
       $this->nm_hr_criacao   = "100855"; 
       $this->nm_autor_alt    = "edgar"; 
-      $this->nm_dt_ult_alt   = "20220803"; 
-      $this->nm_hr_ult_alt   = "091144"; 
+      $this->nm_dt_ult_alt   = "20220809"; 
+      $this->nm_hr_ult_alt   = "100853"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -534,8 +535,7 @@ class fac_compras_new_mob_ini
           }
       }
       if (isset($_SESSION['scriptcase']['fac_compras_new_mob']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+          $SS_cod_html  = '';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -776,6 +776,40 @@ class fac_compras_new_mob_ini
               $this->sc_lig_md5["grid_detallecompra_new_nc"] = 'S';
           }
       }
+      $Tmp_apl_lig = "grid_compras_new";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["grid_compras_new"] = 'S';
+          }
+      }
+      $Tmp_apl_lig = "grid_compras_new";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["grid_compras_new"] = 'S';
+          }
+      }
       $PHP_ver = str_replace(".", "", phpversion()); 
       if (substr($PHP_ver, 0, 3) < 434)
       {
@@ -960,6 +994,7 @@ class fac_compras_new_mob_ini
       $this->sc_lig_target["C_@scinf_detalleNC"] = 'nmsc_iframe_liga_grid_detallecompra_new_nc';
       $this->sc_lig_iframe["nmsc_iframe_liga_grid_detallecompra_new_nc"] = 'nmsc_iframe_liga_grid_detallecompra_new_nc';
       $this->link_blank_compras = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('blank_compras') . "/";
+      $this->link_grid_compras_new_cons = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_compras_new') . "/";
       if ($_SESSION['sc_session'][$this->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard'])
       {
           $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['fac_compras_new_mob']['dashboard_info']['dashboard_app'];
@@ -1027,7 +1062,7 @@ class fac_compras_new_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGH9FUHANOV5XGHuvmVIBOHEFYHIJeHQXGZ1F7HAvmZMB/HgBeZSJqDWXCHIrqDcJeDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsD9NwDQJsZ1rwV5BOHuBOVIBsDuX7VErqHQBiZSFaHIveD5XGDEBOZSXeDuXKZuJeHQJKZSBiHAN7VWJeDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBODcJeDQX7D1BeV5raHgvsDkBOV5X7DoXGD9XOZ1rqHAN7D5NUDErKZSJqV5FaVoBiDcBwDQFGHIrwV5raHuNOVcBOV5X7VoBOHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuzGVIBsDuFGVoX7D9JmZSB/Z1vmZMBOHgveVkJGDWr/HMX7DcBwZSX7D1veD5XGHgvOVcB/Dur/HMBiD9BsVIraD1rwV5X7HgBeHErCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDurGVorqHQNmH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDQFaZ1N7HuBqDMzGVIB/DWJeHMBqD9BsZ1F7DSrYHQX7DErKHArCHEXCHIJeD9NmH9FGHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSX7Z1BYV5FaDMvsVcXKH5FqHIrqD9XGZ1F7DSrYHuXGDEBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgNOHArCDWX7HMJwDcBwDQFUDSN7HuF7HuNOVcFeH5XKVoF7D9JmZ1F7HArYZMJwHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DorqDcBqZ1B/D1rwD5BiDMBYZSXeV5FaVoFGD9NwDQJwHANOV5FUHuzGDkB/V5X7DoJsDcJUZ1FaHIBeD5BiDEBOHEXeV5FaDorqHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgNOHEJGDWFqVoXGD9FYH9FUD1veD5NUHgvOVcFeDuX7HMBODcFYZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQBqZ1BiHAvsZMJeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQFaHuNOVIFCDWFYHMrqD9XOZSFaHAzGZMXGDMvCZSJ3DWX7HMJeHQNwDQX7HABYHQBqDMzGVcFKHEF/HMBqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1976,8 +2011,9 @@ ob_start();
             $id_pedidocom = NM_utf8_urldecode($_POST['rsargs'][4]);
             $saldo = NM_utf8_urldecode($_POST['rsargs'][5]);
             $pagada = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $idfaccom = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $numfacom = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $idfaccom = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][9]);
         }
         if ('ajax_fac_compras_new_mob_autocomp_idprov' == $_POST['rs'])
         {
@@ -3474,7 +3510,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_idprov_onchange
 
-    function ajax_fac_compras_new_mob_event_tipo_com_onchange($total, $tipo_com, $id_comafec, $es_remision, $id_pedidocom, $saldo, $pagada, $idfaccom, $script_case_init)
+    function ajax_fac_compras_new_mob_event_tipo_com_onchange($total, $tipo_com, $id_comafec, $es_remision, $id_pedidocom, $saldo, $pagada, $numfacom, $idfaccom, $script_case_init)
     {
         global $inicial_fac_compras_new_mob;
         //register_shutdown_function("fac_compras_new_mob_pack_ajax_response");
@@ -3488,6 +3524,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'id_pedidocom' => NM_utf8_urldecode($id_pedidocom),
                   'saldo' => NM_utf8_urldecode($saldo),
                   'pagada' => NM_utf8_urldecode($pagada),
+                  'numfacom' => NM_utf8_urldecode($numfacom),
                   'idfaccom' => NM_utf8_urldecode($idfaccom),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,

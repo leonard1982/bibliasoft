@@ -225,13 +225,13 @@ class grid_detalleventa_ini
       $this->nm_dt_criacao   = "20171229"; 
       $this->nm_hr_criacao   = "144024"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220622"; 
-      $this->nm_hr_ult_alt   = "203739"; 
+      $this->nm_dt_ult_alt   = "20220706"; 
+      $this->nm_hr_ult_alt   = "114018"; 
       $this->Apl_paginacao   = "FULL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0";
+      $this->nm_app_version  = "1.0.0";
       $this->nm_tp_variance  = "P";
 // 
 // 
@@ -762,7 +762,7 @@ class grid_detalleventa_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -850,7 +850,7 @@ class grid_detalleventa_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_detalleventa']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_detalleventa']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9FYDQB/HABYHuFUHuBYVcFCDur/VoF7DcJUH9B/DSvmZMXGHgBYHEXeHEFqZuBqDcXGH9X7HIrwHuXGDMNOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuBqD9NwZSBiDSBYD5JwDMvODkB/Dur/DoXGD9JmZkBiHANOHuBOHgNKZSJ3HEFaVoJwDcBwZSFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BODErKVkXeHEFqVoFaDcXOZSX7D1veD5JwHuBYVcFKDWFaDoJeD9BsZ1F7HArYZMBqDMzGHEXeV5XCZuFaDcJeDuBOZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuvmVcB/HEF/DoNUHQNmZkFGHAvmV5X7DMveHErsDWFqHIXGDcBwDQFUD1veD5NUDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYZSJqDWB3VErqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBiD9NmZSX7HABYHuBOHuzGV9BUDWXCVEX7HQNwH9BqHArYD5JwDENOHEJqDWF/VoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsDuFaHIrKV5JwHuBYVcXKDWFYDoFGHQJmZ1FaHAvsZMJeHgBOHErCDWX7VoBqHQBiZSX7D1BeHurqHuvmVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMX7D9NwDQX7HANOD5BODMBODkBsDur/VEX7HQFYZ1B/HIrwD5BqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKDkFCDWJeDoFGDcJUZ1X7Z1BeV5B/DMzGHEJGH5F/DoraD9XsDQJsHIBeD5JwHuBYVIBODWFYDoJsD9BiZ1F7HAzGV5FUDErKHEFiDuJeDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBiD9BsVIraD1rwV5X7HgBeHENiHEXCHMJwD9NwDQJsHIBOD5F7DMBYVcXKDuX7DoraHQNmH9B/HANOV5FGDEBOHArCV5FaHIB/HQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWrGDoBOHQJeDQBqHANKVWJwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BqHgBOZSJqHEFqVoFaDcXOZSX7HAN7V5BqHgrwDkB/DWJeVoBqHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1702,7 +1702,6 @@ class grid_detalleventa_apl
    var $xml;
    var $json;
    var $csv;
-   var $rtf;
 //
 //----- 
    function prep_modulos($modulo)
@@ -1718,7 +1717,7 @@ class grid_detalleventa_apl
    function controle($linhas = 0)
    {
       global $nm_saida, $nm_url_saida, $script_case_init, $nmgp_parms_pdf, $nmgp_graf_pdf, $nm_apl_dependente, $nmgp_navegator_print, $nmgp_tipo_print, $nmgp_cor_print, $nmgp_cor_word, $Det_use_pass_pdf, $Det_pdf_zip, $NMSC_conf_apl, $NM_contr_var_session, $NM_run_iframe, $SC_module_export, $nmgp_password,
-             $glo_senha_protect, $nmgp_opcao, $nm_call_php, $rec, $nmgp_fast_search, $nmgp_cond_fast_search, $nmgp_arg_fast_search, $nmgp_ordem;
+             $glo_senha_protect, $nmgp_opcao, $nm_call_php, $rec, $nmgp_ordem;
 
       $Parms_form_pdf = false;
       if (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_detalleventa']))
@@ -1937,16 +1936,6 @@ class grid_detalleventa_apl
                   unset($_SESSION['sc_session'][$script_case_init]['grid_detalleventa']['pivot_order_level']);
                   unset($_SESSION['sc_session'][$script_case_init]['grid_detalleventa']['pivot_order_sort']);
                   unset($_SESSION['sc_session'][$script_case_init]['grid_detalleventa']['pivot_tabular']);
-              }
-              if ($nmgp_opcao == "fast_search")
-              {
-                  $_POST['parm'] = str_replace("__NM_PLUS__", "+", $_POST['parm']);
-                  $_POST['parm'] = str_replace("__NM_AMP__", "&", $_POST['parm']);
-                  $_POST['parm'] = str_replace("__NM_PRC__", "%", $_POST['parm']);
-                  $temp = explode("_SCQS_", $_POST['parm']);
-                  $nmgp_fast_search      = (isset($temp[0])) ? $temp[0] : "";
-                  $nmgp_cond_fast_search = (isset($temp[1])) ? $temp[1] : "";
-                  $nmgp_arg_fast_search  = (isset($temp[2])) ? $temp[2] : "";
               }
               if ($nmgp_opcao == "ordem")
               {
@@ -2203,32 +2192,6 @@ class grid_detalleventa_apl
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
       include($this->Ini->path_btn . $this->Ini->Str_btn_grid);
-      $this->arr_buttons['group_group_1']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
-          'has_fa'           => true,
-          'content_icons'    => false,
-          'style'            => "default",
-      );
-
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'fontawesomeicon'  => "",
-          'has_fa'           => true,
-          'content_icons'    => false,
-          'style'            => "default",
-      );
-
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida'])
       { 
       $this->Ini->Color_bg_ajax            = (!isset($str_ajax_bg)       || "" == trim($str_ajax_bg))         ? "#000" : $str_ajax_bg;
@@ -2285,7 +2248,6 @@ class grid_detalleventa_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['field_order'][] = "descuento";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['field_order'][] = "iddet";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['field_order'][] = "numfac";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['field_order'];
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['usr_cmp_sel']))
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['usr_cmp_sel'] = array();
@@ -2553,23 +2515,6 @@ class grid_detalleventa_apl
       { 
           $this->Ini->path_img_modelo = $this->Ini->path_img_modelo;
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['opcao'] == "fast_search")  
-      { 
-          $this->SC_fast_search($GLOBALS["nmgp_fast_search"], $GLOBALS["nmgp_cond_fast_search"], $GLOBALS["nmgp_arg_fast_search"]);
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_ant'] == $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq'])
-          { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['opcao'] = 'igual';
-          } 
-          else 
-          { 
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq'];
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['contr_array_resumo'] = "NAO";
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['contr_total_geral']  = "NAO";
-              unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['tot_geral']);
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['opcao'] = 'pesq';
-              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['orig_pesq'] = 'grid';
-          } 
-      } 
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['opcao'] == 'pesq' && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['orig_pesq']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['orig_pesq']))  
       { 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['orig_pesq'] == "res")  
@@ -2597,7 +2542,6 @@ class grid_detalleventa_apl
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['campos_busca']      = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['grid_pesq']         = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['Grid_search']       = "";
-         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_fast']   = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['tot_geral']);
@@ -2714,21 +2658,6 @@ class grid_detalleventa_apl
           $this->csv->monta_csv();
       }
       else   
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['opcao'] == "rtf")  
-      { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida'])
-          { 
-              require_once($this->Ini->path_embutida . "grid_detalleventa/grid_detalleventa_rtf.class.php"); 
-          } 
-          else 
-          { 
-              require_once($this->Ini->path_aplicacao . "grid_detalleventa_rtf.class.php"); 
-          } 
-          $this->rtf  = new grid_detalleventa_rtf();
-          $this->prep_modulos("rtf");
-          $this->rtf->monta_rtf();
-      }
-      else
       if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['opcao'], 0, 7) == "grafico")  
       { 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['embutida'])
@@ -3287,425 +3216,6 @@ if (window.parent && typeof window.parent.updateGeneratedPdfFile === "function")
           $this->Db->Close(); 
       }
   }
-   function SC_fast_search($in_fields, $arg_search, $data_search)
-   {
-      $fields = (strpos($in_fields, "SC_all_Cmp") !== false) ? array("SC_all_Cmp") : explode("_VLS_", $in_fields);
-      $this->NM_case_insensitive = false;
-      if (empty($data_search)) 
-      {
-          $tmp_cmd = "";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_fast'] = "";
-          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_orig'])) 
-          {
-              $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_orig']; 
-          }
-          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_filtro'])) 
-          {
-              if (!empty($tmp_cmd)) 
-              {
-                  $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_filtro'] . ")"; 
-              }
-              else
-              {
-                  $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_filtro'] . ")"; 
-              }
-          }
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq'] = $tmp_cmd;
-          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['fast_search']);
-          return;
-      }
-      $comando = "";
-      if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($data_search))
-      {
-          $data_search = NM_conv_charset($data_search, $_SESSION['scriptcase']['charset'], "UTF-8");
-      }
-      $sv_data = $data_search;
-      foreach ($fields as $field) {
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "iddet", $arg_search, str_replace(",", ".", $data_search));
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "numfac", $arg_search, str_replace(",", ".", $data_search));
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $data_lookup = $this->SC_lookup_idpro($arg_search, $data_search);
-              if (is_array($data_lookup) && !empty($data_lookup)) 
-              {
-                  $this->SC_monta_condicao($comando, "idpro", $arg_search, $data_lookup);
-              }
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $data_lookup = $this->SC_lookup_idbod($arg_search, $data_search);
-              if (is_array($data_lookup) && !empty($data_lookup)) 
-              {
-                  $this->SC_monta_condicao($comando, "idbod", $arg_search, $data_lookup);
-              }
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "cantidad", $arg_search, str_replace(",", ".", $data_search));
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "valorunit", $arg_search, str_replace(",", ".", $data_search));
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "valorpar", $arg_search, str_replace(",", ".", $data_search));
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "iva", $arg_search, str_replace(",", ".", $data_search));
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "descuento", $arg_search, str_replace(",", ".", $data_search));
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "adicional", $arg_search, str_replace(",", ".", $data_search));
-          }
-          if ($field == "SC_all_Cmp") 
-          {
-              $this->SC_monta_condicao($comando, "adicional1", $arg_search, str_replace(",", ".", $data_search));
-          }
-      }
-      if (empty($comando)) 
-      {
-          $comando = " 1 <> 1 "; 
-      }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_fast'] = $comando;
-      $tmp_cmd = "";
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_orig'])) 
-      {
-          $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_orig']; 
-      }
-      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_filtro'])) 
-      {
-          if (!empty($tmp_cmd)) 
-          {
-              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_filtro'] . ")"; 
-          }
-          else
-          {
-              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq_filtro'] . ")"; 
-          }
-      }
-      if (!empty($tmp_cmd)) 
-      {
-          $comando = $tmp_cmd . " and (" . $comando . ")"; 
-      }
-      else
-      {
-          $comando = " where (" . $comando . ")"; 
-      }
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['where_pesq'] = $comando;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['fast_search'][0] = $in_fields;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['fast_search'][1] = $arg_search;
-      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['fast_search'][2] = $sv_data;
-   }
-   function SC_monta_condicao(&$comando, $nome, $condicao, $campo, $tp_campo="")
-   {
-      $nm_aspas   = "'";
-      $nm_aspas1  = "'";
-      $nm_numeric = array();
-      $Nm_datas   = array();
-      $nm_esp_postgres = array();
-      $campo_join = strtolower(str_replace(".", "_", $nome));
-      $nm_ini_lower = "";
-      $nm_fim_lower = "";
-      $nm_numeric[] = "iddet";$nm_numeric[] = "numfac";$nm_numeric[] = "idpro";$nm_numeric[] = "factor";$nm_numeric[] = "idbod";$nm_numeric[] = "cantidad";$nm_numeric[] = "valorunit";$nm_numeric[] = "valorpar";$nm_numeric[] = "iva";$nm_numeric[] = "descuento";$nm_numeric[] = "adicional";$nm_numeric[] = "adicional1";$nm_numeric[] = "colores";$nm_numeric[] = "tallas";$nm_numeric[] = "sabor";
-      if (in_array($campo_join, $nm_numeric))
-      {
-         if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa']['decimal_db'] == ".")
-         {
-             $nm_aspas  = "";
-             $nm_aspas1 = "";
-         }
-         if (is_array($campo))
-         {
-             foreach ($campo as $Ind => $Cmp)
-             {
-                if (!is_numeric($Cmp))
-                {
-                    return;
-                }
-                if ($Cmp == "")
-                {
-                    $campo[$Ind] = 0;
-                }
-             }
-         }
-         else
-         {
-             if (!is_numeric($campo))
-             {
-                 return;
-             }
-             if ($campo == "")
-             {
-                $campo = 0;
-             }
-         }
-      }
-      if (in_array($campo_join, $nm_numeric) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && (strtoupper($condicao) == "II" || strtoupper($condicao) == "QP" || strtoupper($condicao) == "NP"))
-      {
-          $nome      = "CAST ($nome AS TEXT)";
-          $nm_aspas  = "'";
-          $nm_aspas1 = "'";
-      }
-      if (in_array($campo_join, $nm_esp_postgres) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres))
-      {
-          $nome      = "CAST ($nome AS TEXT)";
-          $nm_aspas  = "'";
-          $nm_aspas1 = "'";
-      }
-      if (in_array($campo_join, $nm_numeric) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase) && (strtoupper($condicao) == "II" || strtoupper($condicao) == "QP" || strtoupper($condicao) == "NP"))
-      {
-          $nome      = "CAST ($nome AS VARCHAR)";
-          $nm_aspas  = "'";
-          $nm_aspas1 = "'";
-      }
-      if (in_array($campo_join, $nm_numeric) && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_progress) && (strtoupper($condicao) == "II" || strtoupper($condicao) == "QP" || strtoupper($condicao) == "NP"))
-      {
-          $nome      = "CAST ($nome AS VARCHAR(255))";
-          $nm_aspas  = "'";
-          $nm_aspas1 = "'";
-      }
-         $comando .= (!empty($comando) ? " or " : "");
-         if (is_array($campo))
-         {
-             $prep = "";
-             foreach ($campo as $Ind => $Cmp)
-             {
-                 $prep .= (!empty($prep)) ? "," : "";
-                 $Cmp   = substr($this->Db->qstr($Cmp), 1, -1);
-                 $prep .= $nm_ini_lower . $nm_aspas . $Cmp . $nm_aspas1 . $nm_fim_lower;
-             }
-             $prep .= (empty($prep)) ? $nm_aspas . $nm_aspas1 : "";
-             $comando .= $nm_ini_lower . $nome . $nm_fim_lower . " in (" . $prep . ")";
-             return;
-         }
-         $campo  = substr($this->Db->qstr($campo), 1, -1);
-         $cond_tst = strtoupper($condicao);
-         if ($cond_tst == "II" || $cond_tst == "QP" || $cond_tst == "NP")
-         {
-             if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && $this->NM_case_insensitive)
-             {
-                 $op_like      = " ilike ";
-                 $nm_ini_lower = "";
-                 $nm_fim_lower = "";
-             }
-             else
-             {
-                 $op_like = " like ";
-             }
-         }
-         switch ($cond_tst)
-         {
-            case "EQ":     // 
-               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " = " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
-            break;
-            case "II":     // 
-               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . $op_like . $nm_ini_lower . "'" . $campo . "%'" . $nm_fim_lower;
-            break;
-            case "QP":     // 
-               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . $op_like . $nm_ini_lower . "'%" . $campo . "%'" . $nm_fim_lower;
-            break;
-            case "NP":     // 
-               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower ." not" . $op_like . $nm_ini_lower . "'%" . $campo . "%'" . $nm_fim_lower;
-            break;
-            case "DF":     // 
-               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " <> " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
-            break;
-            case "GT":     // 
-               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " > " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
-            break;
-            case "GE":     // 
-               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " >= " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
-            break;
-            case "LT":     // 
-               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " < " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
-            break;
-            case "LE":     // 
-               $comando        .= $nm_ini_lower . $nome . $nm_fim_lower . " <= " . $nm_ini_lower . $nm_aspas . $campo . $nm_aspas1 . $nm_fim_lower;
-            break;
-         }
-   }
-   function SC_lookup_idpro($condicao, $campo)
-   {
-       $result     = array();
-       $campo_orig = $campo;
-       $campo      = substr($this->Db->qstr($campo), 1, -1);
-       $nm_comando = "SELECT codigobar, idprod FROM productos WHERE (codigobar LIKE '%$campo%')" ; 
-       if ($condicao == "ii")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
-       }
-       if ($condicao == "df" || $condicao == "np")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
-       }
-       if ($condicao == "gt")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
-       }
-       if ($condicao == "ge")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
-       }
-       if ($condicao == "lt")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
-       }
-       if ($condicao == "le")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
-       }
-       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-       if ($rx = $this->Db->Execute($nm_comando)) 
-       { 
-           $campo = $campo_orig;
-           while (!$rx->EOF) 
-           { 
-               $chave = (isset($rx->fields[1])) ? $rx->fields[1] : $rx->fields[0];
-               $label = $rx->fields[0];
-               if ($condicao == "eq" && $campo == $label)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "qp" && strstr($label, $campo))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "np" && !strstr($label, $campo))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "df" && $campo != $label)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "gt" && $label > $campo )
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "ge" && $label >= $campo)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "lt" && $label < $campo)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "le" && $label <= $campo)
-               {
-                   $result[] = $chave;
-               }
-               $rx->MoveNext() ;
-           }  
-           return $result;
-       }  
-       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
-       { 
-           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-           exit; 
-       } 
-   }
-   function SC_lookup_idbod($condicao, $campo)
-   {
-       $result     = array();
-       $campo_orig = $campo;
-       $campo      = substr($this->Db->qstr($campo), 1, -1);
-       $nm_comando = "SELECT bodega, idbodega FROM bodegas WHERE (bodega LIKE '%$campo%')" ; 
-       if ($condicao == "ii")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
-       }
-       if ($condicao == "df" || $condicao == "np")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
-       }
-       if ($condicao == "gt")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
-       }
-       if ($condicao == "ge")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
-       }
-       if ($condicao == "lt")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
-       }
-       if ($condicao == "le")
-       {
-           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
-       }
-       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
-       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-       if ($rx = $this->Db->Execute($nm_comando)) 
-       { 
-           $campo = $campo_orig;
-           while (!$rx->EOF) 
-           { 
-               $chave = (isset($rx->fields[1])) ? $rx->fields[1] : $rx->fields[0];
-               $label = $rx->fields[0];
-               if ($condicao == "eq" && $campo == $label)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "qp" && strstr($label, $campo))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "np" && !strstr($label, $campo))
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "df" && $campo != $label)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "gt" && $label > $campo )
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "ge" && $label >= $campo)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "lt" && $label < $campo)
-               {
-                   $result[] = $chave;
-               }
-               if ($condicao == "le" && $label <= $campo)
-               {
-                   $result[] = $chave;
-               }
-               $rx->MoveNext() ;
-           }  
-           return $result;
-       }  
-       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
-       { 
-           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
-           exit; 
-       } 
-   }
   function html_doc_word($nm_arquivo_doc_word, $nmgp_password)
   {
       global $nm_url_saida;
@@ -3856,7 +3366,7 @@ $path_doc_md5 = md5($this->Ini->path_imag_temp . $nm_arquivo_doc_word);
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa'][$path_doc_md5][0] = $this->Ini->path_imag_temp . $nm_arquivo_doc_word;
 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_detalleventa'][$path_doc_md5][1] = substr($nm_arquivo_doc_word, 1);
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/font-awesome/css/all.min.css" type="text/css" media="screen" />

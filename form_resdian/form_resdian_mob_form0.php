@@ -22,7 +22,7 @@ header("X-Frame-Options: SAMEORIGIN");
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
  <META http-equiv="Pragma" content="no-cache" />
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 <?php
 
 if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
@@ -1491,23 +1491,7 @@ $tmp_form_data = str_replace(';'   , ' '                                       ,
 
 <?php } 
 ?> 
-
-
-
-
-
-
-<?php $sStyleHidden_ultima_fac_dumb = ('' == $sStyleHidden_ultima_fac) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_ultima_fac_dumb" style="<?php echo $sStyleHidden_ultima_fac_dumb; ?>"></TD>
-   </tr>
-<?php $sc_hidden_no = 1; ?>
-</TABLE></div><!-- bloco_f -->
-   </td>
-   </tr></table>
-   <a name="bloco_1"></a>
-   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
-<div id="div_hidden_bloco_1"><!-- bloco_c -->
-<TABLE align="center" id="hidden_bloco_1" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
@@ -1584,14 +1568,30 @@ $tipo_look = "";
 
 <?php } 
 ?> 
-<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+
+
+
+
+
+
+<?php $sStyleHidden_tipo_dumb = ('' == $sStyleHidden_tipo) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_tipo_dumb" style="<?php echo $sStyleHidden_tipo_dumb; ?>"></TD>
+   </tr>
+<?php $sc_hidden_no = 1; ?>
+</TABLE></div><!-- bloco_f -->
+   </td>
+   </tr></table>
+   <a name="bloco_1"></a>
+   <table width="100%" height="100%" cellpadding="0" cellspacing=0><tr valign="top"><td width="100%" height="">
+<div id="div_hidden_bloco_1"><!-- bloco_c -->
+<TABLE align="center" id="hidden_bloco_1" class="scFormTable<?php echo $this->classes_100perc_fields['table'] ?>" width="100%" style="height: 100%;"><?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
       $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
 
 
    <?php
    if (!isset($this->nm_new_label['prefijo_fe']))
    {
-       $this->nm_new_label['prefijo_fe'] = "Tipo Factura";
+       $this->nm_new_label['prefijo_fe'] = "Tipo Documento";
    }
    $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
    $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
@@ -1624,7 +1624,7 @@ $prefijo_fe_look = "";
  if ($this->prefijo_fe == "NF") { $prefijo_fe_look .= "FACTURA" ;} 
  if ($this->prefijo_fe == "FC") { $prefijo_fe_look .= "F. COMPUTADOR" ;} 
  if ($this->prefijo_fe == "FP") { $prefijo_fe_look .= "F. POS" ;} 
- if ($this->prefijo_fe == "FE") { $prefijo_fe_look .= "F. ELECTRÓNICA" ;} 
+ if ($this->prefijo_fe == "FE") { $prefijo_fe_look .= "ELECTRÓNICO" ;} 
  if (empty($prefijo_fe_look)) { $prefijo_fe_look = $this->prefijo_fe; }
 ?>
 <input type="hidden" name="prefijo_fe" value="<?php echo $this->form_encode_input($prefijo_fe) . "\">" . $prefijo_fe_look . ""; ?>
@@ -1635,7 +1635,7 @@ $prefijo_fe_look = "";
  if ($this->prefijo_fe == "NF") { $prefijo_fe_look .= "FACTURA" ;} 
  if ($this->prefijo_fe == "FC") { $prefijo_fe_look .= "F. COMPUTADOR" ;} 
  if ($this->prefijo_fe == "FP") { $prefijo_fe_look .= "F. POS" ;} 
- if ($this->prefijo_fe == "FE") { $prefijo_fe_look .= "F. ELECTRÓNICA" ;} 
+ if ($this->prefijo_fe == "FE") { $prefijo_fe_look .= "ELECTRÓNICO" ;} 
  if (empty($prefijo_fe_look)) { $prefijo_fe_look = $this->prefijo_fe; }
 ?>
 <span id="id_read_on_prefijo_fe" class="css_prefijo_fe_line"  style="<?php echo $sStyleReadLab_prefijo_fe; ?>"><?php echo $this->form_format_readonly("prefijo_fe", $this->form_encode_input($prefijo_fe_look)); ?></span><span id="id_read_off_prefijo_fe" class="css_read_off_prefijo_fe<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap; <?php echo $sStyleReadInp_prefijo_fe; ?>">
@@ -1648,7 +1648,7 @@ $prefijo_fe_look = "";
 <?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian_mob']['Lookup_prefijo_fe'][] = 'FC'; ?>
  <option  value="FP" <?php  if ($this->prefijo_fe == "FP") { echo " selected" ;} ?>>F. POS</option>
 <?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian_mob']['Lookup_prefijo_fe'][] = 'FP'; ?>
- <option  value="FE" <?php  if ($this->prefijo_fe == "FE") { echo " selected" ;} ?>>F. ELECTRÓNICA</option>
+ <option  value="FE" <?php  if ($this->prefijo_fe == "FE") { echo " selected" ;} ?>>ELECTRÓNICO</option>
 <?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian_mob']['Lookup_prefijo_fe'][] = 'FE'; ?>
  </select></span>
 </span><?php  }?>
@@ -1957,6 +1957,208 @@ $pref_ndb_look = "";
 <?php echo "</div>\r\n"; ?></span><?php  }?>
 <span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('pref_ndb')", "nm_mostra_mens('pref_ndb')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
 </span></td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_pref_ndb_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_pref_ndb_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['prefijo_com']))
+   {
+       $this->nm_new_label['prefijo_com'] = "Prefijo de Auto factura";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $prefijo_com = $this->prefijo_com;
+   $sStyleHidden_prefijo_com = '';
+   if (isset($this->nmgp_cmp_hidden['prefijo_com']) && $this->nmgp_cmp_hidden['prefijo_com'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['prefijo_com']);
+       $sStyleHidden_prefijo_com = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_prefijo_com = 'display: none;';
+   $sStyleReadInp_prefijo_com = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['prefijo_com']) && $this->nmgp_cmp_readonly['prefijo_com'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['prefijo_com']);
+       $sStyleReadLab_prefijo_com = '';
+       $sStyleReadInp_prefijo_com = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['prefijo_com']) && $this->nmgp_cmp_hidden['prefijo_com'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="prefijo_com" value="<?php echo $this->form_encode_input($this->prefijo_com) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->prefijo_com_1 = explode(";", trim($this->prefijo_com));
+  } 
+  else
+  {
+      if (empty($this->prefijo_com))
+      {
+          $this->prefijo_com_1= array(); 
+          $this->prefijo_com= "NO";
+      } 
+      else
+      {
+          $this->prefijo_com_1= $this->prefijo_com; 
+          $this->prefijo_com= ""; 
+          foreach ($this->prefijo_com_1 as $cada_prefijo_com)
+          {
+             if (!empty($prefijo_com))
+             {
+                 $this->prefijo_com.= ";"; 
+             } 
+             $this->prefijo_com.= $cada_prefijo_com; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_prefijo_com_line" id="hidden_field_data_prefijo_com" style="<?php echo $sStyleHidden_prefijo_com; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_prefijo_com_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_prefijo_com_label" style=""><span id="id_label_prefijo_com"><?php echo $this->nm_new_label['prefijo_com']; ?></span><span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('prefijo_com')", "nm_mostra_mens('prefijo_com')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["prefijo_com"]) &&  $this->nmgp_cmp_readonly["prefijo_com"] == "on") { 
+
+$prefijo_com_look = "";
+ if ($this->prefijo_com == "SI") { $prefijo_com_look .= "" ;} 
+ if (empty($prefijo_com_look)) { $prefijo_com_look = $this->prefijo_com; }
+?>
+<input type="hidden" name="prefijo_com" value="<?php echo $this->form_encode_input($prefijo_com) . "\">" . $prefijo_com_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$prefijo_com_look = "";
+ if ($this->prefijo_com == "SI") { $prefijo_com_look .= "" ;} 
+ if (empty($prefijo_com_look)) { $prefijo_com_look = $this->prefijo_com; }
+?>
+<span id="id_read_on_prefijo_com" class="css_prefijo_com_line" style="<?php echo $sStyleReadLab_prefijo_com; ?>"><?php echo $this->form_format_readonly("prefijo_com", $this->form_encode_input($prefijo_com_look)); ?></span><span id="id_read_off_prefijo_com" class="css_read_off_prefijo_com css_prefijo_com_line" style="<?php echo $sStyleReadInp_prefijo_com; ?>"><?php echo "<div id=\"idAjaxCheckbox_prefijo_com\" style=\"display: inline-block\" class=\"css_prefijo_com_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_prefijo_com_line"><?php $tempOptionId = "id-opt-prefijo_com" . $sc_seq_vert . "-1"; ?>
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-prefijo_com sc-ui-checkbox-prefijo_com sc-js-input" name="prefijo_com[]" value="SI"
+ alt="{type: 'checkbox', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian_mob']['Lookup_prefijo_com'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->prefijo_com_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_prefijo_com_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_prefijo_com_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+   if (!isset($this->nm_new_label['prefijo_ajuscom']))
+   {
+       $this->nm_new_label['prefijo_ajuscom'] = "Prefijo Ajuste compra";
+   }
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $prefijo_ajuscom = $this->prefijo_ajuscom;
+   $sStyleHidden_prefijo_ajuscom = '';
+   if (isset($this->nmgp_cmp_hidden['prefijo_ajuscom']) && $this->nmgp_cmp_hidden['prefijo_ajuscom'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['prefijo_ajuscom']);
+       $sStyleHidden_prefijo_ajuscom = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_prefijo_ajuscom = 'display: none;';
+   $sStyleReadInp_prefijo_ajuscom = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['prefijo_ajuscom']) && $this->nmgp_cmp_readonly['prefijo_ajuscom'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['prefijo_ajuscom']);
+       $sStyleReadLab_prefijo_ajuscom = '';
+       $sStyleReadInp_prefijo_ajuscom = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['prefijo_ajuscom']) && $this->nmgp_cmp_hidden['prefijo_ajuscom'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="prefijo_ajuscom" value="<?php echo $this->form_encode_input($this->prefijo_ajuscom) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+<?php 
+  if ($this->nmgp_opcao != "recarga") 
+  {
+      $this->prefijo_ajuscom_1 = explode(";", trim($this->prefijo_ajuscom));
+  } 
+  else
+  {
+      if (empty($this->prefijo_ajuscom))
+      {
+          $this->prefijo_ajuscom_1= array(); 
+          $this->prefijo_ajuscom= "NO";
+      } 
+      else
+      {
+          $this->prefijo_ajuscom_1= $this->prefijo_ajuscom; 
+          $this->prefijo_ajuscom= ""; 
+          foreach ($this->prefijo_ajuscom_1 as $cada_prefijo_ajuscom)
+          {
+             if (!empty($prefijo_ajuscom))
+             {
+                 $this->prefijo_ajuscom.= ";"; 
+             } 
+             $this->prefijo_ajuscom.= $cada_prefijo_ajuscom; 
+          } 
+      } 
+  } 
+?> 
+
+    <TD class="scFormDataOdd css_prefijo_ajuscom_line" id="hidden_field_data_prefijo_ajuscom" style="<?php echo $sStyleHidden_prefijo_ajuscom; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_prefijo_ajuscom_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_prefijo_ajuscom_label" style=""><span id="id_label_prefijo_ajuscom"><?php echo $this->nm_new_label['prefijo_ajuscom']; ?></span><span style="display: inline-block"><?php echo nmButtonOutput($this->arr_buttons, "bfieldhelp", "nm_mostra_mens('prefijo_ajuscom')", "nm_mostra_mens('prefijo_ajuscom')", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
+</span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["prefijo_ajuscom"]) &&  $this->nmgp_cmp_readonly["prefijo_ajuscom"] == "on") { 
+
+$prefijo_ajuscom_look = "";
+ if ($this->prefijo_ajuscom == "SI") { $prefijo_ajuscom_look .= "" ;} 
+ if (empty($prefijo_ajuscom_look)) { $prefijo_ajuscom_look = $this->prefijo_ajuscom; }
+?>
+<input type="hidden" name="prefijo_ajuscom" value="<?php echo $this->form_encode_input($prefijo_ajuscom) . "\">" . $prefijo_ajuscom_look . ""; ?>
+<?php } else { ?>
+
+<?php
+
+$prefijo_ajuscom_look = "";
+ if ($this->prefijo_ajuscom == "SI") { $prefijo_ajuscom_look .= "" ;} 
+ if (empty($prefijo_ajuscom_look)) { $prefijo_ajuscom_look = $this->prefijo_ajuscom; }
+?>
+<span id="id_read_on_prefijo_ajuscom" class="css_prefijo_ajuscom_line" style="<?php echo $sStyleReadLab_prefijo_ajuscom; ?>"><?php echo $this->form_format_readonly("prefijo_ajuscom", $this->form_encode_input($prefijo_ajuscom_look)); ?></span><span id="id_read_off_prefijo_ajuscom" class="css_read_off_prefijo_ajuscom css_prefijo_ajuscom_line" style="<?php echo $sStyleReadInp_prefijo_ajuscom; ?>"><?php echo "<div id=\"idAjaxCheckbox_prefijo_ajuscom\" style=\"display: inline-block\" class=\"css_prefijo_ajuscom_line\">\r\n"; ?><TABLE cellspacing=0 cellpadding=0 border=0><TR>
+  <TD class="scFormDataFontOdd css_prefijo_ajuscom_line"><?php $tempOptionId = "id-opt-prefijo_ajuscom" . $sc_seq_vert . "-1"; ?>
+ <input type=checkbox id="<?php echo $tempOptionId ?>" class="sc-ui-checkbox-prefijo_ajuscom sc-ui-checkbox-prefijo_ajuscom sc-js-input" name="prefijo_ajuscom[]" value="SI"
+ alt="{type: 'checkbox', enterTab: true}"<?php $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian_mob']['Lookup_prefijo_ajuscom'][] = 'SI'; ?>
+<?php  if (in_array("SI", $this->prefijo_ajuscom_1))  { echo " checked" ;} ?> onClick="" ><label for="<?php echo $tempOptionId ?>"></label></TD>
+</TR></TABLE>
+<?php echo "</div>\r\n"; ?></span><?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_prefijo_ajuscom_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_prefijo_ajuscom_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 

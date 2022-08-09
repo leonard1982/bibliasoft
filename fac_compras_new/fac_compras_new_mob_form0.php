@@ -124,6 +124,11 @@ if ('' != $miniCalendarFA) {
 	border: 0;
 	padding: 0
 }
+.css_read_off_fecha_validacion button {
+	background-color: transparent;
+	border: 0;
+	padding: 0
+}
 </style>
 <?php
 }
@@ -908,7 +913,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['new'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-16';
+        $buttonMacroDisabled = 'sc-unique-btn-11';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['new']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['new']) {
@@ -927,7 +932,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['insert'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-17';
+        $buttonMacroDisabled = 'sc-unique-btn-12';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['insert']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['insert']) {
@@ -946,7 +951,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['insert'] == "on" && $this->nmgp_botoes['cancel'] == "on") && ($this->nm_flag_saida_novo != "S" || $this->nmgp_botoes['exit'] != "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-18';
+        $buttonMacroDisabled = 'sc-unique-btn-13';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['bcancelar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['bcancelar']) {
@@ -965,7 +970,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['update'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-19';
+        $buttonMacroDisabled = 'sc-unique-btn-14';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['update']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['update']) {
@@ -984,7 +989,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['delete'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-20';
+        $buttonMacroDisabled = 'sc-unique-btn-15';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['delete']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['delete']) {
@@ -1078,7 +1083,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['reload'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-21';
+        $buttonMacroDisabled = 'sc-unique-btn-16';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['breload']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['breload']) {
@@ -1115,7 +1120,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = (($this->nm_flag_saida_novo == "S" || ($this->nm_Start_new && !$this->aba_iframe)) && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-22';
+        $buttonMacroDisabled = 'sc-unique-btn-17';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
@@ -1134,7 +1139,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nm_flag_saida_novo == "S" && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-23';
+        $buttonMacroDisabled = 'sc-unique-btn-18';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
@@ -1153,7 +1158,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && $nm_apl_dependente != 1 && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "R" && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-24';
+        $buttonMacroDisabled = 'sc-unique-btn-19';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
@@ -1172,7 +1177,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = (!isset($_SESSION['scriptcase']['nm_sc_retorno']) || empty($_SESSION['scriptcase']['nm_sc_retorno']) || $nm_apl_dependente == 1 || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "R" || $this->aba_iframe || $this->nmgp_botoes['exit'] != "on") && ($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "F" && $this->nmgp_botoes['exit'] == "on") && ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-25';
+        $buttonMacroDisabled = 'sc-unique-btn-20';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
@@ -1191,7 +1196,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = (!isset($_SESSION['scriptcase']['nm_sc_retorno']) || empty($_SESSION['scriptcase']['nm_sc_retorno']) || $nm_apl_dependente == 1 || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "R" || $this->aba_iframe || $this->nmgp_botoes['exit'] != "on") && ($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "F" && $this->nmgp_botoes['exit'] == "on") && ($nm_apl_dependente != 1 || $this->nmgp_botoes['exit'] != "on") && ((!$this->aba_iframe || $this->is_calendar_app) && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-26';
+        $buttonMacroDisabled = 'sc-unique-btn-21';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
@@ -1726,6 +1731,7 @@ $tipo_com_look = "";
  if ($this->tipo_com == "NC") { $tipo_com_look .= "NOTA C" ;} 
  if ($this->tipo_com == "ND") { $tipo_com_look .= "NOTA D" ;} 
  if ($this->tipo_com == "AF") { $tipo_com_look .= "AUTO F" ;} 
+ if ($this->tipo_com == "AAF") { $tipo_com_look .= "AJUSTE AF" ;} 
  if (empty($tipo_com_look)) { $tipo_com_look = $this->tipo_com; }
 ?>
 <input type="hidden" name="tipo_com" value="<?php echo $this->form_encode_input($tipo_com) . "\">" . $tipo_com_look . ""; ?>
@@ -1738,6 +1744,7 @@ $tipo_com_look = "";
  if ($this->tipo_com == "NC") { $tipo_com_look .= "NOTA C" ;} 
  if ($this->tipo_com == "ND") { $tipo_com_look .= "NOTA D" ;} 
  if ($this->tipo_com == "AF") { $tipo_com_look .= "AUTO F" ;} 
+ if ($this->tipo_com == "AAF") { $tipo_com_look .= "AJUSTE AF" ;} 
  if (empty($tipo_com_look)) { $tipo_com_look = $this->tipo_com; }
 ?>
 <span id="id_read_on_tipo_com" class="css_tipo_com_line"  style="<?php echo $sStyleReadLab_tipo_com; ?>"><?php echo $this->form_format_readonly("tipo_com", $this->form_encode_input($tipo_com_look)); ?></span><span id="id_read_off_tipo_com" class="css_read_off_tipo_com<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap; <?php echo $sStyleReadInp_tipo_com; ?>">
@@ -1752,6 +1759,8 @@ $tipo_com_look = "";
 <?php $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['Lookup_tipo_com'][] = 'ND'; ?>
  <option  value="AF" <?php  if ($this->tipo_com == "AF") { echo " selected" ;} ?>>AUTO F</option>
 <?php $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['Lookup_tipo_com'][] = 'AF'; ?>
+ <option  value="AAF" <?php  if ($this->tipo_com == "AAF") { echo " selected" ;} ?>>AJUSTE AF</option>
+<?php $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['Lookup_tipo_com'][] = 'AAF'; ?>
  </select></span>
 </span><?php  }?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_tipo_com_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_tipo_com_text"></span></td></tr></table></td></tr></table> </TD>
@@ -2324,7 +2333,7 @@ else
 <input type="hidden" name="numfacom" value="<?php echo $this->form_encode_input($numfacom) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOdd css_numfacom_line" id="hidden_field_data_numfacom" style="<?php echo $sStyleHidden_numfacom; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_numfacom_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_numfacom_label" style=""><span id="id_label_numfacom"><?php echo $this->nm_new_label['numfacom']; ?></span><?php if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['php_cmp_required']['numfacom']) || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['php_cmp_required']['numfacom'] == "on") { ?> <span class="scFormRequiredOdd">*</span> <?php }?></span><br>
+    <TD class="scFormDataOdd css_numfacom_line" id="hidden_field_data_numfacom" style="<?php echo $sStyleHidden_numfacom; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_numfacom_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_numfacom_label" style=""><span id="id_label_numfacom"><?php echo $this->nm_new_label['numfacom']; ?></span></span><br>
 <?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["numfacom"]) &&  $this->nmgp_cmp_readonly["numfacom"] == "on") { 
 
  ?>

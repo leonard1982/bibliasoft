@@ -207,7 +207,7 @@ if (@is_file($_str_btn_file))
 <?php
  }
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $STR_schema; ?>_export.css" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $STR_schema; ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <link rel="stylesheet" href="<?php echo $STR_prod ?>/third/font-awesome/css/all.min.css" type="text/css" media="screen" />

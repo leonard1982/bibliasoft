@@ -4386,6 +4386,68 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxRedir();
   } // do_ajax_detallecompra_new_event_tallas__onchange_cb_after_alert
 
+  // ---------- Event onchange tasaiva_
+  function do_ajax_detallecompra_new_event_tasaiva__onchange(iSeqForm)
+  {
+    var var_valorpar_ = scAjaxGetFieldHidden("valorpar_" + iSeqForm);
+    var var_cantidad_ = scAjaxGetFieldText("cantidad_" + iSeqForm);
+    var var_valorunit_ = scAjaxGetFieldText("valorunit_" + iSeqForm);
+    var var_descuento_ = scAjaxGetFieldText("descuento_" + iSeqForm);
+    var var_tasaiva_ = scAjaxGetFieldText("tasaiva_" + iSeqForm);
+    var var_iva_ = scAjaxGetFieldHidden("iva_" + iSeqForm);
+    var var_script_case_init = document.F2.script_case_init.value;
+    var var_nmgp_refresh_row = iSeqForm;
+    scAjaxProcOn(true);
+    x_ajax_detallecompra_new_event_tasaiva__onchange(var_valorpar_, var_cantidad_, var_valorunit_, var_descuento_, var_tasaiva_, var_iva_, var_script_case_init, var_nmgp_refresh_row, do_ajax_detallecompra_new_event_tasaiva__onchange_cb);
+  } // do_ajax_detallecompra_new_event_tasaiva__onchange
+
+  function do_ajax_detallecompra_new_event_tasaiva__onchange_cb(sResp)
+  {
+    scAjaxProcOff(true);
+    oResp = scAjaxResponse(sResp);
+    iLineNumber = scAjaxGetLineNumber();
+    if ("" != iLineNumber)
+    {
+      sFieldValid = "tasaiva_" + iLineNumber;
+    }
+    else
+    {
+      sFieldValid = "tasaiva_";
+    }
+    scEventControl_onChange(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "onchange");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      scAjaxHideErrorDisplay(sFieldValid);
+      scErrorLineOff(iLineNumber, "tasaiva_");
+    }
+    else
+    {
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+      scErrorLineOn(iLineNumber, "tasaiva_");
+    }
+    if (!scAjaxHasError())
+    {
+      scAjaxSetFields();
+      scAjaxSetVariables();
+    }
+    scAjaxShowDebug();
+    scAjaxSetDisplay();
+    scBtnDisabled();
+    scBtnLabel();
+    scAjaxSetLabel();
+    scAjaxSetReadonly();
+    scAjaxSetMaster();
+    scAjaxAlert(do_ajax_detallecompra_new_event_tasaiva__onchange_cb_after_alert);
+  } // do_ajax_detallecompra_new_event_tasaiva__onchange_cb
+  function do_ajax_detallecompra_new_event_tasaiva__onchange_cb_after_alert() {
+    scAjaxMessage();
+    scAjaxJavascript();
+    scAjaxSetFocus();
+    scAjaxRedir();
+  } // do_ajax_detallecompra_new_event_tasaiva__onchange_cb_after_alert
+
   // ---------- Event onblur valorunit_
   function do_ajax_detallecompra_new_event_valorunit__onblur(iSeqForm)
   {
@@ -5527,6 +5589,7 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_field_id["valorpar_" + iNumLinha] = new Array("hidden_field_label_valorpar_", "hidden_field_data_valorpar_" + iNumLinha);
     ajax_field_id["iva_" + iNumLinha] = new Array("hidden_field_label_iva_", "hidden_field_data_iva_" + iNumLinha);
     ajax_field_id["idbod_" + iNumLinha] = new Array("hidden_field_label_idbod_", "hidden_field_data_idbod_" + iNumLinha);
+    ajax_field_id["tasaiva_" + iNumLinha] = new Array("hidden_field_label_tasaiva_", "hidden_field_data_tasaiva_" + iNumLinha);
     ajax_error_count["cod_barras_" + iNumLinha] = "off";
     ajax_error_count["idpro_" + iNumLinha] = "off";
     ajax_error_count["ver_" + iNumLinha] = "off";

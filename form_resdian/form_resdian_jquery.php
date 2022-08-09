@@ -65,6 +65,8 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["pref_factura" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["pref_ncr" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["pref_ndb" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["prefijo_com" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["prefijo_ajuscom" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["activa" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["nombre_pc" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["nombre_impre" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -156,6 +158,18 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["pref_ndb" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["prefijo_com" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["prefijo_com" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["prefijo_ajuscom" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["prefijo_ajuscom" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["activa" + iSeqRow]["blur"]) {
@@ -301,9 +315,17 @@ function scJQEventsAdd(iSeqRow) {
   $('#id_sc_field_texto_pie_pagina' + iSeqRow).bind('blur', function() { sc_form_resdian_texto_pie_pagina_onblur(this, iSeqRow) })
                                               .bind('change', function() { sc_form_resdian_texto_pie_pagina_onchange(this, iSeqRow) })
                                               .bind('focus', function() { sc_form_resdian_texto_pie_pagina_onfocus(this, iSeqRow) });
+  $('#id_sc_field_prefijo_com' + iSeqRow).bind('blur', function() { sc_form_resdian_prefijo_com_onblur(this, iSeqRow) })
+                                         .bind('change', function() { sc_form_resdian_prefijo_com_onchange(this, iSeqRow) })
+                                         .bind('focus', function() { sc_form_resdian_prefijo_com_onfocus(this, iSeqRow) });
+  $('#id_sc_field_prefijo_ajuscom' + iSeqRow).bind('blur', function() { sc_form_resdian_prefijo_ajuscom_onblur(this, iSeqRow) })
+                                             .bind('change', function() { sc_form_resdian_prefijo_ajuscom_onchange(this, iSeqRow) })
+                                             .bind('focus', function() { sc_form_resdian_prefijo_ajuscom_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-pref_factura' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-pref_ncr' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-pref_ndb' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-prefijo_com' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
+  $('.sc-ui-checkbox-prefijo_ajuscom' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
 } // scJQEventsAdd
 
 function sc_form_resdian_idres_onchange(oThis, iSeqRow) {
@@ -591,6 +613,34 @@ function sc_form_resdian_texto_pie_pagina_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_resdian_prefijo_com_onblur(oThis, iSeqRow) {
+  do_ajax_form_resdian_validate_prefijo_com();
+  scCssBlur(oThis);
+}
+
+function sc_form_resdian_prefijo_com_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_resdian_prefijo_com_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_resdian_prefijo_ajuscom_onblur(oThis, iSeqRow) {
+  do_ajax_form_resdian_validate_prefijo_ajuscom();
+  scCssBlur(oThis);
+}
+
+function sc_form_resdian_prefijo_ajuscom_onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_form_resdian_prefijo_ajuscom_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function displayChange_block(block, status) {
 	if ("0" == block) {
 		displayChange_block_0(status);
@@ -613,14 +663,16 @@ function displayChange_block_0(status) {
 	displayChange_field("primerfactura", "", status);
 	displayChange_field("desde", "", status);
 	displayChange_field("ultima_fac", "", status);
+	displayChange_field("tipo", "", status);
 }
 
 function displayChange_block_1(status) {
-	displayChange_field("tipo", "", status);
 	displayChange_field("prefijo_fe", "", status);
 	displayChange_field("pref_factura", "", status);
 	displayChange_field("pref_ncr", "", status);
 	displayChange_field("pref_ndb", "", status);
+	displayChange_field("prefijo_com", "", status);
+	displayChange_field("prefijo_ajuscom", "", status);
 	displayChange_field("activa", "", status);
 	displayChange_field("nombre_pc", "", status);
 	displayChange_field("nombre_impre", "", status);
@@ -647,6 +699,8 @@ function displayChange_row(row, status) {
 	displayChange_field_pref_factura(row, status);
 	displayChange_field_pref_ncr(row, status);
 	displayChange_field_pref_ndb(row, status);
+	displayChange_field_prefijo_com(row, status);
+	displayChange_field_prefijo_ajuscom(row, status);
 	displayChange_field_activa(row, status);
 	displayChange_field_nombre_pc(row, status);
 	displayChange_field_nombre_impre(row, status);
@@ -697,6 +751,12 @@ function displayChange_field(field, row, status) {
 	}
 	if ("pref_ndb" == field) {
 		displayChange_field_pref_ndb(row, status);
+	}
+	if ("prefijo_com" == field) {
+		displayChange_field_prefijo_com(row, status);
+	}
+	if ("prefijo_ajuscom" == field) {
+		displayChange_field_prefijo_ajuscom(row, status);
 	}
 	if ("activa" == field) {
 		displayChange_field_activa(row, status);
@@ -782,6 +842,12 @@ function displayChange_field_pref_ncr(row, status) {
 }
 
 function displayChange_field_pref_ndb(row, status) {
+}
+
+function displayChange_field_prefijo_com(row, status) {
+}
+
+function displayChange_field_prefijo_ajuscom(row, status) {
 }
 
 function displayChange_field_activa(row, status) {

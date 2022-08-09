@@ -4446,10 +4446,11 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     var var_id_pedidocom = scAjaxGetFieldSelect("id_pedidocom");
     var var_saldo = scAjaxGetFieldHidden("saldo");
     var var_pagada = scAjaxGetFieldHidden("pagada");
+    var var_numfacom = scAjaxGetFieldText("numfacom");
     var var_idfaccom = scAjaxGetFieldHidden("idfaccom");
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn(true);
-    x_ajax_fac_compras_new_event_tipo_com_onchange(var_total, var_tipo_com, var_id_comafec, var_es_remision, var_id_pedidocom, var_saldo, var_pagada, var_idfaccom, var_script_case_init, do_ajax_fac_compras_new_event_tipo_com_onchange_cb);
+    x_ajax_fac_compras_new_event_tipo_com_onchange(var_total, var_tipo_com, var_id_comafec, var_es_remision, var_id_pedidocom, var_saldo, var_pagada, var_numfacom, var_idfaccom, var_script_case_init, do_ajax_fac_compras_new_event_tipo_com_onchange_cb);
   } // do_ajax_fac_compras_new_event_tipo_com_onchange
 
   function do_ajax_fac_compras_new_event_tipo_com_onchange_cb(sResp)
@@ -5006,16 +5007,6 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
         document.F5.nmgp_opcao.value = "inicio";
         document.F5.nmgp_parms.value = "";
         document.F5.submit();
-    }
-    if ("ERROR" == oResp.result)
-    {
-        scAjaxShowErrorDisplay("table", oResp.errList[0].msgText);
-        scAjaxProcOff();
-        return;
-    }
-    else if (oResp["navSummary"].reg_tot == 0)
-    {
-       scAjax_displayEmptyForm();
     }
     scAjaxClearErrors()
     scResetFormChanges()

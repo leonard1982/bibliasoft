@@ -386,6 +386,328 @@ class grid_compras_new_resumo
            $this->asentada = substr($this->asentada, 0, $tmp_pos);
        }
      } 
+      $this->nm_where_dinamico = "";
+       ob_start(); 
+      $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+ ?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
+<script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
+
+<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
+
+<style>
+</style>
+<?php
+
+
+;
+
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+
+;
+;
+;
+;
+;
+
+;
+;
+
+
+?>
+<script>
+function fEnviarPropio(idfaccom,bd)
+{
+	alertify.confirm('Confirmación de envío', '¿Desea enviar el documento a la DIAN?', 
+	function(){ 
+	
+	  alertify.notify('Enviando documento a la DIAN...', 'custom', 6, function(){ });
+		
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		var vvalidar_correo_enlinea = "<?php echo $vvalidar_correo_enlinea; ?>";
+		
+		if(vvalidar_correo_enlinea=="SI")
+		{
+			$.post("../blank_correo_reenvio_validador/index.php",{
+
+				idfacven:idfaccom
+
+			},function(r){
+
+				console.log("Se busca el correo del cliente: ");
+				console.log(r);
+				var em = JSON.parse(r);
+				
+				var email    = em.email;
+				var validado = em.validado;
+				
+				if(validado=="NO")
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.get("../valida_email.php",{
+
+							email:email
+
+						},function(r2){
+
+							console.log("Si no esta validado: ");
+							console.log(r2);
+							var obj = JSON.parse(r2);
+
+							if(obj.error=="")
+							{
+								$.post("../blank_enviar_fes_propio_compras/index.php",{
+
+									idfacven:idfaccom,
+									bd:bd,
+									reason:obj.reason,
+									json_valida_email:obj.json
+
+									},function(r3){
+
+									$.unblockUI();
+									console.log(r3);
+
+									if(r3=="Documento enviado con éxito!!!")
+									{
+										nm_gp_submit_ajax ('igual', 'breload');
+									}
+									else
+									{
+										if(confirm(r3))
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+										else
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+									}
+								});
+							}
+							else
+							{
+								if(confirm(obj.error))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El proveedor no tiene correo electrónico.");
+					}
+				}
+				else
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.post("../blank_enviar_fes_propio_compras/index.php",{
+
+							idfacven:idfaccom,
+							reason:'accepted_email',
+							json_valida_email:''
+
+							},function(r3){
+
+							console.log("Si ya esta validado: ");
+							$.unblockUI();
+							console.log(r3);
+
+							if(r3=="Documento enviado con éxito!!!")
+							{
+								nm_gp_submit_ajax ('igual', 'breload');
+							}
+							else
+							{
+								if(confirm(r3))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El proveedor no tiene correo electrónico...");
+					}
+				}
+			});
+		}
+		else
+		{
+			$.post("../blank_enviar_fes_propio_compras/index.php",{
+
+				idfaccom:idfaccom,
+				bd:bd
+
+				},function(r){
+
+				console.log("Si no se va a validar: ");
+				$.unblockUI();
+				console.log(r);
+
+				if(r=="Documento enviado con éxito!!!")
+				{
+					nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+					if(confirm(r))
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+					else
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+				}
+			});
+		}
+	}
+    , function(){
+		
+		alertify.error('Envío cancelado.');
+	});
+}
+
+
+function fRegenerarPDFPropio(idfacven,bd,cufe)
+{
+	if(!$.isEmptyObject(cufe))
+	{
+		if(confirm('¿Desea regenerar el PDF del documento?'))
+		{
+			$.blockUI({ 
+				message: 'Espere por favor...', 
+				css: { 
+					border: 'none', 
+					padding: '15px', 
+					backgroundColor: '#000', 
+					'-webkit-border-radius': '10px', 
+					'-moz-border-radius': '10px', 
+					opacity: .5, 
+					color: '#fff'
+				}
+			});
+
+			$.post("../blank_envio_propio_regenerar/index.php",{
+
+				idfacven:idfaccom,
+				bd:bd
+
+				},function(r){
+
+				$.unblockUI();
+				console.log(r);
+
+				if(confirm('PDF regenerado con éxito.'))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+
+			});
+		}
+	}
+	else
+	{
+		alert('El documento no ha sido enviado electrónicamente.');
+	}
+}
+	
+function fJSONPropio(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_propio_xml/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+</script>
+<?php
+$_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off'; 
+       $this->SC_Buf_onInit = ob_get_clean();; 
+         if  (!empty($this->nm_where_dinamico)) 
+         {   
+             $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['where_pesq'] .= $this->nm_where_dinamico;
+         }
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['opcao'] != "pdf")
       {
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['where_resumo']);
@@ -577,6 +899,10 @@ class grid_compras_new_resumo
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['detalle']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['detalle'] = "detalle"; 
+       }
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['acciones']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['acciones'] = "Acciones"; 
        }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['idfaccom']))
        {
@@ -3568,7 +3894,7 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['doc_word'
       $nm_saida->saida(" <META http-equiv=\"Cache-Control\" content=\"post-check=0, pre-check=0\"/>\r\n");
       $nm_saida->saida(" <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
 }
-      $nm_saida->saida(" <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
+      $nm_saida->saida(" <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n");
        $css_body = "";
       $nm_saida->saida(" <style type=\"text/css\">\r\n");
       $nm_saida->saida("  BODY { " . $css_body . " }\r\n");
@@ -3914,6 +4240,10 @@ if ($_SESSION['scriptcase']['proc_mobile'])
        $nm_saida->saida("   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" />\r\n");
 }
 
+      if (!empty($this->SC_Buf_onInit))
+      { 
+          $nm_saida->saida("" . $this->SC_Buf_onInit . "\r\n");
+      } 
       $nm_saida->saida("</HEAD>\r\n");
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['responsive_chart']['active']) {
           $summary_width = "width=\"100%\"";
@@ -5666,6 +5996,326 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['doc_word'
      $this->sc_where_filtro = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['where_pesq_filtro'];
      $this->nm_field_dinamico = array();
      $this->nm_order_dinamico = array();
+     $this->nm_where_dinamico = "";
+     $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+ ?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
+<script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
+
+<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
+
+<style>
+</style>
+<?php
+
+
+;
+
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+
+;
+;
+;
+;
+;
+
+;
+;
+
+
+?>
+<script>
+function fEnviarPropio(idfaccom,bd)
+{
+	alertify.confirm('Confirmación de envío', '¿Desea enviar el documento a la DIAN?', 
+	function(){ 
+	
+	  alertify.notify('Enviando documento a la DIAN...', 'custom', 6, function(){ });
+		
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		var vvalidar_correo_enlinea = "<?php echo $vvalidar_correo_enlinea; ?>";
+		
+		if(vvalidar_correo_enlinea=="SI")
+		{
+			$.post("../blank_correo_reenvio_validador/index.php",{
+
+				idfacven:idfaccom
+
+			},function(r){
+
+				console.log("Se busca el correo del cliente: ");
+				console.log(r);
+				var em = JSON.parse(r);
+				
+				var email    = em.email;
+				var validado = em.validado;
+				
+				if(validado=="NO")
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.get("../valida_email.php",{
+
+							email:email
+
+						},function(r2){
+
+							console.log("Si no esta validado: ");
+							console.log(r2);
+							var obj = JSON.parse(r2);
+
+							if(obj.error=="")
+							{
+								$.post("../blank_enviar_fes_propio_compras/index.php",{
+
+									idfacven:idfaccom,
+									bd:bd,
+									reason:obj.reason,
+									json_valida_email:obj.json
+
+									},function(r3){
+
+									$.unblockUI();
+									console.log(r3);
+
+									if(r3=="Documento enviado con éxito!!!")
+									{
+										nm_gp_submit_ajax ('igual', 'breload');
+									}
+									else
+									{
+										if(confirm(r3))
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+										else
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+									}
+								});
+							}
+							else
+							{
+								if(confirm(obj.error))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El proveedor no tiene correo electrónico.");
+					}
+				}
+				else
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.post("../blank_enviar_fes_propio_compras/index.php",{
+
+							idfacven:idfaccom,
+							reason:'accepted_email',
+							json_valida_email:''
+
+							},function(r3){
+
+							console.log("Si ya esta validado: ");
+							$.unblockUI();
+							console.log(r3);
+
+							if(r3=="Documento enviado con éxito!!!")
+							{
+								nm_gp_submit_ajax ('igual', 'breload');
+							}
+							else
+							{
+								if(confirm(r3))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El proveedor no tiene correo electrónico...");
+					}
+				}
+			});
+		}
+		else
+		{
+			$.post("../blank_enviar_fes_propio_compras/index.php",{
+
+				idfaccom:idfaccom,
+				bd:bd
+
+				},function(r){
+
+				console.log("Si no se va a validar: ");
+				$.unblockUI();
+				console.log(r);
+
+				if(r=="Documento enviado con éxito!!!")
+				{
+					nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+					if(confirm(r))
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+					else
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+				}
+			});
+		}
+	}
+    , function(){
+		
+		alertify.error('Envío cancelado.');
+	});
+}
+
+
+function fRegenerarPDFPropio(idfacven,bd,cufe)
+{
+	if(!$.isEmptyObject(cufe))
+	{
+		if(confirm('¿Desea regenerar el PDF del documento?'))
+		{
+			$.blockUI({ 
+				message: 'Espere por favor...', 
+				css: { 
+					border: 'none', 
+					padding: '15px', 
+					backgroundColor: '#000', 
+					'-webkit-border-radius': '10px', 
+					'-moz-border-radius': '10px', 
+					opacity: .5, 
+					color: '#fff'
+				}
+			});
+
+			$.post("../blank_envio_propio_regenerar/index.php",{
+
+				idfacven:idfaccom,
+				bd:bd
+
+				},function(r){
+
+				$.unblockUI();
+				console.log(r);
+
+				if(confirm('PDF regenerado con éxito.'))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+
+			});
+		}
+	}
+	else
+	{
+		alert('El documento no ha sido enviado electrónicamente.');
+	}
+}
+	
+function fJSONPropio(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_propio_xml/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+</script>
+<?php
+$_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off'; 
+     if  (!empty($this->nm_where_dinamico)) 
+     {   
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['where_pesq'] .= $this->nm_where_dinamico;
+     }   
      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ""; 
      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
      { 
@@ -5687,7 +6337,21 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['doc_word'
      $campos_order = "";
      $format       = $this->Ini->Get_Gb_date_format('', 'idprov');
      $campos_order = $this->Ini->Get_date_order_groupby("idprov", 'asc', $format, $campos_order);
+     if (!empty($this->Ini->nm_order_dinamico)) 
+     {
+         foreach ($this->Ini->nm_order_dinamico as $nm_cada_col => $nm_nova_col)
+         {
+              $nmgp_order_by = str_replace($nm_cada_col, $nm_nova_col, $nmgp_order_by); 
+         }
+     }
      $nmgp_select .= $nmgp_order_by; 
+     if (!empty($this->Ini->nm_col_dinamica)) 
+     {
+         foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+         {
+                  $nmgp_select = str_replace($nm_cada_col, $nm_nova_col, $nmgp_select); 
+         }
+     }
      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
      $rs_res = $this->Db->Execute($nmgp_select) ; 
      if ($rs_res === false && !$rs_graf->EOF) 
@@ -5791,6 +6455,8 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['doc_word'
             $this->look_asentada = $this->asentada; 
             $this->Lookup->lookup_asentada($this->look_asentada); 
             $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
  if($this->asentada ==1)
 {
 	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -5983,6 +6649,20 @@ else
 	$this->iva_19  = 0;
 	
 	}
+
+if($this->tipo_com =="AF" and $this->asentada  == 1)
+	{
+	$this->acciones  = "<a onclick='fEnviarPropio(\"".$this->idfaccom ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+	}
+elseif($this->tipo_com =="AF")
+	{
+	$this->acciones  = "Por favor <br>Asentar!!!";
+	}
+else
+	{
+	$this->acciones  = "";
+	}
+if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off'; 
             $this->idprov_orig = $this->idprov;
             $this->idprov = $this->look_idprov ;
@@ -6182,8 +6862,43 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
    { 
        $nmgp_order_by = " order by " . $campos_order; 
    } 
+   if (!empty($this->Ini->nm_order_dinamico)) 
+   {
+       foreach ($this->Ini->nm_order_dinamico as $nm_cada_col => $nm_nova_col)
+       {
+           $nmgp_order_by = str_replace($nm_cada_col, $nm_nova_col, $nmgp_order_by);
+       }
+       $NM_temp = explode(",", $nmgp_order_by);
+       $nmgp_order_by = "";
+       $NM_arr_order = array();
+       foreach ($NM_temp as $Nm_cada_order)
+       {
+           $Nm_order_pura = trim($Nm_cada_order);
+           if (substr($Nm_order_pura, 0, 8) == "order by")
+           {
+               $Nm_order_pura = trim(substr($Nm_order_pura, 8));
+           }
+           $Nm_pos = strrpos($Nm_order_pura, " ");
+           if ($Nm_pos !== false)
+           {
+               $Nm_order_pura = trim(substr($Nm_order_pura, 0, $Nm_pos));
+           }
+           if (!in_array($Nm_order_pura, $NM_arr_order))
+           {
+               $NM_arr_order[] = $Nm_order_pura;
+               $nmgp_order_by .= (empty($nmgp_order_by)) ? $Nm_cada_order : ", " . trim($Nm_cada_order);
+           }
+       }
+   }
    $nmgp_select .= $nmgp_order_by; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['order_grid'] = $nmgp_order_by;
+   if (!empty($this->Ini->nm_col_dinamica)) 
+   {
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+         $nmgp_select = str_replace($nm_cada_col, $nm_nova_col, $nmgp_select); 
+      }
+   }
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nmgp_select; 
       $this->rs_grid = $this->Db->Execute($nmgp_select) ; 
       if ($this->rs_grid === false && !$this->rs_grid->EOF && $GLOBALS["NM_ERRO_IBASE"] != 1) 
@@ -6268,6 +6983,8 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $tipo_com_orig = $this->tipo_com;
          $prefijo_com_orig = $this->prefijo_com;
          $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
  if($this->asentada ==1)
 {
 	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -6460,6 +7177,20 @@ else
 	$this->iva_19  = 0;
 	
 	}
+
+if($this->tipo_com =="AF" and $this->asentada  == 1)
+	{
+	$this->acciones  = "<a onclick='fEnviarPropio(\"".$this->idfaccom ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+	}
+elseif($this->tipo_com =="AF")
+	{
+	$this->acciones  = "Por favor <br>Asentar!!!";
+	}
+else
+	{
+	$this->acciones  = "";
+	}
+if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $this->arg_sum_tipo_com = " = " . $this->Db->qstr($this->tipo_com);
          $this->arg_sum_prefijo_com = " = " . $this->Db->qstr($this->prefijo_com);

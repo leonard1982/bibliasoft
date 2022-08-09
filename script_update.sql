@@ -263,3 +263,21 @@ ALTER TABLE `detallecompra` ADD `tipo_docu` VARCHAR(4) NOT NULL DEFAULT 'FC' COM
 
 
 CREATE TABLE `facturaven_adjuntos` ( `id` INT NOT NULL AUTO_INCREMENT , `idfacven` INT NOT NULL DEFAULT '0' , `adjunto` TEXT NULL DEFAULT NULL , `creado` DATETIME NULL DEFAULT NULL , `actualizado` DATETIME NULL DEFAULT NULL , `usuario` INT NOT NULL DEFAULT '0' , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_unicode_ci;
+
+
+ALTER TABLE `seg_apps` CHANGE `app_order` `app_order` INT(4) NULL DEFAULT '99'; 
+
+ALTER TABLE `menu_icons` CHANGE `descripcion` `descripcion` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; 
+
+
+ALTER TABLE `webservicefe` ADD `servidor4` VARCHAR(300) NULL DEFAULT NULL COMMENT 'servidor doc soporte' AFTER `password_anterior`, ADD `servidor5` VARCHAR(300) NULL DEFAULT NULL COMMENT 'servidor ajuste doc soporte' AFTER `servidor4`; 
+
+ALTER TABLE `facturacom` ADD `cufe` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL AFTER `id_comafec`, ADD `enlacepdf` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL AFTER `cufe`, ADD `estado` VARCHAR(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL AFTER `enlacepdf`, ADD `qr_base64` LONGTEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL AFTER `estado`, ADD `fecha_validacion` DATETIME NULL DEFAULT NULL AFTER `qr_base64`, ADD `avisos` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL AFTER `fecha_validacion`, ADD `proveedor` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL AFTER `avisos`, ADD `token` VARCHAR(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL AFTER `proveedor`, ADD `password` VARCHAR(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL AFTER `token`, ADD `servidor` VARCHAR(300) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL AFTER `password`; 
+
+ALTER TABLE `facturacom` ADD `resolucion` VARCHAR(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL COMMENT 'resolución para autofactura' AFTER `servidor`; 
+
+ALTER TABLE `resdian` ADD `prefijo_com` SET('SI','NO') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'cuando prefijo es para compras' AFTER `texto_pie_pagina`;  
+
+ALTER TABLE `resdian` ADD `prefijo_ajuscom` SET('SI','NO') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'NO' COMMENT 'prefijo Nota Ajuste Autofactura' AFTER `prefijo_com`; 
+
+ALTER TABLE `facturacom` CHANGE `tipo_com` `tipo_com` SET('FC','RE','NC','ND','AF','AAF') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'FC' COMMENT 'tipo de trasaccion: FC compra, RE remision, NC Nota credito, ND debito,AF auto factura, AAF Ajuste autofactura';

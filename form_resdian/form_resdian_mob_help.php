@@ -50,12 +50,12 @@ class form_resdian_mob_help
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
 <body class="scFormHelpPage">
-<?php echo "<b>Tipo Factura</b><br>" . nl2br("SELECCIONE TIPO DE FACTURA AL QUE PERTENECE LA RESOLUCIÓN"); ?>
+<?php echo "<b>Tipo Documento</b><br>" . nl2br("SELECCIONE TIPO DE DOCUMENTO AL QUE PERTENECE LA RESOLUCIÓN"); ?>
 </body>
 </html>
 <?php
@@ -79,7 +79,7 @@ class form_resdian_mob_help
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -108,7 +108,7 @@ class form_resdian_mob_help
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -137,12 +137,70 @@ class form_resdian_mob_help
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
 <body class="scFormHelpPage">
 <?php echo "<b>Prefijo de Nota Débito</b><br>" . nl2br("Activar si el prefijo se va a utilizar en las Notas de Débito"); ?>
+</body>
+</html>
+<?php
+        }
+        if ($nm_cod_campo ==  "prefijo_com")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Prefijo de Auto factura</b><br>" . nl2br("Activar si el prefijo se va a utilizar en auto facturas"); ?>
+</body>
+</html>
+<?php
+        }
+        if ($nm_cod_campo ==  "prefijo_ajuscom")
+        {
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<html>
+<head>
+ <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+
+    if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
+    {
+?>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+    }
+
+?>
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
+ <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
+ <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
+</head>
+<body class="scFormHelpPage">
+<?php echo "<b>Prefijo Ajuste compra</b><br>" . nl2br("Se debe seleccionar si el prefijo es para Nota de Ajuste auto-factura"); ?>
 </body>
 </html>
 <?php

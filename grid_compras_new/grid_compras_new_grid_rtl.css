@@ -1,13 +1,13 @@
 .css_tipo_com_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_tipo_com_grid_line {vertical-align: top;text-align: right;}
+.css_tipo_com_grid_line {vertical-align: middle;text-align: right;}
 .css_prefijo_com_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_prefijo_com_grid_line {vertical-align: top;text-align: right;}
+.css_prefijo_com_grid_line {vertical-align: middle;text-align: right;}
 .css_numero_com_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}
 .css_numero_com_grid_line {vertical-align: middle;text-align: right;}
 .css_numfacom_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_numfacom_grid_line {vertical-align: middle;width: 2%;text-align: right;}
 .css_formapago_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_formapago_grid_line {vertical-align: top;width: 1%;text-align: right;}
+.css_formapago_grid_line {vertical-align: middle;width: 1%;text-align: right;}
 .css_fechacom_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_fechacom_grid_line {vertical-align: middle;width: 2%;text-align: center;}
 .css_fechavenc_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
@@ -21,7 +21,9 @@
 .css_total_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_total_grid_line {vertical-align: middle;text-align: right;}
 .css_asentada_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
-.css_asentada_grid_line {vertical-align: top;width: 50%;text-align: right;}
+.css_asentada_grid_line {vertical-align: middle;width: 50%;text-align: center;}
+.css_acciones_label {text-align:center;vertical-align:middle;justify-content:center;font-weight:bold;}
+.css_acciones_grid_line {vertical-align: middle;text-align: center;}
 .css_idfaccom_label {text-align:left;vertical-align:middle;justify-content:left;font-weight:bold;}
 .css_idfaccom_grid_line {vertical-align: middle;width: 1%;text-align: center;}
 .css_subtotal_label {text-align:right;vertical-align:middle;justify-content:right;font-weight:bold;}

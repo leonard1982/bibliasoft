@@ -26,7 +26,7 @@
 .css_descuento__line {text-align:left;}
 .css_descuento__obj {text-align:center;}
 .css_tasaiva__label {text-align:right;}
-.css_tasaiva__line {text-align:left;}
+.css_tasaiva__line {text-align:center;width:20px;}
 .css_tasaiva__obj {text-align:left;}
 .css_tasadesc__label {text-align:right;}
 .css_tasadesc__line {text-align:left;}

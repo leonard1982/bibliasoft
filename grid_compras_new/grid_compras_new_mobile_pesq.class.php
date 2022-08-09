@@ -290,6 +290,10 @@ class grid_compras_new_pesq
             $numfacom_look = substr($this->Db->qstr($numfacom), 1, -1); 
       $nmgp_def_dados = array(); 
       $nm_comando = "select distinct numfacom from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp where  numfacom like '%" . $numfacom . "%'"; 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -345,6 +349,10 @@ class grid_compras_new_pesq
       { 
           $nm_comando = "select idtercero, documento||' - '||nombres from terceros where  documento||' - '||nombres like '%" . $idprov . "%' order by documento, nombres" ; 
       } 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -1555,7 +1563,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
  <META http-equiv="Pragma" content="no-cache"/>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 </HEAD>
 <BODY id="grid_search" class="scGridPage">
 <FORM style="display:none;" name="form_ok" method="POST" action="<?php echo $NM_retorno; ?>" target="_self">
@@ -1597,7 +1605,7 @@ if ($_SESSION['scriptcase']['proc_mobile'])
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
  <META http-equiv="Pragma" content="no-cache" />
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <script type="text/javascript" src="../_lib/lib/js/jquery-3.6.0.min.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod; ?>/third/jquery/js/jquery-ui.js"></script>
  <script type="text/javascript" src="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/malsup-blockui/jquery.blockUI.js"></script>
@@ -2633,6 +2641,10 @@ foreach ($Arr_format as $Part_date)
       $numfacom_look = substr($this->Db->qstr($numfacom), 1, -1); 
       $nmgp_def_dados = array(); 
       $nm_comando = "select distinct numfacom from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp where numfacom = '$numfacom_look'"; 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -2719,6 +2731,10 @@ foreach ($Arr_format as $Part_date)
       { 
           $nm_comando = "select idtercero, documento||' - '||nombres from terceros where idtercero = $idprov_look order by documento, nombres" ; 
       } 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3614,6 +3630,10 @@ foreach ($Arr_format as $Part_date)
       $numfacom_look = substr($this->Db->qstr($numfacom), 1, -1); 
       $nmgp_def_dados = array(); 
       $nm_comando = "select distinct numfacom from (SELECT      idfaccom,     numfacom,     fechacom,     fechavenc,     idprov,     if(tipo_com='NC',subtotal*-1,subtotal) as subtotal,     if(tipo_com='NC',valoriva*-1,valoriva) as valoriva,     if(tipo_com='NC',total*-1,total) as total,     pagada,     asentada,     observaciones,     saldo,     id_pedidocom,     formapago, retencion, reteica, reteiva, cod_cuenta, tipo_com, prefijo_com, numero_com,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='0'),0)) as excento,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as base_iva_19,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0) *-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='19'),0)) as valor_iva_19,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as base_iva_5,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='5'),0)) as valor_iva_5,  if(tipo_com='NC',coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.valorpar) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as base_con_8,  if(tipo_com='NC',coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=idfaccom and c.tasaiva='8'),0)*-1,coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0)) as valor_con_8,  if(tipo_com='NC',(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )*-1,(valoriva - coalesce((select sum(c.iva) from detallecompra c where c.idfaccom=p.idfaccom and c.tasaiva='8'),0) )) as t_iva  FROM      facturacom p ) nm_sel_esp where numfacom = '$numfacom_look'"; 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -3688,6 +3708,10 @@ foreach ($Arr_format as $Part_date)
       { 
           $nm_comando = "select idtercero, documento||' - '||nombres from terceros where idtercero = $idprov_look order by documento, nombres" ; 
       } 
+      foreach ($this->Ini->nm_col_dinamica as $nm_cada_col => $nm_nova_col)
+      {
+          $nm_comando = str_replace($nm_cada_col, $nm_nova_col, $nm_comando); 
+      }
       unset($cmp1,$cmp2);
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 

@@ -185,6 +185,7 @@ class fac_compras_new_ini
    var $link_detallecompra_new_edit;
    var $link_grid_detallecompra_new_nc_cons;
    var $link_blank_compras;
+   var $link_grid_compras_new_cons;
    var $link_fac_compras_new_inline;
    var $nm_cont_lin;
    var $nm_limite_lin;
@@ -301,8 +302,8 @@ class fac_compras_new_ini
       $this->nm_dt_criacao   = "20180212"; 
       $this->nm_hr_criacao   = "100855"; 
       $this->nm_autor_alt    = "edgar"; 
-      $this->nm_dt_ult_alt   = "20220803"; 
-      $this->nm_hr_ult_alt   = "091144"; 
+      $this->nm_dt_ult_alt   = "20220809"; 
+      $this->nm_hr_ult_alt   = "100853"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -535,8 +536,7 @@ class fac_compras_new_ini
           }
       }
       if (isset($_SESSION['scriptcase']['fac_compras_new']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+          $SS_cod_html  = '';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -777,6 +777,40 @@ class fac_compras_new_ini
               $this->sc_lig_md5["grid_detallecompra_new_nc"] = 'S';
           }
       }
+      $Tmp_apl_lig = "grid_compras_new";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["grid_compras_new"] = 'S';
+          }
+      }
+      $Tmp_apl_lig = "grid_compras_new";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_compras_new_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_compras_new_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["grid_compras_new"] = 'S';
+          }
+      }
       $PHP_ver = str_replace(".", "", phpversion()); 
       if (substr($PHP_ver, 0, 3) < 434)
       {
@@ -961,6 +995,7 @@ class fac_compras_new_ini
       $this->sc_lig_target["C_@scinf_detalleNC"] = 'nmsc_iframe_liga_grid_detallecompra_new_nc';
       $this->sc_lig_iframe["nmsc_iframe_liga_grid_detallecompra_new_nc"] = 'nmsc_iframe_liga_grid_detallecompra_new_nc';
       $this->link_blank_compras = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('blank_compras') . "/";
+      $this->link_grid_compras_new_cons = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_compras_new') . "/";
       $this->link_fac_compras_new_inline = $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('fac_compras_new') . "/fac_compras_new_inline.php";
       if ($_SESSION['sc_session'][$this->sc_page]['fac_compras_new']['dashboard_info']['under_dashboard'])
       {
@@ -1029,7 +1064,7 @@ class fac_compras_new_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSX7HIBeV5XGHgvsVIBOV5F/DoXGD9BsZ1BOHArYD5BODErKHENiDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZ1X7DSNOHuB/DMveHErCDuFYVoB/D9XsDQX7DSN7HQBOHgrKVcrsHEX/VEraD9XGZ1rqD1rwD5BqHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgrKVIBODWFaVoBqDcNwH9B/D1rwD5FaDEBOHEJGDWF/DoJeDcJeDQFGD1BeV5raHuNOVIBODWFYVEF7HQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHAvsZMBOHgrKHEBUHEFqHIBiD9XsZSFUHAvmV5JeHgrwVIBsH5XCHMFGD9BsH9FaHArKV5FGHgvsHArsHEFqDorqHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAvCD5BqHgveDkXKDWrGDoBOHQJeDQBqHANKV5BqDMvmVcFKV5BmVoBqD9BsZkFGHArKHuB/DMzGZSJqDWX7HIBiDcXGDQJsHAN7HuJwDMzGVIBODuFGVEFGHQJmZSBOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBeHuraDMBYDkBsV5F/HMFUHQXGZSBqD1rKHuJeDMrYHErCDWX7HMBOHQXsH9BiZ1rwHQBODMBODkBsV5FGVoFaHQBiZSBqHABYHQBqHgBeHEJqDWr/HMX7HQNmZ9rqHAveHQrqDMBYDkBsHEF/HMFUHQXGH9BqHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQFGHABYD5XGDMrYVIBsH5FqDoFUD9XGZ1FGHAN7HQJwDEBODkFeH5FYVoFGHQJKDQBqHANOHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HABYV5JeDMBYHEJqH5FYHIFUD9FYH9X7HIrwVWBOHgrKVIBsDur/VoFGD9XGZSB/Z1NOV5B/DMzGVkXeDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HANOD5NUDMBYZSJqV5FaDoF7D9XsZSX7Z1BYV5JeHuzGVIBODWFaVoFGDcNwH9B/Z1NOV5FaDEvsDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHArKHQJeDErKVkJ3DuJeVoX7HQJKZ9XGD1veHuXGHuBOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMvsVcBUDWB3VEFGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoBqHQNwDuBqHAN7VWBOHgvsDkBOH5FqVEX7HQXGZ1BOHIBeV5FaDMvCDkXKHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuFqHMJwHQBiH9BqZ1NOHQJsHgNOVkJ3H5F/HMXGDcJUDQFaHArYHQJeDMNOVIBsV5X7HIX7HQXGH9BqZ1BOD5raHgvsVkJ3DWX7HIBOHQJKDQFUHANOHQrqDMBYZSJ3DWXCHIJeHQBiH9BqDSNOHQJsHgNOZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvsV9FiV5BmVorq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1978,8 +2013,9 @@ ob_start();
             $id_pedidocom = NM_utf8_urldecode($_POST['rsargs'][4]);
             $saldo = NM_utf8_urldecode($_POST['rsargs'][5]);
             $pagada = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $idfaccom = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $numfacom = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $idfaccom = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][9]);
         }
         if ('ajax_fac_compras_new_autocomp_idprov' == $_POST['rs'])
         {
@@ -3476,7 +3512,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_idprov_onchange
 
-    function ajax_fac_compras_new_event_tipo_com_onchange($total, $tipo_com, $id_comafec, $es_remision, $id_pedidocom, $saldo, $pagada, $idfaccom, $script_case_init)
+    function ajax_fac_compras_new_event_tipo_com_onchange($total, $tipo_com, $id_comafec, $es_remision, $id_pedidocom, $saldo, $pagada, $numfacom, $idfaccom, $script_case_init)
     {
         global $inicial_fac_compras_new;
         //register_shutdown_function("fac_compras_new_pack_ajax_response");
@@ -3490,6 +3526,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'id_pedidocom' => NM_utf8_urldecode($id_pedidocom),
                   'saldo' => NM_utf8_urldecode($saldo),
                   'pagada' => NM_utf8_urldecode($pagada),
+                  'numfacom' => NM_utf8_urldecode($numfacom),
                   'idfaccom' => NM_utf8_urldecode($idfaccom),
                   'script_case_init' => NM_utf8_urldecode($script_case_init),
                   'buffer_output' => true,

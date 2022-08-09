@@ -217,8 +217,8 @@ class blk_menu_ini
       $this->nm_dt_criacao   = "20220525"; 
       $this->nm_hr_criacao   = "004840"; 
       $this->nm_autor_alt    = "desarrollo3"; 
-      $this->nm_dt_ult_alt   = "20220722"; 
-      $this->nm_hr_ult_alt   = "073520"; 
+      $this->nm_dt_ult_alt   = "20220727"; 
+      $this->nm_hr_ult_alt   = "221043"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -832,7 +832,7 @@ class blk_menu_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blk_menu']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blk_menu']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDQFUHArYHQFaHgvOVcBOH5FqVEFGDcJUZkFGDSNOV5X7HgNKHENiH5X/DoBqD9XsDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsD9JKZSFUZ1rwHQF7DMBOVIFCHEFYHIraHQBsZ1FGHABYV5XGHgvsVkJGDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDEBeZSJqV5FaVoFGDcBwDQX7Z1N7VWJwDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQFYDQJsZ1rwD5rqDMBYV9FeHEF/HMFGDcFYZSBOD1rwHQJeHgvsHArCV5FaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDuXKDoJeHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQJmZSBqDSBeZMFaDMvCVkJGDuXKZuB/DcXGDQFaHIrwV5raHgrwVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQFaZ1BYHQJsDMrYVIB/DWJeHIFUD9JmZSB/Z1NOD5BODMvCHEBUDWF/HIBOHQBiDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwH9X7HABYHuBiHuzGVIBODWFaHIJeHQBiZkBiD1rwHQBiDMveHErCDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDEBeZSJqV5FaVoFGDcBwDQX7Z1N7VWJwDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQBqHAveHQBqDMBYDkB/H5XCHIFUHQNmZ1BiHANOHQrqHgNKZSJ3DuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDurmDoBOHQXODuFaHAveD5NUHgNKDkBOV5FYHMBiD9XGZkFUZ1vOD5BqHgNOHErCDWr/HIraDcBwDQB/D1veVWJeHgrYZSJqDWJeHIFGDcJUZ1rqDSrYZMBODMzGHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -2121,7 +2121,7 @@ $picture = sc_url_library('prj', 'menu', 'assets/images/icon-login/BARRA-1.png')
 					<!-- tab-content-->
 					<div id="contenidopestanas">
 
-						<div id="content_tab_0" class="content-tabs" style="height: 100%; width: 100%;">  <table style="height: 100%; width: 100%" cellspacing="0" cellpadding="0"><tbody><tr>        <td id="Iframe_control" style="border: 0px; height: 100%; width:100%; vertical-align:top;text-align:center;padding: 0px"><iframe src="../seg_apps_grid" name="iframe_130" id="iframe_130" scrolling="yes" style="width: 100%; height: 100%;" onload="genexis(this)" frameborder="0"></iframe></td></tr></tbody></table></div>
+						<div id="content_tab_0" class="content-tabs" style="height: 100%; width: 100%;">  <table style="height: 100%; width: 100%" cellspacing="0" cellpadding="0"><tbody><tr>        <td id="Iframe_control" style="border: 0px; height: 100%; width:100%; vertical-align:top;text-align:center;padding: 0px"><iframe src="../blk_dashboard" name="iframe_130" id="iframe_130" scrolling="yes" style="width: 100%; height: 100%;" onload="genexis(this)" frameborder="0"></iframe></td></tr></tbody></table></div>
 
 					</div>
 					<!-- end tab-content-->

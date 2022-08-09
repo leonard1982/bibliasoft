@@ -76,6 +76,10 @@ class form_resdian_apl
    var $contador_pruebas;
    var $texto_encabezado;
    var $texto_pie_pagina;
+   var $prefijo_com;
+   var $prefijo_com_1;
+   var $prefijo_ajuscom;
+   var $prefijo_ajuscom_1;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -203,6 +207,14 @@ class form_resdian_apl
           if (isset($this->NM_ajax_info['param']['prefijo']))
           {
               $this->prefijo = $this->NM_ajax_info['param']['prefijo'];
+          }
+          if (isset($this->NM_ajax_info['param']['prefijo_ajuscom']))
+          {
+              $this->prefijo_ajuscom = $this->NM_ajax_info['param']['prefijo_ajuscom'];
+          }
+          if (isset($this->NM_ajax_info['param']['prefijo_com']))
+          {
+              $this->prefijo_com = $this->NM_ajax_info['param']['prefijo_com'];
           }
           if (isset($this->NM_ajax_info['param']['prefijo_fe']))
           {
@@ -1288,6 +1300,14 @@ class form_resdian_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'pref_ndb');
           }
+          if ('validate_prefijo_com' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'prefijo_com');
+          }
+          if ('validate_prefijo_ajuscom' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'prefijo_ajuscom');
+          }
           if ('validate_activa' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'activa');
@@ -1384,6 +1404,42 @@ class form_resdian_apl
                           $this->pref_ndb .= ";";
                       } 
                       $this->pref_ndb .= $dados_pref_ndb_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->prefijo_com))
+          {
+              $x = 0; 
+              $this->prefijo_com_1 = $this->prefijo_com;
+              $this->prefijo_com = ""; 
+              if ($this->prefijo_com_1 != "") 
+              { 
+                  foreach ($this->prefijo_com_1 as $dados_prefijo_com_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->prefijo_com .= ";";
+                      } 
+                      $this->prefijo_com .= $dados_prefijo_com_1;
+                      $x++ ; 
+                  } 
+              } 
+          } 
+          if (is_array($this->prefijo_ajuscom))
+          {
+              $x = 0; 
+              $this->prefijo_ajuscom_1 = $this->prefijo_ajuscom;
+              $this->prefijo_ajuscom = ""; 
+              if ($this->prefijo_ajuscom_1 != "") 
+              { 
+                  foreach ($this->prefijo_ajuscom_1 as $dados_prefijo_ajuscom_1 ) 
+                  { 
+                      if ($x != 0)
+                      { 
+                          $this->prefijo_ajuscom .= ";";
+                      } 
+                      $this->prefijo_ajuscom .= $dados_prefijo_ajuscom_1;
                       $x++ ; 
                   } 
               } 
@@ -1634,7 +1690,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form ?>.css" /> 
   <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_prod; ?>/third/font-awesome/css/all.min.css" /> 
-  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+  <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 </HEAD>
 <BODY class="scExportPage">
 <table style="border-collapse: collapse; border-width: 0; height: 100%; width: 100%"><tr><td style="padding: 0; text-align: center; vertical-align: top">
@@ -1935,7 +1991,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
                return "Tipo resolución";
                break;
            case 'prefijo_fe':
-               return "Tipo Factura";
+               return "Tipo Documento";
                break;
            case 'pref_factura':
                return "Prefijo de Factura";
@@ -1945,6 +2001,12 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
                break;
            case 'pref_ndb':
                return "Prefijo de Nota Débito";
+               break;
+           case 'prefijo_com':
+               return "Prefijo de Auto factura";
+               break;
+           case 'prefijo_ajuscom':
+               return "Prefijo Ajuste compra";
                break;
            case 'activa':
                return "Activa";
@@ -2043,6 +2105,10 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         $this->ValidateField_pref_ncr($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'pref_ndb' == $filtro)) || (is_array($filtro) && in_array('pref_ndb', $filtro)))
         $this->ValidateField_pref_ndb($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'prefijo_com' == $filtro)) || (is_array($filtro) && in_array('prefijo_com', $filtro)))
+        $this->ValidateField_prefijo_com($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ((!is_array($filtro) && ('' == $filtro || 'prefijo_ajuscom' == $filtro)) || (is_array($filtro) && in_array('prefijo_ajuscom', $filtro)))
+        $this->ValidateField_prefijo_ajuscom($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'activa' == $filtro)) || (is_array($filtro) && in_array('activa', $filtro)))
         $this->ValidateField_activa($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ((!is_array($filtro) && ('' == $filtro || 'nombre_pc' == $filtro)) || (is_array($filtro) && in_array('nombre_pc', $filtro)))
@@ -2801,6 +2867,92 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
         }
     } // ValidateField_pref_ndb
 
+    function ValidateField_prefijo_com(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->prefijo_com == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->prefijo_com = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->prefijo_com))
+          {
+              $x = 0; 
+              $this->prefijo_com_1 = array(); 
+              foreach ($this->prefijo_com as $ind => $dados_prefijo_com_1 ) 
+              {
+                  if ($dados_prefijo_com_1 != "") 
+                  {
+                      $this->prefijo_com_1[] = $dados_prefijo_com_1;
+                  } 
+              } 
+              $this->prefijo_com = ""; 
+              foreach ($this->prefijo_com_1 as $dados_prefijo_com_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->prefijo_com .= ";";
+                   } 
+                   $this->prefijo_com .= $dados_prefijo_com_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'prefijo_com';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_prefijo_com
+
+    function ValidateField_prefijo_ajuscom(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+        $hasError = false;
+      if ($this->prefijo_ajuscom == "" && $this->nmgp_opcao != "excluir")
+      { 
+          $this->prefijo_ajuscom = "NO";
+      } 
+      else 
+      { 
+          if (is_array($this->prefijo_ajuscom))
+          {
+              $x = 0; 
+              $this->prefijo_ajuscom_1 = array(); 
+              foreach ($this->prefijo_ajuscom as $ind => $dados_prefijo_ajuscom_1 ) 
+              {
+                  if ($dados_prefijo_ajuscom_1 != "") 
+                  {
+                      $this->prefijo_ajuscom_1[] = $dados_prefijo_ajuscom_1;
+                  } 
+              } 
+              $this->prefijo_ajuscom = ""; 
+              foreach ($this->prefijo_ajuscom_1 as $dados_prefijo_ajuscom_1 ) 
+              { 
+                   if ($x != 0)
+                   { 
+                       $this->prefijo_ajuscom .= ";";
+                   } 
+                   $this->prefijo_ajuscom .= $dados_prefijo_ajuscom_1;
+                   $x++ ; 
+              } 
+          } 
+      } 
+        if ($hasError) {
+            global $sc_seq_vert;
+            $fieldName = 'prefijo_ajuscom';
+            if (isset($sc_seq_vert) && '' != $sc_seq_vert) {
+                $fieldName .= $sc_seq_vert;
+            }
+            $this->NM_ajax_info['fieldsWithErrors'][] = $fieldName;
+        }
+    } // ValidateField_prefijo_ajuscom
+
     function ValidateField_activa(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
@@ -3015,6 +3167,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     $this->nmgp_dados_form['pref_factura'] = $this->pref_factura;
     $this->nmgp_dados_form['pref_ncr'] = $this->pref_ncr;
     $this->nmgp_dados_form['pref_ndb'] = $this->pref_ndb;
+    $this->nmgp_dados_form['prefijo_com'] = $this->prefijo_com;
+    $this->nmgp_dados_form['prefijo_ajuscom'] = $this->prefijo_ajuscom;
     $this->nmgp_dados_form['activa'] = $this->activa;
     $this->nmgp_dados_form['nombre_pc'] = $this->nombre_pc;
     $this->nmgp_dados_form['nombre_impre'] = $this->nombre_impre;
@@ -3618,6 +3772,8 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
           $this->ajax_return_values_pref_factura();
           $this->ajax_return_values_pref_ncr();
           $this->ajax_return_values_pref_ndb();
+          $this->ajax_return_values_prefijo_com();
+          $this->ajax_return_values_prefijo_ajuscom();
           $this->ajax_return_values_activa();
           $this->ajax_return_values_nombre_pc();
           $this->ajax_return_values_nombre_impre();
@@ -3854,7 +4010,7 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian']['Lookup_tipo'][] = 
 $aLookup[] = array(form_resdian_pack_protect_string('NF') => str_replace('<', '&lt;',form_resdian_pack_protect_string("FACTURA")));
 $aLookup[] = array(form_resdian_pack_protect_string('FC') => str_replace('<', '&lt;',form_resdian_pack_protect_string("F. COMPUTADOR")));
 $aLookup[] = array(form_resdian_pack_protect_string('FP') => str_replace('<', '&lt;',form_resdian_pack_protect_string("F. POS")));
-$aLookup[] = array(form_resdian_pack_protect_string('FE') => str_replace('<', '&lt;',form_resdian_pack_protect_string("F. ELECTRÓNICA")));
+$aLookup[] = array(form_resdian_pack_protect_string('FE') => str_replace('<', '&lt;',form_resdian_pack_protect_string("ELECTRÓNICO")));
 $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian']['Lookup_prefijo_fe'][] = 'NF';
 $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian']['Lookup_prefijo_fe'][] = 'FC';
 $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian']['Lookup_prefijo_fe'][] = 'FP';
@@ -4049,6 +4205,100 @@ $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian']['Lookup_pref_ndb'][
               $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
           }
           $this->NM_ajax_info['fldList']['pref_ndb']['labList'] = $aLabel;
+          }
+   }
+
+          //----- prefijo_com
+   function ajax_return_values_prefijo_com($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("prefijo_com", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->prefijo_com);
+              $aLookup = array();
+              $this->_tmp_lookup_prefijo_com = $this->prefijo_com;
+
+$aLookup[] = array(form_resdian_pack_protect_string('SI') => str_replace('<', '&lt;',form_resdian_pack_protect_string("")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian']['Lookup_prefijo_com'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['prefijo_com']) && !empty($this->NM_ajax_info['select_html']['prefijo_com']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['prefijo_com']);
+          }
+          $this->NM_ajax_info['fldList']['prefijo_com'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => false,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-prefijo_com',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['prefijo_com']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['prefijo_com']['valList'][$i] = form_resdian_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['prefijo_com']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['prefijo_com']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['prefijo_com']['labList'] = $aLabel;
+          }
+   }
+
+          //----- prefijo_ajuscom
+   function ajax_return_values_prefijo_ajuscom($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("prefijo_ajuscom", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->prefijo_ajuscom);
+              $aLookup = array();
+              $this->_tmp_lookup_prefijo_ajuscom = $this->prefijo_ajuscom;
+
+$aLookup[] = array(form_resdian_pack_protect_string('SI') => str_replace('<', '&lt;',form_resdian_pack_protect_string("")));
+$_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian']['Lookup_prefijo_ajuscom'][] = 'SI';
+          $aLookupOrig = $aLookup;
+          $sOptComp = "";
+          if (isset($this->NM_ajax_info['select_html']['prefijo_ajuscom']) && !empty($this->NM_ajax_info['select_html']['prefijo_ajuscom']))
+          {
+              $sOptComp = str_replace('{SC_100PERC_CLASS_INPUT}', $this->classes_100perc_fields['input'], $this->NM_ajax_info['select_html']['prefijo_ajuscom']);
+          }
+          $this->NM_ajax_info['fldList']['prefijo_ajuscom'] = array(
+                       'row'    => '',
+               'type'    => 'checkbox',
+               'switch'  => false,
+               'valList' => explode(';', $sTmpValue),
+               'colNum'  => 1,
+               'optComp'  => $sOptComp,
+               'optClass' => 'sc-ui-checkbox-prefijo_ajuscom',
+              );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['prefijo_ajuscom']['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['prefijo_ajuscom']['valList'][$i] = form_resdian_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['prefijo_ajuscom']['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['prefijo_ajuscom']['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['prefijo_ajuscom']['labList'] = $aLabel;
           }
    }
 
@@ -4472,6 +4722,8 @@ $_SESSION['scriptcase']['form_resdian']['contr_erro'] = 'off';
       $NM_val_form['pref_factura'] = $this->pref_factura;
       $NM_val_form['pref_ncr'] = $this->pref_ncr;
       $NM_val_form['pref_ndb'] = $this->pref_ndb;
+      $NM_val_form['prefijo_com'] = $this->prefijo_com;
+      $NM_val_form['prefijo_ajuscom'] = $this->prefijo_ajuscom;
       $NM_val_form['activa'] = $this->activa;
       $NM_val_form['nombre_pc'] = $this->nombre_pc;
       $NM_val_form['nombre_impre'] = $this->nombre_impre;
@@ -4604,6 +4856,16 @@ $_SESSION['scriptcase']['form_resdian']['contr_erro'] = 'off';
               $this->texto_pie_pagina = "null"; 
               $NM_val_null[] = "texto_pie_pagina";
           } 
+          if ($this->prefijo_com == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->prefijo_com = "null"; 
+              $NM_val_null[] = "prefijo_com";
+          } 
+          if ($this->prefijo_ajuscom == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->prefijo_ajuscom = "null"; 
+              $NM_val_null[] = "prefijo_ajuscom";
+          } 
       }
       if ($this->nmgp_opcao == "alterar") 
       {
@@ -4670,37 +4932,37 @@ $_SESSION['scriptcase']['form_resdian']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = #$this->fec_vencimiento#, prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina'"; 
+                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = #$this->fec_vencimiento#, prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina', prefijo_com = '$this->prefijo_com', prefijo_ajuscom = '$this->prefijo_ajuscom'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina'"; 
+                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina', prefijo_com = '$this->prefijo_com', prefijo_ajuscom = '$this->prefijo_ajuscom'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina'"; 
+                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina', prefijo_com = '$this->prefijo_com', prefijo_ajuscom = '$this->prefijo_ajuscom'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = EXTEND('$this->fec_vencimiento', YEAR TO DAY), prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina'"; 
+                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = EXTEND('$this->fec_vencimiento', YEAR TO DAY), prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina', prefijo_com = '$this->prefijo_com', prefijo_ajuscom = '$this->prefijo_ajuscom'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina'"; 
+                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina', prefijo_com = '$this->prefijo_com', prefijo_ajuscom = '$this->prefijo_ajuscom'"; 
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina'"; 
+                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina', prefijo_com = '$this->prefijo_com', prefijo_ajuscom = '$this->prefijo_ajuscom'"; 
               } 
               else 
               { 
                   $comando = "UPDATE " . $this->Ini->nm_tabela . " SET ";  
-                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina'"; 
+                  $SC_fields_update[] = "resolucion = '$this->resolucion', rangofac = '$this->rangofac', fecha = '$this->fecha', prefijo = '$this->prefijo', primerfactura = $this->primerfactura, nombre_pc = '$this->nombre_pc', nombre_impre = '$this->nombre_impre', fec_vencimiento = " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", prefijo_fe = '$this->prefijo_fe', pref_factura = '$this->pref_factura', pref_ncr = '$this->pref_ncr', pref_ndb = '$this->pref_ndb', ultima_fac = $this->ultima_fac, vigencia = $this->vigencia, tipo = '$this->tipo', activa = '$this->activa', desde = $this->desde, contador_pruebas = '$this->contador_pruebas', texto_encabezado = '$this->texto_encabezado', texto_pie_pagina = '$this->texto_pie_pagina', prefijo_com = '$this->prefijo_com', prefijo_ajuscom = '$this->prefijo_ajuscom'"; 
               } 
               $aDoNotUpdate = array();
               $comando .= implode(",", $SC_fields_update);  
@@ -4820,7 +5082,7 @@ $_SESSION['scriptcase']['form_resdian']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('resolucion', 'rangofac', 'fecha', 'vigencia', 'fec_vencimiento', 'prefijo', 'primerfactura', 'desde', 'ultima_fac', 'tipo', 'prefijo_fe', 'pref_factura', 'pref_ncr', 'pref_ndb', 'activa', 'nombre_pc', 'nombre_impre', 'contador_pruebas', 'texto_encabezado', 'texto_pie_pagina'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('resolucion', 'rangofac', 'fecha', 'vigencia', 'fec_vencimiento', 'prefijo', 'primerfactura', 'desde', 'ultima_fac', 'tipo', 'prefijo_fe', 'pref_factura', 'pref_ncr', 'pref_ndb', 'prefijo_com', 'prefijo_ajuscom', 'activa', 'nombre_pc', 'nombre_impre', 'contador_pruebas', 'texto_encabezado', 'texto_pie_pagina'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -4869,39 +5131,39 @@ $_SESSION['scriptcase']['form_resdian']['contr_erro'] = 'off';
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina) VALUES ('$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', #$this->fec_vencimiento#, '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom) VALUES ('$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', #$this->fec_vencimiento#, '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina', '$this->prefijo_com', '$this->prefijo_ajuscom')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina', '$this->prefijo_com', '$this->prefijo_ajuscom')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina', '$this->prefijo_com', '$this->prefijo_ajuscom')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina', '$this->prefijo_com', '$this->prefijo_ajuscom')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', EXTEND('$this->fec_vencimiento', YEAR TO DAY), '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', EXTEND('$this->fec_vencimiento', YEAR TO DAY), '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina', '$this->prefijo_com', '$this->prefijo_ajuscom')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina', '$this->prefijo_com', '$this->prefijo_ajuscom')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina', '$this->prefijo_com', '$this->prefijo_ajuscom')"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina', '$this->prefijo_com', '$this->prefijo_ajuscom')"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom) VALUES (" . $NM_seq_auto . "'$this->resolucion', '$this->rangofac', '$this->fecha', '$this->prefijo', $this->primerfactura, '$this->nombre_pc', '$this->nombre_impre', " . $this->Ini->date_delim . $this->fec_vencimiento . $this->Ini->date_delim1 . ", '$this->prefijo_fe', '$this->pref_factura', '$this->pref_ncr', '$this->pref_ndb', $this->ultima_fac, $this->vigencia, '$this->tipo', '$this->activa', $this->desde, '$this->contador_pruebas', '$this->texto_encabezado', '$this->texto_pie_pagina', '$this->prefijo_com', '$this->prefijo_ajuscom')"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -5409,23 +5671,23 @@ $_SESSION['scriptcase']['form_resdian']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, str_replace (convert(char(10),fec_vencimiento,102), '.', '-') + ' ' + convert(char(8),fec_vencimiento,20), prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, str_replace (convert(char(10),fec_vencimiento,102), '.', '-') + ' ' + convert(char(8),fec_vencimiento,20), prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, convert(char(23),fec_vencimiento,121), prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, convert(char(23),fec_vencimiento,121), prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, EXTEND(fec_vencimiento, YEAR TO DAY), prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, EXTEND(fec_vencimiento, YEAR TO DAY), prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT Idres, resolucion, rangofac, fecha, prefijo, primerfactura, nombre_pc, nombre_impre, fec_vencimiento, prefijo_fe, pref_factura, pref_ncr, pref_ndb, ultima_fac, vigencia, tipo, activa, desde, contador_pruebas, texto_encabezado, texto_pie_pagina, prefijo_com, prefijo_ajuscom from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = "resolucion<>0";
@@ -5622,6 +5884,10 @@ $_SESSION['scriptcase']['form_resdian']['contr_erro'] = 'off';
               $this->nmgp_dados_select['texto_encabezado'] = $this->texto_encabezado;
               $this->texto_pie_pagina = $rs->fields[20] ; 
               $this->nmgp_dados_select['texto_pie_pagina'] = $this->texto_pie_pagina;
+              $this->prefijo_com = $rs->fields[21] ; 
+              $this->nmgp_dados_select['prefijo_com'] = $this->prefijo_com;
+              $this->prefijo_ajuscom = $rs->fields[22] ; 
+              $this->nmgp_dados_select['prefijo_ajuscom'] = $this->prefijo_ajuscom;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->idres = (string)$this->idres; 
               $this->primerfactura = (string)$this->primerfactura; 
@@ -5692,6 +5958,10 @@ $_SESSION['scriptcase']['form_resdian']['contr_erro'] = 'off';
               $this->nmgp_dados_form["texto_encabezado"] = $this->texto_encabezado;
               $this->texto_pie_pagina = "";  
               $this->nmgp_dados_form["texto_pie_pagina"] = $this->texto_pie_pagina;
+              $this->prefijo_com = "";  
+              $this->nmgp_dados_form["prefijo_com"] = $this->prefijo_com;
+              $this->prefijo_ajuscom = "";  
+              $this->nmgp_dados_form["prefijo_ajuscom"] = $this->prefijo_ajuscom;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
@@ -6398,7 +6668,7 @@ function sc_file_size($file, $format = false)
        $nmgp_def_dados .= "FACTURA?#?NF?#?S?@?";
        $nmgp_def_dados .= "F. COMPUTADOR?#?FC?#?N?@?";
        $nmgp_def_dados .= "F. POS?#?FP?#?N?@?";
-       $nmgp_def_dados .= "F. ELECTRÓNICA?#?FE?#?N?@?";
+       $nmgp_def_dados .= "ELECTRÓNICO?#?FE?#?N?@?";
        $todo = explode("?@?", $nmgp_def_dados);
        return $todo;
 
@@ -6420,6 +6690,22 @@ function sc_file_size($file, $format = false)
 
    }
    function Form_lookup_pref_ndb()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_prefijo_com()
+   {
+       $nmgp_def_dados  = "";
+       $nmgp_def_dados .= "?#?SI?#?N?@?";
+       $todo = explode("?@?", $nmgp_def_dados);
+       return $todo;
+
+   }
+   function Form_lookup_prefijo_ajuscom()
    {
        $nmgp_def_dados  = "";
        $nmgp_def_dados .= "?#?SI?#?N?@?";
@@ -6788,7 +7074,7 @@ function nmgp_redireciona($tipo=0)
     <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
     <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
     <META http-equiv="Pragma" content="no-cache"/>
-    <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
    </HEAD>
    <BODY>
    <FORM name="form_ok" method="POST" action="<?php echo $this->form_encode_input($nmgp_saida_form); ?>" target="_self">

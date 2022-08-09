@@ -78,6 +78,9 @@ class detallecompra_new_apl
    var $porc_desc_;
    var $unidad_c_;
    var $num_ndevolucion_;
+   var $tipo_docu_;
+   var $tipo_trans_;
+   var $id_nota_;
    var $cod_barras_;
    var $presentacion_;
    var $ver_;
@@ -306,6 +309,9 @@ class detallecompra_new_apl
       $this->sc_conv_var['porc_desc'] = "porc_desc_";
       $this->sc_conv_var['unidad_c'] = "unidad_c_";
       $this->sc_conv_var['num_ndevolucion'] = "num_ndevolucion_";
+      $this->sc_conv_var['tipo_docu'] = "tipo_docu_";
+      $this->sc_conv_var['tipo_trans'] = "tipo_trans_";
+      $this->sc_conv_var['id_nota'] = "id_nota_";
       $this->sc_conv_var['cod_barras'] = "cod_barras_";
       $this->sc_conv_var['presentacion'] = "presentacion_";
       $this->sc_conv_var['ver'] = "ver_";
@@ -1854,6 +1860,13 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
       $this->field_config['num_ndevolucion_']['symbol_dec'] = '';
       $this->field_config['num_ndevolucion_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['num_ndevolucion_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- id_nota_
+      $this->field_config['id_nota_']               = array();
+      $this->field_config['id_nota_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['id_nota_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['id_nota_']['symbol_dec'] = '';
+      $this->field_config['id_nota_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['id_nota_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
    }
 
    function controle()
@@ -1982,6 +1995,9 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
              $this->fecha_fab_ = $this->nmgp_dados_form['fecha_fab_']; 
              $this->unidad_c_ = $this->nmgp_dados_form['unidad_c_']; 
              $this->num_ndevolucion_ = $this->nmgp_dados_form['num_ndevolucion_']; 
+             $this->tipo_docu_ = $this->nmgp_dados_form['tipo_docu_']; 
+             $this->tipo_trans_ = $this->nmgp_dados_form['tipo_trans_']; 
+             $this->id_nota_ = $this->nmgp_dados_form['id_nota_']; 
          }
          $this->controle_form_vert();
          if ($Campos_Crit != "" || !empty($Campos_Falta) || $this->Campos_Mens_erro != "")
@@ -2310,6 +2326,9 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
              $this->fecha_fab_ = $this->nmgp_dados_form['fecha_fab_']; 
              $this->unidad_c_ = $this->nmgp_dados_form['unidad_c_']; 
              $this->num_ndevolucion_ = $this->nmgp_dados_form['num_ndevolucion_']; 
+             $this->tipo_docu_ = $this->nmgp_dados_form['tipo_docu_']; 
+             $this->tipo_trans_ = $this->nmgp_dados_form['tipo_trans_']; 
+             $this->id_nota_ = $this->nmgp_dados_form['id_nota_']; 
          }
          if (isset($this->iddet_)) { $this->nm_limpa_alfa($this->iddet_); }
          if (isset($this->idfaccom_)) { $this->nm_limpa_alfa($this->idfaccom_); }
@@ -2383,6 +2402,9 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
              $this->form_vert_detallecompra_new[$sc_seq_vert]['fecha_fab_'] =  $this->fecha_fab_; 
              $this->form_vert_detallecompra_new[$sc_seq_vert]['unidad_c_'] =  $this->unidad_c_; 
              $this->form_vert_detallecompra_new[$sc_seq_vert]['num_ndevolucion_'] =  $this->num_ndevolucion_; 
+             $this->form_vert_detallecompra_new[$sc_seq_vert]['tipo_docu_'] =  $this->tipo_docu_; 
+             $this->form_vert_detallecompra_new[$sc_seq_vert]['tipo_trans_'] =  $this->tipo_trans_; 
+             $this->form_vert_detallecompra_new[$sc_seq_vert]['id_nota_'] =  $this->id_nota_; 
          }
          $sc_seq_vert++; 
       } 
@@ -2523,6 +2545,10 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
           if ('event_tallas__onchange' == $this->NM_ajax_opcao)
           {
               $this->tallas__onChange();
+          }
+          if ('event_tasaiva__onchange' == $this->NM_ajax_opcao)
+          {
+              $this->tasaiva__onChange();
           }
           if ('event_valorunit__onblur' == $this->NM_ajax_opcao)
           {
@@ -2760,7 +2786,7 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form ?>.css" /> 
   <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_prod; ?>/third/font-awesome/css/all.min.css" /> 
-  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+  <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 </HEAD>
 <BODY class="scExportPage">
 <table style="border-collapse: collapse; border-width: 0; height: 100%; width: 100%"><tr><td style="padding: 0; text-align: center; vertical-align: top">
@@ -3145,6 +3171,15 @@ ORDER BY descripcion_um";
                break;
            case 'num_ndevolucion_':
                return "Num Ndevolucion";
+               break;
+           case 'tipo_docu_':
+               return "Tipo Docu";
+               break;
+           case 'tipo_trans_':
+               return "Tipo Trans";
+               break;
+           case 'id_nota_':
+               return "Id Nota";
                break;
        }
 
@@ -4457,6 +4492,9 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
     $this->nmgp_dados_form['fecha_fab_'] = $this->fecha_fab_;
     $this->nmgp_dados_form['unidad_c_'] = $this->unidad_c_;
     $this->nmgp_dados_form['num_ndevolucion_'] = $this->num_ndevolucion_;
+    $this->nmgp_dados_form['tipo_docu_'] = $this->tipo_docu_;
+    $this->nmgp_dados_form['tipo_trans_'] = $this->tipo_trans_;
+    $this->nmgp_dados_form['id_nota_'] = $this->id_nota_;
     $_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new']['dados_form'][$sc_seq_vert] = $this->nmgp_dados_form;
    }
    function nm_tira_formatacao()
@@ -4514,6 +4552,8 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
       nm_limpa_data($this->fecha_fab_, $this->field_config['fecha_fab_']['date_sep']) ; 
       $this->Before_unformat['num_ndevolucion_'] = $this->num_ndevolucion_;
       nm_limpa_numero($this->num_ndevolucion_, $this->field_config['num_ndevolucion_']['symbol_grp']) ; 
+      $this->Before_unformat['id_nota_'] = $this->id_nota_;
+      nm_limpa_numero($this->id_nota_, $this->field_config['id_nota_']['symbol_grp']) ; 
    }
    function sc_add_currency(&$value, $symbol, $pos)
    {
@@ -4626,6 +4666,10 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
       if ($Nome_Campo == "num_ndevolucion_")
       {
           nm_limpa_numero($this->num_ndevolucion_, $this->field_config['num_ndevolucion_']['symbol_grp']) ; 
+      }
+      if ($Nome_Campo == "id_nota_")
+      {
+          nm_limpa_numero($this->id_nota_, $this->field_config['id_nota_']['symbol_grp']) ; 
       }
    }
    function nm_formatar_campos($format_fields = array())
@@ -6259,6 +6303,7 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     $original_cantidad_ = $this->cantidad_;
+    $original_idfaccom_ = $this->idfaccom_;
     $original_idpro_ = $this->idpro_;
     $original_lote_ = $this->lote_;
     $original_serial_codbarra_ = $this->serial_codbarra_;
@@ -6330,6 +6375,41 @@ if($this->idpro_ >0)
 		$this->serial_codbarra_ ='';
 		}
 	}
+$sql_mast = "SELECT tipo_com FROM facturacom WHERE idfaccom = '".$this->idfaccom_ ."'";
+ 
+      $nm_select = $sql_mast; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dtmast = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dtmast[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dtmast = false;
+          $this->dtmast_erro = $this->Db->ErrorMsg();
+      } 
+;
+if(isset($this->dtmast[0][0]))
+	{
+	if($this->dtmast[0][0]=='AF')
+		{
+		$this->tipo_docu_  = 'AF';
+		$this->tipo_trans_  = 'AFAC';
+		}
+	}
 if (isset($this->sc_temp_cost_ant)) { $_SESSION['cost_ant'] = $this->sc_temp_cost_ant;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
@@ -6338,6 +6418,12 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['type']    = 'text';
         $this->NM_ajax_info['fldList']['cantidad_' . $this->nmgp_refresh_row]['valList'] = array($this->cantidad_);
         $this->NM_ajax_changed['cantidad_'] = true;
+    }
+    if (($original_idfaccom_ != $this->idfaccom_ || (isset($bFlagRead_idfaccom_) && $bFlagRead_idfaccom_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['idfaccom_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['idfaccom_' . $this->nmgp_refresh_row]['valList'] = array($this->idfaccom_);
+        $this->NM_ajax_changed['idfaccom_'] = true;
     }
     if (($original_idpro_ != $this->idpro_ || (isset($bFlagRead_idpro_) && $bFlagRead_idpro_))&& isset($this->nmgp_refresh_row))
     {
@@ -6753,6 +6839,9 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
       $NM_val_form['fecha_fab_'] = $this->fecha_fab_;
       $NM_val_form['unidad_c_'] = $this->unidad_c_;
       $NM_val_form['num_ndevolucion_'] = $this->num_ndevolucion_;
+      $NM_val_form['tipo_docu_'] = $this->tipo_docu_;
+      $NM_val_form['tipo_trans_'] = $this->tipo_trans_;
+      $NM_val_form['id_nota_'] = $this->id_nota_;
       if ($this->iddet_ === "" || is_null($this->iddet_))  
       { 
           $this->iddet_ = 0;
@@ -6837,6 +6926,11 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
           $this->num_ndevolucion_ = 0;
           $this->sc_force_zero[] = 'num_ndevolucion_';
       } 
+      if ($this->id_nota_ === "" || is_null($this->id_nota_))  
+      { 
+          $this->id_nota_ = 0;
+          $this->sc_force_zero[] = 'id_nota_';
+      } 
       $nm_bases_lob_geral = array_merge($this->Ini->nm_bases_oracle, $this->Ini->nm_bases_ibase, $this->Ini->nm_bases_informix, $this->Ini->nm_bases_mysql, $this->Ini->nm_bases_access, $this->Ini->nm_bases_sqlite, array('pdo_ibm'), array('pdo_sqlsrv'));
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new']['decimal_db'] == ",") 
       {
@@ -6881,6 +6975,20 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
           { 
               $this->unidad_c_ = "null"; 
               $NM_val_null[] = "unidad_c_";
+          } 
+          $this->tipo_docu__before_qstr = $this->tipo_docu_;
+          $this->tipo_docu_ = substr($this->Db->qstr($this->tipo_docu_), 1, -1); 
+          if ($this->tipo_docu_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->tipo_docu_ = "null"; 
+              $NM_val_null[] = "tipo_docu_";
+          } 
+          $this->tipo_trans__before_qstr = $this->tipo_trans_;
+          $this->tipo_trans_ = substr($this->Db->qstr($this->tipo_trans_), 1, -1); 
+          if ($this->tipo_trans_ == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->tipo_trans_ = "null"; 
+              $NM_val_null[] = "tipo_trans_";
           } 
       }
       if ($this->nmgp_opcao == "alterar") 
@@ -7023,6 +7131,18 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
               { 
                   $SC_fields_update[] = "num_ndevolucion = $this->num_ndevolucion_"; 
               } 
+              if (isset($NM_val_form['tipo_docu_']) && $NM_val_form['tipo_docu_'] != $this->nmgp_dados_select['tipo_docu_']) 
+              { 
+                  $SC_fields_update[] = "tipo_docu = '$this->tipo_docu_'"; 
+              } 
+              if (isset($NM_val_form['tipo_trans_']) && $NM_val_form['tipo_trans_'] != $this->nmgp_dados_select['tipo_trans_']) 
+              { 
+                  $SC_fields_update[] = "tipo_trans = '$this->tipo_trans_'"; 
+              } 
+              if (isset($NM_val_form['id_nota_']) && $NM_val_form['id_nota_'] != $this->nmgp_dados_select['id_nota_']) 
+              { 
+                  $SC_fields_update[] = "id_nota = $this->id_nota_"; 
+              } 
               $aDoNotUpdate = array();
               $comando .= implode(",", $SC_fields_update);  
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
@@ -7086,6 +7206,8 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
               $this->descr_ = $this->descr__before_qstr;
               $this->serial_codbarra_ = $this->serial_codbarra__before_qstr;
               $this->unidad_c_ = $this->unidad_c__before_qstr;
+              $this->tipo_docu_ = $this->tipo_docu__before_qstr;
+              $this->tipo_trans_ = $this->tipo_trans__before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
               }   
@@ -7227,39 +7349,39 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
           { 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion) VALUES ($this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, #$this->vencimiento_#, '$this->lote_', '$this->descr_', #$this->fecha_fab_#, '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota) VALUES ($this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, #$this->vencimiento_#, '$this->lote_', '$this->descr_', #$this->fecha_fab_#, '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_, '$this->tipo_docu_', '$this->tipo_trans_', $this->id_nota_)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_, '$this->tipo_docu_', '$this->tipo_trans_', $this->id_nota_)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_, '$this->tipo_docu_', '$this->tipo_trans_', $this->id_nota_)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_, '$this->tipo_docu_', '$this->tipo_trans_', $this->id_nota_)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, EXTEND('$this->vencimiento_', YEAR TO DAY), '$this->lote_', '$this->descr_', EXTEND('$this->fecha_fab_', YEAR TO DAY), '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, EXTEND('$this->vencimiento_', YEAR TO DAY), '$this->lote_', '$this->descr_', EXTEND('$this->fecha_fab_', YEAR TO DAY), '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_, '$this->tipo_docu_', '$this->tipo_trans_', $this->id_nota_)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_, '$this->tipo_docu_', '$this->tipo_trans_', $this->id_nota_)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_, '$this->tipo_docu_', '$this->tipo_trans_', $this->id_nota_)"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_, '$this->tipo_docu_', '$this->tipo_trans_', $this->id_nota_)"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota) VALUES (" . $NM_seq_auto . "$this->idfaccom_, $this->idpro_, $this->idbod_, $this->cantidad_, $this->valorunit_, $this->valorpar_, $this->iva_, $this->descuento_, $this->tasaiva_, $this->tasadesc_, $this->devuelto_, $this->colores_, $this->tallas_, $this->sabor_, " . $this->Ini->date_delim . $this->vencimiento_ . $this->Ini->date_delim1 . ", '$this->lote_', '$this->descr_', " . $this->Ini->date_delim . $this->fecha_fab_ . $this->Ini->date_delim1 . ", '$this->serial_codbarra_', $this->porc_desc_, '$this->unidad_c_', $this->num_ndevolucion_, '$this->tipo_docu_', '$this->tipo_trans_', $this->id_nota_)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -7407,6 +7529,8 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
               $this->descr_ = $this->descr__before_qstr;
               $this->serial_codbarra_ = $this->serial_codbarra__before_qstr;
               $this->unidad_c_ = $this->unidad_c__before_qstr;
+              $this->tipo_docu_ = $this->tipo_docu__before_qstr;
+              $this->tipo_trans_ = $this->tipo_trans__before_qstr;
               }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new']['db_changed'] = true;
@@ -7416,6 +7540,8 @@ $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
               $this->descr_ = $this->descr__before_qstr;
               $this->serial_codbarra_ = $this->serial_codbarra__before_qstr;
               $this->unidad_c_ = $this->unidad_c__before_qstr;
+              $this->tipo_docu_ = $this->tipo_docu__before_qstr;
+              $this->tipo_trans_ = $this->tipo_trans__before_qstr;
               $_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new']['total']++; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new']['reg_qtd']++; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new']['reg_I_E']++; 
@@ -8978,23 +9104,23 @@ and cantidad >0");
       } 
       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
       { 
-          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, str_replace (convert(char(10),vencimiento,102), '.', '-') + ' ' + convert(char(8),vencimiento,20), lote, descr, str_replace (convert(char(10),fecha_fab,102), '.', '-') + ' ' + convert(char(8),fecha_fab,20), serial_codbarra, porc_desc, unidad_c, num_ndevolucion from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, str_replace (convert(char(10),vencimiento,102), '.', '-') + ' ' + convert(char(8),vencimiento,20), lote, descr, str_replace (convert(char(10),fecha_fab,102), '.', '-') + ' ' + convert(char(8),fecha_fab,20), serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
       { 
-          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, convert(char(23),vencimiento,121), lote, descr, convert(char(23),fecha_fab,121), serial_codbarra, porc_desc, unidad_c, num_ndevolucion from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, convert(char(23),vencimiento,121), lote, descr, convert(char(23),fecha_fab,121), serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
       { 
-          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
       { 
-          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, EXTEND(vencimiento, YEAR TO DAY), lote, descr, EXTEND(fecha_fab, YEAR TO DAY), serial_codbarra, porc_desc, unidad_c, num_ndevolucion from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, EXTEND(vencimiento, YEAR TO DAY), lote, descr, EXTEND(fecha_fab, YEAR TO DAY), serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       else 
       { 
-          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
+          $nmgp_select = "SELECT iddet, idfaccom, idpro, idbod, cantidad, valorunit, valorpar, iva, descuento, tasaiva, tasadesc, devuelto, colores, tallas, sabor, vencimiento, lote, descr, fecha_fab, serial_codbarra, porc_desc, unidad_c, num_ndevolucion, tipo_docu, tipo_trans, id_nota from " . $this->Ini->nm_tabela . $sc_where . $sc_order_by; 
       } 
       if ($this->nmgp_opcao != "novo") 
       { 
@@ -9153,6 +9279,12 @@ and cantidad >0");
               $this->nmgp_dados_select['unidad_c_'] = $this->unidad_c_;
               $this->num_ndevolucion_ = $rs->fields[22] ; 
               $this->nmgp_dados_select['num_ndevolucion_'] = $this->num_ndevolucion_;
+              $this->tipo_docu_ = $rs->fields[23] ; 
+              $this->nmgp_dados_select['tipo_docu_'] = $this->tipo_docu_;
+              $this->tipo_trans_ = $rs->fields[24] ; 
+              $this->nmgp_dados_select['tipo_trans_'] = $this->tipo_trans_;
+              $this->id_nota_ = $rs->fields[25] ; 
+              $this->nmgp_dados_select['id_nota_'] = $this->id_nota_;
               $this->cod_barras_ = isset($GLOBALS['cod_barras_' . $sc_seq_vert]) ? $GLOBALS['cod_barras_' . $sc_seq_vert] : '';
               $this->presentacion_ = isset($GLOBALS['presentacion_' . $sc_seq_vert]) ? $GLOBALS['presentacion_' . $sc_seq_vert] : '';
               $this->ver_ = isset($GLOBALS['ver_' . $sc_seq_vert]) ? $GLOBALS['ver_' . $sc_seq_vert] : '';
@@ -9175,6 +9307,7 @@ and cantidad >0");
               $this->sabor_ = (string)$this->sabor_; 
               $this->porc_desc_ = (string)$this->porc_desc_; 
               $this->num_ndevolucion_ = (string)$this->num_ndevolucion_; 
+              $this->id_nota_ = (string)$this->id_nota_; 
               if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new']['parms'])) 
               { 
                   $_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new']['parms'] = "iddet_?#?$this->iddet_?@?";
@@ -9212,6 +9345,9 @@ and cantidad >0");
              $this->form_vert_detallecompra_new[$sc_seq_vert]['fecha_fab_'] =  $this->fecha_fab_; 
              $this->form_vert_detallecompra_new[$sc_seq_vert]['unidad_c_'] =  $this->unidad_c_; 
              $this->form_vert_detallecompra_new[$sc_seq_vert]['num_ndevolucion_'] =  $this->num_ndevolucion_; 
+             $this->form_vert_detallecompra_new[$sc_seq_vert]['tipo_docu_'] =  $this->tipo_docu_; 
+             $this->form_vert_detallecompra_new[$sc_seq_vert]['tipo_trans_'] =  $this->tipo_trans_; 
+             $this->form_vert_detallecompra_new[$sc_seq_vert]['id_nota_'] =  $this->id_nota_; 
               $sc_seq_vert++; 
               $rs->MoveNext() ; 
               if (isset($this->NM_ajax_opcao) && 'backup_line' == $this->NM_ajax_opcao)
@@ -9332,6 +9468,9 @@ and cantidad >0");
              $this->form_vert_detallecompra_new[$sc_seq_vert]['fecha_fab_'] =  $this->fecha_fab_; 
              $this->form_vert_detallecompra_new[$sc_seq_vert]['unidad_c_'] =  $this->unidad_c_; 
              $this->form_vert_detallecompra_new[$sc_seq_vert]['num_ndevolucion_'] =  $this->num_ndevolucion_; 
+             $this->form_vert_detallecompra_new[$sc_seq_vert]['tipo_docu_'] =  $this->tipo_docu_; 
+             $this->form_vert_detallecompra_new[$sc_seq_vert]['tipo_trans_'] =  $this->tipo_trans_; 
+             $this->form_vert_detallecompra_new[$sc_seq_vert]['id_nota_'] =  $this->id_nota_; 
               $sc_seq_vert++; 
           } 
       }  
@@ -10909,6 +11048,74 @@ exit;
 
 $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
 }
+function tasaiva__onChange()
+{
+$_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'on';
+  
+$original_valorpar_ = $this->valorpar_;
+$original_cantidad_ = $this->cantidad_;
+$original_valorunit_ = $this->valorunit_;
+$original_descuento_ = $this->descuento_;
+$original_tasaiva_ = $this->tasaiva_;
+$original_iva_ = $this->iva_;
+
+$this->calcula_valor();
+
+$modificado_valorpar_ = $this->valorpar_;
+$modificado_cantidad_ = $this->cantidad_;
+$modificado_valorunit_ = $this->valorunit_;
+$modificado_descuento_ = $this->descuento_;
+$modificado_tasaiva_ = $this->tasaiva_;
+$modificado_iva_ = $this->iva_;
+$this->nm_formatar_campos('valorpar_', 'cantidad_', 'valorunit_', 'descuento_', 'tasaiva_', 'iva_');
+$this->nmgp_refresh_fields = array();
+if ($original_valorpar_ !== $modificado_valorpar_ || isset($this->nmgp_cmp_readonly['valorpar_']) || (isset($bFlagRead_valorpar_) && $bFlagRead_valorpar_))
+{
+    $this->nmgp_refresh_fields[] = 'valorpar_';
+    $this->NM_ajax_changed['valorpar_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_cantidad_ !== $modificado_cantidad_ || isset($this->nmgp_cmp_readonly['cantidad_']) || (isset($bFlagRead_cantidad_) && $bFlagRead_cantidad_))
+{
+    $this->nmgp_refresh_fields[] = 'cantidad_';
+    $this->NM_ajax_changed['cantidad_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_valorunit_ !== $modificado_valorunit_ || isset($this->nmgp_cmp_readonly['valorunit_']) || (isset($bFlagRead_valorunit_) && $bFlagRead_valorunit_))
+{
+    $this->nmgp_refresh_fields[] = 'valorunit_';
+    $this->NM_ajax_changed['valorunit_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_descuento_ !== $modificado_descuento_ || isset($this->nmgp_cmp_readonly['descuento_']) || (isset($bFlagRead_descuento_) && $bFlagRead_descuento_))
+{
+    $this->nmgp_refresh_fields[] = 'descuento_';
+    $this->NM_ajax_changed['descuento_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_tasaiva_ !== $modificado_tasaiva_ || isset($this->nmgp_cmp_readonly['tasaiva_']) || (isset($bFlagRead_tasaiva_) && $bFlagRead_tasaiva_))
+{
+    $this->nmgp_refresh_fields[] = 'tasaiva_';
+    $this->NM_ajax_changed['tasaiva_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($original_iva_ !== $modificado_iva_ || isset($this->nmgp_cmp_readonly['iva_']) || (isset($bFlagRead_iva_) && $bFlagRead_iva_))
+{
+    $this->nmgp_refresh_fields[] = 'iva_';
+    $this->NM_ajax_changed['iva_'] = true;
+    $this->NM_ajax_force_values = true;
+}
+if ($this->NM_ajax_force_values)
+{
+    $this->ajax_return_values();
+}
+$this->NM_ajax_info['event_field'] = 'tasaiva';
+detallecompra_new_pack_ajax_response();
+exit;
+
+
+$_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'off';
+}
 function update_master()
 {
 $_SESSION['scriptcase']['detallecompra_new']['contr_erro'] = 'on';
@@ -11983,7 +12190,7 @@ and cantidad >0 and (" . $comando . ")";
       $campo_join = strtolower(str_replace(".", "_", $nome));
       $nm_ini_lower = "";
       $nm_fim_lower = "";
-      $nm_numeric[] = "iddet";$nm_numeric[] = "idfaccom";$nm_numeric[] = "idpro";$nm_numeric[] = "idbod";$nm_numeric[] = "cantidad";$nm_numeric[] = "valorunit";$nm_numeric[] = "valorpar";$nm_numeric[] = "iva";$nm_numeric[] = "descuento";$nm_numeric[] = "tasaiva";$nm_numeric[] = "tasadesc";$nm_numeric[] = "devuelto";$nm_numeric[] = "colores";$nm_numeric[] = "tallas";$nm_numeric[] = "sabor";$nm_numeric[] = "porc_desc";$nm_numeric[] = "num_ndevolucion";
+      $nm_numeric[] = "iddet";$nm_numeric[] = "idfaccom";$nm_numeric[] = "idpro";$nm_numeric[] = "idbod";$nm_numeric[] = "cantidad";$nm_numeric[] = "valorunit";$nm_numeric[] = "valorpar";$nm_numeric[] = "iva";$nm_numeric[] = "descuento";$nm_numeric[] = "tasaiva";$nm_numeric[] = "tasadesc";$nm_numeric[] = "devuelto";$nm_numeric[] = "colores";$nm_numeric[] = "tallas";$nm_numeric[] = "sabor";$nm_numeric[] = "porc_desc";$nm_numeric[] = "num_ndevolucion";$nm_numeric[] = "id_nota";
       if (in_array($campo_join, $nm_numeric))
       {
          if ($_SESSION['sc_session'][$this->Ini->sc_page]['detallecompra_new']['decimal_db'] == ".")
@@ -12420,7 +12627,7 @@ function nmgp_redireciona($tipo=0)
     <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
     <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
     <META http-equiv="Pragma" content="no-cache"/>
-    <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
    </HEAD>
    <BODY>
    <FORM name="form_ok" method="POST" action="<?php echo $this->form_encode_input($nmgp_saida_form); ?>" target="_self">

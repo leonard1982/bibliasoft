@@ -292,12 +292,12 @@ class form_resdian_mob_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20171208"; 
       $this->nm_hr_criacao   = "133245"; 
-      $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220622"; 
-      $this->nm_hr_ult_alt   = "203752"; 
+      $this->nm_autor_alt    = "edgar"; 
+      $this->nm_dt_ult_alt   = "20220808"; 
+      $this->nm_hr_ult_alt   = "141708"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0"; 
+      $this->nm_app_version  = "1.0.0"; 
 // 
       $this->border_grid           = ""; 
       $this->cor_bg_grid           = ""; 
@@ -527,8 +527,7 @@ class form_resdian_mob_ini
           }
       }
       if (isset($_SESSION['scriptcase']['form_resdian_mob']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+          $SS_cod_html  = '';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -543,7 +542,7 @@ class form_resdian_mob_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_form.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -873,7 +872,7 @@ class form_resdian_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwDQFUD1BeHQNUDMvsVcBUDWF/HIX7HQNwZSBOD1zGZMFaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5XGDMBYV9BUHEBmVErqHQBsZ1BOHABYHQJsDMvCDkBsV5B7ZuXGHQFYDQFUDSBYHurqDMNOV9FiV5FYHMF7HQNwH9BqD1rwHuB/HgBeDkFeV5FqHIXGHQFYH9BiHABYHuBqDMzGZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqHgrKHArsHEB3ZuJeHQXODuFaD1BeHurqDMzGVcFiV5FYHINUDcFYZ1X7HArYHQJeHgNKDkFeV5FqHIX7HQNwZSBiZ1N7HQF7HgvOVcFiV5X/VEX7DcNmZ1X7D1rwHuXGDMveHAFKH5FYVoX7D9JKDQX7D1BOV5FGDMBYVcBUHEF/HIraHQBiZ1FGHABYD5JwDMvCHEFKV5FqHMFaHQXsDuFaZ1BYHuBiDMzGVcFiV5FYHIJeHQBqZkFGHABYHQBOHgBeDkFeV5FqHIraHQNmDuBqHAN7HQNUDMNOZSrCH5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9NwDQJsHArYVWJsHuvmVcXKV5FGVoraD9BiZSB/HABYD5XGHgvCZSJGDuFaZuBqD9NmZ9rqZ1rwD5BOHuBYVcFKV5FYDoJeHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/DSrYD5BqHgvCHArsDWFGZuBqHQBiZ9JeZ1zGV5BqDMvOV9FiV5X/VENUHQBqZ1FUZ1vOD5BOHgveHArsDuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDuX7DoraHQNwH9BqHIBeHQF7DMzGZSJ3DWXCVoBOHQXsH9BiZ1N7HuBqDMvOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDWXCDoB/D9NwH9X7Z1BYV5raHuzGVIBODWFYVoFGDcJUZ1F7DSrYD5NUDEBOVkJqV5FaVoFGD9XsZSX7HAvmD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcrsHEF/DoX7D9BiH9BOHArYHQXGHgNKHEJGDWB3DoBOHQXODuBqHIrwVWJwDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FaDErKHENiV5FaDorqD9NwH9X7Z1rwD5NUHuBOVIBODWFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMrYZSJqDWB3VErqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/DcBiDQJsHAN7HuF7DMzGVcBOHEFYDorqDcJUZ1X7HArKV5XGHgveVkJ3HEFaHIrqD9FYDuFaDSBYVWJsDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiH9FUHIrKHuBOHuBYVcFCDWFYHIraHQNmZ1B/D1rwV5BqHgveHErCV5B7ZuJeDcXGDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXODQJsHANOV5X7HuvmVcFKHEFYVoBODcNmZSBqD1rKHuXGHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DorqD9BsH9FaHAN7V5X7DMNKZSJGDWr/VoB/D9NwZSX7D1veD5BqHgvsVcBOV5F/VoJwD9BsZ1B/Z1BeD5F7HgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiDcBqVINUHArYHuX7DMvCZSJ3V5XCHMJwHQXsDQFUHArYHQBOHgrwVcB/HEF/HMXGHQBiZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQBqZ1BiHAvsZMXGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFGHgrKVIBODuFqDoF7D9XOVIJsHIveD5F7HgNKZSJqDuJeHMJwHQBiH9FUHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1626,6 +1625,16 @@ ob_start();
             $pref_ndb = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_resdian_mob_validate_prefijo_com' == $_POST['rs'])
+        {
+            $prefijo_com = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_form_resdian_mob_validate_prefijo_ajuscom' == $_POST['rs'])
+        {
+            $prefijo_ajuscom = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_form_resdian_mob_validate_activa' == $_POST['rs'])
         {
             $activa = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1679,21 +1688,23 @@ ob_start();
             $pref_factura = NM_utf8_urldecode($_POST['rsargs'][11]);
             $pref_ncr = NM_utf8_urldecode($_POST['rsargs'][12]);
             $pref_ndb = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $activa = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $nombre_pc = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $nombre_impre = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $contador_pruebas = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $texto_encabezado = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $texto_pie_pagina = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $idres = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][23]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][24]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][25]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][26]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][27]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][28]);
+            $prefijo_com = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $prefijo_ajuscom = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $activa = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $nombre_pc = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $nombre_impre = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $contador_pruebas = NM_utf8_urldecode($_POST['rsargs'][19]);
+            $texto_encabezado = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $texto_pie_pagina = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $idres = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][24]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][25]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][26]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][27]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][28]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][29]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][30]);
         }
         if ('ajax_form_resdian_mob_navigate_form' == $_POST['rs'])
         {
@@ -2155,6 +2166,8 @@ ob_start();
     $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['select_html']['pref_factura'] = " onClick=\"\" ";
     $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['select_html']['pref_ncr'] = " onClick=\"\" ";
     $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['select_html']['pref_ndb'] = " onClick=\"\" ";
+    $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['select_html']['prefijo_com'] = " onClick=\"\" ";
+    $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['select_html']['prefijo_ajuscom'] = " onClick=\"\" ";
     $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['select_html']['activa'] = "class=\"sc-js-input scFormObjectOdd css_activa_obj{SC_100PERC_CLASS_INPUT}\" style=\"\" id=\"id_sc_field_activa\" name=\"activa\" size=\"1\" alt=\"{type: \'select\', enterTab: true}\"";
 
     if (!defined('SC_SAJAX_LOADED'))
@@ -2183,6 +2196,8 @@ ob_start();
     sajax_export("ajax_form_resdian_mob_validate_pref_factura");
     sajax_export("ajax_form_resdian_mob_validate_pref_ncr");
     sajax_export("ajax_form_resdian_mob_validate_pref_ndb");
+    sajax_export("ajax_form_resdian_mob_validate_prefijo_com");
+    sajax_export("ajax_form_resdian_mob_validate_prefijo_ajuscom");
     sajax_export("ajax_form_resdian_mob_validate_activa");
     sajax_export("ajax_form_resdian_mob_validate_nombre_pc");
     sajax_export("ajax_form_resdian_mob_validate_nombre_impre");
@@ -2487,6 +2502,44 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_validate_pref_ndb
 
+    function ajax_form_resdian_mob_validate_prefijo_com($prefijo_com, $script_case_init)
+    {
+        global $inicial_form_resdian_mob;
+        //register_shutdown_function("form_resdian_mob_pack_ajax_response");
+        $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_flag          = true;
+        $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_opcao         = 'validate_prefijo_com';
+        $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['param'] = array(
+                  'prefijo_com' => NM_utf8_urldecode($prefijo_com),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_resdian_mob->contr_form_resdian_mob->controle();
+        exit;
+    } // ajax_validate_prefijo_com
+
+    function ajax_form_resdian_mob_validate_prefijo_ajuscom($prefijo_ajuscom, $script_case_init)
+    {
+        global $inicial_form_resdian_mob;
+        //register_shutdown_function("form_resdian_mob_pack_ajax_response");
+        $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_flag          = true;
+        $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_opcao         = 'validate_prefijo_ajuscom';
+        $inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['param'] = array(
+                  'prefijo_ajuscom' => NM_utf8_urldecode($prefijo_ajuscom),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_resdian_mob->contr_form_resdian_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_resdian_mob->contr_form_resdian_mob->controle();
+        exit;
+    } // ajax_validate_prefijo_ajuscom
+
     function ajax_form_resdian_mob_validate_activa($activa, $script_case_init)
     {
         global $inicial_form_resdian_mob;
@@ -2622,7 +2675,7 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         exit;
     } // ajax_event_vigencia_onchange
 
-    function ajax_form_resdian_mob_submit_form($resolucion, $rangofac, $fecha, $vigencia, $fec_vencimiento, $prefijo, $primerfactura, $desde, $ultima_fac, $tipo, $prefijo_fe, $pref_factura, $pref_ncr, $pref_ndb, $activa, $nombre_pc, $nombre_impre, $contador_pruebas, $texto_encabezado, $texto_pie_pagina, $idres, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_resdian_mob_submit_form($resolucion, $rangofac, $fecha, $vigencia, $fec_vencimiento, $prefijo, $primerfactura, $desde, $ultima_fac, $tipo, $prefijo_fe, $pref_factura, $pref_ncr, $pref_ndb, $prefijo_com, $prefijo_ajuscom, $activa, $nombre_pc, $nombre_impre, $contador_pruebas, $texto_encabezado, $texto_pie_pagina, $idres, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_resdian_mob;
         //register_shutdown_function("form_resdian_mob_pack_ajax_response");
@@ -2643,6 +2696,8 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
                   'pref_factura' => NM_utf8_urldecode($pref_factura),
                   'pref_ncr' => NM_utf8_urldecode($pref_ncr),
                   'pref_ndb' => NM_utf8_urldecode($pref_ndb),
+                  'prefijo_com' => NM_utf8_urldecode($prefijo_com),
+                  'prefijo_ajuscom' => NM_utf8_urldecode($prefijo_ajuscom),
                   'activa' => NM_utf8_urldecode($activa),
                   'nombre_pc' => NM_utf8_urldecode($nombre_pc),
                   'nombre_impre' => NM_utf8_urldecode($nombre_impre),

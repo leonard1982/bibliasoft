@@ -1086,10 +1086,6 @@ $_SESSION['scriptcase']['grid_NC_ND']['contr_erro'] = 'off';
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['asentada'] = "Asentada"; 
        }
-       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['detalleventa']))
-       {
-           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['detalleventa'] = "Nota"; 
-       }
        if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['pdf2']))
        {
            $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['labels']['pdf2'] = "PDF"; 

@@ -109,7 +109,7 @@ class grid_NC_ND_ini
    var $Gd_missing;
    var $sc_site_ssl;
    var $link_form_notas;
-   var $link_grid_detalleventa_cons_emb;
+   var $link_grid_detalleventa_cons;
    var $link_pdfreport_facturaven_cons;
    var $nm_cont_lin;
    var $nm_limite_lin;
@@ -230,8 +230,8 @@ class grid_NC_ND_ini
       $this->nm_dt_criacao   = "20171228"; 
       $this->nm_hr_criacao   = "114401"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220706"; 
-      $this->nm_hr_ult_alt   = "114018"; 
+      $this->nm_dt_ult_alt   = "20220805"; 
+      $this->nm_hr_ult_alt   = "213119"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -514,25 +514,6 @@ class grid_NC_ND_ini
       }
       $this->sc_lig_target["A_@scinf_"] = '_self';
       $this->sc_lig_target["A_@scinf__@scinf_form_notas"] = '_self';
-      $Tmp_apl_lig = "grid_detalleventa";
-      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_detalleventa_ini.txt"))
-      {
-          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_detalleventa_ini.txt");
-          if (isset($Friendly[0]) && !empty($Friendly[0]))
-          {
-              $Tmp_apl_lig = trim($Friendly[0]);
-          }
-      }
-      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_detalleventa_ini.txt"))
-      {
-          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_detalleventa_ini.txt");
-          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
-          {
-              $this->sc_lig_md5["grid_detalleventa"] = 'S';
-          }
-      }
-      $this->sc_lig_target["C_@scinf_detalleventa"] = '_self';
-      $this->sc_lig_target["C_@scinf_detalleventa_@scinf_grid_detalleventa"] = '_self';
       $Tmp_apl_lig = "pdfreport_facturaven";
       if (is_file($this->root . $this->path_link . "_lib/friendly_url/pdfreport_facturaven_ini.txt"))
       {
@@ -571,6 +552,25 @@ class grid_NC_ND_ini
       }
       $this->sc_lig_target["B_@scinf_sc_btn_1"] = '_self';
       $this->sc_lig_target["B_@scinf_sc_btn_1_@scinf_form_notas"] = '_self';
+      $Tmp_apl_lig = "grid_detalleventa";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_detalleventa_ini.txt"))
+      {
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_detalleventa_ini.txt");
+          if (isset($Friendly[0]) && !empty($Friendly[0]))
+          {
+              $Tmp_apl_lig = trim($Friendly[0]);
+          }
+      }
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_detalleventa_ini.txt"))
+      {
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_detalleventa_ini.txt");
+          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
+          {
+              $this->sc_lig_md5["grid_detalleventa"] = 'S';
+          }
+      }
+      $this->sc_lig_target["C_@scinf_num"] = 'modal';
+      $this->sc_lig_target["C_@scinf_num_@scinf_grid_detalleventa"] = 'modal';
       if ($_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['dashboard_info']['under_dashboard'])
       {
           $sTmpDashboardApp = $_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['dashboard_info']['dashboard_app'];
@@ -586,7 +586,7 @@ class grid_NC_ND_ini
           }
       }
       $this->link_form_notas =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('form_notas') . "/" ; 
-      $this->link_grid_detalleventa_cons_emb =  $this->root . $this->path_link  . "" . SC_dir_app_name('grid_detalleventa') . "/index.php" ; 
+      $this->link_grid_detalleventa_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_detalleventa') . "/" ; 
       $this->link_pdfreport_facturaven_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('pdfreport_facturaven') . "/" ; 
       if ($Tp_init == "Path_sub")
       {
@@ -992,7 +992,7 @@ class grid_NC_ND_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_NC_ND']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXODQB/DSN7HQrqDMvOVIB/DWFYDoXGHQXGZ1BODSNOD5NUDMvCVkJ3DWX7DoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1rqHAzGD5JeHgNKHENiDWr/HIBiHQBiDQFaHArYD5JsHuBYZSJqDWFYHMBiD9BsVIraD1rwV5X7HgBeHEFKV5FaVoBqD9NwH9X7DSBYD5JsHgrYDkBsV5F/HMXGDcNwH9BqZ1NOHQFUHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMJeHQJeDQJsZ1rwHQJeDMvODkBsDuFGVEFGDcNmZkFGHABYD5BiDMNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDuXKDoJeHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQFYZ1B/HANOD5JeDEvsDkB/DuJeVoX7HQBiH9FUHIrKV5BODMvmVcB/DWJeHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQJsHIrwHuF7DMrYVIBsHEX7HMraD9JmZSBOZ1BeHuJsDErKHENiDWFqZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSvmZMBqHgBOHEJqDWX7HIJwDcXGZ9rqZ1zGVWBqDMBOVcB/HEFYHMJeHQBsZkFUZ1rYHQBOHgNKZSJ3H5FYHMFaHQJKZ9JeZ1BYHuBqDMBOVIBsDWFYHMFGHQXOVIJwD1rwV5FGDEBeHEXeH5X/DoF7HQNwDuBqDSvCVWBODMrYV9FeH5FqHMJeHQXOZ1FUZ1rYHuB/DMvCHENiDWFqHIXGHQXOZ9JeZ1BYHurqDMzGDkBsV5F/HIXGDcNmZ1FUZ1vOZMXGDMveHENiH5FYHMJeDcBiDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQBiZ1BiDSNOHuFaHgvsHErCDWX7DoJsDcXGDQBOZ1BYHQJsDMNOV9FeV5FYHMFaHQXOZ1FUZ1rYHuFGHgBYHArCDWX7HIBqHQJKZ9JeZ1BYHuFUDMBYV9BUDWF/HIJsHQBsVIraD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BOD5FaDEvsVkXeDWX7DoJeHQXGZSFGHIrwVWXGHuBYZSJ3V5X7DoX7D9BiZ1F7Z1rYV5FGHgvCZSJGH5FYDoF7D9NwH9X7DSBYV5JeHuBYVcFKH5FqVoB/D9XOH9B/D1zGD5FaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7DoX7D9BsH9FaD1rwZMB/DMNKZSXeHEFqDoBOHQXGDuBqHAvOVWXGDMvOZSrCV5X/VoFGHQNmZkFUZ1vOZMB/HgBYHEFKV5B7DoBqHQBiDuBqHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1F7D1rKD5F7DMBYVkJ3DuJeHMJwD9FYDQBqHAveHuBODMBYVcFKDuFqHMF7D9BsZ1BiD1rwZMXGDEvsHENiHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoF7D9XOZSB/DSrYV5B/DMNKZSJ3V5XCHIFGDcXOZSBiZ1N7HuNUDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMBOD9XOZ1B/Z1BeZMFaDMzGHArsH5FGDoJeHQXODQBqHArYHQrqDMBOV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDurGVorqHQNwZkFGHArKV5FUDMrYZSXeV5FqHIJsD9JKDQX7Z1N7D5BOHuzGVIB/H5FqDoJeDcNmVINUHIveHQFGDEBeZSJGDuFaHMX7D9FYDQFGHIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1020,11 +1020,6 @@ class grid_NC_ND_ini
       if (empty($this->nm_tabela))
       {
           $this->nm_tabela = ""; 
-      }
-      $_SESSION['sc_session'][$script_case_init]['grid_detalleventa']['ind_tree'] = 0;
-      if (!isset($_SESSION['sc_session'][$script_case_init]['grid_NC_ND']['emb_linha']))
-      {
-          $_SESSION['sc_session'][$script_case_init]['grid_NC_ND']['emb_linha'] = 0;
       }
    }
 
@@ -3615,16 +3610,6 @@ class grid_NC_ND_sub_css
    function __construct()
    {
       global $script_case_init;
-      if (!$this->Ini) 
-      { 
-          $this->Ini = new grid_NC_ND_ini(); 
-          $this->Ini->init("Path_sub");
-      } 
-      $_SESSION['sc_session'][$script_case_init]['grid_detalleventa']['SC_herda_css'] = "S"; 
-      $_SESSION['sc_session'][$script_case_init]['grid_detalleventa']['embutida'] = true;
-      include_once ($this->Ini->link_grid_detalleventa_cons_emb);
-      $this->grid_detalleventa = new grid_detalleventa_sub_css ;
-      $_SESSION['sc_session'][$script_case_init]['grid_detalleventa']['embutida'] = false;
       $str_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
       if ($_SESSION['sc_session'][$script_case_init]['grid_NC_ND']['SC_herda_css'] == "N")
       {
@@ -3755,7 +3740,6 @@ class grid_NC_ND_apl
       $this->Ini->Export_html_zip = false;
       $this->Ini->Export_img_zip  = false;
       $this->Ini->Img_export_zip  = array();
-      $this->Ini->Init_apl_lig = array();
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_NC_ND']['emb_lig_aba'] = array();
       $this->Change_Menu = false;
        if ($nmgp_opcao == "link_res")  

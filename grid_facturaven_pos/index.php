@@ -108,9 +108,8 @@ class grid_facturaven_pos_ini
    var $path_atual;
    var $Gd_missing;
    var $sc_site_ssl;
-   var $link_blank_recursos_facturatech_callback_blk;
+   var $link_grid_detalleventa_cons;
    var $link_pdfreport_facturaven_cons;
-   var $link_grid_facturaven_pos_detalle_cons_emb;
    var $link_control_reenviar_factura_edit;
    var $link_control_copiar_facturapos_edit;
    var $link_impresion_pos_pdf_cons;
@@ -233,8 +232,8 @@ class grid_facturaven_pos_ini
       $this->nm_dt_criacao   = "20180116"; 
       $this->nm_hr_criacao   = "154435"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220802"; 
-      $this->nm_hr_ult_alt   = "171118"; 
+      $this->nm_dt_ult_alt   = "20220808"; 
+      $this->nm_hr_ult_alt   = "211651"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -631,25 +630,6 @@ class grid_facturaven_pos_ini
       }
       $this->sc_lig_target["C_@scinf_copiar"] = '_self';
       $this->sc_lig_target["C_@scinf_copiar_@scinf_control_copiar_facturapos"] = '_self';
-      $Tmp_apl_lig = "grid_facturaven_pos_detalle";
-      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_facturaven_pos_detalle_ini.txt"))
-      {
-          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_facturaven_pos_detalle_ini.txt");
-          if (isset($Friendly[0]) && !empty($Friendly[0]))
-          {
-              $Tmp_apl_lig = trim($Friendly[0]);
-          }
-      }
-      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_facturaven_pos_detalle_ini.txt"))
-      {
-          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_facturaven_pos_detalle_ini.txt");
-          if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
-          {
-              $this->sc_lig_md5["grid_facturaven_pos_detalle"] = 'S';
-          }
-      }
-      $this->sc_lig_target["C_@scinf_detalle"] = '_self';
-      $this->sc_lig_target["C_@scinf_detalle_@scinf_grid_facturaven_pos_detalle"] = '_self';
       $Tmp_apl_lig = "control_reenviar_factura";
       if (is_file($this->root . $this->path_link . "_lib/friendly_url/control_reenviar_factura_ini.txt"))
       {
@@ -669,25 +649,25 @@ class grid_facturaven_pos_ini
       }
       $this->sc_lig_target["C_@scinf_reenviar"] = '_self';
       $this->sc_lig_target["C_@scinf_reenviar_@scinf_control_reenviar_factura"] = '_self';
-      $Tmp_apl_lig = "blank_recursos_facturatech_callback";
-      if (is_file($this->root . $this->path_link . "_lib/friendly_url/blank_recursos_facturatech_callback_ini.txt"))
+      $Tmp_apl_lig = "grid_detalleventa";
+      if (is_file($this->root . $this->path_link . "_lib/friendly_url/grid_detalleventa_ini.txt"))
       {
-          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/blank_recursos_facturatech_callback_ini.txt");
+          $Friendly = file($this->root . $this->path_link . "_lib/friendly_url/grid_detalleventa_ini.txt");
           if (isset($Friendly[0]) && !empty($Friendly[0]))
           {
               $Tmp_apl_lig = trim($Friendly[0]);
           }
       }
-      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/blank_recursos_facturatech_callback_ini.txt"))
+      if (is_file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_detalleventa_ini.txt"))
       {
-          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/blank_recursos_facturatech_callback_ini.txt");
+          $L_md5 = file($this->root . $this->path_link . $Tmp_apl_lig . "/grid_detalleventa_ini.txt");
           if (isset($L_md5[6]) && trim($L_md5[6]) == "LigMd5")
           {
-              $this->sc_lig_md5["blank_recursos_facturatech_callback"] = 'S';
+              $this->sc_lig_md5["grid_detalleventa"] = 'S';
           }
       }
-      $this->sc_lig_target["C_@scinf_numero2"] = '_blank';
-      $this->sc_lig_target["C_@scinf_numero2_@scinf_blank_recursos_facturatech_callback"] = '_blank';
+      $this->sc_lig_target["C_@scinf_numero2"] = 'modal';
+      $this->sc_lig_target["C_@scinf_numero2_@scinf_grid_detalleventa"] = 'modal';
       $Tmp_apl_lig = "blank_grupos_calculadora";
       if (is_file($this->root . $this->path_link . "_lib/friendly_url/blank_grupos_calculadora_ini.txt"))
       {
@@ -740,9 +720,8 @@ class grid_facturaven_pos_ini
               }
           }
       }
-      $this->link_blank_recursos_facturatech_callback_blk =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('blank_recursos_facturatech_callback') . "/" ; 
+      $this->link_grid_detalleventa_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('grid_detalleventa') . "/" ; 
       $this->link_pdfreport_facturaven_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('pdfreport_facturaven') . "/" ; 
-      $this->link_grid_facturaven_pos_detalle_cons_emb =  $this->root . $this->path_link  . "" . SC_dir_app_name('grid_facturaven_pos_detalle') . "/index.php" ; 
       $this->link_control_reenviar_factura_edit =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('control_reenviar_factura') . "/" ; 
       $this->link_control_copiar_facturapos_edit =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('control_copiar_facturapos') . "/" ; 
       $this->link_impresion_pos_pdf_cons =  $this->sc_protocolo . $this->server . $this->path_link . "" . SC_dir_app_name('impresion_pos_pdf') . "/" ; 
@@ -1220,7 +1199,7 @@ class grid_facturaven_pos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJeDQX7HAN7V5X7DMNOVcFeDWFYVENUD9JmZkFGD1rKHQF7DEBeDkXKDuFaDoJeD9FYDQJwHAveHQFaDMBOVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvmVIB/H5FqDorqD9XOZ1X7Z1BeD5JwHgvsZSJ3H5F/DorqHQFYH9BiZ1rwHuXGDMBOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/DcBwZSFGHANOD5BqHgrKVcXKV5X7DorqDcBqZ1B/D1rwZMB/DEvsHEJGDWr/DoraD9NmH9X7HABYD5NUHgrYDkFCDWXCVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDuFGVErqHQXGZSBqZ1BeHQFGDErKHArCHEXCHMXGD9NmDuFaZ1rwV5JeDMrwVcBOHEF/HMJwHQXGZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDuBqDSvCVWJeDMNOVcB/DWFaHMFUDcFYVIJwZ1vOZMJeHgNOHEJqHEFqHIX7HQXsDuBOZ1BYHuXGDMrYDkBsH5FqHINUHQJmVIraZ1rYHQJeHgNOVkJ3DWFqHIXGHQNwZ9rqD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSvmZMXGHgNKHArCH5FYHIX7HQNwDQBOZ1BYHQJsHgrwVcXKDWFYHMFGHQNwVIraZ1rYHQFGHgrKZSJ3V5XCHMFGDcBiDQBOZ1zGVWBOHgvOVcXKH5FqHIX7DcNmZkFUD1rwV5FGDEBeHEXeH5X/DoF7HQNmDQBqDSN7HQJwDMBYVcFeDWFaVoBiDcFYZ1FUZ1rYHuB/HgBOHArCV5FqHINUHQNwDQBOZ1BYHQrqDMvsV9FeDWFaHMF7HQJmVIraZ1rYHQNUHgvsHArsDWXCHMBiHQXsZ9JeD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDErKHEFiDWX7ZuFaD9JKDQB/Z1NaV5JwHuBYVIBODWFaVoX7HQFYH9FaHIBeZMBODEvsDkBsV5FaVoJeD9NmDQJsZ1BYD5rqDMrwDkFCH5FqVoBqD9XOZSB/DSrYD5BqDEvsHEFiH5FYDoraD9NwZSX7D1vOV5JwHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaVoJeD9XsZSFGD1BeVWJsHgrYDkBOHEFYVorqHQFYZkBiHAzGZMBOHgveDkFeV5B7DoXGHQBiDuBOZ1zGVWJsDMvsVcFiV5X/VoF7HQNmZkBiHIBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOZSNiDWrmVorqHQBqZ1BiHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveV5raHgrKVcFKV5FYHMBOHQXOZSB/DSNOD5F7HgBODkXKHEB7DoJeDcBwH9FUHAveHQF7DMrwV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQJsHIrwVWJeDMBODkB/DuFGVorqD9XGZ1X7D1zGD5BOHgNOVkXeV5FaVoXGHQXsDQB/HAvmVWJsDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJsHuvmVIBsV5F/HIF7HQBiZ1FGHABYHQJsDMveHEXeHEFqVoFGDcBwZSX7HArYHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCZSXeDuFaDoJeD9JKDQX7D1veV5raHgrKVIBODWFaVoBqD9BiZ1rqHArYD5XGDMBYHEJGDWXCVoB/D9XsH9FUZ1rwV5JeHuNODkFCH5B7DoJsD9XOZ1F7HIveD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBiDMzGDkBsDWFaHMraD9XOZkBiD1rwD5BODMveVkJ3DuFYHIB/DcBwDQJwHIrKHuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqHIvsV5JeDMvsVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgrKHEFiDuFYHMJeDcBwZSFGD1BeHuF7HgvOVIBsHEX7DoFUHQBiZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       if (isset($_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize']) && $_SESSION['sc_session'][$this->sc_page]['grid_facturaven_pos']['initialize'])  
       { 
@@ -1228,7 +1207,33 @@ class grid_facturaven_pos_ini
           $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'on';
 if (!isset($_SESSION['gproveedor'])) {$_SESSION['gproveedor'] = "";}
 if (!isset($this->sc_temp_gproveedor)) {$this->sc_temp_gproveedor = (isset($_SESSION['gproveedor'])) ? $_SESSION['gproveedor'] : "";}
-  $vsql = "SELECT proveedor, if(modo='PRUEBAS',servidor_prueba1,servidor1) as server1, if(modo='PRUEBAS',servidor_prueba2,servidor2) as server2, if(modo='PRUEBAS',token_prueba,tokenempresa) as tk_empresa, if(modo='PRUEBAS',password_prueba,tokenpassword) as tk_password, modo, enviar_dian, enviar_cliente FROM webservicefe where idwebservicefe='1'";
+  ;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+
+;
+;
+;
+;
+;
+
+;
+;
+
+$vsql = "SELECT proveedor, if(modo='PRUEBAS',servidor_prueba1,servidor1) as server1, if(modo='PRUEBAS',servidor_prueba2,servidor2) as server2, if(modo='PRUEBAS',token_prueba,tokenempresa) as tk_empresa, if(modo='PRUEBAS',password_prueba,tokenpassword) as tk_password, modo, enviar_dian, enviar_cliente FROM webservicefe where idwebservicefe='1'";
  
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -1410,11 +1415,6 @@ $_SESSION['scriptcase']['grid_facturaven_pos']['contr_erro'] = 'off';
       if (empty($this->nm_tabela))
       {
           $this->nm_tabela = ""; 
-      }
-      $_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos_detalle']['ind_tree'] = 0;
-      if (!isset($_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos']['emb_linha']))
-      {
-          $_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos']['emb_linha'] = 0;
       }
    }
 
@@ -4021,16 +4021,6 @@ class grid_facturaven_pos_sub_css
    function __construct()
    {
       global $script_case_init;
-      if (!$this->Ini) 
-      { 
-          $this->Ini = new grid_facturaven_pos_ini(); 
-          $this->Ini->init("Path_sub");
-      } 
-      $_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos_detalle']['SC_herda_css'] = "S"; 
-      $_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos_detalle']['embutida'] = true;
-      include_once ($this->Ini->link_grid_facturaven_pos_detalle_cons_emb);
-      $this->grid_facturaven_pos_detalle = new grid_facturaven_pos_detalle_sub_css ;
-      $_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos_detalle']['embutida'] = false;
       $str_schema_all = (isset($_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos']['str_schema_all']) && !empty($_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos']['str_schema_all'])) ? $_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos']['str_schema_all'] : "Sc9_Rhino/Sc9_Rhino";
       if ($_SESSION['sc_session'][$script_case_init]['grid_facturaven_pos']['SC_herda_css'] == "N")
       {
@@ -4182,7 +4172,7 @@ class grid_facturaven_pos_apl
       $this->Ini->Export_img_zip  = false;
       $this->Ini->Img_export_zip  = array();
       $this->Ini->Init_apl_lig = array();
-      $this->List_apl_lig = array('pdfreport_facturaven'=>array('type'=>'reportpdf', 'lab'=>'Factura de Venta', 'hint'=>'Factura de Venta', 'img_on'=>'scriptcase__NM__ico__NM__document_32.png', 'img_off'=>'scriptcase__NM__ico__NM__document_32.png'),'blank_recursos_facturatech_callback'=>array('type'=>'blank', 'lab'=>'Consulta DIAN', 'hint'=>'Consulta DIAN', 'img_on'=>'', 'img_off'=>''));
+      $this->List_apl_lig = array('pdfreport_facturaven'=>array('type'=>'reportpdf', 'lab'=>'Factura de Venta', 'hint'=>'Factura de Venta', 'img_on'=>'scriptcase__NM__ico__NM__document_32.png', 'img_off'=>'scriptcase__NM__ico__NM__document_32.png'));
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_pos']['emb_lig_aba'] = array();
       $this->Change_Menu = false;
        if ($nmgp_opcao == "link_res")  

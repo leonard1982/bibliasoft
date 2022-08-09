@@ -133,6 +133,7 @@ class grid_compras_new_grid
    var $sum_prefijo_com_val_ret;
    var $sum_prefijo_com_val_retiva;
    var $pagos;
+   var $acciones;
    var $a_pagar;
    var $devolucion;
    var $val_ica;
@@ -705,6 +706,323 @@ class grid_compras_new_grid
    { 
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['opcao'] = "muda_qt_linhas";
    } 
+       ob_start(); 
+   $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+ ?>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery-ui.js'); ?>"></script>
+<script src="<?php echo sc_url_library('prj', 'js', 'jquery.blockUI.js'); ?>"></script>
+
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'all.min.css'); ?>" rel="stylesheet"/>
+<script src="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.bundle.min.js'); ?>"></script>
+<link href="<?php echo sc_url_library('prj', 'js/boton_opciones', 'bootstrap.min.css'); ?>" rel="stylesheet" />
+
+<script src="<?php echo sc_url_library('prj', 'js', 'alertify.js'); ?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/alertify.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/default.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/semantic.min.css'); ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo sc_url_library('prj', 'js', 'css/themes/bootstrap.min.css'); ?>">
+
+<style>
+</style>
+<?php
+
+
+;
+
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+;
+
+;
+;
+;
+;
+;
+
+;
+;
+
+
+?>
+<script>
+function fEnviarPropio(idfaccom,bd)
+{
+	alertify.confirm('Confirmación de envío', '¿Desea enviar el documento a la DIAN?', 
+	function(){ 
+	
+	  alertify.notify('Enviando documento a la DIAN...', 'custom', 6, function(){ });
+		
+		$.blockUI({ 
+			message: 'Espere por favor...', 
+			css: { 
+				border: 'none', 
+				padding: '15px', 
+				backgroundColor: '#000', 
+				'-webkit-border-radius': '10px', 
+				'-moz-border-radius': '10px', 
+				opacity: .5, 
+				color: '#fff'
+			}
+		});
+		
+		var vvalidar_correo_enlinea = "<?php echo $vvalidar_correo_enlinea; ?>";
+		
+		if(vvalidar_correo_enlinea=="SI")
+		{
+			$.post("../blank_correo_reenvio_validador/index.php",{
+
+				idfacven:idfaccom
+
+			},function(r){
+
+				console.log("Se busca el correo del cliente: ");
+				console.log(r);
+				var em = JSON.parse(r);
+				
+				var email    = em.email;
+				var validado = em.validado;
+				
+				if(validado=="NO")
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.get("../valida_email.php",{
+
+							email:email
+
+						},function(r2){
+
+							console.log("Si no esta validado: ");
+							console.log(r2);
+							var obj = JSON.parse(r2);
+
+							if(obj.error=="")
+							{
+								$.post("../blank_enviar_fes_propio_compras/index.php",{
+
+									idfacven:idfaccom,
+									bd:bd,
+									reason:obj.reason,
+									json_valida_email:obj.json
+
+									},function(r3){
+
+									$.unblockUI();
+									console.log(r3);
+
+									if(r3=="Documento enviado con éxito!!!")
+									{
+										nm_gp_submit_ajax ('igual', 'breload');
+									}
+									else
+									{
+										if(confirm(r3))
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+										else
+										{
+										   nm_gp_submit_ajax ('igual', 'breload');
+										}
+									}
+								});
+							}
+							else
+							{
+								if(confirm(obj.error))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El proveedor no tiene correo electrónico.");
+					}
+				}
+				else
+				{
+					if(!$.isEmptyObject(email))
+					{
+						$.post("../blank_enviar_fes_propio_compras/index.php",{
+
+							idfacven:idfaccom,
+							reason:'accepted_email',
+							json_valida_email:''
+
+							},function(r3){
+
+							console.log("Si ya esta validado: ");
+							$.unblockUI();
+							console.log(r3);
+
+							if(r3=="Documento enviado con éxito!!!")
+							{
+								nm_gp_submit_ajax ('igual', 'breload');
+							}
+							else
+							{
+								if(confirm(r3))
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+								else
+								{
+								   nm_gp_submit_ajax ('igual', 'breload');
+								}
+							}
+						});
+					}
+					else
+					{
+						alert("El proveedor no tiene correo electrónico...");
+					}
+				}
+			});
+		}
+		else
+		{
+			$.post("../blank_enviar_fes_propio_compras/index.php",{
+
+				idfaccom:idfaccom,
+				bd:bd
+
+				},function(r){
+
+				console.log("Si no se va a validar: ");
+				$.unblockUI();
+				console.log(r);
+
+				if(r=="Documento enviado con éxito!!!")
+				{
+					nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+					if(confirm(r))
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+					else
+					{
+					   nm_gp_submit_ajax ('igual', 'breload');
+					}
+				}
+			});
+		}
+	}
+    , function(){
+		
+		alertify.error('Envío cancelado.');
+	});
+}
+
+
+function fRegenerarPDFPropio(idfacven,bd,cufe)
+{
+	if(!$.isEmptyObject(cufe))
+	{
+		if(confirm('¿Desea regenerar el PDF del documento?'))
+		{
+			$.blockUI({ 
+				message: 'Espere por favor...', 
+				css: { 
+					border: 'none', 
+					padding: '15px', 
+					backgroundColor: '#000', 
+					'-webkit-border-radius': '10px', 
+					'-moz-border-radius': '10px', 
+					opacity: .5, 
+					color: '#fff'
+				}
+			});
+
+			$.post("../blank_envio_propio_regenerar/index.php",{
+
+				idfacven:idfaccom,
+				bd:bd
+
+				},function(r){
+
+				$.unblockUI();
+				console.log(r);
+
+				if(confirm('PDF regenerado con éxito.'))
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+				else
+				{
+				   nm_gp_submit_ajax ('igual', 'breload');
+				}
+
+			});
+		}
+	}
+	else
+	{
+		alert('El documento no ha sido enviado electrónicamente.');
+	}
+}
+	
+function fJSONPropio(idfacven,bd)
+{
+
+	$.blockUI({ 
+		message: 'Espere por favor...', 
+		css: { 
+			border: 'none', 
+			padding: '15px', 
+			backgroundColor: '#000', 
+			'-webkit-border-radius': '10px', 
+			'-moz-border-radius': '10px', 
+			opacity: .5, 
+			color: '#fff'
+		}
+	});
+
+	$.post("../blank_envio_propio_xml/index.php",{
+
+		idfacven:idfacven,
+		bd:bd
+
+		},function(r){
+
+		$.unblockUI();
+		console.log(r);
+
+		var obj = JSON.parse(r);
+		if(obj.existe=="SI")
+		{
+		   window.open(obj.archivo, "XML",)
+		}
+		else
+		{
+			alert("Hubo un problema al generar el archivo.");
+		}
+	});
+}
+</script>
+<?php
+$_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off'; 
+       $this->SC_Buf_onInit = ob_get_clean();; 
 
    if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['dashboard_info']['under_dashboard'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['dashboard_info']['maximized']) {
        $tmpDashboardApp = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['dashboard_info']['dashboard_app'];
@@ -1661,7 +1979,7 @@ class grid_compras_new_grid
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0">
  <META http-equiv="Pragma" content="no-cache">
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid.css" /> 
  <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
  <?php 
@@ -1759,7 +2077,7 @@ $nm_saida->saida("                        <link rel=\"shortcut icon\" href=\"\">
            $nm_saida->saida("   <META http-equiv=\"Cache-Control\" content=\"post-check=0, pre-check=0\"/>\r\n");
            $nm_saida->saida("   <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
        }
-       $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
+       $nm_saida->saida("   <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n");
        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['opcao'] != "pdf" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['embutida'])
        { 
            $css_body = "";
@@ -2588,6 +2906,10 @@ $nm_saida->saida("}\r\n");
   }
            $nm_saida->saida("  </style>\r\n");
        }
+       if (!empty($this->SC_Buf_onInit))
+       { 
+       $nm_saida->saida("" . $this->SC_Buf_onInit . "\r\n");
+       } 
        $nm_saida->saida("  </HEAD>\r\n");
    } 
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['embutida'] && $this->Ini->nm_ger_css_emb)
@@ -2904,6 +3226,8 @@ $nm_saida->saida("}\r\n");
    $this->css_asentada_grid_line = $compl_css_emb . "css_asentada_grid_line";
    $this->css_detalle_label = $compl_css_emb . "css_detalle_label";
    $this->css_detalle_grid_line = $compl_css_emb . "css_detalle_grid_line";
+   $this->css_acciones_label = $compl_css_emb . "css_acciones_label";
+   $this->css_acciones_grid_line = $compl_css_emb . "css_acciones_grid_line";
    $this->css_idfaccom_label = $compl_css_emb . "css_idfaccom_label";
    $this->css_idfaccom_grid_line = $compl_css_emb . "css_idfaccom_grid_line";
    $this->css_subtotal_label = $compl_css_emb . "css_subtotal_label";
@@ -3703,6 +4027,14 @@ $nm_saida->saida("}\r\n");
    $nm_saida->saida("</TD>\r\n");
    } 
  }
+ function NM_label_acciones()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['acciones'])) ? $this->New_label['acciones'] : "Acciones"; 
+   if (!isset($this->NM_cmp_hidden['acciones']) || $this->NM_cmp_hidden['acciones'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_acciones_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_acciones_label'] . "\" NOWRAP>" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
  function NM_label_idfaccom()
  {
    global $nm_saida;
@@ -4325,6 +4657,8 @@ $nm_saida->saida("}\r\n");
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['total'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['asentada'])) ? $this->New_label['asentada'] : "Asentada"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['asentada'] = $SC_Label; 
+   $SC_Label = (isset($this->New_label['acciones'])) ? $this->New_label['acciones'] : "Acciones"; 
+   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['acciones'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['idfaccom'])) ? $this->New_label['idfaccom'] : "#"; 
    $_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['labels']['idfaccom'] = $SC_Label; 
    $SC_Label = (isset($this->New_label['subtotal'])) ? $this->New_label['subtotal'] : "Subtotal"; 
@@ -4919,6 +5253,8 @@ if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['proc_pdf']
           } 
           $this->sc_proc_grid = true;
           $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
  if($this->asentada ==1)
 {
 	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -5103,6 +5439,19 @@ else
 	$this->iva_19  = 0;
 	
 	}
+if($this->tipo_com =="AF" and $this->asentada  == 1)
+	{
+	$this->acciones  = "<a onclick='fEnviarPropio(\"".$this->idfaccom ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+	}
+elseif($this->tipo_com =="AF")
+	{
+	$this->acciones  = "Por favor <br>Asentar!!!";
+	}
+else
+	{
+	$this->acciones  = "";
+	}
+if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
           if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['proc_pdf'])
           {
@@ -5431,7 +5780,7 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
           {
               $this->SC_nowrap = "";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_tipo_com_grid_line . "\"  style=\"" . $this->Css_Cmp['css_tipo_com_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_tipo_com_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_tipo_com_grid_line . "\"  style=\"" . $this->Css_Cmp['css_tipo_com_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_tipo_com_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_prefijo_com()
@@ -5460,7 +5809,7 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
           {
               $this->SC_nowrap = "";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_prefijo_com_grid_line . "\"  style=\"" . $this->Css_Cmp['css_prefijo_com_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"   HEIGHT=\"0px\"><span id=\"id_sc_field_prefijo_com_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_prefijo_com_grid_line . "\"  style=\"" . $this->Css_Cmp['css_prefijo_com_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_prefijo_com_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_numero_com()
@@ -5573,7 +5922,7 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
           {
               $this->SC_nowrap = "";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_formapago_grid_line . "\"  style=\"" . $this->Css_Cmp['css_formapago_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"  WIDTH=\"1%\"  HEIGHT=\"0px\"><span id=\"id_sc_field_formapago_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_formapago_grid_line . "\"  style=\"" . $this->Css_Cmp['css_formapago_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"  WIDTH=\"1%\"  HEIGHT=\"0px\"><span id=\"id_sc_field_formapago_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_fechacom()
@@ -5857,7 +6206,7 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
           {
               $this->SC_nowrap = "NOWRAP";
           }
-   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_asentada_grid_line . "\"  style=\"" . $this->Css_Cmp['css_asentada_grid_line'] . $Style_asentada . "\" " . $this->SC_nowrap . " align=\"\" valign=\"top\"  WIDTH=\"50%\"  HEIGHT=\"0px\"><span id=\"id_sc_field_asentada_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_asentada_grid_line . "\"  style=\"" . $this->Css_Cmp['css_asentada_grid_line'] . $Style_asentada . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"  WIDTH=\"50%\"  HEIGHT=\"0px\"><span id=\"id_sc_field_asentada_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_detalle()
@@ -5938,6 +6287,35 @@ if (strlen($conteudo) > 20 && $conteudo != "&nbsp;") {
               $nm_saida->saida("</table>");
           }
    $nm_saida->saida("</TD>\r\n");
+      }
+ }
+ function NM_grid_acciones()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['acciones']) || $this->NM_cmp_hidden['acciones'] != "off") { 
+          $conteudo = sc_strip_script($this->acciones); 
+          $conteudo_original = sc_strip_script($this->acciones); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $str_tem_display = $conteudo;
+          if(!empty($str_tem_display) && $str_tem_display != '&nbsp;' && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['proc_pdf'] && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['embutida'] && !empty($conteudo)) 
+          { 
+              $str_tem_display = $this->getFieldHighlight('quicksearch', 'acciones', $str_tem_display, $conteudo_original); 
+              $str_tem_display = $this->getFieldHighlight('advanced_search', 'acciones', $str_tem_display, $conteudo_original); 
+          } 
+              $conteudo = $str_tem_display; 
+          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['proc_pdf'])
+          {
+              $this->SC_nowrap = "NOWRAP";
+          }
+          else
+          {
+              $this->SC_nowrap = "";
+          }
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_acciones_grid_line . "\"  style=\"" . $this->Css_Cmp['css_acciones_grid_line'] . "\" " . $this->SC_nowrap . " align=\"\" valign=\"middle\"   HEIGHT=\"0px\"><span id=\"id_sc_field_acciones_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
  function NM_grid_idfaccom()
@@ -6736,7 +7114,7 @@ if (strlen($conteudo) > 15 && $conteudo != "&nbsp;") {
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 37;
+   $this->NM_colspan  = 38;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_compras_new']['opc_psq'])
    {
        $this->NM_colspan++;
@@ -8091,6 +8469,8 @@ if (strlen($conteudo) > 15 && $conteudo != "&nbsp;") {
          $tipo_com_orig = $this->tipo_com;
          $prefijo_com_orig = $this->prefijo_com;
          $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
  if($this->asentada ==1)
 {
 	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -8283,6 +8663,20 @@ else
 	$this->iva_19  = 0;
 	
 	}
+
+if($this->tipo_com =="AF" and $this->asentada  == 1)
+	{
+	$this->acciones  = "<a onclick='fEnviarPropio(\"".$this->idfaccom ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+	}
+elseif($this->tipo_com =="AF")
+	{
+	$this->acciones  = "Por favor <br>Asentar!!!";
+	}
+else
+	{
+	$this->acciones  = "";
+	}
+if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $this->arg_sum_tipo_com = " = " . $this->Db->qstr($this->tipo_com);
          $this->arg_sum_prefijo_com = " = " . $this->Db->qstr($this->prefijo_com);
@@ -8501,6 +8895,8 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $tipo_com_orig = $this->tipo_com;
          $prefijo_com_orig = $this->prefijo_com;
          $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
  if($this->asentada ==1)
 {
 	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -8693,6 +9089,20 @@ else
 	$this->iva_19  = 0;
 	
 	}
+
+if($this->tipo_com =="AF" and $this->asentada  == 1)
+	{
+	$this->acciones  = "<a onclick='fEnviarPropio(\"".$this->idfaccom ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+	}
+elseif($this->tipo_com =="AF")
+	{
+	$this->acciones  = "Por favor <br>Asentar!!!";
+	}
+else
+	{
+	$this->acciones  = "";
+	}
+if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $this->arg_sum_tipo_com = " = " . $this->Db->qstr($this->tipo_com);
          $this->arg_sum_prefijo_com = " = " . $this->Db->qstr($this->prefijo_com);
@@ -8900,6 +9310,8 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $tipo_com_orig = $this->tipo_com;
          $prefijo_com_orig = $this->prefijo_com;
          $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
  if($this->asentada ==1)
 {
 	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -9092,6 +9504,20 @@ else
 	$this->iva_19  = 0;
 	
 	}
+
+if($this->tipo_com =="AF" and $this->asentada  == 1)
+	{
+	$this->acciones  = "<a onclick='fEnviarPropio(\"".$this->idfaccom ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+	}
+elseif($this->tipo_com =="AF")
+	{
+	$this->acciones  = "Por favor <br>Asentar!!!";
+	}
+else
+	{
+	$this->acciones  = "";
+	}
+if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $this->arg_sum_tipo_com = " = " . $this->Db->qstr($this->tipo_com);
          $this->arg_sum_prefijo_com = " = " . $this->Db->qstr($this->prefijo_com);
@@ -9297,6 +9723,8 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $tipo_com_orig = $this->tipo_com;
          $prefijo_com_orig = $this->prefijo_com;
          $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
  if($this->asentada ==1)
 {
 	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -9489,6 +9917,20 @@ else
 	$this->iva_19  = 0;
 	
 	}
+
+if($this->tipo_com =="AF" and $this->asentada  == 1)
+	{
+	$this->acciones  = "<a onclick='fEnviarPropio(\"".$this->idfaccom ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+	}
+elseif($this->tipo_com =="AF")
+	{
+	$this->acciones  = "Por favor <br>Asentar!!!";
+	}
+else
+	{
+	$this->acciones  = "";
+	}
+if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $this->arg_sum_tipo_com = " = " . $this->Db->qstr($this->tipo_com);
          $this->arg_sum_prefijo_com = " = " . $this->Db->qstr($this->prefijo_com);
@@ -9697,6 +10139,8 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $tipo_com_orig = $this->tipo_com;
          $prefijo_com_orig = $this->prefijo_com;
          $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
  if($this->asentada ==1)
 {
 	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -9889,6 +10333,20 @@ else
 	$this->iva_19  = 0;
 	
 	}
+
+if($this->tipo_com =="AF" and $this->asentada  == 1)
+	{
+	$this->acciones  = "<a onclick='fEnviarPropio(\"".$this->idfaccom ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+	}
+elseif($this->tipo_com =="AF")
+	{
+	$this->acciones  = "Por favor <br>Asentar!!!";
+	}
+else
+	{
+	$this->acciones  = "";
+	}
+if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $this->arg_sum_tipo_com = " = " . $this->Db->qstr($this->tipo_com);
          $this->arg_sum_prefijo_com = " = " . $this->Db->qstr($this->prefijo_com);
@@ -10105,6 +10563,8 @@ $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $tipo_com_orig = $this->tipo_com;
          $prefijo_com_orig = $this->prefijo_com;
          $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'on';
+if (!isset($_SESSION['gbd_seleccionada'])) {$_SESSION['gbd_seleccionada'] = "";}
+if (!isset($this->sc_temp_gbd_seleccionada)) {$this->sc_temp_gbd_seleccionada = (isset($_SESSION['gbd_seleccionada'])) ? $_SESSION['gbd_seleccionada'] : "";}
  if($this->asentada ==1)
 {
 	$this->NM_field_style["asentada"] = "background-color:#33ff99;font-size:15px;color:#000000;font-family:arial;font-weight:sans-serif;";
@@ -10297,6 +10757,20 @@ else
 	$this->iva_19  = 0;
 	
 	}
+
+if($this->tipo_com =="AF" and $this->asentada  == 1)
+	{
+	$this->acciones  = "<a onclick='fEnviarPropio(\"".$this->idfaccom ."\",\"".$this->sc_temp_gbd_seleccionada."\",parent.id);' title='Enviar Documento Electrónico'><img style='cursor:pointer;width:32px;' src='../_lib/img/scriptcase__NM__ico__NM__server_mail_download_32.png' /></a>";
+	}
+elseif($this->tipo_com =="AF")
+	{
+	$this->acciones  = "Por favor <br>Asentar!!!";
+	}
+else
+	{
+	$this->acciones  = "";
+	}
+if (isset($this->sc_temp_gbd_seleccionada)) {$_SESSION['gbd_seleccionada'] = $this->sc_temp_gbd_seleccionada;}
 $_SESSION['scriptcase']['grid_compras_new']['contr_erro'] = 'off';
          $this->arg_sum_tipo_com = " = " . $this->Db->qstr($this->tipo_com);
          $this->arg_sum_prefijo_com = " = " . $this->Db->qstr($this->prefijo_com);

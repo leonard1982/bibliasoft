@@ -267,6 +267,12 @@ function scEventControl_onFocus(oField, iSeq) {
     scEventControl_data[fieldName]["calculated"] = $(oField).val();
     return;
   }
+  if ("tasaiva_" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["change"]   = true;
+    scEventControl_data[fieldName]["original"] = $(oField).val();
+    scEventControl_data[fieldName]["calculated"] = $(oField).val();
+    return;
+  }
   if ("valorunit_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["change"]   = true;
     scEventControl_data[fieldName]["original"] = $(oField).val();
@@ -351,6 +357,9 @@ function scJQEventsAdd(iSeqRow) {
                                         .bind('focus', function() { sc_detallecompra_new_porc_desc__onfocus(this, iSeqRow) });
   $('#id_sc_field_unidad_c_' + iSeqRow).bind('change', function() { sc_detallecompra_new_unidad_c__onchange(this, iSeqRow) });
   $('#id_sc_field_num_ndevolucion_' + iSeqRow).bind('change', function() { sc_detallecompra_new_num_ndevolucion__onchange(this, iSeqRow) });
+  $('#id_sc_field_tipo_docu_' + iSeqRow).bind('change', function() { sc_detallecompra_new_tipo_docu__onchange(this, iSeqRow) });
+  $('#id_sc_field_tipo_trans_' + iSeqRow).bind('change', function() { sc_detallecompra_new_tipo_trans__onchange(this, iSeqRow) });
+  $('#id_sc_field_id_nota_' + iSeqRow).bind('change', function() { sc_detallecompra_new_id_nota__onchange(this, iSeqRow) });
   $('#id_sc_field_cod_barras_' + iSeqRow).bind('blur', function() { sc_detallecompra_new_cod_barras__onblur(this, iSeqRow) })
                                          .bind('change', function() { sc_detallecompra_new_cod_barras__onchange(this, iSeqRow) })
                                          .bind('focus', function() { sc_detallecompra_new_cod_barras__onfocus(this, iSeqRow) });
@@ -509,6 +518,7 @@ function sc_detallecompra_new_tasaiva__onblur(oThis, iSeqRow) {
 
 function sc_detallecompra_new_tasaiva__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
+  do_ajax_detallecompra_new_event_tasaiva__onchange(iSeqRow);
   nm_check_insert(iSeqRow);
 }
 
@@ -633,6 +643,18 @@ function sc_detallecompra_new_unidad_c__onchange(oThis, iSeqRow) {
 }
 
 function sc_detallecompra_new_num_ndevolucion__onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_detallecompra_new_tipo_docu__onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_detallecompra_new_tipo_trans__onchange(oThis, iSeqRow) {
+  scMarkFormAsChanged();
+}
+
+function sc_detallecompra_new_id_nota__onchange(oThis, iSeqRow) {
   scMarkFormAsChanged();
 }
 

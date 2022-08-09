@@ -285,12 +285,12 @@ class detallecompra_new_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20180216"; 
       $this->nm_hr_criacao   = "062845"; 
-      $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220622"; 
-      $this->nm_hr_ult_alt   = "203751"; 
+      $this->nm_autor_alt    = "edgar"; 
+      $this->nm_dt_ult_alt   = "20220809"; 
+      $this->nm_hr_ult_alt   = "093134"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0"; 
+      $this->nm_app_version  = "1.0.0"; 
 // 
       $this->border_grid           = ""; 
       $this->cor_bg_grid           = ""; 
@@ -536,7 +536,7 @@ class detallecompra_new_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_form.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -884,7 +884,7 @@ class detallecompra_new_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQJKZSBiZ1BYD5BODMNOV9BUHEFYHMJsHQBsH9B/DSrYV5B/HgNOHErCDuX/ZuFaD9XsDQBqDSBYD5JeHuvmVIBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIBOHQNmZSFUHIrwD5JsHgvsVcB/DWFYHIF7HQNmH9B/HIveV5FaHgNOHEJqDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoNUDcJUZ1FaD1rKD5NUDEBOHEFiDuFYVoB/DcJeZSX7Z1rwD5F7HuzGVcrsDWJeVoB/DcNwH9B/Z1NOV5FaDEvsDkBsV5XCDoBOD9JKDQJwHAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQXODQFGD1veV5JwHuvmVcB/H5FqVorqDcBqZSB/D1rKHQX7HgNKHEJqDuFaVoX7HQXsH9FGHABYV5BODMzGV9FeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDuFGVorqHQNwZSBqHArKV5FUDMrYZSXeV5FqHIJsDcJeZSFGHIrwHuFUDMzGZSNiDWXCDoFGHQNmZ1F7HIBeHQFGHgveVkJ3H5FYVoJwD9NwZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHArYHuJeHgvsVkJ3DWX7HMX7HQXsDQFaZ1NaV5BiDMvmV9FeDuFqHMFaHQBiH9BqZ1NOHuX7HgvsDkBsDWF/HMJeHQJKDQFUHAN7HuB/DMBOVIB/DWJeHIFGDcBwZ1X7HAN7HuJeHgrKVkJ3DWX7HMFGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwH9FUHIrwHQBqDMBOVIBsV5FYDoNUD9XOZ1FaHIveV5FUHgBeZSJ3H5F/HMBqHQNwDQBqD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgrKZSJ3DuJeHIBiHQJKZ9F7HAN7HQXGDMvmVIBODWJeDoFUDcBqVINUD1rKHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5JsHgrKVcFCH5XCVoB/D9BsZ1F7HIrwV5FaDMBYZSXeV5FaVoFGD9NwDQJwHANOV5FUHgrYDkBOV5F/DoraD9BiVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHEFiHEXKZuXGD9NwDQJwD1BeHQXGHuBOV9FeDWJeVoBiDcJUZkFGDSrYD5BOHgBOHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDurmDoBOHQJeDuFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZSBODSrYHuFGHgrKHErCV5FqVoBqDcBiDuFaD1veV5BODMvODkFCH5B3VErqD9BiZ1FaDSrYD5rqHgvsHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       if (!isset($_SESSION['sc_session'][$this->sc_page]['detallecompra_new']['ordem_cmp'])) { 
           $_SESSION['sc_session'][$this->sc_page]['detallecompra_new']['ordem_cmp'] = ""; 
@@ -1473,6 +1473,9 @@ ob_start();
     $sc_conv_var['porc_desc'] = "porc_desc_";
     $sc_conv_var['unidad_c'] = "unidad_c_";
     $sc_conv_var['num_ndevolucion'] = "num_ndevolucion_";
+    $sc_conv_var['tipo_docu'] = "tipo_docu_";
+    $sc_conv_var['tipo_trans'] = "tipo_trans_";
+    $sc_conv_var['id_nota'] = "id_nota_";
     $sc_conv_var['cod_barras'] = "cod_barras_";
     $sc_conv_var['presentacion'] = "presentacion_";
     $sc_conv_var['ver'] = "ver_";
@@ -1846,6 +1849,17 @@ ob_start();
         {
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][0]);
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
+        if ('ajax_detallecompra_new_event_tasaiva__onchange' == $_POST['rs'])
+        {
+            $valorpar_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $cantidad_ = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $valorunit_ = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $descuento_ = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $tasaiva_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $iva_ = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][7]);
         }
         if ('ajax_detallecompra_new_event_valorunit__onblur' == $_POST['rs'])
         {
@@ -2749,6 +2763,7 @@ ob_start();
     sajax_export("ajax_detallecompra_new_event_porc_desc__onchange");
     sajax_export("ajax_detallecompra_new_event_sabor__onchange");
     sajax_export("ajax_detallecompra_new_event_tallas__onchange");
+    sajax_export("ajax_detallecompra_new_event_tasaiva__onchange");
     sajax_export("ajax_detallecompra_new_event_valorunit__onblur");
     sajax_export("ajax_detallecompra_new_event_valorunit__onchange");
     for ($iSeq = 1; $iSeq <= 80; $iSeq++)
@@ -3429,6 +3444,31 @@ if (isset($_POST['wizard_action']) && 'change_step' == $_POST['wizard_action']) 
         $inicial_detallecompra_new->contr_detallecompra_new->controle();
         exit;
     } // ajax_event_tallas__onchange
+
+    function ajax_detallecompra_new_event_tasaiva__onchange($valorpar_, $cantidad_, $valorunit_, $descuento_, $tasaiva_, $iva_, $script_case_init, $nmgp_refresh_row)
+    {
+        global $inicial_detallecompra_new;
+        //register_shutdown_function("detallecompra_new_pack_ajax_response");
+        $inicial_detallecompra_new->contr_detallecompra_new->NM_ajax_flag          = true;
+        $inicial_detallecompra_new->contr_detallecompra_new->NM_ajax_opcao         = 'event_tasaiva__onchange';
+        $inicial_detallecompra_new->contr_detallecompra_new->NM_ajax_info['param'] = array(
+                  'valorpar_' => NM_utf8_urldecode($valorpar_),
+                  'cantidad_' => NM_utf8_urldecode($cantidad_),
+                  'valorunit_' => NM_utf8_urldecode($valorunit_),
+                  'descuento_' => NM_utf8_urldecode($descuento_),
+                  'tasaiva_' => NM_utf8_urldecode($tasaiva_),
+                  'iva_' => NM_utf8_urldecode($iva_),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_detallecompra_new->contr_detallecompra_new->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_detallecompra_new->contr_detallecompra_new->controle();
+        exit;
+    } // ajax_event_tasaiva__onchange
 
     function ajax_detallecompra_new_event_valorunit__onblur($valorpar_, $descuento_, $iva_, $script_case_init, $nmgp_refresh_row)
     {

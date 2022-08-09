@@ -3443,6 +3443,80 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
     scAjaxSetFocus();
   } // do_ajax_form_resdian_validate_pref_ndb_cb
 
+  // ---------- Validate prefijo_com
+  function do_ajax_form_resdian_validate_prefijo_com()
+  {
+    var nomeCampo_prefijo_com = "prefijo_com";
+    var var_prefijo_com = scAjaxGetFieldCheckbox(nomeCampo_prefijo_com, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_resdian_validate_prefijo_com(var_prefijo_com, var_script_case_init, do_ajax_form_resdian_validate_prefijo_com_cb);
+  } // do_ajax_form_resdian_validate_prefijo_com
+
+  function do_ajax_form_resdian_validate_prefijo_com_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "prefijo_com";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_resdian_validate_prefijo_com_cb
+
+  // ---------- Validate prefijo_ajuscom
+  function do_ajax_form_resdian_validate_prefijo_ajuscom()
+  {
+    var nomeCampo_prefijo_ajuscom = "prefijo_ajuscom";
+    var var_prefijo_ajuscom = scAjaxGetFieldCheckbox(nomeCampo_prefijo_ajuscom, ";");
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_resdian_validate_prefijo_ajuscom(var_prefijo_ajuscom, var_script_case_init, do_ajax_form_resdian_validate_prefijo_ajuscom_cb);
+  } // do_ajax_form_resdian_validate_prefijo_ajuscom
+
+  function do_ajax_form_resdian_validate_prefijo_ajuscom_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "prefijo_ajuscom";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_resdian_validate_prefijo_ajuscom_cb
+
   // ---------- Validate activa
   function do_ajax_form_resdian_validate_activa()
   {
@@ -4021,6 +4095,8 @@ function scJs_sweetalert_params(params) {
     var var_pref_factura = scAjaxGetFieldCheckbox("pref_factura", ";");
     var var_pref_ncr = scAjaxGetFieldCheckbox("pref_ncr", ";");
     var var_pref_ndb = scAjaxGetFieldCheckbox("pref_ndb", ";");
+    var var_prefijo_com = scAjaxGetFieldCheckbox("prefijo_com", ";");
+    var var_prefijo_ajuscom = scAjaxGetFieldCheckbox("prefijo_ajuscom", ";");
     var var_activa = scAjaxGetFieldSelect("activa");
     var var_nombre_pc = scAjaxGetFieldText("nombre_pc");
     var var_nombre_impre = scAjaxGetFieldText("nombre_impre");
@@ -4036,7 +4112,7 @@ function scJs_sweetalert_params(params) {
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_resdian_submit_form(var_resolucion, var_rangofac, var_fecha, var_vigencia, var_fec_vencimiento, var_prefijo, var_primerfactura, var_desde, var_ultima_fac, var_tipo, var_prefijo_fe, var_pref_factura, var_pref_ncr, var_pref_ndb, var_activa, var_nombre_pc, var_nombre_impre, var_contador_pruebas, var_texto_encabezado, var_texto_pie_pagina, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_resdian_submit_form_cb);
+    x_ajax_form_resdian_submit_form(var_resolucion, var_rangofac, var_fecha, var_vigencia, var_fec_vencimiento, var_prefijo, var_primerfactura, var_desde, var_ultima_fac, var_tipo, var_prefijo_fe, var_pref_factura, var_pref_ncr, var_pref_ndb, var_prefijo_com, var_prefijo_ajuscom, var_activa, var_nombre_pc, var_nombre_impre, var_contador_pruebas, var_texto_encabezado, var_texto_pie_pagina, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_resdian_submit_form_cb);
   } // do_ajax_form_resdian_submit_form
 
   function do_ajax_form_resdian_submit_form_cb(sResp)
@@ -4074,6 +4150,8 @@ function scJs_sweetalert_params(params) {
       scAjaxHideErrorDisplay("pref_factura");
       scAjaxHideErrorDisplay("pref_ncr");
       scAjaxHideErrorDisplay("pref_ndb");
+      scAjaxHideErrorDisplay("prefijo_com");
+      scAjaxHideErrorDisplay("prefijo_ajuscom");
       scAjaxHideErrorDisplay("activa");
       scAjaxHideErrorDisplay("nombre_pc");
       scAjaxHideErrorDisplay("nombre_impre");
@@ -4152,6 +4230,8 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_resdian']['dashboar
     scAjaxHideErrorDisplay("pref_factura");
     scAjaxHideErrorDisplay("pref_ncr");
     scAjaxHideErrorDisplay("pref_ndb");
+    scAjaxHideErrorDisplay("prefijo_com");
+    scAjaxHideErrorDisplay("prefijo_ajuscom");
     scAjaxHideErrorDisplay("activa");
     scAjaxHideErrorDisplay("nombre_pc");
     scAjaxHideErrorDisplay("nombre_impre");
@@ -4259,12 +4339,14 @@ if ($this->Embutida_form)
   ajax_field_list[11] = "pref_factura";
   ajax_field_list[12] = "pref_ncr";
   ajax_field_list[13] = "pref_ndb";
-  ajax_field_list[14] = "activa";
-  ajax_field_list[15] = "nombre_pc";
-  ajax_field_list[16] = "nombre_impre";
-  ajax_field_list[17] = "contador_pruebas";
-  ajax_field_list[18] = "texto_encabezado";
-  ajax_field_list[19] = "texto_pie_pagina";
+  ajax_field_list[14] = "prefijo_com";
+  ajax_field_list[15] = "prefijo_ajuscom";
+  ajax_field_list[16] = "activa";
+  ajax_field_list[17] = "nombre_pc";
+  ajax_field_list[18] = "nombre_impre";
+  ajax_field_list[19] = "contador_pruebas";
+  ajax_field_list[20] = "texto_encabezado";
+  ajax_field_list[21] = "texto_pie_pagina";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -4282,10 +4364,12 @@ if ($this->Embutida_form)
     "desde": {"label": "Desde", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "ultima_fac": {"label": "Hasta", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "tipo": {"label": "Tipo resolución", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
-    "prefijo_fe": {"label": "Tipo Factura", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "prefijo_fe": {"label": "Tipo Documento", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "pref_factura": {"label": "Prefijo de Factura", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "pref_ncr": {"label": "Prefijo de Nota de Crédito", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "pref_ndb": {"label": "Prefijo de Nota Débito", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "prefijo_com": {"label": "Prefijo de Auto factura", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "prefijo_ajuscom": {"label": "Prefijo Ajuste compra", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "activa": {"label": "Activa", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "nombre_pc": {"label": "Nombre Pc de Red", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "nombre_impre": {"label": "Nombre Impresora de Red", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -4322,6 +4406,8 @@ if ($this->Embutida_form)
     "pref_factura": new Array(),
     "pref_ncr": new Array(),
     "pref_ndb": new Array(),
+    "prefijo_com": new Array(),
+    "prefijo_ajuscom": new Array(),
     "activa": new Array(),
     "nombre_pc": new Array(),
     "nombre_impre": new Array(),
@@ -4343,6 +4429,8 @@ if ($this->Embutida_form)
   ajax_field_mult["pref_factura"][1] = "pref_factura";
   ajax_field_mult["pref_ncr"][1] = "pref_ncr";
   ajax_field_mult["pref_ndb"][1] = "pref_ndb";
+  ajax_field_mult["prefijo_com"][1] = "prefijo_com";
+  ajax_field_mult["prefijo_ajuscom"][1] = "prefijo_ajuscom";
   ajax_field_mult["activa"][1] = "activa";
   ajax_field_mult["nombre_pc"][1] = "nombre_pc";
   ajax_field_mult["nombre_impre"][1] = "nombre_impre";
@@ -4364,6 +4452,8 @@ if ($this->Embutida_form)
     "pref_factura": new Array("hidden_field_label_pref_factura", "hidden_field_data_pref_factura"),
     "pref_ncr": new Array("hidden_field_label_pref_ncr", "hidden_field_data_pref_ncr"),
     "pref_ndb": new Array("hidden_field_label_pref_ndb", "hidden_field_data_pref_ndb"),
+    "prefijo_com": new Array("hidden_field_label_prefijo_com", "hidden_field_data_prefijo_com"),
+    "prefijo_ajuscom": new Array("hidden_field_label_prefijo_ajuscom", "hidden_field_data_prefijo_ajuscom"),
     "activa": new Array("hidden_field_label_activa", "hidden_field_data_activa"),
     "nombre_pc": new Array("hidden_field_label_nombre_pc", "hidden_field_data_nombre_pc"),
     "nombre_impre": new Array("hidden_field_label_nombre_impre", "hidden_field_data_nombre_impre"),
@@ -4387,6 +4477,8 @@ if ($this->Embutida_form)
     "pref_factura": "off",
     "pref_ncr": "off",
     "pref_ndb": "off",
+    "prefijo_com": "off",
+    "prefijo_ajuscom": "off",
     "activa": "off",
     "nombre_pc": "off",
     "nombre_impre": "off",
@@ -4626,6 +4718,40 @@ if ($this->Embutida_form)
       return;
     }
     if ("pref_ndb" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("prefijo_com" == sIndex)
+    {
+      scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("prefijo_ajuscom" == sIndex)
     {
       scAjaxSetFieldCheckbox(sIndex, aValue, null, 1, null, null, "", "", "", false, true);
       updateHeaderFooter(sIndex, aValue);

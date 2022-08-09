@@ -94,10 +94,22 @@ class fac_compras_new_mob_apl
    var $tipo_com_1;
    var $id_comafec;
    var $id_comafec_1;
+   var $cufe;
+   var $enlacepdf;
+   var $estado;
+   var $qr_base64;
+   var $fecha_validacion;
+   var $fecha_validacion_hora;
+   var $avisos;
+   var $proveedor;
+   var $token;
+   var $password;
+   var $servidor;
+   var $resolucion;
    var $detalle;
+   var $detallenc;
    var $hdetalle;
    var $prefijo_delpedido;
-   var $detallenc;
    var $nm_data;
    var $nmgp_opcao;
    var $nmgp_opc_ant;
@@ -769,6 +781,26 @@ class fac_compras_new_mob_apl
       $this->arr_buttons['sc_btn_0']['style']            = "";
       $this->arr_buttons['sc_btn_0']['image']            = "grp__NM__ico__NM__preview_search_find_locate_1551.png";
 
+      $this->arr_buttons['regresar']['hint']             = "Regresa a la lista de compras";
+      $this->arr_buttons['regresar']['type']             = "button";
+      $this->arr_buttons['regresar']['value']            = "Volver";
+      $this->arr_buttons['regresar']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons['regresar']['display_position'] = "text_right";
+      $this->arr_buttons['regresar']['style']            = "default";
+      $this->arr_buttons['regresar']['image']            = "";
+      $this->arr_buttons['regresar']['has_fa']            = "true";
+      $this->arr_buttons['regresar']['fontawesomeicon']            = "fas fa-arrow-circle-left";
+
+      $this->arr_buttons['cancela']['hint']             = "Cancelar proceso";
+      $this->arr_buttons['cancela']['type']             = "button";
+      $this->arr_buttons['cancela']['value']            = "Cancelar";
+      $this->arr_buttons['cancela']['display']          = "text_fontawesomeicon";
+      $this->arr_buttons['cancela']['display_position'] = "text_right";
+      $this->arr_buttons['cancela']['style']            = "danger";
+      $this->arr_buttons['cancela']['image']            = "";
+      $this->arr_buttons['cancela']['has_fa']            = "true";
+      $this->arr_buttons['cancela']['fontawesomeicon']            = "fas fa-angle-double-left";
+
 
       $_SESSION['scriptcase']['error_icon']['fac_compras_new_mob']  = "<img src=\"" . $this->Ini->path_icones . "/scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png\" style=\"border-width: 0px\" align=\"top\">&nbsp;";
       $_SESSION['scriptcase']['error_close']['fac_compras_new_mob'] = "<td>" . nmButtonOutput($this->arr_buttons, "berrm_clse", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "document.getElementById('id_error_display_fixed').style.display = 'none'; document.getElementById('id_error_message_fixed').innerHTML = ''; return false", "", "", "", "", "", "", "", $this->Ini->path_botoes, "", "", "", "", "") . "</td>";
@@ -927,6 +959,8 @@ class fac_compras_new_mob_apl
       $this->nmgp_botoes['reload'] = "on";
       $this->nmgp_botoes['Eliminar'] = "on";
       $this->nmgp_botoes['sc_btn_0'] = "on";
+      $this->nmgp_botoes['regresar'] = "on";
+      $this->nmgp_botoes['cancela'] = "on";
       if (isset($this->NM_btn_cancel) && 'N' == $this->NM_btn_cancel)
       {
           $this->nmgp_botoes['cancel'] = "off";
@@ -1096,6 +1130,17 @@ class fac_compras_new_mob_apl
           if ($this->nmgp_opcao == "incluir" && $this->nmgp_dados_form['asentada'] != "null"){$this->asentada = $this->nmgp_dados_form['asentada'];} 
           if ($this->nmgp_opcao == "incluir" && $this->nmgp_dados_form['anulada'] != "null"){$this->anulada = $this->nmgp_dados_form['anulada'];} 
           if (!isset($this->num_ndevolucion)){$this->num_ndevolucion = $this->nmgp_dados_form['num_ndevolucion'];} 
+          if (!isset($this->cufe)){$this->cufe = $this->nmgp_dados_form['cufe'];} 
+          if (!isset($this->enlacepdf)){$this->enlacepdf = $this->nmgp_dados_form['enlacepdf'];} 
+          if (!isset($this->estado)){$this->estado = $this->nmgp_dados_form['estado'];} 
+          if (!isset($this->qr_base64)){$this->qr_base64 = $this->nmgp_dados_form['qr_base64'];} 
+          if (!isset($this->fecha_validacion)){$this->fecha_validacion = $this->nmgp_dados_form['fecha_validacion'];} 
+          if (!isset($this->avisos)){$this->avisos = $this->nmgp_dados_form['avisos'];} 
+          if (!isset($this->proveedor)){$this->proveedor = $this->nmgp_dados_form['proveedor'];} 
+          if (!isset($this->token)){$this->token = $this->nmgp_dados_form['token'];} 
+          if (!isset($this->password)){$this->password = $this->nmgp_dados_form['password'];} 
+          if (!isset($this->servidor)){$this->servidor = $this->nmgp_dados_form['servidor'];} 
+          if (!isset($this->resolucion)){$this->resolucion = $this->nmgp_dados_form['resolucion'];} 
           if (!isset($this->hdetalle)){$this->hdetalle = $this->nmgp_dados_form['hdetalle'];} 
       }
       $glo_senha_protect = (isset($_SESSION['scriptcase']['glo_senha_protect'])) ? $_SESSION['scriptcase']['glo_senha_protect'] : "S";
@@ -1271,11 +1316,15 @@ class fac_compras_new_mob_apl
       {
           $this->nmgp_botoes['Eliminar'] = "off";
           $this->nmgp_botoes['sc_btn_0'] = "off";
+          $this->nmgp_botoes['regresar'] = "off";
+          $this->nmgp_botoes['cancela'] = "on";
       }
       elseif ($this->nmgp_opcao == "incluir")  
       {
           $this->nmgp_botoes['Eliminar'] = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['botoes']['Eliminar'];
           $this->nmgp_botoes['sc_btn_0'] = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['botoes']['sc_btn_0'];
+          $this->nmgp_botoes['regresar'] = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['botoes']['regresar'];
+          $this->nmgp_botoes['cancela'] = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['botoes']['cancela'];
       }
       if ($this->nmgp_opcao == "recarga" || $this->nmgp_opcao == "muda_form")  
       {
@@ -1488,6 +1537,13 @@ class fac_compras_new_mob_apl
       $this->field_config['num_ndevolucion']['symbol_dec'] = '';
       $this->field_config['num_ndevolucion']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['num_ndevolucion']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- fecha_validacion
+      $this->field_config['fecha_validacion']                 = array();
+      $this->field_config['fecha_validacion']['date_format']  = $_SESSION['scriptcase']['reg_conf']['date_format'] . ';' . $_SESSION['scriptcase']['reg_conf']['time_format'];
+      $this->field_config['fecha_validacion']['date_sep']     = $_SESSION['scriptcase']['reg_conf']['date_sep'];
+      $this->field_config['fecha_validacion']['time_sep']     = $_SESSION['scriptcase']['reg_conf']['time_sep'];
+      $this->field_config['fecha_validacion']['date_display'] = "ddmmaaaa;hhiiss";
+      $this->new_date_format('DH', 'fecha_validacion');
    }
 
    function controle()
@@ -2772,6 +2828,39 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
            case 'num_ndevolucion':
                return "Num Ndevolucion";
                break;
+           case 'cufe':
+               return "Cufe";
+               break;
+           case 'enlacepdf':
+               return "Enlacepdf";
+               break;
+           case 'estado':
+               return "Estado";
+               break;
+           case 'qr_base64':
+               return "Qr Base 64";
+               break;
+           case 'fecha_validacion':
+               return "Fecha Validacion";
+               break;
+           case 'avisos':
+               return "Avisos";
+               break;
+           case 'proveedor':
+               return "Proveedor";
+               break;
+           case 'token':
+               return "Token";
+               break;
+           case 'password':
+               return "Password";
+               break;
+           case 'servidor':
+               return "Servidor";
+               break;
+           case 'resolucion':
+               return "Resolucion";
+               break;
            case 'hdetalle':
                return "Llenar detalle";
                break;
@@ -3089,24 +3178,6 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
         global $teste_validade;
         $hasError = false;
       $this->numfacom = sc_strtoupper($this->numfacom); 
-      if ($this->nmgp_opcao != "excluir" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['php_cmp_required']['numfacom']) || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['php_cmp_required']['numfacom'] == "on")) 
-      { 
-          if ($this->numfacom == "")  
-          { 
-              $hasError = true;
-              $Campos_Falta[] =  "REFERENCIA  DE LA COMPRA:" ; 
-              if (!isset($Campos_Erros['numfacom']))
-              {
-                  $Campos_Erros['numfacom'] = array();
-              }
-              $Campos_Erros['numfacom'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-                  if (!isset($this->NM_ajax_info['errList']['numfacom']) || !is_array($this->NM_ajax_info['errList']['numfacom']))
-                  {
-                      $this->NM_ajax_info['errList']['numfacom'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['numfacom'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-          } 
-      } 
       if ($this->nmgp_opcao != "excluir") 
       { 
           if (NM_utf8_strlen($this->numfacom) > 20) 
@@ -4342,6 +4413,17 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
     $this->nmgp_dados_form['detalle'] = $this->detalle;
     $this->nmgp_dados_form['detallenc'] = $this->detallenc;
     $this->nmgp_dados_form['num_ndevolucion'] = $this->num_ndevolucion;
+    $this->nmgp_dados_form['cufe'] = $this->cufe;
+    $this->nmgp_dados_form['enlacepdf'] = $this->enlacepdf;
+    $this->nmgp_dados_form['estado'] = $this->estado;
+    $this->nmgp_dados_form['qr_base64'] = $this->qr_base64;
+    $this->nmgp_dados_form['fecha_validacion'] = $this->fecha_validacion;
+    $this->nmgp_dados_form['avisos'] = $this->avisos;
+    $this->nmgp_dados_form['proveedor'] = $this->proveedor;
+    $this->nmgp_dados_form['token'] = $this->token;
+    $this->nmgp_dados_form['password'] = $this->password;
+    $this->nmgp_dados_form['servidor'] = $this->servidor;
+    $this->nmgp_dados_form['resolucion'] = $this->resolucion;
     $this->nmgp_dados_form['hdetalle'] = $this->hdetalle;
     $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dados_form'] = $this->nmgp_dados_form;
    }
@@ -4401,6 +4483,10 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
       nm_limpa_hora($this->editado_hora, $this->field_config['editado']['time_sep']) ; 
       $this->Before_unformat['num_ndevolucion'] = $this->num_ndevolucion;
       nm_limpa_numero($this->num_ndevolucion, $this->field_config['num_ndevolucion']['symbol_grp']) ; 
+      $this->Before_unformat['fecha_validacion'] = $this->fecha_validacion;
+      $this->Before_unformat['fecha_validacion_hora'] = $this->fecha_validacion_hora;
+      nm_limpa_data($this->fecha_validacion, $this->field_config['fecha_validacion']['date_sep']) ; 
+      nm_limpa_hora($this->fecha_validacion_hora, $this->field_config['fecha_validacion']['time_sep']) ; 
    }
    function sc_add_currency(&$value, $symbol, $pos)
    {
@@ -5539,11 +5625,13 @@ $aLookup[] = array(fac_compras_new_mob_pack_protect_string('RE') => str_replace(
 $aLookup[] = array(fac_compras_new_mob_pack_protect_string('NC') => str_replace('<', '&lt;',fac_compras_new_mob_pack_protect_string("NOTA C")));
 $aLookup[] = array(fac_compras_new_mob_pack_protect_string('ND') => str_replace('<', '&lt;',fac_compras_new_mob_pack_protect_string("NOTA D")));
 $aLookup[] = array(fac_compras_new_mob_pack_protect_string('AF') => str_replace('<', '&lt;',fac_compras_new_mob_pack_protect_string("AUTO F")));
+$aLookup[] = array(fac_compras_new_mob_pack_protect_string('AAF') => str_replace('<', '&lt;',fac_compras_new_mob_pack_protect_string("AJUSTE AF")));
 $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['Lookup_tipo_com'][] = 'FC';
 $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['Lookup_tipo_com'][] = 'RE';
 $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['Lookup_tipo_com'][] = 'NC';
 $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['Lookup_tipo_com'][] = 'ND';
 $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['Lookup_tipo_com'][] = 'AF';
+$_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['Lookup_tipo_com'][] = 'AAF';
           $aLookupOrig = $aLookup;
           $sSelComp = "name=\"tipo_com\"";
           if (isset($this->NM_ajax_info['select_html']['tipo_com']) && !empty($this->NM_ajax_info['select_html']['tipo_com']))
@@ -7360,7 +7448,7 @@ if(isset($this->numfacom ))
 	$this->trae_prefijo_ped();
 	}
 
-if($this->tipo_com =='NC' or $this->tipo_com =='ND' or $this->tipo_com =='AF')
+if($this->tipo_com =='NC' or $this->tipo_com =='ND' or $this->tipo_com =='AAF')
 	{
 	$this->nmgp_cmp_hidden["id_comafec"] = "on"; $this->NM_ajax_info['fieldDisplay']['id_comafec'] = 'on';
 	$this->nmgp_cmp_hidden["es_remision"] = "off"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'off';
@@ -7380,9 +7468,15 @@ else
 		$this->nmgp_cmp_hidden["es_remision"] = "on"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'on';
 		$this->nmgp_cmp_hidden["id_pedidocom"] = "off"; $this->NM_ajax_info['fieldDisplay']['id_pedidocom'] = 'off';
 		}
+	if($this->tipo_com =='AF')
+			{
+			$this->nmgp_cmp_hidden["id_pedidocom"] = "off"; $this->NM_ajax_info['fieldDisplay']['id_pedidocom'] = 'off';
+			$this->nmgp_cmp_hidden["es_remision"] = "off"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'off';
+			$this->nmgp_cmp_hidden["numfacom"] = "off"; $this->NM_ajax_info['fieldDisplay']['numfacom'] = 'off';
+			}
 	}
 
-if($this->tipo_com =='NC' or $this->tipo_com =='ND')
+if($this->tipo_com =='NC' or $this->tipo_com =='ND' or $this->tipo_com =='AAF')
 	{
 	$this->nmgp_cmp_hidden["saldo"] = "off"; $this->NM_ajax_info['fieldDisplay']['saldo'] = 'off';
 	$this->nmgp_cmp_hidden["pagada"] = "off"; $this->NM_ajax_info['fieldDisplay']['pagada'] = 'off';
@@ -7469,6 +7563,10 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
       if (empty($this->editado))
       {
           $this->editado_hora = $this->editado;
+      }
+      if (empty($this->fecha_validacion))
+      {
+          $this->fecha_validacion_hora = $this->fecha_validacion;
       }
       $this->nm_guardar_campos();
       if ($bFormat) $this->nm_formatar_campos();
@@ -7611,7 +7709,7 @@ if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SES
 $vprov= $this->idprov ;
 
  
-      $nm_select = "select numfacom from facturacom where numfacom='".$vnum."' and idprov='".$vprov."'"; 
+      $nm_select = "select numfacom from facturacom where numfacom='".$vnum."' and idprov='".$vprov."' and tipo_com = '".$this->tipo_com ."' and prefijo_com = '".$this->prefijo_com ."'"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->vSiExi = array();
@@ -7698,6 +7796,96 @@ if(isset($this->dtnum[0][0]))
 else
 	{
 	$this->numero_com  = 1;
+	}
+
+if($this->tipo_com  == 'AF')
+	{
+	$this->numfacom  = $this->numero_com ;
+	$sqlres = "SELECT resolucion FROM resdian WHERE prefijo_com = 'SI' ORDER BY Idres DESC Limit 1";
+	 
+      $nm_select = $sqlres; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dtres = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dtres[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dtres = false;
+          $this->dtres_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->dtres[0][0]))
+		{
+		$this->resolucion  = $this->dtres[0][0];
+		}
+	}
+if($this->tipo_com  == 'AAF')
+	{
+	$this->numfacom  = $this->numero_com ;
+	$sqlres = "SELECT resolucion FROM resdian WHERE prefijo_ajuscom = 'SI' ORDER BY Idres DESC Limit 1";
+	 
+      $nm_select = $sqlres; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->dtres = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                      $this->dtres[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->dtres = false;
+          $this->dtres_erro = $this->Db->ErrorMsg();
+      } 
+;
+	if(isset($this->dtres[0][0]))
+		{
+		$this->resolucion  = $this->dtres[0][0];
+		}
+	}
+
+if(empty($this->numfacom ))
+	{
+	
+ if (!isset($this->Campos_Mens_erro)){$this->Campos_Mens_erro = "";}
+ if (!empty($this->Campos_Mens_erro)){$this->Campos_Mens_erro .= "<br>";}$this->Campos_Mens_erro .= "Referencia de la compra No puede estar vacío!!!";
+ if ('submit_form' == $this->NM_ajax_opcao || 'event_' == substr($this->NM_ajax_opcao, 0, 6) || (isset($this->wizard_action) && 'change_step' == $this->wizard_action))
+ {
+  if (isset($this->wizard_action) && 'change_step' == $this->wizard_action) {
+   $sErrorIndex = 'geral_fac_compras_new_mob';
+  } elseif ('submit_form' == $this->NM_ajax_opcao) {
+   $sErrorIndex = 'geral_fac_compras_new_mob';
+  } else {
+   $sErrorIndex = substr(substr($this->NM_ajax_opcao, 0, strrpos($this->NM_ajax_opcao, '_')), 6);
+  }
+  $this->NM_ajax_info['errList'][$sErrorIndex][] = "Referencia de la compra No puede estar vacío!!!";
+ }
+;
 	}
 if (isset($this->sc_temp_gidtercero)) { $_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
@@ -8055,6 +8243,17 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
       $NM_val_form['detalle'] = $this->detalle;
       $NM_val_form['detallenc'] = $this->detallenc;
       $NM_val_form['num_ndevolucion'] = $this->num_ndevolucion;
+      $NM_val_form['cufe'] = $this->cufe;
+      $NM_val_form['enlacepdf'] = $this->enlacepdf;
+      $NM_val_form['estado'] = $this->estado;
+      $NM_val_form['qr_base64'] = $this->qr_base64;
+      $NM_val_form['fecha_validacion'] = $this->fecha_validacion;
+      $NM_val_form['avisos'] = $this->avisos;
+      $NM_val_form['proveedor'] = $this->proveedor;
+      $NM_val_form['token'] = $this->token;
+      $NM_val_form['password'] = $this->password;
+      $NM_val_form['servidor'] = $this->servidor;
+      $NM_val_form['resolucion'] = $this->resolucion;
       $NM_val_form['hdetalle'] = $this->hdetalle;
       if ($this->idfaccom === "" || is_null($this->idfaccom))  
       { 
@@ -8228,6 +8427,81 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->tipo_com = "null"; 
               $NM_val_null[] = "tipo_com";
           } 
+          $this->cufe_before_qstr = $this->cufe;
+          $this->cufe = substr($this->Db->qstr($this->cufe), 1, -1); 
+          if ($this->cufe == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->cufe = "null"; 
+              $NM_val_null[] = "cufe";
+          } 
+          $this->enlacepdf_before_qstr = $this->enlacepdf;
+          $this->enlacepdf = substr($this->Db->qstr($this->enlacepdf), 1, -1); 
+          if ($this->enlacepdf == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->enlacepdf = "null"; 
+              $NM_val_null[] = "enlacepdf";
+          } 
+          $this->estado_before_qstr = $this->estado;
+          $this->estado = substr($this->Db->qstr($this->estado), 1, -1); 
+          if ($this->estado == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->estado = "null"; 
+              $NM_val_null[] = "estado";
+          } 
+          $this->qr_base64_before_qstr = $this->qr_base64;
+          $this->qr_base64 = substr($this->Db->qstr($this->qr_base64), 1, -1); 
+          if ($this->qr_base64 == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->qr_base64 = "null"; 
+              $NM_val_null[] = "qr_base64";
+          } 
+          if ($this->fecha_validacion == "")  
+          { 
+              $this->fecha_validacion = "null"; 
+              $NM_val_null[] = "fecha_validacion";
+          } 
+          $this->avisos_before_qstr = $this->avisos;
+          $this->avisos = substr($this->Db->qstr($this->avisos), 1, -1); 
+          if ($this->avisos == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->avisos = "null"; 
+              $NM_val_null[] = "avisos";
+          } 
+          $this->proveedor_before_qstr = $this->proveedor;
+          $this->proveedor = substr($this->Db->qstr($this->proveedor), 1, -1); 
+          if ($this->proveedor == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->proveedor = "null"; 
+              $NM_val_null[] = "proveedor";
+          } 
+          $this->token_before_qstr = $this->token;
+          $this->token = substr($this->Db->qstr($this->token), 1, -1); 
+          if ($this->token == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->token = "null"; 
+              $NM_val_null[] = "token";
+          } 
+          $this->password_before_qstr = $this->password;
+          $this->password = substr($this->Db->qstr($this->password), 1, -1); 
+          if ($this->password == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->password = "null"; 
+              $NM_val_null[] = "password";
+          } 
+          $this->servidor_before_qstr = $this->servidor;
+          $this->servidor = substr($this->Db->qstr($this->servidor), 1, -1); 
+          if ($this->servidor == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->servidor = "null"; 
+              $NM_val_null[] = "servidor";
+          } 
+          $this->resolucion_before_qstr = $this->resolucion;
+          $this->resolucion = substr($this->Db->qstr($this->resolucion), 1, -1); 
+          if ($this->resolucion == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->resolucion = "null"; 
+              $NM_val_null[] = "resolucion";
+          } 
           $this->detalle_before_qstr = $this->detalle;
           $this->detalle = substr($this->Db->qstr($this->detalle), 1, -1); 
           if ($this->detalle == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
@@ -8356,6 +8630,61 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               { 
                   $SC_fields_update[] = "id_comafec = $this->id_comafec"; 
               } 
+              if (isset($NM_val_form['cufe']) && $NM_val_form['cufe'] != $this->nmgp_dados_select['cufe']) 
+              { 
+                  $SC_fields_update[] = "cufe = '$this->cufe'"; 
+              } 
+              if (isset($NM_val_form['enlacepdf']) && $NM_val_form['enlacepdf'] != $this->nmgp_dados_select['enlacepdf']) 
+              { 
+                  $SC_fields_update[] = "enlacepdf = '$this->enlacepdf'"; 
+              } 
+              if (isset($NM_val_form['estado']) && $NM_val_form['estado'] != $this->nmgp_dados_select['estado']) 
+              { 
+                  $SC_fields_update[] = "estado = '$this->estado'"; 
+              } 
+              if (isset($NM_val_form['qr_base64']) && $NM_val_form['qr_base64'] != $this->nmgp_dados_select['qr_base64']) 
+              { 
+                  $SC_fields_update[] = "qr_base64 = '$this->qr_base64'"; 
+              } 
+              if (isset($NM_val_form['fecha_validacion']) && $NM_val_form['fecha_validacion'] != $this->nmgp_dados_select['fecha_validacion']) 
+              { 
+                  if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+                  { 
+                      $SC_fields_update[] = "fecha_validacion = #$this->fecha_validacion#"; 
+                  } 
+                  elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
+                  { 
+                      $SC_fields_update[] = "fecha_validacion = EXTEND('" . $this->fecha_validacion . "', YEAR TO FRACTION)"; 
+                  } 
+                  else
+                  { 
+                      $SC_fields_update[] = "fecha_validacion = " . $this->Ini->date_delim . $this->fecha_validacion . $this->Ini->date_delim1 . ""; 
+                  } 
+              } 
+              if (isset($NM_val_form['avisos']) && $NM_val_form['avisos'] != $this->nmgp_dados_select['avisos']) 
+              { 
+                  $SC_fields_update[] = "avisos = '$this->avisos'"; 
+              } 
+              if (isset($NM_val_form['proveedor']) && $NM_val_form['proveedor'] != $this->nmgp_dados_select['proveedor']) 
+              { 
+                  $SC_fields_update[] = "proveedor = '$this->proveedor'"; 
+              } 
+              if (isset($NM_val_form['token']) && $NM_val_form['token'] != $this->nmgp_dados_select['token']) 
+              { 
+                  $SC_fields_update[] = "token = '$this->token'"; 
+              } 
+              if (isset($NM_val_form['password']) && $NM_val_form['password'] != $this->nmgp_dados_select['password']) 
+              { 
+                  $SC_fields_update[] = "password = '$this->password'"; 
+              } 
+              if (isset($NM_val_form['servidor']) && $NM_val_form['servidor'] != $this->nmgp_dados_select['servidor']) 
+              { 
+                  $SC_fields_update[] = "servidor = '$this->servidor'"; 
+              } 
+              if (isset($NM_val_form['resolucion']) && $NM_val_form['resolucion'] != $this->nmgp_dados_select['resolucion']) 
+              { 
+                  $SC_fields_update[] = "resolucion = '$this->resolucion'"; 
+              } 
               $aDoNotUpdate = array();
               $comando .= implode(",", $SC_fields_update);  
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
@@ -8420,6 +8749,16 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->observaciones = $this->observaciones_before_qstr;
               $this->cod_cuenta = $this->cod_cuenta_before_qstr;
               $this->prefijo_com = $this->prefijo_com_before_qstr;
+              $this->cufe = $this->cufe_before_qstr;
+              $this->enlacepdf = $this->enlacepdf_before_qstr;
+              $this->estado = $this->estado_before_qstr;
+              $this->qr_base64 = $this->qr_base64_before_qstr;
+              $this->avisos = $this->avisos_before_qstr;
+              $this->proveedor = $this->proveedor_before_qstr;
+              $this->token = $this->token_before_qstr;
+              $this->password = $this->password_before_qstr;
+              $this->servidor = $this->servidor_before_qstr;
+              $this->resolucion = $this->resolucion_before_qstr;
               $this->detalle = $this->detalle_before_qstr;
               $this->detallenc = $this->detallenc_before_qstr;
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
@@ -8556,7 +8895,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", pagada";
                        $compl_insert_val .= ", '$this->pagada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec $compl_insert) VALUES ('$this->numfacom', '$this->formapago', #$this->fechacom#, #$this->fechavenc#, $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, #$this->creado#, #$this->editado#, '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion $compl_insert) VALUES ('$this->numfacom', '$this->formapago', #$this->fechacom#, #$this->fechavenc#, $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, #$this->creado#, #$this->editado#, '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec, '$this->cufe', '$this->enlacepdf', '$this->estado', '$this->qr_base64', #$this->fecha_validacion#, '$this->avisos', '$this->proveedor', '$this->token', '$this->password', '$this->servidor', '$this->resolucion' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
@@ -8567,7 +8906,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", pagada";
                        $compl_insert_val .= ", '$this->pagada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec, '$this->cufe', '$this->enlacepdf', '$this->estado', '$this->qr_base64', " . $this->Ini->date_delim . $this->fecha_validacion . $this->Ini->date_delim1 . ", '$this->avisos', '$this->proveedor', '$this->token', '$this->password', '$this->servidor', '$this->resolucion' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
@@ -8578,7 +8917,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", pagada";
                        $compl_insert_val .= ", '$this->pagada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec, '$this->cufe', '$this->enlacepdf', '$this->estado', '$this->qr_base64', " . $this->Ini->date_delim . $this->fecha_validacion . $this->Ini->date_delim1 . ", '$this->avisos', '$this->proveedor', '$this->token', '$this->password', '$this->servidor', '$this->resolucion' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
@@ -8589,7 +8928,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", pagada";
                        $compl_insert_val .= ", '$this->pagada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec, '$this->cufe', '$this->enlacepdf', '$this->estado', '$this->qr_base64', " . $this->Ini->date_delim . $this->fecha_validacion . $this->Ini->date_delim1 . ", '$this->avisos', '$this->proveedor', '$this->token', '$this->password', '$this->servidor', '$this->resolucion' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
@@ -8600,7 +8939,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", pagada";
                        $compl_insert_val .= ", '$this->pagada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', EXTEND('$this->fechacom', YEAR TO DAY), EXTEND('$this->fechavenc', YEAR TO DAY), $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, EXTEND('$this->creado', YEAR TO FRACTION), EXTEND('$this->editado', YEAR TO FRACTION), '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', EXTEND('$this->fechacom', YEAR TO DAY), EXTEND('$this->fechavenc', YEAR TO DAY), $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, EXTEND('$this->creado', YEAR TO FRACTION), EXTEND('$this->editado', YEAR TO FRACTION), '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec, '$this->cufe', '$this->enlacepdf', '$this->estado', '$this->qr_base64', EXTEND('$this->fecha_validacion', YEAR TO FRACTION), '$this->avisos', '$this->proveedor', '$this->token', '$this->password', '$this->servidor', '$this->resolucion' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
@@ -8611,7 +8950,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", pagada";
                        $compl_insert_val .= ", '$this->pagada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec, '$this->cufe', '$this->enlacepdf', '$this->estado', '$this->qr_base64', " . $this->Ini->date_delim . $this->fecha_validacion . $this->Ini->date_delim1 . ", '$this->avisos', '$this->proveedor', '$this->token', '$this->password', '$this->servidor', '$this->resolucion' $compl_insert_val)"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sqlite))
               {
@@ -8622,7 +8961,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", pagada";
                        $compl_insert_val .= ", '$this->pagada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec, '$this->cufe', '$this->enlacepdf', '$this->estado', '$this->qr_base64', " . $this->Ini->date_delim . $this->fecha_validacion . $this->Ini->date_delim1 . ", '$this->avisos', '$this->proveedor', '$this->token', '$this->password', '$this->servidor', '$this->resolucion' $compl_insert_val)"; 
               }
               elseif ($this->Ini->nm_tpbanco == 'pdo_ibm')
               {
@@ -8633,7 +8972,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", pagada";
                        $compl_insert_val .= ", '$this->pagada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec, '$this->cufe', '$this->enlacepdf', '$this->estado', '$this->qr_base64', " . $this->Ini->date_delim . $this->fecha_validacion . $this->Ini->date_delim1 . ", '$this->avisos', '$this->proveedor', '$this->token', '$this->password', '$this->servidor', '$this->resolucion' $compl_insert_val)"; 
               }
               else
               {
@@ -8644,7 +8983,7 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                        $compl_insert     .= ", pagada";
                        $compl_insert_val .= ", '$this->pagada'";
                   } 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec $compl_insert_val)"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion $compl_insert) VALUES (" . $NM_seq_auto . "'$this->numfacom', '$this->formapago', " . $this->Ini->date_delim . $this->fechacom . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fechavenc . $this->Ini->date_delim1 . ", $this->idprov, $this->subtotal, $this->valoriva, $this->total, $this->asentada, $this->control, '$this->observaciones', $this->saldo, '$this->anulada', '$this->es_remision', $this->id_pedidocom, $this->retencion, $this->reteica, $this->reteiva, $this->usuario, $this->banco, $this->num_ndevolucion, " . $this->Ini->date_delim . $this->creado . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->editado . $this->Ini->date_delim1 . ", '$this->prefijo_com', $this->numero_com, '$this->tipo_com', $this->id_comafec, '$this->cufe', '$this->enlacepdf', '$this->estado', '$this->qr_base64', " . $this->Ini->date_delim . $this->fecha_validacion . $this->Ini->date_delim1 . ", '$this->avisos', '$this->proveedor', '$this->token', '$this->password', '$this->servidor', '$this->resolucion' $compl_insert_val)"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -8793,6 +9132,16 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->observaciones = $this->observaciones_before_qstr;
               $this->cod_cuenta = $this->cod_cuenta_before_qstr;
               $this->prefijo_com = $this->prefijo_com_before_qstr;
+              $this->cufe = $this->cufe_before_qstr;
+              $this->enlacepdf = $this->enlacepdf_before_qstr;
+              $this->estado = $this->estado_before_qstr;
+              $this->qr_base64 = $this->qr_base64_before_qstr;
+              $this->avisos = $this->avisos_before_qstr;
+              $this->proveedor = $this->proveedor_before_qstr;
+              $this->token = $this->token_before_qstr;
+              $this->password = $this->password_before_qstr;
+              $this->servidor = $this->servidor_before_qstr;
+              $this->resolucion = $this->resolucion_before_qstr;
               $this->detalle = $this->detalle_before_qstr;
               $this->detallenc = $this->detallenc_before_qstr;
               }
@@ -8810,6 +9159,16 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->observaciones = $this->observaciones_before_qstr;
               $this->cod_cuenta = $this->cod_cuenta_before_qstr;
               $this->prefijo_com = $this->prefijo_com_before_qstr;
+              $this->cufe = $this->cufe_before_qstr;
+              $this->enlacepdf = $this->enlacepdf_before_qstr;
+              $this->estado = $this->estado_before_qstr;
+              $this->qr_base64 = $this->qr_base64_before_qstr;
+              $this->avisos = $this->avisos_before_qstr;
+              $this->proveedor = $this->proveedor_before_qstr;
+              $this->token = $this->token_before_qstr;
+              $this->password = $this->password_before_qstr;
+              $this->servidor = $this->servidor_before_qstr;
+              $this->resolucion = $this->resolucion_before_qstr;
               $this->detalle = $this->detalle_before_qstr;
               $this->detallenc = $this->detallenc_before_qstr;
               $this->sc_insert_on = true; 
@@ -8822,6 +9181,8 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->nmgp_opc_ant = "igual"; 
               $this->nmgp_botoes['Eliminar'] = "on";
               $this->nmgp_botoes['sc_btn_0'] = "on";
+              $this->nmgp_botoes['regresar'] = "on";
+              $this->nmgp_botoes['cancela'] = "off";
               $this->return_after_insert();
               }
               $this->nm_flag_iframe = true;
@@ -9803,23 +10164,23 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT idfaccom, numfacom, formapago, str_replace (convert(char(10),fechacom,102), '.', '-') + ' ' + convert(char(8),fechacom,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idfaccom, numfacom, formapago, str_replace (convert(char(10),fechacom,102), '.', '-') + ' ' + convert(char(8),fechacom,20), str_replace (convert(char(10),fechavenc,102), '.', '-') + ' ' + convert(char(8),fechavenc,20), idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, str_replace (convert(char(10),creado,102), '.', '-') + ' ' + convert(char(8),creado,20), str_replace (convert(char(10),editado,102), '.', '-') + ' ' + convert(char(8),editado,20), cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, str_replace (convert(char(10),fecha_validacion,102), '.', '-') + ' ' + convert(char(8),fecha_validacion,20), avisos, proveedor, token, password, servidor, resolucion from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT idfaccom, numfacom, formapago, convert(char(23),fechacom,121), convert(char(23),fechavenc,121), idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, convert(char(23),creado,121), convert(char(23),editado,121), cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idfaccom, numfacom, formapago, convert(char(23),fechacom,121), convert(char(23),fechavenc,121), idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, convert(char(23),creado,121), convert(char(23),editado,121), cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, convert(char(23),fecha_validacion,121), avisos, proveedor, token, password, servidor, resolucion from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT idfaccom, numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idfaccom, numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT idfaccom, numfacom, formapago, EXTEND(fechacom, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idfaccom, numfacom, formapago, EXTEND(fechacom, YEAR TO DAY), EXTEND(fechavenc, YEAR TO DAY), idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, EXTEND(creado, YEAR TO FRACTION), EXTEND(editado, YEAR TO FRACTION), cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, EXTEND(fecha_validacion, YEAR TO FRACTION), avisos, proveedor, token, password, servidor, resolucion from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT idfaccom, numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT idfaccom, numfacom, formapago, fechacom, fechavenc, idprov, subtotal, valoriva, total, pagada, asentada, control, observaciones, saldo, anulada, es_remision, id_pedidocom, retencion, reteica, reteiva, usuario, banco, num_ndevolucion, creado, editado, cod_cuenta, prefijo_com, numero_com, tipo_com, id_comafec, cufe, enlacepdf, estado, qr_base64, fecha_validacion, avisos, proveedor, token, password, servidor, resolucion from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = $sc_where_filter;
@@ -9933,6 +10294,8 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
                   $this->NM_ajax_info['buttonDisplay']['first']   = $this->nmgp_botoes['insert']  = "off";
                   $this->NM_ajax_info['buttonDisplay']['Eliminar'] = $this->nmgp_botoes['Eliminar'] = "off";
                   $this->NM_ajax_info['buttonDisplay']['sc_btn_0'] = $this->nmgp_botoes['sc_btn_0'] = "off";
+                  $this->NM_ajax_info['buttonDisplay']['regresar'] = $this->nmgp_botoes['regresar'] = "off";
+                  $this->NM_ajax_info['buttonDisplay']['cancela'] = $this->nmgp_botoes['cancela'] = "off";
                   $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['empty_filter'] = true;
                   return; 
               }
@@ -9949,6 +10312,8 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $rs->Close(); 
               $this->NM_ajax_info['buttonDisplay']['Eliminar'] = $this->nmgp_botoes['Eliminar'] = "off";
               $this->NM_ajax_info['buttonDisplay']['sc_btn_0'] = $this->nmgp_botoes['sc_btn_0'] = "off";
+              $this->NM_ajax_info['buttonDisplay']['regresar'] = $this->nmgp_botoes['regresar'] = "off";
+              $this->NM_ajax_info['buttonDisplay']['cancela'] = $this->nmgp_botoes['cancela'] = "on";
               if ($this->aba_iframe)
               {
                   $this->NM_ajax_info['buttonDisplay']['exit'] = $this->nmgp_botoes['exit'] = 'off';
@@ -10038,6 +10403,36 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_select['tipo_com'] = $this->tipo_com;
               $this->id_comafec = $rs->fields[29] ; 
               $this->nmgp_dados_select['id_comafec'] = $this->id_comafec;
+              $this->cufe = $rs->fields[30] ; 
+              $this->nmgp_dados_select['cufe'] = $this->cufe;
+              $this->enlacepdf = $rs->fields[31] ; 
+              $this->nmgp_dados_select['enlacepdf'] = $this->enlacepdf;
+              $this->estado = $rs->fields[32] ; 
+              $this->nmgp_dados_select['estado'] = $this->estado;
+              $this->qr_base64 = $rs->fields[33] ; 
+              $this->nmgp_dados_select['qr_base64'] = $this->qr_base64;
+              $this->fecha_validacion = $rs->fields[34] ; 
+              if (substr($this->fecha_validacion, 10, 1) == "-") 
+              { 
+                 $this->fecha_validacion = substr($this->fecha_validacion, 0, 10) . " " . substr($this->fecha_validacion, 11);
+              } 
+              if (substr($this->fecha_validacion, 13, 1) == ".") 
+              { 
+                 $this->fecha_validacion = substr($this->fecha_validacion, 0, 13) . ":" . substr($this->fecha_validacion, 14, 2) . ":" . substr($this->fecha_validacion, 17);
+              } 
+              $this->nmgp_dados_select['fecha_validacion'] = $this->fecha_validacion;
+              $this->avisos = $rs->fields[35] ; 
+              $this->nmgp_dados_select['avisos'] = $this->avisos;
+              $this->proveedor = $rs->fields[36] ; 
+              $this->nmgp_dados_select['proveedor'] = $this->proveedor;
+              $this->token = $rs->fields[37] ; 
+              $this->nmgp_dados_select['token'] = $this->token;
+              $this->password = $rs->fields[38] ; 
+              $this->nmgp_dados_select['password'] = $this->password;
+              $this->servidor = $rs->fields[39] ; 
+              $this->nmgp_dados_select['servidor'] = $this->servidor;
+              $this->resolucion = $rs->fields[40] ; 
+              $this->nmgp_dados_select['resolucion'] = $this->resolucion;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->nm_troca_decimal(",", ".");
               $this->idfaccom = (string)$this->idfaccom; 
@@ -10140,14 +10535,37 @@ $_SESSION['scriptcase']['fac_compras_new_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["tipo_com"] = $this->tipo_com;
               $this->id_comafec = "";  
               $this->nmgp_dados_form["id_comafec"] = $this->id_comafec;
+              $this->cufe = "";  
+              $this->nmgp_dados_form["cufe"] = $this->cufe;
+              $this->enlacepdf = "";  
+              $this->nmgp_dados_form["enlacepdf"] = $this->enlacepdf;
+              $this->estado = "";  
+              $this->nmgp_dados_form["estado"] = $this->estado;
+              $this->qr_base64 = "";  
+              $this->nmgp_dados_form["qr_base64"] = $this->qr_base64;
+              $this->fecha_validacion = "";  
+              $this->fecha_validacion_hora = "" ;  
+              $this->nmgp_dados_form["fecha_validacion"] = $this->fecha_validacion;
+              $this->avisos = "";  
+              $this->nmgp_dados_form["avisos"] = $this->avisos;
+              $this->proveedor = "";  
+              $this->nmgp_dados_form["proveedor"] = $this->proveedor;
+              $this->token = "";  
+              $this->nmgp_dados_form["token"] = $this->token;
+              $this->password = "";  
+              $this->nmgp_dados_form["password"] = $this->password;
+              $this->servidor = "";  
+              $this->nmgp_dados_form["servidor"] = $this->servidor;
+              $this->resolucion = "";  
+              $this->nmgp_dados_form["resolucion"] = $this->resolucion;
               $this->detalle = "";  
               $this->nmgp_dados_form["detalle"] = $this->detalle;
+              $this->detallenc = "";  
+              $this->nmgp_dados_form["detallenc"] = $this->detallenc;
               $this->hdetalle = "";  
               $this->nmgp_dados_form["hdetalle"] = $this->hdetalle;
               $this->prefijo_delpedido = "";  
               $this->nmgp_dados_form["prefijo_delpedido"] = $this->prefijo_delpedido;
-              $this->detallenc = "";  
-              $this->nmgp_dados_form["detallenc"] = $this->detallenc;
               $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dados_form'] = $this->nmgp_dados_form;
               $this->formatado = false;
           }
@@ -11567,7 +11985,7 @@ if(isset($this->ds[0][0]))
 	$vtotal=$stotal+$siva;
 	}
 
-if(!empty($this->ds[0][0]) and $this->tipo_com  == 'FC')
+if(!empty($this->ds[0][0]) and ($this->tipo_com  == 'FC' or $this->tipo_com  == 'AF'))
 	{
 	$this->subtotal  = $stotal;
 	$this->valoriva  = $siva;
@@ -11575,7 +11993,7 @@ if(!empty($this->ds[0][0]) and $this->tipo_com  == 'FC')
 	$this->saldo 	   = $vtotal;
 	}
 
-elseif($this->tipo_com  == 'FC')
+elseif($this->tipo_com  == 'FC' or $this->tipo_com  == 'AF')
 	{
 	$stotal= 0;
 	$siva=0;
@@ -12000,12 +12418,13 @@ $original_es_remision = $this->es_remision;
 $original_id_pedidocom = $this->id_pedidocom;
 $original_saldo = $this->saldo;
 $original_pagada = $this->pagada;
+$original_numfacom = $this->numfacom;
 $original_idfaccom = $this->idfaccom;
 $original_tipo_com = $this->tipo_com;
 
 if($this->total  == 0)
 	{
-	if($this->tipo_com =='NC' or $this->tipo_com =='ND')
+	if($this->tipo_com =='NC' or $this->tipo_com =='ND' or $this->tipo_com =='AAF')
 		{
 		$this->nmgp_cmp_hidden["id_comafec"] = "on"; $this->NM_ajax_info['fieldDisplay']['id_comafec'] = 'on';
 		$this->nmgp_cmp_hidden["es_remision"] = "off"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'off';
@@ -12036,6 +12455,13 @@ $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_
 			$this->es_remision  = 'SI';
 			$this->nmgp_cmp_hidden["es_remision"] = "on"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'on';
 			$this->nmgp_cmp_hidden["id_pedidocom"] = "off"; $this->NM_ajax_info['fieldDisplay']['id_pedidocom'] = 'off';
+			}
+		if($this->tipo_com =='AF')
+			{
+			$this->nmgp_cmp_hidden["id_pedidocom"] = "off"; $this->NM_ajax_info['fieldDisplay']['id_pedidocom'] = 'off';
+			$this->nmgp_cmp_hidden["es_remision"] = "off"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'off';
+			$this->nmgp_cmp_hidden["numfacom"] = "off"; $this->NM_ajax_info['fieldDisplay']['numfacom'] = 'off';
+			$this->es_remision  = 'NO';
 			}
 		$this->nmgp_cmp_hidden["saldo"] = "on"; $this->NM_ajax_info['fieldDisplay']['saldo'] = 'on';
 		$this->nmgp_cmp_hidden["pagada"] = "on"; $this->NM_ajax_info['fieldDisplay']['pagada'] = 'on';
@@ -12099,6 +12525,12 @@ elseif($this->total >1)
 			$this->nmgp_cmp_hidden["es_remision"] = "on"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'on';
 			$this->nmgp_cmp_hidden["id_pedidocom"] = "off"; $this->NM_ajax_info['fieldDisplay']['id_pedidocom'] = 'off';
 			}
+		if($this->tipo_com =='AF')
+			{
+			$this->nmgp_cmp_hidden["id_pedidocom"] = "off"; $this->NM_ajax_info['fieldDisplay']['id_pedidocom'] = 'off';
+			$this->nmgp_cmp_hidden["es_remision"] = "off"; $this->NM_ajax_info['fieldDisplay']['es_remision'] = 'off';
+			$this->nmgp_cmp_hidden["numfacom"] = "off"; $this->NM_ajax_info['fieldDisplay']['numfacom'] = 'off';
+			}
 		}
 	}
 
@@ -12110,9 +12542,10 @@ $modificado_es_remision = $this->es_remision;
 $modificado_id_pedidocom = $this->id_pedidocom;
 $modificado_saldo = $this->saldo;
 $modificado_pagada = $this->pagada;
+$modificado_numfacom = $this->numfacom;
 $modificado_idfaccom = $this->idfaccom;
 $modificado_tipo_com = $this->tipo_com;
-$this->nm_formatar_campos('total', 'tipo_com', 'id_comafec', 'es_remision', 'id_pedidocom', 'saldo', 'pagada', 'idfaccom');
+$this->nm_formatar_campos('total', 'tipo_com', 'id_comafec', 'es_remision', 'id_pedidocom', 'saldo', 'pagada', 'numfacom', 'idfaccom');
 if ($original_total !== $modificado_total || isset($this->nmgp_cmp_readonly['total']) || (isset($bFlagRead_total) && $bFlagRead_total))
 {
     $this->ajax_return_values_total(true);
@@ -12140,6 +12573,10 @@ if ($original_saldo !== $modificado_saldo || isset($this->nmgp_cmp_readonly['sal
 if ($original_pagada !== $modificado_pagada || isset($this->nmgp_cmp_readonly['pagada']) || (isset($bFlagRead_pagada) && $bFlagRead_pagada))
 {
     $this->ajax_return_values_pagada(true);
+}
+if ($original_numfacom !== $modificado_numfacom || isset($this->nmgp_cmp_readonly['numfacom']) || (isset($bFlagRead_numfacom) && $bFlagRead_numfacom))
+{
+    $this->ajax_return_values_numfacom(true);
 }
 if ($original_idfaccom !== $modificado_idfaccom || isset($this->nmgp_cmp_readonly['idfaccom']) || (isset($bFlagRead_idfaccom) && $bFlagRead_idfaccom))
 {
@@ -13038,6 +13475,7 @@ else
        $nmgp_def_dados .= "NOTA C?#?NC?#?N?@?";
        $nmgp_def_dados .= "NOTA D?#?ND?#?N?@?";
        $nmgp_def_dados .= "AUTO F?#?AF?#?N?@?";
+       $nmgp_def_dados .= "AJUSTE AF?#?AAF?#?N?@?";
        $todo = explode("?@?", $nmgp_def_dados);
        return $todo;
 
@@ -13792,7 +14230,7 @@ else
              $nm_aspas  = "'";
              $nm_aspas1 = "'";
          }
-      $Nm_datas['fechacom'] = "date";$Nm_datas['fechavenc'] = "date";$Nm_datas['creado'] = "datetime";$Nm_datas['editado'] = "datetime";
+      $Nm_datas['fechacom'] = "date";$Nm_datas['fechavenc'] = "date";$Nm_datas['creado'] = "datetime";$Nm_datas['editado'] = "datetime";$Nm_datas['fecha_validacion'] = "datetime";
          if (isset($Nm_datas[$campo_join]))
          {
              for ($x = 0; $x < strlen($campo); $x++)
@@ -14598,19 +15036,19 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
     function getButtonIds($buttonName) {
         switch ($buttonName) {
             case "new":
-                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-16");
+                return array("sc_b_new_t.sc-unique-btn-1", "sc_b_new_t.sc-unique-btn-11");
                 break;
             case "insert":
-                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-17");
+                return array("sc_b_ins_t.sc-unique-btn-2", "sc_b_ins_t.sc-unique-btn-12");
                 break;
-            case "bcancelar":
-                return array("sc_b_sai_t.sc-unique-btn-3", "sc_b_sai_t.sc-unique-btn-18");
+            case "cancela":
+                return array("sc_cancela_top");
                 break;
             case "update":
-                return array("sc_b_upd_t.sc-unique-btn-4", "sc_b_upd_t.sc-unique-btn-19");
+                return array("sc_b_upd_t.sc-unique-btn-3", "sc_b_upd_t.sc-unique-btn-14");
                 break;
             case "delete":
-                return array("sc_b_del_t.sc-unique-btn-5", "sc_b_del_t.sc-unique-btn-20");
+                return array("sc_b_del_t.sc-unique-btn-4", "sc_b_del_t.sc-unique-btn-15");
                 break;
             case "eliminar":
                 return array("sc_Eliminar_top");
@@ -14619,28 +15057,34 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
                 return array("sc_sc_btn_0_top");
                 break;
             case "breload":
-                return array("sc_b_reload_t.sc-unique-btn-6", "sc_b_reload_t.sc-unique-btn-21");
+                return array("sc_b_reload_t.sc-unique-btn-5", "sc_b_reload_t.sc-unique-btn-16");
                 break;
-            case "help":
-                return array("sc_b_hlp_t");
-                break;
-            case "exit":
-                return array("sc_b_sai_t.sc-unique-btn-7", "sc_b_sai_t.sc-unique-btn-8", "sc_b_sai_t.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-22", "sc_b_sai_t.sc-unique-btn-23", "sc_b_sai_t.sc-unique-btn-25", "sc_b_sai_t.sc-unique-btn-9", "sc_b_sai_t.sc-unique-btn-11", "sc_b_sai_t.sc-unique-btn-24", "sc_b_sai_t.sc-unique-btn-26");
+            case "regresar":
+                return array("sc_regresar_top");
                 break;
             case "birpara":
                 return array("brec_b");
                 break;
             case "first":
-                return array("sc_b_ini_b.sc-unique-btn-12", "sc_b_ini_b.sc-unique-btn-27");
+                return array("sc_b_ini_b.sc-unique-btn-6", "sc_b_ini_b.sc-unique-btn-22");
                 break;
             case "back":
-                return array("sc_b_ret_b.sc-unique-btn-13", "sc_b_ret_b.sc-unique-btn-28");
+                return array("sc_b_ret_b.sc-unique-btn-7", "sc_b_ret_b.sc-unique-btn-23");
                 break;
             case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-14", "sc_b_avc_b.sc-unique-btn-29");
+                return array("sc_b_avc_b.sc-unique-btn-8", "sc_b_avc_b.sc-unique-btn-24");
                 break;
             case "last":
-                return array("sc_b_fim_b.sc-unique-btn-15", "sc_b_fim_b.sc-unique-btn-30");
+                return array("sc_b_fim_b.sc-unique-btn-9", "sc_b_fim_b.sc-unique-btn-25");
+                break;
+            case "exit":
+                return array("sc_b_sai_b.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-19", "sc_b_sai_t.sc-unique-btn-21", "sc_b_sai_t.sc-unique-btn-17", "sc_b_sai_t.sc-unique-btn-18", "sc_b_sai_t.sc-unique-btn-20");
+                break;
+            case "bcancelar":
+                return array("sc_b_sai_t.sc-unique-btn-13");
+                break;
+            case "help":
+                return array("sc_b_hlp_t");
                 break;
         }
 
