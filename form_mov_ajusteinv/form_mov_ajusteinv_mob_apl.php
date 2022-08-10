@@ -5188,7 +5188,7 @@ switch($this->idtipotran )
 		$vtipotras="Ajuste por inventario periódico";
 }
 
-$sql="INSERT INTO inventario (fecha, cantidad, idpro, costo, valorparcial, idbod, tipo, detalle, idmov, iddetalle, colores, tallas, sabor,lote2,fechavenc) VALUES ('$this->fecha', $this->cantidad , $this->idpro , $cost, $valpar, $this->idbodorig , $ent, '".$vtipotras."', $last_id, 0, $this->colores , $this->tallas , $this->sabor ,$vlote2,$vfechavenc)";
+$sql="INSERT INTO inventario (fecha, cantidad, idpro, costo, valorparcial, idbod, tipo, detalle, idmov, iddetalle, colores, tallas, sabor,lote2,fechavenc) VALUES ('$this->fecha', $this->cantidad , $this->idpro , $cost, $valpar, $this->idbodorig , $ent, '".$vtipotras."', $last_id, 0, 0, 0, 0,$vlote2,$vfechavenc)";
 
      $nm_select = $sql; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
