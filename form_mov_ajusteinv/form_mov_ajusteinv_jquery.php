@@ -495,18 +495,6 @@ function displayChange_field(field, row, status) {
 }
 
 function displayChange_field_prefijonota(row, status) {
-	if ("on" == status) {
-		if ("all" == row) {
-			var fieldList = $(".css_prefijonota__obj");
-			for (var i = 0; i < fieldList.length; i++) {
-				$($(fieldList[i]).attr("id")).select2("destroy");
-			}
-		}
-		else {
-			$("#id_sc_field_prefijonota" + row).select2("destroy");
-		}
-		scJQSelect2Add(row, "prefijonota");
-	}
 }
 
 function displayChange_field_numeronota(row, status) {
@@ -573,7 +561,6 @@ function displayChange_field_observaciones(row, status) {
 }
 
 function scRecreateSelect2() {
-	displayChange_field_prefijonota("all", "on");
 	displayChange_field_idtipotran("all", "on");
 	displayChange_field_idpro("all", "on");
 	displayChange_field_idbodorig("all", "on");
@@ -848,9 +835,6 @@ $(document).ready(function(){
 } // scJQPasswordToggleAdd
 
 function scJQSelect2Add(seqRow, specificField) {
-  if (null == specificField || "prefijonota" == specificField) {
-    scJQSelect2Add_prefijonota(seqRow);
-  }
   if (null == specificField || "idtipotran" == specificField) {
     scJQSelect2Add_idtipotran(seqRow);
   }
@@ -872,24 +856,6 @@ function scJQSelect2Add(seqRow, specificField) {
   if (null == specificField || "seleccionarlfs" == specificField) {
     scJQSelect2Add_seleccionarlfs(seqRow);
   }
-} // scJQSelect2Add
-
-function scJQSelect2Add_prefijonota(seqRow) {
-  var elemSelector = "all" == seqRow ? ".css_prefijonota_obj" : "#id_sc_field_prefijonota" + seqRow;
-  $(elemSelector).select2(
-    {
-      containerCssClass: 'css_prefijonota_obj',
-      dropdownCssClass: 'css_prefijonota_obj',
-      language: {
-        noResults: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_notfound'] ?>";
-        },
-        searching: function() {
-          return "<?php echo $this->Ini->Nm_lang['lang_autocomp_searching'] ?>";
-        }
-      }
-    }
-  );
 } // scJQSelect2Add
 
 function scJQSelect2Add_idtipotran(seqRow) {
@@ -1026,7 +992,6 @@ function scJQElementsAdd(iLine) {
   scJQUploadAdd(iLine);
   scJQPasswordToggleAdd(iLine);
   scJQSelect2Add(iLine);
-  setTimeout(function () { if ('function' == typeof displayChange_field_prefijonota) { displayChange_field_prefijonota(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_idtipotran) { displayChange_field_idtipotran(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_idpro) { displayChange_field_idpro(iLine, "on"); } }, 150);
   setTimeout(function () { if ('function' == typeof displayChange_field_idbodorig) { displayChange_field_idbodorig(iLine, "on"); } }, 150);

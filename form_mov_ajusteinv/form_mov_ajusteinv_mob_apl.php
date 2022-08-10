@@ -1285,10 +1285,6 @@ class form_mov_ajusteinv_mob_apl
       {
           $this->nm_tira_formatacao();
           $this->nm_converte_datas();
-          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['prefijonota']) && !isset($this->nmgp_refresh_fields))
-          { 
-              $this->prefijonota = $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['prefijonota'];
-          } 
           if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['numeronota']) && !isset($this->nmgp_refresh_fields))
           { 
               $this->numeronota = $_SESSION['sc_session'][$this->Ini->sc_page]['form_mov_ajusteinv_mob']['dados_select']['numeronota'];
@@ -1559,7 +1555,7 @@ if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['
   <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_export<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
   <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form ?>.css" /> 
   <link rel="stylesheet" type="text/css" href="<?php echo $this->Ini->path_prod; ?>/third/font-awesome/css/all.min.css" /> 
-  <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+  <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 </HEAD>
 <BODY class="scExportPage">
 <table style="border-collapse: collapse; border-width: 0; height: 100%; width: 100%"><tr><td style="padding: 0; text-align: center; vertical-align: top">
@@ -4345,6 +4341,9 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
       { 
           $this->Ini->sc_tem_trans_banco = $this->Db->BeginTrans(); 
       } 
+      if ('incluir' == $this->nmgp_opcao && empty($this->colores)) {$this->colores = "0"; $NM_val_null[] = "colores";}  
+      if ('incluir' == $this->nmgp_opcao && empty($this->tallas)) {$this->tallas = "0"; $NM_val_null[] = "tallas";}  
+      if ('incluir' == $this->nmgp_opcao && empty($this->sabor)) {$this->sabor = "0"; $NM_val_null[] = "sabor";}  
       $NM_val_form['prefijonota'] = $this->prefijonota;
       $NM_val_form['numeronota'] = $this->numeronota;
       $NM_val_form['idtipotran'] = $this->idtipotran;
@@ -5719,7 +5718,7 @@ $_SESSION['scriptcase']['form_mov_ajusteinv_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["sabor"] = $this->sabor;
               $this->numeronota = "";  
               $this->nmgp_dados_form["numeronota"] = $this->numeronota;
-              $this->prefijonota = "";  
+              $this->prefijonota = "2";  
               $this->nmgp_dados_form["prefijonota"] = $this->prefijonota;
               $this->lote = "";  
               $this->nmgp_dados_form["lote"] = $this->lote;
@@ -8004,7 +8003,7 @@ function nmgp_redireciona($tipo=0)
     <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
     <META http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
     <META http-equiv="Pragma" content="no-cache"/>
-    <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+    <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
    </HEAD>
    <BODY>
    <FORM name="form_ok" method="POST" action="<?php echo $this->form_encode_input($nmgp_saida_form); ?>" target="_self">

@@ -22,7 +22,7 @@ header("X-Frame-Options: SAMEORIGIN");
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
  <META http-equiv="Pragma" content="no-cache" />
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 <?php
 
 if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
@@ -313,16 +313,6 @@ function navpage_atualiza(str_navpage)
      F_temp = Field[i].split("=");
      F_name = F_temp[0];
      F_opc  = (F_temp[1] && ("disabled" == F_temp[1] || "true" == F_temp[1])) ? true : false;
-     if (F_name == "prefijonota")
-     {
-        $('select[name="prefijonota"]').prop("disabled", F_opc);
-        if (F_opc == "disabled" || F_opc == true) {
-            $('select[name="prefijonota"]').addClass("scFormInputDisabled");
-        }
-        else {
-            $('select[name="prefijonota"]').removeClass("scFormInputDisabled");
-        }
-     }
      if (F_name == "numeronota")
      {
         $('input[name="numeronota"]').prop("disabled", F_opc);

@@ -453,7 +453,7 @@ var hasJsFormOnload = true;
 function sc_form_onload()
 {
    nm_field_disabled("presentacion=disabled", "");
-   nm_field_disabled("prefijonota=disabled;numeronota=disabled;idtipotran=disabled;fecha=disabled;idpro=disabled;cantidad=disabled;idbodorig=disabled;observaciones=disabled", "U");
+   nm_field_disabled("numeronota=disabled;idtipotran=disabled;fecha=disabled;idpro=disabled;cantidad=disabled;idbodorig=disabled;observaciones=disabled", "U");
    
 }
 

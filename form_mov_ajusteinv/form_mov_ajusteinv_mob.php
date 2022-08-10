@@ -293,11 +293,11 @@ class form_mov_ajusteinv_mob_ini
       $this->nm_dt_criacao   = "20180106"; 
       $this->nm_hr_criacao   = "140555"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220622"; 
-      $this->nm_hr_ult_alt   = "203752"; 
+      $this->nm_dt_ult_alt   = "20220810"; 
+      $this->nm_hr_ult_alt   = "162239"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0"; 
+      $this->nm_app_version  = "1.0.0"; 
 // 
       $this->border_grid           = ""; 
       $this->cor_bg_grid           = ""; 
@@ -527,8 +527,7 @@ class form_mov_ajusteinv_mob_ini
           }
       }
       if (isset($_SESSION['scriptcase']['form_mov_ajusteinv_mob']['session_timeout']['redir'])) {
-          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
+          $SS_cod_html  = '';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -543,7 +542,7 @@ class form_mov_ajusteinv_mob_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_form.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_form" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -873,7 +872,7 @@ class form_mov_ajusteinv_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwH9BiHABYHuXGHuzGV9FeV5X7DoNUHQNwZSB/D1rKHuJsDEvsDkXKDWF/HIJeHQJKZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHArKV5FUHgNOZSXeDWXCHMBOHQNwZ9F7HAvmV5BOHuNOVIBODWFYVoX7DcBqZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7HAN7V5JwHuzGVIBOV5FYVoJwD9BsZ1B/Z1BeZMBqDMNKZSXeDWX7VoJsD9NmDQFGD1BeVWJsHgrKVcBOHEFYDoJsD9BiZSBOZ1BeV5X7DEBOZSXeDWrGVoBiD9NwDQJsHIrKV5JeDMvmVcFKV5BmVoBqD9BsZkFGHArKHQJwDEBODkFeH5FYVoFGHQJKDQJsHIBeHuB/DMvsVcFKH5XCHMFUHQBsH9FaHABYD5BODMvCHEXeH5F/DoBqHQXODuFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWrGDoJeHQBiDQBqHINaV5JeDMrYVIBsDWXCDoJsDcBwH9B/Z1rYHQJwDErKVkJ3V5XCHIF7DcJeH9FUD1BeHuraHgrKVIB/DWJeHMBiD9BsVIraD1rwV5X7HgBeHErCDuFYHIFUHQNmZSBiZ1N7HuB/DMBOVIBsH5XCHIFGDcBwZ1FGHABYHuBqHgBOVkJ3V5FaHMJeHQFYZSBiZ1NaV5BiDMBYVIBsDWFaHMrqHQJmZ1BOHAN7HuFGHgvsDkBsDWF/HMX7HQNmZSBiDSN7HuB/DMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQB/DSBYHQF7DMBYZSNiDWFaHIBiD9XOZSBqDSBeHQJwDEBODkFeH5FYVoFGHQJKDQBqHArYHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHuzGDkBOHEFYHINUD9XOZ1F7Z1vmD5BqHgvsHEJqDWXCHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DorqD9BsH9FaHAN7V5X7DMNKZSXeV5FqDoB/D9NmH9FUZ1rwV5FUHuvmVIFCDWFYVoFGD9BiZ1F7HArYV5JeDEBOVkJGDWXCDoFUD9XsDQX7Z1rwV5X7DMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVoBiHQBsH9FaHIBeD5JwHgveDkXKDuFaHIFGDcBiH9FGHIrKHQNUDMBODkBODWF/HMJeHQBsVINUHIveHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMXGHgveHArsDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWFaHINUD9XOH9BOHABYHQrqDENOHEFiDuJeHMJwDcXGDQBqHANOD5NUHuvmVIBsHEX7DoraHQNwZkFGHArKV5FUDMrYZSXeV5FqHIJsHQNmDQFaHABYHQBqDMBYVIBsDWFaHIJeHQBsZ1FGZ1BOD5raHgBeHArCDuFYHINUHQNmZSBiZ1N7HQF7DMBYZSJ3DWXCHIX7HQJmZ1BOHANOHQJsHgNOVkJqDWr/HMXGDcJUDQB/HANOHQBqDMzGVIBsDWFaHIXGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))

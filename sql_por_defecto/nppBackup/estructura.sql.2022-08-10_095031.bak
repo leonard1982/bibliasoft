@@ -5816,6 +5816,8 @@ CREATE TABLE `facturaven_adjuntos` ( `id` INT NOT NULL AUTO_INCREMENT , `idfacve
 
 ALTER TABLE `seg_apps` CHANGE `app_order` `app_order` INT(4) NULL DEFAULT '99'; 
 
+ALTER TABLE `menu_icons` CHANGE `descripcion` `descripcion` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; 
+
 
 ALTER TABLE `webservicefe` ADD `servidor4` VARCHAR(300) NULL DEFAULT NULL COMMENT 'servidor doc soporte' AFTER `password_anterior`, ADD `servidor5` VARCHAR(300) NULL DEFAULT NULL COMMENT 'servidor ajuste doc soporte' AFTER `servidor4`; 
 
