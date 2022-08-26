@@ -216,9 +216,9 @@ class blk_dashboard_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20220729"; 
       $this->nm_hr_criacao   = "170736"; 
-      $this->nm_autor_alt    = "desarrollo3"; 
-      $this->nm_dt_ult_alt   = "20220805"; 
-      $this->nm_hr_ult_alt   = "092735"; 
+      $this->nm_autor_alt    = "admin"; 
+      $this->nm_dt_ult_alt   = "20220824"; 
+      $this->nm_hr_ult_alt   = "094808"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blk_dashboard_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blk_dashboard']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blk_dashboard']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwH9FGHIrwV5FUHgvOVcFCHEFYVoJwHQXGH9B/DSBeV5JeDENOHArCDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWJeHMBiD9BsVIraD1rwV5X7HgBeHENiV5FaHIBOHQXOZSFGHABYVWJsDMvmV9FeV5FYHIFGHQXOZ1X7D1NaZMFaHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7VoBOD9BsZ1F7DSBeD5BiDMzGHEFiDWX7DoXGD9JKDQJsHANOV5JwHgvsVcFCDWJeDoNUHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgvsVIBODuX7HMFGD9XOZSB/D1rKHQXGHgvsHENiH5F/DoBqDcBiH9X7D1veV5JwDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWBODMvOVcBUDWFYHMBiD9BsVIraD1rwV5X7HgBeHEFiDWB3DoBqD9NwH9BiDSN7HQB/DMvsVcXKH5XKVENUHQBiZSB/HArYV5JwDEvsZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmH9BiHIrKHuraDMzGDkFCDWF/DoFGHQNmZSBOHArKZMXGDMzGHErCDuFaHIXGHQNmH9BiHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsHQNwH9BiDSBYVWBqDMBOZSJqDWF/HMB/D9XOH9B/DSrYHuJwDEvsVkJqDWFGDoBOHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiHEFaDoFUDcBwDQJsHArYV5BqHuvmVcFKDWJeVoraDcBqZ1FaHAN7V5B/HgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZ1F7DSNOHQBODMzGZSXeDWXCHMBOD9JKDQB/D1veVWBOHgrKDkFCHEFYHIJsHQXGZkBiHArYHuFaHgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsZSNiDWF/HMJwHQXGZkFGHABYHQBOHgvCHArsHEFqHMJwDcBiDuFaHANOHuraDMrwVcB/DuFGVEF7HQJmH9BqDSNOHQFGHgvCHEJqHEFqHMX7HQXsDQFUDSBYHQJwHgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYDkXKDurmZuB/HQJKZSBiHANOHuX7DMrwV9FeHEF/HIJsDcFYZ1BODSvOZMBqHgvCHArCDWr/HMB/HQNmH9FUD1BeHuBODMrwV9BUDur/HMX7HQXGH9BqZ1NOHQJeDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHQJeDMvsVIBsHEX7HIrqHQJmZ1BODSNOHuFUHgvCHArCHEXCHIFUHQNmDuFaHAN7HuX7DMrwVcB/DWrmVEFGHQJmZ1BOHIBeHQFGHgvCHArCDuFaHMBqHQXOH9FUD1veHuBiHgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYZSJ3V5X7VErqDcBqZ1FaHAvCD5FaDEvsZSJGDuFaZuBqHQXGZSX7HIrKVWJsHuNOVcBODuB7VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwD9JmZ1FaHAvsV5X7HgveHArsDuXKDoJeHQXGDuBqD1BOV5XGDMrwV9BUH5B3VEX7HQFYZkBiHAzGD5BOHgNKZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoX7HQNmVINUHAvsZMXGHgveDkXKH5F/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeHEX7VEF7DcFYZ1FGHIrwHQXGDENOHArCV5FqDoJsDcBwDQFUZ1rwHuBiDMvmDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHErCDWFqHMXGHQNmH9BiHArYHQrqDMNOVcFeV5FGVoFaHQJmZkFGHIrwHQraHgvsZSJ3V5XCHMFGHQNmZ9rqHAveHQBODMvmVcB/DWF/HMFUHQXGZSBOHAN7HuJeDMrYHENiDWr/HMXGHQNwH9BiHArYHQF7DMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1964,7 +1964,7 @@ $data_cliente = $this->getDataCliente();
 							<div class="card-body"> 
 								<div class="feature"> 
 									<i class="bx bxs-bank fs-40 feature-icon"></i>
-									<h1 id="total_ventas" class="font-weight-bold mb-0 mt-4">$120.345.000</h1>
+									<h1 id="total_ventas" class="font-weight-bold mb-0 mt-4">$0</h1>
 									<p class="text-muted fs-16 mb-0">Ventas este Año</p>
 								</div> 
 							</div>
@@ -2081,7 +2081,7 @@ $data_cliente = $this->getDataCliente();
 								<div class="row">
 									<div class="t_cre col-xl-6 col-lg-6 col-sm-6 mb-4 mb-sm-0 text-center">
 										<h2 class="font-weight-normal text-dark mb-0">
-											2.900.450
+											0
 										</h2>
 										<div class="text-muted mb-1 fs-13 d-inline-flex">
 											<div class="w-3 h-3 bg-primary mr-2 mt-1 mr-3"></div>
@@ -2090,7 +2090,7 @@ $data_cliente = $this->getDataCliente();
 									</div>
 									<div class="t_cont col-xl-6 col-lg-6 col-sm-6 mb-4 mb-sm-0 text-center">
 										<h2 class="font-weight-normal text-dark mb-0">
-											5.780.630
+											0
 										</h2>
 										<div class="text-muted mb-1 fs-13 d-inline-flex">
 											<div class="w-3 h-3 bg-secondary mr-2 mt-1 mr-3"></div>
@@ -2113,8 +2113,8 @@ $data_cliente = $this->getDataCliente();
 											</button>
 											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 												<a class="dropdown-item" href="#">Año Pasado</a>
+												<a class="dropdown-item" href="#">2021</a>
 												<a class="dropdown-item" href="#">2020</a>
-												<a class="dropdown-item" href="#">2019</a>
 											</div>
 										</div>
 									</div>
@@ -2270,6 +2270,7 @@ $data_cliente = $this->getDataCliente();
 				renderIndicadores();
 				projectInvestment();
 				projectTracked();
+				
 				renderTopTenClientes();
 				canvasDoughnut3();
 				renderListFolios();
@@ -2341,37 +2342,43 @@ $data_cliente = $this->getDataCliente();
 
 
 			function renderListFolios(){
+				
+				if($('#item_list_folios').length > 0)
+				{
 
-				let container_main = $('#list_folios');
+					let container_main = $('#list_folios');
 
-				const fragment = $(document.createDocumentFragment());
+					const fragment = $(document.createDocumentFragment());
 
-				let datox = data.data.sort((a, b, i) => {
-					return b.value - a.value;
-				});
-				let template = $('#item_list_folios').contents();
+					let datox = data.data.sort((a, b, i) => {
+						return b.value - a.value;
+					});
+					let template = $('#item_list_folios').contents();
 
-				let n = 0;
+					let n = 0;
 
-				datox.forEach( item => {
+					datox.forEach( item => {
 
-					let porcentaje = item.value * 100 / sum(data.data, 'value') ;
-					let folio = item.name;
-					let color = colors[ n];
+						if(item.value!=NaN && item.value > 0)
+						{
+							let porcentaje = item.value * 100 / sum(data.data, 'value') ;
+							let folio = item.name;
+							let color = colors[ n];
 
-					template.find('.brround').css('background-color', color);
-					template.find('.name-folio').text(folio);
-					template.find('.porc-folio').text(porcentaje.toFixed(2) + '%');
-					template.find('.n-folio').text(formatNumber(item.value));
+							template.find('.brround').css('background-color', color);
+							template.find('.name-folio').text(folio);
+							template.find('.porc-folio').text(porcentaje.toFixed(2) + '%');
+							template.find('.n-folio').text(formatNumber(item.value));
 
-					template.clone(true).appendTo(fragment);
+							template.clone(true).appendTo(fragment);
 
-					n = (n >= colors.length - 1)? 0 : n+1;
+							n = (n >= colors.length - 1)? 0 : n+1;
+						}
 
-				})
+					});
 
-				container_main.append(fragment)
-
+					container_main.append(fragment);
+				}
 
 			}
 
@@ -2379,16 +2386,23 @@ $data_cliente = $this->getDataCliente();
 
 			function renderIndicadores(){
 
-				$('#indicadores_deck .indica h3').each(function(i, indica){
-					let count = data.hasOwnProperty(indica.id)? data[indica.id] : 0;
-					$('#'+indica.id).jQuerySimpleCounter({end: count,duration: 1500});
-				})
-				$('#indicadores_card h2').each(function(i, indica){
-					let count = data.hasOwnProperty(indica.id)? data[indica.id] : 0;
-					$(this).jQuerySimpleCounter({end: count,duration: 1500});
-				})
-
-
+				if($('#indicadores_deck .indica h3').length > 0)
+				{
+					console.log("indicadores_deck");
+					$('#indicadores_deck .indica h3').each(function(i, indica){
+						let count = data.hasOwnProperty(indica.id)? data[indica.id] : 0;
+						$('#'+indica.id).jQuerySimpleCounter({end: count,duration: 1500});
+					});
+				}
+				
+				if($('#indicadores_card h2').length > 0)
+				{
+					console.log("indicadores_card");
+					$('#indicadores_card h2').each(function(i, indica){
+						let count = data.hasOwnProperty(indica.id)? data[indica.id] : 0;
+						$(this).jQuerySimpleCounter({end: count,duration: 1500});
+					});
+				}
 			}
 
 
@@ -2766,8 +2780,13 @@ $data_cliente = $this->getDataCliente();
 
 
 			function canvasDoughnut3() {
-				let labels = arrayColumn(data.data,'name');
-				let values = arrayColumn(data.data,'value');
+				
+				let datox = data.data.sort((a, b, i) => {
+					return b.value - a.value;
+				});
+				
+				let labels = arrayColumn(datox,'name');
+				let values = arrayColumn(datox,'value');
 				document.querySelector("#canvasDoughnut3.chart-container").innerHTML = '<canvas class="canvasDoughnut3" height="200" width="200"></canvas>';
 				if ($('.canvasDoughnut3').length){
 

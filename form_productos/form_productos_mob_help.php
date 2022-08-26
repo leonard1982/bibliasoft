@@ -50,7 +50,7 @@ class form_productos_mob_help
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -80,7 +80,7 @@ Números, letras, espacio, punto, signo menos, guión piso."); ?>
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -110,7 +110,7 @@ Números, letras, espacio, punto, signo menos, guión piso."); ?>
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -139,7 +139,7 @@ Números, letras, espacio, punto, signo menos, guión piso."); ?>
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -168,7 +168,7 @@ Números, letras, espacio, punto, signo menos, guión piso."); ?>
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -199,7 +199,7 @@ SELECCIONAR LA UNIDAD QUE SERÁ BASE PARA LAS ESCALAS O FACTORES RESTANTES CUAND
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -228,7 +228,7 @@ SELECCIONAR LA UNIDAD QUE SERÁ BASE PARA LAS ESCALAS O FACTORES RESTANTES CUAND
     }
 
 ?>
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>

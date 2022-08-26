@@ -11917,11 +11917,10 @@ if(isset($this->dt_ri[0][0]))
 		}
 	else
 		{
-		$this->sc_ajax_message("NO HAY NUMERO DE DOCUMENTO", "Mensaje", "", "");
 		}
 		
 	if($vRes>0 and $vNufac==0)
-		{
+		{echo "Error1";
 		$this->asentado ='NO';
 		$this->sc_ajax_message("SELECCIONE UN DOCUMENTO O CUENTA A COBRAR, NO SE PUEDE PROCEDER", "Mensaje", "", "");
 		goto ap;
@@ -12207,7 +12206,7 @@ if(isset($this->dt_ri[0][0]))
 		}
 	
 	else
-		{		
+		{echo "Dossssss";
 		$hoy= date('d-m-Y');
 		$fecha_del=date("Y-m-d", strtotime($hoy));
 		$val=$this->monto +$vTotDesc;
@@ -12215,7 +12214,7 @@ if(isset($this->dt_ri[0][0]))
 		$nsalcli=$el_sald-$val;
 		$asen=$this->fSiAsentada();
 		if($asen==0)
-			{
+			{echo "tressssssss";
 			
      $nm_select ="insert caja set fecha='$fecha_del', detalle='R. CAJA', nota='OTROS INGRESOS', documento='SIN', cantidad=$vMonto, cierredia='NO', resolucion=0, idrc=$this->idrecibo , banco=$this->banco_id , usuario=$this->usuario "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
@@ -12252,7 +12251,7 @@ if(isset($this->dt_ri[0][0]))
       ;
 			}
 		else
-			{
+			{echo "cuatroooooooo";
 			
      $nm_select ="update caja set detalle='R. CAJA', nota='OTROS INGRESOS', documento='SIN', cantidad=$vMonto  where idrc=$this->idrecibo "; 
          $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;

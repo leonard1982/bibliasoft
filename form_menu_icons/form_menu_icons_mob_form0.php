@@ -724,6 +724,36 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['run_iframe'] != "R")
 {
     $NM_btn = false;
+      if ($this->nmgp_botoes['qsearch'] == "on" && $opcao_botoes != "novo")
+      {
+          $OPC_cmp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['fast_search'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['fast_search'][0] : "";
+          $OPC_arg = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['fast_search'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['fast_search'][1] : "";
+          $OPC_dat = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['fast_search'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['fast_search'][2] : "";
+          $stateSearchIconClose  = 'none';
+          $stateSearchIconSearch = '';
+          if(!empty($OPC_dat))
+          {
+              $stateSearchIconClose  = '';
+              $stateSearchIconSearch = 'none';
+          }
+?> 
+           <script type="text/javascript">var change_fast_t = "";</script>
+          <input id='fast_search_f0_t' type="hidden" name="nmgp_fast_search_t" value="SC_all_Cmp">
+          <select id='cond_fast_search_f0_t' class="scFormToolbarInput" style="vertical-align: middle;display:none;" name="nmgp_cond_fast_search_t" onChange="change_fast_t = 'CH';">
+<?php 
+          $OPC_sel = ("qp" == $OPC_arg) ? " selected" : "";
+           echo "           <option value='qp'" . $OPC_sel . ">" . $this->Ini->Nm_lang['lang_srch_like'] . "</option>";
+?> 
+          </select>
+          <span id="quicksearchph_t" class="scFormToolbarInput" style='display: inline-block; vertical-align: inherit'>
+              <span>
+                  <input type="text" id="SC_fast_search_t" class="scFormToolbarInputText" style="border-width: 0px;;" name="nmgp_arg_fast_search_t" value="<?php echo $this->form_encode_input($OPC_dat) ?>" size="10" onChange="change_fast_t = 'CH';" alt="{maxLength: 255}" placeholder="<?php echo $this->Ini->Nm_lang['lang_othr_qk_watermark'] ?>">&nbsp;
+                  <img style="display: <?php echo $stateSearchIconSearch ?>; "  id="SC_fast_search_submit_t" class='css_toolbar_obj_qs_search_img' src="<?php echo $this->Ini->path_botoes ?>/<?php echo $this->Ini->Img_qs_search; ?>" onclick="scQuickSearchSubmit_t();">
+                  <img style="display: <?php echo $stateSearchIconClose ?>; " id="SC_fast_search_close_t" class='css_toolbar_obj_qs_search_img' src="<?php echo $this->Ini->path_botoes ?>/<?php echo $this->Ini->Img_qs_clean; ?>" onclick="document.getElementById('SC_fast_search_t').value = '__Clear_Fast__'; nm_move('fast_search', 't');">
+              </span>
+          </span>  </div>
+  <?php
+      }
     if ($opcao_botoes != "novo") {
         $sCondStyle = ($this->nmgp_botoes['new'] == "on") ? '' : 'display: none;';
 ?>

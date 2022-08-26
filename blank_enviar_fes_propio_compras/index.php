@@ -217,8 +217,8 @@ class blank_enviar_fes_propio_compras_ini
       $this->nm_dt_criacao   = "20201026"; 
       $this->nm_hr_criacao   = "172606"; 
       $this->nm_autor_alt    = "edgar"; 
-      $this->nm_dt_ult_alt   = "20220809"; 
-      $this->nm_hr_ult_alt   = "111306"; 
+      $this->nm_dt_ult_alt   = "20220824"; 
+      $this->nm_hr_ult_alt   = "091855"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -910,7 +910,7 @@ class blank_enviar_fes_propio_compras_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_compras']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_compras']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiZSX7D1BeD5XGHuvmDkBOH5FqHMFaDcJUH9FaD1rwHQrqHgBOHEFiDuJeHIFGD9XsH9FUDSBYV5BqDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveHuFGHuvmDkBOHEX7HMB/HQNmZSBOHAvmZMBODMzGZSJqHEB7DoXGHQJeDuFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYVkXeDuFYDoraD9XsH9X7DSrwV5raHgrKVcBOV5F/VErqD9JmZ1B/HABYD5XGDMNKZSXeDWXCVoB/D9NwZSFUZ1rwV5JeHuzGVIBOV5X7VorqD9JmZ1B/Z1BeD5BiDMBYZSXeV5FaVoFGD9NwDQJwHANOV5FUHuzGZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHIBOVWJeDMBYVIFCH5FqHMX7HQXGZ1rqHABYV5JwDMNKZSJqDWF/VoFGHQXOZ9F7HAvOVWJsDMvmVcFKV5BmVoBqD9BsZkFGHArKHuBOHgBYDkXKDWXCHIFUHQFYDuFaHArYHuXGDMrwV9BUHEFYHIFUDcNmZkFGHAN7HQBiHgvCHEJqDuXKZuBqHQJKZSBiDSN7HurqDMrwVcB/HEFYHIJeHQBsZ1BODSrYHuFaDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsZSNiDurGVEraHQJmH9BqHAN7HQF7HgvCHArCHEXCHMBiDcXGDQFUDSzGVWJeDMrwV9FeDWJeHIraHQBiZSBOD1rwHQXGHgvCHArsDuJeHIJeHQFYZSBiZ1N7HuBqHgNKDkBODuFqDoFGDcBqVIJwD1rwHuBqHgBYVkJ3HEFaHMBOHQJKDQFUDSN7HQNUDMrwV9FeHEF/HMJwHQBiZkFGHANOHQF7HgvCHEJqDWrGZuXGHQJKDQFUHIrwHurqDMrwV9FeDuX7HIF7HQNwZSBOD1rKHQraDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKDkBsV5FaZuBODcJeDQFGHAvmV5JwHuBYDkFCDuX7VEF7HQFYH9B/HIveZMB/DEBOHEXeDuX/DoB/D9NwZSX7D1BeV5BOHuvmVcFCDWXCVENUDcBqH9B/HABYD5JeDMzGHAFKV5XKDoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9B/HIveD5FaDErKZSJGH5F/DoFUD9JKDQFGHANKD5F7DMvOV9BUDuFGVoX7HQFYZkBiD1NaD5BOHgvCHArsH5BmZuJeHQXGDuBqHAvOV5XGDMrYDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWBODMvOVcBUHEFYHMBiD9BsVIraD1rwV5X7HgBeHErsDWXCHIJwHQFYZSFUDSBYHQBqDMvmV9FeH5XCVEraHQBiVIJsHABYHuJeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQFUHAveHQNUHuvmVIFCDWJeHIFUHQBqZ1rqHIBeV5X7DMBYHEJGDuJeDoBOD9NmZSBiHIrKD5F7DMvmVcFKV5BmVoBqD9BsZkFGHAvsD5BOHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHEFiHEFqDoF7DcXGDQFUD1BeV5XGHgvOVcB/H5XCVoX7D9BiZ1FaHArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5X7HuNOVcFKDWFaDoJsD9JmH9BOZ1BeV5FaDEBOVkJGDWXCVoXGDcJeDQFGHANOV5raHgrKVIBODWFYVoFGDcNwH9FaHArKD5XGDEBOZSJGDWF/VoXGD9XsZSFUZ1rwV5FGHuNODkBOV5FYVorqD9XOZSB/HABYD5JeHgvCVkJGDWF/VoJeD9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIBOD9NmDQJwHIrKD5JwDMrYVIB/DWFYHINUD9JmZ1F7D1vsD5BODErKHEJGDWF/HMB/D9NwDQX7HANOHuFaHuNOZSrCH5FqDoXGHQJmZ1F7HArYD5BqDMNKZSXeDWr/DoJeD9XsZSX7Z1N7VWFaHgrKV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveDkXKDWBmDoJeHQBiZ9XGHANKVWBODMvOZSNiDWFYHMBiD9BsVIraD1rwV5X7HgBeHErCDuFaHMBqD9JKZSBiDSrwHQrqDMNOVcFKDur/HIBiHQNwZ1FGHABYHQJeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1034,6 +1034,14 @@ class blank_enviar_fes_propio_compras_ini
       }
       if (!isset($_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_compras']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['blank_enviar_fes_propio_compras']['embutida_init']) 
       {
+          if (!isset($_SESSION['gusuariologueado'])) 
+          {
+              $this->nm_falta_var .= "gusuariologueado; ";
+          }
+          if (!isset($_SESSION['gidtercero'])) 
+          {
+              $this->nm_falta_var .= "gidtercero; ";
+          }
       }
 // 
       if (!isset($_SESSION['scriptcase']['glo_tpbanco']))
@@ -1933,6 +1941,10 @@ class blank_enviar_fes_propio_compras_apl
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
       $_SESSION['scriptcase']['blank_enviar_fes_propio_compras']['contr_erro'] = 'on';
+if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
+if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
+if (!isset($_SESSION['gusuariologueado'])) {$_SESSION['gusuariologueado'] = "";}
+if (!isset($this->sc_temp_gusuariologueado)) {$this->sc_temp_gusuariologueado = (isset($_SESSION['gusuariologueado'])) ? $_SESSION['gusuariologueado'] : "";}
   date_default_timezone_set('America/Bogota');
 setlocale(LC_ALL, 'es_CO');
 setlocale(LC_MONETARY, 'es_CO');
@@ -1943,7 +1955,6 @@ if(isset($_POST['idfaccom']))
 {
 	$vidfacven = $_POST['idfaccom'];
 }
-$vidfacven = 61;
 
 
 $vservidor='';
@@ -2082,92 +2093,6 @@ if(empty($vservidor) or empty($vtoken))
 else
 {
 	
-	if($vplantillas_correo=="SI" and $vplantilla_pordefecto>0)
-	{
-		$vsql = "select html_header, html_body, html_buttons, html_footer from plantillas_correo_propio where id='".$vplantilla_pordefecto."'";
-		 
-      $nm_select = $vsql; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->vSiPlantilla = array();
-      $this->vsiplantilla = array();
-      if ($SCrx = $this->Db->Execute($nm_select)) 
-      { 
-          $SCy = 0; 
-          $nm_count = $SCrx->FieldCount();
-          while (!$SCrx->EOF)
-          { 
-                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
-                 { 
-                        $this->vSiPlantilla[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                        $this->vsiplantilla[$SCy] [$SCx] = $SCrx->fields[$SCx];
-                 }
-                 $SCy++; 
-                 $SCrx->MoveNext();
-          } 
-          $SCrx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->vSiPlantilla = false;
-          $this->vSiPlantilla_erro = $this->Db->ErrorMsg();
-          $this->vsiplantilla = false;
-          $this->vsiplantilla_erro = $this->Db->ErrorMsg();
-      } 
-;
-		
-		if(isset($this->vsiplantilla[0][0]) and isset($this->vsiplantilla[0][1]) and isset($this->vsiplantilla[0][2]) and isset($this->vsiplantilla[0][3]))
-		{
-			$vplantilla_existe = true;
-			
-			$mystring = $this->vsiplantilla[0][0];
-			$findme   = 'ó';
-			$pos = strpos($mystring, $findme);
-
-			if ($pos === false)
-			{
-				$vcabecera = utf8_decode($this->vsiplantilla[0][0]);
-				$vcuerpo   = utf8_decode($this->vsiplantilla[0][1]);
-				$vbotones  = utf8_decode($this->vsiplantilla[0][2]);
-				$vpie      = utf8_decode($this->vsiplantilla[0][3]);
-			}
-			else
-			{
-				$vcabecera = $this->vsiplantilla[0][0];
-				$vcabecera = str_replace("á","a",$vcabecera);
-				$vcabecera = str_replace("é","e",$vcabecera);
-				$vcabecera = str_replace("í","i",$vcabecera);
-				$vcabecera = str_replace("ó","o",$vcabecera);
-				$vcabecera = str_replace("ú","u",$vcabecera);
-				$vcabecera = str_replace("ñ","n",$vcabecera);
-				
-				$vcuerpo   = $this->vsiplantilla[0][1];
-				$vcuerpo   = str_replace("á","a",$vcuerpo);
-				$vcuerpo   = str_replace("é","e",$vcuerpo);
-				$vcuerpo   = str_replace("í","i",$vcuerpo);
-				$vcuerpo   = str_replace("ó","o",$vcuerpo);
-				$vcuerpo   = str_replace("ú","u",$vcuerpo);
-				$vcuerpo   = str_replace("ñ","n",$vcuerpo);
-				
-				$vbotones  = $this->vsiplantilla[0][2];
-				$vbotones  = str_replace("á","a",$vbotones);
-				$vbotones  = str_replace("é","e",$vbotones);
-				$vbotones  = str_replace("í","i",$vbotones);
-				$vbotones  = str_replace("ó","o",$vbotones);
-				$vbotones  = str_replace("ú","u",$vbotones);
-				$vbotones  = str_replace("ñ","n",$vbotones);
-				
-				$vpie      = $this->vsiplantilla[0][3];
-				$vpie      = str_replace("á","a",$vpie);
-				$vpie      = str_replace("é","e",$vpie);
-				$vpie      = str_replace("í","i",$vpie);
-				$vpie      = str_replace("ó","o",$vpie);
-				$vpie      = str_replace("ú","u",$vpie);
-				$vpie      = str_replace("ñ","n",$vpie);
-			}
-
-		}
-	}
 	
 	
 	$vsql = "SELECT f.fechacom, f.numfacom, f.resolucion, TIME(f.creado) as hora, f.prefijo_com, t.documento,t.dv,t.nombres,t.tel_cel,t.direccion,if(t.regimen='SIM','2','1') as regimen, if(t.tipo_documento='13','3','6') as tipodoc, if(t.tipo='NAT','1','2') as tipopersona,'' as ciudad, if(f.formapago='CREDITO','2','1') as formapago, '' as fvencimiento, '0' as diascredito, f.total, t.urlmail,'' as sucursal, (select ml.id from municipalities ml where ml.code=(select concat(m.codigo_dep,m.codigo_mu) from municipio m where m.idmun=t.idmuni limit 1) limit 1) as codigomu, f.observaciones, r.texto_encabezado, r.texto_pie_pagina, t.urlmail, t.correo_notificafe, t.celular_notificafe, f.idprov, '' as orden_compra, '' as orden_fecha,  coalesce((select mc.id from municipalities mc where mc.code=(select concat(dcc.codigo_dep,dcc.codigo_mu) from municipio dcc where dcc.idmun=t.idmuni)), (select mc.id from municipalities mc where mc.code=(select concat(dcc.codigo_dep,dcc.codigo_mu) from municipio dcc where dcc.idmun=t.idmuni))) as municipalidad, t.codigo_postal FROM facturacom f join resdian r on f.resolucion=r.resolucion inner join terceros t on f.idprov=t.idtercero WHERE f.idfaccom = '".$vidfacven."'";
@@ -2233,6 +2158,13 @@ else
 		$vcodigo_postal 	= $this->r2[0][31];
 		
 	}
+	else
+		{
+		echo "no realizó"; 
+		}
+	
+	$curl = curl_init();
+	$vurl = $vservidor;
 	
 	$vdatos["number"] =  $vnumero;
 	$vdatos["type_document_id"] =  11;
@@ -2242,14 +2174,6 @@ else
 	$vdatos["prefix"] =  $vprefijo;
 	$vdatos["notes"] =  $vobservaciones;
 	$vdatos["sendmail"] =  false;
-	if($venvio_credenciales=="NO")
-	{
-		$vdatos["send_customer_credentials"] =  false;
-	}
-	else
-	{
-		$vdatos["send_customer_credentials"] =  true;
-	}
 
 	
 	if(!empty($vordencompra) and !empty($vordenfecha))
@@ -2289,72 +2213,6 @@ else
 	
 	
 	
-	if($vplantillas_correo=="SI" and $vplantilla_pordefecto>0)
-	{
-		if($vplantilla_existe)
-		{
-			$vdatos["html_header"] =  $vcabecera;
-			$vdatos["html_header"] = str_replace("vNombreCliente",$vnombre,$vdatos["html_header"]);
-			$vdatos["html_header"] = str_replace("vNit",$vccnit,$vdatos["html_header"]);
-			$vdatos["html_header"] = str_replace("vNombreEmisor",$vnombre_emisor,$vdatos["html_header"]);
-			
-			$vdatos["html_body"]   =  $vcuerpo;
-			$vdatos["html_body"] = str_replace("vNumeroDocumento",$vprefijo.$vnumero,$vdatos["html_body"]);
-			$vdatos["html_body"] = str_replace("vFechaDocumento",$vfecha.' '.$vhora,$vdatos["html_body"]);
-			$vdatos["html_body"] = str_replace("vTotalDocumento",number_format($vtotal),$vdatos["html_body"]);
-			
-			$vurl_pdf_factura = $vurl_api_pdfs."/".$vnit_emisor."/FES-".$vprefijo.$vnumero.".pdf";
-			$vurl_aceptar     = "https://www.apifacilweb.com/public/index.php/accept-reject-document/".$vnit_emisor."/".$vccnit."/".$vprefijo."/".$vnumero."/".$vfecha;
-			
-			$vurl_pdf_factura = $vurl_api_pdfs."/".$vnit_emisor."/FES-".$vprefijo.$vnumero.".pdf";
-			$vurl_aceptar     = " style='display:none;' ";
-			
-			$vdatos["html_buttons"]=  $vbotones;
-			$vdatos["html_buttons"] = str_replace("https://vUrlPdfFactura",$vurl_pdf_factura,$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("https://vUrlPdf",$vurl_pdf_factura,$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("href=",$vurl_aceptar,$vdatos["html_buttons"]);
-			
-			$vdatos["html_buttons"] = str_replace("https://vurlpdffactura",$vurl_pdf_factura,$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("https://vurlpdf",$vurl_pdf_factura,$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("href=",$vurl_aceptar,$vdatos["html_buttons"]);
-			
-			$vdatos["html_buttons"] = str_replace("vUrlPdfFactura",$vurl_pdf_factura,$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("vUrlPdf",$vurl_pdf_factura,$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("href=",$vurl_aceptar,$vdatos["html_buttons"]);
-			
-			$vdatos["html_buttons"] = str_replace("vurlpdffactura",$vurl_pdf_factura,$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("vurlpdf",$vurl_pdf_factura,$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("href=",$vurl_aceptar,$vdatos["html_buttons"]);
-			
-			
-			$vdatos["html_buttons"] = str_replace("font-weight:bold;text-decoration:none;border:2px solid #0880e8;padding:10px 32px;color:#0880e8;border-radius:50px;background:#fff;text-align:center","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("font-weight:bold;text-decoration:none;border:2px solid #0880e8;padding:10px 32px;color:#0880e8;border-radius:50px;background:#fff;text-align:center","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("font-weight:bold;text-decoration:none;border:2px solid #0880e8;padding:10px 32px;color:#0880e8;border-radius:50px;background:#fff;text-align:center","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("font-weight:bold;text-decoration:none;border:2px solid #0880e8;padding:10px 32px;color:#0880e8;border-radius:50px;background:#fff;text-align:center","",$vdatos["html_buttons"]);
-			
-			$vdatos["html_buttons"] = str_replace("Aceptar y/o Rechazar documento","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("Aceptar y/o Rechazar documento","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("Aceptar y/o Rechazar documento","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("Aceptar y/o Rechazar documento","",$vdatos["html_buttons"]);
-			
-			$vdatos["html_buttons"] = str_replace("style=","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("style=","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("style=","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("style=","",$vdatos["html_buttons"]);
-			
-			$vdatos["html_buttons"] = str_replace("Ver factura","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("Ver factura","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("Ver factura","",$vdatos["html_buttons"]);
-			$vdatos["html_buttons"] = str_replace("Ver factura","",$vdatos["html_buttons"]);
-			
-			$vdatos["html_body"] = str_replace("Si requiere consultar el documento en línea haga clic en el siguiente enlace.","",$vdatos["html_body"]);
-			
-			
-			$vdatos["html_footer"] =  $vpie;
-			$vdatos["html_footer"] = str_replace("vCorreoEmisor",$vcorreo_emisor,$vdatos["html_footer"]);
-		}
-	}
-	
 		
 	$vdescripcion = '';
 	$vporciva = '';
@@ -2373,7 +2231,7 @@ else
 	
 
 	
-	$vsql = "SELECT d.descr, '' as adicional,d.cantidad,d.valorunit,d.iva,d.valorpar,'' as obs, b.bodega, m.codigoprod from detallecompra d inner join productos m on d.idpro=m.idprod inner join bodegas b on d.idbod=b.idbodega where d.idfaccom='".$vidfacven."'";
+	$vsql = "SELECT m.nompro, '' as adicional,d.cantidad,d.valorunit,d.iva,d.valorpar,'' as obs, b.bodega, m.codigoprod from detallecompra d inner join productos m on d.idpro=m.idprod inner join bodegas b on d.idbod=b.idbodega where d.idfaccom='".$vidfacven."'";
 	 
       $nm_select = $vsql; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
@@ -2504,15 +2362,1188 @@ else
 	$vdatos["legal_monetary_totals"]["charge_total_amount"] =  "0.00";
 	$vdatos["legal_monetary_totals"]["payable_amount"] =  $vtotal;
 	
-	$vdatos = json_encode($vdatos);
-	print_r($vdatos);
 	
 	
+	$vcorreo_validar = $vdatos["seller"]["email"];
+	$vdatos = json_encode($vdatos, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);	
+	
+	$varchivo = fopen("Autofactura_".$vnit_emisor.".json","w+");
+    fwrite($varchivo,$vdatos);
 	
 	$valida_correo = false;
 	
+	if($vvalidar_correo_enlinea=="SI")
+	{
+		if(!empty($vcorreo_validar))
+		{
+			$vsql = "select valido from correos_validos where correo='".$vcorreo_validar."' and valido='SI' limit 1";
+			
+			
+			 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->vValido = array();
+      $this->vvalido = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->vValido[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                        $this->vvalido[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->vValido = false;
+          $this->vValido_erro = $this->Db->ErrorMsg();
+          $this->vvalido = false;
+          $this->vvalido_erro = $this->Db->ErrorMsg();
+      } 
+;
+			if(isset($this->vvalido[0][0]))
+			{
+				$valida_correo = true;
+			}
+			else
+			{
+				
+
+				if($vreason=="accepted_email" or $vreason=="unknown" or $vreason=="low_deliverability")
+				{
+					$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='SI',json='".json_encode($vjson_valida_email)."'";
+					
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+					$valida_correo = true;
+				}
+				else
+				{
+					$valida_correo = false;
+					$vsql = "insert into correos_validos set idtercero='".$vidtercero."',correo='".$vcorreo_validar."',fecha=NOW(),valido='NO',json='".json_encode($vjson_valida_email)."'";
+					
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+					echo "El correo no es válido o algo salió mal, por favor vuelva a intentarlo. ".$vreason;
+				}
+				
+			}
+			
+			if($valida_correo)
+			{
+				$vdconexion = array(
+				  CURLOPT_URL => $vurl,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => '',
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 0,
+				  CURLOPT_FOLLOWLOCATION => true,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => 'POST',
+				  CURLOPT_POSTFIELDS =>$vdatos,
+				  CURLOPT_HTTPHEADER => array(
+					'Content-Type: application/json',
+					'Accept: application/json',
+					'Authorization: Bearer '.$vtoken
+				  ),
+				);
+
+				curl_setopt_array($curl, $vdconexion);
+
+				$response = curl_exec($curl);
+				$vinvoicexml = "";
+				$vzipinvoicexml = "";
+				$vunsignedinvoicexml = "";
+				$vreqfe = "";
+				$vrptafe = "";
+				$vurlinvoicexml = "";
+				$vurlinvoicepdf = "";
+				$vurlinvoiceattached = "";
+				$vcufe = "";
+				$vQRStr  = "";
+
+				curl_close($curl);
+				$json = json_decode($response);
+
+
+				$varchivo2 = fopen("autofactura_respuesta_".$vnit_emisor.".json","w+");
+				fwrite($varchivo2,$response);
+
+				if(isset($json->errors))
+				{	
+					$vmensaje = "";
+					foreach($json->errors as $clave=>$valor){
+						$vmensaje .= strtoupper($clave).": <br>";
+						$vinfo = "";
+						foreach($valor as $ids=>$valores)
+						{
+							$vinfo .= "*. ".$valores."<br>";
+						}
+						$vmensaje .= $vinfo;		
+					}
+
+					echo $vmensaje;
+				}
+				else
+				{
+					if(isset($json->message))
+					{
+					}
+
+					if(isset($json->invoicexml))
+					{
+						$vinvoicexml = (string)$json->invoicexml;
+					}
+
+					if(isset($json->zipinvoicexml))
+					{
+						$vzipinvoicexml = (string)$json->zipinvoicexml;
+					}
+
+					if(isset($json->urlinvoicexml))
+					{
+						$vurlinvoicexml = (string)$json->urlinvoicexml;
+					}
+
+					if(isset($json->urlinvoicepdf))
+					{
+						$vurlinvoicepdf = (string)$json->urlinvoicepdf;
+					}
+
+					if(isset($json->cufe))
+					{
+						$vcufe = (string)$json->cufe;
+					}
+
+					if(isset($json->QRStr))
+					{
+						$vQRStr = (string)$json->QRStr;
+					}
+
+
+					if($vmodo=='PRUEBAS' and !empty($vtestid))
+					{
+						if(!isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage))
+						{
+							$vsql = "select nit from datosemp where iddatos='1'";
+							 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r5 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r5 = false;
+          $this->r5_erro = $this->Db->ErrorMsg();
+      } 
+;
+							if(isset($this->r5[0][0]))
+							{
+								$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+								$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
+							}
+
+							$vsql="UPDATE facturacom SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechacom,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfaccom='".$vidfacven."'";
+							
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+							$vsql = "select cufe from facturacom where idfaccom='".$vidfacven."' and cufe is not null and cufe <> ''";
+							 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r4 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r4 = false;
+          $this->r4_erro = $this->Db->ErrorMsg();
+      } 
+;
+							if(isset($this->r4[0][0]))
+							{
+								if(!empty($this->r4[0][0]))
+								{
+									echo "Documento enviado con éxito!!!";
+								}
+								else
+								{
+									echo "Hubo un error al enviar el documento.";
+								}
+							}
+						}
+						else
+						{
+							if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage))
+							{
+								if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+								{
+									if(is_array($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+									{
+										print_r($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string);
+									}
+									else
+									{
+										$vabuscar = 'procesado anteriormente';
+										$vmitexto = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+										$pos = strpos($vmitexto, $vabuscar);
+
+										if ($pos === false)
+										{
+											echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#f00000;padding:8px;' >".$json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string."</div>";
+										}
+										else
+										{
+											$vsql = "select nit from datosemp where iddatos='1'";
+											 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r5 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r5 = false;
+          $this->r5_erro = $this->Db->ErrorMsg();
+      } 
+;
+											if(isset($this->r5[0][0]))
+											{
+												$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+												$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
+											}
+											
+											$vcufe = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->XmlDocumentKey;
+
+											$vsql="UPDATE facturacom SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechacom,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."'  WHERE idfaccom='".$vidfacven."'";
+											
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+											$vsql = "select cufe from facturacom where idfaccom='".$vidfacven."' and cufe is not null and cufe <> ''";
+											 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r4 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r4 = false;
+          $this->r4_erro = $this->Db->ErrorMsg();
+      } 
+;
+											if(isset($this->r4[0][0]))
+											{
+												if(!empty($this->r4[0][0]))
+												{
+													echo "Documento enviado con éxito!!!";
+												}
+												else
+												{
+													echo "Hubo un error al enviar el documento.";
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+					else
+					{
+						if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->IsValid))
+						{
+							if($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->IsValid=="true")
+							{
+								$vsql = "select nit from datosemp where iddatos='1'";
+								 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r5 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r5 = false;
+          $this->r5_erro = $this->Db->ErrorMsg();
+      } 
+;
+								if(isset($this->r5[0][0]))
+								{
+									$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+									$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
+								}
+
+								$vsql="UPDATE facturacom SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechacom,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfaccom='".$vidfacven."'";
+								
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+								$vsql = "select cufe from facturacom where idfaccom='".$vidfacven."' and cufe is not null and cufe <> ''";
+								 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r4 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r4 = false;
+          $this->r4_erro = $this->Db->ErrorMsg();
+      } 
+;
+								if(isset($this->r4[0][0]))
+								{
+									if(!empty($this->r4[0][0]))
+									{
+										echo "Documento enviado con éxito!!!";
+										
+										$vfec = $vfecha." ".date("H:i:s");
+										$vfec = date_create($vfec);
+										$vfec = date_format($vfec,"Y-m-d H:i:s");
+										$this->fAgregarConsumoFolio('FV',$vprefijo.$vnumero,$this->sc_temp_gusuariologueado,$this->sc_temp_gidtercero,'FACILWEB','NO',"$vfec");
+									}
+									else
+									{
+										echo "Hubo un error al enviar el documento.";
+									}
+								}
+							}
+							else
+							{
+								if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage))
+								{
+									if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+									{
+										if(is_array($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+										{
+											print_r($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string);
+										}
+										else
+										{
+											$vabuscar = 'procesado anteriormente';
+											$vmitexto = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+											$pos = strpos($vmitexto, $vabuscar);
+
+											if ($pos === false)
+											{
+												echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#f00000;padding:8px;' >".$json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string."</div>";
+											}
+											else
+											{
+												$vsql = "select nit from datosemp where iddatos='1'";
+												 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r5 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r5 = false;
+          $this->r5_erro = $this->Db->ErrorMsg();
+      } 
+;
+												if(isset($this->r5[0][0]))
+												{
+													$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+													$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
+												}
+												
+												$vcufe = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->XmlDocumentKey;
+
+												$vsql="UPDATE facturacom SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechacom,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfaccom='".$vidfacven."'";
+												
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+												$vsql = "select cufe from facturacom where idfaccom='".$vidfacven."' and cufe is not null and cufe <> ''";
+												 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r4 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r4 = false;
+          $this->r4_erro = $this->Db->ErrorMsg();
+      } 
+;
+												if(isset($this->r4[0][0]))
+												{
+													if(!empty($this->r4[0][0]))
+													{
+														echo "Documento enviado con éxito!!!";
+													}
+													else
+													{
+														echo "Hubo un error al enviar el documento.";
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				
+			}
+			
+		}
+		else
+		{
+			echo "El tercero debe tener parametrizado un correo electrónico válido.";
+		}
+	}
+	else
+	{
 	
+		$vdconexion = array(
+		  CURLOPT_URL => $vurl,
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => '',
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 0,
+		  CURLOPT_FOLLOWLOCATION => true,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => 'POST',
+		  CURLOPT_POSTFIELDS =>$vdatos,
+		  CURLOPT_HTTPHEADER => array(
+			'Content-Type: application/json',
+			'Accept: application/json',
+			'Authorization: Bearer '.$vtoken
+		  ),
+		);
+
+		curl_setopt_array($curl, $vdconexion);
+
+		$response = curl_exec($curl);
+		$vinvoicexml = "";
+		$vzipinvoicexml = "";
+		$vunsignedinvoicexml = "";
+		$vreqfe = "";
+		$vrptafe = "";
+		$vurlinvoicexml = "";
+		$vurlinvoicepdf = "";
+		$vurlinvoiceattached = "";
+		$vcufe = "";
+		$vQRStr  = "";
+
+		curl_close($curl);
+		$json = json_decode($response);
+
+
+		$varchivo2 = fopen("autofactura_respuesta_".$vnit_emisor.".json","w+");
+		fwrite($varchivo2,$response);
+
+		if(isset($json->errors))
+		{	
+			$vmensaje = "";
+			foreach($json->errors as $clave=>$valor){
+				$vmensaje .= strtoupper($clave).": <br>";
+				$vinfo = "";
+				foreach($valor as $ids=>$valores)
+				{
+					$vinfo .= "*. ".$valores."<br>";
+				}
+				$vmensaje .= $vinfo;		
+			}
+
+			echo $vmensaje;
+		}
+		else
+		{
+			if(isset($json->message))
+			{
+			}
+
+			if(isset($json->invoicexml))
+			{
+				$vinvoicexml = (string)$json->invoicexml;
+			}
+
+			if(isset($json->zipinvoicexml))
+			{
+				$vzipinvoicexml = (string)$json->zipinvoicexml;
+			}
+
+			if(isset($json->urlinvoicexml))
+			{
+				$vurlinvoicexml = (string)$json->urlinvoicexml;
+			}
+
+			if(isset($json->urlinvoicepdf))
+			{
+				$vurlinvoicepdf = (string)$json->urlinvoicepdf;
+			}
+
+			if(isset($json->cufe))
+			{
+				$vcufe = (string)$json->cufe;
+			}
+
+			if(isset($json->QRStr))
+			{
+				$vQRStr = (string)$json->QRStr;
+			}
+
+
+			if($vmodo=='PRUEBAS' and !empty($vtestid))
+			{
+				if(!isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage))
+				{
+					$vsql = "select nit from datosemp where iddatos='1'";
+					 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r5 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r5 = false;
+          $this->r5_erro = $this->Db->ErrorMsg();
+      } 
+;
+					if(isset($this->r5[0][0]))
+					{
+						
+						$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+						$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
+					}
+
+					$vsql="UPDATE facturacom SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechacom,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfaccom='".$vidfacven."'";
+					
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+					$vsql = "select cufe from facturacom where idfaccom='".$vidfacven."' and cufe is not null and cufe <> ''";
+					 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r4 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r4 = false;
+          $this->r4_erro = $this->Db->ErrorMsg();
+      } 
+;
+					if(isset($this->r4[0][0]))
+					{
+						if(!empty($this->r4[0][0]))
+						{
+							echo "Documento enviado con éxito!!!";
+							$vfec = $vfecha." ".date("H:i:s");
+							$vfec = date_create($vfec);
+							$vfec = date_format($vfec,"Y-m-d H:i:s");
+							$this->fAgregarConsumoFolio('FV',$vprefijo.$vnumero,$this->sc_temp_gusuariologueado,$this->sc_temp_gidtercero,'FACILWEB','NO',"$vfec");
+						}
+						else
+						{
+							echo "Hubo un error al enviar el documento.";
+						}
+					}
+				}
+				else
+				{
+					if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage))
+					{
+						if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+						{
+							if(is_array($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+							{
+								print_r($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string);
+							}
+							else
+							{
+								$vabuscar = 'procesado anteriormente';
+								$vmitexto = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+								$pos = strpos($vmitexto, $vabuscar);
+
+								if ($pos === false)
+								{
+									echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#f00000;padding:8px;' >".$json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string."</div>";
+								}
+								else
+								{
+									$vsql = "select nit from datosemp where iddatos='1'";
+									 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r5 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r5 = false;
+          $this->r5_erro = $this->Db->ErrorMsg();
+      } 
+;
+									if(isset($this->r5[0][0]))
+									{
+										$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+										$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
+									}
+									
+									$vcufe = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->XmlDocumentKey;
+
+									$vsql="UPDATE facturacom SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechacom,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfaccom='".$vidfacven."'";
+									
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+									$vsql = "select cufe from facturacom where idfaccom='".$vidfacven."' and cufe is not null and cufe <> ''";
+									 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r4 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r4 = false;
+          $this->r4_erro = $this->Db->ErrorMsg();
+      } 
+;
+									if(isset($this->r4[0][0]))
+									{
+										if(!empty($this->r4[0][0]))
+										{
+											echo "Documento enviado con éxito!!!";
+										}
+										else
+										{
+											echo "Hubo un error al enviar el documento.";
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->IsValid))
+				{
+					if($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->IsValid=="true")
+					{
+						$vsql = "select nit from datosemp where iddatos='1'";
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r5 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r5 = false;
+          $this->r5_erro = $this->Db->ErrorMsg();
+      } 
+;
+						if(isset($this->r5[0][0]))
+						{
+							$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+							$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml;  
+						}
+
+						$vsql="UPDATE facturacom SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechacom,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfaccom='".$vidfacven."'";
+						
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+						$vsql = "select cufe from facturacom where idfaccom='".$vidfacven."' and cufe is not null and cufe <> ''";
+						 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r4 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r4 = false;
+          $this->r4_erro = $this->Db->ErrorMsg();
+      } 
+;
+						if(isset($this->r4[0][0]))
+						{
+							if(!empty($this->r4[0][0]))
+							{
+								echo "Documento enviado con éxito!!!";
+							}
+							else
+							{
+								echo "Hubo un error al enviar el documento.";
+							}
+						}
+					}
+					else
+					{
+						if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage))
+						{
+							if(isset($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+							{
+								if(is_array($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string))
+								{
+									print_r($json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string);
+								}
+								else
+								{
+									$vabuscar = 'procesado anteriormente';
+									$vmitexto = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string;
+									$pos = strpos($vmitexto, $vabuscar);
+
+									if ($pos === false)
+									{
+										echo "<div style='margin-bottom:10px;border-radius:8px;color:white;background:#f00000;padding:8px;' >".$json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->ErrorMessage->string."</div>";
+									}
+									else
+									{
+										$vsql = "select nit from datosemp where iddatos='1'";
+										 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r5 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r5[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r5 = false;
+          $this->r5_erro = $this->Db->ErrorMsg();
+      } 
+;
+										if(isset($this->r5[0][0]))
+										{
+											$vurlinvoicepdf = $vurl_api_pdfs."/".$this->r5[0][0]."/".$vurlinvoicepdf;
+											$vurlinvoicexml = $vurl_api_sendmail."/".$this->r5[0][0]."/".$vurlinvoicexml; 
+										}
+										
+										$vcufe = $json->ResponseDian->Envelope->Body->SendBillSyncResponse->SendBillSyncResult->XmlDocumentKey;
+
+										$vsql="UPDATE facturacom SET cufe = '".$vcufe."', enlacepdf='".$vurlinvoicepdf."', estado='200', qr_base64='".$vQRStr."',fecha_validacion=concat(fechacom,' ".date("H:i:s")."'),avisos='".$vurlinvoicexml."', proveedor='FACILWEB', token='".$vtoken."', password='".$vtoken_password."', servidor='".$vservidor."' WHERE idfaccom='".$vidfacven."'";
+										
+     $nm_select = $vsql; 
+         $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select;
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+         $rf = $this->Db->Execute($nm_select);
+         if ($rf === false)
+         {
+             $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg());
+             if ($this->Ini->sc_tem_trans_banco)
+             {
+                 $this->Db->RollbackTrans(); 
+                 $this->Ini->sc_tem_trans_banco = false;
+             }
+             exit;
+         }
+         $rf->Close();
+      ;
+
+										$vsql = "select cufe from facturacom where idfaccom='".$vidfacven."' and cufe is not null and cufe <> ''";
+										 
+      $nm_select = $vsql; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->r4 = array();
+      if ($SCrx = $this->Db->Execute($nm_select)) 
+      { 
+          $SCy = 0; 
+          $nm_count = $SCrx->FieldCount();
+          while (!$SCrx->EOF)
+          { 
+                 for ($SCx = 0; $SCx < $nm_count; $SCx++)
+                 { 
+                        $this->r4[$SCy] [$SCx] = $SCrx->fields[$SCx];
+                 }
+                 $SCy++; 
+                 $SCrx->MoveNext();
+          } 
+          $SCrx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->r4 = false;
+          $this->r4_erro = $this->Db->ErrorMsg();
+      } 
+;
+										if(isset($this->r4[0][0]))
+										{
+											if(!empty($this->r4[0][0]))
+											{
+												echo "Documento enviado con éxito!!!";
+											}
+											else
+											{
+												echo "Hubo un error al enviar el documento.";
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
 }
+if (isset($this->sc_temp_gusuariologueado)) {$_SESSION['gusuariologueado'] = $this->sc_temp_gusuariologueado;}
+if (isset($this->sc_temp_gidtercero)) {$_SESSION['gidtercero'] = $this->sc_temp_gidtercero;}
 $_SESSION['scriptcase']['blank_enviar_fes_propio_compras']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 
@@ -5384,6 +6415,34 @@ $_SESSION['scriptcase']['blank_enviar_fes_propio_compras']['contr_erro'] = 'off'
    {
        $_SESSION['sc_session']['SC_parm_violation'] = true;
    }
+   if (isset($_POST["gusuariologueado"])) 
+   {
+       $_SESSION["gusuariologueado"] = $_POST["gusuariologueado"];
+       nm_limpa_str_blank_enviar_fes_propio_compras($_SESSION["gusuariologueado"]);
+   }
+   if (isset($_GET["gusuariologueado"])) 
+   {
+       $_SESSION["gusuariologueado"] = $_GET["gusuariologueado"];
+       nm_limpa_str_blank_enviar_fes_propio_compras($_SESSION["gusuariologueado"]);
+   }
+   if (!isset($_SESSION["gusuariologueado"])) 
+   {
+       $_SESSION["gusuariologueado"] = "";
+   }
+   if (isset($_POST["gidtercero"])) 
+   {
+       $_SESSION["gidtercero"] = $_POST["gidtercero"];
+       nm_limpa_str_blank_enviar_fes_propio_compras($_SESSION["gidtercero"]);
+   }
+   if (isset($_GET["gidtercero"])) 
+   {
+       $_SESSION["gidtercero"] = $_GET["gidtercero"];
+       nm_limpa_str_blank_enviar_fes_propio_compras($_SESSION["gidtercero"]);
+   }
+   if (!isset($_SESSION["gidtercero"])) 
+   {
+       $_SESSION["gidtercero"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -5538,6 +6597,16 @@ $_SESSION['scriptcase']['blank_enviar_fes_propio_compras']['contr_erro'] = 'off'
                 $$Tmp_par = $cadapar[1];
             }
             $ix++;
+       }
+       if (isset($gusuariologueado)) 
+       {
+           $_SESSION['gusuariologueado'] = $gusuariologueado;
+           nm_limpa_str_blank_enviar_fes_propio_compras($_SESSION["gusuariologueado"]);
+       }
+       if (isset($gidtercero)) 
+       {
+           $_SESSION['gidtercero'] = $gidtercero;
+           nm_limpa_str_blank_enviar_fes_propio_compras($_SESSION["gidtercero"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

@@ -217,13 +217,13 @@ class autocompletararticulos_ini
       $this->nm_dt_criacao   = "20180605"; 
       $this->nm_hr_criacao   = "174314"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220622"; 
-      $this->nm_hr_ult_alt   = "203705"; 
+      $this->nm_dt_ult_alt   = "20220825"; 
+      $this->nm_hr_ult_alt   = "172422"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0";
+      $this->nm_app_version  = "1.0.0";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -822,7 +822,7 @@ class autocompletararticulos_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -910,7 +910,7 @@ class autocompletararticulos_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['autocompletararticulos']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['autocompletararticulos']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQJsHIBeD5BOHuBYVIBOH5B7VEF7D9BiZkFGHIrwV5BOHgNKVkJqDuJeHMJeHQXODQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNKVkJ3DWFqHMJwHQJKDQFUHINaD5F7DMvsVcB/DWFaHMFGHQJmZSBqD1zGV5X7DMvCDkB/DuFaHIFGHQNwH9BiHAvmD5F7HgvOVcB/DWJeHMJwDcNmZkFGDSBOD5rqDEBOHEFiHEFqDoF7DcJUZSBiDSzGVWFaDMvsVcBUDWFYHMXGHQJmZSBqHINKV5X7HgrKVkJqH5F/HIB/DcBiDuBqHAvCD5F7DMvmVIBsHEX7HIX7HQXGH9BOHINKV5X7HgBYHENiDuJeHMFGHQNmH9FUDSzGV5FGHuNOVcFKHEFYVoBqDcBwH9BqHINaZMJwHgrKZSJ3DuFYHIJwDcBiH9FUD1NKD5F7DMzGVIBsDWFYHIF7HQBsZSBqHINKV5X7HgNODkXKHEFqHIJwDcXGZSBiHAvmD5F7DMNODkBsV5X/VErqDcFYZ1FGHAvmD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgvCZSJGDWXCDoraD9NwZ9JeZ1rwVWXGHuBYDkFCDuFGVoraD9JmZ1rqD1rKV5X7DEBOHEFKV5FaDoXGDcJeZSFGHANOD5BqHuzGVcrsH5XCVoBqDcBqZ1FaD1rwV5FaHgvCDkBsH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9JmZ1F7Z1BeD5JeDEvsHENiV5FaVoXGD9NwDQBOZ1zGV5XGDMrYZSJqDWrmDoXGHQNmVIJsHAzGV5X7HgNKHErsDurmVoFGHQBiDuBqHAvOVWXGDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5JeDMzGHArCDWrGDoXGHQNwZ9F7HANOHQB/HgvsV9FeHEFYVErqDcNwH9BOHIveHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwV5FUHuBYVcFCH5XCVoraDcBqH9B/Z1BeV5X7DErKHEFiDuFYVoB/D9NmDQJsHArYV5BOHgvsVcFCDWJeVENUD9JmZ1B/D1rwZMFaDEBOHEFiV5FaDoXGHQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBeHEFiV5B3DoF7D9XsDuFaHAveHQNUHuNODkBsHEX7HMX7HQXGH9BqDSBeV5JsDMveVkXeDuXKDoBOD9NmZSBiHIrKHuXGDMBOV9FeDWFaHMBiD9BsVIraD1rwV5X7HgBeHEFiDWFqDoBODcXOZSX7HANOV5BOHuNODkBOV5F/VEBiDcJUZkFGHArKV5FUDMrYZSXeV5FqHIJsHQBiZ9XGHANKV5BODMvOZSNiDWB3VEF7HQNmZ1BiHANOHQJwDEBODkFeH5FYVoFGHQJKDQFaHIvsVWJsDMvsVcBUDWJeHMFaHQBsVIJsHIveD5rqHgveHArCDWr/DoJsDcBwH9X7DSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGHIrwHQBiHgvsZSJ3V5XCHIJwHQFYH9BiD1veHQBqHgNKVcFeDWFaHIrqHQBsZSBqZ1BeHuXGHgNOZSJ3V5XKDoNUHQNmH9BiHArYHuJeDMvmVcB/DWJeHIJeHQBiVIJwHArKHuFGHgvsZSJ3HEXCHIJwHQFYZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBqZkFUZ1vmD5Bq";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9XsH9BiHIBOV5BODMBYVcXKHEF/DoJsHQXGZkFGZ1NOD5NUHgBOHArCDWXCHMFGDcBwH9FUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiHAN7HQJwDEBODkFeH5FYVoFGHQJKDQJsHIrKV5BOHuBYVcXKDWXCHIF7D9BiVINUHArYV5XGHgBeZSJGDWr/HMFGDcXGDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5FaDMBYHEJGDWFqZuFaD9XsZSX7D1BeV5JwHuNOVcFCDWXCDoJeDcJUZ1FaD1rKD5NUDErKVkXeDWX7DoJeD9NmDQJsDSBYV5FGHuBYVcBODuFqVoraD9XOVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcrsDWFaHMX7DcJUZ1F7HIrwV5XGDEvsHArsDWBmZuFaHQJeDQFaD1BOV5JeDMBODkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgvsHArsHEB3ZuBOHQXsDQFUHArYHuB/HgrwZSJ3V5X/VEFGHQXGZ1BODSrYHQFGHgBOHAFKV5FqHIBqHQXOZSBiD1BeHQJsDMvmZSrCV5FYHMFGHQXGZSBqHArYHQJeHgrKDkBsH5FYVoX7D9JKDQX7D1BOV5FGDMzGV9BUHEBmVEX7HQNwZkFGD1rwHQFGHgrKHEFKV5FqHMFaDcXGDQB/HABYHuBqDMrYZSrCV5FYHMJeHQXOH9BqZ1NOHuX7DMveHEFKV5B7ZuJeDcBiDQB/D1BeHQBOHgvOV9FiH5FqDoJeD9JmZ1B/D1NaD5rqHgvsHErsHEXCHMB/HQNmDQFaHArYV5FaHgrwVcFiV5FYHINUHQBsZkFGZ1rYHQraHgrKHEFKV5FqHMX7HQJeDuFaHArYHuXGDMvmZSrCV5FYHMB/HQBiZkBiHANOHuFUHgBODkFeH5FYVoX7D9JKDQX7D1BOV5FGHuzGDkBOH5FqVoJwD9XOZ1F7HABYZMB/DEBeHENiV5XKDoB/D9NmH9X7HArYV5BODMrwDkFCDuX7VEF7D9BiVIJwZ1BeV5XGDEvsHEFiV5FqVoX7HQXGZSFGD1BeV5FGHuzGVIBOHEFYVorqD9BiZ1F7D1rwD5NUDErKZSXeH5FGDoB/DcJUZSX7HIBeD5BqHgvsZSJ3H5FqVoFGDcBqH9BOZ1BeV5XGDEBOZSJGH5FYZuFaDcXOZSX7DSBYV5JeDMrwV9BUDWXKVEF7HQNmVIraZ1vOD5JeHgveHAFKV5B7ZuFaHQJeDQBOZ1zGV5XGDMvOV9BUDuX7HMBiD9BsVIraD1rwV5X7HgBeHErsDWrGDoBOHQBiZ9XGHAvmV5JeDMvsVcBUDWrmVEraHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoJwHQXsDQFGD1veD5rqHgrKDkBOHEFYVEFGDcFYZSB/DSNOV5JeDErKVkJ3DWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1034,6 +1034,10 @@ class autocompletararticulos_ini
       }
       if (!isset($_SESSION['sc_session'][$this->sc_page]['autocompletararticulos']['embutida_init']) || !$_SESSION['sc_session'][$this->sc_page]['autocompletararticulos']['embutida_init']) 
       {
+          if (!isset($_SESSION['gnit'])) 
+          {
+              $this->nm_falta_var .= "gnit; ";
+          }
       }
 // 
       if (!isset($_SESSION['scriptcase']['glo_tpbanco']))
@@ -1933,6 +1937,8 @@ class autocompletararticulos_apl
       header("X-XSS-Protection: 1; mode=block");
       header("X-Frame-Options: SAMEORIGIN");
       $_SESSION['scriptcase']['autocompletararticulos']['contr_erro'] = 'on';
+if (!isset($_SESSION['gnit'])) {$_SESSION['gnit'] = "";}
+if (!isset($this->sc_temp_gnit)) {$this->sc_temp_gnit = (isset($_SESSION['gnit'])) ? $_SESSION['gnit'] : "";}
  
 if(isset($_POST['indicio'])){
     
@@ -1959,7 +1965,9 @@ if(isset($_POST['indicio'])){
 			p.preciomen,
 			p.unimen,
 			p.costomen,
-			p.stockmen
+			p.stockmen,
+			(select u.descripcion_um from unidades_medida u where u.codigo_um=if('MENOR'='MAYOR',p.unimay,p.unimen) limit 1) as und2,
+			p.imagen
 			from 
 			productos p 
 			inner join iva i on p.idiva=i.idiva 
@@ -2020,9 +2028,10 @@ if(isset($_POST['indicio'])){
 			$descripcion = $this->vdatos[$i][2]; 
 			$adicional   = $this->vdatos[$i][3]; 
 			$precio      = $this->vdatos[$i][4]; 
-			$unimen      = $this->vdatos[$i][5];
+			$unimen      = $this->vdatos[$i][8];
 			$costo		 = $this->vdatos[$i][6];
 			$stockmen    = $this->vdatos[$i][7];
+			$vimagen     = $this->vdatos[$i][9];
 			
 			if($stockmen < 0)
 			{
@@ -2047,7 +2056,20 @@ if(isset($_POST['indicio'])){
 			echo "$".number_format($precio);
 			echo "</td>";
 			
+			$varchivo = "../_lib/file/img/".$this->sc_temp_gnit."/".$vimagen;
+			echo "<td>";
+			if(file_exists($varchivo))
+			{
+				if(is_file($varchivo))
+				{
+					echo "<img src='".$varchivo."' style='width:50px;'/>";
+				}
+			}
+			echo "</td>";
+			
 			echo "</tr>";
+			
+			echo "<tr><td colspan='5'><hr></td></tr>";
 			
 			
 			$contador++;
@@ -2060,6 +2082,7 @@ if(isset($_POST['indicio'])){
 		}
 	}
 }
+if (isset($this->sc_temp_gnit)) {$_SESSION['gnit'] = $this->sc_temp_gnit;}
 $_SESSION['scriptcase']['autocompletararticulos']['contr_erro'] = 'off'; 
 //--- 
        $this->Db->Close(); 
@@ -2256,6 +2279,20 @@ $_SESSION['scriptcase']['autocompletararticulos']['contr_erro'] = 'off';
    {
        $_SESSION['sc_session']['SC_parm_violation'] = true;
    }
+   if (isset($_POST["gnit"])) 
+   {
+       $_SESSION["gnit"] = $_POST["gnit"];
+       nm_limpa_str_autocompletararticulos($_SESSION["gnit"]);
+   }
+   if (isset($_GET["gnit"])) 
+   {
+       $_SESSION["gnit"] = $_GET["gnit"];
+       nm_limpa_str_autocompletararticulos($_SESSION["gnit"]);
+   }
+   if (!isset($_SESSION["gnit"])) 
+   {
+       $_SESSION["gnit"] = "";
+   }
    if (!empty($glo_perfil))  
    { 
       $_SESSION['scriptcase']['glo_perfil'] = $glo_perfil;
@@ -2410,6 +2447,11 @@ $_SESSION['scriptcase']['autocompletararticulos']['contr_erro'] = 'off';
                 $$Tmp_par = $cadapar[1];
             }
             $ix++;
+       }
+       if (isset($gnit)) 
+       {
+           $_SESSION['gnit'] = $gnit;
+           nm_limpa_str_autocompletararticulos($_SESSION["gnit"]);
        }
    } 
    $GLOBALS["NM_ERRO_IBASE"] = 0;  

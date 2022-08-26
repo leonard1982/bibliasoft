@@ -3451,10 +3451,13 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['d
     var var_nm_form_submit = document.F2.nm_form_submit.value;
     var var_nmgp_opcao = document.F2.nmgp_opcao.value;
     var var_nmgp_ordem = document.F2.nmgp_ordem.value;
+    var var_nmgp_fast_search = document.F2.nmgp_fast_search.value;
+    var var_nmgp_cond_fast_search = document.F2.nmgp_cond_fast_search.value;
+    var var_nmgp_arg_fast_search = document.F2.nmgp_arg_fast_search.value;
     var var_nmgp_arg_dyn_search = document.F2.nmgp_arg_dyn_search.value;
     var var_script_case_init = document.F2.script_case_init.value;
     scAjaxProcOn();
-    x_ajax_form_menu_icons_mob_navigate_form(var_id_icon, var_nm_form_submit, var_nmgp_opcao, var_nmgp_ordem, var_nmgp_arg_dyn_search, var_script_case_init, do_ajax_form_menu_icons_mob_navigate_form_cb);
+    x_ajax_form_menu_icons_mob_navigate_form(var_id_icon, var_nm_form_submit, var_nmgp_opcao, var_nmgp_ordem, var_nmgp_fast_search,  var_nmgp_cond_fast_search,  var_nmgp_arg_fast_search, var_nmgp_arg_dyn_search, var_script_case_init, do_ajax_form_menu_icons_mob_navigate_form_cb);
   } // do_ajax_form_menu_icons_mob_navigate_form
 
   var scMasterDetailParentIframe = "<?php echo $_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['dashboard_info']['parent_widget'] ?>";
@@ -3477,6 +3480,16 @@ foreach ($this->Ini->sc_lig_iframe as $tmp_i => $tmp_v)
         document.F5.nmgp_opcao.value = "inicio";
         document.F5.nmgp_parms.value = "";
         document.F5.submit();
+    }
+    if ("ERROR" == oResp.result)
+    {
+        scAjaxShowErrorDisplay("table", oResp.errList[0].msgText);
+        scAjaxProcOff();
+        return;
+    }
+    else if (oResp["navSummary"].reg_tot == 0)
+    {
+       scAjax_displayEmptyForm();
     }
     scAjaxClearErrors()
     scResetFormChanges()

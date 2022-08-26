@@ -217,8 +217,8 @@ class cCrearPedido_ini
       $this->nm_dt_criacao   = "20190924"; 
       $this->nm_hr_criacao   = "223211"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220706"; 
-      $this->nm_hr_ult_alt   = "114018"; 
+      $this->nm_dt_ult_alt   = "20220824"; 
+      $this->nm_hr_ult_alt   = "091855"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -822,7 +822,7 @@ class cCrearPedido_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -910,7 +910,7 @@ class cCrearPedido_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['cCrearPedido']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['cCrearPedido']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZSX7DSrwHuF7HgrwDkBsDWFYHIJeHQBiZSBOHABYD5BiDMveVkXeV5XCDoJeHQNwDuFaDSzGV5BqDMvOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoX7HQBiDQJsD1BeVWBOHgvsZSJqH5FqVoX7DcBqH9BOHABYD5BqDEvsHEJGDuJeHIX7HQJeDQFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/D1rwHQX7DErKVkXeDWFqDoraD9NwH9FUHAveD5JwHgrKVcFKHEFYDoNUD9BsVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgvCHEJqDWFGDoXGDcXOZSX7HANOHuJwHgrKVIFCHEFYHMJeDcJUZSB/Z1NOHuFGHgNOHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDuXKDoBOHQJeDQFaHAveD5NUHgNKDkBOV5FYHMBiD9JmZ1BOD1rKHQraHgNKHArsDWrGDoJeHQXOH9FUZ1rwV5X7DMBYVcFKHEX7HMBOHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMBOHQXsDuFaZ1rwHQBODMvmVcB/DWJeHMJsHQBiVIJwHArKHQJsHgvsHErCDWXCHMXGHQNmH9FUD1BeHQBqHgNKVcFeV5F/HMFUDcFYZSBqHABYHuFGHgNOVkJ3V5XKDoNUHQFYH9BiZ1rwHQJsDMvmVcB/H5FqHMBiD9BsVIraD1rwV5X7HgBeHErsHEB7VoBiHQBiDQNUZ1rKVWFU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQBiDQFGD1NKV5XGHuvmVIBsHEX/VorqD9BsZSFaHArKV5B/HgvsVkJGDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiD9JmZ1FGZ1rYHuX7DEvsDkB/DuJeHIX7HQXGDQFGHAN7HQF7HuvmVIB/V5X7VENUDcJUZ1F7Z1BeV5JwHgBeHEFiV5B3DoF7D9XsDuFaHANKV5JwHgvsDkBsH5FqVoX7DcJUZ1B/HABYD5XGHgNOHEFiDWFqVoFaD9JKDQX7D1veV5JwDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCVEraHQJmZSB/HArYV5JwDEvsHArsDWFqVoBqHQFYDuBqHArYHurqDMBOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMzGHEJGDWF/DoFUDcJeH9FGHANOV5JwHuNOVIFCHEF/DoraHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvmV5BODMvOVcBUDurGVoX7HQNwZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXsDQJsHABYV5FGDMBYVcBODWFYVoBiHQNwZ1BiD1rwHuBODMNKDkB/DWF/HIFGHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIrqHQBsZkFGZ1BeHuXGHgBeHEJqDWr/HIBiHQNmZ9rqHAveHuB/DMBYVcFeDWF/HIFGHQBiZSBOD1rwHuJeDMrYHErCV5XCHIJwDcXGH9BiHArYHQrqDMBOVIBsV5FGVoFaHQXGZSBqZ1BeHuB/HgBeHEJqH5FYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUHEX/DoJsHQNmZ1XGZ1veZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1960,7 +1960,7 @@ if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SES
 	$vfecha2      = date("d/m/Y");
 	$vnomcliente  = "VARIOS";
 	
-	$vsql = "INSERT INTO pedidos set fechaven=NOW(),idcli=(select t.idtercero  from terceros t where t.documento='".$vcod_cliente."'),subtotal='0',valoriva='0',total='0',facturado='NO',asentada='0',saldo='0',adicional='0',formapago='EFECTIVO',adicional2='0',adicional3='0',obspago='',vendedor='".$this->sc_temp_gidtercero."',dircliente='0',numpedido=coalesce((select max(p.numpedido)+1 from pedidos p where p.prefijo='".$this->sc_temp_gprefijo."'),'1'),creado_en_movil='SI',disponible_en_movil='NO',prefijo='".$this->sc_temp_gprefijo."',cod_cliente='".$vcod_cliente."',cod_vendedor='".$this->sc_temp_gtercero_ccnit."',prefijo_ped=coalesce((select r.Idres from resdian r where r.prefijo='".$this->sc_temp_gprefijo."'),'1')";
+	$vsql = "INSERT INTO pedidos set fechaven=NOW(),idcli=(select t.idtercero  from terceros t where t.documento='".$vcod_cliente."'),subtotal='0',valoriva='0',total='0',facturado='NO',asentada='0',saldo='0',adicional='0',formapago='EFECTIVO',adicional2='0',adicional3='0',obspago='',vendedor='".$this->sc_temp_gidtercero."',dircliente='0',numpedido=coalesce((select max(p.numpedido)+1 from pedidos p where p.prefijo='".$this->sc_temp_gprefijo."'),'1'),creado_en_movil='SI',disponible_en_movil='NO',prefijo='".$this->sc_temp_gprefijo."',cod_cliente='".$vcod_cliente."',cod_vendedor='".$this->sc_temp_gtercero_ccnit."',prefijo_ped=coalesce((select r.Idres from resdian r where r.prefijo='".$this->sc_temp_gprefijo."' order by r.Idres DESC limit 1),'1')";
 
 	if (strpos(strtolower($this->Ini->nm_tpbanco), "access") === false && !$this->Ini->sc_tem_trans_banco)
 {
@@ -1993,7 +1993,7 @@ if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SES
 
 	
 	
-	$vsql2 = "select idpedido from pedidos where vendedor='".$this->sc_temp_gidtercero."' and prefijo_ped=coalesce((select r.Idres from resdian r where r.prefijo='".$this->sc_temp_gprefijo."')) order by numpedido desc limit 1";
+	$vsql2 = "select idpedido from pedidos where vendedor='".$this->sc_temp_gidtercero."' and prefijo_ped=coalesce((select r.Idres from resdian r where r.prefijo='".$this->sc_temp_gprefijo."' order by r.Idres DESC limit 1),1) order by numpedido desc limit 1";
 	 
       $nm_select = $vsql2; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 

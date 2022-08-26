@@ -216,9 +216,9 @@ class blk_menu_ini
       $this->nm_tp_lic_sc    = "ep_bronze"; 
       $this->nm_dt_criacao   = "20220525"; 
       $this->nm_hr_criacao   = "004840"; 
-      $this->nm_autor_alt    = "desarrollo3"; 
-      $this->nm_dt_ult_alt   = "20220727"; 
-      $this->nm_hr_ult_alt   = "221043"; 
+      $this->nm_autor_alt    = "admin"; 
+      $this->nm_dt_ult_alt   = "20220823"; 
+      $this->nm_hr_ult_alt   = "152851"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -832,7 +832,7 @@ class blk_menu_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['blk_menu']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['blk_menu']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNmDQFaZ1BYHQJsDMrYVIB/DWJeHIFUD9JmZSB/Z1NOD5BODMvCHEBUDWF/HIBOHQBiDuFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwH9X7HABYHuBiHuzGVIBODWFaHIJeHQBiZkBiD1rwHQBiDMveHErCDWX7HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDWFYVorqDcNwH9B/HAN7D5XGDEBOZSXeV5XCZuJsDcBwDuFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HAN7V5FGDEBeZSJqV5FaVoFGDcBwDQX7Z1N7VWJwDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQBqHAveHQBqDMBYDkB/H5XCHIFUHQNmZ1BiHANOHQrqHgNKZSJ3DuFaHIJsD9XsZ9JeD1BeD5F7DMvmVcFeV5X/VEBiHQNwZSBqHArYHuJsHgBeHEJqDuXKVoFGHQJeDQFUHArYHuBqDMvmVIBsH5XKDoXGDcFYVIJsHIBeHQX7HgrKVkJ3DWrGVoFGDcBiDQFUHANOHuraHgvOV9FeHEFGVoBqD9BsZ1F7DSrYD5rqDMrYZSJ3HEB7ZuJsHQJeDQBqHABYHuF7DMvmVIBsDurGDoXGHQXOZSBOD1rKHQFaDMveHArsDWB3VoFGHQJKH9BiDSrwHQBODMBODkB/DurGDoXGHQBqZ1X7HIveHuX7HgvsVkJqHEB7DoF7D9XsDQJsDSBYV5FGHgNKDkBsDuB7VEBiHQXOH9BqHIrwHQJsDMveVkJqH5BmVoFGHQNwH9BiHABYHQXGDMNOVIBsDurGDoXGHQXGVINUDSrYHQJsDMvCZSJ3DWrGVoFGHQXsZSBiZ1zGVWJeHgrwVcFeDWBmVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSFGHAveV5FUHuBYVcFKDur/VoJwHQFYH9FaHANOD5NUDErKDkFeV5FaZuBqD9NmZSFGHINaV5JwHuvmVcrsH5XCDoXGD9BsZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5JeDErKHEFKV5B7DoBqHQXOZ9F7HAvmD5F7DMvOZSJqDWXKDoXGHQNwZ1BiHINKV5X7HgveHArsDWFGZuBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDurmDoBOHQXODuFaHAveD5NUHgNKDkBOV5FYHMBiD9XGZkFUZ1vOD5BqHgNOHErCDWr/HIraDcBwDQB/D1veVWJeHgrYZSJqDWJeHIFGDcJUZ1rqDSrYZMBODMzGHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMBYVcFeDWFYHIFGHQBiZSBqHABYHuFGHgBOHErCV5XKDoNUHQJKDuFaHIBeHuBiDMBYDkBsV5F/HIXGHQBiVIJwHArKHuXGHgBeHEJqDWXCHIJwHQFYH9FUHANOHQBqHgNKVcXKDWJeHIFGHQXOZSBqHABYHuX7HgBeHEFiV5B3DoF7D9XsDuFaHANKVWBqDMrwZSNiDWB3VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwZSX7D1veHQF7DMvOVcFCHEX/VEX7D9BsZSB/D1rwHuBqHgNOVkXeH5FYVoB/D9JKH9FGHArYHQF7DMvmV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHArCV5B7ZuJsHQXOH9BiHABYHQB/DMvmVcB/DuFGDoXGHQBqZ1BOHABYHQJeHgBeVkJ3H5FGVoFGDcXGZ9F7HIrwHuF7DMzGVIBsDWrmDoXGDcNmZ1BOHAN7HQBiDMveHArCHEXKDoF7D9XsDQJsDSBYV5FGHgNKDkBsHEX/VEBiHQBqZ1BiHArYHQX7HgBeVkJ3DurmVoFGHQNwH9FUD1veHuJwHgvOV9BUDWBmDoXGHQJmZSBqDSBeHuXGHgNOZSJqDurmVoFGHQJeDQB/HIrKHQF7DMBYVIB/HEX/VoBqD9BsZ1F7DSrYD5rqDMrYZSJ3DuX/ZuJsHQNwZSBiHIBeHuB/HgvOVIB/H5B3DoXGHQXOZSBqHArYHuBOHgBOVkJ3DurmVoFGHQFYZ9XGDSBYHuB/HgrwDkBsDWrmDoXGHQBsH9BqZ1vOZMBqDMvCHErCDWB3DoF7D9XsDQJsDSBYV5FGHgNKDkFCH5FqVoBqDcNwH9FaHArKD5NUDEvsHEFiDuJeDoFUHQXGZSFGHAN7V5FUHuzGZSrCV5X7VEF7D9BiH9FaHIBOD5FaDEBeHEBUH5F/VoFGD9XsDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5BqHuzGVcFiV5X/VoF7HQNwVIJsHAvCV5X7HgveDkB/DWFGVoFGHQXODQBqHIvsD5F7DMvOV9BUDWXKVEF7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoX7HQXsZ9F7HAN7D5JeHuvmVcXKV5X7VEraD9BiH9BqZ1BeHQNUDEBOZSJqDWB3ZuBqHQJKZSX7Z1BYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeD5F7DEBOHEFiHEFaDoFUD9XsDQX7HABYD5NUHuBYV9FiV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBiZ1FGHIveHuFUDMvCZSJ3HEFqVoX7HQXsDQFaHIBeHurqDMvmVcBOHEFYHMXGD9JmZSBqHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWrmVoX7HQNmZ1BiHINKD5XGHgNKHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrKDkBOHEF/HIJeDcJUH9B/D1rKZMJeHgvsHEXeDuJeHMBqHQXsDQFUHAN7HuB/DMvmVcFKV5BmVoBqD9BsZkFGHArKHuBqHgBOHArCV5FaHMJeHQJKDQFUHANOHuNUDMBYZSJ3DWXCHMFUHQBiZ1FGHANOHuJeHgvsVkJqH5FYHMXGDcJUDQFaZ1N7HuB/HgrwVIBsDWFaHIJeHQXGZSBqZ1BOD5raHgNOVkJ3V5FaHMFaHQJKDQFUD1BeHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1792,7 +1792,32 @@ if (!isset($_SESSION['gtipo_empresa'])) {$_SESSION['gtipo_empresa'] = "";}
 if (!isset($this->sc_temp_gtipo_empresa)) {$this->sc_temp_gtipo_empresa = (isset($_SESSION['gtipo_empresa'])) ? $_SESSION['gtipo_empresa'] : "";}
 if (!isset($_SESSION['gidtercero'])) {$_SESSION['gidtercero'] = "";}
 if (!isset($this->sc_temp_gidtercero)) {$this->sc_temp_gidtercero = (isset($_SESSION['gidtercero'])) ? $_SESSION['gidtercero'] : "";}
-  $this->sc_temp_gidtercero = 1;$this->sc_temp_gtipo_empresa = 'NUBE';$this->sc_temp_gOS = 'linux';
+  ?>
+<script src="<?php echo sc_url_library('prj', 'js', 'js.cookie.min.js'); ?>"></script>
+<script>
+if (+Cookies.get('tabs') > 0) 
+{
+	if(confirm("Ya tiene abierto el programa en otra pestaña."))
+	{
+		location.href = "https://www.google.com";
+	}
+	else
+	{
+		location.href = "https://www.google.com";
+	}
+}
+else 
+{
+		Cookies.set('tabs', 0); 
+		Cookies.set('tabs', +Cookies.get('tabs') + 1); 
+		window.onunload = function () { 
+		Cookies.set('tabs', +Cookies.get('tabs') - 1); 
+	}; 
+}
+</script>
+<?php
+
+$this->sc_temp_gidtercero = 1;$this->sc_temp_gtipo_empresa = 'NUBE';$this->sc_temp_gOS = 'linux';
 
 $res_valida_certificado = $this->valida_certificado_digital();
 $profile_name = empty($this->sc_temp_usr_name)? 'anonimo' : $this->sc_temp_usr_name;
@@ -1804,7 +1829,7 @@ if(COUNT($explode_name) == 1){
 }
 $avatar = sc_url_library('prj', 'menu', 'assets/images/icon-menu/avatardefault.svg');
 $picture_2 = 'https://www.facilwebnube.com/scriptcase/devel/conf/grp/FACILWEBvVERSIONp3/img/bg/logo_facilweb.jpeg';
-$picture = sc_url_library('prj', 'menu', 'assets/images/icon-login/BARRA-1.png');
+$picture = sc_url_library('prj', 'menu', 'assets/images/icon-login/ico_barra_facilweb_117x40.png');
 
 ?>
 <!DOCTYPE html>
@@ -3036,9 +3061,10 @@ $_SESSION['scriptcase']['blk_menu']['contr_erro'] = 'on';
 		.sidenav-toggled .app-content {
 			height: calc(100vh - 50px);
 			min-height: calc(100vh - 50px);
-			height: 100vh;
-			min-height: 100vh;
-			overflow-y: auto;
+			
+			
+			
+			overflow-y: hidden;
 			position: relative;
 		}
 		

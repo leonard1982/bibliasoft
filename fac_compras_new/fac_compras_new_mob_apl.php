@@ -942,7 +942,7 @@ class fac_compras_new_mob_apl
       }
 
       $this->nmgp_botoes['cancel'] = "on";
-      $this->nmgp_botoes['exit'] = "on";
+      $this->nmgp_botoes['exit'] = "off";
       $this->nmgp_botoes['new'] = "on";
       $this->nmgp_botoes['insert'] = "on";
       $this->nmgp_botoes['copy'] = "off";
@@ -15045,10 +15045,10 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
                 return array("sc_cancela_top");
                 break;
             case "update":
-                return array("sc_b_upd_t.sc-unique-btn-3", "sc_b_upd_t.sc-unique-btn-14");
+                return array("sc_b_upd_t.sc-unique-btn-3", "sc_b_upd_t.sc-unique-btn-13");
                 break;
             case "delete":
-                return array("sc_b_del_t.sc-unique-btn-4", "sc_b_del_t.sc-unique-btn-15");
+                return array("sc_b_del_t.sc-unique-btn-4", "sc_b_del_t.sc-unique-btn-14");
                 break;
             case "eliminar":
                 return array("sc_Eliminar_top");
@@ -15057,7 +15057,7 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
                 return array("sc_sc_btn_0_top");
                 break;
             case "breload":
-                return array("sc_b_reload_t.sc-unique-btn-5", "sc_b_reload_t.sc-unique-btn-16");
+                return array("sc_b_reload_t.sc-unique-btn-5", "sc_b_reload_t.sc-unique-btn-15");
                 break;
             case "regresar":
                 return array("sc_regresar_top");
@@ -15066,25 +15066,19 @@ setTimeout(function() { document.Fredir.submit(); }, 250);
                 return array("brec_b");
                 break;
             case "first":
-                return array("sc_b_ini_b.sc-unique-btn-6", "sc_b_ini_b.sc-unique-btn-22");
+                return array("sc_b_ini_b.sc-unique-btn-6", "sc_b_ini_b.sc-unique-btn-16");
                 break;
             case "back":
-                return array("sc_b_ret_b.sc-unique-btn-7", "sc_b_ret_b.sc-unique-btn-23");
+                return array("sc_b_ret_b.sc-unique-btn-7", "sc_b_ret_b.sc-unique-btn-17");
                 break;
             case "forward":
-                return array("sc_b_avc_b.sc-unique-btn-8", "sc_b_avc_b.sc-unique-btn-24");
+                return array("sc_b_avc_b.sc-unique-btn-8", "sc_b_avc_b.sc-unique-btn-18");
                 break;
             case "last":
-                return array("sc_b_fim_b.sc-unique-btn-9", "sc_b_fim_b.sc-unique-btn-25");
+                return array("sc_b_fim_b.sc-unique-btn-9", "sc_b_fim_b.sc-unique-btn-19");
                 break;
             case "exit":
-                return array("sc_b_sai_b.sc-unique-btn-10", "sc_b_sai_t.sc-unique-btn-19", "sc_b_sai_t.sc-unique-btn-21", "sc_b_sai_t.sc-unique-btn-17", "sc_b_sai_t.sc-unique-btn-18", "sc_b_sai_t.sc-unique-btn-20");
-                break;
-            case "bcancelar":
-                return array("sc_b_sai_t.sc-unique-btn-13");
-                break;
-            case "help":
-                return array("sc_b_hlp_t");
+                return array("sc_b_sai_b.sc-unique-btn-10", "sc_b_sai_b.sc-unique-btn-20");
                 break;
         }
 

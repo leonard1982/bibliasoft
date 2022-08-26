@@ -40,7 +40,7 @@ class form_detalle_notasDC_help
 <html>
 <head>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -59,7 +59,7 @@ class form_detalle_notasDC_help
 <html>
 <head>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>
@@ -79,7 +79,7 @@ Para una devolución no cambie los valores"); ?>
 <html>
 <head>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
  <link rel="stylesheet" href="<?php echo $cssHelp ?>" type="text/css" media="screen" />
  <link rel="stylesheet" href="<?php echo $cssHelpDir ?>" type="text/css" media="screen" />
 </head>

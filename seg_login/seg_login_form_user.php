@@ -130,7 +130,12 @@ foreach ($lookupInfo as $lookupOption) {
     <!-- Bootstrap4 js-->
     <script src="<?php echo sc_url_library('prj', 'menu', 'assets/plugins/bootstrap/js/bootstrap.min.js') ?>"></script>
     <script src="<?php echo sc_url_library('prj', 'menu', 'assets/plugins/bootstrap/popper.min.js') ?>"></script>
-     <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
+  
+    <!-- Cookie js-->
+  	<script src="<?php echo sc_url_library('prj', 'js', 'js.cookie.min.js'); ?>"></script>
+
+  
+   <link rel="stylesheet" href="<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/thickbox.css" type="text/css" media="screen" />
  <SCRIPT type="text/javascript">
   var sc_pathToTB = '<?php echo $this->Ini->path_prod ?>/third/jquery_plugin/thickbox/';
   var sc_tbLangClose = "<?php echo html_entity_decode($this->Ini->Nm_lang["lang_tb_close"], ENT_COMPAT, $_SESSION["scriptcase"]["charset"]) ?>";

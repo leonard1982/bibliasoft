@@ -152,6 +152,18 @@ class form_menu_icons_mob_apl
           {
               $this->nmgp_arg_dyn_search = $this->NM_ajax_info['param']['nmgp_arg_dyn_search'];
           }
+          if (isset($this->NM_ajax_info['param']['nmgp_arg_fast_search']))
+          {
+              $this->nmgp_arg_fast_search = $this->NM_ajax_info['param']['nmgp_arg_fast_search'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_cond_fast_search']))
+          {
+              $this->nmgp_cond_fast_search = $this->NM_ajax_info['param']['nmgp_cond_fast_search'];
+          }
+          if (isset($this->NM_ajax_info['param']['nmgp_fast_search']))
+          {
+              $this->nmgp_fast_search = $this->NM_ajax_info['param']['nmgp_fast_search'];
+          }
           if (isset($this->NM_ajax_info['param']['nmgp_num_form']))
           {
               $this->nmgp_num_form = $this->NM_ajax_info['param']['nmgp_num_form'];
@@ -692,6 +704,7 @@ class form_menu_icons_mob_apl
 
       $this->nmgp_botoes['cancel'] = "on";
       $this->nmgp_botoes['exit'] = "on";
+      $this->nmgp_botoes['qsearch'] = "on";
       $this->nmgp_botoes['new'] = "on";
       $this->nmgp_botoes['insert'] = "on";
       $this->nmgp_botoes['copy'] = "off";
@@ -998,6 +1011,13 @@ class form_menu_icons_mob_apl
           $this->form_paginacao = "total";
       }
       $this->proc_fast_search = false;
+      if ($this->nmgp_opcao == "fast_search")  
+      {
+          $this->SC_fast_search($this->nmgp_fast_search, $this->nmgp_cond_fast_search, $this->nmgp_arg_fast_search);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['opcao'] = "inicio";
+          $this->nmgp_opcao = "inicio";
+          $this->proc_fast_search = true;
+      } 
       if ($nm_opc_lookup != "lookup" && $nm_opc_php != "formphp")
       { 
          if (empty($_SESSION['sc_session'][$this->Ini->sc_page]['form_menu_icons_mob']['opcao']))

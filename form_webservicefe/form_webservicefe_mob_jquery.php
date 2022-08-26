@@ -27,6 +27,8 @@ function scFocusField(sField) {
       case 'servidor1':
       case 'servidor2':
       case 'servidor3':
+      case 'servidor4':
+      case 'servidor5':
       case 'tokenempresa':
       case 'tokenpassword':
       case 'url_api_pdfs':
@@ -95,6 +97,8 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["servidor1" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["servidor2" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["servidor3" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["servidor4" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["servidor5" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["tokenempresa" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["tokenpassword" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["url_api_pdfs" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -147,6 +151,18 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["servidor3" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor4" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor4" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor5" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["servidor5" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["tokenempresa" + iSeqRow]["blur"]) {
@@ -384,6 +400,10 @@ function scJQEventsAdd(iSeqRow) {
                                             .bind('focus', function() { sc_form_webservicefe_token_anterior_onfocus(this, iSeqRow) });
   $('#id_sc_field_password_anterior' + iSeqRow).bind('blur', function() { sc_form_webservicefe_password_anterior_onblur(this, iSeqRow) })
                                                .bind('focus', function() { sc_form_webservicefe_password_anterior_onfocus(this, iSeqRow) });
+  $('#id_sc_field_servidor4' + iSeqRow).bind('blur', function() { sc_form_webservicefe_servidor4_onblur(this, iSeqRow) })
+                                       .bind('focus', function() { sc_form_webservicefe_servidor4_onfocus(this, iSeqRow) });
+  $('#id_sc_field_servidor5' + iSeqRow).bind('blur', function() { sc_form_webservicefe_servidor5_onblur(this, iSeqRow) })
+                                       .bind('focus', function() { sc_form_webservicefe_servidor5_onfocus(this, iSeqRow) });
   $('.sc-ui-checkbox-enviar_dian' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-enviar_cliente' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
   $('.sc-ui-checkbox-envio_credenciales' + iSeqRow).on('click', function() { scMarkFormAsChanged(); });
@@ -658,6 +678,26 @@ function sc_form_webservicefe_password_anterior_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_webservicefe_servidor4_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_mob_validate_servidor4();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_servidor4_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
+function sc_form_webservicefe_servidor5_onblur(oThis, iSeqRow) {
+  do_ajax_form_webservicefe_mob_validate_servidor5();
+  scCssBlur(oThis);
+}
+
+function sc_form_webservicefe_servidor5_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function displayChange_page(page, status) {
 	if ("0" == page) {
 		displayChange_page_0(status);
@@ -710,6 +750,8 @@ function displayChange_block_0(status) {
 	displayChange_field("servidor1", "", status);
 	displayChange_field("servidor2", "", status);
 	displayChange_field("servidor3", "", status);
+	displayChange_field("servidor4", "", status);
+	displayChange_field("servidor5", "", status);
 	displayChange_field("tokenempresa", "", status);
 	displayChange_field("tokenpassword", "", status);
 	displayChange_field("url_api_pdfs", "", status);
@@ -748,6 +790,8 @@ function displayChange_row(row, status) {
 	displayChange_field_servidor1(row, status);
 	displayChange_field_servidor2(row, status);
 	displayChange_field_servidor3(row, status);
+	displayChange_field_servidor4(row, status);
+	displayChange_field_servidor5(row, status);
 	displayChange_field_tokenempresa(row, status);
 	displayChange_field_tokenpassword(row, status);
 	displayChange_field_url_api_pdfs(row, status);
@@ -786,6 +830,12 @@ function displayChange_field(field, row, status) {
 	}
 	if ("servidor3" == field) {
 		displayChange_field_servidor3(row, status);
+	}
+	if ("servidor4" == field) {
+		displayChange_field_servidor4(row, status);
+	}
+	if ("servidor5" == field) {
+		displayChange_field_servidor5(row, status);
 	}
 	if ("tokenempresa" == field) {
 		displayChange_field_tokenempresa(row, status);
@@ -889,6 +939,12 @@ function displayChange_field_servidor2(row, status) {
 }
 
 function displayChange_field_servidor3(row, status) {
+}
+
+function displayChange_field_servidor4(row, status) {
+}
+
+function displayChange_field_servidor5(row, status) {
 }
 
 function displayChange_field_tokenempresa(row, status) {

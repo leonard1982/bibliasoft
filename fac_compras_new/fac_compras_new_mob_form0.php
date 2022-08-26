@@ -947,21 +947,40 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
 <?php
         $NM_btn = true;
     }
-    if (($opcao_botoes == "novo") && (!$this->Embutida_call || $this->sc_evento == "novo" || $this->sc_evento == "insert" || $this->sc_evento == "incluir")) {
-        $sCondStyle = ($this->nmgp_botoes['insert'] == "on" && $this->nmgp_botoes['cancel'] == "on") && ($this->nm_flag_saida_novo != "S" || $this->nmgp_botoes['exit'] != "on") ? '' : 'display: none;';
+    if (($opcao_botoes != "novo") && ($opcao_botoes == "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['cancela'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-13';
+        $buttonMacroDisabled = '';
         $buttonMacroLabel = "";
         
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['bcancelar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['bcancelar']) {
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['cancela']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['cancela']) {
             $buttonMacroDisabled .= ' disabled';
         }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['bcancelar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['bcancelar']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['bcancelar'];
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['cancela']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['cancela']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['cancela'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bcancelar", "scBtnFn_sys_format_cnl()", "scBtnFn_sys_format_cnl()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "cancela", "scBtnFn_cancela()", "scBtnFn_cancela()", "sc_cancela_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
+    if (($opcao_botoes == "novo") && ($opcao_botoes == "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['cancela'] == "on") ? '' : 'display: none;';
+?>
+<?php
+        $buttonMacroDisabled = '';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['cancela']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['cancela']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['cancela']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['cancela']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['cancela'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "cancela", "scBtnFn_cancela()", "scBtnFn_cancela()", "sc_cancela_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
@@ -970,7 +989,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['update'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-14';
+        $buttonMacroDisabled = 'sc-unique-btn-13';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['update']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['update']) {
@@ -989,7 +1008,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['delete'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-15';
+        $buttonMacroDisabled = 'sc-unique-btn-14';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['delete']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['delete']) {
@@ -1083,7 +1102,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['reload'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-16';
+        $buttonMacroDisabled = 'sc-unique-btn-15';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['breload']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['breload']) {
@@ -1097,116 +1116,40 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
  
 <?php
         $NM_btn = true;
-    if ('' != $this->url_webhelp) {
-        $sCondStyle = '';
+    if (($opcao_botoes != "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['regresar'] == "on") ? '' : 'display: none;';
 ?>
 <?php
         $buttonMacroDisabled = '';
         $buttonMacroLabel = "";
         
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['help']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['help']) {
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['regresar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['regresar']) {
             $buttonMacroDisabled .= ' disabled';
         }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['help']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['help']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['help'];
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['regresar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['regresar']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['regresar'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bhelp", "scBtnFn_sys_format_hlp()", "scBtnFn_sys_format_hlp()", "sc_b_hlp_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "regresar", "scBtnFn_regresar()", "scBtnFn_regresar()", "sc_regresar_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;
     }
-    if (($opcao_botoes == "novo") && (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && ($nm_apl_dependente != 1 || $this->nm_Start_new) && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "R") && (!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard']))) {
-        $sCondStyle = (($this->nm_flag_saida_novo == "S" || ($this->nm_Start_new && !$this->aba_iframe)) && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
+    if (($opcao_botoes == "novo") && ($opcao_botoes != "novo")) {
+        $sCondStyle = ($this->nmgp_botoes['regresar'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-17';
+        $buttonMacroDisabled = '';
         $buttonMacroLabel = "";
         
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['regresar']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['regresar']) {
             $buttonMacroDisabled .= ' disabled';
         }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit'];
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['regresar']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['regresar']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['regresar'];
         }
 ?>
-<?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if (($opcao_botoes == "novo") && (!isset($_SESSION['scriptcase']['nm_sc_retorno']) || empty($_SESSION['scriptcase']['nm_sc_retorno']) || $nm_apl_dependente == 1 || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "R") && (!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard']))) {
-        $sCondStyle = ($this->nm_flag_saida_novo == "S" && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = 'sc-unique-btn-18';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if (($opcao_botoes != "novo") && (!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard'] || (isset($this->is_calendar_app) && $this->is_calendar_app)))) {
-        $sCondStyle = (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']) && $nm_apl_dependente != 1 && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "R" && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = 'sc-unique-btn-19';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if (($opcao_botoes != "novo") && (!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard'] || (isset($this->is_calendar_app) && $this->is_calendar_app)))) {
-        $sCondStyle = (!isset($_SESSION['scriptcase']['nm_sc_retorno']) || empty($_SESSION['scriptcase']['nm_sc_retorno']) || $nm_apl_dependente == 1 || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "R" || $this->aba_iframe || $this->nmgp_botoes['exit'] != "on") && ($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "F" && $this->nmgp_botoes['exit'] == "on") && ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = 'sc-unique-btn-20';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "bvoltar", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
- 
-<?php
-        $NM_btn = true;
-    }
-    if (($opcao_botoes != "novo") && (!$this->Embutida_call) && ((!isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['dashboard_info']['under_dashboard'] || (isset($this->is_calendar_app) && $this->is_calendar_app)))) {
-        $sCondStyle = (!isset($_SESSION['scriptcase']['nm_sc_retorno']) || empty($_SESSION['scriptcase']['nm_sc_retorno']) || $nm_apl_dependente == 1 || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "F" || $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] == "R" || $this->aba_iframe || $this->nmgp_botoes['exit'] != "on") && ($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "R" && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "F" && $this->nmgp_botoes['exit'] == "on") && ($nm_apl_dependente != 1 || $this->nmgp_botoes['exit'] != "on") && ((!$this->aba_iframe || $this->is_calendar_app) && $this->nmgp_botoes['exit'] == "on") ? '' : 'display: none;';
-?>
-<?php
-        $buttonMacroDisabled = 'sc-unique-btn-21';
-        $buttonMacroLabel = "";
-        
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
-            $buttonMacroDisabled .= ' disabled';
-        }
-        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) {
-            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit'];
-        }
-?>
-<?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai()", "scBtnFn_sys_format_sai()", "sc_b_sai_t", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+<?php echo nmButtonOutput($this->arr_buttons, "regresar", "scBtnFn_regresar()", "scBtnFn_regresar()", "sc_regresar_top", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
  
 <?php
         $NM_btn = true;

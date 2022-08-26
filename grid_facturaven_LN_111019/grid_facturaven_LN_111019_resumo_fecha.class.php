@@ -4049,7 +4049,7 @@ if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_facturaven_LN_111019']['
       $nm_saida->saida(" <META http-equiv=\"Cache-Control\" content=\"post-check=0, pre-check=0\"/>\r\n");
       $nm_saida->saida(" <META http-equiv=\"Pragma\" content=\"no-cache\"/>\r\n");
 }
-      $nm_saida->saida(" <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n");
+      $nm_saida->saida(" <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n");
        $css_body = "margin-top:0px;margin-bottom:0px;";
       $nm_saida->saida(" <style type=\"text/css\">\r\n");
       $nm_saida->saida("  BODY { " . $css_body . " }\r\n");

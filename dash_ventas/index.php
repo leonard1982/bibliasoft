@@ -348,8 +348,8 @@ class dash_ventas_ini {
         $this->nm_dt_criacao   = "20210115";
         $this->nm_hr_criacao   = "101406";
         $this->nm_autor_alt    = "admin";
-        $this->nm_dt_ult_alt   = "20220622";
-        $this->nm_hr_ult_alt   = "203707";
+        $this->nm_dt_ult_alt   = "20220706";
+        $this->nm_hr_ult_alt   = "114018";
         list($NM_usec, $NM_sec) = explode(" ", microtime());
         $this->nm_timestamp  = (float) $NM_sec;
 
@@ -515,7 +515,7 @@ class dash_ventas_ini {
                 $SS_cod_html .= "   <body>\r\n";
             }
             else {
-                $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+                $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
                 $SS_cod_html .= $this->Nm_lang['lang_errm_expired_session'] . "\r\n";
                 $SS_cod_html .= "     <form name=\"Fsession_redir\" method=\"post\"\r\n";
                 $SS_cod_html .= "           target=\"_self\">\r\n";
@@ -1587,7 +1587,7 @@ function refreshWidget(wId, wSrc, wRef)
         ?>
         <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT" />
         <META http-equiv="Pragma" content="no-cache" />
-        <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico" />
+        <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico" />
         <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $this->Ini->str_schema_all ?>_form.css" />
         <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $this->Ini->Str_btn_form; ?>/<?php echo $this->Ini->Str_btn_form; ?>.css" />
         <?php

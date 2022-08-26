@@ -619,7 +619,7 @@ class grid_abc_productos_grafico
 <html>
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 <?php
              if ($_SESSION['scriptcase']['proc_mobile'])
              {

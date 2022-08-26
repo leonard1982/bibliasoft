@@ -15,14 +15,14 @@ header("X-Frame-Options: SAMEORIGIN");
 
 <html<?php echo $_SESSION['scriptcase']['reg_conf']['html_dir'] ?>>
 <HEAD>
- <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("WebService Proveedor FE "); } else { echo strip_tags("WebService Proveedor FE "); } ?></TITLE>
+ <TITLE><?php if ('novo' == $this->nmgp_opcao) { echo strip_tags("WebService Proveedor documentos electrónicos"); } else { echo strip_tags("WebService Proveedor documentos electrónicos"); } ?></TITLE>
  <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
  <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT" />
  <META http-equiv="Last-Modified" content="<?php echo gmdate('D, d M Y H:i:s') ?> GMT" />
  <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
  <META http-equiv="Cache-Control" content="post-check=0, pre-check=0" />
  <META http-equiv="Pragma" content="no-cache" />
- <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+ <link rel="shortcut icon" href="../_lib/img/grp__NM__ico__NM__favicon.ico">
 <?php
 
 if (isset($_SESSION['scriptcase']['device_mobile']) && $_SESSION['scriptcase']['device_mobile'] && $_SESSION['scriptcase']['display_mobile'])
@@ -694,23 +694,68 @@ sc_userSweetAlertDisplayed = false;
   {
 ?>
 <tr><td>
-<style>
-#lin1_col1 { padding-left:9px; padding-top:7px;  height:27px; overflow:hidden; text-align:left;}			 
-#lin1_col2 { padding-right:9px; padding-top:7px; height:27px; text-align:right; overflow:hidden;   font-size:12px; font-weight:normal;}
-</style>
-
-<div style="width: 100%">
- <div class="scFormHeader" style="height:11px; display: block; border-width:0px; "></div>
- <div style="height:37px; border-width:0px 0px 1px 0px;  border-style: dashed; border-color:#ddd; display: block">
- 	<table style="width:100%; border-collapse:collapse; padding:0;">
-    	<tr>
-        	<td id="lin1_col1" class="scFormHeaderFont"><span><?php if ($this->nmgp_opcao == "novo") { echo "WebService Proveedor FE "; } else { echo "WebService Proveedor FE "; } ?></span></td>
-            <td id="lin1_col2" class="scFormHeaderFont"><span></span></td>
-        </tr>
-    </table>		 
- </div>
-</div>
-</td></tr>
+   <TABLE width="100%" class="scFormHeader">
+    <TR align="center">
+     <TD style="padding: 0px">
+      <TABLE style="padding: 0px; border-spacing: 0px; border-width: 0px;" width="100%">
+       <TR valign="middle">
+        <TD align="left" rowspan="3" class="scFormHeaderFont">
+          <?php if ($this->Ini->Export_img_zip) {$this->Ini->Img_export_zip[] = $this->Ini->root . $this->Ini->path_imag_cab . '/grp__NM__ico__NM__fw_ico_nube (1).png';echo '<IMG SRC="grp__NM__ico__NM__fw_ico_nube (1).png';}else{ echo '<IMG SRC="' . $this->Ini->path_imag_cab  . '/grp__NM__ico__NM__fw_ico_nube (1).png';}?>" BORDER="0"/>
+        </TD>
+        <TD align="left" class="scFormHeaderFont">
+          <?php if ($this->nmgp_opcao == "novo") { echo "WebService Proveedor documentos electrónicos"; } else { echo "WebService Proveedor documentos electrónicos"; } ?>
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          <?php echo date($this->dateDefaultFormat()); ?>
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+       <TR valign="middle">
+        <TD align="left" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="center" class="scFormHeaderFont">
+          
+        </TD>
+        <TD style="font-size: 5px">
+          &nbsp; &nbsp;
+        </TD>
+        <TD align="right" class="scFormHeaderFont">
+          
+        </TD>
+       </TR>
+      </TABLE>
+     </TD>
+    </TR>
+   </TABLE></td></tr>
 <?php
   }
 ?>
@@ -1306,6 +1351,128 @@ $modo_look = "";
  <input class="sc-js-input scFormObjectOdd css_servidor3_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_servidor3" type=text name="servidor3" value="<?php echo $this->form_encode_input($servidor3) ?>"
  <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=80"; } ?> maxlength=300 alt="{datatype: 'text', maxLength: 300, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_servidor3_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_servidor3_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['servidor4']))
+    {
+        $this->nm_new_label['servidor4'] = "Servidor 4";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $servidor4 = $this->servidor4;
+   $sStyleHidden_servidor4 = '';
+   if (isset($this->nmgp_cmp_hidden['servidor4']) && $this->nmgp_cmp_hidden['servidor4'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['servidor4']);
+       $sStyleHidden_servidor4 = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_servidor4 = 'display: none;';
+   $sStyleReadInp_servidor4 = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['servidor4']) && $this->nmgp_cmp_readonly['servidor4'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['servidor4']);
+       $sStyleReadLab_servidor4 = '';
+       $sStyleReadInp_servidor4 = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['servidor4']) && $this->nmgp_cmp_hidden['servidor4'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="servidor4" value="<?php echo $this->form_encode_input($servidor4) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_servidor4_line" id="hidden_field_data_servidor4" style="<?php echo $sStyleHidden_servidor4; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_servidor4_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_servidor4_label" style=""><span id="id_label_servidor4"><?php echo $this->nm_new_label['servidor4']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["servidor4"]) &&  $this->nmgp_cmp_readonly["servidor4"] == "on") { 
+
+ ?>
+<input type="hidden" name="servidor4" value="<?php echo $this->form_encode_input($servidor4) . "\">" . $servidor4 . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_servidor4" class="sc-ui-readonly-servidor4 css_servidor4_line" style="<?php echo $sStyleReadLab_servidor4; ?>"><?php echo $this->form_format_readonly("servidor4", $this->form_encode_input($this->servidor4)); ?></span><span id="id_read_off_servidor4" class="css_read_off_servidor4<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_servidor4; ?>">
+ <input class="sc-js-input scFormObjectOdd css_servidor4_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_servidor4" type=text name="servidor4" value="<?php echo $this->form_encode_input($servidor4) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=80"; } ?> maxlength=300 alt="{datatype: 'text', maxLength: 300, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_servidor4_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_servidor4_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['servidor5']))
+    {
+        $this->nm_new_label['servidor5'] = "Servidor 5";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $servidor5 = $this->servidor5;
+   $sStyleHidden_servidor5 = '';
+   if (isset($this->nmgp_cmp_hidden['servidor5']) && $this->nmgp_cmp_hidden['servidor5'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['servidor5']);
+       $sStyleHidden_servidor5 = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_servidor5 = 'display: none;';
+   $sStyleReadInp_servidor5 = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['servidor5']) && $this->nmgp_cmp_readonly['servidor5'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['servidor5']);
+       $sStyleReadLab_servidor5 = '';
+       $sStyleReadInp_servidor5 = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['servidor5']) && $this->nmgp_cmp_hidden['servidor5'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="servidor5" value="<?php echo $this->form_encode_input($servidor5) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_servidor5_line" id="hidden_field_data_servidor5" style="<?php echo $sStyleHidden_servidor5; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_servidor5_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_servidor5_label" style=""><span id="id_label_servidor5"><?php echo $this->nm_new_label['servidor5']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["servidor5"]) &&  $this->nmgp_cmp_readonly["servidor5"] == "on") { 
+
+ ?>
+<input type="hidden" name="servidor5" value="<?php echo $this->form_encode_input($servidor5) . "\">" . $servidor5 . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_servidor5" class="sc-ui-readonly-servidor5 css_servidor5_line" style="<?php echo $sStyleReadLab_servidor5; ?>"><?php echo $this->form_format_readonly("servidor5", $this->form_encode_input($this->servidor5)); ?></span><span id="id_read_off_servidor5" class="css_read_off_servidor5<?php echo $this->classes_100perc_fields['span_input'] ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_servidor5; ?>">
+ <input class="sc-js-input scFormObjectOdd css_servidor5_obj<?php echo $this->classes_100perc_fields['input'] ?>" style="" id="id_sc_field_servidor5" type=text name="servidor5" value="<?php echo $this->form_encode_input($servidor5) ?>"
+ <?php if ($this->classes_100perc_fields['keep_field_size']) { echo "size=80"; } ?> maxlength=300 alt="{datatype: 'text', maxLength: 300, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_servidor5_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_servidor5_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 

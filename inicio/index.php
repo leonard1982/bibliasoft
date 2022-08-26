@@ -220,13 +220,13 @@ class inicio_ini
       $this->nm_dt_criacao   = "20180904"; 
       $this->nm_hr_criacao   = "084030"; 
       $this->nm_autor_alt    = "admin"; 
-      $this->nm_dt_ult_alt   = "20220622"; 
-      $this->nm_hr_ult_alt   = "203711"; 
+      $this->nm_dt_ult_alt   = "20220825"; 
+      $this->nm_hr_ult_alt   = "173618"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
       $this->nm_timestamp    = (float) $NM_sec; 
-      $this->nm_app_version  = "1.0";
+      $this->nm_app_version  = "1.0.0";
 // 
 // 
       $NM_dir_atual = getcwd();
@@ -825,7 +825,7 @@ class inicio_ini
               $SS_cod_html .= "   <body>\r\n";
           }
           else {
-              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/scriptcase__NM__ico__NM__favicon.ico\">\r\n";
+              $SS_cod_html .= "    <link rel=\"shortcut icon\" href=\"../_lib/img/grp__NM__ico__NM__favicon.ico\">\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid.css\"/>\r\n";
               $SS_cod_html .= "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/css/" . $this->str_schema_all . "_grid" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\"/>\r\n";
               $SS_cod_html .= "  </HEAD>\r\n";
@@ -913,7 +913,7 @@ class inicio_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['inicio']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['inicio']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NmZSBiHAN7D5rqDMvODkFCDWB3VENUDcNmZkFGHIveV5JwDMveDkXKDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiDcNmZ1B/HANOHQFaDMzGZSJGH5BmZuB/DcBwDuBqD1veHuB/DMzGV9FiV5FYHMraD9BiZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXGZSX7DSBYD5NUHuvmVcBOH5FqDoFGD9BsVIJwZ1NOD5BqDEBeHEBUDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWXCDoJsDcBwH9B/Z1rYHQJwDMBYVkJGDWr/DoF7HQFYDuBqD1veHQrqHgrwV9FeHEF/DoBiDcNmVINUHArKV5JsHgvsZSJ3DWF/VoBiDcJUZSX7Z1BYHuFaHgrKVcFCDWXCVoJwDcBqZSFaHAN7D5FaDEBOVkJGHEXCVoB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQNmZ1BiHAvCD5XGHgveHErsDuXKDoBOHQXOH9BiHAveD5NUHgNKDkBOV5FYHMBiDcFYZ1rqHIveHQJsHgvsZSJqH5X/DoJeHQXsZSX7HIBeHQBOHuBOVcrsH5XCVoF7DcNmZ1B/HABYV5JwHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQX7Z1N7V5XGHuvmVIFCDWXCHMrqHQNmZSB/HANOD5FaDEBeZSJGDWr/HIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqVINUHANOHQBiHgNOHArCDWX7HIBqHQXGDuBqDSBYHQB/HgvOV9FeDWJeHMJwHQFYZ1BOHIBOZMBOHgBeZSJ3HEXCHIX7HQXGDQFUDSBYHQrqDMNOVcB/HEFYHIraDcBwH9B/HIrwV5JeDMBYDkBsH5FYHIF7HQJeZ9XGHIvsVWJwDMvmDkBsDWJeHMBOHQFYZkFGDSNOHuFUDMvCHEJqHEB7ZuBOHQXGDuFaHANOHQJwDMBYVIB/H5FqHMX7HQFYZkBiHIveHQXGHgNOZSJ3V5XCHIXGDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHIrqHQBqZSBqDSBeHuBqHgBeHEJqHEXCHMBiHQXGDuFaDSN7HuraDMBYV9FeDWF/HMBOHQFYZ1BOHAvCZMJeHgBeHEJqDuFaHIX7HQXGDuFaHIrwHQXGDMrYVIB/H5XCHMFaDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwVIJwZ1BeZMBqDMBYHEJGDWrGDoB/D9NmZSFGHIrwVWXGDMrwDkBODur/VENUD9BsZ1B/HINaD5FaDErKZSXeH5FYDoJeD9JKDQFGHAveVWJsHgvsDkBODWFaVoFGDcJUZkFUZ1BOD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkBODur/VoraD9XOH9FaD1rKD5BiDEBeHEJGDWBmVoFGHQBiDuBqHINaV5BODMrwV9BUH5B7VoF7HQFYZkBiD1vsZMXGHgvCHArsDWFGDoBqHQXOZSBiHAveD5NUHgNKDkBOV5FYHMBiHQXGZ1FaD1rwV5BqDMvCZSJGHEFqHMX7D9NwDQFUD1veD5BODMBOZSNiDWF/HMJsHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoB/D9JKDQX7Z1N7D5BqHgvsDkBOHEFYVoraHQFYZSFaHArKV5XGDErKHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvmVcFKV5BmVoBqD9BsZkFGHArKHuJwDEBeHErCV5XCHIBiDcBiH9X7Z1N7HuBqDMvsV9FeDur/VoJwHQXOZ1FaHArKHQJsHgBeHEFiV5B3DoF7D9XsDuFaHAveD5JwHuzGVcXKV5X7VoBOD9XOZSB/Z1BeV5FUDENOVkXeDWFqHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWrmVorqHQNmVINUHAvCD5BqHgBYHErsDWrGZuB/HQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEraHQNwZkBiHIBeHQXGDEvsZSJ3V5B3DoXGD9JKDQB/D1vOVWBOHgrYDkB/DuX7HIXGDcFYZ1F7D1rKHQF7HgBeHEFiV5B3DoF7D9XsDuFaHAveHQJeDMNOV9FeV5X7HIX7HQJmZ1BOHAN7HQFUHgvsDkBsDWF/HIJwHQNmDQFaHAN7HQBqDMBYVIB/H5FqHIFGDcBwZ1FGZ1NOHQJsDMvCVkJ3DWX7HMX7HQFYH9BiZ1NaV5BiDMBOVIBsV5X7HINUHQJmZ1BOD1rwHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
       $this->prep_conect();
       $this->conectDB();
       $this->conectExtra();
@@ -2058,6 +2058,8 @@ sc_connection_edit("conn_mysql", $arr_conn);
 ;
 ;
 
+;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -2602,6 +2604,8 @@ sc_connection_edit("conn_mysql", $arr_conn);
 		
 				break;
 			}
+			
+			console.log(sql);
 		
 			var sqlretorno = "select iddet from detallepedido where iddet='"+iddet+"'";
 		
@@ -2691,7 +2695,9 @@ sc_connection_edit("conn_mysql", $arr_conn);
 				console.log("Log JSON fModificarItem: ");
 				console.log(r);
 		
-				var sql2 = "update pedidos set subtotal=(select sum(valorpar)-sum(iva) from detallepedido where idpedid='"+idpedido+"'),valoriva=(select sum(iva) from detallepedido where idpedid='"+idpedido+"'),total=(select sum(valorpar) from detallepedido where idpedid='"+idpedido+"'), saldo=(select sum(valorpar) from detallepedido where idpedid='"+idpedido+"') where idpedido='"+idpedido+"'";
+				var sql2 = "update pedidos set subtotal=coalesce((select sum(valorpar)-sum(iva) from detallepedido where idpedid='"+idpedido+"'),0),valoriva=coalesce((select sum(iva) from detallepedido where idpedid='"+idpedido+"'),0),total=coalesce((select sum(valorpar) from detallepedido where idpedid='"+idpedido+"'),0), saldo=coalesce((select sum(valorpar) from detallepedido where idpedid='"+idpedido+"'),0) where idpedido='"+idpedido+"'";
+				
+				console.log(sql2);
 												
 				$.post("../consulta/index.php",{
 
@@ -3695,8 +3701,10 @@ sc_connection_edit("conn_mysql", $arr_conn);
         </header>
         <div data-role="content">
 			
+			<div class="container">
+			
 			<center>
-					<img src="../_lib/img/Logo Nuevo-STN_1_5cm.png" width="180px"/>
+					<img src="../_lib/img/grp__NM__ico__NM__ico_restaurante_512x512.png" width="180px"/>
 			</center>
 			<br>
             <form id="form_login">
@@ -3708,7 +3716,7 @@ sc_connection_edit("conn_mysql", $arr_conn);
 				<select id="selectempresa" name="selectempresa" style="text-align:center;">
 				<?php
 					 
-      $nm_select = "select nombre,nombre_empresa from empresas"; 
+      $nm_select = "select nombre,nombre_empresa from empresas order by nombre_empresa asc"; 
       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
       $this->vEmpresas = array();
@@ -3761,7 +3769,7 @@ sc_connection_edit("conn_mysql", $arr_conn);
 				 <input  type="button" value="Ingresar" id="btnLogin" >
             </form>
              <!--<div id="errorMsg" style="background-color:red;color: #FFFFFF;">Usuario o Contraseña no valida</div>-->
-			
+			</div><!--fin container -->
         </div>
 		
 		<div data-role="footer" data-position="fixed">

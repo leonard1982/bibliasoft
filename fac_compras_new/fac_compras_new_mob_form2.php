@@ -189,7 +189,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['first'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-22';
+        $buttonMacroDisabled = 'sc-unique-btn-16';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['first']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['first']) {
@@ -208,7 +208,7 @@ if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $t
         $sCondStyle = ($this->nmgp_botoes['back'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-23';
+        $buttonMacroDisabled = 'sc-unique-btn-17';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['back']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['back']) {
@@ -233,7 +233,7 @@ if ($opcao_botoes != "novo" && $this->nmgp_botoes['navpage'] == "on")
         $sCondStyle = ($this->nmgp_botoes['forward'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-24';
+        $buttonMacroDisabled = 'sc-unique-btn-18';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['forward']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['forward']) {
@@ -252,7 +252,7 @@ if ($opcao_botoes != "novo" && $this->nmgp_botoes['navpage'] == "on")
         $sCondStyle = ($this->nmgp_botoes['last'] == "on") ? '' : 'display: none;';
 ?>
 <?php
-        $buttonMacroDisabled = 'sc-unique-btn-25';
+        $buttonMacroDisabled = 'sc-unique-btn-19';
         $buttonMacroLabel = "";
         
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['last']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['last']) {
@@ -281,6 +281,25 @@ if ($opcao_botoes != "novo" && $this->nmgp_botoes['summary'] == "on")
      </td> 
      <td nowrap align="right" valign="middle" width="33%" class="scFormToolbarPadding"> 
 <?php 
+    if (isset($this->NMSC_modal) && $this->NMSC_modal == "ok") {
+        $sCondStyle = '';
+?>
+<?php
+        $buttonMacroDisabled = 'sc-unique-btn-20';
+        $buttonMacroLabel = "";
+        
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_disabled']['exit']) {
+            $buttonMacroDisabled .= ' disabled';
+        }
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) && '' != $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit']) {
+            $buttonMacroLabel = $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['btn_label']['exit'];
+        }
+?>
+<?php echo nmButtonOutput($this->arr_buttons, "bsair", "scBtnFn_sys_format_sai_modal()", "scBtnFn_sys_format_sai_modal()", "sc_b_sai_b", "", "" . $buttonMacroLabel . "", "" . $sCondStyle . "", "", "", "", $this->Ini->path_botoes, "", "", "" . $buttonMacroDisabled . "", "", "");?>
+ 
+<?php
+        $NM_btn = true;
+    }
 }
 if (($this->Embutida_form || !$this->Embutida_call || $this->Grid_editavel || $this->Embutida_multi || ($this->Embutida_call && 'on' == $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['embutida_liga_form_btn_nav'])) && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "F" && $_SESSION['sc_session'][$this->Ini->sc_page]['fac_compras_new_mob']['run_iframe'] != "R")
 {
@@ -580,8 +599,8 @@ scAjax_displayEmptyForm();
 			nm_atualiza ('alterar');
 			 return;
 		}
-		if ($("#sc_b_upd_t.sc-unique-btn-14").length && $("#sc_b_upd_t.sc-unique-btn-14").is(":visible")) {
-		    if ($("#sc_b_upd_t.sc-unique-btn-14").hasClass("disabled")) {
+		if ($("#sc_b_upd_t.sc-unique-btn-13").length && $("#sc_b_upd_t.sc-unique-btn-13").is(":visible")) {
+		    if ($("#sc_b_upd_t.sc-unique-btn-13").hasClass("disabled")) {
 		        return;
 		    }
 			nm_atualiza ('alterar');
@@ -596,8 +615,8 @@ scAjax_displayEmptyForm();
 			nm_atualiza ('excluir');
 			 return;
 		}
-		if ($("#sc_b_del_t.sc-unique-btn-15").length && $("#sc_b_del_t.sc-unique-btn-15").is(":visible")) {
-		    if ($("#sc_b_del_t.sc-unique-btn-15").hasClass("disabled")) {
+		if ($("#sc_b_del_t.sc-unique-btn-14").length && $("#sc_b_del_t.sc-unique-btn-14").is(":visible")) {
+		    if ($("#sc_b_del_t.sc-unique-btn-14").hasClass("disabled")) {
 		        return;
 		    }
 			nm_atualiza ('excluir');
@@ -630,8 +649,8 @@ scAjax_displayEmptyForm();
 			scAjax_formReload();
 			 return;
 		}
-		if ($("#sc_b_reload_t.sc-unique-btn-16").length && $("#sc_b_reload_t.sc-unique-btn-16").is(":visible")) {
-		    if ($("#sc_b_reload_t.sc-unique-btn-16").hasClass("disabled")) {
+		if ($("#sc_b_reload_t.sc-unique-btn-15").length && $("#sc_b_reload_t.sc-unique-btn-15").is(":visible")) {
+		    if ($("#sc_b_reload_t.sc-unique-btn-15").hasClass("disabled")) {
 		        return;
 		    }
 			scAjax_formReload();
@@ -664,8 +683,8 @@ scAjax_displayEmptyForm();
 			nm_move ('inicio');
 			 return;
 		}
-		if ($("#sc_b_ini_b.sc-unique-btn-22").length && $("#sc_b_ini_b.sc-unique-btn-22").is(":visible")) {
-		    if ($("#sc_b_ini_b.sc-unique-btn-22").hasClass("disabled")) {
+		if ($("#sc_b_ini_b.sc-unique-btn-16").length && $("#sc_b_ini_b.sc-unique-btn-16").is(":visible")) {
+		    if ($("#sc_b_ini_b.sc-unique-btn-16").hasClass("disabled")) {
 		        return;
 		    }
 			nm_move ('inicio');
@@ -680,8 +699,8 @@ scAjax_displayEmptyForm();
 			nm_move ('retorna');
 			 return;
 		}
-		if ($("#sc_b_ret_b.sc-unique-btn-23").length && $("#sc_b_ret_b.sc-unique-btn-23").is(":visible")) {
-		    if ($("#sc_b_ret_b.sc-unique-btn-23").hasClass("disabled")) {
+		if ($("#sc_b_ret_b.sc-unique-btn-17").length && $("#sc_b_ret_b.sc-unique-btn-17").is(":visible")) {
+		    if ($("#sc_b_ret_b.sc-unique-btn-17").hasClass("disabled")) {
 		        return;
 		    }
 			nm_move ('retorna');
@@ -696,8 +715,8 @@ scAjax_displayEmptyForm();
 			nm_move ('avanca');
 			 return;
 		}
-		if ($("#sc_b_avc_b.sc-unique-btn-24").length && $("#sc_b_avc_b.sc-unique-btn-24").is(":visible")) {
-		    if ($("#sc_b_avc_b.sc-unique-btn-24").hasClass("disabled")) {
+		if ($("#sc_b_avc_b.sc-unique-btn-18").length && $("#sc_b_avc_b.sc-unique-btn-18").is(":visible")) {
+		    if ($("#sc_b_avc_b.sc-unique-btn-18").hasClass("disabled")) {
 		        return;
 		    }
 			nm_move ('avanca');
@@ -712,8 +731,8 @@ scAjax_displayEmptyForm();
 			nm_move ('final');
 			 return;
 		}
-		if ($("#sc_b_fim_b.sc-unique-btn-25").length && $("#sc_b_fim_b.sc-unique-btn-25").is(":visible")) {
-		    if ($("#sc_b_fim_b.sc-unique-btn-25").hasClass("disabled")) {
+		if ($("#sc_b_fim_b.sc-unique-btn-19").length && $("#sc_b_fim_b.sc-unique-btn-19").is(":visible")) {
+		    if ($("#sc_b_fim_b.sc-unique-btn-19").hasClass("disabled")) {
 		        return;
 		    }
 			nm_move ('final');
@@ -728,56 +747,8 @@ scAjax_displayEmptyForm();
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
 			 return;
 		}
-	}
-	function scBtnFn_sys_format_cnl() {
-		if ($("#sc_b_sai_t.sc-unique-btn-13").length && $("#sc_b_sai_t.sc-unique-btn-13").is(":visible")) {
-		    if ($("#sc_b_sai_t.sc-unique-btn-13").hasClass("disabled")) {
-		        return;
-		    }
-			<?php echo $this->NM_cancel_insert_new ?> document.F5.submit();
-			 return;
-		}
-	}
-	function scBtnFn_sys_format_hlp() {
-		if ($("#sc_b_hlp_t").length && $("#sc_b_hlp_t").is(":visible")) {
-		    if ($("#sc_b_hlp_t").hasClass("disabled")) {
-		        return;
-		    }
-			window.open('<?php echo $this->url_webhelp; ?>', '', 'resizable, scrollbars'); 
-			 return;
-		}
-	}
-	function scBtnFn_sys_format_sai() {
-		if ($("#sc_b_sai_t.sc-unique-btn-17").length && $("#sc_b_sai_t.sc-unique-btn-17").is(":visible")) {
-		    if ($("#sc_b_sai_t.sc-unique-btn-17").hasClass("disabled")) {
-		        return;
-		    }
-			scFormClose_F5('<?php echo $nm_url_saida; ?>');
-			 return;
-		}
-		if ($("#sc_b_sai_t.sc-unique-btn-18").length && $("#sc_b_sai_t.sc-unique-btn-18").is(":visible")) {
-		    if ($("#sc_b_sai_t.sc-unique-btn-18").hasClass("disabled")) {
-		        return;
-		    }
-			scFormClose_F5('<?php echo $nm_url_saida; ?>');
-			 return;
-		}
-		if ($("#sc_b_sai_t.sc-unique-btn-19").length && $("#sc_b_sai_t.sc-unique-btn-19").is(":visible")) {
-		    if ($("#sc_b_sai_t.sc-unique-btn-19").hasClass("disabled")) {
-		        return;
-		    }
-			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
-			 return;
-		}
-		if ($("#sc_b_sai_t.sc-unique-btn-20").length && $("#sc_b_sai_t.sc-unique-btn-20").is(":visible")) {
-		    if ($("#sc_b_sai_t.sc-unique-btn-20").hasClass("disabled")) {
-		        return;
-		    }
-			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;
-			 return;
-		}
-		if ($("#sc_b_sai_t.sc-unique-btn-21").length && $("#sc_b_sai_t.sc-unique-btn-21").is(":visible")) {
-		    if ($("#sc_b_sai_t.sc-unique-btn-21").hasClass("disabled")) {
+		if ($("#sc_b_sai_b.sc-unique-btn-20").length && $("#sc_b_sai_b.sc-unique-btn-20").is(":visible")) {
+		    if ($("#sc_b_sai_b.sc-unique-btn-20").hasClass("disabled")) {
 		        return;
 		    }
 			scFormClose_F6('<?php echo $nm_url_saida; ?>'); return false;

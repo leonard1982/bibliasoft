@@ -1,4 +1,4 @@
-scriptcase__NM__ico__NM__favicon.ico
+grp__NM__ico__NM__favicon.ico
 scriptcase__NM__ajax_load.gif
 scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png
 scriptcase__NM__ico__NM__document_refresh_32.png
@@ -43,7 +43,7 @@ nm_icon_bmp.gif
 nm_icon_html.gif
 nm_icon_eml.gif
 nm_icon_zip.gif
-scriptcase__NM__ico__NM__favicon.ico
+grp__NM__ico__NM__favicon.ico
 scriptcase__NM__ajax_load.gif
 scriptcase__NM__btn__NM__scriptcase9_Rhino__NM__nm_scriptcase9_Rhino_error.png
 scriptcase__NM__ico__NM__document_refresh_32.png
