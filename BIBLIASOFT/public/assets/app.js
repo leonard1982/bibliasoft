@@ -233,12 +233,17 @@
                     toggleVerse(verse);
                     state.lastSelectedVerse = verse;
                 }
-                if (window.matchMedia('(max-width: 980px)').matches) {
-                    activateTab('contexto');
-                    openHelpDrawer();
-                }
+                handleMobileVerseTap();
             });
         });
+    }
+
+    function handleMobileVerseTap() {
+        if (!window.matchMedia('(max-width: 980px)').matches) {
+            return;
+        }
+        activateTab('contexto');
+        openHelpDrawer();
     }
 
     function toggleVerse(verse) {
