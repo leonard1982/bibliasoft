@@ -12,6 +12,7 @@
         chapters: [],
         verses: [],
         selectedVerses: [],
+        lastSelectedVerse: null,
         settings: {
             showHelp: true,
             layoutMode: 'columns',
@@ -56,6 +57,7 @@
         renderVerses();
         wireEvents();
         activateTab('contexto');
+        bindSelectionActions();
     }
 
     function wireEvents() {
@@ -153,16 +155,22 @@
 
         els.versesContainer.innerHTML = html || '<p class="muted">No se pudo cargar el capítulo.</p>';
         state.selectedVerses = [];
+        state.lastSelectedVerse = null;
         updateSelectionUI();
         updateContextPanel();
 
         els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
-            node.addEventListener('click', function () {
+            node.addEventListener('click', function (event) {
                 var verse = Number(this.getAttribute('data-verse'));
                 if (!verse) {
                     return;
                 }
-                toggleVerse(verse);
+                if (event.shiftKey && state.lastSelectedVerse !== null) {
+                    selectRange(state.lastSelectedVerse, verse);
+                } else {
+                    toggleVerse(verse);
+                    state.lastSelectedVerse = verse;
+                }
             });
         });
     }
@@ -214,6 +222,23 @@
             '<div class="card"><strong>Resumen del pasaje</strong><p class="muted">Disponible al abrir la pestaña Herramientas.</p></div>' +
             '<div class="card"><strong>Contexto histórico</strong><p class="muted">Disponible al abrir la pestaña Herramientas.</p></div>' +
             '<div class="card"><strong>Contexto literario</strong><p class="muted">Disponible al abrir la pestaña Herramientas.</p></div>';
+    }
+
+    function selectRange(fromVerse, toVerse) {
+        var min = Math.min(fromVerse, toVerse);
+        var max = Math.max(fromVerse, toVerse);
+        var map = {};
+        state.selectedVerses.forEach(function (value) { map[value] = true; });
+        for (var v = min; v <= max; v++) {
+            map[v] = true;
+        }
+        state.selectedVerses = Object.keys(map).map(function (k) {
+            return Number(k);
+        }).sort(function (a, b) {
+            return a - b;
+        });
+        updateSelectionUI();
+        updateContextPanel();
     }
 
     function fetchChapters(book) {
@@ -352,6 +377,114 @@
         if (els.settingsModal.classList.contains('hidden')) {
             els.overlay.classList.add('hidden');
         }
+    }
+
+    function bindSelectionActions() {
+        els.copySelection.addEventListener('click', function () {
+            var references = buildSelectionReferences();
+            if (!references.length) {
+                notify('Selecciona al menos un versículo.');
+                return;
+            }
+            copyText(references.join('\n')).then(function () {
+                notify('Selección copiada.');
+            }).catch(function () {
+                notify('No se pudo copiar.');
+            });
+        });
+
+        els.copyParagraph.addEventListener('click', function () {
+            var rows = selectedRows();
+            if (!rows.length) {
+                notify('Selecciona al menos un versículo.');
+                return;
+            }
+
+            var paragraph = rows.map(function (row) {
+                return cleanText(row.scripture_text || row.scripture_html || '');
+            }).join(' ');
+
+            var start = rows[0].verse;
+            var end = rows[rows.length - 1].verse;
+            var reference = buildReference(state.currentBook, state.currentChapter, start) + (start !== end ? '-' + end : '');
+            var text = paragraph + '\n\n' + reference;
+
+            copyText(text).then(function () {
+                notify('Párrafo copiado.');
+            }).catch(function () {
+                notify('No se pudo copiar.');
+            });
+        });
+
+        els.shareSelection.addEventListener('click', function () {
+            var references = buildSelectionReferences();
+            if (!references.length) {
+                notify('Selecciona al menos un versículo.');
+                return;
+            }
+
+            var text = references.join('\n');
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Biblia para todos',
+                    text: text
+                }).catch(function () {
+                    // user canceled
+                });
+                return;
+            }
+
+            copyText(text).then(function () {
+                notify('Compartir no disponible. Texto copiado.');
+            }).catch(function () {
+                notify('No se pudo copiar.');
+            });
+        });
+    }
+
+    function selectedRows() {
+        var map = {};
+        state.selectedVerses.forEach(function (value) {
+            map[value] = true;
+        });
+        return state.verses.filter(function (row) {
+            return Boolean(map[Number(row.verse)]);
+        });
+    }
+
+    function buildSelectionReferences() {
+        var rows = selectedRows();
+        return rows.map(function (row) {
+            return buildReference(row.book, row.chapter, row.verse) + ' - ' + cleanText(row.scripture_text || row.scripture_html || '');
+        });
+    }
+
+    function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function (resolve, reject) {
+            try {
+                var area = document.createElement('textarea');
+                area.value = text;
+                area.style.position = 'fixed';
+                area.style.left = '-1000px';
+                document.body.appendChild(area);
+                area.focus();
+                area.select();
+                document.execCommand('copy');
+                document.body.removeChild(area);
+                resolve();
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    function cleanText(value) {
+        var div = document.createElement('div');
+        div.innerHTML = value;
+        return (div.textContent || div.innerText || '').replace(/\s+/g, ' ').trim();
     }
 
     function buildReference(book, chapter, verse) {
