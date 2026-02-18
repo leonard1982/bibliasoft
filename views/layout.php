@@ -48,7 +48,9 @@
             <p class="site-copy">Copyright: Leonardo Navarro - Fundación La Iglesia en la Calle</p>
             <div class="site-links">
                 <a href="https://www.laiglesiaenlacalle.co" target="_blank" rel="noopener noreferrer">www.laiglesiaenlacalle.co</a>
-                <a href="https://www.facebook.com/fundacionlaiglesianelacalle" target="_blank" rel="noopener noreferrer">www.facebook.com/fundacionlaiglesianelacalle</a>
+                <a class="site-social-link" href="https://www.facebook.com/fundacionlaiglesiaenlacalle" target="_blank" rel="noopener noreferrer" title="Facebook Fundación La Iglesia en la Calle" aria-label="Facebook Fundación La Iglesia en la Calle">
+                    <img src="assets/icons/facebook.svg" alt="" class="ico">
+                </a>
             </div>
         </div>
     </footer>
