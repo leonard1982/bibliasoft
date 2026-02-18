@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Services\AIService;
 use App\Services\BibleRepository;
+use App\Services\SearchService;
 use App\Services\UserDataRepository;
 
 class ApiController
@@ -11,15 +12,18 @@ class ApiController
     private $bibleRepository;
     private $userDataRepository;
     private $aiService;
+    private $searchService;
 
     public function __construct(
         BibleRepository $bibleRepository,
         UserDataRepository $userDataRepository,
-        AIService $aiService
+        AIService $aiService,
+        SearchService $searchService
     ) {
         $this->bibleRepository = $bibleRepository;
         $this->userDataRepository = $userDataRepository;
         $this->aiService = $aiService;
+        $this->searchService = $searchService;
     }
 
     public function verse()
@@ -239,6 +243,40 @@ class ApiController
         }
         $active = $this->userDataRepository->toggleFavorite($book, $chapter, $verse);
         app_json(['ok' => true, 'active' => $active]);
+    }
+
+    public function search()
+    {
+        $query = isset($_GET['q']) ? trim($_GET['q']) : '';
+        $mode = isset($_GET['mode']) ? trim($_GET['mode']) : 'any';
+        $book = isset($_GET['book']) ? (int) $_GET['book'] : 0;
+        $chapterFrom = isset($_GET['chapter_from']) ? (int) $_GET['chapter_from'] : 0;
+        $chapterTo = isset($_GET['chapter_to']) ? (int) $_GET['chapter_to'] : 0;
+        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : (int) config('search.default_limit', 60);
+
+        if (!in_array($mode, ['any', 'all', 'exact'], true)) {
+            $mode = 'any';
+        }
+        if ($query === '') {
+            app_json([
+                'engine' => null,
+                'rows' => [],
+            ]);
+        }
+
+        $result = $this->searchService->search([
+            'query' => $query,
+            'mode' => $mode,
+            'book' => $book,
+            'chapter_from' => $chapterFrom,
+            'chapter_to' => $chapterTo,
+        ], $limit);
+
+        foreach ($result['rows'] as &$row) {
+            $row['reference'] = $this->bibleRepository->buildReferenceLabel($row['book'], $row['chapter'], $row['verse']);
+        }
+
+        app_json($result);
     }
 
     public function linkDelete()

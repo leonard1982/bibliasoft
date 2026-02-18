@@ -31,6 +31,7 @@ class SearchService
                     'book' => (int) $row['book'],
                     'chapter' => (int) $row['chapter'],
                     'verse' => (int) $row['verse'],
+                    'title' => isset($row['title']) ? trim((string) $row['title']) : '',
                     'scripture_html' => $clean,
                     'scripture_text' => $this->sanitizer->text($clean),
                 ];

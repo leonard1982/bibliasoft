@@ -332,6 +332,12 @@ a {
     padding: .85rem;
 }
 
+#searchModal {
+    width: min(760px, 94vw);
+    max-height: 88vh;
+    overflow: auto;
+}
+
 .settings header {
     display: flex;
     justify-content: space-between;
@@ -347,6 +353,19 @@ a {
     display: grid;
     gap: .3rem;
     font-size: .95rem;
+}
+
+.search-result {
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    padding: .56rem;
+    background: color-mix(in srgb, var(--panel) 96%, var(--bg) 4%);
+}
+
+.search-result strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: .35rem;
 }
 
 input,

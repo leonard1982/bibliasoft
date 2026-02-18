@@ -21,7 +21,7 @@ $aiService = new AIService(config('ai', []), $userDataRepository);
 $homeController = new HomeController($bibleRepository);
 $bibleController = new BibleController($bibleRepository, $searchService);
 $readerController = new ReaderController($bibleRepository);
-$apiController = new ApiController($bibleRepository, $userDataRepository, $aiService);
+$apiController = new ApiController($bibleRepository, $userDataRepository, $aiService, $searchService);
 
 $route = isset($_GET['route']) ? $_GET['route'] : 'reader';
 
@@ -61,6 +61,10 @@ try {
 
         case 'api.selection':
             $apiController->selection();
+            break;
+
+        case 'api.search':
+            $apiController->search();
             break;
 
         case 'api.note.create':
