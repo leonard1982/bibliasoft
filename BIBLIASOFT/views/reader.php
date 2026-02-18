@@ -31,11 +31,11 @@ $initial = [
 
         <main class="pane pane-reading">
             <header class="reading-head">
-                <div>
+                <div class="reading-meta">
                     <h1 id="readingTitle"><?php echo e($bookName); ?> <?php echo (int) $chapter; ?></h1>
                     <p class="muted"><?php echo e(config('branding.slogan')); ?></p>
                 </div>
-                <div class="toolbar">
+                <div class="toolbar reading-tools">
                     <button id="openNavigator" class="btn-light mobile-only" type="button" title="Navegar" aria-label="Navegar"><img src="assets/icons/menu.svg" alt="" class="ico"><span class="btn-label">Navegar</span></button>
                     <button id="openQuickSearch" class="btn-light" type="button" title="Buscar" aria-label="Buscar"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Buscar</span></button>
                     <button id="copySelection" class="btn-light" type="button" title="Copiar selección" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"><span class="btn-label">Copiar selección</span></button>
