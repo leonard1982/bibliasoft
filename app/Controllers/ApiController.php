@@ -129,21 +129,19 @@ class ApiController
         }
         $text = trim(implode(' ', $plain));
 
-        $summary = substr($text, 0, 420);
-        if (strlen($text) > 420) {
-            $summary .= '...';
-        }
-
         $contextRef = $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd);
         $pericope = $this->bibleRepository->getPericopeHint($book, $chapter, $verseStart);
+        $keywords = $this->extractKeywordsForStudy($text, 8);
+        $keywordInsights = $this->buildKeywordInsights($keywords);
 
         $context = [
             'title' => $contextRef,
-            'summary' => $summary,
-            'historical' => $this->historicalContextText($book, $chapter, $contextRef, $pericope),
-            'literary' => $this->literaryContextText($book, $chapter, $contextRef, $pericope, $verses),
+            'simple_version' => $this->plainVersionText($text, $contextRef),
+            'historical' => $this->historicalContextText($book, $chapter, $contextRef, $pericope, $text),
+            'literary' => $this->literaryContextText($book, $chapter, $contextRef, $pericope, $verses, $keywordInsights),
             'canonical' => $this->canonicalContextText($book, $contextRef),
-            'keywords' => $this->extractKeywordsForStudy($text, 8),
+            'keywords' => $keywords,
+            'keyword_insights' => $keywordInsights,
             'questions' => $this->buildStudyQuestions($book, $chapter, $contextRef),
             'study_tips' => $this->buildStudyTips($book, $chapter, $verseStart, $verseEnd, $verses),
         ];
@@ -434,20 +432,26 @@ class ApiController
         app_json(['ok' => true, 'ai' => $ai]);
     }
 
-    private function historicalContextText($book, $chapter, $reference, $pericope)
+    private function historicalContextText($book, $chapter, $reference, $pericope, $text)
     {
         $meta = $this->bookStudyMeta((int) $book);
         $pericopeText = trim((string) $pericope);
         $pericopeLine = $pericopeText !== '' ? (' Perícopa cercana: "' . $pericopeText . '".') : '';
+        $focus = $this->historicalFocusHint($text);
+        $focusLine = $focus !== '' ? (' Pista interna del pasaje: ' . $focus . '.') : '';
 
         return 'Para ' . $reference . ', el marco histórico se ubica en ' . $meta['periodo']
             . ', dentro del bloque ' . $meta['corpus'] . '. '
+            . 'Vida cotidiana de la época: ' . $meta['daily_life'] . '. '
+            . 'Usos y costumbres relevantes: ' . $meta['customs'] . '. '
+            . 'Estructura social/religiosa: ' . $meta['social_frame'] . '. '
             . 'Audiencia/escenario principal: ' . $meta['audiencia'] . '. '
             . 'Al estudiar el capítulo ' . (int) $chapter . ', observa cómo el pasaje responde a ' . $meta['problematica'] . '.'
-            . $pericopeLine;
+            . $pericopeLine
+            . $focusLine;
     }
 
-    private function literaryContextText($book, $chapter, $reference, $pericope, array $verses)
+    private function literaryContextText($book, $chapter, $reference, $pericope, array $verses, array $keywordInsights)
     {
         $meta = $this->bookStudyMeta((int) $book);
         $first = '';
@@ -461,11 +465,18 @@ class ApiController
         $pericopeText = trim((string) $pericope);
         $header = $pericopeText !== '' ? (' Encabezado del pasaje: "' . $pericopeText . '".') : '';
         $sample = $first !== '' ? (' Muestra textual inicial: "' . $first . '".') : '';
+        $terms = [];
+        foreach (array_slice($keywordInsights, 0, 3) as $item) {
+            $terms[] = $item['term'] . ' (' . $item['meaning'] . ')';
+        }
+        $termsLine = empty($terms)
+            ? ''
+            : (' Términos clave para leer el texto: ' . implode('; ', $terms) . '.');
 
         return 'Género literario predominante: ' . $meta['genre'] . '. '
             . 'Función del capítulo ' . (int) $chapter . ': ' . $meta['chapter_function'] . '. '
             . 'Para ' . $reference . ', sigue el movimiento argumental: observación, interpretación, implicación teológica y aplicación pastoral.'
-            . $header . $sample;
+            . $header . $sample . $termsLine;
     }
 
     private function canonicalContextText($book, $reference)
@@ -539,6 +550,144 @@ class ApiController
         return array_slice(array_keys($freq), 0, max(1, (int) $limit));
     }
 
+    private function buildKeywordInsights(array $keywords)
+    {
+        $glossary = [
+            'gracia' => ['favor inmerecido de Dios que salva y sostiene', 'ubica el texto en clave de iniciativa divina, no de mérito humano'],
+            'justicia' => ['rectitud y fidelidad al estándar de Dios', 'evalúa si el pasaje habla de conducta, juicio o justicia imputada'],
+            'misericordia' => ['compasión activa que socorre al necesitado', 'observa cómo el texto une verdad y compasión'],
+            'pacto' => ['compromiso vinculante establecido por Dios', 'interpreta promesas y demandas dentro de la relación de pacto'],
+            'santidad' => ['separación para Dios y pureza de vida', 'distingue entre lo común y lo consagrado'],
+            'fe' => ['confianza obediente y perseverante en Dios', 'mira si la fe se expresa en obediencia concreta'],
+            'esperanza' => ['expectativa firme basada en las promesas de Dios', 'conecta el pasaje con futuro redentor, no solo presente'],
+            'redencion' => ['liberación mediante precio o rescate', 'relaciona el texto con éxodo, cruz o restauración'],
+            'salvacion' => ['rescate integral del pecado y sus efectos', 'observa dimensión personal y comunitaria de la salvación'],
+            'perdon' => ['cancelación de culpa y restauración relacional', 'pregunta qué cambia después del perdón'],
+            'reino' => ['gobierno efectivo de Dios sobre su pueblo', 'diferencia reino como autoridad presente y consumación futura'],
+            'verdad' => ['realidad revelada por Dios, confiable y normativa', 'identifica contraste con engaño o idolatría'],
+            'amor' => ['entrega sacrificial orientada al bien del otro', 'evalúa si el amor se define por actos y no solo emoción'],
+            'sabiduria' => ['habilidad para vivir conforme al temor de Dios', 'extrae principio práctico para decisiones reales'],
+            'palabra' => ['mensaje revelado y autoritativo de Dios', 'revisa repetición de mandato, promesa o advertencia'],
+            'espiritu' => ['presencia y acción de Dios que guía y transforma', 'observa fruto ético y dirección misional'],
+            'pecado' => ['ruptura de la voluntad de Dios', 'mira causa, consecuencia y llamado al arrepentimiento'],
+            'gloria' => ['manifestación del peso y majestad de Dios', 'ubica el centro del pasaje en Dios y no en el ser humano'],
+            'temor' => ['reverencia obediente ante Dios', 'diferencia temor santo de miedo servil'],
+            'discipulo' => ['aprendiz que sigue y obedece a Jesús', 'lee el pasaje en clave de formación integral'],
+            'evangelio' => ['buena noticia de la obra de Cristo', 'identifica anuncio, respuesta y misión'],
+            'oracion' => ['diálogo dependiente con Dios', 'evalúa motivo, contenido y actitud de la oración'],
+            'justificado' => ['declarado justo por Dios', 'distingue justificación de santificación'],
+            'arrepentimiento' => ['cambio de mente y dirección hacia Dios', 'busca evidencias concretas del cambio'],
+            'obediencia' => ['respuesta práctica a la voluntad de Dios', 'conecta doctrina con conducta diaria'],
+            'vida' => ['vida plena bajo el señorío de Dios', 'observa contraste entre vida nueva y vida antigua'],
+            'muerte' => ['realidad de juicio o fin de la antigua condición', 'lee el término en su dimensión física y espiritual'],
+            'luz' => ['revelación, verdad y pureza de Dios', 'contrasta luz con tinieblas en el argumento del texto'],
+            'tinieblas' => ['ignorancia, maldad o oposición a Dios', 'analiza el llamado de salida hacia la luz'],
+        ];
+
+        $results = [];
+        foreach ($keywords as $word) {
+            $key = $this->normalizeKeywordKey($word);
+            if (isset($glossary[$key])) {
+                $results[] = [
+                    'term' => (string) $word,
+                    'meaning' => $glossary[$key][0],
+                    'study_use' => $glossary[$key][1],
+                    'source' => 'glosario-biblico',
+                ];
+            } else {
+                $results[] = [
+                    'term' => (string) $word,
+                    'meaning' => 'término clave del pasaje que debe leerse dentro de su argumento inmediato y del libro completo',
+                    'study_use' => 'revisa repetición, contraste y relación con el propósito del autor en el capítulo',
+                    'source' => 'analisis-contextual',
+                ];
+            }
+        }
+        return $results;
+    }
+
+    private function normalizeKeywordKey($value)
+    {
+        $text = function_exists('mb_strtolower') ? mb_strtolower((string) $value, 'UTF-8') : strtolower((string) $value);
+        $text = strtr($text, [
+            'á' => 'a',
+            'é' => 'e',
+            'í' => 'i',
+            'ó' => 'o',
+            'ú' => 'u',
+            'ü' => 'u',
+            'ñ' => 'n',
+        ]);
+        return preg_replace('/[^a-z0-9]/', '', $text);
+    }
+
+    private function plainVersionText($text, $reference)
+    {
+        $plain = trim((string) $text);
+        if ($plain === '') {
+            return 'No fue posible construir una versión sencilla para ' . $reference . '.';
+        }
+
+        $replace = [
+            'he aquí' => 'mira',
+            'mas ' => 'pero ',
+            'vosotros' => 'ustedes',
+            'vosotras' => 'ustedes',
+            'varón' => 'hombre',
+            'siervo' => 'servidor',
+            'siervos' => 'servidores',
+            'iniquidad' => 'maldad',
+            'redención' => 'rescate',
+            'perecer' => 'perderse',
+            'santificado' => 'apartado para Dios',
+            'santificados' => 'apartados para Dios',
+            'justificados' => 'declarados justos',
+            'justificado' => 'declarado justo',
+        ];
+        $simple = $plain;
+        foreach ($replace as $from => $to) {
+            $simple = preg_replace('/\b' . preg_quote($from, '/') . '\b/ui', $to, $simple);
+        }
+        $simple = preg_replace('/\s+/', ' ', $simple);
+        if (strlen($simple) > 520) {
+            $simple = substr($simple, 0, 520) . '...';
+        }
+        return 'Versión sencilla de ' . $reference . ': ' . $simple;
+    }
+
+    private function historicalFocusHint($text)
+    {
+        $sample = function_exists('mb_strtolower') ? mb_strtolower((string) $text, 'UTF-8') : strtolower((string) $text);
+        if ($sample === '') {
+            return '';
+        }
+
+        $map = [
+            'siembra' => 'la economía agrícola y los ciclos de cosecha explican varias metáforas del texto',
+            'cosecha' => 'el calendario agrícola era central para trabajo, fiestas y provisión familiar',
+            'rey' => 'la figura real implicaba administración, justicia y defensa del pueblo',
+            'sacerdote' => 'el sacerdocio regulaba culto, pureza y mediación en la vida comunitaria',
+            'templo' => 'el templo funcionaba como centro espiritual, social y simbólico de identidad',
+            'sinagoga' => 'la sinagoga era espacio local de lectura, enseñanza y oración comunitaria',
+            'impuesto' => 'el sistema tributario afectaba la vida diaria y el discurso social del pasaje',
+            'camino' => 'los viajes por rutas antiguas marcaban comercio, misión y riesgos cotidianos',
+            'banquete' => 'las comidas públicas expresaban honor, pertenencia y jerarquía social',
+            'pacto' => 'los pactos incluían señales y obligaciones visibles en la vida diaria del pueblo',
+        ];
+        foreach ($map as $needle => $hint) {
+            if (function_exists('mb_strpos')) {
+                if (mb_strpos($sample, $needle) !== false) {
+                    return $hint;
+                }
+                continue;
+            }
+            if (strpos($sample, $needle) !== false) {
+                return $hint;
+            }
+        }
+        return '';
+    }
+
     private function bookStudyMeta($book)
     {
         $book = (int) $book;
@@ -548,6 +697,9 @@ class ApiController
                 'periodo' => 'la etapa fundacional de Israel (patriarcas, éxodo y desierto)',
                 'audiencia' => 'comunidad del pacto en formación',
                 'problematica' => 'identidad del pueblo, obediencia al pacto y santidad',
+                'daily_life' => 'vida de clan, pastoreo, agricultura inicial, viajes largos y organización tribal',
+                'customs' => 'genealogías, pactos familiares, circuncisión, sacrificios y festividades del calendario sagrado',
+                'social_frame' => 'familias extensas, ancianos de clan y mediación sacerdotal en el culto',
                 'genre' => 'narrativo-legal-teológico',
                 'chapter_function' => 'establecer fundamentos de fe, culto y vida comunitaria',
                 'canonical_axis' => 'creación, caída, promesa y pacto',
@@ -562,6 +714,9 @@ class ApiController
                 'periodo' => 'conquista, monarquía, división del reino y exilio',
                 'audiencia' => 'Israel/Judá en procesos de fidelidad o crisis',
                 'problematica' => 'lealtad al pacto frente a idolatría y poder político',
+                'daily_life' => 'agricultura de subsistencia, ciudades amuralladas, oficios artesanales y servicio militar',
+                'customs' => 'puertas de la ciudad como tribunal, alianzas políticas, juramentos y ceremonias reales',
+                'social_frame' => 'reyes, profetas, sacerdotes y ancianos con tensión entre poder y fidelidad',
                 'genre' => 'narrativo-histórico teológico',
                 'chapter_function' => 'mostrar consecuencias de obediencia y desobediencia',
                 'canonical_axis' => 'reino, juicio y esperanza de restauración',
@@ -576,6 +731,9 @@ class ApiController
                 'periodo' => 'distintas etapas de la vida de Israel',
                 'audiencia' => 'creyentes en búsqueda de sabiduría y adoración',
                 'problematica' => 'sufrimiento, temor de Dios, justicia y sentido de vida',
+                'daily_life' => 'hogar, trabajo, mercado, tribunales y relaciones familiares como escenario moral',
+                'customs' => 'poesía cantada, enseñanza proverbial, lamento público y oración congregacional',
+                'social_frame' => 'sabios, familias, maestros y comunidad de adoración',
                 'genre' => 'poético-sapiencial',
                 'chapter_function' => 'formar discernimiento espiritual y ético',
                 'canonical_axis' => 'temor del Señor, adoración y sabiduría práctica',
@@ -590,6 +748,9 @@ class ApiController
                 'periodo' => 'antes, durante y después del exilio',
                 'audiencia' => 'pueblo del pacto en crisis espiritual y social',
                 'problematica' => 'arrepentimiento, injusticia, juicio y restauración',
+                'daily_life' => 'presión imperial, crisis económica, desplazamientos y ruptura social',
+                'customs' => 'ayunos, lamentos, señales proféticas y llamados públicos al arrepentimiento',
+                'social_frame' => 'profetas frente a reyes, élites urbanas y pueblo vulnerable',
                 'genre' => 'profético-oracular',
                 'chapter_function' => 'denunciar pecado y anunciar esperanza',
                 'canonical_axis' => 'santidad de Dios, juicio y promesa mesiánica',
@@ -604,6 +765,9 @@ class ApiController
                 'periodo' => 'siglo I (ministerio de Jesús e iglesia primitiva)',
                 'audiencia' => 'comunidades cristianas en expansión misionera',
                 'problematica' => 'identidad de Jesús, discipulado y misión',
+                'daily_life' => 'aldeas agrícolas, pesca, comercio local y caminos controlados por Roma',
+                'customs' => 'sinagoga, comidas de honor, pureza ritual, pago de tributos y peregrinaciones',
+                'social_frame' => 'autoridad romana, liderazgo religioso judío y grupos populares',
                 'genre' => 'narrativo-evangélico',
                 'chapter_function' => 'presentar obra de Cristo y avance del evangelio',
                 'canonical_axis' => 'reino de Dios, cruz, resurrección y misión',
@@ -618,6 +782,9 @@ class ApiController
             'periodo' => 'primera generación apostólica',
             'audiencia' => 'iglesias locales y líderes pastorales',
             'problematica' => 'doctrina, santidad comunitaria, perseverancia y esperanza final',
+            'daily_life' => 'casas-iglesia, trabajo manual, redes comerciales y presión cultural pagana',
+            'customs' => 'lectura pública de cartas, mesas compartidas, patronazgo y disciplina comunitaria',
+            'social_frame' => 'líderes locales, comunidades mixtas y tensión con el entorno imperial',
             'genre' => 'epistolar y apocalíptico',
             'chapter_function' => 'instruir, corregir y fortalecer la fe',
             'canonical_axis' => 'vida en Cristo, iglesia y consumación',

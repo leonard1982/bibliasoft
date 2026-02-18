@@ -354,11 +354,18 @@
     function renderContextPanel(payload) {
         var c = payload.context || {};
         var keywords = Array.isArray(c.keywords) ? c.keywords : [];
+        var keywordInsights = Array.isArray(c.keyword_insights) ? c.keyword_insights : [];
         var questions = Array.isArray(c.questions) ? c.questions : [];
         var studyTips = Array.isArray(c.study_tips) ? c.study_tips : [];
         var keywordHtml = keywords.length ? keywords.map(function (word) {
             return '<span class="chip">' + escapeHtml(word) + '</span>';
         }).join('') : '<span class="muted">Sin términos destacados.</span>';
+        var keywordInsightHtml = keywordInsights.length ? '<ul class="context-list">' + keywordInsights.map(function (item) {
+            return '<li><strong>' + escapeHtml(item.term || '') + ':</strong> ' +
+                escapeHtml(item.meaning || '') +
+                (item.study_use ? ' <span class="muted">(' + escapeHtml(item.study_use) + ')</span>' : '') +
+                '</li>';
+        }).join('') + '</ul>' : '<p class="muted">Sin desarrollo de términos para este pasaje.</p>';
 
         var questionsHtml = questions.length ? '<ul class="context-list">' + questions.map(function (q) {
             return '<li>' + escapeHtml(q) + '</li>';
@@ -370,11 +377,12 @@
 
         els.contextPanel.innerHTML = '' +
             '<div class="card"><strong>Pasaje</strong><p>' + escapeHtml(payload.reference.label || '') + '</p></div>' +
-            '<div class="card"><strong>Resumen del pasaje</strong><p>' + escapeHtml(c.summary || '') + '</p></div>' +
+            '<div class="card"><strong>Versión sencilla</strong><p>' + escapeHtml(c.simple_version || '') + '</p></div>' +
             '<div class="card"><strong>Contexto histórico</strong><p>' + escapeHtml(c.historical || '') + '</p></div>' +
             '<div class="card"><strong>Contexto literario</strong><p>' + escapeHtml(c.literary || '') + '</p></div>' +
             '<div class="card"><strong>Contexto canónico</strong><p>' + escapeHtml(c.canonical || '') + '</p></div>' +
             '<div class="card"><strong>Términos clave</strong><div class="context-chip-wrap">' + keywordHtml + '</div></div>' +
+            '<div class="card"><strong>Significado de palabras clave</strong>' + keywordInsightHtml + '</div>' +
             '<div class="card"><strong>Preguntas de estudio</strong>' + questionsHtml + '</div>' +
             '<div class="card"><strong>Pistas de observación</strong>' + tipsHtml + '</div>';
     }
