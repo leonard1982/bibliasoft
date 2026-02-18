@@ -142,6 +142,9 @@ class AnecdoteService
             'las decisiones discretas y fieles suelen producir frutos duraderos',
             'da hoy un paso concreto pequeno y verificable en este tema',
             'historia 0',
+            'ocurrio ',
+            'la persona principal',
+            'este relato conecta con el llamado biblico',
         ];
 
         foreach ($flags as $flag) {
@@ -162,112 +165,140 @@ class AnecdoteService
         $seedHash = md5((string) $seed . ':' . $topic);
         $topicLower = function_exists('mb_strtolower') ? mb_strtolower($topic, 'UTF-8') : strtolower($topic);
 
-        $profiles = [
-            'Fe' => [
-                'titles' => ['Cuando solo quedaba confiar', 'La decisión antes del amanecer', 'El paso que no parecía lógico', 'Fe en medio del retraso'],
-                'settings' => ['en una sala de urgencias', 'en una finca golpeada por la sequía', 'en un pequeño taller familiar', 'en un barrio con alta inseguridad'],
-                'tensions' => ['la noticia llegó tarde y el miedo tomó el control', 'los números no cerraban y la presión aumentaba', 'todos esperaban una reacción impulsiva', 'el panorama parecía cerrarse por completo'],
-                'turns' => ['decidió orar primero y actuar después', 'anotó promesas bíblicas y las leyó en voz alta antes de decidir', 'se negó a ceder al pánico y buscó consejo piadoso', 'guardó silencio, respiró y dio un paso de obediencia'],
-                'closures' => ['La respuesta no fue inmediata, pero la paz regresó y luego llegó una salida real.', 'Su entorno notó serenidad en vez de caos, y eso abrió conversaciones sobre Dios.', 'Lo que parecía un final terminó siendo un testimonio que fortaleció a otros.', 'Meses después, aquella decisión se convirtió en referencia para toda la familia.'],
-                'idea' => 'La fe madura no niega la realidad; decide obedecer aun cuando no controla el resultado.',
-                'application' => 'Escribe hoy tu situación más pesada en una frase. Al lado, escribe una promesa bíblica y define un paso de obediencia para las próximas 24 horas.',
-            ],
-            'Oración' => [
-                'titles' => ['Cinco minutos que cambiaron la semana', 'La puerta cerrada y la rodilla en tierra', 'Antes de responder, oró', 'La lista de oración en el bolsillo'],
-                'settings' => ['en una oficina llena de tensión', 'en la cocina de una madre agotada', 'en el pasillo de una escuela', 'en el bus de regreso a casa'],
-                'tensions' => ['la ansiedad crecía antes de una conversación difícil', 'había cansancio acumulado y respuestas cortantes', 'las malas noticias llegaron en cadena', 'la familia estaba dividida por una decisión urgente'],
-                'turns' => ['apartó cinco minutos para orar con nombre y apellido', 'hizo una pausa y convirtió su queja en petición', 'llamó a un hermano para orar juntos', 'cambió la prisa por una oración breve pero enfocada'],
-                'closures' => ['No todo cambió de inmediato, pero sí cambió su forma de responder.', 'La conversación más difícil terminó en reconciliación inesperada.', 'Esa disciplina breve se volvió un hábito diario en casa.', 'La paz llegó primero al corazón, y luego a la situación.'],
-                'idea' => 'La oración constante no es evasión: es dirección, fuerza y enfoque para actuar con sabiduría.',
-                'application' => 'Define una alarma de 7 minutos hoy. Ora por tres personas específicas y anota una acción concreta que harás por una de ellas.',
-            ],
-            'Perdón' => [
-                'titles' => ['La llamada que rompió diez años de silencio', 'Perdonar sin justificar', 'La mesa que volvió a llenarse', 'Cuando el orgullo bajó la voz'],
-                'settings' => ['en una reunión familiar tensa', 'después de un conflicto laboral', 'en una visita al hospital', 'frente a una conversación pendiente desde años'],
-                'tensions' => ['cada parte tenía razones para defenderse', 'el dolor viejo seguía gobernando las palabras', 'nadie quería dar el primer paso', 'la herida se volvió costumbre y distancia'],
-                'turns' => ['decidió escuchar antes de responder', 'pidió perdón por su parte sin exigir condiciones', 'oró por la persona que más le costaba amar', 'escribió una carta clara y humilde para reconciliar'],
-                'closures' => ['No borró la historia, pero sí rompió la cadena de rencor.', 'La relación tardó en sanar, pero dejó de sangrar.', 'El ambiente en casa cambió desde ese primer acto humilde.', 'Otros también se animaron a reconciliarse al ver su ejemplo.'],
-                'idea' => 'Perdonar no llama bueno a lo malo; libera el corazón para que Dios restaure lo quebrado.',
-                'application' => 'Identifica a una persona con la que necesites avanzar en perdón. Da hoy un paso medible: mensaje, llamada o encuentro.',
-            ],
-            'Sabiduría' => [
-                'titles' => ['La decisión tomada en calma', 'Cuando callar fue más sabio', 'El consejo oportuno', 'Elegir bien bajo presión'],
-                'settings' => ['en una junta de trabajo', 'en una decisión económica familiar', 'en medio de un conflicto ministerial', 'en una conversación con un hijo adolescente'],
-                'tensions' => ['había presión por decidir rápido', 'las emociones estaban por encima de los hechos', 'cada voz tiraba hacia un extremo', 'el cansancio nublaba el criterio'],
-                'turns' => ['pospuso la decisión para orar y revisar datos', 'buscó consejo en dos personas maduras', 'hizo preguntas antes de afirmar conclusiones', 'prefirió una verdad incómoda antes que una salida fácil'],
-                'closures' => ['La decisión final evitó pérdidas mayores y trajo paz.', 'La familia entendió que la prisa casi los llevaba a un error grave.', 'La claridad llegó cuando bajó el ruido emocional.', 'Lo correcto no fue lo más popular, pero sí lo más sólido.'],
-                'idea' => 'La sabiduría bíblica une verdad, prudencia y tiempo correcto para actuar.',
-                'application' => 'Antes de decidir hoy, escribe tres opciones, un riesgo de cada una y una oración pidiendo discernimiento.',
-            ],
-            'Familia' => [
-                'titles' => ['La mesa de los miércoles', 'Un hábito pequeño que sanó la casa', 'Volver a escucharse', 'Cuando la familia oró unida'],
-                'settings' => ['en una casa con horarios rotos', 'en una familia con conflictos repetidos', 'en medio del cansancio laboral', 'después de varias semanas de discusiones'],
-                'tensions' => ['cada uno vivía aislado en su pantalla', 'las conversaciones terminaban en reproches', 'faltaba tiempo de calidad y paciencia', 'la rutina había desplazado los afectos'],
-                'turns' => ['acordaron una comida semanal sin celulares', 'comenzaron a leer un salmo por noche', 'pidieron perdón por palabras hirientes', 'establecieron una oración corta antes de dormir'],
-                'closures' => ['La confianza volvió de forma gradual, pero firme.', 'El hogar recuperó conversaciones con respeto y ternura.', 'Los niños percibieron seguridad al ver coherencia en los adultos.', 'Aquello pequeño se volvió un ancla para toda la semana.'],
-                'idea' => 'La familia se fortalece con hábitos simples, repetidos con amor y constancia.',
-                'application' => 'Define hoy un ritual familiar de 10 minutos: lectura bíblica breve, oración y una pregunta de gratitud.',
-            ],
-            'Perseverancia' => [
-                'titles' => ['El kilómetro que nadie ve', 'Seguir cuando no hay aplausos', 'La segunda cosecha', 'Constancia bajo presión'],
-                'settings' => ['en un negocio en recuperación', 'en un proceso de sanidad largo', 'en el cuidado diario de un familiar', 'en una etapa de desempleo'],
-                'tensions' => ['el progreso era más lento de lo esperado', 'los resultados tardaban en aparecer', 'la comparación con otros desanimaba', 'la fatiga hacía pensar en abandonar'],
-                'turns' => ['decidió celebrar avances pequeños cada semana', 'volvió a la disciplina diaria aunque sin emoción', 'pidió apoyo a su comunidad de fe', 'recordó testimonios pasados para sostenerse'],
-                'closures' => ['El fruto llegó después de insistir más allá del cansancio inicial.', 'La constancia silenciosa abrió una puerta inesperada.', 'Su testimonio animó a otros que estaban por rendirse.', 'La temporada difícil no desapareció de golpe, pero dejó de dominar su corazón.'],
-                'idea' => 'Perseverar en Dios no es aguantar sin sentido; es sostener un propósito hasta ver fruto.',
-                'application' => 'Escoge una meta espiritual para 30 días y divide el avance en pasos diarios de menos de 15 minutos.',
-            ],
-            'Santidad' => [
-                'titles' => ['La decisión cuando nadie mira', 'Cerrar la ventana a tiempo', 'Integridad en lo secreto', 'Pureza con propósito'],
-                'settings' => ['durante una jornada de trabajo en línea', 'en una conversación privada delicada', 'en una noche de soledad', 'frente a una propuesta poco ética'],
-                'tensions' => ['nadie parecía notar el límite que iba a cruzar', 'la tentación se presentó como algo pequeño', 'la presión por encajar era fuerte', 'el cansancio debilitaba sus convicciones'],
-                'turns' => ['cerró la puerta antes de negociar con la tentación', 'pidió rendición de cuentas a un amigo maduro', 'recordó su identidad en Cristo antes de responder', 'eligió transparencia aunque fuera incómoda'],
-                'closures' => ['La victoria no fue ruidosa, pero fortaleció su carácter.', 'Ese límite claro evitó una cadena de consecuencias dolorosas.', 'Su ejemplo inspiró a otros jóvenes a vivir con integridad.', 'La paz de una conciencia limpia valió más que la gratificación instantánea.'],
-                'idea' => 'La santidad se cultiva en decisiones concretas de obediencia, especialmente en lo secreto.',
-                'application' => 'Define hoy un límite específico que proteja tu integridad y compártelo con alguien que pueda acompañarte.',
-            ],
-            'Evangelismo' => [
-                'titles' => ['Una conversación en la fila', 'El testimonio en voz baja', 'Semillas en el camino diario', 'Hablar de Cristo con naturalidad'],
-                'settings' => ['mientras esperaba en una sala', 'en una visita breve a un vecino', 'en un viaje cotidiano de transporte', 'en una pausa del trabajo'],
-                'tensions' => ['sentía temor de no saber qué decir', 'el otro parecía poco interesado', 'había poco tiempo para conversar', 'pensó que su historia no tenía valor'],
-                'turns' => ['compartió una experiencia real en lugar de un discurso largo', 'hizo una pregunta sincera y escuchó con respeto', 'ofreció orar ahí mismo por una necesidad puntual', 'entregó una palabra de esperanza simple y clara'],
-                'closures' => ['La charla breve abrió una puerta para encuentros posteriores.', 'La persona pidió seguir conversando otro día.', 'Un gesto sencillo dejó una huella espiritual profunda.', 'Dios usó su autenticidad más que su elocuencia.'],
-                'idea' => 'Evangelizar es mostrar a Cristo con verdad, amor y disponibilidad en la vida cotidiana.',
-                'application' => 'Ora por una persona específica y busca hoy una conversación breve para escucharla y compartir esperanza.',
-            ],
-        ];
+        $stories = $this->storiesByTopic($topic);
+        $idx = hexdec(substr($seedHash, 0, 6)) % count($stories);
+        $story = $stories[$idx];
 
-        $profile = isset($profiles[$topic]) ? $profiles[$topic] : $profiles['Fe'];
-
-        $title = $this->pickByHash($profile['titles'], $seedHash, 0);
-        $setting = $this->pickByHash($profile['settings'], $seedHash, 8);
-        $tension = $this->pickByHash($profile['tensions'], $seedHash, 16);
-        $turn = $this->pickByHash($profile['turns'], $seedHash, 24);
-        $closure = $this->pickByHash($profile['closures'], $seedHash, 32);
-
-        $content = 'Ocurrió ' . $setting . ', cuando ' . $tension . '.' . "\n\n"
-            . 'En ese momento, la persona principal ' . $turn . ', aun con dudas y presión alrededor.' . "\n\n"
-            . $closure . ' Este relato conecta con el llamado bíblico a vivir ' . $topicLower . ' con decisiones concretas.';
+        $content = $story['content'] . "\n\n" .
+            'El desenlace dejó una enseñanza concreta para la comunidad: vivir ' . $topicLower . ' no como teoría, sino como obediencia visible en decisiones pequeñas pero constantes.';
 
         return [
-            'title' => $title,
+            'title' => $story['title'],
             'content' => $content,
-            'idea_central' => $profile['idea'],
-            'application' => $profile['application'],
+            'idea_central' => $story['idea'],
+            'application' => $story['application'],
         ];
     }
 
-    private function pickByHash(array $items, $hash, $offset)
+    private function storiesByTopic($topic)
     {
-        if (empty($items)) {
-            return '';
-        }
-        $slice = substr((string) $hash, (int) $offset, 6);
-        if ($slice === '') {
-            $slice = '0';
-        }
-        $idx = hexdec($slice) % count($items);
-        return $items[$idx];
+        $topic = trim((string) $topic);
+        $map = [
+            'Fe' => [
+                [
+                    'title' => 'Raúl y el pedido que salvó el taller',
+                    'content' => 'Raúl Mendoza, ebanista de 52 años en Barranquilla, llevaba tres semanas sin un solo encargo y ya pensaba cerrar su taller. La noche del viernes reunió a su esposa Miriam y a sus dos hijos alrededor de la mesa, leyeron Hebreos 11 y oraron con una sinceridad que casi dolía.\n\nAl amanecer del sábado, en vez de quedarse paralizado, Raúl limpió el local, ordenó herramientas y publicó tres trabajos antiguos con un mensaje breve sobre su oficio. Ese mismo día recibió una llamada de una escuela cristiana que necesitaba mobiliario urgente para su biblioteca. No fue un milagro mágico: fue una puerta que se abrió mientras él seguía actuando con fe y excelencia.',
+                    'idea' => 'La fe bíblica no reemplaza la responsabilidad; la impulsa con esperanza cuando todo parece detenido.',
+                    'application' => 'Anota hoy una área donde te sientes bloqueado. Ora por ella y ejecuta una acción concreta antes de terminar el día.',
+                ],
+                [
+                    'title' => 'Lina en la sala de urgencias',
+                    'content' => 'Lina Torres, enfermera en Bucaramanga, recibió la noticia de que su madre sería operada de emergencia. En la sala de espera, con el celular temblando entre las manos, abrió su Biblia en Salmo 46 y escribió en una libreta: “Dios es nuestro amparo”.\n\nDurante las siguientes horas no tuvo respuestas inmediatas, pero decidió sostener la fe con actos: llamó a su hermano para reconciliarse, coordinó donantes de sangre y evitó que el miedo tomara decisiones precipitadas. La cirugía fue exitosa, y Lina testificó en su iglesia que la paz de Dios llegó antes que la solución visible.',
+                    'idea' => 'La fe madura se evidencia en la forma de responder bajo presión, no solo en palabras de domingo.',
+                    'application' => 'Frente a una preocupación real, escribe una promesa bíblica y conviértela en dos acciones prácticas esta semana.',
+                ],
+            ],
+            'Oración' => [
+                [
+                    'title' => 'Los siete minutos de Diana',
+                    'content' => 'Diana Pardo, docente de primaria en Soacha, terminaba cada jornada agotada y con la sensación de no llegar a nada. Un mentor le propuso algo simple: apartar siete minutos diarios para orar con nombres concretos, sin discursos largos.\n\nEn menos de un mes cambió su tono en clase, disminuyeron sus reacciones impulsivas y varios padres notaron mayor cercanía y calma. Una madre le dijo llorando: “Gracias por escuchar a mi hijo; volvió sonriendo a casa”. Diana entendió que la oración breve, cuando es constante, reordena el corazón y también la agenda.',
+                    'idea' => 'Orar de manera sostenida transforma primero el interior, y desde ahí impacta relaciones y decisiones.',
+                    'application' => 'Programa una alarma de 7 minutos hoy y ora por tres personas específicas con necesidades reales.',
+                ],
+                [
+                    'title' => 'El cuaderno de peticiones de don Abel',
+                    'content' => 'Don Abel Quintero, líder de célula en Medellín, llevaba un cuaderno viejo donde anotaba peticiones y fechas. Cada miércoles, antes de abrir su negocio, se quedaba solo quince minutos orando por cada nombre.\n\nCon el tiempo, varias páginas se llenaron de respuestas: reconciliaciones familiares, empleo para jóvenes y sanidad emocional en matrimonios al borde de la ruptura. En su cumpleaños 70, mostró ese cuaderno a su congregación y dijo: “La oración no me quitó todas las tormentas, pero me enseñó a atravesarlas con dirección”.',
+                    'idea' => 'La oración perseverante crea memoria espiritual y fortalece la confianza de toda la comunidad.',
+                    'application' => 'Abre un registro de oración hoy mismo y documenta peticiones con fecha para ver el obrar de Dios en el tiempo.',
+                ],
+            ],
+            'Perdón' => [
+                [
+                    'title' => 'La llamada de Eduardo después de 11 años',
+                    'content' => 'Eduardo Rivera y su hermano no se hablaban desde una discusión por una herencia. Once años después, al escuchar una predicación sobre Mateo 5, sintió que su “razón” se había convertido en cárcel.\n\nEse domingo envió un audio corto: “No quiero seguir peleando. Perdóname por mis palabras”. La primera respuesta fue fría, pero una semana más tarde se encontraron en una panadería del barrio y hablaron por dos horas. No borraron el pasado, pero comenzaron a sanar. Meses después, sus hijos volvieron a compartir celebraciones familiares.',
+                    'idea' => 'Perdonar no minimiza la herida; rompe la cadena del orgullo y abre camino a restauración real.',
+                    'application' => 'Da hoy un primer paso de reconciliación: un mensaje humilde, una llamada o una cita para escuchar.',
+                ],
+                [
+                    'title' => 'Patricia y la silla vacía en Navidad',
+                    'content' => 'En la cena de Navidad siempre había una silla vacía: la de su hija mayor, alejadas por años de reproches. Patricia Gómez decidió dejar de esperar “el momento perfecto” y escribir una carta breve, sin justificarse, pidiendo perdón por su dureza.\n\nNo recibió respuesta inmediata, pero a los veinte días su hija llegó con un café y una frase: “Quiero intentarlo otra vez”. El proceso fue lento y con lágrimas, pero volvió el diálogo. Patricia testificó que el perdón fue una puerta angosta que terminó conduciendo a libertad.',
+                    'idea' => 'La humildad inicial puede parecer pequeña, pero tiene poder para iniciar procesos de reconciliación duraderos.',
+                    'application' => 'Escribe hoy una carta corta y honesta donde reconozcas tu parte sin culpar al otro.',
+                ],
+            ],
+            'Sabiduría' => [
+                [
+                    'title' => 'Natalia y la decisión que evitó una deuda mayor',
+                    'content' => 'Natalia Cárdenas recibió una oferta “demasiado buena” para invertir en un negocio sin respaldo legal. La presión era fuerte: todos le repetían que se estaba quedando atrás.\n\nEn lugar de decidir por miedo, pidió 48 horas, oró, consultó a dos creyentes con experiencia financiera y revisó documentos. Descubrió inconsistencias graves y rechazó el acuerdo. Tres meses después supo que varios conocidos perdieron sus ahorros en ese mismo esquema. Su calma no fue pasividad: fue sabiduría aplicada con temor de Dios.',
+                    'idea' => 'La sabiduría bíblica combina oración, consejo y verificación antes de comprometer decisiones importantes.',
+                    'application' => 'Antes de decidir algo clave, consulta a una persona madura y revisa datos concretos por escrito.',
+                ],
+                [
+                    'title' => 'El silencio oportuno de Andrés',
+                    'content' => 'Durante una reunión ministerial, Andrés Salcedo estuvo a punto de responder con dureza a una crítica pública. Sintió la garganta arder, pero recordó Proverbios 15:1 y decidió pedir un receso de cinco minutos.\n\nEse breve silencio evitó una ruptura entre líderes. Al volver, habló con firmeza pero sin herir, y la conversación terminó en acuerdos concretos. Varios jóvenes que observaban aprendieron que la madurez espiritual no es tener la última palabra, sino administrar bien la primera reacción.',
+                    'idea' => 'Muchas crisis se evitan cuando la prudencia frena la impulsividad y da espacio a respuestas sabias.',
+                    'application' => 'Practica hoy una pausa de 30 segundos antes de responder en un conflicto sensible.',
+                ],
+            ],
+            'Familia' => [
+                [
+                    'title' => 'Cuando la familia oró unida en el apartamento 403',
+                    'content' => 'Julián y Marcela Ríos llevaban semanas discutiendo por dinero, horarios y crianza. Sus dos hijos empezaron a cenar en silencio, evitando cualquier conversación para no encender otra pelea.\n\nUna noche, después de leer Efesios 4, decidieron apagar pantallas, pedir perdón delante de los niños y hacer una oración de tres minutos antes de dormir. No resolvieron todo de inmediato, pero cambió el clima emocional del hogar: menos gritos, más escucha, decisiones más claras. En tres meses retomaron su presupuesto familiar y restauraron la confianza de sus hijos.',
+                    'idea' => 'La unidad familiar no nace de discursos largos, sino de hábitos espirituales simples practicados con constancia.',
+                    'application' => 'Inicia hoy un ritual de 10 minutos en casa: lectura breve, oración y una conversación de gratitud.',
+                ],
+                [
+                    'title' => 'La mesa del miércoles de los Herrera',
+                    'content' => 'Los Herrera casi no coincidían en casa: cada uno comía a distinta hora y vivía en su propio mundo digital. Don Felipe, el abuelo, propuso recuperar una sola comida semanal sin celulares.\n\nAl principio fue incómodo, pero pronto se volvió el momento más esperado: compartían cargas, celebraban avances y oraban por necesidades concretas. Esa mesa evitó que un conflicto adolescente escalara, porque el diálogo ya estaba abierto. Lo que empezó como una decisión pequeña se convirtió en ancla emocional y espiritual para toda la familia.',
+                    'idea' => 'La familia se fortalece cuando crea espacios intencionales de presencia, conversación y oración.',
+                    'application' => 'Agenda una comida fija semanal sin pantallas y define una pregunta que ayude a escuchar el corazón de cada miembro.',
+                ],
+            ],
+            'Perseverancia' => [
+                [
+                    'title' => 'Mónica y el cuaderno de los 120 días',
+                    'content' => 'Mónica Villalba buscó trabajo durante cuatro meses sin éxito. Recibía correos de rechazo casi a diario y la vergüenza comenzaba a apagar su ánimo.\n\nEn vez de rendirse, abrió un cuaderno y trazó un plan de 120 días: mejorar perfil, estudiar una habilidad nueva y enviar candidaturas con seguimiento semanal. Cada noche escribía una oración corta y un aprendizaje del día. Al día 97 recibió una entrevista decisiva y fue contratada. Su testimonio no fue “todo salió fácil”, sino “Dios me sostuvo para no abandonar”.',
+                    'idea' => 'Perseverar en fe implica disciplina sostenida cuando los resultados tardan en llegar.',
+                    'application' => 'Define una meta de 30 días y parte el avance en acciones diarias medibles.',
+                ],
+                [
+                    'title' => 'El segundo intento de Samuel',
+                    'content' => 'Samuel Acosta cerró su primer emprendimiento con pérdidas y quedó con deudas que lo desanimaron por completo. Durante meses evitó volver a intentarlo por miedo a fracasar otra vez.\n\nAcompañado por su iglesia, ordenó sus finanzas, buscó mentoría y relanzó su proyecto con pasos más prudentes. El crecimiento fue lento, pero estable. Un año después empleaba a dos personas del barrio. Samuel suele repetir: “La perseverancia me enseñó que caer no define mi historia; levantarme sí”.',
+                    'idea' => 'La perseverancia cristiana no es obstinación ciega; es constancia humilde con aprendizaje y dependencia de Dios.',
+                    'application' => 'Retoma hoy un proyecto detenido y establece el próximo paso concreto para esta semana.',
+                ],
+            ],
+            'Santidad' => [
+                [
+                    'title' => 'Kevin y la decisión de cerrar la puerta',
+                    'content' => 'Kevin, joven líder de alabanza, notó que ciertas conversaciones nocturnas en redes lo estaban arrastrando a una doble vida. Nadie lo sabía, pero su conciencia estaba cada vez más cargada.\n\nUna madrugada, después de orar con lágrimas, eliminó contactos de riesgo, pidió acompañamiento a un mentor y estableció límites digitales estrictos. No fue un cambio de un día, pero recuperó paz interior y coherencia en su servicio. Meses después ayudaba a otros jóvenes a poner límites saludables con transparencia.',
+                    'idea' => 'La santidad se construye con decisiones concretas en lo secreto, antes de que el daño se haga público.',
+                    'application' => 'Define hoy un límite específico que proteja tu integridad y compártelo con alguien de confianza.',
+                ],
+                [
+                    'title' => 'Transparencia que evitó una caída',
+                    'content' => 'Laura Peña recibió una propuesta laboral que exigía alterar reportes para “acelerar resultados”. El sueldo era atractivo y la presión económica en casa era real.\n\nDespués de orar y consultar a sus pastores, rechazó la condición y explicó sus convicciones con respeto. Perdió la oportunidad inmediata, pero semanas después fue recomendada para un cargo mejor justamente por su reputación de integridad. Laura entendió que la santidad no siempre es cómoda, pero siempre protege el alma.',
+                    'idea' => 'La integridad cuesta en el corto plazo, pero construye una base firme para el futuro.',
+                    'application' => 'Evalúa una área de compromiso ético en tu vida y toma hoy una decisión alineada con la verdad.',
+                ],
+            ],
+            'Evangelismo' => [
+                [
+                    'title' => 'Una conversación en la ruta 27',
+                    'content' => 'Camilo viajaba en bus al trabajo cuando notó a un hombre llorando en silencio. Dudó en acercarse, pero oró en voz baja y preguntó con respeto si podía acompañarlo.\n\nEl hombre acababa de perder a su padre y dijo sentirse completamente solo. Camilo lo escuchó, compartió brevemente cómo Cristo lo sostuvo en su propio duelo y oró por él allí mismo. Intercambiaron contacto, y semanas después comenzaron un estudio bíblico. Todo empezó con una pregunta sencilla y una escucha genuina.',
+                    'idea' => 'Evangelizar muchas veces inicia con compasión práctica y presencia sincera, no con discursos largos.',
+                    'application' => 'Pide hoy a Dios una persona para escuchar y animar; da un paso intencional de conversación.',
+                ],
+                [
+                    'title' => 'El café que abrió una puerta',
+                    'content' => 'Rosa Martínez llevaba meses invitando a su vecina Clara a la iglesia sin éxito. En lugar de insistir con presión, cambió de estrategia: una tarde la invitó a café para escuchar su historia.\n\nClara habló por primera vez de su ansiedad y de una pérdida reciente que no había contado a nadie. Rosa no predicó de inmediato; primero acompañó, oró y permaneció cercana. Con el tiempo Clara pidió conocer más de la Biblia. El evangelio entró por una relación real, sostenida con paciencia y amor.',
+                    'idea' => 'El testimonio creíble nace de relaciones auténticas donde primero se escucha y luego se comparte esperanza.',
+                    'application' => 'Invita esta semana a una persona a conversar y prepárate para escucharla antes de hablar.',
+                ],
+            ],
+        ];
+
+        return isset($map[$topic]) ? $map[$topic] : $map['Fe'];
     }
 
     private function normalizeText($value)

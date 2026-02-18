@@ -43,6 +43,16 @@
         <?php echo $content; ?>
     </main>
 
+    <footer class="site-footer">
+        <div class="wrap site-footer-inner">
+            <p class="site-copy">Copyright: Leonardo Navarro - Fundación La Iglesia en la Calle</p>
+            <div class="site-links">
+                <a href="https://www.laiglesiaenlacalle.co" target="_blank" rel="noopener noreferrer">www.laiglesiaenlacalle.co</a>
+                <a href="https://www.facebook.com/fundacionlaiglesianelacalle" target="_blank" rel="noopener noreferrer">www.facebook.com/fundacionlaiglesianelacalle</a>
+            </div>
+        </div>
+    </footer>
+
     <script src="assets/app.js"></script>
 </body>
 </html>

@@ -29,7 +29,17 @@ class DevotionalService
         $date = $date ?: date('Y-m-d');
         $existing = $this->userDataRepository->getDevotionalByDate($date);
         if ($existing) {
-            return $this->hydrate($existing);
+            $hydrated = $this->hydrate($existing);
+            if (!$this->isLegacyDevotional($hydrated)) {
+                return $hydrated;
+            }
+
+            return $this->generateNew([
+                'date' => $date,
+                'book' => (int) ($hydrated['book'] ?? 0),
+                'chapter' => (int) ($hydrated['chapter'] ?? 0),
+                'verse' => (int) ($hydrated['verse'] ?? 0),
+            ]);
         }
         return $this->generateNew([
             'date' => $date,
@@ -177,23 +187,23 @@ class DevotionalService
         $stories = [
             [
                 'title' => 'Gratitud en medio de la escasez',
-                'text' => 'En plena temporada de dificultad, una familia decidió cerrar cada día agradeciendo tres cosas concretas antes de dormir. Nada cambió de inmediato afuera, pero cambió la atmósfera dentro de casa: menos queja, más unidad y decisiones más sabias.',
+                'text' => 'Ruth y Esteban, matrimonio en Cali, enfrentaron un mes sin ingresos estables. En lugar de terminar cada noche con reproches, empezaron a escribir tres motivos de gratitud y a orar juntos antes de dormir. La situación económica no cambió de golpe, pero sí cambió el ambiente del hogar: menos ansiedad, más cooperación y decisiones financieras más sabias.',
             ],
             [
                 'title' => 'Persistir cuando no se ve fruto',
-                'text' => 'Un líder sirvió durante años sin resultados visibles, pero mantuvo disciplina en oración, estudio y servicio. Cuando llegó la oportunidad, su carácter ya estaba formado. Lo que parecía estancamiento era entrenamiento silencioso.',
+                'text' => 'Tomás, líder de jóvenes en Montería, sirvió durante años con pocas respuestas visibles y varias decepciones. Decidió no abandonar: mantuvo oración diaria, preparación bíblica y visitas personales a quienes se alejaban. Un año después, varios jóvenes regresaron y comenzaron a discipular a otros. Lo que parecía estancamiento era una formación profunda de carácter.',
             ],
             [
                 'title' => 'Oración que vence la ansiedad',
-                'text' => 'Ante una noticia difícil, una mujer cambió la reacción impulsiva por una oración breve y concreta: “Señor, guía mi respuesta en esta hora”. Ese minuto de dependencia evitó decisiones apresuradas y abrió un camino de paz.',
+                'text' => 'Martha recibió una llamada médica que la dejó paralizada en el pasillo del hospital. Iba a reaccionar con pánico, pero respiró, tomó su Biblia y oró: “Señor, ordena mi mente y guía mis pasos”. Esa pausa cambió su respuesta: llamó a su familia con calma, coordinó apoyos y evitó decisiones precipitadas. La paz llegó primero al corazón y luego al proceso.',
             ],
             [
                 'title' => 'Fidelidad en lo pequeño',
-                'text' => 'Un joven decidió honrar a Dios en tareas que nadie veía: puntualidad, integridad y buen trato. Meses después recibió nuevas responsabilidades porque su testimonio ya hablaba antes que sus palabras.',
+                'text' => 'Kevin, auxiliar administrativo en Bogotá, decidió honrar a Dios en tareas que nadie celebraba: puntualidad, orden y trato digno incluso en días de presión. Durante meses nadie dijo nada, pero cuando la empresa abrió una vacante interna, su nombre fue recomendado por confianza y coherencia. Su testimonio habló antes que su discurso.',
             ],
             [
                 'title' => 'Disciplina diaria, fruto profundo',
-                'text' => 'Una madre con agenda saturada reservó diez minutos diarios para Palabra y oración. Ese hábito corto pero constante transformó su tono al corregir, su paciencia en casa y su manera de acompañar a otros.',
+                'text' => 'Lorena, madre de tres niños, sentía que vivía corriendo sin dirección espiritual. Decidió separar diez minutos diarios para lectura bíblica y oración antes de iniciar sus labores. Ese hábito breve, repetido durante semanas, transformó su manera de corregir, su paciencia con los hijos y su capacidad de acompañar a otras mujeres en su iglesia.',
             ],
         ];
 
@@ -291,5 +301,39 @@ class DevotionalService
             return 'Reto de 7 días: toma como inspiración "' . $storyTitle . '". Registra cada noche una decisión concreta de obediencia. ' . ($action !== '' ? $action : 'Al final de la semana, comparte un aprendizaje con alguien de confianza.');
         }
         return 'Reto de 7 días: registra cada noche una decisión concreta de obediencia y comparte al final de la semana un aprendizaje con alguien de confianza.';
+    }
+
+    private function isLegacyDevotional(array $payload)
+    {
+        $sections = isset($payload['sections']) && is_array($payload['sections']) ? $payload['sections'] : [];
+        $context = trim((string) ($sections['contexto_historico'] ?? ''));
+        $story = trim((string) ($sections['anecdota'] ?? ''));
+        $storyTitle = trim((string) ($sections['anecdota_titulo'] ?? ''));
+
+        if ($context !== '' && strpos($context, 'Contexto de ') === 0) {
+            return true;
+        }
+        if ($storyTitle === '') {
+            return true;
+        }
+
+        $storyLen = function_exists('mb_strlen') ? mb_strlen($story, 'UTF-8') : strlen($story);
+        if ($storyLen < 180) {
+            return true;
+        }
+
+        $legacyPhrases = [
+            'William Carey persistió',
+            'George Muller registró',
+            'Susanna Wesley apartaba',
+            'fidelidad silenciosa',
+        ];
+        foreach ($legacyPhrases as $phrase) {
+            if (strpos($story, $phrase) !== false) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
