@@ -1,6 +1,34 @@
 # CHANGELOG
 
 ## 2026-02-18
+- Corrección de generación:
+  - El contenido de `Generar explicación` ya no devuelve placeholders antiguos.
+  - Se invalida caché de respuestas base y se regenera contenido contextual útil.
+- Registro/Login visible en UI:
+  - Nuevas rutas y vistas: `Ingresar`, `Registro`, `Salir`, `Admin`.
+  - Sesión activa para acciones personales (favoritos de anécdotas).
+- Compartir App por QR:
+  - Nueva vista `?route=share_app`.
+  - QR local (librería local `public/assets/vendor/qrcode.min.js`) usando `APP_PUBLIC_URL`.
+  - Botones `Copiar enlace` y `Compartir` + guía de instalación PWA (Android/iPhone).
+- Módulo Anécdotas:
+  - Nueva vista `?route=anecdotes`.
+  - Seed local: `data/anecdotas_seed.json` (64 anécdotas originales por tema).
+  - Filtros por tema y búsqueda.
+  - Acciones: `Copiar`, `Guardar`, `Compartir`.
+  - Generación bajo demanda (`api.anecdotes.generate`) y favoritos (`api.anecdotes.favorite`).
+  - Nuevas tablas: `anecdotes`, `anecdote_favorites`.
+- Comentarios con control legal:
+  - Nueva configuración `config/sources.php`.
+  - `cmti` desactivado por defecto (licencia no verificada).
+  - Fallback de comentario contextual con etiqueta `Fuente: Generado`.
+  - Nueva documentación: `docs/LICENCIAS_COMENTARIOS.md`.
+- Fixes UI/Responsive:
+  - Al ocultar Ayuda, el lector central se expande al ancho disponible.
+  - Ajuste de columna de capítulos para mostrar correctamente el label.
+  - En móvil, toolbar del lector muestra solo íconos con `title/aria-label`.
+  - Tap en versículo (móvil) abre ayuda automáticamente y enfoca `Contexto`.
+  - Alineación del versículo 1: número y texto en misma línea.
 - Extensión de accesibilidad y contenido diario:
   - Control de letra en Herramientas (`A+`, `A-`, `Restablecer`), rango 85%-150%, persistencia local.
   - Atajos `Ctrl+=` y `Ctrl+-` para ajuste rápido.
