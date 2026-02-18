@@ -635,7 +635,8 @@ body.spacing-normal .verse {
 
     .reading-head .toolbar .btn-light,
     .reading-head .toolbar .btn-primary {
-        min-width: 38px;
+        min-width: 40px;
+        min-height: 40px;
         justify-content: center;
         padding: .5rem;
         gap: 0;
