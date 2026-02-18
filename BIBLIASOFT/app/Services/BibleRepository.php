@@ -74,6 +74,36 @@ class BibleRepository
         return $rows;
     }
 
+    public function getVersesInRange($book, $chapter, $verseStart, $verseEnd)
+    {
+        $range = $this->normalizeRange($verseStart, $verseEnd);
+        $stmt = $this->bible()->prepare(
+            'SELECT Book, Chapter, Verse, Scripture
+             FROM Bible
+             WHERE Book = :book AND Chapter = :chapter AND Verse BETWEEN :verse_start AND :verse_end
+             ORDER BY Verse ASC'
+        );
+        $stmt->execute([
+            ':book' => (int) $book,
+            ':chapter' => (int) $chapter,
+            ':verse_start' => $range['start'],
+            ':verse_end' => $range['end'],
+        ]);
+
+        $rows = [];
+        foreach ($stmt->fetchAll() as $row) {
+            $scriptureHtml = $this->sanitizer->sanitize($row['Scripture']);
+            $rows[] = [
+                'book' => (int) $row['Book'],
+                'chapter' => (int) $row['Chapter'],
+                'verse' => (int) $row['Verse'],
+                'scripture_html' => $scriptureHtml,
+                'scripture_text' => $this->sanitizer->text($scriptureHtml),
+            ];
+        }
+        return $rows;
+    }
+
     public function getVerse($book, $chapter, $verse)
     {
         $stmt = $this->bible()->prepare(
@@ -198,6 +228,72 @@ class BibleRepository
         ];
     }
 
+    public function getCommentariesForRange($book, $chapter, $verseStart, $verseEnd)
+    {
+        $range = $this->normalizeRange($verseStart, $verseEnd);
+
+        $book = (int) $book;
+        $chapter = (int) $chapter;
+
+        $bookRows = [];
+        $chapterRows = [];
+        $verseRows = [];
+
+        $stmtBook = $this->commentary()->prepare('SELECT Comments FROM BookCommentary WHERE Book = :book');
+        $stmtBook->execute([':book' => $book]);
+        foreach ($stmtBook->fetchAll() as $row) {
+            $bookRows[] = [
+                'html' => $this->sanitizer->sanitize($row['Comments']),
+            ];
+        }
+
+        $stmtChapter = $this->commentary()->prepare(
+            'SELECT Comments FROM ChapterCommentary WHERE Book = :book AND Chapter = :chapter'
+        );
+        $stmtChapter->execute([
+            ':book' => $book,
+            ':chapter' => $chapter,
+        ]);
+        foreach ($stmtChapter->fetchAll() as $row) {
+            $chapterRows[] = [
+                'html' => $this->sanitizer->sanitize($row['Comments']),
+            ];
+        }
+
+        $stmtVerse = $this->commentary()->prepare(
+            'SELECT ChapterBegin, VerseBegin, ChapterEnd, VerseEnd, Comments
+             FROM VerseCommentary
+             WHERE Book = :book
+               AND (
+                   (ChapterBegin < :chapter OR (ChapterBegin = :chapter AND VerseBegin <= :verse_end))
+                   AND
+                   (ChapterEnd > :chapter OR (ChapterEnd = :chapter AND VerseEnd >= :verse_start))
+               )
+             ORDER BY ChapterBegin, VerseBegin'
+        );
+        $stmtVerse->execute([
+            ':book' => $book,
+            ':chapter' => $chapter,
+            ':verse_start' => $range['start'],
+            ':verse_end' => $range['end'],
+        ]);
+        foreach ($stmtVerse->fetchAll() as $row) {
+            $verseRows[] = [
+                'chapter_begin' => (int) $row['ChapterBegin'],
+                'verse_begin' => (int) $row['VerseBegin'],
+                'chapter_end' => (int) $row['ChapterEnd'],
+                'verse_end' => (int) $row['VerseEnd'],
+                'html' => $this->sanitizer->sanitize($row['Comments']),
+            ];
+        }
+
+        return [
+            'book' => $bookRows,
+            'chapter' => $chapterRows,
+            'verse' => $verseRows,
+        ];
+    }
+
     public function getPericopeHint($book, $chapter, $verse)
     {
         $stmt = $this->bible()->prepare(
@@ -297,6 +393,25 @@ class BibleRepository
     public function buildReferenceLabel($book, $chapter, $verse)
     {
         return $this->getBookName($book) . ' ' . (int) $chapter . ':' . (int) $verse;
+    }
+
+    public function buildRangeLabel($book, $chapter, $verseStart, $verseEnd)
+    {
+        $range = $this->normalizeRange($verseStart, $verseEnd);
+        if ($range['start'] === $range['end']) {
+            return $this->buildReferenceLabel($book, $chapter, $range['start']);
+        }
+        return $this->getBookName($book) . ' ' . (int) $chapter . ':' . $range['start'] . '-' . $range['end'];
+    }
+
+    private function normalizeRange($a, $b)
+    {
+        $a = max(1, (int) $a);
+        $b = max(1, (int) $b);
+        return [
+            'start' => min($a, $b),
+            'end' => max($a, $b),
+        ];
     }
 
     private function bible()

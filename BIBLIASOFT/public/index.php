@@ -59,6 +59,10 @@ try {
             $apiController->verse();
             break;
 
+        case 'api.selection':
+            $apiController->selection();
+            break;
+
         case 'api.note.create':
             $apiController->noteCreate();
             break;
@@ -77,6 +81,10 @@ try {
 
         case 'api.link.delete':
             $apiController->linkDelete();
+            break;
+
+        case 'api.favorite.toggle':
+            $apiController->favoriteToggle();
             break;
 
         case 'api.ai.refresh':

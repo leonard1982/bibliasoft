@@ -13,6 +13,7 @@
         verses: [],
         selectedVerses: [],
         lastSelectedVerse: null,
+        selectionPayload: null,
         settings: {
             showHelp: true,
             layoutMode: 'columns',
@@ -40,7 +41,12 @@
         closeSettings: document.getElementById('closeSettings'),
         copySelection: document.getElementById('copySelection'),
         copyParagraph: document.getElementById('copyParagraph'),
-        shareSelection: document.getElementById('shareSelection')
+        shareSelection: document.getElementById('shareSelection'),
+        contextPanel: document.getElementById('contextPanel'),
+        commentsPanel: document.getElementById('commentsPanel'),
+        notesPanel: document.getElementById('notesPanel'),
+        linksPanel: document.getElementById('linksPanel'),
+        toolsPanel: document.getElementById('toolsPanel')
     };
 
     function init() {
@@ -58,6 +64,7 @@
         wireEvents();
         activateTab('contexto');
         bindSelectionActions();
+        renderEmptyPanels();
     }
 
     function wireEvents() {
@@ -156,8 +163,9 @@
         els.versesContainer.innerHTML = html || '<p class="muted">No se pudo cargar el capítulo.</p>';
         state.selectedVerses = [];
         state.lastSelectedVerse = null;
+        state.selectionPayload = null;
         updateSelectionUI();
-        updateContextPanel();
+        renderEmptyPanels();
 
         els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
             node.addEventListener('click', function (event) {
@@ -184,44 +192,7 @@
             state.selectedVerses.sort(function (a, b) { return a - b; });
         }
         updateSelectionUI();
-        updateContextPanel();
-    }
-
-    function updateSelectionUI() {
-        var selectedMap = {};
-        state.selectedVerses.forEach(function (v) { selectedMap[v] = true; });
-        els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
-            var verse = Number(node.getAttribute('data-verse'));
-            node.classList.toggle('is-selected', Boolean(selectedMap[verse]));
-        });
-    }
-
-    function updateContextPanel() {
-        var contextPanel = document.getElementById('contextPanel');
-        var commentsPanel = document.getElementById('commentsPanel');
-        var notesPanel = document.getElementById('notesPanel');
-        var linksPanel = document.getElementById('linksPanel');
-        var toolsPanel = document.getElementById('toolsPanel');
-
-        if (!state.selectedVerses.length) {
-            contextPanel.innerHTML = '<p class="muted">Selecciona versículos para ver contexto y herramientas.</p>';
-            commentsPanel.innerHTML = '<p class="muted">Selecciona versículos para cargar comentarios.</p>';
-            notesPanel.innerHTML = '<p class="muted">Selecciona versículos para gestionar tus notas.</p>';
-            linksPanel.innerHTML = '<p class="muted">Selecciona versículos para crear vínculos.</p>';
-            toolsPanel.innerHTML = '<div class="card"><p class="muted">Herramientas disponibles al seleccionar un pasaje.</p></div>';
-            return;
-        }
-
-        var first = state.selectedVerses[0];
-        var last = state.selectedVerses[state.selectedVerses.length - 1];
-        var rangeLabel = buildReference(state.currentBook, state.currentChapter, first) +
-            (first !== last ? ' - ' + buildReference(state.currentBook, state.currentChapter, last) : '');
-
-        contextPanel.innerHTML =
-            '<div class="card"><strong>Pasaje seleccionado</strong><p>' + escapeHtml(rangeLabel) + '</p></div>' +
-            '<div class="card"><strong>Resumen del pasaje</strong><p class="muted">Disponible al abrir la pestaña Herramientas.</p></div>' +
-            '<div class="card"><strong>Contexto histórico</strong><p class="muted">Disponible al abrir la pestaña Herramientas.</p></div>' +
-            '<div class="card"><strong>Contexto literario</strong><p class="muted">Disponible al abrir la pestaña Herramientas.</p></div>';
+        onSelectionChange();
     }
 
     function selectRange(fromVerse, toVerse) {
@@ -238,7 +209,348 @@
             return a - b;
         });
         updateSelectionUI();
-        updateContextPanel();
+        onSelectionChange();
+    }
+
+    function updateSelectionUI() {
+        var selectedMap = {};
+        state.selectedVerses.forEach(function (v) { selectedMap[v] = true; });
+        els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
+            var verse = Number(node.getAttribute('data-verse'));
+            node.classList.toggle('is-selected', Boolean(selectedMap[verse]));
+        });
+    }
+
+    function onSelectionChange() {
+        if (!state.selectedVerses.length) {
+            state.selectionPayload = null;
+            renderEmptyPanels();
+            return;
+        }
+        loadSelectionData();
+    }
+
+    function loadSelectionData() {
+        var range = selectedRange();
+        fetch('?route=api.selection&book=' + state.currentBook + '&chapter=' + state.currentChapter +
+            '&verse_start=' + range.start + '&verse_end=' + range.end)
+            .then(asJson)
+            .then(function (data) {
+                if (data.error) {
+                    notify(data.error);
+                    return;
+                }
+                state.selectionPayload = data;
+                renderPanels();
+            })
+            .catch(function () {
+                notify('No se pudo cargar la ayuda del pasaje.');
+            });
+    }
+
+    function renderPanels() {
+        if (!state.selectionPayload) {
+            renderEmptyPanels();
+            return;
+        }
+
+        renderContextPanel(state.selectionPayload);
+        renderCommentsPanel(state.selectionPayload.commentary || {});
+        renderNotesPanel(state.selectionPayload);
+        renderLinksPanel(state.selectionPayload);
+        renderToolsPanel(state.selectionPayload);
+    }
+
+    function renderEmptyPanels() {
+        els.contextPanel.innerHTML = '<p class="muted">Selecciona versículos para ver contexto del pasaje.</p>';
+        els.commentsPanel.innerHTML = '<p class="muted">Selecciona versículos para cargar comentarios.</p>';
+        els.notesPanel.innerHTML = '<p class="muted">Selecciona versículos para gestionar tus notas.</p>';
+        els.linksPanel.innerHTML = '<p class="muted">Selecciona versículos para crear vínculos.</p>';
+        els.toolsPanel.innerHTML = '<p class="muted">Herramientas disponibles al seleccionar un pasaje.</p>';
+    }
+
+    function renderContextPanel(payload) {
+        var c = payload.context || {};
+        els.contextPanel.innerHTML = '' +
+            '<div class="card"><strong>Pasaje</strong><p>' + escapeHtml(payload.reference.label || '') + '</p></div>' +
+            '<div class="card"><strong>Resumen del pasaje</strong><p>' + escapeHtml(c.summary || '') + '</p></div>' +
+            '<div class="card"><strong>Contexto histórico</strong><p>' + escapeHtml(c.historical || '') + '</p></div>' +
+            '<div class="card"><strong>Contexto literario</strong><p>' + escapeHtml(c.literary || '') + '</p></div>';
+    }
+
+    function renderCommentsPanel(commentary) {
+        var cards = [];
+        (commentary.book || []).forEach(function (row) {
+            cards.push('<div class="card"><strong>Comentario de libro</strong><div>' + (row.html || '') + '</div></div>');
+        });
+        (commentary.chapter || []).forEach(function (row) {
+            cards.push('<div class="card"><strong>Comentario de capítulo</strong><div>' + (row.html || '') + '</div></div>');
+        });
+        (commentary.verse || []).forEach(function (row) {
+            cards.push(
+                '<div class="card"><strong>Rango ' +
+                row.chapter_begin + ':' + row.verse_begin + ' - ' + row.chapter_end + ':' + row.verse_end +
+                '</strong><div>' + (row.html || '') + '</div></div>'
+            );
+        });
+        if (!cards.length) {
+            cards.push('<p class="muted">Sin comentarios para esta selección.</p>');
+        }
+        els.commentsPanel.innerHTML = cards.join('');
+    }
+
+    function renderNotesPanel(payload) {
+        var range = payload.reference || {};
+        var notes = payload.notes || [];
+        var list = notes.map(function (note) {
+            return '' +
+                '<div class="card">' +
+                '<strong>' + rangeLabel(note.verse_start, note.verse_end) + '</strong>' +
+                '<p>' + escapeHtml(note.content || '') + '</p>' +
+                (note.tags ? '<small class="muted">Etiquetas: ' + escapeHtml(note.tags) + '</small>' : '') +
+                '<div class="toolbar">' +
+                '<button class="btn-light js-note-edit" data-note-id="' + note.id + '" data-note-content="' + escapeHtml(note.content || '') + '" data-note-tags="' + escapeHtml(note.tags || '') + '">Editar</button>' +
+                '<button class="btn-light js-note-delete" data-note-id="' + note.id + '">Eliminar</button>' +
+                '</div>' +
+                '</div>';
+        }).join('');
+
+        els.notesPanel.innerHTML = '' +
+            '<form id="noteForm" class="stack">' +
+            '<textarea id="noteContent" rows="3" placeholder="Escribe tu nota del pasaje"></textarea>' +
+            '<input id="noteTags" type="text" placeholder="Etiquetas separadas por coma">' +
+            '<button class="btn-primary" type="submit">Guardar nota</button>' +
+            '</form>' +
+            (list || '<p class="muted">No hay notas en este pasaje.</p>');
+
+        var noteForm = document.getElementById('noteForm');
+        noteForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            createNote();
+        });
+
+        els.notesPanel.querySelectorAll('.js-note-delete').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                deleteNote(this.getAttribute('data-note-id'));
+            });
+        });
+
+        els.notesPanel.querySelectorAll('.js-note-edit').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                editNote(
+                    this.getAttribute('data-note-id'),
+                    decodeHtml(this.getAttribute('data-note-content')),
+                    decodeHtml(this.getAttribute('data-note-tags'))
+                );
+            });
+        });
+    }
+
+    function renderLinksPanel(payload) {
+        var range = selectedRange();
+        var links = payload.links || [];
+        var items = links.map(function (link) {
+            return '' +
+                '<div class="card">' +
+                '<strong>' + toReference(link.to_book, link.to_chapter, link.to_verse_start, link.to_verse_end) + '</strong>' +
+                (link.note ? '<p>' + escapeHtml(link.note) + '</p>' : '') +
+                '<div class="toolbar">' +
+                '<button class="btn-light js-link-open" data-book="' + link.to_book + '" data-chapter="' + link.to_chapter + '">Abrir</button>' +
+                '<button class="btn-light js-link-delete" data-id="' + link.id + '">Eliminar</button>' +
+                '</div></div>';
+        }).join('');
+
+        els.linksPanel.innerHTML = '' +
+            '<form id="linkForm" class="stack">' +
+            '<div class="toolbar">' +
+            '<input id="linkBook" type="number" min="1" max="66" placeholder="Libro destino">' +
+            '<input id="linkChapter" type="number" min="1" placeholder="Capítulo destino">' +
+            '<input id="linkVerseStart" type="number" min="1" placeholder="Vers. inicio">' +
+            '<input id="linkVerseEnd" type="number" min="1" placeholder="Vers. fin">' +
+            '</div>' +
+            '<input id="linkNote" type="text" placeholder="Nota del vínculo (opcional)">' +
+            '<button class="btn-primary" type="submit">Guardar vínculo</button>' +
+            '</form>' +
+            '<div class="card"><small class="muted">Origen: ' + escapeHtml(toReference(state.currentBook, state.currentChapter, range.start, range.end)) + '</small></div>' +
+            (items || '<p class="muted">No hay vínculos para este pasaje.</p>');
+
+        var form = document.getElementById('linkForm');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            createLink();
+        });
+
+        els.linksPanel.querySelectorAll('.js-link-open').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                fetchChapter(Number(this.getAttribute('data-book')), Number(this.getAttribute('data-chapter')));
+            });
+        });
+
+        els.linksPanel.querySelectorAll('.js-link-delete').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                deleteLink(Number(this.getAttribute('data-id')));
+            });
+        });
+    }
+
+    function renderToolsPanel(payload) {
+        var historyRows = payload.history || [];
+        var historyHtml = historyRows.map(function (row) {
+            return '<button class="btn-light js-open-history" data-book="' + row.book + '" data-chapter="' + row.chapter + '">' +
+                toReference(row.book, row.chapter, null, null) +
+                '</button>';
+        }).join('');
+
+        els.toolsPanel.innerHTML = '' +
+            '<div class="stack">' +
+            '<button class="btn-primary js-generate" data-mode="explicacion">Generar explicación</button>' +
+            '<button class="btn-light js-generate" data-mode="palabras_clave">Palabras clave</button>' +
+            '<button class="btn-light js-generate" data-mode="bosquejo">Bosquejo</button>' +
+            '<button class="btn-light js-generate" data-mode="aplicacion_practica">Aplicación práctica</button>' +
+            '<div id="toolsOutput" class="card"><p class="muted">Selecciona una acción para generar contenido del pasaje.</p></div>' +
+            '<div class="card"><strong>Historial reciente</strong><div class="stack">' + (historyHtml || '<span class="muted">Sin historial.</span>') + '</div></div>' +
+            '</div>';
+
+        els.toolsPanel.querySelectorAll('.js-open-history').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                fetchChapter(Number(this.getAttribute('data-book')), Number(this.getAttribute('data-chapter')));
+            });
+        });
+
+        els.toolsPanel.querySelectorAll('.js-generate').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var output = document.getElementById('toolsOutput');
+                output.innerHTML = '<p class="muted">Preparado para generar "' + escapeHtml(this.getAttribute('data-mode')) + '".</p>';
+            });
+        });
+    }
+
+    function createNote() {
+        var range = selectedRange();
+        var content = (document.getElementById('noteContent').value || '').trim();
+        var tags = (document.getElementById('noteTags').value || '').trim();
+        if (!content) {
+            notify('Escribe una nota.');
+            return;
+        }
+        postForm('api.note.create', {
+            book: state.currentBook,
+            chapter: state.currentChapter,
+            verse_start: range.start,
+            verse_end: range.end,
+            content: content,
+            tags: tags
+        }).then(function (res) {
+            if (res.error) {
+                notify(res.error);
+                return;
+            }
+            notify('Nota guardada.');
+            loadSelectionData();
+        });
+    }
+
+    function editNote(id, currentContent, currentTags) {
+        var content = window.prompt('Editar nota', currentContent || '');
+        if (!content || !content.trim()) {
+            return;
+        }
+        var tags = window.prompt('Etiquetas', currentTags || '');
+        postForm('api.note.update', {
+            id: id,
+            content: content.trim(),
+            tags: (tags || '').trim()
+        }).then(function (res) {
+            if (res.error) {
+                notify(res.error);
+                return;
+            }
+            notify('Nota actualizada.');
+            loadSelectionData();
+        });
+    }
+
+    function deleteNote(id) {
+        postForm('api.note.delete', { id: id }).then(function (res) {
+            if (res.error) {
+                notify(res.error);
+                return;
+            }
+            notify('Nota eliminada.');
+            loadSelectionData();
+        });
+    }
+
+    function createLink() {
+        var range = selectedRange();
+        var toBook = Number(document.getElementById('linkBook').value || 0);
+        var toChapter = Number(document.getElementById('linkChapter').value || 0);
+        var toVerseStart = Number(document.getElementById('linkVerseStart').value || 0);
+        var toVerseEnd = Number(document.getElementById('linkVerseEnd').value || toVerseStart);
+        var note = (document.getElementById('linkNote').value || '').trim();
+
+        if (!toBook || !toChapter || !toVerseStart) {
+            notify('Completa referencia destino.');
+            return;
+        }
+
+        postForm('api.link.create', {
+            from_book: state.currentBook,
+            from_chapter: state.currentChapter,
+            from_verse_start: range.start,
+            from_verse_end: range.end,
+            to_book: toBook,
+            to_chapter: toChapter,
+            to_verse_start: toVerseStart,
+            to_verse_end: toVerseEnd,
+            note: note
+        }).then(function (res) {
+            if (res.error) {
+                notify(res.error);
+                return;
+            }
+            notify('Vínculo guardado.');
+            loadSelectionData();
+        });
+    }
+
+    function deleteLink(id) {
+        postForm('api.link.delete', { id: id }).then(function (res) {
+            if (res.error) {
+                notify(res.error);
+                return;
+            }
+            notify('Vínculo eliminado.');
+            loadSelectionData();
+        });
+    }
+
+    function selectedRows() {
+        var map = {};
+        state.selectedVerses.forEach(function (value) {
+            map[value] = true;
+        });
+        return state.verses.filter(function (row) {
+            return Boolean(map[Number(row.verse)]);
+        });
+    }
+
+    function selectedRange() {
+        var rows = selectedRows();
+        if (!rows.length) {
+            return { start: 1, end: 1 };
+        }
+        return {
+            start: Number(rows[0].verse),
+            end: Number(rows[rows.length - 1].verse)
+        };
+    }
+
+    function buildSelectionReferences() {
+        var rows = selectedRows();
+        return rows.map(function (row) {
+            return buildReference(row.book, row.chapter, row.verse) + ' - ' + cleanText(row.scripture_text || row.scripture_html || '');
+        });
     }
 
     function fetchChapters(book) {
@@ -286,6 +598,58 @@
             });
     }
 
+    function bindSelectionActions() {
+        els.copySelection.addEventListener('click', function () {
+            var references = buildSelectionReferences();
+            if (!references.length) {
+                notify('Selecciona al menos un versículo.');
+                return;
+            }
+            copyText(references.join('\n')).then(function () {
+                notify('Selección copiada.');
+            }).catch(function () {
+                notify('No se pudo copiar.');
+            });
+        });
+
+        els.copyParagraph.addEventListener('click', function () {
+            var rows = selectedRows();
+            if (!rows.length) {
+                notify('Selecciona al menos un versículo.');
+                return;
+            }
+            var paragraph = rows.map(function (row) {
+                return cleanText(row.scripture_text || row.scripture_html || '');
+            }).join(' ');
+            var start = rows[0].verse;
+            var end = rows[rows.length - 1].verse;
+            var reference = buildReference(state.currentBook, state.currentChapter, start) + (start !== end ? '-' + end : '');
+            copyText(paragraph + '\n\n' + reference).then(function () {
+                notify('Párrafo copiado.');
+            }).catch(function () {
+                notify('No se pudo copiar.');
+            });
+        });
+
+        els.shareSelection.addEventListener('click', function () {
+            var references = buildSelectionReferences();
+            if (!references.length) {
+                notify('Selecciona al menos un versículo.');
+                return;
+            }
+            var text = references.join('\n');
+            if (navigator.share) {
+                navigator.share({ title: 'Biblia para todos', text: text }).catch(function () {});
+                return;
+            }
+            copyText(text).then(function () {
+                notify('Compartir no disponible. Texto copiado.');
+            }).catch(function () {
+                notify('No se pudo copiar.');
+            });
+        });
+    }
+
     function activateTab(tabName) {
         document.querySelectorAll('.tab').forEach(function (tab) {
             tab.classList.toggle('is-active', tab.getAttribute('data-tab') === tabName);
@@ -319,7 +683,6 @@
         if (!input) {
             return;
         }
-
         if (type === 'checkbox') {
             input.checked = Boolean(state.settings[key]);
         } else {
@@ -340,7 +703,6 @@
         document.body.classList.remove('spacing-compact', 'spacing-normal');
         document.body.classList.add('spacing-' + state.settings.spacing);
         document.body.classList.toggle('theme-dark', state.settings.theme === 'dark');
-
         if (state.settings.showHelp) {
             els.helpPane.classList.remove('hidden');
         } else {
@@ -354,8 +716,7 @@
             if (!raw) {
                 return;
             }
-            var parsed = JSON.parse(raw);
-            state.settings = Object.assign({}, state.settings, parsed || {});
+            state.settings = Object.assign({}, state.settings, JSON.parse(raw) || {});
         } catch (err) {
             // ignore
         }
@@ -379,84 +740,14 @@
         }
     }
 
-    function bindSelectionActions() {
-        els.copySelection.addEventListener('click', function () {
-            var references = buildSelectionReferences();
-            if (!references.length) {
-                notify('Selecciona al menos un versículo.');
-                return;
-            }
-            copyText(references.join('\n')).then(function () {
-                notify('Selección copiada.');
-            }).catch(function () {
-                notify('No se pudo copiar.');
-            });
-        });
-
-        els.copyParagraph.addEventListener('click', function () {
-            var rows = selectedRows();
-            if (!rows.length) {
-                notify('Selecciona al menos un versículo.');
-                return;
-            }
-
-            var paragraph = rows.map(function (row) {
-                return cleanText(row.scripture_text || row.scripture_html || '');
-            }).join(' ');
-
-            var start = rows[0].verse;
-            var end = rows[rows.length - 1].verse;
-            var reference = buildReference(state.currentBook, state.currentChapter, start) + (start !== end ? '-' + end : '');
-            var text = paragraph + '\n\n' + reference;
-
-            copyText(text).then(function () {
-                notify('Párrafo copiado.');
-            }).catch(function () {
-                notify('No se pudo copiar.');
-            });
-        });
-
-        els.shareSelection.addEventListener('click', function () {
-            var references = buildSelectionReferences();
-            if (!references.length) {
-                notify('Selecciona al menos un versículo.');
-                return;
-            }
-
-            var text = references.join('\n');
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Biblia para todos',
-                    text: text
-                }).catch(function () {
-                    // user canceled
-                });
-                return;
-            }
-
-            copyText(text).then(function () {
-                notify('Compartir no disponible. Texto copiado.');
-            }).catch(function () {
-                notify('No se pudo copiar.');
-            });
-        });
-    }
-
-    function selectedRows() {
-        var map = {};
-        state.selectedVerses.forEach(function (value) {
-            map[value] = true;
-        });
-        return state.verses.filter(function (row) {
-            return Boolean(map[Number(row.verse)]);
-        });
-    }
-
-    function buildSelectionReferences() {
-        var rows = selectedRows();
-        return rows.map(function (row) {
-            return buildReference(row.book, row.chapter, row.verse) + ' - ' + cleanText(row.scripture_text || row.scripture_html || '');
-        });
+    function postForm(route, data) {
+        return fetch('?route=' + encodeURIComponent(route), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            body: new URLSearchParams(data).toString()
+        }).then(asJson);
     }
 
     function copyText(text) {
@@ -481,6 +772,10 @@
         });
     }
 
+    function asJson(res) {
+        return res.json();
+    }
+
     function cleanText(value) {
         var div = document.createElement('div');
         div.innerHTML = value;
@@ -493,16 +788,37 @@
         return bookName + ' ' + chapter + ':' + verse;
     }
 
+    function toReference(book, chapter, verseStart, verseEnd) {
+        var bookRow = state.books.find(function (item) { return Number(item.id) === Number(book); });
+        var bookName = bookRow ? bookRow.name : ('Libro ' + book);
+        if (!verseStart) {
+            return bookName + ' ' + chapter;
+        }
+        if (!verseEnd || Number(verseStart) === Number(verseEnd)) {
+            return bookName + ' ' + chapter + ':' + verseStart;
+        }
+        return bookName + ' ' + chapter + ':' + verseStart + '-' + verseEnd;
+    }
+
+    function rangeLabel(start, end) {
+        if (Number(start) === Number(end)) {
+            return 'Versículo ' + start;
+        }
+        return 'Versículos ' + start + '-' + end;
+    }
+
+    function decodeHtml(value) {
+        var txt = document.createElement('textarea');
+        txt.innerHTML = value || '';
+        return txt.value;
+    }
+
     function notify(message) {
         els.notice.textContent = message;
         els.notice.classList.remove('hidden');
         setTimeout(function () {
             els.notice.classList.add('hidden');
-        }, 2000);
-    }
-
-    function asJson(res) {
-        return res.json();
+        }, 2200);
     }
 
     function escapeHtml(value) {
