@@ -52,11 +52,11 @@ $initial = [
             <header class="pane-head">
                 <h2><img src="assets/icons/help.svg" alt="" class="ico"> Ayuda</h2>
                 <div class="tabs">
-                    <button class="tab is-active" data-tab="contexto">Contexto</button>
-                    <button class="tab" data-tab="comentarios">Comentarios</button>
-                    <button class="tab" data-tab="notas">Mis notas</button>
-                    <button class="tab" data-tab="vincular">Vincular</button>
-                    <button class="tab" data-tab="herramientas">Herramientas</button>
+                    <button class="tab is-active" data-tab="contexto" title="Contexto"><img src="assets/icons/help.svg" alt="" class="ico tab-ico"><span>Contexto</span></button>
+                    <button class="tab" data-tab="comentarios" title="Comentarios"><img src="assets/icons/text.svg" alt="" class="ico tab-ico"><span>Comentarios</span></button>
+                    <button class="tab" data-tab="notas" title="Mis notas"><img src="assets/icons/copy.svg" alt="" class="ico tab-ico"><span>Mis notas</span></button>
+                    <button class="tab" data-tab="vincular" title="Vincular"><img src="assets/icons/share.svg" alt="" class="ico tab-ico"><span>Vincular</span></button>
+                    <button class="tab" data-tab="herramientas" title="Herramientas"><img src="assets/icons/settings.svg" alt="" class="ico tab-ico"><span>Herramientas</span></button>
                 </div>
             </header>
 

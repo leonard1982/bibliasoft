@@ -134,11 +134,14 @@ class ApiController
             $summary .= '...';
         }
 
+        $contextRef = $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd);
+        $pericope = $this->bibleRepository->getPericopeHint($book, $chapter, $verseStart);
+
         $context = [
-            'title' => $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd),
+            'title' => $contextRef,
             'summary' => $summary,
-            'historical' => 'Resumen breve del contexto histórico del pasaje seleccionado (base inicial).',
-            'literary' => 'Ubicación literaria del pasaje dentro del capítulo y flujo argumental.',
+            'historical' => $this->historicalContextText($book, $contextRef, $pericope),
+            'literary' => $this->literaryContextText($book, $chapter, $contextRef, $pericope, $verses),
         ];
 
         app_json([
@@ -425,6 +428,59 @@ class ApiController
 
         $ai = $this->aiService->cardsForVerse($book, $chapter, $verse, $context, true);
         app_json(['ok' => true, 'ai' => $ai]);
+    }
+
+    private function historicalContextText($book, $reference, $pericope)
+    {
+        $book = (int) $book;
+        $era = 'periodo bíblico no determinado';
+        if ($book >= 1 && $book <= 5) {
+            $era = 'etapa patriarcal y formación del pueblo de Israel';
+        } elseif ($book >= 6 && $book <= 17) {
+            $era = 'periodo de conquista, monarquía y exilio de Israel';
+        } elseif ($book >= 18 && $book <= 22) {
+            $era = 'época sapiencial del Antiguo Testamento';
+        } elseif ($book >= 23 && $book <= 39) {
+            $era = 'periodo profético previo y posterior al exilio';
+        } elseif ($book >= 40 && $book <= 44) {
+            $era = 'ministerio de Jesús y origen de la iglesia';
+        } elseif ($book >= 45 && $book <= 66) {
+            $era = 'expansión de la iglesia apostólica del primer siglo';
+        }
+
+        $pericopeText = trim((string) $pericope);
+        $hint = $pericopeText !== '' ? ' Tema cercano: ' . $pericopeText . '.' : '';
+        return 'Para ' . $reference . ', el marco histórico corresponde a ' . $era . '.' . $hint;
+    }
+
+    private function literaryContextText($book, $chapter, $reference, $pericope, array $verses)
+    {
+        $book = (int) $book;
+        $genre = 'narrativo';
+        if ($book >= 18 && $book <= 22) {
+            $genre = 'poético/sapiencial';
+        } elseif ($book >= 23 && $book <= 39) {
+            $genre = 'profético';
+        } elseif ($book >= 40 && $book <= 44) {
+            $genre = 'evangélico-histórico';
+        } elseif ($book >= 45 && $book <= 65) {
+            $genre = 'epistolar';
+        } elseif ($book === 66) {
+            $genre = 'apocalíptico';
+        }
+
+        $first = '';
+        if (!empty($verses[0]['scripture_text'])) {
+            $first = trim((string) $verses[0]['scripture_text']);
+        }
+        if ($first !== '' && strlen($first) > 120) {
+            $first = substr($first, 0, 120) . '...';
+        }
+
+        $pericopeText = trim((string) $pericope);
+        $topic = $pericopeText !== '' ? (' bajo el encabezado "' . $pericopeText . '"') : '';
+        $line = $first !== '' ? (' Inicio del pasaje: ' . $first) : '';
+        return 'Literariamente, ' . $reference . ' se interpreta como texto ' . $genre . ' dentro del capítulo ' . (int) $chapter . $topic . '.' . $line;
     }
 
     private function requestData()

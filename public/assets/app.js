@@ -17,6 +17,7 @@
         lastSelectedVerse: null,
         pendingVerse: null,
         selectionPayload: null,
+        selectedBackground: '',
         settings: {
             showHelp: true,
             layoutMode: 'columns',
@@ -67,6 +68,9 @@
         state.currentChapter = parseInt(state.initial.chapter || 1, 10);
         state.chapters = state.initial.chapters || [];
         state.verses = state.initial.verses || [];
+        if (state.initial.backgrounds && state.initial.backgrounds.length) {
+            state.selectedBackground = state.initial.backgrounds[0];
+        }
 
         if (state.initial.user_prefs) {
             state.settings.fontScale = Number(state.initial.user_prefs.font_scale || 100);
@@ -477,8 +481,13 @@
         }).join('');
 
         var backgrounds = state.initial.backgrounds || [];
-        var bgOptions = backgrounds.map(function (item) {
-            return '<option value="' + escapeHtml(item) + '">' + escapeHtml(item.split('/').pop()) + '</option>';
+        var selectedBg = state.selectedBackground || backgrounds[0] || 'assets/backgrounds/bg-01.svg';
+        state.selectedBackground = selectedBg;
+        var bgThumbs = backgrounds.map(function (item) {
+            var active = item === selectedBg ? ' is-active' : '';
+            return '<button class="bg-thumb js-bg-thumb' + active + '" type="button" data-bg="' + escapeHtml(item) + '" title="Elegir fondo">' +
+                '<img src="' + escapeHtml(item) + '" alt="Fondo">' +
+                '</button>';
         }).join('');
         var imageCardMode = state.settings.theme === 'dark' ? 'dark' : 'light';
 
@@ -507,16 +516,17 @@
             '<div class="card"><strong>Historial reciente</strong><div class="stack">' + (historyHtml || '<span class="muted">Sin historial.</span>') + '</div></div>' +
             '<details class="card image-tool-box">' +
             '<summary>Crear imagen del versículo</summary>' +
-            '<select id="imageBackgroundSelect">' + (bgOptions || '<option value="assets/backgrounds/bg-01.svg">bg-01.svg</option>') + '</select>' +
+            '<div class="image-bg-carousel">' + (bgThumbs || '<button class="bg-thumb is-active" type="button"><img src="assets/backgrounds/bg-01.svg" alt="Fondo"></button>') + '</div>' +
+            '<div class="image-bg-active-wrap"><img id="imageBgActive" class="image-bg-active" src="' + escapeHtml(selectedBg) + '" alt="Fondo seleccionado"></div>' +
             '<select id="imageCardMode">' +
             '<option value="dark"' + (imageCardMode === 'dark' ? ' selected' : '') + '>Modo oscuro</option>' +
             '<option value="light"' + (imageCardMode === 'light' ? ' selected' : '') + '>Modo claro</option>' +
             '</select>' +
-            '<div class="toolbar">' +
-            '<button class="btn-light js-image-create" type="button" title="Crear imagen">Crear imagen</button>' +
-            '<button class="btn-light js-image-download" type="button" title="Descargar PNG">Descargar</button>' +
-            '<button class="btn-light js-image-share" type="button" title="Compartir imagen">Compartir</button>' +
-            '<button class="btn-light js-image-copy" type="button" title="Copiar imagen">Copiar</button>' +
+            '<div class="tool-icon-row image-action-row">' +
+            '<button class="icon-tool js-image-create" type="button" title="Crear imagen" aria-label="Crear imagen"><img src="assets/icons/camera.svg" alt="" class="ico"></button>' +
+            '<button class="icon-tool js-image-download" type="button" title="Descargar PNG" aria-label="Descargar PNG"><img src="assets/icons/download.svg" alt="" class="ico"></button>' +
+            '<button class="icon-tool js-image-share" type="button" title="Compartir imagen" aria-label="Compartir imagen"><img src="assets/icons/share.svg" alt="" class="ico"></button>' +
+            '<button class="icon-tool js-image-copy" type="button" title="Copiar imagen" aria-label="Copiar imagen"><img src="assets/icons/copy.svg" alt="" class="ico"></button>' +
             '</div>' +
             '<img id="imageCardPreview" class="image-card-preview hidden" alt="Vista previa de versículo">' +
             '</details>' +
@@ -525,6 +535,23 @@
         els.toolsPanel.querySelectorAll('.js-open-history').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 fetchChapter(Number(this.getAttribute('data-book')), Number(this.getAttribute('data-chapter')));
+            });
+        });
+
+        var activeBgPreview = document.getElementById('imageBgActive');
+        els.toolsPanel.querySelectorAll('.js-bg-thumb').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var bg = this.getAttribute('data-bg');
+                if (!bg) {
+                    return;
+                }
+                state.selectedBackground = bg;
+                els.toolsPanel.querySelectorAll('.js-bg-thumb').forEach(function (item) {
+                    item.classList.toggle('is-active', item === btn);
+                });
+                if (activeBgPreview) {
+                    activeBgPreview.src = bg;
+                }
             });
         });
 
@@ -1141,8 +1168,7 @@
         var text = selected.map(function (row) {
             return cleanText(row.scripture_text || row.scripture_html || '');
         }).join(' ');
-        var bgSelect = document.getElementById('imageBackgroundSelect');
-        var background = bgSelect ? bgSelect.value : 'assets/backgrounds/bg-01.svg';
+        var background = state.selectedBackground || 'assets/backgrounds/bg-01.svg';
         var modeSelect = document.getElementById('imageCardMode');
         var cardMode = modeSelect ? modeSelect.value : (state.settings.theme === 'dark' ? 'dark' : 'light');
         var overlayColor = cardMode === 'light' ? 'rgba(255,255,255,.48)' : 'rgba(0,0,0,.40)';
