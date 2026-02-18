@@ -173,7 +173,7 @@ class GenerationService
             'bosquejo' => 'Bosquejo sugerido para ' . $reference . ': 1) Qué dice el texto. 2) Qué significa en su contexto. 3) Qué decisión práctica pide hoy.',
             'aplicacion_practica' => 'Aplicación práctica para ' . $reference . ': identifica una acción concreta para hoy, exprésala en oración breve y compártela con alguien de confianza.',
             'resumen' => $this->buildSummary($text, $reference),
-            'contexto' => 'Contexto de ' . $reference . ': conecta este pasaje con el flujo del capítulo y el propósito general del libro para evitar interpretaciones aisladas.',
+            'contexto' => $this->buildStudyContext($book, $chapter, $verseStart, $verseEnd, $reference, $text),
         ];
         return isset($map[$mode]) ? $map[$mode] : $map['explicacion'];
     }
@@ -231,6 +231,85 @@ class GenerationService
         }
 
         return 'Resumen de ' . $reference . ': ' . $text;
+    }
+
+    private function buildStudyContext($book, $chapter, $verseStart, $verseEnd, $reference, $text)
+    {
+        $meta = $this->bookStudyMeta((int) $book);
+        $bookName = $this->bibleRepository->getBookName((int) $book);
+        $chapterFocus = $verseStart === $verseEnd
+            ? ('el v. ' . (int) $verseStart)
+            : ('los vv. ' . (int) $verseStart . '-' . (int) $verseEnd);
+
+        $sample = trim((string) $text);
+        if ($sample !== '' && (function_exists('mb_strlen') ? mb_strlen($sample, 'UTF-8') : strlen($sample)) > 150) {
+            $sample = function_exists('mb_substr') ? mb_substr($sample, 0, 150, 'UTF-8') . '...' : substr($sample, 0, 150) . '...';
+        }
+
+        $line = 'Contexto histórico-literario de ' . $reference . ': '
+            . $bookName . ' pertenece al bloque ' . $meta['corpus']
+            . ', enmarcado aproximadamente en ' . $meta['periodo'] . '. '
+            . 'Tema macro del libro: ' . $meta['tema'] . '. '
+            . 'Para estudiar el capítulo ' . (int) $chapter . ', lee primero la unidad completa y luego observa cómo ' . $chapterFocus
+            . ' desarrolla la progresión del argumento: ' . $meta['enfoque'] . '.';
+
+        if ($sample !== '') {
+            $line .= ' Pista textual inmediata: "' . $sample . '"';
+        }
+
+        $line .= ' Recomendación exegética: identifica repetición de términos clave, estructura del párrafo y relación con el contexto canónico del libro.';
+        return $line;
+    }
+
+    private function bookStudyMeta($book)
+    {
+        $book = (int) $book;
+        if ($book >= 1 && $book <= 5) {
+            return [
+                'corpus' => 'Pentateuco',
+                'periodo' => 'la etapa fundacional de Israel',
+                'tema' => 'origen, pacto y formación del pueblo de Dios',
+                'enfoque' => 'identidad del pueblo, santidad y fidelidad al pacto',
+            ];
+        }
+        if ($book >= 6 && $book <= 17) {
+            return [
+                'corpus' => 'Históricos del Antiguo Testamento',
+                'periodo' => 'conquista, monarquía, división del reino y exilio',
+                'tema' => 'respuesta de Israel a la alianza en su historia nacional',
+                'enfoque' => 'obediencia o rebeldía y sus consecuencias históricas',
+            ];
+        }
+        if ($book >= 18 && $book <= 22) {
+            return [
+                'corpus' => 'Sapienciales y poéticos',
+                'periodo' => 'diversas etapas de la historia de Israel',
+                'tema' => 'sabiduría, adoración, sufrimiento y temor de Dios',
+                'enfoque' => 'formación del carácter y discernimiento práctico',
+            ];
+        }
+        if ($book >= 23 && $book <= 39) {
+            return [
+                'corpus' => 'Profetas',
+                'periodo' => 'antes, durante y después del exilio',
+                'tema' => 'llamado al arrepentimiento, juicio y restauración',
+                'enfoque' => 'oráculos en su marco histórico y esperanza mesiánica',
+            ];
+        }
+        if ($book >= 40 && $book <= 44) {
+            return [
+                'corpus' => 'Evangelios y Hechos',
+                'periodo' => 'siglo I, ministerio de Jesús y expansión inicial de la iglesia',
+                'tema' => 'reino de Dios, obra de Cristo y misión apostólica',
+                'enfoque' => 'narrativa redentiva y testimonio cristocéntrico',
+            ];
+        }
+        return [
+            'corpus' => 'Epístolas y Apocalipsis',
+            'periodo' => 'primera generación de la iglesia',
+            'tema' => 'doctrina, vida comunitaria y esperanza escatológica',
+            'enfoque' => 'argumentación teológica, exhortación pastoral y perseverancia final',
+        ];
     }
 
     private function extractKeywords($text, $limit)
