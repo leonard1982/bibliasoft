@@ -78,18 +78,28 @@
         }
         var s = row.sections || {};
         var word = s.palabra_clave || {};
+        var background = row.background || backgrounds[0] || 'assets/backgrounds/bg-01.svg';
         currentBox.innerHTML = '' +
-            '<h2>Devocional del día</h2>' +
-            '<p class="muted">' + escapeHtml(row.reference || '') + '</p>' +
-            '<h3>A) Versículo base</h3><p>' + escapeHtml(s.versiculo_base || '') + '</p>' +
-            '<h3>B) Explicación breve</h3><p>' + escapeHtml(s.contexto_textual || '') + '</p>' +
-            '<h3>C) Contexto histórico</h3><p>' + escapeHtml(s.contexto_historico || '') + '</p>' +
-            '<h3>D) Anécdota</h3><p>' + escapeHtml(s.anecdota || '') + '</p>' +
-            '<h3>E) Palabra clave</h3>' +
+            '<div class="devotional-hero" style="background-image: linear-gradient(rgba(11,22,34,.42), rgba(11,22,34,.68)), url(\'' + escapeAttr(background) + '\')">' +
+            '<span class="daily-tag">Devocional del día</span>' +
+            '<h2>' + escapeHtml(row.reference || '') + '</h2>' +
+            '<p class="devotional-verse">"' + escapeHtml(s.versiculo_base || '') + '"</p>' +
+            '</div>' +
+            '<div class="devotional-sections">' +
+            '<article class="card devotional-block"><h3>Contexto textual</h3><p>' + escapeHtml(s.contexto_textual || '') + '</p></article>' +
+            '<article class="card devotional-block"><h3>Contexto histórico</h3><p>' + escapeHtml(s.contexto_historico || '') + '</p></article>' +
+            '<article class="card devotional-block"><h3>Contexto literario</h3><p>' + escapeHtml(s.contexto_literario || '') + '</p></article>' +
+            '<article class="card devotional-block"><h3>Anécdota: ' + escapeHtml(s.anecdota_titulo || 'Aplicación en la vida real') + '</h3><p>' + escapeHtml(s.anecdota || '') + '</p></article>' +
+            '<article class="card devotional-block">' +
+            '<h3>Palabra clave</h3>' +
             '<p><strong>' + escapeHtml(word.palabra || '') + '</strong> · ' + escapeHtml(word.transliteracion || '') + '</p>' +
             '<p>' + escapeHtml(word.significado || '') + '</p>' +
             '<p>' + escapeHtml(word.aplicacion || '') + '</p>' +
-            '<h3>F) Tip del 1%</h3><p>' + escapeHtml(s.tip_1_por_ciento || '') + '</p>';
+            '</article>' +
+            '<article class="card devotional-block"><h3>Tip del 1%</h3><p>' + escapeHtml(s.tip_1_por_ciento || '') + '</p></article>' +
+            '<article class="card devotional-block"><h3>Oración sugerida</h3><p>' + escapeHtml(s.oracion_sugerida || '') + '</p></article>' +
+            '<article class="card devotional-block"><h3>Desafío semanal</h3><p>' + escapeHtml(s.desafio_semana || '') + '</p></article>' +
+            '</div>';
     }
 
     function renderHistory(rows) {
@@ -97,9 +107,31 @@
             historyBox.innerHTML = '<p class="muted">Aún no hay devocionales guardados.</p>';
             return;
         }
-        historyBox.innerHTML = rows.slice(0, 20).map(function (row) {
-            return '<article class="card"><strong>' + escapeHtml(row.date || '') + '</strong><p>' + escapeHtml(row.reference || '') + '</p></article>';
+        historyBox.innerHTML = rows.slice(0, 20).map(function (row, idx) {
+            var summary = row.sections && row.sections.tip_1_por_ciento ? row.sections.tip_1_por_ciento : '';
+            return '<article class="card devotional-history-card" data-idx="' + idx + '">' +
+                '<strong>' + escapeHtml(row.date || '') + '</strong>' +
+                '<p>' + escapeHtml(row.reference || '') + '</p>' +
+                '<small class="muted">' + escapeHtml(summary) + '</small>' +
+                '<div class="toolbar"><button class="btn-light js-open-devotional" type="button">Ver más</button></div>' +
+                '</article>';
         }).join('');
+
+        historyBox.querySelectorAll('.js-open-devotional').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var card = btn.closest('.devotional-history-card');
+                if (!card) {
+                    return;
+                }
+                var idx = Number(card.getAttribute('data-idx'));
+                if (!history[idx]) {
+                    return;
+                }
+                current = history[idx];
+                renderCurrent(current);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
     }
 
     function buildShareText(row) {
@@ -220,5 +252,9 @@
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
+    }
+
+    function escapeAttr(value) {
+        return String(value || '').replace(/'/g, '&#039;').replace(/"/g, '&quot;');
     }
 })();

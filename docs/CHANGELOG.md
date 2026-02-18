@@ -1,6 +1,17 @@
 # CHANGELOG
 
 ## 2026-02-18
+- Rediseño de Inicio como landing profesional:
+  - Mensaje de valor, beneficios concretos, características y llamados a la acción.
+  - Mantiene tarjeta de versículo del día sin forzar redirección automática al lector.
+- Mejora fuerte de Anécdotas:
+  - Render visual más rico (tarjetas por tema, párrafos legibles, destaque de idea y aplicación).
+  - Enriquecimiento automático de anécdotas seed genéricas para evitar repetición visible.
+  - Generador fallback con historias más emocionales y aplicables por tema.
+- Devocionales más completos y con mejor presentación:
+  - Nueva estructura visual con portada del pasaje y bloques de contenido.
+  - Secciones ampliadas: contexto literario, oración sugerida y desafío semanal.
+  - Historial con vista rápida para reabrir devocionales previos.
 - Corrección de generación:
   - El contenido de `Generar explicación` ya no devuelve placeholders antiguos.
   - Se invalida caché de respuestas base y se regenera contenido contextual útil.
