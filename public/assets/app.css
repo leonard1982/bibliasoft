@@ -201,9 +201,9 @@ a {
 }
 
 .reading-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+    display: grid;
+    align-items: stretch;
+    justify-content: stretch;
     gap: .8rem;
     border-bottom: 1px solid var(--line);
     padding: .9rem;
@@ -212,6 +212,15 @@ a {
 .reading-head h1 {
     margin: 0;
     font-size: 1.22rem;
+}
+
+.reading-meta .muted {
+    margin-top: .28rem;
+    margin-bottom: 0;
+}
+
+.reading-tools {
+    justify-content: flex-start;
 }
 
 .toolbar {
@@ -476,7 +485,41 @@ a {
 }
 
 .auth-card {
-    max-width: 560px;
+    max-width: 620px;
+}
+
+.auth-shell {
+    min-height: calc(100vh - 170px);
+    display: grid;
+    place-items: center;
+}
+
+.auth-card {
+    width: min(620px, 96vw);
+    border-radius: 18px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 96%, var(--bg) 4%), var(--panel));
+}
+
+.auth-head {
+    border-bottom: 1px solid var(--line);
+    margin-bottom: .8rem;
+    padding-bottom: .6rem;
+}
+
+.auth-title {
+    margin: 0 0 .35rem;
+    font-size: 1.35rem;
+}
+
+.auth-row {
+    display: grid;
+    gap: .7rem;
+}
+
+.auth-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .55rem;
 }
 
 .error-note {
@@ -721,6 +764,13 @@ body.spacing-normal .verse {
         justify-content: center;
         padding: .5rem;
         gap: 0;
+        font-size: 0;
+        line-height: 0;
+    }
+
+    .reading-head .toolbar .ico {
+        width: 18px;
+        height: 18px;
     }
 
     .share-grid {
@@ -729,5 +779,10 @@ body.spacing-normal .verse {
 
     .qr-box {
         width: min(100%, 270px);
+    }
+
+    .auth-card {
+        width: 100%;
+        border-radius: 14px;
     }
 }

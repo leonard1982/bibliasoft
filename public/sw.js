@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'biblia-soft-v1';
+const CACHE_VERSION = 'biblia-soft-v2';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

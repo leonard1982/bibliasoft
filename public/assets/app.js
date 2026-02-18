@@ -504,6 +504,7 @@
             '</div>' +
             '<div id="toolsOutput" class="card tool-output"><p class="muted">Selecciona un ícono para generar contenido del pasaje.</p></div>' +
             '</div>' +
+            '<div class="card"><strong>Historial reciente</strong><div class="stack">' + (historyHtml || '<span class="muted">Sin historial.</span>') + '</div></div>' +
             '<details class="card image-tool-box">' +
             '<summary>Crear imagen del versículo</summary>' +
             '<select id="imageBackgroundSelect">' + (bgOptions || '<option value="assets/backgrounds/bg-01.svg">bg-01.svg</option>') + '</select>' +
@@ -519,7 +520,6 @@
             '</div>' +
             '<img id="imageCardPreview" class="image-card-preview hidden" alt="Vista previa de versículo">' +
             '</details>' +
-            '<div class="card"><strong>Historial reciente</strong><div class="stack">' + (historyHtml || '<span class="muted">Sin historial.</span>') + '</div></div>' +
             '</div>';
 
         els.toolsPanel.querySelectorAll('.js-open-history').forEach(function (btn) {
