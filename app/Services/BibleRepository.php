@@ -379,10 +379,15 @@ class BibleRepository
         $results = [];
         foreach ($stmt->fetchAll() as $row) {
             $clean = $this->sanitizer->sanitize($row['Scripture']);
+            $title = '';
+            if (preg_match('/<p[^>]*align=["\']center["\'][^>]*>(.*?)<\/p>/is', (string) $row['Scripture'], $matches)) {
+                $title = trim($this->sanitizer->text($matches[1]));
+            }
             $results[] = [
                 'book' => (int) $row['Book'],
                 'chapter' => (int) $row['Chapter'],
                 'verse' => (int) $row['Verse'],
+                'title' => $title,
                 'scripture_html' => $clean,
                 'scripture_text' => $this->sanitizer->text($clean),
             ];

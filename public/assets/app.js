@@ -13,6 +13,7 @@
         verses: [],
         selectedVerses: [],
         lastSelectedVerse: null,
+        pendingVerse: null,
         selectionPayload: null,
         settings: {
             showHelp: true,
@@ -33,15 +34,20 @@
         booksPane: document.getElementById('booksPane'),
         chaptersPane: document.getElementById('chaptersPane'),
         openNavigator: document.getElementById('openNavigator'),
+        openQuickSearch: document.getElementById('openQuickSearch'),
         toggleHelp: document.getElementById('toggleHelp'),
         overlay: document.getElementById('mobileOverlay'),
         notice: document.getElementById('readingNotice'),
         settingsModal: document.getElementById('settingsModal'),
+        searchModal: document.getElementById('searchModal'),
         openSettings: document.getElementById('openSettings'),
         closeSettings: document.getElementById('closeSettings'),
+        closeSearch: document.getElementById('closeSearch'),
         copySelection: document.getElementById('copySelection'),
         copyParagraph: document.getElementById('copyParagraph'),
         shareSelection: document.getElementById('shareSelection'),
+        quickSearchForm: document.getElementById('quickSearchForm'),
+        quickSearchResults: document.getElementById('quickSearchResults'),
         contextPanel: document.getElementById('contextPanel'),
         commentsPanel: document.getElementById('commentsPanel'),
         notesPanel: document.getElementById('notesPanel'),
@@ -113,6 +119,28 @@
         if (els.closeSettings) {
             els.closeSettings.addEventListener('click', closeSettings);
         }
+        if (els.openQuickSearch) {
+            els.openQuickSearch.addEventListener('click', openSearch);
+        }
+        if (els.closeSearch) {
+            els.closeSearch.addEventListener('click', closeSearch);
+        }
+        if (els.quickSearchForm) {
+            els.quickSearchForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                runQuickSearch();
+            });
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.ctrlKey && event.key.toLowerCase() === 'k') {
+                event.preventDefault();
+                openSearch();
+            }
+            if (event.key === 'Escape') {
+                closeSearch();
+            }
+        });
 
         bindSettingsInputs();
     }
@@ -596,6 +624,11 @@
                 renderBooks(state.books);
                 renderChapters();
                 renderVerses();
+                if (state.pendingVerse) {
+                    toggleVerse(state.pendingVerse);
+                    state.lastSelectedVerse = state.pendingVerse;
+                    state.pendingVerse = null;
+                }
                 els.title.textContent = data.book_name + ' ' + data.chapter;
                 history.replaceState(null, '', '?route=reader&book=' + state.currentBook + '&chapter=' + state.currentChapter);
                 closeDrawers();
@@ -677,6 +710,77 @@
         closeDrawers();
     }
 
+    function openSearch() {
+        els.overlay.classList.remove('hidden');
+        els.searchModal.classList.remove('hidden');
+        var q = document.getElementById('qText');
+        if (q) {
+            q.focus();
+        }
+    }
+
+    function closeSearch() {
+        if (!els.searchModal || els.searchModal.classList.contains('hidden')) {
+            return;
+        }
+        els.searchModal.classList.add('hidden');
+        if (els.settingsModal.classList.contains('hidden')) {
+            els.overlay.classList.add('hidden');
+        }
+    }
+
+    function runQuickSearch() {
+        var q = (document.getElementById('qText').value || '').trim();
+        if (!q) {
+            notify('Escribe un texto de búsqueda.');
+            return;
+        }
+        var params = new URLSearchParams({
+            route: 'api.search',
+            q: q,
+            mode: document.getElementById('qMode').value || 'any',
+            book: document.getElementById('qBook').value || '0',
+            chapter_from: document.getElementById('qChapterFrom').value || '0',
+            chapter_to: document.getElementById('qChapterTo').value || '0',
+            limit: '80'
+        });
+
+        fetch('?' + params.toString())
+            .then(asJson)
+            .then(function (res) {
+                renderSearchResults(res.rows || [], res.engine || '');
+            })
+            .catch(function () {
+                notify('No se pudo ejecutar la búsqueda.');
+            });
+    }
+
+    function renderSearchResults(rows, engine) {
+        if (!rows.length) {
+            els.quickSearchResults.innerHTML = '<p class="muted">Sin resultados.</p>';
+            return;
+        }
+        var html = '<p class="muted">Motor: ' + escapeHtml(engine || '-') + ' · Resultados: ' + rows.length + '</p>';
+        html += rows.map(function (row) {
+            return '' +
+                '<div class="search-result">' +
+                '<strong>' + escapeHtml(row.reference || '') + '</strong>' +
+                (row.title ? '<small class="muted">' + escapeHtml(row.title) + '</small>' : '') +
+                '<div>' + (row.scripture_html || '') + '</div>' +
+                '<div class="toolbar"><button class="btn-light js-open-result" data-book="' + row.book + '" data-chapter="' + row.chapter + '" data-verse="' + row.verse + '">Abrir</button></div>' +
+                '</div>';
+        }).join('');
+
+        els.quickSearchResults.innerHTML = html;
+        els.quickSearchResults.querySelectorAll('.js-open-result').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                state.pendingVerse = Number(this.getAttribute('data-verse'));
+                closeSearch();
+                fetchChapter(Number(this.getAttribute('data-book')), Number(this.getAttribute('data-chapter')));
+            });
+        });
+    }
+
     function bindSettingsInputs() {
         bindSetting('optShowHelp', 'showHelp', 'checkbox');
         bindSetting('optLayoutMode', 'layoutMode');
@@ -742,6 +846,9 @@
         els.helpPane.classList.remove('is-open');
         els.booksPane.classList.remove('is-open');
         els.chaptersPane.classList.remove('is-open');
+        if (els.searchModal && !els.searchModal.classList.contains('hidden')) {
+            els.searchModal.classList.add('hidden');
+        }
         if (els.settingsModal.classList.contains('hidden')) {
             els.overlay.classList.add('hidden');
         }

@@ -34,6 +34,7 @@ $initial = [
                 </div>
                 <div class="toolbar">
                     <button id="openNavigator" class="btn-light mobile-only" type="button"><img src="assets/icons/menu.svg" alt="" class="ico"> Navegar</button>
+                    <button id="openQuickSearch" class="btn-light" type="button"><img src="assets/icons/list.svg" alt="" class="ico"> Buscar</button>
                     <button id="copySelection" class="btn-light" type="button"><img src="assets/icons/copy.svg" alt="" class="ico"> Copiar selección</button>
                     <button id="copyParagraph" class="btn-light" type="button"><img src="assets/icons/text.svg" alt="" class="ico"> Copiar como párrafo</button>
                     <button id="shareSelection" class="btn-light" type="button"><img src="assets/icons/share.svg" alt="" class="ico"> Compartir</button>
@@ -114,5 +115,27 @@ $initial = [
                 </select>
             </label>
         </div>
+    </div>
+
+    <div id="searchModal" class="settings hidden" role="dialog" aria-modal="true">
+        <header>
+            <h3><img src="assets/icons/list.svg" alt="" class="ico"> Búsqueda avanzada</h3>
+            <button class="btn-light" id="closeSearch">Cerrar</button>
+        </header>
+        <form id="quickSearchForm" class="settings-grid">
+            <input id="qText" type="text" placeholder="Texto libre o frase">
+            <select id="qMode">
+                <option value="any">Cualquier palabra</option>
+                <option value="all">Todas las palabras</option>
+                <option value="exact">Frase exacta</option>
+            </select>
+            <div class="toolbar">
+                <input id="qBook" type="number" min="0" max="66" placeholder="Libro (0=todos)">
+                <input id="qChapterFrom" type="number" min="1" placeholder="Capítulo desde">
+                <input id="qChapterTo" type="number" min="1" placeholder="Capítulo hasta">
+            </div>
+            <button class="btn-primary" type="submit">Buscar</button>
+        </form>
+        <div id="quickSearchResults" class="stack"></div>
     </div>
 </div>

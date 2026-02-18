@@ -16,12 +16,14 @@ $app = ConnectionFactory::sqlite($appDbPath);
 $source = ConnectionFactory::sqlite($sourceDbPath);
 
 $mode = 'fts5';
+$app->exec('DROP TABLE IF EXISTS fts_index');
 
 try {
     $app->exec("CREATE VIRTUAL TABLE IF NOT EXISTS fts_index USING fts5(
         book UNINDEXED,
         chapter UNINDEXED,
         verse UNINDEXED,
+        title,
         scripture,
         tokenize = 'unicode61 remove_diacritics 2'
     )");
@@ -31,24 +33,28 @@ try {
         book INTEGER NOT NULL,
         chapter INTEGER NOT NULL,
         verse INTEGER NOT NULL,
+        title TEXT,
         scripture TEXT NOT NULL
     )');
     $app->exec('CREATE INDEX IF NOT EXISTS idx_fts_index_ref ON fts_index (book, chapter, verse)');
 }
 
-$app->exec('DELETE FROM fts_index');
-
 $select = $source->query('SELECT Book, Chapter, Verse, Scripture FROM Bible ORDER BY Book, Chapter, Verse');
-$insert = $app->prepare('INSERT INTO fts_index (book, chapter, verse, scripture) VALUES (:book, :chapter, :verse, :scripture)');
+$insert = $app->prepare('INSERT INTO fts_index (book, chapter, verse, title, scripture) VALUES (:book, :chapter, :verse, :title, :scripture)');
 
 $count = 0;
 $app->beginTransaction();
 foreach ($select as $row) {
+    $title = '';
+    if (preg_match('/<p[^>]*align=["\']center["\'][^>]*>(.*?)<\/p>/is', (string) $row['Scripture'], $m)) {
+        $title = trim(html_entity_decode(strip_tags($m[1]), ENT_QUOTES, 'UTF-8'));
+    }
     $plain = trim(html_entity_decode(strip_tags((string) $row['Scripture']), ENT_QUOTES, 'UTF-8'));
     $insert->execute([
         ':book' => (int) $row['Book'],
         ':chapter' => (int) $row['Chapter'],
         ':verse' => (int) $row['Verse'],
+        ':title' => $title,
         ':scripture' => $plain,
     ]);
     $count++;
