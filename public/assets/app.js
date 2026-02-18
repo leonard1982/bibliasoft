@@ -455,8 +455,50 @@
                     output.innerHTML = '<p class="muted">No disponible sin conexión.</p>';
                     return;
                 }
-                output.innerHTML = '<p class="muted">Preparado para generar "' + escapeHtml(this.getAttribute('data-mode')) + '".</p>';
+                var mode = this.getAttribute('data-mode');
+                output.innerHTML = '<p class="muted">Generando...</p>';
+                callGenerate(mode);
             });
+        });
+    }
+
+    function callGenerate(mode) {
+        if (!state.selectionPayload) {
+            notify('Selecciona un pasaje.');
+            return;
+        }
+
+        var ref = state.selectionPayload.reference || {};
+        var verses = state.selectionPayload.verses || [];
+
+        fetch('api/generate.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                book: ref.book,
+                chapter: ref.chapter,
+                verse_start: ref.verse_start,
+                verse_end: ref.verse_end,
+                mode: mode,
+                verses: verses
+            })
+        }).then(asJson).then(function (res) {
+            var output = document.getElementById('toolsOutput');
+            if (res.error) {
+                output.innerHTML = '<p class="muted">' + escapeHtml(res.error) + '</p>';
+                return;
+            }
+            if (!res.result) {
+                output.innerHTML = '<p class="muted">No fue posible generar contenido.</p>';
+                return;
+            }
+            output.innerHTML = '<p>' + escapeHtml(res.result.content || '') + '</p>' +
+                '<small class="muted">' + (res.result.cached ? 'Resultado en caché' : 'Resultado actualizado') + '</small>';
+        }).catch(function () {
+            var output = document.getElementById('toolsOutput');
+            output.innerHTML = '<p class="muted">No disponible sin conexión.</p>';
         });
     }
 

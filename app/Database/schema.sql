@@ -33,16 +33,21 @@ CREATE TABLE IF NOT EXISTS ai_cache (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     book INTEGER NOT NULL,
     chapter INTEGER NOT NULL,
-    verse INTEGER NOT NULL,
-    context_hash TEXT NOT NULL,
-    cards_json TEXT NOT NULL,
-    model TEXT NOT NULL,
+    verse INTEGER,
+    verse_start INTEGER,
+    verse_end INTEGER,
+    context_hash TEXT DEFAULT '',
+    cards_json TEXT DEFAULT '',
+    model TEXT DEFAULT '',
+    mode TEXT DEFAULT 'resumen',
+    prompt_hash TEXT DEFAULT '',
+    response TEXT,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(book, chapter, verse, context_hash)
 );
 
-CREATE INDEX IF NOT EXISTS idx_ai_cache_ref ON ai_cache (book, chapter, verse);
+CREATE INDEX IF NOT EXISTS idx_ai_cache_ref ON ai_cache (book, chapter, verse_start, verse_end, mode);
 
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

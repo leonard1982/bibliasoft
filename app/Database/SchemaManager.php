@@ -111,6 +111,11 @@ class SchemaManager
         if (!isset($columns['response'])) {
             $pdo->exec('ALTER TABLE ai_cache ADD COLUMN response TEXT');
         }
+
+        $pdo->exec('UPDATE ai_cache SET verse_start = COALESCE(verse_start, verse, 1), verse_end = COALESCE(verse_end, verse_start, 1)');
+        $pdo->exec("UPDATE ai_cache SET mode = COALESCE(mode, 'resumen'), prompt_hash = COALESCE(prompt_hash, '')");
+        $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_ai_cache_legacy_unique ON ai_cache(book, chapter, verse, context_hash)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_ai_cache_generation ON ai_cache(book, chapter, verse_start, verse_end, mode)');
     }
 
     private static function tableExists(\PDO $pdo, $table)

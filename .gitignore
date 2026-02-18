@@ -1,0 +1,6 @@
+.env
+storage/*.sqlite
+*.bbli
+*.cmti
+*.lexx
+*.devx
