@@ -74,12 +74,71 @@ class ApiController
             app_json(['error' => 'Capítulo no encontrado'], 404);
         }
 
+        $this->userDataRepository->saveHistory($book, $chapter);
+
         app_json([
             'book' => $book,
             'book_name' => $this->bibleRepository->getBookName($book),
             'chapter' => $chapter,
             'chapters' => $this->bibleRepository->getChapters($book),
             'verses' => $verses,
+        ]);
+    }
+
+    public function selection()
+    {
+        $book = isset($_GET['book']) ? (int) $_GET['book'] : 0;
+        $chapter = isset($_GET['chapter']) ? (int) $_GET['chapter'] : 0;
+        $verseStart = isset($_GET['verse_start']) ? (int) $_GET['verse_start'] : 0;
+        $verseEnd = isset($_GET['verse_end']) ? (int) $_GET['verse_end'] : 0;
+
+        if ($book < 1 || $chapter < 1 || $verseStart < 1 || $verseEnd < 1) {
+            app_json(['error' => 'Parámetros inválidos'], 422);
+        }
+
+        if ($verseStart > $verseEnd) {
+            $tmp = $verseStart;
+            $verseStart = $verseEnd;
+            $verseEnd = $tmp;
+        }
+
+        $verses = $this->bibleRepository->getVersesInRange($book, $chapter, $verseStart, $verseEnd);
+        if (empty($verses)) {
+            app_json(['error' => 'No se encontró el pasaje'], 404);
+        }
+
+        $plain = [];
+        foreach ($verses as $row) {
+            $plain[] = $row['scripture_text'];
+        }
+        $text = trim(implode(' ', $plain));
+
+        $summary = substr($text, 0, 420);
+        if (strlen($text) > 420) {
+            $summary .= '...';
+        }
+
+        $context = [
+            'title' => $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd),
+            'summary' => $summary,
+            'historical' => 'Resumen breve del contexto histórico del pasaje seleccionado (base inicial).',
+            'literary' => 'Ubicación literaria del pasaje dentro del capítulo y flujo argumental.',
+        ];
+
+        app_json([
+            'reference' => [
+                'book' => $book,
+                'chapter' => $chapter,
+                'verse_start' => $verseStart,
+                'verse_end' => $verseEnd,
+                'label' => $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd),
+            ],
+            'verses' => $verses,
+            'context' => $context,
+            'commentary' => $this->bibleRepository->getCommentariesForRange($book, $chapter, $verseStart, $verseEnd),
+            'notes' => $this->userDataRepository->getNotesForRange($book, $chapter, $verseStart, $verseEnd),
+            'links' => $this->userDataRepository->getLinksForRange($book, $chapter, $verseStart, $verseEnd),
+            'history' => $this->userDataRepository->getHistory(8),
         ]);
     }
 
@@ -102,12 +161,14 @@ class ApiController
         $input = $this->requestData();
         $book = isset($input['book']) ? (int) $input['book'] : 0;
         $chapter = isset($input['chapter']) ? (int) $input['chapter'] : 0;
-        $verse = isset($input['verse']) ? (int) $input['verse'] : 0;
+        $verseStart = isset($input['verse_start']) ? (int) $input['verse_start'] : (isset($input['verse']) ? (int) $input['verse'] : 0);
+        $verseEnd = isset($input['verse_end']) ? (int) $input['verse_end'] : $verseStart;
         $content = isset($input['content']) ? trim($input['content']) : '';
-        if ($book < 1 || $chapter < 1 || $verse < 1 || $content === '') {
+        $tags = isset($input['tags']) ? trim($input['tags']) : '';
+        if ($book < 1 || $chapter < 1 || $verseStart < 1 || $verseEnd < 1 || $content === '') {
             app_json(['error' => 'Parámetros inválidos'], 422);
         }
-        $id = $this->userDataRepository->createNote($book, $chapter, $verse, $content);
+        $id = $this->userDataRepository->createNoteForRange($book, $chapter, $verseStart, $verseEnd, $content, $tags);
         app_json(['ok' => true, 'id' => $id], 201);
     }
 
@@ -116,10 +177,11 @@ class ApiController
         $input = $this->requestData();
         $id = isset($input['id']) ? (int) $input['id'] : 0;
         $content = isset($input['content']) ? trim($input['content']) : '';
+        $tags = isset($input['tags']) ? trim($input['tags']) : '';
         if ($id < 1 || $content === '') {
             app_json(['error' => 'Parámetros inválidos'], 422);
         }
-        $ok = $this->userDataRepository->updateNote($id, $content);
+        $ok = $this->userDataRepository->updateNote($id, $content, $tags);
         app_json(['ok' => $ok]);
     }
 
@@ -137,23 +199,46 @@ class ApiController
     public function linkCreate()
     {
         $input = $this->requestData();
-        $required = ['from_book', 'from_chapter', 'from_verse', 'to_book', 'to_chapter', 'to_verse'];
+        $required = ['from_book', 'from_chapter', 'to_book', 'to_chapter'];
         foreach ($required as $field) {
             if (empty($input[$field])) {
                 app_json(['error' => 'Parámetros inválidos'], 422);
             }
         }
 
-        $id = $this->userDataRepository->createLink(
+        $fromVerseStart = isset($input['from_verse_start']) ? (int) $input['from_verse_start'] : (int) ($input['from_verse'] ?? 0);
+        $fromVerseEnd = isset($input['from_verse_end']) ? (int) $input['from_verse_end'] : $fromVerseStart;
+        $toVerseStart = isset($input['to_verse_start']) ? (int) $input['to_verse_start'] : (int) ($input['to_verse'] ?? 0);
+        $toVerseEnd = isset($input['to_verse_end']) ? (int) $input['to_verse_end'] : $toVerseStart;
+        if ($fromVerseStart < 1 || $toVerseStart < 1) {
+            app_json(['error' => 'Parámetros inválidos'], 422);
+        }
+
+        $id = $this->userDataRepository->createLinkForRange(
             (int) $input['from_book'],
             (int) $input['from_chapter'],
-            (int) $input['from_verse'],
+            $fromVerseStart,
+            $fromVerseEnd,
             (int) $input['to_book'],
             (int) $input['to_chapter'],
-            (int) $input['to_verse'],
+            $toVerseStart,
+            $toVerseEnd,
             isset($input['note']) ? $input['note'] : ''
         );
         app_json(['ok' => true, 'id' => $id], 201);
+    }
+
+    public function favoriteToggle()
+    {
+        $input = $this->requestData();
+        $book = isset($input['book']) ? (int) $input['book'] : 0;
+        $chapter = isset($input['chapter']) ? (int) $input['chapter'] : 0;
+        $verse = isset($input['verse']) ? (int) $input['verse'] : 0;
+        if ($book < 1 || $chapter < 1 || $verse < 1) {
+            app_json(['error' => 'Parámetros inválidos'], 422);
+        }
+        $active = $this->userDataRepository->toggleFavorite($book, $chapter, $verse);
+        app_json(['ok' => true, 'active' => $active]);
     }
 
     public function linkDelete()
