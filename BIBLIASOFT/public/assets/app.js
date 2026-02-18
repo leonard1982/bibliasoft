@@ -434,6 +434,7 @@
 
         els.toolsPanel.innerHTML = '' +
             '<div class="stack">' +
+            '<button class="btn-light js-favorite">Marcar favorito</button>' +
             '<button class="btn-primary js-generate" data-mode="explicacion" ' + (offline ? 'disabled' : '') + '>Generar explicación</button>' +
             '<button class="btn-light js-generate" data-mode="palabras_clave" ' + (offline ? 'disabled' : '') + '>Palabras clave</button>' +
             '<button class="btn-light js-generate" data-mode="bosquejo" ' + (offline ? 'disabled' : '') + '>Bosquejo</button>' +
@@ -447,6 +448,24 @@
                 fetchChapter(Number(this.getAttribute('data-book')), Number(this.getAttribute('data-chapter')));
             });
         });
+
+        var favoriteBtn = els.toolsPanel.querySelector('.js-favorite');
+        if (favoriteBtn) {
+            favoriteBtn.addEventListener('click', function () {
+                var range = selectedRange();
+                postForm('api.favorite.toggle', {
+                    book: state.currentBook,
+                    chapter: state.currentChapter,
+                    verse: range.start
+                }).then(function (res) {
+                    if (res.error) {
+                        notify(res.error);
+                        return;
+                    }
+                    notify(res.active ? 'Versículo marcado como favorito.' : 'Favorito eliminado.');
+                });
+            });
+        }
 
         els.toolsPanel.querySelectorAll('.js-generate').forEach(function (btn) {
             btn.addEventListener('click', function () {
