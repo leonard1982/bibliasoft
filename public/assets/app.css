@@ -83,18 +83,37 @@ a {
 
 .nav {
     display: flex;
-    gap: .7rem;
+    gap: .42rem;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
-.nav a {
+.nav-link {
     text-decoration: none;
     color: var(--muted);
+    border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+    border-radius: 999px;
+    padding: .34rem .62rem;
+    background: color-mix(in srgb, var(--panel) 88%, var(--bg) 12%);
+    font-size: .92rem;
 }
 
-.nav .is-active {
+.nav-link:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
     color: var(--accent);
+}
+
+.nav-link.is-active {
+    color: #fff;
     font-weight: 600;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    border-color: transparent;
+}
+
+.nav-settings {
+    border-radius: 999px;
+    padding-inline: .65rem;
 }
 
 .main-content {
@@ -343,6 +362,49 @@ a {
     border: 1px solid var(--line);
     border-radius: 12px;
     overflow: hidden;
+}
+
+.tool-icon-row {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin-top: .55rem;
+}
+
+.icon-tool {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: color-mix(in srgb, var(--panel) 84%, var(--bg) 16%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.icon-tool .ico {
+    width: 18px;
+    height: 18px;
+}
+
+.icon-tool:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.tool-output {
+    margin-top: .6rem;
+}
+
+.image-tool-box summary {
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: .6rem;
+}
+
+.image-tool-box[open] summary {
+    color: var(--accent);
 }
 
 .font-ctrls {
@@ -618,6 +680,25 @@ body.spacing-normal .verse {
         align-items: flex-start;
         flex-direction: column;
         padding: .35rem 0;
+    }
+
+    .brand-wrap {
+        width: 100%;
+    }
+
+    .nav {
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding-bottom: .2rem;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-link,
+    .nav .btn-light {
+        flex: 0 0 auto;
+        white-space: nowrap;
     }
 
     .reading-head .toolbar {

@@ -494,26 +494,31 @@
             '</div>' +
             '</div>' +
             '<button class="btn-light js-favorite">Marcar favorito</button>' +
-            '<button class="btn-primary js-generate" data-mode="explicacion" ' + (offline ? 'disabled' : '') + '>Generar explicación</button>' +
-            '<button class="btn-light js-generate" data-mode="palabras_clave" ' + (offline ? 'disabled' : '') + '>Palabras clave</button>' +
-            '<button class="btn-light js-generate" data-mode="bosquejo" ' + (offline ? 'disabled' : '') + '>Bosquejo</button>' +
-            '<button class="btn-light js-generate" data-mode="aplicacion_practica" ' + (offline ? 'disabled' : '') + '>Aplicación práctica</button>' +
             '<div class="card">' +
-            '<strong>Crear imagen del versículo</strong>' +
+            '<strong>Generar contenido</strong>' +
+            '<div class="tool-icon-row">' +
+            '<button class="icon-tool js-generate" data-mode="explicacion" title="Generar explicación" aria-label="Generar explicación" ' + (offline ? 'disabled' : '') + '><img src="assets/icons/help.svg" alt="" class="ico"></button>' +
+            '<button class="icon-tool js-generate" data-mode="palabras_clave" title="Palabras clave" aria-label="Palabras clave" ' + (offline ? 'disabled' : '') + '><img src="assets/icons/text.svg" alt="" class="ico"></button>' +
+            '<button class="icon-tool js-generate" data-mode="bosquejo" title="Bosquejo" aria-label="Bosquejo" ' + (offline ? 'disabled' : '') + '><img src="assets/icons/list.svg" alt="" class="ico"></button>' +
+            '<button class="icon-tool js-generate" data-mode="aplicacion_practica" title="Aplicación práctica" aria-label="Aplicación práctica" ' + (offline ? 'disabled' : '') + '><img src="assets/icons/share.svg" alt="" class="ico"></button>' +
+            '</div>' +
+            '<div id="toolsOutput" class="card tool-output"><p class="muted">Selecciona un ícono para generar contenido del pasaje.</p></div>' +
+            '</div>' +
+            '<details class="card image-tool-box">' +
+            '<summary>Crear imagen del versículo</summary>' +
             '<select id="imageBackgroundSelect">' + (bgOptions || '<option value="assets/backgrounds/bg-01.svg">bg-01.svg</option>') + '</select>' +
             '<select id="imageCardMode">' +
             '<option value="dark"' + (imageCardMode === 'dark' ? ' selected' : '') + '>Modo oscuro</option>' +
             '<option value="light"' + (imageCardMode === 'light' ? ' selected' : '') + '>Modo claro</option>' +
             '</select>' +
             '<div class="toolbar">' +
-            '<button class="btn-light js-image-create" type="button">Crear imagen del versículo</button>' +
-            '<button class="btn-light js-image-download" type="button">Descargar PNG</button>' +
-            '<button class="btn-light js-image-share" type="button">Compartir</button>' +
-            '<button class="btn-light js-image-copy" type="button">Copiar imagen</button>' +
+            '<button class="btn-light js-image-create" type="button" title="Crear imagen">Crear imagen</button>' +
+            '<button class="btn-light js-image-download" type="button" title="Descargar PNG">Descargar</button>' +
+            '<button class="btn-light js-image-share" type="button" title="Compartir imagen">Compartir</button>' +
+            '<button class="btn-light js-image-copy" type="button" title="Copiar imagen">Copiar</button>' +
             '</div>' +
             '<img id="imageCardPreview" class="image-card-preview hidden" alt="Vista previa de versículo">' +
-            '</div>' +
-            '<div id="toolsOutput" class="card"><p class="muted">Selecciona una acción para generar contenido del pasaje.</p></div>' +
+            '</details>' +
             '<div class="card"><strong>Historial reciente</strong><div class="stack">' + (historyHtml || '<span class="muted">Sin historial.</span>') + '</div></div>' +
             '</div>';
 
