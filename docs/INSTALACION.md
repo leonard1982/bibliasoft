@@ -39,11 +39,14 @@ Rutas principales:
 - `?route=home_daily` (Versículo del día)
 - `?route=reader` (Lector principal)
 - `?route=devotional` (Devocionales)
+- `?route=share_app` (Compartir App con QR)
+- `?route=anecdotes` (Anécdotas)
 
 ## Configuración de entorno
 Variables opcionales:
 - `APP_ENV=local|production`
 - `APP_TZ=America/Bogota`
+- `APP_PUBLIC_URL=https://tu-dominio.com/`
 - `OPENAI_API_KEY=...`
 - `OPENAI_MODEL=gpt-4.1-mini`
 - `AI_ENABLED=1`
@@ -64,3 +67,5 @@ copy .env.example .env
   - `daily_cache`
   - `devotionals`
   - `user_prefs`
+  - `anecdotes`
+  - `anecdote_favorites`

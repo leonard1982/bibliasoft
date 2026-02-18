@@ -30,6 +30,12 @@ En inicio (`?route=home_daily`):
 - Botón `Compartir` para enviar el versículo diario.
 - Botón `No mostrar más hoy` para ocultar la portada diaria hasta el siguiente día.
 
+## Compartir la app por QR
+En `?route=share_app`:
+- se genera QR local apuntando a `APP_PUBLIC_URL` (si está configurado),
+- botón `Copiar enlace`,
+- botón `Compartir`.
+
 ## Devocionales
 En `Devocionales`:
 - `Compartir texto`
