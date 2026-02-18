@@ -103,9 +103,13 @@ a {
 
 .reader-shell {
     display: grid;
-    grid-template-columns: 250px 94px minmax(420px, 1fr) 410px;
+    grid-template-columns: 250px 116px minmax(420px, 1fr) 410px;
     gap: .75rem;
     min-height: calc(100vh - 100px);
+}
+
+.reader-shell.help-hidden {
+    grid-template-columns: 250px 116px minmax(420px, 1fr);
 }
 
 .pane {
@@ -132,6 +136,8 @@ a {
 
 .pane-head.mini h2 {
     margin: 0;
+    font-size: .9rem;
+    white-space: nowrap;
 }
 
 .pane-head input {
@@ -242,6 +248,9 @@ a {
 }
 
 .verse {
+    display: flex;
+    align-items: flex-start;
+    gap: .35rem;
     border: 1px solid transparent;
     border-radius: 10px;
     padding: .55rem .6rem;
@@ -262,7 +271,20 @@ a {
 .verse-num {
     color: var(--muted);
     font-size: .78rem;
-    margin-right: .38rem;
+    margin-right: .14rem;
+    line-height: 1.45;
+    flex: 0 0 auto;
+}
+
+.verse-text {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.verse-text p,
+.verse-text div {
+    display: inline;
+    margin: 0;
 }
 
 .pane-help {
@@ -389,10 +411,65 @@ a {
     margin-bottom: .35rem;
 }
 
+.auth-card {
+    max-width: 560px;
+}
+
+.error-note {
+    border: 1px solid #d77;
+    color: #8a1f1f;
+    background: rgba(211, 60, 60, .1);
+    border-radius: 10px;
+    padding: .5rem .65rem;
+}
+
 .daily-home,
 .devotional-page {
     display: grid;
     gap: .8rem;
+}
+
+.share-app {
+    display: grid;
+    gap: .8rem;
+}
+
+.anecdotes-page {
+    display: grid;
+    gap: .8rem;
+}
+
+.anecdotes-list {
+    display: grid;
+    gap: .65rem;
+}
+
+.anecdote-card h3 {
+    margin-top: .3rem;
+    margin-bottom: .5rem;
+}
+
+.share-card {
+    max-width: 980px;
+}
+
+.share-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: .9rem;
+    align-items: start;
+}
+
+.qr-box {
+    width: 250px;
+    min-height: 250px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .4rem;
 }
 
 .daily-hero {
@@ -484,7 +561,11 @@ body.spacing-normal .verse {
 
 @media (max-width: 1180px) {
     .reader-shell {
-        grid-template-columns: 220px 84px minmax(320px, 1fr) 350px;
+        grid-template-columns: 220px 104px minmax(320px, 1fr) 350px;
+    }
+
+    .reader-shell.help-hidden {
+        grid-template-columns: 220px 104px minmax(320px, 1fr);
     }
 }
 
@@ -535,5 +616,34 @@ body.spacing-normal .verse {
         align-items: flex-start;
         flex-direction: column;
         padding: .35rem 0;
+    }
+
+    .reading-head .toolbar {
+        width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: .35rem;
+        padding-bottom: .2rem;
+    }
+
+    .reading-head .toolbar .btn-label {
+        display: none;
+    }
+
+    .reading-head .toolbar .btn-light,
+    .reading-head .toolbar .btn-primary {
+        min-width: 38px;
+        justify-content: center;
+        padding: .5rem;
+        gap: 0;
+    }
+
+    .share-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .qr-box {
+        width: min(100%, 270px);
     }
 }
