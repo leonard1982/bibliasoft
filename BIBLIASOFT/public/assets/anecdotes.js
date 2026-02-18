@@ -99,14 +99,18 @@
         els.list.innerHTML = state.rows.map(function (row) {
             var sourceLabel = row.source === 'generated' ? 'Generado' : 'Original';
             var favoriteLabel = row.favorite ? 'Guardado' : 'Guardar';
+            var content = formatParagraphs(escapeHtml(row.content || ''));
             return '' +
-                '<article class="card anecdote-card" data-id="' + Number(row.id) + '">' +
-                '<small class="muted">Tema: ' + escapeHtml(row.topic || '') + ' · Fuente: ' + sourceLabel + '</small>' +
+                '<article class="card anecdote-card topic-' + slugify(row.topic || '') + '" data-id="' + Number(row.id) + '">' +
+                '<div class="anecdote-meta">' +
+                '<span class="chip">' + escapeHtml(row.topic || 'General') + '</span>' +
+                '<small class="muted">Fuente: ' + sourceLabel + '</small>' +
+                '</div>' +
                 '<h3>' + escapeHtml(row.title || '') + '</h3>' +
-                '<p>' + nl2br(escapeHtml(row.content || '')) + '</p>' +
-                '<p><strong>Idea central:</strong> ' + escapeHtml(row.idea_central || '') + '</p>' +
-                '<p><strong>Aplicación:</strong> ' + escapeHtml(row.application || '') + '</p>' +
-                '<div class="toolbar">' +
+                '<div class="anecdote-content">' + content + '</div>' +
+                '<p class="anecdote-highlight"><strong>Idea central:</strong> ' + escapeHtml(row.idea_central || '') + '</p>' +
+                '<p class="anecdote-action"><strong>Aplicación:</strong> ' + escapeHtml(row.application || '') + '</p>' +
+                '<div class="toolbar anecdote-actions">' +
                 '<button class="btn-light js-copy" type="button">Copiar</button>' +
                 '<button class="btn-light js-save" type="button">' + favoriteLabel + '</button>' +
                 '<button class="btn-light js-share" type="button">Compartir</button>' +
@@ -193,8 +197,19 @@
             'Biblia para todos';
     }
 
-    function nl2br(text) {
-        return String(text || '').replace(/\n/g, '<br>');
+    function formatParagraphs(text) {
+        var parts = String(text || '').split(/\n\s*\n/);
+        return parts.map(function (part) {
+            return '<p>' + String(part || '').replace(/\n/g, '<br>') + '</p>';
+        }).join('');
+    }
+
+    function slugify(value) {
+        var text = String(value || 'general').toLowerCase();
+        if (text.normalize) {
+            text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        }
+        return text.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
     }
 
     function asJson(res) {

@@ -8,7 +8,7 @@ $devotionalPayload = [
 <section id="devotionalPage" class="devotional-page" data-devotional="<?php echo e(json_encode($devotionalPayload, JSON_UNESCAPED_UNICODE)); ?>">
     <header class="panel">
         <h1>Devocionales</h1>
-        <p class="muted">Devocional del día con estructura clara y aplicación práctica.</p>
+        <p class="muted">Contenido diario para profundizar en la Palabra, fortalecer la fe y aterrizar decisiones prácticas para hoy.</p>
         <div class="toolbar">
             <button class="btn-primary" id="generateDevotional" type="button">Generar otro</button>
             <button class="btn-light" id="shareDevotionalText" type="button">Compartir texto</button>

@@ -15,16 +15,13 @@
     var today = daily.date || new Date().toISOString().slice(0, 10);
     var hideKey = 'daily_hidden_date';
     var showDailyEnabled = localStorage.getItem('show_daily_start') !== '0';
-
-    var urlParams = new URLSearchParams(window.location.search);
-    var forceDaily = urlParams.get('force_daily') === '1';
-
-    if ((!showDailyEnabled || localStorage.getItem(hideKey) === today) && !forceDaily) {
-        window.location.replace('?route=reader');
-        return;
-    }
+    var dailyCard = document.getElementById('dailyVerseCard');
 
     sessionStorage.setItem('daily_seen_today', today);
+
+    if ((!showDailyEnabled || localStorage.getItem(hideKey) === today) && dailyCard) {
+        dailyCard.classList.add('hidden');
+    }
 
     var shareBtn = document.getElementById('shareDailyVerse');
     var hideBtn = document.getElementById('hideDailyToday');
@@ -48,7 +45,9 @@
     if (hideBtn) {
         hideBtn.addEventListener('click', function () {
             localStorage.setItem(hideKey, today);
-            window.location.href = '?route=reader';
+            if (dailyCard) {
+                dailyCard.classList.add('hidden');
+            }
         });
     }
 
