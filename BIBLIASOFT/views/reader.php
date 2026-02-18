@@ -36,12 +36,12 @@ $initial = [
                     <p class="muted"><?php echo e(config('branding.slogan')); ?></p>
                 </div>
                 <div class="toolbar">
-                    <button id="openNavigator" class="btn-light mobile-only" type="button"><img src="assets/icons/menu.svg" alt="" class="ico"> Navegar</button>
-                    <button id="openQuickSearch" class="btn-light" type="button"><img src="assets/icons/list.svg" alt="" class="ico"> Buscar</button>
-                    <button id="copySelection" class="btn-light" type="button"><img src="assets/icons/copy.svg" alt="" class="ico"> Copiar selección</button>
-                    <button id="copyParagraph" class="btn-light" type="button"><img src="assets/icons/text.svg" alt="" class="ico"> Copiar como párrafo</button>
-                    <button id="shareSelection" class="btn-light" type="button"><img src="assets/icons/share.svg" alt="" class="ico"> Compartir</button>
-                    <button id="toggleHelp" class="btn-light"><img src="assets/icons/help.svg" alt="" class="ico"> Ayuda</button>
+                    <button id="openNavigator" class="btn-light mobile-only" type="button" title="Navegar" aria-label="Navegar"><img src="assets/icons/menu.svg" alt="" class="ico"><span class="btn-label">Navegar</span></button>
+                    <button id="openQuickSearch" class="btn-light" type="button" title="Buscar" aria-label="Buscar"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Buscar</span></button>
+                    <button id="copySelection" class="btn-light" type="button" title="Copiar selección" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"><span class="btn-label">Copiar selección</span></button>
+                    <button id="copyParagraph" class="btn-light" type="button" title="Copiar como párrafo" aria-label="Copiar como párrafo"><img src="assets/icons/text.svg" alt="" class="ico"><span class="btn-label">Copiar como párrafo</span></button>
+                    <button id="shareSelection" class="btn-light" type="button" title="Compartir" aria-label="Compartir"><img src="assets/icons/share.svg" alt="" class="ico"><span class="btn-label">Compartir</span></button>
+                    <button id="toggleHelp" class="btn-light" type="button" title="Ayuda" aria-label="Ayuda"><img src="assets/icons/help.svg" alt="" class="ico"><span class="btn-label">Ayuda</span></button>
                 </div>
             </header>
             <div id="readingNotice" class="notice hidden"></div>
