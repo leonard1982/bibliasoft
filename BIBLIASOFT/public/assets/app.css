@@ -138,6 +138,7 @@ a {
     margin: 0;
     font-size: .9rem;
     white-space: nowrap;
+    letter-spacing: .01em;
 }
 
 .pane-head input {
@@ -172,6 +173,7 @@ a {
 .chapter-item {
     text-align: center;
     padding: .6rem .2rem;
+    font-size: .95rem;
 }
 
 .pane-reading {
