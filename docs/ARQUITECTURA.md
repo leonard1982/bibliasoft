@@ -1,0 +1,54 @@
+# ARQUITECTURA
+
+## Objetivo
+Separar completamente:
+- Contenido bíblico de terceros (`*.bbli`, `*.cmti`, `*.lexx`, `*.devx`) en modo solo lectura.
+- Datos propios de la app (`storage/app.sqlite`) para notas, enlaces, caché IA e índices.
+
+## Estructura de carpetas
+- `public/`: front controller y assets (`index.php`, `assets/`).
+- `app/Controllers/`: controladores web/API.
+- `app/Services/`: lógica de dominio (Biblia, búsqueda, IA, sanitización, datos usuario).
+- `app/Database/`: conexión y esquema SQL de app.
+- `views/`: plantillas PHP.
+- `config/`: configuración global.
+- `scripts/`: utilidades CLI (inicialización DB e indexado FTS).
+- `docs/`: bitácora, roadmap, instalación, licencia/distribución.
+
+## Flujo principal
+1. `public/index.php` enruta por query `route`.
+2. `BibleRepository` consulta `01RVR1960x.bbli` y `01RVR1960x.cmti`.
+3. `HtmlSanitizer` limpia HTML antes de render.
+4. Drawer de versículo consume `route=api.verse`:
+   - versículo
+   - comentarios por rango (`ChapterBegin/VerseBegin` a `ChapterEnd/VerseEnd`)
+   - apuntes y enlaces locales
+   - tarjetas IA (stub/caché)
+5. CRUD de apuntes/enlaces persiste en `storage/app.sqlite`.
+
+## Búsqueda
+- Sin índice: `BibleRepository::searchSource()` con `LIKE`.
+- Con índice: `SearchService` usa tabla `fts_index` en BD propia.
+- Script: `php scripts/index_fts.php`
+  - intenta FTS5
+  - si no está disponible, cae a tabla normal indexada.
+
+## Módulo IA
+- Servicio: `app/Services/AIService.php`.
+- Entrada contextual:
+  - libro/capítulo/versículo
+  - texto del versículo
+  - perícopa detectada
+- Salida: 3-5 tarjetas.
+- Estado actual: `stub-first` con caché (`ai_cache`).
+- Integración OpenAI:
+  - llave por variable `OPENAI_API_KEY`
+  - modelo configurable por `OPENAI_MODEL`
+  - punto de integración preparado en `generateWithOpenAI()`.
+
+## Esquema de BD de app
+- `notes`: apuntes por versículo (CRUD).
+- `links`: vínculos manuales entre versículos (CRUD).
+- `ai_cache`: respuestas IA cacheadas con `context_hash` y `model`.
+- `users`: reservada para fase multiusuario.
+- `fts_index`: opcional, generado por script.
