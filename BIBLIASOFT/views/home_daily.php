@@ -12,24 +12,63 @@ $dailyPayload = [
             <h1>Más claridad bíblica, menos distracción, más transformación diaria.</h1>
             <p class="muted">Organiza tu lectura, profundiza en cada pasaje y lleva a la práctica la Palabra con una experiencia simple, moderna y totalmente gratuita.</p>
             <div class="toolbar landing-cta">
-                <a class="btn-primary" href="?route=reader">Empezar ahora</a>
-                <a class="btn-light" href="?route=devotional">Ver devocionales</a>
-                <a class="btn-light" href="?route=anecdotes">Explorar anécdotas</a>
+                <a class="btn-primary" href="?route=reader">
+                    <img src="assets/icons/book.svg" alt="" class="ico"> Empezar ahora
+                </a>
+                <a class="btn-light" href="?route=devotional">
+                    <img src="assets/icons/text.svg" alt="" class="ico"> Ver devocionales
+                </a>
+                <a class="btn-light" href="?route=anecdotes">
+                    <img src="assets/icons/help.svg" alt="" class="ico"> Explorar anécdotas
+                </a>
             </div>
         </div>
         <div class="landing-proof">
             <article class="proof-card">
-                <strong>Lectura guiada</strong>
+                <div class="proof-head">
+                    <img src="assets/icons/book.svg" alt="" class="proof-ico">
+                    <strong>Lectura guiada</strong>
+                </div>
                 <p>Encuentra libro, capítulo y versículos en segundos sin perder el enfoque.</p>
             </article>
             <article class="proof-card">
-                <strong>Estudio estructurado</strong>
+                <div class="proof-head">
+                    <img src="assets/icons/list.svg" alt="" class="proof-ico">
+                    <strong>Estudio estructurado</strong>
+                </div>
                 <p>Contexto, comentarios, notas y vínculos en un flujo claro para estudiar mejor.</p>
             </article>
             <article class="proof-card">
-                <strong>Aplicación diaria</strong>
+                <div class="proof-head">
+                    <img src="assets/icons/share.svg" alt="" class="proof-ico">
+                    <strong>Aplicación diaria</strong>
+                </div>
                 <p>Devocionales y herramientas prácticas para pasar del texto a la acción.</p>
             </article>
+        </div>
+    </article>
+
+    <article class="panel landing-highlights">
+        <div class="highlight-card">
+            <img src="assets/backgrounds/bg-01.svg" alt="" class="highlight-bg">
+            <div class="highlight-overlay">
+                <span class="chip-light"><img src="assets/icons/copy.svg" alt="" class="ico"> Más claridad</span>
+                <p>Lectura limpia y foco en el pasaje para estudiar sin ruido.</p>
+            </div>
+        </div>
+        <div class="highlight-card">
+            <img src="assets/backgrounds/bg-03.svg" alt="" class="highlight-bg">
+            <div class="highlight-overlay">
+                <span class="chip-light"><img src="assets/icons/list.svg" alt="" class="ico"> Más orden</span>
+                <p>Notas, vínculos y recursos organizados para preparar clases y predicaciones.</p>
+            </div>
+        </div>
+        <div class="highlight-card">
+            <img src="assets/backgrounds/bg-05.svg" alt="" class="highlight-bg">
+            <div class="highlight-overlay">
+                <span class="chip-light"><img src="assets/icons/share.svg" alt="" class="ico"> Más alcance</span>
+                <p>Comparte contenido bíblico con formato útil para redes y grupos.</p>
+            </div>
         </div>
     </article>
 
@@ -38,16 +77,24 @@ $dailyPayload = [
         <h2><?php echo e($daily['reference']); ?></h2>
         <p class="daily-verse-text"><?php echo e($daily['text']); ?></p>
         <div class="toolbar">
-            <a class="btn-primary" href="?route=reader&amp;book=<?php echo (int) $daily['book']; ?>&amp;chapter=<?php echo (int) $daily['chapter']; ?>&amp;verse=<?php echo (int) $daily['verse']; ?>">Leer contexto</a>
-            <button class="btn-light" id="shareDailyVerse" type="button">Compartir</button>
-            <a class="btn-light" href="?route=reader">Ir a lectura</a>
-            <button class="btn-light" id="hideDailyToday" type="button">No mostrar más hoy</button>
+            <a class="btn-primary" href="?route=reader&amp;book=<?php echo (int) $daily['book']; ?>&amp;chapter=<?php echo (int) $daily['chapter']; ?>&amp;verse=<?php echo (int) $daily['verse']; ?>">
+                <img src="assets/icons/book.svg" alt="" class="ico"> Leer contexto
+            </a>
+            <button class="btn-light" id="shareDailyVerse" type="button">
+                <img src="assets/icons/share.svg" alt="" class="ico"> Compartir
+            </button>
+            <a class="btn-light" href="?route=reader">
+                <img src="assets/icons/menu.svg" alt="" class="ico"> Ir a lectura
+            </a>
+            <button class="btn-light" id="hideDailyToday" type="button">
+                <img src="assets/icons/eye.svg" alt="" class="ico"> No mostrar más hoy
+            </button>
         </div>
     </article>
 
     <article class="panel marketing-grid">
         <section class="marketing-block">
-            <h3>Lo que puedes lograr</h3>
+            <h3><img src="assets/icons/settings.svg" alt="" class="ico"> Lo que puedes lograr</h3>
             <ul>
                 <li>Ganar más tiempo al estudiar con navegación rápida y lectura limpia.</li>
                 <li>Preparar estudios bíblicos más ordenados con notas por versículo y por rango.</li>
@@ -56,7 +103,7 @@ $dailyPayload = [
             </ul>
         </section>
         <section class="marketing-block">
-            <h3>Características que te impulsan</h3>
+            <h3><img src="assets/icons/help.svg" alt="" class="ico"> Características que te impulsan</h3>
             <ul>
                 <li>Lector profesional: libros, capítulos y panel de ayuda en una sola vista.</li>
                 <li>Búsqueda avanzada por frase, palabras, libro y rango de capítulos.</li>
@@ -65,7 +112,7 @@ $dailyPayload = [
             </ul>
         </section>
         <section class="marketing-block">
-            <h3>Beneficios reales para la iglesia y la familia</h3>
+            <h3><img src="assets/icons/camera.svg" alt="" class="ico"> Beneficios reales para la iglesia y la familia</h3>
             <ul>
                 <li>Más constancia espiritual con un sistema simple de lectura diaria.</li>
                 <li>Mejor retención de la enseñanza al conectar texto, contexto y aplicación.</li>
