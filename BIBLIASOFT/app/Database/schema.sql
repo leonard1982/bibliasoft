@@ -101,3 +101,24 @@ CREATE TABLE IF NOT EXISTS user_prefs (
     theme TEXT NOT NULL DEFAULT 'light',
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS anecdotes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    topic TEXT NOT NULL,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    idea_central TEXT NOT NULL DEFAULT '',
+    application TEXT NOT NULL DEFAULT '',
+    source TEXT NOT NULL DEFAULT 'seed',
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_anecdotes_topic ON anecdotes (topic);
+
+CREATE TABLE IF NOT EXISTS anecdote_favorites (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    anecdote_id INTEGER NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, anecdote_id)
+);

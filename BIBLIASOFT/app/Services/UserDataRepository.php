@@ -463,7 +463,7 @@ class UserDataRepository
     {
         if ($this->hasColumn('ai_cache', 'verse')) {
             $stmt = $this->db()->prepare(
-                'INSERT INTO ai_cache
+                'INSERT OR REPLACE INTO ai_cache
                  (book, chapter, verse, verse_start, verse_end, mode, prompt_hash, response, context_hash, cards_json, model, created_at, updated_at)
                  VALUES
                  (:book, :chapter, :verse, :verse_start, :verse_end, :mode, :prompt_hash, :response, :context_hash, :cards_json, :model, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
@@ -576,6 +576,195 @@ class UserDataRepository
         $stmt = $this->db()->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll();
+    }
+
+    public function createUser($username, $password)
+    {
+        $username = trim((string) $username);
+        if ($username === '' || strlen($username) < 3) {
+            throw new \InvalidArgumentException('Usuario inválido');
+        }
+        if (strlen((string) $password) < 6) {
+            throw new \InvalidArgumentException('La contraseña debe tener al menos 6 caracteres');
+        }
+
+        $stmt = $this->db()->prepare(
+            'INSERT INTO users (username, password_hash, created_at)
+             VALUES (:username, :password_hash, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':username' => $username,
+            ':password_hash' => password_hash((string) $password, PASSWORD_DEFAULT),
+        ]);
+
+        return (int) $this->db()->lastInsertId();
+    }
+
+    public function getUserByUsername($username)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT id, username, password_hash, created_at
+             FROM users
+             WHERE username = :username
+             LIMIT 1'
+        );
+        $stmt->execute([':username' => trim((string) $username)]);
+        return $stmt->fetch();
+    }
+
+    public function getUserById($id)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT id, username, created_at
+             FROM users
+             WHERE id = :id
+             LIMIT 1'
+        );
+        $stmt->execute([':id' => (int) $id]);
+        return $stmt->fetch();
+    }
+
+    public function verifyUser($username, $password)
+    {
+        $row = $this->getUserByUsername($username);
+        if (!$row) {
+            return null;
+        }
+        if (!password_verify((string) $password, (string) $row['password_hash'])) {
+            return null;
+        }
+
+        return [
+            'id' => (int) $row['id'],
+            'username' => (string) $row['username'],
+            'created_at' => (string) $row['created_at'],
+        ];
+    }
+
+    public function countUsers()
+    {
+        return (int) $this->db()->query('SELECT COUNT(*) FROM users')->fetchColumn();
+    }
+
+    public function getAnecdotes(array $filters = [], $limit = 60)
+    {
+        $limit = max(1, min(200, (int) $limit));
+        $where = [];
+        $params = [];
+
+        $topic = isset($filters['topic']) ? trim((string) $filters['topic']) : '';
+        if ($topic !== '' && $topic !== 'Todos') {
+            $where[] = 'topic = :topic';
+            $params[':topic'] = $topic;
+        }
+
+        $query = isset($filters['q']) ? trim((string) $filters['q']) : '';
+        if ($query !== '') {
+            $where[] = '(title LIKE :q OR content LIKE :q OR idea_central LIKE :q OR application LIKE :q)';
+            $params[':q'] = '%' . $query . '%';
+        }
+
+        $sql = 'SELECT id, topic, title, content, idea_central, application, source, created_at
+                FROM anecdotes';
+        if (!empty($where)) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
+        $sql .= ' ORDER BY id DESC LIMIT ' . $limit;
+
+        $stmt = $this->db()->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    public function getAnecdoteTopics()
+    {
+        $stmt = $this->db()->query(
+            'SELECT topic, COUNT(*) AS total
+             FROM anecdotes
+             GROUP BY topic
+             ORDER BY topic ASC'
+        );
+        return $stmt->fetchAll();
+    }
+
+    public function countAnecdotes()
+    {
+        return (int) $this->db()->query('SELECT COUNT(*) FROM anecdotes')->fetchColumn();
+    }
+
+    public function createAnecdote($topic, $title, $content, $ideaCentral, $application, $source = 'seed')
+    {
+        $stmt = $this->db()->prepare(
+            'INSERT INTO anecdotes (topic, title, content, idea_central, application, source, created_at)
+             VALUES (:topic, :title, :content, :idea_central, :application, :source, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':topic' => trim((string) $topic),
+            ':title' => trim((string) $title),
+            ':content' => trim((string) $content),
+            ':idea_central' => trim((string) $ideaCentral),
+            ':application' => trim((string) $application),
+            ':source' => trim((string) $source),
+        ]);
+        return (int) $this->db()->lastInsertId();
+    }
+
+    public function hasAnecdotes()
+    {
+        return $this->countAnecdotes() > 0;
+    }
+
+    public function toggleAnecdoteFavorite($userId, $anecdoteId)
+    {
+        $userId = (int) $userId;
+        $anecdoteId = (int) $anecdoteId;
+        if ($userId < 1 || $anecdoteId < 1) {
+            return false;
+        }
+
+        $stmt = $this->db()->prepare(
+            'SELECT id FROM anecdote_favorites WHERE user_id = :user_id AND anecdote_id = :anecdote_id LIMIT 1'
+        );
+        $stmt->execute([
+            ':user_id' => $userId,
+            ':anecdote_id' => $anecdoteId,
+        ]);
+        $id = (int) $stmt->fetchColumn();
+
+        if ($id > 0) {
+            $del = $this->db()->prepare('DELETE FROM anecdote_favorites WHERE id = :id');
+            $del->execute([':id' => $id]);
+            return false;
+        }
+
+        $ins = $this->db()->prepare(
+            'INSERT INTO anecdote_favorites (user_id, anecdote_id, created_at)
+             VALUES (:user_id, :anecdote_id, CURRENT_TIMESTAMP)'
+        );
+        $ins->execute([
+            ':user_id' => $userId,
+            ':anecdote_id' => $anecdoteId,
+        ]);
+        return true;
+    }
+
+    public function getFavoriteAnecdoteIds($userId)
+    {
+        $userId = (int) $userId;
+        if ($userId < 1) {
+            return [];
+        }
+
+        $stmt = $this->db()->prepare(
+            'SELECT anecdote_id FROM anecdote_favorites WHERE user_id = :user_id'
+        );
+        $stmt->execute([':user_id' => $userId]);
+        $rows = $stmt->fetchAll();
+        $ids = [];
+        foreach ($rows as $row) {
+            $ids[] = (int) $row['anecdote_id'];
+        }
+        return $ids;
     }
 
     private function normalizeRange($a, $b)

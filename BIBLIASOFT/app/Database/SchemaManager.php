@@ -36,6 +36,8 @@ class SchemaManager
         self::migrateDailyCache($pdo);
         self::migrateDevotionals($pdo);
         self::migrateUserPrefs($pdo);
+        self::migrateAnecdotes($pdo);
+        self::migrateAnecdoteFavorites($pdo);
     }
 
     private static function migrateNotes(\PDO $pdo)
@@ -202,6 +204,52 @@ class SchemaManager
         }
 
         $pdo->exec("INSERT OR IGNORE INTO user_prefs (id, font_scale, show_daily, auto_devotional, theme, updated_at) VALUES (1, 100, 1, 0, 'light', CURRENT_TIMESTAMP)");
+    }
+
+    private static function migrateAnecdotes(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'anecdotes')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS anecdotes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                topic TEXT NOT NULL,
+                title TEXT NOT NULL,
+                content TEXT NOT NULL,
+                idea_central TEXT NOT NULL DEFAULT \'\',
+                application TEXT NOT NULL DEFAULT \'\',
+                source TEXT NOT NULL DEFAULT \'seed\',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+            $pdo->exec('CREATE INDEX IF NOT EXISTS idx_anecdotes_topic ON anecdotes(topic)');
+            return;
+        }
+
+        $columns = self::columns($pdo, 'anecdotes');
+        if (!isset($columns['idea_central'])) {
+            $pdo->exec("ALTER TABLE anecdotes ADD COLUMN idea_central TEXT NOT NULL DEFAULT ''");
+        }
+        if (!isset($columns['application'])) {
+            $pdo->exec("ALTER TABLE anecdotes ADD COLUMN application TEXT NOT NULL DEFAULT ''");
+        }
+        if (!isset($columns['source'])) {
+            $pdo->exec("ALTER TABLE anecdotes ADD COLUMN source TEXT NOT NULL DEFAULT 'seed'");
+        }
+        if (!isset($columns['created_at'])) {
+            $pdo->exec("ALTER TABLE anecdotes ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_anecdotes_topic ON anecdotes(topic)');
+    }
+
+    private static function migrateAnecdoteFavorites(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'anecdote_favorites')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS anecdote_favorites (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                anecdote_id INTEGER NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(user_id, anecdote_id)
+            )');
+        }
     }
 
     private static function tableExists(\PDO $pdo, $table)
