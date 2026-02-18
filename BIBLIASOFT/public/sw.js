@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'biblia-soft-v2';
+const CACHE_VERSION = 'biblia-soft-v3';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -18,6 +18,8 @@ const STATIC_ASSETS = [
   './assets/vendor/qrcode.min.js',
   './assets/icons/book.svg',
   './assets/icons/copy.svg',
+  './assets/icons/camera.svg',
+  './assets/icons/download.svg',
   './assets/icons/help.svg',
   './assets/icons/list.svg',
   './assets/icons/menu.svg',
