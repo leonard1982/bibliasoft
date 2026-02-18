@@ -173,52 +173,75 @@ class BibleRepository
         $bookRows = [];
         $chapterRows = [];
         $verseRows = [];
+        $cmtiEnabled = (bool) config('sources.comments.cmti.enabled', false);
+        if ($cmtiEnabled) {
+            $stmtBook = $this->commentary()->prepare('SELECT Comments FROM BookCommentary WHERE Book = :book');
+            $stmtBook->execute([':book' => $book]);
+            foreach ($stmtBook->fetchAll() as $row) {
+                $bookRows[] = [
+                    'html' => $this->sanitizer->sanitize($row['Comments']),
+                    'source' => 'cmti',
+                    'source_label' => $this->sourceLabel('cmti'),
+                ];
+            }
 
-        $stmtBook = $this->commentary()->prepare('SELECT Comments FROM BookCommentary WHERE Book = :book');
-        $stmtBook->execute([':book' => $book]);
-        foreach ($stmtBook->fetchAll() as $row) {
-            $bookRows[] = [
-                'html' => $this->sanitizer->sanitize($row['Comments']),
-            ];
+            $stmtChapter = $this->commentary()->prepare(
+                'SELECT Comments FROM ChapterCommentary WHERE Book = :book AND Chapter = :chapter'
+            );
+            $stmtChapter->execute([
+                ':book' => $book,
+                ':chapter' => $chapter,
+            ]);
+            foreach ($stmtChapter->fetchAll() as $row) {
+                $chapterRows[] = [
+                    'html' => $this->sanitizer->sanitize($row['Comments']),
+                    'source' => 'cmti',
+                    'source_label' => $this->sourceLabel('cmti'),
+                ];
+            }
+
+            $stmtVerse = $this->commentary()->prepare(
+                'SELECT ChapterBegin, VerseBegin, ChapterEnd, VerseEnd, Comments
+                 FROM VerseCommentary
+                 WHERE Book = :book
+                   AND (
+                       (ChapterBegin < :chapter OR (ChapterBegin = :chapter AND VerseBegin <= :verse))
+                       AND
+                       (ChapterEnd > :chapter OR (ChapterEnd = :chapter AND VerseEnd >= :verse))
+                   )
+                 ORDER BY ChapterBegin, VerseBegin'
+            );
+            $stmtVerse->execute([
+                ':book' => $book,
+                ':chapter' => $chapter,
+                ':verse' => $verse,
+            ]);
+            foreach ($stmtVerse->fetchAll() as $row) {
+                $verseRows[] = [
+                    'chapter_begin' => (int) $row['ChapterBegin'],
+                    'verse_begin' => (int) $row['VerseBegin'],
+                    'chapter_end' => (int) $row['ChapterEnd'],
+                    'verse_end' => (int) $row['VerseEnd'],
+                    'html' => $this->sanitizer->sanitize($row['Comments']),
+                    'source' => 'cmti',
+                    'source_label' => $this->sourceLabel('cmti'),
+                ];
+            }
         }
 
-        $stmtChapter = $this->commentary()->prepare(
-            'SELECT Comments FROM ChapterCommentary WHERE Book = :book AND Chapter = :chapter'
-        );
-        $stmtChapter->execute([
-            ':book' => $book,
-            ':chapter' => $chapter,
-        ]);
-        foreach ($stmtChapter->fetchAll() as $row) {
-            $chapterRows[] = [
-                'html' => $this->sanitizer->sanitize($row['Comments']),
-            ];
-        }
-
-        $stmtVerse = $this->commentary()->prepare(
-            'SELECT ChapterBegin, VerseBegin, ChapterEnd, VerseEnd, Comments
-             FROM VerseCommentary
-             WHERE Book = :book
-               AND (
-                   (ChapterBegin < :chapter OR (ChapterBegin = :chapter AND VerseBegin <= :verse))
-                   AND
-                   (ChapterEnd > :chapter OR (ChapterEnd = :chapter AND VerseEnd >= :verse))
-               )
-             ORDER BY ChapterBegin, VerseBegin'
-        );
-        $stmtVerse->execute([
-            ':book' => $book,
-            ':chapter' => $chapter,
-            ':verse' => $verse,
-        ]);
-        foreach ($stmtVerse->fetchAll() as $row) {
-            $verseRows[] = [
-                'chapter_begin' => (int) $row['ChapterBegin'],
-                'verse_begin' => (int) $row['VerseBegin'],
-                'chapter_end' => (int) $row['ChapterEnd'],
-                'verse_end' => (int) $row['VerseEnd'],
-                'html' => $this->sanitizer->sanitize($row['Comments']),
-            ];
+        if (empty($bookRows) && empty($chapterRows) && empty($verseRows) && (bool) config('sources.comments.generated.enabled', true)) {
+            $generatedHtml = $this->generatedCommentaryHtml($book, $chapter, $verse, $verse);
+            if ($generatedHtml !== '') {
+                $verseRows[] = [
+                    'chapter_begin' => $chapter,
+                    'verse_begin' => $verse,
+                    'chapter_end' => $chapter,
+                    'verse_end' => $verse,
+                    'html' => $generatedHtml,
+                    'source' => 'generated',
+                    'source_label' => $this->sourceLabel('generated'),
+                ];
+            }
         }
 
         return [
@@ -238,53 +261,76 @@ class BibleRepository
         $bookRows = [];
         $chapterRows = [];
         $verseRows = [];
+        $cmtiEnabled = (bool) config('sources.comments.cmti.enabled', false);
+        if ($cmtiEnabled) {
+            $stmtBook = $this->commentary()->prepare('SELECT Comments FROM BookCommentary WHERE Book = :book');
+            $stmtBook->execute([':book' => $book]);
+            foreach ($stmtBook->fetchAll() as $row) {
+                $bookRows[] = [
+                    'html' => $this->sanitizer->sanitize($row['Comments']),
+                    'source' => 'cmti',
+                    'source_label' => $this->sourceLabel('cmti'),
+                ];
+            }
 
-        $stmtBook = $this->commentary()->prepare('SELECT Comments FROM BookCommentary WHERE Book = :book');
-        $stmtBook->execute([':book' => $book]);
-        foreach ($stmtBook->fetchAll() as $row) {
-            $bookRows[] = [
-                'html' => $this->sanitizer->sanitize($row['Comments']),
-            ];
+            $stmtChapter = $this->commentary()->prepare(
+                'SELECT Comments FROM ChapterCommentary WHERE Book = :book AND Chapter = :chapter'
+            );
+            $stmtChapter->execute([
+                ':book' => $book,
+                ':chapter' => $chapter,
+            ]);
+            foreach ($stmtChapter->fetchAll() as $row) {
+                $chapterRows[] = [
+                    'html' => $this->sanitizer->sanitize($row['Comments']),
+                    'source' => 'cmti',
+                    'source_label' => $this->sourceLabel('cmti'),
+                ];
+            }
+
+            $stmtVerse = $this->commentary()->prepare(
+                'SELECT ChapterBegin, VerseBegin, ChapterEnd, VerseEnd, Comments
+                 FROM VerseCommentary
+                 WHERE Book = :book
+                   AND (
+                       (ChapterBegin < :chapter OR (ChapterBegin = :chapter AND VerseBegin <= :verse_end))
+                       AND
+                       (ChapterEnd > :chapter OR (ChapterEnd = :chapter AND VerseEnd >= :verse_start))
+                   )
+                 ORDER BY ChapterBegin, VerseBegin'
+            );
+            $stmtVerse->execute([
+                ':book' => $book,
+                ':chapter' => $chapter,
+                ':verse_start' => $range['start'],
+                ':verse_end' => $range['end'],
+            ]);
+            foreach ($stmtVerse->fetchAll() as $row) {
+                $verseRows[] = [
+                    'chapter_begin' => (int) $row['ChapterBegin'],
+                    'verse_begin' => (int) $row['VerseBegin'],
+                    'chapter_end' => (int) $row['ChapterEnd'],
+                    'verse_end' => (int) $row['VerseEnd'],
+                    'html' => $this->sanitizer->sanitize($row['Comments']),
+                    'source' => 'cmti',
+                    'source_label' => $this->sourceLabel('cmti'),
+                ];
+            }
         }
 
-        $stmtChapter = $this->commentary()->prepare(
-            'SELECT Comments FROM ChapterCommentary WHERE Book = :book AND Chapter = :chapter'
-        );
-        $stmtChapter->execute([
-            ':book' => $book,
-            ':chapter' => $chapter,
-        ]);
-        foreach ($stmtChapter->fetchAll() as $row) {
-            $chapterRows[] = [
-                'html' => $this->sanitizer->sanitize($row['Comments']),
-            ];
-        }
-
-        $stmtVerse = $this->commentary()->prepare(
-            'SELECT ChapterBegin, VerseBegin, ChapterEnd, VerseEnd, Comments
-             FROM VerseCommentary
-             WHERE Book = :book
-               AND (
-                   (ChapterBegin < :chapter OR (ChapterBegin = :chapter AND VerseBegin <= :verse_end))
-                   AND
-                   (ChapterEnd > :chapter OR (ChapterEnd = :chapter AND VerseEnd >= :verse_start))
-               )
-             ORDER BY ChapterBegin, VerseBegin'
-        );
-        $stmtVerse->execute([
-            ':book' => $book,
-            ':chapter' => $chapter,
-            ':verse_start' => $range['start'],
-            ':verse_end' => $range['end'],
-        ]);
-        foreach ($stmtVerse->fetchAll() as $row) {
-            $verseRows[] = [
-                'chapter_begin' => (int) $row['ChapterBegin'],
-                'verse_begin' => (int) $row['VerseBegin'],
-                'chapter_end' => (int) $row['ChapterEnd'],
-                'verse_end' => (int) $row['VerseEnd'],
-                'html' => $this->sanitizer->sanitize($row['Comments']),
-            ];
+        if (empty($bookRows) && empty($chapterRows) && empty($verseRows) && (bool) config('sources.comments.generated.enabled', true)) {
+            $generatedHtml = $this->generatedCommentaryHtml($book, $chapter, $range['start'], $range['end']);
+            if ($generatedHtml !== '') {
+                $verseRows[] = [
+                    'chapter_begin' => $chapter,
+                    'verse_begin' => $range['start'],
+                    'chapter_end' => $chapter,
+                    'verse_end' => $range['end'],
+                    'html' => $generatedHtml,
+                    'source' => 'generated',
+                    'source_label' => $this->sourceLabel('generated'),
+                ];
+            }
         }
 
         return [
@@ -417,6 +463,50 @@ class BibleRepository
             'start' => min($a, $b),
             'end' => max($a, $b),
         ];
+    }
+
+    private function sourceLabel($source)
+    {
+        $source = trim((string) $source);
+        $label = config('sources.comments.' . $source . '.ui_label', '');
+        if ($label !== '') {
+            return (string) $label;
+        }
+        if ($source === 'generated') {
+            return 'Generado';
+        }
+        return 'Dominio público';
+    }
+
+    private function generatedCommentaryHtml($book, $chapter, $verseStart, $verseEnd)
+    {
+        $verses = $this->getVersesInRange($book, $chapter, $verseStart, $verseEnd);
+        if (empty($verses)) {
+            return '';
+        }
+
+        $textParts = [];
+        foreach ($verses as $row) {
+            $textParts[] = trim((string) $row['scripture_text']);
+        }
+        $joined = trim(preg_replace('/\s+/', ' ', implode(' ', $textParts)));
+        if ($joined === '') {
+            return '';
+        }
+        if (function_exists('mb_strlen') && function_exists('mb_substr')) {
+            if (mb_strlen($joined, 'UTF-8') > 260) {
+                $joined = mb_substr($joined, 0, 260, 'UTF-8') . '...';
+            }
+        } elseif (strlen($joined) > 260) {
+            $joined = substr($joined, 0, 260) . '...';
+        }
+
+        $reference = $this->buildRangeLabel($book, $chapter, $verseStart, $verseEnd);
+        $html = '<p><strong>' . e($reference) . '.</strong> Este comentario contextual resume el enfoque del pasaje: '
+            . e($joined)
+            . ' Se recomienda comparar con el capítulo completo para una interpretación equilibrada.</p>';
+
+        return $html;
     }
 
     private function bible()
