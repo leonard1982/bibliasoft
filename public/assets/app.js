@@ -45,6 +45,7 @@
         notice: document.getElementById('readingNotice'),
         settingsModal: document.getElementById('settingsModal'),
         searchModal: document.getElementById('searchModal'),
+        readerShell: root.querySelector('.reader-shell'),
         openSettings: document.getElementById('openSettings'),
         closeSettings: document.getElementById('closeSettings'),
         closeSearch: document.getElementById('closeSearch'),
@@ -232,6 +233,10 @@
                     toggleVerse(verse);
                     state.lastSelectedVerse = verse;
                 }
+                if (window.matchMedia('(max-width: 980px)').matches) {
+                    activateTab('contexto');
+                    openHelpDrawer();
+                }
             });
         });
     }
@@ -334,22 +339,33 @@
     function renderCommentsPanel(commentary) {
         var cards = [];
         (commentary.book || []).forEach(function (row) {
-            cards.push('<div class="card"><strong>Comentario de libro</strong><div>' + (row.html || '') + '</div></div>');
+            cards.push('<div class="card"><strong>Comentario de libro</strong>' +
+                renderSourceTag(row) +
+                '<div>' + (row.html || '') + '</div></div>');
         });
         (commentary.chapter || []).forEach(function (row) {
-            cards.push('<div class="card"><strong>Comentario de capítulo</strong><div>' + (row.html || '') + '</div></div>');
+            cards.push('<div class="card"><strong>Comentario de capítulo</strong>' +
+                renderSourceTag(row) +
+                '<div>' + (row.html || '') + '</div></div>');
         });
         (commentary.verse || []).forEach(function (row) {
             cards.push(
                 '<div class="card"><strong>Rango ' +
                 row.chapter_begin + ':' + row.verse_begin + ' - ' + row.chapter_end + ':' + row.verse_end +
-                '</strong><div>' + (row.html || '') + '</div></div>'
+                '</strong>' + renderSourceTag(row) + '<div>' + (row.html || '') + '</div></div>'
             );
         });
         if (!cards.length) {
             cards.push('<p class="muted">Sin comentarios para esta selección.</p>');
         }
         els.commentsPanel.innerHTML = cards.join('');
+    }
+
+    function renderSourceTag(row) {
+        if (!row || !row.source_label) {
+            return '';
+        }
+        return '<small class="muted">Fuente: ' + escapeHtml(row.source_label) + '</small>';
     }
 
     function renderNotesPanel(payload) {
@@ -971,6 +987,9 @@
         } else {
             els.helpPane.classList.add('hidden');
         }
+        if (els.readerShell) {
+            els.readerShell.classList.toggle('help-hidden', !state.settings.showHelp);
+        }
     }
 
     function loadSettings() {
@@ -1000,6 +1019,7 @@
     }
 
     function openHelpDrawer() {
+        els.helpPane.classList.remove('hidden');
         els.helpPane.classList.add('is-open');
         els.overlay.classList.remove('hidden');
     }
@@ -1008,6 +1028,9 @@
         els.helpPane.classList.remove('is-open');
         els.booksPane.classList.remove('is-open');
         els.chaptersPane.classList.remove('is-open');
+        if (!state.settings.showHelp) {
+            els.helpPane.classList.add('hidden');
+        }
         if (els.searchModal && !els.searchModal.classList.contains('hidden')) {
             els.searchModal.classList.add('hidden');
         }
