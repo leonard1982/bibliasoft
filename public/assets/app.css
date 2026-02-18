@@ -448,6 +448,29 @@ a {
     background: color-mix(in srgb, var(--panel) 95%, var(--bg) 5%);
 }
 
+.note-editor {
+    border-color: color-mix(in srgb, var(--accent) 34%, var(--line));
+    background: linear-gradient(145deg, color-mix(in srgb, var(--selection) 52%, transparent), color-mix(in srgb, var(--panel) 90%, var(--bg) 10%));
+    box-shadow: 0 10px 24px rgba(17, 34, 49, .08);
+}
+
+.note-editor-head {
+    display: grid;
+    gap: .12rem;
+    margin-bottom: .45rem;
+}
+
+.note-editor textarea {
+    min-height: 120px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.note-editor-actions {
+    justify-content: flex-end;
+    gap: .45rem;
+}
+
 .image-card-preview {
     width: 100%;
     border: 1px solid var(--line);

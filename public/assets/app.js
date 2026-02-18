@@ -436,6 +436,21 @@
         }).join('');
 
         els.notesPanel.innerHTML = '' +
+            '<div id="noteEditBox" class="card note-editor hidden">' +
+            '<div class="note-editor-head">' +
+            '<strong>Editar nota</strong>' +
+            '<small class="muted">Actualiza el contenido y las etiquetas.</small>' +
+            '</div>' +
+            '<form id="noteEditForm" class="stack">' +
+            '<input id="noteEditId" type="hidden">' +
+            '<textarea id="noteEditContent" rows="4" placeholder="Edita tu nota del pasaje"></textarea>' +
+            '<input id="noteEditTags" type="text" placeholder="Etiquetas separadas por coma">' +
+            '<div class="toolbar note-editor-actions">' +
+            '<button class="btn-primary" type="submit">Guardar cambios</button>' +
+            '<button class="btn-light" id="noteEditCancel" type="button">Cancelar</button>' +
+            '</div>' +
+            '</form>' +
+            '</div>' +
             '<form id="noteForm" class="stack">' +
             '<textarea id="noteContent" rows="3" placeholder="Escribe tu nota del pasaje"></textarea>' +
             '<input id="noteTags" type="text" placeholder="Etiquetas separadas por coma">' +
@@ -448,6 +463,19 @@
             event.preventDefault();
             createNote();
         });
+
+        var noteEditForm = document.getElementById('noteEditForm');
+        if (noteEditForm) {
+            noteEditForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                submitEditedNote();
+            });
+        }
+
+        var noteEditCancel = document.getElementById('noteEditCancel');
+        if (noteEditCancel) {
+            noteEditCancel.addEventListener('click', closeNoteEditor);
+        }
 
         els.notesPanel.querySelectorAll('.js-note-delete').forEach(function (btn) {
             btn.addEventListener('click', function () {
@@ -722,21 +750,62 @@
     }
 
     function editNote(id, currentContent, currentTags) {
-        var content = window.prompt('Editar nota', currentContent || '');
-        if (!content || !content.trim()) {
+        var box = document.getElementById('noteEditBox');
+        var idInput = document.getElementById('noteEditId');
+        var contentInput = document.getElementById('noteEditContent');
+        var tagsInput = document.getElementById('noteEditTags');
+        if (!box || !idInput || !contentInput || !tagsInput) {
             return;
         }
-        var tags = window.prompt('Etiquetas', currentTags || '');
+
+        idInput.value = String(id || '');
+        contentInput.value = currentContent || '';
+        tagsInput.value = currentTags || '';
+        box.classList.remove('hidden');
+        contentInput.focus();
+        box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function closeNoteEditor() {
+        var box = document.getElementById('noteEditBox');
+        var idInput = document.getElementById('noteEditId');
+        var contentInput = document.getElementById('noteEditContent');
+        var tagsInput = document.getElementById('noteEditTags');
+        if (idInput) {
+            idInput.value = '';
+        }
+        if (contentInput) {
+            contentInput.value = '';
+        }
+        if (tagsInput) {
+            tagsInput.value = '';
+        }
+        if (box) {
+            box.classList.add('hidden');
+        }
+    }
+
+    function submitEditedNote() {
+        var id = Number((document.getElementById('noteEditId') || {}).value || 0);
+        var content = ((document.getElementById('noteEditContent') || {}).value || '').trim();
+        var tags = ((document.getElementById('noteEditTags') || {}).value || '').trim();
+
+        if (!id || !content) {
+            notify('Completa la nota antes de guardar.');
+            return;
+        }
+
         postForm('api.note.update', {
             id: id,
-            content: content.trim(),
-            tags: (tags || '').trim()
+            content: content,
+            tags: tags
         }).then(function (res) {
             if (res.error) {
                 notify(res.error);
                 return;
             }
             notify('Nota actualizada.');
+            closeNoteEditor();
             loadSelectionData();
         });
     }
