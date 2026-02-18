@@ -4,11 +4,17 @@ require_once __DIR__ . '/../app/bootstrap.php';
 
 use App\Controllers\ApiController;
 use App\Controllers\BibleController;
+use App\Controllers\DevotionalController;
 use App\Controllers\HomeController;
+use App\Controllers\HomeDailyController;
 use App\Controllers\ReaderController;
 use App\Services\AIService;
 use App\Services\BibleRepository;
+use App\Services\DailyVerseService;
+use App\Services\DevotionalService;
+use App\Services\GenerationService;
 use App\Services\HtmlSanitizer;
+use App\Services\ImageCardService;
 use App\Services\SearchService;
 use App\Services\UserDataRepository;
 
@@ -17,13 +23,38 @@ $bibleRepository = new BibleRepository(config('paths.bible'), config('paths.comm
 $userDataRepository = new UserDataRepository(config('paths.app_db'));
 $searchService = new SearchService($bibleRepository, $userDataRepository, $sanitizer);
 $aiService = new AIService(config('ai', []), $userDataRepository);
+$imageCardService = new ImageCardService();
+$dailyVerseService = new DailyVerseService(
+    config('paths.bible'),
+    $bibleRepository,
+    $userDataRepository,
+    $sanitizer,
+    $imageCardService
+);
+$generationService = new GenerationService(config('ai', []), $userDataRepository, $bibleRepository);
+$devotionalService = new DevotionalService(
+    $bibleRepository,
+    $userDataRepository,
+    $dailyVerseService,
+    $generationService,
+    $imageCardService
+);
 
 $homeController = new HomeController($bibleRepository);
 $bibleController = new BibleController($bibleRepository, $searchService);
-$readerController = new ReaderController($bibleRepository);
-$apiController = new ApiController($bibleRepository, $userDataRepository, $aiService, $searchService);
+$readerController = new ReaderController($bibleRepository, $imageCardService, $userDataRepository);
+$homeDailyController = new HomeDailyController($dailyVerseService, $imageCardService, $userDataRepository);
+$devotionalController = new DevotionalController($devotionalService, $imageCardService);
+$apiController = new ApiController(
+    $bibleRepository,
+    $userDataRepository,
+    $aiService,
+    $searchService,
+    $devotionalService,
+    $dailyVerseService
+);
 
-$route = isset($_GET['route']) ? $_GET['route'] : 'reader';
+$route = isset($_GET['route']) ? $_GET['route'] : 'home_daily';
 
 try {
     switch ($route) {
@@ -33,6 +64,14 @@ try {
 
         case 'reader':
             $readerController->index();
+            break;
+
+        case 'home_daily':
+            $homeDailyController->index();
+            break;
+
+        case 'devotional':
+            $devotionalController->index();
             break;
 
         case 'book':
@@ -65,6 +104,18 @@ try {
 
         case 'api.search':
             $apiController->search();
+            break;
+
+        case 'api.devotional.generate':
+            $apiController->devotionalGenerate();
+            break;
+
+        case 'api.devotional.history':
+            $apiController->devotionalHistory();
+            break;
+
+        case 'api.prefs.save':
+            $apiController->prefsSave();
             break;
 
         case 'api.note.create':

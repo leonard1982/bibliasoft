@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Services\AIService;
 use App\Services\BibleRepository;
+use App\Services\DailyVerseService;
+use App\Services\DevotionalService;
 use App\Services\SearchService;
 use App\Services\UserDataRepository;
 
@@ -13,17 +15,23 @@ class ApiController
     private $userDataRepository;
     private $aiService;
     private $searchService;
+    private $devotionalService;
+    private $dailyVerseService;
 
     public function __construct(
         BibleRepository $bibleRepository,
         UserDataRepository $userDataRepository,
         AIService $aiService,
-        SearchService $searchService
+        SearchService $searchService,
+        DevotionalService $devotionalService,
+        DailyVerseService $dailyVerseService
     ) {
         $this->bibleRepository = $bibleRepository;
         $this->userDataRepository = $userDataRepository;
         $this->aiService = $aiService;
         $this->searchService = $searchService;
+        $this->devotionalService = $devotionalService;
+        $this->dailyVerseService = $dailyVerseService;
     }
 
     public function verse()
@@ -277,6 +285,60 @@ class ApiController
         }
 
         app_json($result);
+    }
+
+    public function devotionalGenerate()
+    {
+        $input = $this->requestData();
+        $book = isset($input['book']) ? (int) $input['book'] : 0;
+        $chapter = isset($input['chapter']) ? (int) $input['chapter'] : 0;
+        $verse = isset($input['verse']) ? (int) $input['verse'] : 0;
+
+        $payload = $this->devotionalService->generateNew([
+            'book' => $book,
+            'chapter' => $chapter,
+            'verse' => $verse,
+            'date' => isset($input['date']) ? $input['date'] : date('Y-m-d'),
+        ]);
+
+        app_json([
+            'ok' => true,
+            'devotional' => $payload,
+        ]);
+    }
+
+    public function devotionalHistory()
+    {
+        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 30;
+        app_json([
+            'ok' => true,
+            'rows' => $this->devotionalService->history($limit),
+        ]);
+    }
+
+    public function prefsSave()
+    {
+        $input = $this->requestData();
+        $prefs = [];
+        if (isset($input['font_scale'])) {
+            $prefs['font_scale'] = (int) $input['font_scale'];
+        }
+        if (isset($input['show_daily'])) {
+            $prefs['show_daily'] = (int) $input['show_daily'];
+        }
+        if (isset($input['auto_devotional'])) {
+            $prefs['auto_devotional'] = (int) $input['auto_devotional'];
+        }
+        if (isset($input['theme'])) {
+            $prefs['theme'] = trim((string) $input['theme']);
+        }
+
+        if (empty($prefs)) {
+            app_json(['error' => 'Sin datos de preferencia'], 422);
+        }
+
+        $this->userDataRepository->saveUserPrefs($prefs);
+        app_json(['ok' => true, 'prefs' => $this->userDataRepository->getUserPrefs()]);
     }
 
     public function linkDelete()

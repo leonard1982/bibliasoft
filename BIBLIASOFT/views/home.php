@@ -1,6 +1,6 @@
 <section class="panel">
     <h1>Selecciona un libro</h1>
-    <p class="muted">MVP lector bíblico con comentarios, apuntes, enlaces y módulo IA por versículo.</p>
+    <p class="muted">MVP lector bíblico con comentarios, apuntes, enlaces y herramientas de explicación por versículo.</p>
 </section>
 
 <section class="book-grid">

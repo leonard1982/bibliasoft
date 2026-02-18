@@ -1,4 +1,6 @@
 (function () {
+    applyGlobalPrefsFromStorage();
+
     var root = document.getElementById('readerApp');
     if (!root) {
         return;
@@ -20,7 +22,10 @@
             layoutMode: 'columns',
             fontSize: 'md',
             spacing: 'normal',
-            theme: 'light'
+            theme: 'light',
+            fontScale: 100,
+            showDaily: true,
+            autoDevotional: false
         }
     };
 
@@ -62,7 +67,17 @@
         state.chapters = state.initial.chapters || [];
         state.verses = state.initial.verses || [];
 
+        if (state.initial.user_prefs) {
+            state.settings.fontScale = Number(state.initial.user_prefs.font_scale || 100);
+            state.settings.showDaily = Number(state.initial.user_prefs.show_daily || 0) === 1;
+            state.settings.autoDevotional = Number(state.initial.user_prefs.auto_devotional || 0) === 1;
+            if (state.initial.user_prefs.theme === 'dark') {
+                state.settings.theme = 'dark';
+            }
+        }
+
         loadSettings();
+        maybeRedirectToDailyAtStartup();
         applySettings();
         renderBooks(state.books);
         renderChapters();
@@ -136,6 +151,14 @@
             if (event.ctrlKey && event.key.toLowerCase() === 'k') {
                 event.preventDefault();
                 openSearch();
+            }
+            if (event.ctrlKey && (event.key === '=' || event.key === '+')) {
+                event.preventDefault();
+                changeFontScale(5);
+            }
+            if (event.ctrlKey && (event.key === '-' || event.key === '_')) {
+                event.preventDefault();
+                changeFontScale(-5);
             }
             if (event.key === 'Escape') {
                 closeSearch();
@@ -432,13 +455,43 @@
                 '</button>';
         }).join('');
 
+        var backgrounds = state.initial.backgrounds || [];
+        var bgOptions = backgrounds.map(function (item) {
+            return '<option value="' + escapeHtml(item) + '">' + escapeHtml(item.split('/').pop()) + '</option>';
+        }).join('');
+        var imageCardMode = state.settings.theme === 'dark' ? 'dark' : 'light';
+
         els.toolsPanel.innerHTML = '' +
             '<div class="stack">' +
+            '<div class="card">' +
+            '<strong>Accesibilidad</strong>' +
+            '<div class="font-ctrls">' +
+            '<button class="btn-light js-font-up" type="button">A+</button>' +
+            '<button class="btn-light js-font-down" type="button">A-</button>' +
+            '<button class="btn-light js-font-reset" type="button">Restablecer</button>' +
+            '<small class="muted">Escala: ' + state.settings.fontScale + '%</small>' +
+            '</div>' +
+            '</div>' +
             '<button class="btn-light js-favorite">Marcar favorito</button>' +
             '<button class="btn-primary js-generate" data-mode="explicacion" ' + (offline ? 'disabled' : '') + '>Generar explicación</button>' +
             '<button class="btn-light js-generate" data-mode="palabras_clave" ' + (offline ? 'disabled' : '') + '>Palabras clave</button>' +
             '<button class="btn-light js-generate" data-mode="bosquejo" ' + (offline ? 'disabled' : '') + '>Bosquejo</button>' +
             '<button class="btn-light js-generate" data-mode="aplicacion_practica" ' + (offline ? 'disabled' : '') + '>Aplicación práctica</button>' +
+            '<div class="card">' +
+            '<strong>Crear imagen del versículo</strong>' +
+            '<select id="imageBackgroundSelect">' + (bgOptions || '<option value="assets/backgrounds/bg-01.svg">bg-01.svg</option>') + '</select>' +
+            '<select id="imageCardMode">' +
+            '<option value="dark"' + (imageCardMode === 'dark' ? ' selected' : '') + '>Modo oscuro</option>' +
+            '<option value="light"' + (imageCardMode === 'light' ? ' selected' : '') + '>Modo claro</option>' +
+            '</select>' +
+            '<div class="toolbar">' +
+            '<button class="btn-light js-image-create" type="button">Crear imagen del versículo</button>' +
+            '<button class="btn-light js-image-download" type="button">Descargar PNG</button>' +
+            '<button class="btn-light js-image-share" type="button">Compartir</button>' +
+            '<button class="btn-light js-image-copy" type="button">Copiar imagen</button>' +
+            '</div>' +
+            '<img id="imageCardPreview" class="image-card-preview hidden" alt="Vista previa de versículo">' +
+            '</div>' +
             '<div id="toolsOutput" class="card"><p class="muted">Selecciona una acción para generar contenido del pasaje.</p></div>' +
             '<div class="card"><strong>Historial reciente</strong><div class="stack">' + (historyHtml || '<span class="muted">Sin historial.</span>') + '</div></div>' +
             '</div>';
@@ -467,6 +520,31 @@
             });
         }
 
+        var fontUp = els.toolsPanel.querySelector('.js-font-up');
+        var fontDown = els.toolsPanel.querySelector('.js-font-down');
+        var fontReset = els.toolsPanel.querySelector('.js-font-reset');
+        if (fontUp) {
+            fontUp.addEventListener('click', function () {
+                changeFontScale(5);
+                renderToolsPanel(payload);
+            });
+        }
+        if (fontDown) {
+            fontDown.addEventListener('click', function () {
+                changeFontScale(-5);
+                renderToolsPanel(payload);
+            });
+        }
+        if (fontReset) {
+            fontReset.addEventListener('click', function () {
+                state.settings.fontScale = 100;
+                applySettings();
+                saveSettings();
+                notify('Tamaño restablecido.');
+                renderToolsPanel(payload);
+            });
+        }
+
         els.toolsPanel.querySelectorAll('.js-generate').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var output = document.getElementById('toolsOutput');
@@ -479,6 +557,8 @@
                 callGenerate(mode);
             });
         });
+
+        bindImageCardActions();
     }
 
     function callGenerate(mode) {
@@ -738,7 +818,7 @@
                 notify('Selecciona al menos un versículo.');
                 return;
             }
-            var text = references.join('\n');
+            var text = references.join('\n') + '\n\nBiblia para todos';
             if (navigator.share) {
                 navigator.share({ title: 'Biblia para todos', text: text }).catch(function () {});
                 return;
@@ -845,6 +925,8 @@
     function bindSettingsInputs() {
         bindSetting('optShowHelp', 'showHelp', 'checkbox');
         bindSetting('optLayoutMode', 'layoutMode');
+        bindSetting('optShowDaily', 'showDaily', 'checkbox');
+        bindSetting('optAutoDevotional', 'autoDevotional', 'checkbox');
         bindSetting('optFontSize', 'fontSize');
         bindSetting('optSpacing', 'spacing');
         bindSetting('optTheme', 'theme');
@@ -863,6 +945,9 @@
 
         input.addEventListener('change', function () {
             state.settings[key] = type === 'checkbox' ? this.checked : this.value;
+            if (key === 'showDaily') {
+                localStorage.setItem('show_daily_start', state.settings.showDaily ? '1' : '0');
+            }
             saveSettings();
             applySettings();
         });
@@ -875,6 +960,12 @@
         document.body.classList.remove('spacing-compact', 'spacing-normal');
         document.body.classList.add('spacing-' + state.settings.spacing);
         document.body.classList.toggle('theme-dark', state.settings.theme === 'dark');
+        if (state.settings.fontScale < 85) {
+            state.settings.fontScale = 85;
+        } else if (state.settings.fontScale > 150) {
+            state.settings.fontScale = 150;
+        }
+        document.documentElement.style.setProperty('--reader-font-scale', String(state.settings.fontScale) + '%');
         if (state.settings.showHelp) {
             els.helpPane.classList.remove('hidden');
         } else {
@@ -886,9 +977,17 @@
         try {
             var raw = localStorage.getItem('biblia_settings');
             if (!raw) {
+                var showDaily = localStorage.getItem('show_daily_start');
+                if (showDaily !== null) {
+                    state.settings.showDaily = showDaily === '1';
+                }
                 return;
             }
             state.settings = Object.assign({}, state.settings, JSON.parse(raw) || {});
+            var storedDaily = localStorage.getItem('show_daily_start');
+            if (storedDaily !== null) {
+                state.settings.showDaily = storedDaily === '1';
+            }
         } catch (err) {
             // ignore
         }
@@ -896,6 +995,8 @@
 
     function saveSettings() {
         localStorage.setItem('biblia_settings', JSON.stringify(state.settings));
+        localStorage.setItem('show_daily_start', state.settings.showDaily ? '1' : '0');
+        syncUserPrefs();
     }
 
     function openHelpDrawer() {
@@ -923,6 +1024,210 @@
             },
             body: new URLSearchParams(data).toString()
         }).then(asJson);
+    }
+
+    function bindImageCardActions() {
+        var createBtn = els.toolsPanel.querySelector('.js-image-create');
+        var downloadBtn = els.toolsPanel.querySelector('.js-image-download');
+        var shareBtn = els.toolsPanel.querySelector('.js-image-share');
+        var copyBtn = els.toolsPanel.querySelector('.js-image-copy');
+        var preview = document.getElementById('imageCardPreview');
+
+        if (!createBtn || !preview) {
+            return;
+        }
+
+        createBtn.addEventListener('click', function () {
+            createVerseImageCard().then(function (result) {
+                preview.src = result.dataUrl;
+                preview.dataset.blobUrl = result.blobUrl;
+                preview.classList.remove('hidden');
+                notify('Imagen creada.');
+            }).catch(function () {
+                notify('No se pudo crear la imagen.');
+            });
+        });
+
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', function () {
+                ensureImageReady(preview).then(function (blob) {
+                    downloadBlob(blob, buildImageFilename());
+                });
+            });
+        }
+
+        if (shareBtn) {
+            shareBtn.addEventListener('click', function () {
+                ensureImageReady(preview).then(function (blob) {
+                    shareImageBlob(blob, buildImageFilename(), buildShareSummary());
+                }).catch(function () {
+                    notify('No se pudo compartir la imagen.');
+                });
+            });
+        }
+
+        if (copyBtn) {
+            copyBtn.addEventListener('click', function () {
+                ensureImageReady(preview).then(function (blob) {
+                    if (navigator.clipboard && window.ClipboardItem) {
+                        var item = new ClipboardItem({ 'image/png': blob });
+                        return navigator.clipboard.write([item]).then(function () {
+                            notify('Imagen copiada al portapapeles.');
+                        });
+                    }
+                    downloadBlob(blob, buildImageFilename());
+                    notify('Portapapeles no disponible. Imagen descargada.');
+                }).catch(function () {
+                    notify('No se pudo copiar la imagen.');
+                });
+            });
+        }
+    }
+
+    function ensureImageReady(preview) {
+        if (preview && preview.dataset.blobUrl) {
+            return fetch(preview.dataset.blobUrl).then(function (res) { return res.blob(); });
+        }
+        return createVerseImageCard().then(function (result) {
+            if (preview) {
+                preview.src = result.dataUrl;
+                preview.dataset.blobUrl = result.blobUrl;
+                preview.classList.remove('hidden');
+            }
+            return result.blob;
+        });
+    }
+
+    function createVerseImageCard() {
+        var selected = selectedRows();
+        if (!selected.length) {
+            return Promise.reject(new Error('Sin selección'));
+        }
+        var range = selectedRange();
+        var reference = toReference(state.currentBook, state.currentChapter, range.start, range.end);
+        var text = selected.map(function (row) {
+            return cleanText(row.scripture_text || row.scripture_html || '');
+        }).join(' ');
+        var bgSelect = document.getElementById('imageBackgroundSelect');
+        var background = bgSelect ? bgSelect.value : 'assets/backgrounds/bg-01.svg';
+        var modeSelect = document.getElementById('imageCardMode');
+        var cardMode = modeSelect ? modeSelect.value : (state.settings.theme === 'dark' ? 'dark' : 'light');
+        var overlayColor = cardMode === 'light' ? 'rgba(255,255,255,.48)' : 'rgba(0,0,0,.40)';
+        var textColor = cardMode === 'light' ? '#102334' : '#ffffff';
+
+        var canvas = document.createElement('canvas');
+        canvas.width = 1080;
+        canvas.height = 1080;
+        var ctx = canvas.getContext('2d');
+
+        return new Promise(function (resolve, reject) {
+            var img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function () {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = overlayColor;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = textColor;
+                ctx.font = 'bold 54px Segoe UI, Arial, sans-serif';
+                drawWrappedText(ctx, '"' + text + '"', 90, 250, 900, 72);
+                ctx.font = 'bold 38px Segoe UI, Arial, sans-serif';
+                ctx.fillText(reference, 90, 900);
+                ctx.font = '30px Segoe UI, Arial, sans-serif';
+                ctx.fillText('Biblia para todos', 90, 950);
+
+                canvas.toBlob(function (blob) {
+                    if (!blob) {
+                        reject(new Error('blob'));
+                        return;
+                    }
+                    var blobUrl = URL.createObjectURL(blob);
+                    resolve({
+                        blob: blob,
+                        blobUrl: blobUrl,
+                        dataUrl: canvas.toDataURL('image/png')
+                    });
+                }, 'image/png');
+            };
+            img.onerror = function () {
+                reject(new Error('image'));
+            };
+            img.src = background;
+        });
+    }
+
+    function drawWrappedText(ctx, text, x, y, maxWidth, lineHeight) {
+        var words = String(text || '').split(/\s+/);
+        var line = '';
+        var currentY = y;
+        for (var i = 0; i < words.length; i++) {
+            var testLine = line + words[i] + ' ';
+            var width = ctx.measureText(testLine).width;
+            if (width > maxWidth && i > 0) {
+                ctx.fillText(line, x, currentY);
+                line = words[i] + ' ';
+                currentY += lineHeight;
+            } else {
+                line = testLine;
+            }
+        }
+        if (line) {
+            ctx.fillText(line, x, currentY);
+        }
+    }
+
+    function buildImageFilename() {
+        var range = selectedRange();
+        return 'versiculo-' + state.currentBook + '-' + state.currentChapter + '-' + range.start + '-' + range.end + '.png';
+    }
+
+    function buildShareSummary() {
+        var rows = selectedRows();
+        if (!rows.length) {
+            return 'Biblia para todos';
+        }
+        var range = selectedRange();
+        var text = rows.map(function (row) {
+            return cleanText(row.scripture_text || row.scripture_html || '');
+        }).join(' ');
+        return text + '\n\n' + toReference(state.currentBook, state.currentChapter, range.start, range.end) + '\nBiblia para todos';
+    }
+
+    function shareImageBlob(blob, filename, fallbackText) {
+        var file = new File([blob], filename, { type: 'image/png' });
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+            return navigator.share({
+                title: 'Biblia para todos',
+                text: fallbackText,
+                files: [file]
+            }).catch(function () {});
+        }
+        downloadBlob(blob, filename);
+        return Promise.resolve();
+    }
+
+    function downloadBlob(blob, filename) {
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    function changeFontScale(delta) {
+        state.settings.fontScale = Number(state.settings.fontScale || 100) + Number(delta || 0);
+        if (state.settings.fontScale < 85) {
+            state.settings.fontScale = 85;
+        }
+        if (state.settings.fontScale > 150) {
+            state.settings.fontScale = 150;
+        }
+        applySettings();
+        saveSettings();
+        notify('Tamaño ' + state.settings.fontScale + '%');
     }
 
     function copyText(text) {
@@ -988,6 +1293,37 @@
         return txt.value;
     }
 
+    function maybeRedirectToDailyAtStartup() {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('skip_daily') === '1') {
+            return;
+        }
+        var today = new Date().toISOString().slice(0, 10);
+        var seen = sessionStorage.getItem('daily_seen_today');
+        if (seen === today) {
+            return;
+        }
+        if (!state.settings.showDaily) {
+            return;
+        }
+        if (localStorage.getItem('daily_hidden_date') === today) {
+            return;
+        }
+        sessionStorage.setItem('daily_seen_today', today);
+        window.location.replace('?route=home_daily');
+    }
+
+    function syncUserPrefs() {
+        postForm('api.prefs.save', {
+            font_scale: state.settings.fontScale,
+            show_daily: state.settings.showDaily ? 1 : 0,
+            auto_devotional: state.settings.autoDevotional ? 1 : 0,
+            theme: state.settings.theme
+        }).catch(function () {
+            // ignore
+        });
+    }
+
     function bindConnectivity() {
         window.addEventListener('online', function () {
             notify('Conexión restablecida.');
@@ -1017,9 +1353,33 @@
     function notify(message) {
         els.notice.textContent = message;
         els.notice.classList.remove('hidden');
-        setTimeout(function () {
+        clearTimeout(notify.timer);
+        notify.timer = setTimeout(function () {
             els.notice.classList.add('hidden');
         }, 2200);
+    }
+
+    function applyGlobalPrefsFromStorage() {
+        var settings = {};
+        try {
+            settings = JSON.parse(localStorage.getItem('biblia_settings') || '{}') || {};
+        } catch (err) {
+            settings = {};
+        }
+
+        var scale = Number(settings.fontScale || 100);
+        if (scale < 85) {
+            scale = 85;
+        } else if (scale > 150) {
+            scale = 150;
+        }
+        document.documentElement.style.setProperty('--reader-font-scale', String(scale) + '%');
+
+        if (settings.theme === 'dark') {
+            document.body.classList.add('theme-dark');
+        } else {
+            document.body.classList.remove('theme-dark');
+        }
     }
 
     function escapeHtml(value) {

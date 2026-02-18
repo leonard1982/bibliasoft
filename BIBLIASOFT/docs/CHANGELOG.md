@@ -1,6 +1,34 @@
 # CHANGELOG
 
 ## 2026-02-18
+- Extensión de accesibilidad y contenido diario:
+  - Control de letra en Herramientas (`A+`, `A-`, `Restablecer`), rango 85%-150%, persistencia local.
+  - Atajos `Ctrl+=` y `Ctrl+-` para ajuste rápido.
+  - Escala aplicada al lector, comentarios y vista de devocionales (global desde preferencias guardadas).
+- Generador de imagen de versículo:
+  - Fondos locales en `public/assets/backgrounds/`.
+  - Selector de estilo para tarjeta (`Modo oscuro` / `Modo claro`).
+  - Descarga PNG, compartir (Web Share) y copiar imagen (fallback descarga).
+- Página de inicio “Versículo del día”:
+  - Vista `views/home_daily.php` con tarjeta destacada.
+  - Botones: `Leer contexto`, `Compartir`, `Ir a lectura`, `No mostrar más hoy`.
+  - Cache diaria en tabla `daily_cache`.
+- Nuevo módulo “Devocionales”:
+  - Vista `views/devotional.php`.
+  - Generación diaria con estructura fija (A-F).
+  - Historial persistido en tabla `devotionals`.
+  - Compartir como texto e imagen.
+- Configuración ampliada:
+  - Toggle `Mostrar Versículo del día al iniciar`.
+  - Toggle `Activar devocionales automáticos`.
+  - Mensaje de seguridad para token vía `.env`.
+- Nuevos servicios:
+  - `DailyVerseService`
+  - `DevotionalService`
+  - `ImageCardService`
+- Persistencia adicional:
+  - Tabla `user_prefs` (font_scale, show_daily, auto_devotional, theme).
+  - Endpoint `api.prefs.save`.
 - Rebranding completo:
   - Nombre principal: `Biblia para todos`
   - Branding alterno: `BibliaSoft`

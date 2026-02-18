@@ -9,18 +9,23 @@
     <link rel="stylesheet" href="assets/app.css">
 </head>
 <body>
+    <?php $activeRoute = isset($_GET['route']) ? $_GET['route'] : 'home_daily'; ?>
     <header class="topbar">
         <div class="wrap topbar-inner">
-            <a href="?route=reader" class="brand-wrap">
+            <a href="?route=home_daily" class="brand-wrap">
                 <strong class="brand-main"><?php echo e(config('branding.app_name', 'Biblia para todos')); ?></strong>
                 <small class="brand-sub"><?php echo e(config('branding.app_short', 'BibliaSoft')); ?> · <?php echo e(config('branding.slogan', 'Biblia para todos')); ?></small>
             </a>
             <nav class="nav">
-                <a href="?route=reader">Lector</a>
-                <a href="?route=search">Búsqueda</a>
-                <button class="btn-light" id="openSettings" type="button">
-                    <img src="assets/icons/settings.svg" alt="" class="ico"> Configuración
-                </button>
+                <a class="<?php echo $activeRoute === 'home_daily' ? 'is-active' : ''; ?>" href="?route=home_daily">Inicio</a>
+                <a class="<?php echo $activeRoute === 'reader' ? 'is-active' : ''; ?>" href="?route=reader">Lector</a>
+                <a class="<?php echo $activeRoute === 'devotional' ? 'is-active' : ''; ?>" href="?route=devotional">Devocionales</a>
+                <a class="<?php echo $activeRoute === 'search' ? 'is-active' : ''; ?>" href="?route=search">Búsqueda</a>
+                <?php if ($activeRoute === 'reader'): ?>
+                    <button class="btn-light" id="openSettings" type="button">
+                        <img src="assets/icons/settings.svg" alt="" class="ico"> Configuración
+                    </button>
+                <?php endif; ?>
             </nav>
         </div>
     </header>
