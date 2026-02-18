@@ -251,7 +251,7 @@ a {
 
 .verse {
     display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     gap: .35rem;
     border: 1px solid transparent;
     border-radius: 10px;
