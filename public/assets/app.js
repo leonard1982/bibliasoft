@@ -65,6 +65,8 @@
         activateTab('contexto');
         bindSelectionActions();
         renderEmptyPanels();
+        bindConnectivity();
+        registerPwa();
     }
 
     function wireEvents() {
@@ -395,6 +397,7 @@
 
     function renderToolsPanel(payload) {
         var historyRows = payload.history || [];
+        var offline = !navigator.onLine;
         var historyHtml = historyRows.map(function (row) {
             return '<button class="btn-light js-open-history" data-book="' + row.book + '" data-chapter="' + row.chapter + '">' +
                 toReference(row.book, row.chapter, null, null) +
@@ -403,10 +406,10 @@
 
         els.toolsPanel.innerHTML = '' +
             '<div class="stack">' +
-            '<button class="btn-primary js-generate" data-mode="explicacion">Generar explicación</button>' +
-            '<button class="btn-light js-generate" data-mode="palabras_clave">Palabras clave</button>' +
-            '<button class="btn-light js-generate" data-mode="bosquejo">Bosquejo</button>' +
-            '<button class="btn-light js-generate" data-mode="aplicacion_practica">Aplicación práctica</button>' +
+            '<button class="btn-primary js-generate" data-mode="explicacion" ' + (offline ? 'disabled' : '') + '>Generar explicación</button>' +
+            '<button class="btn-light js-generate" data-mode="palabras_clave" ' + (offline ? 'disabled' : '') + '>Palabras clave</button>' +
+            '<button class="btn-light js-generate" data-mode="bosquejo" ' + (offline ? 'disabled' : '') + '>Bosquejo</button>' +
+            '<button class="btn-light js-generate" data-mode="aplicacion_practica" ' + (offline ? 'disabled' : '') + '>Aplicación práctica</button>' +
             '<div id="toolsOutput" class="card"><p class="muted">Selecciona una acción para generar contenido del pasaje.</p></div>' +
             '<div class="card"><strong>Historial reciente</strong><div class="stack">' + (historyHtml || '<span class="muted">Sin historial.</span>') + '</div></div>' +
             '</div>';
@@ -420,6 +423,10 @@
         els.toolsPanel.querySelectorAll('.js-generate').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var output = document.getElementById('toolsOutput');
+                if (!navigator.onLine) {
+                    output.innerHTML = '<p class="muted">No disponible sin conexión.</p>';
+                    return;
+                }
                 output.innerHTML = '<p class="muted">Preparado para generar "' + escapeHtml(this.getAttribute('data-mode')) + '".</p>';
             });
         });
@@ -811,6 +818,32 @@
         var txt = document.createElement('textarea');
         txt.innerHTML = value || '';
         return txt.value;
+    }
+
+    function bindConnectivity() {
+        window.addEventListener('online', function () {
+            notify('Conexión restablecida.');
+            if (state.selectionPayload) {
+                renderToolsPanel(state.selectionPayload);
+            }
+        });
+        window.addEventListener('offline', function () {
+            notify('Disponible offline.');
+            if (state.selectionPayload) {
+                renderToolsPanel(state.selectionPayload);
+            }
+        });
+    }
+
+    function registerPwa() {
+        if (!('serviceWorker' in navigator)) {
+            return;
+        }
+        navigator.serviceWorker.register('sw.js').then(function () {
+            notify('Disponible offline.');
+        }).catch(function () {
+            // ignore
+        });
     }
 
     function notify(message) {

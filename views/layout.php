@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#12313f">
     <title><?php echo e(isset($pageTitle) ? $pageTitle . ' | ' : ''); ?><?php echo e(config('branding.app_name', 'Biblia para todos')); ?></title>
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="assets/app.css">
 </head>
 <body>
