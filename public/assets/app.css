@@ -422,6 +422,20 @@ a {
     display: block;
 }
 
+.context-chip-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+    margin-top: .4rem;
+}
+
+.context-list {
+    margin: .45rem 0 0;
+    padding-left: 1rem;
+    display: grid;
+    gap: .35rem;
+}
+
 .stack {
     display: grid;
     gap: .55rem;
@@ -1069,6 +1083,18 @@ a {
 
 .anecdote-actions {
     margin-top: .6rem;
+    justify-content: flex-start;
+    gap: .45rem;
+}
+
+.anecdote-actions .icon-tool {
+    width: 36px;
+    height: 36px;
+}
+
+.anecdote-actions .icon-tool.is-active {
+    border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
+    background: color-mix(in srgb, var(--selection) 80%, transparent);
 }
 
 .topic-fe {

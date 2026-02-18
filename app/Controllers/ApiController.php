@@ -140,8 +140,12 @@ class ApiController
         $context = [
             'title' => $contextRef,
             'summary' => $summary,
-            'historical' => $this->historicalContextText($book, $contextRef, $pericope),
+            'historical' => $this->historicalContextText($book, $chapter, $contextRef, $pericope),
             'literary' => $this->literaryContextText($book, $chapter, $contextRef, $pericope, $verses),
+            'canonical' => $this->canonicalContextText($book, $contextRef),
+            'keywords' => $this->extractKeywordsForStudy($text, 8),
+            'questions' => $this->buildStudyQuestions($book, $chapter, $contextRef),
+            'study_tips' => $this->buildStudyTips($book, $chapter, $verseStart, $verseEnd, $verses),
         ];
 
         app_json([
@@ -430,57 +434,197 @@ class ApiController
         app_json(['ok' => true, 'ai' => $ai]);
     }
 
-    private function historicalContextText($book, $reference, $pericope)
+    private function historicalContextText($book, $chapter, $reference, $pericope)
     {
-        $book = (int) $book;
-        $era = 'periodo bíblico no determinado';
-        if ($book >= 1 && $book <= 5) {
-            $era = 'etapa patriarcal y formación del pueblo de Israel';
-        } elseif ($book >= 6 && $book <= 17) {
-            $era = 'periodo de conquista, monarquía y exilio de Israel';
-        } elseif ($book >= 18 && $book <= 22) {
-            $era = 'época sapiencial del Antiguo Testamento';
-        } elseif ($book >= 23 && $book <= 39) {
-            $era = 'periodo profético previo y posterior al exilio';
-        } elseif ($book >= 40 && $book <= 44) {
-            $era = 'ministerio de Jesús y origen de la iglesia';
-        } elseif ($book >= 45 && $book <= 66) {
-            $era = 'expansión de la iglesia apostólica del primer siglo';
-        }
-
+        $meta = $this->bookStudyMeta((int) $book);
         $pericopeText = trim((string) $pericope);
-        $hint = $pericopeText !== '' ? ' Tema cercano: ' . $pericopeText . '.' : '';
-        return 'Para ' . $reference . ', el marco histórico corresponde a ' . $era . '.' . $hint;
+        $pericopeLine = $pericopeText !== '' ? (' Perícopa cercana: "' . $pericopeText . '".') : '';
+
+        return 'Para ' . $reference . ', el marco histórico se ubica en ' . $meta['periodo']
+            . ', dentro del bloque ' . $meta['corpus'] . '. '
+            . 'Audiencia/escenario principal: ' . $meta['audiencia'] . '. '
+            . 'Al estudiar el capítulo ' . (int) $chapter . ', observa cómo el pasaje responde a ' . $meta['problematica'] . '.'
+            . $pericopeLine;
     }
 
     private function literaryContextText($book, $chapter, $reference, $pericope, array $verses)
     {
-        $book = (int) $book;
-        $genre = 'narrativo';
-        if ($book >= 18 && $book <= 22) {
-            $genre = 'poético/sapiencial';
-        } elseif ($book >= 23 && $book <= 39) {
-            $genre = 'profético';
-        } elseif ($book >= 40 && $book <= 44) {
-            $genre = 'evangélico-histórico';
-        } elseif ($book >= 45 && $book <= 65) {
-            $genre = 'epistolar';
-        } elseif ($book === 66) {
-            $genre = 'apocalíptico';
-        }
-
+        $meta = $this->bookStudyMeta((int) $book);
         $first = '';
         if (!empty($verses[0]['scripture_text'])) {
             $first = trim((string) $verses[0]['scripture_text']);
         }
-        if ($first !== '' && strlen($first) > 120) {
-            $first = substr($first, 0, 120) . '...';
+        if ($first !== '' && strlen($first) > 160) {
+            $first = substr($first, 0, 160) . '...';
         }
 
         $pericopeText = trim((string) $pericope);
-        $topic = $pericopeText !== '' ? (' bajo el encabezado "' . $pericopeText . '"') : '';
-        $line = $first !== '' ? (' Inicio del pasaje: ' . $first) : '';
-        return 'Literariamente, ' . $reference . ' se interpreta como texto ' . $genre . ' dentro del capítulo ' . (int) $chapter . $topic . '.' . $line;
+        $header = $pericopeText !== '' ? (' Encabezado del pasaje: "' . $pericopeText . '".') : '';
+        $sample = $first !== '' ? (' Muestra textual inicial: "' . $first . '".') : '';
+
+        return 'Género literario predominante: ' . $meta['genre'] . '. '
+            . 'Función del capítulo ' . (int) $chapter . ': ' . $meta['chapter_function'] . '. '
+            . 'Para ' . $reference . ', sigue el movimiento argumental: observación, interpretación, implicación teológica y aplicación pastoral.'
+            . $header . $sample;
+    }
+
+    private function canonicalContextText($book, $reference)
+    {
+        $meta = $this->bookStudyMeta((int) $book);
+        return 'En el marco canónico, ' . $reference . ' dialoga con el eje bíblico de ' . $meta['canonical_axis']
+            . '. Relación recomendada para estudio: ' . $meta['canonical_bridge'] . '.';
+    }
+
+    private function buildStudyQuestions($book, $chapter, $reference)
+    {
+        $meta = $this->bookStudyMeta((int) $book);
+        return [
+            '¿Qué revela este pasaje del carácter de Dios en ' . $reference . '?',
+            '¿Qué problema humano o comunitario aborda el texto dentro del capítulo ' . (int) $chapter . '?',
+            '¿Qué términos repetidos sostienen el argumento del autor?',
+            '¿Cómo conecta este pasaje con el tema mayor de ' . $meta['book_theme'] . '?',
+            '¿Qué implicaciones doctrinales y pastorales se desprenden para la iglesia hoy?',
+        ];
+    }
+
+    private function buildStudyTips($book, $chapter, $verseStart, $verseEnd, array $verses)
+    {
+        $meta = $this->bookStudyMeta((int) $book);
+        $range = (int) $verseStart === (int) $verseEnd
+            ? ('v. ' . (int) $verseStart)
+            : ('vv. ' . (int) $verseStart . '-' . (int) $verseEnd);
+
+        $wordCount = 0;
+        foreach ($verses as $row) {
+            $wordCount += str_word_count((string) ($row['scripture_text'] ?? ''));
+        }
+        if ($wordCount < 1) {
+            $wordCount = count($verses) * 10;
+        }
+
+        return [
+            'Lee primero todo el capítulo ' . (int) $chapter . ' antes de fijarte solo en ' . $range . '.',
+            'Delimita unidades: contexto inmediato (párrafo), contexto del libro y contexto canónico.',
+            'Marca conectores lógicos y verbos principales; ahí suele estar el argumento del autor.',
+            'Contrasta observación textual con ' . $meta['method_hint'] . ' para evitar interpretaciones aisladas.',
+            'Carga textual estimada del pasaje seleccionado: ' . (int) $wordCount . ' palabras (aprox.).',
+        ];
+    }
+
+    private function extractKeywordsForStudy($text, $limit)
+    {
+        $text = function_exists('mb_strtolower') ? mb_strtolower((string) $text, 'UTF-8') : strtolower((string) $text);
+        $text = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $text);
+        $tokens = preg_split('/\s+/u', $text);
+        $stop = [
+            'de', 'la', 'el', 'los', 'las', 'y', 'a', 'en', 'que', 'por', 'con',
+            'para', 'del', 'se', 'su', 'un', 'una', 'al', 'como', 'no', 'es', 'le',
+            'lo', 'tu', 'mi', 'si', 'más', 'mas', 'o', 'ya', 'ha', 'sus', 'pero',
+            'porque', 'cuando', 'sobre', 'entre', 'todo', 'toda', 'este', 'esta',
+        ];
+
+        $freq = [];
+        foreach ($tokens as $token) {
+            $token = trim((string) $token);
+            $len = function_exists('mb_strlen') ? mb_strlen($token, 'UTF-8') : strlen($token);
+            if ($token === '' || $len < 4 || in_array($token, $stop, true)) {
+                continue;
+            }
+            if (!isset($freq[$token])) {
+                $freq[$token] = 0;
+            }
+            $freq[$token]++;
+        }
+        arsort($freq);
+        return array_slice(array_keys($freq), 0, max(1, (int) $limit));
+    }
+
+    private function bookStudyMeta($book)
+    {
+        $book = (int) $book;
+        if ($book >= 1 && $book <= 5) {
+            return [
+                'corpus' => 'Pentateuco',
+                'periodo' => 'la etapa fundacional de Israel (patriarcas, éxodo y desierto)',
+                'audiencia' => 'comunidad del pacto en formación',
+                'problematica' => 'identidad del pueblo, obediencia al pacto y santidad',
+                'genre' => 'narrativo-legal-teológico',
+                'chapter_function' => 'establecer fundamentos de fe, culto y vida comunitaria',
+                'canonical_axis' => 'creación, caída, promesa y pacto',
+                'canonical_bridge' => 'éxodo-redención y cumplimiento en Cristo',
+                'book_theme' => 'origen y formación del pueblo de Dios',
+                'method_hint' => 'estructura narrativa y secciones legales',
+            ];
+        }
+        if ($book >= 6 && $book <= 17) {
+            return [
+                'corpus' => 'Históricos del Antiguo Testamento',
+                'periodo' => 'conquista, monarquía, división del reino y exilio',
+                'audiencia' => 'Israel/Judá en procesos de fidelidad o crisis',
+                'problematica' => 'lealtad al pacto frente a idolatría y poder político',
+                'genre' => 'narrativo-histórico teológico',
+                'chapter_function' => 'mostrar consecuencias de obediencia y desobediencia',
+                'canonical_axis' => 'reino, juicio y esperanza de restauración',
+                'canonical_bridge' => 'línea davídica y expectativa mesiánica',
+                'book_theme' => 'historia redentiva en la vida nacional de Israel',
+                'method_hint' => 'cronología, personajes y evaluación profética',
+            ];
+        }
+        if ($book >= 18 && $book <= 22) {
+            return [
+                'corpus' => 'Sapienciales y poéticos',
+                'periodo' => 'distintas etapas de la vida de Israel',
+                'audiencia' => 'creyentes en búsqueda de sabiduría y adoración',
+                'problematica' => 'sufrimiento, temor de Dios, justicia y sentido de vida',
+                'genre' => 'poético-sapiencial',
+                'chapter_function' => 'formar discernimiento espiritual y ético',
+                'canonical_axis' => 'temor del Señor, adoración y sabiduría práctica',
+                'canonical_bridge' => 'sabiduría bíblica y ética del Reino',
+                'book_theme' => 'vida piadosa en medio de complejidades humanas',
+                'method_hint' => 'paralelismos, metáforas y progresión poética',
+            ];
+        }
+        if ($book >= 23 && $book <= 39) {
+            return [
+                'corpus' => 'Profetas',
+                'periodo' => 'antes, durante y después del exilio',
+                'audiencia' => 'pueblo del pacto en crisis espiritual y social',
+                'problematica' => 'arrepentimiento, injusticia, juicio y restauración',
+                'genre' => 'profético-oracular',
+                'chapter_function' => 'denunciar pecado y anunciar esperanza',
+                'canonical_axis' => 'santidad de Dios, juicio y promesa mesiánica',
+                'canonical_bridge' => 'cumplimiento cristológico de promesas proféticas',
+                'book_theme' => 'llamado al retorno del pueblo a Dios',
+                'method_hint' => 'oráculos, metáforas proféticas y contexto histórico',
+            ];
+        }
+        if ($book >= 40 && $book <= 44) {
+            return [
+                'corpus' => 'Evangelios y Hechos',
+                'periodo' => 'siglo I (ministerio de Jesús e iglesia primitiva)',
+                'audiencia' => 'comunidades cristianas en expansión misionera',
+                'problematica' => 'identidad de Jesús, discipulado y misión',
+                'genre' => 'narrativo-evangélico',
+                'chapter_function' => 'presentar obra de Cristo y avance del evangelio',
+                'canonical_axis' => 'reino de Dios, cruz, resurrección y misión',
+                'canonical_bridge' => 'continuidad promesa-cumplimiento',
+                'book_theme' => 'evangelio del Reino y testimonio apostólico',
+                'method_hint' => 'escenas narrativas, discursos y patrón misión',
+            ];
+        }
+
+        return [
+            'corpus' => 'Epístolas y Apocalipsis',
+            'periodo' => 'primera generación apostólica',
+            'audiencia' => 'iglesias locales y líderes pastorales',
+            'problematica' => 'doctrina, santidad comunitaria, perseverancia y esperanza final',
+            'genre' => 'epistolar y apocalíptico',
+            'chapter_function' => 'instruir, corregir y fortalecer la fe',
+            'canonical_axis' => 'vida en Cristo, iglesia y consumación',
+            'canonical_bridge' => 'ética apostólica y esperanza escatológica',
+            'book_theme' => 'madurez doctrinal y perseverancia de la iglesia',
+            'method_hint' => 'argumentación teológica, secciones paranéticas y simbolismo',
+        ];
     }
 
     private function requestData()

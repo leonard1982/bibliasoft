@@ -98,8 +98,8 @@
 
         els.list.innerHTML = state.rows.map(function (row) {
             var sourceLabel = row.source === 'generated' ? 'Generado' : 'Original';
-            var favoriteLabel = row.favorite ? 'Guardado' : 'Guardar';
-            var content = formatParagraphs(escapeHtml(row.content || ''));
+            var contentText = normalizeNarrative(row.content || '');
+            var content = formatParagraphs(escapeHtml(contentText));
             return '' +
                 '<article class="card anecdote-card topic-' + slugify(row.topic || '') + '" data-id="' + Number(row.id) + '">' +
                 '<div class="anecdote-meta">' +
@@ -111,9 +111,9 @@
                 '<p class="anecdote-highlight"><strong>Idea central:</strong> ' + escapeHtml(row.idea_central || '') + '</p>' +
                 '<p class="anecdote-action"><strong>Aplicación:</strong> ' + escapeHtml(row.application || '') + '</p>' +
                 '<div class="toolbar anecdote-actions">' +
-                '<button class="btn-light js-copy" type="button">Copiar</button>' +
-                '<button class="btn-light js-save" type="button">' + favoriteLabel + '</button>' +
-                '<button class="btn-light js-share" type="button">Compartir</button>' +
+                '<button class="icon-tool js-copy" type="button" title="Copiar anécdota" aria-label="Copiar anécdota"><img src="assets/icons/copy.svg" alt="" class="ico"></button>' +
+                '<button class="icon-tool js-save ' + (row.favorite ? 'is-active' : '') + '" type="button" title="' + (row.favorite ? 'Quitar guardado' : 'Guardar anécdota') + '" aria-label="' + (row.favorite ? 'Quitar guardado' : 'Guardar anécdota') + '"><img src="assets/icons/bookmark.svg" alt="" class="ico"></button>' +
+                '<button class="icon-tool js-share" type="button" title="Compartir anécdota" aria-label="Compartir anécdota"><img src="assets/icons/share.svg" alt="" class="ico"></button>' +
                 '</div>' +
                 '</article>';
         }).join('');
@@ -190,8 +190,9 @@
     }
 
     function buildText(row) {
+        var normalized = normalizeNarrative(row.content || '');
         return (row.title || '') + '\n\n' +
-            (row.content || '') + '\n\n' +
+            normalized + '\n\n' +
             'Idea central: ' + (row.idea_central || '') + '\n' +
             'Aplicación: ' + (row.application || '') + '\n' +
             'Biblia para todos';
@@ -202,6 +203,15 @@
         return parts.map(function (part) {
             return '<p>' + String(part || '').replace(/\n/g, '<br>') + '</p>';
         }).join('');
+    }
+
+    function normalizeNarrative(value) {
+        return String(value || '')
+            .replace(/\\r\\n/g, '\n')
+            .replace(/\\n/g, '\n')
+            .replace(/\r\n/g, '\n')
+            .replace(/\n{3,}/g, '\n\n')
+            .trim();
     }
 
     function slugify(value) {

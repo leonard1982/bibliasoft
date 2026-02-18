@@ -16,8 +16,11 @@
         selectedVerses: [],
         lastSelectedVerse: null,
         pendingVerse: null,
+        pendingSelectionVerses: [],
         selectionPayload: null,
         selectedBackground: '',
+        activeTab: 'contexto',
+        needsChapterRefresh: false,
         settings: {
             showHelp: true,
             layoutMode: 'columns',
@@ -68,6 +71,9 @@
         state.currentChapter = parseInt(state.initial.chapter || 1, 10);
         state.chapters = state.initial.chapters || [];
         state.verses = state.initial.verses || [];
+        if (Number(state.initial.highlight_verse || 0) > 0) {
+            state.pendingVerse = Number(state.initial.highlight_verse);
+        }
         if (state.initial.backgrounds && state.initial.backgrounds.length) {
             state.selectedBackground = state.initial.backgrounds[0];
         }
@@ -81,6 +87,7 @@
             }
         }
 
+        restoreReaderState();
         loadSettings();
         maybeRedirectToDailyAtStartup();
         applySettings();
@@ -88,11 +95,17 @@
         renderChapters();
         renderVerses();
         wireEvents();
-        activateTab('contexto');
+        activateTab(state.activeTab || 'contexto');
         bindSelectionActions();
         renderEmptyPanels();
         bindConnectivity();
         registerPwa();
+
+        if (state.needsChapterRefresh) {
+            fetchChapter(state.currentBook, state.currentChapter);
+            return;
+        }
+        applyPendingSelection();
     }
 
     function wireEvents() {
@@ -292,8 +305,10 @@
         if (!state.selectedVerses.length) {
             state.selectionPayload = null;
             renderEmptyPanels();
+            persistReaderState();
             return;
         }
+        persistReaderState();
         loadSelectionData();
     }
 
@@ -338,11 +353,30 @@
 
     function renderContextPanel(payload) {
         var c = payload.context || {};
+        var keywords = Array.isArray(c.keywords) ? c.keywords : [];
+        var questions = Array.isArray(c.questions) ? c.questions : [];
+        var studyTips = Array.isArray(c.study_tips) ? c.study_tips : [];
+        var keywordHtml = keywords.length ? keywords.map(function (word) {
+            return '<span class="chip">' + escapeHtml(word) + '</span>';
+        }).join('') : '<span class="muted">Sin términos destacados.</span>';
+
+        var questionsHtml = questions.length ? '<ul class="context-list">' + questions.map(function (q) {
+            return '<li>' + escapeHtml(q) + '</li>';
+        }).join('') + '</ul>' : '<p class="muted">Sin preguntas sugeridas.</p>';
+
+        var tipsHtml = studyTips.length ? '<ul class="context-list">' + studyTips.map(function (tip) {
+            return '<li>' + escapeHtml(tip) + '</li>';
+        }).join('') + '</ul>' : '<p class="muted">Sin recomendaciones adicionales.</p>';
+
         els.contextPanel.innerHTML = '' +
             '<div class="card"><strong>Pasaje</strong><p>' + escapeHtml(payload.reference.label || '') + '</p></div>' +
             '<div class="card"><strong>Resumen del pasaje</strong><p>' + escapeHtml(c.summary || '') + '</p></div>' +
             '<div class="card"><strong>Contexto histórico</strong><p>' + escapeHtml(c.historical || '') + '</p></div>' +
-            '<div class="card"><strong>Contexto literario</strong><p>' + escapeHtml(c.literary || '') + '</p></div>';
+            '<div class="card"><strong>Contexto literario</strong><p>' + escapeHtml(c.literary || '') + '</p></div>' +
+            '<div class="card"><strong>Contexto canónico</strong><p>' + escapeHtml(c.canonical || '') + '</p></div>' +
+            '<div class="card"><strong>Términos clave</strong><div class="context-chip-wrap">' + keywordHtml + '</div></div>' +
+            '<div class="card"><strong>Preguntas de estudio</strong>' + questionsHtml + '</div>' +
+            '<div class="card"><strong>Pistas de observación</strong>' + tipsHtml + '</div>';
     }
 
     function renderCommentsPanel(commentary) {
@@ -775,6 +809,108 @@
         };
     }
 
+    function restoreReaderState() {
+        var params = new URLSearchParams(window.location.search);
+        var hasExplicitLocation = params.has('book') || params.has('chapter') || params.has('verse');
+        if (hasExplicitLocation) {
+            state.activeTab = 'contexto';
+            return;
+        }
+
+        var saved = readStoredReaderState();
+        if (!saved) {
+            return;
+        }
+
+        state.activeTab = saved.active_tab || 'contexto';
+        state.pendingSelectionVerses = Array.isArray(saved.selected_verses) ? saved.selected_verses : [];
+
+        var savedBook = Number(saved.book || 0);
+        var savedChapter = Number(saved.chapter || 0);
+        if (savedBook < 1 || savedChapter < 1) {
+            return;
+        }
+
+        if (savedBook === Number(state.currentBook) && savedChapter === Number(state.currentChapter)) {
+            return;
+        }
+
+        state.currentBook = savedBook;
+        state.currentChapter = savedChapter;
+        state.chapters = [];
+        state.verses = [];
+        state.needsChapterRefresh = true;
+    }
+
+    function applyPendingSelection() {
+        var pending = Array.isArray(state.pendingSelectionVerses) ? state.pendingSelectionVerses.slice() : [];
+        if (!pending.length && Number(state.pendingVerse || 0) > 0) {
+            pending.push(Number(state.pendingVerse));
+            state.pendingVerse = null;
+        }
+        state.pendingSelectionVerses = [];
+        if (!pending.length) {
+            return;
+        }
+
+        var verseMap = {};
+        state.verses.forEach(function (row) {
+            verseMap[Number(row.verse)] = true;
+        });
+
+        var unique = {};
+        var restored = [];
+        pending.forEach(function (verse) {
+            var num = Number(verse);
+            if (!verseMap[num] || unique[num]) {
+                return;
+            }
+            unique[num] = true;
+            restored.push(num);
+        });
+
+        if (!restored.length) {
+            return;
+        }
+
+        restored.sort(function (a, b) { return a - b; });
+        state.selectedVerses = restored;
+        state.lastSelectedVerse = restored[restored.length - 1];
+        updateSelectionUI();
+        onSelectionChange();
+    }
+
+    function persistReaderState() {
+        var payload = {
+            book: Number(state.currentBook || 1),
+            chapter: Number(state.currentChapter || 1),
+            selected_verses: state.selectedVerses.slice(),
+            active_tab: state.activeTab || 'contexto',
+            updated_at: Date.now()
+        };
+        try {
+            localStorage.setItem('biblia_reader_state', JSON.stringify(payload));
+        } catch (err) {
+            // ignore storage errors
+        }
+    }
+
+    function readStoredReaderState() {
+        try {
+            var raw = localStorage.getItem('biblia_reader_state');
+            if (!raw) {
+                return null;
+            }
+            var parsed = JSON.parse(raw);
+            if (!parsed || typeof parsed !== 'object') {
+                return null;
+            }
+            return parsed;
+        } catch (err) {
+            return null;
+        }
+    }
+
     function buildSelectionReferences() {
         var rows = selectedRows();
         return rows.map(function (row) {
@@ -818,13 +954,16 @@
                 renderBooks(state.books);
                 renderChapters();
                 renderVerses();
-                if (state.pendingVerse) {
+                if (state.pendingSelectionVerses && state.pendingSelectionVerses.length) {
+                    applyPendingSelection();
+                } else if (state.pendingVerse) {
                     toggleVerse(state.pendingVerse);
                     state.lastSelectedVerse = state.pendingVerse;
                     state.pendingVerse = null;
                 }
                 els.title.textContent = data.book_name + ' ' + data.chapter;
                 history.replaceState(null, '', '?route=reader&book=' + state.currentBook + '&chapter=' + state.currentChapter);
+                persistReaderState();
                 closeDrawers();
             })
             .catch(function () {
@@ -885,12 +1024,14 @@
     }
 
     function activateTab(tabName) {
+        state.activeTab = tabName || 'contexto';
         document.querySelectorAll('.tab').forEach(function (tab) {
-            tab.classList.toggle('is-active', tab.getAttribute('data-tab') === tabName);
+            tab.classList.toggle('is-active', tab.getAttribute('data-tab') === state.activeTab);
         });
         document.querySelectorAll('.tab-panel').forEach(function (panel) {
-            panel.classList.toggle('is-active', panel.getAttribute('data-panel') === tabName);
+            panel.classList.toggle('is-active', panel.getAttribute('data-panel') === state.activeTab);
         });
+        persistReaderState();
     }
 
     function openSettings() {
