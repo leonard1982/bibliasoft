@@ -1,5 +1,27 @@
 <?php
 
+$envPath = dirname(__DIR__) . '/.env';
+if (is_file($envPath)) {
+    $lines = file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $trimmed = trim($line);
+        if ($trimmed === '' || strpos($trimmed, '#') === 0 || strpos($trimmed, '=') === false) {
+            continue;
+        }
+        list($key, $value) = explode('=', $trimmed, 2);
+        $key = trim($key);
+        $value = trim($value);
+        if ($value !== '' && (($value[0] === '"' && substr($value, -1) === '"') || ($value[0] === "'" && substr($value, -1) === "'"))) {
+            $value = substr($value, 1, -1);
+        }
+        if ($key !== '' && getenv($key) === false) {
+            putenv($key . '=' . $value);
+            $_ENV[$key] = $value;
+            $_SERVER[$key] = $value;
+        }
+    }
+}
+
 $config = require __DIR__ . '/../config/app.php';
 $config['branding'] = require __DIR__ . '/../config/branding.php';
 $GLOBALS['app_config'] = $config;

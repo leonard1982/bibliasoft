@@ -7,6 +7,8 @@ Separar completamente:
 
 ## Estructura de carpetas
 - `public/`: front controller y assets (`index.php`, `assets/`).
+- `public/api/generate.php`: endpoint de generación por pasaje (POST JSON).
+- `public/sw.js` + `public/manifest.json`: PWA/offline.
 - `app/Controllers/`: controladores web/API.
 - `app/Services/`: lógica de dominio (Biblia, búsqueda, IA, sanitización, datos usuario).
 - `app/Database/`: conexión y esquema SQL de app.
@@ -45,6 +47,17 @@ Separar completamente:
   - llave por variable `OPENAI_API_KEY`
   - modelo configurable por `OPENAI_MODEL`
   - punto de integración preparado en `generateWithOpenAI()`.
+
+## Generación por pasaje (sin exponer token)
+- Servicio: `app/Services/GenerationService.php`.
+- Endpoint: `POST /api/generate.php`.
+- Entrada:
+  - libro, capítulo, rango de versículos, modo (`explicacion`, `palabras_clave`, etc.)
+- Cache:
+  - `ai_cache(book, chapter, verse_start, verse_end, mode, prompt_hash, response, created_at)`
+- Seguridad:
+  - token solo en `.env` / variables de entorno.
+  - no hardcode en frontend ni en repositorio.
 
 ## Esquema de BD de app
 - `notes`: apuntes por versículo (CRUD).

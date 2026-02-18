@@ -2,7 +2,7 @@
 
 return [
     'app' => [
-        'name' => 'Biblia Web MVP',
+        'name' => 'Biblia para todos',
         'env' => getenv('APP_ENV') ?: 'local',
         'base_path' => dirname(__DIR__),
         'base_url' => getenv('APP_URL') ?: '/',

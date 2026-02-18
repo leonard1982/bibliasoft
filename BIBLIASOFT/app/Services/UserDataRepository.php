@@ -304,6 +304,72 @@ class UserDataRepository
         ]);
     }
 
+    public function getGenerationCache($book, $chapter, $verseStart, $verseEnd, $mode, $promptHash)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT response, created_at
+             FROM ai_cache
+             WHERE book = :book
+               AND chapter = :chapter
+               AND verse_start = :verse_start
+               AND verse_end = :verse_end
+               AND mode = :mode
+               AND prompt_hash = :prompt_hash
+             ORDER BY id DESC
+             LIMIT 1'
+        );
+        $stmt->execute([
+            ':book' => (int) $book,
+            ':chapter' => (int) $chapter,
+            ':verse_start' => (int) $verseStart,
+            ':verse_end' => (int) $verseEnd,
+            ':mode' => $mode,
+            ':prompt_hash' => $promptHash,
+        ]);
+        return $stmt->fetch();
+    }
+
+    public function saveGenerationCache($book, $chapter, $verseStart, $verseEnd, $mode, $promptHash, $response)
+    {
+        if ($this->hasColumn('ai_cache', 'verse')) {
+            $stmt = $this->db()->prepare(
+                'INSERT INTO ai_cache
+                 (book, chapter, verse, verse_start, verse_end, mode, prompt_hash, response, context_hash, cards_json, model, created_at, updated_at)
+                 VALUES
+                 (:book, :chapter, :verse, :verse_start, :verse_end, :mode, :prompt_hash, :response, :context_hash, :cards_json, :model, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+            );
+            $stmt->execute([
+                ':book' => (int) $book,
+                ':chapter' => (int) $chapter,
+                ':verse' => (int) $verseStart,
+                ':verse_start' => (int) $verseStart,
+                ':verse_end' => (int) $verseEnd,
+                ':mode' => $mode,
+                ':prompt_hash' => $promptHash,
+                ':response' => $response,
+                ':context_hash' => 'gen:' . $promptHash,
+                ':cards_json' => '',
+                ':model' => 'generation',
+            ]);
+        } else {
+            $stmt = $this->db()->prepare(
+                'INSERT INTO ai_cache
+                 (book, chapter, verse_start, verse_end, mode, prompt_hash, response, created_at, updated_at)
+                 VALUES
+                 (:book, :chapter, :verse_start, :verse_end, :mode, :prompt_hash, :response, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+            );
+            $stmt->execute([
+                ':book' => (int) $book,
+                ':chapter' => (int) $chapter,
+                ':verse_start' => (int) $verseStart,
+                ':verse_end' => (int) $verseEnd,
+                ':mode' => $mode,
+                ':prompt_hash' => $promptHash,
+                ':response' => $response,
+            ]);
+        }
+    }
+
     public function hasFtsIndex()
     {
         $stmt = $this->db()->query("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'fts_index' LIMIT 1");

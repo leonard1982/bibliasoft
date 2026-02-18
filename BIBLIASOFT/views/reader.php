@@ -114,6 +114,7 @@ $initial = [
                     <option value="dark">Oscuro</option>
                 </select>
             </label>
+            <small class="muted">Configurar token: pega tu `OPENAI_API_KEY` en el archivo `.env` (no en la interfaz).</small>
         </div>
     </div>
 

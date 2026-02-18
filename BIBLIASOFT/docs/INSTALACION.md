@@ -43,6 +43,15 @@ Variables opcionales:
 - `OPENAI_MODEL=gpt-4.1-mini`
 - `AI_ENABLED=1`
 
+### Archivo .env
+1. Copiar plantilla:
+```bash
+copy .env.example .env
+```
+2. Editar `.env` y completar `OPENAI_API_KEY` si usarás “Generar…”.
+
 ## Notas
 - El MVP no modifica las bases SQLite originales.
 - Apuntes, enlaces y cache IA se guardan en `storage/app.sqlite`.
+- Endpoint de generación:
+  - `POST /api/generate.php`

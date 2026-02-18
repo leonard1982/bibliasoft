@@ -1,6 +1,35 @@
 # CHANGELOG
 
 ## 2026-02-18
+- Rebranding completo:
+  - Nombre principal: `Biblia para todos`
+  - Branding alterno: `BibliaSoft`
+  - Slogan visible: `Biblia para todos`
+- Nuevo layout lector profesional:
+  - 3 columnas fijas en escritorio (Libros / Capítulos / Lectura + panel de ayuda)
+  - drawer adaptado en móvil para navegación y ayuda
+- Selección avanzada de versículos:
+  - selección múltiple con `Shift+click`
+  - `Copiar selección`, `Copiar como párrafo`, `Compartir`
+- Panel de ayuda por pestañas:
+  - `Contexto`, `Comentarios`, `Mis notas`, `Vincular`, `Herramientas`
+  - Notas por rango con etiquetas
+  - Vínculos manuales por rango
+- PWA instalable y offline:
+  - `manifest.json`
+  - `sw.js`
+  - cache de assets y capítulos consultados
+  - acciones de “Generar…” deshabilitadas sin conexión
+- Búsqueda avanzada con atajo `Ctrl+K`:
+  - filtros por modo de búsqueda, libro y rango de capítulos
+  - apertura directa al resultado
+- Integración segura de generación por API:
+  - endpoint `public/api/generate.php`
+  - carga de `.env` sin hardcodear claves
+  - cache en `ai_cache` por libro/capítulo/rango/modo/prompt_hash
+- Extras implementados:
+  - Historial de capítulos recientes
+  - Favoritos de versículos (endpoint preparado)
 - Inspección completa del repositorio base `C:\facilweb\htdocs\BIBLIASOFT`.
 - Validación de estructura SQLite en:
   - `01RVR1960.bbli`
