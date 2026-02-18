@@ -6,6 +6,7 @@ return [
         'env' => getenv('APP_ENV') ?: 'local',
         'base_path' => dirname(__DIR__),
         'base_url' => getenv('APP_URL') ?: '/',
+        'public_url' => getenv('APP_PUBLIC_URL') ?: '',
         'timezone' => getenv('APP_TZ') ?: 'America/Bogota',
     ],
     'paths' => [

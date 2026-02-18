@@ -3,12 +3,16 @@
 require_once __DIR__ . '/../app/bootstrap.php';
 
 use App\Controllers\ApiController;
+use App\Controllers\AnecdoteController;
+use App\Controllers\AuthController;
 use App\Controllers\BibleController;
 use App\Controllers\DevotionalController;
 use App\Controllers\HomeController;
 use App\Controllers\HomeDailyController;
 use App\Controllers\ReaderController;
+use App\Controllers\ShareController;
 use App\Services\AIService;
+use App\Services\AnecdoteService;
 use App\Services\BibleRepository;
 use App\Services\DailyVerseService;
 use App\Services\DevotionalService;
@@ -32,6 +36,11 @@ $dailyVerseService = new DailyVerseService(
     $imageCardService
 );
 $generationService = new GenerationService(config('ai', []), $userDataRepository, $bibleRepository);
+$anecdoteService = new AnecdoteService(
+    $userDataRepository,
+    config('app.base_path') . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'anecdotas_seed.json',
+    config('ai', [])
+);
 $devotionalService = new DevotionalService(
     $bibleRepository,
     $userDataRepository,
@@ -45,13 +54,17 @@ $bibleController = new BibleController($bibleRepository, $searchService);
 $readerController = new ReaderController($bibleRepository, $imageCardService, $userDataRepository);
 $homeDailyController = new HomeDailyController($dailyVerseService, $imageCardService, $userDataRepository);
 $devotionalController = new DevotionalController($devotionalService, $imageCardService);
+$authController = new AuthController($userDataRepository);
+$shareController = new ShareController();
+$anecdoteController = new AnecdoteController($anecdoteService);
 $apiController = new ApiController(
     $bibleRepository,
     $userDataRepository,
     $aiService,
     $searchService,
     $devotionalService,
-    $dailyVerseService
+    $dailyVerseService,
+    $anecdoteService
 );
 
 $route = isset($_GET['route']) ? $_GET['route'] : 'home_daily';
@@ -86,6 +99,38 @@ try {
             $bibleController->search();
             break;
 
+        case 'share_app':
+            $shareController->app();
+            break;
+
+        case 'anecdotes':
+            $anecdoteController->index();
+            break;
+
+        case 'login':
+            $authController->loginForm();
+            break;
+
+        case 'register':
+            $authController->registerForm();
+            break;
+
+        case 'login.submit':
+            $authController->login();
+            break;
+
+        case 'register.submit':
+            $authController->register();
+            break;
+
+        case 'logout':
+            $authController->logout();
+            break;
+
+        case 'admin':
+            $authController->admin();
+            break;
+
         case 'api.chapter':
             $apiController->chapter();
             break;
@@ -116,6 +161,18 @@ try {
 
         case 'api.prefs.save':
             $apiController->prefsSave();
+            break;
+
+        case 'api.anecdotes.list':
+            $apiController->anecdotesList();
+            break;
+
+        case 'api.anecdotes.generate':
+            $apiController->anecdotesGenerate();
+            break;
+
+        case 'api.anecdotes.favorite':
+            $apiController->anecdotesFavoriteToggle();
             break;
 
         case 'api.note.create':
