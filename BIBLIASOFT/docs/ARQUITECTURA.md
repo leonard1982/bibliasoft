@@ -11,6 +11,9 @@ Separar completamente:
 - `public/sw.js` + `public/manifest.json`: PWA/offline.
 - `public/assets/daily.js`: comportamiento de portada diaria.
 - `public/assets/devotional.js`: interacción del módulo Devocionales.
+- `public/assets/share_app.js`: pantalla de compartir app por QR.
+- `public/assets/anecdotes.js`: interacción del módulo Anécdotas.
+- `public/assets/vendor/qrcode.min.js`: librería local para QR.
 - `app/Controllers/`: controladores web/API.
 - `app/Services/`: lógica de dominio (Biblia, búsqueda, IA, sanitización, datos usuario).
 - `app/Database/`: conexión y esquema SQL de app.
@@ -18,6 +21,7 @@ Separar completamente:
 - `config/`: configuración global.
 - `scripts/`: utilidades CLI (inicialización DB e indexado FTS).
 - `docs/`: bitácora, roadmap, instalación, licencia/distribución.
+- `data/anecdotas_seed.json`: banco inicial de anécdotas originales.
 
 ## Flujo principal
 1. `public/index.php` enruta por query `route`.
@@ -29,6 +33,10 @@ Separar completamente:
    - apuntes y enlaces locales
    - tarjetas IA (stub/caché)
 5. CRUD de apuntes/enlaces persiste en `storage/app.sqlite`.
+
+Rutas de UI nuevas:
+- `?route=share_app`: compartir app con QR y guía de instalación.
+- `?route=anecdotes`: anécdotas por tema con búsqueda, guardar y compartir.
 
 ## Búsqueda
 - Sin índice: `BibleRepository::searchSource()` con `LIKE`.
@@ -70,3 +78,11 @@ Separar completamente:
 - `daily_cache`: versículo del día cacheado por fecha.
 - `devotionals`: historial de devocionales generados.
 - `user_prefs`: preferencias persistidas (escala fuente, show_daily, tema, etc.).
+- `anecdotes`: banco local y contenido generado bajo demanda.
+- `anecdote_favorites`: favoritos de anécdotas por usuario.
+
+## Comentarios y licencias
+- Fuentes de comentarios configuradas en `config/sources.php`.
+- Política por defecto:
+  - `cmti` desactivado (licencia no verificada).
+  - fallback contextual `Fuente: Generado`.
