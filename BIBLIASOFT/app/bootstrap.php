@@ -24,9 +24,17 @@ if (is_file($envPath)) {
 
 $config = require __DIR__ . '/../config/app.php';
 $config['branding'] = require __DIR__ . '/../config/branding.php';
+$sourcesConfigPath = __DIR__ . '/../config/sources.php';
+if (is_file($sourcesConfigPath)) {
+    $config['sources'] = require $sourcesConfigPath;
+}
 $GLOBALS['app_config'] = $config;
 
 date_default_timezone_set($config['app']['timezone']);
+
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 spl_autoload_register(function ($class) {
     $prefix = 'App\\';
@@ -93,5 +101,19 @@ if (!function_exists('app_redirect')) {
     {
         header('Location: ' . $url);
         exit;
+    }
+}
+
+if (!function_exists('auth_user_id')) {
+    function auth_user_id()
+    {
+        return isset($_SESSION['user_id']) ? (int) $_SESSION['user_id'] : 0;
+    }
+}
+
+if (!function_exists('auth_username')) {
+    function auth_username()
+    {
+        return isset($_SESSION['username']) ? (string) $_SESSION['username'] : '';
     }
 }

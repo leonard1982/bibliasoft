@@ -54,7 +54,7 @@ class GenerationService
             $mode,
             $promptHash
         );
-        if ($cached) {
+        if ($cached && !$this->isBadPlaceholder((string) $cached['response'])) {
             return [
                 'cached' => true,
                 'mode' => $mode,
@@ -62,7 +62,7 @@ class GenerationService
             ];
         }
 
-        $content = $this->fallbackText($mode, $verseStart, $verseEnd);
+        $content = $this->fallbackText($mode, $book, $chapter, $verseStart, $verseEnd, $verses);
         $source = 'stub';
 
         $enabled = !empty($this->config['enabled']);
@@ -159,17 +159,104 @@ class GenerationService
         return null;
     }
 
-    private function fallbackText($mode, $verseStart, $verseEnd)
+    private function fallbackText($mode, $book, $chapter, $verseStart, $verseEnd, array $verses)
     {
         $range = $verseStart === $verseEnd ? (string) $verseStart : $verseStart . '-' . $verseEnd;
+        $reference = $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd);
+        $text = $this->collectText($verses);
+        $keywords = $this->extractKeywords($text, 5);
+        $keywordText = empty($keywords) ? 'gracia, fe, obediencia, esperanza' : implode(', ', $keywords);
+
         $map = [
-            'explicacion' => 'Explicación base del pasaje ' . $range . ': identifica la idea principal, el sujeto, y la acción central.',
-            'palabras_clave' => 'Palabras clave base del pasaje ' . $range . ': gracia, fe, obediencia, esperanza (ajustar al texto).',
-            'bosquejo' => 'Bosquejo base: 1) Observación del texto. 2) Interpretación del contexto. 3) Aplicación práctica.',
-            'aplicacion_practica' => 'Aplicación base: define una acción concreta para hoy, una oración breve y un compromiso semanal.',
-            'resumen' => 'Resumen base del pasaje: sintetiza el mensaje central del texto seleccionado.',
-            'contexto' => 'Contexto base: ubica el pasaje en su capítulo y en la intención general del libro.',
+            'explicacion' => $this->buildExplanation($reference, $text),
+            'palabras_clave' => 'Palabras clave en ' . $reference . ': ' . $keywordText . '. Observa cómo estas ideas sostienen el mensaje del pasaje.',
+            'bosquejo' => 'Bosquejo sugerido para ' . $reference . ': 1) Qué dice el texto. 2) Qué significa en su contexto. 3) Qué decisión práctica pide hoy.',
+            'aplicacion_practica' => 'Aplicación práctica para ' . $reference . ': identifica una acción concreta para hoy, exprésala en oración breve y compártela con alguien de confianza.',
+            'resumen' => $this->buildSummary($text, $reference),
+            'contexto' => 'Contexto de ' . $reference . ': conecta este pasaje con el flujo del capítulo y el propósito general del libro para evitar interpretaciones aisladas.',
         ];
-        return $map[$mode];
+        return isset($map[$mode]) ? $map[$mode] : $map['explicacion'];
+    }
+
+    private function isBadPlaceholder($text)
+    {
+        $text = trim((string) $text);
+        if ($text === '') {
+            return true;
+        }
+        $badPhrases = [
+            'preparado para generar',
+            'stub:',
+            'modo seguro',
+            'explicación base del pasaje',
+            'palabras clave base',
+            'bosquejo base',
+            'aplicación base',
+            'resumen base',
+            'contexto base',
+        ];
+        $lower = function_exists('mb_strtolower') ? mb_strtolower($text, 'UTF-8') : strtolower($text);
+        foreach ($badPhrases as $phrase) {
+            if (strpos($lower, $phrase) !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function collectText(array $verses)
+    {
+        $parts = [];
+        foreach ($verses as $row) {
+            $parts[] = trim((string) ($row['scripture_text'] ?? ''));
+        }
+        return trim(preg_replace('/\s+/', ' ', implode(' ', $parts)));
+    }
+
+    private function buildExplanation($reference, $text)
+    {
+        $summary = $this->buildSummary($text, $reference);
+        return $summary . ' La invitación principal es leerlo como mensaje integral: verdad, carácter de Dios y respuesta práctica del creyente.';
+    }
+
+    private function buildSummary($text, $reference)
+    {
+        if ($text === '') {
+            return 'Resumen de ' . $reference . ': este pasaje llama a observar el mensaje central y aplicarlo con fidelidad en lo cotidiano.';
+        }
+
+        $len = function_exists('mb_strlen') ? mb_strlen($text, 'UTF-8') : strlen($text);
+        if ($len > 220) {
+            $text = (function_exists('mb_substr') ? mb_substr($text, 0, 220, 'UTF-8') : substr($text, 0, 220)) . '...';
+        }
+
+        return 'Resumen de ' . $reference . ': ' . $text;
+    }
+
+    private function extractKeywords($text, $limit)
+    {
+        $text = function_exists('mb_strtolower') ? mb_strtolower((string) $text, 'UTF-8') : strtolower((string) $text);
+        $text = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $text);
+        $tokens = preg_split('/\s+/u', $text);
+        $stop = [
+            'de', 'la', 'el', 'los', 'las', 'y', 'a', 'en', 'que', 'por', 'con',
+            'para', 'del', 'se', 'su', 'un', 'una', 'al', 'como', 'no', 'es', 'le',
+            'lo', 'tu', 'mi', 'si', 'más', 'mas', 'o', 'ya', 'ha', 'sus', 'pero',
+            'porque', 'cuando', 'sobre', 'entre', 'todo', 'toda', 'este', 'esta',
+        ];
+        $freq = [];
+        foreach ($tokens as $token) {
+            $token = trim((string) $token);
+            $tokenLen = function_exists('mb_strlen') ? mb_strlen($token, 'UTF-8') : strlen($token);
+            if ($token === '' || $tokenLen < 4 || in_array($token, $stop, true)) {
+                continue;
+            }
+            if (!isset($freq[$token])) {
+                $freq[$token] = 0;
+            }
+            $freq[$token]++;
+        }
+        arsort($freq);
+        return array_slice(array_keys($freq), 0, max(1, (int) $limit));
     }
 }
