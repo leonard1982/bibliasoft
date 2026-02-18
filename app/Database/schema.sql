@@ -71,3 +71,33 @@ CREATE TABLE IF NOT EXISTS history (
     chapter INTEGER NOT NULL,
     visited_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS daily_cache (
+    date TEXT PRIMARY KEY,
+    book INTEGER NOT NULL,
+    chapter INTEGER NOT NULL,
+    verse INTEGER NOT NULL,
+    image_path TEXT DEFAULT '',
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS devotionals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT NOT NULL,
+    book INTEGER NOT NULL,
+    chapter INTEGER NOT NULL,
+    verse INTEGER NOT NULL,
+    content_json TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_devotionals_date ON devotionals (date);
+
+CREATE TABLE IF NOT EXISTS user_prefs (
+    id INTEGER PRIMARY KEY CHECK (id = 1),
+    font_scale INTEGER NOT NULL DEFAULT 100,
+    show_daily INTEGER NOT NULL DEFAULT 1,
+    auto_devotional INTEGER NOT NULL DEFAULT 0,
+    theme TEXT NOT NULL DEFAULT 'light',
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

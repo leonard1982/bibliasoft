@@ -72,8 +72,8 @@
 
         <section class="drawer-section">
             <div class="section-inline">
-                <h3>IA por versículo</h3>
-                <button id="refreshAi" class="btn-light" type="button">Regenerar</button>
+                <h3>Explicación por versículo</h3>
+                <button id="refreshAi" class="btn-light" type="button">Actualizar</button>
             </div>
             <div id="aiCards" class="stack"></div>
         </section>

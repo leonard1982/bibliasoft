@@ -4,9 +4,13 @@ const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
 const STATIC_ASSETS = [
   './',
+  './?route=home_daily',
   './?route=reader',
+  './?route=devotional',
   './assets/app.css',
   './assets/app.js',
+  './assets/daily.js',
+  './assets/devotional.js',
   './assets/icons/book.svg',
   './assets/icons/copy.svg',
   './assets/icons/help.svg',
@@ -15,6 +19,11 @@ const STATIC_ASSETS = [
   './assets/icons/settings.svg',
   './assets/icons/share.svg',
   './assets/icons/text.svg',
+  './assets/backgrounds/bg-01.svg',
+  './assets/backgrounds/bg-02.svg',
+  './assets/backgrounds/bg-03.svg',
+  './assets/backgrounds/bg-04.svg',
+  './assets/backgrounds/bg-05.svg',
   './manifest.json'
 ];
 

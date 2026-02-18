@@ -35,6 +35,11 @@ php -S localhost:8080 -t public
 4. Abrir en navegador:
 `http://localhost:8080`
 
+Rutas principales:
+- `?route=home_daily` (Versículo del día)
+- `?route=reader` (Lector principal)
+- `?route=devotional` (Devocionales)
+
 ## Configuración de entorno
 Variables opcionales:
 - `APP_ENV=local|production`
@@ -55,3 +60,7 @@ copy .env.example .env
 - Apuntes, enlaces y cache IA se guardan en `storage/app.sqlite`.
 - Endpoint de generación:
   - `POST /api/generate.php`
+- Nuevas tablas de app:
+  - `daily_cache`
+  - `devotionals`
+  - `user_prefs`

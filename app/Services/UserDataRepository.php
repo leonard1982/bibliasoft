@@ -269,6 +269,136 @@ class UserDataRepository
         return $stmt->fetchAll();
     }
 
+    public function getDailyCache($date)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT date, book, chapter, verse, image_path, created_at
+             FROM daily_cache
+             WHERE date = :date
+             LIMIT 1'
+        );
+        $stmt->execute([':date' => (string) $date]);
+        return $stmt->fetch();
+    }
+
+    public function saveDailyCache($date, $book, $chapter, $verse, $imagePath = '')
+    {
+        $stmt = $this->db()->prepare(
+            'INSERT INTO daily_cache (date, book, chapter, verse, image_path, created_at)
+             VALUES (:date, :book, :chapter, :verse, :image_path, CURRENT_TIMESTAMP)
+             ON CONFLICT(date)
+             DO UPDATE SET
+                 book = excluded.book,
+                 chapter = excluded.chapter,
+                 verse = excluded.verse,
+                 image_path = excluded.image_path'
+        );
+        $stmt->execute([
+            ':date' => (string) $date,
+            ':book' => (int) $book,
+            ':chapter' => (int) $chapter,
+            ':verse' => (int) $verse,
+            ':image_path' => (string) $imagePath,
+        ]);
+    }
+
+    public function getDevotionalByDate($date)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT id, date, book, chapter, verse, content_json, created_at
+             FROM devotionals
+             WHERE date = :date
+             ORDER BY id DESC
+             LIMIT 1'
+        );
+        $stmt->execute([':date' => (string) $date]);
+        return $stmt->fetch();
+    }
+
+    public function saveDevotional($date, $book, $chapter, $verse, $contentJson)
+    {
+        $stmt = $this->db()->prepare(
+            'INSERT INTO devotionals (date, book, chapter, verse, content_json, created_at)
+             VALUES (:date, :book, :chapter, :verse, :content_json, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':date' => (string) $date,
+            ':book' => (int) $book,
+            ':chapter' => (int) $chapter,
+            ':verse' => (int) $verse,
+            ':content_json' => (string) $contentJson,
+        ]);
+        return (int) $this->db()->lastInsertId();
+    }
+
+    public function getDevotionals($limit = 20)
+    {
+        $limit = max(1, min(200, (int) $limit));
+        $stmt = $this->db()->query(
+            'SELECT id, date, book, chapter, verse, content_json, created_at
+             FROM devotionals
+             ORDER BY id DESC
+             LIMIT ' . $limit
+        );
+        return $stmt->fetchAll();
+    }
+
+    public function getUserPrefs()
+    {
+        $stmt = $this->db()->query(
+            'SELECT id, font_scale, show_daily, auto_devotional, theme, updated_at
+             FROM user_prefs
+             WHERE id = 1
+             LIMIT 1'
+        );
+        $row = $stmt->fetch();
+        if (!$row) {
+            $this->db()->exec("INSERT INTO user_prefs (id, font_scale, show_daily, auto_devotional, theme, updated_at) VALUES (1, 100, 1, 0, 'light', CURRENT_TIMESTAMP)");
+            return [
+                'id' => 1,
+                'font_scale' => 100,
+                'show_daily' => 1,
+                'auto_devotional' => 0,
+                'theme' => 'light',
+            ];
+        }
+        return $row;
+    }
+
+    public function saveUserPrefs(array $prefs)
+    {
+        $current = $this->getUserPrefs();
+        $fontScale = isset($prefs['font_scale']) ? (int) $prefs['font_scale'] : (int) $current['font_scale'];
+        $showDaily = isset($prefs['show_daily']) ? (int) $prefs['show_daily'] : (int) $current['show_daily'];
+        $autoDevotional = isset($prefs['auto_devotional']) ? (int) $prefs['auto_devotional'] : (int) $current['auto_devotional'];
+        $theme = isset($prefs['theme']) ? trim((string) $prefs['theme']) : (string) $current['theme'];
+
+        if ($fontScale < 85) {
+            $fontScale = 85;
+        } elseif ($fontScale > 150) {
+            $fontScale = 150;
+        }
+        if ($theme !== 'dark') {
+            $theme = 'light';
+        }
+
+        $stmt = $this->db()->prepare(
+            'UPDATE user_prefs
+             SET font_scale = :font_scale,
+                 show_daily = :show_daily,
+                 auto_devotional = :auto_devotional,
+                 theme = :theme,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = 1'
+        );
+        $stmt->execute([
+            ':font_scale' => $fontScale,
+            ':show_daily' => $showDaily ? 1 : 0,
+            ':auto_devotional' => $autoDevotional ? 1 : 0,
+            ':theme' => $theme,
+        ]);
+    }
+
     public function getAiCache($book, $chapter, $verse, $contextHash)
     {
         $stmt = $this->db()->prepare(

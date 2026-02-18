@@ -33,6 +33,9 @@ class SchemaManager
         self::migrateNotes($pdo);
         self::migrateLinks($pdo);
         self::migrateAiCache($pdo);
+        self::migrateDailyCache($pdo);
+        self::migrateDevotionals($pdo);
+        self::migrateUserPrefs($pdo);
     }
 
     private static function migrateNotes(\PDO $pdo)
@@ -116,6 +119,89 @@ class SchemaManager
         $pdo->exec("UPDATE ai_cache SET mode = COALESCE(mode, 'resumen'), prompt_hash = COALESCE(prompt_hash, '')");
         $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_ai_cache_legacy_unique ON ai_cache(book, chapter, verse, context_hash)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_ai_cache_generation ON ai_cache(book, chapter, verse_start, verse_end, mode)');
+    }
+
+    private static function migrateDailyCache(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'daily_cache')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS daily_cache (
+                date TEXT PRIMARY KEY,
+                book INTEGER NOT NULL,
+                chapter INTEGER NOT NULL,
+                verse INTEGER NOT NULL,
+                image_path TEXT DEFAULT \'\',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+            return;
+        }
+
+        $columns = self::columns($pdo, 'daily_cache');
+        if (!isset($columns['image_path'])) {
+            $pdo->exec("ALTER TABLE daily_cache ADD COLUMN image_path TEXT DEFAULT ''");
+        }
+        if (!isset($columns['created_at'])) {
+            $pdo->exec("ALTER TABLE daily_cache ADD COLUMN created_at TEXT DEFAULT CURRENT_TIMESTAMP");
+        }
+    }
+
+    private static function migrateDevotionals(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'devotionals')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS devotionals (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                date TEXT NOT NULL,
+                book INTEGER NOT NULL,
+                chapter INTEGER NOT NULL,
+                verse INTEGER NOT NULL,
+                content_json TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+            $pdo->exec('CREATE INDEX IF NOT EXISTS idx_devotionals_date ON devotionals(date)');
+            return;
+        }
+
+        $columns = self::columns($pdo, 'devotionals');
+        if (!isset($columns['content_json']) && isset($columns['content'])) {
+            $pdo->exec('ALTER TABLE devotionals ADD COLUMN content_json TEXT');
+            $pdo->exec('UPDATE devotionals SET content_json = content WHERE content_json IS NULL');
+        }
+        if (!isset($columns['created_at'])) {
+            $pdo->exec("ALTER TABLE devotionals ADD COLUMN created_at TEXT DEFAULT CURRENT_TIMESTAMP");
+        }
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_devotionals_date ON devotionals(date)');
+    }
+
+    private static function migrateUserPrefs(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'user_prefs')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS user_prefs (
+                id INTEGER PRIMARY KEY CHECK (id = 1),
+                font_scale INTEGER NOT NULL DEFAULT 100,
+                show_daily INTEGER NOT NULL DEFAULT 1,
+                auto_devotional INTEGER NOT NULL DEFAULT 0,
+                theme TEXT NOT NULL DEFAULT \'light\',
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        }
+
+        $columns = self::columns($pdo, 'user_prefs');
+        if (!isset($columns['font_scale'])) {
+            $pdo->exec('ALTER TABLE user_prefs ADD COLUMN font_scale INTEGER NOT NULL DEFAULT 100');
+        }
+        if (!isset($columns['show_daily'])) {
+            $pdo->exec('ALTER TABLE user_prefs ADD COLUMN show_daily INTEGER NOT NULL DEFAULT 1');
+        }
+        if (!isset($columns['auto_devotional'])) {
+            $pdo->exec('ALTER TABLE user_prefs ADD COLUMN auto_devotional INTEGER NOT NULL DEFAULT 0');
+        }
+        if (!isset($columns['theme'])) {
+            $pdo->exec("ALTER TABLE user_prefs ADD COLUMN theme TEXT NOT NULL DEFAULT 'light'");
+        }
+        if (!isset($columns['updated_at'])) {
+            $pdo->exec("ALTER TABLE user_prefs ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+
+        $pdo->exec("INSERT OR IGNORE INTO user_prefs (id, font_scale, show_daily, auto_devotional, theme, updated_at) VALUES (1, 100, 1, 0, 'light', CURRENT_TIMESTAMP)");
     }
 
     private static function tableExists(\PDO $pdo, $table)

@@ -9,6 +9,8 @@ Separar completamente:
 - `public/`: front controller y assets (`index.php`, `assets/`).
 - `public/api/generate.php`: endpoint de generación por pasaje (POST JSON).
 - `public/sw.js` + `public/manifest.json`: PWA/offline.
+- `public/assets/daily.js`: comportamiento de portada diaria.
+- `public/assets/devotional.js`: interacción del módulo Devocionales.
 - `app/Controllers/`: controladores web/API.
 - `app/Services/`: lógica de dominio (Biblia, búsqueda, IA, sanitización, datos usuario).
 - `app/Database/`: conexión y esquema SQL de app.
@@ -65,3 +67,6 @@ Separar completamente:
 - `ai_cache`: respuestas IA cacheadas con `context_hash` y `model`.
 - `users`: reservada para fase multiusuario.
 - `fts_index`: opcional, generado por script.
+- `daily_cache`: versículo del día cacheado por fecha.
+- `devotionals`: historial de devocionales generados.
+- `user_prefs`: preferencias persistidas (escala fuente, show_daily, tema, etc.).

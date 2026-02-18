@@ -6,6 +6,9 @@ $initial = [
     'books' => $books,
     'chapters' => $chapters,
     'verses' => $verses,
+    'backgrounds' => $backgrounds,
+    'highlight_verse' => (int) $highlightVerse,
+    'user_prefs' => $userPrefs,
 ];
 ?>
 <div id="readerApp"
@@ -95,6 +98,8 @@ $initial = [
                     <option value="focus">Modo B: Pantalla completa</option>
                 </select>
             </label>
+            <label><input type="checkbox" id="optShowDaily" checked> Mostrar Versículo del día al iniciar</label>
+            <label><input type="checkbox" id="optAutoDevotional"> Activar devocionales automáticos</label>
             <label>Tamaño de letra
                 <select id="optFontSize">
                     <option value="sm">Pequeña</option>
@@ -114,7 +119,8 @@ $initial = [
                     <option value="dark">Oscuro</option>
                 </select>
             </label>
-            <small class="muted">Configurar token: pega tu `OPENAI_API_KEY` en el archivo `.env` (no en la interfaz).</small>
+            <small class="muted">Configurar token: pega tu token en el archivo `.env` (no en la interfaz).</small>
+            <small class="muted">Para habilitar funciones avanzadas, configure su token en `.env`.</small>
         </div>
     </div>
 
