@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\AIService;
+use App\Services\AnecdoteService;
 use App\Services\BibleRepository;
 use App\Services\DailyVerseService;
 use App\Services\DevotionalService;
@@ -17,6 +18,7 @@ class ApiController
     private $searchService;
     private $devotionalService;
     private $dailyVerseService;
+    private $anecdoteService;
 
     public function __construct(
         BibleRepository $bibleRepository,
@@ -24,7 +26,8 @@ class ApiController
         AIService $aiService,
         SearchService $searchService,
         DevotionalService $devotionalService,
-        DailyVerseService $dailyVerseService
+        DailyVerseService $dailyVerseService,
+        AnecdoteService $anecdoteService
     ) {
         $this->bibleRepository = $bibleRepository;
         $this->userDataRepository = $userDataRepository;
@@ -32,6 +35,7 @@ class ApiController
         $this->searchService = $searchService;
         $this->devotionalService = $devotionalService;
         $this->dailyVerseService = $dailyVerseService;
+        $this->anecdoteService = $anecdoteService;
     }
 
     public function verse()
@@ -339,6 +343,52 @@ class ApiController
 
         $this->userDataRepository->saveUserPrefs($prefs);
         app_json(['ok' => true, 'prefs' => $this->userDataRepository->getUserPrefs()]);
+    }
+
+    public function anecdotesList()
+    {
+        $this->anecdoteService->bootstrapSeed();
+        $topic = isset($_GET['topic']) ? trim((string) $_GET['topic']) : '';
+        $q = isset($_GET['q']) ? trim((string) $_GET['q']) : '';
+        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 80;
+
+        $payload = $this->anecdoteService->list([
+            'topic' => $topic,
+            'q' => $q,
+        ], $limit, auth_user_id());
+
+        app_json([
+            'ok' => true,
+            'rows' => $payload['rows'],
+            'topics' => $payload['topics'],
+        ]);
+    }
+
+    public function anecdotesGenerate()
+    {
+        $input = $this->requestData();
+        $topic = isset($input['topic']) ? trim((string) $input['topic']) : 'Fe';
+        $row = $this->anecdoteService->generate($topic);
+        app_json([
+            'ok' => true,
+            'row' => $row,
+        ]);
+    }
+
+    public function anecdotesFavoriteToggle()
+    {
+        if (auth_user_id() < 1) {
+            app_json(['error' => 'Inicia sesión para guardar anécdotas.'], 401);
+        }
+
+        $input = $this->requestData();
+        $anecdoteId = isset($input['anecdote_id']) ? (int) $input['anecdote_id'] : 0;
+        if ($anecdoteId < 1) {
+            app_json(['error' => 'Parámetro inválido.'], 422);
+        }
+
+        $active = $this->anecdoteService->toggleFavorite(auth_user_id(), $anecdoteId);
+        app_json(['ok' => true, 'active' => $active]);
     }
 
     public function linkDelete()
