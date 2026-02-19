@@ -103,6 +103,17 @@ $initial = [
             </label>
             <label><input type="checkbox" id="optShowDaily" checked> Mostrar Versículo del día al iniciar</label>
             <label><input type="checkbox" id="optAutoDevotional"> Activar devocionales automáticos</label>
+            <label>Meta semanal (días completos)
+                <select id="optWeeklyGoalDays">
+                    <option value="1">1 día</option>
+                    <option value="2">2 días</option>
+                    <option value="3">3 días</option>
+                    <option value="4">4 días</option>
+                    <option value="5">5 días</option>
+                    <option value="6">6 días</option>
+                    <option value="7">7 días</option>
+                </select>
+            </label>
             <label><input type="checkbox" id="optReminderEnabled"> Activar recordatorio diario</label>
             <label>Hora del recordatorio
                 <input type="time" id="optReminderTime" step="60" value="07:00">

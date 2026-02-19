@@ -1211,6 +1211,195 @@ a {
     background: linear-gradient(90deg, #2f9f5f, #56c281);
 }
 
+.reading-plan-chapter-list {
+    display: grid;
+    gap: .42rem;
+}
+
+.reading-plan-chapter-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .42rem;
+    align-items: center;
+}
+
+.reading-plan-chapter-row.is-current .js-plan-open-chapter {
+    border-color: color-mix(in srgb, var(--accent) 52%, var(--line));
+    background: color-mix(in srgb, var(--selection) 72%, transparent);
+}
+
+.js-plan-open-chapter {
+    justify-content: flex-start;
+}
+
+.js-plan-toggle-chapter {
+    min-width: 86px;
+    justify-content: center;
+}
+
+.js-plan-toggle-chapter.is-done {
+    border-color: color-mix(in srgb, #2f9f5f 56%, var(--line));
+    background: color-mix(in srgb, #2f9f5f 14%, var(--panel));
+}
+
+.reading-plan-weekly {
+    display: grid;
+    gap: .48rem;
+}
+
+.reading-plan-weekly-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+.reading-plan-weekly-days {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: .36rem;
+}
+
+.reading-plan-weekly-day {
+    display: grid;
+    justify-items: center;
+    gap: .22rem;
+    padding: .34rem .2rem;
+    border: 1px solid color-mix(in srgb, var(--line) 86%, transparent);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--panel) 96%, var(--bg) 4%);
+}
+
+.reading-plan-weekly-day-label {
+    font-size: .74rem;
+}
+
+.reading-plan-weekly-day-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--line) 85%, transparent);
+}
+
+.reading-plan-weekly-day.is-completed {
+    border-color: color-mix(in srgb, #2f9f5f 54%, var(--line));
+    background: color-mix(in srgb, #2f9f5f 14%, var(--panel));
+}
+
+.reading-plan-weekly-day.is-completed .reading-plan-weekly-day-dot {
+    background: #2f9f5f;
+}
+
+.reading-plan-weekly-day.is-idle {
+    opacity: .58;
+}
+
+.reading-plan-weekly-day.is-today {
+    outline: 2px solid color-mix(in srgb, var(--accent) 50%, transparent);
+    outline-offset: -1px;
+}
+
+.reading-plan-calendar {
+    display: grid;
+    gap: .48rem;
+}
+
+.reading-plan-calendar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+.reading-plan-calendar-head {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: .32rem;
+    color: var(--muted);
+    font-size: .76rem;
+}
+
+.reading-plan-calendar-head span {
+    text-align: center;
+}
+
+.reading-plan-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: .32rem;
+}
+
+.reading-plan-calendar-cell {
+    min-height: 40px;
+    border: 1px solid color-mix(in srgb, var(--line) 84%, transparent);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--panel) 95%, var(--bg) 5%);
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: .16rem;
+}
+
+.reading-plan-calendar-cell.is-empty {
+    min-height: 40px;
+    border-style: dashed;
+    opacity: .35;
+}
+
+.reading-plan-calendar-cell.is-idle {
+    opacity: .6;
+}
+
+.reading-plan-calendar-cell.is-assigned {
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
+}
+
+.reading-plan-calendar-cell.is-completed {
+    border-color: color-mix(in srgb, #2f9f5f 58%, var(--line));
+    background: color-mix(in srgb, #2f9f5f 14%, var(--panel));
+}
+
+.reading-plan-calendar-cell.is-pending {
+    border-color: color-mix(in srgb, #e09f2a 62%, var(--line));
+    background: color-mix(in srgb, #e09f2a 12%, var(--panel));
+}
+
+.reading-plan-calendar-cell.is-future {
+    border-color: color-mix(in srgb, #2c70d3 52%, var(--line));
+    background: color-mix(in srgb, #2c70d3 10%, var(--panel));
+}
+
+.reading-plan-calendar-cell.is-today {
+    outline: 2px solid color-mix(in srgb, var(--accent) 52%, transparent);
+    outline-offset: -1px;
+}
+
+.reading-plan-calendar-day {
+    font-size: .84rem;
+    line-height: 1;
+}
+
+.reading-plan-calendar-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--line) 85%, transparent);
+}
+
+.reading-plan-calendar-cell.is-completed .reading-plan-calendar-dot {
+    background: #2f9f5f;
+}
+
+.reading-plan-calendar-cell.is-pending .reading-plan-calendar-dot {
+    background: #e09f2a;
+}
+
+.reading-plan-calendar-cell.is-future .reading-plan-calendar-dot {
+    background: #2c70d3;
+}
+
 .marketing-grid {
     display: grid;
     gap: .75rem;

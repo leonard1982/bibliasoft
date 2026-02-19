@@ -24,6 +24,7 @@
         needsChapterRefresh: false,
         readingPlan: null,
         planDate: '',
+        planCalendarMonth: '',
         settings: {
             showHelp: true,
             layoutMode: 'columns',
@@ -33,6 +34,7 @@
             fontScale: 100,
             showDaily: true,
             autoDevotional: false,
+            weeklyGoalDays: 5,
             reminderEnabled: false,
             reminderTime: '07:00'
         }
@@ -92,6 +94,7 @@
             state.settings.fontScale = Number(state.initial.user_prefs.font_scale || 100);
             state.settings.showDaily = Number(state.initial.user_prefs.show_daily || 0) === 1;
             state.settings.autoDevotional = Number(state.initial.user_prefs.auto_devotional || 0) === 1;
+            state.settings.weeklyGoalDays = clampGoalDays(state.initial.user_prefs.weekly_goal_days || 5);
             state.settings.reminderEnabled = Number(state.initial.user_prefs.reminder_enabled || 0) === 1;
             state.settings.reminderTime = normalizeReminderTime(state.initial.user_prefs.reminder_time || '07:00');
             if (state.initial.user_prefs.theme === 'dark') {
@@ -113,6 +116,7 @@
         bindConnectivity();
         registerPwa();
         maybeOpenSearchAtStartup();
+        fetchReadingPlanStatus();
 
         if (state.needsChapterRefresh) {
             fetchChapter(state.currentBook, state.currentChapter);
@@ -1123,6 +1127,7 @@
                 history.replaceState(null, '', '?route=reader&book=' + state.currentBook + '&chapter=' + state.currentChapter);
                 persistReaderState();
                 if (!refreshReadingPlanIfDateChanged()) {
+                    maybeAutoCompleteCurrentPlanChapter();
                     renderReadingPlanCard();
                 }
                 closeDrawers();
@@ -1147,7 +1152,11 @@
                     return;
                 }
                 state.readingPlan = res.plan || {};
+                if (!state.planCalendarMonth) {
+                    state.planCalendarMonth = monthStartIsoFromDate(state.readingPlan.today || state.planDate);
+                }
                 renderReadingPlanCard();
+                maybeAutoCompleteCurrentPlanChapter();
             })
             .catch(function () {
                 els.readerPlanCard.innerHTML = '<p class="muted">No se pudo cargar el plan de lectura.</p>';
@@ -1183,6 +1192,7 @@
                 var days = Number(item.days || 0);
                 return '<option value="' + days + '">' + escapeHtml(item.name || (days + ' días')) + '</option>';
             }).join('');
+            var inactiveGoal = clampGoalDays(rootPlan.weekly_goal_days || state.settings.weeklyGoalDays || 5);
             els.readerPlanCard.innerHTML = '' +
                 '<div class="reading-plan-head">' +
                 '<h3><img src="assets/icons/list.svg" alt="" class="ico"> Plan de lectura</h3>' +
@@ -1191,7 +1201,8 @@
                 '<div class="reading-plan-controls">' +
                 '<select id="readerPlanDays">' + options + '</select>' +
                 '<button class="btn-primary" id="readerPlanStartBtn" type="button">Iniciar plan</button>' +
-                '</div>';
+                '</div>' +
+                '<small class="muted">Meta semanal actual: ' + inactiveGoal + ' día(s) completos.</small>';
 
             var startBtn = document.getElementById('readerPlanStartBtn');
             if (startBtn) {
@@ -1224,11 +1235,46 @@
         var totalDays = Number(plan.total_days || 0);
         var completedDays = Number(plan.completed_days || 0);
         var progress = Number(plan.progress_percent || 0);
+        var todayCompletedCount = Number(plan.today_completed_count || 0);
+        var todayTotalCount = Number(plan.today_total_count || Number(assignment.count || 0));
         var done = plan.today_done === true;
+        var weekly = (plan.weekly && typeof plan.weekly === 'object') ? plan.weekly : {};
+        var weeklyGoal = clampGoalDays(weekly.goal_days || rootPlan.weekly_goal_days || state.settings.weeklyGoalDays || 5);
+        var weeklyCompletedDays = Number(weekly.completed_days || 0);
+        var weeklyProgress = Number(weekly.progress_percent || 0);
+        var weeklyGoalMet = weekly.goal_met === true;
+        var currentStreak = Number(plan.current_streak || rootPlan.current_streak || rootPlan.streak_current || 0);
+        var longestStreak = Number(plan.longest_streak || rootPlan.longest_streak || currentStreak || 0);
+        var weeklyDaysHtml = buildWeeklyDaysHtml(weekly.days || []);
+        var todayIso = String(rootPlan.today || localDateYmd(new Date()));
+        if (!state.planCalendarMonth) {
+            state.planCalendarMonth = monthStartIsoFromDate(todayIso);
+        }
+        var monthCalendar = buildPlanMonthCalendar(plan, todayIso, state.planCalendarMonth);
         var isCurrentAssignment = isCurrentChapterAssigned(chapters);
         var toggleLabel = done ? 'Marcar como pendiente' : 'Marcar hoy como leído';
         var toggleClass = done ? 'btn-light' : 'btn-primary';
         var progressSafe = Math.max(0, Math.min(100, progress));
+        var weeklyProgressSafe = Math.max(0, Math.min(100, weeklyProgress));
+        var chapterRowsHtml = chapters.map(function (row) {
+            var book = Number(row.book || 0);
+            var chapter = Number(row.chapter || 0);
+            var completed = row.completed === true || Number(row.completed) === 1;
+            var label = String(row.label || chapterLabelFromRow(row));
+            var isCurrent = book === Number(state.currentBook) && chapter === Number(state.currentChapter);
+            return '' +
+                '<div class="reading-plan-chapter-row' + (isCurrent ? ' is-current' : '') + '">' +
+                '<button class="btn-light js-plan-open-chapter" type="button" data-book="' + book + '" data-chapter="' + chapter + '">' +
+                escapeHtml(label) +
+                '</button>' +
+                '<button class="btn-light js-plan-toggle-chapter' + (completed ? ' is-done' : '') + '" type="button" data-book="' + book + '" data-chapter="' + chapter + '" data-completed="' + (completed ? '1' : '0') + '">' +
+                (completed ? 'Leído' : 'Marcar') +
+                '</button>' +
+                '</div>';
+        }).join('');
+        if (!chapterRowsHtml) {
+            chapterRowsHtml = '<p class="muted">Sin capítulos asignados hoy.</p>';
+        }
 
         els.readerPlanCard.innerHTML = '' +
             '<div class="reading-plan-head">' +
@@ -1247,9 +1293,34 @@
             '<div class="card">' +
             '<strong>Día ' + Number(plan.today_index || 1) + ' de ' + totalDays + '</strong>' +
             '<p>' + escapeHtml(rangeLabel) + '</p>' +
-            '<small class="muted">Capítulos del día: ' + Number(assignment.count || 0) + ' · Progreso: ' + completedDays + '/' + totalDays + ' (' + progressSafe + '%)</small>' +
+            '<small class="muted">Capítulos del día: ' + todayCompletedCount + '/' + todayTotalCount + ' · Progreso global: ' + completedDays + '/' + totalDays + ' (' + progressSafe + '%)</small>' +
             '</div>' +
             '<div class="reading-plan-progress"><div class="reading-plan-progress-bar" style="width:' + progressSafe + '%"></div></div>' +
+            '<div class="card reading-plan-weekly">' +
+            '<div class="reading-plan-weekly-head">' +
+            '<strong>Racha actual: ' + currentStreak + ' día(s)</strong>' +
+            '<small class="muted">Meta semanal: ' + weeklyCompletedDays + '/' + weeklyGoal + ' día(s)</small>' +
+            '</div>' +
+            '<div class="reading-plan-progress"><div class="reading-plan-progress-bar" style="width:' + weeklyProgressSafe + '%"></div></div>' +
+            '<div class="reading-plan-weekly-days">' + weeklyDaysHtml + '</div>' +
+            '<small class="muted">' + (weeklyGoalMet ? 'Meta semanal cumplida.' : 'Sigue avanzando para cumplir la meta semanal.') + '</small>' +
+            '</div>' +
+            '<div class="card reading-plan-calendar">' +
+            '<div class="reading-plan-calendar-top">' +
+            '<strong>Calendario mensual</strong>' +
+            '<div class="toolbar">' +
+            '<button class="btn-light js-plan-calendar-nav" type="button" data-shift="-1" aria-label="Mes anterior">Anterior</button>' +
+            '<small class="muted">' + escapeHtml(monthCalendar.month_label) + '</small>' +
+            '<button class="btn-light js-plan-calendar-nav" type="button" data-shift="1" aria-label="Mes siguiente">Siguiente</button>' +
+            '</div>' +
+            '</div>' +
+            '<small class="muted">Mes: ' + monthCalendar.completed_count + ' completados · ' + monthCalendar.pending_count + ' pendientes · Racha máxima: ' + longestStreak + ' día(s)</small>' +
+            '<div class="reading-plan-calendar-head">' +
+            '<span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Dom</span>' +
+            '</div>' +
+            '<div class="reading-plan-calendar-grid">' + monthCalendar.cells_html + '</div>' +
+            '</div>' +
+            '<div class="reading-plan-chapter-list">' + chapterRowsHtml + '</div>' +
             '<div class="toolbar">' +
             '<button class="' + toggleClass + '" id="readerPlanToggleBtn" type="button">' + toggleLabel + '</button>' +
             '<button class="btn-light" id="readerPlanOpenBtn" type="button" ' + (firstChapter ? '' : 'disabled') + '><img src="assets/icons/book.svg" alt="" class="ico"> Abrir lectura de hoy</button>' +
@@ -1269,6 +1340,33 @@
                 toggleReadingPlanTodayFromReader(!done);
             });
         }
+
+        els.readerPlanCard.querySelectorAll('.js-plan-calendar-nav').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var shift = Number(this.getAttribute('data-shift') || '0');
+                if (!shift) {
+                    return;
+                }
+                state.planCalendarMonth = shiftMonthIso(state.planCalendarMonth, shift);
+                renderReadingPlanCard();
+            });
+        });
+
+        els.readerPlanCard.querySelectorAll('.js-plan-open-chapter').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                closePlan();
+                fetchChapter(Number(this.getAttribute('data-book') || '0'), Number(this.getAttribute('data-chapter') || '0'));
+            });
+        });
+
+        els.readerPlanCard.querySelectorAll('.js-plan-toggle-chapter').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var book = Number(this.getAttribute('data-book') || '0');
+                var chapter = Number(this.getAttribute('data-chapter') || '0');
+                var isDone = Number(this.getAttribute('data-completed') || '0') === 1;
+                setPlanChapterCompletion(book, chapter, !isDone, false);
+            });
+        });
 
         var openBtn = document.getElementById('readerPlanOpenBtn');
         if (openBtn && firstChapter) {
@@ -1293,12 +1391,70 @@
                 return;
             }
             state.planDate = localDateYmd(new Date());
+            state.planCalendarMonth = monthStartIsoFromDate(state.planDate);
             state.readingPlan = res.plan || {};
             renderReadingPlanCard();
             notify('Plan de lectura actualizado.');
         }).catch(function () {
             notify('No se pudo iniciar el plan.');
         });
+    }
+
+    function setPlanChapterCompletion(book, chapter, completed, silent) {
+        if (!book || !chapter) {
+            return;
+        }
+        postForm('api.plan.chapter', {
+            book: book,
+            chapter: chapter,
+            completed: completed ? 1 : 0,
+            date: localDateYmd(new Date())
+        }).then(function (res) {
+            if (res.error) {
+                if (!silent) {
+                    notify(res.error);
+                }
+                return;
+            }
+            state.planDate = localDateYmd(new Date());
+            state.readingPlan = res.plan || {};
+            renderReadingPlanCard();
+            if (!silent) {
+                notify(completed ? 'Capítulo marcado como leído.' : 'Capítulo marcado como pendiente.');
+            }
+        }).catch(function () {
+            if (!silent) {
+                notify('No se pudo actualizar el capítulo del plan.');
+            }
+        });
+    }
+
+    function maybeAutoCompleteCurrentPlanChapter() {
+        if (!state.readingPlan || !state.readingPlan.active) {
+            return;
+        }
+        var plan = state.readingPlan.plan || {};
+        var assignment = plan.today_assignment || {};
+        var chapters = Array.isArray(assignment.chapters) ? assignment.chapters : [];
+        if (!chapters.length) {
+            return;
+        }
+        var currentKey = chapterKey(state.currentBook, state.currentChapter);
+        var target = null;
+        for (var i = 0; i < chapters.length; i++) {
+            var row = chapters[i] || {};
+            if (chapterKey(Number(row.book || 0), Number(row.chapter || 0)) === currentKey) {
+                target = row;
+                break;
+            }
+        }
+        if (!target) {
+            return;
+        }
+        if (target.completed === true || Number(target.completed || 0) === 1) {
+            return;
+        }
+        setPlanChapterCompletion(state.currentBook, state.currentChapter, true, true);
     }
 
     function toggleReadingPlanTodayFromReader(completed) {
@@ -1343,6 +1499,215 @@
         });
         var name = bookRow ? String(bookRow.name || '') : ('Libro ' + bookId);
         return name + ' ' + chapter;
+    }
+
+    function chapterKey(book, chapter) {
+        return String(Number(book || 0)) + ':' + String(Number(chapter || 0));
+    }
+
+    function buildWeeklyDaysHtml(days) {
+        var labels = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
+        var rows = Array.isArray(days) ? days.slice(0, 7) : [];
+        if (!rows.length) {
+            rows = labels.map(function (label) {
+                return {
+                    label: label,
+                    has_assignment: false,
+                    completed: false,
+                    is_today: false
+                };
+            });
+        }
+        return rows.map(function (row, index) {
+            var label = String(row.label || labels[index] || '');
+            var completed = row.completed === true;
+            var hasAssignment = row.has_assignment === true;
+            var isToday = row.is_today === true;
+            var classes = 'reading-plan-weekly-day';
+            if (completed) {
+                classes += ' is-completed';
+            }
+            if (!hasAssignment) {
+                classes += ' is-idle';
+            }
+            if (isToday) {
+                classes += ' is-today';
+            }
+            return '' +
+                '<div class="' + classes + '">' +
+                '<span class="reading-plan-weekly-day-label">' + escapeHtml(label) + '</span>' +
+                '<span class="reading-plan-weekly-day-dot"></span>' +
+                '</div>';
+        }).join('');
+    }
+
+    function buildPlanMonthCalendar(plan, todayIso, monthIso) {
+        var totalDays = Number((plan && plan.total_days) || 0);
+        var startDate = String((plan && plan.start_date) || '');
+        var completedDayIndexes = Array.isArray(plan && plan.completed_day_indexes) ? plan.completed_day_indexes : [];
+        var completedSet = {};
+        completedDayIndexes.forEach(function (value) {
+            var day = Number(value || 0);
+            if (day > 0) {
+                completedSet[day] = true;
+            }
+        });
+
+        var normalizedMonthIso = monthStartIsoFromDate(monthIso || todayIso);
+        var parts = parseYmdToParts(normalizedMonthIso);
+        if (!parts) {
+            return {
+                month_iso: normalizedMonthIso,
+                month_label: '',
+                completed_count: 0,
+                pending_count: 0,
+                cells_html: ''
+            };
+        }
+
+        var daysInMonth = new Date(parts.year, parts.month, 0).getDate();
+        var firstWeekday = (new Date(parts.year, parts.month - 1, 1).getDay() + 6) % 7;
+        var today = String(todayIso || localDateYmd(new Date()));
+        var cells = '';
+        var completedCount = 0;
+        var pendingCount = 0;
+
+        for (var lead = 0; lead < firstWeekday; lead++) {
+            cells += '<div class="reading-plan-calendar-cell is-empty"></div>';
+        }
+
+        for (var day = 1; day <= daysInMonth; day++) {
+            var dateIso = isoFromParts(parts.year, parts.month, day);
+            var dayIndex = dayIndexFromDates(startDate, dateIso);
+            var hasAssignment = dayIndex >= 1 && dayIndex <= totalDays;
+            var isCompleted = hasAssignment && completedSet[dayIndex] === true;
+            var isPastOrToday = dateIso <= today;
+            var isPending = hasAssignment && !isCompleted && isPastOrToday;
+            var isFutureAssigned = hasAssignment && !isPastOrToday;
+            var isToday = dateIso === today;
+
+            if (isCompleted) {
+                completedCount++;
+            }
+            if (isPending) {
+                pendingCount++;
+            }
+
+            cells += buildPlanCalendarCellHtml(day, hasAssignment, isCompleted, isPending, isFutureAssigned, isToday);
+        }
+
+        var totalCells = firstWeekday + daysInMonth;
+        var trailing = (7 - (totalCells % 7)) % 7;
+        for (var tail = 0; tail < trailing; tail++) {
+            cells += '<div class="reading-plan-calendar-cell is-empty"></div>';
+        }
+
+        return {
+            month_iso: normalizedMonthIso,
+            month_label: monthTitleFromParts(parts.year, parts.month),
+            completed_count: completedCount,
+            pending_count: pendingCount,
+            cells_html: cells
+        };
+    }
+
+    function buildPlanCalendarCellHtml(day, hasAssignment, isCompleted, isPending, isFutureAssigned, isToday) {
+        var classes = 'reading-plan-calendar-cell';
+        var status = 'Sin asignacion';
+
+        if (!hasAssignment) {
+            classes += ' is-idle';
+        } else {
+            classes += ' is-assigned';
+            status = 'Asignado';
+            if (isCompleted) {
+                classes += ' is-completed';
+                status = 'Completado';
+            } else if (isPending) {
+                classes += ' is-pending';
+                status = 'Pendiente';
+            } else if (isFutureAssigned) {
+                classes += ' is-future';
+                status = 'Programado';
+            }
+        }
+        if (isToday) {
+            classes += ' is-today';
+        }
+
+        return '' +
+            '<div class="' + classes + '" title="' + escapeHtml(status) + '">' +
+            '<span class="reading-plan-calendar-day">' + Number(day) + '</span>' +
+            '<span class="reading-plan-calendar-dot"></span>' +
+            '</div>';
+    }
+
+    function monthStartIsoFromDate(dateIso) {
+        var parts = parseYmdToParts(dateIso);
+        if (!parts) {
+            var now = parseYmdToParts(localDateYmd(new Date()));
+            if (!now) {
+                return '1970-01-01';
+            }
+            return isoFromParts(now.year, now.month, 1);
+        }
+        return isoFromParts(parts.year, parts.month, 1);
+    }
+
+    function shiftMonthIso(monthIso, shift) {
+        var parts = parseYmdToParts(monthIso);
+        if (!parts) {
+            parts = parseYmdToParts(localDateYmd(new Date()));
+        }
+        if (!parts) {
+            return '1970-01-01';
+        }
+        var shifted = new Date(parts.year, (parts.month - 1) + Number(shift || 0), 1);
+        return isoFromParts(shifted.getFullYear(), shifted.getMonth() + 1, 1);
+    }
+
+    function monthTitleFromParts(year, month) {
+        var names = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        var label = names[Math.max(0, Math.min(11, Number(month || 1) - 1))] || '';
+        return label + ' ' + Number(year || 0);
+    }
+
+    function dayIndexFromDates(startIso, targetIso) {
+        var start = parseYmdToParts(startIso);
+        var target = parseYmdToParts(targetIso);
+        if (!start || !target) {
+            return 0;
+        }
+        var startUtc = Date.UTC(start.year, start.month - 1, start.day);
+        var targetUtc = Date.UTC(target.year, target.month - 1, target.day);
+        var diff = Math.floor((targetUtc - startUtc) / 86400000);
+        return diff + 1;
+    }
+
+    function parseYmdToParts(value) {
+        var raw = String(value || '').trim();
+        var match = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (!match) {
+            return null;
+        }
+        var year = Number(match[1]);
+        var month = Number(match[2]);
+        var day = Number(match[3]);
+        if (year < 1 || month < 1 || month > 12 || day < 1 || day > 31) {
+            return null;
+        }
+        return {
+            year: year,
+            month: month,
+            day: day
+        };
+    }
+
+    function isoFromParts(year, month, day) {
+        var y = Number(year || 0);
+        var m = Number(month || 1);
+        var d = Number(day || 1);
+        return String(y).padStart(4, '0') + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0');
     }
 
     function applyHighlight(color) {
@@ -1559,6 +1924,7 @@
         bindSetting('optLayoutMode', 'layoutMode');
         bindSetting('optShowDaily', 'showDaily', 'checkbox');
         bindSetting('optAutoDevotional', 'autoDevotional', 'checkbox');
+        bindSetting('optWeeklyGoalDays', 'weeklyGoalDays');
         bindSetting('optReminderEnabled', 'reminderEnabled', 'checkbox');
         bindSetting('optReminderTime', 'reminderTime');
         bindSetting('optFontSize', 'fontSize');
@@ -1579,6 +1945,10 @@
 
         input.addEventListener('change', function () {
             state.settings[key] = type === 'checkbox' ? this.checked : this.value;
+            if (key === 'weeklyGoalDays') {
+                state.settings.weeklyGoalDays = clampGoalDays(state.settings.weeklyGoalDays);
+                input.value = String(state.settings.weeklyGoalDays);
+            }
             if (key === 'reminderEnabled' && state.settings.reminderEnabled) {
                 requestReminderPermission();
             }
@@ -1591,6 +1961,9 @@
             }
             saveSettings();
             applySettings();
+            if (key === 'weeklyGoalDays') {
+                fetchReadingPlanStatus();
+            }
         });
     }
 
@@ -1636,6 +2009,7 @@
             if (storedDaily !== null) {
                 state.settings.showDaily = storedDaily === '1';
             }
+            state.settings.weeklyGoalDays = clampGoalDays(state.settings.weeklyGoalDays);
             state.settings.reminderEnabled = state.settings.reminderEnabled === true || Number(state.settings.reminderEnabled) === 1;
             state.settings.reminderTime = normalizeReminderTime(state.settings.reminderTime || '07:00');
         } catch (err) {
@@ -2004,12 +2378,37 @@
             font_scale: state.settings.fontScale,
             show_daily: state.settings.showDaily ? 1 : 0,
             auto_devotional: state.settings.autoDevotional ? 1 : 0,
+            weekly_goal_days: clampGoalDays(state.settings.weeklyGoalDays),
             reminder_enabled: state.settings.reminderEnabled ? 1 : 0,
             reminder_time: normalizeReminderTime(state.settings.reminderTime || '07:00'),
             theme: state.settings.theme
+        }).then(function (res) {
+            if (!res || !res.prefs) {
+                return;
+            }
+            state.settings.weeklyGoalDays = clampGoalDays(res.prefs.weekly_goal_days || state.settings.weeklyGoalDays);
+            var weeklyGoalInput = document.getElementById('optWeeklyGoalDays');
+            if (weeklyGoalInput) {
+                weeklyGoalInput.value = String(state.settings.weeklyGoalDays);
+            }
         }).catch(function () {
             // ignore
         });
+    }
+
+    function clampGoalDays(value) {
+        var goal = Number(value || 5);
+        if (!Number.isFinite(goal)) {
+            goal = 5;
+        }
+        goal = Math.round(goal);
+        if (goal < 1) {
+            return 1;
+        }
+        if (goal > 7) {
+            return 7;
+        }
+        return goal;
     }
 
     function normalizeReminderTime(value) {

@@ -411,19 +411,20 @@ class UserDataRepository
     public function getUserPrefs()
     {
         $stmt = $this->db()->query(
-            'SELECT id, font_scale, show_daily, auto_devotional, reminder_enabled, reminder_time, theme, updated_at
+            'SELECT id, font_scale, show_daily, auto_devotional, weekly_goal_days, reminder_enabled, reminder_time, theme, updated_at
              FROM user_prefs
              WHERE id = 1
              LIMIT 1'
         );
         $row = $stmt->fetch();
         if (!$row) {
-            $this->db()->exec("INSERT INTO user_prefs (id, font_scale, show_daily, auto_devotional, reminder_enabled, reminder_time, theme, updated_at) VALUES (1, 100, 1, 0, 0, '07:00', 'light', CURRENT_TIMESTAMP)");
+            $this->db()->exec("INSERT INTO user_prefs (id, font_scale, show_daily, auto_devotional, weekly_goal_days, reminder_enabled, reminder_time, theme, updated_at) VALUES (1, 100, 1, 0, 5, 0, '07:00', 'light', CURRENT_TIMESTAMP)");
             return [
                 'id' => 1,
                 'font_scale' => 100,
                 'show_daily' => 1,
                 'auto_devotional' => 0,
+                'weekly_goal_days' => 5,
                 'reminder_enabled' => 0,
                 'reminder_time' => '07:00',
                 'theme' => 'light',
@@ -438,6 +439,7 @@ class UserDataRepository
         $fontScale = isset($prefs['font_scale']) ? (int) $prefs['font_scale'] : (int) $current['font_scale'];
         $showDaily = isset($prefs['show_daily']) ? (int) $prefs['show_daily'] : (int) $current['show_daily'];
         $autoDevotional = isset($prefs['auto_devotional']) ? (int) $prefs['auto_devotional'] : (int) $current['auto_devotional'];
+        $weeklyGoalDays = isset($prefs['weekly_goal_days']) ? (int) $prefs['weekly_goal_days'] : (int) ($current['weekly_goal_days'] ?? 5);
         $reminderEnabled = isset($prefs['reminder_enabled']) ? (int) $prefs['reminder_enabled'] : (int) ($current['reminder_enabled'] ?? 0);
         $reminderTime = isset($prefs['reminder_time']) ? trim((string) $prefs['reminder_time']) : (string) ($current['reminder_time'] ?? '07:00');
         $theme = isset($prefs['theme']) ? trim((string) $prefs['theme']) : (string) $current['theme'];
@@ -449,6 +451,11 @@ class UserDataRepository
         }
         if ($theme !== 'dark') {
             $theme = 'light';
+        }
+        if ($weeklyGoalDays < 1) {
+            $weeklyGoalDays = 1;
+        } elseif ($weeklyGoalDays > 7) {
+            $weeklyGoalDays = 7;
         }
         if (!preg_match('/^\d{2}:\d{2}$/', $reminderTime)) {
             $reminderTime = '07:00';
@@ -464,6 +471,7 @@ class UserDataRepository
              SET font_scale = :font_scale,
                  show_daily = :show_daily,
                  auto_devotional = :auto_devotional,
+                 weekly_goal_days = :weekly_goal_days,
                  reminder_enabled = :reminder_enabled,
                  reminder_time = :reminder_time,
                  theme = :theme,
@@ -474,6 +482,7 @@ class UserDataRepository
             ':font_scale' => $fontScale,
             ':show_daily' => $showDaily ? 1 : 0,
             ':auto_devotional' => $autoDevotional ? 1 : 0,
+            ':weekly_goal_days' => $weeklyGoalDays,
             ':reminder_enabled' => $reminderEnabled ? 1 : 0,
             ':reminder_time' => $reminderTime,
             ':theme' => $theme,
@@ -544,6 +553,34 @@ class UserDataRepository
         return $map;
     }
 
+    public function getReadingPlanChapterProgressByDay($planId)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT day_index, book, chapter
+             FROM reading_plan_chapter_progress
+             WHERE plan_id = :plan_id
+             ORDER BY day_index ASC, book ASC, chapter ASC'
+        );
+        $stmt->execute([':plan_id' => (int) $planId]);
+
+        $rows = $stmt->fetchAll();
+        $map = [];
+        foreach ($rows as $row) {
+            $dayIndex = (int) ($row['day_index'] ?? 0);
+            $book = (int) ($row['book'] ?? 0);
+            $chapter = (int) ($row['chapter'] ?? 0);
+            if ($dayIndex < 1 || $book < 1 || $chapter < 1) {
+                continue;
+            }
+            if (!isset($map[$dayIndex])) {
+                $map[$dayIndex] = [];
+            }
+            $key = $book . ':' . $chapter;
+            $map[$dayIndex][$key] = true;
+        }
+        return $map;
+    }
+
     public function countReadingPlanCompletedDays($planId)
     {
         $stmt = $this->db()->prepare(
@@ -583,6 +620,65 @@ class UserDataRepository
             ':date' => trim((string) $date),
             ':book' => (int) $book,
             ':chapter' => (int) $chapter,
+        ]);
+    }
+
+    public function setReadingPlanChapterCompletion($planId, $dayIndex, $date, $book, $chapter, $completed)
+    {
+        $planId = (int) $planId;
+        $dayIndex = (int) $dayIndex;
+        $book = (int) $book;
+        $chapter = (int) $chapter;
+        $date = trim((string) $date);
+
+        if ($planId < 1 || $dayIndex < 1 || $book < 1 || $chapter < 1) {
+            return;
+        }
+
+        if (!$completed) {
+            $stmtDelete = $this->db()->prepare(
+                'DELETE FROM reading_plan_chapter_progress
+                 WHERE plan_id = :plan_id
+                   AND day_index = :day_index
+                   AND book = :book
+                   AND chapter = :chapter'
+            );
+            $stmtDelete->execute([
+                ':plan_id' => $planId,
+                ':day_index' => $dayIndex,
+                ':book' => $book,
+                ':chapter' => $chapter,
+            ]);
+            return;
+        }
+
+        $stmt = $this->db()->prepare(
+            'INSERT INTO reading_plan_chapter_progress (plan_id, day_index, date, book, chapter, completed_at)
+             VALUES (:plan_id, :day_index, :date, :book, :chapter, CURRENT_TIMESTAMP)
+             ON CONFLICT(plan_id, day_index, book, chapter)
+             DO UPDATE SET
+                 date = excluded.date,
+                 completed_at = CURRENT_TIMESTAMP'
+        );
+        $stmt->execute([
+            ':plan_id' => $planId,
+            ':day_index' => $dayIndex,
+            ':date' => $date,
+            ':book' => $book,
+            ':chapter' => $chapter,
+        ]);
+    }
+
+    public function clearReadingPlanDayChapters($planId, $dayIndex)
+    {
+        $stmt = $this->db()->prepare(
+            'DELETE FROM reading_plan_chapter_progress
+             WHERE plan_id = :plan_id
+               AND day_index = :day_index'
+        );
+        $stmt->execute([
+            ':plan_id' => (int) $planId,
+            ':day_index' => (int) $dayIndex,
         ]);
     }
 

@@ -175,6 +175,10 @@ try {
             $apiController->readingPlanToday();
             break;
 
+        case 'api.plan.chapter':
+            $apiController->readingPlanChapter();
+            break;
+
         case 'api.prefs.save':
             $apiController->prefsSave();
             break;

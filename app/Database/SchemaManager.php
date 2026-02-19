@@ -183,6 +183,7 @@ class SchemaManager
                 font_scale INTEGER NOT NULL DEFAULT 100,
                 show_daily INTEGER NOT NULL DEFAULT 1,
                 auto_devotional INTEGER NOT NULL DEFAULT 0,
+                weekly_goal_days INTEGER NOT NULL DEFAULT 5,
                 theme TEXT NOT NULL DEFAULT \'light\',
                 updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             )');
@@ -198,6 +199,9 @@ class SchemaManager
         if (!isset($columns['auto_devotional'])) {
             $pdo->exec('ALTER TABLE user_prefs ADD COLUMN auto_devotional INTEGER NOT NULL DEFAULT 0');
         }
+        if (!isset($columns['weekly_goal_days'])) {
+            $pdo->exec('ALTER TABLE user_prefs ADD COLUMN weekly_goal_days INTEGER NOT NULL DEFAULT 5');
+        }
         if (!isset($columns['reminder_enabled'])) {
             $pdo->exec('ALTER TABLE user_prefs ADD COLUMN reminder_enabled INTEGER NOT NULL DEFAULT 0');
         }
@@ -211,7 +215,7 @@ class SchemaManager
             $pdo->exec("ALTER TABLE user_prefs ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
         }
 
-        $pdo->exec("INSERT OR IGNORE INTO user_prefs (id, font_scale, show_daily, auto_devotional, reminder_enabled, reminder_time, theme, updated_at) VALUES (1, 100, 1, 0, 0, '07:00', 'light', CURRENT_TIMESTAMP)");
+        $pdo->exec("INSERT OR IGNORE INTO user_prefs (id, font_scale, show_daily, auto_devotional, weekly_goal_days, reminder_enabled, reminder_time, theme, updated_at) VALUES (1, 100, 1, 0, 5, 0, '07:00', 'light', CURRENT_TIMESTAMP)");
     }
 
     private static function migrateHighlights(\PDO $pdo)
@@ -306,8 +310,36 @@ class SchemaManager
             $pdo->exec("ALTER TABLE reading_plan_progress ADD COLUMN completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
         }
 
+        if (!self::tableExists($pdo, 'reading_plan_chapter_progress')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS reading_plan_chapter_progress (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                plan_id INTEGER NOT NULL,
+                day_index INTEGER NOT NULL,
+                date TEXT NOT NULL,
+                book INTEGER NOT NULL,
+                chapter INTEGER NOT NULL,
+                completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(plan_id, day_index, book, chapter)
+            )');
+        }
+
+        $chapterProgressColumns = self::columns($pdo, 'reading_plan_chapter_progress');
+        if (!isset($chapterProgressColumns['date'])) {
+            $pdo->exec("ALTER TABLE reading_plan_chapter_progress ADD COLUMN date TEXT NOT NULL DEFAULT '1970-01-01'");
+        }
+        if (!isset($chapterProgressColumns['book'])) {
+            $pdo->exec('ALTER TABLE reading_plan_chapter_progress ADD COLUMN book INTEGER NOT NULL DEFAULT 1');
+        }
+        if (!isset($chapterProgressColumns['chapter'])) {
+            $pdo->exec('ALTER TABLE reading_plan_chapter_progress ADD COLUMN chapter INTEGER NOT NULL DEFAULT 1');
+        }
+        if (!isset($chapterProgressColumns['completed_at'])) {
+            $pdo->exec("ALTER TABLE reading_plan_chapter_progress ADD COLUMN completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_plans_active ON reading_plans(active, updated_at)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_progress_plan ON reading_plan_progress(plan_id, day_index)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_chapter_progress_plan_day ON reading_plan_chapter_progress(plan_id, day_index)');
     }
 
     private static function migrateAnecdotes(\PDO $pdo)

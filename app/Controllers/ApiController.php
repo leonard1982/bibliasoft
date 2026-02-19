@@ -397,6 +397,28 @@ class ApiController
         }
     }
 
+    public function readingPlanChapter()
+    {
+        $input = $this->requestData();
+        $book = isset($input['book']) ? (int) $input['book'] : 0;
+        $chapter = isset($input['chapter']) ? (int) $input['chapter'] : 0;
+        $completed = isset($input['completed']) ? (int) $input['completed'] : 1;
+        $date = isset($input['date']) ? trim((string) $input['date']) : date('Y-m-d');
+
+        if ($book < 1 || $chapter < 1) {
+            app_json(['error' => 'Parámetros inválidos'], 422);
+        }
+
+        try {
+            $plan = $this->readingPlanService->markChapter($book, $chapter, $completed === 1, $date);
+            app_json(['ok' => true, 'plan' => $plan]);
+        } catch (\InvalidArgumentException $e) {
+            app_json(['error' => $e->getMessage()], 422);
+        } catch (\RuntimeException $e) {
+            app_json(['error' => $e->getMessage()], 422);
+        }
+    }
+
     public function prefsSave()
     {
         $input = $this->requestData();
@@ -409,6 +431,9 @@ class ApiController
         }
         if (isset($input['auto_devotional'])) {
             $prefs['auto_devotional'] = (int) $input['auto_devotional'];
+        }
+        if (isset($input['weekly_goal_days'])) {
+            $prefs['weekly_goal_days'] = (int) $input['weekly_goal_days'];
         }
         if (isset($input['reminder_enabled'])) {
             $prefs['reminder_enabled'] = (int) $input['reminder_enabled'];

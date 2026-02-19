@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS user_prefs (
     font_scale INTEGER NOT NULL DEFAULT 100,
     show_daily INTEGER NOT NULL DEFAULT 1,
     auto_devotional INTEGER NOT NULL DEFAULT 0,
+    weekly_goal_days INTEGER NOT NULL DEFAULT 5,
     reminder_enabled INTEGER NOT NULL DEFAULT 0,
     reminder_time TEXT NOT NULL DEFAULT '07:00',
     theme TEXT NOT NULL DEFAULT 'light',
@@ -141,6 +142,19 @@ CREATE TABLE IF NOT EXISTS reading_plan_progress (
 );
 
 CREATE INDEX IF NOT EXISTS idx_reading_progress_plan ON reading_plan_progress (plan_id, day_index);
+
+CREATE TABLE IF NOT EXISTS reading_plan_chapter_progress (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    plan_id INTEGER NOT NULL,
+    day_index INTEGER NOT NULL,
+    date TEXT NOT NULL,
+    book INTEGER NOT NULL,
+    chapter INTEGER NOT NULL,
+    completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(plan_id, day_index, book, chapter)
+);
+
+CREATE INDEX IF NOT EXISTS idx_reading_chapter_progress_plan_day ON reading_plan_chapter_progress (plan_id, day_index);
 
 CREATE TABLE IF NOT EXISTS anecdotes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
