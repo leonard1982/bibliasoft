@@ -93,6 +93,23 @@ CREATE TABLE IF NOT EXISTS history (
     visited_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE INDEX IF NOT EXISTS idx_history_recent ON history (id DESC);
+CREATE INDEX IF NOT EXISTS idx_history_ref ON history (book, chapter, visited_at);
+
+CREATE TABLE IF NOT EXISTS passage_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    book INTEGER NOT NULL,
+    chapter INTEGER NOT NULL,
+    verse_start INTEGER NOT NULL,
+    verse_end INTEGER NOT NULL,
+    hits INTEGER NOT NULL DEFAULT 1,
+    last_viewed TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(book, chapter, verse_start, verse_end)
+);
+
+CREATE INDEX IF NOT EXISTS idx_passage_history_hits ON passage_history (hits DESC, last_viewed DESC);
+CREATE INDEX IF NOT EXISTS idx_passage_history_recent ON passage_history (last_viewed DESC);
+
 CREATE TABLE IF NOT EXISTS daily_cache (
     date TEXT PRIMARY KEY,
     book INTEGER NOT NULL,

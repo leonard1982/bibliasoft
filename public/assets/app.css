@@ -706,6 +706,34 @@ a {
     justify-content: flex-start;
 }
 
+.history-smart-grid {
+    margin-top: .45rem;
+    display: grid;
+    gap: .55rem;
+}
+
+.history-smart-col {
+    display: grid;
+    gap: .35rem;
+}
+
+.history-smart-btn {
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
+}
+
+.history-smart-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--line));
+    background: color-mix(in srgb, var(--selection) 62%, transparent);
+    padding: .12rem .42rem;
+    font-size: .75rem;
+    color: var(--muted);
+}
+
 .favorite-tooltip {
     position: fixed;
     z-index: 220;

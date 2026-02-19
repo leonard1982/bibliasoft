@@ -37,6 +37,7 @@ class SchemaManager
         self::migrateDevotionals($pdo);
         self::migrateUserPrefs($pdo);
         self::migrateFavorites($pdo);
+        self::migrateHistory($pdo);
         self::migrateHighlights($pdo);
         self::migrateReadingPlans($pdo);
         self::migrateAnecdotes($pdo);
@@ -308,6 +309,49 @@ class SchemaManager
         }
         $pdo->exec("UPDATE highlights SET color = COALESCE(NULLIF(color, ''), 'yellow')");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_highlights_ref ON highlights(book, chapter, verse)');
+    }
+
+    private static function migrateHistory(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'history')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                book INTEGER NOT NULL,
+                chapter INTEGER NOT NULL,
+                visited_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $historyColumns = self::columns($pdo, 'history');
+            if (!isset($historyColumns['visited_at'])) {
+                $pdo->exec("ALTER TABLE history ADD COLUMN visited_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+        }
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_history_recent ON history (id DESC)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_history_ref ON history (book, chapter, visited_at)');
+
+        if (!self::tableExists($pdo, 'passage_history')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS passage_history (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                book INTEGER NOT NULL,
+                chapter INTEGER NOT NULL,
+                verse_start INTEGER NOT NULL,
+                verse_end INTEGER NOT NULL,
+                hits INTEGER NOT NULL DEFAULT 1,
+                last_viewed TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(book, chapter, verse_start, verse_end)
+            )');
+        } else {
+            $passageColumns = self::columns($pdo, 'passage_history');
+            if (!isset($passageColumns['hits'])) {
+                $pdo->exec('ALTER TABLE passage_history ADD COLUMN hits INTEGER NOT NULL DEFAULT 1');
+            }
+            if (!isset($passageColumns['last_viewed'])) {
+                $pdo->exec("ALTER TABLE passage_history ADD COLUMN last_viewed TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+        }
+        $pdo->exec('UPDATE passage_history SET hits = CASE WHEN hits < 1 THEN 1 ELSE hits END');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_passage_history_hits ON passage_history (hits DESC, last_viewed DESC)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_passage_history_recent ON passage_history (last_viewed DESC)');
     }
 
     private static function migrateReadingPlans(\PDO $pdo)

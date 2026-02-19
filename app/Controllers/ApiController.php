@@ -127,6 +127,7 @@ class ApiController
         if (empty($verses)) {
             app_json(['error' => 'No se encontró el pasaje'], 404);
         }
+        $this->userDataRepository->savePassageHistory($book, $chapter, $verseStart, $verseEnd);
 
         $plain = [];
         foreach ($verses as $row) {
@@ -165,6 +166,7 @@ class ApiController
             'notes' => $this->userDataRepository->getNotesForRange($book, $chapter, $verseStart, $verseEnd),
             'links' => $this->userDataRepository->getLinksForRange($book, $chapter, $verseStart, $verseEnd),
             'history' => $this->userDataRepository->getHistory(8),
+            'smart_history' => $this->userDataRepository->getSmartHistory(8, 8, 8),
         ]);
     }
 

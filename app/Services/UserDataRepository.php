@@ -521,6 +521,93 @@ class UserDataRepository
         return $stmt->fetchAll();
     }
 
+    public function savePassageHistory($book, $chapter, $verseStart, $verseEnd)
+    {
+        $book = (int) $book;
+        $chapter = (int) $chapter;
+        $range = $this->normalizeRange($verseStart, $verseEnd);
+        if ($book < 1 || $chapter < 1) {
+            return;
+        }
+
+        $stmt = $this->db()->prepare(
+            'INSERT INTO passage_history (book, chapter, verse_start, verse_end, hits, last_viewed)
+             VALUES (:book, :chapter, :verse_start, :verse_end, 1, CURRENT_TIMESTAMP)
+             ON CONFLICT(book, chapter, verse_start, verse_end)
+             DO UPDATE SET
+                 hits = passage_history.hits + 1,
+                 last_viewed = CURRENT_TIMESTAMP'
+        );
+        $stmt->execute([
+            ':book' => $book,
+            ':chapter' => $chapter,
+            ':verse_start' => $range['start'],
+            ':verse_end' => $range['end'],
+        ]);
+    }
+
+    public function getSmartHistory($recentLimit = 8, $topChapterLimit = 8, $topPassageLimit = 8)
+    {
+        $recentLimit = max(1, min(40, (int) $recentLimit));
+        $topChapterLimit = max(1, min(40, (int) $topChapterLimit));
+        $topPassageLimit = max(1, min(40, (int) $topPassageLimit));
+
+        $recentStmt = $this->db()->query(
+            'SELECT book, chapter, COUNT(*) AS visits, MAX(visited_at) AS last_visited
+             FROM history
+             GROUP BY book, chapter
+             ORDER BY MAX(id) DESC
+             LIMIT ' . $recentLimit
+        );
+        $recentChapters = $recentStmt->fetchAll();
+
+        $topChapterStmt = $this->db()->query(
+            'SELECT book, chapter, COUNT(*) AS visits, MAX(visited_at) AS last_visited
+             FROM history
+             GROUP BY book, chapter
+             ORDER BY visits DESC, last_visited DESC
+             LIMIT ' . $topChapterLimit
+        );
+        $topChapters = $topChapterStmt->fetchAll();
+
+        $topPassageStmt = $this->db()->query(
+            'SELECT book, chapter, verse_start, verse_end, hits, last_viewed
+             FROM passage_history
+             ORDER BY hits DESC, last_viewed DESC
+             LIMIT ' . $topPassageLimit
+        );
+        $topPassages = $topPassageStmt->fetchAll();
+
+        foreach ($recentChapters as &$row) {
+            $row['book'] = (int) ($row['book'] ?? 0);
+            $row['chapter'] = (int) ($row['chapter'] ?? 0);
+            $row['visits'] = (int) ($row['visits'] ?? 0);
+            $row['last_visited'] = (string) ($row['last_visited'] ?? '');
+        }
+
+        foreach ($topChapters as &$row) {
+            $row['book'] = (int) ($row['book'] ?? 0);
+            $row['chapter'] = (int) ($row['chapter'] ?? 0);
+            $row['visits'] = (int) ($row['visits'] ?? 0);
+            $row['last_visited'] = (string) ($row['last_visited'] ?? '');
+        }
+
+        foreach ($topPassages as &$row) {
+            $row['book'] = (int) ($row['book'] ?? 0);
+            $row['chapter'] = (int) ($row['chapter'] ?? 0);
+            $row['verse_start'] = (int) ($row['verse_start'] ?? 0);
+            $row['verse_end'] = (int) ($row['verse_end'] ?? 0);
+            $row['hits'] = (int) ($row['hits'] ?? 0);
+            $row['last_viewed'] = (string) ($row['last_viewed'] ?? '');
+        }
+
+        return [
+            'recent_chapters' => $recentChapters,
+            'top_chapters' => $topChapters,
+            'top_passages' => $topPassages,
+        ];
+    }
+
     public function getDailyCache($date)
     {
         $stmt = $this->db()->prepare(

@@ -772,12 +772,9 @@
 
     function renderToolsPanel(payload) {
         var historyRows = payload.history || [];
+        var smartHistory = payload.smart_history || {};
+        var smartHistoryCard = buildSmartHistoryCardHtml(smartHistory, historyRows);
         var offline = !navigator.onLine;
-        var historyHtml = historyRows.map(function (row) {
-            return '<button class="btn-light js-open-history" data-book="' + row.book + '" data-chapter="' + row.chapter + '">' +
-                toReference(row.book, row.chapter, null, null) +
-                '</button>';
-        }).join('');
         hideFavoriteTooltip();
 
         var backgrounds = state.initial.backgrounds || [];
@@ -814,7 +811,7 @@
             '</div>' +
             '<div id="toolsOutput" class="card tool-output"><p class="muted">Selecciona un ícono para generar contenido del pasaje.</p></div>' +
             '</div>' +
-            '<div class="card"><strong>Historial reciente</strong><div class="stack">' + (historyHtml || '<span class="muted">Sin historial.</span>') + '</div></div>' +
+            smartHistoryCard +
             '<details class="card image-tool-box">' +
             '<summary>Crear imagen del versículo</summary>' +
             '<div class="image-bg-carousel">' + (bgThumbs || '<button class="bg-thumb is-active" type="button"><img src="assets/backgrounds/bg-01.svg" alt="Fondo"></button>') + '</div>' +
@@ -836,6 +833,29 @@
         els.toolsPanel.querySelectorAll('.js-open-history').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 fetchChapter(Number(this.getAttribute('data-book')), Number(this.getAttribute('data-chapter')));
+            });
+        });
+
+        els.toolsPanel.querySelectorAll('.js-open-history-passage').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var book = Number(this.getAttribute('data-book') || 0);
+                var chapter = Number(this.getAttribute('data-chapter') || 0);
+                var verseStart = Number(this.getAttribute('data-verse-start') || 0);
+                var verseEnd = Number(this.getAttribute('data-verse-end') || verseStart);
+                if (book < 1 || chapter < 1 || verseStart < 1 || verseEnd < 1) {
+                    return;
+                }
+
+                var min = Math.min(verseStart, verseEnd);
+                var max = Math.max(verseStart, verseEnd);
+                var pending = [];
+                var cap = max - min > 80 ? min + 80 : max;
+                for (var verse = min; verse <= cap; verse++) {
+                    pending.push(verse);
+                }
+                state.pendingSelectionVerses = pending;
+                state.pendingVerse = min;
+                fetchChapter(book, chapter);
             });
         });
 
@@ -913,6 +933,55 @@
 
         bindImageCardActions();
         refreshFavoriteSnapshot(false);
+    }
+
+    function buildSmartHistoryCardHtml(smartHistory, fallbackHistoryRows) {
+        var recentRows = Array.isArray(smartHistory.recent_chapters) && smartHistory.recent_chapters.length
+            ? smartHistory.recent_chapters
+            : (Array.isArray(fallbackHistoryRows) ? fallbackHistoryRows : []);
+        var topChapterRows = Array.isArray(smartHistory.top_chapters) ? smartHistory.top_chapters : [];
+        var topPassageRows = Array.isArray(smartHistory.top_passages) ? smartHistory.top_passages : [];
+
+        var recentHtml = recentRows.map(function (row) {
+            var visits = Number(row.visits || 0);
+            return '<button class="btn-light js-open-history history-smart-btn" data-book="' + Number(row.book || 0) + '" data-chapter="' + Number(row.chapter || 0) + '">' +
+                '<span>' + escapeHtml(toReference(row.book, row.chapter, null, null)) + '</span>' +
+                (visits > 0 ? '<small class="muted">(' + visits + ')</small>' : '') +
+                '</button>';
+        }).join('');
+
+        var topChapterHtml = topChapterRows.map(function (row) {
+            return '<button class="btn-light js-open-history history-smart-btn" data-book="' + Number(row.book || 0) + '" data-chapter="' + Number(row.chapter || 0) + '">' +
+                '<span>' + escapeHtml(toReference(row.book, row.chapter, null, null)) + '</span>' +
+                '<small class="history-smart-badge">' + Number(row.visits || 0) + ' lecturas</small>' +
+                '</button>';
+        }).join('');
+
+        var topPassageHtml = topPassageRows.map(function (row) {
+            return '<button class="btn-light js-open-history-passage history-smart-btn" data-book="' + Number(row.book || 0) + '" data-chapter="' + Number(row.chapter || 0) + '" data-verse-start="' + Number(row.verse_start || 0) + '" data-verse-end="' + Number(row.verse_end || 0) + '">' +
+                '<span>' + escapeHtml(toReference(row.book, row.chapter, row.verse_start, row.verse_end)) + '</span>' +
+                '<small class="history-smart-badge">' + Number(row.hits || 0) + ' lecturas</small>' +
+                '</button>';
+        }).join('');
+
+        return '' +
+            '<div class="card">' +
+            '<strong>Historial inteligente</strong>' +
+            '<div class="history-smart-grid">' +
+            '<div class="history-smart-col">' +
+            '<small class="muted">Últimos capítulos</small>' +
+            '<div class="stack">' + (recentHtml || '<span class="muted">Sin historial.</span>') + '</div>' +
+            '</div>' +
+            '<div class="history-smart-col">' +
+            '<small class="muted">Capítulos más leídos</small>' +
+            '<div class="stack">' + (topChapterHtml || '<span class="muted">Sin datos todavía.</span>') + '</div>' +
+            '</div>' +
+            '<div class="history-smart-col">' +
+            '<small class="muted">Pasajes más leídos</small>' +
+            '<div class="stack">' + (topPassageHtml || '<span class="muted">Selecciona pasajes para entrenar este historial.</span>') + '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
     }
 
     function buildFavoriteManagerCardHtml() {
