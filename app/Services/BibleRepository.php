@@ -9,14 +9,20 @@ class BibleRepository
 {
     private $bibleDbPath;
     private $commentaryDbPath;
+    private $compareDbPath;
     private $sanitizer;
     private $biblePdo;
     private $commentaryPdo;
+    private $comparePdo;
 
-    public function __construct($bibleDbPath, $commentaryDbPath, HtmlSanitizer $sanitizer)
+    public function __construct($bibleDbPath, $commentaryDbPath, HtmlSanitizer $sanitizer, $compareDbPath = null)
     {
         $this->bibleDbPath = $bibleDbPath;
         $this->commentaryDbPath = $commentaryDbPath;
+        if ($compareDbPath === null || trim((string) $compareDbPath) === '') {
+            $compareDbPath = (string) config('paths.bible_compare', '');
+        }
+        $this->compareDbPath = trim((string) $compareDbPath);
         $this->sanitizer = $sanitizer;
     }
 
@@ -70,26 +76,80 @@ class BibleRepository
 
     public function getChapterVerses($book, $chapter)
     {
-        $stmt = $this->bible()->prepare(
-            'SELECT Book, Chapter, Verse, Scripture FROM Bible WHERE Book = :book AND Chapter = :chapter ORDER BY Verse ASC'
-        );
-        $stmt->execute([
-            ':book' => (int) $book,
-            ':chapter' => (int) $chapter,
-        ]);
+        return $this->chapterVersesFromPdo($this->bible(), $book, $chapter);
+    }
 
-        $rows = [];
-        foreach ($stmt->fetchAll() as $row) {
-            $scriptureHtml = $this->sanitizer->sanitize($row['Scripture']);
-            $rows[] = [
-                'book' => (int) $row['Book'],
-                'chapter' => (int) $row['Chapter'],
-                'verse' => (int) $row['Verse'],
-                'scripture_html' => $scriptureHtml,
-                'scripture_text' => $this->sanitizer->text($scriptureHtml),
+    public function getParallelChapter($book, $chapter)
+    {
+        $primaryRows = $this->getChapterVerses($book, $chapter);
+        $compareRows = [];
+        $available = false;
+        $sameSource = false;
+        $message = '';
+
+        $primaryLabel = trim((string) config('versions.primary_label', 'RVR60'));
+        if ($primaryLabel === '') {
+            $primaryLabel = 'RVR60';
+        }
+        $compareLabel = trim((string) config('versions.compare_label', 'Versión 2'));
+        if ($compareLabel === '') {
+            $compareLabel = 'Versión 2';
+        }
+
+        $comparePath = trim((string) $this->compareDbPath);
+        if ($comparePath === '') {
+            $message = 'No se configuró base de datos para comparación.';
+            return [
+                'book' => (int) $book,
+                'chapter' => (int) $chapter,
+                'available' => false,
+                'same_source' => false,
+                'primary_label' => $primaryLabel,
+                'compare_label' => $compareLabel,
+                'message' => $message,
+                'compare_verses' => [],
             ];
         }
-        return $rows;
+
+        $sameSource = realpath($comparePath) === realpath($this->bibleDbPath);
+        if (!is_file($comparePath)) {
+            $message = 'No se encontró la base de comparación.';
+            return [
+                'book' => (int) $book,
+                'chapter' => (int) $chapter,
+                'available' => false,
+                'same_source' => $sameSource,
+                'primary_label' => $primaryLabel,
+                'compare_label' => $compareLabel,
+                'message' => $message,
+                'compare_verses' => [],
+            ];
+        }
+
+        try {
+            $compareRows = $this->chapterVersesFromPdo($this->compareBible(), $book, $chapter);
+            $available = !empty($compareRows);
+            if (!$available) {
+                $message = 'La versión de comparación no tiene este capítulo.';
+            } elseif ($sameSource) {
+                $message = 'Comparando contra la misma base. Configura BIBLE_COMPARE_DB para otra versión.';
+            }
+        } catch (\Throwable $e) {
+            $available = false;
+            $message = 'No se pudo abrir la versión de comparación.';
+            $compareRows = [];
+        }
+
+        return [
+            'book' => (int) $book,
+            'chapter' => (int) $chapter,
+            'available' => $available,
+            'same_source' => $sameSource,
+            'primary_label' => $primaryLabel,
+            'compare_label' => $compareLabel,
+            'message' => $message,
+            'compare_verses' => $compareRows,
+        ];
     }
 
     public function getVersesInRange($book, $chapter, $verseStart, $verseEnd)
@@ -535,6 +595,14 @@ class BibleRepository
         return $this->biblePdo;
     }
 
+    private function compareBible()
+    {
+        if (!$this->comparePdo instanceof PDO) {
+            $this->comparePdo = ConnectionFactory::sqlite($this->compareDbPath);
+        }
+        return $this->comparePdo;
+    }
+
     private function commentary()
     {
         if (!$this->commentaryPdo instanceof PDO) {
@@ -560,5 +628,29 @@ class BibleRepository
             56 => 'Tito', 57 => 'Filemón', 58 => 'Hebreos', 59 => 'Santiago', 60 => '1 Pedro',
             61 => '2 Pedro', 62 => '1 Juan', 63 => '2 Juan', 64 => '3 Juan', 65 => 'Judas', 66 => 'Apocalipsis',
         ];
+    }
+
+    private function chapterVersesFromPdo(PDO $pdo, $book, $chapter)
+    {
+        $stmt = $pdo->prepare(
+            'SELECT Book, Chapter, Verse, Scripture FROM Bible WHERE Book = :book AND Chapter = :chapter ORDER BY Verse ASC'
+        );
+        $stmt->execute([
+            ':book' => (int) $book,
+            ':chapter' => (int) $chapter,
+        ]);
+
+        $rows = [];
+        foreach ($stmt->fetchAll() as $row) {
+            $scriptureHtml = $this->sanitizer->sanitize($row['Scripture']);
+            $rows[] = [
+                'book' => (int) $row['Book'],
+                'chapter' => (int) $row['Chapter'],
+                'verse' => (int) $row['Verse'],
+                'scripture_html' => $scriptureHtml,
+                'scripture_text' => $this->sanitizer->text($scriptureHtml),
+            ];
+        }
+        return $rows;
     }
 }

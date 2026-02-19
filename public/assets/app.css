@@ -462,6 +462,45 @@ a {
     margin: 0;
 }
 
+.parallel-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+    border-radius: 10px;
+    padding: .42rem .56rem;
+    margin-bottom: .52rem;
+    background: color-mix(in srgb, var(--selection) 52%, transparent);
+}
+
+.verse.verse-parallel {
+    align-items: flex-start;
+}
+
+.verse-parallel-cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .6rem;
+    width: 100%;
+}
+
+.verse-parallel-col {
+    display: grid;
+    gap: .16rem;
+    border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+    border-radius: 9px;
+    padding: .34rem .42rem;
+    background: color-mix(in srgb, var(--panel) 90%, var(--bg) 10%);
+}
+
+.parallel-label {
+    color: var(--muted);
+    font-size: .74rem;
+    letter-spacing: .01em;
+}
+
 .pane-help {
     display: flex;
     flex-direction: column;
@@ -1987,6 +2026,11 @@ body.spacing-normal .verse {
     .reading-head .toolbar .ico {
         width: 18px;
         height: 18px;
+    }
+
+    .verse-parallel-cols {
+        grid-template-columns: 1fr;
+        gap: .42rem;
     }
 
     .preach-controls {

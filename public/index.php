@@ -24,7 +24,12 @@ use App\Services\SearchService;
 use App\Services\UserDataRepository;
 
 $sanitizer = new HtmlSanitizer();
-$bibleRepository = new BibleRepository(config('paths.bible'), config('paths.commentary'), $sanitizer);
+$bibleRepository = new BibleRepository(
+    config('paths.bible'),
+    config('paths.commentary'),
+    $sanitizer,
+    config('paths.bible_compare')
+);
 $userDataRepository = new UserDataRepository(config('paths.app_db'));
 $searchService = new SearchService($bibleRepository, $userDataRepository, $sanitizer);
 $aiService = new AIService(config('ai', []), $userDataRepository);
@@ -137,6 +142,10 @@ try {
 
         case 'api.chapter':
             $apiController->chapter();
+            break;
+
+        case 'api.chapter.parallel':
+            $apiController->chapterParallel();
             break;
 
         case 'api.chapters':

@@ -36,6 +36,13 @@
         favoriteSnapshotToken: '',
         favoriteVerseCache: {},
         favoriteTooltipKey: '',
+        parallelLoading: false,
+        parallelAvailable: false,
+        parallelSameSource: false,
+        parallelPrimaryLabel: 'RVR60',
+        parallelCompareLabel: 'Versión 2',
+        parallelMessage: '',
+        parallelVerseMap: {},
         preachBackup: null,
         settings: {
             showHelp: true,
@@ -49,7 +56,8 @@
             weeklyGoalDays: 5,
             reminderEnabled: false,
             reminderTime: '07:00',
-            preachMode: false
+            preachMode: false,
+            parallelMode: false
         }
     };
 
@@ -65,6 +73,7 @@
         openNavigator: document.getElementById('openNavigator'),
         openQuickSearch: document.getElementById('openQuickSearch'),
         openReadingPlan: document.getElementById('openReadingPlan'),
+        toggleParallel: document.getElementById('toggleParallel'),
         toggleHelp: document.getElementById('toggleHelp'),
         togglePreachMode: document.getElementById('togglePreachMode'),
         overlay: document.getElementById('mobileOverlay'),
@@ -142,6 +151,10 @@
             fetchChapter(state.currentBook, state.currentChapter);
             return;
         }
+        if (state.settings.parallelMode) {
+            resetParallelChapterState();
+            loadParallelChapterData(true, true);
+        }
         applyPendingSelection();
     }
 
@@ -194,6 +207,11 @@
         }
         if (els.openReadingPlan) {
             els.openReadingPlan.addEventListener('click', openPlan);
+        }
+        if (els.toggleParallel) {
+            els.toggleParallel.addEventListener('click', function () {
+                toggleParallelMode();
+            });
         }
         if (els.togglePreachMode) {
             els.togglePreachMode.addEventListener('click', function () {
@@ -307,22 +325,61 @@
         });
     }
 
-    function renderVerses() {
+    function renderVerses(preserveSelection) {
+        var keepSelection = preserveSelection === true;
+        var keptSelected = keepSelection ? (state.selectedVerses || []).slice() : [];
+        var verseExists = {};
+        state.verses.forEach(function (row) {
+            verseExists[Number(row.verse || 0)] = true;
+        });
+
+        var parallelEnabled = state.settings.parallelMode === true;
+        var parallelHead = parallelEnabled ? buildParallelHeadHtml() : '';
         var html = state.verses.map(function (verse) {
+            var verseNumber = Number(verse.verse || 0);
+            if (!parallelEnabled) {
+                return '' +
+                    '<div class="verse" data-verse="' + verseNumber + '">' +
+                    '<span class="verse-num">' + verseNumber + '</span>' +
+                    '<span class="verse-text">' + (verse.scripture_html || '') + '</span>' +
+                    '</div>';
+            }
+
+            var compareHtml = getParallelCompareVerseHtml(verseNumber);
             return '' +
-                '<div class="verse" data-verse="' + Number(verse.verse) + '">' +
-                '<span class="verse-num">' + Number(verse.verse) + '</span>' +
-                '<span class="verse-text">' + (verse.scripture_html || '') + '</span>' +
+                '<div class="verse verse-parallel" data-verse="' + verseNumber + '">' +
+                '<span class="verse-num">' + verseNumber + '</span>' +
+                '<div class="verse-parallel-cols">' +
+                '<div class="verse-parallel-col">' +
+                '<small class="parallel-label">' + escapeHtml(state.parallelPrimaryLabel || 'RVR60') + '</small>' +
+                '<div class="verse-text">' + (verse.scripture_html || '') + '</div>' +
+                '</div>' +
+                '<div class="verse-parallel-col">' +
+                '<small class="parallel-label">' + escapeHtml(state.parallelCompareLabel || 'Versión 2') + '</small>' +
+                '<div class="verse-text">' + compareHtml + '</div>' +
+                '</div>' +
+                '</div>' +
                 '</div>';
         }).join('');
 
-        els.versesContainer.innerHTML = html || '<p class="muted">No se pudo cargar el capítulo.</p>';
-        state.selectedVerses = [];
-        state.lastSelectedVerse = null;
-        state.selectionPayload = null;
+        els.versesContainer.innerHTML = (parallelHead + html) || '<p class="muted">No se pudo cargar el capítulo.</p>';
+        if (keepSelection) {
+            var filtered = keptSelected.filter(function (value) {
+                return Boolean(verseExists[Number(value || 0)]);
+            });
+            state.selectedVerses = filtered.sort(function (a, b) { return a - b; });
+            state.lastSelectedVerse = state.selectedVerses.length ? state.selectedVerses[state.selectedVerses.length - 1] : null;
+        } else {
+            state.selectedVerses = [];
+            state.lastSelectedVerse = null;
+            state.selectionPayload = null;
+            renderEmptyPanels();
+        }
         updateSelectionUI();
         updateHighlightUI();
-        renderEmptyPanels();
+        if (keepSelection && state.selectionPayload) {
+            renderPanels();
+        }
 
         els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
             node.addEventListener('click', function (event) {
@@ -339,6 +396,33 @@
                 handleMobileVerseTap();
             });
         });
+    }
+
+    function buildParallelHeadHtml() {
+        var status = '';
+        if (state.parallelLoading) {
+            status = '<span class="muted">Cargando comparación...</span>';
+        } else if (!state.parallelAvailable) {
+            status = '<span class="muted">' + escapeHtml(state.parallelMessage || 'No disponible para este capítulo.') + '</span>';
+        } else if (state.parallelSameSource) {
+            status = '<span class="muted">' + escapeHtml(state.parallelMessage || 'Comparando con la misma versión.') + '</span>';
+        } else if (state.parallelMessage) {
+            status = '<span class="muted">' + escapeHtml(state.parallelMessage) + '</span>';
+        }
+
+        return '' +
+            '<div class="parallel-head">' +
+            '<strong>' + escapeHtml(state.parallelPrimaryLabel || 'RVR60') + ' vs ' + escapeHtml(state.parallelCompareLabel || 'Versión 2') + '</strong>' +
+            status +
+            '</div>';
+    }
+
+    function getParallelCompareVerseHtml(verseNumber) {
+        var row = state.parallelVerseMap[String(Number(verseNumber || 0))] || null;
+        if (row && row.scripture_html) {
+            return row.scripture_html;
+        }
+        return '<span class="muted">Sin versículo equivalente.</span>';
     }
 
     function handleMobileVerseTap() {
@@ -1918,10 +2002,14 @@
                 state.chapters = data.chapters || [];
                 state.verses = data.verses || [];
                 state.highlights = normalizeHighlights(data.highlights || {});
+                resetParallelChapterState();
                 renderBooks(state.books);
                 renderChapters();
                 renderVerses();
                 updatePreachControlsFromChapter();
+                if (state.settings.parallelMode) {
+                    loadParallelChapterData(true, true);
+                }
                 if (state.pendingSelectionVerses && state.pendingSelectionVerses.length) {
                     applyPendingSelection();
                 } else if (state.pendingVerse) {
@@ -1940,6 +2028,108 @@
             })
             .catch(function () {
                 notify('No se pudo cargar el capítulo.');
+            });
+    }
+
+    function toggleParallelMode() {
+        state.settings.parallelMode = !state.settings.parallelMode;
+        if (!state.settings.parallelMode) {
+            state.parallelLoading = false;
+            state.parallelMessage = '';
+            state.parallelAvailable = false;
+            state.parallelVerseMap = {};
+            if (els.toggleParallel) {
+                els.toggleParallel.classList.remove('is-active');
+            }
+            renderVerses(true);
+            saveSettings();
+            applySettings();
+            notify('Comparación desactivada.');
+            return;
+        }
+
+        if (els.toggleParallel) {
+            els.toggleParallel.classList.add('is-active');
+        }
+        resetParallelChapterState();
+        renderVerses(true);
+        loadParallelChapterData(true, false);
+        saveSettings();
+        applySettings();
+    }
+
+    function resetParallelChapterState() {
+        state.parallelLoading = false;
+        state.parallelAvailable = false;
+        state.parallelSameSource = false;
+        state.parallelMessage = '';
+        state.parallelVerseMap = {};
+    }
+
+    function loadParallelChapterData(force, silent) {
+        if (!state.settings.parallelMode) {
+            return;
+        }
+        if (state.parallelLoading && !force) {
+            return;
+        }
+
+        state.parallelLoading = true;
+        state.parallelMessage = '';
+        renderVerses(true);
+
+        fetch('?route=api.chapter.parallel&book=' + encodeURIComponent(state.currentBook) + '&chapter=' + encodeURIComponent(state.currentChapter))
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'Error');
+                }
+
+                var payload = res.parallel || {};
+                state.parallelLoading = false;
+                state.parallelAvailable = payload.available === true;
+                state.parallelSameSource = payload.same_source === true;
+                state.parallelPrimaryLabel = String(payload.primary_label || state.parallelPrimaryLabel || 'RVR60');
+                state.parallelCompareLabel = String(payload.compare_label || state.parallelCompareLabel || 'Versión 2');
+                state.parallelMessage = String(payload.message || '');
+                state.parallelVerseMap = {};
+
+                var rows = Array.isArray(payload.compare_verses) ? payload.compare_verses : [];
+                rows.forEach(function (row) {
+                    var verse = Number(row.verse || 0);
+                    if (verse < 1) {
+                        return;
+                    }
+                    state.parallelVerseMap[String(verse)] = row;
+                });
+
+                if (els.toggleParallel) {
+                    els.toggleParallel.classList.toggle('is-active', state.settings.parallelMode === true);
+                }
+
+                renderVerses(true);
+                if (!silent) {
+                    if (state.parallelAvailable) {
+                        if (state.parallelSameSource) {
+                            notify('Comparación activa, pero apunta a la misma versión.');
+                        } else {
+                            notify('Comparación de versiones activada.');
+                        }
+                    } else {
+                        notify(state.parallelMessage || 'No hay versión paralela para este capítulo.');
+                    }
+                }
+            })
+            .catch(function () {
+                state.parallelLoading = false;
+                state.parallelAvailable = false;
+                state.parallelSameSource = false;
+                state.parallelMessage = 'No se pudo cargar la versión paralela.';
+                state.parallelVerseMap = {};
+                renderVerses(true);
+                if (!silent) {
+                    notify(state.parallelMessage);
+                }
             });
     }
 
@@ -2843,6 +3033,7 @@
     function applySettings() {
         document.body.classList.toggle('mode-focus', state.settings.layoutMode === 'focus');
         document.body.classList.toggle('mode-preach', state.settings.preachMode === true);
+        document.body.classList.toggle('mode-parallel', state.settings.parallelMode === true);
         document.body.classList.remove('font-sm', 'font-md', 'font-lg');
         document.body.classList.add('font-' + state.settings.fontSize);
         document.body.classList.remove('spacing-compact', 'spacing-normal');
@@ -2866,6 +3057,9 @@
         if (reminderTimeInput) {
             reminderTimeInput.disabled = !state.settings.reminderEnabled;
         }
+        if (els.toggleParallel) {
+            els.toggleParallel.classList.toggle('is-active', state.settings.parallelMode === true);
+        }
         syncPreachUi();
     }
 
@@ -2888,6 +3082,7 @@
             state.settings.reminderEnabled = state.settings.reminderEnabled === true || Number(state.settings.reminderEnabled) === 1;
             state.settings.reminderTime = normalizeReminderTime(state.settings.reminderTime || '07:00');
             state.settings.preachMode = state.settings.preachMode === true || Number(state.settings.preachMode) === 1;
+            state.settings.parallelMode = state.settings.parallelMode === true || Number(state.settings.parallelMode) === 1;
         } catch (err) {
             // ignore
         }

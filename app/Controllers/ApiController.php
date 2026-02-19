@@ -106,6 +106,21 @@ class ApiController
         ]);
     }
 
+    public function chapterParallel()
+    {
+        $book = isset($_GET['book']) ? (int) $_GET['book'] : 0;
+        $chapter = isset($_GET['chapter']) ? (int) $_GET['chapter'] : 0;
+        if ($book < 1 || $chapter < 1) {
+            app_json(['error' => 'Parámetros inválidos'], 422);
+        }
+
+        $parallel = $this->bibleRepository->getParallelChapter($book, $chapter);
+        app_json([
+            'ok' => true,
+            'parallel' => $parallel,
+        ]);
+    }
+
     public function selection()
     {
         $book = isset($_GET['book']) ? (int) $_GET['book'] : 0;
