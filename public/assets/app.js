@@ -36,6 +36,7 @@
         favoriteSnapshotToken: '',
         favoriteVerseCache: {},
         favoriteTooltipKey: '',
+        preachBackup: null,
         settings: {
             showHelp: true,
             layoutMode: 'columns',
@@ -47,7 +48,8 @@
             autoDevotional: false,
             weeklyGoalDays: 5,
             reminderEnabled: false,
-            reminderTime: '07:00'
+            reminderTime: '07:00',
+            preachMode: false
         }
     };
 
@@ -64,8 +66,14 @@
         openQuickSearch: document.getElementById('openQuickSearch'),
         openReadingPlan: document.getElementById('openReadingPlan'),
         toggleHelp: document.getElementById('toggleHelp'),
+        togglePreachMode: document.getElementById('togglePreachMode'),
         overlay: document.getElementById('mobileOverlay'),
         notice: document.getElementById('readingNotice'),
+        preachControls: document.getElementById('preachControls'),
+        preachPrevChapter: document.getElementById('preachPrevChapter'),
+        preachNextChapter: document.getElementById('preachNextChapter'),
+        preachVerseJump: document.getElementById('preachVerseJump'),
+        preachGoVerse: document.getElementById('preachGoVerse'),
         readerPlanCard: document.getElementById('readerPlanCard'),
         settingsModal: document.getElementById('settingsModal'),
         searchModal: document.getElementById('searchModal'),
@@ -120,6 +128,7 @@
         renderBooks(state.books);
         renderChapters();
         renderVerses();
+        updatePreachControlsFromChapter();
         wireEvents();
         activateTab(state.activeTab || 'contexto');
         bindSelectionActions();
@@ -186,6 +195,34 @@
         if (els.openReadingPlan) {
             els.openReadingPlan.addEventListener('click', openPlan);
         }
+        if (els.togglePreachMode) {
+            els.togglePreachMode.addEventListener('click', function () {
+                setPreachMode(!state.settings.preachMode);
+            });
+        }
+        if (els.preachPrevChapter) {
+            els.preachPrevChapter.addEventListener('click', function () {
+                goToAdjacentChapter(-1);
+            });
+        }
+        if (els.preachNextChapter) {
+            els.preachNextChapter.addEventListener('click', function () {
+                goToAdjacentChapter(1);
+            });
+        }
+        if (els.preachGoVerse) {
+            els.preachGoVerse.addEventListener('click', function () {
+                jumpToVerseFromPreachInput();
+            });
+        }
+        if (els.preachVerseJump) {
+            els.preachVerseJump.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    jumpToVerseFromPreachInput();
+                }
+            });
+        }
         if (els.closeSearch) {
             els.closeSearch.addEventListener('click', closeSearch);
         }
@@ -215,6 +252,19 @@
             if (event.key === 'Escape') {
                 closeSearch();
                 closePlan();
+            }
+            if (state.settings.preachMode && !event.ctrlKey && !event.altKey && !event.metaKey) {
+                var target = event.target || null;
+                var tag = target && target.tagName ? String(target.tagName).toLowerCase() : '';
+                if (tag !== 'input' && tag !== 'textarea' && !(target && target.isContentEditable)) {
+                    if (event.key === 'ArrowLeft') {
+                        event.preventDefault();
+                        goToAdjacentChapter(-1);
+                    } else if (event.key === 'ArrowRight') {
+                        event.preventDefault();
+                        goToAdjacentChapter(1);
+                    }
+                }
             }
         });
 
@@ -308,6 +358,29 @@
             state.selectedVerses.sort(function (a, b) { return a - b; });
         }
         updateSelectionUI();
+        onSelectionChange();
+    }
+
+    function selectSingleVerse(verse, smooth) {
+        var target = Number(verse || 0);
+        if (target < 1) {
+            return;
+        }
+        var exists = false;
+        for (var i = 0; i < state.verses.length; i++) {
+            if (Number(state.verses[i].verse || 0) === target) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            return;
+        }
+
+        state.selectedVerses = [target];
+        state.lastSelectedVerse = target;
+        updateSelectionUI();
+        scrollToVerse(target, Boolean(smooth));
         onSelectionChange();
     }
 
@@ -1848,13 +1921,12 @@
                 renderBooks(state.books);
                 renderChapters();
                 renderVerses();
+                updatePreachControlsFromChapter();
                 if (state.pendingSelectionVerses && state.pendingSelectionVerses.length) {
                     applyPendingSelection();
                 } else if (state.pendingVerse) {
                     var pending = Number(state.pendingVerse || 0);
-                    toggleVerse(pending);
-                    state.lastSelectedVerse = pending;
-                    scrollToVerse(pending, true);
+                    selectSingleVerse(pending, true);
                     state.pendingVerse = null;
                 }
                 els.title.textContent = data.book_name + ' ' + data.chapter;
@@ -2756,6 +2828,10 @@
             if (key === 'showDaily') {
                 localStorage.setItem('show_daily_start', state.settings.showDaily ? '1' : '0');
             }
+            if (state.settings.preachMode && (key === 'layoutMode' || key === 'showHelp' || key === 'fontSize' || key === 'spacing')) {
+                state.settings.preachMode = false;
+                state.preachBackup = null;
+            }
             saveSettings();
             applySettings();
             if (key === 'weeklyGoalDays') {
@@ -2766,6 +2842,7 @@
 
     function applySettings() {
         document.body.classList.toggle('mode-focus', state.settings.layoutMode === 'focus');
+        document.body.classList.toggle('mode-preach', state.settings.preachMode === true);
         document.body.classList.remove('font-sm', 'font-md', 'font-lg');
         document.body.classList.add('font-' + state.settings.fontSize);
         document.body.classList.remove('spacing-compact', 'spacing-normal');
@@ -2789,6 +2866,7 @@
         if (reminderTimeInput) {
             reminderTimeInput.disabled = !state.settings.reminderEnabled;
         }
+        syncPreachUi();
     }
 
     function loadSettings() {
@@ -2809,6 +2887,7 @@
             state.settings.weeklyGoalDays = clampGoalDays(state.settings.weeklyGoalDays);
             state.settings.reminderEnabled = state.settings.reminderEnabled === true || Number(state.settings.reminderEnabled) === 1;
             state.settings.reminderTime = normalizeReminderTime(state.settings.reminderTime || '07:00');
+            state.settings.preachMode = state.settings.preachMode === true || Number(state.settings.preachMode) === 1;
         } catch (err) {
             // ignore
         }
@@ -2818,6 +2897,130 @@
         localStorage.setItem('biblia_settings', JSON.stringify(state.settings));
         localStorage.setItem('show_daily_start', state.settings.showDaily ? '1' : '0');
         syncUserPrefs();
+    }
+
+    function setPreachMode(enabled) {
+        var next = Boolean(enabled);
+        var current = state.settings.preachMode === true;
+        if (next === current) {
+            syncPreachUi();
+            return;
+        }
+
+        if (next) {
+            state.preachBackup = {
+                layoutMode: state.settings.layoutMode,
+                showHelp: state.settings.showHelp,
+                fontSize: state.settings.fontSize,
+                spacing: state.settings.spacing,
+                fontScale: Number(state.settings.fontScale || 100)
+            };
+            state.settings.preachMode = true;
+            state.settings.layoutMode = 'focus';
+            state.settings.showHelp = false;
+            state.settings.fontSize = 'lg';
+            state.settings.spacing = 'normal';
+            if (Number(state.settings.fontScale || 100) < 120) {
+                state.settings.fontScale = 120;
+            }
+            closeDrawers();
+            activateTab('contexto');
+            notify('Modo predicación activado.');
+        } else {
+            var backup = state.preachBackup || {};
+            state.settings.preachMode = false;
+            state.settings.layoutMode = backup.layoutMode || 'columns';
+            state.settings.showHelp = typeof backup.showHelp === 'boolean' ? backup.showHelp : true;
+            state.settings.fontSize = backup.fontSize || 'md';
+            state.settings.spacing = backup.spacing || 'normal';
+            if (Number.isFinite(Number(backup.fontScale))) {
+                state.settings.fontScale = Number(backup.fontScale);
+            }
+            state.preachBackup = null;
+            notify('Modo predicación desactivado.');
+        }
+
+        saveSettings();
+        applySettings();
+    }
+
+    function syncPreachUi() {
+        var active = state.settings.preachMode === true;
+        if (els.preachControls) {
+            els.preachControls.classList.toggle('hidden', !active);
+        }
+        if (els.togglePreachMode) {
+            els.togglePreachMode.classList.toggle('is-active', active);
+            els.togglePreachMode.setAttribute('title', active ? 'Salir de modo predicación' : 'Modo predicación');
+            els.togglePreachMode.setAttribute('aria-label', active ? 'Salir de modo predicación' : 'Modo predicación');
+            var label = els.togglePreachMode.querySelector('.btn-label');
+            if (label) {
+                label.textContent = active ? 'Salir' : 'Predicación';
+            }
+        }
+        updatePreachControlsFromChapter();
+    }
+
+    function updatePreachControlsFromChapter() {
+        var idx = chapterIndexOf(state.currentChapter);
+        var hasPrev = idx > 0;
+        var hasNext = idx >= 0 && idx < state.chapters.length - 1;
+        if (els.preachPrevChapter) {
+            els.preachPrevChapter.disabled = !hasPrev;
+        }
+        if (els.preachNextChapter) {
+            els.preachNextChapter.disabled = !hasNext;
+        }
+        if (els.preachVerseJump) {
+            var maxVerse = Number((state.verses[state.verses.length - 1] || {}).verse || 0);
+            if (maxVerse > 0) {
+                els.preachVerseJump.max = String(maxVerse);
+                els.preachVerseJump.placeholder = 'Versículo (1-' + maxVerse + ')';
+            } else {
+                els.preachVerseJump.removeAttribute('max');
+                els.preachVerseJump.placeholder = 'Versículo';
+            }
+        }
+    }
+
+    function chapterIndexOf(chapter) {
+        var target = Number(chapter || 0);
+        for (var i = 0; i < state.chapters.length; i++) {
+            if (Number(state.chapters[i] || 0) === target) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    function goToAdjacentChapter(step) {
+        var delta = Number(step || 0);
+        if (!delta) {
+            return;
+        }
+        var idx = chapterIndexOf(state.currentChapter);
+        if (idx < 0) {
+            return;
+        }
+        var nextIdx = idx + (delta < 0 ? -1 : 1);
+        if (nextIdx < 0 || nextIdx >= state.chapters.length) {
+            notify(delta < 0 ? 'No hay capítulo anterior.' : 'No hay capítulo siguiente.');
+            return;
+        }
+        fetchChapter(state.currentBook, Number(state.chapters[nextIdx]));
+    }
+
+    function jumpToVerseFromPreachInput() {
+        if (!els.preachVerseJump) {
+            return;
+        }
+        var target = Number(els.preachVerseJump.value || 0);
+        var maxVerse = Number((state.verses[state.verses.length - 1] || {}).verse || 0);
+        if (target < 1 || (maxVerse > 0 && target > maxVerse)) {
+            notify('Versículo fuera de rango.');
+            return;
+        }
+        selectSingleVerse(target, true);
     }
 
     function openHelpDrawer() {

@@ -39,16 +39,23 @@ $initial = [
                 </div>
                 <div class="toolbar reading-tools">
                     <button id="openNavigator" class="btn-light mobile-only" type="button" title="Navegar" aria-label="Navegar"><img src="assets/icons/menu.svg" alt="" class="ico"><span class="btn-label">Navegar</span></button>
-                    <button id="openQuickSearch" class="btn-light" type="button" title="Buscar" aria-label="Buscar"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Buscar</span></button>
-                    <button id="openReadingPlan" class="btn-light" type="button" title="Plan de lectura" aria-label="Plan de lectura"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Plan</span></button>
-                    <button id="copySelection" class="btn-light" type="button" title="Copiar selección" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"><span class="btn-label">Copiar selección</span></button>
-                    <button id="copyParagraph" class="btn-light" type="button" title="Copiar como párrafo" aria-label="Copiar como párrafo"><img src="assets/icons/text.svg" alt="" class="ico"><span class="btn-label">Copiar como párrafo</span></button>
-                    <button id="shareSelection" class="btn-light" type="button" title="Compartir" aria-label="Compartir"><img src="assets/icons/share.svg" alt="" class="ico"><span class="btn-label">Compartir</span></button>
-                    <button id="toggleHelp" class="btn-light" type="button" title="Ayuda" aria-label="Ayuda"><img src="assets/icons/help.svg" alt="" class="ico"><span class="btn-label">Ayuda</span></button>
+                    <button id="openQuickSearch" class="btn-light hide-in-preach" type="button" title="Buscar" aria-label="Buscar"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Buscar</span></button>
+                    <button id="openReadingPlan" class="btn-light hide-in-preach" type="button" title="Plan de lectura" aria-label="Plan de lectura"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Plan</span></button>
+                    <button id="copySelection" class="btn-light hide-in-preach" type="button" title="Copiar selección" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"><span class="btn-label">Copiar selección</span></button>
+                    <button id="copyParagraph" class="btn-light hide-in-preach" type="button" title="Copiar como párrafo" aria-label="Copiar como párrafo"><img src="assets/icons/text.svg" alt="" class="ico"><span class="btn-label">Copiar como párrafo</span></button>
+                    <button id="shareSelection" class="btn-light hide-in-preach" type="button" title="Compartir" aria-label="Compartir"><img src="assets/icons/share.svg" alt="" class="ico"><span class="btn-label">Compartir</span></button>
+                    <button id="toggleHelp" class="btn-light hide-in-preach" type="button" title="Ayuda" aria-label="Ayuda"><img src="assets/icons/help.svg" alt="" class="ico"><span class="btn-label">Ayuda</span></button>
+                    <button id="togglePreachMode" class="btn-light" type="button" title="Modo predicación" aria-label="Modo predicación"><img src="assets/icons/eye.svg" alt="" class="ico"><span class="btn-label">Predicación</span></button>
                 </div>
             </header>
             <div id="readingNotice" class="notice hidden"></div>
             <article id="versesContainer" class="verses-area"></article>
+            <div id="preachControls" class="preach-controls hidden">
+                <button id="preachPrevChapter" class="btn-light" type="button">Capítulo anterior</button>
+                <button id="preachNextChapter" class="btn-light" type="button">Capítulo siguiente</button>
+                <input id="preachVerseJump" type="number" min="1" placeholder="Versículo">
+                <button id="preachGoVerse" class="btn-primary" type="button">Ir</button>
+            </div>
         </main>
 
         <aside class="pane pane-help" id="helpPane">
