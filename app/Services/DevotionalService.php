@@ -27,22 +27,29 @@ class DevotionalService
     public function getToday($date = null)
     {
         $date = $date ?: date('Y-m-d');
+        $daily = $this->dailyVerseService->getDailyVerse($date);
         $existing = $this->userDataRepository->getDevotionalByDate($date);
         if ($existing) {
             $hydrated = $this->hydrate($existing);
-            if (!$this->isLegacyDevotional($hydrated)) {
+            $matchesDailyReference = (int) ($hydrated['book'] ?? 0) === (int) ($daily['book'] ?? 0)
+                && (int) ($hydrated['chapter'] ?? 0) === (int) ($daily['chapter'] ?? 0)
+                && (int) ($hydrated['verse'] ?? 0) === (int) ($daily['verse'] ?? 0);
+            if (!$this->isLegacyDevotional($hydrated) && $matchesDailyReference) {
                 return $hydrated;
             }
 
             return $this->generateNew([
                 'date' => $date,
-                'book' => (int) ($hydrated['book'] ?? 0),
-                'chapter' => (int) ($hydrated['chapter'] ?? 0),
-                'verse' => (int) ($hydrated['verse'] ?? 0),
+                'book' => (int) ($daily['book'] ?? 0),
+                'chapter' => (int) ($daily['chapter'] ?? 0),
+                'verse' => (int) ($daily['verse'] ?? 0),
             ]);
         }
         return $this->generateNew([
             'date' => $date,
+            'book' => (int) ($daily['book'] ?? 0),
+            'chapter' => (int) ($daily['chapter'] ?? 0),
+            'verse' => (int) ($daily['verse'] ?? 0),
         ]);
     }
 

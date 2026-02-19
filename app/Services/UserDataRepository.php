@@ -249,6 +249,71 @@ class UserDataRepository
         return true;
     }
 
+    public function getHighlightsForChapter($book, $chapter)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT verse, color
+             FROM highlights
+             WHERE book = :book AND chapter = :chapter
+             ORDER BY verse ASC'
+        );
+        $stmt->execute([
+            ':book' => (int) $book,
+            ':chapter' => (int) $chapter,
+        ]);
+
+        $rows = $stmt->fetchAll();
+        $result = [];
+        foreach ($rows as $row) {
+            $verse = (int) ($row['verse'] ?? 0);
+            $color = trim((string) ($row['color'] ?? ''));
+            if ($verse < 1 || $color === '') {
+                continue;
+            }
+            $result[$verse] = $color;
+        }
+        return $result;
+    }
+
+    public function setHighlightForRange($book, $chapter, $verseStart, $verseEnd, $color)
+    {
+        $range = $this->normalizeRange($verseStart, $verseEnd);
+        $stmt = $this->db()->prepare(
+            'INSERT INTO highlights (book, chapter, verse, color, created_at, updated_at)
+             VALUES (:book, :chapter, :verse, :color, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+             ON CONFLICT(book, chapter, verse)
+             DO UPDATE SET color = excluded.color, updated_at = CURRENT_TIMESTAMP'
+        );
+
+        for ($verse = $range['start']; $verse <= $range['end']; $verse++) {
+            $stmt->execute([
+                ':book' => (int) $book,
+                ':chapter' => (int) $chapter,
+                ':verse' => (int) $verse,
+                ':color' => trim((string) $color),
+            ]);
+        }
+    }
+
+    public function clearHighlightForRange($book, $chapter, $verseStart, $verseEnd)
+    {
+        $range = $this->normalizeRange($verseStart, $verseEnd);
+        $stmt = $this->db()->prepare(
+            'DELETE FROM highlights
+             WHERE book = :book
+               AND chapter = :chapter
+               AND verse >= :verse_start
+               AND verse <= :verse_end'
+        );
+        $stmt->execute([
+            ':book' => (int) $book,
+            ':chapter' => (int) $chapter,
+            ':verse_start' => $range['start'],
+            ':verse_end' => $range['end'],
+        ]);
+        return $stmt->rowCount();
+    }
+
     public function saveHistory($book, $chapter)
     {
         $stmt = $this->db()->prepare(
@@ -346,19 +411,21 @@ class UserDataRepository
     public function getUserPrefs()
     {
         $stmt = $this->db()->query(
-            'SELECT id, font_scale, show_daily, auto_devotional, theme, updated_at
+            'SELECT id, font_scale, show_daily, auto_devotional, reminder_enabled, reminder_time, theme, updated_at
              FROM user_prefs
              WHERE id = 1
              LIMIT 1'
         );
         $row = $stmt->fetch();
         if (!$row) {
-            $this->db()->exec("INSERT INTO user_prefs (id, font_scale, show_daily, auto_devotional, theme, updated_at) VALUES (1, 100, 1, 0, 'light', CURRENT_TIMESTAMP)");
+            $this->db()->exec("INSERT INTO user_prefs (id, font_scale, show_daily, auto_devotional, reminder_enabled, reminder_time, theme, updated_at) VALUES (1, 100, 1, 0, 0, '07:00', 'light', CURRENT_TIMESTAMP)");
             return [
                 'id' => 1,
                 'font_scale' => 100,
                 'show_daily' => 1,
                 'auto_devotional' => 0,
+                'reminder_enabled' => 0,
+                'reminder_time' => '07:00',
                 'theme' => 'light',
             ];
         }
@@ -371,6 +438,8 @@ class UserDataRepository
         $fontScale = isset($prefs['font_scale']) ? (int) $prefs['font_scale'] : (int) $current['font_scale'];
         $showDaily = isset($prefs['show_daily']) ? (int) $prefs['show_daily'] : (int) $current['show_daily'];
         $autoDevotional = isset($prefs['auto_devotional']) ? (int) $prefs['auto_devotional'] : (int) $current['auto_devotional'];
+        $reminderEnabled = isset($prefs['reminder_enabled']) ? (int) $prefs['reminder_enabled'] : (int) ($current['reminder_enabled'] ?? 0);
+        $reminderTime = isset($prefs['reminder_time']) ? trim((string) $prefs['reminder_time']) : (string) ($current['reminder_time'] ?? '07:00');
         $theme = isset($prefs['theme']) ? trim((string) $prefs['theme']) : (string) $current['theme'];
 
         if ($fontScale < 85) {
@@ -381,12 +450,22 @@ class UserDataRepository
         if ($theme !== 'dark') {
             $theme = 'light';
         }
+        if (!preg_match('/^\d{2}:\d{2}$/', $reminderTime)) {
+            $reminderTime = '07:00';
+        }
+        $hour = (int) substr($reminderTime, 0, 2);
+        $minute = (int) substr($reminderTime, 3, 2);
+        if ($hour < 0 || $hour > 23 || $minute < 0 || $minute > 59) {
+            $reminderTime = '07:00';
+        }
 
         $stmt = $this->db()->prepare(
             'UPDATE user_prefs
              SET font_scale = :font_scale,
                  show_daily = :show_daily,
                  auto_devotional = :auto_devotional,
+                 reminder_enabled = :reminder_enabled,
+                 reminder_time = :reminder_time,
                  theme = :theme,
                  updated_at = CURRENT_TIMESTAMP
              WHERE id = 1'
@@ -395,7 +474,115 @@ class UserDataRepository
             ':font_scale' => $fontScale,
             ':show_daily' => $showDaily ? 1 : 0,
             ':auto_devotional' => $autoDevotional ? 1 : 0,
+            ':reminder_enabled' => $reminderEnabled ? 1 : 0,
+            ':reminder_time' => $reminderTime,
             ':theme' => $theme,
+        ]);
+    }
+
+    public function getActiveReadingPlan()
+    {
+        $stmt = $this->db()->query(
+            'SELECT id, name, total_days, start_date, active, created_at, updated_at
+             FROM reading_plans
+             WHERE active = 1
+             ORDER BY id DESC
+             LIMIT 1'
+        );
+        return $stmt->fetch();
+    }
+
+    public function startReadingPlan($name, $totalDays, $startDate)
+    {
+        $this->db()->beginTransaction();
+        try {
+            $this->db()->exec('UPDATE reading_plans SET active = 0, updated_at = CURRENT_TIMESTAMP WHERE active = 1');
+            $stmt = $this->db()->prepare(
+                'INSERT INTO reading_plans (name, total_days, start_date, active, created_at, updated_at)
+                 VALUES (:name, :total_days, :start_date, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+            );
+            $stmt->execute([
+                ':name' => trim((string) $name),
+                ':total_days' => (int) $totalDays,
+                ':start_date' => trim((string) $startDate),
+            ]);
+            $id = (int) $this->db()->lastInsertId();
+            $this->db()->commit();
+            return $id;
+        } catch (\Throwable $e) {
+            if ($this->db()->inTransaction()) {
+                $this->db()->rollBack();
+            }
+            throw $e;
+        }
+    }
+
+    public function getReadingPlanProgressMap($planId)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT day_index, date, book, chapter, completed_at
+             FROM reading_plan_progress
+             WHERE plan_id = :plan_id
+             ORDER BY day_index ASC'
+        );
+        $stmt->execute([':plan_id' => (int) $planId]);
+
+        $rows = $stmt->fetchAll();
+        $map = [];
+        foreach ($rows as $row) {
+            $day = (int) ($row['day_index'] ?? 0);
+            if ($day < 1) {
+                continue;
+            }
+            $map[$day] = [
+                'date' => (string) ($row['date'] ?? ''),
+                'book' => (int) ($row['book'] ?? 0),
+                'chapter' => (int) ($row['chapter'] ?? 0),
+                'completed_at' => (string) ($row['completed_at'] ?? ''),
+            ];
+        }
+        return $map;
+    }
+
+    public function countReadingPlanCompletedDays($planId)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT COUNT(*) FROM reading_plan_progress WHERE plan_id = :plan_id'
+        );
+        $stmt->execute([':plan_id' => (int) $planId]);
+        return (int) $stmt->fetchColumn();
+    }
+
+    public function setReadingPlanDayCompletion($planId, $dayIndex, $date, $book, $chapter, $completed)
+    {
+        if (!$completed) {
+            $stmtDelete = $this->db()->prepare(
+                'DELETE FROM reading_plan_progress
+                 WHERE plan_id = :plan_id AND day_index = :day_index'
+            );
+            $stmtDelete->execute([
+                ':plan_id' => (int) $planId,
+                ':day_index' => (int) $dayIndex,
+            ]);
+            return;
+        }
+
+        $stmt = $this->db()->prepare(
+            'INSERT INTO reading_plan_progress (plan_id, day_index, date, book, chapter, completed_at)
+             VALUES (:plan_id, :day_index, :date, :book, :chapter, CURRENT_TIMESTAMP)
+             ON CONFLICT(plan_id, day_index)
+             DO UPDATE SET
+                 date = excluded.date,
+                 book = excluded.book,
+                 chapter = excluded.chapter,
+                 completed_at = CURRENT_TIMESTAMP'
+        );
+        $stmt->execute([
+            ':plan_id' => (int) $planId,
+            ':day_index' => (int) $dayIndex,
+            ':date' => trim((string) $date),
+            ':book' => (int) $book,
+            ':chapter' => (int) $chapter,
         ]);
     }
 

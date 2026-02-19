@@ -7,6 +7,7 @@ use App\Services\AnecdoteService;
 use App\Services\BibleRepository;
 use App\Services\DailyVerseService;
 use App\Services\DevotionalService;
+use App\Services\ReadingPlanService;
 use App\Services\SearchService;
 use App\Services\UserDataRepository;
 
@@ -19,6 +20,7 @@ class ApiController
     private $devotionalService;
     private $dailyVerseService;
     private $anecdoteService;
+    private $readingPlanService;
 
     public function __construct(
         BibleRepository $bibleRepository,
@@ -27,7 +29,8 @@ class ApiController
         SearchService $searchService,
         DevotionalService $devotionalService,
         DailyVerseService $dailyVerseService,
-        AnecdoteService $anecdoteService
+        AnecdoteService $anecdoteService,
+        ReadingPlanService $readingPlanService
     ) {
         $this->bibleRepository = $bibleRepository;
         $this->userDataRepository = $userDataRepository;
@@ -36,6 +39,7 @@ class ApiController
         $this->devotionalService = $devotionalService;
         $this->dailyVerseService = $dailyVerseService;
         $this->anecdoteService = $anecdoteService;
+        $this->readingPlanService = $readingPlanService;
     }
 
     public function verse()
@@ -98,6 +102,7 @@ class ApiController
             'chapter' => $chapter,
             'chapters' => $this->bibleRepository->getChapters($book),
             'verses' => $verses,
+            'highlights' => $this->userDataRepository->getHighlightsForChapter($book, $chapter),
         ]);
     }
 
@@ -262,6 +267,38 @@ class ApiController
         app_json(['ok' => true, 'active' => $active]);
     }
 
+    public function highlightSet()
+    {
+        $input = $this->requestData();
+        $book = isset($input['book']) ? (int) $input['book'] : 0;
+        $chapter = isset($input['chapter']) ? (int) $input['chapter'] : 0;
+        $verseStart = isset($input['verse_start']) ? (int) $input['verse_start'] : 0;
+        $verseEnd = isset($input['verse_end']) ? (int) $input['verse_end'] : $verseStart;
+        $color = isset($input['color']) ? trim((string) $input['color']) : '';
+
+        if ($book < 1 || $chapter < 1 || $verseStart < 1 || $verseEnd < 1) {
+            app_json(['error' => 'Parámetros inválidos'], 422);
+        }
+
+        if ($color === '' || $color === 'none') {
+            $this->userDataRepository->clearHighlightForRange($book, $chapter, $verseStart, $verseEnd);
+            app_json([
+                'ok' => true,
+                'highlights' => $this->userDataRepository->getHighlightsForChapter($book, $chapter),
+            ]);
+        }
+
+        if (!$this->isValidHighlightColor($color)) {
+            app_json(['error' => 'Color de subrayado no permitido'], 422);
+        }
+
+        $this->userDataRepository->setHighlightForRange($book, $chapter, $verseStart, $verseEnd, $color);
+        app_json([
+            'ok' => true,
+            'highlights' => $this->userDataRepository->getHighlightsForChapter($book, $chapter),
+        ]);
+    }
+
     public function search()
     {
         $query = isset($_GET['q']) ? trim($_GET['q']) : '';
@@ -325,6 +362,41 @@ class ApiController
         ]);
     }
 
+    public function readingPlanStatus()
+    {
+        $date = isset($_GET['date']) ? trim((string) $_GET['date']) : date('Y-m-d');
+        app_json([
+            'ok' => true,
+            'plan' => $this->readingPlanService->status($date),
+        ]);
+    }
+
+    public function readingPlanStart()
+    {
+        $input = $this->requestData();
+        $days = isset($input['days']) ? (int) $input['days'] : 0;
+        $date = isset($input['date']) ? trim((string) $input['date']) : date('Y-m-d');
+        try {
+            $plan = $this->readingPlanService->start($days, $date);
+            app_json(['ok' => true, 'plan' => $plan]);
+        } catch (\InvalidArgumentException $e) {
+            app_json(['error' => $e->getMessage()], 422);
+        }
+    }
+
+    public function readingPlanToday()
+    {
+        $input = $this->requestData();
+        $completed = isset($input['completed']) ? (int) $input['completed'] : 1;
+        $date = isset($input['date']) ? trim((string) $input['date']) : date('Y-m-d');
+        try {
+            $plan = $this->readingPlanService->markToday($completed === 1, $date);
+            app_json(['ok' => true, 'plan' => $plan]);
+        } catch (\RuntimeException $e) {
+            app_json(['error' => $e->getMessage()], 422);
+        }
+    }
+
     public function prefsSave()
     {
         $input = $this->requestData();
@@ -337,6 +409,12 @@ class ApiController
         }
         if (isset($input['auto_devotional'])) {
             $prefs['auto_devotional'] = (int) $input['auto_devotional'];
+        }
+        if (isset($input['reminder_enabled'])) {
+            $prefs['reminder_enabled'] = (int) $input['reminder_enabled'];
+        }
+        if (isset($input['reminder_time'])) {
+            $prefs['reminder_time'] = trim((string) $input['reminder_time']);
         }
         if (isset($input['theme'])) {
             $prefs['theme'] = trim((string) $input['theme']);
@@ -458,9 +536,7 @@ class ApiController
         if (!empty($verses[0]['scripture_text'])) {
             $first = trim((string) $verses[0]['scripture_text']);
         }
-        if ($first !== '' && strlen($first) > 160) {
-            $first = substr($first, 0, 160) . '...';
-        }
+        $first = $this->truncateText($first, 160);
 
         $pericopeText = trim((string) $pericope);
         $header = $pericopeText !== '' ? (' Encabezado del pasaje: "' . $pericopeText . '".') : '';
@@ -649,10 +725,29 @@ class ApiController
             $simple = preg_replace('/\b' . preg_quote($from, '/') . '\b/ui', $to, $simple);
         }
         $simple = preg_replace('/\s+/', ' ', $simple);
-        if (strlen($simple) > 520) {
-            $simple = substr($simple, 0, 520) . '...';
-        }
+        $simple = $this->truncateText($simple, 520);
         return 'Versión sencilla de ' . $reference . ': ' . $simple;
+    }
+
+    private function truncateText($text, $limit)
+    {
+        $text = (string) $text;
+        $limit = (int) $limit;
+        if ($text === '' || $limit < 1) {
+            return $text;
+        }
+
+        if (function_exists('mb_strlen') && function_exists('mb_substr')) {
+            if (mb_strlen($text, 'UTF-8') > $limit) {
+                return mb_substr($text, 0, $limit, 'UTF-8') . '...';
+            }
+            return $text;
+        }
+
+        if (strlen($text) > $limit) {
+            return substr($text, 0, $limit) . '...';
+        }
+        return $text;
     }
 
     private function historicalFocusHint($text)
@@ -812,5 +907,10 @@ class ApiController
 
         parse_str($raw, $form);
         return is_array($form) ? $form : [];
+    }
+
+    private function isValidHighlightColor($color)
+    {
+        return in_array((string) $color, ['yellow', 'green', 'blue', 'pink', 'orange'], true);
     }
 }

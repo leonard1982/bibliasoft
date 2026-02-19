@@ -31,18 +31,23 @@ class DailyVerseService
     public function getDailyVerse($date = null)
     {
         $date = $date ?: date('Y-m-d');
-        $cached = $this->userDataRepository->getDailyCache($date);
-
-        if ($cached) {
-            $verse = $this->bibleRepository->getVerse($cached['book'], $cached['chapter'], $cached['verse']);
-            if ($verse) {
-                return $this->formatPayload($date, $cached['book'], $cached['chapter'], $cached['verse'], $verse, $cached['image_path']);
-            }
-        }
-
         $picked = $this->pickVerseByDate($date);
         if (!$picked) {
             throw new \RuntimeException('No se pudo generar el versículo del día.');
+        }
+
+        $cached = $this->userDataRepository->getDailyCache($date);
+
+        if ($cached) {
+            $cacheMatchesDatePick = (int) $cached['book'] === (int) $picked['book']
+                && (int) $cached['chapter'] === (int) $picked['chapter']
+                && (int) $cached['verse'] === (int) $picked['verse'];
+            if ($cacheMatchesDatePick) {
+                $verse = $this->bibleRepository->getVerse($cached['book'], $cached['chapter'], $cached['verse']);
+                if ($verse) {
+                    return $this->formatPayload($date, $cached['book'], $cached['chapter'], $cached['verse'], $verse, $cached['image_path']);
+                }
+            }
         }
 
         $verse = $this->bibleRepository->getVerse($picked['book'], $picked['chapter'], $picked['verse']);
@@ -63,9 +68,7 @@ class DailyVerseService
             return null;
         }
 
-        $hash = md5((string) $date);
-        $num = hexdec(substr($hash, 0, 10));
-        $offset = $num % $count;
+        $offset = $this->stableOffsetForDate($date, $count);
 
         $pdo = ConnectionFactory::sqlite($this->bibleDbPath);
         $stmt = $pdo->prepare(
@@ -87,6 +90,24 @@ class DailyVerseService
             'chapter' => (int) $row['Chapter'],
             'verse' => (int) $row['Verse'],
         ];
+    }
+
+    private function stableOffsetForDate($date, $count)
+    {
+        $count = (int) $count;
+        if ($count < 2) {
+            return 0;
+        }
+
+        // Reduce hash to [0, count) without large integer casts/overflow.
+        $hash = md5((string) $date);
+        $offset = 0;
+        $len = strlen($hash);
+        for ($i = 0; $i < $len; $i++) {
+            $digit = hexdec($hash[$i]);
+            $offset = (($offset * 16) + $digit) % $count;
+        }
+        return $offset;
     }
 
     private function getVerseCount()

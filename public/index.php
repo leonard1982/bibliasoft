@@ -19,6 +19,7 @@ use App\Services\DevotionalService;
 use App\Services\GenerationService;
 use App\Services\HtmlSanitizer;
 use App\Services\ImageCardService;
+use App\Services\ReadingPlanService;
 use App\Services\SearchService;
 use App\Services\UserDataRepository;
 
@@ -27,6 +28,7 @@ $bibleRepository = new BibleRepository(config('paths.bible'), config('paths.comm
 $userDataRepository = new UserDataRepository(config('paths.app_db'));
 $searchService = new SearchService($bibleRepository, $userDataRepository, $sanitizer);
 $aiService = new AIService(config('ai', []), $userDataRepository);
+$readingPlanService = new ReadingPlanService($bibleRepository, $userDataRepository);
 $imageCardService = new ImageCardService();
 $dailyVerseService = new DailyVerseService(
     config('paths.bible'),
@@ -52,7 +54,7 @@ $devotionalService = new DevotionalService(
 $homeController = new HomeController($bibleRepository);
 $bibleController = new BibleController($bibleRepository, $searchService);
 $readerController = new ReaderController($bibleRepository, $imageCardService, $userDataRepository);
-$homeDailyController = new HomeDailyController($dailyVerseService, $imageCardService, $userDataRepository);
+$homeDailyController = new HomeDailyController($dailyVerseService, $imageCardService, $userDataRepository, $readingPlanService);
 $devotionalController = new DevotionalController($devotionalService, $imageCardService);
 $authController = new AuthController($userDataRepository);
 $shareController = new ShareController();
@@ -64,7 +66,8 @@ $apiController = new ApiController(
     $searchService,
     $devotionalService,
     $dailyVerseService,
-    $anecdoteService
+    $anecdoteService,
+    $readingPlanService
 );
 
 $route = isset($_GET['route']) ? $_GET['route'] : 'home_daily';
@@ -96,7 +99,8 @@ try {
             break;
 
         case 'search':
-            $bibleController->search();
+            $_SESSION['open_reader_search'] = 1;
+            app_redirect('?route=reader');
             break;
 
         case 'share_app':
@@ -159,6 +163,18 @@ try {
             $apiController->devotionalHistory();
             break;
 
+        case 'api.plan.status':
+            $apiController->readingPlanStatus();
+            break;
+
+        case 'api.plan.start':
+            $apiController->readingPlanStart();
+            break;
+
+        case 'api.plan.today':
+            $apiController->readingPlanToday();
+            break;
+
         case 'api.prefs.save':
             $apiController->prefsSave();
             break;
@@ -197,6 +213,10 @@ try {
 
         case 'api.favorite.toggle':
             $apiController->favoriteToggle();
+            break;
+
+        case 'api.highlight.set':
+            $apiController->highlightSet();
             break;
 
         case 'api.ai.refresh':

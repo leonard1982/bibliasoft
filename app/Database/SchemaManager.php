@@ -36,6 +36,8 @@ class SchemaManager
         self::migrateDailyCache($pdo);
         self::migrateDevotionals($pdo);
         self::migrateUserPrefs($pdo);
+        self::migrateHighlights($pdo);
+        self::migrateReadingPlans($pdo);
         self::migrateAnecdotes($pdo);
         self::migrateAnecdoteFavorites($pdo);
     }
@@ -196,6 +198,12 @@ class SchemaManager
         if (!isset($columns['auto_devotional'])) {
             $pdo->exec('ALTER TABLE user_prefs ADD COLUMN auto_devotional INTEGER NOT NULL DEFAULT 0');
         }
+        if (!isset($columns['reminder_enabled'])) {
+            $pdo->exec('ALTER TABLE user_prefs ADD COLUMN reminder_enabled INTEGER NOT NULL DEFAULT 0');
+        }
+        if (!isset($columns['reminder_time'])) {
+            $pdo->exec("ALTER TABLE user_prefs ADD COLUMN reminder_time TEXT NOT NULL DEFAULT '07:00'");
+        }
         if (!isset($columns['theme'])) {
             $pdo->exec("ALTER TABLE user_prefs ADD COLUMN theme TEXT NOT NULL DEFAULT 'light'");
         }
@@ -203,7 +211,103 @@ class SchemaManager
             $pdo->exec("ALTER TABLE user_prefs ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
         }
 
-        $pdo->exec("INSERT OR IGNORE INTO user_prefs (id, font_scale, show_daily, auto_devotional, theme, updated_at) VALUES (1, 100, 1, 0, 'light', CURRENT_TIMESTAMP)");
+        $pdo->exec("INSERT OR IGNORE INTO user_prefs (id, font_scale, show_daily, auto_devotional, reminder_enabled, reminder_time, theme, updated_at) VALUES (1, 100, 1, 0, 0, '07:00', 'light', CURRENT_TIMESTAMP)");
+    }
+
+    private static function migrateHighlights(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'highlights')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS highlights (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                book INTEGER NOT NULL,
+                chapter INTEGER NOT NULL,
+                verse INTEGER NOT NULL,
+                color TEXT NOT NULL DEFAULT \'yellow\',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(book, chapter, verse)
+            )');
+            $pdo->exec('CREATE INDEX IF NOT EXISTS idx_highlights_ref ON highlights(book, chapter, verse)');
+            return;
+        }
+
+        $columns = self::columns($pdo, 'highlights');
+        if (!isset($columns['color'])) {
+            $pdo->exec("ALTER TABLE highlights ADD COLUMN color TEXT NOT NULL DEFAULT 'yellow'");
+        }
+        if (!isset($columns['created_at'])) {
+            $pdo->exec("ALTER TABLE highlights ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+        if (!isset($columns['updated_at'])) {
+            $pdo->exec("ALTER TABLE highlights ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+        $pdo->exec("UPDATE highlights SET color = COALESCE(NULLIF(color, ''), 'yellow')");
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_highlights_ref ON highlights(book, chapter, verse)');
+    }
+
+    private static function migrateReadingPlans(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'reading_plans')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS reading_plans (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                total_days INTEGER NOT NULL,
+                start_date TEXT NOT NULL,
+                active INTEGER NOT NULL DEFAULT 1,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        }
+
+        $planColumns = self::columns($pdo, 'reading_plans');
+        if (!isset($planColumns['name'])) {
+            $pdo->exec("ALTER TABLE reading_plans ADD COLUMN name TEXT NOT NULL DEFAULT 'Plan de lectura'");
+        }
+        if (!isset($planColumns['total_days'])) {
+            $pdo->exec('ALTER TABLE reading_plans ADD COLUMN total_days INTEGER NOT NULL DEFAULT 90');
+        }
+        if (!isset($planColumns['start_date'])) {
+            $pdo->exec("ALTER TABLE reading_plans ADD COLUMN start_date TEXT NOT NULL DEFAULT '1970-01-01'");
+        }
+        if (!isset($planColumns['active'])) {
+            $pdo->exec('ALTER TABLE reading_plans ADD COLUMN active INTEGER NOT NULL DEFAULT 1');
+        }
+        if (!isset($planColumns['created_at'])) {
+            $pdo->exec("ALTER TABLE reading_plans ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+        if (!isset($planColumns['updated_at'])) {
+            $pdo->exec("ALTER TABLE reading_plans ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+
+        if (!self::tableExists($pdo, 'reading_plan_progress')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS reading_plan_progress (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                plan_id INTEGER NOT NULL,
+                day_index INTEGER NOT NULL,
+                date TEXT NOT NULL,
+                book INTEGER NOT NULL,
+                chapter INTEGER NOT NULL,
+                completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(plan_id, day_index)
+            )');
+        }
+
+        $progressColumns = self::columns($pdo, 'reading_plan_progress');
+        if (!isset($progressColumns['date'])) {
+            $pdo->exec("ALTER TABLE reading_plan_progress ADD COLUMN date TEXT NOT NULL DEFAULT '1970-01-01'");
+        }
+        if (!isset($progressColumns['book'])) {
+            $pdo->exec('ALTER TABLE reading_plan_progress ADD COLUMN book INTEGER NOT NULL DEFAULT 1');
+        }
+        if (!isset($progressColumns['chapter'])) {
+            $pdo->exec('ALTER TABLE reading_plan_progress ADD COLUMN chapter INTEGER NOT NULL DEFAULT 1');
+        }
+        if (!isset($progressColumns['completed_at'])) {
+            $pdo->exec("ALTER TABLE reading_plan_progress ADD COLUMN completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_plans_active ON reading_plans(active, updated_at)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_progress_plan ON reading_plan_progress(plan_id, day_index)');
     }
 
     private static function migrateAnecdotes(\PDO $pdo)

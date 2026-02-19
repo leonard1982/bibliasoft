@@ -12,23 +12,25 @@
     <?php $activeRoute = isset($_GET['route']) ? $_GET['route'] : 'home_daily'; ?>
     <header class="topbar">
         <div class="wrap topbar-inner">
+            <button class="btn-light mobile-nav-toggle" id="mobileNavToggle" type="button" aria-controls="mainNav" aria-expanded="false" aria-label="Abrir menú principal">
+                <img src="assets/icons/menu.svg" alt="" class="ico"> Menú
+            </button>
             <a href="?route=home_daily" class="brand-wrap">
                 <strong class="brand-main"><?php echo e(config('branding.app_name', 'Biblia para todos')); ?></strong>
                 <small class="brand-sub"><?php echo e(config('branding.app_short', 'BibliaSoft')); ?> · <?php echo e(config('branding.slogan', 'Biblia para todos')); ?></small>
             </a>
-            <nav class="nav">
-                <a class="nav-link <?php echo $activeRoute === 'home_daily' ? 'is-active' : ''; ?>" href="?route=home_daily">Inicio</a>
-                <a class="nav-link <?php echo $activeRoute === 'reader' ? 'is-active' : ''; ?>" href="?route=reader">Lector</a>
-                <a class="nav-link <?php echo $activeRoute === 'devotional' ? 'is-active' : ''; ?>" href="?route=devotional">Devocionales</a>
-                <a class="nav-link <?php echo $activeRoute === 'share_app' ? 'is-active' : ''; ?>" href="?route=share_app">Compartir App</a>
-                <a class="nav-link <?php echo $activeRoute === 'anecdotes' ? 'is-active' : ''; ?>" href="?route=anecdotes">Anécdotas</a>
-                <a class="nav-link <?php echo $activeRoute === 'search' ? 'is-active' : ''; ?>" href="?route=search">Búsqueda</a>
+            <nav class="nav" id="mainNav">
+                <a class="nav-link <?php echo $activeRoute === 'home_daily' ? 'is-active' : ''; ?>" href="?route=home_daily"><img src="assets/icons/book.svg" alt="" class="ico"> Inicio</a>
+                <a class="nav-link <?php echo $activeRoute === 'reader' ? 'is-active' : ''; ?>" href="?route=reader"><img src="assets/icons/eye.svg" alt="" class="ico"> Lector</a>
+                <a class="nav-link <?php echo $activeRoute === 'devotional' ? 'is-active' : ''; ?>" href="?route=devotional"><img src="assets/icons/text.svg" alt="" class="ico"> Devocionales</a>
+                <a class="nav-link <?php echo $activeRoute === 'share_app' ? 'is-active' : ''; ?>" href="?route=share_app"><img src="assets/icons/share.svg" alt="" class="ico"> Compartir App</a>
+                <a class="nav-link <?php echo $activeRoute === 'anecdotes' ? 'is-active' : ''; ?>" href="?route=anecdotes"><img src="assets/icons/bookmark.svg" alt="" class="ico"> Anécdotas</a>
                 <?php if (auth_user_id() > 0): ?>
-                    <a class="nav-link <?php echo $activeRoute === 'admin' ? 'is-active' : ''; ?>" href="?route=admin"><?php echo e(auth_username()); ?></a>
-                    <a class="nav-link" href="?route=logout">Salir</a>
+                    <a class="nav-link <?php echo $activeRoute === 'admin' ? 'is-active' : ''; ?>" href="?route=admin"><img src="assets/icons/user.svg" alt="" class="ico"> <?php echo e(auth_username()); ?></a>
+                    <a class="nav-link" href="?route=logout"><img src="assets/icons/lock.svg" alt="" class="ico"> Salir</a>
                 <?php else: ?>
-                    <a class="nav-link <?php echo $activeRoute === 'login' ? 'is-active' : ''; ?>" href="?route=login">Ingresar</a>
-                    <a class="nav-link <?php echo $activeRoute === 'register' ? 'is-active' : ''; ?>" href="?route=register">Registro</a>
+                    <a class="nav-link <?php echo $activeRoute === 'login' ? 'is-active' : ''; ?>" href="?route=login"><img src="assets/icons/login.svg" alt="" class="ico"> Ingresar</a>
+                    <a class="nav-link <?php echo $activeRoute === 'register' ? 'is-active' : ''; ?>" href="?route=register"><img src="assets/icons/register.svg" alt="" class="ico"> Registro</a>
                 <?php endif; ?>
                 <?php if ($activeRoute === 'reader'): ?>
                     <button class="btn-light nav-settings" id="openSettings" type="button">
@@ -56,5 +58,51 @@
     </footer>
 
     <script src="assets/app.js"></script>
+    <script src="assets/reminders.js"></script>
+    <script>
+        (function () {
+            var toggle = document.getElementById('mobileNavToggle');
+            var nav = document.getElementById('mainNav');
+            if (!toggle || !nav) {
+                return;
+            }
+
+            function setOpen(open) {
+                nav.classList.toggle('is-open', !!open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+
+            toggle.addEventListener('click', function () {
+                setOpen(!nav.classList.contains('is-open'));
+            });
+
+            nav.querySelectorAll('a, button').forEach(function (item) {
+                item.addEventListener('click', function () {
+                    if (window.matchMedia('(max-width: 980px)').matches) {
+                        setOpen(false);
+                    }
+                });
+            });
+
+            document.addEventListener('click', function (event) {
+                if (!window.matchMedia('(max-width: 980px)').matches) {
+                    return;
+                }
+                if (!nav.classList.contains('is-open')) {
+                    return;
+                }
+                if (nav.contains(event.target) || toggle.contains(event.target)) {
+                    return;
+                }
+                setOpen(false);
+            });
+
+            window.addEventListener('resize', function () {
+                if (!window.matchMedia('(max-width: 980px)').matches) {
+                    setOpen(false);
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

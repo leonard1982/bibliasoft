@@ -50,6 +50,24 @@ class BibleRepository
         return range(1, $max);
     }
 
+    public function getAllChaptersOrdered()
+    {
+        $stmt = $this->bible()->query(
+            'SELECT Book, Chapter
+             FROM Bible
+             GROUP BY Book, Chapter
+             ORDER BY Book ASC, Chapter ASC'
+        );
+        $rows = [];
+        foreach ($stmt->fetchAll() as $row) {
+            $rows[] = [
+                'book' => (int) $row['Book'],
+                'chapter' => (int) $row['Chapter'],
+            ];
+        }
+        return $rows;
+    }
+
     public function getChapterVerses($book, $chapter)
     {
         $stmt = $this->bible()->prepare(

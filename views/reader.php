@@ -6,9 +6,11 @@ $initial = [
     'books' => $books,
     'chapters' => $chapters,
     'verses' => $verses,
+    'highlights' => $highlights,
     'backgrounds' => $backgrounds,
     'highlight_verse' => (int) $highlightVerse,
     'user_prefs' => $userPrefs,
+    'open_search' => (int) $openSearch,
 ];
 ?>
 <div id="readerApp"
@@ -38,6 +40,7 @@ $initial = [
                 <div class="toolbar reading-tools">
                     <button id="openNavigator" class="btn-light mobile-only" type="button" title="Navegar" aria-label="Navegar"><img src="assets/icons/menu.svg" alt="" class="ico"><span class="btn-label">Navegar</span></button>
                     <button id="openQuickSearch" class="btn-light" type="button" title="Buscar" aria-label="Buscar"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Buscar</span></button>
+                    <button id="openReadingPlan" class="btn-light" type="button" title="Plan de lectura" aria-label="Plan de lectura"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Plan</span></button>
                     <button id="copySelection" class="btn-light" type="button" title="Copiar selección" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"><span class="btn-label">Copiar selección</span></button>
                     <button id="copyParagraph" class="btn-light" type="button" title="Copiar como párrafo" aria-label="Copiar como párrafo"><img src="assets/icons/text.svg" alt="" class="ico"><span class="btn-label">Copiar como párrafo</span></button>
                     <button id="shareSelection" class="btn-light" type="button" title="Compartir" aria-label="Compartir"><img src="assets/icons/share.svg" alt="" class="ico"><span class="btn-label">Compartir</span></button>
@@ -100,6 +103,10 @@ $initial = [
             </label>
             <label><input type="checkbox" id="optShowDaily" checked> Mostrar Versículo del día al iniciar</label>
             <label><input type="checkbox" id="optAutoDevotional"> Activar devocionales automáticos</label>
+            <label><input type="checkbox" id="optReminderEnabled"> Activar recordatorio diario</label>
+            <label>Hora del recordatorio
+                <input type="time" id="optReminderTime" step="60" value="07:00">
+            </label>
             <label>Tamaño de letra
                 <select id="optFontSize">
                     <option value="sm">Pequeña</option>
@@ -136,13 +143,28 @@ $initial = [
                 <option value="all">Todas las palabras</option>
                 <option value="exact">Frase exacta</option>
             </select>
+            <select id="qBook">
+                <option value="">Todos los libros</option>
+                <?php foreach ($books as $bookRow): ?>
+                    <option value="<?php echo (int) $bookRow['id']; ?>"><?php echo e($bookRow['name']); ?></option>
+                <?php endforeach; ?>
+            </select>
             <div class="toolbar">
-                <input id="qBook" type="number" min="0" max="66" placeholder="Libro (0=todos)">
-                <input id="qChapterFrom" type="number" min="1" placeholder="Capítulo desde">
-                <input id="qChapterTo" type="number" min="1" placeholder="Capítulo hasta">
+                <input id="qChapterFrom" type="number" min="1" placeholder="Capítulo desde (opcional)">
+                <input id="qChapterTo" type="number" min="1" placeholder="Capítulo hasta (opcional)">
             </div>
             <button class="btn-primary" type="submit">Buscar</button>
         </form>
         <div id="quickSearchResults" class="stack"></div>
+    </div>
+
+    <div id="planModal" class="settings hidden" role="dialog" aria-modal="true">
+        <header>
+            <h3><img src="assets/icons/list.svg" alt="" class="ico"> Plan de lectura</h3>
+            <button class="btn-light" id="closePlan">Cerrar</button>
+        </header>
+        <div id="readerPlanCard" class="stack">
+            <p class="muted">Cargando plan de lectura...</p>
+        </div>
     </div>
 </div>

@@ -51,12 +51,15 @@
     }
 
     function generateNew() {
+        var body = new URLSearchParams({
+            date: localDateISO()
+        }).toString();
         fetch('?route=api.devotional.generate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             },
-            body: ''
+            body: body
         }).then(asJson).then(function (res) {
             if (res.error || !res.devotional) {
                 alert(res.error || 'No se pudo generar el devocional.');
@@ -243,6 +246,14 @@
 
     function asJson(res) {
         return res.json();
+    }
+
+    function localDateISO() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = String(now.getMonth() + 1).padStart(2, '0');
+        var day = String(now.getDate()).padStart(2, '0');
+        return year + '-' + month + '-' + day;
     }
 
     function escapeHtml(value) {

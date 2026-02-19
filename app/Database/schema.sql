@@ -65,6 +65,19 @@ CREATE TABLE IF NOT EXISTS favorites (
     UNIQUE(book, chapter, verse)
 );
 
+CREATE TABLE IF NOT EXISTS highlights (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    book INTEGER NOT NULL,
+    chapter INTEGER NOT NULL,
+    verse INTEGER NOT NULL,
+    color TEXT NOT NULL DEFAULT 'yellow',
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(book, chapter, verse)
+);
+
+CREATE INDEX IF NOT EXISTS idx_highlights_ref ON highlights (book, chapter, verse);
+
 CREATE TABLE IF NOT EXISTS history (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     book INTEGER NOT NULL,
@@ -98,9 +111,36 @@ CREATE TABLE IF NOT EXISTS user_prefs (
     font_scale INTEGER NOT NULL DEFAULT 100,
     show_daily INTEGER NOT NULL DEFAULT 1,
     auto_devotional INTEGER NOT NULL DEFAULT 0,
+    reminder_enabled INTEGER NOT NULL DEFAULT 0,
+    reminder_time TEXT NOT NULL DEFAULT '07:00',
     theme TEXT NOT NULL DEFAULT 'light',
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS reading_plans (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    total_days INTEGER NOT NULL,
+    start_date TEXT NOT NULL,
+    active INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_reading_plans_active ON reading_plans (active, updated_at);
+
+CREATE TABLE IF NOT EXISTS reading_plan_progress (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    plan_id INTEGER NOT NULL,
+    day_index INTEGER NOT NULL,
+    date TEXT NOT NULL,
+    book INTEGER NOT NULL,
+    chapter INTEGER NOT NULL,
+    completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(plan_id, day_index)
+);
+
+CREATE INDEX IF NOT EXISTS idx_reading_progress_plan ON reading_plan_progress (plan_id, day_index);
 
 CREATE TABLE IF NOT EXISTS anecdotes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

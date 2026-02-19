@@ -1,18 +1,14 @@
-const CACHE_VERSION = 'biblia-soft-v6';
+const CACHE_VERSION = 'biblia-soft-v15';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
 const STATIC_ASSETS = [
   './',
-  './?route=home_daily',
-  './?route=reader',
-  './?route=devotional',
-  './?route=share_app',
-  './?route=anecdotes',
   './assets/app.css',
   './assets/app.js',
   './assets/daily.js',
   './assets/devotional.js',
+  './assets/reminders.js',
   './assets/anecdotes.js',
   './assets/share_app.js',
   './assets/vendor/qrcode.min.js',
@@ -70,17 +66,21 @@ self.addEventListener('fetch', (event) => {
   }
 
   const url = new URL(event.request.url);
-  const isChapterApi = url.searchParams.get('route') === 'api.chapter';
-  const isReaderRoute = url.searchParams.get('route') === 'reader';
+  if (url.origin !== self.location.origin) {
+    return;
+  }
 
-  if (isChapterApi || isReaderRoute) {
+  const route = url.searchParams.get('route') || '';
+  const isApiRoute = route.startsWith('api.');
+  const accept = event.request.headers.get('accept') || '';
+  const isHtmlRequest = event.request.mode === 'navigate' || accept.includes('text/html');
+
+  if (isApiRoute || isHtmlRequest) {
     event.respondWith(networkFirst(event.request));
     return;
   }
 
-  if (url.origin === self.location.origin) {
-    event.respondWith(cacheFirst(event.request));
-  }
+  event.respondWith(cacheFirst(event.request));
 });
 
 async function cacheFirst(request) {

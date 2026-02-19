@@ -3,6 +3,7 @@ $dailyPayload = [
     'daily' => $daily,
     'backgrounds' => $backgrounds,
     'prefs' => $prefs,
+    'plan' => $plan,
 ];
 ?>
 <section id="dailyHome" class="daily-home" data-daily="<?php echo e(json_encode($dailyPayload, JSON_UNESCAPED_UNICODE)); ?>">
@@ -89,6 +90,16 @@ $dailyPayload = [
             <button class="btn-light" id="hideDailyToday" type="button">
                 <img src="assets/icons/eye.svg" alt="" class="ico"> No mostrar más hoy
             </button>
+        </div>
+    </article>
+
+    <article class="panel">
+        <div class="reading-plan-head">
+            <h3><img src="assets/icons/list.svg" alt="" class="ico"> Plan de lectura</h3>
+            <small class="muted">Progreso diario de lectura completa de la Biblia.</small>
+        </div>
+        <div id="readingPlanCard" class="stack">
+            <p class="muted">Cargando plan de lectura...</p>
         </div>
     </article>
 

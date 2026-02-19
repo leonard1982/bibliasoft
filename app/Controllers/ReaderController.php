@@ -28,6 +28,8 @@ class ReaderController
         $book = isset($_GET['book']) ? (int) $_GET['book'] : 1;
         $chapter = isset($_GET['chapter']) ? (int) $_GET['chapter'] : 1;
         $verse = isset($_GET['verse']) ? (int) $_GET['verse'] : 0;
+        $openSearch = !empty($_SESSION['open_reader_search']) || (isset($_GET['open_search']) && (string) $_GET['open_search'] === '1');
+        unset($_SESSION['open_reader_search']);
 
         if ($book < 1 || $book > 66) {
             $book = 1;
@@ -50,8 +52,10 @@ class ReaderController
             'chapters' => $chapters,
             'bookName' => $this->bibleRepository->getBookName($book),
             'verses' => $this->bibleRepository->getChapterVerses($book, $chapter),
+            'highlights' => $this->userDataRepository->getHighlightsForChapter($book, $chapter),
             'backgrounds' => $this->imageCardService->getBackgrounds(),
             'userPrefs' => $this->userDataRepository->getUserPrefs(),
+            'openSearch' => $openSearch ? 1 : 0,
         ]);
     }
 }

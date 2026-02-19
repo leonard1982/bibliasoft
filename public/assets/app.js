@@ -18,9 +18,12 @@
         pendingVerse: null,
         pendingSelectionVerses: [],
         selectionPayload: null,
+        highlights: {},
         selectedBackground: '',
         activeTab: 'contexto',
         needsChapterRefresh: false,
+        readingPlan: null,
+        planDate: '',
         settings: {
             showHelp: true,
             layoutMode: 'columns',
@@ -29,7 +32,9 @@
             theme: 'light',
             fontScale: 100,
             showDaily: true,
-            autoDevotional: false
+            autoDevotional: false,
+            reminderEnabled: false,
+            reminderTime: '07:00'
         }
     };
 
@@ -44,15 +49,19 @@
         chaptersPane: document.getElementById('chaptersPane'),
         openNavigator: document.getElementById('openNavigator'),
         openQuickSearch: document.getElementById('openQuickSearch'),
+        openReadingPlan: document.getElementById('openReadingPlan'),
         toggleHelp: document.getElementById('toggleHelp'),
         overlay: document.getElementById('mobileOverlay'),
         notice: document.getElementById('readingNotice'),
+        readerPlanCard: document.getElementById('readerPlanCard'),
         settingsModal: document.getElementById('settingsModal'),
         searchModal: document.getElementById('searchModal'),
+        planModal: document.getElementById('planModal'),
         readerShell: root.querySelector('.reader-shell'),
         openSettings: document.getElementById('openSettings'),
         closeSettings: document.getElementById('closeSettings'),
         closeSearch: document.getElementById('closeSearch'),
+        closePlan: document.getElementById('closePlan'),
         copySelection: document.getElementById('copySelection'),
         copyParagraph: document.getElementById('copyParagraph'),
         shareSelection: document.getElementById('shareSelection'),
@@ -71,6 +80,7 @@
         state.currentChapter = parseInt(state.initial.chapter || 1, 10);
         state.chapters = state.initial.chapters || [];
         state.verses = state.initial.verses || [];
+        state.highlights = normalizeHighlights(state.initial.highlights || {});
         if (Number(state.initial.highlight_verse || 0) > 0) {
             state.pendingVerse = Number(state.initial.highlight_verse);
         }
@@ -82,6 +92,8 @@
             state.settings.fontScale = Number(state.initial.user_prefs.font_scale || 100);
             state.settings.showDaily = Number(state.initial.user_prefs.show_daily || 0) === 1;
             state.settings.autoDevotional = Number(state.initial.user_prefs.auto_devotional || 0) === 1;
+            state.settings.reminderEnabled = Number(state.initial.user_prefs.reminder_enabled || 0) === 1;
+            state.settings.reminderTime = normalizeReminderTime(state.initial.user_prefs.reminder_time || '07:00');
             if (state.initial.user_prefs.theme === 'dark') {
                 state.settings.theme = 'dark';
             }
@@ -100,6 +112,7 @@
         renderEmptyPanels();
         bindConnectivity();
         registerPwa();
+        maybeOpenSearchAtStartup();
 
         if (state.needsChapterRefresh) {
             fetchChapter(state.currentBook, state.currentChapter);
@@ -155,8 +168,14 @@
         if (els.openQuickSearch) {
             els.openQuickSearch.addEventListener('click', openSearch);
         }
+        if (els.openReadingPlan) {
+            els.openReadingPlan.addEventListener('click', openPlan);
+        }
         if (els.closeSearch) {
             els.closeSearch.addEventListener('click', closeSearch);
+        }
+        if (els.closePlan) {
+            els.closePlan.addEventListener('click', closePlan);
         }
         if (els.quickSearchForm) {
             els.quickSearchForm.addEventListener('submit', function (event) {
@@ -180,6 +199,7 @@
             }
             if (event.key === 'Escape') {
                 closeSearch();
+                closePlan();
             }
         });
 
@@ -236,6 +256,7 @@
         state.lastSelectedVerse = null;
         state.selectionPayload = null;
         updateSelectionUI();
+        updateHighlightUI();
         renderEmptyPanels();
 
         els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
@@ -299,6 +320,40 @@
             var verse = Number(node.getAttribute('data-verse'));
             node.classList.toggle('is-selected', Boolean(selectedMap[verse]));
         });
+    }
+
+    function updateHighlightUI() {
+        var palette = ['yellow', 'green', 'blue', 'pink', 'orange'];
+        var map = normalizeHighlights(state.highlights || {});
+        els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
+            var verse = Number(node.getAttribute('data-verse'));
+            palette.forEach(function (color) {
+                node.classList.remove('hl-' + color);
+            });
+            node.removeAttribute('data-highlight');
+            var color = map[verse] || '';
+            if (!color || palette.indexOf(color) === -1) {
+                return;
+            }
+            node.classList.add('hl-' + color);
+            node.setAttribute('data-highlight', color);
+        });
+    }
+
+    function normalizeHighlights(value) {
+        var out = {};
+        if (!value || typeof value !== 'object') {
+            return out;
+        }
+        Object.keys(value).forEach(function (key) {
+            var verse = Number(key);
+            var color = String(value[key] || '').trim().toLowerCase();
+            if (!verse || !color) {
+                return;
+            }
+            out[verse] = color;
+        });
+        return out;
     }
 
     function onSelectionChange() {
@@ -574,6 +629,18 @@
             '</div>' +
             '<button class="btn-light js-favorite">Marcar favorito</button>' +
             '<div class="card">' +
+            '<strong>Subrayado</strong>' +
+            '<small class="muted">Aplica color al rango seleccionado.</small>' +
+            '<div class="highlight-palette">' +
+            '<button class="highlight-dot hl-yellow js-highlight-set" type="button" data-color="yellow" title="Subrayar amarillo" aria-label="Subrayar amarillo"></button>' +
+            '<button class="highlight-dot hl-green js-highlight-set" type="button" data-color="green" title="Subrayar verde" aria-label="Subrayar verde"></button>' +
+            '<button class="highlight-dot hl-blue js-highlight-set" type="button" data-color="blue" title="Subrayar azul" aria-label="Subrayar azul"></button>' +
+            '<button class="highlight-dot hl-pink js-highlight-set" type="button" data-color="pink" title="Subrayar rosa" aria-label="Subrayar rosa"></button>' +
+            '<button class="highlight-dot hl-orange js-highlight-set" type="button" data-color="orange" title="Subrayar naranja" aria-label="Subrayar naranja"></button>' +
+            '<button class="btn-light js-highlight-clear" type="button">Quitar</button>' +
+            '</div>' +
+            '</div>' +
+            '<div class="card">' +
             '<strong>Generar contenido</strong>' +
             '<div class="tool-icon-row">' +
             '<button class="icon-tool js-generate" data-mode="explicacion" title="Generar explicación" aria-label="Generar explicación" ' + (offline ? 'disabled' : '') + '><img src="assets/icons/help.svg" alt="" class="ico"></button>' +
@@ -640,6 +707,19 @@
                     }
                     notify(res.active ? 'Versículo marcado como favorito.' : 'Favorito eliminado.');
                 });
+            });
+        }
+
+        els.toolsPanel.querySelectorAll('.js-highlight-set').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                applyHighlight(this.getAttribute('data-color'));
+            });
+        });
+
+        var clearHighlightBtn = els.toolsPanel.querySelector('.js-highlight-clear');
+        if (clearHighlightBtn) {
+            clearHighlightBtn.addEventListener('click', function () {
+                applyHighlight('');
             });
         }
 
@@ -1028,6 +1108,7 @@
                 state.currentChapter = Number(data.chapter);
                 state.chapters = data.chapters || [];
                 state.verses = data.verses || [];
+                state.highlights = normalizeHighlights(data.highlights || {});
                 renderBooks(state.books);
                 renderChapters();
                 renderVerses();
@@ -1041,11 +1122,252 @@
                 els.title.textContent = data.book_name + ' ' + data.chapter;
                 history.replaceState(null, '', '?route=reader&book=' + state.currentBook + '&chapter=' + state.currentChapter);
                 persistReaderState();
+                if (!refreshReadingPlanIfDateChanged()) {
+                    renderReadingPlanCard();
+                }
                 closeDrawers();
             })
             .catch(function () {
                 notify('No se pudo cargar el capítulo.');
             });
+    }
+
+    function fetchReadingPlanStatus() {
+        if (!els.readerPlanCard) {
+            return;
+        }
+        state.planDate = localDateYmd(new Date());
+        els.readerPlanCard.innerHTML = '<p class="muted">Cargando plan de lectura...</p>';
+
+        fetch('?route=api.plan.status&date=' + encodeURIComponent(state.planDate))
+            .then(asJson)
+            .then(function (res) {
+                if (res.error) {
+                    els.readerPlanCard.innerHTML = '<p class="muted">No se pudo cargar el plan de lectura.</p>';
+                    return;
+                }
+                state.readingPlan = res.plan || {};
+                renderReadingPlanCard();
+            })
+            .catch(function () {
+                els.readerPlanCard.innerHTML = '<p class="muted">No se pudo cargar el plan de lectura.</p>';
+            });
+    }
+
+    function refreshReadingPlanIfDateChanged() {
+        if (!state.planDate) {
+            return false;
+        }
+        var today = localDateYmd(new Date());
+        if (state.planDate !== today) {
+            fetchReadingPlanStatus();
+            return true;
+        }
+        return false;
+    }
+
+    function renderReadingPlanCard() {
+        if (!els.readerPlanCard) {
+            return;
+        }
+        if (!state.readingPlan || typeof state.readingPlan !== 'object') {
+            els.readerPlanCard.innerHTML = '<p class="muted">Sin plan de lectura activo.</p>';
+            return;
+        }
+
+        var rootPlan = state.readingPlan;
+        var catalog = Array.isArray(rootPlan.catalog) ? rootPlan.catalog : [];
+
+        if (!rootPlan.active) {
+            var options = catalog.map(function (item) {
+                var days = Number(item.days || 0);
+                return '<option value="' + days + '">' + escapeHtml(item.name || (days + ' días')) + '</option>';
+            }).join('');
+            els.readerPlanCard.innerHTML = '' +
+                '<div class="reading-plan-head">' +
+                '<h3><img src="assets/icons/list.svg" alt="" class="ico"> Plan de lectura</h3>' +
+                '<small class="muted">Aún no hay un plan activo.</small>' +
+                '</div>' +
+                '<div class="reading-plan-controls">' +
+                '<select id="readerPlanDays">' + options + '</select>' +
+                '<button class="btn-primary" id="readerPlanStartBtn" type="button">Iniciar plan</button>' +
+                '</div>';
+
+            var startBtn = document.getElementById('readerPlanStartBtn');
+            if (startBtn) {
+                startBtn.addEventListener('click', function () {
+                    var days = Number((document.getElementById('readerPlanDays').value || '0'));
+                    startReadingPlanFromReader(days);
+                });
+            }
+            return;
+        }
+
+        var plan = rootPlan.plan || {};
+        var assignment = plan.today_assignment || {};
+        var chapters = Array.isArray(assignment.chapters) ? assignment.chapters : [];
+        var startLabel = String(assignment.start_label || '');
+        var endLabel = String(assignment.end_label || '');
+        var rangeLabel = startLabel && endLabel && startLabel !== endLabel
+            ? (startLabel + ' - ' + endLabel)
+            : (startLabel || endLabel || '');
+        if (!rangeLabel && chapters.length) {
+            var firstLabel = chapterLabelFromRow(chapters[0]);
+            var lastLabel = chapterLabelFromRow(chapters[chapters.length - 1]);
+            rangeLabel = firstLabel && lastLabel && firstLabel !== lastLabel ? (firstLabel + ' - ' + lastLabel) : (firstLabel || lastLabel);
+        }
+        if (!rangeLabel) {
+            rangeLabel = 'Sin lectura asignada';
+        }
+
+        var firstChapter = chapters.length ? chapters[0] : null;
+        var totalDays = Number(plan.total_days || 0);
+        var completedDays = Number(plan.completed_days || 0);
+        var progress = Number(plan.progress_percent || 0);
+        var done = plan.today_done === true;
+        var isCurrentAssignment = isCurrentChapterAssigned(chapters);
+        var toggleLabel = done ? 'Marcar como pendiente' : 'Marcar hoy como leído';
+        var toggleClass = done ? 'btn-light' : 'btn-primary';
+        var progressSafe = Math.max(0, Math.min(100, progress));
+
+        els.readerPlanCard.innerHTML = '' +
+            '<div class="reading-plan-head">' +
+            '<h3><img src="assets/icons/list.svg" alt="" class="ico"> Plan de lectura</h3>' +
+            '<small class="muted">' + (isCurrentAssignment ? 'Esta lectura corresponde al plan de hoy.' : 'Puedes abrir la lectura asignada de hoy.') + '</small>' +
+            '</div>' +
+            '<div class="reading-plan-controls">' +
+            '<label for="readerPlanDays" class="muted">Plan actual:</label>' +
+            '<select id="readerPlanDays">' + catalog.map(function (item) {
+                var days = Number(item.days || 0);
+                var selected = days === totalDays ? ' selected' : '';
+                return '<option value="' + days + '"' + selected + '>' + escapeHtml(item.name || (days + ' días')) + '</option>';
+            }).join('') + '</select>' +
+            '<button class="btn-light" id="readerPlanRestartBtn" type="button">Reiniciar</button>' +
+            '</div>' +
+            '<div class="card">' +
+            '<strong>Día ' + Number(plan.today_index || 1) + ' de ' + totalDays + '</strong>' +
+            '<p>' + escapeHtml(rangeLabel) + '</p>' +
+            '<small class="muted">Capítulos del día: ' + Number(assignment.count || 0) + ' · Progreso: ' + completedDays + '/' + totalDays + ' (' + progressSafe + '%)</small>' +
+            '</div>' +
+            '<div class="reading-plan-progress"><div class="reading-plan-progress-bar" style="width:' + progressSafe + '%"></div></div>' +
+            '<div class="toolbar">' +
+            '<button class="' + toggleClass + '" id="readerPlanToggleBtn" type="button">' + toggleLabel + '</button>' +
+            '<button class="btn-light" id="readerPlanOpenBtn" type="button" ' + (firstChapter ? '' : 'disabled') + '><img src="assets/icons/book.svg" alt="" class="ico"> Abrir lectura de hoy</button>' +
+            '</div>';
+
+        var restartBtn = document.getElementById('readerPlanRestartBtn');
+        if (restartBtn) {
+            restartBtn.addEventListener('click', function () {
+                var days = Number((document.getElementById('readerPlanDays').value || '0'));
+                startReadingPlanFromReader(days);
+            });
+        }
+
+        var toggleBtn = document.getElementById('readerPlanToggleBtn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function () {
+                toggleReadingPlanTodayFromReader(!done);
+            });
+        }
+
+        var openBtn = document.getElementById('readerPlanOpenBtn');
+        if (openBtn && firstChapter) {
+            openBtn.addEventListener('click', function () {
+                closePlan();
+                fetchChapter(Number(firstChapter.book || 0), Number(firstChapter.chapter || 0));
+            });
+        }
+    }
+
+    function startReadingPlanFromReader(days) {
+        if (!days) {
+            notify('Selecciona un plan.');
+            return;
+        }
+        postForm('api.plan.start', {
+            days: days,
+            date: localDateYmd(new Date())
+        }).then(function (res) {
+            if (res.error) {
+                notify(res.error);
+                return;
+            }
+            state.planDate = localDateYmd(new Date());
+            state.readingPlan = res.plan || {};
+            renderReadingPlanCard();
+            notify('Plan de lectura actualizado.');
+        }).catch(function () {
+            notify('No se pudo iniciar el plan.');
+        });
+    }
+
+    function toggleReadingPlanTodayFromReader(completed) {
+        postForm('api.plan.today', {
+            completed: completed ? 1 : 0,
+            date: localDateYmd(new Date())
+        }).then(function (res) {
+            if (res.error) {
+                notify(res.error);
+                return;
+            }
+            state.planDate = localDateYmd(new Date());
+            state.readingPlan = res.plan || {};
+            renderReadingPlanCard();
+            notify(completed ? 'Día marcado como leído.' : 'Día marcado como pendiente.');
+        }).catch(function () {
+            notify('No se pudo actualizar el progreso del plan.');
+        });
+    }
+
+    function isCurrentChapterAssigned(chapters) {
+        if (!Array.isArray(chapters) || !chapters.length) {
+            return false;
+        }
+        for (var i = 0; i < chapters.length; i++) {
+            if (Number(chapters[i].book || 0) === Number(state.currentBook) &&
+                Number(chapters[i].chapter || 0) === Number(state.currentChapter)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function chapterLabelFromRow(row) {
+        var bookId = Number((row && row.book) || 0);
+        var chapter = Number((row && row.chapter) || 0);
+        if (!bookId || !chapter) {
+            return '';
+        }
+        var bookRow = state.books.find(function (item) {
+            return Number(item.id) === bookId;
+        });
+        var name = bookRow ? String(bookRow.name || '') : ('Libro ' + bookId);
+        return name + ' ' + chapter;
+    }
+
+    function applyHighlight(color) {
+        if (!state.selectedVerses.length) {
+            notify('Selecciona al menos un versículo.');
+            return;
+        }
+        var range = selectedRange();
+        postForm('api.highlight.set', {
+            book: state.currentBook,
+            chapter: state.currentChapter,
+            verse_start: range.start,
+            verse_end: range.end,
+            color: color || ''
+        }).then(function (res) {
+            if (res.error) {
+                notify(res.error);
+                return;
+            }
+            state.highlights = normalizeHighlights(res.highlights || {});
+            updateHighlightUI();
+            notify(color ? 'Subrayado aplicado.' : 'Subrayado eliminado.');
+        }).catch(function () {
+            notify('No se pudo guardar el subrayado.');
+        });
     }
 
     function bindSelectionActions() {
@@ -1131,12 +1453,37 @@
         }
     }
 
+    function openPlan() {
+        els.overlay.classList.remove('hidden');
+        if (els.planModal) {
+            els.planModal.classList.remove('hidden');
+        }
+        if (refreshReadingPlanIfDateChanged()) {
+            return;
+        }
+        if (!state.readingPlan || typeof state.readingPlan !== 'object' || !state.planDate) {
+            fetchReadingPlanStatus();
+            return;
+        }
+        renderReadingPlanCard();
+    }
+
     function closeSearch() {
         if (!els.searchModal || els.searchModal.classList.contains('hidden')) {
             return;
         }
         els.searchModal.classList.add('hidden');
-        if (els.settingsModal.classList.contains('hidden')) {
+        if (els.settingsModal.classList.contains('hidden') && (!els.planModal || els.planModal.classList.contains('hidden'))) {
+            els.overlay.classList.add('hidden');
+        }
+    }
+
+    function closePlan() {
+        if (!els.planModal || els.planModal.classList.contains('hidden')) {
+            return;
+        }
+        els.planModal.classList.add('hidden');
+        if (els.settingsModal.classList.contains('hidden') && els.searchModal.classList.contains('hidden')) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -1147,15 +1494,29 @@
             notify('Escribe un texto de búsqueda.');
             return;
         }
+        var book = (document.getElementById('qBook').value || '').trim();
+        var chapterFrom = (document.getElementById('qChapterFrom').value || '').trim();
+        var chapterTo = (document.getElementById('qChapterTo').value || '').trim();
+        if (chapterFrom && chapterTo && Number(chapterFrom) > Number(chapterTo)) {
+            notify('El capítulo inicial no puede ser mayor al capítulo final.');
+            return;
+        }
+
         var params = new URLSearchParams({
             route: 'api.search',
             q: q,
             mode: document.getElementById('qMode').value || 'any',
-            book: document.getElementById('qBook').value || '0',
-            chapter_from: document.getElementById('qChapterFrom').value || '0',
-            chapter_to: document.getElementById('qChapterTo').value || '0',
             limit: '80'
         });
+        if (book) {
+            params.set('book', book);
+        }
+        if (chapterFrom) {
+            params.set('chapter_from', chapterFrom);
+        }
+        if (chapterTo) {
+            params.set('chapter_to', chapterTo);
+        }
 
         fetch('?' + params.toString())
             .then(asJson)
@@ -1198,6 +1559,8 @@
         bindSetting('optLayoutMode', 'layoutMode');
         bindSetting('optShowDaily', 'showDaily', 'checkbox');
         bindSetting('optAutoDevotional', 'autoDevotional', 'checkbox');
+        bindSetting('optReminderEnabled', 'reminderEnabled', 'checkbox');
+        bindSetting('optReminderTime', 'reminderTime');
         bindSetting('optFontSize', 'fontSize');
         bindSetting('optSpacing', 'spacing');
         bindSetting('optTheme', 'theme');
@@ -1216,6 +1579,13 @@
 
         input.addEventListener('change', function () {
             state.settings[key] = type === 'checkbox' ? this.checked : this.value;
+            if (key === 'reminderEnabled' && state.settings.reminderEnabled) {
+                requestReminderPermission();
+            }
+            if (key === 'reminderTime') {
+                state.settings.reminderTime = normalizeReminderTime(state.settings.reminderTime);
+                input.value = state.settings.reminderTime;
+            }
             if (key === 'showDaily') {
                 localStorage.setItem('show_daily_start', state.settings.showDaily ? '1' : '0');
             }
@@ -1245,6 +1615,10 @@
         if (els.readerShell) {
             els.readerShell.classList.toggle('help-hidden', !state.settings.showHelp);
         }
+        var reminderTimeInput = document.getElementById('optReminderTime');
+        if (reminderTimeInput) {
+            reminderTimeInput.disabled = !state.settings.reminderEnabled;
+        }
     }
 
     function loadSettings() {
@@ -1262,6 +1636,8 @@
             if (storedDaily !== null) {
                 state.settings.showDaily = storedDaily === '1';
             }
+            state.settings.reminderEnabled = state.settings.reminderEnabled === true || Number(state.settings.reminderEnabled) === 1;
+            state.settings.reminderTime = normalizeReminderTime(state.settings.reminderTime || '07:00');
         } catch (err) {
             // ignore
         }
@@ -1289,7 +1665,12 @@
         if (els.searchModal && !els.searchModal.classList.contains('hidden')) {
             els.searchModal.classList.add('hidden');
         }
-        if (els.settingsModal.classList.contains('hidden')) {
+        if (els.planModal && !els.planModal.classList.contains('hidden')) {
+            els.planModal.classList.add('hidden');
+        }
+        if (els.settingsModal.classList.contains('hidden') &&
+            els.searchModal.classList.contains('hidden') &&
+            (!els.planModal || els.planModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -1570,9 +1951,23 @@
         return txt.value;
     }
 
+    function localDateYmd(date) {
+        var value = date instanceof Date ? date : new Date();
+        var year = value.getFullYear();
+        var month = value.getMonth() + 1;
+        var day = value.getDate();
+        return year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+    }
+
     function maybeRedirectToDailyAtStartup() {
         var params = new URLSearchParams(window.location.search);
         if (params.get('skip_daily') === '1') {
+            return;
+        }
+        if (Number(state.initial.open_search || 0) === 1) {
+            return;
+        }
+        if (params.get('open_search') === '1') {
             return;
         }
         var today = new Date().toISOString().slice(0, 10);
@@ -1590,13 +1985,55 @@
         window.location.replace('?route=home_daily');
     }
 
+    function maybeOpenSearchAtStartup() {
+        var shouldOpen = Number(state.initial.open_search || 0) === 1;
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('open_search') === '1') {
+            shouldOpen = true;
+            params.delete('open_search');
+            var cleanUrl = '?' + params.toString();
+            history.replaceState(null, '', cleanUrl === '?' ? '?route=reader' : cleanUrl);
+        }
+        if (shouldOpen) {
+            openSearch();
+        }
+    }
+
     function syncUserPrefs() {
         postForm('api.prefs.save', {
             font_scale: state.settings.fontScale,
             show_daily: state.settings.showDaily ? 1 : 0,
             auto_devotional: state.settings.autoDevotional ? 1 : 0,
+            reminder_enabled: state.settings.reminderEnabled ? 1 : 0,
+            reminder_time: normalizeReminderTime(state.settings.reminderTime || '07:00'),
             theme: state.settings.theme
         }).catch(function () {
+            // ignore
+        });
+    }
+
+    function normalizeReminderTime(value) {
+        var raw = String(value || '').trim();
+        if (!/^\d{2}:\d{2}$/.test(raw)) {
+            return '07:00';
+        }
+        var parts = raw.split(':');
+        var hour = Number(parts[0]);
+        var minute = Number(parts[1]);
+        if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+            return '07:00';
+        }
+        return (hour < 10 ? '0' : '') + hour + ':' + (minute < 10 ? '0' : '') + minute;
+    }
+
+    function requestReminderPermission() {
+        if (!('Notification' in window)) {
+            return;
+        }
+        if (Notification.permission !== 'default') {
+            return;
+        }
+        Notification.requestPermission().catch(function () {
             // ignore
         });
     }
