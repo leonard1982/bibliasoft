@@ -267,6 +267,105 @@ class ApiController
         app_json(['ok' => true, 'active' => $active]);
     }
 
+    public function favoriteSnapshot()
+    {
+        $book = isset($_GET['book']) ? (int) $_GET['book'] : 0;
+        $chapter = isset($_GET['chapter']) ? (int) $_GET['chapter'] : 0;
+        $verse = isset($_GET['verse']) ? (int) $_GET['verse'] : 0;
+        $folderId = isset($_GET['folder_id']) ? (int) $_GET['folder_id'] : 0;
+        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 300;
+
+        $folders = $this->userDataRepository->getFavoriteFoldersWithCounts();
+        $folderIds = [];
+        foreach ($folders as $folder) {
+            $id = (int) ($folder['id'] ?? 0);
+            if ($id > 0) {
+                $folderIds[$id] = true;
+            }
+        }
+
+        $selectedFolderId = 0;
+        if ($folderId > 0 && isset($folderIds[$folderId])) {
+            $selectedFolderId = $folderId;
+        } elseif (isset($folderIds[1])) {
+            $selectedFolderId = 1;
+        } elseif (!empty($folders)) {
+            $selectedFolderId = (int) ($folders[0]['id'] ?? 0);
+        }
+
+        $favorites = $this->userDataRepository->getFavorites($selectedFolderId, $limit);
+        $current = null;
+        if ($book > 0 && $chapter > 0 && $verse > 0) {
+            $current = $this->userDataRepository->findFavorite($book, $chapter, $verse);
+        }
+
+        app_json([
+            'ok' => true,
+            'selected_folder_id' => $selectedFolderId,
+            'folders' => $folders,
+            'favorites' => $favorites,
+            'current' => $current,
+        ]);
+    }
+
+    public function favoriteSave()
+    {
+        $input = $this->requestData();
+        $book = isset($input['book']) ? (int) $input['book'] : 0;
+        $chapter = isset($input['chapter']) ? (int) $input['chapter'] : 0;
+        $verse = isset($input['verse']) ? (int) $input['verse'] : 0;
+        $folderId = isset($input['folder_id']) ? (int) $input['folder_id'] : 0;
+
+        if ($book < 1 || $chapter < 1 || $verse < 1) {
+            app_json(['error' => 'Parámetros inválidos'], 422);
+        }
+
+        try {
+            $favorite = $this->userDataRepository->saveFavorite($book, $chapter, $verse, $folderId);
+        } catch (\InvalidArgumentException $e) {
+            app_json(['error' => $e->getMessage()], 422);
+        }
+
+        app_json([
+            'ok' => true,
+            'favorite' => $favorite,
+        ]);
+    }
+
+    public function favoriteRemove()
+    {
+        $input = $this->requestData();
+        $book = isset($input['book']) ? (int) $input['book'] : 0;
+        $chapter = isset($input['chapter']) ? (int) $input['chapter'] : 0;
+        $verse = isset($input['verse']) ? (int) $input['verse'] : 0;
+        if ($book < 1 || $chapter < 1 || $verse < 1) {
+            app_json(['error' => 'Parámetros inválidos'], 422);
+        }
+
+        $ok = $this->userDataRepository->removeFavorite($book, $chapter, $verse);
+        app_json(['ok' => $ok]);
+    }
+
+    public function favoriteFolderCreate()
+    {
+        $input = $this->requestData();
+        $name = isset($input['name']) ? trim((string) $input['name']) : '';
+        if ($name === '') {
+            app_json(['error' => 'Nombre de carpeta requerido'], 422);
+        }
+
+        try {
+            $folder = $this->userDataRepository->createFavoriteFolder($name);
+        } catch (\InvalidArgumentException $e) {
+            app_json(['error' => $e->getMessage()], 422);
+        }
+
+        app_json([
+            'ok' => true,
+            'folder' => $folder,
+        ], !empty($folder['created']) ? 201 : 200);
+    }
+
     public function highlightSet()
     {
         $input = $this->requestData();

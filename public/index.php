@@ -219,6 +219,22 @@ try {
             $apiController->favoriteToggle();
             break;
 
+        case 'api.favorite.snapshot':
+            $apiController->favoriteSnapshot();
+            break;
+
+        case 'api.favorite.save':
+            $apiController->favoriteSave();
+            break;
+
+        case 'api.favorite.remove':
+            $apiController->favoriteRemove();
+            break;
+
+        case 'api.favorite.folder.create':
+            $apiController->favoriteFolderCreate();
+            break;
+
         case 'api.highlight.set':
             $apiController->highlightSet();
             break;

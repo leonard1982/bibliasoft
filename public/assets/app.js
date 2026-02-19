@@ -26,6 +26,16 @@
         readingPlan: null,
         planDate: '',
         planCalendarMonth: '',
+        favoriteFolderId: 0,
+        favoriteFolders: [],
+        favoriteItems: [],
+        favoriteCurrent: null,
+        favoriteLoaded: false,
+        favoriteLoading: false,
+        favoriteError: '',
+        favoriteSnapshotToken: '',
+        favoriteVerseCache: {},
+        favoriteTooltipKey: '',
         settings: {
             showHelp: true,
             layoutMode: 'columns',
@@ -325,6 +335,36 @@
             var verse = Number(node.getAttribute('data-verse'));
             node.classList.toggle('is-selected', Boolean(selectedMap[verse]));
         });
+    }
+
+    function scrollToVerse(verse, smooth) {
+        var target = Number(verse || 0);
+        if (!els.versesContainer || target < 1) {
+            return;
+        }
+        var node = els.versesContainer.querySelector('.verse[data-verse="' + target + '"]');
+        if (!node) {
+            return;
+        }
+
+        var prefersReduced = false;
+        if (window.matchMedia) {
+            prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        }
+        var behavior = (smooth && !prefersReduced) ? 'smooth' : 'auto';
+        node.scrollIntoView({
+            behavior: behavior,
+            block: 'center',
+            inline: 'nearest'
+        });
+
+        node.classList.remove('verse-focus-target');
+        void node.offsetWidth;
+        node.classList.add('verse-focus-target');
+        clearTimeout(scrollToVerse._timer);
+        scrollToVerse._timer = setTimeout(function () {
+            node.classList.remove('verse-focus-target');
+        }, 1400);
     }
 
     function updateHighlightUI() {
@@ -738,6 +778,7 @@
                 toReference(row.book, row.chapter, null, null) +
                 '</button>';
         }).join('');
+        hideFavoriteTooltip();
 
         var backgrounds = state.initial.backgrounds || [];
         var selectedBg = state.selectedBackground || backgrounds[0] || 'assets/backgrounds/bg-01.svg';
@@ -761,7 +802,7 @@
             '<small class="muted">Escala: ' + state.settings.fontScale + '%</small>' +
             '</div>' +
             '</div>' +
-            '<button class="btn-light js-favorite">Marcar favorito</button>' +
+            buildFavoriteManagerCardHtml() +
             buildHighlightFilterCardHtml(true) +
             '<div class="card">' +
             '<strong>Generar contenido</strong>' +
@@ -815,23 +856,7 @@
             });
         });
 
-        var favoriteBtn = els.toolsPanel.querySelector('.js-favorite');
-        if (favoriteBtn) {
-            favoriteBtn.addEventListener('click', function () {
-                var range = selectedRange();
-                postForm('api.favorite.toggle', {
-                    book: state.currentBook,
-                    chapter: state.currentChapter,
-                    verse: range.start
-                }).then(function (res) {
-                    if (res.error) {
-                        notify(res.error);
-                        return;
-                    }
-                    notify(res.active ? 'Versículo marcado como favorito.' : 'Favorito eliminado.');
-                });
-            });
-        }
+        bindFavoriteControls();
 
         els.toolsPanel.querySelectorAll('.js-highlight-set').forEach(function (btn) {
             btn.addEventListener('click', function () {
@@ -887,6 +912,494 @@
         });
 
         bindImageCardActions();
+        refreshFavoriteSnapshot(false);
+    }
+
+    function buildFavoriteManagerCardHtml() {
+        var folders = Array.isArray(state.favoriteFolders) ? state.favoriteFolders : [];
+        var items = Array.isArray(state.favoriteItems) ? state.favoriteItems : [];
+        var verse = getFavoriteTargetVerse();
+        var hasSelection = verse > 0;
+        var current = state.favoriteCurrent || null;
+        var isCurrentFavorite = current &&
+            Number(current.book || 0) === Number(state.currentBook) &&
+            Number(current.chapter || 0) === Number(state.currentChapter) &&
+            Number(current.verse || 0) === Number(verse);
+        var activeFolderId = Number(state.favoriteFolderId || 0);
+
+        var folderOptions = folders.map(function (folder) {
+            var id = Number(folder.id || 0);
+            var selected = id === activeFolderId ? ' selected' : '';
+            var count = Number(folder.total || 0);
+            var label = (folder.name || ('Carpeta ' + id)) + ' (' + count + ')';
+            return '<option value="' + id + '"' + selected + '>' + escapeHtml(label) + '</option>';
+        }).join('');
+        if (!folderOptions) {
+            folderOptions = '<option value="0">Sin carpetas</option>';
+        }
+
+        var selectedRef = hasSelection ? toReference(state.currentBook, state.currentChapter, verse, verse) : 'Selecciona un versículo';
+        var status = '';
+        if (state.favoriteLoading) {
+            status = '<small class="muted">Cargando favoritos...</small>';
+        } else if (state.favoriteError) {
+            status = '<small class="muted">' + escapeHtml(state.favoriteError) + '</small>';
+        } else if (isCurrentFavorite) {
+            status = '<small class="muted">Actual: guardado en carpeta.</small>';
+        } else if (hasSelection) {
+            status = '<small class="muted">Actual: no está en favoritos.</small>';
+        } else {
+            status = '<small class="muted">Selecciona un versículo para guardarlo.</small>';
+        }
+
+        var listHtml = items.map(function (item) {
+            var ref = toReference(item.book, item.chapter, item.verse, item.verse);
+            var createdAt = String(item.created_at || '').trim();
+            if (createdAt.length > 16) {
+                createdAt = createdAt.slice(0, 16);
+            }
+            createdAt = createdAt.replace('T', ' ');
+            return '' +
+                '<div class="favorite-item js-fav-tooltip" data-book="' + Number(item.book || 0) + '" data-chapter="' + Number(item.chapter || 0) + '" data-verse="' + Number(item.verse || 0) + '">' +
+                '<div class="favorite-item-main">' +
+                '<strong class="favorite-item-ref">' + escapeHtml(ref) + '</strong>' +
+                (createdAt ? '<small class="muted">' + escapeHtml(createdAt) + '</small>' : '') +
+                '</div>' +
+                '<div class="toolbar favorite-item-actions">' +
+                '<button class="btn-light js-fav-open" type="button" data-book="' + Number(item.book || 0) + '" data-chapter="' + Number(item.chapter || 0) + '" data-verse="' + Number(item.verse || 0) + '">Abrir</button>' +
+                '<button class="btn-light js-fav-remove-item" type="button" data-book="' + Number(item.book || 0) + '" data-chapter="' + Number(item.chapter || 0) + '" data-verse="' + Number(item.verse || 0) + '">Quitar</button>' +
+                '</div>' +
+                '</div>';
+        }).join('');
+        if (!listHtml) {
+            listHtml = '<p class="muted">Esta carpeta todavía no tiene favoritos.</p>';
+        }
+
+        return '' +
+            '<div class="card favorite-manager">' +
+            '<strong>Favoritos</strong>' +
+            '<small class="muted">Referencia: ' + escapeHtml(selectedRef) + '</small>' +
+            status +
+            '<div class="favorite-manager-row">' +
+            '<select class="js-fav-folder">' + folderOptions + '</select>' +
+            '<button class="btn-light js-fav-refresh" type="button">Actualizar</button>' +
+            '</div>' +
+            '<div class="favorite-manager-row">' +
+            '<input class="js-fav-folder-name" type="text" maxlength="50" placeholder="Nueva carpeta">' +
+            '<button class="btn-light js-fav-folder-create" type="button">Crear</button>' +
+            '</div>' +
+            '<div class="favorite-manager-row">' +
+            '<button class="btn-primary js-fav-save" type="button">Guardar actual</button>' +
+            '<button class="btn-light js-fav-remove" type="button">Quitar actual</button>' +
+            '</div>' +
+            '<div class="favorite-list">' + listHtml + '</div>' +
+            '</div>';
+    }
+
+    function bindFavoriteControls() {
+        if (!els.toolsPanel) {
+            return;
+        }
+
+        var folderSelect = els.toolsPanel.querySelector('.js-fav-folder');
+        if (folderSelect) {
+            folderSelect.addEventListener('change', function () {
+                state.favoriteFolderId = Number(this.value || 0);
+                state.favoriteLoaded = false;
+                refreshFavoriteSnapshot(true);
+            });
+        }
+
+        var refreshBtn = els.toolsPanel.querySelector('.js-fav-refresh');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', function () {
+                refreshFavoriteSnapshot(true);
+            });
+        }
+
+        var createInput = els.toolsPanel.querySelector('.js-fav-folder-name');
+        var createBtn = els.toolsPanel.querySelector('.js-fav-folder-create');
+        if (createInput) {
+            createInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    if (createBtn) {
+                        createBtn.click();
+                    }
+                }
+            });
+        }
+        if (createBtn) {
+            createBtn.addEventListener('click', function () {
+                var name = createInput ? (createInput.value || '').trim() : '';
+                if (!name) {
+                    notify('Escribe el nombre de la carpeta.');
+                    return;
+                }
+                postForm('api.favorite.folder.create', { name: name }).then(function (res) {
+                    if (!res || res.error) {
+                        notify((res && res.error) ? res.error : 'No se pudo crear la carpeta.');
+                        return;
+                    }
+                    var folder = res.folder || {};
+                    var created = folder.created === true || Number(folder.created || 0) === 1;
+                    state.favoriteFolderId = Number(folder.id || state.favoriteFolderId || 0);
+                    state.favoriteLoaded = false;
+                    if (createInput) {
+                        createInput.value = '';
+                    }
+                    refreshFavoriteSnapshot(true);
+                    notify(created ? 'Carpeta creada.' : 'Carpeta ya existente.');
+                }).catch(function () {
+                    notify('No se pudo crear la carpeta.');
+                });
+            });
+        }
+
+        var saveBtn = els.toolsPanel.querySelector('.js-fav-save');
+        if (saveBtn) {
+            saveBtn.addEventListener('click', function () {
+                var verse = getFavoriteTargetVerse();
+                if (verse < 1) {
+                    notify('Selecciona un versículo.');
+                    return;
+                }
+                var wasFavorite = state.favoriteCurrent &&
+                    Number(state.favoriteCurrent.book || 0) === Number(state.currentBook) &&
+                    Number(state.favoriteCurrent.chapter || 0) === Number(state.currentChapter) &&
+                    Number(state.favoriteCurrent.verse || 0) === Number(verse);
+                var previousFolderId = wasFavorite ? Number(state.favoriteCurrent.folder_id || 0) : 0;
+
+                postForm('api.favorite.save', {
+                    book: state.currentBook,
+                    chapter: state.currentChapter,
+                    verse: verse,
+                    folder_id: Number(state.favoriteFolderId || 0)
+                }).then(function (res) {
+                    if (!res || res.error) {
+                        notify((res && res.error) ? res.error : 'No se pudo guardar favorito.');
+                        return;
+                    }
+                    var favorite = res.favorite || {};
+                    var nextFolderId = Number(favorite.folder_id || state.favoriteFolderId || 0);
+                    if (nextFolderId > 0) {
+                        state.favoriteFolderId = nextFolderId;
+                    }
+                    state.favoriteLoaded = false;
+                    refreshFavoriteSnapshot(true);
+
+                    if (!wasFavorite) {
+                        notify('Favorito guardado.');
+                        return;
+                    }
+                    if (previousFolderId !== nextFolderId) {
+                        notify('Favorito movido de carpeta.');
+                        return;
+                    }
+                    notify('Ese versículo ya estaba en la carpeta.');
+                }).catch(function () {
+                    notify('No se pudo guardar favorito.');
+                });
+            });
+        }
+
+        var removeBtn = els.toolsPanel.querySelector('.js-fav-remove');
+        if (removeBtn) {
+            removeBtn.addEventListener('click', function () {
+                var verse = getFavoriteTargetVerse();
+                if (verse < 1) {
+                    notify('Selecciona un versículo.');
+                    return;
+                }
+                postForm('api.favorite.remove', {
+                    book: state.currentBook,
+                    chapter: state.currentChapter,
+                    verse: verse
+                }).then(function (res) {
+                    if (!res || res.error) {
+                        notify((res && res.error) ? res.error : 'No se pudo quitar favorito.');
+                        return;
+                    }
+                    state.favoriteLoaded = false;
+                    refreshFavoriteSnapshot(true);
+                    notify(res.ok ? 'Favorito eliminado.' : 'No estaba en favoritos.');
+                }).catch(function () {
+                    notify('No se pudo quitar favorito.');
+                });
+            });
+        }
+
+        els.toolsPanel.querySelectorAll('.js-fav-open').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var book = Number(this.getAttribute('data-book') || 0);
+                var chapter = Number(this.getAttribute('data-chapter') || 0);
+                var verse = Number(this.getAttribute('data-verse') || 0);
+                if (book < 1 || chapter < 1) {
+                    return;
+                }
+                if (verse > 0) {
+                    state.pendingVerse = verse;
+                }
+                fetchChapter(book, chapter);
+            });
+        });
+
+        els.toolsPanel.querySelectorAll('.js-fav-remove-item').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var book = Number(this.getAttribute('data-book') || 0);
+                var chapter = Number(this.getAttribute('data-chapter') || 0);
+                var verse = Number(this.getAttribute('data-verse') || 0);
+                if (book < 1 || chapter < 1 || verse < 1) {
+                    return;
+                }
+                postForm('api.favorite.remove', {
+                    book: book,
+                    chapter: chapter,
+                    verse: verse
+                }).then(function (res) {
+                    if (!res || res.error) {
+                        notify((res && res.error) ? res.error : 'No se pudo quitar favorito.');
+                        return;
+                    }
+                    state.favoriteLoaded = false;
+                    refreshFavoriteSnapshot(true);
+                    notify(res.ok ? 'Favorito eliminado.' : 'No estaba en favoritos.');
+                }).catch(function () {
+                    notify('No se pudo quitar favorito.');
+                });
+            });
+        });
+
+        els.toolsPanel.querySelectorAll('.js-fav-tooltip').forEach(function (item) {
+            item.addEventListener('mouseenter', function () {
+                showFavoriteTooltipForItem(item);
+            });
+            item.addEventListener('focusin', function () {
+                showFavoriteTooltipForItem(item);
+            });
+            item.addEventListener('mouseleave', function () {
+                hideFavoriteTooltip();
+            });
+            item.addEventListener('focusout', function () {
+                hideFavoriteTooltip();
+            });
+        });
+    }
+
+    function refreshFavoriteSnapshot(force) {
+        if (!state.selectionPayload) {
+            return;
+        }
+
+        var token = favoriteSnapshotTokenForCurrentContext();
+        if (!force) {
+            if (state.favoriteLoading && state.favoriteSnapshotToken === token) {
+                return;
+            }
+            if (state.favoriteLoaded && state.favoriteSnapshotToken === token) {
+                return;
+            }
+        }
+
+        state.favoriteSnapshotToken = token;
+        state.favoriteLoading = true;
+        state.favoriteError = '';
+        var requestToken = token;
+
+        var params = new URLSearchParams({
+            route: 'api.favorite.snapshot',
+            book: String(Number(state.currentBook || 0)),
+            chapter: String(Number(state.currentChapter || 0)),
+            limit: '300'
+        });
+        var verse = getFavoriteTargetVerse();
+        if (verse > 0) {
+            params.set('verse', String(verse));
+        }
+        if (Number(state.favoriteFolderId || 0) > 0) {
+            params.set('folder_id', String(Number(state.favoriteFolderId || 0)));
+        }
+
+        fetch('?' + params.toString())
+            .then(asJson)
+            .then(function (res) {
+                if (state.favoriteSnapshotToken !== requestToken) {
+                    return;
+                }
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'Error');
+                }
+
+                state.favoriteFolders = Array.isArray(res.folders) ? res.folders : [];
+                state.favoriteItems = Array.isArray(res.favorites) ? res.favorites : [];
+                state.favoriteCurrent = res.current || null;
+                state.favoriteFolderId = Number(res.selected_folder_id || state.favoriteFolderId || 0);
+                state.favoriteLoading = false;
+                state.favoriteLoaded = true;
+                state.favoriteError = '';
+                state.favoriteSnapshotToken = favoriteSnapshotTokenForCurrentContext();
+
+                if (state.selectionPayload) {
+                    renderToolsPanel(state.selectionPayload);
+                }
+            })
+            .catch(function () {
+                if (state.favoriteSnapshotToken !== requestToken) {
+                    return;
+                }
+                state.favoriteLoading = false;
+                state.favoriteLoaded = true;
+                state.favoriteError = 'No se pudo cargar favoritos.';
+                state.favoriteSnapshotToken = favoriteSnapshotTokenForCurrentContext();
+
+                if (state.selectionPayload) {
+                    renderToolsPanel(state.selectionPayload);
+                }
+            });
+    }
+
+    function favoriteSnapshotTokenForCurrentContext() {
+        return [
+            Number(state.currentBook || 0),
+            Number(state.currentChapter || 0),
+            Number(getFavoriteTargetVerse() || 0),
+            Number(state.favoriteFolderId || 0)
+        ].join(':');
+    }
+
+    function getFavoriteTargetVerse() {
+        if (Array.isArray(state.selectedVerses) && state.selectedVerses.length > 0) {
+            return Number(selectedRange().start || 0);
+        }
+
+        var ref = state.selectionPayload && state.selectionPayload.reference ? state.selectionPayload.reference : null;
+        var verse = ref ? Number(ref.verse_start || ref.verse || 0) : 0;
+        return verse > 0 ? verse : 0;
+    }
+
+    function saveFavoriteByReference(book, chapter, verse, notifyMessage) {
+        var b = Number(book || 0);
+        var c = Number(chapter || 0);
+        var v = Number(verse || 0);
+        if (b < 1 || c < 1 || v < 1) {
+            notify('Referencia inválida.');
+            return Promise.resolve(false);
+        }
+
+        return postForm('api.favorite.save', {
+            book: b,
+            chapter: c,
+            verse: v,
+            folder_id: Number(state.favoriteFolderId || 0)
+        }).then(function (res) {
+            if (!res || res.error) {
+                notify((res && res.error) ? res.error : 'No se pudo guardar favorito.');
+                return false;
+            }
+
+            var favorite = res.favorite || {};
+            var nextFolderId = Number(favorite.folder_id || state.favoriteFolderId || 0);
+            if (nextFolderId > 0) {
+                state.favoriteFolderId = nextFolderId;
+            }
+            state.favoriteLoaded = false;
+
+            if (state.selectionPayload) {
+                refreshFavoriteSnapshot(true);
+            }
+
+            notify(notifyMessage || 'Guardado en favoritos.');
+            return true;
+        }).catch(function () {
+            notify('No se pudo guardar favorito.');
+            return false;
+        });
+    }
+
+    function showFavoriteTooltipForItem(item) {
+        if (!item) {
+            return;
+        }
+
+        var book = Number(item.getAttribute('data-book') || 0);
+        var chapter = Number(item.getAttribute('data-chapter') || 0);
+        var verse = Number(item.getAttribute('data-verse') || 0);
+        if (book < 1 || chapter < 1 || verse < 1) {
+            return;
+        }
+
+        var key = book + ':' + chapter + ':' + verse;
+        state.favoriteTooltipKey = key;
+
+        if (state.favoriteVerseCache[key]) {
+            renderFavoriteTooltip(item, state.favoriteVerseCache[key]);
+            return;
+        }
+
+        renderFavoriteTooltip(item, 'Cargando versículo...');
+        fetch('?route=api.verse&book=' + book + '&chapter=' + chapter + '&verse=' + verse)
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error('error');
+                }
+                var row = res.verse || {};
+                var text = cleanText(row.text || row.html || '');
+                if (!text) {
+                    text = 'Sin texto disponible.';
+                }
+                state.favoriteVerseCache[key] = text;
+                if (state.favoriteTooltipKey === key) {
+                    renderFavoriteTooltip(item, text);
+                }
+            })
+            .catch(function () {
+                state.favoriteVerseCache[key] = 'No se pudo cargar el versículo.';
+                if (state.favoriteTooltipKey === key) {
+                    renderFavoriteTooltip(item, state.favoriteVerseCache[key]);
+                }
+            });
+    }
+
+    function renderFavoriteTooltip(anchor, text) {
+        var tip = document.getElementById('favoriteTooltip');
+        if (!tip) {
+            tip = document.createElement('div');
+            tip.id = 'favoriteTooltip';
+            tip.className = 'favorite-tooltip hidden';
+            document.body.appendChild(tip);
+        }
+
+        tip.textContent = text || '';
+        tip.classList.remove('hidden');
+
+        var rect = anchor.getBoundingClientRect();
+        var maxWidth = Math.min(420, Math.max(240, window.innerWidth - 24));
+        tip.style.maxWidth = String(maxWidth) + 'px';
+        tip.style.left = '8px';
+        tip.style.top = '8px';
+
+        var tipRect = tip.getBoundingClientRect();
+        var left = Math.max(8, Math.min(rect.left, window.innerWidth - tipRect.width - 8));
+        var top = rect.top - tipRect.height - 10;
+        if (top < 8) {
+            top = rect.bottom + 10;
+        }
+        if (top + tipRect.height > window.innerHeight - 8) {
+            top = Math.max(8, window.innerHeight - tipRect.height - 8);
+        }
+
+        tip.style.left = Math.round(left) + 'px';
+        tip.style.top = Math.round(top) + 'px';
+    }
+
+    function hideFavoriteTooltip() {
+        state.favoriteTooltipKey = '';
+        var tip = document.getElementById('favoriteTooltip');
+        if (!tip) {
+            return;
+        }
+        tip.classList.add('hidden');
     }
 
     function bindHighlightFilterControls() {
@@ -1187,6 +1700,7 @@
         state.selectedVerses = restored;
         state.lastSelectedVerse = restored[restored.length - 1];
         updateSelectionUI();
+        scrollToVerse(restored[0], true);
         onSelectionChange();
     }
 
@@ -1268,8 +1782,10 @@
                 if (state.pendingSelectionVerses && state.pendingSelectionVerses.length) {
                     applyPendingSelection();
                 } else if (state.pendingVerse) {
-                    toggleVerse(state.pendingVerse);
-                    state.lastSelectedVerse = state.pendingVerse;
+                    var pending = Number(state.pendingVerse || 0);
+                    toggleVerse(pending);
+                    state.lastSelectedVerse = pending;
+                    scrollToVerse(pending, true);
                     state.pendingVerse = null;
                 }
                 els.title.textContent = data.book_name + ' ' + data.chapter;
@@ -2097,7 +2613,10 @@
                 '<strong>' + escapeHtml(row.reference || '') + '</strong>' +
                 (row.title ? '<small class="muted">' + escapeHtml(row.title) + '</small>' : '') +
                 '<div>' + (row.scripture_html || '') + '</div>' +
-                '<div class="toolbar"><button class="btn-light js-open-result" data-book="' + row.book + '" data-chapter="' + row.chapter + '" data-verse="' + row.verse + '">Abrir</button></div>' +
+                '<div class="toolbar">' +
+                '<button class="btn-light js-open-result" data-book="' + row.book + '" data-chapter="' + row.chapter + '" data-verse="' + row.verse + '">Abrir</button>' +
+                '<button class="btn-light js-save-result-fav" data-book="' + row.book + '" data-chapter="' + row.chapter + '" data-verse="' + row.verse + '">Favorito</button>' +
+                '</div>' +
                 '</div>';
         }).join('');
 
@@ -2107,6 +2626,23 @@
                 state.pendingVerse = Number(this.getAttribute('data-verse'));
                 closeSearch();
                 fetchChapter(Number(this.getAttribute('data-book')), Number(this.getAttribute('data-chapter')));
+            });
+        });
+
+        els.quickSearchResults.querySelectorAll('.js-save-result-fav').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var book = Number(this.getAttribute('data-book') || 0);
+                var chapter = Number(this.getAttribute('data-chapter') || 0);
+                var verse = Number(this.getAttribute('data-verse') || 0);
+                if (book < 1 || chapter < 1 || verse < 1) {
+                    return;
+                }
+
+                var self = this;
+                self.disabled = true;
+                saveFavoriteByReference(book, chapter, verse, 'Resultado agregado a favoritos.').finally(function () {
+                    self.disabled = false;
+                });
             });
         });
     }
@@ -2222,6 +2758,7 @@
     }
 
     function closeDrawers() {
+        hideFavoriteTooltip();
         els.helpPane.classList.remove('is-open');
         els.booksPane.classList.remove('is-open');
         els.chaptersPane.classList.remove('is-open');

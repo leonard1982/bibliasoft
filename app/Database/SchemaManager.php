@@ -36,10 +36,71 @@ class SchemaManager
         self::migrateDailyCache($pdo);
         self::migrateDevotionals($pdo);
         self::migrateUserPrefs($pdo);
+        self::migrateFavorites($pdo);
         self::migrateHighlights($pdo);
         self::migrateReadingPlans($pdo);
         self::migrateAnecdotes($pdo);
         self::migrateAnecdoteFavorites($pdo);
+    }
+
+    private static function migrateFavorites(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'favorite_folders')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS favorite_folders (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL UNIQUE,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $folderColumns = self::columns($pdo, 'favorite_folders');
+            if (!isset($folderColumns['created_at'])) {
+                $pdo->exec("ALTER TABLE favorite_folders ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+            if (!isset($folderColumns['updated_at'])) {
+                $pdo->exec("ALTER TABLE favorite_folders ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+        }
+
+        $seedDefaultFolder = $pdo->prepare(
+            'INSERT OR IGNORE INTO favorite_folders (id, name, created_at, updated_at)
+             VALUES (:id, :name, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $seedDefaultFolder->execute([
+            ':id' => 1,
+            ':name' => 'General',
+        ]);
+
+        $seedFolderByName = $pdo->prepare(
+            'INSERT OR IGNORE INTO favorite_folders (name, created_at, updated_at)
+             VALUES (:name, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        foreach (['Fe', 'Familia', 'Predicacion', 'Oracion', 'Promesas'] as $folderName) {
+            $seedFolderByName->execute([':name' => $folderName]);
+        }
+
+        if (!self::tableExists($pdo, 'favorites')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS favorites (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                book INTEGER NOT NULL,
+                chapter INTEGER NOT NULL,
+                verse INTEGER NOT NULL,
+                folder_id INTEGER NOT NULL DEFAULT 1,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(book, chapter, verse)
+            )');
+        } else {
+            $favoriteColumns = self::columns($pdo, 'favorites');
+            if (!isset($favoriteColumns['folder_id'])) {
+                $pdo->exec('ALTER TABLE favorites ADD COLUMN folder_id INTEGER NOT NULL DEFAULT 1');
+            }
+            if (!isset($favoriteColumns['created_at'])) {
+                $pdo->exec("ALTER TABLE favorites ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+        }
+
+        $pdo->exec('UPDATE favorites SET folder_id = COALESCE(NULLIF(folder_id, 0), 1)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_favorites_folder ON favorites (folder_id, book, chapter, verse)');
     }
 
     private static function migrateNotes(\PDO $pdo)

@@ -223,30 +223,217 @@ class UserDataRepository
 
     public function toggleFavorite($book, $chapter, $verse)
     {
-        $check = $this->db()->prepare(
-            'SELECT id FROM favorites WHERE book = :book AND chapter = :chapter AND verse = :verse LIMIT 1'
-        );
-        $check->execute([
-            ':book' => (int) $book,
-            ':chapter' => (int) $chapter,
-            ':verse' => (int) $verse,
-        ]);
-        $id = (int) $check->fetchColumn();
-        if ($id > 0) {
-            $stmt = $this->db()->prepare('DELETE FROM favorites WHERE id = :id');
-            $stmt->execute([':id' => $id]);
+        $current = $this->findFavorite($book, $chapter, $verse);
+        if ($current) {
+            $this->removeFavorite($book, $chapter, $verse);
             return false;
         }
 
+        $this->saveFavorite($book, $chapter, $verse, $this->ensureDefaultFavoriteFolderId());
+        return true;
+    }
+
+    public function getFavoriteFoldersWithCounts()
+    {
+        if (!$this->hasTable('favorite_folders')) {
+            return [];
+        }
+
+        $stmt = $this->db()->query(
+            'SELECT ff.id, ff.name, COUNT(f.id) AS total
+             FROM favorite_folders ff
+             LEFT JOIN favorites f ON f.folder_id = ff.id
+             GROUP BY ff.id, ff.name
+             ORDER BY CASE WHEN ff.id = 1 THEN 0 ELSE 1 END, ff.name COLLATE NOCASE ASC'
+        );
+        $rows = $stmt->fetchAll();
+        foreach ($rows as &$row) {
+            $row['id'] = (int) ($row['id'] ?? 0);
+            $row['total'] = (int) ($row['total'] ?? 0);
+            $row['name'] = trim((string) ($row['name'] ?? ''));
+        }
+        return $rows;
+    }
+
+    public function createFavoriteFolder($name)
+    {
+        $name = trim((string) $name);
+        if ($name === '') {
+            throw new \InvalidArgumentException('El nombre de la carpeta es obligatorio');
+        }
+        if (function_exists('mb_strlen')) {
+            if (mb_strlen($name, 'UTF-8') > 50) {
+                throw new \InvalidArgumentException('La carpeta no puede tener más de 50 caracteres');
+            }
+        } elseif (strlen($name) > 50) {
+            throw new \InvalidArgumentException('La carpeta no puede tener más de 50 caracteres');
+        }
+
+        $lookup = $this->db()->prepare(
+            'SELECT id, name
+             FROM favorite_folders
+             WHERE LOWER(name) = LOWER(:name)
+             LIMIT 1'
+        );
+        $lookup->execute([':name' => $name]);
+        $existing = $lookup->fetch();
+        if ($existing) {
+            return [
+                'id' => (int) ($existing['id'] ?? 0),
+                'name' => (string) ($existing['name'] ?? ''),
+                'created' => false,
+            ];
+        }
+
         $stmt = $this->db()->prepare(
-            'INSERT INTO favorites (book, chapter, verse, created_at) VALUES (:book, :chapter, :verse, CURRENT_TIMESTAMP)'
+            'INSERT INTO favorite_folders (name, created_at, updated_at)
+             VALUES (:name, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':name' => $name,
+        ]);
+        return [
+            'id' => (int) $this->db()->lastInsertId(),
+            'name' => $name,
+            'created' => true,
+        ];
+    }
+
+    public function getFavorites($folderId = 0, $limit = 300)
+    {
+        $folderId = (int) $folderId;
+        $limit = max(1, min(1000, (int) $limit));
+        $params = [];
+
+        $sql = 'SELECT id, book, chapter, verse, folder_id, created_at
+                FROM favorites';
+        if ($folderId > 0) {
+            $sql .= ' WHERE folder_id = :folder_id';
+            $params[':folder_id'] = $folderId;
+        }
+        $sql .= ' ORDER BY id DESC LIMIT ' . $limit;
+
+        $stmt = $this->db()->prepare($sql);
+        $stmt->execute($params);
+        $rows = $stmt->fetchAll();
+        foreach ($rows as &$row) {
+            $row['id'] = (int) ($row['id'] ?? 0);
+            $row['book'] = (int) ($row['book'] ?? 0);
+            $row['chapter'] = (int) ($row['chapter'] ?? 0);
+            $row['verse'] = (int) ($row['verse'] ?? 0);
+            $row['folder_id'] = (int) ($row['folder_id'] ?? 0);
+            $row['created_at'] = (string) ($row['created_at'] ?? '');
+        }
+        return $rows;
+    }
+
+    public function findFavorite($book, $chapter, $verse)
+    {
+        $stmt = $this->db()->prepare(
+            'SELECT id, book, chapter, verse, folder_id, created_at
+             FROM favorites
+             WHERE book = :book AND chapter = :chapter AND verse = :verse
+             LIMIT 1'
         );
         $stmt->execute([
             ':book' => (int) $book,
             ':chapter' => (int) $chapter,
             ':verse' => (int) $verse,
         ]);
-        return true;
+        $row = $stmt->fetch();
+        if (!$row) {
+            return null;
+        }
+
+        $row['id'] = (int) ($row['id'] ?? 0);
+        $row['book'] = (int) ($row['book'] ?? 0);
+        $row['chapter'] = (int) ($row['chapter'] ?? 0);
+        $row['verse'] = (int) ($row['verse'] ?? 0);
+        $row['folder_id'] = (int) ($row['folder_id'] ?? 0);
+        $row['created_at'] = (string) ($row['created_at'] ?? '');
+        return $row;
+    }
+
+    public function saveFavorite($book, $chapter, $verse, $folderId)
+    {
+        $book = (int) $book;
+        $chapter = (int) $chapter;
+        $verse = (int) $verse;
+        $folderId = $this->resolveFavoriteFolderId($folderId);
+
+        if ($book < 1 || $chapter < 1 || $verse < 1) {
+            throw new \InvalidArgumentException('Referencia inválida');
+        }
+
+        $current = $this->findFavorite($book, $chapter, $verse);
+        if ($current) {
+            if ((int) $current['folder_id'] !== $folderId && $this->hasColumn('favorites', 'folder_id')) {
+                $update = $this->db()->prepare(
+                    'UPDATE favorites
+                     SET folder_id = :folder_id
+                     WHERE id = :id'
+                );
+                $update->execute([
+                    ':folder_id' => $folderId,
+                    ':id' => (int) $current['id'],
+                ]);
+            }
+
+            return [
+                'id' => (int) $current['id'],
+                'book' => $book,
+                'chapter' => $chapter,
+                'verse' => $verse,
+                'folder_id' => $folderId,
+                'created' => false,
+            ];
+        }
+
+        if ($this->hasColumn('favorites', 'folder_id')) {
+            $insert = $this->db()->prepare(
+                'INSERT INTO favorites (book, chapter, verse, folder_id, created_at)
+                 VALUES (:book, :chapter, :verse, :folder_id, CURRENT_TIMESTAMP)'
+            );
+            $insert->execute([
+                ':book' => $book,
+                ':chapter' => $chapter,
+                ':verse' => $verse,
+                ':folder_id' => $folderId,
+            ]);
+        } else {
+            $insert = $this->db()->prepare(
+                'INSERT INTO favorites (book, chapter, verse, created_at)
+                 VALUES (:book, :chapter, :verse, CURRENT_TIMESTAMP)'
+            );
+            $insert->execute([
+                ':book' => $book,
+                ':chapter' => $chapter,
+                ':verse' => $verse,
+            ]);
+        }
+
+        return [
+            'id' => (int) $this->db()->lastInsertId(),
+            'book' => $book,
+            'chapter' => $chapter,
+            'verse' => $verse,
+            'folder_id' => $folderId,
+            'created' => true,
+        ];
+    }
+
+    public function removeFavorite($book, $chapter, $verse)
+    {
+        $stmt = $this->db()->prepare(
+            'DELETE FROM favorites
+             WHERE book = :book AND chapter = :chapter AND verse = :verse'
+        );
+        $stmt->execute([
+            ':book' => (int) $book,
+            ':chapter' => (int) $chapter,
+            ':verse' => (int) $verse,
+        ]);
+        return $stmt->rowCount() > 0;
     }
 
     public function getHighlightsForChapter($book, $chapter)
@@ -1048,6 +1235,65 @@ class UserDataRepository
             $ids[] = (int) $row['anecdote_id'];
         }
         return $ids;
+    }
+
+    private function resolveFavoriteFolderId($folderId)
+    {
+        $folderId = max(1, (int) $folderId);
+        if ($this->favoriteFolderExists($folderId)) {
+            return $folderId;
+        }
+        return $this->ensureDefaultFavoriteFolderId();
+    }
+
+    private function favoriteFolderExists($folderId)
+    {
+        if (!$this->hasTable('favorite_folders')) {
+            return false;
+        }
+
+        $stmt = $this->db()->prepare(
+            'SELECT id
+             FROM favorite_folders
+             WHERE id = :id
+             LIMIT 1'
+        );
+        $stmt->execute([':id' => (int) $folderId]);
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
+    private function ensureDefaultFavoriteFolderId()
+    {
+        if (!$this->hasTable('favorite_folders')) {
+            return 1;
+        }
+
+        $id = (int) $this->db()->query(
+            'SELECT id
+             FROM favorite_folders
+             ORDER BY CASE WHEN id = 1 THEN 0 ELSE 1 END, id ASC
+             LIMIT 1'
+        )->fetchColumn();
+
+        if ($id > 0) {
+            return $id;
+        }
+
+        $insert = $this->db()->prepare(
+            'INSERT OR IGNORE INTO favorite_folders (id, name, created_at, updated_at)
+             VALUES (1, :name, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $insert->execute([':name' => 'General']);
+        return 1;
+    }
+
+    private function hasTable($table)
+    {
+        $stmt = $this->db()->prepare(
+            "SELECT name FROM sqlite_master WHERE type = 'table' AND name = :table LIMIT 1"
+        );
+        $stmt->execute([':table' => trim((string) $table)]);
+        return (bool) $stmt->fetchColumn();
     }
 
     private function normalizeRange($a, $b)
