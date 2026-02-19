@@ -414,6 +414,14 @@ a {
     background: color-mix(in srgb, #ffc185 30%, var(--selection));
 }
 
+.verse.is-highlight-filtered-out {
+    display: none;
+}
+
+.verse.is-highlight-filter-hit {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
 .verse-num {
     color: var(--muted);
     font-size: .78rem;
@@ -669,6 +677,24 @@ a {
 
 .highlight-dot.hl-orange {
     background: #ffc185;
+}
+
+.highlight-filter-row {
+    margin-top: .5rem;
+    display: flex;
+    align-items: center;
+    gap: .42rem;
+    flex-wrap: wrap;
+}
+
+.highlight-filter-row select {
+    min-width: 180px;
+}
+
+.highlight-divider {
+    border: 0;
+    border-top: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+    margin: .62rem 0;
 }
 
 .notice {

@@ -19,6 +19,7 @@
         pendingSelectionVerses: [],
         selectionPayload: null,
         highlights: {},
+        highlightFilterColor: 'all',
         selectedBackground: '',
         activeTab: 'contexto',
         needsChapterRefresh: false,
@@ -327,7 +328,7 @@
     }
 
     function updateHighlightUI() {
-        var palette = ['yellow', 'green', 'blue', 'pink', 'orange'];
+        var palette = highlightPaletteColors();
         var map = normalizeHighlights(state.highlights || {});
         els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
             var verse = Number(node.getAttribute('data-verse'));
@@ -342,6 +343,8 @@
             node.classList.add('hl-' + color);
             node.setAttribute('data-highlight', color);
         });
+        applyHighlightFilterUI();
+        updateHighlightFilterInfoUI();
     }
 
     function normalizeHighlights(value) {
@@ -358,6 +361,89 @@
             out[verse] = color;
         });
         return out;
+    }
+
+    function highlightPaletteColors() {
+        return ['yellow', 'green', 'blue', 'pink', 'orange'];
+    }
+
+    function normalizeHighlightFilterColor(value) {
+        var color = String(value || '').trim().toLowerCase();
+        if (color === '' || color === 'all') {
+            return 'all';
+        }
+        return highlightPaletteColors().indexOf(color) >= 0 ? color : 'all';
+    }
+
+    function highlightColorLabel(color) {
+        var labels = {
+            yellow: 'Amarillo',
+            green: 'Verde',
+            blue: 'Azul',
+            pink: 'Rosa',
+            orange: 'Naranja'
+        };
+        return labels[color] || '';
+    }
+
+    function countHighlightsByColor(map) {
+        var counts = {
+            all: 0,
+            yellow: 0,
+            green: 0,
+            blue: 0,
+            pink: 0,
+            orange: 0
+        };
+        var normalized = normalizeHighlights(map || {});
+        Object.keys(normalized).forEach(function (verseKey) {
+            var color = normalized[verseKey];
+            if (counts[color] === undefined) {
+                return;
+            }
+            counts[color]++;
+            counts.all++;
+        });
+        return counts;
+    }
+
+    function buildHighlightFilterInfoText(selectedColor, counts) {
+        var selected = normalizeHighlightFilterColor(selectedColor);
+        if (selected === 'all') {
+            return 'Subrayados en este capítulo: ' + Number(counts.all || 0) + '.';
+        }
+        var label = highlightColorLabel(selected) || selected;
+        var count = Number(counts[selected] || 0);
+        if (count < 1) {
+            return 'No hay versículos subrayados en ' + label + ' en este capítulo.';
+        }
+        return 'Mostrando ' + count + ' versículo(s) subrayado(s) en ' + label + '.';
+    }
+
+    function applyHighlightFilterUI() {
+        if (!els.versesContainer) {
+            return;
+        }
+        var selected = normalizeHighlightFilterColor(state.highlightFilterColor);
+        els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
+            node.classList.remove('is-highlight-filtered-out', 'is-highlight-filter-hit');
+            if (selected === 'all') {
+                return;
+            }
+            var color = String(node.getAttribute('data-highlight') || '').trim().toLowerCase();
+            var matches = color === selected;
+            node.classList.toggle('is-highlight-filtered-out', !matches);
+            node.classList.toggle('is-highlight-filter-hit', matches);
+        });
+    }
+
+    function updateHighlightFilterInfoUI() {
+        var infoNode = els.toolsPanel ? els.toolsPanel.querySelector('.js-highlight-filter-info') : null;
+        if (!infoNode) {
+            return;
+        }
+        var counts = countHighlightsByColor(state.highlights || {});
+        infoNode.textContent = buildHighlightFilterInfoText(state.highlightFilterColor, counts);
     }
 
     function onSelectionChange() {
@@ -407,7 +493,51 @@
         els.commentsPanel.innerHTML = '<p class="muted">Selecciona versículos para cargar comentarios.</p>';
         els.notesPanel.innerHTML = '<p class="muted">Selecciona versículos para gestionar tus notas.</p>';
         els.linksPanel.innerHTML = '<p class="muted">Selecciona versículos para crear vínculos.</p>';
-        els.toolsPanel.innerHTML = '<p class="muted">Herramientas disponibles al seleccionar un pasaje.</p>';
+        els.toolsPanel.innerHTML = '' +
+            '<div class="stack">' +
+            '<p class="muted">Herramientas disponibles al seleccionar un pasaje.</p>' +
+            buildHighlightFilterCardHtml(false) +
+            '</div>';
+        bindHighlightFilterControls();
+    }
+
+    function buildHighlightFilterCardHtml(includePaintTools) {
+        var selected = normalizeHighlightFilterColor(state.highlightFilterColor);
+        var counts = countHighlightsByColor(state.highlights || {});
+        var options = '<option value="all">Todos (' + Number(counts.all || 0) + ')</option>' +
+            highlightPaletteColors().map(function (color) {
+                var label = highlightColorLabel(color) || color;
+                return '<option value="' + color + '"' + (selected === color ? ' selected' : '') + '>' +
+                    label + ' (' + Number(counts[color] || 0) + ')' +
+                    '</option>';
+            }).join('');
+
+        var html = '' +
+            '<div class="card">' +
+            '<strong>Filtro de subrayado</strong>' +
+            '<small class="muted">Filtra los versículos del capítulo por color.</small>' +
+            '<div class="highlight-filter-row">' +
+            '<select class="js-highlight-filter">' + options + '</select>' +
+            '<button class="btn-light js-highlight-filter-clear" type="button">Mostrar todo</button>' +
+            '</div>' +
+            '<small class="muted js-highlight-filter-info">' + escapeHtml(buildHighlightFilterInfoText(selected, counts)) + '</small>';
+
+        if (includePaintTools) {
+            html += '' +
+                '<hr class="highlight-divider">' +
+                '<small class="muted">Aplica color al rango seleccionado.</small>' +
+                '<div class="highlight-palette">' +
+                '<button class="highlight-dot hl-yellow js-highlight-set" type="button" data-color="yellow" title="Subrayar amarillo" aria-label="Subrayar amarillo"></button>' +
+                '<button class="highlight-dot hl-green js-highlight-set" type="button" data-color="green" title="Subrayar verde" aria-label="Subrayar verde"></button>' +
+                '<button class="highlight-dot hl-blue js-highlight-set" type="button" data-color="blue" title="Subrayar azul" aria-label="Subrayar azul"></button>' +
+                '<button class="highlight-dot hl-pink js-highlight-set" type="button" data-color="pink" title="Subrayar rosa" aria-label="Subrayar rosa"></button>' +
+                '<button class="highlight-dot hl-orange js-highlight-set" type="button" data-color="orange" title="Subrayar naranja" aria-label="Subrayar naranja"></button>' +
+                '<button class="btn-light js-highlight-clear" type="button">Quitar</button>' +
+                '</div>';
+        }
+
+        html += '</div>';
+        return html;
     }
 
     function renderContextPanel(payload) {
@@ -632,18 +762,7 @@
             '</div>' +
             '</div>' +
             '<button class="btn-light js-favorite">Marcar favorito</button>' +
-            '<div class="card">' +
-            '<strong>Subrayado</strong>' +
-            '<small class="muted">Aplica color al rango seleccionado.</small>' +
-            '<div class="highlight-palette">' +
-            '<button class="highlight-dot hl-yellow js-highlight-set" type="button" data-color="yellow" title="Subrayar amarillo" aria-label="Subrayar amarillo"></button>' +
-            '<button class="highlight-dot hl-green js-highlight-set" type="button" data-color="green" title="Subrayar verde" aria-label="Subrayar verde"></button>' +
-            '<button class="highlight-dot hl-blue js-highlight-set" type="button" data-color="blue" title="Subrayar azul" aria-label="Subrayar azul"></button>' +
-            '<button class="highlight-dot hl-pink js-highlight-set" type="button" data-color="pink" title="Subrayar rosa" aria-label="Subrayar rosa"></button>' +
-            '<button class="highlight-dot hl-orange js-highlight-set" type="button" data-color="orange" title="Subrayar naranja" aria-label="Subrayar naranja"></button>' +
-            '<button class="btn-light js-highlight-clear" type="button">Quitar</button>' +
-            '</div>' +
-            '</div>' +
+            buildHighlightFilterCardHtml(true) +
             '<div class="card">' +
             '<strong>Generar contenido</strong>' +
             '<div class="tool-icon-row">' +
@@ -727,6 +846,8 @@
             });
         }
 
+        bindHighlightFilterControls();
+
         var fontUp = els.toolsPanel.querySelector('.js-font-up');
         var fontDown = els.toolsPanel.querySelector('.js-font-down');
         var fontReset = els.toolsPanel.querySelector('.js-font-reset');
@@ -766,6 +887,34 @@
         });
 
         bindImageCardActions();
+    }
+
+    function bindHighlightFilterControls() {
+        if (!els.toolsPanel) {
+            return;
+        }
+
+        var filterSelect = els.toolsPanel.querySelector('.js-highlight-filter');
+        if (filterSelect) {
+            filterSelect.value = normalizeHighlightFilterColor(state.highlightFilterColor);
+            filterSelect.addEventListener('change', function () {
+                state.highlightFilterColor = normalizeHighlightFilterColor(this.value);
+                applyHighlightFilterUI();
+                updateHighlightFilterInfoUI();
+            });
+        }
+
+        var showAllBtn = els.toolsPanel.querySelector('.js-highlight-filter-clear');
+        if (showAllBtn) {
+            showAllBtn.addEventListener('click', function () {
+                state.highlightFilterColor = 'all';
+                if (filterSelect) {
+                    filterSelect.value = 'all';
+                }
+                applyHighlightFilterUI();
+                updateHighlightFilterInfoUI();
+            });
+        }
     }
 
     function callGenerate(mode) {
