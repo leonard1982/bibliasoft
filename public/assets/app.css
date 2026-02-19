@@ -1400,6 +1400,10 @@ a {
     background: #2c70d3;
 }
 
+.reading-plan-pending {
+    border-left: 4px solid color-mix(in srgb, #e09f2a 72%, var(--line));
+}
+
 .marketing-grid {
     display: grid;
     gap: .75rem;

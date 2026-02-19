@@ -43,8 +43,8 @@ class ReadingPlanService
         $planId = (int) $active['id'];
         $totalDays = max(1, (int) $active['total_days']);
         $startDate = $this->normalizeDate($active['start_date'] ?? '');
-        $todayIndex = $this->dayIndex($startDate, $date);
-        $todayIndex = max(1, min($totalDays, $todayIndex));
+        $rawTodayIndex = $this->dayIndex($startDate, $date);
+        $todayIndex = max(1, min($totalDays, $rawTodayIndex));
 
         $allChapters = $this->bibleRepository->getAllChaptersOrdered();
         $completedByDay = $this->userDataRepository->getReadingPlanChapterProgressByDay($planId);
@@ -61,6 +61,15 @@ class ReadingPlanService
         $todayDone = isset($completedDaySet[$todayIndex]);
         $currentStreak = $this->currentStreak($completedDaySet, $todayIndex, $todayDone);
         $longestStreak = $this->longestStreak($completedDaySet);
+        $pendingOldest = $this->oldestPendingDayBeforeToday(
+            $allChapters,
+            $startDate,
+            $date,
+            $totalDays,
+            $rawTodayIndex,
+            $completedDaySet,
+            $completedByDay
+        );
         $weekly = $this->buildWeeklySummary($date, $startDate, $totalDays, $completedDaySet, $weeklyGoalDays);
 
         return [
@@ -83,6 +92,7 @@ class ReadingPlanService
                 'today_completion_percent' => $todayTotalCount > 0 ? (int) round(($todayCompletedCount / $todayTotalCount) * 100) : 0,
                 'current_streak' => $currentStreak,
                 'longest_streak' => $longestStreak,
+                'pending_oldest' => $pendingOldest,
                 'weekly' => $weekly,
                 'completed_day_indexes' => array_map('intval', array_keys($completedDaySet)),
                 'today_assignment' => [
@@ -346,6 +356,75 @@ class ReadingPlanService
         }
 
         return $longest;
+    }
+
+    private function oldestPendingDayBeforeToday(
+        array $allChapters,
+        $startDate,
+        $todayDate,
+        $totalDays,
+        $rawTodayIndex,
+        array $completedDaySet,
+        array $completedByDay
+    ) {
+        $rawTodayIndex = (int) $rawTodayIndex;
+        $totalDays = (int) $totalDays;
+        if ($rawTodayIndex <= 1 || $totalDays < 1) {
+            return null;
+        }
+
+        $maxDueBeforeToday = min($totalDays, $rawTodayIndex - 1);
+        if ($maxDueBeforeToday < 1) {
+            return null;
+        }
+
+        for ($day = 1; $day <= $maxDueBeforeToday; $day++) {
+            if (isset($completedDaySet[$day])) {
+                continue;
+            }
+
+            $assignment = $this->assignmentForDay($allChapters, $totalDays, $day);
+            if (empty($assignment)) {
+                continue;
+            }
+
+            $completedMap = isset($completedByDay[$day]) && is_array($completedByDay[$day]) ? $completedByDay[$day] : [];
+            $chapters = $this->decorateAssignedChapters($assignment, $completedMap);
+            if (empty($chapters)) {
+                continue;
+            }
+
+            $assignmentDate = $this->addDaysToDate($startDate, $day - 1);
+            $completedCount = $this->countCompletedInAssignment($chapters);
+            $totalCount = count($chapters);
+
+            return [
+                'day_index' => $day,
+                'date' => $assignmentDate,
+                'is_overdue' => $assignmentDate < $todayDate,
+                'start_label' => (string) $chapters[0]['label'],
+                'end_label' => (string) $chapters[count($chapters) - 1]['label'],
+                'total_count' => $totalCount,
+                'completed_count' => $completedCount,
+                'first_chapter' => [
+                    'book' => (int) $chapters[0]['book'],
+                    'chapter' => (int) $chapters[0]['chapter'],
+                ],
+                'chapters' => $chapters,
+            ];
+        }
+
+        return null;
+    }
+
+    private function addDaysToDate($baseDate, $days)
+    {
+        try {
+            $base = new \DateTimeImmutable($baseDate);
+            return $base->modify('+' . (int) $days . ' day')->format('Y-m-d');
+        } catch (\Throwable $e) {
+            return $this->normalizeDate($baseDate);
+        }
     }
 
     private function buildWeeklySummaryWithoutPlan($date, $goalDays)

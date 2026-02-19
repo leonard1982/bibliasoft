@@ -1245,6 +1245,12 @@
         var weeklyGoalMet = weekly.goal_met === true;
         var currentStreak = Number(plan.current_streak || rootPlan.current_streak || rootPlan.streak_current || 0);
         var longestStreak = Number(plan.longest_streak || rootPlan.longest_streak || currentStreak || 0);
+        var pendingOldest = (plan.pending_oldest && typeof plan.pending_oldest === 'object') ? plan.pending_oldest : null;
+        var pendingRangeLabel = pendingOldest
+            ? buildAssignmentRangeLabel(String(pendingOldest.start_label || ''), String(pendingOldest.end_label || ''))
+            : '';
+        var pendingBook = pendingOldest && pendingOldest.first_chapter ? Number(pendingOldest.first_chapter.book || 0) : 0;
+        var pendingChapter = pendingOldest && pendingOldest.first_chapter ? Number(pendingOldest.first_chapter.chapter || 0) : 0;
         var weeklyDaysHtml = buildWeeklyDaysHtml(weekly.days || []);
         var todayIso = String(rootPlan.today || localDateYmd(new Date()));
         if (!state.planCalendarMonth) {
@@ -1274,6 +1280,20 @@
         }).join('');
         if (!chapterRowsHtml) {
             chapterRowsHtml = '<p class="muted">Sin capítulos asignados hoy.</p>';
+        }
+        var pendingHtml = '';
+        if (pendingOldest && pendingBook > 0 && pendingChapter > 0) {
+            pendingHtml = '' +
+                '<div class="card reading-plan-pending">' +
+                '<strong>Día pendiente por recuperar</strong>' +
+                '<p>' + escapeHtml(pendingRangeLabel || 'Lectura pendiente') + '</p>' +
+                '<small class="muted">Día ' + Number(pendingOldest.day_index || 0) + ' · ' + escapeHtml(String(pendingOldest.date || '')) + ' · Progreso: ' + Number(pendingOldest.completed_count || 0) + '/' + Number(pendingOldest.total_count || 0) + '</small>' +
+                '<div class="toolbar">' +
+                '<button class="btn-primary" id="readerPlanRecoverBtn" type="button" data-book="' + pendingBook + '" data-chapter="' + pendingChapter + '">' +
+                '<img src="assets/icons/book.svg" alt="" class="ico"> Recuperar día pendiente' +
+                '</button>' +
+                '</div>' +
+                '</div>';
         }
 
         els.readerPlanCard.innerHTML = '' +
@@ -1320,6 +1340,7 @@
             '</div>' +
             '<div class="reading-plan-calendar-grid">' + monthCalendar.cells_html + '</div>' +
             '</div>' +
+            pendingHtml +
             '<div class="reading-plan-chapter-list">' + chapterRowsHtml + '</div>' +
             '<div class="toolbar">' +
             '<button class="' + toggleClass + '" id="readerPlanToggleBtn" type="button">' + toggleLabel + '</button>' +
@@ -1351,6 +1372,19 @@
                 renderReadingPlanCard();
             });
         });
+
+        var recoverBtn = document.getElementById('readerPlanRecoverBtn');
+        if (recoverBtn) {
+            recoverBtn.addEventListener('click', function () {
+                var book = Number(this.getAttribute('data-book') || '0');
+                var chapter = Number(this.getAttribute('data-chapter') || '0');
+                if (!book || !chapter) {
+                    return;
+                }
+                closePlan();
+                fetchChapter(book, chapter);
+            });
+        }
 
         els.readerPlanCard.querySelectorAll('.js-plan-open-chapter').forEach(function (btn) {
             btn.addEventListener('click', function () {
@@ -1503,6 +1537,15 @@
 
     function chapterKey(book, chapter) {
         return String(Number(book || 0)) + ':' + String(Number(chapter || 0));
+    }
+
+    function buildAssignmentRangeLabel(startLabel, endLabel) {
+        var start = String(startLabel || '').trim();
+        var end = String(endLabel || '').trim();
+        if (start && end && start !== end) {
+            return start + ' - ' + end;
+        }
+        return start || end || '';
     }
 
     function buildWeeklyDaysHtml(days) {
