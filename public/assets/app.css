@@ -339,6 +339,14 @@ a {
     height: 16px;
 }
 
+body.theme-dark img.ico,
+body.theme-dark img.proof-ico,
+body.theme-dark img.auth-switch-ico,
+body.theme-dark img.auth-avatar-icon,
+body.theme-dark img.auth-field-ico {
+    filter: brightness(0) invert(1);
+}
+
 .muted {
     color: var(--muted);
 }
@@ -454,6 +462,17 @@ a {
 .verse-text {
     flex: 1 1 auto;
     min-width: 0;
+}
+
+.verse-text .strong-word,
+.verse-text [data-strong] {
+    cursor: pointer;
+    border-bottom: 1px dotted color-mix(in srgb, var(--accent) 68%, transparent);
+}
+
+.verse-text .strong-word:hover,
+.verse-text [data-strong]:hover {
+    color: var(--accent);
 }
 
 .verse-text p,
@@ -951,6 +970,61 @@ a {
     overflow: auto;
 }
 
+#interlinearModal {
+    width: min(900px, 96vw);
+    max-height: 88vh;
+    overflow: auto;
+}
+
+#strongModal {
+    width: min(760px, 94vw);
+    max-height: 88vh;
+    overflow: auto;
+}
+
+.interlinear-card {
+    display: grid;
+    gap: .5rem;
+}
+
+.interlinear-grid {
+    display: grid;
+    gap: .45rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.interlinear-token {
+    border: 1px solid color-mix(in srgb, var(--line) 84%, transparent);
+    border-radius: 10px;
+    padding: .45rem .5rem;
+    background: color-mix(in srgb, var(--panel) 96%, var(--bg) 4%);
+    display: grid;
+    gap: .2rem;
+}
+
+.interlinear-token p {
+    margin: .14rem 0 0;
+    font-size: .88rem;
+    line-height: 1.45;
+}
+
+.strong-entry-list {
+    display: grid;
+    gap: .55rem;
+}
+
+.strong-entry-card p {
+    margin: .32rem 0 0;
+}
+
+.strong-entry-code {
+    color: var(--accent);
+}
+
+.strong-entry-meta {
+    margin: .2rem 0 .3rem;
+}
+
 .settings header {
     display: flex;
     justify-content: space-between;
@@ -966,6 +1040,21 @@ a {
     display: grid;
     gap: .3rem;
     font-size: .95rem;
+    min-width: 0;
+}
+
+.settings-grid input,
+.settings-grid select,
+.settings-grid textarea,
+.settings-grid button {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+#versionsModal .settings-grid {
+    overflow-x: hidden;
 }
 
 .search-result {
@@ -979,6 +1068,15 @@ a {
     color: var(--accent);
     display: block;
     margin-bottom: .35rem;
+}
+
+.search-result [data-strong] {
+    cursor: pointer;
+    border-bottom: 1px dotted color-mix(in srgb, var(--accent) 68%, transparent);
+}
+
+.search-result [data-strong]:hover {
+    color: var(--accent);
 }
 
 .auth-shell {

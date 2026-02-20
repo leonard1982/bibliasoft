@@ -43,6 +43,10 @@
         parallelCompareLabel: 'Versión 2',
         parallelMessage: '',
         parallelVerseMap: {},
+        versionsCatalog: [],
+        versionPrimaryFile: '',
+        versionCompareFile: '',
+        strongCache: {},
         preachBackup: null,
         settings: {
             showHelp: true,
@@ -73,6 +77,8 @@
         openNavigator: document.getElementById('openNavigator'),
         openQuickSearch: document.getElementById('openQuickSearch'),
         openReadingPlan: document.getElementById('openReadingPlan'),
+        openVersions: document.getElementById('openVersions'),
+        openInterlinear: document.getElementById('openInterlinear'),
         toggleParallel: document.getElementById('toggleParallel'),
         toggleHelp: document.getElementById('toggleHelp'),
         togglePreachMode: document.getElementById('togglePreachMode'),
@@ -87,11 +93,20 @@
         settingsModal: document.getElementById('settingsModal'),
         searchModal: document.getElementById('searchModal'),
         planModal: document.getElementById('planModal'),
+        versionsModal: document.getElementById('versionsModal'),
+        interlinearModal: document.getElementById('interlinearModal'),
+        strongModal: document.getElementById('strongModal'),
         readerShell: root.querySelector('.reader-shell'),
         openSettings: document.getElementById('openSettings'),
         closeSettings: document.getElementById('closeSettings'),
         closeSearch: document.getElementById('closeSearch'),
         closePlan: document.getElementById('closePlan'),
+        closeVersions: document.getElementById('closeVersions'),
+        closeInterlinear: document.getElementById('closeInterlinear'),
+        closeStrong: document.getElementById('closeStrong'),
+        versionPrimarySelect: document.getElementById('versionPrimarySelect'),
+        versionCompareSelect: document.getElementById('versionCompareSelect'),
+        saveVersions: document.getElementById('saveVersions'),
         copySelection: document.getElementById('copySelection'),
         copyParagraph: document.getElementById('copyParagraph'),
         shareSelection: document.getElementById('shareSelection'),
@@ -101,7 +116,9 @@
         commentsPanel: document.getElementById('commentsPanel'),
         notesPanel: document.getElementById('notesPanel'),
         linksPanel: document.getElementById('linksPanel'),
-        toolsPanel: document.getElementById('toolsPanel')
+        toolsPanel: document.getElementById('toolsPanel'),
+        interlinearModalBody: document.getElementById('interlinearModalBody'),
+        strongModalBody: document.getElementById('strongModalBody')
     };
 
     function init() {
@@ -130,6 +147,14 @@
             }
         }
 
+        if (state.initial.versions && typeof state.initial.versions === 'object') {
+            var currentVersions = state.initial.versions.current || {};
+            var versionRows = Array.isArray(state.initial.versions.versions) ? state.initial.versions.versions : [];
+            state.versionsCatalog = versionRows.slice();
+            state.versionPrimaryFile = String(currentVersions.primary_file || '');
+            state.versionCompareFile = String(currentVersions.compare_file || '');
+        }
+
         restoreReaderState();
         loadSettings();
         maybeRedirectToDailyAtStartup();
@@ -145,6 +170,7 @@
         bindConnectivity();
         registerPwa();
         maybeOpenSearchAtStartup();
+        renderVersionSelectors();
         fetchReadingPlanStatus();
 
         if (state.needsChapterRefresh) {
@@ -208,6 +234,12 @@
         if (els.openReadingPlan) {
             els.openReadingPlan.addEventListener('click', openPlan);
         }
+        if (els.openVersions) {
+            els.openVersions.addEventListener('click', openVersions);
+        }
+        if (els.openInterlinear) {
+            els.openInterlinear.addEventListener('click', openInterlinear);
+        }
         if (els.toggleParallel) {
             els.toggleParallel.addEventListener('click', function () {
                 toggleParallelMode();
@@ -247,6 +279,18 @@
         if (els.closePlan) {
             els.closePlan.addEventListener('click', closePlan);
         }
+        if (els.closeVersions) {
+            els.closeVersions.addEventListener('click', closeVersions);
+        }
+        if (els.closeInterlinear) {
+            els.closeInterlinear.addEventListener('click', closeInterlinear);
+        }
+        if (els.closeStrong) {
+            els.closeStrong.addEventListener('click', closeStrong);
+        }
+        if (els.saveVersions) {
+            els.saveVersions.addEventListener('click', saveVersionSelection);
+        }
         if (els.quickSearchForm) {
             els.quickSearchForm.addEventListener('submit', function (event) {
                 event.preventDefault();
@@ -270,6 +314,9 @@
             if (event.key === 'Escape') {
                 closeSearch();
                 closePlan();
+                closeVersions();
+                closeInterlinear();
+                closeStrong();
             }
             if (state.settings.preachMode && !event.ctrlKey && !event.altKey && !event.metaKey) {
                 var target = event.target || null;
@@ -363,6 +410,7 @@
         }).join('');
 
         els.versesContainer.innerHTML = (parallelHead + html) || '<p class="muted">No se pudo cargar el capítulo.</p>';
+        applyStrongFallbackMarkup();
         if (keepSelection) {
             var filtered = keptSelected.filter(function (value) {
                 return Boolean(verseExists[Number(value || 0)]);
@@ -383,6 +431,15 @@
 
         els.versesContainer.querySelectorAll('.verse').forEach(function (node) {
             node.addEventListener('click', function (event) {
+                var target = event.target || null;
+                var strongToken = target && target.closest ? target.closest('[data-strong]') : null;
+                if (strongToken && this.contains(strongToken)) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    openStrongLookup(String(strongToken.getAttribute('data-strong') || ''));
+                    return;
+                }
+
                 var verse = Number(this.getAttribute('data-verse'));
                 if (!verse) {
                     return;
@@ -423,6 +480,120 @@
             return row.scripture_html;
         }
         return '<span class="muted">Sin versículo equivalente.</span>';
+    }
+
+    function applyStrongFallbackMarkup() {
+        if (!els.versesContainer) {
+            return;
+        }
+
+        state.verses.forEach(function (row) {
+            var verse = Number(row && row.verse ? row.verse : 0);
+            if (verse < 1) {
+                return;
+            }
+            var alignment = Array.isArray(row.strong_alignment) ? row.strong_alignment : [];
+            if (!alignment.length) {
+                return;
+            }
+
+            var verseNode = els.versesContainer.querySelector('.verse[data-verse="' + verse + '"]');
+            if (!verseNode) {
+                return;
+            }
+
+            var primaryText = verseNode.querySelector('.verse-parallel-col .verse-text') || verseNode.querySelector('.verse-text');
+            if (!primaryText) {
+                return;
+            }
+            if (primaryText.querySelector('[data-strong]')) {
+                return;
+            }
+
+            wrapTextNodesWithStrongAlignment(primaryText, alignment);
+        });
+    }
+
+    function wrapTextNodesWithStrongAlignment(container, alignment) {
+        if (!container || !Array.isArray(alignment) || !alignment.length) {
+            return;
+        }
+
+        var textNodes = [];
+        var walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, null);
+        var node;
+        while ((node = walker.nextNode())) {
+            if (!node || !node.parentNode) {
+                continue;
+            }
+            var parent = node.parentNode;
+            if (!(parent instanceof HTMLElement)) {
+                continue;
+            }
+            if (parent.closest('[data-strong]')) {
+                continue;
+            }
+            var tag = (parent.tagName || '').toLowerCase();
+            if (tag === 'sup' || tag === 'sub') {
+                continue;
+            }
+            if (!/[A-Za-zÀ-ÖØ-öø-ÿ0-9]/.test(node.nodeValue || '')) {
+                continue;
+            }
+            textNodes.push(node);
+        }
+
+        var indexRef = { index: 0 };
+        textNodes.forEach(function (textNode) {
+            replaceTextNodeWithStrongSpans(textNode, alignment, indexRef);
+        });
+    }
+
+    function replaceTextNodeWithStrongSpans(textNode, alignment, indexRef) {
+        var text = String(textNode.nodeValue || '');
+        if (!text) {
+            return;
+        }
+
+        var regex = /([\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*)/gu;
+        var frag = document.createDocumentFragment();
+        var lastPos = 0;
+        var matched = false;
+        var m;
+
+        while ((m = regex.exec(text)) !== null) {
+            matched = true;
+            var word = m[1];
+            var start = m.index;
+            if (start > lastPos) {
+                frag.appendChild(document.createTextNode(text.slice(lastPos, start)));
+            }
+
+            var code = '';
+            if (indexRef.index < alignment.length) {
+                code = String(alignment[indexRef.index] || '').trim();
+            }
+            indexRef.index += 1;
+
+            if (code) {
+                var span = document.createElement('span');
+                span.className = 'strong-word';
+                span.setAttribute('data-strong', code);
+                span.textContent = word;
+                frag.appendChild(span);
+            } else {
+                frag.appendChild(document.createTextNode(word));
+            }
+            lastPos = start + word.length;
+        }
+
+        if (!matched) {
+            return;
+        }
+        if (lastPos < text.length) {
+            frag.appendChild(document.createTextNode(text.slice(lastPos)));
+        }
+        textNode.parentNode.replaceChild(frag, textNode);
     }
 
     function handleMobileVerseTap() {
@@ -2872,12 +3043,61 @@
         renderReadingPlanCard();
     }
 
+    function openVersions() {
+        if (!els.versionsModal) {
+            return;
+        }
+        renderVersionSelectors();
+        els.overlay.classList.remove('hidden');
+        els.versionsModal.classList.remove('hidden');
+    }
+
+    function openInterlinear() {
+        if (!els.interlinearModal || !els.interlinearModalBody) {
+            return;
+        }
+        if (!state.selectedVerses || !state.selectedVerses.length) {
+            notify('Selecciona uno o más versículos para abrir el interlineal.');
+            return;
+        }
+
+        var range = selectedRange();
+        var params = new URLSearchParams({
+            route: 'api.interlinear',
+            book: String(state.currentBook),
+            chapter: String(state.currentChapter),
+            verse_start: String(range.start),
+            verse_end: String(range.end)
+        });
+
+        els.interlinearModalBody.innerHTML = '<p class="muted">Cargando interlineal...</p>';
+        els.overlay.classList.remove('hidden');
+        els.interlinearModal.classList.remove('hidden');
+
+        fetch('?' + params.toString())
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'No se pudo cargar interlineal.');
+                }
+                renderInterlinearRows(Array.isArray(res.rows) ? res.rows : []);
+            })
+            .catch(function (err) {
+                var msg = (err && err.message) ? err.message : 'No se pudo cargar interlineal.';
+                els.interlinearModalBody.innerHTML = '<p class="muted">' + escapeHtml(msg) + '</p>';
+            });
+    }
+
     function closeSearch() {
         if (!els.searchModal || els.searchModal.classList.contains('hidden')) {
             return;
         }
         els.searchModal.classList.add('hidden');
-        if (els.settingsModal.classList.contains('hidden') && (!els.planModal || els.planModal.classList.contains('hidden'))) {
+        if (els.settingsModal.classList.contains('hidden') &&
+            (!els.planModal || els.planModal.classList.contains('hidden')) &&
+            (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
+            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -2887,9 +3107,317 @@
             return;
         }
         els.planModal.classList.add('hidden');
-        if (els.settingsModal.classList.contains('hidden') && els.searchModal.classList.contains('hidden')) {
+        if (els.settingsModal.classList.contains('hidden') &&
+            els.searchModal.classList.contains('hidden') &&
+            (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
+            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
+    }
+
+    function closeVersions() {
+        if (!els.versionsModal || els.versionsModal.classList.contains('hidden')) {
+            return;
+        }
+        els.versionsModal.classList.add('hidden');
+        if (els.settingsModal.classList.contains('hidden') &&
+            els.searchModal.classList.contains('hidden') &&
+            (!els.planModal || els.planModal.classList.contains('hidden')) &&
+            (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
+            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
+            els.overlay.classList.add('hidden');
+        }
+    }
+
+    function closeInterlinear() {
+        if (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) {
+            return;
+        }
+        els.interlinearModal.classList.add('hidden');
+        if (els.settingsModal.classList.contains('hidden') &&
+            els.searchModal.classList.contains('hidden') &&
+            (!els.planModal || els.planModal.classList.contains('hidden')) &&
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
+            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
+            els.overlay.classList.add('hidden');
+        }
+    }
+
+    function renderInterlinearRows(rows) {
+        if (!els.interlinearModalBody) {
+            return;
+        }
+        if (!rows.length) {
+            els.interlinearModalBody.innerHTML = '<p class="muted">No hay datos interlineales para este rango.</p>';
+            return;
+        }
+
+        var html = rows.map(function (row) {
+            var tokens = Array.isArray(row.tokens) ? row.tokens : [];
+            var tokenHtml = tokens.map(function (token) {
+                var word = escapeHtml(token.word || '');
+                var code = escapeHtml(token.code || '');
+                var entries = Array.isArray(token.entries) ? token.entries : [];
+                var entry = entries.length ? entries[0] : null;
+                var lemma = entry ? escapeHtml(entry.lemma || '') : '';
+                var translit = entry ? escapeHtml(entry.translit || '') : '';
+                var def = entry ? escapeHtml((entry.strongs_def || entry.kjv_def || '')) : '';
+                return '' +
+                    '<div class="interlinear-token">' +
+                    '<strong>' + word + '</strong>' +
+                    '<small>' + code + '</small>' +
+                    (lemma || translit ? '<small class="muted">' + [lemma, translit].filter(Boolean).join(' · ') + '</small>' : '') +
+                    (def ? '<p>' + def + '</p>' : '<p class="muted">Sin definición disponible.</p>') +
+                    '</div>';
+            }).join('');
+
+            return '' +
+                '<article class="card interlinear-card">' +
+                '<strong>' + escapeHtml(row.reference || '') + '</strong>' +
+                (tokenHtml ? '<div class="interlinear-grid">' + tokenHtml + '</div>' : '<p class="muted">Sin tokens con Strong para este versículo.</p>') +
+                '</article>';
+        }).join('');
+
+        els.interlinearModalBody.innerHTML = html;
+    }
+
+    function closeStrong() {
+        if (!els.strongModal || els.strongModal.classList.contains('hidden')) {
+            return;
+        }
+        els.strongModal.classList.add('hidden');
+        if (els.settingsModal.classList.contains('hidden') &&
+            els.searchModal.classList.contains('hidden') &&
+            (!els.planModal || els.planModal.classList.contains('hidden')) &&
+            (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden'))) {
+            els.overlay.classList.add('hidden');
+        }
+    }
+
+    function openStrongLookup(rawCodes) {
+        var codes = parseStrongCodes(rawCodes);
+        if (!codes.length) {
+            notify('Este término no tiene código Strong válido.');
+            return;
+        }
+        if (!els.strongModal || !els.strongModalBody) {
+            return;
+        }
+
+        var loadingHtml = '<p class="muted">Cargando definición Strong...</p>';
+        els.strongModalBody.innerHTML = loadingHtml;
+        els.overlay.classList.remove('hidden');
+        els.strongModal.classList.remove('hidden');
+
+        var uncached = [];
+        var cachedEntries = [];
+        codes.forEach(function (code) {
+            var key = String(code || '');
+            if (!key) {
+                return;
+            }
+            if (state.strongCache[key]) {
+                cachedEntries.push(state.strongCache[key]);
+                return;
+            }
+            uncached.push(key);
+        });
+
+        if (!uncached.length) {
+            renderStrongEntries(cachedEntries, codes);
+            return;
+        }
+
+        fetch('?route=api.strong.lookup&codes=' + encodeURIComponent(uncached.join(',')))
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'No se pudo cargar Strong.');
+                }
+                var entries = Array.isArray(res.entries) ? res.entries : [];
+                entries.forEach(function (entry) {
+                    var code = String(entry && entry.code ? entry.code : '').toUpperCase();
+                    if (!code) {
+                        return;
+                    }
+                    state.strongCache[code] = entry;
+                });
+
+                var merged = [];
+                var seen = {};
+                codes.forEach(function (code) {
+                    var key = String(code || '').toUpperCase();
+                    if (!key || seen[key]) {
+                        return;
+                    }
+                    seen[key] = true;
+                    if (state.strongCache[key]) {
+                        merged.push(state.strongCache[key]);
+                    }
+                });
+                renderStrongEntries(merged, codes);
+            })
+            .catch(function (err) {
+                var msg = (err && err.message) ? err.message : 'No se pudo cargar Strong.';
+                els.strongModalBody.innerHTML = '<p class="muted">' + escapeHtml(msg) + '</p>';
+            });
+    }
+
+    function parseStrongCodes(rawCodes) {
+        var raw = String(rawCodes || '').toUpperCase().trim();
+        if (!raw) {
+            return [];
+        }
+        var tokens = raw.split(/[\s,;]+/);
+        var map = {};
+        tokens.forEach(function (token) {
+            var match = String(token || '').match(/^([GH])0*([0-9]{1,5})$/);
+            if (!match) {
+                return;
+            }
+            var number = Number(match[2]);
+            if (!number || number < 1) {
+                return;
+            }
+            var code = match[1] + String(number);
+            map[code] = true;
+        });
+        return Object.keys(map);
+    }
+
+    function renderStrongEntries(entries, requestedCodes) {
+        if (!els.strongModalBody) {
+            return;
+        }
+
+        var list = Array.isArray(entries) ? entries : [];
+        if (!list.length) {
+            var requested = Array.isArray(requestedCodes) ? requestedCodes.join(', ') : '';
+            els.strongModalBody.innerHTML = '' +
+                '<p class="muted">No se encontró definición para ' + escapeHtml(requested) + '.</p>' +
+                '<p class="muted">Revisa que la versión tenga códigos Strong y que el índice esté generado.</p>';
+            return;
+        }
+
+        var html = list.map(function (entry) {
+            var code = escapeHtml(entry.code || '');
+            var lemma = escapeHtml(entry.lemma || '');
+            var translit = escapeHtml(entry.translit || '');
+            var pron = escapeHtml(entry.pron || '');
+            var strongDef = escapeHtml(entry.strongs_def || '');
+            var kjvDef = escapeHtml(entry.kjv_def || '');
+            var derivation = escapeHtml(entry.derivation || '');
+
+            var meta = [lemma, translit, pron].filter(function (part) {
+                return String(part || '').trim() !== '';
+            }).join(' · ');
+
+            return '' +
+                '<article class="card strong-entry-card">' +
+                '<strong class="strong-entry-code">' + code + '</strong>' +
+                (meta ? '<p class="muted strong-entry-meta">' + meta + '</p>' : '') +
+                (strongDef ? '<p><strong>Definición:</strong> ' + strongDef + '</p>' : '') +
+                (kjvDef ? '<p><strong>KJV:</strong> ' + kjvDef + '</p>' : '') +
+                (derivation ? '<p><strong>Derivación:</strong> ' + derivation + '</p>' : '') +
+                '</article>';
+        }).join('');
+
+        els.strongModalBody.innerHTML = '<div class="strong-entry-list">' + html + '</div>';
+    }
+
+    function renderVersionSelectors() {
+        if (!els.versionPrimarySelect || !els.versionCompareSelect) {
+            return;
+        }
+        var rows = Array.isArray(state.versionsCatalog) ? state.versionsCatalog : [];
+        if (!rows.length) {
+            els.versionPrimarySelect.innerHTML = '<option value="">Sin versiones</option>';
+            els.versionCompareSelect.innerHTML = '<option value="">Sin versiones</option>';
+            if (els.saveVersions) {
+                els.saveVersions.disabled = true;
+            }
+            return;
+        }
+
+        var primary = String(state.versionPrimaryFile || rows[0].file || '');
+        var compare = String(state.versionCompareFile || primary);
+        var map = {};
+        rows.forEach(function (row) {
+            map[String(row.file || '')] = true;
+        });
+        if (!map[primary]) {
+            primary = String(rows[0].file || '');
+        }
+        if (!map[compare]) {
+            compare = primary;
+        }
+
+        state.versionPrimaryFile = primary;
+        state.versionCompareFile = compare;
+
+        var options = rows.map(function (row) {
+            var file = String(row.file || '');
+            var label = String(row.label || file || 'Versión');
+            var abbr = String(row.abbreviation || '').trim();
+            var text = abbr ? (label + ' (' + abbr + ')') : label;
+            return '<option value="' + escapeHtml(file) + '">' + escapeHtml(text) + '</option>';
+        }).join('');
+
+        els.versionPrimarySelect.innerHTML = options;
+        els.versionCompareSelect.innerHTML = options;
+        els.versionPrimarySelect.value = primary;
+        els.versionCompareSelect.value = compare;
+        if (els.saveVersions) {
+            els.saveVersions.disabled = false;
+        }
+    }
+
+    function saveVersionSelection() {
+        if (!els.versionPrimarySelect || !els.versionCompareSelect || !els.saveVersions) {
+            return;
+        }
+
+        var primary = String(els.versionPrimarySelect.value || '').trim();
+        var compare = String(els.versionCompareSelect.value || '').trim();
+        if (!primary) {
+            notify('Selecciona una versión principal.');
+            return;
+        }
+        if (!compare) {
+            compare = primary;
+            els.versionCompareSelect.value = compare;
+        }
+
+        var button = els.saveVersions;
+        button.disabled = true;
+        var originalText = button.textContent;
+        button.textContent = 'Guardando...';
+
+        postForm('api.versions.set', {
+            primary_file: primary,
+            compare_file: compare
+        }).then(function (res) {
+            if (!res || !res.ok) {
+                throw new Error((res && res.error) || 'No se pudo guardar la versión.');
+            }
+            state.versionPrimaryFile = primary;
+            state.versionCompareFile = compare;
+            notify('Versiones actualizadas.');
+
+            var verse = Number((state.selectedVerses && state.selectedVerses.length ? state.selectedVerses[0] : state.pendingVerse) || 0);
+            var url = '?route=reader&book=' + encodeURIComponent(state.currentBook) + '&chapter=' + encodeURIComponent(state.currentChapter);
+            if (verse > 0) {
+                url += '&verse=' + encodeURIComponent(verse);
+            }
+            window.location.assign(url);
+        }).catch(function (err) {
+            notify((err && err.message) ? err.message : 'No se pudo guardar la versión.');
+        }).finally(function () {
+            button.disabled = false;
+            button.textContent = originalText;
+        });
     }
 
     function runQuickSearch() {
@@ -2974,6 +3502,14 @@
                 saveFavoriteByReference(book, chapter, verse, 'Resultado agregado a favoritos.').finally(function () {
                     self.disabled = false;
                 });
+            });
+        });
+
+        els.quickSearchResults.querySelectorAll('[data-strong]').forEach(function (node) {
+            node.addEventListener('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                openStrongLookup(String(this.getAttribute('data-strong') || ''));
             });
         });
     }
@@ -3238,9 +3774,21 @@
         if (els.planModal && !els.planModal.classList.contains('hidden')) {
             els.planModal.classList.add('hidden');
         }
+        if (els.versionsModal && !els.versionsModal.classList.contains('hidden')) {
+            els.versionsModal.classList.add('hidden');
+        }
+        if (els.interlinearModal && !els.interlinearModal.classList.contains('hidden')) {
+            els.interlinearModal.classList.add('hidden');
+        }
+        if (els.strongModal && !els.strongModal.classList.contains('hidden')) {
+            els.strongModal.classList.add('hidden');
+        }
         if (els.settingsModal.classList.contains('hidden') &&
             els.searchModal.classList.contains('hidden') &&
-            (!els.planModal || els.planModal.classList.contains('hidden'))) {
+            (!els.planModal || els.planModal.classList.contains('hidden')) &&
+            (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
+            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -3532,6 +4080,9 @@
     function maybeRedirectToDailyAtStartup() {
         var params = new URLSearchParams(window.location.search);
         if (params.get('skip_daily') === '1') {
+            return;
+        }
+        if (params.get('book') || params.get('chapter') || params.get('verse')) {
             return;
         }
         if (Number(state.initial.open_search || 0) === 1) {

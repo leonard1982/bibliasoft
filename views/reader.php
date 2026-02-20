@@ -11,6 +11,7 @@ $initial = [
     'highlight_verse' => (int) $highlightVerse,
     'user_prefs' => $userPrefs,
     'open_search' => (int) $openSearch,
+    'versions' => $versions,
 ];
 ?>
 <div id="readerApp"
@@ -39,9 +40,11 @@ $initial = [
                 </div>
                 <div class="toolbar reading-tools">
                     <button id="openNavigator" class="btn-light mobile-only" type="button" title="Navegar" aria-label="Navegar"><img src="assets/icons/menu.svg" alt="" class="ico"><span class="btn-label">Navegar</span></button>
-                    <button id="openQuickSearch" class="btn-light hide-in-preach" type="button" title="Buscar" aria-label="Buscar"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Buscar</span></button>
-                    <button id="openReadingPlan" class="btn-light hide-in-preach" type="button" title="Plan de lectura" aria-label="Plan de lectura"><img src="assets/icons/list.svg" alt="" class="ico"><span class="btn-label">Plan</span></button>
-                    <button id="toggleParallel" class="btn-light hide-in-preach" type="button" title="Comparar versiones" aria-label="Comparar versiones"><img src="assets/icons/book.svg" alt="" class="ico"><span class="btn-label">Comparar</span></button>
+                    <button id="openQuickSearch" class="btn-light hide-in-preach" type="button" title="Buscar" aria-label="Buscar"><img src="assets/icons/search.svg" alt="" class="ico"><span class="btn-label">Buscar</span></button>
+                    <button id="openReadingPlan" class="btn-light hide-in-preach" type="button" title="Plan de lectura" aria-label="Plan de lectura"><img src="assets/icons/calendar.svg" alt="" class="ico"><span class="btn-label">Plan</span></button>
+                    <button id="toggleParallel" class="btn-light hide-in-preach" type="button" title="Comparar versiones" aria-label="Comparar versiones"><img src="assets/icons/columns.svg" alt="" class="ico"><span class="btn-label">Comparar</span></button>
+                    <button id="openVersions" class="btn-light hide-in-preach" type="button" title="Versiones" aria-label="Versiones"><img src="assets/icons/layers.svg" alt="" class="ico"><span class="btn-label">Versiones</span></button>
+                    <button id="openInterlinear" class="btn-light hide-in-preach" type="button" title="Interlineal" aria-label="Interlineal"><img src="assets/icons/interlinear.svg" alt="" class="ico"><span class="btn-label">Interlineal</span></button>
                     <button id="copySelection" class="btn-light hide-in-preach" type="button" title="Copiar selección" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"><span class="btn-label">Copiar selección</span></button>
                     <button id="copyParagraph" class="btn-light hide-in-preach" type="button" title="Copiar como párrafo" aria-label="Copiar como párrafo"><img src="assets/icons/text.svg" alt="" class="ico"><span class="btn-label">Copiar como párrafo</span></button>
                     <button id="shareSelection" class="btn-light hide-in-preach" type="button" title="Compartir" aria-label="Compartir"><img src="assets/icons/share.svg" alt="" class="ico"><span class="btn-label">Compartir</span></button>
@@ -184,6 +187,43 @@ $initial = [
         </header>
         <div id="readerPlanCard" class="stack">
             <p class="muted">Cargando plan de lectura...</p>
+        </div>
+    </div>
+
+    <div id="versionsModal" class="settings hidden" role="dialog" aria-modal="true">
+        <header>
+            <h3><img src="assets/icons/book.svg" alt="" class="ico"> Versiones de Biblia</h3>
+            <button class="btn-light" id="closeVersions">Cerrar</button>
+        </header>
+        <div class="settings-grid">
+            <label>Versión principal
+                <select id="versionPrimarySelect"></select>
+            </label>
+            <label>Versión para comparar
+                <select id="versionCompareSelect"></select>
+            </label>
+            <button class="btn-primary" type="button" id="saveVersions">Guardar versiones</button>
+            <small class="muted">Al guardar, el lector recarga la vista con la nueva versión seleccionada.</small>
+        </div>
+    </div>
+
+    <div id="interlinearModal" class="settings hidden" role="dialog" aria-modal="true">
+        <header>
+            <h3><img src="assets/icons/interlinear.svg" alt="" class="ico"> Interlineal</h3>
+            <button class="btn-light" id="closeInterlinear">Cerrar</button>
+        </header>
+        <div id="interlinearModalBody" class="stack">
+            <p class="muted">Selecciona uno o más versículos y abre Interlineal.</p>
+        </div>
+    </div>
+
+    <div id="strongModal" class="settings hidden" role="dialog" aria-modal="true">
+        <header>
+            <h3><img src="assets/icons/help.svg" alt="" class="ico"> Strong</h3>
+            <button class="btn-light" id="closeStrong">Cerrar</button>
+        </header>
+        <div id="strongModalBody" class="stack">
+            <p class="muted">Toca una palabra con código Strong para ver su definición.</p>
         </div>
     </div>
 </div>

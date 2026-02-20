@@ -6,6 +6,7 @@ use App\Services\BibleRepository;
 use App\Services\GenerationService;
 use App\Services\HtmlSanitizer;
 use App\Services\UserDataRepository;
+use App\Support\UserDataScope;
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -28,7 +29,11 @@ if (!is_array($payload)) {
 
 try {
     $repo = new BibleRepository(config('paths.bible'), config('paths.commentary'), new HtmlSanitizer());
-    $userRepo = new UserDataRepository(config('paths.app_db'));
+    $dataScope = UserDataScope::resolve(config());
+    if ($dataScope['personal_db'] !== $dataScope['global_db']) {
+        UserDataScope::ensurePersonalSchema(config(), $dataScope['personal_db']);
+    }
+    $userRepo = new UserDataRepository($dataScope['personal_db'], $dataScope['global_db']);
     $service = new GenerationService(config('ai', []), $userRepo, $repo);
     $result = $service->generate($payload);
     echo json_encode(['ok' => true, 'result' => $result], JSON_UNESCAPED_UNICODE);

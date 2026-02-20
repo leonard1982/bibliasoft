@@ -13,7 +13,7 @@ $dailyPayload = [
             <h1>Más claridad bíblica, menos distracción, más transformación diaria.</h1>
             <p class="muted">Organiza tu lectura, profundiza en cada pasaje y lleva a la práctica la Palabra con una experiencia simple, moderna y totalmente gratuita.</p>
             <div class="toolbar landing-cta">
-                <a class="btn-primary" href="?route=reader">
+                <a class="btn-primary" href="?route=reader&amp;skip_daily=1">
                     <img src="assets/icons/book.svg" alt="" class="ico"> Empezar ahora
                 </a>
                 <a class="btn-light" href="?route=devotional">
@@ -78,13 +78,13 @@ $dailyPayload = [
         <h2><?php echo e($daily['reference']); ?></h2>
         <p class="daily-verse-text"><?php echo e($daily['text']); ?></p>
         <div class="toolbar">
-            <a class="btn-primary" href="?route=reader&amp;book=<?php echo (int) $daily['book']; ?>&amp;chapter=<?php echo (int) $daily['chapter']; ?>&amp;verse=<?php echo (int) $daily['verse']; ?>">
+            <a class="btn-primary" href="?route=reader&amp;book=<?php echo (int) $daily['book']; ?>&amp;chapter=<?php echo (int) $daily['chapter']; ?>&amp;verse=<?php echo (int) $daily['verse']; ?>&amp;skip_daily=1">
                 <img src="assets/icons/book.svg" alt="" class="ico"> Leer contexto
             </a>
             <button class="btn-light" id="shareDailyVerse" type="button">
                 <img src="assets/icons/share.svg" alt="" class="ico"> Compartir
             </button>
-            <a class="btn-light" href="?route=reader">
+            <a class="btn-light" href="?route=reader&amp;skip_daily=1">
                 <img src="assets/icons/menu.svg" alt="" class="ico"> Ir a lectura
             </a>
             <button class="btn-light" id="hideDailyToday" type="button">

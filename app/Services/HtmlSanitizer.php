@@ -20,6 +20,12 @@ class HtmlSanitizer
         'li' => true,
         'blockquote' => true,
     ];
+    private $allowedAttributes = [
+        'span' => [
+            'class' => true,
+            'data-strong' => true,
+        ],
+    ];
 
     public function sanitize($html)
     {
@@ -71,8 +77,36 @@ class HtmlSanitizer
                 }
 
                 if ($child->attributes && $child->attributes->length > 0) {
-                    while ($child->attributes->length > 0) {
-                        $child->removeAttributeNode($child->attributes->item(0));
+                    for ($a = $child->attributes->length - 1; $a >= 0; $a--) {
+                        $attr = $child->attributes->item($a);
+                        if (!$attr instanceof \DOMAttr) {
+                            continue;
+                        }
+                        $attrName = strtolower($attr->nodeName);
+                        $allow = isset($this->allowedAttributes[$tagName][$attrName]);
+                        if (!$allow) {
+                            $child->removeAttributeNode($attr);
+                            continue;
+                        }
+
+                        if ($tagName === 'span' && $attrName === 'class') {
+                            $className = trim((string) $attr->nodeValue);
+                            if ($className !== 'strong-word') {
+                                $child->removeAttributeNode($attr);
+                                continue;
+                            }
+                            $attr->nodeValue = 'strong-word';
+                            continue;
+                        }
+
+                        if ($tagName === 'span' && $attrName === 'data-strong') {
+                            $normalized = $this->normalizeStrongCodes((string) $attr->nodeValue);
+                            if ($normalized === '') {
+                                $child->removeAttributeNode($attr);
+                                continue;
+                            }
+                            $attr->nodeValue = $normalized;
+                        }
                     }
                 }
             }
@@ -88,5 +122,28 @@ class HtmlSanitizer
             $html .= $element->ownerDocument->saveHTML($child);
         }
         return $html;
+    }
+
+    private function normalizeStrongCodes($value)
+    {
+        $raw = strtoupper(trim((string) $value));
+        if ($raw === '') {
+            return '';
+        }
+
+        $tokens = preg_split('/[\s,;]+/', $raw);
+        $codes = [];
+        foreach ($tokens as $token) {
+            if (!preg_match('/^([GH])0*([0-9]{1,5})$/', (string) $token, $m)) {
+                continue;
+            }
+            $number = (int) $m[2];
+            if ($number < 1) {
+                continue;
+            }
+            $codes[$m[1] . $number] = true;
+        }
+
+        return implode(',', array_keys($codes));
     }
 }

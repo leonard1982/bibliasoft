@@ -8,12 +8,15 @@ use PDO;
 class UserDataRepository
 {
     private $appDbPath;
+    private $globalDbPath;
     private $pdo;
+    private $globalPdo;
     private $columnCache = [];
 
-    public function __construct($appDbPath)
+    public function __construct($appDbPath, $globalDbPath = null)
     {
-        $this->appDbPath = $appDbPath;
+        $this->appDbPath = trim((string) $appDbPath);
+        $this->globalDbPath = trim((string) ($globalDbPath !== null ? $globalDbPath : $appDbPath));
     }
 
     public function getNotes($book, $chapter, $verse)
@@ -1059,7 +1062,7 @@ class UserDataRepository
 
     public function hasFtsIndex()
     {
-        $stmt = $this->db()->query("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'fts_index' LIMIT 1");
+        $stmt = $this->globalDb()->query("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'fts_index' LIMIT 1");
         return (bool) $stmt->fetchColumn();
     }
 
@@ -1130,7 +1133,7 @@ class UserDataRepository
                 WHERE ' . implode(' AND ', $where) . '
                 LIMIT ' . $limit;
 
-        $stmt = $this->db()->prepare($sql);
+        $stmt = $this->globalDb()->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll();
     }
@@ -1145,7 +1148,7 @@ class UserDataRepository
             throw new \InvalidArgumentException('La contraseña debe tener al menos 6 caracteres');
         }
 
-        $stmt = $this->db()->prepare(
+        $stmt = $this->globalDb()->prepare(
             'INSERT INTO users (username, password_hash, created_at)
              VALUES (:username, :password_hash, CURRENT_TIMESTAMP)'
         );
@@ -1154,12 +1157,12 @@ class UserDataRepository
             ':password_hash' => password_hash((string) $password, PASSWORD_DEFAULT),
         ]);
 
-        return (int) $this->db()->lastInsertId();
+        return (int) $this->globalDb()->lastInsertId();
     }
 
     public function getUserByUsername($username)
     {
-        $stmt = $this->db()->prepare(
+        $stmt = $this->globalDb()->prepare(
             'SELECT id, username, password_hash, created_at
              FROM users
              WHERE username = :username
@@ -1171,7 +1174,7 @@ class UserDataRepository
 
     public function getUserById($id)
     {
-        $stmt = $this->db()->prepare(
+        $stmt = $this->globalDb()->prepare(
             'SELECT id, username, created_at
              FROM users
              WHERE id = :id
@@ -1200,7 +1203,7 @@ class UserDataRepository
 
     public function countUsers()
     {
-        return (int) $this->db()->query('SELECT COUNT(*) FROM users')->fetchColumn();
+        return (int) $this->globalDb()->query('SELECT COUNT(*) FROM users')->fetchColumn();
     }
 
     public function getAnecdotes(array $filters = [], $limit = 60)
@@ -1228,14 +1231,14 @@ class UserDataRepository
         }
         $sql .= ' ORDER BY id DESC LIMIT ' . $limit;
 
-        $stmt = $this->db()->prepare($sql);
+        $stmt = $this->globalDb()->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll();
     }
 
     public function getAnecdoteTopics()
     {
-        $stmt = $this->db()->query(
+        $stmt = $this->globalDb()->query(
             'SELECT topic, COUNT(*) AS total
              FROM anecdotes
              GROUP BY topic
@@ -1246,12 +1249,12 @@ class UserDataRepository
 
     public function countAnecdotes()
     {
-        return (int) $this->db()->query('SELECT COUNT(*) FROM anecdotes')->fetchColumn();
+        return (int) $this->globalDb()->query('SELECT COUNT(*) FROM anecdotes')->fetchColumn();
     }
 
     public function createAnecdote($topic, $title, $content, $ideaCentral, $application, $source = 'seed')
     {
-        $stmt = $this->db()->prepare(
+        $stmt = $this->globalDb()->prepare(
             'INSERT INTO anecdotes (topic, title, content, idea_central, application, source, created_at)
              VALUES (:topic, :title, :content, :idea_central, :application, :source, CURRENT_TIMESTAMP)'
         );
@@ -1263,7 +1266,7 @@ class UserDataRepository
             ':application' => trim((string) $application),
             ':source' => trim((string) $source),
         ]);
-        return (int) $this->db()->lastInsertId();
+        return (int) $this->globalDb()->lastInsertId();
     }
 
     public function hasAnecdotes()
@@ -1279,7 +1282,7 @@ class UserDataRepository
             return false;
         }
 
-        $stmt = $this->db()->prepare(
+        $stmt = $this->globalDb()->prepare(
             'SELECT id FROM anecdote_favorites WHERE user_id = :user_id AND anecdote_id = :anecdote_id LIMIT 1'
         );
         $stmt->execute([
@@ -1289,12 +1292,12 @@ class UserDataRepository
         $id = (int) $stmt->fetchColumn();
 
         if ($id > 0) {
-            $del = $this->db()->prepare('DELETE FROM anecdote_favorites WHERE id = :id');
+            $del = $this->globalDb()->prepare('DELETE FROM anecdote_favorites WHERE id = :id');
             $del->execute([':id' => $id]);
             return false;
         }
 
-        $ins = $this->db()->prepare(
+        $ins = $this->globalDb()->prepare(
             'INSERT INTO anecdote_favorites (user_id, anecdote_id, created_at)
              VALUES (:user_id, :anecdote_id, CURRENT_TIMESTAMP)'
         );
@@ -1312,7 +1315,7 @@ class UserDataRepository
             return [];
         }
 
-        $stmt = $this->db()->prepare(
+        $stmt = $this->globalDb()->prepare(
             'SELECT anecdote_id FROM anecdote_favorites WHERE user_id = :user_id'
         );
         $stmt->execute([':user_id' => $userId]);
@@ -1395,7 +1398,7 @@ class UserDataRepository
 
     private function isVirtualFtsIndex()
     {
-        $stmt = $this->db()->query("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'fts_index' LIMIT 1");
+        $stmt = $this->globalDb()->query("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'fts_index' LIMIT 1");
         $sql = (string) $stmt->fetchColumn();
         $normalized = strtoupper($sql);
         return strpos($normalized, 'VIRTUAL TABLE') !== false && strpos($normalized, 'FTS5') !== false;
@@ -1420,5 +1423,13 @@ class UserDataRepository
             $this->pdo = ConnectionFactory::sqlite($this->appDbPath);
         }
         return $this->pdo;
+    }
+
+    private function globalDb()
+    {
+        if (!$this->globalPdo instanceof PDO) {
+            $this->globalPdo = ConnectionFactory::sqlite($this->globalDbPath);
+        }
+        return $this->globalPdo;
     }
 }

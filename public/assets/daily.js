@@ -88,7 +88,9 @@
         var endLabel = assignment.end_label || '';
         var rangeLabel = startLabel && endLabel && startLabel !== endLabel ? (startLabel + ' - ' + endLabel) : (startLabel || endLabel || 'Sin lectura asignada');
         var firstChapter = Array.isArray(assignment.chapters) && assignment.chapters.length ? assignment.chapters[0] : null;
-        var openHref = firstChapter ? ('?route=reader&book=' + Number(firstChapter.book) + '&chapter=' + Number(firstChapter.chapter)) : '?route=reader';
+        var openHref = firstChapter
+            ? ('?route=reader&book=' + Number(firstChapter.book) + '&chapter=' + Number(firstChapter.chapter) + '&skip_daily=1')
+            : '?route=reader&skip_daily=1';
         var completedDays = Number(plan.completed_days || 0);
         var totalDays = Number(plan.total_days || 0);
         var progress = Number(plan.progress_percent || 0);

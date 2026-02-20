@@ -13,6 +13,7 @@ return [
         'bible' => dirname(__DIR__) . DIRECTORY_SEPARATOR . (getenv('BIBLE_DB') ?: '01RVR1960x.bbli'),
         'bible_plain' => dirname(__DIR__) . DIRECTORY_SEPARATOR . (getenv('BIBLE_PLAIN_DB') ?: '01RVR1960.bbli'),
         'bible_compare' => dirname(__DIR__) . DIRECTORY_SEPARATOR . (getenv('BIBLE_COMPARE_DB') ?: (getenv('BIBLE_PLAIN_DB') ?: '01RVR1960.bbli')),
+        'bible_strong' => dirname(__DIR__) . DIRECTORY_SEPARATOR . (getenv('BIBLE_STRONG_DB') ?: 'es_rv1909.bbli'),
         'commentary' => dirname(__DIR__) . DIRECTORY_SEPARATOR . (getenv('COMMENTARY_DB') ?: '01RVR1960x.cmti'),
         'lexicon' => dirname(__DIR__) . DIRECTORY_SEPARATOR . (getenv('LEXICON_DB') ?: 'strong.lexx'),
         'devotional' => dirname(__DIR__) . DIRECTORY_SEPARATOR . (getenv('DEVOTIONAL_DB') ?: 'spurgeon.devx'),

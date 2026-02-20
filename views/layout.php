@@ -21,7 +21,7 @@
             </a>
             <nav class="nav" id="mainNav">
                 <a class="nav-link <?php echo $activeRoute === 'home_daily' ? 'is-active' : ''; ?>" href="?route=home_daily"><img src="assets/icons/book.svg" alt="" class="ico"> Inicio</a>
-                <a class="nav-link <?php echo $activeRoute === 'reader' ? 'is-active' : ''; ?>" href="?route=reader"><img src="assets/icons/eye.svg" alt="" class="ico"> Lector</a>
+                <a class="nav-link <?php echo $activeRoute === 'reader' ? 'is-active' : ''; ?>" href="?route=reader&amp;skip_daily=1"><img src="assets/icons/eye.svg" alt="" class="ico"> Lector</a>
                 <a class="nav-link <?php echo $activeRoute === 'devotional' ? 'is-active' : ''; ?>" href="?route=devotional"><img src="assets/icons/text.svg" alt="" class="ico"> Devocionales</a>
                 <a class="nav-link <?php echo $activeRoute === 'share_app' ? 'is-active' : ''; ?>" href="?route=share_app"><img src="assets/icons/share.svg" alt="" class="ico"> Compartir App</a>
                 <a class="nav-link <?php echo $activeRoute === 'anecdotes' ? 'is-active' : ''; ?>" href="?route=anecdotes"><img src="assets/icons/bookmark.svg" alt="" class="ico"> Anécdotas</a>

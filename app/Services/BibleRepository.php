@@ -10,12 +10,25 @@ class BibleRepository
     private $bibleDbPath;
     private $commentaryDbPath;
     private $compareDbPath;
+    private $strongDbPath;
+    private $baseBibleDir;
+    private $primaryLabel;
+    private $compareLabel;
     private $sanitizer;
     private $biblePdo;
     private $commentaryPdo;
     private $comparePdo;
+    private $strongPdo;
+    private $strongChapterCache;
 
-    public function __construct($bibleDbPath, $commentaryDbPath, HtmlSanitizer $sanitizer, $compareDbPath = null)
+    public function __construct(
+        $bibleDbPath,
+        $commentaryDbPath,
+        HtmlSanitizer $sanitizer,
+        $compareDbPath = null,
+        $primaryLabel = null,
+        $compareLabel = null
+    )
     {
         $this->bibleDbPath = $bibleDbPath;
         $this->commentaryDbPath = $commentaryDbPath;
@@ -23,7 +36,72 @@ class BibleRepository
             $compareDbPath = (string) config('paths.bible_compare', '');
         }
         $this->compareDbPath = trim((string) $compareDbPath);
+        $this->baseBibleDir = dirname((string) $this->bibleDbPath);
+        $this->strongDbPath = $this->resolveAuxBiblePath((string) config('paths.bible_strong', ''));
         $this->sanitizer = $sanitizer;
+        $this->strongChapterCache = [];
+        $this->primaryLabel = $this->resolveVersionLabel(
+            $this->bibleDbPath,
+            $primaryLabel,
+            (string) config('versions.primary_label', 'RVR60')
+        );
+        $this->compareLabel = $this->resolveVersionLabel(
+            $this->compareDbPath,
+            $compareLabel,
+            (string) config('versions.compare_label', 'Versión 2')
+        );
+    }
+
+    public function getVersionSelectionPayload()
+    {
+        return [
+            'current' => [
+                'primary_file' => basename((string) $this->bibleDbPath),
+                'compare_file' => basename((string) $this->compareDbPath),
+                'primary_label' => $this->primaryLabel,
+                'compare_label' => $this->compareLabel,
+            ],
+            'versions' => $this->listAvailableBibleVersions(),
+        ];
+    }
+
+    public function listAvailableBibleVersions()
+    {
+        $dir = (string) $this->baseBibleDir;
+        if ($dir === '' || !is_dir($dir)) {
+            return [];
+        }
+
+        $files = glob($dir . DIRECTORY_SEPARATOR . '*.bbli');
+        if (empty($files)) {
+            return [];
+        }
+        sort($files, SORT_NATURAL | SORT_FLAG_CASE);
+
+        $rows = [];
+        foreach ($files as $path) {
+            if (!is_file($path)) {
+                continue;
+            }
+            $meta = $this->readDetailsMeta($path);
+            $file = basename($path);
+            $fallbackLabel = pathinfo($file, PATHINFO_FILENAME);
+            $title = trim((string) ($meta['title'] ?? ''));
+            $abbr = trim((string) ($meta['abbr'] ?? ''));
+
+            $label = $title !== '' ? $title : $fallbackLabel;
+            $rows[] = [
+                'file' => $file,
+                'label' => $label,
+                'title' => $title !== '' ? $title : $label,
+                'abbreviation' => $abbr,
+            ];
+        }
+
+        usort($rows, static function (array $a, array $b): int {
+            return strcasecmp((string) $a['label'], (string) $b['label']);
+        });
+        return $rows;
     }
 
     public function getBooks()
@@ -86,15 +164,8 @@ class BibleRepository
         $available = false;
         $sameSource = false;
         $message = '';
-
-        $primaryLabel = trim((string) config('versions.primary_label', 'RVR60'));
-        if ($primaryLabel === '') {
-            $primaryLabel = 'RVR60';
-        }
-        $compareLabel = trim((string) config('versions.compare_label', 'Versión 2'));
-        if ($compareLabel === '') {
-            $compareLabel = 'Versión 2';
-        }
+        $primaryLabel = $this->primaryLabel;
+        $compareLabel = $this->compareLabel;
 
         $comparePath = trim((string) $this->compareDbPath);
         if ($comparePath === '') {
@@ -132,7 +203,7 @@ class BibleRepository
             if (!$available) {
                 $message = 'La versión de comparación no tiene este capítulo.';
             } elseif ($sameSource) {
-                $message = 'Comparando contra la misma base. Configura BIBLE_COMPARE_DB para otra versión.';
+                $message = 'Comparando contra la misma versión. Selecciona otra en el botón "Versiones".';
             }
         } catch (\Throwable $e) {
             $available = false;
@@ -155,6 +226,8 @@ class BibleRepository
     public function getVersesInRange($book, $chapter, $verseStart, $verseEnd)
     {
         $range = $this->normalizeRange($verseStart, $verseEnd);
+        $book = (int) $book;
+        $chapter = (int) $chapter;
         $stmt = $this->bible()->prepare(
             'SELECT Book, Chapter, Verse, Scripture
              FROM Bible
@@ -162,21 +235,31 @@ class BibleRepository
              ORDER BY Verse ASC'
         );
         $stmt->execute([
-            ':book' => (int) $book,
-            ':chapter' => (int) $chapter,
+            ':book' => $book,
+            ':chapter' => $chapter,
             ':verse_start' => $range['start'],
             ':verse_end' => $range['end'],
         ]);
 
+        $strongFallbackMap = $this->getStrongFallbackChapterMap($book, $chapter);
         $rows = [];
         foreach ($stmt->fetchAll() as $row) {
             $scriptureHtml = $this->sanitizer->sanitize($row['Scripture']);
+            $scriptureText = $this->sanitizer->text($scriptureHtml);
+            $verseNumber = (int) $row['Verse'];
+            $strongMeta = $this->buildStrongAlignmentMeta(
+                $scriptureHtml,
+                $scriptureText,
+                isset($strongFallbackMap[$verseNumber]) ? (string) $strongFallbackMap[$verseNumber] : ''
+            );
             $rows[] = [
                 'book' => (int) $row['Book'],
                 'chapter' => (int) $row['Chapter'],
-                'verse' => (int) $row['Verse'],
+                'verse' => $verseNumber,
                 'scripture_html' => $scriptureHtml,
-                'scripture_text' => $this->sanitizer->text($scriptureHtml),
+                'scripture_text' => $scriptureText,
+                'has_embedded_strong' => $strongMeta['embedded'],
+                'strong_alignment' => $strongMeta['alignment'],
             ];
         }
         return $rows;
@@ -184,13 +267,16 @@ class BibleRepository
 
     public function getVerse($book, $chapter, $verse)
     {
+        $book = (int) $book;
+        $chapter = (int) $chapter;
+        $verse = (int) $verse;
         $stmt = $this->bible()->prepare(
             'SELECT Book, Chapter, Verse, Scripture FROM Bible WHERE Book = :book AND Chapter = :chapter AND Verse = :verse LIMIT 1'
         );
         $stmt->execute([
-            ':book' => (int) $book,
-            ':chapter' => (int) $chapter,
-            ':verse' => (int) $verse,
+            ':book' => $book,
+            ':chapter' => $chapter,
+            ':verse' => $verse,
         ]);
         $row = $stmt->fetch();
         if (!$row) {
@@ -198,12 +284,21 @@ class BibleRepository
         }
 
         $scriptureHtml = $this->sanitizer->sanitize($row['Scripture']);
+        $scriptureText = $this->sanitizer->text($scriptureHtml);
+        $strongFallbackMap = $this->getStrongFallbackChapterMap($book, $chapter);
+        $strongMeta = $this->buildStrongAlignmentMeta(
+            $scriptureHtml,
+            $scriptureText,
+            isset($strongFallbackMap[$verse]) ? (string) $strongFallbackMap[$verse] : ''
+        );
         return [
             'book' => (int) $row['Book'],
             'chapter' => (int) $row['Chapter'],
             'verse' => (int) $row['Verse'],
             'scripture_html' => $scriptureHtml,
-            'scripture_text' => $this->sanitizer->text($scriptureHtml),
+            'scripture_text' => $scriptureText,
+            'has_embedded_strong' => $strongMeta['embedded'],
+            'strong_alignment' => $strongMeta['alignment'],
             'raw_scripture' => (string) $row['Scripture'],
         ];
     }
@@ -533,6 +628,37 @@ class BibleRepository
         return $this->getBookName($book) . ' ' . (int) $chapter . ':' . $range['start'] . '-' . $range['end'];
     }
 
+    public function getInterlinearRange($book, $chapter, $verseStart, $verseEnd)
+    {
+        $range = $this->normalizeRange($verseStart, $verseEnd);
+        $rows = $this->getVersesInRange($book, $chapter, $range['start'], $range['end']);
+        $output = [];
+
+        foreach ($rows as $row) {
+            $alignment = isset($row['strong_alignment']) && is_array($row['strong_alignment'])
+                ? $row['strong_alignment']
+                : [];
+            $tokens = $this->buildInterlinearTokens((string) ($row['scripture_text'] ?? ''), $alignment);
+            $tokens = array_values(array_filter($tokens, static function (array $token): bool {
+                return trim((string) ($token['code'] ?? '')) !== '';
+            }));
+
+            $output[] = [
+                'book' => (int) ($row['book'] ?? 0),
+                'chapter' => (int) ($row['chapter'] ?? 0),
+                'verse' => (int) ($row['verse'] ?? 0),
+                'reference' => $this->buildReferenceLabel(
+                    (int) ($row['book'] ?? 0),
+                    (int) ($row['chapter'] ?? 0),
+                    (int) ($row['verse'] ?? 0)
+                ),
+                'tokens' => $tokens,
+            ];
+        }
+
+        return $output;
+    }
+
     private function normalizeRange($a, $b)
     {
         $a = max(1, (int) $a);
@@ -611,6 +737,25 @@ class BibleRepository
         return $this->commentaryPdo;
     }
 
+    private function strongBible()
+    {
+        if ($this->strongPdo instanceof PDO) {
+            return $this->strongPdo;
+        }
+
+        if ($this->strongDbPath === '' || !is_file($this->strongDbPath)) {
+            return null;
+        }
+
+        try {
+            $this->strongPdo = ConnectionFactory::sqlite($this->strongDbPath);
+        } catch (\Throwable $e) {
+            return null;
+        }
+
+        return $this->strongPdo;
+    }
+
     private function bookNames()
     {
         return [
@@ -632,25 +777,307 @@ class BibleRepository
 
     private function chapterVersesFromPdo(PDO $pdo, $book, $chapter)
     {
+        $book = (int) $book;
+        $chapter = (int) $chapter;
         $stmt = $pdo->prepare(
             'SELECT Book, Chapter, Verse, Scripture FROM Bible WHERE Book = :book AND Chapter = :chapter ORDER BY Verse ASC'
         );
         $stmt->execute([
-            ':book' => (int) $book,
-            ':chapter' => (int) $chapter,
+            ':book' => $book,
+            ':chapter' => $chapter,
         ]);
 
+        $strongFallbackMap = $this->getStrongFallbackChapterMap($book, $chapter);
         $rows = [];
         foreach ($stmt->fetchAll() as $row) {
             $scriptureHtml = $this->sanitizer->sanitize($row['Scripture']);
+            $scriptureText = $this->sanitizer->text($scriptureHtml);
+            $verseNumber = (int) $row['Verse'];
+            $strongMeta = $this->buildStrongAlignmentMeta(
+                $scriptureHtml,
+                $scriptureText,
+                isset($strongFallbackMap[$verseNumber]) ? (string) $strongFallbackMap[$verseNumber] : ''
+            );
             $rows[] = [
                 'book' => (int) $row['Book'],
                 'chapter' => (int) $row['Chapter'],
-                'verse' => (int) $row['Verse'],
+                'verse' => $verseNumber,
                 'scripture_html' => $scriptureHtml,
-                'scripture_text' => $this->sanitizer->text($scriptureHtml),
+                'scripture_text' => $scriptureText,
+                'has_embedded_strong' => $strongMeta['embedded'],
+                'strong_alignment' => $strongMeta['alignment'],
             ];
         }
         return $rows;
+    }
+
+    private function getStrongFallbackChapterMap($book, $chapter)
+    {
+        $book = (int) $book;
+        $chapter = (int) $chapter;
+        if ($book < 1 || $chapter < 1) {
+            return [];
+        }
+
+        $pdo = $this->strongBible();
+        if (!$pdo instanceof PDO) {
+            return [];
+        }
+
+        $cacheKey = $book . ':' . $chapter;
+        if (isset($this->strongChapterCache[$cacheKey])) {
+            return $this->strongChapterCache[$cacheKey];
+        }
+
+        $stmt = $pdo->prepare(
+            'SELECT Verse, Scripture FROM Bible WHERE Book = :book AND Chapter = :chapter ORDER BY Verse ASC'
+        );
+        $stmt->execute([
+            ':book' => $book,
+            ':chapter' => $chapter,
+        ]);
+
+        $map = [];
+        foreach ($stmt->fetchAll() as $row) {
+            $verse = (int) ($row['Verse'] ?? 0);
+            if ($verse < 1) {
+                continue;
+            }
+            $map[$verse] = $this->sanitizer->sanitize((string) ($row['Scripture'] ?? ''));
+        }
+
+        $this->strongChapterCache[$cacheKey] = $map;
+        return $map;
+    }
+
+    private function buildStrongAlignmentMeta($scriptureHtml, $scriptureText, $fallbackHtml = '')
+    {
+        $pairs = $this->extractStrongPairsFromHtml((string) $scriptureHtml);
+        $embedded = !empty($pairs);
+
+        if (empty($pairs) && trim((string) $fallbackHtml) !== '') {
+            $pairs = $this->extractStrongPairsFromHtml((string) $fallbackHtml);
+        }
+
+        if (empty($pairs)) {
+            return [
+                'embedded' => false,
+                'alignment' => [],
+            ];
+        }
+
+        return [
+            'embedded' => $embedded,
+            'alignment' => $this->alignDisplayWordsToPairs((string) $scriptureText, $pairs),
+        ];
+    }
+
+    private function buildInterlinearTokens($scriptureText, array $alignment)
+    {
+        $words = $this->tokenizeWords((string) $scriptureText);
+        $tokens = [];
+        foreach ($words as $idx => $word) {
+            $tokens[] = [
+                'word' => (string) $word,
+                'code' => isset($alignment[$idx]) ? trim((string) $alignment[$idx]) : '',
+            ];
+        }
+        return $tokens;
+    }
+
+    private function alignDisplayWordsToPairs($displayText, array $pairs)
+    {
+        $displayWords = $this->tokenizeWords((string) $displayText);
+        if (empty($displayWords)) {
+            return [];
+        }
+
+        $codesSequence = [];
+        foreach ($pairs as $pair) {
+            $codes = isset($pair['codes']) && is_array($pair['codes']) ? $pair['codes'] : [];
+            if (empty($codes)) {
+                continue;
+            }
+            $word = isset($pair['word']) ? (string) $pair['word'] : '';
+            $wordCount = count($this->tokenizeWords($word));
+            if ($wordCount < 1) {
+                $wordCount = 1;
+            }
+            $codeValue = implode(',', $codes);
+            for ($i = 0; $i < $wordCount; $i++) {
+                $codesSequence[] = $codeValue;
+            }
+        }
+
+        if (empty($codesSequence)) {
+            return [];
+        }
+
+        $alignment = array_fill(0, count($displayWords), '');
+        $displayCount = count($displayWords);
+        $codesCount = count($codesSequence);
+        $offset = 0;
+        if ($displayCount > $codesCount) {
+            // Heurística: algunos versos incluyen títulos introductorios sin Strong.
+            // Alineamos desde el final para no desplazar los códigos principales.
+            $offset = $displayCount - $codesCount;
+        }
+        $limit = min($codesCount, $displayCount - $offset);
+        for ($i = 0; $i < $limit; $i++) {
+            $alignment[$offset + $i] = $codesSequence[$i];
+        }
+
+        return $alignment;
+    }
+
+    private function extractStrongPairsFromHtml($html)
+    {
+        $html = trim((string) $html);
+        if ($html === '' || strpos($html, 'data-strong=') === false) {
+            return [];
+        }
+
+        $doc = new \DOMDocument('1.0', 'UTF-8');
+        libxml_use_internal_errors(true);
+        $doc->loadHTML(
+            '<?xml encoding="UTF-8"><div id="root">' . $html . '</div>',
+            LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+        );
+        libxml_clear_errors();
+
+        $xpath = new \DOMXPath($doc);
+        $nodes = $xpath->query('//*[@data-strong]');
+        if (!$nodes) {
+            return [];
+        }
+
+        $pairs = [];
+        foreach ($nodes as $node) {
+            if (!$node instanceof \DOMElement) {
+                continue;
+            }
+            $codes = $this->normalizeStrongCodes((string) $node->getAttribute('data-strong'));
+            if (empty($codes)) {
+                continue;
+            }
+            $word = $this->sanitizer->text($node->textContent);
+            if ($word === '') {
+                continue;
+            }
+            $pairs[] = [
+                'word' => $word,
+                'codes' => $codes,
+            ];
+        }
+
+        return $pairs;
+    }
+
+    private function normalizeStrongCodes($raw)
+    {
+        $raw = strtoupper(trim((string) $raw));
+        if ($raw === '') {
+            return [];
+        }
+
+        $tokens = preg_split('/[\s,;]+/', $raw);
+        $codes = [];
+        foreach ($tokens as $token) {
+            if (!preg_match('/^([GH])0*([0-9]{1,5})$/', (string) $token, $m)) {
+                continue;
+            }
+            $number = (int) $m[2];
+            if ($number < 1) {
+                continue;
+            }
+            $codes[$m[1] . $number] = true;
+        }
+
+        return array_keys($codes);
+    }
+
+    private function tokenizeWords($text)
+    {
+        $text = trim((string) $text);
+        if ($text === '') {
+            return [];
+        }
+
+        if (preg_match_all('/[\p{L}\p{N}]+(?:[\'’][\p{L}\p{N}]+)*/u', $text, $m)) {
+            return isset($m[0]) ? $m[0] : [];
+        }
+        return [];
+    }
+
+    private function resolveAuxBiblePath($requestedPath)
+    {
+        $requestedPath = trim((string) $requestedPath);
+        if ($requestedPath === '') {
+            return '';
+        }
+
+        if (is_file($requestedPath)) {
+            return $requestedPath;
+        }
+
+        $candidate = $this->baseBibleDir . DIRECTORY_SEPARATOR . basename($requestedPath);
+        if (is_file($candidate)) {
+            return $candidate;
+        }
+
+        return '';
+    }
+
+    private function resolveVersionLabel($dbPath, $preferredLabel, $fallbackLabel)
+    {
+        $preferredLabel = trim((string) $preferredLabel);
+        if ($preferredLabel !== '') {
+            return $preferredLabel;
+        }
+
+        $meta = $this->readDetailsMeta((string) $dbPath);
+        $title = trim((string) ($meta['title'] ?? ''));
+        $abbr = trim((string) ($meta['abbr'] ?? ''));
+        if ($title !== '') {
+            return $title;
+        }
+        if ($abbr !== '') {
+            return $abbr;
+        }
+
+        $fallbackLabel = trim((string) $fallbackLabel);
+        if ($fallbackLabel !== '') {
+            return $fallbackLabel;
+        }
+
+        $name = basename((string) $dbPath);
+        if ($name !== '') {
+            return pathinfo($name, PATHINFO_FILENAME);
+        }
+        return 'Biblia';
+    }
+
+    private function readDetailsMeta($dbPath)
+    {
+        $dbPath = trim((string) $dbPath);
+        if ($dbPath === '' || !is_file($dbPath)) {
+            return [];
+        }
+
+        try {
+            $pdo = ConnectionFactory::sqlite($dbPath);
+            $stmt = $pdo->query('SELECT Title, Abbreviation FROM Details LIMIT 1');
+            $row = $stmt ? $stmt->fetch() : false;
+            if (!$row) {
+                return [];
+            }
+
+            return [
+                'title' => isset($row['Title']) ? (string) $row['Title'] : '',
+                'abbr' => isset($row['Abbreviation']) ? (string) $row['Abbreviation'] : '',
+            ];
+        } catch (\Throwable $e) {
+            return [];
+        }
     }
 }

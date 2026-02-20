@@ -7,7 +7,7 @@
         <p>Total de anécdotas guardadas: <?php echo (int) $anecdotesCount; ?></p>
     </div>
     <div class="toolbar">
-        <a class="btn-light" href="?route=reader">Ir al lector</a>
+        <a class="btn-light" href="?route=reader&amp;skip_daily=1">Ir al lector</a>
         <a class="btn-light" href="?route=logout">Cerrar sesión</a>
     </div>
 </section>

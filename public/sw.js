@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'biblia-soft-v25';
+const CACHE_VERSION = 'biblia-soft-v32';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -20,6 +20,11 @@ const STATIC_ASSETS = [
   './assets/icons/facebook.svg',
   './assets/icons/help.svg',
   './assets/icons/list.svg',
+  './assets/icons/search.svg',
+  './assets/icons/calendar.svg',
+  './assets/icons/columns.svg',
+  './assets/icons/layers.svg',
+  './assets/icons/interlinear.svg',
   './assets/icons/login.svg',
   './assets/icons/register.svg',
   './assets/icons/menu.svg',

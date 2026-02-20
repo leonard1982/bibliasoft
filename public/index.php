@@ -21,19 +21,74 @@ use App\Services\HtmlSanitizer;
 use App\Services\ImageCardService;
 use App\Services\ReadingPlanService;
 use App\Services\SearchService;
+use App\Services\StrongLexiconService;
 use App\Services\UserDataRepository;
+use App\Support\UserDataScope;
+
+$defaultBiblePath = (string) config('paths.bible');
+$defaultComparePath = (string) config('paths.bible_compare');
+$bibleBaseDir = dirname($defaultBiblePath);
+
+$resolveBiblePath = static function ($requestedFile, $fallbackPath) use ($bibleBaseDir) {
+    $requestedFile = basename(trim((string) $requestedFile));
+    $fallbackPath = trim((string) $fallbackPath);
+
+    if ($requestedFile !== '' && preg_match('/\.bbli$/i', $requestedFile)) {
+        $candidate = $bibleBaseDir . DIRECTORY_SEPARATOR . $requestedFile;
+        if (is_file($candidate)) {
+            return $candidate;
+        }
+    }
+
+    if ($fallbackPath !== '' && is_file($fallbackPath)) {
+        return $fallbackPath;
+    }
+
+    $fallbackFile = basename($fallbackPath);
+    if ($fallbackFile !== '' && preg_match('/\.bbli$/i', $fallbackFile)) {
+        $candidate = $bibleBaseDir . DIRECTORY_SEPARATOR . $fallbackFile;
+        if (is_file($candidate)) {
+            return $candidate;
+        }
+    }
+
+    $catalog = glob($bibleBaseDir . DIRECTORY_SEPARATOR . '*.bbli');
+    if (!empty($catalog)) {
+        sort($catalog, SORT_NATURAL | SORT_FLAG_CASE);
+        return $catalog[0];
+    }
+
+    return $fallbackPath;
+};
+
+$selectedPrimaryFile = isset($_SESSION['bible_primary_file']) ? (string) $_SESSION['bible_primary_file'] : '';
+$selectedCompareFile = isset($_SESSION['bible_compare_file']) ? (string) $_SESSION['bible_compare_file'] : '';
+
+$resolvedBiblePath = $resolveBiblePath($selectedPrimaryFile, $defaultBiblePath);
+$resolvedComparePath = $resolveBiblePath($selectedCompareFile, $defaultComparePath);
+
+$_SESSION['bible_primary_file'] = basename((string) $resolvedBiblePath);
+$_SESSION['bible_compare_file'] = basename((string) $resolvedComparePath);
 
 $sanitizer = new HtmlSanitizer();
 $bibleRepository = new BibleRepository(
-    config('paths.bible'),
+    $resolvedBiblePath,
     config('paths.commentary'),
     $sanitizer,
-    config('paths.bible_compare')
+    $resolvedComparePath
 );
-$userDataRepository = new UserDataRepository(config('paths.app_db'));
+$dataScope = UserDataScope::resolve(config());
+if ($dataScope['personal_db'] !== $dataScope['global_db']) {
+    UserDataScope::ensurePersonalSchema(config(), $dataScope['personal_db']);
+}
+$userDataRepository = new UserDataRepository($dataScope['personal_db'], $dataScope['global_db']);
 $searchService = new SearchService($bibleRepository, $userDataRepository, $sanitizer);
 $aiService = new AIService(config('ai', []), $userDataRepository);
 $readingPlanService = new ReadingPlanService($bibleRepository, $userDataRepository);
+$strongLexiconService = new StrongLexiconService(
+    config('paths.lexicon'),
+    config('app.base_path') . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'strong.sqlite'
+);
 $imageCardService = new ImageCardService();
 $dailyVerseService = new DailyVerseService(
     config('paths.bible'),
@@ -72,7 +127,8 @@ $apiController = new ApiController(
     $devotionalService,
     $dailyVerseService,
     $anecdoteService,
-    $readingPlanService
+    $readingPlanService,
+    $strongLexiconService
 );
 
 $route = isset($_GET['route']) ? $_GET['route'] : 'home_daily';
@@ -148,6 +204,14 @@ try {
             $apiController->chapterParallel();
             break;
 
+        case 'api.versions.list':
+            $apiController->versionsList();
+            break;
+
+        case 'api.versions.set':
+            $apiController->versionsSet();
+            break;
+
         case 'api.chapters':
             $apiController->chapters();
             break;
@@ -162,6 +226,14 @@ try {
 
         case 'api.search':
             $apiController->search();
+            break;
+
+        case 'api.strong.lookup':
+            $apiController->strongLookup();
+            break;
+
+        case 'api.interlinear':
+            $apiController->interlinear();
             break;
 
         case 'api.devotional.generate':

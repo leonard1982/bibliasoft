@@ -56,6 +56,7 @@ class ReaderController
             'backgrounds' => $this->imageCardService->getBackgrounds(),
             'userPrefs' => $this->userDataRepository->getUserPrefs(),
             'openSearch' => $openSearch ? 1 : 0,
+            'versions' => $this->bibleRepository->getVersionSelectionPayload(),
         ]);
     }
 }

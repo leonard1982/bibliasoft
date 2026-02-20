@@ -9,6 +9,7 @@ use App\Services\DailyVerseService;
 use App\Services\DevotionalService;
 use App\Services\ReadingPlanService;
 use App\Services\SearchService;
+use App\Services\StrongLexiconService;
 use App\Services\UserDataRepository;
 
 class ApiController
@@ -21,6 +22,7 @@ class ApiController
     private $dailyVerseService;
     private $anecdoteService;
     private $readingPlanService;
+    private $strongLexiconService;
 
     public function __construct(
         BibleRepository $bibleRepository,
@@ -30,7 +32,8 @@ class ApiController
         DevotionalService $devotionalService,
         DailyVerseService $dailyVerseService,
         AnecdoteService $anecdoteService,
-        ReadingPlanService $readingPlanService
+        ReadingPlanService $readingPlanService,
+        StrongLexiconService $strongLexiconService
     ) {
         $this->bibleRepository = $bibleRepository;
         $this->userDataRepository = $userDataRepository;
@@ -40,6 +43,7 @@ class ApiController
         $this->dailyVerseService = $dailyVerseService;
         $this->anecdoteService = $anecdoteService;
         $this->readingPlanService = $readingPlanService;
+        $this->strongLexiconService = $strongLexiconService;
     }
 
     public function verse()
@@ -118,6 +122,61 @@ class ApiController
         app_json([
             'ok' => true,
             'parallel' => $parallel,
+        ]);
+    }
+
+    public function versionsList()
+    {
+        app_json([
+            'ok' => true,
+            'versions' => $this->bibleRepository->getVersionSelectionPayload(),
+        ]);
+    }
+
+    public function versionsSet()
+    {
+        $input = $this->requestData();
+        $payload = $this->bibleRepository->getVersionSelectionPayload();
+        $catalog = isset($payload['versions']) && is_array($payload['versions']) ? $payload['versions'] : [];
+        $current = isset($payload['current']) && is_array($payload['current']) ? $payload['current'] : [];
+
+        $allowedFiles = [];
+        foreach ($catalog as $row) {
+            $file = isset($row['file']) ? basename((string) $row['file']) : '';
+            if ($file !== '') {
+                $allowedFiles[$file] = true;
+            }
+        }
+        if (empty($allowedFiles)) {
+            app_json(['error' => 'No hay versiones disponibles para seleccionar.'], 422);
+        }
+
+        $primary = isset($input['primary_file']) ? basename(trim((string) $input['primary_file'])) : '';
+        $compare = isset($input['compare_file']) ? basename(trim((string) $input['compare_file'])) : '';
+
+        if ($primary === '') {
+            $primary = basename((string) ($current['primary_file'] ?? ''));
+        }
+        if ($compare === '') {
+            $compare = basename((string) ($current['compare_file'] ?? ''));
+        }
+
+        if ($primary === '' || !isset($allowedFiles[$primary])) {
+            app_json(['error' => 'Versión principal inválida.'], 422);
+        }
+        if ($compare === '' || !isset($allowedFiles[$compare])) {
+            $compare = $primary;
+        }
+
+        $_SESSION['bible_primary_file'] = $primary;
+        $_SESSION['bible_compare_file'] = $compare;
+
+        app_json([
+            'ok' => true,
+            'selected' => [
+                'primary_file' => $primary,
+                'compare_file' => $compare,
+            ],
         ]);
     }
 
@@ -447,6 +506,122 @@ class ApiController
         }
 
         app_json($result);
+    }
+
+    public function strongLookup()
+    {
+        $codesRaw = isset($_GET['codes']) ? trim((string) $_GET['codes']) : '';
+        if ($codesRaw === '') {
+            $single = isset($_GET['code']) ? trim((string) $_GET['code']) : '';
+            $codesRaw = $single;
+        }
+
+        $codes = $this->parseStrongCodes($codesRaw);
+        if (empty($codes)) {
+            app_json(['error' => 'Código Strong inválido'], 422);
+        }
+
+        if (!$this->strongLexiconService->available()) {
+            app_json([
+                'error' => 'Léxico Strong no disponible. Ejecute: php scripts/build_strongs_lexicon.php',
+            ], 503);
+        }
+
+        $entries = $this->strongLexiconService->lookupMany($codes);
+        app_json([
+            'ok' => true,
+            'codes' => $codes,
+            'entries' => $entries,
+        ]);
+    }
+
+    public function interlinear()
+    {
+        $book = isset($_GET['book']) ? (int) $_GET['book'] : 0;
+        $chapter = isset($_GET['chapter']) ? (int) $_GET['chapter'] : 0;
+        $verseStart = isset($_GET['verse_start']) ? (int) $_GET['verse_start'] : (isset($_GET['verse']) ? (int) $_GET['verse'] : 0);
+        $verseEnd = isset($_GET['verse_end']) ? (int) $_GET['verse_end'] : $verseStart;
+
+        if ($book < 1 || $chapter < 1 || $verseStart < 1 || $verseEnd < 1) {
+            app_json(['error' => 'Parámetros inválidos'], 422);
+        }
+
+        if ($verseStart > $verseEnd) {
+            $tmp = $verseStart;
+            $verseStart = $verseEnd;
+            $verseEnd = $tmp;
+        }
+        if (($verseEnd - $verseStart) > 20) {
+            app_json(['error' => 'Rango demasiado amplio para interlineal (máx. 20 versículos).'], 422);
+        }
+
+        $rows = $this->bibleRepository->getInterlinearRange($book, $chapter, $verseStart, $verseEnd);
+        if (empty($rows)) {
+            app_json(['error' => 'No se pudo construir el interlineal para este rango.'], 404);
+        }
+
+        $uniqueCodes = [];
+        foreach ($rows as $row) {
+            $tokens = isset($row['tokens']) && is_array($row['tokens']) ? $row['tokens'] : [];
+            foreach ($tokens as $token) {
+                $codeList = $this->parseStrongCodes((string) ($token['code'] ?? ''));
+                foreach ($codeList as $code) {
+                    $uniqueCodes[$code] = true;
+                }
+            }
+        }
+        $catalog = [];
+        if (!empty($uniqueCodes) && $this->strongLexiconService->available()) {
+            $entries = $this->strongLexiconService->lookupMany(array_keys($uniqueCodes));
+            foreach ($entries as $entry) {
+                $code = strtoupper(trim((string) ($entry['code'] ?? '')));
+                if ($code !== '') {
+                    $catalog[$code] = $entry;
+                }
+            }
+        }
+
+        $normalizedRows = [];
+        foreach ($rows as $row) {
+            $tokensOut = [];
+            $tokens = isset($row['tokens']) && is_array($row['tokens']) ? $row['tokens'] : [];
+            foreach ($tokens as $token) {
+                $word = trim((string) ($token['word'] ?? ''));
+                $codeRaw = trim((string) ($token['code'] ?? ''));
+                if ($word === '' || $codeRaw === '') {
+                    continue;
+                }
+                $codeList = $this->parseStrongCodes($codeRaw);
+                if (empty($codeList)) {
+                    continue;
+                }
+
+                $tokenEntries = [];
+                foreach ($codeList as $code) {
+                    if (isset($catalog[$code])) {
+                        $tokenEntries[] = $catalog[$code];
+                    }
+                }
+                $tokensOut[] = [
+                    'word' => $word,
+                    'code' => implode(',', $codeList),
+                    'entries' => $tokenEntries,
+                ];
+            }
+
+            $normalizedRows[] = [
+                'book' => (int) ($row['book'] ?? 0),
+                'chapter' => (int) ($row['chapter'] ?? 0),
+                'verse' => (int) ($row['verse'] ?? 0),
+                'reference' => (string) ($row['reference'] ?? ''),
+                'tokens' => $tokensOut,
+            ];
+        }
+
+        app_json([
+            'ok' => true,
+            'rows' => $normalizedRows,
+        ]);
     }
 
     public function devotionalGenerate()
@@ -1053,5 +1228,25 @@ class ApiController
     private function isValidHighlightColor($color)
     {
         return in_array((string) $color, ['yellow', 'green', 'blue', 'pink', 'orange'], true);
+    }
+
+    private function parseStrongCodes($raw)
+    {
+        $raw = strtoupper(trim((string) $raw));
+        if ($raw === '') {
+            return [];
+        }
+
+        $tokens = preg_split('/[\s,;]+/', $raw);
+        $codes = [];
+        foreach ($tokens as $token) {
+            $normalized = $this->strongLexiconService->normalizeCode((string) $token);
+            if ($normalized === '') {
+                continue;
+            }
+            $codes[$normalized] = true;
+        }
+
+        return array_keys($codes);
     }
 }
