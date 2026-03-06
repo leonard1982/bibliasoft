@@ -47,9 +47,51 @@
         versionPrimaryFile: '',
         versionCompareFile: '',
         strongCache: {},
+        generatedByMode: {},
+        latestDevotionalExport: null,
+        cloudSyncStatus: null,
+        statsPanel: null,
+        statsLoading: false,
+        statsLoaded: false,
+        statsError: '',
+        readingTracker: {
+            lastTickMs: 0,
+            unsentSeconds: 0,
+            sending: false,
+            intervalId: null
+        },
+        auth: {
+            isLogged: false,
+            username: ''
+        },
+        branding: {
+            appName: 'Biblia para todos',
+            churchName: '',
+            logoPath: 'assets/branding/logo_bibliasoft.png'
+        },
+        audio: {
+            supported: isAudioTtsSupported(),
+            source: 'chapter',
+            rate: 1,
+            voiceUri: '',
+            voices: [],
+            speaking: false,
+            paused: false,
+            queue: [],
+            queueIndex: 0,
+            currentReference: ''
+        },
+        preach: {
+            timerRunning: false,
+            timerStartedAt: 0,
+            timerElapsedMs: 0,
+            timerTickId: null,
+            markersByChapter: {}
+        },
         preachBackup: null,
         settings: {
             showHelp: true,
+            autoTourOnStart: true,
             layoutMode: 'columns',
             fontSize: 'md',
             spacing: 'normal',
@@ -62,6 +104,10 @@
             reminderTime: '07:00',
             preachMode: false,
             parallelMode: false
+        },
+        guide: {
+            activeStep: 0,
+            focusSelector: ''
         }
     };
 
@@ -78,7 +124,10 @@
         openQuickSearch: document.getElementById('openQuickSearch'),
         openReadingPlan: document.getElementById('openReadingPlan'),
         openVersions: document.getElementById('openVersions'),
+        openModules: document.getElementById('openModules'),
         openInterlinear: document.getElementById('openInterlinear'),
+        openAudio: document.getElementById('openAudio'),
+        openGuideTour: document.getElementById('openGuideTour'),
         toggleParallel: document.getElementById('toggleParallel'),
         toggleHelp: document.getElementById('toggleHelp'),
         togglePreachMode: document.getElementById('togglePreachMode'),
@@ -89,37 +138,141 @@
         preachNextChapter: document.getElementById('preachNextChapter'),
         preachVerseJump: document.getElementById('preachVerseJump'),
         preachGoVerse: document.getElementById('preachGoVerse'),
+        preachTimerDisplay: document.getElementById('preachTimerDisplay'),
+        preachTimerToggle: document.getElementById('preachTimerToggle'),
+        preachTimerReset: document.getElementById('preachTimerReset'),
+        preachSetMarker1: document.getElementById('preachSetMarker1'),
+        preachGoMarker1: document.getElementById('preachGoMarker1'),
+        preachSetMarker2: document.getElementById('preachSetMarker2'),
+        preachGoMarker2: document.getElementById('preachGoMarker2'),
+        preachSetMarker3: document.getElementById('preachSetMarker3'),
+        preachGoMarker3: document.getElementById('preachGoMarker3'),
         readerPlanCard: document.getElementById('readerPlanCard'),
         settingsModal: document.getElementById('settingsModal'),
         searchModal: document.getElementById('searchModal'),
         planModal: document.getElementById('planModal'),
         versionsModal: document.getElementById('versionsModal'),
+        modulesModal: document.getElementById('modulesModal'),
         interlinearModal: document.getElementById('interlinearModal'),
+        guideModal: document.getElementById('guideModal'),
         strongModal: document.getElementById('strongModal'),
+        audioModal: document.getElementById('audioModal'),
         readerShell: root.querySelector('.reader-shell'),
         openSettings: document.getElementById('openSettings'),
         closeSettings: document.getElementById('closeSettings'),
         closeSearch: document.getElementById('closeSearch'),
         closePlan: document.getElementById('closePlan'),
         closeVersions: document.getElementById('closeVersions'),
+        closeModules: document.getElementById('closeModules'),
         closeInterlinear: document.getElementById('closeInterlinear'),
         closeStrong: document.getElementById('closeStrong'),
+        closeAudio: document.getElementById('closeAudio'),
         versionPrimarySelect: document.getElementById('versionPrimarySelect'),
         versionCompareSelect: document.getElementById('versionCompareSelect'),
         saveVersions: document.getElementById('saveVersions'),
         copySelection: document.getElementById('copySelection'),
         copyParagraph: document.getElementById('copyParagraph'),
         shareSelection: document.getElementById('shareSelection'),
+        shareWhatsApp: document.getElementById('shareWhatsApp'),
+        shareFacebook: document.getElementById('shareFacebook'),
+        modulesList: document.getElementById('modulesList'),
+        modulesDictQuery: document.getElementById('modulesDictQuery'),
+        modulesDictSearch: document.getElementById('modulesDictSearch'),
+        modulesDictResults: document.getElementById('modulesDictResults'),
         quickSearchForm: document.getElementById('quickSearchForm'),
+        qTheme: document.getElementById('qTheme'),
+        qThemeSearch: document.getElementById('qThemeSearch'),
+        qThemeToggle: document.getElementById('qThemeToggle'),
+        qThemePanel: document.getElementById('qThemePanel'),
+        qThemeOptions: document.getElementById('qThemeOptions'),
+        qThemeLabel: document.getElementById('qThemeLabel'),
+        runThemeSearch: document.getElementById('runThemeSearch'),
         quickSearchResults: document.getElementById('quickSearchResults'),
         contextPanel: document.getElementById('contextPanel'),
         commentsPanel: document.getElementById('commentsPanel'),
         notesPanel: document.getElementById('notesPanel'),
         linksPanel: document.getElementById('linksPanel'),
         toolsPanel: document.getElementById('toolsPanel'),
+        guidePanel: document.getElementById('guidePanel'),
         interlinearModalBody: document.getElementById('interlinearModalBody'),
-        strongModalBody: document.getElementById('strongModalBody')
+        closeGuide: document.getElementById('closeGuide'),
+        guideTourStepLabel: document.getElementById('guideTourStepLabel'),
+        guideTourTitle: document.getElementById('guideTourTitle'),
+        guideTourText: document.getElementById('guideTourText'),
+        guideTourHint: document.getElementById('guideTourHint'),
+        guidePrevStep: document.getElementById('guidePrevStep'),
+        guideNextStep: document.getElementById('guideNextStep'),
+        guideGoTarget: document.getElementById('guideGoTarget'),
+        guideHideOnStart: document.getElementById('guideHideOnStart'),
+        strongModalBody: document.getElementById('strongModalBody'),
+        audioSource: document.getElementById('audioSource'),
+        audioVoice: document.getElementById('audioVoice'),
+        audioRate: document.getElementById('audioRate'),
+        audioRateLabel: document.getElementById('audioRateLabel'),
+        audioTargetInfo: document.getElementById('audioTargetInfo'),
+        audioPlay: document.getElementById('audioPlay'),
+        audioPauseResume: document.getElementById('audioPauseResume'),
+        audioStop: document.getElementById('audioStop'),
+        audioStatus: document.getElementById('audioStatus')
     };
+
+    var STRONG_MORPH_GLOSSARY = [
+        { pattern: /\bdual\s+de\s+sing(?:ular)?\.?\b/i, label: 'dual de sing', meaning: 'Forma dual derivada de un término en singular (dos elementos relacionados).' },
+        { pattern: /\bplu?r\.?\s+de\s+sing(?:ular)?\.?\b/i, label: 'plur de sing', meaning: 'Forma plural derivada de un término en singular.' },
+        { pattern: /\bfem\.?\s+de\s+masc\b/i, label: 'fem de masc', meaning: 'Forma femenina derivada de una base masculina.' },
+        { pattern: /\bpart\.?\s+act\b/i, label: 'part act', meaning: 'Participio activo: acción en curso realizada por el sujeto.' },
+        { pattern: /\bpart\.?\s+pas\b/i, label: 'part pas', meaning: 'Participio pasivo: acción recibida por el sujeto.' },
+        { pattern: /\bimperf\b/i, label: 'imperf', meaning: 'Tiempo imperfecto: acción continua, repetida o no concluida.' },
+        { pattern: /\baor\b/i, label: 'aor', meaning: 'Aoristo: acción puntual o vista en conjunto.' },
+        { pattern: /\bgen\b/i, label: 'gen', meaning: 'Genitivo: relación de posesión, origen o pertenencia.' },
+        { pattern: /\bdat\b/i, label: 'dat', meaning: 'Dativo: complemento indirecto, beneficiario o destino.' },
+        { pattern: /\bnom\b/i, label: 'nom', meaning: 'Nominativo: normalmente el sujeto de la oración.' },
+        { pattern: /\bacc\b/i, label: 'acc', meaning: 'Acusativo: normalmente objeto directo o dirección.' },
+        { pattern: /\bvoc\b/i, label: 'voc', meaning: 'Vocativo: forma de llamado directo.' },
+        { pattern: /\bprep\b/i, label: 'prep', meaning: 'Preposición: conecta términos y define relación.' },
+        { pattern: /\bconj\b/i, label: 'conj', meaning: 'Conjunción: une cláusulas o ideas.' },
+        { pattern: /\binterj\b/i, label: 'interj', meaning: 'Interjección: expresión breve de énfasis o emoción.' },
+        { pattern: /\badv\b/i, label: 'adv', meaning: 'Adverbio: modifica verbo, adjetivo u otra frase.' },
+        { pattern: /\bpron\b/i, label: 'pron', meaning: 'Pronombre: sustituye al nombre en contexto.' }
+    ];
+    var GUIDE_TOUR_STEPS = [
+        {
+            title: 'Navega por libros y capítulos',
+            text: 'En estas columnas eliges libro y capítulo. Es el punto de partida para cualquier estudio.',
+            hint: 'Primero el libro, luego el capítulo, después selecciona versículos.',
+            selector: '#booksPane'
+        },
+        {
+            title: 'Selecciona versículos del pasaje',
+            text: 'Haz clic en un versículo para abrir ayuda contextual. Puedes seleccionar varios para estudiar un rango.',
+            hint: 'Usa selección múltiple para construir contexto y notas por bloque.',
+            selector: '#versesContainer'
+        },
+        {
+            title: 'Panel de Ayuda por pestañas',
+            text: 'Aquí tienes contexto, comentarios, notas, vínculos, herramientas y la nueva guía de aprendizaje.',
+            hint: 'Este panel concentra el trabajo exegético y pastoral.',
+            selector: '#helpPane'
+        },
+        {
+            title: 'Strong y diccionario',
+            text: 'Toca una palabra marcada con Strong para abrir su léxico, contexto bíblico y glosario morfológico.',
+            hint: 'Lee primero definición corta, luego contexto del pasaje y finalmente derivación.',
+            selector: '#versesContainer'
+        },
+        {
+            title: 'Módulos y diccionario bíblico',
+            text: 'Desde Módulos puedes activar diccionarios/comentarios y buscar términos por palabra.',
+            hint: 'Flujo recomendado: término -> diccionario -> referencias -> aplicación.',
+            selector: '#openModules'
+        },
+        {
+            title: 'Generación y aplicación práctica',
+            text: 'En Herramientas puedes generar explicación, palabras clave, bosquejo y aplicación.',
+            hint: 'No te quedes en la teoría: termina con una decisión concreta.',
+            selector: '#toolsPanel'
+        }
+    ];
 
     function init() {
         state.books = state.initial.books || [];
@@ -155,6 +308,25 @@
             state.versionCompareFile = String(currentVersions.compare_file || '');
         }
 
+        if (state.initial.auth && typeof state.initial.auth === 'object') {
+            state.auth.isLogged = state.initial.auth.is_logged === true || Number(state.initial.auth.is_logged || 0) === 1;
+            state.auth.username = String(state.initial.auth.username || '');
+        }
+        if (state.initial.branding && typeof state.initial.branding === 'object') {
+            state.branding.appName = String(state.initial.branding.app_name || state.branding.appName || 'Biblia para todos');
+            state.branding.churchName = String(state.initial.branding.church_name || '');
+            state.branding.logoPath = String(state.initial.branding.logo_public || state.branding.logoPath || 'assets/branding/logo_bibliasoft.png');
+        }
+
+        loadAudioPrefs();
+        loadPreachPrefs();
+        refreshSpeechVoices(false);
+        if (state.audio.supported && typeof window.speechSynthesis.onvoiceschanged !== 'undefined') {
+            window.speechSynthesis.onvoiceschanged = function () {
+                refreshSpeechVoices(true);
+            };
+        }
+
         restoreReaderState();
         loadSettings();
         maybeRedirectToDailyAtStartup();
@@ -167,11 +339,13 @@
         activateTab(state.activeTab || 'contexto');
         bindSelectionActions();
         renderEmptyPanels();
+        renderGuidePanel();
         bindConnectivity();
         registerPwa();
         maybeOpenSearchAtStartup();
         renderVersionSelectors();
         fetchReadingPlanStatus();
+        initReadingTelemetry();
 
         if (state.needsChapterRefresh) {
             fetchChapter(state.currentBook, state.currentChapter);
@@ -182,6 +356,7 @@
             loadParallelChapterData(true, true);
         }
         applyPendingSelection();
+        maybeAutoStartGuideTour();
     }
 
     function wireEvents() {
@@ -237,8 +412,19 @@
         if (els.openVersions) {
             els.openVersions.addEventListener('click', openVersions);
         }
+        if (els.openModules) {
+            els.openModules.addEventListener('click', openModules);
+        }
         if (els.openInterlinear) {
             els.openInterlinear.addEventListener('click', openInterlinear);
+        }
+        if (els.openAudio) {
+            els.openAudio.addEventListener('click', openAudio);
+        }
+        if (els.openGuideTour) {
+            els.openGuideTour.addEventListener('click', function () {
+                openGuideModal(true);
+            });
         }
         if (els.toggleParallel) {
             els.toggleParallel.addEventListener('click', function () {
@@ -273,6 +459,34 @@
                 }
             });
         }
+        if (els.preachTimerToggle) {
+            els.preachTimerToggle.addEventListener('click', function () {
+                togglePreachTimer();
+            });
+        }
+        if (els.preachTimerReset) {
+            els.preachTimerReset.addEventListener('click', function () {
+                resetPreachTimer();
+            });
+        }
+        if (els.preachSetMarker1) {
+            els.preachSetMarker1.addEventListener('click', function () { setPreachMarker(1); });
+        }
+        if (els.preachSetMarker2) {
+            els.preachSetMarker2.addEventListener('click', function () { setPreachMarker(2); });
+        }
+        if (els.preachSetMarker3) {
+            els.preachSetMarker3.addEventListener('click', function () { setPreachMarker(3); });
+        }
+        if (els.preachGoMarker1) {
+            els.preachGoMarker1.addEventListener('click', function () { goToPreachMarker(1); });
+        }
+        if (els.preachGoMarker2) {
+            els.preachGoMarker2.addEventListener('click', function () { goToPreachMarker(2); });
+        }
+        if (els.preachGoMarker3) {
+            els.preachGoMarker3.addEventListener('click', function () { goToPreachMarker(3); });
+        }
         if (els.closeSearch) {
             els.closeSearch.addEventListener('click', closeSearch);
         }
@@ -282,12 +496,22 @@
         if (els.closeVersions) {
             els.closeVersions.addEventListener('click', closeVersions);
         }
+        if (els.closeModules) {
+            els.closeModules.addEventListener('click', closeModules);
+        }
         if (els.closeInterlinear) {
             els.closeInterlinear.addEventListener('click', closeInterlinear);
         }
         if (els.closeStrong) {
             els.closeStrong.addEventListener('click', closeStrong);
         }
+        if (els.closeAudio) {
+            els.closeAudio.addEventListener('click', closeAudio);
+        }
+        if (els.closeGuide) {
+            els.closeGuide.addEventListener('click', closeGuideModal);
+        }
+        bindGuideTourControls();
         if (els.saveVersions) {
             els.saveVersions.addEventListener('click', saveVersionSelection);
         }
@@ -295,6 +519,11 @@
             els.quickSearchForm.addEventListener('submit', function (event) {
                 event.preventDefault();
                 runQuickSearch();
+            });
+        }
+        if (els.runThemeSearch) {
+            els.runThemeSearch.addEventListener('click', function () {
+                runThemeSearch('');
             });
         }
 
@@ -315,8 +544,11 @@
                 closeSearch();
                 closePlan();
                 closeVersions();
+                closeModules();
                 closeInterlinear();
                 closeStrong();
+                closeAudio();
+                closeGuideModal();
             }
             if (state.settings.preachMode && !event.ctrlKey && !event.altKey && !event.metaKey) {
                 var target = event.target || null;
@@ -328,15 +560,30 @@
                     } else if (event.key === 'ArrowRight') {
                         event.preventDefault();
                         goToAdjacentChapter(1);
+                    } else if (event.key === 'm' || event.key === 'M') {
+                        event.preventDefault();
+                        setPreachMarker(1);
+                    } else if (event.key === '1') {
+                        event.preventDefault();
+                        goToPreachMarker(1);
+                    } else if (event.key === '2') {
+                        event.preventDefault();
+                        goToPreachMarker(2);
+                    } else if (event.key === '3') {
+                        event.preventDefault();
+                        goToPreachMarker(3);
                     }
                 }
             }
         });
 
         bindSettingsInputs();
+        bindAudioControls();
+        bindThemeSelectSearch();
     }
 
-    function renderBooks(rows) {
+    function renderBooks(rows, options) {
+        var opts = options && typeof options === 'object' ? options : {};
         var html = rows.map(function (book) {
             var active = Number(book.id) === Number(state.currentBook) ? 'is-active' : '';
             return '<button class="book-item ' + active + '" data-book="' + book.id + '"><span>' + escapeHtml(book.name) + '</span></button>';
@@ -351,6 +598,35 @@
                 }
                 fetchChapters(book);
             });
+        });
+
+        keepActiveBookVisible(opts.smooth === true);
+    }
+
+    function keepActiveBookVisible(smooth) {
+        if (!els.booksList) {
+            return;
+        }
+        var active = els.booksList.querySelector('.book-item.is-active');
+        if (!active) {
+            return;
+        }
+
+        var listRect = els.booksList.getBoundingClientRect();
+        var itemRect = active.getBoundingClientRect();
+        var fullyVisible = itemRect.top >= listRect.top && itemRect.bottom <= listRect.bottom;
+        if (fullyVisible) {
+            return;
+        }
+
+        var prefersReduced = false;
+        if (window.matchMedia) {
+            prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        }
+        active.scrollIntoView({
+            behavior: smooth && !prefersReduced ? 'smooth' : 'auto',
+            block: 'center',
+            inline: 'nearest'
         });
     }
 
@@ -436,7 +712,12 @@
                 if (strongToken && this.contains(strongToken)) {
                     event.preventDefault();
                     event.stopPropagation();
-                    openStrongLookup(String(strongToken.getAttribute('data-strong') || ''));
+                    openStrongLookup(String(strongToken.getAttribute('data-strong') || ''), {
+                        book: Number(state.currentBook || 0),
+                        chapter: Number(state.currentChapter || 0),
+                        verse: Number(this.getAttribute('data-verse') || 0),
+                        word: String(strongToken.textContent || '').trim()
+                    });
                     return;
                 }
 
@@ -663,6 +944,9 @@
             var verse = Number(node.getAttribute('data-verse'));
             node.classList.toggle('is-selected', Boolean(selectedMap[verse]));
         });
+        if (els.audioModal && !els.audioModal.classList.contains('hidden')) {
+            renderAudioControls();
+        }
     }
 
     function scrollToVerse(verse, smooth) {
@@ -854,6 +1138,7 @@
         renderNotesPanel(state.selectionPayload);
         renderLinksPanel(state.selectionPayload);
         renderToolsPanel(state.selectionPayload);
+        renderGuidePanel();
     }
 
     function renderEmptyPanels() {
@@ -867,6 +1152,59 @@
             buildHighlightFilterCardHtml(false) +
             '</div>';
         bindHighlightFilterControls();
+        renderGuidePanel();
+    }
+
+    function renderGuidePanel() {
+        if (!els.guidePanel) {
+            return;
+        }
+
+        els.guidePanel.innerHTML = '' +
+            '<article class="card guide-card">' +
+            '<strong>Tutorial rápido de uso</strong>' +
+            '<ul class="guide-list">' +
+            '<li>1) Elige libro y capítulo.</li>' +
+            '<li>2) Selecciona uno o más versículos.</li>' +
+            '<li>3) Revisa Contexto y Comentarios.</li>' +
+            '<li>4) Registra Notas y Vínculos.</li>' +
+            '<li>5) Aplica en Herramientas (explicación, bosquejo, aplicación).</li>' +
+            '</ul>' +
+            '<div class="toolbar">' +
+            '<button class="btn-primary js-open-guide-modal" type="button">Abrir tour guiado</button>' +
+            '<button class="btn-light js-open-guide-modules" type="button">Abrir módulos</button>' +
+            '</div>' +
+            '</article>' +
+            '<article class="card guide-card">' +
+            '<strong>Cómo usar Strong y diccionario bíblico</strong>' +
+            '<ul class="guide-list">' +
+            '<li>1) Toca una palabra con código Strong.</li>' +
+            '<li>2) Lee primero la definición corta y el primer contexto bíblico.</li>' +
+            '<li>3) Revisa “Comentarios bíblicos” y “Voces históricas”.</li>' +
+            '<li>4) Contrasta con “Diccionario adicional” si está disponible.</li>' +
+            '<li>5) Resume en una frase aplicada al pasaje actual.</li>' +
+            '</ul>' +
+            '</article>' +
+            '<article class="card guide-card">' +
+            '<strong>Ruta de aprendizaje recomendada (8 semanas)</strong>' +
+            '<div class="learning-path-grid">' +
+            '<div><small class="muted">Semanas 1-2</small><p>Lectura diaria, observación literal y palabras clave.</p></div>' +
+            '<div><small class="muted">Semanas 3-4</small><p>Contexto del capítulo/libro, notas y vínculos cruzados.</p></div>' +
+            '<div><small class="muted">Semanas 5-6</small><p>Strong + diccionario modular para términos teológicos.</p></div>' +
+            '<div><small class="muted">Semanas 7-8</small><p>Bosquejo, aplicación pastoral y material para enseñar.</p></div>' +
+            '</div>' +
+            '</article>';
+
+        els.guidePanel.querySelectorAll('.js-open-guide-modal').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                openGuideModal(true);
+            });
+        });
+        els.guidePanel.querySelectorAll('.js-open-guide-modules').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                openModules();
+            });
+        });
     }
 
     function buildHighlightFilterCardHtml(includePaintTools) {
@@ -910,17 +1248,48 @@
 
     function renderContextPanel(payload) {
         var c = payload.context || {};
+        var meta = c.study_meta && typeof c.study_meta === 'object' ? c.study_meta : {};
         var keywords = Array.isArray(c.keywords) ? c.keywords : [];
         var keywordInsights = Array.isArray(c.keyword_insights) ? c.keyword_insights : [];
+        var application = Array.isArray(c.application) ? c.application : [];
+        var observationGuide = Array.isArray(c.observation_guide) ? c.observation_guide : [];
         var questions = Array.isArray(c.questions) ? c.questions : [];
         var studyTips = Array.isArray(c.study_tips) ? c.study_tips : [];
+        var sciences = Array.isArray(c.biblical_sciences) ? c.biblical_sciences : [];
+        var customsNotes = Array.isArray(c.customs_notes) ? c.customs_notes : [];
+        var originalLanguage = Array.isArray(c.original_language) ? c.original_language : [];
+        var mainIdea = String(c.main_idea || '').trim();
+        var referenceLabel = String((payload.reference && payload.reference.label) || '');
+
+        var quickPills = [];
+        if (meta.corpus) {
+            quickPills.push('<span class="context-pill">' + escapeHtml(meta.corpus) + '</span>');
+        }
+        if (meta.genre) {
+            quickPills.push('<span class="context-pill">' + escapeHtml(meta.genre) + '</span>');
+        }
+        if (meta.range_label) {
+            quickPills.push('<span class="context-pill">Rango: ' + escapeHtml(meta.range_label) + '</span>');
+        }
+        if (Number(meta.word_count || 0) > 0) {
+            quickPills.push('<span class="context-pill">' + Number(meta.word_count || 0) + ' palabras aprox.</span>');
+        }
+
         var keywordHtml = keywords.length ? keywords.map(function (word) {
             return '<span class="chip">' + escapeHtml(word) + '</span>';
         }).join('') : '<span class="muted">Sin términos destacados.</span>';
         var keywordInsightHtml = keywordInsights.length ? '<ul class="context-list">' + keywordInsights.map(function (item) {
-            return '<li><strong>' + escapeHtml(item.term || '') + ':</strong> ' +
-                escapeHtml(item.meaning || '') +
-                (item.study_use ? ' <span class="muted">(' + escapeHtml(item.study_use) + ')</span>' : '') +
+            var refs = Array.isArray(item.references) ? item.references.filter(Boolean) : [];
+            var refsHtml = refs.length ? ('<small class="muted"><strong>Referencias:</strong> ' + escapeHtml(refs.slice(0, 4).join(' · ')) + '</small>') : '';
+            var sourceHtml = item.source ? ('<small class="muted"><strong>Fuente:</strong> ' + escapeHtml(item.source) + '</small>') : '';
+            var cleanMeaning = stripDefinitionPrefix(item.meaning || '');
+            return '' +
+                '<li class="context-word-item">' +
+                '<strong>' + escapeHtml(item.term || '') + '</strong>' +
+                '<small><strong>Definición:</strong> ' + escapeHtml(cleanMeaning) + '</small>' +
+                (item.study_use ? '<small class="muted"><strong>Uso en estudio:</strong> ' + escapeHtml(item.study_use) + '</small>' : '') +
+                refsHtml +
+                sourceHtml +
                 '</li>';
         }).join('') + '</ul>' : '<p class="muted">Sin desarrollo de términos para este pasaje.</p>';
 
@@ -932,27 +1301,82 @@
             return '<li>' + escapeHtml(tip) + '</li>';
         }).join('') + '</ul>' : '<p class="muted">Sin recomendaciones adicionales.</p>';
 
+        var applicationHtml = application.length ? '<ol class="context-list">' + application.map(function (line) {
+            return '<li>' + escapeHtml(line) + '</li>';
+        }).join('') + '</ol>' : '<p class="muted">Sin aplicación sugerida.</p>';
+
+        var guideHtml = observationGuide.length ? '<ol class="context-list">' + observationGuide.map(function (line) {
+            return '<li>' + escapeHtml(line) + '</li>';
+        }).join('') + '</ol>' : '<p class="muted">Sin ruta de estudio sugerida.</p>';
+        var sciencesHtml = sciences.length ? '<ul class="context-list">' + sciences.map(function (row) {
+            var area = row && row.area ? String(row.area) : '';
+            var note = row && row.note ? String(row.note) : '';
+            var detail = row && row.detail ? String(row.detail) : '';
+            var examples = row && Array.isArray(row.examples) ? row.examples.filter(Boolean).slice(0, 4) : [];
+            var detailHtml = detail ? ('<small class="muted"><strong>Detalle:</strong> ' + escapeHtml(detail) + '</small>') : '';
+            var examplesHtml = examples.length ? ('<small class="muted"><strong>Ejemplos:</strong> ' + escapeHtml(examples.join(' | ')) + '</small>') : '';
+            return '<li><strong>' + escapeHtml(area) + ':</strong> ' + escapeHtml(note) + detailHtml + examplesHtml + '</li>';
+        }).join('') + '</ul>' : '<p class="muted">Sin observaciones de ciencias bíblicas para este pasaje.</p>';
+        var customsHtml = customsNotes.length ? '<ul class="context-list">' + customsNotes.map(function (line) {
+            return '<li>' + escapeHtml(line) + '</li>';
+        }).join('') + '</ul>' : '<p class="muted">Sin notas de usos y costumbres detectadas.</p>';
+        var originalLanguageHtml = originalLanguage.length ? '<div class="lang-note-grid">' + originalLanguage.map(function (row) {
+            var language = String(row.language || '').trim();
+            var trans = String(row.transliteration || '').trim();
+            var code = String(row.strong_code || '').trim();
+            var source = String(row.source || '').trim();
+            return '' +
+                '<article class="card lang-note">' +
+                '<div class="lang-note-head">' +
+                '<strong>' + escapeHtml(String(row.term || '')) + '</strong>' +
+                (language ? '<span class="lang-badge">' + escapeHtml(language) + '</span>' : '') +
+                '</div>' +
+                (trans ? '<small class="muted"><strong>Translit.:</strong> ' + escapeHtml(trans) + '</small>' : '') +
+                '<p><strong>Sentido:</strong> ' + escapeHtml(String(row.meaning || '')) + '</p>' +
+                (row.nuance ? '<small class="muted"><strong>Matiz:</strong> ' + escapeHtml(String(row.nuance || '')) + '</small>' : '') +
+                ((code || source) ? '<small class="muted">' + (code ? ('<strong>' + escapeHtml(code) + '</strong> · ') : '') + escapeHtml(source) + '</small>' : '') +
+                '</article>';
+        }).join('') + '</div>' : '<p class="muted">Sin notas de idioma original para este pasaje.</p>';
+
+        var chapterFunction = String(meta.chapter_function || '').trim();
+        var bookTheme = String(meta.book_theme || '').trim();
+        var methodHint = String(meta.method_hint || '').trim();
+
         els.contextPanel.innerHTML = '' +
-            '<div class="card"><strong>Pasaje</strong><p>' + escapeHtml(payload.reference.label || '') + '</p></div>' +
-            '<div class="card"><strong>Versión sencilla</strong><p>' + escapeHtml(c.simple_version || '') + '</p></div>' +
-            '<div class="card"><strong>Contexto histórico</strong><p>' + escapeHtml(c.historical || '') + '</p></div>' +
-            '<div class="card"><strong>Contexto literario</strong><p>' + escapeHtml(c.literary || '') + '</p></div>' +
-            '<div class="card"><strong>Contexto canónico</strong><p>' + escapeHtml(c.canonical || '') + '</p></div>' +
+            '<div class="card context-hero-card">' +
+            '<strong>Panorama del pasaje</strong>' +
+            '<p>' + escapeHtml(referenceLabel) + '</p>' +
+            '<div class="context-pill-wrap">' + (quickPills.join('') || '<span class="muted">Sin metadatos disponibles.</span>') + '</div>' +
+            (chapterFunction ? '<small class="muted"><strong>Función del capítulo:</strong> ' + escapeHtml(chapterFunction) + '</small>' : '') +
+            (bookTheme ? '<small class="muted"><strong>Tema del libro:</strong> ' + escapeHtml(bookTheme) + '</small>' : '') +
+            (methodHint ? '<small class="muted"><strong>Método sugerido:</strong> ' + escapeHtml(methodHint) + '</small>' : '') +
+            '</div>' +
+            '<div class="card"><strong>Idea central</strong><p class="context-main-idea">' + escapeHtml(mainIdea || c.simple_version || '') + '</p></div>' +
+            '<div class="card"><strong>Aplicación práctica</strong>' + applicationHtml + '</div>' +
+            '<div class="card"><strong>Ruta de estudio</strong>' + guideHtml + '</div>' +
+            '<div class="card"><strong>Idioma original (hebreo/griego)</strong>' + originalLanguageHtml + '</div>' +
+            '<div class="card"><strong>Ciencias bíblicas aplicadas</strong>' + sciencesHtml + '</div>' +
+            '<div class="card"><strong>Usos y costumbres del pasaje</strong>' + customsHtml + '</div>' +
             '<div class="card"><strong>Términos clave</strong><div class="context-chip-wrap">' + keywordHtml + '</div></div>' +
             '<div class="card"><strong>Significado de palabras clave</strong>' + keywordInsightHtml + '</div>' +
-            '<div class="card"><strong>Preguntas de estudio</strong>' + questionsHtml + '</div>' +
-            '<div class="card"><strong>Pistas de observación</strong>' + tipsHtml + '</div>';
+            '<details class="card context-detail-card">' +
+            '<summary><strong>Preguntas y pistas de observación</strong></summary>' +
+            '<div><strong>Preguntas de estudio</strong>' + questionsHtml + '</div>' +
+            '<div><strong>Pistas de observación</strong>' + tipsHtml + '</div>' +
+            '</details>';
     }
 
     function renderCommentsPanel(commentary) {
         var cards = [];
         (commentary.book || []).forEach(function (row) {
             cards.push('<div class="card"><strong>Comentario de libro</strong>' +
+                (row.title ? '<small class="muted">' + escapeHtml(row.title) + '</small>' : '') +
                 renderSourceTag(row) +
                 '<div>' + (row.html || '') + '</div></div>');
         });
         (commentary.chapter || []).forEach(function (row) {
             cards.push('<div class="card"><strong>Comentario de capítulo</strong>' +
+                (row.title ? '<small class="muted">' + escapeHtml(row.title) + '</small>' : '') +
                 renderSourceTag(row) +
                 '<div>' + (row.html || '') + '</div></div>');
         });
@@ -960,7 +1384,9 @@
             cards.push(
                 '<div class="card"><strong>Rango ' +
                 row.chapter_begin + ':' + row.verse_begin + ' - ' + row.chapter_end + ':' + row.verse_end +
-                '</strong>' + renderSourceTag(row) + '<div>' + (row.html || '') + '</div></div>'
+                '</strong>' +
+                (row.title ? '<small class="muted">' + escapeHtml(row.title) + '</small>' : '') +
+                renderSourceTag(row) + '<div>' + (row.html || '') + '</div></div>'
             );
         });
         if (!cards.length) {
@@ -1054,40 +1480,109 @@
     function renderLinksPanel(payload) {
         var range = selectedRange();
         var links = payload.links || [];
+        var currentBook = Number(state.currentBook || 1);
+        var currentChapter = Number(state.currentChapter || 1);
+        var books = Array.isArray(state.books) ? state.books : [];
+        var bookOptions = books.map(function (book) {
+            var id = Number(book.id || 0);
+            if (id < 1) {
+                return '';
+            }
+            var selected = id === currentBook ? ' selected' : '';
+            return '<option value="' + id + '"' + selected + '>' + escapeHtml(book.name || ('Libro ' + id)) + '</option>';
+        }).join('');
+        if (!bookOptions) {
+            bookOptions = '<option value="' + currentBook + '">Libro ' + currentBook + '</option>';
+        }
+
         var items = links.map(function (link) {
+            var targetRef = toReference(link.to_book, link.to_chapter, link.to_verse_start, link.to_verse_end);
+            var note = (link.note || '').trim();
             return '' +
-                '<div class="card">' +
-                '<strong>' + toReference(link.to_book, link.to_chapter, link.to_verse_start, link.to_verse_end) + '</strong>' +
-                (link.note ? '<p>' + escapeHtml(link.note) + '</p>' : '') +
-                '<div class="toolbar">' +
-                '<button class="btn-light js-link-open" data-book="' + link.to_book + '" data-chapter="' + link.to_chapter + '">Abrir</button>' +
+                '<article class="card link-item">' +
+                '<div class="link-item-head">' +
+                '<strong class="link-item-ref">' + escapeHtml(targetRef) + '</strong>' +
+                '</div>' +
+                (note ? '<p class="link-item-note">' + escapeHtml(note) + '</p>' : '') +
+                '<div class="toolbar link-item-actions">' +
+                '<button class="btn-light js-link-open" data-book="' + link.to_book + '" data-chapter="' + link.to_chapter + '" data-verse="' + link.to_verse_start + '">Abrir</button>' +
                 '<button class="btn-light js-link-delete" data-id="' + link.id + '">Eliminar</button>' +
-                '</div></div>';
+                '</div></article>';
         }).join('');
 
         els.linksPanel.innerHTML = '' +
+            '<article class="card link-builder-card">' +
+            '<div class="link-builder-head">' +
+            '<strong>Crear vínculo</strong>' +
+            '<small class="muted">Origen: ' + escapeHtml(toReference(currentBook, currentChapter, range.start, range.end)) + '</small>' +
+            '</div>' +
             '<form id="linkForm" class="stack">' +
-            '<div class="toolbar">' +
-            '<input id="linkBook" type="number" min="1" max="66" placeholder="Libro destino">' +
-            '<input id="linkChapter" type="number" min="1" placeholder="Capítulo destino">' +
-            '<input id="linkVerseStart" type="number" min="1" placeholder="Vers. inicio">' +
-            '<input id="linkVerseEnd" type="number" min="1" placeholder="Vers. fin">' +
+            '<div class="link-grid">' +
+            '<label>Libro destino<select id="linkBookSelect">' + bookOptions + '</select></label>' +
+            '<label>Capítulo destino<select id="linkChapterSelect"><option value="' + currentChapter + '">' + currentChapter + '</option></select></label>' +
+            '<label>Versículo desde<input id="linkVerseStart" type="number" min="1" value="' + range.start + '" placeholder="Vers. inicio"></label>' +
+            '<label>Versículo hasta<input id="linkVerseEnd" type="number" min="1" value="' + range.end + '" placeholder="Vers. fin"></label>' +
+            '</div>' +
+            '<div class="toolbar link-quick-toolbar">' +
+            '<button class="btn-light" id="linkUseSelection" type="button">Usar selección actual</button>' +
+            '<button class="btn-light" id="linkPreviewTarget" type="button">Abrir destino</button>' +
             '</div>' +
             '<input id="linkNote" type="text" placeholder="Nota del vínculo (opcional)">' +
             '<button class="btn-primary" type="submit">Guardar vínculo</button>' +
-            '</form>' +
-            '<div class="card"><small class="muted">Origen: ' + escapeHtml(toReference(state.currentBook, state.currentChapter, range.start, range.end)) + '</small></div>' +
-            (items || '<p class="muted">No hay vínculos para este pasaje.</p>');
+            '</form></article>' +
+            '<div class="stack link-list">' +
+            '<small class="muted">' + (links.length ? ('Vínculos guardados: ' + links.length) : 'No hay vínculos para este pasaje.') + '</small>' +
+            (items || '') +
+            '</div>';
 
         var form = document.getElementById('linkForm');
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             createLink();
         });
+        var linkBookSelect = document.getElementById('linkBookSelect');
+        var linkChapterSelect = document.getElementById('linkChapterSelect');
+        var useSelectionBtn = document.getElementById('linkUseSelection');
+        var previewBtn = document.getElementById('linkPreviewTarget');
+        if (linkBookSelect) {
+            linkBookSelect.addEventListener('change', function () {
+                populateLinkChapterOptions(Number(this.value || 0), 1);
+            });
+        }
+        populateLinkChapterOptions(currentBook, currentChapter);
+        if (useSelectionBtn) {
+            useSelectionBtn.addEventListener('click', function () {
+                var selected = selectedRange();
+                var startInput = document.getElementById('linkVerseStart');
+                var endInput = document.getElementById('linkVerseEnd');
+                if (startInput) {
+                    startInput.value = String(selected.start);
+                }
+                if (endInput) {
+                    endInput.value = String(selected.end);
+                }
+                notify('Rango actual cargado como destino.');
+            });
+        }
+        if (previewBtn) {
+            previewBtn.addEventListener('click', function () {
+                var toBook = linkBookSelect ? Number(linkBookSelect.value || 0) : 0;
+                var toChapter = linkChapterSelect ? Number(linkChapterSelect.value || 0) : 0;
+                var toVerseStart = Number((document.getElementById('linkVerseStart') || {}).value || 0);
+                if (toBook < 1 || toChapter < 1 || toVerseStart < 1) {
+                    notify('Completa destino para abrir la vista previa.');
+                    return;
+                }
+                openLinkedPassage(toBook, toChapter, toVerseStart);
+            });
+        }
 
         els.linksPanel.querySelectorAll('.js-link-open').forEach(function (btn) {
             btn.addEventListener('click', function () {
-                fetchChapter(Number(this.getAttribute('data-book')), Number(this.getAttribute('data-chapter')));
+                var toBook = Number(this.getAttribute('data-book') || 0);
+                var toChapter = Number(this.getAttribute('data-chapter') || 0);
+                var toVerse = Number(this.getAttribute('data-verse') || 0);
+                openLinkedPassage(toBook, toChapter, toVerse);
             });
         });
 
@@ -1098,11 +1593,72 @@
         });
     }
 
+    function populateLinkChapterOptions(book, selectedChapter) {
+        var select = document.getElementById('linkChapterSelect');
+        var targetBook = Number(book || 0);
+        if (!select || targetBook < 1) {
+            return Promise.resolve();
+        }
+
+        select.disabled = true;
+        select.innerHTML = '<option value="">Cargando...</option>';
+        return fetch('?route=api.chapters&book=' + targetBook)
+            .then(asJson)
+            .then(function (data) {
+                var chapters = Array.isArray(data.chapters) ? data.chapters : [];
+                if (!chapters.length) {
+                    chapters = [1];
+                }
+                var selected = Number(selectedChapter || 0);
+                var hasSelected = chapters.some(function (chapter) {
+                    return Number(chapter || 0) === selected;
+                });
+                if (!hasSelected) {
+                    selected = Number(chapters[0] || 1);
+                }
+                select.innerHTML = chapters.map(function (chapter) {
+                    var value = Number(chapter || 0);
+                    var isSelected = value === selected ? ' selected' : '';
+                    return '<option value="' + value + '"' + isSelected + '>' + value + '</option>';
+                }).join('');
+                select.value = String(selected);
+                select.disabled = false;
+            })
+            .catch(function () {
+                select.innerHTML = '<option value="1">1</option>';
+                select.value = '1';
+                select.disabled = false;
+                notify('No se pudo cargar capítulos del libro destino.');
+            });
+    }
+
+    function openLinkedPassage(book, chapter, verse) {
+        var targetBook = Number(book || 0);
+        var targetChapter = Number(chapter || 0);
+        var targetVerse = Number(verse || 0);
+        if (targetBook < 1 || targetChapter < 1) {
+            return;
+        }
+
+        if (targetBook === Number(state.currentBook || 0) && targetChapter === Number(state.currentChapter || 0)) {
+            if (targetVerse > 0) {
+                selectSingleVerse(targetVerse, true);
+            }
+            return;
+        }
+
+        state.pendingVerse = targetVerse > 0 ? targetVerse : null;
+        fetchChapter(targetBook, targetChapter);
+    }
+
     function renderToolsPanel(payload) {
         var historyRows = payload.history || [];
         var smartHistory = payload.smart_history || {};
         var smartHistoryCard = buildSmartHistoryCardHtml(smartHistory, historyRows);
         var offline = !navigator.onLine;
+        var defaultChurch = state.branding.churchName || '';
+        var syncStatusText = buildCloudSyncStatusText();
+        var statsCard = buildStatsPanelCardHtml();
         hideFavoriteTooltip();
 
         var backgrounds = state.initial.backgrounds || [];
@@ -1127,6 +1683,14 @@
             '<small class="muted">Escala: ' + state.settings.fontScale + '%</small>' +
             '</div>' +
             '</div>' +
+            '<div class="card guide-quick-card">' +
+            '<strong>Tutorial y ruta de aprendizaje</strong>' +
+            '<small class="muted">Abre la guía completa o inicia el tour paso a paso.</small>' +
+            '<div class="toolbar">' +
+            '<button class="btn-primary js-open-guide-modal" type="button">Ver guía</button>' +
+            '<button class="btn-light js-open-guide-tour" type="button">Iniciar tour</button>' +
+            '</div>' +
+            '</div>' +
             buildFavoriteManagerCardHtml() +
             buildHighlightFilterCardHtml(true) +
             '<div class="card">' +
@@ -1139,6 +1703,38 @@
             '</div>' +
             '<div id="toolsOutput" class="card tool-output"><p class="muted">Selecciona un ícono para generar contenido del pasaje.</p></div>' +
             '</div>' +
+            '<div class="card export-sync-card">' +
+            '<strong>Exportar y sincronizar</strong>' +
+            '<div class="export-tools-grid">' +
+            '<label>Contenido a exportar' +
+            '<select id="exportSourceType">' +
+            '<option value="notes">Notas del pasaje</option>' +
+            '<option value="outline">Bosquejo generado</option>' +
+            '<option value="devotional">Devocional más reciente</option>' +
+            '</select>' +
+            '</label>' +
+            '<label>Iglesia o ministerio' +
+            '<input id="exportChurchName" type="text" placeholder="Nombre de tu iglesia" value="' + escapeHtml(defaultChurch) + '">' +
+            '</label>' +
+            '</div>' +
+            '<div class="tool-icon-row export-action-row">' +
+            '<button class="icon-tool js-export-image" type="button" title="Exportar imagen PNG" aria-label="Exportar imagen PNG"><img src="assets/icons/camera.svg" alt="" class="ico"></button>' +
+            '<button class="icon-tool js-export-pdf" type="button" title="Exportar PDF" aria-label="Exportar PDF"><img src="assets/icons/download.svg" alt="" class="ico"></button>' +
+            '</div>' +
+            '<small class="muted">Exporta con marca de ' + escapeHtml(state.branding.appName || 'Biblia para todos') + '.</small>' +
+            '<div class="sync-cloud-wrap">' +
+            '<small id="cloudSyncStatus" class="muted">' + escapeHtml(syncStatusText) + '</small>' +
+            (state.auth.isLogged ? (
+                '<div class="toolbar sync-cloud-actions">' +
+                '<button class="btn-light js-sync-push" type="button">Respaldar en nube</button>' +
+                '<button class="btn-light js-sync-pull" type="button">Restaurar respaldo</button>' +
+                '</div>'
+            ) : (
+                '<small class="muted">Inicia sesión para respaldo en nube por cuenta.</small>'
+            )) +
+            '</div>' +
+            '</div>' +
+            statsCard +
             smartHistoryCard +
             '<details class="card image-tool-box">' +
             '<summary>Crear imagen del versículo</summary>' +
@@ -1246,6 +1842,17 @@
             });
         }
 
+        els.toolsPanel.querySelectorAll('.js-open-guide-modal').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                openGuideModal(false);
+            });
+        });
+        els.toolsPanel.querySelectorAll('.js-open-guide-tour').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                openGuideModal(true);
+            });
+        });
+
         els.toolsPanel.querySelectorAll('.js-generate').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var output = document.getElementById('toolsOutput');
@@ -1260,7 +1867,18 @@
         });
 
         bindImageCardActions();
+        bindExportAndSyncControls();
+        var statsRefresh = els.toolsPanel.querySelector('.js-stats-refresh');
+        if (statsRefresh) {
+            statsRefresh.addEventListener('click', function () {
+                fetchStatsPanel(true, true);
+            });
+        }
         refreshFavoriteSnapshot(false);
+        fetchStatsPanel(false, true);
+        if (state.auth.isLogged) {
+            refreshCloudSyncStatus();
+        }
     }
 
     function buildSmartHistoryCardHtml(smartHistory, fallbackHistoryRows) {
@@ -1310,6 +1928,163 @@
             '</div>' +
             '</div>' +
             '</div>';
+    }
+
+    function buildStatsPanelCardHtml() {
+        var loading = state.statsLoading === true;
+        var hasStats = !!(state.statsPanel && typeof state.statsPanel === 'object');
+        var stats = hasStats ? state.statsPanel : {};
+        var reading = stats.reading && typeof stats.reading === 'object' ? stats.reading : {};
+        var chapters = stats.chapters && typeof stats.chapters === 'object' ? stats.chapters : {};
+        var trendRows = Array.isArray(stats.week_daily) ? stats.week_daily : [];
+        var themesRows = Array.isArray(stats.themes_top) ? stats.themes_top : [];
+
+        var todayMinutes = Number(reading.today_minutes || 0);
+        var weekMinutes = Number(reading.week_minutes || 0);
+        var streak = Number(reading.streak_days || 0);
+        var longest = Number(reading.longest_streak_days || 0);
+        var chaptersWeek = Number(chapters.week_distinct || 0);
+        var visitsWeek = Number(chapters.week_visits || 0);
+
+        var body = '';
+        if (!hasStats) {
+            if (loading) {
+                body = '<p class="muted">Cargando estadísticas...</p>';
+            } else if (state.statsError) {
+                body = '<p class="muted">' + escapeHtml(state.statsError) + '</p>';
+            } else {
+                body = '<p class="muted">Aún no hay estadísticas suficientes.</p>';
+            }
+        } else {
+            var themesHtml = themesRows.map(function (row) {
+                var key = String(row.theme_key || '').trim();
+                var label = key ? formatThemeLabel(key) : 'Tema';
+                var hits = Number(row.hits || 0);
+                return '<span class="stats-theme-chip">' + escapeHtml(label) + ' (' + hits + ')</span>';
+            }).join('');
+            if (!themesHtml) {
+                themesHtml = '<small class="muted">Busca temas para alimentar esta sección.</small>';
+            }
+
+            body = '' +
+                '<div class="stats-kpis">' +
+                '<div class="stats-kpi"><small class="muted">Lectura hoy</small><strong>' + formatMinutesCompact(todayMinutes) + '</strong></div>' +
+                '<div class="stats-kpi"><small class="muted">Lectura semanal</small><strong>' + formatMinutesCompact(weekMinutes) + '</strong></div>' +
+                '<div class="stats-kpi"><small class="muted">Racha actual</small><strong>' + streak + ' día(s)</strong></div>' +
+                '<div class="stats-kpi"><small class="muted">Racha máxima</small><strong>' + longest + ' día(s)</strong></div>' +
+                '<div class="stats-kpi"><small class="muted">Capítulos/semana</small><strong>' + chaptersWeek + '</strong></div>' +
+                '<div class="stats-kpi"><small class="muted">Visitas/semana</small><strong>' + visitsWeek + '</strong></div>' +
+                '</div>' +
+                '<div class="stats-trend">' +
+                '<small class="muted">Tendencia (últimos ' + Number(stats.range_days || 7) + ' días)</small>' +
+                buildStatsTrendHtml(trendRows) +
+                '</div>' +
+                '<div class="stats-themes">' +
+                '<small class="muted">Temas más estudiados</small>' +
+                '<div class="stats-theme-list">' + themesHtml + '</div>' +
+                '</div>';
+        }
+
+        return '' +
+            '<div class="card stats-card">' +
+            '<div class="stats-card-head">' +
+            '<strong>Panel de estadísticas</strong>' +
+            '<button class="btn-light js-stats-refresh" type="button"' + (loading ? ' disabled' : '') + '>Actualizar</button>' +
+            '</div>' +
+            body +
+            '</div>';
+    }
+
+    function buildStatsTrendHtml(rows) {
+        var list = Array.isArray(rows) ? rows : [];
+        if (!list.length) {
+            return '<p class="muted">Sin datos aún.</p>';
+        }
+
+        var maxSeconds = 0;
+        list.forEach(function (row) {
+            var sec = Number(row.seconds || 0);
+            if (sec > maxSeconds) {
+                maxSeconds = sec;
+            }
+        });
+
+        return '<div class="stats-trend-bars">' + list.map(function (row) {
+            var seconds = Number(row.seconds || 0);
+            var label = String(row.label || '');
+            var minutes = Number(row.minutes || Math.floor(seconds / 60));
+            var width = 0;
+            if (maxSeconds > 0) {
+                width = Math.max(8, Math.round((seconds / maxSeconds) * 100));
+            }
+            return '' +
+                '<div class="stats-trend-row">' +
+                '<span>' + escapeHtml(label) + '</span>' +
+                '<div class="stats-trend-track"><i style="width:' + width + '%"></i></div>' +
+                '<small>' + formatMinutesCompact(minutes) + '</small>' +
+                '</div>';
+        }).join('') + '</div>';
+    }
+
+    function formatMinutesCompact(totalMinutes) {
+        var minutes = Math.max(0, Number(totalMinutes || 0));
+        if (minutes < 60) {
+            return Math.round(minutes) + ' min';
+        }
+        var h = Math.floor(minutes / 60);
+        var m = Math.round(minutes % 60);
+        if (m < 1) {
+            return h + ' h';
+        }
+        return h + ' h ' + m + ' min';
+    }
+
+    function formatThemeLabel(key) {
+        var value = String(key || '').trim();
+        if (!value) {
+            return 'Tema';
+        }
+        value = value.replace(/[_\-]+/g, ' ');
+        value = value.replace(/\s+/g, ' ').trim();
+        return value.charAt(0).toUpperCase() + value.slice(1);
+    }
+
+    function fetchStatsPanel(force, rerenderTools) {
+        if (state.statsLoading && !force) {
+            return;
+        }
+        if (state.statsLoaded && !force) {
+            return;
+        }
+
+        state.statsLoading = true;
+        if (!force) {
+            state.statsError = '';
+        }
+        var shouldRerender = rerenderTools !== false;
+
+        fetch('?route=api.stats.panel&days=7&top_themes=8')
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'No se pudo cargar estadísticas.');
+                }
+                state.statsPanel = res.stats || null;
+                state.statsLoading = false;
+                state.statsLoaded = true;
+                state.statsError = '';
+                if (shouldRerender && state.selectionPayload) {
+                    renderToolsPanel(state.selectionPayload);
+                }
+            })
+            .catch(function () {
+                state.statsLoading = false;
+                state.statsLoaded = true;
+                state.statsError = 'No se pudo cargar estadísticas.';
+                if (shouldRerender && state.selectionPayload) {
+                    renderToolsPanel(state.selectionPayload);
+                }
+            });
     }
 
     function buildFavoriteManagerCardHtml() {
@@ -1859,12 +2634,481 @@
                 output.innerHTML = '<p class="muted">No fue posible generar contenido.</p>';
                 return;
             }
-            output.innerHTML = '<p>' + escapeHtml(res.result.content || '') + '</p>' +
+            var generatedText = String(res.result.content || '').trim();
+            state.generatedByMode[mode] = {
+                mode: mode,
+                label: generationModeLabel(mode),
+                content: generatedText,
+                reference: (state.selectionPayload && state.selectionPayload.reference && state.selectionPayload.reference.label) ? state.selectionPayload.reference.label : '',
+                generated_at: res.result.generated_at || ''
+            };
+            output.innerHTML = '<strong>' + escapeHtml(generationModeLabel(mode)) + '</strong>' +
+                '<p>' + escapeHtml(generatedText) + '</p>' +
                 '<small class="muted">' + (res.result.cached ? 'Resultado en caché' : 'Resultado actualizado') + '</small>';
         }).catch(function () {
             var output = document.getElementById('toolsOutput');
             output.innerHTML = '<p class="muted">No disponible sin conexión.</p>';
         });
+    }
+
+    function generationModeLabel(mode) {
+        var key = String(mode || '').trim();
+        if (key === 'explicacion') {
+            return 'Explicación';
+        }
+        if (key === 'palabras_clave') {
+            return 'Palabras clave';
+        }
+        if (key === 'bosquejo') {
+            return 'Bosquejo';
+        }
+        if (key === 'aplicacion_practica') {
+            return 'Aplicación práctica';
+        }
+        return 'Contenido generado';
+    }
+
+    function bindExportAndSyncControls() {
+        if (!els.toolsPanel) {
+            return;
+        }
+
+        var sourceSelect = document.getElementById('exportSourceType');
+        var imageBtn = els.toolsPanel.querySelector('.js-export-image');
+        var pdfBtn = els.toolsPanel.querySelector('.js-export-pdf');
+        var syncPushBtn = els.toolsPanel.querySelector('.js-sync-push');
+        var syncPullBtn = els.toolsPanel.querySelector('.js-sync-pull');
+
+        if (imageBtn && sourceSelect) {
+            imageBtn.addEventListener('click', function () {
+                var sourceType = String(sourceSelect.value || 'notes');
+                var churchNameInput = document.getElementById('exportChurchName');
+                var churchName = String((churchNameInput && churchNameInput.value) || state.branding.churchName || '').trim();
+                resolveExportSource(sourceType).then(function (source) {
+                    return createBrandedExportImage(source, churchName);
+                }).then(function (result) {
+                    downloadBlob(result.blob, buildExportImageFilename(sourceType));
+                    notify('Imagen exportada.');
+                }).catch(function (err) {
+                    var message = err && err.message ? err.message : 'No se pudo exportar imagen.';
+                    notify(message);
+                });
+            });
+        }
+
+        if (pdfBtn && sourceSelect) {
+            pdfBtn.addEventListener('click', function () {
+                var sourceType = String(sourceSelect.value || 'notes');
+                var churchNameInput = document.getElementById('exportChurchName');
+                var churchName = String((churchNameInput && churchNameInput.value) || state.branding.churchName || '').trim();
+                resolveExportSource(sourceType).then(function (source) {
+                    return downloadExportPdf(source, churchName, sourceType);
+                }).then(function () {
+                    notify('PDF exportado.');
+                }).catch(function (err) {
+                    var message = err && err.message ? err.message : 'No se pudo exportar PDF.';
+                    notify(message);
+                });
+            });
+        }
+
+        if (syncPushBtn) {
+            syncPushBtn.addEventListener('click', function () {
+                postForm('api.sync.push', {}).then(function (res) {
+                    if (res.error) {
+                        notify(res.error);
+                        return;
+                    }
+                    state.cloudSyncStatus = res.sync || state.cloudSyncStatus;
+                    updateCloudSyncStatusUi();
+                    notify('Respaldo en nube actualizado.');
+                }).catch(function () {
+                    notify('No se pudo respaldar en nube.');
+                });
+            });
+        }
+
+        if (syncPullBtn) {
+            syncPullBtn.addEventListener('click', function () {
+                if (!window.confirm('Se restaurará el último respaldo en nube y se reemplazarán tus datos actuales.')) {
+                    return;
+                }
+                postForm('api.sync.pull', {}).then(function (res) {
+                    if (res.error) {
+                        notify(res.error);
+                        return;
+                    }
+                    state.cloudSyncStatus = res.sync || state.cloudSyncStatus;
+                    updateCloudSyncStatusUi();
+                    state.favoriteLoaded = false;
+                    state.statsLoaded = false;
+                    state.statsPanel = null;
+                    state.statsError = '';
+                    notify('Respaldo restaurado desde nube.');
+                    fetchChapter(state.currentBook, state.currentChapter);
+                    fetchReadingPlanStatus();
+                }).catch(function () {
+                    notify('No se pudo restaurar el respaldo en nube.');
+                });
+            });
+        }
+    }
+
+    function buildCloudSyncStatusText() {
+        if (!state.auth.isLogged) {
+            return 'Sincronización en nube disponible al iniciar sesión.';
+        }
+        if (!state.cloudSyncStatus) {
+            return 'Consultando estado de respaldo en nube...';
+        }
+
+        if (!state.cloudSyncStatus.has_backup) {
+            return 'Aún no tienes respaldo en nube. Pulsa "Respaldar en nube".';
+        }
+
+        var updatedAt = String(state.cloudSyncStatus.updated_at || '').trim();
+        var parts = [];
+        if (updatedAt !== '') {
+            parts.push('Último respaldo: ' + updatedAt);
+        }
+        var counts = state.cloudSyncStatus.counts || {};
+        var notes = Number(counts.notes || 0);
+        var favorites = Number(counts.favorites || 0);
+        var plans = Number(counts.reading_plans || 0);
+        parts.push('Notas ' + notes);
+        parts.push('Favoritos ' + favorites);
+        parts.push('Planes ' + plans);
+        return parts.join(' · ');
+    }
+
+    function refreshCloudSyncStatus() {
+        if (!state.auth.isLogged) {
+            return;
+        }
+        fetch('?route=api.sync.status').then(asJson).then(function (res) {
+            if (!res || res.error) {
+                return;
+            }
+            state.cloudSyncStatus = res.sync || null;
+            updateCloudSyncStatusUi();
+        }).catch(function () {
+            // ignore
+        });
+    }
+
+    function updateCloudSyncStatusUi() {
+        var node = document.getElementById('cloudSyncStatus');
+        if (!node) {
+            return;
+        }
+        node.textContent = buildCloudSyncStatusText();
+    }
+
+    function resolveExportSource(sourceType) {
+        var key = String(sourceType || '').trim();
+        if (key === 'outline') {
+            return Promise.resolve(buildOutlineExportSource());
+        }
+        if (key === 'devotional') {
+            return buildLatestDevotionalExportSource();
+        }
+        return Promise.resolve(buildNotesExportSource());
+    }
+
+    function buildNotesExportSource() {
+        if (!state.selectionPayload) {
+            throw new Error('Selecciona un pasaje para exportar notas.');
+        }
+        var notes = Array.isArray(state.selectionPayload.notes) ? state.selectionPayload.notes : [];
+
+        var blocks = [];
+        if (notes.length) {
+            notes.forEach(function (note, index) {
+                var verseStart = Number(note.verse_start || note.verse || 0);
+                var verseEnd = Number(note.verse_end || verseStart || 0);
+                var ref = toReference(
+                    Number(note.book || state.currentBook),
+                    Number(note.chapter || state.currentChapter),
+                    verseStart,
+                    verseEnd
+                );
+                var content = cleanText(note.content || '');
+                var tags = String(note.tags || '').trim();
+                var block = (index + 1) + '. ' + ref + '\n' + content;
+                if (tags !== '') {
+                    block += '\nEtiquetas: ' + tags;
+                }
+                blocks.push(block.trim());
+            });
+        } else {
+            var selected = selectedRows();
+            var passageText = selected.map(function (row) {
+                return cleanText(row.scripture_text || row.scripture_html || '');
+            }).join(' ');
+            blocks.push('No hay notas guardadas en este pasaje.');
+            if (passageText) {
+                blocks.push('Texto del pasaje:\n' + passageText);
+            }
+        }
+
+        var reference = (state.selectionPayload.reference && state.selectionPayload.reference.label)
+            ? state.selectionPayload.reference.label
+            : toReference(state.currentBook, state.currentChapter, null, null);
+
+        return {
+            source_type: 'notas',
+            title: 'Notas del pasaje',
+            reference: reference,
+            content: blocks.join('\n\n')
+        };
+    }
+
+    function buildOutlineExportSource() {
+        var entry = state.generatedByMode.bosquejo || null;
+        if (!entry || !entry.content) {
+            throw new Error('Primero genera un bosquejo del pasaje.');
+        }
+        return {
+            source_type: 'bosquejo',
+            title: 'Bosquejo bíblico',
+            reference: entry.reference || '',
+            content: String(entry.content || '').trim()
+        };
+    }
+
+    function buildLatestDevotionalExportSource() {
+        return fetchLatestDevotionalExport().then(function (row) {
+            if (!row) {
+                throw new Error('No hay devocionales disponibles para exportar.');
+            }
+            return {
+                source_type: 'devocional',
+                title: 'Devocional diario',
+                reference: String(row.reference || ''),
+                content: devotionalToPlainText(row)
+            };
+        });
+    }
+
+    function fetchLatestDevotionalExport() {
+        if (state.latestDevotionalExport) {
+            return Promise.resolve(state.latestDevotionalExport);
+        }
+        return fetch('?route=api.devotional.history&limit=1').then(asJson).then(function (res) {
+            if (!res || res.error) {
+                return null;
+            }
+            var rows = Array.isArray(res.rows) ? res.rows : [];
+            state.latestDevotionalExport = rows.length ? rows[0] : null;
+            return state.latestDevotionalExport;
+        });
+    }
+
+    function devotionalToPlainText(row) {
+        var sections = (row && row.sections && typeof row.sections === 'object') ? row.sections : {};
+        var lines = [];
+        lines.push('Versículo base: ' + String(sections.versiculo_base || ''));
+        lines.push('');
+        lines.push('Contexto textual: ' + String(sections.contexto_textual || ''));
+        lines.push('');
+        lines.push('Contexto histórico: ' + String(sections.contexto_historico || ''));
+        lines.push('');
+        lines.push('Contexto literario: ' + String(sections.contexto_literario || ''));
+        lines.push('');
+        lines.push('Aplicación: ' + String(sections.tip_1_por_ciento || ''));
+        lines.push('');
+        lines.push('Oración sugerida: ' + String(sections.oracion_sugerida || ''));
+        return lines.join('\n').trim();
+    }
+
+    function createBrandedExportImage(source, churchName) {
+        var background = state.selectedBackground || 'assets/backgrounds/bg-01.svg';
+        var logoPath = state.branding.logoPath || 'assets/branding/logo_bibliasoft.png';
+        var appName = state.branding.appName || 'Biblia para todos';
+        var church = String(churchName || state.branding.churchName || '').trim();
+        var content = String((source && source.content) || '').trim();
+        var title = String((source && source.title) || 'Documento bíblico').trim();
+        var reference = String((source && source.reference) || '').trim();
+
+        var canvas = document.createElement('canvas');
+        canvas.width = 1200;
+        canvas.height = 1600;
+        var ctx = canvas.getContext('2d');
+
+        return Promise.all([loadImageOptional(background), loadImageOptional(logoPath)]).then(function (items) {
+            var bg = items[0];
+            var logo = items[1];
+
+            if (bg) {
+                ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+            } else {
+                ctx.fillStyle = '#193349';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            ctx.fillStyle = 'rgba(9, 18, 29, 0.62)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if (logo) {
+                var maxW = 160;
+                var maxH = 160;
+                var ratio = Math.min(maxW / Math.max(1, logo.width), maxH / Math.max(1, logo.height));
+                var w = Math.max(1, Math.round(logo.width * ratio));
+                var h = Math.max(1, Math.round(logo.height * ratio));
+                ctx.drawImage(logo, canvas.width - w - 56, 42, w, h);
+            }
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '700 46px Segoe UI, Arial, sans-serif';
+            ctx.fillText(appName, 56, 92);
+            if (church !== '') {
+                ctx.font = '400 30px Segoe UI, Arial, sans-serif';
+                ctx.fillText(church, 56, 132);
+            }
+
+            ctx.font = '700 52px Segoe UI, Arial, sans-serif';
+            var cursorY = drawWrappedTextBlock(ctx, title, 56, 260, 1088, 62, 4);
+            if (reference !== '') {
+                ctx.font = '600 34px Segoe UI, Arial, sans-serif';
+                cursorY = drawWrappedTextBlock(ctx, reference, 56, cursorY + 12, 1088, 42, 3);
+            }
+
+            ctx.font = '400 32px Segoe UI, Arial, sans-serif';
+            drawWrappedTextBlock(ctx, content, 56, cursorY + 24, 1088, 44, 22);
+
+            ctx.font = '400 26px Segoe UI, Arial, sans-serif';
+            ctx.fillText('Generado: ' + localDateYmd(new Date()), 56, canvas.height - 52);
+
+            return new Promise(function (resolve, reject) {
+                canvas.toBlob(function (blob) {
+                    if (!blob) {
+                        reject(new Error('No se pudo crear la imagen.'));
+                        return;
+                    }
+                    resolve({
+                        blob: blob,
+                        dataUrl: canvas.toDataURL('image/png')
+                    });
+                }, 'image/png');
+            });
+        });
+    }
+
+    function drawWrappedTextBlock(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+        var words = String(text || '').split(/\s+/);
+        var line = '';
+        var currentY = Number(y || 0);
+        var printed = 0;
+        var cap = Math.max(1, Number(maxLines || 20));
+
+        for (var i = 0; i < words.length; i++) {
+            var word = words[i];
+            if (!word) {
+                continue;
+            }
+            var candidate = line ? (line + ' ' + word) : word;
+            if (ctx.measureText(candidate).width <= maxWidth) {
+                line = candidate;
+                continue;
+            }
+
+            if (line) {
+                ctx.fillText(line, x, currentY);
+                printed++;
+                if (printed >= cap) {
+                    return currentY;
+                }
+                currentY += lineHeight;
+                line = word;
+            } else {
+                ctx.fillText(word, x, currentY);
+                printed++;
+                if (printed >= cap) {
+                    return currentY;
+                }
+                currentY += lineHeight;
+                line = '';
+            }
+        }
+
+        if (line && printed < cap) {
+            ctx.fillText(line, x, currentY);
+        }
+        return currentY;
+    }
+
+    function loadImageOptional(src) {
+        var path = String(src || '').trim();
+        if (!path) {
+            return Promise.resolve(null);
+        }
+        return new Promise(function (resolve) {
+            var img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function () {
+                resolve(img);
+            };
+            img.onerror = function () {
+                resolve(null);
+            };
+            img.src = path;
+        });
+    }
+
+    function buildExportImageFilename(sourceType) {
+        var key = String(sourceType || 'documento').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-+|-+$)/g, '');
+        if (!key) {
+            key = 'documento';
+        }
+        return key + '-' + localDateYmd(new Date()) + '.png';
+    }
+
+    function buildExportPdfFilename(sourceType) {
+        var key = String(sourceType || 'documento').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-+|-+$)/g, '');
+        if (!key) {
+            key = 'documento';
+        }
+        return key + '-' + localDateYmd(new Date()) + '.pdf';
+    }
+
+    function downloadExportPdf(source, churchName, sourceType) {
+        var fields = {
+            source_type: String((source && source.source_type) || sourceType || 'documento'),
+            title: String((source && source.title) || 'Documento bíblico'),
+            reference: String((source && source.reference) || ''),
+            content: String((source && source.content) || ''),
+            church_name: String(churchName || state.branding.churchName || '')
+        };
+
+        if (!fields.title.trim() || !fields.content.trim()) {
+            return Promise.reject(new Error('No hay contenido suficiente para exportar PDF.'));
+        }
+
+        try {
+            submitHiddenPostForm('?route=api.export.download', fields);
+            return Promise.resolve();
+        } catch (err) {
+            return Promise.reject(new Error('No se pudo iniciar la descarga del PDF.'));
+        }
+    }
+
+    function submitHiddenPostForm(actionUrl, fields) {
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = String(actionUrl || '');
+        form.style.display = 'none';
+
+        var entries = fields && typeof fields === 'object' ? fields : {};
+        Object.keys(entries).forEach(function (key) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = String(entries[key] == null ? '' : entries[key]);
+            form.appendChild(input);
+        });
+
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
     }
 
     function createNote() {
@@ -1966,8 +3210,8 @@
 
     function createLink() {
         var range = selectedRange();
-        var toBook = Number(document.getElementById('linkBook').value || 0);
-        var toChapter = Number(document.getElementById('linkChapter').value || 0);
+        var toBook = Number(((document.getElementById('linkBookSelect') || document.getElementById('linkBook')) || {}).value || 0);
+        var toChapter = Number(((document.getElementById('linkChapterSelect') || document.getElementById('linkChapter')) || {}).value || 0);
         var toVerseStart = Number(document.getElementById('linkVerseStart').value || 0);
         var toVerseEnd = Number(document.getElementById('linkVerseEnd').value || toVerseStart);
         var note = (document.getElementById('linkNote').value || '').trim();
@@ -1975,6 +3219,11 @@
         if (!toBook || !toChapter || !toVerseStart) {
             notify('Completa referencia destino.');
             return;
+        }
+        if (toVerseEnd < toVerseStart) {
+            var tmp = toVerseStart;
+            toVerseStart = toVerseEnd;
+            toVerseEnd = tmp;
         }
 
         postForm('api.link.create', {
@@ -2139,6 +3388,51 @@
         });
     }
 
+    function buildPrettySharePayload() {
+        var rows = selectedRows();
+        if (!rows.length) {
+            return { error: 'Selecciona al menos un versículo.' };
+        }
+
+        var range = selectedRange();
+        var reference = toReference(state.currentBook, state.currentChapter, range.start, range.end);
+        var paragraph = rows.map(function (row) {
+            return cleanText(row.scripture_text || row.scripture_html || '');
+        }).join(' ');
+        paragraph = paragraph.replace(/\s+/g, ' ').trim();
+
+        var maxLen = 520;
+        var preview = paragraph;
+        if (preview.length > maxLen) {
+            preview = preview.slice(0, maxLen).trim() + '...';
+        }
+
+        var appName = String((state.branding && state.branding.appName) ? state.branding.appName : 'Biblia para todos');
+        var text = '*' + reference + '*\n\n"' + preview + '"\n\n' + appName;
+        return {
+            reference: reference,
+            preview: preview,
+            text: text,
+            url: buildSharePassageUrl(range.start)
+        };
+    }
+
+    function buildSharePassageUrl(verse) {
+        var book = Number(state.currentBook || 0);
+        var chapter = Number(state.currentChapter || 0);
+        var verseNum = Number(verse || 0);
+        var base = window.location.origin + window.location.pathname;
+        var params = new URLSearchParams({
+            route: 'reader',
+            book: String(book > 0 ? book : 1),
+            chapter: String(chapter > 0 ? chapter : 1)
+        });
+        if (verseNum > 0) {
+            params.set('verse', String(verseNum));
+        }
+        return base + '?' + params.toString();
+    }
+
     function fetchChapters(book) {
         fetch('?route=api.chapters&book=' + book)
             .then(asJson)
@@ -2161,6 +3455,7 @@
     }
 
     function fetchChapter(book, chapter) {
+        stopAudioPlayback(true);
         fetch('?route=api.chapter&book=' + book + '&chapter=' + chapter)
             .then(asJson)
             .then(function (data) {
@@ -2178,6 +3473,7 @@
                 renderChapters();
                 renderVerses();
                 updatePreachControlsFromChapter();
+                renderAudioControls();
                 if (state.settings.parallelMode) {
                     loadParallelChapterData(true, true);
                 }
@@ -2195,11 +3491,125 @@
                     maybeAutoCompleteCurrentPlanChapter();
                     renderReadingPlanCard();
                 }
+                state.readingTracker.lastTickMs = Date.now();
                 closeDrawers();
             })
             .catch(function () {
                 notify('No se pudo cargar el capítulo.');
             });
+    }
+
+    function initReadingTelemetry() {
+        if (state.readingTracker.intervalId) {
+            return;
+        }
+
+        state.readingTracker.lastTickMs = Date.now();
+        state.readingTracker.intervalId = window.setInterval(function () {
+            readingTelemetryTick();
+            flushReadingTelemetry(false);
+        }, 15000);
+
+        document.addEventListener('visibilitychange', function () {
+            readingTelemetryTick();
+            if (document.hidden) {
+                flushReadingTelemetry(true);
+            } else {
+                state.readingTracker.lastTickMs = Date.now();
+            }
+        });
+
+        window.addEventListener('focus', function () {
+            state.readingTracker.lastTickMs = Date.now();
+        });
+
+        window.addEventListener('blur', function () {
+            readingTelemetryTick();
+            flushReadingTelemetry(true);
+        });
+
+        window.addEventListener('pagehide', function () {
+            readingTelemetryTick();
+            flushReadingTelemetry(true);
+        });
+    }
+
+    function readingTelemetryTick() {
+        var now = Date.now();
+        var lastTick = Number(state.readingTracker.lastTickMs || 0);
+        if (lastTick < 1) {
+            state.readingTracker.lastTickMs = now;
+            return;
+        }
+
+        var elapsedSeconds = Math.floor((now - lastTick) / 1000);
+        state.readingTracker.lastTickMs = now;
+        if (elapsedSeconds < 1) {
+            return;
+        }
+        if (!isReadingTelemetryActive()) {
+            return;
+        }
+        queueReadingSeconds(elapsedSeconds);
+    }
+
+    function isReadingTelemetryActive() {
+        if (document.hidden) {
+            return false;
+        }
+        if (Number(state.currentBook || 0) < 1 || Number(state.currentChapter || 0) < 1) {
+            return false;
+        }
+        if (!Array.isArray(state.verses) || state.verses.length < 1) {
+            return false;
+        }
+        return true;
+    }
+
+    function queueReadingSeconds(seconds) {
+        var safeSeconds = Number(seconds || 0);
+        if (!Number.isFinite(safeSeconds) || safeSeconds < 1) {
+            return;
+        }
+        safeSeconds = Math.max(1, Math.min(90, Math.round(safeSeconds)));
+        state.readingTracker.unsentSeconds = Math.min(12 * 3600, Number(state.readingTracker.unsentSeconds || 0) + safeSeconds);
+    }
+
+    function flushReadingTelemetry(force) {
+        var minimum = force ? 1 : 20;
+        var pending = Number(state.readingTracker.unsentSeconds || 0);
+        if (pending < minimum) {
+            return Promise.resolve(false);
+        }
+        if (state.readingTracker.sending) {
+            return Promise.resolve(false);
+        }
+        if (!navigator.onLine) {
+            return Promise.resolve(false);
+        }
+
+        state.readingTracker.unsentSeconds = 0;
+        state.readingTracker.sending = true;
+
+        return postForm('api.stats.track', {
+            seconds: pending,
+            date: localDateYmd(new Date()),
+            book: Number(state.currentBook || 0),
+            chapter: Number(state.currentChapter || 0)
+        }).then(function (res) {
+            state.readingTracker.sending = false;
+            if (!res || res.error) {
+                throw new Error('track');
+            }
+            if (state.statsLoaded) {
+                fetchStatsPanel(true, false);
+            }
+            return true;
+        }).catch(function () {
+            state.readingTracker.sending = false;
+            state.readingTracker.unsentSeconds = Math.min(12 * 3600, Number(state.readingTracker.unsentSeconds || 0) + pending);
+            return false;
+        });
     }
 
     function toggleParallelMode() {
@@ -2979,22 +4389,453 @@
         });
 
         els.shareSelection.addEventListener('click', function () {
-            var references = buildSelectionReferences();
-            if (!references.length) {
-                notify('Selecciona al menos un versículo.');
+            var payload = buildPrettySharePayload();
+            if (payload.error) {
+                notify(payload.error);
                 return;
             }
-            var text = references.join('\n') + '\n\nBiblia para todos';
             if (navigator.share) {
-                navigator.share({ title: 'Biblia para todos', text: text }).catch(function () {});
+                navigator.share({
+                    title: payload.reference,
+                    text: payload.text,
+                    url: payload.url
+                }).catch(function () {});
                 return;
             }
-            copyText(text).then(function () {
+            copyText(payload.text + '\n' + payload.url).then(function () {
                 notify('Compartir no disponible. Texto copiado.');
             }).catch(function () {
                 notify('No se pudo copiar.');
             });
         });
+
+        if (els.shareWhatsApp) {
+            els.shareWhatsApp.addEventListener('click', function () {
+                var payload = buildPrettySharePayload();
+                if (payload.error) {
+                    notify(payload.error);
+                    return;
+                }
+                var waText = payload.text + '\n' + payload.url;
+                window.open('https://wa.me/?text=' + encodeURIComponent(waText), '_blank', 'noopener');
+            });
+        }
+
+        if (els.shareFacebook) {
+            els.shareFacebook.addEventListener('click', function () {
+                var payload = buildPrettySharePayload();
+                if (payload.error) {
+                    notify(payload.error);
+                    return;
+                }
+                var quote = payload.reference + ' - ' + payload.preview;
+                var fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' +
+                    encodeURIComponent(payload.url) + '&quote=' + encodeURIComponent(quote);
+                window.open(fbUrl, '_blank', 'noopener');
+            });
+        }
+    }
+
+    function bindAudioControls() {
+        if (!els.audioSource || !els.audioVoice || !els.audioRate || !els.audioPlay || !els.audioPauseResume || !els.audioStop) {
+            return;
+        }
+
+        els.audioSource.addEventListener('change', function () {
+            state.audio.source = String(this.value || 'chapter');
+            saveAudioPrefs();
+            renderAudioControls();
+        });
+
+        els.audioVoice.addEventListener('change', function () {
+            state.audio.voiceUri = String(this.value || '');
+            saveAudioPrefs();
+        });
+
+        els.audioRate.addEventListener('input', function () {
+            var next = Number(this.value || 1);
+            if (!Number.isFinite(next)) {
+                next = 1;
+            }
+            state.audio.rate = Math.max(0.7, Math.min(1.6, next));
+            saveAudioPrefs();
+            renderAudioControls();
+        });
+
+        els.audioPlay.addEventListener('click', function () {
+            startAudioPlayback();
+        });
+
+        els.audioPauseResume.addEventListener('click', function () {
+            toggleAudioPauseResume();
+        });
+
+        els.audioStop.addEventListener('click', function () {
+            stopAudioPlayback(false);
+        });
+
+        window.addEventListener('beforeunload', function () {
+            stopAudioPlayback(true);
+            savePreachPrefs();
+        });
+
+        renderAudioControls();
+    }
+
+    function isAudioTtsSupported() {
+        if (typeof window === 'undefined') {
+            return false;
+        }
+        var hasSynth = typeof window.speechSynthesis !== 'undefined';
+        var hasCtor = typeof window.SpeechSynthesisUtterance !== 'undefined' || typeof SpeechSynthesisUtterance !== 'undefined';
+        return hasSynth && hasCtor;
+    }
+
+    function loadAudioPrefs() {
+        try {
+            var raw = localStorage.getItem('biblia_audio_prefs');
+            if (!raw) {
+                return;
+            }
+            var parsed = JSON.parse(raw);
+            if (!parsed || typeof parsed !== 'object') {
+                return;
+            }
+            state.audio.source = parsed.source === 'selection' ? 'selection' : 'chapter';
+            var rate = Number(parsed.rate || 1);
+            state.audio.rate = Number.isFinite(rate) ? Math.max(0.7, Math.min(1.6, rate)) : 1;
+            state.audio.voiceUri = String(parsed.voice_uri || '');
+        } catch (err) {
+            // ignore
+        }
+    }
+
+    function saveAudioPrefs() {
+        localStorage.setItem('biblia_audio_prefs', JSON.stringify({
+            source: state.audio.source,
+            rate: state.audio.rate,
+            voice_uri: state.audio.voiceUri
+        }));
+    }
+
+    function refreshSpeechVoices(updateUi) {
+        state.audio.supported = isAudioTtsSupported();
+        if (!state.audio.supported) {
+            state.audio.voices = [];
+            return;
+        }
+        var allVoices = window.speechSynthesis.getVoices() || [];
+        var preferred = allVoices.filter(function (voice) {
+            return /^es([-_]|$)/i.test(String(voice.lang || ''));
+        });
+        if (!preferred.length) {
+            preferred = allVoices.slice();
+        }
+
+        var byUri = {};
+        preferred.forEach(function (voice) {
+            var key = String(voice.voiceURI || voice.name || '');
+            if (!key || byUri[key]) {
+                return;
+            }
+            byUri[key] = voice;
+        });
+        state.audio.voices = Object.keys(byUri).map(function (key) {
+            return byUri[key];
+        });
+
+        if (state.audio.voiceUri && !state.audio.voices.some(function (voice) {
+            return String(voice.voiceURI || '') === state.audio.voiceUri;
+        })) {
+            state.audio.voiceUri = '';
+        }
+
+        if (updateUi) {
+            renderAudioControls();
+        }
+    }
+
+    function renderAudioControls() {
+        if (!els.audioSource || !els.audioVoice || !els.audioRate || !els.audioRateLabel || !els.audioTargetInfo || !els.audioPauseResume || !els.audioPlay || !els.audioStop) {
+            return;
+        }
+
+        state.audio.supported = isAudioTtsSupported();
+        if (!state.audio.supported) {
+            els.audioSource.disabled = true;
+            els.audioVoice.innerHTML = '<option value="">TTS no disponible en este navegador</option>';
+            els.audioVoice.disabled = true;
+            els.audioRate.disabled = true;
+            els.audioPlay.disabled = true;
+            els.audioPauseResume.disabled = true;
+            els.audioStop.disabled = true;
+            setAudioStatus('Este navegador no soporta lectura por voz.');
+            return;
+        }
+
+        refreshSpeechVoices(false);
+
+        els.audioSource.disabled = false;
+        els.audioSource.value = state.audio.source === 'selection' ? 'selection' : 'chapter';
+        els.audioRate.disabled = false;
+        els.audioRate.value = String(state.audio.rate.toFixed(1));
+        els.audioRateLabel.textContent = state.audio.rate.toFixed(1) + 'x';
+
+        var voices = Array.isArray(state.audio.voices) ? state.audio.voices : [];
+        if (!voices.length) {
+            els.audioVoice.innerHTML = '<option value="">Predeterminada del navegador</option>';
+            els.audioVoice.disabled = true;
+        } else {
+            els.audioVoice.disabled = false;
+            els.audioVoice.innerHTML = voices.map(function (voice) {
+                var uri = escapeHtml(String(voice.voiceURI || ''));
+                var label = escapeHtml(String(voice.name || 'Voz')) + ' (' + escapeHtml(String(voice.lang || '')) + ')';
+                var selected = state.audio.voiceUri && state.audio.voiceUri === String(voice.voiceURI || '') ? ' selected' : '';
+                return '<option value="' + uri + '"' + selected + '>' + label + '</option>';
+            }).join('');
+            if (!state.audio.voiceUri && voices[0] && voices[0].voiceURI) {
+                els.audioVoice.value = String(voices[0].voiceURI);
+            }
+        }
+
+        if (!state.audio.voiceUri) {
+            state.audio.voiceUri = String(els.audioVoice.value || '');
+        }
+
+        var payload = getAudioReadingPayload(state.audio.source);
+        if (payload.error) {
+            els.audioTargetInfo.innerHTML = '<small class="muted">' + escapeHtml(payload.error) + '</small>';
+        } else {
+            els.audioTargetInfo.innerHTML = '' +
+                '<strong>' + escapeHtml(payload.reference) + '</strong>' +
+                '<small class="muted">Versículos incluidos: ' + Number(payload.count || 0) + '</small>';
+        }
+
+        var playing = state.audio.speaking === true;
+        var paused = state.audio.paused === true;
+        els.audioPauseResume.textContent = paused ? 'Reanudar' : 'Pausar';
+        els.audioPauseResume.disabled = !playing;
+        els.audioStop.disabled = !playing;
+        els.audioPlay.textContent = playing ? 'Reiniciar' : 'Leer';
+        els.audioPlay.disabled = Boolean(payload.error);
+    }
+
+    function setAudioStatus(message) {
+        if (!els.audioStatus) {
+            return;
+        }
+        els.audioStatus.textContent = String(message || '');
+    }
+
+    function getAudioReadingPayload(source) {
+        var mode = source === 'selection' ? 'selection' : 'chapter';
+        var rows = mode === 'selection' ? selectedRows() : (Array.isArray(state.verses) ? state.verses.slice() : []);
+        if (!rows.length) {
+            return {
+                error: mode === 'selection'
+                    ? 'Selecciona uno o más versículos para usar audio por selección.'
+                    : 'No hay versículos cargados en este capítulo.'
+            };
+        }
+
+        var start = Number(rows[0].verse || 0);
+        var end = Number(rows[rows.length - 1].verse || 0);
+        var text = rows.map(function (row) {
+            var verseNum = Number(row.verse || 0);
+            var verseText = cleanText(row.scripture_text || row.scripture_html || '');
+            return verseNum + '. ' + verseText;
+        }).join(' ');
+
+        return {
+            source: mode,
+            count: rows.length,
+            reference: toReference(state.currentBook, state.currentChapter, start, end),
+            text: text
+        };
+    }
+
+    function buildSpeechQueue(text) {
+        var normalized = String(text || '').replace(/\s+/g, ' ').trim();
+        if (!normalized) {
+            return [];
+        }
+
+        var words = normalized.split(' ');
+        var chunks = [];
+        var current = '';
+        var maxLen = 220;
+
+        words.forEach(function (word) {
+            var candidate = current ? (current + ' ' + word) : word;
+            if (candidate.length > maxLen && current) {
+                chunks.push(current);
+                current = word;
+                return;
+            }
+            current = candidate;
+        });
+
+        if (current) {
+            chunks.push(current);
+        }
+        return chunks;
+    }
+
+    function findVoiceByUri(uri) {
+        var key = String(uri || '');
+        if (!key || !Array.isArray(state.audio.voices)) {
+            return null;
+        }
+        for (var i = 0; i < state.audio.voices.length; i++) {
+            var voice = state.audio.voices[i];
+            if (String(voice.voiceURI || '') === key) {
+                return voice;
+            }
+        }
+        return null;
+    }
+
+    function startAudioPlayback() {
+        state.audio.supported = isAudioTtsSupported();
+        if (!state.audio.supported) {
+            notify('Audio no disponible en este navegador.');
+            return;
+        }
+
+        var payload = getAudioReadingPayload(state.audio.source);
+        if (payload.error) {
+            notify(payload.error);
+            setAudioStatus(payload.error);
+            renderAudioControls();
+            return;
+        }
+
+        stopAudioPlayback(true);
+        state.audio.currentReference = payload.reference;
+        state.audio.queue = buildSpeechQueue(payload.text);
+        state.audio.queueIndex = 0;
+        state.audio.speaking = state.audio.queue.length > 0;
+        state.audio.paused = false;
+
+        if (!state.audio.queue.length) {
+            notify('No hay texto para leer.');
+            setAudioStatus('No hay texto para leer.');
+            renderAudioControls();
+            return;
+        }
+
+        setAudioStatus('Leyendo ' + payload.reference + '...');
+        speakAudioNextChunk();
+        renderAudioControls();
+    }
+
+    function speakAudioNextChunk() {
+        state.audio.supported = isAudioTtsSupported();
+        if (!state.audio.speaking || !state.audio.supported) {
+            return;
+        }
+        if (state.audio.queueIndex >= state.audio.queue.length) {
+            state.audio.speaking = false;
+            state.audio.paused = false;
+            state.audio.queue = [];
+            state.audio.queueIndex = 0;
+            setAudioStatus('Lectura finalizada.');
+            renderAudioControls();
+            return;
+        }
+
+        var chunk = String(state.audio.queue[state.audio.queueIndex] || '').trim();
+        if (!chunk) {
+            state.audio.queueIndex += 1;
+            speakAudioNextChunk();
+            return;
+        }
+
+        var utterance = new SpeechSynthesisUtterance(chunk);
+        var voice = findVoiceByUri(state.audio.voiceUri);
+        if (voice) {
+            utterance.voice = voice;
+            utterance.lang = String(voice.lang || 'es-ES');
+        } else {
+            utterance.lang = 'es-ES';
+        }
+        utterance.rate = state.audio.rate;
+
+        utterance.onend = function () {
+            if (!state.audio.speaking) {
+                return;
+            }
+            state.audio.queueIndex += 1;
+            speakAudioNextChunk();
+        };
+
+        utterance.onstart = function () {
+            setAudioStatus('Reproduciendo ' + (state.audio.currentReference || 'pasaje') + '...');
+        };
+
+        utterance.onerror = function () {
+            state.audio.speaking = false;
+            state.audio.paused = false;
+            state.audio.queue = [];
+            state.audio.queueIndex = 0;
+            setAudioStatus('No se pudo reproducir el audio.');
+            renderAudioControls();
+        };
+
+        try {
+            window.speechSynthesis.speak(utterance);
+        } catch (err) {
+            state.audio.speaking = false;
+            state.audio.paused = false;
+            state.audio.queue = [];
+            state.audio.queueIndex = 0;
+            setAudioStatus('El navegador bloqueó la reproducción de audio.');
+            notify('No se pudo iniciar el audio.');
+            renderAudioControls();
+        }
+    }
+
+    function toggleAudioPauseResume() {
+        state.audio.supported = isAudioTtsSupported();
+        if (!state.audio.supported) {
+            return;
+        }
+        var synth = window.speechSynthesis;
+        if (!state.audio.speaking && !synth.speaking) {
+            notify('No hay audio en reproducción.');
+            return;
+        }
+
+        if (synth.paused || state.audio.paused) {
+            synth.resume();
+            state.audio.paused = false;
+            setAudioStatus('Reproduciendo...');
+        } else {
+            synth.pause();
+            state.audio.paused = true;
+            setAudioStatus('Audio en pausa.');
+        }
+        renderAudioControls();
+    }
+
+    function stopAudioPlayback(silent) {
+        state.audio.supported = isAudioTtsSupported();
+        if (state.audio.supported) {
+            window.speechSynthesis.cancel();
+        }
+
+        var wasActive = state.audio.speaking || state.audio.paused;
+        state.audio.speaking = false;
+        state.audio.paused = false;
+        state.audio.queue = [];
+        state.audio.queueIndex = 0;
+        state.audio.currentReference = '';
+
+        if (!silent && wasActive) {
+            notify('Audio detenido.');
+        }
+        setAudioStatus('Listo para reproducir.');
+        renderAudioControls();
     }
 
     function activateTab(tabName) {
@@ -3006,6 +4847,153 @@
             panel.classList.toggle('is-active', panel.getAttribute('data-panel') === state.activeTab);
         });
         persistReaderState();
+    }
+
+    function bindGuideTourControls() {
+        if (els.guidePrevStep) {
+            els.guidePrevStep.addEventListener('click', function () {
+                setGuideTourStep(Number(state.guide.activeStep || 0) - 1, true);
+            });
+        }
+        if (els.guideNextStep) {
+            els.guideNextStep.addEventListener('click', function () {
+                var current = Number(state.guide.activeStep || 0);
+                if (current >= GUIDE_TOUR_STEPS.length - 1) {
+                    closeGuideModal();
+                    notify('Tour finalizado. Puedes abrirlo de nuevo cuando quieras.');
+                    return;
+                }
+                setGuideTourStep(current + 1, true);
+            });
+        }
+        if (els.guideGoTarget) {
+            els.guideGoTarget.addEventListener('click', function () {
+                var step = GUIDE_TOUR_STEPS[Number(state.guide.activeStep || 0)] || null;
+                if (!step || !step.selector) {
+                    return;
+                }
+                var target = document.querySelector(step.selector);
+                if (!target) {
+                    notify('No se encontró el elemento de este paso.');
+                    return;
+                }
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (step.selector === '#openModules') {
+                    openModules();
+                }
+                if (step.selector === '#helpPane') {
+                    openHelpDrawer();
+                }
+            });
+        }
+        if (els.guideHideOnStart) {
+            els.guideHideOnStart.addEventListener('change', function () {
+                state.settings.autoTourOnStart = !this.checked;
+                saveSettings();
+            });
+        }
+    }
+
+    function openGuideModal(startFromFirstStep) {
+        if (!els.guideModal) {
+            return;
+        }
+        els.overlay.classList.remove('hidden');
+        els.guideModal.classList.remove('hidden');
+        if (els.guideHideOnStart) {
+            els.guideHideOnStart.checked = !state.settings.autoTourOnStart;
+        }
+        if (startFromFirstStep === true) {
+            setGuideTourStep(0, true);
+            return;
+        }
+        setGuideTourStep(Number(state.guide.activeStep || 0), false);
+    }
+
+    function closeGuideModal() {
+        if (!els.guideModal || els.guideModal.classList.contains('hidden')) {
+            return;
+        }
+        clearGuideFocus();
+        els.guideModal.classList.add('hidden');
+        if (els.settingsModal.classList.contains('hidden') &&
+            els.searchModal.classList.contains('hidden') &&
+            (!els.planModal || els.planModal.classList.contains('hidden')) &&
+            (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
+            (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
+            (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            els.overlay.classList.add('hidden');
+        }
+    }
+
+    function clearGuideFocus() {
+        if (state.guide.focusSelector) {
+            var current = document.querySelector(state.guide.focusSelector);
+            if (current) {
+                current.classList.remove('tour-focus');
+            }
+        }
+        state.guide.focusSelector = '';
+    }
+
+    function setGuideTourStep(index, autoScroll) {
+        if (!els.guideTourTitle || !els.guideTourText || !els.guideTourHint || !els.guideTourStepLabel) {
+            return;
+        }
+        if (!GUIDE_TOUR_STEPS.length) {
+            return;
+        }
+
+        var safe = Number(index || 0);
+        if (!Number.isFinite(safe)) {
+            safe = 0;
+        }
+        if (safe < 0) {
+            safe = 0;
+        }
+        if (safe > GUIDE_TOUR_STEPS.length - 1) {
+            safe = GUIDE_TOUR_STEPS.length - 1;
+        }
+        state.guide.activeStep = safe;
+
+        var step = GUIDE_TOUR_STEPS[safe];
+        els.guideTourTitle.textContent = String(step.title || 'Paso');
+        els.guideTourText.textContent = String(step.text || '');
+        els.guideTourHint.textContent = String(step.hint || '');
+        els.guideTourStepLabel.textContent = 'Paso ' + (safe + 1) + ' de ' + GUIDE_TOUR_STEPS.length;
+
+        if (els.guidePrevStep) {
+            els.guidePrevStep.disabled = safe === 0;
+        }
+        if (els.guideNextStep) {
+            els.guideNextStep.textContent = safe >= GUIDE_TOUR_STEPS.length - 1 ? 'Finalizar' : 'Siguiente';
+        }
+
+        clearGuideFocus();
+        var target = step && step.selector ? document.querySelector(step.selector) : null;
+        if (target && step.selector) {
+            state.guide.focusSelector = step.selector;
+            target.classList.add('tour-focus');
+            if (autoScroll) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        if (els.guideGoTarget) {
+            els.guideGoTarget.disabled = !target;
+        }
+    }
+
+    function maybeAutoStartGuideTour() {
+        if (!state.settings.autoTourOnStart) {
+            return;
+        }
+        if (els.searchModal && !els.searchModal.classList.contains('hidden')) {
+            return;
+        }
+        openGuideModal(true);
     }
 
     function openSettings() {
@@ -3052,6 +5040,210 @@
         els.versionsModal.classList.remove('hidden');
     }
 
+    function openModules() {
+        if (!els.modulesModal || !els.modulesList) {
+            return;
+        }
+        els.overlay.classList.remove('hidden');
+        els.modulesModal.classList.remove('hidden');
+        refreshModulesCatalog();
+    }
+
+    function closeModules() {
+        if (!els.modulesModal || els.modulesModal.classList.contains('hidden')) {
+            return;
+        }
+        els.modulesModal.classList.add('hidden');
+        if (els.settingsModal.classList.contains('hidden') &&
+            els.searchModal.classList.contains('hidden') &&
+            (!els.planModal || els.planModal.classList.contains('hidden')) &&
+            (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
+            (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
+            (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            els.overlay.classList.add('hidden');
+        }
+    }
+
+    function refreshModulesCatalog() {
+        if (!els.modulesList) {
+            return;
+        }
+        els.modulesList.innerHTML = '<p class="muted">Cargando módulos...</p>';
+        fetch('?route=api.modules.list')
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'No se pudo cargar módulos.');
+                }
+                renderModulesCatalog(Array.isArray(res.modules) ? res.modules : []);
+            })
+            .catch(function (err) {
+                var msg = (err && err.message) ? err.message : 'No se pudo cargar módulos.';
+                if (els.modulesList) {
+                    els.modulesList.innerHTML = '<p class="muted">' + escapeHtml(msg) + '</p>';
+                }
+            });
+    }
+
+    function renderModulesCatalog(modules) {
+        if (!els.modulesList) {
+            return;
+        }
+        var rows = Array.isArray(modules) ? modules : [];
+        if (!rows.length) {
+            els.modulesList.innerHTML = '<p class="muted">No hay módulos en catálogo.</p>';
+            return;
+        }
+
+        els.modulesList.innerHTML = rows.map(function (module) {
+            var key = String(module.key || '');
+            var installed = module.installed === true;
+            var enabled = module.enabled === true;
+            var type = formatModuleTypeLabel(String(module.type || ''));
+            var version = String(module.version || '').trim();
+            var status = installed ? (enabled ? 'Instalado y activo' : 'Instalado e inactivo') : 'No instalado';
+            var installLabel = installed ? 'Reinstalar' : 'Descargar';
+            var toggleLabel = enabled ? 'Desactivar' : 'Activar';
+
+            return '' +
+                '<article class="card module-card">' +
+                '<div class="module-card-head">' +
+                '<strong>' + escapeHtml(module.name || key || 'Modulo') + '</strong>' +
+                '<span class="module-type-chip">' + escapeHtml(type) + '</span>' +
+                '</div>' +
+                (module.description ? '<p>' + escapeHtml(module.description) + '</p>' : '') +
+                '<small class="muted">Estado: ' + escapeHtml(status) + (version ? ' · v' + escapeHtml(version) : '') + '</small>' +
+                '<div class="toolbar module-actions">' +
+                '<button class="btn-primary js-module-install" type="button" data-key="' + escapeHtml(key) + '">' + escapeHtml(installLabel) + '</button>' +
+                '<button class="btn-light js-module-toggle" type="button" data-key="' + escapeHtml(key) + '" data-enabled="' + (enabled ? '1' : '0') + '"' + (installed ? '' : ' disabled') + '>' + escapeHtml(toggleLabel) + '</button>' +
+                '</div>' +
+                '</article>';
+        }).join('');
+
+        els.modulesList.querySelectorAll('.js-module-install').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var key = String(this.getAttribute('data-key') || '').trim();
+                if (!key) {
+                    return;
+                }
+                this.disabled = true;
+                postForm('api.modules.install', { key: key }).then(function (res) {
+                    if (!res || res.error) {
+                        notify((res && res.error) ? res.error : 'No se pudo descargar el módulo.');
+                        return;
+                    }
+                    notify('Módulo instalado.');
+                    renderModulesCatalog(Array.isArray(res.modules) ? res.modules : []);
+                    fetchChapter(state.currentBook, state.currentChapter);
+                }).catch(function () {
+                    notify('No se pudo descargar el módulo.');
+                }).finally(function () {
+                    btn.disabled = false;
+                });
+            });
+        });
+
+        els.modulesList.querySelectorAll('.js-module-toggle').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var key = String(this.getAttribute('data-key') || '').trim();
+                var currentEnabled = Number(this.getAttribute('data-enabled') || 0) === 1;
+                if (!key) {
+                    return;
+                }
+                this.disabled = true;
+                postForm('api.modules.toggle', {
+                    key: key,
+                    enabled: currentEnabled ? 0 : 1
+                }).then(function (res) {
+                    if (!res || res.error) {
+                        notify((res && res.error) ? res.error : 'No se pudo actualizar el módulo.');
+                        return;
+                    }
+                    notify(currentEnabled ? 'Módulo desactivado.' : 'Módulo activado.');
+                    renderModulesCatalog(Array.isArray(res.modules) ? res.modules : []);
+                    fetchChapter(state.currentBook, state.currentChapter);
+                }).catch(function () {
+                    notify('No se pudo actualizar el módulo.');
+                }).finally(function () {
+                    btn.disabled = false;
+                });
+            });
+        });
+
+        if (els.modulesDictSearch && !els.modulesDictSearch.dataset.bound) {
+            els.modulesDictSearch.dataset.bound = '1';
+            els.modulesDictSearch.addEventListener('click', runModuleDictionaryLookup);
+        }
+        if (els.modulesDictQuery && !els.modulesDictQuery.dataset.bound) {
+            els.modulesDictQuery.dataset.bound = '1';
+            els.modulesDictQuery.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    runModuleDictionaryLookup();
+                }
+            });
+        }
+    }
+
+    function runModuleDictionaryLookup() {
+        if (!els.modulesDictQuery || !els.modulesDictResults) {
+            return;
+        }
+        var query = String(els.modulesDictQuery.value || '').trim();
+        if (!query) {
+            notify('Escribe una palabra para buscar en diccionario.');
+            return;
+        }
+
+        els.modulesDictResults.innerHTML = '<p class="muted">Buscando...</p>';
+        fetch('?route=api.dictionary.lookup&q=' + encodeURIComponent(query) + '&limit=12')
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'No se pudo consultar el diccionario.');
+                }
+                renderModuleDictionaryResults(Array.isArray(res.rows) ? res.rows : []);
+            })
+            .catch(function (err) {
+                var msg = (err && err.message) ? err.message : 'No se pudo consultar el diccionario.';
+                els.modulesDictResults.innerHTML = '<p class="muted">' + escapeHtml(msg) + '</p>';
+            });
+    }
+
+    function renderModuleDictionaryResults(rows) {
+        if (!els.modulesDictResults) {
+            return;
+        }
+        var list = Array.isArray(rows) ? rows : [];
+        if (!list.length) {
+            els.modulesDictResults.innerHTML = '<p class="muted">Sin resultados en diccionarios activos.</p>';
+            return;
+        }
+
+        els.modulesDictResults.innerHTML = list.map(function (row) {
+            var refs = Array.isArray(row.references) ? row.references : [];
+            return '' +
+                '<article class="card module-dict-item">' +
+                '<strong>' + escapeHtml(row.term || '') + '</strong>' +
+                (row.definition ? '<p>' + escapeHtml(row.definition) + '</p>' : '') +
+                (row.usage ? '<small class="muted">Uso: ' + escapeHtml(row.usage) + '</small>' : '') +
+                (refs.length ? '<small class="muted">Referencias: ' + escapeHtml(refs.join(', ')) + '</small>' : '') +
+                '<small class="muted">Fuente: ' + escapeHtml(row.module_name || 'Diccionario') + '</small>' +
+                '</article>';
+        }).join('');
+    }
+
+    function formatModuleTypeLabel(type) {
+        var key = String(type || '').trim().toLowerCase();
+        if (key === 'dictionary') {
+            return 'Diccionario';
+        }
+        return 'Comentario';
+    }
+
     function openInterlinear() {
         if (!els.interlinearModal || !els.interlinearModalBody) {
             return;
@@ -3088,6 +5280,16 @@
             });
     }
 
+    function openAudio() {
+        if (!els.audioModal) {
+            return;
+        }
+        refreshSpeechVoices(false);
+        renderAudioControls();
+        els.overlay.classList.remove('hidden');
+        els.audioModal.classList.remove('hidden');
+    }
+
     function closeSearch() {
         if (!els.searchModal || els.searchModal.classList.contains('hidden')) {
             return;
@@ -3097,7 +5299,10 @@
             (!els.planModal || els.planModal.classList.contains('hidden')) &&
             (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
             (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
-            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
+            (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
+            (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -3111,7 +5316,10 @@
             els.searchModal.classList.contains('hidden') &&
             (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
             (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
-            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
+            (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
+            (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -3125,7 +5333,10 @@
             els.searchModal.classList.contains('hidden') &&
             (!els.planModal || els.planModal.classList.contains('hidden')) &&
             (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
-            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
+            (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
+            (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -3139,7 +5350,10 @@
             els.searchModal.classList.contains('hidden') &&
             (!els.planModal || els.planModal.classList.contains('hidden')) &&
             (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
-            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
+            (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
+            (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -3191,12 +5405,32 @@
             els.searchModal.classList.contains('hidden') &&
             (!els.planModal || els.planModal.classList.contains('hidden')) &&
             (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
-            (!els.versionsModal || els.versionsModal.classList.contains('hidden'))) {
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
+            (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
 
-    function openStrongLookup(rawCodes) {
+    function closeAudio() {
+        if (!els.audioModal || els.audioModal.classList.contains('hidden')) {
+            return;
+        }
+        els.audioModal.classList.add('hidden');
+        if (els.settingsModal.classList.contains('hidden') &&
+            els.searchModal.classList.contains('hidden') &&
+            (!els.planModal || els.planModal.classList.contains('hidden')) &&
+            (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
+            (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            els.overlay.classList.add('hidden');
+        }
+    }
+
+    function openStrongLookup(rawCodes, options) {
         var codes = parseStrongCodes(rawCodes);
         if (!codes.length) {
             notify('Este término no tiene código Strong válido.');
@@ -3211,32 +5445,31 @@
         els.overlay.classList.remove('hidden');
         els.strongModal.classList.remove('hidden');
 
-        var uncached = [];
-        var cachedEntries = [];
-        codes.forEach(function (code) {
-            var key = String(code || '');
-            if (!key) {
-                return;
-            }
-            if (state.strongCache[key]) {
-                cachedEntries.push(state.strongCache[key]);
-                return;
-            }
-            uncached.push(key);
+        var params = new URLSearchParams({
+            route: 'api.strong.lookup',
+            codes: codes.join(',')
         });
-
-        if (!uncached.length) {
-            renderStrongEntries(cachedEntries, codes);
-            return;
+        if (options && Number(options.book || 0) > 0) {
+            params.set('book', String(Number(options.book)));
+        }
+        if (options && Number(options.chapter || 0) > 0) {
+            params.set('chapter', String(Number(options.chapter)));
+        }
+        if (options && Number(options.verse || 0) > 0) {
+            params.set('verse', String(Number(options.verse)));
+        }
+        if (options && String(options.word || '').trim() !== '') {
+            params.set('word', String(options.word).trim().slice(0, 80));
         }
 
-        fetch('?route=api.strong.lookup&codes=' + encodeURIComponent(uncached.join(',')))
+        fetch('?' + params.toString())
             .then(asJson)
             .then(function (res) {
                 if (!res || res.error) {
                     throw new Error((res && res.error) ? res.error : 'No se pudo cargar Strong.');
                 }
                 var entries = Array.isArray(res.entries) ? res.entries : [];
+                var dictionaryRows = Array.isArray(res.dictionary_rows) ? res.dictionary_rows : [];
                 entries.forEach(function (entry) {
                     var code = String(entry && entry.code ? entry.code : '').toUpperCase();
                     if (!code) {
@@ -3257,9 +5490,20 @@
                         merged.push(state.strongCache[key]);
                     }
                 });
-                renderStrongEntries(merged, codes);
+                renderStrongEntries(merged, codes, dictionaryRows);
             })
             .catch(function (err) {
+                var fallback = [];
+                codes.forEach(function (code) {
+                    var key = String(code || '').toUpperCase();
+                    if (state.strongCache[key]) {
+                        fallback.push(state.strongCache[key]);
+                    }
+                });
+                if (fallback.length) {
+                    renderStrongEntries(fallback, codes, []);
+                    return;
+                }
                 var msg = (err && err.message) ? err.message : 'No se pudo cargar Strong.';
                 els.strongModalBody.innerHTML = '<p class="muted">' + escapeHtml(msg) + '</p>';
             });
@@ -3287,13 +5531,31 @@
         return Object.keys(map);
     }
 
-    function renderStrongEntries(entries, requestedCodes) {
+    function renderStrongEntries(entries, requestedCodes, dictionaryRows) {
         if (!els.strongModalBody) {
             return;
         }
 
         var list = Array.isArray(entries) ? entries : [];
+        var dictionaryList = Array.isArray(dictionaryRows) ? dictionaryRows : [];
+        var guideHtml = buildStrongReferenceGuideHtml(list);
         if (!list.length) {
+            if (dictionaryList.length) {
+                var onlyDictionaryHtml = '' +
+                    '<article class="card strong-entry-card">' +
+                    '<strong>Diccionario adicional</strong>' +
+                    '<ul class="context-list">' + dictionaryList.map(function (row) {
+                        var refs = Array.isArray(row.references) ? row.references : [];
+                        return '<li><strong>' + escapeHtml(row.term || '') + ':</strong> ' +
+                            escapeHtml(row.definition || '') +
+                            (row.usage ? ' <span class="muted">(' + escapeHtml(row.usage) + ')</span>' : '') +
+                            (refs.length ? '<br><small class="muted">Refs: ' + escapeHtml(refs.join(', ')) + '</small>' : '') +
+                            '<br><small class="muted">Fuente: ' + escapeHtml(row.module_name || 'Diccionario') + '</small></li>';
+                    }).join('') + '</ul>' +
+                    '</article>';
+                els.strongModalBody.innerHTML = '<div class="strong-entry-list">' + guideHtml + onlyDictionaryHtml + '</div>';
+                return;
+            }
             var requested = Array.isArray(requestedCodes) ? requestedCodes.join(', ') : '';
             els.strongModalBody.innerHTML = '' +
                 '<p class="muted">No se encontró definición para ' + escapeHtml(requested) + '.</p>' +
@@ -3306,25 +5568,162 @@
             var lemma = escapeHtml(entry.lemma || '');
             var translit = escapeHtml(entry.translit || '');
             var pron = escapeHtml(entry.pron || '');
+            var shortDef = escapeHtml(entry.short_def || '');
             var strongDef = escapeHtml(entry.strongs_def || '');
             var kjvDef = escapeHtml(entry.kjv_def || '');
             var derivation = escapeHtml(entry.derivation || '');
+            var usageTerms = Array.isArray(entry.usage_terms) ? entry.usage_terms : [];
+            var firstContext = entry.first_context && typeof entry.first_context === 'object' ? entry.first_context : null;
+            var commentary = Array.isArray(entry.commentary_samples) ? entry.commentary_samples : [];
+            var voices = Array.isArray(entry.theology_voices) ? entry.theology_voices : [];
 
             var meta = [lemma, translit, pron].filter(function (part) {
                 return String(part || '').trim() !== '';
             }).join(' · ');
 
+            var usageHtml = usageTerms.length
+                ? '<div class="strong-usage-list">' + usageTerms.map(function (term) {
+                    return '<span class="chip">' + escapeHtml(term) + '</span>';
+                }).join('') + '</div>'
+                : '<p class="muted">Sin usos destacados.</p>';
+
+            var contextHtml = '';
+            if (firstContext) {
+                var ctxBook = Number(firstContext.book || 0);
+                var ctxChapter = Number(firstContext.chapter || 0);
+                var ctxVerse = Number(firstContext.verse || 0);
+                var ctxRef = escapeHtml(firstContext.reference || '');
+                var ctxText = escapeHtml(firstContext.verse_text || '');
+                var ctxWords = Array.isArray(firstContext.matched_words) ? firstContext.matched_words : [];
+                var ctxWordsHtml = ctxWords.length
+                    ? '<small class="muted">Palabra(s): ' + escapeHtml(ctxWords.join(', ')) + '</small>'
+                    : '';
+                contextHtml = '' +
+                    '<div class="strong-context-block">' +
+                    '<p><strong>Primer contexto bíblico:</strong> ' + ctxRef + '</p>' +
+                    (ctxText ? '<p class="muted">' + ctxText + '</p>' : '') +
+                    ctxWordsHtml +
+                    (ctxBook > 0 && ctxChapter > 0 && ctxVerse > 0
+                        ? '<button class="btn-light js-open-strong-context" data-book="' + ctxBook + '" data-chapter="' + ctxChapter + '" data-verse="' + ctxVerse + '">Abrir contexto</button>'
+                        : '') +
+                    '</div>';
+            } else {
+                contextHtml = '<p class="muted">No se encontró contexto bíblico con este código.</p>';
+            }
+
+            var commentaryHtml = commentary.length ? '<ul class="context-list">' + commentary.map(function (row) {
+                var source = escapeHtml(row.source || 'Comentario');
+                var excerpt = escapeHtml(row.excerpt || '');
+                return '<li><strong>' + source + ':</strong> ' + excerpt + '</li>';
+            }).join('') + '</ul>' : '<p class="muted">Sin comentarios disponibles para este contexto.</p>';
+
+            var voicesHtml = voices.length ? '<ul class="context-list">' + voices.map(function (row) {
+                var author = escapeHtml(row.author || '');
+                var note = escapeHtml(row.note || '');
+                return '<li><strong>' + author + ':</strong> ' + note + '</li>';
+            }).join('') + '</ul>' : '<p class="muted">Sin notas históricas disponibles.</p>';
+
             return '' +
                 '<article class="card strong-entry-card">' +
                 '<strong class="strong-entry-code">' + code + '</strong>' +
                 (meta ? '<p class="muted strong-entry-meta">' + meta + '</p>' : '') +
+                (shortDef ? '<p><strong>Definición corta:</strong> ' + shortDef + '</p>' : '') +
+                '<div class="strong-sub-block"><strong>Usos</strong>' + usageHtml + '</div>' +
+                '<div class="strong-sub-block">' + contextHtml + '</div>' +
+                '<div class="strong-sub-block"><strong>Comentarios bíblicos</strong>' + commentaryHtml + '</div>' +
+                '<div class="strong-sub-block"><strong>Voces históricas (resumen)</strong>' + voicesHtml + '</div>' +
                 (strongDef ? '<p><strong>Definición:</strong> ' + strongDef + '</p>' : '') +
                 (kjvDef ? '<p><strong>KJV:</strong> ' + kjvDef + '</p>' : '') +
                 (derivation ? '<p><strong>Derivación:</strong> ' + derivation + '</p>' : '') +
                 '</article>';
         }).join('');
 
-        els.strongModalBody.innerHTML = '<div class="strong-entry-list">' + html + '</div>';
+        var dictionaryHtml = '';
+        if (dictionaryList.length) {
+            dictionaryHtml = '' +
+                '<article class="card strong-entry-card">' +
+                '<strong>Diccionario adicional</strong>' +
+                '<ul class="context-list">' + dictionaryList.map(function (row) {
+                    var refs = Array.isArray(row.references) ? row.references : [];
+                    return '<li><strong>' + escapeHtml(row.term || '') + ':</strong> ' +
+                        escapeHtml(row.definition || '') +
+                        (row.usage ? ' <span class="muted">(' + escapeHtml(row.usage) + ')</span>' : '') +
+                        (refs.length ? '<br><small class="muted">Refs: ' + escapeHtml(refs.join(', ')) + '</small>' : '') +
+                        '<br><small class="muted">Fuente: ' + escapeHtml(row.module_name || 'Diccionario') + '</small></li>';
+                }).join('') + '</ul>' +
+                '</article>';
+        }
+
+        els.strongModalBody.innerHTML = '<div class="strong-entry-list">' + guideHtml + dictionaryHtml + html + '</div>';
+        els.strongModalBody.querySelectorAll('.js-open-strong-context').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var book = Number(this.getAttribute('data-book') || 0);
+                var chapter = Number(this.getAttribute('data-chapter') || 0);
+                var verse = Number(this.getAttribute('data-verse') || 0);
+                if (book < 1 || chapter < 1 || verse < 1) {
+                    return;
+                }
+                closeStrong();
+                state.pendingVerse = verse;
+                fetchChapter(book, chapter);
+            });
+        });
+    }
+
+    function buildStrongReferenceGuideHtml(entries) {
+        var matches = [];
+        var seen = {};
+        var list = Array.isArray(entries) ? entries : [];
+        list.forEach(function (entry) {
+            var probes = [
+                String((entry && entry.short_def) || ''),
+                String((entry && entry.strongs_def) || ''),
+                String((entry && entry.kjv_def) || ''),
+                String((entry && entry.derivation) || '')
+            ];
+            probes.forEach(function (text) {
+                STRONG_MORPH_GLOSSARY.forEach(function (item) {
+                    if (!item || !item.pattern || !item.label || !item.meaning) {
+                        return;
+                    }
+                    if (!item.pattern.test(text)) {
+                        return;
+                    }
+                    if (seen[item.label]) {
+                        return;
+                    }
+                    seen[item.label] = true;
+                    matches.push({
+                        label: item.label,
+                        meaning: item.meaning
+                    });
+                });
+            });
+        });
+
+        if (!matches.length) {
+            matches = STRONG_MORPH_GLOSSARY.slice(0, 4).map(function (item) {
+                return {
+                    label: item.label,
+                    meaning: item.meaning
+                };
+            });
+        }
+
+        return '' +
+            '<article class="card strong-entry-card strong-guide-card">' +
+            '<strong>Cómo leer Strong y diccionario</strong>' +
+            '<ol class="guide-list guide-list-numbered">' +
+            '<li>Lee primero la definición corta y el primer contexto bíblico.</li>' +
+            '<li>Identifica el matiz gramatical (abreviaturas) y compáralo con el pasaje.</li>' +
+            '<li>Contrasta con diccionario adicional y resume una aplicación en una frase.</li>' +
+            '</ol>' +
+            '<div class="strong-glossary-grid">' +
+            matches.map(function (item) {
+                return '<div class="strong-glossary-item"><strong>' + escapeHtml(item.label) + '</strong><small class="muted">' + escapeHtml(item.meaning) + '</small></div>';
+            }).join('') +
+            '</div>' +
+            '</article>';
     }
 
     function renderVersionSelectors() {
@@ -3420,17 +5819,228 @@
         });
     }
 
-    function runQuickSearch() {
-        var q = (document.getElementById('qText').value || '').trim();
-        if (!q) {
-            notify('Escribe un texto de búsqueda.');
-            return;
-        }
+    function readSearchRangeFilters() {
         var book = (document.getElementById('qBook').value || '').trim();
         var chapterFrom = (document.getElementById('qChapterFrom').value || '').trim();
         var chapterTo = (document.getElementById('qChapterTo').value || '').trim();
         if (chapterFrom && chapterTo && Number(chapterFrom) > Number(chapterTo)) {
-            notify('El capítulo inicial no puede ser mayor al capítulo final.');
+            return {
+                error: 'El capítulo inicial no puede ser mayor al capítulo final.'
+            };
+        }
+        return {
+            book: book,
+            chapterFrom: chapterFrom,
+            chapterTo: chapterTo
+        };
+    }
+
+    function normalizeThemeFilterText(value) {
+        var text = String(value || '').toLowerCase().trim();
+        if (!text) {
+            return '';
+        }
+        var map = {
+            'á': 'a',
+            'é': 'e',
+            'í': 'i',
+            'ó': 'o',
+            'ú': 'u',
+            'ü': 'u',
+            'ñ': 'n'
+        };
+        return text.replace(/[áéíóúüñ]/g, function (ch) {
+            return map[ch] || ch;
+        }).replace(/\s+/g, ' ').trim();
+    }
+
+    function bindThemeSelectSearch() {
+        if (!els.qTheme || !els.qThemeSearch || !els.qThemeToggle || !els.qThemePanel || !els.qThemeOptions || !els.qThemeLabel) {
+            return;
+        }
+
+        var options = Array.prototype.slice.call(els.qTheme.querySelectorAll('option')).map(function (option) {
+            return {
+                value: String(option.value || ''),
+                label: String(option.textContent || '')
+            };
+        });
+        var currentTheme = String(els.qTheme.value || '');
+
+        function setThemeValue(value) {
+            currentTheme = String(value || '');
+            els.qTheme.value = currentTheme;
+            var picked = options.find(function (opt) { return opt.value === currentTheme; }) || options[0];
+            els.qThemeLabel.textContent = picked ? picked.label : 'Todos los temas';
+        }
+
+        function openThemePanel() {
+            els.qThemePanel.classList.remove('hidden');
+            els.qThemeToggle.setAttribute('aria-expanded', 'true');
+            renderThemeOptions();
+            setTimeout(function () {
+                if (els.qThemeSearch) {
+                    els.qThemeSearch.focus();
+                    els.qThemeSearch.select();
+                }
+            }, 0);
+        }
+
+        function closeThemePanel(clearSearch) {
+            els.qThemePanel.classList.add('hidden');
+            els.qThemeToggle.setAttribute('aria-expanded', 'false');
+            if (clearSearch && els.qThemeSearch) {
+                els.qThemeSearch.value = '';
+                renderThemeOptions();
+            }
+        }
+
+        function renderThemeOptions() {
+            var query = normalizeThemeFilterText(els.qThemeSearch.value || '');
+            var filtered = options.filter(function (opt, idx) {
+                if (idx === 0) {
+                    return true;
+                }
+                if (!query) {
+                    return true;
+                }
+                return normalizeThemeFilterText(opt.label).indexOf(query) !== -1;
+            });
+            if (!filtered.length) {
+                filtered = [options[0]];
+            }
+
+            els.qThemeOptions.innerHTML = filtered.map(function (opt) {
+                var active = opt.value === currentTheme ? ' is-active' : '';
+                return '<button type="button" class="theme-combo-option' + active + '" data-theme-value="' + escapeHtml(opt.value) + '">' +
+                    escapeHtml(opt.label) +
+                    '</button>';
+            }).join('');
+
+            els.qThemeOptions.querySelectorAll('.theme-combo-option').forEach(function (btn) {
+                btn.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setThemeValue(String(this.getAttribute('data-theme-value') || ''));
+                    closeThemePanel(true);
+                });
+            });
+        }
+
+        setThemeValue(currentTheme);
+
+        els.qThemeToggle.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var isOpen = !els.qThemePanel.classList.contains('hidden');
+            if (isOpen) {
+                closeThemePanel(true);
+            } else {
+                openThemePanel();
+            }
+        });
+        els.qThemeSearch.addEventListener('input', renderThemeOptions);
+        els.qThemeSearch.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                closeThemePanel(true);
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            var target = event.target || null;
+            var combo = document.getElementById('qThemeCombo');
+            if (!combo || !target) {
+                return;
+            }
+            if (!combo.contains(target)) {
+                closeThemePanel(true);
+            }
+        });
+
+        renderThemeOptions();
+    }
+
+    function runThemeSearch(themeOverride) {
+        var selected = String(themeOverride || (els.qTheme ? els.qTheme.value : '') || '').trim();
+        if (!selected) {
+            var fallbackQ = (document.getElementById('qText').value || '').trim();
+            if (fallbackQ) {
+                runQuickSearch();
+                return;
+            }
+            notify('Selecciona un tema para la concordancia.');
+            return;
+        }
+        if (els.qTheme) {
+            els.qTheme.value = selected;
+            if (els.qThemeLabel) {
+                var selectedLabel = selected;
+                Array.prototype.slice.call(els.qTheme.querySelectorAll('option')).some(function (option) {
+                    if (String(option.value || '') !== selected) {
+                        return false;
+                    }
+                    selectedLabel = String(option.textContent || selected);
+                    return true;
+                });
+                els.qThemeLabel.textContent = selectedLabel || 'Todos los temas';
+            }
+        }
+
+        var range = readSearchRangeFilters();
+        if (range.error) {
+            notify(range.error);
+            return;
+        }
+
+        var params = new URLSearchParams({
+            route: 'api.search.theme',
+            theme: selected,
+            limit: '80'
+        });
+        if (range.book) {
+            params.set('book', range.book);
+        }
+        if (range.chapterFrom) {
+            params.set('chapter_from', range.chapterFrom);
+        }
+        if (range.chapterTo) {
+            params.set('chapter_to', range.chapterTo);
+        }
+
+        fetch('?' + params.toString())
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'No se pudo ejecutar la concordancia temática.');
+                }
+                renderSearchResults(res.rows || [], res.engine || '', res.meta || {});
+                fetchStatsPanel(true, false);
+            })
+            .catch(function (err) {
+                var msg = (err && err.message) ? err.message : 'No se pudo ejecutar la concordancia temática.';
+                notify(msg);
+                if (els.quickSearchResults) {
+                    els.quickSearchResults.innerHTML = '<p class="muted">' + escapeHtml(msg) + '</p>';
+                }
+            });
+    }
+
+    function runQuickSearch() {
+        var q = (document.getElementById('qText').value || '').trim();
+        var selectedTheme = String(els.qTheme && els.qTheme.value ? els.qTheme.value : '').trim();
+        if (!q && selectedTheme) {
+            runThemeSearch(selectedTheme);
+            return;
+        }
+        if (!q) {
+            notify('Escribe un texto de búsqueda.');
+            return;
+        }
+
+        var range = readSearchRangeFilters();
+        if (range.error) {
+            notify(range.error);
             return;
         }
 
@@ -3440,35 +6050,40 @@
             mode: document.getElementById('qMode').value || 'any',
             limit: '80'
         });
-        if (book) {
-            params.set('book', book);
+        if (range.book) {
+            params.set('book', range.book);
         }
-        if (chapterFrom) {
-            params.set('chapter_from', chapterFrom);
+        if (range.chapterFrom) {
+            params.set('chapter_from', range.chapterFrom);
         }
-        if (chapterTo) {
-            params.set('chapter_to', chapterTo);
+        if (range.chapterTo) {
+            params.set('chapter_to', range.chapterTo);
         }
 
         fetch('?' + params.toString())
             .then(asJson)
             .then(function (res) {
-                renderSearchResults(res.rows || [], res.engine || '');
+                renderSearchResults(res.rows || [], res.engine || '', {});
             })
             .catch(function () {
                 notify('No se pudo ejecutar la búsqueda.');
             });
     }
 
-    function renderSearchResults(rows, engine) {
+    function renderSearchResults(rows, engine, meta) {
+        var payload = meta && typeof meta === 'object' ? meta : {};
         if (!rows.length) {
             els.quickSearchResults.innerHTML = '<p class="muted">Sin resultados.</p>';
             return;
         }
-        var html = '<p class="muted">Motor: ' + escapeHtml(engine || '-') + ' · Resultados: ' + rows.length + '</p>';
+        var header = '';
+        if (payload.theme_label) {
+            header = '<p class="muted">Tema: ' + escapeHtml(payload.theme_label) + (payload.theme_query ? ' · Consulta: ' + escapeHtml(payload.theme_query) : '') + '</p>';
+        }
+        var html = header + '<p class="muted">Motor: ' + escapeHtml(engine || '-') + ' · Resultados: ' + rows.length + '</p>';
         html += rows.map(function (row) {
             return '' +
-                '<div class="search-result">' +
+                '<div class="search-result" data-book="' + row.book + '" data-chapter="' + row.chapter + '" data-verse="' + row.verse + '">' +
                 '<strong>' + escapeHtml(row.reference || '') + '</strong>' +
                 (row.title ? '<small class="muted">' + escapeHtml(row.title) + '</small>' : '') +
                 '<div>' + (row.scripture_html || '') + '</div>' +
@@ -3509,13 +6124,20 @@
             node.addEventListener('click', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
-                openStrongLookup(String(this.getAttribute('data-strong') || ''));
+                var container = this.closest('.search-result');
+                openStrongLookup(String(this.getAttribute('data-strong') || ''), {
+                    book: Number(container && container.getAttribute('data-book') ? container.getAttribute('data-book') : 0),
+                    chapter: Number(container && container.getAttribute('data-chapter') ? container.getAttribute('data-chapter') : 0),
+                    verse: Number(container && container.getAttribute('data-verse') ? container.getAttribute('data-verse') : 0),
+                    word: String(this.textContent || '').trim()
+                });
             });
         });
     }
 
     function bindSettingsInputs() {
         bindSetting('optShowHelp', 'showHelp', 'checkbox');
+        bindSetting('optAutoTour', 'autoTourOnStart', 'checkbox');
         bindSetting('optLayoutMode', 'layoutMode');
         bindSetting('optShowDaily', 'showDaily', 'checkbox');
         bindSetting('optAutoDevotional', 'autoDevotional', 'checkbox');
@@ -3553,6 +6175,9 @@
             }
             if (key === 'showDaily') {
                 localStorage.setItem('show_daily_start', state.settings.showDaily ? '1' : '0');
+            }
+            if (key === 'autoTourOnStart' && els.guideHideOnStart) {
+                els.guideHideOnStart.checked = !state.settings.autoTourOnStart;
             }
             if (state.settings.preachMode && (key === 'layoutMode' || key === 'showHelp' || key === 'fontSize' || key === 'spacing')) {
                 state.settings.preachMode = false;
@@ -3617,6 +6242,7 @@
             state.settings.weeklyGoalDays = clampGoalDays(state.settings.weeklyGoalDays);
             state.settings.reminderEnabled = state.settings.reminderEnabled === true || Number(state.settings.reminderEnabled) === 1;
             state.settings.reminderTime = normalizeReminderTime(state.settings.reminderTime || '07:00');
+            state.settings.autoTourOnStart = state.settings.autoTourOnStart !== false && Number(state.settings.autoTourOnStart) !== 0;
             state.settings.preachMode = state.settings.preachMode === true || Number(state.settings.preachMode) === 1;
             state.settings.parallelMode = state.settings.parallelMode === true || Number(state.settings.parallelMode) === 1;
         } catch (err) {
@@ -3628,6 +6254,296 @@
         localStorage.setItem('biblia_settings', JSON.stringify(state.settings));
         localStorage.setItem('show_daily_start', state.settings.showDaily ? '1' : '0');
         syncUserPrefs();
+    }
+
+    function loadPreachPrefs() {
+        try {
+            var raw = localStorage.getItem('biblia_preach_prefs');
+            if (!raw) {
+                return;
+            }
+            var parsed = JSON.parse(raw);
+            if (!parsed || typeof parsed !== 'object') {
+                return;
+            }
+
+            var elapsed = Number(parsed.timer_elapsed_ms || 0);
+            if (Number.isFinite(elapsed) && elapsed >= 0) {
+                state.preach.timerElapsedMs = Math.round(elapsed);
+            }
+
+            var cleaned = {};
+            var markers = parsed.markers_by_chapter;
+            if (markers && typeof markers === 'object') {
+                Object.keys(markers).forEach(function (chapterKey) {
+                    var row = markers[chapterKey];
+                    if (!row || typeof row !== 'object') {
+                        return;
+                    }
+                    var nextRow = {};
+                    for (var slot = 1; slot <= 3; slot++) {
+                        var verse = Number(row[String(slot)] || row[slot] || 0);
+                        if (!Number.isFinite(verse) || verse < 1) {
+                            continue;
+                        }
+                        nextRow[String(slot)] = Math.round(verse);
+                    }
+                    if (Object.keys(nextRow).length) {
+                        cleaned[chapterKey] = nextRow;
+                    }
+                });
+            }
+            state.preach.markersByChapter = cleaned;
+        } catch (err) {
+            // ignore
+        }
+    }
+
+    function savePreachPrefs() {
+        var elapsed = getPreachTimerElapsedMs();
+        localStorage.setItem('biblia_preach_prefs', JSON.stringify({
+            timer_elapsed_ms: elapsed,
+            markers_by_chapter: state.preach.markersByChapter || {}
+        }));
+    }
+
+    function getPreachTimerElapsedMs() {
+        var elapsed = Number(state.preach.timerElapsedMs || 0);
+        if (!Number.isFinite(elapsed) || elapsed < 0) {
+            elapsed = 0;
+        }
+        if (state.preach.timerRunning && Number(state.preach.timerStartedAt || 0) > 0) {
+            elapsed += Math.max(0, Date.now() - Number(state.preach.timerStartedAt));
+        }
+        return Math.max(0, Math.round(elapsed));
+    }
+
+    function togglePreachTimer() {
+        if (state.preach.timerRunning) {
+            pausePreachTimer(false);
+            return;
+        }
+        state.preach.timerRunning = true;
+        state.preach.timerStartedAt = Date.now();
+        if (state.preach.timerTickId) {
+            clearInterval(state.preach.timerTickId);
+            state.preach.timerTickId = null;
+        }
+        state.preach.timerTickId = setInterval(function () {
+            renderPreachTimer();
+        }, 1000);
+        renderPreachTimer();
+        savePreachPrefs();
+        notify('Temporizador iniciado.');
+    }
+
+    function pausePreachTimer(silent) {
+        if (!state.preach.timerRunning) {
+            renderPreachTimer();
+            return;
+        }
+        state.preach.timerElapsedMs = getPreachTimerElapsedMs();
+        state.preach.timerRunning = false;
+        state.preach.timerStartedAt = 0;
+        if (state.preach.timerTickId) {
+            clearInterval(state.preach.timerTickId);
+            state.preach.timerTickId = null;
+        }
+        renderPreachTimer();
+        savePreachPrefs();
+        if (!silent) {
+            notify('Temporizador en pausa.');
+        }
+    }
+
+    function resetPreachTimer() {
+        pausePreachTimer(true);
+        state.preach.timerElapsedMs = 0;
+        renderPreachTimer();
+        savePreachPrefs();
+        notify('Temporizador reiniciado.');
+    }
+
+    function renderPreachTimer() {
+        if (!els.preachTimerDisplay) {
+            return;
+        }
+        els.preachTimerDisplay.textContent = formatPreachTimer(getPreachTimerElapsedMs());
+        if (els.preachTimerToggle) {
+            els.preachTimerToggle.textContent = state.preach.timerRunning ? 'Pausar' : 'Iniciar';
+            els.preachTimerToggle.setAttribute('aria-label', state.preach.timerRunning ? 'Pausar temporizador' : 'Iniciar temporizador');
+        }
+    }
+
+    function formatPreachTimer(ms) {
+        var totalSeconds = Math.max(0, Math.floor(Number(ms || 0) / 1000));
+        var hours = Math.floor(totalSeconds / 3600);
+        var minutes = Math.floor((totalSeconds % 3600) / 60);
+        var seconds = totalSeconds % 60;
+
+        var mm = String(minutes).padStart(2, '0');
+        var ss = String(seconds).padStart(2, '0');
+        if (hours > 0) {
+            return String(hours) + ':' + mm + ':' + ss;
+        }
+        return mm + ':' + ss;
+    }
+
+    function preachChapterKey() {
+        return String(state.currentBook) + ':' + String(state.currentChapter);
+    }
+
+    function getPreachMarkersForCurrentChapter(createIfMissing) {
+        var key = preachChapterKey();
+        var existing = state.preach.markersByChapter[key];
+        if (!existing || typeof existing !== 'object') {
+            if (!createIfMissing) {
+                return {};
+            }
+            state.preach.markersByChapter[key] = {};
+            return state.preach.markersByChapter[key];
+        }
+        return existing;
+    }
+
+    function chapterHasVerse(verse) {
+        var target = Number(verse || 0);
+        if (target < 1) {
+            return false;
+        }
+        for (var i = 0; i < state.verses.length; i++) {
+            if (Number(state.verses[i].verse || 0) === target) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function getVisibleCenterVerse() {
+        if (!els.versesContainer) {
+            return 0;
+        }
+        var rows = els.versesContainer.querySelectorAll('.verse[data-verse]');
+        if (!rows.length) {
+            return 0;
+        }
+
+        var containerRect = els.versesContainer.getBoundingClientRect();
+        var centerY = containerRect.top + (containerRect.height / 2);
+        var nearestVerse = 0;
+        var nearestDistance = Infinity;
+
+        rows.forEach(function (row) {
+            var verse = Number(row.getAttribute('data-verse') || 0);
+            if (verse < 1) {
+                return;
+            }
+            var rect = row.getBoundingClientRect();
+            var visible = rect.bottom > containerRect.top && rect.top < containerRect.bottom;
+            if (!visible) {
+                return;
+            }
+            var rowCenter = rect.top + (rect.height / 2);
+            var distance = Math.abs(rowCenter - centerY);
+            if (distance < nearestDistance) {
+                nearestDistance = distance;
+                nearestVerse = verse;
+            }
+        });
+
+        return nearestVerse;
+    }
+
+    function getCurrentPreachMarkerVerse() {
+        var centered = Number(getVisibleCenterVerse() || 0);
+        if (chapterHasVerse(centered)) {
+            return centered;
+        }
+
+        var selected = Number((state.selectedVerses && state.selectedVerses.length ? state.selectedVerses[0] : 0) || 0);
+        if (chapterHasVerse(selected)) {
+            return selected;
+        }
+
+        var last = Number(state.lastSelectedVerse || 0);
+        if (chapterHasVerse(last)) {
+            return last;
+        }
+
+        var typed = Number((els.preachVerseJump && els.preachVerseJump.value) ? els.preachVerseJump.value : 0);
+        if (chapterHasVerse(typed)) {
+            return typed;
+        }
+
+        if (centered > 0) {
+            return centered;
+        }
+
+        if (state.verses.length) {
+            return Number(state.verses[0].verse || 1);
+        }
+        return 0;
+    }
+
+    function setPreachMarker(slot) {
+        var markerSlot = Number(slot || 0);
+        if (markerSlot < 1 || markerSlot > 3) {
+            return;
+        }
+        var verse = getCurrentPreachMarkerVerse();
+        if (verse < 1) {
+            notify('No se pudo detectar un versículo para el marcador.');
+            return;
+        }
+        var markers = getPreachMarkersForCurrentChapter(true);
+        markers[String(markerSlot)] = verse;
+        savePreachPrefs();
+        renderPreachMarkers();
+        if (els.preachVerseJump) {
+            els.preachVerseJump.value = String(verse);
+        }
+        notify('Marcador M' + markerSlot + ' guardado en versículo ' + verse + '.');
+    }
+
+    function goToPreachMarker(slot) {
+        var markerSlot = Number(slot || 0);
+        if (markerSlot < 1 || markerSlot > 3) {
+            return;
+        }
+        var markers = getPreachMarkersForCurrentChapter(false);
+        var verse = Number(markers[String(markerSlot)] || 0);
+        if (verse < 1) {
+            notify('El marcador M' + markerSlot + ' no está definido en este capítulo.');
+            return;
+        }
+        if (!chapterHasVerse(verse)) {
+            notify('El versículo del marcador no existe en este capítulo.');
+            return;
+        }
+        if (els.preachVerseJump) {
+            els.preachVerseJump.value = String(verse);
+        }
+        selectSingleVerse(verse, true);
+    }
+
+    function renderPreachMarkers() {
+        var markers = getPreachMarkersForCurrentChapter(false);
+        var slots = [
+            { n: 1, set: els.preachSetMarker1, go: els.preachGoMarker1 },
+            { n: 2, set: els.preachSetMarker2, go: els.preachGoMarker2 },
+            { n: 3, set: els.preachSetMarker3, go: els.preachGoMarker3 }
+        ];
+
+        slots.forEach(function (slot) {
+            var verse = Number(markers[String(slot.n)] || 0);
+            if (slot.set) {
+                slot.set.textContent = verse > 0 ? ('Fijar M' + slot.n + ' (v' + verse + ')') : ('Fijar M' + slot.n);
+            }
+            if (slot.go) {
+                slot.go.disabled = verse < 1 || !chapterHasVerse(verse);
+                slot.go.textContent = verse > 0 ? ('Ir M' + slot.n + ' (v' + verse + ')') : ('Ir M' + slot.n);
+            }
+        });
     }
 
     function setPreachMode(enabled) {
@@ -3658,6 +6574,7 @@
             activateTab('contexto');
             notify('Modo predicación activado.');
         } else {
+            pausePreachTimer(true);
             var backup = state.preachBackup || {};
             state.settings.preachMode = false;
             state.settings.layoutMode = backup.layoutMode || 'columns';
@@ -3712,6 +6629,8 @@
                 els.preachVerseJump.placeholder = 'Versículo';
             }
         }
+        renderPreachTimer();
+        renderPreachMarkers();
     }
 
     function chapterIndexOf(chapter) {
@@ -3783,12 +6702,25 @@
         if (els.strongModal && !els.strongModal.classList.contains('hidden')) {
             els.strongModal.classList.add('hidden');
         }
+        if (els.audioModal && !els.audioModal.classList.contains('hidden')) {
+            els.audioModal.classList.add('hidden');
+        }
+        if (els.modulesModal && !els.modulesModal.classList.contains('hidden')) {
+            els.modulesModal.classList.add('hidden');
+        }
+        if (els.guideModal && !els.guideModal.classList.contains('hidden')) {
+            els.guideModal.classList.add('hidden');
+            clearGuideFocus();
+        }
         if (els.settingsModal.classList.contains('hidden') &&
             els.searchModal.classList.contains('hidden') &&
             (!els.planModal || els.planModal.classList.contains('hidden')) &&
             (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
             (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
-            (!els.strongModal || els.strongModal.classList.contains('hidden'))) {
+            (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
+            (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -4069,6 +7001,10 @@
         return txt.value;
     }
 
+    function stripDefinitionPrefix(value) {
+        return String(value || '').replace(/^\s*definici[oó]n\s*:\s*/i, '').trim();
+    }
+
     function localDateYmd(date) {
         var value = date instanceof Date ? date : new Date();
         var year = value.getFullYear();
@@ -4187,6 +7123,8 @@
     function bindConnectivity() {
         window.addEventListener('online', function () {
             notify('Conexión restablecida.');
+            flushReadingTelemetry(true);
+            fetchStatsPanel(true, false);
             if (state.selectionPayload) {
                 renderToolsPanel(state.selectionPayload);
             }
@@ -4203,7 +7141,8 @@
         if (!('serviceWorker' in navigator)) {
             return;
         }
-        navigator.serviceWorker.register('sw.js').then(function () {
+        var swUrl = (window.__BIBLIASOFT_SW_URL && String(window.__BIBLIASOFT_SW_URL)) || 'sw.js';
+        navigator.serviceWorker.register(swUrl).then(function () {
             notify('Disponible offline.');
         }).catch(function () {
             // ignore
@@ -4253,3 +7192,4 @@
 
     init();
 })();
+
