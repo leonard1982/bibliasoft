@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'biblia-soft-v32';
+const CACHE_VERSION = 'biblia-soft-v43';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -25,6 +25,7 @@ const STATIC_ASSETS = [
   './assets/icons/columns.svg',
   './assets/icons/layers.svg',
   './assets/icons/interlinear.svg',
+  './assets/icons/audio.svg',
   './assets/icons/login.svg',
   './assets/icons/register.svg',
   './assets/icons/menu.svg',
@@ -32,6 +33,7 @@ const STATIC_ASSETS = [
   './assets/icons/lock.svg',
   './assets/icons/settings.svg',
   './assets/icons/share.svg',
+  './assets/icons/whatsapp.svg',
   './assets/icons/text.svg',
   './assets/icons/user.svg',
   './assets/backgrounds/bg-01.svg',
@@ -39,6 +41,12 @@ const STATIC_ASSETS = [
   './assets/backgrounds/bg-03.svg',
   './assets/backgrounds/bg-04.svg',
   './assets/backgrounds/bg-05.svg',
+  './assets/backgrounds/verse-01.svg',
+  './assets/backgrounds/verse-02.svg',
+  './assets/backgrounds/verse-03.svg',
+  './assets/backgrounds/verse-04.svg',
+  './assets/backgrounds/verse-05.svg',
+  './assets/backgrounds/verse-06.svg',
   './manifest.json'
 ];
 
@@ -79,8 +87,9 @@ self.addEventListener('fetch', (event) => {
   const isApiRoute = route.startsWith('api.');
   const accept = event.request.headers.get('accept') || '';
   const isHtmlRequest = event.request.mode === 'navigate' || accept.includes('text/html');
+  const isMutableAsset = /\/assets\/.+\.(css|js)$/i.test(url.pathname);
 
-  if (isApiRoute || isHtmlRequest) {
+  if (isApiRoute || isHtmlRequest || isMutableAsset) {
     event.respondWith(networkFirst(event.request));
     return;
   }
