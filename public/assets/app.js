@@ -4987,6 +4987,12 @@
     }
 
     function maybeAutoStartGuideTour() {
+        var params = new URLSearchParams(window.location.search || '');
+        var forceTour = params.get('tour') === '1';
+        if (forceTour) {
+            openGuideModal(true);
+            return;
+        }
         if (!state.settings.autoTourOnStart) {
             return;
         }
@@ -5219,21 +5225,41 @@
         }
         var list = Array.isArray(rows) ? rows : [];
         if (!list.length) {
-            els.modulesDictResults.innerHTML = '<p class="muted">Sin resultados en diccionarios activos.</p>';
+            els.modulesDictResults.innerHTML = '' +
+                '<article class="card module-dict-item module-dict-guide">' +
+                '<strong>Cómo usar el diccionario bíblico</strong>' +
+                '<small class="muted">1) Busca un término clave del pasaje.</small>' +
+                '<small class="muted">2) Lee definición + uso + referencias.</small>' +
+                '<small class="muted">3) Resume una aplicación en una frase práctica.</small>' +
+                '</article>' +
+                '<p class="muted">Sin resultados en diccionarios activos.</p>';
             return;
         }
 
-        els.modulesDictResults.innerHTML = list.map(function (row) {
+        var guideCard = '' +
+            '<article class="card module-dict-item module-dict-guide">' +
+            '<strong>Cómo leer estos resultados</strong>' +
+            '<small class="muted">Prioriza el significado que mejor encaja con el contexto inmediato del pasaje.</small>' +
+            '<small class="muted">No te quedes en la palabra aislada: verifica las referencias y vuelve al texto bíblico.</small>' +
+            '</article>';
+
+        var resultCards = list.map(function (row) {
             var refs = Array.isArray(row.references) ? row.references : [];
+            var usageHint = String(row.usage || '').trim();
+            if (!usageHint) {
+                usageHint = 'Aplica esta definición al argumento del capítulo y anota una implicación práctica.';
+            }
             return '' +
                 '<article class="card module-dict-item">' +
                 '<strong>' + escapeHtml(row.term || '') + '</strong>' +
                 (row.definition ? '<p>' + escapeHtml(row.definition) + '</p>' : '') +
-                (row.usage ? '<small class="muted">Uso: ' + escapeHtml(row.usage) + '</small>' : '') +
+                '<small class="muted">Uso en estudio: ' + escapeHtml(usageHint) + '</small>' +
                 (refs.length ? '<small class="muted">Referencias: ' + escapeHtml(refs.join(', ')) + '</small>' : '') +
                 '<small class="muted">Fuente: ' + escapeHtml(row.module_name || 'Diccionario') + '</small>' +
                 '</article>';
         }).join('');
+
+        els.modulesDictResults.innerHTML = guideCard + resultCards;
     }
 
     function formatModuleTypeLabel(type) {

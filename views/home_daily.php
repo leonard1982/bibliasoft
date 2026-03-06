@@ -45,6 +45,9 @@ $planCurrentStreak = (int) ($planInfo['current_streak'] ?? 0);
                 <a class="btn-light" href="?route=devotional">
                     <img src="assets/icons/text.svg" alt="" class="ico"> Devocionales
                 </a>
+                <a class="btn-light" href="?route=reader&amp;skip_daily=1&amp;tour=1">
+                    <img src="assets/icons/list.svg" alt="" class="ico"> Iniciar tour guiado
+                </a>
                 <a class="btn-light" href="?route=anecdotes">
                     <img src="assets/icons/help.svg" alt="" class="ico"> Anécdotas
                 </a>
@@ -83,63 +86,58 @@ $planCurrentStreak = (int) ($planInfo['current_streak'] ?? 0);
 
     <article class="panel landing-signal">
         <div class="signal-item">
-            <small>Enfoque</small>
-            <strong>Texto + contexto + aplicación</strong>
+            <small>Modelo</small>
+            <strong>Lectura guiada en 3 etapas</strong>
         </div>
         <div class="signal-item">
-            <small>Diseño</small>
-            <strong>Visual limpio, ritmo claro, lectura móvil</strong>
+            <small>Ejecución</small>
+            <strong>Inicio, estudio y aplicación en una sola ruta</strong>
         </div>
         <div class="signal-item">
-            <small>Uso real</small>
-            <strong>Devocional diario y preparación de enseñanza</strong>
+            <small>Resultado</small>
+            <strong>Más constancia y mejor preparación semanal</strong>
         </div>
     </article>
 
-    <article class="panel landing-highlights">
-        <div class="highlight-card">
-            <img src="assets/backgrounds/highlight-01.jpg" alt="Biblia abierta con luz cálida" class="highlight-bg">
-            <div class="highlight-overlay">
-                <span class="chip-light"><img src="assets/icons/copy.svg" alt="" class="ico"> Más claridad</span>
-                <p>Lectura limpia y foco en el pasaje para estudiar sin ruido visual.</p>
-                <small class="highlight-credit">Foto: Mabby Marielle · Pexels</small>
+    <article class="panel landing-strategy">
+        <div class="strategy-visual">
+            <img src="assets/backgrounds/highlight-02.jpg" alt="Biblia abierta para estudio personal" class="strategy-main-image">
+            <div class="strategy-mini-grid">
+                <article class="strategy-mini-card">
+                    <small>Paso 01</small>
+                    <strong>Leer contexto</strong>
+                </article>
+                <article class="strategy-mini-card">
+                    <small>Paso 02</small>
+                    <strong>Anotar ideas</strong>
+                </article>
+                <article class="strategy-mini-card">
+                    <small>Paso 03</small>
+                    <strong>Aplicar hoy</strong>
+                </article>
             </div>
         </div>
-        <div class="highlight-card">
-            <img src="assets/backgrounds/highlight-02.jpg" alt="Biblia abierta para estudio personal" class="highlight-bg">
-            <div class="highlight-overlay">
-                <span class="chip-light"><img src="assets/icons/list.svg" alt="" class="ico"> Más orden</span>
-                <p>Notas, vínculos y recursos organizados para preparar clases y predicaciones.</p>
-                <small class="highlight-credit">Foto: RDNE Stock project · Pexels</small>
+        <div class="strategy-copy">
+            <span class="strategy-kicker">Inspirado en homepages profesionales</span>
+            <h3>Diseño orientado a decisión rápida: saber qué leer, qué estudiar y qué aplicar.</h3>
+            <p class="muted">Reordenamos el inicio para que cada bloque responda a una acción clara, con menos ruido visual y una narrativa directa.</p>
+            <ul class="strategy-points">
+                <li>Una ruta principal visible desde el primer scroll.</li>
+                <li>Bloques de valor concretos para lectura personal e iglesia.</li>
+                <li>Recursos visuales libres listos para renovación de imágenes.</li>
+            </ul>
+            <div class="toolbar strategy-links">
+                <a class="btn-light" target="_blank" rel="noopener noreferrer" href="https://www.pexels.com/search/open%20bible/">
+                    <img src="assets/icons/search.svg" alt="" class="ico"> Pexels
+                </a>
+                <a class="btn-light" target="_blank" rel="noopener noreferrer" href="https://unsplash.com/s/photos/open-bible">
+                    <img src="assets/icons/search.svg" alt="" class="ico"> Unsplash
+                </a>
+                <a class="btn-light" target="_blank" rel="noopener noreferrer" href="https://commons.wikimedia.org/w/index.php?search=open+bible&title=Special:MediaSearch&type=image">
+                    <img src="assets/icons/search.svg" alt="" class="ico"> Wikimedia
+                </a>
             </div>
         </div>
-        <div class="highlight-card">
-            <img src="assets/backgrounds/highlight-03.jpg" alt="Biblia abierta en fondo de madera" class="highlight-bg">
-            <div class="highlight-overlay">
-                <span class="chip-light"><img src="assets/icons/share.svg" alt="" class="ico"> Más alcance</span>
-                <p>Comparte contenido bíblico en un formato útil para grupos y redes.</p>
-                <small class="highlight-credit">Foto: Pixabay · Pexels</small>
-            </div>
-        </div>
-    </article>
-
-    <article class="panel free-images-panel">
-        <div class="free-images-head">
-            <h3><img src="assets/icons/camera.svg" alt="" class="ico"> Biblioteca de imágenes libres</h3>
-            <small class="muted">Busca nuevas imágenes para esta sección y reemplázalas cuando quieras.</small>
-        </div>
-        <div class="toolbar free-images-links">
-            <a class="btn-light" target="_blank" rel="noopener noreferrer" href="https://www.pexels.com/search/open%20bible/">
-                <img src="assets/icons/search.svg" alt="" class="ico"> Buscar en Pexels
-            </a>
-            <a class="btn-light" target="_blank" rel="noopener noreferrer" href="https://unsplash.com/s/photos/open-bible">
-                <img src="assets/icons/search.svg" alt="" class="ico"> Buscar en Unsplash
-            </a>
-            <a class="btn-light" target="_blank" rel="noopener noreferrer" href="https://commons.wikimedia.org/w/index.php?search=open+bible&title=Special:MediaSearch&type=image">
-                <img src="assets/icons/search.svg" alt="" class="ico"> Buscar en Wikimedia
-            </a>
-        </div>
-        <small class="muted">Recomendación: usa imágenes con licencia libre (Pexels, Unsplash o CC en Wikimedia) y conserva atribución cuando aplique.</small>
     </article>
 
     <div class="daily-spotlights-head">

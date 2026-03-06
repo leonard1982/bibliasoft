@@ -1752,6 +1752,11 @@ body.theme-dark img.auth-field-ico {
     gap: .2rem;
 }
 
+.module-dict-guide {
+    border-color: color-mix(in srgb, var(--accent) 36%, var(--line));
+    background: color-mix(in srgb, var(--selection) 72%, transparent);
+}
+
 .search-result {
     border: 1px solid var(--line);
     border-radius: 11px;
@@ -3429,6 +3434,11 @@ body.theme-dark img.auth-field-ico {
 .theme-dark .strong-glossary-item {
     border-color: color-mix(in srgb, #3f627a 58%, var(--line));
     background: color-mix(in srgb, #162836 74%, var(--panel) 26%);
+}
+
+.theme-dark .module-dict-guide {
+    border-color: color-mix(in srgb, #4e7f9f 54%, var(--line));
+    background: color-mix(in srgb, #173346 74%, var(--panel) 26%);
 }
 
 .theme-dark .tour-focus {

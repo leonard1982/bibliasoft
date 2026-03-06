@@ -304,7 +304,8 @@ $initial = [
             </div>
             <div class="card modules-dict-card">
                 <strong>Diccionario adicional</strong>
-                <small class="muted">Busca términos en los diccionarios que tengas activos.</small>
+                <small class="muted">Busca términos en los diccionarios activos y aterriza el significado al pasaje.</small>
+                <small class="muted">Flujo recomendado: término -> definición -> referencias -> aplicación.</small>
                 <div class="toolbar">
                     <input id="modulesDictQuery" type="search" placeholder="Ejemplo: gracia, fe, redencion">
                     <button id="modulesDictSearch" class="btn-primary" type="button">Buscar</button>
