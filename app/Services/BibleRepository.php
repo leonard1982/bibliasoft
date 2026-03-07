@@ -20,6 +20,7 @@ class BibleRepository
     private $comparePdo;
     private $strongPdo;
     private $strongChapterCache;
+    private $strongOccurrenceCache;
 
     public function __construct(
         $bibleDbPath,
@@ -40,6 +41,7 @@ class BibleRepository
         $this->strongDbPath = $this->resolveAuxBiblePath((string) config('paths.bible_strong', ''));
         $this->sanitizer = $sanitizer;
         $this->strongChapterCache = [];
+        $this->strongOccurrenceCache = [];
         $this->primaryLabel = $this->resolveVersionLabel(
             $this->bibleDbPath,
             $primaryLabel,
@@ -54,10 +56,33 @@ class BibleRepository
 
     public function getVersionSelectionPayload()
     {
+        $compareFiles = [];
+        if (isset($_SESSION['bible_compare_files']) && is_array($_SESSION['bible_compare_files'])) {
+            foreach ($_SESSION['bible_compare_files'] as $rawFile) {
+                $file = basename(trim((string) $rawFile));
+                if ($file === '' || !preg_match('/\.bbli$/i', $file)) {
+                    continue;
+                }
+                if (!in_array($file, $compareFiles, true)) {
+                    $compareFiles[] = $file;
+                }
+                if (count($compareFiles) >= 3) {
+                    break;
+                }
+            }
+        }
+        if (empty($compareFiles)) {
+            $fallbackCompare = basename((string) $this->compareDbPath);
+            if ($fallbackCompare !== '' && preg_match('/\.bbli$/i', $fallbackCompare)) {
+                $compareFiles[] = $fallbackCompare;
+            }
+        }
+
         return [
             'current' => [
                 'primary_file' => basename((string) $this->bibleDbPath),
                 'compare_file' => basename((string) $this->compareDbPath),
+                'compare_files' => $compareFiles,
                 'primary_label' => $this->primaryLabel,
                 'compare_label' => $this->compareLabel,
             ],
@@ -159,67 +184,150 @@ class BibleRepository
 
     public function getParallelChapter($book, $chapter)
     {
-        $primaryRows = $this->getChapterVerses($book, $chapter);
-        $compareRows = [];
-        $available = false;
-        $sameSource = false;
-        $message = '';
-        $primaryLabel = $this->primaryLabel;
-        $compareLabel = $this->compareLabel;
-
-        $comparePath = trim((string) $this->compareDbPath);
-        if ($comparePath === '') {
-            $message = 'No se configuró base de datos para comparación.';
-            return [
-                'book' => (int) $book,
-                'chapter' => (int) $chapter,
-                'available' => false,
-                'same_source' => false,
-                'primary_label' => $primaryLabel,
-                'compare_label' => $compareLabel,
-                'message' => $message,
-                'compare_verses' => [],
-            ];
-        }
-
-        $sameSource = realpath($comparePath) === realpath($this->bibleDbPath);
-        if (!is_file($comparePath)) {
-            $message = 'No se encontró la base de comparación.';
-            return [
-                'book' => (int) $book,
-                'chapter' => (int) $chapter,
-                'available' => false,
-                'same_source' => $sameSource,
-                'primary_label' => $primaryLabel,
-                'compare_label' => $compareLabel,
-                'message' => $message,
-                'compare_verses' => [],
-            ];
-        }
-
-        try {
-            $compareRows = $this->chapterVersesFromPdo($this->compareBible(), $book, $chapter);
-            $available = !empty($compareRows);
-            if (!$available) {
-                $message = 'La versión de comparación no tiene este capítulo.';
-            } elseif ($sameSource) {
-                $message = 'Comparando contra la misma versión. Selecciona otra en el botón "Versiones".';
-            }
-        } catch (\Throwable $e) {
-            $available = false;
-            $message = 'No se pudo abrir la versión de comparación.';
-            $compareRows = [];
-        }
+        $set = $this->getParallelChapterSet($book, $chapter, [basename((string) $this->compareDbPath)], 1);
+        $first = isset($set['comparisons'][0]) && is_array($set['comparisons'][0])
+            ? $set['comparisons'][0]
+            : [];
 
         return [
             'book' => (int) $book,
             'chapter' => (int) $chapter,
-            'available' => $available,
-            'same_source' => $sameSource,
-            'primary_label' => $primaryLabel,
-            'compare_label' => $compareLabel,
-            'message' => $message,
-            'compare_verses' => $compareRows,
+            'available' => !empty($first) ? !empty($first['available']) : false,
+            'same_source' => !empty($first) ? !empty($first['same_source']) : false,
+            'primary_label' => (string) ($set['primary_label'] ?? $this->primaryLabel),
+            'compare_label' => !empty($first) ? (string) ($first['label'] ?? $this->compareLabel) : $this->compareLabel,
+            'message' => !empty($first) ? (string) ($first['message'] ?? '') : (string) ($set['message'] ?? ''),
+            'compare_verses' => !empty($first) && isset($first['verses']) && is_array($first['verses']) ? $first['verses'] : [],
+        ];
+    }
+
+    public function getParallelChapterSet($book, $chapter, array $compareFiles = [], $maxColumns = 3)
+    {
+        $book = (int) $book;
+        $chapter = (int) $chapter;
+        $limit = max(1, min(3, (int) $maxColumns));
+        $primaryRows = $this->getChapterVerses($book, $chapter);
+        $primaryFile = basename((string) $this->bibleDbPath);
+        $versions = $this->listAvailableBibleVersions();
+        $versionLabels = [];
+        foreach ($versions as $row) {
+            $file = basename((string) ($row['file'] ?? ''));
+            if ($file === '') {
+                continue;
+            }
+            $label = trim((string) ($row['label'] ?? ''));
+            if ($label === '') {
+                $label = pathinfo($file, PATHINFO_FILENAME);
+            }
+            $versionLabels[$file] = $label;
+        }
+
+        $requested = [];
+        foreach ($compareFiles as $rawFile) {
+            $file = basename(trim((string) $rawFile));
+            if ($file === '' || !preg_match('/\.bbli$/i', $file)) {
+                continue;
+            }
+            if (!in_array($file, $requested, true)) {
+                $requested[] = $file;
+            }
+            if (count($requested) >= $limit) {
+                break;
+            }
+        }
+
+        if (empty($requested)) {
+            $fallbackCompare = basename((string) $this->compareDbPath);
+            if ($fallbackCompare !== '' && preg_match('/\.bbli$/i', $fallbackCompare)) {
+                $requested[] = $fallbackCompare;
+            }
+        }
+
+        if (empty($requested)) {
+            foreach ($versions as $row) {
+                $file = basename((string) ($row['file'] ?? ''));
+                if ($file === '' || $file === $primaryFile) {
+                    continue;
+                }
+                $requested[] = $file;
+                if (count($requested) >= $limit) {
+                    break;
+                }
+            }
+        }
+
+        $comparisons = [];
+        $availableCount = 0;
+        $warnings = [];
+        foreach ($requested as $file) {
+            if (count($comparisons) >= $limit) {
+                break;
+            }
+            $path = $this->resolveVersionFilePath($file);
+            $sameSource = $path !== '' && realpath($path) === realpath($this->bibleDbPath);
+            $label = isset($versionLabels[$file])
+                ? (string) $versionLabels[$file]
+                : ($path !== ''
+                    ? $this->resolveVersionLabel($path, '', pathinfo($file, PATHINFO_FILENAME))
+                    : pathinfo($file, PATHINFO_FILENAME));
+
+            $available = false;
+            $message = '';
+            $rows = [];
+            if ($path === '') {
+                $message = 'No se encontró la versión solicitada.';
+            } else {
+                try {
+                    $pdo = ConnectionFactory::sqlite($path);
+                    $rows = $this->chapterVersesFromPdo($pdo, $book, $chapter);
+                    $available = !empty($rows);
+                    if (!$available) {
+                        $message = 'Esta versión no tiene este capítulo.';
+                    } elseif ($sameSource) {
+                        $message = 'Esta comparación usa la misma versión principal.';
+                    }
+                } catch (\Throwable $e) {
+                    $available = false;
+                    $rows = [];
+                    $message = 'No se pudo abrir esta versión.';
+                }
+            }
+
+            if ($available) {
+                $availableCount += 1;
+            }
+            if ($message !== '') {
+                $warnings[] = $label . ': ' . $message;
+            }
+
+            $comparisons[] = [
+                'file' => $file,
+                'label' => $label,
+                'available' => $available,
+                'same_source' => $sameSource,
+                'message' => $message,
+                'verses' => $rows,
+            ];
+        }
+
+        $summary = '';
+        if (empty($comparisons)) {
+            $summary = 'No hay versiones paralelas configuradas.';
+        } elseif ($availableCount < 1) {
+            $summary = 'No hay versiones paralelas disponibles para este capítulo.';
+        } elseif (!empty($warnings)) {
+            $summary = implode(' | ', array_slice($warnings, 0, 2));
+        }
+
+        return [
+            'book' => $book,
+            'chapter' => $chapter,
+            'primary_label' => $this->primaryLabel,
+            'primary_file' => $primaryFile,
+            'primary_verses' => $primaryRows,
+            'available_count' => $availableCount,
+            'message' => $summary,
+            'comparisons' => $comparisons,
         ];
     }
 
@@ -544,9 +652,17 @@ class BibleRepository
         $limit = max(1, min(500, (int) $limit));
         $query = isset($filters['query']) ? trim($filters['query']) : '';
         $mode = isset($filters['mode']) ? $filters['mode'] : 'any';
+        $wholeWordTerms = [];
 
         $where = [];
         $params = [];
+
+        $testament = isset($filters['testament']) ? strtolower(trim((string) $filters['testament'])) : 'all';
+        if ($testament === 'ot') {
+            $where[] = 'Book BETWEEN 1 AND 39';
+        } elseif ($testament === 'nt') {
+            $where[] = 'Book BETWEEN 40 AND 66';
+        }
 
         if (!empty($filters['book'])) {
             $where[] = 'Book = :book';
@@ -567,30 +683,49 @@ class BibleRepository
             if ($mode === 'exact') {
                 $where[] = 'Scripture LIKE :exact';
                 $params[':exact'] = '%' . $query . '%';
+            } elseif ($mode === 'word') {
+                $words = $this->tokenizeSearchTerms($query);
+                if (empty($words)) {
+                    return [];
+                }
+                // Para palabra completa no usamos pre-filtro LIKE:
+                // primero acotamos por libro/testamento/capítulo y luego
+                // validamos límites de palabra en PHP.
+                $wholeWordTerms = $words;
             } else {
-                $words = preg_split('/\s+/', $query);
-                $words = array_values(array_filter($words));
-                if (!empty($words)) {
-                    $pieces = [];
-                    foreach ($words as $idx => $word) {
-                        $key = ':w' . $idx;
-                        $pieces[] = 'Scripture LIKE ' . $key;
-                        $params[$key] = '%' . $word . '%';
-                    }
-                    if ($mode === 'all') {
-                        $where[] = '(' . implode(' AND ', $pieces) . ')';
-                    } else {
-                        $where[] = '(' . implode(' OR ', $pieces) . ')';
-                    }
+                $words = $this->tokenizeSearchTerms($query);
+                if (empty($words)) {
+                    return [];
+                }
+
+                $pieces = [];
+                foreach ($words as $idx => $word) {
+                    $key = ':w' . $idx;
+                    $pieces[] = 'Scripture LIKE ' . $key;
+                    $params[$key] = '%' . $word . '%';
+                }
+                if ($mode === 'all' || $mode === 'word') {
+                    $where[] = '(' . implode(' AND ', $pieces) . ')';
+                } else {
+                    $where[] = '(' . implode(' OR ', $pieces) . ')';
+                }
+                if ($mode === 'word') {
+                    $wholeWordTerms = $words;
                 }
             }
+        }
+
+        $sqlLimit = $limit;
+        if ($mode === 'word' && !empty($wholeWordTerms)) {
+            // Escaneo amplio para no perder coincidencias válidas por orden canónico.
+            $sqlLimit = 50000;
         }
 
         $sql = 'SELECT Book, Chapter, Verse, Scripture FROM Bible';
         if (!empty($where)) {
             $sql .= ' WHERE ' . implode(' AND ', $where);
         }
-        $sql .= ' ORDER BY Book, Chapter, Verse LIMIT ' . $limit;
+        $sql .= ' ORDER BY Book, Chapter, Verse LIMIT ' . $sqlLimit;
 
         $stmt = $this->bible()->prepare($sql);
         $stmt->execute($params);
@@ -598,6 +733,10 @@ class BibleRepository
         $results = [];
         foreach ($stmt->fetchAll() as $row) {
             $clean = $this->sanitizer->sanitize($row['Scripture']);
+            $scriptureText = $this->sanitizer->text($clean);
+            if (!empty($wholeWordTerms) && !$this->containsWholeWords($scriptureText, $wholeWordTerms, true)) {
+                continue;
+            }
             $title = '';
             if (preg_match('/<p[^>]*align=["\']center["\'][^>]*>(.*?)<\/p>/is', (string) $row['Scripture'], $matches)) {
                 $title = trim($this->sanitizer->text($matches[1]));
@@ -608,8 +747,11 @@ class BibleRepository
                 'verse' => (int) $row['Verse'],
                 'title' => $title,
                 'scripture_html' => $clean,
-                'scripture_text' => $this->sanitizer->text($clean),
+                'scripture_text' => $scriptureText,
             ];
+            if (count($results) >= $limit) {
+                break;
+            }
         }
         return $results;
     }
@@ -659,6 +801,85 @@ class BibleRepository
         return $output;
     }
 
+    public function getFirstStrongContext($code)
+    {
+        $normalized = strtoupper(trim((string) $code));
+        if (!preg_match('/^([GH])([1-9][0-9]{0,4})$/', $normalized, $m)) {
+            return null;
+        }
+        if (array_key_exists($normalized, $this->strongOccurrenceCache)) {
+            return $this->strongOccurrenceCache[$normalized];
+        }
+
+        $pdo = $this->strongBible();
+        if (!$pdo instanceof PDO) {
+            $this->strongOccurrenceCache[$normalized] = null;
+            return null;
+        }
+
+        $bookMin = $m[1] === 'G' ? 40 : 1;
+        $bookMax = $m[1] === 'G' ? 66 : 39;
+        $stmt = $pdo->prepare(
+            'SELECT Book, Chapter, Verse, Scripture
+             FROM Bible
+             WHERE Book BETWEEN :book_min AND :book_max
+             ORDER BY Book ASC, Chapter ASC, Verse ASC'
+        );
+        $stmt->execute([
+            ':book_min' => $bookMin,
+            ':book_max' => $bookMax,
+        ]);
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $scriptureHtml = $this->sanitizer->sanitize((string) ($row['Scripture'] ?? ''));
+            if ($scriptureHtml === '') {
+                continue;
+            }
+            $pairs = $this->extractStrongPairsFromHtml($scriptureHtml);
+            if (empty($pairs)) {
+                continue;
+            }
+
+            $matchedWords = [];
+            foreach ($pairs as $pair) {
+                $codes = isset($pair['codes']) && is_array($pair['codes']) ? $pair['codes'] : [];
+                if (!in_array($normalized, $codes, true)) {
+                    continue;
+                }
+                $word = trim((string) ($pair['word'] ?? ''));
+                if ($word !== '') {
+                    $matchedWords[$word] = true;
+                }
+            }
+
+            if (empty($matchedWords)) {
+                continue;
+            }
+
+            $book = (int) ($row['Book'] ?? 0);
+            $chapter = (int) ($row['Chapter'] ?? 0);
+            $verse = (int) ($row['Verse'] ?? 0);
+            $display = $this->getVerse($book, $chapter, $verse);
+            $verseText = $display ? (string) ($display['scripture_text'] ?? '') : $this->sanitizer->text($scriptureHtml);
+
+            $context = [
+                'code' => $normalized,
+                'book' => $book,
+                'chapter' => $chapter,
+                'verse' => $verse,
+                'reference' => $this->buildReferenceLabel($book, $chapter, $verse),
+                'verse_text' => $verseText,
+                'matched_words' => array_keys($matchedWords),
+            ];
+
+            $this->strongOccurrenceCache[$normalized] = $context;
+            return $context;
+        }
+
+        $this->strongOccurrenceCache[$normalized] = null;
+        return null;
+    }
+
     private function normalizeRange($a, $b)
     {
         $a = max(1, (int) $a);
@@ -677,14 +898,15 @@ class BibleRepository
             return (string) $label;
         }
         if ($source === 'generated') {
-            return 'Generado';
+            return 'Generado (análisis contextual)';
         }
         return 'Dominio público';
     }
 
     private function generatedCommentaryHtml($book, $chapter, $verseStart, $verseEnd)
     {
-        $verses = $this->getVersesInRange($book, $chapter, $verseStart, $verseEnd);
+        $range = $this->normalizeRange($verseStart, $verseEnd);
+        $verses = $this->getVersesInRange($book, $chapter, $range['start'], $range['end']);
         if (empty($verses)) {
             return '';
         }
@@ -693,24 +915,236 @@ class BibleRepository
         foreach ($verses as $row) {
             $textParts[] = trim((string) $row['scripture_text']);
         }
-        $joined = trim(preg_replace('/\s+/', ' ', implode(' ', $textParts)));
+        $joined = $this->commentaryCompactText(implode(' ', $textParts));
         if ($joined === '') {
             return '';
         }
-        if (function_exists('mb_strlen') && function_exists('mb_substr')) {
-            if (mb_strlen($joined, 'UTF-8') > 260) {
-                $joined = mb_substr($joined, 0, 260, 'UTF-8') . '...';
-            }
-        } elseif (strlen($joined) > 260) {
-            $joined = substr($joined, 0, 260) . '...';
+
+        $chapterRows = $this->getChapterVerses($book, $chapter);
+        $chapterTotal = count($chapterRows);
+        $placement = $this->commentaryPlacementLabel($chapterTotal, $range['start'], $range['end']);
+        $contextLine = $this->buildImmediateContextLine($chapterRows, $range['start'], $range['end']);
+        $motif = $this->detectCommentaryMotif($joined);
+        $corpusMeta = $this->commentaryCorpusMeta($book);
+        $keywords = $this->extractCommentaryKeywords($joined, 4);
+        $keywordLine = !empty($keywords) ? implode(', ', $keywords) : '';
+        $pericope = trim((string) $this->getPericopeHint($book, $chapter, $range['start']));
+
+        $reference = $this->buildRangeLabel($book, $chapter, $range['start'], $range['end']);
+        $excerpt = $this->commentaryClip($joined, 210);
+        $opening = 'El pasaje está ubicado en ' . $placement . ' del capítulo ' . (int) $chapter . '.';
+        if ($pericope !== '') {
+            $opening .= ' Se mueve dentro de la unidad "' . $pericope . '".';
         }
 
-        $reference = $this->buildRangeLabel($book, $chapter, $verseStart, $verseEnd);
-        $html = '<p><strong>' . e($reference) . '.</strong> Este comentario contextual resume el enfoque del pasaje: '
-            . e($joined)
-            . ' Se recomienda comparar con el capítulo completo para una interpretación equilibrada.</p>';
+        $html = '<p><strong>' . e($reference) . '.</strong> ' . e($opening) . '</p>'
+            . '<p><strong>Observación textual:</strong> ' . e($motif['focus']) . ' Texto base: "' . e($excerpt) . '".</p>';
+
+        if ($contextLine !== '') {
+            $html .= '<p><strong>Contexto inmediato:</strong> ' . e($contextLine) . '</p>';
+        }
+
+        $html .= '<p><strong>Lectura teológica:</strong> ' . e($motif['insight']) . '</p>'
+            . '<p><strong>Puente canónico:</strong> ' . e($corpusMeta['bridge']) . '</p>';
+
+        if ($keywordLine !== '') {
+            $html .= '<p><strong>Palabras eje:</strong> ' . e($keywordLine) . '.</p>';
+        }
+
+        $html .= '<p><strong>Aplicación pastoral:</strong> ' . e($motif['application']) . '</p>';
+        if (!empty($motif['misread'])) {
+            $html .= '<p><strong>Error común de interpretación:</strong> ' . e($motif['misread']) . '</p>';
+        }
 
         return $html;
+    }
+
+    private function commentaryPlacementLabel($chapterTotal, $verseStart, $verseEnd)
+    {
+        $chapterTotal = max(1, (int) $chapterTotal);
+        $verseStart = max(1, (int) $verseStart);
+        $verseEnd = max(1, (int) $verseEnd);
+
+        $firstBand = max(1, (int) ceil($chapterTotal / 3));
+        $lastBandStart = max(1, $chapterTotal - $firstBand + 1);
+
+        if ($verseEnd <= $firstBand) {
+            return 'la apertura literaria';
+        }
+        if ($verseStart >= $lastBandStart) {
+            return 'el cierre literario';
+        }
+        return 'el desarrollo argumental';
+    }
+
+    private function buildImmediateContextLine(array $chapterRows, $verseStart, $verseEnd)
+    {
+        if (empty($chapterRows)) {
+            return '';
+        }
+
+        $index = [];
+        foreach ($chapterRows as $row) {
+            $verse = (int) ($row['verse'] ?? 0);
+            if ($verse < 1) {
+                continue;
+            }
+            $index[$verse] = $this->commentaryCompactText((string) ($row['scripture_text'] ?? ''));
+        }
+
+        $parts = [];
+        $prev = (int) $verseStart - 1;
+        $next = (int) $verseEnd + 1;
+        if (isset($index[$prev]) && $index[$prev] !== '') {
+            $parts[] = 'El v.' . $prev . ' prepara la escena con "' . $this->commentaryClip($index[$prev], 110) . '".';
+        }
+        if (isset($index[$next]) && $index[$next] !== '') {
+            $parts[] = 'El v.' . $next . ' proyecta el argumento hacia "' . $this->commentaryClip($index[$next], 110) . '".';
+        }
+
+        return implode(' ', $parts);
+    }
+
+    private function detectCommentaryMotif($text)
+    {
+        $lower = function_exists('mb_strtolower')
+            ? mb_strtolower((string) $text, 'UTF-8')
+            : strtolower((string) $text);
+
+        $focus = 'el texto concentra su fuerza en el movimiento interno del pasaje y en su llamado a una respuesta concreta.';
+        $insight = 'La lógica del texto no se queda en información religiosa: presenta el carácter de Dios y orienta la obediencia del creyente en su contexto real.';
+        $application = 'Convierte esta verdad en una decisión puntual hoy: qué debes creer, qué debes confesar y qué acción concreta debes ajustar.';
+        $misread = 'Reducir el pasaje a una frase motivacional aislada sin seguir su argumento inmediato. Léelo dentro del párrafo y verifica cómo cada oración desarrolla la idea central.';
+
+        if (preg_match('/(ira|enoj|indignaci|furor)/u', $lower) && preg_match('/(consuel|misericord|gracia|salvaci|piedad)/u', $lower)) {
+            $focus = 'el pasaje describe el tránsito del juicio al consuelo: Dios confronta el pecado, pero no abandona al pueblo restaurado.';
+            $insight = 'La secuencia teológica es clara: la disciplina divina tiene propósito redentor; la última palabra no es condena para siempre, sino restauración del vínculo con Dios.';
+            $application = 'Examina hoy dónde necesitas arrepentimiento real y agradece explícitamente la misericordia que te reubica en obediencia.';
+            $misread = 'Pensar que la ira de Dios es un arrebato sin propósito o que su consuelo minimiza el pecado. El texto une santidad, juicio justo y restauración para quien vuelve a Dios.';
+        } elseif (preg_match('/(cantar|alabar|exaltar|dar gracias|accion de gracias|c[aá]ntico)/u', $lower)) {
+            $focus = 'la respuesta central del pasaje es adoración: el texto empuja del recuerdo de la gracia a la proclamación pública de esa gracia.';
+            $insight = 'No presenta una fe silenciosa: la experiencia de Dios se convierte en testimonio, doxología y memoria comunitaria.';
+            $application = 'Formula hoy una oración de gratitud concreta y compártela con alguien para transformar la experiencia en testimonio.';
+            $misread = 'Tratar el canto solo como emoción del momento. Aquí la alabanza nace de una memoria teológica: recordar lo que Dios hizo y responder con obediencia y testimonio.';
+        } elseif (preg_match('/(temor|miedo|no temas|confiar|confianza|salvaci[oó]n|fortaleza)/u', $lower)) {
+            $focus = 'el pasaje enfrenta la ansiedad con una teología de confianza: el sujeto deja de mirarse y vuelve a la fidelidad de Dios.';
+            $insight = 'La seguridad bíblica no nace del control humano, sino de la presencia y acción de Dios dentro de la historia del creyente.';
+            $application = 'Identifica una preocupación dominante y sométela hoy en oración, reemplazando reacción impulsiva por obediencia confiada.';
+            $misread = 'Leer “no temas” como negación de la realidad del dolor. El pasaje no niega la crisis; redefine la respuesta desde la presencia de Dios.';
+        } elseif (preg_match('/(terrenal|terrenales|celestial|celestiales|cielo|tierra)/u', $lower) && preg_match('/(cre[eé]|fe|confi)/u', $lower)) {
+            $focus = 'el pasaje contrasta la percepción terrenal con la revelación celestial: no basta información religiosa, se requiere fe obediente.';
+            $insight = 'La progresión del texto es epistemológica y espiritual: quien resiste la verdad ya explicada en lo cercano, difícilmente abrazará lo trascendente sin rendición del corazón.';
+            $application = 'Pregunta hoy en qué área escuchas la verdad pero aún no obedeces; da un paso verificable de fe para pasar de comprensión a respuesta.';
+            $misread = 'Separar “terrenal” y “celestial” como si fueran temas sin relación. Jesús usa lo conocido para llevar al oyente a la verdad mayor y exigir fe real, no curiosidad religiosa.';
+        } elseif (preg_match('/(justicia|justo|rectitud|recto|iniquidad|pecado)/u', $lower)) {
+            $focus = 'el texto vincula la obra de Dios con una ética visible: la gracia no cancela la justicia, la produce.';
+            $insight = 'El pasaje exige coherencia entre confesión y conducta: la rectitud no es adorno moral, es fruto verificable de la acción divina.';
+            $application = 'Revisa una práctica cotidiana donde haya incoherencia y establece una corrección específica para reflejar justicia bíblica.';
+            $misread = 'Confundir justicia bíblica con autojustificación moral. El texto llama a una rectitud que nace de la obra de Dios y se verifica en el trato al prójimo.';
+        }
+
+        return [
+            'focus' => $focus,
+            'insight' => $insight,
+            'application' => $application,
+            'misread' => $misread,
+        ];
+    }
+
+    private function commentaryCorpusMeta($book)
+    {
+        $book = (int) $book;
+        if ($book >= 1 && $book <= 5) {
+            return ['bridge' => 'Dentro del Pentateuco, este pasaje se entiende desde la lógica del pacto: Dios forma un pueblo santo y prepara la necesidad de un mediador pleno en Cristo.'];
+        }
+        if ($book >= 6 && $book <= 17) {
+            return ['bridge' => 'En los libros históricos, el texto conecta fidelidad y consecuencias nacionales; su lectura apunta a la necesidad de un Rey verdaderamente justo, cumplido en Cristo.'];
+        }
+        if ($book >= 18 && $book <= 22) {
+            return ['bridge' => 'En la literatura sapiencial, este pasaje trabaja el corazón, no solo la conducta externa; converge en la sabiduría encarnada de Cristo y en la formación del discípulo.'];
+        }
+        if ($book >= 23 && $book <= 39) {
+            return ['bridge' => 'En los profetas, el juicio y la restauración sostienen la esperanza mesiánica: Dios corrige para redimir y abrir futuro de pacto renovado.'];
+        }
+        if ($book >= 40 && $book <= 44) {
+            return ['bridge' => 'En Evangelios y Hechos, el eje es cristológico y misional: la revelación de Dios en Jesús impulsa fe obediente y testimonio público.'];
+        }
+        return ['bridge' => 'En las epístolas y Apocalipsis, el pasaje se integra en una teología de perseverancia: doctrina sólida, vida santa y esperanza final en Cristo.'];
+    }
+
+    private function extractCommentaryKeywords($text, $limit = 4)
+    {
+        $limit = max(1, (int) $limit);
+        $lower = function_exists('mb_strtolower')
+            ? mb_strtolower((string) $text, 'UTF-8')
+            : strtolower((string) $text);
+        $clean = preg_replace('/[^\p{L}\p{N}\s]/u', ' ', $lower);
+        if (!is_string($clean)) {
+            $clean = '';
+        }
+        $tokens = preg_split('/\s+/u', trim($clean));
+        if (!is_array($tokens)) {
+            return [];
+        }
+
+        $stop = [
+            'de', 'la', 'el', 'los', 'las', 'y', 'a', 'en', 'que', 'por', 'con', 'para', 'del', 'se',
+            'su', 'un', 'una', 'al', 'como', 'no', 'es', 'le', 'lo', 'tu', 'mi', 'si', 'mas', 'más',
+            'o', 'ya', 'ha', 'sus', 'pero', 'porque', 'cuando', 'sobre', 'entre', 'todo', 'toda', 'este',
+            'esta', 'estos', 'estas', 'aquel', 'aquella', 'dios', 'jehova',
+        ];
+
+        $freq = [];
+        foreach ($tokens as $token) {
+            $token = trim((string) $token);
+            if ($token === '' || in_array($token, $stop, true)) {
+                continue;
+            }
+            $len = function_exists('mb_strlen') ? mb_strlen($token, 'UTF-8') : strlen($token);
+            if ($len < 4) {
+                continue;
+            }
+            if (!isset($freq[$token])) {
+                $freq[$token] = 0;
+            }
+            $freq[$token]++;
+        }
+
+        if (empty($freq)) {
+            return [];
+        }
+        arsort($freq);
+        return array_slice(array_keys($freq), 0, $limit);
+    }
+
+    private function commentaryCompactText($text)
+    {
+        $text = preg_replace('/\s+/u', ' ', trim((string) $text));
+        if ($text === null) {
+            $text = preg_replace('/\s+/', ' ', trim((string) $text));
+        }
+        return trim((string) $text);
+    }
+
+    private function commentaryClip($text, $max)
+    {
+        $text = $this->commentaryCompactText($text);
+        $max = max(40, (int) $max);
+        if ($text === '') {
+            return '';
+        }
+
+        if (function_exists('mb_strlen') && function_exists('mb_substr')) {
+            if (mb_strlen($text, 'UTF-8') <= $max) {
+                return $text;
+            }
+            return rtrim(mb_substr($text, 0, $max, 'UTF-8')) . '...';
+        }
+
+        if (strlen($text) <= $max) {
+            return $text;
+        }
+        return rtrim(substr($text, 0, $max)) . '...';
     }
 
     private function bible()
@@ -1009,6 +1443,46 @@ class BibleRepository
         return [];
     }
 
+    private function tokenizeSearchTerms($query)
+    {
+        return $this->tokenizeWords((string) $query);
+    }
+
+    private function containsWholeWords($text, array $terms, $requireAll = true)
+    {
+        $text = (string) $text;
+        if ($text === '' || empty($terms)) {
+            return false;
+        }
+
+        $checked = 0;
+        $matchedAny = false;
+        foreach ($terms as $term) {
+            $term = trim((string) $term);
+            if ($term === '') {
+                continue;
+            }
+            $checked++;
+            $pattern = '/(?<![\p{L}\p{N}_])' . preg_quote($term, '/') . '(?![\p{L}\p{N}_])/iu';
+            $found = preg_match($pattern, $text) === 1;
+            if ($requireAll && !$found) {
+                return false;
+            }
+            if (!$requireAll && $found) {
+                return true;
+            }
+            if ($found) {
+                $matchedAny = true;
+            }
+        }
+
+        if ($checked === 0) {
+            return false;
+        }
+
+        return $requireAll ? true : $matchedAny;
+    }
+
     private function resolveAuxBiblePath($requestedPath)
     {
         $requestedPath = trim((string) $requestedPath);
@@ -1026,6 +1500,19 @@ class BibleRepository
         }
 
         return '';
+    }
+
+    private function resolveVersionFilePath($fileName)
+    {
+        $file = basename(trim((string) $fileName));
+        if ($file === '' || !preg_match('/\.bbli$/i', $file)) {
+            return '';
+        }
+        $candidate = $this->baseBibleDir . DIRECTORY_SEPARATOR . $file;
+        if (!is_file($candidate)) {
+            return '';
+        }
+        return $candidate;
     }
 
     private function resolveVersionLabel($dbPath, $preferredLabel, $fallbackLabel)

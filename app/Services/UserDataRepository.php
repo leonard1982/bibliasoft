@@ -959,6 +959,452 @@ class UserDataRepository
         ]);
     }
 
+    public function addReadingSessionSeconds($date, $seconds)
+    {
+        $date = $this->normalizeDateOnly($date);
+        $seconds = max(1, min(6 * 3600, (int) $seconds));
+
+        $stmt = $this->db()->prepare(
+            'INSERT INTO reading_sessions (date, seconds, updated_at)
+             VALUES (:date, :seconds, CURRENT_TIMESTAMP)
+             ON CONFLICT(date)
+             DO UPDATE SET
+                 seconds = reading_sessions.seconds + excluded.seconds,
+                 updated_at = CURRENT_TIMESTAMP'
+        );
+        $stmt->execute([
+            ':date' => $date,
+            ':seconds' => $seconds,
+        ]);
+    }
+
+    public function logThemeStudy($themeKey, $date = null, $hits = 1)
+    {
+        $themeKey = $this->normalizeThemeKey($themeKey);
+        if ($themeKey === '') {
+            return;
+        }
+        $date = $this->normalizeDateOnly($date ?: date('Y-m-d'));
+        $hits = max(1, min(200, (int) $hits));
+
+        $stmt = $this->db()->prepare(
+            'INSERT INTO theme_study_log (theme_key, date, hits, last_studied)
+             VALUES (:theme_key, :date, :hits, CURRENT_TIMESTAMP)
+             ON CONFLICT(theme_key, date)
+             DO UPDATE SET
+                 hits = theme_study_log.hits + excluded.hits,
+                 last_studied = CURRENT_TIMESTAMP'
+        );
+        $stmt->execute([
+            ':theme_key' => $themeKey,
+            ':date' => $date,
+            ':hits' => $hits,
+        ]);
+    }
+
+    public function getReadingStatsPanel($days = 7, $topThemeLimit = 6)
+    {
+        $days = max(3, min(30, (int) $days));
+        $topThemeLimit = max(3, min(20, (int) $topThemeLimit));
+
+        $today = $this->normalizeDateOnly(date('Y-m-d'));
+        $startDate = $this->normalizeDateOnly(date('Y-m-d', strtotime('-' . ($days - 1) . ' day')));
+
+        $sessionStmt = $this->db()->prepare(
+            'SELECT date, seconds
+             FROM reading_sessions
+             WHERE date >= :start_date AND date <= :today
+             ORDER BY date ASC'
+        );
+        $sessionStmt->execute([
+            ':start_date' => $startDate,
+            ':today' => $today,
+        ]);
+        $sessionRows = $sessionStmt->fetchAll();
+        $secondsByDate = [];
+        $weekSeconds = 0;
+        foreach ($sessionRows as $row) {
+            $date = isset($row['date']) ? trim((string) $row['date']) : '';
+            if ($date === '') {
+                continue;
+            }
+            $seconds = max(0, (int) ($row['seconds'] ?? 0));
+            $secondsByDate[$date] = $seconds;
+            $weekSeconds += $seconds;
+        }
+        $todaySeconds = isset($secondsByDate[$today]) ? (int) $secondsByDate[$today] : 0;
+
+        $daily = [];
+        $cursorTs = strtotime($startDate);
+        for ($i = 0; $i < $days; $i++) {
+            $date = date('Y-m-d', $cursorTs + ($i * 86400));
+            $seconds = isset($secondsByDate[$date]) ? (int) $secondsByDate[$date] : 0;
+            $daily[] = [
+                'date' => $date,
+                'label' => date('d/m', strtotime($date)),
+                'seconds' => $seconds,
+                'minutes' => (int) floor($seconds / 60),
+            ];
+        }
+
+        $chapterStmt = $this->db()->prepare(
+            'SELECT COUNT(*) AS visits, COUNT(DISTINCT (CAST(book AS TEXT) || \':\' || CAST(chapter AS TEXT))) AS chapters
+             FROM history
+             WHERE date(visited_at) >= :start_date AND date(visited_at) <= :today'
+        );
+        $chapterStmt->execute([
+            ':start_date' => $startDate,
+            ':today' => $today,
+        ]);
+        $chapterRow = $chapterStmt->fetch();
+        $chapterVisits = (int) ($chapterRow['visits'] ?? 0);
+        $chapterDistinct = (int) ($chapterRow['chapters'] ?? 0);
+
+        $themeStart = $this->normalizeDateOnly(date('Y-m-d', strtotime('-90 day')));
+        $themeStmt = $this->db()->prepare(
+            'SELECT theme_key, SUM(hits) AS total_hits, MAX(last_studied) AS last_studied
+             FROM theme_study_log
+             WHERE date >= :start_date
+             GROUP BY theme_key
+             ORDER BY total_hits DESC, last_studied DESC
+             LIMIT ' . $topThemeLimit
+        );
+        $themeStmt->execute([':start_date' => $themeStart]);
+        $themeRows = $themeStmt->fetchAll();
+        $themesTop = [];
+        foreach ($themeRows as $row) {
+            $themesTop[] = [
+                'theme_key' => (string) ($row['theme_key'] ?? ''),
+                'hits' => (int) ($row['total_hits'] ?? 0),
+                'last_studied' => (string) ($row['last_studied'] ?? ''),
+            ];
+        }
+
+        $streak = $this->computeReadingStreak(600);
+        $longest = $this->computeLongestReadingStreak(600);
+
+        return [
+            'range_days' => $days,
+            'today' => $today,
+            'reading' => [
+                'today_seconds' => $todaySeconds,
+                'today_minutes' => (int) floor($todaySeconds / 60),
+                'week_seconds' => $weekSeconds,
+                'week_minutes' => (int) floor($weekSeconds / 60),
+                'streak_days' => $streak,
+                'longest_streak_days' => $longest,
+            ],
+            'chapters' => [
+                'week_distinct' => $chapterDistinct,
+                'week_visits' => $chapterVisits,
+            ],
+            'themes_top' => $themesTop,
+            'week_daily' => $daily,
+        ];
+    }
+
+    public function listContentModules()
+    {
+        if (!$this->hasTable('content_modules')) {
+            return [];
+        }
+
+        $stmt = $this->db()->query(
+            'SELECT module_key, type, name, version, file_path, enabled, installed_at, updated_at
+             FROM content_modules
+             ORDER BY type ASC, name COLLATE NOCASE ASC'
+        );
+        $rows = $stmt->fetchAll();
+        foreach ($rows as &$row) {
+            $row['module_key'] = trim((string) ($row['module_key'] ?? ''));
+            $row['type'] = trim((string) ($row['type'] ?? 'commentary'));
+            $row['name'] = trim((string) ($row['name'] ?? ''));
+            $row['version'] = trim((string) ($row['version'] ?? ''));
+            $row['file_path'] = trim((string) ($row['file_path'] ?? ''));
+            $row['enabled'] = (int) ($row['enabled'] ?? 0) === 1 ? 1 : 0;
+            $row['installed_at'] = (string) ($row['installed_at'] ?? '');
+            $row['updated_at'] = (string) ($row['updated_at'] ?? '');
+        }
+        return $rows;
+    }
+
+    public function getContentModuleByKey($moduleKey)
+    {
+        $moduleKey = trim((string) $moduleKey);
+        if ($moduleKey === '' || !$this->hasTable('content_modules')) {
+            return null;
+        }
+
+        $stmt = $this->db()->prepare(
+            'SELECT module_key, type, name, version, file_path, enabled, installed_at, updated_at
+             FROM content_modules
+             WHERE module_key = :module_key
+             LIMIT 1'
+        );
+        $stmt->execute([':module_key' => $moduleKey]);
+        $row = $stmt->fetch();
+        if (!$row) {
+            return null;
+        }
+
+        $row['module_key'] = trim((string) ($row['module_key'] ?? ''));
+        $row['type'] = trim((string) ($row['type'] ?? 'commentary'));
+        $row['name'] = trim((string) ($row['name'] ?? ''));
+        $row['version'] = trim((string) ($row['version'] ?? ''));
+        $row['file_path'] = trim((string) ($row['file_path'] ?? ''));
+        $row['enabled'] = (int) ($row['enabled'] ?? 0) === 1 ? 1 : 0;
+        $row['installed_at'] = (string) ($row['installed_at'] ?? '');
+        $row['updated_at'] = (string) ($row['updated_at'] ?? '');
+        return $row;
+    }
+
+    public function saveContentModule($moduleKey, $type, $name, $version, $filePath, $enabled = 1)
+    {
+        $moduleKey = trim((string) $moduleKey);
+        $type = trim((string) $type);
+        $name = trim((string) $name);
+        $version = trim((string) $version);
+        $filePath = trim((string) $filePath);
+        $enabled = (int) $enabled === 1 ? 1 : 0;
+
+        if ($moduleKey === '') {
+            throw new \InvalidArgumentException('Clave de módulo inválida.');
+        }
+        if ($type !== 'commentary' && $type !== 'dictionary') {
+            throw new \InvalidArgumentException('Tipo de módulo inválido.');
+        }
+        if ($name === '' || $filePath === '') {
+            throw new \InvalidArgumentException('Datos de módulo incompletos.');
+        }
+
+        // Resistente a concurrencia: primero intenta UPDATE, luego INSERT y si hay carrera vuelve a UPDATE.
+        $update = $this->db()->prepare(
+            'UPDATE content_modules
+             SET type = :type,
+                 name = :name,
+                 version = :version,
+                 file_path = :file_path,
+                 enabled = :enabled,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE module_key = :module_key'
+        );
+        $params = [
+            ':module_key' => $moduleKey,
+            ':type' => $type,
+            ':name' => $name,
+            ':version' => $version,
+            ':file_path' => $filePath,
+            ':enabled' => $enabled,
+        ];
+        $update->execute($params);
+        if ($update->rowCount() < 1) {
+            $insert = $this->db()->prepare(
+                'INSERT INTO content_modules
+                 (module_key, type, name, version, file_path, enabled, installed_at, updated_at)
+                 VALUES
+                 (:module_key, :type, :name, :version, :file_path, :enabled, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+            );
+            try {
+                $insert->execute($params);
+            } catch (\PDOException $e) {
+                $isUniqueConflict = stripos((string) $e->getMessage(), 'UNIQUE constraint failed') !== false;
+                if (!$isUniqueConflict) {
+                    throw $e;
+                }
+                $update->execute($params);
+            }
+        }
+
+        return $this->getContentModuleByKey($moduleKey);
+    }
+
+    public function setContentModuleEnabled($moduleKey, $enabled)
+    {
+        $moduleKey = trim((string) $moduleKey);
+        if ($moduleKey === '') {
+            return false;
+        }
+
+        $stmt = $this->db()->prepare(
+            'UPDATE content_modules
+             SET enabled = :enabled, updated_at = CURRENT_TIMESTAMP
+             WHERE module_key = :module_key'
+        );
+        $stmt->execute([
+            ':enabled' => (int) $enabled === 1 ? 1 : 0,
+            ':module_key' => $moduleKey,
+        ]);
+        return $stmt->rowCount() > 0;
+    }
+
+    public function getEnabledContentModulesByType($type)
+    {
+        $type = trim((string) $type);
+        if (($type !== 'commentary' && $type !== 'dictionary') || !$this->hasTable('content_modules')) {
+            return [];
+        }
+
+        $stmt = $this->db()->prepare(
+            'SELECT module_key, type, name, version, file_path, enabled, installed_at, updated_at
+             FROM content_modules
+             WHERE type = :type AND enabled = 1
+             ORDER BY name COLLATE NOCASE ASC'
+        );
+        $stmt->execute([':type' => $type]);
+        $rows = $stmt->fetchAll();
+        foreach ($rows as &$row) {
+            $row['module_key'] = trim((string) ($row['module_key'] ?? ''));
+            $row['type'] = trim((string) ($row['type'] ?? $type));
+            $row['name'] = trim((string) ($row['name'] ?? ''));
+            $row['version'] = trim((string) ($row['version'] ?? ''));
+            $row['file_path'] = trim((string) ($row['file_path'] ?? ''));
+            $row['enabled'] = 1;
+            $row['installed_at'] = (string) ($row['installed_at'] ?? '');
+            $row['updated_at'] = (string) ($row['updated_at'] ?? '');
+        }
+        return $rows;
+    }
+
+    public function getCloudSyncStatus($userId)
+    {
+        $userId = (int) $userId;
+        if ($userId < 1) {
+            return [
+                'enabled' => false,
+                'has_backup' => false,
+                'updated_at' => '',
+                'counts' => [],
+            ];
+        }
+
+        $this->ensureCloudSyncTable();
+        $stmt = $this->globalDb()->prepare(
+            'SELECT payload_json, updated_at
+             FROM cloud_sync_backups
+             WHERE user_id = :user_id
+             LIMIT 1'
+        );
+        $stmt->execute([':user_id' => $userId]);
+        $row = $stmt->fetch();
+        if (!$row) {
+            return [
+                'enabled' => true,
+                'has_backup' => false,
+                'updated_at' => '',
+                'counts' => [],
+            ];
+        }
+
+        $payload = json_decode((string) ($row['payload_json'] ?? ''), true);
+        $counts = [];
+        if (is_array($payload) && isset($payload['counts']) && is_array($payload['counts'])) {
+            $counts = $payload['counts'];
+        }
+
+        return [
+            'enabled' => true,
+            'has_backup' => true,
+            'updated_at' => (string) ($row['updated_at'] ?? ''),
+            'counts' => $counts,
+        ];
+    }
+
+    public function pushCloudBackup($userId)
+    {
+        $userId = (int) $userId;
+        if ($userId < 1) {
+            throw new \InvalidArgumentException('Usuario inválido para sincronización.');
+        }
+
+        $this->ensureCloudSyncTable();
+        $snapshot = $this->buildCloudSnapshot();
+        $json = json_encode($snapshot, JSON_UNESCAPED_UNICODE);
+        if (!is_string($json) || $json === '') {
+            throw new \RuntimeException('No se pudo serializar el respaldo.');
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO cloud_sync_backups (user_id, payload_json, updated_at)
+             VALUES (:user_id, :payload_json, CURRENT_TIMESTAMP)
+             ON CONFLICT(user_id)
+             DO UPDATE SET
+                 payload_json = excluded.payload_json,
+                 updated_at = CURRENT_TIMESTAMP'
+        );
+        $stmt->execute([
+            ':user_id' => $userId,
+            ':payload_json' => $json,
+        ]);
+
+        $updatedAt = (string) $this->globalDb()->query(
+            'SELECT updated_at FROM cloud_sync_backups WHERE user_id = ' . (int) $userId . ' LIMIT 1'
+        )->fetchColumn();
+
+        return [
+            'enabled' => true,
+            'has_backup' => true,
+            'updated_at' => $updatedAt,
+            'counts' => isset($snapshot['counts']) && is_array($snapshot['counts']) ? $snapshot['counts'] : [],
+        ];
+    }
+
+    public function pullCloudBackup($userId)
+    {
+        $userId = (int) $userId;
+        if ($userId < 1) {
+            throw new \InvalidArgumentException('Usuario inválido para sincronización.');
+        }
+
+        $this->ensureCloudSyncTable();
+        $stmt = $this->globalDb()->prepare(
+            'SELECT payload_json, updated_at
+             FROM cloud_sync_backups
+             WHERE user_id = :user_id
+             LIMIT 1'
+        );
+        $stmt->execute([':user_id' => $userId]);
+        $row = $stmt->fetch();
+        if (!$row) {
+            throw new \RuntimeException('No hay respaldo en nube para esta cuenta.');
+        }
+
+        $payload = json_decode((string) ($row['payload_json'] ?? ''), true);
+        if (!is_array($payload)) {
+            throw new \RuntimeException('El respaldo en nube está dañado.');
+        }
+
+        $tables = isset($payload['tables']) && is_array($payload['tables']) ? $payload['tables'] : [];
+        if (empty($tables)) {
+            throw new \RuntimeException('El respaldo en nube no contiene datos restaurables.');
+        }
+
+        $this->db()->beginTransaction();
+        try {
+            foreach ($tables as $table => $rows) {
+                if (!is_array($rows)) {
+                    continue;
+                }
+                $this->replaceTableRows((string) $table, $rows);
+            }
+            $this->ensureDefaultFavoriteFolderId();
+            $this->getUserPrefs();
+            $this->db()->commit();
+        } catch (\Throwable $e) {
+            if ($this->db()->inTransaction()) {
+                $this->db()->rollBack();
+            }
+            throw $e;
+        }
+
+        $counts = isset($payload['counts']) && is_array($payload['counts']) ? $payload['counts'] : [];
+        return [
+            'enabled' => true,
+            'has_backup' => true,
+            'updated_at' => (string) ($row['updated_at'] ?? ''),
+            'counts' => $counts,
+        ];
+    }
+
     public function getAiCache($book, $chapter, $verse, $contextHash)
     {
         $stmt = $this->db()->prepare(
@@ -1071,13 +1517,14 @@ class UserDataRepository
         $limit = max(1, min(500, (int) $limit));
         $query = isset($filters['query']) ? trim($filters['query']) : '';
         $mode = isset($filters['mode']) ? $filters['mode'] : 'any';
+        $wholeWordTokens = [];
 
         if ($query === '') {
             return [];
         }
 
-        $tokens = array_values(array_filter(preg_split('/\s+/', $query)));
-        if (empty($tokens)) {
+        $tokens = $this->tokenizeSearchTerms($query);
+        if ($mode !== 'exact' && empty($tokens)) {
             return [];
         }
 
@@ -1088,6 +1535,9 @@ class UserDataRepository
         if ($isVirtual) {
             if ($mode === 'exact') {
                 $ftsQuery = '"' . str_replace('"', ' ', $query) . '"';
+            } elseif ($mode === 'word') {
+                $wholeWordTokens = $tokens;
+                $ftsQuery = implode(' AND ', $tokens);
             } elseif ($mode === 'all') {
                 $ftsQuery = implode(' AND ', $tokens);
             } else {
@@ -1100,6 +1550,10 @@ class UserDataRepository
             if ($mode === 'exact') {
                 $where[] = '(scripture LIKE :exact OR COALESCE(title, \'\') LIKE :exact)';
                 $params[':exact'] = '%' . $query . '%';
+            } elseif ($mode === 'word') {
+                // Para "palabra completa" evitamos un pre-filtro con LIKE,
+                // porque elimina resultados válidos en libros posteriores.
+                $wholeWordTokens = $tokens;
             } else {
                 $likeParts = [];
                 foreach ($tokens as $idx => $word) {
@@ -1107,10 +1561,13 @@ class UserDataRepository
                     $likeParts[] = '(scripture LIKE ' . $key . ' OR COALESCE(title, \'\') LIKE ' . $key . ')';
                     $params[$key] = '%' . $word . '%';
                 }
-                if ($mode === 'all') {
+                if ($mode === 'all' || $mode === 'word') {
                     $where[] = '(' . implode(' AND ', $likeParts) . ')';
                 } else {
                     $where[] = '(' . implode(' OR ', $likeParts) . ')';
+                }
+                if ($mode === 'word') {
+                    $wholeWordTokens = $tokens;
                 }
             }
         }
@@ -1118,6 +1575,12 @@ class UserDataRepository
         if (!empty($filters['book'])) {
             $where[] = 'CAST(book AS INTEGER) = :book';
             $params[':book'] = (int) $filters['book'];
+        }
+        $testament = isset($filters['testament']) ? strtolower(trim((string) $filters['testament'])) : 'all';
+        if ($testament === 'ot') {
+            $where[] = 'CAST(book AS INTEGER) BETWEEN 1 AND 39';
+        } elseif ($testament === 'nt') {
+            $where[] = 'CAST(book AS INTEGER) BETWEEN 40 AND 66';
         }
         if (!empty($filters['chapter_from'])) {
             $where[] = 'CAST(chapter AS INTEGER) >= :chapter_from';
@@ -1128,14 +1591,40 @@ class UserDataRepository
             $params[':chapter_to'] = (int) $filters['chapter_to'];
         }
 
+        $sqlLimit = $limit;
+        if ($mode === 'word' && !empty($wholeWordTokens)) {
+            // Escaneo amplio para luego filtrar con límites de palabra reales.
+            $sqlLimit = 50000;
+        }
+
         $sql = 'SELECT book, chapter, verse, scripture, COALESCE(title, \'\') AS title
-                FROM fts_index
-                WHERE ' . implode(' AND ', $where) . '
-                LIMIT ' . $limit;
+                FROM fts_index';
+        if (!empty($where)) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
+        $sql .= ' LIMIT ' . $sqlLimit;
 
         $stmt = $this->globalDb()->prepare($sql);
         $stmt->execute($params);
-        return $stmt->fetchAll();
+
+        $rows = $stmt->fetchAll();
+        if (empty($wholeWordTokens)) {
+            return $rows;
+        }
+
+        $filtered = [];
+        foreach ($rows as $row) {
+            $haystack = trim((string) ($row['scripture'] ?? '') . ' ' . (string) ($row['title'] ?? ''));
+            if (!$this->containsWholeWords($haystack, $wholeWordTokens, true)) {
+                continue;
+            }
+            $filtered[] = $row;
+            if (count($filtered) >= $limit) {
+                break;
+            }
+        }
+
+        return $filtered;
     }
 
     public function createUser($username, $password)
@@ -1165,7 +1654,7 @@ class UserDataRepository
         $stmt = $this->globalDb()->prepare(
             'SELECT id, username, password_hash, created_at
              FROM users
-             WHERE username = :username
+             WHERE username = :username COLLATE NOCASE
              LIMIT 1'
         );
         $stmt->execute([':username' => trim((string) $username)]);
@@ -1327,6 +1816,357 @@ class UserDataRepository
         return $ids;
     }
 
+    public function getStudyProjects()
+    {
+        if (!$this->hasTable('study_projects')) {
+            return [];
+        }
+
+        $stmt = $this->db()->query(
+            'SELECT p.id, p.name, p.description, p.color, p.created_at, p.updated_at,
+                    COUNT(e.id) AS entries_count,
+                    MAX(COALESCE(e.updated_at, e.created_at)) AS last_entry_at
+             FROM study_projects p
+             LEFT JOIN study_project_entries e ON e.project_id = p.id
+             GROUP BY p.id, p.name, p.description, p.color, p.created_at, p.updated_at
+             ORDER BY p.updated_at DESC, p.id DESC'
+        );
+        $rows = $stmt->fetchAll();
+        foreach ($rows as &$row) {
+            $row['id'] = (int) ($row['id'] ?? 0);
+            $row['name'] = trim((string) ($row['name'] ?? ''));
+            $row['description'] = trim((string) ($row['description'] ?? ''));
+            $row['color'] = $this->normalizeStudyProjectColor($row['color'] ?? '');
+            $row['entries_count'] = (int) ($row['entries_count'] ?? 0);
+            $row['last_entry_at'] = (string) ($row['last_entry_at'] ?? '');
+            $row['created_at'] = (string) ($row['created_at'] ?? '');
+            $row['updated_at'] = (string) ($row['updated_at'] ?? '');
+        }
+        return $rows;
+    }
+
+    public function createStudyProject($name, $description = '', $color = '#1d6a8f')
+    {
+        $name = $this->normalizeStudyProjectName($name);
+        $description = $this->normalizeStudyProjectDescription($description);
+        $color = $this->normalizeStudyProjectColor($color);
+
+        $lookup = $this->db()->prepare(
+            'SELECT id, name, description, color
+             FROM study_projects
+             WHERE LOWER(name) = LOWER(:name)
+             LIMIT 1'
+        );
+        $lookup->execute([':name' => $name]);
+        $existing = $lookup->fetch();
+        if ($existing) {
+            return [
+                'id' => (int) ($existing['id'] ?? 0),
+                'name' => (string) ($existing['name'] ?? ''),
+                'description' => trim((string) ($existing['description'] ?? '')),
+                'color' => $this->normalizeStudyProjectColor($existing['color'] ?? ''),
+                'created' => false,
+            ];
+        }
+
+        $stmt = $this->db()->prepare(
+            'INSERT INTO study_projects (name, description, color, created_at, updated_at)
+             VALUES (:name, :description, :color, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':name' => $name,
+            ':description' => $description,
+            ':color' => $color,
+        ]);
+
+        return [
+            'id' => (int) $this->db()->lastInsertId(),
+            'name' => $name,
+            'description' => $description,
+            'color' => $color,
+            'created' => true,
+        ];
+    }
+
+    public function updateStudyProject($id, $name, $description = '', $color = '#1d6a8f')
+    {
+        $id = (int) $id;
+        if ($id < 1) {
+            throw new \InvalidArgumentException('Proyecto inválido.');
+        }
+
+        $name = $this->normalizeStudyProjectName($name);
+        $description = $this->normalizeStudyProjectDescription($description);
+        $color = $this->normalizeStudyProjectColor($color);
+
+        $exists = $this->db()->prepare('SELECT id FROM study_projects WHERE id = :id LIMIT 1');
+        $exists->execute([':id' => $id]);
+        if (!(int) $exists->fetchColumn()) {
+            throw new \InvalidArgumentException('Proyecto no encontrado.');
+        }
+
+        $nameTaken = $this->db()->prepare(
+            'SELECT id FROM study_projects WHERE LOWER(name) = LOWER(:name) AND id <> :id LIMIT 1'
+        );
+        $nameTaken->execute([
+            ':name' => $name,
+            ':id' => $id,
+        ]);
+        if ((int) $nameTaken->fetchColumn() > 0) {
+            throw new \InvalidArgumentException('Ya existe otro proyecto con ese nombre.');
+        }
+
+        $stmt = $this->db()->prepare(
+            'UPDATE study_projects
+             SET name = :name,
+                 description = :description,
+                 color = :color,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = :id'
+        );
+        $stmt->execute([
+            ':id' => $id,
+            ':name' => $name,
+            ':description' => $description,
+            ':color' => $color,
+        ]);
+        return $stmt->rowCount() > 0;
+    }
+
+    public function deleteStudyProject($id)
+    {
+        $id = (int) $id;
+        if ($id < 1) {
+            return false;
+        }
+
+        if ($this->hasTable('study_project_entries')) {
+            $deleteEntries = $this->db()->prepare('DELETE FROM study_project_entries WHERE project_id = :project_id');
+            $deleteEntries->execute([':project_id' => $id]);
+        }
+
+        $deleteProject = $this->db()->prepare('DELETE FROM study_projects WHERE id = :id');
+        $deleteProject->execute([':id' => $id]);
+        return $deleteProject->rowCount() > 0;
+    }
+
+    public function getStudyProjectEntries($projectId, $limit = 300)
+    {
+        $projectId = (int) $projectId;
+        $limit = max(1, min(1000, (int) $limit));
+        if ($projectId < 1 || !$this->hasTable('study_project_entries')) {
+            return [];
+        }
+
+        $stmt = $this->db()->prepare(
+            'SELECT id, project_id, book, chapter, verse_start, verse_end,
+                    note, strong_code, strong_term, commentary_excerpt, created_at, updated_at
+             FROM study_project_entries
+             WHERE project_id = :project_id
+             ORDER BY updated_at DESC, id DESC
+             LIMIT ' . $limit
+        );
+        $stmt->execute([':project_id' => $projectId]);
+        $rows = $stmt->fetchAll();
+        foreach ($rows as &$row) {
+            $row['id'] = (int) ($row['id'] ?? 0);
+            $row['project_id'] = (int) ($row['project_id'] ?? 0);
+            $row['book'] = (int) ($row['book'] ?? 0);
+            $row['chapter'] = (int) ($row['chapter'] ?? 0);
+            $row['verse_start'] = (int) ($row['verse_start'] ?? 0);
+            $row['verse_end'] = (int) ($row['verse_end'] ?? 0);
+            $row['note'] = trim((string) ($row['note'] ?? ''));
+            $row['strong_code'] = trim((string) ($row['strong_code'] ?? ''));
+            $row['strong_term'] = trim((string) ($row['strong_term'] ?? ''));
+            $row['commentary_excerpt'] = trim((string) ($row['commentary_excerpt'] ?? ''));
+            $row['created_at'] = (string) ($row['created_at'] ?? '');
+            $row['updated_at'] = (string) ($row['updated_at'] ?? '');
+        }
+        return $rows;
+    }
+
+    public function createStudyProjectEntry(
+        $projectId,
+        $book,
+        $chapter,
+        $verseStart,
+        $verseEnd,
+        $note = '',
+        $strongCode = '',
+        $strongTerm = '',
+        $commentaryExcerpt = ''
+    ) {
+        $projectId = (int) $projectId;
+        $book = (int) $book;
+        $chapter = (int) $chapter;
+        $range = $this->normalizeRange($verseStart, $verseEnd);
+        $note = trim((string) $note);
+        $strongCode = strtoupper(trim((string) $strongCode));
+        $strongTerm = trim((string) $strongTerm);
+        $commentaryExcerpt = trim((string) $commentaryExcerpt);
+
+        if ($projectId < 1 || $book < 1 || $chapter < 1 || $range['start'] < 1 || $range['end'] < 1) {
+            throw new \InvalidArgumentException('Referencia inválida para el proyecto.');
+        }
+        if (!$this->studyProjectExists($projectId)) {
+            throw new \InvalidArgumentException('El proyecto de estudio no existe.');
+        }
+        if (function_exists('mb_strlen') ? mb_strlen($note, 'UTF-8') > 5000 : strlen($note) > 5000) {
+            throw new \InvalidArgumentException('La nota no puede superar 5000 caracteres.');
+        }
+        if (function_exists('mb_strlen') ? mb_strlen($commentaryExcerpt, 'UTF-8') > 5000 : strlen($commentaryExcerpt) > 5000) {
+            throw new \InvalidArgumentException('El comentario no puede superar 5000 caracteres.');
+        }
+        if ($strongCode !== '' && !preg_match('/^[GH][0-9]{1,5}$/', $strongCode)) {
+            $strongCode = '';
+        }
+
+        $stmt = $this->db()->prepare(
+            'INSERT INTO study_project_entries
+             (project_id, book, chapter, verse_start, verse_end, note, strong_code, strong_term, commentary_excerpt, created_at, updated_at)
+             VALUES
+             (:project_id, :book, :chapter, :verse_start, :verse_end, :note, :strong_code, :strong_term, :commentary_excerpt, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':project_id' => $projectId,
+            ':book' => $book,
+            ':chapter' => $chapter,
+            ':verse_start' => $range['start'],
+            ':verse_end' => $range['end'],
+            ':note' => $note,
+            ':strong_code' => $strongCode,
+            ':strong_term' => $strongTerm,
+            ':commentary_excerpt' => $commentaryExcerpt,
+        ]);
+
+        $touch = $this->db()->prepare('UPDATE study_projects SET updated_at = CURRENT_TIMESTAMP WHERE id = :id');
+        $touch->execute([':id' => $projectId]);
+
+        return (int) $this->db()->lastInsertId();
+    }
+
+    public function updateStudyProjectEntry($entryId, $note = '', $strongCode = '', $strongTerm = '', $commentaryExcerpt = '')
+    {
+        $entryId = (int) $entryId;
+        if ($entryId < 1) {
+            throw new \InvalidArgumentException('Entrada inválida.');
+        }
+
+        $note = trim((string) $note);
+        $strongCode = strtoupper(trim((string) $strongCode));
+        $strongTerm = trim((string) $strongTerm);
+        $commentaryExcerpt = trim((string) $commentaryExcerpt);
+        if (function_exists('mb_strlen') ? mb_strlen($note, 'UTF-8') > 5000 : strlen($note) > 5000) {
+            throw new \InvalidArgumentException('La nota no puede superar 5000 caracteres.');
+        }
+        if (function_exists('mb_strlen') ? mb_strlen($commentaryExcerpt, 'UTF-8') > 5000 : strlen($commentaryExcerpt) > 5000) {
+            throw new \InvalidArgumentException('El comentario no puede superar 5000 caracteres.');
+        }
+        if ($strongCode !== '' && !preg_match('/^[GH][0-9]{1,5}$/', $strongCode)) {
+            $strongCode = '';
+        }
+
+        $projectStmt = $this->db()->prepare('SELECT project_id FROM study_project_entries WHERE id = :id LIMIT 1');
+        $projectStmt->execute([':id' => $entryId]);
+        $projectId = (int) $projectStmt->fetchColumn();
+        if ($projectId < 1) {
+            throw new \InvalidArgumentException('Entrada no encontrada.');
+        }
+
+        $stmt = $this->db()->prepare(
+            'UPDATE study_project_entries
+             SET note = :note,
+                 strong_code = :strong_code,
+                 strong_term = :strong_term,
+                 commentary_excerpt = :commentary_excerpt,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = :id'
+        );
+        $stmt->execute([
+            ':id' => $entryId,
+            ':note' => $note,
+            ':strong_code' => $strongCode,
+            ':strong_term' => $strongTerm,
+            ':commentary_excerpt' => $commentaryExcerpt,
+        ]);
+
+        $touch = $this->db()->prepare('UPDATE study_projects SET updated_at = CURRENT_TIMESTAMP WHERE id = :id');
+        $touch->execute([':id' => $projectId]);
+        return $stmt->rowCount() > 0;
+    }
+
+    public function deleteStudyProjectEntry($entryId)
+    {
+        $entryId = (int) $entryId;
+        if ($entryId < 1 || !$this->hasTable('study_project_entries')) {
+            return false;
+        }
+
+        $projectStmt = $this->db()->prepare('SELECT project_id FROM study_project_entries WHERE id = :id LIMIT 1');
+        $projectStmt->execute([':id' => $entryId]);
+        $projectId = (int) $projectStmt->fetchColumn();
+
+        $stmt = $this->db()->prepare('DELETE FROM study_project_entries WHERE id = :id');
+        $stmt->execute([':id' => $entryId]);
+        $ok = $stmt->rowCount() > 0;
+        if ($ok && $projectId > 0) {
+            $touch = $this->db()->prepare('UPDATE study_projects SET updated_at = CURRENT_TIMESTAMP WHERE id = :id');
+            $touch->execute([':id' => $projectId]);
+        }
+        return $ok;
+    }
+
+    private function studyProjectExists($projectId)
+    {
+        $projectId = (int) $projectId;
+        if ($projectId < 1 || !$this->hasTable('study_projects')) {
+            return false;
+        }
+        $stmt = $this->db()->prepare('SELECT id FROM study_projects WHERE id = :id LIMIT 1');
+        $stmt->execute([':id' => $projectId]);
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
+    private function normalizeStudyProjectName($name)
+    {
+        $name = trim((string) $name);
+        if ($name === '') {
+            throw new \InvalidArgumentException('El nombre del proyecto es obligatorio.');
+        }
+        $max = 80;
+        if (function_exists('mb_strlen')) {
+            if (mb_strlen($name, 'UTF-8') > $max) {
+                throw new \InvalidArgumentException('El nombre no puede superar 80 caracteres.');
+            }
+        } elseif (strlen($name) > $max) {
+            throw new \InvalidArgumentException('El nombre no puede superar 80 caracteres.');
+        }
+        return $name;
+    }
+
+    private function normalizeStudyProjectDescription($description)
+    {
+        $description = trim((string) $description);
+        $max = 500;
+        if (function_exists('mb_strlen')) {
+            if (mb_strlen($description, 'UTF-8') > $max) {
+                throw new \InvalidArgumentException('La descripción no puede superar 500 caracteres.');
+            }
+        } elseif (strlen($description) > $max) {
+            throw new \InvalidArgumentException('La descripción no puede superar 500 caracteres.');
+        }
+        return $description;
+    }
+
+    private function normalizeStudyProjectColor($color)
+    {
+        $color = trim((string) $color);
+        if (preg_match('/^#[0-9a-fA-F]{6}$/', $color)) {
+            return strtolower($color);
+        }
+        return '#1d6a8f';
+    }
+
     private function resolveFavoriteFolderId($folderId)
     {
         $folderId = max(1, (int) $folderId);
@@ -1377,6 +2217,289 @@ class UserDataRepository
         return 1;
     }
 
+    private function ensureCloudSyncTable()
+    {
+        $this->globalDb()->exec('CREATE TABLE IF NOT EXISTS cloud_sync_backups (
+            user_id INTEGER PRIMARY KEY,
+            payload_json TEXT NOT NULL,
+            updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )');
+    }
+
+    private function buildCloudSnapshot()
+    {
+        $tableOrder = [
+            'content_modules' => 'id ASC',
+            'study_projects' => 'id ASC',
+            'study_project_entries' => 'id ASC',
+            'favorite_folders' => 'id ASC',
+            'notes' => 'id ASC',
+            'links' => 'id ASC',
+            'favorites' => 'id ASC',
+            'highlights' => 'id ASC',
+            'history' => 'id ASC',
+            'passage_history' => 'id ASC',
+            'devotionals' => 'id ASC',
+            'user_prefs' => 'id ASC',
+            'reading_plans' => 'id ASC',
+            'reading_plan_progress' => 'id ASC',
+            'reading_plan_chapter_progress' => 'id ASC',
+            'reading_sessions' => 'id ASC',
+            'theme_study_log' => 'id ASC',
+        ];
+
+        $tables = [];
+        foreach ($tableOrder as $table => $orderBy) {
+            $tables[$table] = $this->exportTableRows($table, $orderBy);
+        }
+
+        return [
+            'version' => 1,
+            'generated_at' => date('Y-m-d H:i:s'),
+            'tables' => $tables,
+            'counts' => $this->buildCloudCounts($tables),
+        ];
+    }
+
+    private function buildCloudCounts(array $tables)
+    {
+        $counts = [];
+        foreach ($tables as $table => $rows) {
+            $counts[(string) $table] = is_array($rows) ? count($rows) : 0;
+        }
+        return $counts;
+    }
+
+    private function exportTableRows($table, $orderBy = 'id ASC')
+    {
+        $table = trim((string) $table);
+        if ($table === '' || !$this->hasTable($table)) {
+            return [];
+        }
+
+        $sql = 'SELECT * FROM ' . $table;
+        $orderBy = trim((string) $orderBy);
+        if ($orderBy !== '') {
+            $sql .= ' ORDER BY ' . $orderBy;
+        }
+
+        $stmt = $this->db()->query($sql);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return is_array($rows) ? $rows : [];
+    }
+
+    private function replaceTableRows($table, array $rows)
+    {
+        $table = trim((string) $table);
+        if ($table === '' || !$this->hasTable($table)) {
+            return;
+        }
+
+        $allowed = [
+            'content_modules' => true,
+            'study_projects' => true,
+            'study_project_entries' => true,
+            'favorite_folders' => true,
+            'notes' => true,
+            'links' => true,
+            'favorites' => true,
+            'highlights' => true,
+            'history' => true,
+            'passage_history' => true,
+            'devotionals' => true,
+            'user_prefs' => true,
+            'reading_plans' => true,
+            'reading_plan_progress' => true,
+            'reading_plan_chapter_progress' => true,
+            'reading_sessions' => true,
+            'theme_study_log' => true,
+        ];
+        if (!isset($allowed[$table])) {
+            return;
+        }
+
+        $this->db()->exec('DELETE FROM ' . $table);
+        if (empty($rows)) {
+            return;
+        }
+
+        $columns = $this->tableColumns($table);
+        if (empty($columns)) {
+            return;
+        }
+
+        $statementCache = [];
+        foreach ($rows as $row) {
+            if (!is_array($row)) {
+                continue;
+            }
+            $insertColumns = [];
+            foreach ($columns as $column) {
+                if (array_key_exists($column, $row)) {
+                    $insertColumns[] = $column;
+                }
+            }
+            if (empty($insertColumns)) {
+                continue;
+            }
+
+            $signature = implode('|', $insertColumns);
+            if (!isset($statementCache[$signature])) {
+                $columnSql = implode(', ', $insertColumns);
+                $placeholderSql = implode(', ', array_map(function ($column) {
+                    return ':' . $column;
+                }, $insertColumns));
+                $statementCache[$signature] = $this->db()->prepare(
+                    'INSERT INTO ' . $table . ' (' . $columnSql . ') VALUES (' . $placeholderSql . ')'
+                );
+            }
+
+            $params = [];
+            foreach ($insertColumns as $column) {
+                $params[':' . $column] = $row[$column];
+            }
+            $statementCache[$signature]->execute($params);
+        }
+    }
+
+    private function tableColumns($table)
+    {
+        $table = trim((string) $table);
+        if ($table === '') {
+            return [];
+        }
+        $rows = $this->db()->query("PRAGMA table_info('" . str_replace("'", "''", $table) . "')")->fetchAll(PDO::FETCH_ASSOC);
+        if (!is_array($rows)) {
+            return [];
+        }
+        $columns = [];
+        foreach ($rows as $row) {
+            $name = isset($row['name']) ? trim((string) $row['name']) : '';
+            if ($name !== '') {
+                $columns[] = $name;
+            }
+        }
+        return $columns;
+    }
+
+    private function normalizeDateOnly($date)
+    {
+        $raw = trim((string) $date);
+        if ($raw === '') {
+            return date('Y-m-d');
+        }
+        $ts = strtotime($raw);
+        if ($ts === false) {
+            return date('Y-m-d');
+        }
+        return date('Y-m-d', $ts);
+    }
+
+    private function normalizeThemeKey($themeKey)
+    {
+        $value = trim((string) $themeKey);
+        if ($value === '') {
+            return '';
+        }
+        if (function_exists('mb_strtolower')) {
+            $value = mb_strtolower($value, 'UTF-8');
+        } else {
+            $value = strtolower($value);
+        }
+        $value = strtr($value, [
+            'á' => 'a',
+            'é' => 'e',
+            'í' => 'i',
+            'ó' => 'o',
+            'ú' => 'u',
+            'ü' => 'u',
+            'ñ' => 'n',
+        ]);
+        $value = preg_replace('/[^a-z0-9\s_\-]/u', ' ', $value);
+        $value = preg_replace('/\s+/u', ' ', (string) $value);
+        return trim((string) $value);
+    }
+
+    private function computeReadingStreak($minimumSeconds = 600)
+    {
+        $minimumSeconds = max(60, (int) $minimumSeconds);
+        $stmt = $this->db()->prepare(
+            'SELECT date
+             FROM reading_sessions
+             WHERE seconds >= :minimum
+             ORDER BY date DESC
+             LIMIT 600'
+        );
+        $stmt->execute([':minimum' => $minimumSeconds]);
+        $rows = $stmt->fetchAll();
+        if (empty($rows)) {
+            return 0;
+        }
+
+        $set = [];
+        foreach ($rows as $row) {
+            $date = isset($row['date']) ? trim((string) $row['date']) : '';
+            if ($date !== '') {
+                $set[$date] = true;
+            }
+        }
+        if (empty($set)) {
+            return 0;
+        }
+
+        $today = $this->normalizeDateOnly(date('Y-m-d'));
+        $cursor = isset($set[$today]) ? $today : $this->normalizeDateOnly(date('Y-m-d', strtotime('-1 day')));
+
+        $streak = 0;
+        while (isset($set[$cursor])) {
+            $streak++;
+            $cursor = $this->normalizeDateOnly(date('Y-m-d', strtotime($cursor . ' -1 day')));
+        }
+        return $streak;
+    }
+
+    private function computeLongestReadingStreak($minimumSeconds = 600)
+    {
+        $minimumSeconds = max(60, (int) $minimumSeconds);
+        $stmt = $this->db()->prepare(
+            'SELECT date
+             FROM reading_sessions
+             WHERE seconds >= :minimum
+             ORDER BY date ASC'
+        );
+        $stmt->execute([':minimum' => $minimumSeconds]);
+        $rows = $stmt->fetchAll();
+        if (empty($rows)) {
+            return 0;
+        }
+
+        $run = 0;
+        $best = 0;
+        $last = null;
+        foreach ($rows as $row) {
+            $date = isset($row['date']) ? trim((string) $row['date']) : '';
+            if ($date === '') {
+                continue;
+            }
+            if ($last !== null) {
+                $expected = $this->normalizeDateOnly(date('Y-m-d', strtotime($last . ' +1 day')));
+                if ($date === $expected) {
+                    $run++;
+                } else {
+                    $run = 1;
+                }
+            } else {
+                $run = 1;
+            }
+            if ($run > $best) {
+                $best = $run;
+            }
+            $last = $date;
+        }
+
+        return $best;
+    }
+
     private function hasTable($table)
     {
         $stmt = $this->db()->prepare(
@@ -1402,6 +2525,53 @@ class UserDataRepository
         $sql = (string) $stmt->fetchColumn();
         $normalized = strtoupper($sql);
         return strpos($normalized, 'VIRTUAL TABLE') !== false && strpos($normalized, 'FTS5') !== false;
+    }
+
+    private function tokenizeSearchTerms($query)
+    {
+        $query = trim((string) $query);
+        if ($query === '') {
+            return [];
+        }
+        if (!preg_match_all('/[\p{L}\p{N}]+(?:[\'’][\p{L}\p{N}]+)*/u', $query, $m)) {
+            return [];
+        }
+        return isset($m[0]) && is_array($m[0]) ? $m[0] : [];
+    }
+
+    private function containsWholeWords($text, array $terms, $requireAll = true)
+    {
+        $text = (string) $text;
+        if ($text === '' || empty($terms)) {
+            return false;
+        }
+
+        $checked = 0;
+        $matchedAny = false;
+        foreach ($terms as $term) {
+            $term = trim((string) $term);
+            if ($term === '') {
+                continue;
+            }
+            $checked++;
+            $pattern = '/(?<![\p{L}\p{N}_])' . preg_quote($term, '/') . '(?![\p{L}\p{N}_])/iu';
+            $found = preg_match($pattern, $text) === 1;
+            if ($requireAll && !$found) {
+                return false;
+            }
+            if (!$requireAll && $found) {
+                return true;
+            }
+            if ($found) {
+                $matchedAny = true;
+            }
+        }
+
+        if ($checked === 0) {
+            return false;
+        }
+
+        return $requireAll ? true : $matchedAny;
     }
 
     private function hasColumn($table, $column)

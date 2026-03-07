@@ -55,14 +55,16 @@ $initial = [
                     <button id="openVersions" class="btn-light hide-in-preach" type="button" title="Versiones" aria-label="Versiones"><img src="assets/icons/layers.svg" alt="" class="ico"><span class="btn-label">Versiones</span></button>
                     <button id="openModules" class="btn-light hide-in-preach" type="button" title="Módulos" aria-label="Módulos"><img src="assets/icons/bookmark.svg" alt="" class="ico"><span class="btn-label">Módulos</span></button>
                     <button id="openInterlinear" class="btn-light hide-in-preach" type="button" title="Interlineal" aria-label="Interlineal"><img src="assets/icons/interlinear.svg" alt="" class="ico"><span class="btn-label">Interlineal</span></button>
-                    <button id="openAudio" class="btn-light hide-in-preach btn-icon-quick" data-tip="Audio Biblia" type="button" title="Audio Biblia" aria-label="Audio Biblia"><img src="assets/icons/audio.svg" alt="" class="ico"></button>
-                    <button id="copySelection" class="btn-light hide-in-preach btn-icon-quick" data-tip="Copiar selección" type="button" title="Copiar selección" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"></button>
-                    <button id="copyParagraph" class="btn-light hide-in-preach btn-icon-quick" data-tip="Copiar párrafo" type="button" title="Copiar como párrafo" aria-label="Copiar como párrafo"><img src="assets/icons/text.svg" alt="" class="ico"></button>
-                    <button id="shareSelection" class="btn-light hide-in-preach btn-icon-quick" data-tip="Compartir" type="button" title="Compartir" aria-label="Compartir"><img src="assets/icons/share.svg" alt="" class="ico"></button>
-                    <button id="shareWhatsApp" class="btn-light hide-in-preach btn-icon-quick btn-share-quick btn-share-wa" data-tip="Compartir a WhatsApp" type="button" title="Compartir a WhatsApp" aria-label="Compartir a WhatsApp"><img src="assets/icons/whatsapp.svg" alt="" class="ico"></button>
-                    <button id="shareFacebook" class="btn-light hide-in-preach btn-icon-quick btn-share-quick btn-share-fb" data-tip="Compartir a Facebook" type="button" title="Compartir a Facebook" aria-label="Compartir a Facebook"><img src="assets/icons/facebook.svg" alt="" class="ico"></button>
-                    <button id="toggleHelp" class="btn-light hide-in-preach btn-icon-quick" data-tip="Ayuda" type="button" title="Ayuda" aria-label="Ayuda"><img src="assets/icons/help.svg" alt="" class="ico"></button>
-                    <button id="openGuideTour" class="btn-light hide-in-preach btn-icon-quick" data-tip="Tour guiado" type="button" title="Tour guiado" aria-label="Tour guiado"><img src="assets/icons/list.svg" alt="" class="ico"></button>
+                    <button id="openAudio" class="btn-light hide-in-preach btn-icon-quick" data-tip="Audio Biblia" type="button" aria-label="Audio Biblia"><img src="assets/icons/audio.svg" alt="" class="ico"></button>
+                    <button id="copySelection" class="btn-light hide-in-preach btn-icon-quick" data-tip="Copiar selección" type="button" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"></button>
+                    <button id="copyParagraph" class="btn-light hide-in-preach btn-icon-quick" data-tip="Copiar párrafo" type="button" aria-label="Copiar como párrafo"><img src="assets/icons/text.svg" alt="" class="ico"></button>
+                    <button id="saveSelectionProject" class="btn-light hide-in-preach btn-icon-quick" data-tip="Agregar a proyecto" type="button" aria-label="Agregar a proyecto"><img src="assets/icons/bookmark.svg" alt="" class="ico"></button>
+                    <button id="shareSelection" class="btn-light hide-in-preach btn-icon-quick" data-tip="Compartir" type="button" aria-label="Compartir"><img src="assets/icons/share.svg" alt="" class="ico"></button>
+                    <button id="shareWhatsApp" class="btn-light hide-in-preach btn-icon-quick btn-share-quick btn-share-wa" data-tip="Compartir a WhatsApp" type="button" aria-label="Compartir a WhatsApp"><img src="assets/icons/whatsapp.svg" alt="" class="ico"></button>
+                    <button id="shareFacebook" class="btn-light hide-in-preach btn-icon-quick btn-share-quick btn-share-fb" data-tip="Compartir a Facebook" type="button" aria-label="Compartir a Facebook"><img src="assets/icons/facebook.svg" alt="" class="ico"></button>
+                    <button id="toggleHelp" class="btn-light hide-in-preach btn-icon-quick" data-tip="Ayuda" type="button" aria-label="Ayuda"><img src="assets/icons/help.svg" alt="" class="ico"></button>
+                    <button id="openSettingsInline" class="btn-light hide-in-preach btn-icon-quick" data-tip="Configuración" type="button" aria-label="Configuración"><img src="assets/icons/settings.svg" alt="" class="ico"></button>
+                    <button id="openGuideTour" class="btn-light hide-in-preach btn-icon-quick" data-tip="Tour guiado" type="button" aria-label="Tour guiado"><img src="assets/icons/list.svg" alt="" class="ico"></button>
                     <button id="togglePreachMode" class="btn-light" type="button" title="Modo predicación" aria-label="Modo predicación"><img src="assets/icons/eye.svg" alt="" class="ico"><span class="btn-label">Predicación</span></button>
                 </div>
             </header>
@@ -135,22 +137,29 @@ $initial = [
     </section>
 
     <div id="mobileOverlay" class="overlay hidden"></div>
+    <div id="guideSpotlight" class="guide-spotlight hidden" aria-hidden="true">
+        <div class="guide-spot-shadow guide-spot-top"></div>
+        <div class="guide-spot-shadow guide-spot-left"></div>
+        <div class="guide-spot-shadow guide-spot-right"></div>
+        <div class="guide-spot-shadow guide-spot-bottom"></div>
+        <div class="guide-spot-hole"></div>
+    </div>
     <div id="settingsModal" class="settings hidden" role="dialog" aria-modal="true">
         <header>
             <h3><img src="assets/icons/settings.svg" alt="" class="ico"> Configuración</h3>
             <button class="btn-light" id="closeSettings">Cerrar</button>
         </header>
         <div class="settings-grid">
-            <label><input type="checkbox" id="optShowHelp" checked> Mostrar panel de ayuda</label>
-            <label><input type="checkbox" id="optAutoTour" checked> Mostrar tour guiado al iniciar</label>
+            <label class="setting-check"><input type="checkbox" id="optShowHelp" checked> Mostrar panel de ayuda</label>
+            <label class="setting-check"><input type="checkbox" id="optAutoTour" checked> Mostrar tour guiado al iniciar</label>
             <label>Modo de vista
                 <select id="optLayoutMode">
                     <option value="columns">Modo A: 3 columnas</option>
                     <option value="focus">Modo B: Pantalla completa</option>
                 </select>
             </label>
-            <label><input type="checkbox" id="optShowDaily" checked> Mostrar Versículo del día al iniciar</label>
-            <label><input type="checkbox" id="optAutoDevotional"> Activar devocionales automáticos</label>
+            <label class="setting-check"><input type="checkbox" id="optShowDaily" checked> Mostrar Versículo del día al iniciar</label>
+            <label class="setting-check"><input type="checkbox" id="optAutoDevotional"> Activar devocionales automáticos</label>
             <label>Meta semanal (días completos)
                 <select id="optWeeklyGoalDays">
                     <option value="1">1 día</option>
@@ -162,7 +171,7 @@ $initial = [
                     <option value="7">7 días</option>
                 </select>
             </label>
-            <label><input type="checkbox" id="optReminderEnabled"> Activar recordatorio diario</label>
+            <label class="setting-check"><input type="checkbox" id="optReminderEnabled"> Activar recordatorio diario</label>
             <label>Hora del recordatorio
                 <input type="time" id="optReminderTime" step="60" value="07:00">
             </label>
@@ -185,8 +194,7 @@ $initial = [
                     <option value="dark">Oscuro</option>
                 </select>
             </label>
-            <small class="muted">Configurar token: pega tu token en el archivo `.env` (no en la interfaz).</small>
-            <small class="muted">Para habilitar funciones avanzadas, configure su token en `.env`.</small>
+            <small class="muted">Configura tu token en `.env` (no en la interfaz).</small>
         </div>
     </div>
 
@@ -198,16 +206,7 @@ $initial = [
         <form id="quickSearchForm" class="settings-grid">
             <input id="qText" type="text" placeholder="Texto libre o frase">
             <label>Tema (concordancia)
-                <div id="qThemeCombo" class="theme-combo">
-                    <button id="qThemeToggle" class="theme-combo-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
-                        <span id="qThemeLabel">Todos los temas</span>
-                    </button>
-                    <div id="qThemePanel" class="theme-combo-panel hidden">
-                        <input id="qThemeSearch" type="search" placeholder="Buscar tema...">
-                        <div id="qThemeOptions" class="theme-combo-options" role="listbox"></div>
-                    </div>
-                </div>
-                <select id="qTheme" class="theme-select-hidden">
+                <select id="qTheme">
                     <option value="">Todos los temas</option>
                     <option value="gracia">Gracia</option>
                     <option value="fe">Fe</option>
@@ -244,7 +243,13 @@ $initial = [
             <select id="qMode">
                 <option value="any">Cualquier palabra</option>
                 <option value="all">Todas las palabras</option>
+                <option value="word">Palabra completa</option>
                 <option value="exact">Frase exacta</option>
+            </select>
+            <select id="qScope">
+                <option value="all">Toda la Biblia</option>
+                <option value="ot">Antiguo Testamento</option>
+                <option value="nt">Nuevo Testamento</option>
             </select>
             <select id="qBook">
                 <option value="">Todos los libros</option>
@@ -284,6 +289,10 @@ $initial = [
             <label>Versión para comparar
                 <select id="versionCompareSelect"></select>
             </label>
+            <label>Versiones paralelas adicionales (hasta 2)
+                <select id="versionCompareMulti" multiple size="6"></select>
+            </label>
+            <small class="muted">Selecciona hasta 2 versiones extra para abrir lectura en 3 o 4 columnas.</small>
             <button class="btn-primary" type="button" id="saveVersions">Guardar versiones</button>
             <small class="muted">Al guardar, el lector recarga la vista con la nueva versión seleccionada.</small>
         </div>
@@ -330,6 +339,7 @@ $initial = [
     <div id="guideModal" class="settings hidden" role="dialog" aria-modal="true">
         <header>
             <h3><img src="assets/icons/list.svg" alt="" class="ico"> Tour guiado</h3>
+            <span id="guideStepBadge" class="guide-step-badge" aria-live="polite">01/01</span>
             <button class="btn-light" id="closeGuide">Cerrar</button>
         </header>
         <div class="settings-grid">
@@ -387,6 +397,29 @@ $initial = [
                 <button class="btn-light" id="audioStop" type="button">Detener</button>
             </div>
             <small id="audioStatus" class="muted">Listo para reproducir.</small>
+        </div>
+    </div>
+
+    <div id="projectSaveModal" class="settings hidden" role="dialog" aria-modal="true">
+        <header>
+            <h3><img src="assets/icons/bookmark.svg" alt="" class="ico"> Guardar en proyecto</h3>
+            <button class="btn-light" id="closeProjectSave">Cerrar</button>
+        </header>
+        <div class="settings-grid">
+            <div class="card">
+                <strong id="projectSaveReference">Referencia</strong>
+                <small id="projectSaveSource" class="muted">Selecciona un proyecto para guardar.</small>
+            </div>
+            <label>Proyecto
+                <select id="projectSaveProject"></select>
+            </label>
+            <label>Nota (opcional)
+                <textarea id="projectSaveNote" rows="5" maxlength="5000" placeholder="Observación, aplicación o motivo por el que guardas este pasaje."></textarea>
+            </label>
+            <div class="toolbar">
+                <a class="btn-light" href="?route=study_center">Abrir proyectos</a>
+                <button class="btn-primary" id="projectSaveSubmit" type="button">Guardar</button>
+            </div>
         </div>
     </div>
 </div>

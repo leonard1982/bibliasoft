@@ -67,7 +67,7 @@ class BibleController
             'chapter_to' => isset($_GET['chapter_to']) ? (int) $_GET['chapter_to'] : 0,
             'mode' => isset($_GET['mode']) ? $_GET['mode'] : 'any',
         ];
-        if (!in_array($filters['mode'], ['any', 'all', 'exact'], true)) {
+        if (!in_array($filters['mode'], ['any', 'all', 'word', 'exact'], true)) {
             $filters['mode'] = 'any';
         }
 

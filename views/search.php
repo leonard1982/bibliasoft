@@ -7,6 +7,7 @@
         <select name="mode">
             <option value="any" <?php echo $filters['mode'] === 'any' ? 'selected' : ''; ?>>Cualquier palabra</option>
             <option value="all" <?php echo $filters['mode'] === 'all' ? 'selected' : ''; ?>>Todas las palabras</option>
+            <option value="word" <?php echo $filters['mode'] === 'word' ? 'selected' : ''; ?>>Palabra completa</option>
             <option value="exact" <?php echo $filters['mode'] === 'exact' ? 'selected' : ''; ?>>Frase exacta</option>
         </select>
 
