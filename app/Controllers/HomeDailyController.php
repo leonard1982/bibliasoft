@@ -29,12 +29,14 @@ class HomeDailyController
     public function index()
     {
         $daily = $this->dailyVerseService->getDailyVerse();
+        $motivation = $this->dailyVerseService->getMotivationVerse($daily['date'] ?? null);
         $prefs = $this->userDataRepository->getUserPrefs();
         $plan = $this->readingPlanService->status($daily['date'] ?? null);
 
         app_render('home_daily', [
             'pageTitle' => 'Versículo del día',
             'daily' => $daily,
+            'motivation' => $motivation,
             'backgrounds' => $this->imageCardService->getBackgrounds(),
             'prefs' => $prefs,
             'plan' => $plan,

@@ -37,9 +37,12 @@ class SchemaManager
         self::migrateDevotionals($pdo);
         self::migrateUserPrefs($pdo);
         self::migrateFavorites($pdo);
+        self::migrateContentModules($pdo);
+        self::migrateStudyCenter($pdo);
         self::migrateHistory($pdo);
         self::migrateHighlights($pdo);
         self::migrateReadingPlans($pdo);
+        self::migrateStudyStats($pdo);
         self::migrateAnecdotes($pdo);
         self::migrateAnecdoteFavorites($pdo);
     }
@@ -354,6 +357,121 @@ class SchemaManager
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_passage_history_recent ON passage_history (last_viewed DESC)');
     }
 
+    private static function migrateContentModules(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'content_modules')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS content_modules (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                module_key TEXT NOT NULL UNIQUE,
+                type TEXT NOT NULL,
+                name TEXT NOT NULL,
+                version TEXT NOT NULL DEFAULT \'\',
+                file_path TEXT NOT NULL,
+                enabled INTEGER NOT NULL DEFAULT 1,
+                installed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'content_modules');
+            if (!isset($columns['module_key'])) {
+                $pdo->exec("ALTER TABLE content_modules ADD COLUMN module_key TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['type'])) {
+                $pdo->exec("ALTER TABLE content_modules ADD COLUMN type TEXT NOT NULL DEFAULT 'commentary'");
+            }
+            if (!isset($columns['name'])) {
+                $pdo->exec("ALTER TABLE content_modules ADD COLUMN name TEXT NOT NULL DEFAULT 'Modulo'");
+            }
+            if (!isset($columns['version'])) {
+                $pdo->exec("ALTER TABLE content_modules ADD COLUMN version TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['file_path'])) {
+                $pdo->exec("ALTER TABLE content_modules ADD COLUMN file_path TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['enabled'])) {
+                $pdo->exec('ALTER TABLE content_modules ADD COLUMN enabled INTEGER NOT NULL DEFAULT 1');
+            }
+            if (!isset($columns['installed_at'])) {
+                $pdo->exec("ALTER TABLE content_modules ADD COLUMN installed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+            if (!isset($columns['updated_at'])) {
+                $pdo->exec("ALTER TABLE content_modules ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+        }
+
+        $pdo->exec('UPDATE content_modules SET enabled = CASE WHEN enabled = 0 THEN 0 ELSE 1 END');
+        $pdo->exec("UPDATE content_modules SET type = CASE WHEN LOWER(type) = 'dictionary' THEN 'dictionary' ELSE 'commentary' END");
+        $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_content_modules_key ON content_modules (module_key)');
+        $pdo->exec('DROP INDEX IF EXISTS idx_content_modules_type');
+    }
+
+    private static function migrateStudyCenter(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'study_projects')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS study_projects (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                description TEXT NOT NULL DEFAULT \'\',
+                color TEXT NOT NULL DEFAULT \'#1d6a8f\',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'study_projects');
+            if (!isset($columns['description'])) {
+                $pdo->exec("ALTER TABLE study_projects ADD COLUMN description TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['color'])) {
+                $pdo->exec("ALTER TABLE study_projects ADD COLUMN color TEXT NOT NULL DEFAULT '#1d6a8f'");
+            }
+            if (!isset($columns['created_at'])) {
+                $pdo->exec("ALTER TABLE study_projects ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+            if (!isset($columns['updated_at'])) {
+                $pdo->exec("ALTER TABLE study_projects ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+        }
+        $pdo->exec("UPDATE study_projects SET color = CASE WHEN color IS NULL OR TRIM(color) = '' THEN '#1d6a8f' ELSE color END");
+        $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_study_projects_name ON study_projects(name)');
+
+        if (!self::tableExists($pdo, 'study_project_entries')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS study_project_entries (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                project_id INTEGER NOT NULL,
+                book INTEGER NOT NULL,
+                chapter INTEGER NOT NULL,
+                verse_start INTEGER NOT NULL,
+                verse_end INTEGER NOT NULL,
+                note TEXT NOT NULL DEFAULT \'\',
+                strong_code TEXT NOT NULL DEFAULT \'\',
+                strong_term TEXT NOT NULL DEFAULT \'\',
+                commentary_excerpt TEXT NOT NULL DEFAULT \'\',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $entryColumns = self::columns($pdo, 'study_project_entries');
+            if (!isset($entryColumns['strong_code'])) {
+                $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN strong_code TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($entryColumns['strong_term'])) {
+                $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN strong_term TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($entryColumns['commentary_excerpt'])) {
+                $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN commentary_excerpt TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($entryColumns['created_at'])) {
+                $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+            if (!isset($entryColumns['updated_at'])) {
+                $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+        }
+
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_study_entries_project ON study_project_entries(project_id, updated_at DESC, id DESC)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_study_entries_ref ON study_project_entries(book, chapter, verse_start, verse_end)');
+    }
+
     private static function migrateReadingPlans(\PDO $pdo)
     {
         if (!self::tableExists($pdo, 'reading_plans')) {
@@ -445,6 +563,50 @@ class SchemaManager
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_plans_active ON reading_plans(active, updated_at)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_progress_plan ON reading_plan_progress(plan_id, day_index)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_chapter_progress_plan_day ON reading_plan_chapter_progress(plan_id, day_index)');
+    }
+
+    private static function migrateStudyStats(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'reading_sessions')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS reading_sessions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                date TEXT NOT NULL UNIQUE,
+                seconds INTEGER NOT NULL DEFAULT 0,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'reading_sessions');
+            if (!isset($columns['seconds'])) {
+                $pdo->exec('ALTER TABLE reading_sessions ADD COLUMN seconds INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['updated_at'])) {
+                $pdo->exec("ALTER TABLE reading_sessions ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+        }
+        $pdo->exec('UPDATE reading_sessions SET seconds = CASE WHEN seconds < 0 THEN 0 ELSE seconds END');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_sessions_date ON reading_sessions(date DESC)');
+
+        if (!self::tableExists($pdo, 'theme_study_log')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS theme_study_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                theme_key TEXT NOT NULL,
+                date TEXT NOT NULL,
+                hits INTEGER NOT NULL DEFAULT 1,
+                last_studied TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(theme_key, date)
+            )');
+        } else {
+            $columns = self::columns($pdo, 'theme_study_log');
+            if (!isset($columns['hits'])) {
+                $pdo->exec('ALTER TABLE theme_study_log ADD COLUMN hits INTEGER NOT NULL DEFAULT 1');
+            }
+            if (!isset($columns['last_studied'])) {
+                $pdo->exec("ALTER TABLE theme_study_log ADD COLUMN last_studied TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            }
+        }
+        $pdo->exec('UPDATE theme_study_log SET hits = CASE WHEN hits < 1 THEN 1 ELSE hits END');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_theme_study_hits ON theme_study_log(hits DESC, last_studied DESC)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_theme_study_date ON theme_study_log(date DESC)');
     }
 
     private static function migrateAnecdotes(\PDO $pdo)

@@ -12,8 +12,7 @@ return [
             'name' => 'Comentario contextual generado',
             'license' => 'Contenido original de la app',
             'enabled' => true,
-            'ui_label' => 'Generado',
+            'ui_label' => 'Generado (análisis contextual)',
         ],
     ],
 ];
-

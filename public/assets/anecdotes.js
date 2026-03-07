@@ -1,4 +1,14 @@
 (function () {
+    function notify(message, type) {
+        if (window.appNotify && typeof window.appNotify === 'function') {
+            window.appNotify(message, type || 'info');
+            return;
+        }
+        if (typeof alert === 'function') {
+            alert(message);
+        }
+    }
+
     var root = document.getElementById('anecdotesPage');
     if (!root) {
         return;
@@ -63,7 +73,7 @@
                 render();
             })
             .catch(function () {
-                alert('No se pudo cargar la lista.');
+                notify('No se pudo cargar la lista.', 'error');
             });
     }
 
@@ -77,13 +87,14 @@
             body: new URLSearchParams({ topic: topic }).toString()
         }).then(asJson).then(function (res) {
             if (res.error || !res.row) {
-                alert(res.error || 'No se pudo generar anécdota.');
+                notify(res.error || 'No se pudo generar anécdota.', 'error');
                 return;
             }
             state.rows.unshift(res.row);
             render();
+            notify('Anécdota generada correctamente.', 'success');
         }).catch(function () {
-            alert('No se pudo generar anécdota.');
+            notify('No se pudo generar anécdota.', 'error');
         });
     }
 
@@ -132,14 +143,14 @@
             if (copyBtn) {
                 copyBtn.addEventListener('click', function () {
                     copyText(buildText(row)).then(function () {
-                        alert('Anécdota copiada.');
+                        notify('Anécdota copiada.', 'success');
                     });
                 });
             }
             if (saveBtn) {
                 saveBtn.addEventListener('click', function () {
                     if (!state.isLogged) {
-                        alert('Inicia sesión para guardar anécdotas.');
+                        notify('Inicia sesión para guardar anécdotas.', 'error');
                         return;
                     }
                     toggleFavorite(row.id);
@@ -153,7 +164,7 @@
                         return;
                     }
                     copyText(text).then(function () {
-                        alert('Texto copiado para compartir.');
+                        notify('Texto copiado para compartir.', 'success');
                     });
                 });
             }
@@ -169,7 +180,7 @@
             body: new URLSearchParams({ anecdote_id: String(id) }).toString()
         }).then(asJson).then(function (res) {
             if (res.error) {
-                alert(res.error);
+                notify(res.error, 'error');
                 return;
             }
             var row = findRow(id);
@@ -178,8 +189,9 @@
             }
             row.favorite = Boolean(res.active);
             render();
+            notify(row.favorite ? 'Anécdota guardada.' : 'Anécdota removida de guardados.', 'success');
         }).catch(function () {
-            alert('No se pudo guardar.');
+            notify('No se pudo guardar.', 'error');
         });
     }
 

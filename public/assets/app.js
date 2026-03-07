@@ -1,5 +1,8 @@
 (function () {
     applyGlobalPrefsFromStorage();
+    document.querySelectorAll('[data-tip][title]').forEach(function (node) {
+        node.removeAttribute('title');
+    });
 
     var root = document.getElementById('readerApp');
     if (!root) {
@@ -36,6 +39,10 @@
         favoriteSnapshotToken: '',
         favoriteVerseCache: {},
         favoriteTooltipKey: '',
+        studyProjects: [],
+        studyProjectsLoadedAt: 0,
+        studyProjectsPromise: null,
+        studyDraftEntry: null,
         parallelLoading: false,
         parallelAvailable: false,
         parallelSameSource: false,
@@ -43,9 +50,11 @@
         parallelCompareLabel: 'Versión 2',
         parallelMessage: '',
         parallelVerseMap: {},
+        parallelColumns: [],
         versionsCatalog: [],
         versionPrimaryFile: '',
         versionCompareFile: '',
+        versionCompareFiles: [],
         strongCache: {},
         generatedByMode: {},
         latestDevotionalExport: null,
@@ -107,7 +116,8 @@
         },
         guide: {
             activeStep: 0,
-            focusSelector: ''
+            focusSelector: '',
+            stepAnimTimer: 0
         }
     };
 
@@ -132,6 +142,7 @@
         toggleHelp: document.getElementById('toggleHelp'),
         togglePreachMode: document.getElementById('togglePreachMode'),
         overlay: document.getElementById('mobileOverlay'),
+        guideSpotlight: document.getElementById('guideSpotlight'),
         notice: document.getElementById('readingNotice'),
         preachControls: document.getElementById('preachControls'),
         preachPrevChapter: document.getElementById('preachPrevChapter'),
@@ -158,7 +169,8 @@
         strongModal: document.getElementById('strongModal'),
         audioModal: document.getElementById('audioModal'),
         readerShell: root.querySelector('.reader-shell'),
-        openSettings: document.getElementById('openSettings'),
+        openSettingsTopbar: document.getElementById('openSettings'),
+        openSettingsInline: document.getElementById('openSettingsInline'),
         closeSettings: document.getElementById('closeSettings'),
         closeSearch: document.getElementById('closeSearch'),
         closePlan: document.getElementById('closePlan'),
@@ -167,11 +179,14 @@
         closeInterlinear: document.getElementById('closeInterlinear'),
         closeStrong: document.getElementById('closeStrong'),
         closeAudio: document.getElementById('closeAudio'),
+        closeProjectSave: document.getElementById('closeProjectSave'),
         versionPrimarySelect: document.getElementById('versionPrimarySelect'),
         versionCompareSelect: document.getElementById('versionCompareSelect'),
+        versionCompareMulti: document.getElementById('versionCompareMulti'),
         saveVersions: document.getElementById('saveVersions'),
         copySelection: document.getElementById('copySelection'),
         copyParagraph: document.getElementById('copyParagraph'),
+        saveSelectionProject: document.getElementById('saveSelectionProject'),
         shareSelection: document.getElementById('shareSelection'),
         shareWhatsApp: document.getElementById('shareWhatsApp'),
         shareFacebook: document.getElementById('shareFacebook'),
@@ -197,6 +212,7 @@
         interlinearModalBody: document.getElementById('interlinearModalBody'),
         closeGuide: document.getElementById('closeGuide'),
         guideTourStepLabel: document.getElementById('guideTourStepLabel'),
+        guideStepBadge: document.getElementById('guideStepBadge'),
         guideTourTitle: document.getElementById('guideTourTitle'),
         guideTourText: document.getElementById('guideTourText'),
         guideTourHint: document.getElementById('guideTourHint'),
@@ -205,6 +221,12 @@
         guideGoTarget: document.getElementById('guideGoTarget'),
         guideHideOnStart: document.getElementById('guideHideOnStart'),
         strongModalBody: document.getElementById('strongModalBody'),
+        projectSaveModal: document.getElementById('projectSaveModal'),
+        projectSaveReference: document.getElementById('projectSaveReference'),
+        projectSaveSource: document.getElementById('projectSaveSource'),
+        projectSaveProject: document.getElementById('projectSaveProject'),
+        projectSaveNote: document.getElementById('projectSaveNote'),
+        projectSaveSubmit: document.getElementById('projectSaveSubmit'),
         audioSource: document.getElementById('audioSource'),
         audioVoice: document.getElementById('audioVoice'),
         audioRate: document.getElementById('audioRate'),
@@ -217,60 +239,104 @@
     };
 
     var STRONG_MORPH_GLOSSARY = [
-        { pattern: /\bdual\s+de\s+sing(?:ular)?\.?\b/i, label: 'dual de sing', meaning: 'Forma dual derivada de un término en singular (dos elementos relacionados).' },
-        { pattern: /\bplu?r\.?\s+de\s+sing(?:ular)?\.?\b/i, label: 'plur de sing', meaning: 'Forma plural derivada de un término en singular.' },
-        { pattern: /\bfem\.?\s+de\s+masc\b/i, label: 'fem de masc', meaning: 'Forma femenina derivada de una base masculina.' },
-        { pattern: /\bpart\.?\s+act\b/i, label: 'part act', meaning: 'Participio activo: acción en curso realizada por el sujeto.' },
-        { pattern: /\bpart\.?\s+pas\b/i, label: 'part pas', meaning: 'Participio pasivo: acción recibida por el sujeto.' },
-        { pattern: /\bimperf\b/i, label: 'imperf', meaning: 'Tiempo imperfecto: acción continua, repetida o no concluida.' },
-        { pattern: /\baor\b/i, label: 'aor', meaning: 'Aoristo: acción puntual o vista en conjunto.' },
-        { pattern: /\bgen\b/i, label: 'gen', meaning: 'Genitivo: relación de posesión, origen o pertenencia.' },
-        { pattern: /\bdat\b/i, label: 'dat', meaning: 'Dativo: complemento indirecto, beneficiario o destino.' },
-        { pattern: /\bnom\b/i, label: 'nom', meaning: 'Nominativo: normalmente el sujeto de la oración.' },
-        { pattern: /\bacc\b/i, label: 'acc', meaning: 'Acusativo: normalmente objeto directo o dirección.' },
-        { pattern: /\bvoc\b/i, label: 'voc', meaning: 'Vocativo: forma de llamado directo.' },
-        { pattern: /\bprep\b/i, label: 'prep', meaning: 'Preposición: conecta términos y define relación.' },
-        { pattern: /\bconj\b/i, label: 'conj', meaning: 'Conjunción: une cláusulas o ideas.' },
-        { pattern: /\binterj\b/i, label: 'interj', meaning: 'Interjección: expresión breve de énfasis o emoción.' },
-        { pattern: /\badv\b/i, label: 'adv', meaning: 'Adverbio: modifica verbo, adjetivo u otra frase.' },
-        { pattern: /\bpron\b/i, label: 'pron', meaning: 'Pronombre: sustituye al nombre en contexto.' }
+        { pattern: /\bdual\s+de\s+sing(?:ular)?\.?\b/i, label: 'dual de sing', meaning: 'Forma dual derivada de singular: enfatiza dos elementos vinculados.' },
+        { pattern: /\bplu?r\.?\s+de\s+sing(?:ular)?\.?\b/i, label: 'plur de sing', meaning: 'Forma plural derivada de un término base singular.' },
+        { pattern: /\bfem\.?\s+de\s+masc\b/i, label: 'fem de masc', meaning: 'Forma femenina construida desde una base masculina.' },
+        { pattern: /\bsing(?:ular)?\.?\b/i, label: 'sing', meaning: 'Número singular: una sola entidad.' },
+        { pattern: /\bpl(?:u?r(?:al)?)?\.?\b/i, label: 'pl', meaning: 'Número plural: más de una entidad.' },
+        { pattern: /\bmasc(?:ulino)?\.?\b/i, label: 'masc', meaning: 'Género masculino gramatical.' },
+        { pattern: /\bfem(?:enino)?\.?\b/i, label: 'fem', meaning: 'Género femenino gramatical.' },
+        { pattern: /\bneut(?:ro)?\.?\b/i, label: 'neut', meaning: 'Género neutro gramatical (especialmente en griego).' },
+        { pattern: /\bpart(?:icipio)?\.?\s+act(?:ivo)?\.?\b/i, label: 'part act', meaning: 'Participio activo: acción en desarrollo realizada por el sujeto.' },
+        { pattern: /\bpart(?:icipio)?\.?\s+pas(?:ivo)?\.?\b/i, label: 'part pas', meaning: 'Participio pasivo: acción recibida por el sujeto.' },
+        { pattern: /\bpart(?:icipio)?\.?\b/i, label: 'part', meaning: 'Participio: forma verbal con función adjetival o nominal.' },
+        { pattern: /\bimperf(?:ecto)?\.?\b/i, label: 'imperf', meaning: 'Imperfecto: acción en progreso, repetida o no concluida.' },
+        { pattern: /\bperf(?:ecto)?\.?\b/i, label: 'perf', meaning: 'Perfecto: acción completada con resultado vigente.' },
+        { pattern: /\bplup(?:erfecto)?\.?\b/i, label: 'plup', meaning: 'Pluscuamperfecto: acción completada antes de otra acción pasada.' },
+        { pattern: /\bpres(?:ente)?\.?\b/i, label: 'pres', meaning: 'Presente: acción actual o habitual según contexto.' },
+        { pattern: /\bfut(?:uro)?\.?\b/i, label: 'fut', meaning: 'Futuro: acción proyectada hacia adelante.' },
+        { pattern: /\baor(?:isto)?\.?\b/i, label: 'aor', meaning: 'Aoristo: acción vista globalmente o como evento puntual.' },
+        { pattern: /\bact(?:ivo)?\.?\b/i, label: 'act', meaning: 'Voz activa: el sujeto ejecuta la acción.' },
+        { pattern: /\bmid(?:io)?\.?\b/i, label: 'mid', meaning: 'Voz media: el sujeto participa en la acción en su propio interés.' },
+        { pattern: /\bpas(?:ivo)?\.?\b/i, label: 'pas', meaning: 'Voz pasiva: el sujeto recibe la acción.' },
+        { pattern: /\bind(?:icativo)?\.?\b/i, label: 'ind', meaning: 'Modo indicativo: afirma hechos o realidades.' },
+        { pattern: /\bsubj(?:untivo)?\.?\b/i, label: 'subj', meaning: 'Modo subjuntivo: posibilidad, propósito o contingencia.' },
+        { pattern: /\bopt(?:ativo)?\.?\b/i, label: 'opt', meaning: 'Modo optativo: deseo, posibilidad remota (griego clásico/koiné temprano).' },
+        { pattern: /\bimp(?:erativo)?\.?\b/i, label: 'imp', meaning: 'Modo imperativo: mandato, exhortación o ruego.' },
+        { pattern: /\binf(?:initivo)?\.?\b/i, label: 'inf', meaning: 'Infinitivo: forma verbal no personal.' },
+        { pattern: /\bcstr|construct\b/i, label: 'construct', meaning: 'Estado constructo (hebreo): relación posesiva o genitiva con el término siguiente.' },
+        { pattern: /\babs|absolute\b/i, label: 'absolute', meaning: 'Estado absoluto: forma independiente del sustantivo hebreo.' },
+        { pattern: /\bjuss(?:ive)?\.?\b/i, label: 'juss', meaning: 'Jusivo (hebreo): deseo, mandato suave o posibilidad para tercera persona.' },
+        { pattern: /\bcohort(?:ative)?\.?\b/i, label: 'cohort', meaning: 'Cohortativo (hebreo): intención o voluntad en primera persona.' },
+        { pattern: /\bqal\b/i, label: 'qal', meaning: 'Hebreo binyan Qal: voz simple/activa básica.' },
+        { pattern: /\bniphal\b/i, label: 'niphal', meaning: 'Hebreo binyan Niphal: pasivo/reflexivo de Qal.' },
+        { pattern: /\bpiel\b/i, label: 'piel', meaning: 'Hebreo binyan Piel: acción intensiva o factitiva activa.' },
+        { pattern: /\bpual\b/i, label: 'pual', meaning: 'Hebreo binyan Pual: pasivo de Piel.' },
+        { pattern: /\bhiphil\b/i, label: 'hiphil', meaning: 'Hebreo binyan Hiphil: causativo activo (hacer que algo ocurra).' },
+        { pattern: /\bhophal\b/i, label: 'hophal', meaning: 'Hebreo binyan Hophal: pasivo de Hiphil.' },
+        { pattern: /\bhithpael\b/i, label: 'hithpael', meaning: 'Hebreo binyan Hithpael: reflexivo/intensivo.' },
+        { pattern: /\bgen(?:itivo)?\.?\b/i, label: 'gen', meaning: 'Genitivo: posesión, origen, relación o cualidad.' },
+        { pattern: /\bdat(?:ivo)?\.?\b/i, label: 'dat', meaning: 'Dativo: destinatario, beneficiario, medio o esfera.' },
+        { pattern: /\bnom(?:inativo)?\.?\b/i, label: 'nom', meaning: 'Nominativo: normalmente marca el sujeto.' },
+        { pattern: /\bacc(?:usativo)?\.?\b/i, label: 'acc', meaning: 'Acusativo: objeto directo, extensión o dirección.' },
+        { pattern: /\bvoc(?:ativo)?\.?\b/i, label: 'voc', meaning: 'Vocativo: llamado directo.' },
+        { pattern: /\bprep(?:osici[oó]n)?\.?\b/i, label: 'prep', meaning: 'Preposición: expresa relación entre términos.' },
+        { pattern: /\bconj(?:unci[oó]n)?\.?\b/i, label: 'conj', meaning: 'Conjunción: enlaza palabras, frases o cláusulas.' },
+        { pattern: /\binterj(?:ecci[oó]n)?\.?\b/i, label: 'interj', meaning: 'Interjección: expresión breve de emoción o énfasis.' },
+        { pattern: /\badv(?:erbio)?\.?\b/i, label: 'adv', meaning: 'Adverbio: modifica verbo, adjetivo u otra expresión.' },
+        { pattern: /\bpron(?:ombre)?\.?\b/i, label: 'pron', meaning: 'Pronombre: sustituye un sustantivo.' },
+        { pattern: /\b1(?:st|a)?\s*pers|\b2(?:nd|a)?\s*pers|\b3(?:rd|a)?\s*pers/i, label: 'persona verbal', meaning: 'Persona gramatical: 1a (yo/nosotros), 2a (tú/ustedes), 3a (él/ellos).' }
     ];
     var GUIDE_TOUR_STEPS = [
         {
             title: 'Navega por libros y capítulos',
             text: 'En estas columnas eliges libro y capítulo. Es el punto de partida para cualquier estudio.',
             hint: 'Primero el libro, luego el capítulo, después selecciona versículos.',
-            selector: '#booksPane'
+            selector: '#booksPane',
+            desktop_targets: ['#booksPane .pane-head', '#booksList .book-item.is-active', '#booksList .book-item', '#booksPane'],
+            mobile_targets: ['#openNavigator']
         },
         {
             title: 'Selecciona versículos del pasaje',
             text: 'Haz clic en un versículo para abrir ayuda contextual. Puedes seleccionar varios para estudiar un rango.',
             hint: 'Usa selección múltiple para construir contexto y notas por bloque.',
-            selector: '#versesContainer'
+            selector: '#versesContainer',
+            desktop_targets: ['#versesContainer .verse.is-selected', '#versesContainer .verse', '#versesContainer'],
+            mobile_targets: ['#versesContainer .verse.is-selected', '#versesContainer .verse', '#versesContainer']
         },
         {
             title: 'Panel de Ayuda por pestañas',
             text: 'Aquí tienes contexto, comentarios, notas, vínculos, herramientas y la nueva guía de aprendizaje.',
             hint: 'Este panel concentra el trabajo exegético y pastoral.',
-            selector: '#helpPane'
+            selector: '#helpPane',
+            desktop_targets: ['#helpPane .tabs', '#helpPane .pane-head', '#helpPane'],
+            mobile_targets: ['#toggleHelp'],
+            tab: 'contexto'
         },
         {
             title: 'Strong y diccionario',
             text: 'Toca una palabra marcada con Strong para abrir su léxico, contexto bíblico y glosario morfológico.',
             hint: 'Lee primero definición corta, luego contexto del pasaje y finalmente derivación.',
-            selector: '#versesContainer'
+            selector: '#versesContainer',
+            desktop_targets: ['#versesContainer [data-strong]', '#versesContainer .verse', '#versesContainer'],
+            mobile_targets: ['#versesContainer [data-strong]', '#versesContainer .verse', '#versesContainer']
         },
         {
             title: 'Módulos y diccionario bíblico',
             text: 'Desde Módulos puedes activar diccionarios/comentarios y buscar términos por palabra.',
             hint: 'Flujo recomendado: término -> diccionario -> referencias -> aplicación.',
-            selector: '#openModules'
+            selector: '#openModules',
+            desktop_targets: ['#openModules'],
+            mobile_targets: ['#openModules']
         },
         {
             title: 'Generación y aplicación práctica',
             text: 'En Herramientas puedes generar explicación, palabras clave, bosquejo y aplicación.',
             hint: 'No te quedes en la teoría: termina con una decisión concreta.',
-            selector: '#toolsPanel'
+            selector: '#toolsPanel',
+            desktop_targets: ['#helpPane .tab[data-tab="herramientas"]', '#toolsPanel', '#toggleHelp'],
+            mobile_targets: ['#toggleHelp'],
+            tab: 'herramientas'
         }
     ];
 
@@ -306,6 +372,12 @@
             state.versionsCatalog = versionRows.slice();
             state.versionPrimaryFile = String(currentVersions.primary_file || '');
             state.versionCompareFile = String(currentVersions.compare_file || '');
+            state.versionCompareFiles = Array.isArray(currentVersions.compare_files)
+                ? currentVersions.compare_files.map(function (file) { return String(file || '').trim(); }).filter(Boolean)
+                : [];
+            if (!state.versionCompareFiles.length && state.versionCompareFile) {
+                state.versionCompareFiles = [state.versionCompareFile];
+            }
         }
 
         if (state.initial.auth && typeof state.initial.auth === 'object') {
@@ -349,6 +421,7 @@
 
         if (state.needsChapterRefresh) {
             fetchChapter(state.currentBook, state.currentChapter);
+            maybeAutoStartGuideTour();
             return;
         }
         if (state.settings.parallelMode) {
@@ -397,9 +470,12 @@
 
         els.overlay.addEventListener('click', closeDrawers);
 
-        if (els.openSettings) {
-            els.openSettings.addEventListener('click', openSettings);
-        }
+        [els.openSettingsTopbar, els.openSettingsInline].forEach(function (button) {
+            if (!button) {
+                return;
+            }
+            button.addEventListener('click', openSettings);
+        });
         if (els.closeSettings) {
             els.closeSettings.addEventListener('click', closeSettings);
         }
@@ -508,12 +584,45 @@
         if (els.closeAudio) {
             els.closeAudio.addEventListener('click', closeAudio);
         }
+        if (els.closeProjectSave) {
+            els.closeProjectSave.addEventListener('click', closeProjectSaveModal);
+        }
+        if (els.projectSaveSubmit) {
+            els.projectSaveSubmit.addEventListener('click', submitProjectSaveModal);
+        }
         if (els.closeGuide) {
             els.closeGuide.addEventListener('click', closeGuideModal);
         }
         bindGuideTourControls();
         if (els.saveVersions) {
             els.saveVersions.addEventListener('click', saveVersionSelection);
+        }
+        if (els.versionPrimarySelect) {
+            els.versionPrimarySelect.addEventListener('change', function () {
+                state.versionPrimaryFile = String(this.value || '').trim();
+                if (state.versionCompareFile === state.versionPrimaryFile) {
+                    state.versionCompareFile = '';
+                }
+                state.versionCompareFiles = (state.versionCompareFiles || []).filter(function (file) {
+                    return String(file || '').trim() !== state.versionPrimaryFile;
+                });
+                renderVersionSelectors();
+            });
+        }
+        if (els.versionCompareSelect) {
+            els.versionCompareSelect.addEventListener('change', function () {
+                state.versionCompareFile = String(this.value || '').trim();
+                var keep = [];
+                (state.versionCompareFiles || []).forEach(function (file) {
+                    var value = String(file || '').trim();
+                    if (!value || value === state.versionPrimaryFile || value === state.versionCompareFile) {
+                        return;
+                    }
+                    keep.push(value);
+                });
+                state.versionCompareFiles = state.versionCompareFile ? [state.versionCompareFile].concat(keep.slice(0, 2)) : keep.slice(0, 2);
+                renderVersionSelectors();
+            });
         }
         if (els.quickSearchForm) {
             els.quickSearchForm.addEventListener('submit', function (event) {
@@ -548,6 +657,7 @@
                 closeInterlinear();
                 closeStrong();
                 closeAudio();
+                closeProjectSaveModal();
                 closeGuideModal();
             }
             if (state.settings.preachMode && !event.ctrlKey && !event.altKey && !event.metaKey) {
@@ -580,6 +690,19 @@
         bindSettingsInputs();
         bindAudioControls();
         bindThemeSelectSearch();
+        window.addEventListener('bs-theme-changed', function (event) {
+            var nextTheme = event && event.detail && event.detail.theme === 'dark' ? 'dark' : 'light';
+            if (state.settings.theme === nextTheme) {
+                return;
+            }
+            state.settings.theme = nextTheme;
+            var themeInput = document.getElementById('optTheme');
+            if (themeInput) {
+                themeInput.value = nextTheme;
+            }
+            applySettings();
+            saveSettings();
+        });
     }
 
     function renderBooks(rows, options) {
@@ -657,7 +780,8 @@
         });
 
         var parallelEnabled = state.settings.parallelMode === true;
-        var parallelHead = parallelEnabled ? buildParallelHeadHtml() : '';
+        var compareColumns = parallelEnabled ? getParallelColumnsForRender() : [];
+        var parallelHead = parallelEnabled ? buildParallelHeadHtml(compareColumns) : '';
         var html = state.verses.map(function (verse) {
             var verseNumber = Number(verse.verse || 0);
             if (!parallelEnabled) {
@@ -668,19 +792,23 @@
                     '</div>';
             }
 
-            var compareHtml = getParallelCompareVerseHtml(verseNumber);
+            var totalCols = 1 + compareColumns.length;
+            var compareHtml = compareColumns.map(function (column) {
+                return '' +
+                    '<div class="verse-parallel-col">' +
+                    '<small class="parallel-label">' + escapeHtml(String(column.label || 'Versión')) + '</small>' +
+                    '<div class="verse-text">' + getParallelCompareVerseHtml(column, verseNumber) + '</div>' +
+                    '</div>';
+            }).join('');
             return '' +
                 '<div class="verse verse-parallel" data-verse="' + verseNumber + '">' +
                 '<span class="verse-num">' + verseNumber + '</span>' +
-                '<div class="verse-parallel-cols">' +
-                '<div class="verse-parallel-col">' +
+                '<div class="verse-parallel-cols" style="--parallel-cols:' + totalCols + ';">' +
+                '<div class="verse-parallel-col verse-parallel-primary">' +
                 '<small class="parallel-label">' + escapeHtml(state.parallelPrimaryLabel || 'RVR60') + '</small>' +
                 '<div class="verse-text">' + (verse.scripture_html || '') + '</div>' +
                 '</div>' +
-                '<div class="verse-parallel-col">' +
-                '<small class="parallel-label">' + escapeHtml(state.parallelCompareLabel || 'Versión 2') + '</small>' +
-                '<div class="verse-text">' + compareHtml + '</div>' +
-                '</div>' +
+                compareHtml +
                 '</div>' +
                 '</div>';
         }).join('');
@@ -736,7 +864,43 @@
         });
     }
 
-    function buildParallelHeadHtml() {
+    function getParallelColumnsForRender() {
+        var columns = Array.isArray(state.parallelColumns) ? state.parallelColumns : [];
+        if (columns.length) {
+            return columns;
+        }
+        var fallbackMap = state.parallelVerseMap || {};
+        var hasFallback = false;
+        Object.keys(fallbackMap).forEach(function (key) {
+            if (fallbackMap[key] && fallbackMap[key].scripture_html) {
+                hasFallback = true;
+            }
+        });
+        if (!hasFallback) {
+            return [];
+        }
+        return [{
+            file: String(state.versionCompareFile || ''),
+            label: String(state.parallelCompareLabel || 'Versión 2'),
+            available: true,
+            same_source: state.parallelSameSource === true,
+            message: String(state.parallelMessage || ''),
+            verseMap: fallbackMap
+        }];
+    }
+
+    function buildParallelHeadHtml(compareColumns) {
+        var columns = Array.isArray(compareColumns) ? compareColumns : [];
+        var compareLabels = columns.map(function (col) {
+            return String(col.label || '').trim();
+        }).filter(Boolean);
+        var title = escapeHtml(state.parallelPrimaryLabel || 'RVR60');
+        if (compareLabels.length) {
+            title += ' vs ' + escapeHtml(compareLabels.join(' · '));
+        } else {
+            title += ' vs ' + escapeHtml(state.parallelCompareLabel || 'Versión 2');
+        }
+
         var status = '';
         if (state.parallelLoading) {
             status = '<span class="muted">Cargando comparación...</span>';
@@ -750,13 +914,14 @@
 
         return '' +
             '<div class="parallel-head">' +
-            '<strong>' + escapeHtml(state.parallelPrimaryLabel || 'RVR60') + ' vs ' + escapeHtml(state.parallelCompareLabel || 'Versión 2') + '</strong>' +
+            '<strong>' + title + '</strong>' +
             status +
             '</div>';
     }
 
-    function getParallelCompareVerseHtml(verseNumber) {
-        var row = state.parallelVerseMap[String(Number(verseNumber || 0))] || null;
+    function getParallelCompareVerseHtml(column, verseNumber) {
+        var verseMap = column && column.verseMap ? column.verseMap : {};
+        var row = verseMap[String(Number(verseNumber || 0))] || null;
         if (row && row.scripture_html) {
             return row.scripture_html;
         }
@@ -783,7 +948,7 @@
                 return;
             }
 
-            var primaryText = verseNode.querySelector('.verse-parallel-col .verse-text') || verseNode.querySelector('.verse-text');
+            var primaryText = verseNode.querySelector('.verse-parallel-primary .verse-text') || verseNode.querySelector('.verse-text');
             if (!primaryText) {
                 return;
             }
@@ -1167,7 +1332,7 @@
             '<li>1) Elige libro y capítulo.</li>' +
             '<li>2) Selecciona uno o más versículos.</li>' +
             '<li>3) Revisa Contexto y Comentarios.</li>' +
-            '<li>4) Registra Notas y Vínculos.</li>' +
+            '<li>4) Registra Notas, Cuaderno y Vínculos.</li>' +
             '<li>5) Aplica en Herramientas (explicación, bosquejo, aplicación).</li>' +
             '</ul>' +
             '<div class="toolbar">' +
@@ -1258,6 +1423,7 @@
         var sciences = Array.isArray(c.biblical_sciences) ? c.biblical_sciences : [];
         var customsNotes = Array.isArray(c.customs_notes) ? c.customs_notes : [];
         var originalLanguage = Array.isArray(c.original_language) ? c.original_language : [];
+        var crossReferences = Array.isArray(payload.cross_references) ? payload.cross_references : [];
         var mainIdea = String(c.main_idea || '').trim();
         var referenceLabel = String((payload.reference && payload.reference.label) || '');
 
@@ -1337,6 +1503,23 @@
                 ((code || source) ? '<small class="muted">' + (code ? ('<strong>' + escapeHtml(code) + '</strong> · ') : '') + escapeHtml(source) + '</small>' : '') +
                 '</article>';
         }).join('') + '</div>' : '<p class="muted">Sin notas de idioma original para este pasaje.</p>';
+        var crossRefHtml = crossReferences.length
+            ? '<ul class="context-list">' + crossReferences.map(function (row) {
+                var terms = Array.isArray(row.match_terms) ? row.match_terms.filter(Boolean) : [];
+                var reason = terms.length ? ('Coincidencia: ' + terms.join(', ')) : '';
+                var label = String(row.reference || '');
+                var excerpt = String(row.text || '');
+                return '' +
+                    '<li class="context-word-item">' +
+                    '<strong>' + escapeHtml(label) + '</strong>' +
+                    (excerpt ? '<small>' + escapeHtml(excerpt) + '</small>' : '') +
+                    (reason ? '<small class="muted">' + escapeHtml(reason) + '</small>' : '') +
+                    '<div class="toolbar">' +
+                    '<button class="btn-light js-open-cross-ref" type="button" data-book="' + Number(row.book || 0) + '" data-chapter="' + Number(row.chapter || 0) + '" data-verse="' + Number(row.verse || 0) + '">Abrir referencia</button>' +
+                    '</div>' +
+                    '</li>';
+            }).join('') + '</ul>'
+            : '<p class="muted">Sin referencias automáticas para este pasaje.</p>';
 
         var chapterFunction = String(meta.chapter_function || '').trim();
         var bookTheme = String(meta.book_theme || '').trim();
@@ -1353,6 +1536,7 @@
             '</div>' +
             '<div class="card"><strong>Idea central</strong><p class="context-main-idea">' + escapeHtml(mainIdea || c.simple_version || '') + '</p></div>' +
             '<div class="card"><strong>Aplicación práctica</strong>' + applicationHtml + '</div>' +
+            '<div class="card"><strong>Referencias cruzadas automáticas</strong>' + crossRefHtml + '</div>' +
             '<div class="card"><strong>Ruta de estudio</strong>' + guideHtml + '</div>' +
             '<div class="card"><strong>Idioma original (hebreo/griego)</strong>' + originalLanguageHtml + '</div>' +
             '<div class="card"><strong>Ciencias bíblicas aplicadas</strong>' + sciencesHtml + '</div>' +
@@ -1364,6 +1548,19 @@
             '<div><strong>Preguntas de estudio</strong>' + questionsHtml + '</div>' +
             '<div><strong>Pistas de observación</strong>' + tipsHtml + '</div>' +
             '</details>';
+
+        els.contextPanel.querySelectorAll('.js-open-cross-ref').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var targetBook = Number(this.getAttribute('data-book') || 0);
+                var targetChapter = Number(this.getAttribute('data-chapter') || 0);
+                var targetVerse = Number(this.getAttribute('data-verse') || 0);
+                if (targetBook < 1 || targetChapter < 1 || targetVerse < 1) {
+                    return;
+                }
+                state.pendingVerse = targetVerse;
+                fetchChapter(targetBook, targetChapter);
+            });
+        });
     }
 
     function renderCommentsPanel(commentary) {
@@ -1404,11 +1601,20 @@
 
     function renderNotesPanel(payload) {
         var range = payload.reference || {};
-        var notes = payload.notes || [];
+        var notes = Array.isArray(payload.notes) ? payload.notes : [];
+        var selected = selectedRange();
+        var fallbackReference = toReference(state.currentBook, state.currentChapter, selected.start, selected.end);
+        var referenceLabel = String(range.label || fallbackReference);
+        var notebookSeed = pickStudyNotebookSeed(notes);
+        var notebookDraft = notebookSeed ? parseStudyNotebookContent(String(notebookSeed.content || '')) : {};
+        var notebookId = notebookSeed ? Number(notebookSeed.id || 0) : 0;
         var list = notes.map(function (note) {
+            var notebookTag = isStudyNotebookNote(note)
+                ? '<span class="study-notebook-note-tag">Cuaderno</span>'
+                : '';
             return '' +
                 '<div class="card">' +
-                '<strong>' + rangeLabel(note.verse_start, note.verse_end) + '</strong>' +
+                '<div class="note-range-head"><strong>' + rangeLabel(note.verse_start, note.verse_end) + '</strong>' + notebookTag + '</div>' +
                 '<p>' + escapeHtml(note.content || '') + '</p>' +
                 (note.tags ? '<small class="muted">Etiquetas: ' + escapeHtml(note.tags) + '</small>' : '') +
                 '<div class="toolbar">' +
@@ -1434,6 +1640,29 @@
             '</div>' +
             '</form>' +
             '</div>' +
+            '<article class="card study-notebook-card">' +
+            '<div class="study-notebook-head">' +
+            '<strong>Cuaderno de estudio del pasaje</strong>' +
+            '<small class="muted">Método guiado: Observación, Interpretación, Aplicación, Oración y Acción.</small>' +
+            '</div>' +
+            '<form id="studyNotebookForm" class="stack">' +
+            '<input id="studyNotebookNoteId" type="hidden" value="' + (notebookId > 0 ? String(notebookId) : '') + '">' +
+            '<input id="studyNotebookReference" type="hidden" value="' + escapeHtml(referenceLabel) + '">' +
+            '<div class="study-notebook-grid">' +
+            '<label class="study-notebook-full">Observación<textarea id="studyNotebookObservation" rows="3" placeholder="¿Qué dice exactamente el texto? Repite palabras clave, estructura y detalles." >' + escapeHtml(String(notebookDraft.observation || '')) + '</textarea></label>' +
+            '<label class="study-notebook-full">Interpretación<textarea id="studyNotebookInterpretation" rows="3" placeholder="¿Qué significa en su contexto histórico, literario y teológico?" >' + escapeHtml(String(notebookDraft.interpretation || '')) + '</textarea></label>' +
+            '<label class="study-notebook-full">Aplicación<textarea id="studyNotebookApplication" rows="3" placeholder="¿Cómo se aplica hoy a tu vida, familia o ministerio?" >' + escapeHtml(String(notebookDraft.application || '')) + '</textarea></label>' +
+            '<label class="study-notebook-full">Oración<textarea id="studyNotebookPrayer" rows="2" placeholder="Redacta una oración basada en el pasaje." >' + escapeHtml(String(notebookDraft.prayer || '')) + '</textarea></label>' +
+            '<label class="study-notebook-full">Acción concreta<textarea id="studyNotebookAction" rows="2" placeholder="Define un paso específico para esta semana." >' + escapeHtml(String(notebookDraft.action || '')) + '</textarea></label>' +
+            '</div>' +
+            '<div class="toolbar study-notebook-actions">' +
+            '<button class="btn-primary" type="submit">Guardar cuaderno</button>' +
+            '<button class="btn-light" id="studyNotebookToFreeNote" type="button">Pasar a nota libre</button>' +
+            '<button class="btn-light" id="studyNotebookClear" type="button">Limpiar</button>' +
+            '</div>' +
+            '<small class="muted">Se guarda como nota etiquetada: <strong>cuaderno,oiao</strong>.</small>' +
+            '</form>' +
+            '</article>' +
             '<form id="noteForm" class="stack">' +
             '<textarea id="noteContent" rows="3" placeholder="Escribe tu nota del pasaje"></textarea>' +
             '<input id="noteTags" type="text" placeholder="Etiquetas separadas por coma">' +
@@ -1458,6 +1687,26 @@
         var noteEditCancel = document.getElementById('noteEditCancel');
         if (noteEditCancel) {
             noteEditCancel.addEventListener('click', closeNoteEditor);
+        }
+
+        var notebookForm = document.getElementById('studyNotebookForm');
+        if (notebookForm) {
+            notebookForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                saveStudyNotebook();
+            });
+        }
+        var notebookToFreeNote = document.getElementById('studyNotebookToFreeNote');
+        if (notebookToFreeNote) {
+            notebookToFreeNote.addEventListener('click', function () {
+                applyNotebookTemplateToFreeNote();
+            });
+        }
+        var notebookClear = document.getElementById('studyNotebookClear');
+        if (notebookClear) {
+            notebookClear.addEventListener('click', function () {
+                clearStudyNotebookForm();
+            });
         }
 
         els.notesPanel.querySelectorAll('.js-note-delete').forEach(function (btn) {
@@ -3111,6 +3360,226 @@
         document.body.removeChild(form);
     }
 
+    function isStudyNotebookNote(note) {
+        var row = note || {};
+        var tags = String(row.tags || '').toLowerCase();
+        var content = String(row.content || '');
+        if (tags.indexOf('cuaderno') !== -1 || tags.indexOf('oiao') !== -1) {
+            return true;
+        }
+        if (content.indexOf('[CUADERNO BIBLIASOFT]') !== -1) {
+            return true;
+        }
+        return /observaci[oó]n\s*:/i.test(content) && /interpretaci[oó]n\s*:/i.test(content);
+    }
+
+    function pickStudyNotebookSeed(notes) {
+        var rows = Array.isArray(notes) ? notes : [];
+        for (var i = 0; i < rows.length; i += 1) {
+            if (isStudyNotebookNote(rows[i])) {
+                return rows[i];
+            }
+        }
+        return null;
+    }
+
+    function parseStudyNotebookContent(content) {
+        var text = String(content || '').replace(/\r/g, '');
+        var fields = {
+            observation: '',
+            interpretation: '',
+            application: '',
+            prayer: '',
+            action: ''
+        };
+        var marker = text.indexOf('[CUADERNO BIBLIASOFT]');
+        if (marker >= 0) {
+            text = text.slice(marker);
+        }
+        var lines = text.split('\n');
+        var activeKey = '';
+        lines.forEach(function (rawLine) {
+            var line = String(rawLine || '');
+            var trimmed = line.trim();
+            if (!trimmed) {
+                return;
+            }
+            if (/^pasaje\s*:/i.test(trimmed) || /^\[cuaderno bibliasoft\]/i.test(trimmed)) {
+                return;
+            }
+            var headingMatch = trimmed.match(/^(observaci[oó]n|interpretaci[oó]n|aplicaci[oó]n|oraci[oó]n|acci[oó]n(?:\s+concreta)?)\s*:\s*(.*)$/i);
+            if (headingMatch) {
+                var heading = String(headingMatch[1] || '').toLowerCase();
+                if (heading.indexOf('observ') === 0) {
+                    activeKey = 'observation';
+                } else if (heading.indexOf('interpret') === 0) {
+                    activeKey = 'interpretation';
+                } else if (heading.indexOf('aplica') === 0) {
+                    activeKey = 'application';
+                } else if (heading.indexOf('orac') === 0) {
+                    activeKey = 'prayer';
+                } else if (heading.indexOf('acci') === 0) {
+                    activeKey = 'action';
+                } else {
+                    activeKey = '';
+                }
+                var sameLineValue = trimNotebookSection(String(headingMatch[2] || ''));
+                if (activeKey && sameLineValue !== '') {
+                    fields[activeKey] = sameLineValue;
+                }
+                return;
+            }
+            if (!activeKey) {
+                return;
+            }
+            if (fields[activeKey] !== '') {
+                fields[activeKey] += '\n';
+            }
+            fields[activeKey] += line;
+        });
+
+        fields.observation = trimNotebookSection(fields.observation);
+        fields.interpretation = trimNotebookSection(fields.interpretation);
+        fields.application = trimNotebookSection(fields.application);
+        fields.prayer = trimNotebookSection(fields.prayer);
+        fields.action = trimNotebookSection(fields.action);
+        return fields;
+    }
+
+    function trimNotebookSection(value) {
+        return String(value || '').replace(/\s+$/g, '').replace(/^\s+/g, '');
+    }
+
+    function buildStudyNotebookContent(referenceLabel, draft) {
+        var data = draft || {};
+        var observation = trimNotebookSection(data.observation || '');
+        var interpretation = trimNotebookSection(data.interpretation || '');
+        var application = trimNotebookSection(data.application || '');
+        var prayer = trimNotebookSection(data.prayer || '');
+        var action = trimNotebookSection(data.action || '');
+        var safeReference = trimNotebookSection(referenceLabel || '') || toReference(
+            Number(state.currentBook || 1),
+            Number(state.currentChapter || 1),
+            Number(selectedRange().start || 1),
+            Number(selectedRange().end || 1)
+        );
+
+        return [
+            '[CUADERNO BIBLIASOFT]',
+            'Pasaje: ' + safeReference,
+            '',
+            'Observación:',
+            observation || '-',
+            '',
+            'Interpretación:',
+            interpretation || '-',
+            '',
+            'Aplicación:',
+            application || '-',
+            '',
+            'Oración:',
+            prayer || '-',
+            '',
+            'Acción concreta:',
+            action || '-'
+        ].join('\n');
+    }
+
+    function collectStudyNotebookDraft() {
+        var read = function (id) {
+            var node = document.getElementById(id);
+            return trimNotebookSection(node ? node.value : '');
+        };
+        return {
+            noteId: Number((document.getElementById('studyNotebookNoteId') || {}).value || 0),
+            reference: trimNotebookSection((document.getElementById('studyNotebookReference') || {}).value || ''),
+            observation: read('studyNotebookObservation'),
+            interpretation: read('studyNotebookInterpretation'),
+            application: read('studyNotebookApplication'),
+            prayer: read('studyNotebookPrayer'),
+            action: read('studyNotebookAction')
+        };
+    }
+
+    function clearStudyNotebookForm() {
+        ['studyNotebookObservation', 'studyNotebookInterpretation', 'studyNotebookApplication', 'studyNotebookPrayer', 'studyNotebookAction'].forEach(function (id) {
+            var node = document.getElementById(id);
+            if (node) {
+                node.value = '';
+            }
+        });
+    }
+
+    function mergeTagCsv(existing, additions) {
+        var tokens = {};
+        var list = [];
+        [String(existing || ''), String(additions || '')].forEach(function (chunk) {
+            chunk.split(',').forEach(function (raw) {
+                var token = trimNotebookSection(raw).toLowerCase();
+                if (!token || tokens[token]) {
+                    return;
+                }
+                tokens[token] = true;
+                list.push(token);
+            });
+        });
+        return list.join(',');
+    }
+
+    function applyNotebookTemplateToFreeNote() {
+        var noteField = document.getElementById('noteContent');
+        if (!noteField) {
+            return;
+        }
+        var draft = collectStudyNotebookDraft();
+        noteField.value = buildStudyNotebookContent(draft.reference, draft);
+        var tagsField = document.getElementById('noteTags');
+        if (tagsField) {
+            tagsField.value = mergeTagCsv(tagsField.value, 'cuaderno,oiao');
+        }
+        noteField.focus();
+        noteField.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        notify('Plantilla enviada a nota libre.');
+    }
+
+    function saveStudyNotebook() {
+        var draft = collectStudyNotebookDraft();
+        if (!draft.observation && !draft.interpretation && !draft.application && !draft.prayer && !draft.action) {
+            notify('Completa al menos un campo del cuaderno.');
+            return;
+        }
+        var range = selectedRange();
+        var content = buildStudyNotebookContent(draft.reference, draft);
+        var tags = 'cuaderno,oiao';
+        var request = null;
+        if (draft.noteId > 0) {
+            request = postForm('api.note.update', {
+                id: draft.noteId,
+                content: content,
+                tags: tags
+            });
+        } else {
+            request = postForm('api.note.create', {
+                book: state.currentBook,
+                chapter: state.currentChapter,
+                verse_start: range.start,
+                verse_end: range.end,
+                content: content,
+                tags: tags
+            });
+        }
+        request.then(function (res) {
+            if (res && res.error) {
+                notify(res.error);
+                return;
+            }
+            notify('Cuaderno guardado.');
+            loadSelectionData();
+        }).catch(function () {
+            notify('No se pudo guardar el cuaderno.');
+        });
+    }
+
     function createNote() {
         var range = selectedRange();
         var content = (document.getElementById('noteContent').value || '').trim();
@@ -3447,7 +3916,7 @@
                 renderBooks(state.books);
                 renderChapters();
                 fetchChapter(state.currentBook, state.currentChapter);
-                closeDrawers();
+                closeDrawers({ keepGuide: true });
             })
             .catch(function () {
                 notify('No se pudo cargar el libro.');
@@ -3492,7 +3961,7 @@
                     renderReadingPlanCard();
                 }
                 state.readingTracker.lastTickMs = Date.now();
-                closeDrawers();
+                closeDrawers({ keepGuide: true });
             })
             .catch(function () {
                 notify('No se pudo cargar el capítulo.');
@@ -3619,6 +4088,7 @@
             state.parallelMessage = '';
             state.parallelAvailable = false;
             state.parallelVerseMap = {};
+            state.parallelColumns = [];
             if (els.toggleParallel) {
                 els.toggleParallel.classList.remove('is-active');
             }
@@ -3645,6 +4115,7 @@
         state.parallelSameSource = false;
         state.parallelMessage = '';
         state.parallelVerseMap = {};
+        state.parallelColumns = [];
     }
 
     function loadParallelChapterData(force, silent) {
@@ -3659,7 +4130,20 @@
         state.parallelMessage = '';
         renderVerses(true);
 
-        fetch('?route=api.chapter.parallel&book=' + encodeURIComponent(state.currentBook) + '&chapter=' + encodeURIComponent(state.currentChapter))
+        var compareFiles = Array.isArray(state.versionCompareFiles) ? state.versionCompareFiles.slice() : [];
+        compareFiles = compareFiles.map(function (file) {
+            return String(file || '').trim();
+        }).filter(Boolean);
+        if (!compareFiles.length && state.versionCompareFile) {
+            compareFiles = [String(state.versionCompareFile)];
+        }
+        var parallelUrl = '?route=api.chapter.parallel&book=' + encodeURIComponent(state.currentBook) +
+            '&chapter=' + encodeURIComponent(state.currentChapter);
+        if (compareFiles.length) {
+            parallelUrl += '&compare_files=' + encodeURIComponent(compareFiles.join(','));
+        }
+
+        fetch(parallelUrl)
             .then(asJson)
             .then(function (res) {
                 if (!res || res.error) {
@@ -3668,21 +4152,72 @@
 
                 var payload = res.parallel || {};
                 state.parallelLoading = false;
-                state.parallelAvailable = payload.available === true;
-                state.parallelSameSource = payload.same_source === true;
+                var comparisons = Array.isArray(payload.comparisons) ? payload.comparisons : [];
+                state.parallelColumns = [];
+                state.parallelAvailable = false;
+                state.parallelSameSource = false;
                 state.parallelPrimaryLabel = String(payload.primary_label || state.parallelPrimaryLabel || 'RVR60');
-                state.parallelCompareLabel = String(payload.compare_label || state.parallelCompareLabel || 'Versión 2');
+                state.parallelCompareLabel = '';
                 state.parallelMessage = String(payload.message || '');
                 state.parallelVerseMap = {};
-
-                var rows = Array.isArray(payload.compare_verses) ? payload.compare_verses : [];
-                rows.forEach(function (row) {
-                    var verse = Number(row.verse || 0);
-                    if (verse < 1) {
-                        return;
+                if (!comparisons.length) {
+                    var legacyRows = Array.isArray(payload.compare_verses) ? payload.compare_verses : [];
+                    if (legacyRows.length) {
+                        var legacyMap = {};
+                        legacyRows.forEach(function (row) {
+                            var verse = Number(row.verse || 0);
+                            if (verse < 1) {
+                                return;
+                            }
+                            legacyMap[String(verse)] = row;
+                            state.parallelVerseMap[String(verse)] = row;
+                        });
+                        state.parallelColumns.push({
+                            file: String(payload.compare_file || state.versionCompareFile || ''),
+                            label: String(payload.compare_label || state.parallelCompareLabel || 'Versión 2'),
+                            available: payload.available === true,
+                            same_source: payload.same_source === true,
+                            message: String(payload.message || ''),
+                            verseMap: legacyMap
+                        });
                     }
-                    state.parallelVerseMap[String(verse)] = row;
-                });
+                    state.parallelAvailable = payload.available === true;
+                    state.parallelSameSource = payload.same_source === true;
+                    state.parallelCompareLabel = String(payload.compare_label || state.parallelCompareLabel || 'Versión 2');
+                } else {
+                    comparisons.forEach(function (comparison) {
+                        var rows = Array.isArray(comparison.verses) ? comparison.verses : [];
+                        var verseMap = {};
+                        rows.forEach(function (row) {
+                            var verse = Number(row.verse || 0);
+                            if (verse < 1) {
+                                return;
+                            }
+                            verseMap[String(verse)] = row;
+                        });
+                        var column = {
+                            file: String(comparison.file || ''),
+                            label: String(comparison.label || 'Versión'),
+                            available: comparison.available === true,
+                            same_source: comparison.same_source === true,
+                            message: String(comparison.message || ''),
+                            verseMap: verseMap
+                        };
+                        state.parallelColumns.push(column);
+                        if (column.available) {
+                            state.parallelAvailable = true;
+                        }
+                        if (column.same_source) {
+                            state.parallelSameSource = true;
+                        }
+                    });
+                    if (!state.parallelCompareLabel && state.parallelColumns.length) {
+                        state.parallelCompareLabel = String(state.parallelColumns[0].label || 'Versión 2');
+                    }
+                    if (!state.parallelAvailable && !state.parallelMessage) {
+                        state.parallelMessage = 'No hay versiones paralelas disponibles para este capítulo.';
+                    }
+                }
 
                 if (els.toggleParallel) {
                     els.toggleParallel.classList.toggle('is-active', state.settings.parallelMode === true);
@@ -3691,10 +4226,11 @@
                 renderVerses(true);
                 if (!silent) {
                     if (state.parallelAvailable) {
-                        if (state.parallelSameSource) {
+                        var availableColumns = state.parallelColumns.filter(function (col) { return col.available === true; });
+                        if (state.parallelSameSource && availableColumns.length === 1) {
                             notify('Comparación activa, pero apunta a la misma versión.');
                         } else {
-                            notify('Comparación de versiones activada.');
+                            notify('Comparación de versiones activada (' + Math.max(2, 1 + availableColumns.length) + ' columnas).');
                         }
                     } else {
                         notify(state.parallelMessage || 'No hay versión paralela para este capítulo.');
@@ -3707,6 +4243,7 @@
                 state.parallelSameSource = false;
                 state.parallelMessage = 'No se pudo cargar la versión paralela.';
                 state.parallelVerseMap = {};
+                state.parallelColumns = [];
                 renderVerses(true);
                 if (!silent) {
                     notify(state.parallelMessage);
@@ -4388,6 +4925,30 @@
             });
         });
 
+        if (els.saveSelectionProject) {
+            els.saveSelectionProject.addEventListener('click', function () {
+                var rows = selectedRows();
+                if (!rows.length) {
+                    notify('Selecciona al menos un versículo para guardarlo en proyecto.');
+                    return;
+                }
+                var range = selectedRange();
+                var reference = toReference(state.currentBook, state.currentChapter, range.start, range.end);
+                var noteSeed = rows.map(function (row) {
+                    return cleanText(row.scripture_text || row.scripture_html || '');
+                }).join(' ').slice(0, 380);
+                openProjectSaveModal({
+                    book: state.currentBook,
+                    chapter: state.currentChapter,
+                    verseStart: range.start,
+                    verseEnd: range.end,
+                    reference: reference,
+                    source: 'Selección actual del lector',
+                    note: noteSeed
+                });
+            });
+        }
+
         els.shareSelection.addEventListener('click', function () {
             var payload = buildPrettySharePayload();
             if (payload.error) {
@@ -4518,6 +5079,52 @@
         }));
     }
 
+    function isSpanishVoice(voice) {
+        if (!voice) {
+            return false;
+        }
+        var lang = String(voice.lang || '').trim().toLowerCase();
+        if (/^es([-_]|$)/i.test(lang)) {
+            return true;
+        }
+        var name = String(voice.name || '').trim().toLowerCase();
+        return /espa[nñ]ol|spanish|castilian|castellano/.test(name);
+    }
+
+    function isLikelyNaturalVoice(voice) {
+        if (!voice) {
+            return false;
+        }
+        var name = String(voice.name || '').trim().toLowerCase();
+        var uri = String(voice.voiceURI || '').trim().toLowerCase();
+        var haystack = name + ' ' + uri;
+        var positive = /(natural|neural|wavenet|premium|enhanced|online|cloud|studio|siri|google|apple)/.test(haystack);
+        var negative = /(desktop|legacy|espeak|festival|mbrola|pico|sam)/.test(haystack);
+        return positive && !negative;
+    }
+
+    function compareVoicePriority(a, b) {
+        var aNatural = isLikelyNaturalVoice(a) ? 1 : 0;
+        var bNatural = isLikelyNaturalVoice(b) ? 1 : 0;
+        if (aNatural !== bNatural) {
+            return bNatural - aNatural;
+        }
+        var aLocal = a && a.localService === true ? 1 : 0;
+        var bLocal = b && b.localService === true ? 1 : 0;
+        if (aLocal !== bLocal) {
+            return bLocal - aLocal;
+        }
+        var aName = String((a && a.name) || '').toLowerCase();
+        var bName = String((b && b.name) || '').toLowerCase();
+        if (aName < bName) {
+            return -1;
+        }
+        if (aName > bName) {
+            return 1;
+        }
+        return 0;
+    }
+
     function refreshSpeechVoices(updateUi) {
         state.audio.supported = isAudioTtsSupported();
         if (!state.audio.supported) {
@@ -4525,12 +5132,12 @@
             return;
         }
         var allVoices = window.speechSynthesis.getVoices() || [];
-        var preferred = allVoices.filter(function (voice) {
-            return /^es([-_]|$)/i.test(String(voice.lang || ''));
+        var spanishVoices = allVoices.filter(function (voice) {
+            return isSpanishVoice(voice);
         });
-        if (!preferred.length) {
-            preferred = allVoices.slice();
-        }
+        var preferred = spanishVoices.filter(function (voice) {
+            return isLikelyNaturalVoice(voice);
+        });
 
         var byUri = {};
         preferred.forEach(function (voice) {
@@ -4542,7 +5149,7 @@
         });
         state.audio.voices = Object.keys(byUri).map(function (key) {
             return byUri[key];
-        });
+        }).sort(compareVoicePriority);
 
         if (state.audio.voiceUri && !state.audio.voices.some(function (voice) {
             return String(voice.voiceURI || '') === state.audio.voiceUri;
@@ -4583,7 +5190,7 @@
 
         var voices = Array.isArray(state.audio.voices) ? state.audio.voices : [];
         if (!voices.length) {
-            els.audioVoice.innerHTML = '<option value="">Predeterminada del navegador</option>';
+            els.audioVoice.innerHTML = '<option value="">Sin voces españolas naturales disponibles</option>';
             els.audioVoice.disabled = true;
         } else {
             els.audioVoice.disabled = false;
@@ -4617,7 +5224,7 @@
         els.audioPauseResume.disabled = !playing;
         els.audioStop.disabled = !playing;
         els.audioPlay.textContent = playing ? 'Reiniciar' : 'Leer';
-        els.audioPlay.disabled = Boolean(payload.error);
+        els.audioPlay.disabled = Boolean(payload.error) || voices.length < 1;
     }
 
     function setAudioStatus(message) {
@@ -4699,6 +5306,12 @@
         state.audio.supported = isAudioTtsSupported();
         if (!state.audio.supported) {
             notify('Audio no disponible en este navegador.');
+            return;
+        }
+        if (!Array.isArray(state.audio.voices) || state.audio.voices.length < 1) {
+            notify('No hay voces españolas naturales disponibles para lectura.');
+            setAudioStatus('No hay voces españolas naturales disponibles para lectura.');
+            renderAudioControls();
             return;
         }
 
@@ -4869,10 +5482,14 @@
         if (els.guideGoTarget) {
             els.guideGoTarget.addEventListener('click', function () {
                 var step = GUIDE_TOUR_STEPS[Number(state.guide.activeStep || 0)] || null;
-                if (!step || !step.selector) {
+                if (!step) {
                     return;
                 }
-                var target = document.querySelector(step.selector);
+                if (step.tab) {
+                    activateTab(String(step.tab));
+                }
+                var resolved = resolveGuideTarget(step);
+                var target = resolved.element;
                 if (!target) {
                     notify('No se encontró el elemento de este paso.');
                     return;
@@ -4892,13 +5509,23 @@
                 saveSettings();
             });
         }
+
+        if (!bindGuideTourControls.bound) {
+            bindGuideTourControls.bound = true;
+            window.addEventListener('resize', refreshGuideSpotlightPosition);
+            window.addEventListener('scroll', refreshGuideSpotlightPosition, true);
+        }
     }
 
     function openGuideModal(startFromFirstStep) {
         if (!els.guideModal) {
             return;
         }
-        els.overlay.classList.remove('hidden');
+        if (els.overlay) {
+            els.overlay.classList.remove('hidden');
+            els.overlay.classList.add('is-guide-mode');
+        }
+        document.body.classList.add('guide-tour-active');
         els.guideModal.classList.remove('hidden');
         if (els.guideHideOnStart) {
             els.guideHideOnStart.checked = !state.settings.autoTourOnStart;
@@ -4916,6 +5543,18 @@
         }
         clearGuideFocus();
         els.guideModal.classList.add('hidden');
+        if (els.overlay) {
+            els.overlay.classList.remove('is-guide-mode');
+        }
+        document.body.classList.remove('guide-tour-active');
+        document.body.classList.remove('guide-step-pulse');
+        if (state.guide.stepAnimTimer) {
+            window.clearTimeout(state.guide.stepAnimTimer);
+            state.guide.stepAnimTimer = 0;
+        }
+        if (els.guideModal) {
+            els.guideModal.classList.remove('guide-step-enter');
+        }
         if (els.settingsModal.classList.contains('hidden') &&
             els.searchModal.classList.contains('hidden') &&
             (!els.planModal || els.planModal.classList.contains('hidden')) &&
@@ -4924,19 +5563,52 @@
             (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
             (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
             (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
-            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
 
     function clearGuideFocus() {
-        if (state.guide.focusSelector) {
-            var current = document.querySelector(state.guide.focusSelector);
-            if (current) {
-                current.classList.remove('tour-focus');
-            }
+        document.querySelectorAll('.tour-focus').forEach(function (node) {
+            node.classList.remove('tour-focus');
+        });
+        if (els.guideSpotlight) {
+            els.guideSpotlight.classList.add('hidden');
         }
         state.guide.focusSelector = '';
+    }
+
+    function formatGuideStepNumber(value) {
+        var safe = Number(value || 0);
+        if (!Number.isFinite(safe) || safe < 0) {
+            safe = 0;
+        }
+        return safe < 10 ? ('0' + safe) : String(safe);
+    }
+
+    function pulseGuideStepTransition() {
+        if (!els.guideModal) {
+            return;
+        }
+        els.guideModal.classList.remove('guide-step-enter');
+        void els.guideModal.offsetWidth;
+        els.guideModal.classList.add('guide-step-enter');
+
+        document.body.classList.remove('guide-step-pulse');
+        void document.body.offsetWidth;
+        document.body.classList.add('guide-step-pulse');
+
+        if (state.guide.stepAnimTimer) {
+            window.clearTimeout(state.guide.stepAnimTimer);
+        }
+        state.guide.stepAnimTimer = window.setTimeout(function () {
+            if (els.guideModal) {
+                els.guideModal.classList.remove('guide-step-enter');
+            }
+            document.body.classList.remove('guide-step-pulse');
+            state.guide.stepAnimTimer = 0;
+        }, 360);
     }
 
     function setGuideTourStep(index, autoScroll) {
@@ -4960,10 +5632,23 @@
         state.guide.activeStep = safe;
 
         var step = GUIDE_TOUR_STEPS[safe];
+        if (step && step.tab) {
+            activateTab(String(step.tab));
+        }
         els.guideTourTitle.textContent = String(step.title || 'Paso');
         els.guideTourText.textContent = String(step.text || '');
         els.guideTourHint.textContent = String(step.hint || '');
         els.guideTourStepLabel.textContent = 'Paso ' + (safe + 1) + ' de ' + GUIDE_TOUR_STEPS.length;
+        if (els.guideStepBadge) {
+            var currentStepText = formatGuideStepNumber(safe + 1);
+            var totalStepText = formatGuideStepNumber(GUIDE_TOUR_STEPS.length);
+            els.guideStepBadge.textContent = currentStepText + '/' + totalStepText;
+        }
+        if (els.guideModal) {
+            var progress = Math.max(0, Math.min(100, Math.round(((safe + 1) / GUIDE_TOUR_STEPS.length) * 100)));
+            els.guideModal.style.setProperty('--guide-progress', String(progress) + '%');
+        }
+        pulseGuideStepTransition();
 
         if (els.guidePrevStep) {
             els.guidePrevStep.disabled = safe === 0;
@@ -4973,17 +5658,245 @@
         }
 
         clearGuideFocus();
-        var target = step && step.selector ? document.querySelector(step.selector) : null;
-        if (target && step.selector) {
-            state.guide.focusSelector = step.selector;
+        if (step && (step.selector === '#helpPane' || step.tab) && window.matchMedia('(max-width: 980px)').matches) {
+            openHelpDrawer();
+        }
+        var resolved = resolveGuideTarget(step);
+        var target = resolved.element;
+        if (target) {
+            state.guide.focusSelector = resolved.selector || '';
             target.classList.add('tour-focus');
             if (autoScroll) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                window.setTimeout(function () {
+                    refreshGuideSpotlightPosition();
+                }, 260);
+            } else {
+                refreshGuideSpotlightPosition();
             }
+        } else {
+            centerGuideModal();
         }
         if (els.guideGoTarget) {
             els.guideGoTarget.disabled = !target;
         }
+    }
+
+    function isGuideCompactViewport() {
+        return window.matchMedia('(max-width: 980px)').matches;
+    }
+
+    function isGuideTargetVisible(target) {
+        if (!target || !target.isConnected) {
+            return false;
+        }
+        if (target.classList && target.classList.contains('hidden')) {
+            return false;
+        }
+        var style = window.getComputedStyle(target);
+        if (!style || style.display === 'none' || style.visibility === 'hidden') {
+            return false;
+        }
+        if (Number(style.opacity || 1) <= 0.01) {
+            return false;
+        }
+        var rect = target.getBoundingClientRect();
+        return rect.width >= 8 && rect.height >= 8;
+    }
+
+    function listGuideTargetSelectors(step) {
+        if (!step || typeof step !== 'object') {
+            return [];
+        }
+
+        var compact = isGuideCompactViewport();
+        var selectors = [];
+        var rawList = compact
+            ? (Array.isArray(step.mobile_targets) && step.mobile_targets.length ? step.mobile_targets : [step.mobile_selector, step.selector])
+            : (Array.isArray(step.desktop_targets) && step.desktop_targets.length ? step.desktop_targets : [step.selector]);
+
+        rawList.forEach(function (item) {
+            var selector = String(item || '').trim();
+            if (selector !== '' && selectors.indexOf(selector) === -1) {
+                selectors.push(selector);
+            }
+        });
+
+        var primary = String(step.selector || '').trim();
+        if (primary !== '' && selectors.indexOf(primary) === -1) {
+            selectors.push(primary);
+        }
+        return selectors;
+    }
+
+    function resolveGuideTarget(step) {
+        var selectors = listGuideTargetSelectors(step);
+        var fallback = null;
+
+        for (var i = 0; i < selectors.length; i += 1) {
+            var selector = selectors[i];
+            var nodes = document.querySelectorAll(selector);
+            if (!nodes || !nodes.length) {
+                continue;
+            }
+            for (var j = 0; j < nodes.length; j += 1) {
+                var node = nodes[j];
+                if (!fallback) {
+                    fallback = { selector: selector, element: node };
+                }
+                if (isGuideTargetVisible(node)) {
+                    return { selector: selector, element: node };
+                }
+            }
+        }
+
+        return fallback || { selector: '', element: null };
+    }
+
+    function refreshGuideSpotlightPosition() {
+        if (!els.guideModal || els.guideModal.classList.contains('hidden')) {
+            return;
+        }
+        var step = GUIDE_TOUR_STEPS[Number(state.guide.activeStep || 0)] || null;
+        var resolved = resolveGuideTarget(step);
+        var target = resolved.element;
+        if (!target) {
+            centerGuideModal();
+            if (els.guideSpotlight) {
+                els.guideSpotlight.classList.add('hidden');
+            }
+            return;
+        }
+        state.guide.focusSelector = resolved.selector || '';
+        applyGuideSpotlightForTarget(target);
+    }
+
+    function applyGuideSpotlightForTarget(target) {
+        if (!target || !els.guideModal) {
+            return;
+        }
+
+        var rect = target.getBoundingClientRect();
+        var viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+        var viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+        if (viewportWidth < 1 || viewportHeight < 1) {
+            centerGuideModal();
+            return;
+        }
+        if (rect.width < 6 || rect.height < 6) {
+            centerGuideModal();
+            if (els.guideSpotlight) {
+                els.guideSpotlight.classList.add('hidden');
+            }
+            return;
+        }
+
+        var margin = 8;
+        var visibleLeft = Math.max(margin, rect.left);
+        var visibleTop = Math.max(margin, rect.top);
+        var visibleRight = Math.min(viewportWidth - margin, rect.right);
+        var visibleBottom = Math.min(viewportHeight - margin, rect.bottom);
+        var visibleWidth = visibleRight - visibleLeft;
+        var visibleHeight = visibleBottom - visibleTop;
+        if (visibleWidth < 8 || visibleHeight < 8) {
+            centerGuideModal();
+            if (els.guideSpotlight) {
+                els.guideSpotlight.classList.add('hidden');
+            }
+            return;
+        }
+
+        var pad = 8;
+        var x = Math.max(margin, visibleLeft - pad);
+        var y = Math.max(margin, visibleTop - pad);
+        var w = Math.max(26, visibleWidth + (pad * 2));
+        var h = Math.max(26, visibleHeight + (pad * 2));
+
+        if (x + w > viewportWidth - margin) {
+            w = Math.max(26, (viewportWidth - margin) - x);
+        }
+        if (y + h > viewportHeight - margin) {
+            h = Math.max(26, (viewportHeight - margin) - y);
+        }
+
+        if (els.guideSpotlight) {
+            els.guideSpotlight.style.setProperty('--spot-x', String(Math.round(x)) + 'px');
+            els.guideSpotlight.style.setProperty('--spot-y', String(Math.round(y)) + 'px');
+            els.guideSpotlight.style.setProperty('--spot-w', String(Math.round(w)) + 'px');
+            els.guideSpotlight.style.setProperty('--spot-h', String(Math.round(h)) + 'px');
+            els.guideSpotlight.classList.remove('hidden');
+        }
+
+        positionGuideModalByRect({
+            left: x,
+            top: y,
+            width: w,
+            height: h
+        }, viewportWidth, viewportHeight);
+    }
+
+    function centerGuideModal() {
+        if (!els.guideModal) {
+            return;
+        }
+        els.guideModal.classList.remove('guide-pos-above', 'guide-pos-below');
+        els.guideModal.style.setProperty('--guide-modal-left', '50%');
+        els.guideModal.style.setProperty('--guide-modal-top', '50%');
+        els.guideModal.style.setProperty('--guide-modal-tx', '-50%');
+        els.guideModal.style.setProperty('--guide-modal-ty', '-50%');
+        els.guideModal.style.setProperty('--guide-anchor-x', '50%');
+    }
+
+    function positionGuideModalByRect(rect, viewportWidth, viewportHeight) {
+        if (!els.guideModal || !rect) {
+            return;
+        }
+
+        var margin = 12;
+        var width = Math.min(460, Math.max(280, viewportWidth - (margin * 2)));
+        var measured = els.guideModal.getBoundingClientRect();
+        var modalHeight = Math.max(240, Math.round(measured.height || 320));
+        if (modalHeight > viewportHeight - (margin * 2)) {
+            modalHeight = viewportHeight - (margin * 2);
+        }
+
+        var left = rect.left + (rect.width / 2) - (width / 2);
+        if (left < margin) {
+            left = margin;
+        }
+        if (left > viewportWidth - width - margin) {
+            left = viewportWidth - width - margin;
+        }
+
+        var preferBelow = rect.top + rect.height + 18;
+        var preferAbove = rect.top - modalHeight - 18;
+        var top = preferBelow;
+        var placeAbove = false;
+        if (preferBelow + modalHeight > viewportHeight - margin && preferAbove >= margin) {
+            top = preferAbove;
+            placeAbove = true;
+        } else if (preferBelow + modalHeight > viewportHeight - margin) {
+            top = Math.max(margin, viewportHeight - modalHeight - margin);
+        }
+        if (top < margin) {
+            top = margin;
+        }
+
+        var anchorX = rect.left + (rect.width / 2) - left;
+        if (anchorX < 26) {
+            anchorX = 26;
+        }
+        if (anchorX > width - 26) {
+            anchorX = width - 26;
+        }
+
+        els.guideModal.style.setProperty('--guide-modal-left', String(Math.round(left)) + 'px');
+        els.guideModal.style.setProperty('--guide-modal-top', String(Math.round(top)) + 'px');
+        els.guideModal.style.setProperty('--guide-modal-tx', '0px');
+        els.guideModal.style.setProperty('--guide-modal-ty', '0px');
+        els.guideModal.style.setProperty('--guide-anchor-x', String(Math.round(anchorX)) + 'px');
+        els.guideModal.classList.toggle('guide-pos-above', placeAbove);
+        els.guideModal.classList.toggle('guide-pos-below', !placeAbove);
     }
 
     function maybeAutoStartGuideTour() {
@@ -5068,7 +5981,8 @@
             (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
             (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
             (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
-            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -5316,6 +6230,175 @@
         els.audioModal.classList.remove('hidden');
     }
 
+    function openProjectSaveModal(entry) {
+        if (!els.projectSaveModal || !els.projectSaveProject || !els.projectSaveSubmit) {
+            return;
+        }
+        var payload = entry && typeof entry === 'object' ? entry : {};
+        var book = Number(payload.book || 0);
+        var chapter = Number(payload.chapter || 0);
+        var verseStart = Number(payload.verseStart || 0);
+        var verseEnd = Number(payload.verseEnd || verseStart || 0);
+        if (book < 1 || chapter < 1 || verseStart < 1 || verseEnd < 1) {
+            notify('Referencia inválida para guardar en proyecto.');
+            return;
+        }
+
+        state.studyDraftEntry = {
+            book: book,
+            chapter: chapter,
+            verseStart: Math.min(verseStart, verseEnd),
+            verseEnd: Math.max(verseStart, verseEnd),
+            reference: String(payload.reference || toReference(book, chapter, verseStart, verseEnd)).trim(),
+            source: String(payload.source || 'Pasaje actual').trim(),
+            note: String(payload.note || '').trim()
+        };
+
+        if (els.projectSaveReference) {
+            els.projectSaveReference.textContent = state.studyDraftEntry.reference || 'Referencia';
+        }
+        if (els.projectSaveSource) {
+            els.projectSaveSource.textContent = state.studyDraftEntry.source || 'Pasaje del lector';
+        }
+        if (els.projectSaveNote) {
+            els.projectSaveNote.value = state.studyDraftEntry.note;
+        }
+        els.projectSaveSubmit.disabled = true;
+        els.projectSaveProject.disabled = true;
+        els.projectSaveProject.innerHTML = '<option value="">Cargando proyectos...</option>';
+
+        els.overlay.classList.remove('hidden');
+        els.projectSaveModal.classList.remove('hidden');
+
+        loadStudyProjects(false).then(function (projects) {
+            renderProjectSaveProjectOptions(projects);
+        }).catch(function (err) {
+            var msg = (err && err.message) ? err.message : 'No se pudo cargar los proyectos.';
+            els.projectSaveProject.innerHTML = '<option value="">' + escapeHtml(msg) + '</option>';
+            els.projectSaveProject.disabled = true;
+            els.projectSaveSubmit.disabled = true;
+        });
+    }
+
+    function renderProjectSaveProjectOptions(projects) {
+        if (!els.projectSaveProject || !els.projectSaveSubmit) {
+            return;
+        }
+        var list = Array.isArray(projects) ? projects : [];
+        if (!list.length) {
+            els.projectSaveProject.innerHTML = '<option value="">No hay proyectos creados</option>';
+            els.projectSaveProject.disabled = true;
+            els.projectSaveSubmit.disabled = true;
+            if (els.projectSaveSource) {
+                els.projectSaveSource.textContent = 'No hay proyectos. Crea uno desde "Abrir proyectos".';
+            }
+            return;
+        }
+
+        els.projectSaveProject.innerHTML = list.map(function (project) {
+            var id = Number(project.id || 0);
+            var count = Number(project.entries_count || 0);
+            var label = String(project.name || ('Proyecto ' + id));
+            var suffix = count > 0 ? (' (' + count + ')') : '';
+            return '<option value="' + id + '">' + escapeHtml(label + suffix) + '</option>';
+        }).join('');
+        els.projectSaveProject.disabled = false;
+        els.projectSaveSubmit.disabled = false;
+    }
+
+    function loadStudyProjects(forceRefresh) {
+        var force = forceRefresh === true;
+        var now = Date.now();
+        var staleMs = 60 * 1000;
+        if (!force && state.studyProjectsPromise) {
+            return state.studyProjectsPromise;
+        }
+        if (!force && state.studyProjectsLoadedAt > 0 && (now - state.studyProjectsLoadedAt) < staleMs) {
+            return Promise.resolve(Array.isArray(state.studyProjects) ? state.studyProjects.slice() : []);
+        }
+
+        state.studyProjectsPromise = fetch('?route=api.study.projects.list')
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'No se pudo cargar los proyectos.');
+                }
+                state.studyProjects = Array.isArray(res.projects) ? res.projects : [];
+                state.studyProjectsLoadedAt = Date.now();
+                return state.studyProjects.slice();
+            })
+            .finally(function () {
+                state.studyProjectsPromise = null;
+            });
+
+        return state.studyProjectsPromise;
+    }
+
+    function submitProjectSaveModal() {
+        if (!els.projectSaveProject || !els.projectSaveSubmit || !state.studyDraftEntry) {
+            return;
+        }
+        var projectId = Number(els.projectSaveProject.value || 0);
+        if (projectId < 1) {
+            notify('Selecciona un proyecto.');
+            return;
+        }
+
+        var note = els.projectSaveNote ? String(els.projectSaveNote.value || '').trim() : '';
+        var draft = state.studyDraftEntry;
+        els.projectSaveSubmit.disabled = true;
+
+        postForm('api.study.entries.create', {
+            project_id: projectId,
+            book: draft.book,
+            chapter: draft.chapter,
+            verse_start: draft.verseStart,
+            verse_end: draft.verseEnd,
+            note: note
+        }).then(function (res) {
+            if (!res || res.error) {
+                throw new Error((res && res.error) ? res.error : 'No se pudo guardar en el proyecto.');
+            }
+            var selected = (state.studyProjects || []).find(function (project) {
+                return Number(project.id || 0) === projectId;
+            });
+            if (selected) {
+                selected.entries_count = Number(selected.entries_count || 0) + 1;
+            }
+            notify('Pasaje guardado en proyecto' + (selected ? ': ' + String(selected.name || '') : '.') );
+            closeProjectSaveModal();
+        }).catch(function (err) {
+            notify((err && err.message) ? err.message : 'No se pudo guardar en el proyecto.');
+        }).finally(function () {
+            if (els.projectSaveSubmit) {
+                els.projectSaveSubmit.disabled = false;
+            }
+        });
+    }
+
+    function closeProjectSaveModal() {
+        if (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden')) {
+            return;
+        }
+        els.projectSaveModal.classList.add('hidden');
+        state.studyDraftEntry = null;
+        if (els.projectSaveNote) {
+            els.projectSaveNote.value = '';
+        }
+        if (els.settingsModal.classList.contains('hidden') &&
+            els.searchModal.classList.contains('hidden') &&
+            (!els.planModal || els.planModal.classList.contains('hidden')) &&
+            (!els.interlinearModal || els.interlinearModal.classList.contains('hidden')) &&
+            (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
+            (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
+            (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
+            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
+            els.overlay.classList.add('hidden');
+        }
+    }
+
     function closeSearch() {
         if (!els.searchModal || els.searchModal.classList.contains('hidden')) {
             return;
@@ -5328,7 +6411,8 @@
             (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
             (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
             (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
-            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -5345,7 +6429,8 @@
             (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
             (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
             (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
-            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -5362,7 +6447,8 @@
             (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
             (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
             (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
-            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -5379,7 +6465,8 @@
             (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
             (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
             (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
-            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -5434,7 +6521,8 @@
             (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
             (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
             (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
-            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -5451,7 +6539,8 @@
             (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
             (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
             (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
-            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -5727,14 +6816,61 @@
             });
         });
 
-        if (!matches.length) {
-            matches = STRONG_MORPH_GLOSSARY.slice(0, 4).map(function (item) {
-                return {
-                    label: item.label,
-                    meaning: item.meaning
-                };
+        var baseLabels = {
+            sing: true,
+            pl: true,
+            masc: true,
+            fem: true,
+            pres: true,
+            imperf: true,
+            aor: true,
+            perf: true,
+            act: true,
+            pas: true,
+            qal: true,
+            hiphil: true
+        };
+        var baseGlossary = [];
+        STRONG_MORPH_GLOSSARY.forEach(function (item) {
+            if (!item || !item.label || !item.meaning) {
+                return;
+            }
+            if (!baseLabels[item.label]) {
+                return;
+            }
+            baseGlossary.push({
+                label: item.label,
+                meaning: item.meaning
             });
+        });
+
+        if (!matches.length) {
+            matches = baseGlossary.slice(0, 8);
         }
+        var detectedHtml = matches.length
+            ? (
+                '<div class="strong-morph-section">' +
+                '<small class="muted"><strong>Detectado en esta entrada:</strong> abreviaturas y formas encontradas en la definición.</small>' +
+                '<div class="strong-glossary-grid">' +
+                matches.slice(0, 10).map(function (item) {
+                    return '<div class="strong-glossary-item"><strong>' + escapeHtml(item.label) + '</strong><small class="muted">' + escapeHtml(item.meaning) + '</small></div>';
+                }).join('') +
+                '</div>' +
+                '</div>'
+            )
+            : '';
+        var baseHtml = baseGlossary.length
+            ? (
+                '<div class="strong-morph-section">' +
+                '<small class="muted"><strong>Glosario base:</strong> guía rápida para leer abreviaturas frecuentes.</small>' +
+                '<div class="strong-glossary-grid">' +
+                baseGlossary.slice(0, 12).map(function (item) {
+                    return '<div class="strong-glossary-item"><strong>' + escapeHtml(item.label) + '</strong><small class="muted">' + escapeHtml(item.meaning) + '</small></div>';
+                }).join('') +
+                '</div>' +
+                '</div>'
+            )
+            : '';
 
         return '' +
             '<article class="card strong-entry-card strong-guide-card">' +
@@ -5744,11 +6880,8 @@
             '<li>Identifica el matiz gramatical (abreviaturas) y compáralo con el pasaje.</li>' +
             '<li>Contrasta con diccionario adicional y resume una aplicación en una frase.</li>' +
             '</ol>' +
-            '<div class="strong-glossary-grid">' +
-            matches.map(function (item) {
-                return '<div class="strong-glossary-item"><strong>' + escapeHtml(item.label) + '</strong><small class="muted">' + escapeHtml(item.meaning) + '</small></div>';
-            }).join('') +
-            '</div>' +
+            detectedHtml +
+            baseHtml +
             '</article>';
     }
 
@@ -5760,6 +6893,9 @@
         if (!rows.length) {
             els.versionPrimarySelect.innerHTML = '<option value="">Sin versiones</option>';
             els.versionCompareSelect.innerHTML = '<option value="">Sin versiones</option>';
+            if (els.versionCompareMulti) {
+                els.versionCompareMulti.innerHTML = '<option value="">Sin versiones</option>';
+            }
             if (els.saveVersions) {
                 els.saveVersions.disabled = true;
             }
@@ -5768,6 +6904,7 @@
 
         var primary = String(state.versionPrimaryFile || rows[0].file || '');
         var compare = String(state.versionCompareFile || primary);
+        var compareFiles = Array.isArray(state.versionCompareFiles) ? state.versionCompareFiles.slice() : [];
         var map = {};
         rows.forEach(function (row) {
             map[String(row.file || '')] = true;
@@ -5778,9 +6915,44 @@
         if (!map[compare]) {
             compare = primary;
         }
+        compareFiles = compareFiles.map(function (file) {
+            return String(file || '').trim();
+        }).filter(function (file) {
+            return !!map[file] && file !== primary;
+        });
+        if (!compareFiles.length && compare && compare !== primary && map[compare]) {
+            compareFiles = [compare];
+        }
+        if (!compareFiles.length) {
+            for (var i = 0; i < rows.length; i += 1) {
+                var candidate = String(rows[i].file || '');
+                if (candidate && candidate !== primary) {
+                    compareFiles.push(candidate);
+                    break;
+                }
+            }
+        }
+        compare = String(compareFiles[0] || compare);
+        if (!compare || compare === primary || !map[compare]) {
+            compare = primary;
+        }
+
+        var extras = compareFiles.filter(function (file) {
+            return file && file !== primary && file !== compare;
+        }).slice(0, 2);
+        compareFiles = [];
+        if (compare && compare !== primary) {
+            compareFiles.push(compare);
+        }
+        extras.forEach(function (file) {
+            if (compareFiles.indexOf(file) === -1) {
+                compareFiles.push(file);
+            }
+        });
 
         state.versionPrimaryFile = primary;
         state.versionCompareFile = compare;
+        state.versionCompareFiles = compareFiles.slice();
 
         var options = rows.map(function (row) {
             var file = String(row.file || '');
@@ -5792,6 +6964,19 @@
 
         els.versionPrimarySelect.innerHTML = options;
         els.versionCompareSelect.innerHTML = options;
+        if (els.versionCompareMulti) {
+            els.versionCompareMulti.innerHTML = rows.map(function (row) {
+                var file = String(row.file || '');
+                if (!file || file === primary || file === compare) {
+                    return '';
+                }
+                var label = String(row.label || file || 'Versión');
+                var abbr = String(row.abbreviation || '').trim();
+                var text = abbr ? (label + ' (' + abbr + ')') : label;
+                var selected = extras.indexOf(file) !== -1 ? ' selected' : '';
+                return '<option value="' + escapeHtml(file) + '"' + selected + '>' + escapeHtml(text) + '</option>';
+            }).join('');
+        }
         els.versionPrimarySelect.value = primary;
         els.versionCompareSelect.value = compare;
         if (els.saveVersions) {
@@ -5806,6 +6991,25 @@
 
         var primary = String(els.versionPrimarySelect.value || '').trim();
         var compare = String(els.versionCompareSelect.value || '').trim();
+        var extras = [];
+        if (els.versionCompareMulti && els.versionCompareMulti.options) {
+            for (var i = 0; i < els.versionCompareMulti.options.length; i += 1) {
+                var opt = els.versionCompareMulti.options[i];
+                if (!opt || !opt.selected) {
+                    continue;
+                }
+                var extraFile = String(opt.value || '').trim();
+                if (!extraFile || extraFile === primary || extraFile === compare) {
+                    continue;
+                }
+                if (extras.indexOf(extraFile) === -1) {
+                    extras.push(extraFile);
+                }
+                if (extras.length >= 2) {
+                    break;
+                }
+            }
+        }
         if (!primary) {
             notify('Selecciona una versión principal.');
             return;
@@ -5815,6 +7019,19 @@
             els.versionCompareSelect.value = compare;
         }
 
+        var compareFiles = [];
+        if (compare && compare !== primary) {
+            compareFiles.push(compare);
+        }
+        extras.forEach(function (file) {
+            if (file && file !== primary && compareFiles.indexOf(file) === -1) {
+                compareFiles.push(file);
+            }
+        });
+        if (!compareFiles.length) {
+            compareFiles.push(compare);
+        }
+
         var button = els.saveVersions;
         button.disabled = true;
         var originalText = button.textContent;
@@ -5822,13 +7039,15 @@
 
         postForm('api.versions.set', {
             primary_file: primary,
-            compare_file: compare
+            compare_file: compare,
+            compare_files: compareFiles.join(',')
         }).then(function (res) {
             if (!res || !res.ok) {
                 throw new Error((res && res.error) || 'No se pudo guardar la versión.');
             }
             state.versionPrimaryFile = primary;
             state.versionCompareFile = compare;
+            state.versionCompareFiles = compareFiles.slice(0, 3);
             notify('Versiones actualizadas.');
 
             var verse = Number((state.selectedVerses && state.selectedVerses.length ? state.selectedVerses[0] : state.pendingVerse) || 0);
@@ -5849,6 +7068,10 @@
         var book = (document.getElementById('qBook').value || '').trim();
         var chapterFrom = (document.getElementById('qChapterFrom').value || '').trim();
         var chapterTo = (document.getElementById('qChapterTo').value || '').trim();
+        var scope = (document.getElementById('qScope').value || 'all').trim().toLowerCase();
+        if (scope !== 'ot' && scope !== 'nt') {
+            scope = 'all';
+        }
         if (chapterFrom && chapterTo && Number(chapterFrom) > Number(chapterTo)) {
             return {
                 error: 'El capítulo inicial no puede ser mayor al capítulo final.'
@@ -5857,7 +7080,8 @@
         return {
             book: book,
             chapterFrom: chapterFrom,
-            chapterTo: chapterTo
+            chapterTo: chapterTo,
+            scope: scope
         };
     }
 
@@ -6027,6 +7251,9 @@
         if (range.book) {
             params.set('book', range.book);
         }
+        if (range.scope && range.scope !== 'all') {
+            params.set('testament', range.scope);
+        }
         if (range.chapterFrom) {
             params.set('chapter_from', range.chapterFrom);
         }
@@ -6079,6 +7306,9 @@
         if (range.book) {
             params.set('book', range.book);
         }
+        if (range.scope && range.scope !== 'all') {
+            params.set('testament', range.scope);
+        }
         if (range.chapterFrom) {
             params.set('chapter_from', range.chapterFrom);
         }
@@ -6115,6 +7345,7 @@
                 '<div>' + (row.scripture_html || '') + '</div>' +
                 '<div class="toolbar">' +
                 '<button class="btn-light js-open-result" data-book="' + row.book + '" data-chapter="' + row.chapter + '" data-verse="' + row.verse + '">Abrir</button>' +
+                '<button class="btn-light js-save-result-project" data-book="' + row.book + '" data-chapter="' + row.chapter + '" data-verse="' + row.verse + '">Proyecto</button>' +
                 '<button class="btn-light js-save-result-fav" data-book="' + row.book + '" data-chapter="' + row.chapter + '" data-verse="' + row.verse + '">Favorito</button>' +
                 '</div>' +
                 '</div>';
@@ -6142,6 +7373,30 @@
                 self.disabled = true;
                 saveFavoriteByReference(book, chapter, verse, 'Resultado agregado a favoritos.').finally(function () {
                     self.disabled = false;
+                });
+            });
+        });
+
+        els.quickSearchResults.querySelectorAll('.js-save-result-project').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var book = Number(this.getAttribute('data-book') || 0);
+                var chapter = Number(this.getAttribute('data-chapter') || 0);
+                var verse = Number(this.getAttribute('data-verse') || 0);
+                if (book < 1 || chapter < 1 || verse < 1) {
+                    return;
+                }
+
+                var container = this.closest('.search-result');
+                var textNode = container ? container.querySelector('div') : null;
+                var noteSeed = textNode ? cleanText(textNode.innerHTML || '') : '';
+                openProjectSaveModal({
+                    book: book,
+                    chapter: chapter,
+                    verseStart: verse,
+                    verseEnd: verse,
+                    reference: buildReference(book, chapter, verse),
+                    source: 'Resultado de búsqueda',
+                    note: noteSeed.slice(0, 380)
                 });
             });
         });
@@ -6705,7 +7960,8 @@
         els.overlay.classList.remove('hidden');
     }
 
-    function closeDrawers() {
+    function closeDrawers(options) {
+        var keepGuide = Boolean(options && options.keepGuide === true);
         hideFavoriteTooltip();
         els.helpPane.classList.remove('is-open');
         els.booksPane.classList.remove('is-open');
@@ -6734,9 +7990,26 @@
         if (els.modulesModal && !els.modulesModal.classList.contains('hidden')) {
             els.modulesModal.classList.add('hidden');
         }
-        if (els.guideModal && !els.guideModal.classList.contains('hidden')) {
+        if (els.projectSaveModal && !els.projectSaveModal.classList.contains('hidden')) {
+            els.projectSaveModal.classList.add('hidden');
+            state.studyDraftEntry = null;
+            if (els.projectSaveNote) {
+                els.projectSaveNote.value = '';
+            }
+        }
+        if (!keepGuide && els.guideModal && !els.guideModal.classList.contains('hidden')) {
             els.guideModal.classList.add('hidden');
             clearGuideFocus();
+            if (els.overlay) {
+                els.overlay.classList.remove('is-guide-mode');
+            }
+            document.body.classList.remove('guide-tour-active');
+            document.body.classList.remove('guide-step-pulse');
+            if (state.guide.stepAnimTimer) {
+                window.clearTimeout(state.guide.stepAnimTimer);
+                state.guide.stepAnimTimer = 0;
+            }
+            els.guideModal.classList.remove('guide-step-enter');
         }
         if (els.settingsModal.classList.contains('hidden') &&
             els.searchModal.classList.contains('hidden') &&
@@ -6745,8 +8018,9 @@
             (!els.versionsModal || els.versionsModal.classList.contains('hidden')) &&
             (!els.strongModal || els.strongModal.classList.contains('hidden')) &&
             (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
-            (!els.guideModal || els.guideModal.classList.contains('hidden')) &&
-            (!els.modulesModal || els.modulesModal.classList.contains('hidden'))) {
+            (keepGuide || !els.guideModal || els.guideModal.classList.contains('hidden')) &&
+            (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -7218,4 +8492,5 @@
 
     init();
 })();
+
 

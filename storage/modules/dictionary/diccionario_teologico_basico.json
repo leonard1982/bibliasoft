@@ -1,0 +1,89 @@
+{
+    "module": {
+        "key": "diccionario_teologico_basico",
+        "type": "dictionary",
+        "name": "Diccionario Teologico Basico",
+        "version": "1.0.0"
+    },
+    "entries": [
+        {
+            "term": "Gracia",
+            "aliases": [
+                "favor inmerecido",
+                "gracia de Dios"
+            ],
+            "definition": "Favor de Dios que el ser humano no puede ganar por obras.",
+            "usage": "Base de la salvacion y de la vida cristiana diaria.",
+            "references": [
+                "Efesios 2:8",
+                "Romanos 3:24",
+                "Tito 2:11"
+            ]
+        },
+        {
+            "term": "Justificacion",
+            "aliases": [
+                "justificado",
+                "declarado justo"
+            ],
+            "definition": "Acto por el cual Dios declara justo al pecador que cree en Cristo.",
+            "usage": "Describe la nueva posicion legal delante de Dios.",
+            "references": [
+                "Romanos 5:1",
+                "Galatas 2:16"
+            ]
+        },
+        {
+            "term": "Santificacion",
+            "aliases": [
+                "santidad",
+                "vida santa"
+            ],
+            "definition": "Proceso de crecimiento en obediencia y semejanza a Cristo.",
+            "usage": "Incluye decisiones diarias guiadas por el Espiritu Santo.",
+            "references": [
+                "1 Tesalonicenses 4:3",
+                "Hebreos 12:14"
+            ]
+        },
+        {
+            "term": "Redencion",
+            "aliases": [
+                "rescate",
+                "liberacion"
+            ],
+            "definition": "Obra de Cristo que compra y libera al creyente de la esclavitud del pecado.",
+            "usage": "Enfatiza costo, libertad y pertenencia al Senor.",
+            "references": [
+                "Efesios 1:7",
+                "Colosenses 1:14"
+            ]
+        },
+        {
+            "term": "Fe",
+            "aliases": [
+                "confiar",
+                "creer"
+            ],
+            "definition": "Confianza activa en Dios y en su Palabra.",
+            "usage": "No es solo informacion, sino entrega y dependencia.",
+            "references": [
+                "Hebreos 11:1",
+                "Romanos 10:17"
+            ]
+        },
+        {
+            "term": "Perdon",
+            "aliases": [
+                "perdonar",
+                "remision"
+            ],
+            "definition": "Cancelacion de la culpa por la obra de Cristo.",
+            "usage": "Restaura la relacion con Dios y enseña reconciliacion con otros.",
+            "references": [
+                "1 Juan 1:9",
+                "Efesios 4:32"
+            ]
+        }
+    ]
+}

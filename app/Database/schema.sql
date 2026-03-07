@@ -56,6 +56,12 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS cloud_sync_backups (
+    user_id INTEGER PRIMARY KEY,
+    payload_json TEXT NOT NULL,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS favorite_folders (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL UNIQUE,
@@ -180,6 +186,68 @@ CREATE TABLE IF NOT EXISTS reading_plan_chapter_progress (
 );
 
 CREATE INDEX IF NOT EXISTS idx_reading_chapter_progress_plan_day ON reading_plan_chapter_progress (plan_id, day_index);
+
+CREATE TABLE IF NOT EXISTS content_modules (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    module_key TEXT NOT NULL UNIQUE,
+    type TEXT NOT NULL,
+    name TEXT NOT NULL,
+    version TEXT NOT NULL DEFAULT '',
+    file_path TEXT NOT NULL,
+    enabled INTEGER NOT NULL DEFAULT 1,
+    installed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS study_projects (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL DEFAULT '',
+    color TEXT NOT NULL DEFAULT '#1d6a8f',
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_study_projects_name ON study_projects (name);
+
+CREATE TABLE IF NOT EXISTS study_project_entries (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    project_id INTEGER NOT NULL,
+    book INTEGER NOT NULL,
+    chapter INTEGER NOT NULL,
+    verse_start INTEGER NOT NULL,
+    verse_end INTEGER NOT NULL,
+    note TEXT NOT NULL DEFAULT '',
+    strong_code TEXT NOT NULL DEFAULT '',
+    strong_term TEXT NOT NULL DEFAULT '',
+    commentary_excerpt TEXT NOT NULL DEFAULT '',
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_study_entries_project ON study_project_entries (project_id, updated_at DESC, id DESC);
+CREATE INDEX IF NOT EXISTS idx_study_entries_ref ON study_project_entries (book, chapter, verse_start, verse_end);
+
+CREATE TABLE IF NOT EXISTS reading_sessions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT NOT NULL UNIQUE,
+    seconds INTEGER NOT NULL DEFAULT 0,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_reading_sessions_date ON reading_sessions (date DESC);
+
+CREATE TABLE IF NOT EXISTS theme_study_log (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    theme_key TEXT NOT NULL,
+    date TEXT NOT NULL,
+    hits INTEGER NOT NULL DEFAULT 1,
+    last_studied TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(theme_key, date)
+);
+
+CREATE INDEX IF NOT EXISTS idx_theme_study_hits ON theme_study_log (hits DESC, last_studied DESC);
+CREATE INDEX IF NOT EXISTS idx_theme_study_date ON theme_study_log (date DESC);
 
 CREATE TABLE IF NOT EXISTS anecdotes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

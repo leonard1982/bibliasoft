@@ -5,7 +5,7 @@ $devotionalPayload = [
     'backgrounds' => $backgrounds,
 ];
 ?>
-<section id="devotionalPage" class="devotional-page" data-devotional="<?php echo e(json_encode($devotionalPayload, JSON_UNESCAPED_UNICODE)); ?>">
+<section id="devotionalPage" class="devotional-page" data-devotional="<?php echo e(app_json_safe($devotionalPayload)); ?>">
     <header class="panel">
         <h1>Devocionales</h1>
         <p class="muted">Contenido diario para profundizar en la Palabra, fortalecer la fe y aterrizar decisiones prácticas para hoy.</p>
@@ -22,4 +22,5 @@ $devotionalPayload = [
         <div id="devotionalHistory" class="stack"></div>
     </section>
 </section>
-<script src="assets/devotional.js"></script>
+<script src="<?php echo e(app_asset('assets/devotional.js')); ?>"></script>
+

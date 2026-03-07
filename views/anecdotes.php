@@ -6,7 +6,7 @@ $payload = [
     'is_logged' => $isLogged,
 ];
 ?>
-<section id="anecdotesPage" class="anecdotes-page" data-initial="<?php echo e(json_encode($payload, JSON_UNESCAPED_UNICODE)); ?>">
+<section id="anecdotesPage" class="anecdotes-page" data-initial="<?php echo e(app_json_safe($payload)); ?>">
     <header class="panel">
         <h1>Anécdotas</h1>
         <p class="muted">Historias para predicar y enseñar con emoción, claridad y aplicación práctica. Contenido original o generado bajo demanda.</p>
@@ -27,3 +27,4 @@ $payload = [
     <section id="anecdotesList" class="anecdotes-list"></section>
 </section>
 <script src="assets/anecdotes.js"></script>
+

@@ -1,4 +1,14 @@
 (function () {
+    function notify(message, type) {
+        if (window.appNotify && typeof window.appNotify === 'function') {
+            window.appNotify(message, type || 'info');
+            return;
+        }
+        if (typeof alert === 'function') {
+            alert(message);
+        }
+    }
+
     var root = document.getElementById('dailyHome');
     if (!root) {
         return;
@@ -12,6 +22,7 @@
     }
 
     var daily = payload.daily || {};
+    var motivation = payload.motivation || {};
     var today = daily.date || new Date().toISOString().slice(0, 10);
     var planState = payload.plan || {};
     var planCalendarMonth = monthStartIsoFromDate(today);
@@ -27,6 +38,7 @@
     }
 
     var shareBtn = document.getElementById('shareDailyVerse');
+    var shareMotivationBtn = document.getElementById('shareMotivationVerse');
     var hideBtn = document.getElementById('hideDailyToday');
 
     if (shareBtn) {
@@ -40,7 +52,23 @@
                 return;
             }
             copyText(text).then(function () {
-                alert('Texto copiado para compartir.');
+                notify('Texto copiado para compartir.', 'success');
+            });
+        });
+    }
+
+    if (shareMotivationBtn) {
+        shareMotivationBtn.addEventListener('click', function () {
+            var text = (motivation.text || '') + '\n\n' + (motivation.reference || '') + '\nBiblia para todos';
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Versículo de motivación',
+                    text: text
+                }).catch(function () {});
+                return;
+            }
+            copyText(text).then(function () {
+                notify('Texto copiado para compartir.', 'success');
             });
         });
     }
@@ -186,7 +214,7 @@
 
     function startPlan(days) {
         if (!days) {
-            alert('Selecciona un plan.');
+            notify('Selecciona un plan.', 'error');
             return;
         }
         postForm('api.plan.start', {
@@ -194,14 +222,15 @@
             date: today
         }).then(function (res) {
             if (res.error) {
-                alert(res.error);
+                notify(res.error, 'error');
                 return;
             }
             planState = res.plan || {};
             planCalendarMonth = monthStartIsoFromDate(String(planState.today || today));
             renderPlan(planState);
+            notify('Plan iniciado correctamente.', 'success');
         }).catch(function () {
-            alert('No se pudo iniciar el plan.');
+            notify('No se pudo iniciar el plan.', 'error');
         });
     }
 
@@ -211,13 +240,14 @@
             date: today
         }).then(function (res) {
             if (res.error) {
-                alert(res.error);
+                notify(res.error, 'error');
                 return;
             }
             planState = res.plan || {};
             renderPlan(planState);
+            notify(completed ? 'Lectura marcada como completada.' : 'Lectura marcada como pendiente.', 'success');
         }).catch(function () {
-            alert('No se pudo actualizar el progreso.');
+            notify('No se pudo actualizar el progreso.', 'error');
         });
     }
 

@@ -37,7 +37,15 @@
         }
 
         localStorage.setItem(LAST_TRIGGER_KEY, todayKey);
-        fireReminder(settings.reminderTime);
+        fetchReminderInsight(settings.reminderTime).then(function (insight) {
+            fireReminder(insight);
+        }).catch(function () {
+            fireReminder({
+                title: 'Recordatorio diario',
+                body: 'Es tiempo de tu lectura biblica (' + settings.reminderTime + ').',
+                route: DAILY_ROUTE
+            });
+        });
     }
 
     function readSettings() {
@@ -54,9 +62,30 @@
         };
     }
 
-    function fireReminder(reminderTime) {
-        var title = 'Recordatorio diario';
-        var body = 'Es tiempo de tu lectura biblica (' + reminderTime + ').';
+    function fetchReminderInsight(reminderTime) {
+        var params = new URLSearchParams({
+            route: 'api.reminder.insight',
+            time: normalizeTime(reminderTime)
+        });
+        return fetch('?' + params.toString()).then(function (res) {
+            return res.json();
+        }).then(function (payload) {
+            if (!payload || payload.error) {
+                throw new Error('insight');
+            }
+            return {
+                title: String(payload.title || 'Recordatorio diario'),
+                body: String(payload.body || 'Es tiempo de tu lectura biblica.'),
+                route: String(payload.route || DAILY_ROUTE)
+            };
+        });
+    }
+
+    function fireReminder(insight) {
+        var data = insight || {};
+        var title = String(data.title || 'Recordatorio diario');
+        var body = String(data.body || 'Es tiempo de tu lectura biblica.');
+        var route = String(data.route || DAILY_ROUTE);
 
         if ('Notification' in window && Notification.permission === 'granted') {
             try {
@@ -66,17 +95,17 @@
                 });
                 note.onclick = function () {
                     window.focus();
-                    window.location.href = DAILY_ROUTE;
+                    window.location.href = route;
                 };
             } catch (err) {
                 // ignore
             }
         }
 
-        showToast(title, body);
+        showToast(title, body, route);
     }
 
-    function showToast(title, message) {
+    function showToast(title, message, route) {
         var oldToast = document.querySelector('.reminder-toast');
         if (oldToast && oldToast.parentNode) {
             oldToast.parentNode.removeChild(oldToast);
@@ -87,7 +116,7 @@
         toast.className = 'reminder-toast';
         toast.innerHTML = '<strong>' + escapeHtml(title) + '</strong><span>' + escapeHtml(message) + '</span>';
         toast.addEventListener('click', function () {
-            window.location.href = DAILY_ROUTE;
+            window.location.href = String(route || DAILY_ROUTE);
         });
 
         document.body.appendChild(toast);

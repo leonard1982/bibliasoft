@@ -1,4 +1,14 @@
 (function () {
+    function notify(message, type) {
+        if (window.appNotify && typeof window.appNotify === 'function') {
+            window.appNotify(message, type || 'info');
+            return;
+        }
+        if (typeof alert === 'function') {
+            alert(message);
+        }
+    }
+
     var root = document.getElementById('shareAppPage');
     if (!root) {
         return;
@@ -30,7 +40,7 @@
     if (copyBtn) {
         copyBtn.addEventListener('click', function () {
             copyText(appUrl).then(function () {
-                alert('Enlace copiado.');
+                notify('Enlace copiado.', 'success');
             });
         });
     }
@@ -46,7 +56,7 @@
                 return;
             }
             copyText(appUrl).then(function () {
-                alert('Compartir no disponible. Enlace copiado.');
+                notify('Compartir no disponible. Enlace copiado.', 'info');
             });
         });
     }

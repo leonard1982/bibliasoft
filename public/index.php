@@ -11,14 +11,17 @@ use App\Controllers\HomeController;
 use App\Controllers\HomeDailyController;
 use App\Controllers\ReaderController;
 use App\Controllers\ShareController;
+use App\Controllers\StudyCenterController;
 use App\Services\AIService;
 use App\Services\AnecdoteService;
 use App\Services\BibleRepository;
 use App\Services\DailyVerseService;
 use App\Services\DevotionalService;
+use App\Services\DocumentExportService;
 use App\Services\GenerationService;
 use App\Services\HtmlSanitizer;
 use App\Services\ImageCardService;
+use App\Services\ModuleCatalogService;
 use App\Services\ReadingPlanService;
 use App\Services\SearchService;
 use App\Services\StrongLexiconService;
@@ -85,10 +88,12 @@ $userDataRepository = new UserDataRepository($dataScope['personal_db'], $dataSco
 $searchService = new SearchService($bibleRepository, $userDataRepository, $sanitizer);
 $aiService = new AIService(config('ai', []), $userDataRepository);
 $readingPlanService = new ReadingPlanService($bibleRepository, $userDataRepository);
+$moduleCatalogService = new ModuleCatalogService($userDataRepository, $sanitizer);
 $strongLexiconService = new StrongLexiconService(
     config('paths.lexicon'),
     config('app.base_path') . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'strong.sqlite'
 );
+$documentExportService = new DocumentExportService();
 $imageCardService = new ImageCardService();
 $dailyVerseService = new DailyVerseService(
     config('paths.bible'),
@@ -118,6 +123,7 @@ $homeDailyController = new HomeDailyController($dailyVerseService, $imageCardSer
 $devotionalController = new DevotionalController($devotionalService, $imageCardService);
 $authController = new AuthController($userDataRepository);
 $shareController = new ShareController();
+$studyCenterController = new StudyCenterController($bibleRepository, $userDataRepository);
 $anecdoteController = new AnecdoteController($anecdoteService);
 $apiController = new ApiController(
     $bibleRepository,
@@ -128,7 +134,9 @@ $apiController = new ApiController(
     $dailyVerseService,
     $anecdoteService,
     $readingPlanService,
-    $strongLexiconService
+    $strongLexiconService,
+    $documentExportService,
+    $moduleCatalogService
 );
 
 $route = isset($_GET['route']) ? $_GET['route'] : 'home_daily';
@@ -166,6 +174,10 @@ try {
 
         case 'share_app':
             $shareController->app();
+            break;
+
+        case 'study_center':
+            $studyCenterController->index();
             break;
 
         case 'anecdotes':
@@ -228,6 +240,10 @@ try {
             $apiController->search();
             break;
 
+        case 'api.search.theme':
+            $apiController->searchTheme();
+            break;
+
         case 'api.strong.lookup':
             $apiController->strongLookup();
             break;
@@ -262,6 +278,50 @@ try {
 
         case 'api.prefs.save':
             $apiController->prefsSave();
+            break;
+
+        case 'api.modules.list':
+            $apiController->modulesList();
+            break;
+
+        case 'api.modules.install':
+            $apiController->modulesInstall();
+            break;
+
+        case 'api.modules.toggle':
+            $apiController->modulesToggle();
+            break;
+
+        case 'api.dictionary.lookup':
+            $apiController->dictionaryLookup();
+            break;
+
+        case 'api.stats.panel':
+            $apiController->statsPanel();
+            break;
+
+        case 'api.stats.track':
+            $apiController->statsTrack();
+            break;
+
+        case 'api.reminder.insight':
+            $apiController->reminderInsight();
+            break;
+
+        case 'api.export.download':
+            $apiController->exportDownload();
+            break;
+
+        case 'api.sync.status':
+            $apiController->syncStatus();
+            break;
+
+        case 'api.sync.push':
+            $apiController->syncPush();
+            break;
+
+        case 'api.sync.pull':
+            $apiController->syncPull();
             break;
 
         case 'api.anecdotes.list':
@@ -314,6 +374,38 @@ try {
 
         case 'api.favorite.folder.create':
             $apiController->favoriteFolderCreate();
+            break;
+
+        case 'api.study.projects.list':
+            $apiController->studyProjectsList();
+            break;
+
+        case 'api.study.projects.create':
+            $apiController->studyProjectCreate();
+            break;
+
+        case 'api.study.projects.update':
+            $apiController->studyProjectUpdate();
+            break;
+
+        case 'api.study.projects.delete':
+            $apiController->studyProjectDelete();
+            break;
+
+        case 'api.study.entries.list':
+            $apiController->studyEntriesList();
+            break;
+
+        case 'api.study.entries.create':
+            $apiController->studyEntryCreate();
+            break;
+
+        case 'api.study.entries.update':
+            $apiController->studyEntryUpdate();
+            break;
+
+        case 'api.study.entries.delete':
+            $apiController->studyEntryDelete();
             break;
 
         case 'api.highlight.set':

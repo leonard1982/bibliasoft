@@ -11,6 +11,7 @@ class StrongLexiconService
     private $fallbackPath;
     private $resolvedPath;
     private $pdo;
+    private $entryCache;
 
     public function __construct($configuredPath, $fallbackPath = null)
     {
@@ -18,6 +19,7 @@ class StrongLexiconService
         $this->fallbackPath = trim((string) $fallbackPath);
         $this->resolvedPath = null;
         $this->pdo = null;
+        $this->entryCache = [];
     }
 
     public function available()
@@ -44,44 +46,69 @@ class StrongLexiconService
             return [];
         }
 
-        $placeholders = [];
-        $params = [];
-        foreach ($keys as $idx => $code) {
-            $key = ':c' . $idx;
-            $placeholders[] = $key;
-            $params[$key] = $code;
-        }
-
-        $sql = 'SELECT code, lang, number, lemma, translit, pron, derivation, strongs_def, kjv_def, source
-                FROM strong_entries
-                WHERE code IN (' . implode(', ', $placeholders) . ')';
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-
         $rowsByCode = [];
-        foreach ($stmt->fetchAll() as $row) {
-            $code = strtoupper(trim((string) ($row['code'] ?? '')));
-            if ($code === '') {
+        $missing = [];
+        foreach ($keys as $code) {
+            if (array_key_exists($code, $this->entryCache)) {
+                if (is_array($this->entryCache[$code])) {
+                    $rowsByCode[$code] = $this->entryCache[$code];
+                }
                 continue;
             }
-            $rowsByCode[$code] = [
-                'code' => $code,
-                'lang' => strtoupper(trim((string) ($row['lang'] ?? ''))),
-                'number' => (int) ($row['number'] ?? 0),
-                'lemma' => $this->normalizeText((string) ($row['lemma'] ?? '')),
-                'translit' => $this->normalizeText((string) ($row['translit'] ?? '')),
-                'pron' => $this->normalizeText((string) ($row['pron'] ?? '')),
-                'derivation' => $this->normalizeText((string) ($row['derivation'] ?? '')),
-                'strongs_def' => $this->normalizeText((string) ($row['strongs_def'] ?? ''), true),
-                'kjv_def' => $this->normalizeText((string) ($row['kjv_def'] ?? ''), true),
-                'source' => trim((string) ($row['source'] ?? '')),
-            ];
+            $missing[] = $code;
+        }
+
+        if (!empty($missing)) {
+            $placeholders = [];
+            $params = [];
+            foreach ($missing as $idx => $code) {
+                $key = ':c' . $idx;
+                $placeholders[] = $key;
+                $params[$key] = $code;
+            }
+
+            $sql = 'SELECT code, lang, number, lemma, translit, pron, derivation, strongs_def, kjv_def, source
+                    FROM strong_entries
+                    WHERE code IN (' . implode(', ', $placeholders) . ')';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($params);
+
+            foreach ($stmt->fetchAll() as $row) {
+                $code = strtoupper(trim((string) ($row['code'] ?? '')));
+                if ($code === '') {
+                    continue;
+                }
+                $resolved = [
+                    'code' => $code,
+                    'lang' => strtoupper(trim((string) ($row['lang'] ?? ''))),
+                    'number' => (int) ($row['number'] ?? 0),
+                    'lemma' => $this->normalizeText((string) ($row['lemma'] ?? '')),
+                    'translit' => $this->normalizeText((string) ($row['translit'] ?? '')),
+                    'pron' => $this->normalizeText((string) ($row['pron'] ?? '')),
+                    'derivation' => $this->normalizeText((string) ($row['derivation'] ?? '')),
+                    'strongs_def' => $this->normalizeText((string) ($row['strongs_def'] ?? ''), true),
+                    'kjv_def' => $this->normalizeText((string) ($row['kjv_def'] ?? ''), true),
+                    'source' => trim((string) ($row['source'] ?? '')),
+                ];
+                $rowsByCode[$code] = $resolved;
+                $this->entryCache[$code] = $resolved;
+            }
+
+            foreach ($missing as $code) {
+                if (!isset($rowsByCode[$code])) {
+                    $this->entryCache[$code] = null;
+                }
+            }
         }
 
         $ordered = [];
         foreach ($keys as $code) {
             if (isset($rowsByCode[$code])) {
                 $ordered[] = $rowsByCode[$code];
+                continue;
+            }
+            if (isset($this->entryCache[$code]) && is_array($this->entryCache[$code])) {
+                $ordered[] = $this->entryCache[$code];
             }
         }
         return $ordered;

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'biblia-soft-v43';
+const CACHE_VERSION = 'biblia-soft-v47';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -8,6 +8,7 @@ const STATIC_ASSETS = [
   './assets/app.js',
   './assets/daily.js',
   './assets/devotional.js',
+  './assets/study_center.js',
   './assets/reminders.js',
   './assets/anecdotes.js',
   './assets/share_app.js',
@@ -71,6 +72,17 @@ self.addEventListener('activate', (event) => {
     )
   );
   self.clients.claim();
+});
+
+self.addEventListener('message', (event) => {
+  const data = event && event.data ? event.data : null;
+  if (!data || typeof data !== 'object') {
+    return;
+  }
+
+  if (data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 self.addEventListener('fetch', (event) => {

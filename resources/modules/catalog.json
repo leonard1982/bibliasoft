@@ -1,0 +1,26 @@
+[
+  {
+    "key": "comentario_contexto_pastoral",
+    "type": "commentary",
+    "name": "Comentario: Contexto Pastoral",
+    "description": "Notas introductorias por libro, capitulo y pasajes clave para apoyo devocional y de clase.",
+    "version": "1.0.0",
+    "package": "comentario_contexto_pastoral.json"
+  },
+  {
+    "key": "diccionario_teologico_basico",
+    "type": "dictionary",
+    "name": "Diccionario Teologico Basico",
+    "description": "Definiciones practicas de terminos biblicos frecuentes con referencias sugeridas.",
+    "version": "1.0.0",
+    "package": "diccionario_teologico_basico.json"
+  },
+  {
+    "key": "diccionario_biblico_strong_es",
+    "type": "dictionary",
+    "name": "Diccionario Biblico Strong (ES)",
+    "description": "Diccionario amplio generado desde Strong en espanol para cubrir miles de palabras del texto biblico.",
+    "version": "1.0.1",
+    "package": "diccionario_biblico_strong_es.json"
+  }
+]

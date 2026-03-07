@@ -1,4 +1,14 @@
 (function () {
+    function notify(message, type) {
+        if (window.appNotify && typeof window.appNotify === 'function') {
+            window.appNotify(message, type || 'info');
+            return;
+        }
+        if (typeof alert === 'function') {
+            alert(message);
+        }
+    }
+
     var root = document.getElementById('devotionalPage');
     if (!root) {
         return;
@@ -20,6 +30,8 @@
     var btnGenerate = document.getElementById('generateDevotional');
     var btnShareText = document.getElementById('shareDevotionalText');
     var btnShareImage = document.getElementById('shareDevotionalImage');
+    var isGenerating = false;
+    var generateDefaultLabel = btnGenerate ? btnGenerate.textContent : 'Generar otro';
 
     renderCurrent(current);
     renderHistory(history);
@@ -45,16 +57,37 @@
             generateImageCard(current).then(function (blob) {
                 return shareImageBlob(blob, 'devocional.png', buildShareText(current));
             }).catch(function () {
-                alert('No se pudo crear la imagen.');
+                notify('No se pudo crear la imagen.', 'error');
             });
         });
     }
 
     function generateNew() {
+        if (isGenerating) {
+            return;
+        }
+        isGenerating = true;
+        setGenerateButtonState(true, 'Generando...');
         var body = new URLSearchParams({
             date: localDateISO()
         }).toString();
-        fetch('?route=api.devotional.generate', {
+        requestGenerate(body, 1).then(function (res) {
+            current = res.devotional;
+            history.unshift(res.devotional);
+            renderCurrent(current);
+            renderHistory(history);
+            notify('Devocional generado correctamente.', 'success');
+        }).catch(function (err) {
+            var message = (err && err.message) ? err.message : 'No se pudo generar el devocional.';
+            notify(message, 'error');
+        }).finally(function () {
+            isGenerating = false;
+            setGenerateButtonState(false, generateDefaultLabel);
+        });
+    }
+
+    function requestGenerate(body, retries) {
+        return fetch('?route=api.devotional.generate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -62,16 +95,25 @@
             body: body
         }).then(asJson).then(function (res) {
             if (res.error || !res.devotional) {
-                alert(res.error || 'No se pudo generar el devocional.');
-                return;
+                throw new Error(res.error || 'No se pudo generar el devocional.');
             }
-            current = res.devotional;
-            history.unshift(res.devotional);
-            renderCurrent(current);
-            renderHistory(history);
-        }).catch(function () {
-            alert('No se pudo generar el devocional.');
+            return res;
+        }).catch(function (err) {
+            if (retries > 0 && isRetriableDevotionalError(err)) {
+                return delay(650).then(function () {
+                    return requestGenerate(body, retries - 1);
+                });
+            }
+            throw err;
         });
+    }
+
+    function setGenerateButtonState(disabled, label) {
+        if (!btnGenerate) {
+            return;
+        }
+        btnGenerate.disabled = !!disabled;
+        btnGenerate.textContent = label || generateDefaultLabel;
     }
 
     function renderCurrent(row) {
@@ -148,7 +190,7 @@
             return;
         }
         copyText(text).then(function () {
-            alert('Texto copiado para compartir.');
+            notify('Texto copiado para compartir.', 'success');
         });
     }
 
@@ -245,7 +287,34 @@
     }
 
     function asJson(res) {
-        return res.json();
+        return res.text().then(function (text) {
+            var json = null;
+            try {
+                json = JSON.parse(text || '{}');
+            } catch (err) {
+                throw new Error('Respuesta inválida del servidor.');
+            }
+
+            if (!res.ok) {
+                throw new Error((json && json.error) ? json.error : ('Error HTTP ' + res.status));
+            }
+
+            return json;
+        });
+    }
+
+    function isRetriableDevotionalError(err) {
+        var message = String((err && err.message) ? err.message : '').toLowerCase();
+        return message.indexOf('http 5') !== -1
+            || message.indexOf('respuesta inválida') !== -1
+            || message.indexOf('failed to fetch') !== -1
+            || message.indexOf('network') !== -1;
+    }
+
+    function delay(ms) {
+        return new Promise(function (resolve) {
+            setTimeout(resolve, Number(ms) || 0);
+        });
     }
 
     function localDateISO() {

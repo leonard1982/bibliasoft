@@ -91,7 +91,12 @@ if (!function_exists('app_json')) {
     {
         http_response_code((int) $status);
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($payload, JSON_UNESCAPED_UNICODE);
+        $json = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE);
+        if ($json === false) {
+            http_response_code(500);
+            $json = '{"error":"No se pudo serializar la respuesta JSON."}';
+        }
+        echo $json;
         exit;
     }
 }
@@ -115,5 +120,62 @@ if (!function_exists('auth_username')) {
     function auth_username()
     {
         return isset($_SESSION['username']) ? (string) $_SESSION['username'] : '';
+    }
+}
+
+if (!function_exists('app_asset')) {
+    function app_asset($path)
+    {
+        $raw = trim((string) $path);
+        if ($raw === '') {
+            return '';
+        }
+
+        $queryPos = strpos($raw, '?');
+        $assetPath = $queryPos === false ? $raw : substr($raw, 0, $queryPos);
+        $assetPath = ltrim($assetPath, '/\\');
+        if ($assetPath === '') {
+            return $raw;
+        }
+
+        $publicDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'public';
+        $filePath = $publicDir . DIRECTORY_SEPARATOR . str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $assetPath);
+        if (!is_file($filePath)) {
+            return $raw;
+        }
+
+        $separator = $queryPos === false ? '?' : '&';
+        return $raw . $separator . 'v=' . (string) filemtime($filePath);
+    }
+}
+
+if (!function_exists('app_json_safe')) {
+    function app_json_safe($value)
+    {
+        $flags = JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE;
+        $json = json_encode($value, $flags);
+        if ($json !== false) {
+            return $json;
+        }
+
+        if (is_array($value)) {
+            if (function_exists('array_is_list') ? array_is_list($value) : array_keys($value) === range(0, count($value) - 1)) {
+                return '[]';
+            }
+            return '{}';
+        }
+        if (is_object($value)) {
+            return '{}';
+        }
+        if (is_string($value)) {
+            return '""';
+        }
+        if (is_bool($value)) {
+            return $value ? 'true' : 'false';
+        }
+        if (is_int($value) || is_float($value)) {
+            return (string) $value;
+        }
+        return 'null';
     }
 }

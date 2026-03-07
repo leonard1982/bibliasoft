@@ -1,0 +1,50 @@
+{
+  "module": {
+    "key": "comentario_contexto_pastoral",
+    "type": "commentary",
+    "name": "Comentario: Contexto Pastoral",
+    "version": "1.0.0"
+  },
+  "entries": [
+    {
+      "scope": "book",
+      "book": 45,
+      "title": "Romanos",
+      "html": "<p><strong>Panorama:</strong> Romanos presenta el evangelio con base doctrinal clara y aplicacion practica para la iglesia local.</p>"
+    },
+    {
+      "scope": "chapter",
+      "book": 45,
+      "chapter": 8,
+      "title": "Romanos 8",
+      "html": "<p>El capitulo 8 contrasta vida en la carne y vida en el Espiritu, enfatizando seguridad, adopcion y esperanza futura.</p>"
+    },
+    {
+      "scope": "verse",
+      "book": 45,
+      "chapter_begin": 8,
+      "chapter_end": 8,
+      "verse_begin": 1,
+      "verse_end": 4,
+      "title": "Romanos 8:1-4",
+      "html": "<p>La justificacion en Cristo quita condenacion y abre una vida nueva que cumple el proposito de la ley mediante el Espiritu.</p>"
+    },
+    {
+      "scope": "chapter",
+      "book": 19,
+      "chapter": 23,
+      "title": "Salmo 23",
+      "html": "<p>Salmo pastoral de confianza: Dios cuida, guia y sostiene a su pueblo aun en momentos de crisis.</p>"
+    },
+    {
+      "scope": "verse",
+      "book": 43,
+      "chapter_begin": 3,
+      "chapter_end": 3,
+      "verse_begin": 16,
+      "verse_end": 17,
+      "title": "Juan 3:16-17",
+      "html": "<p>El amor de Dios se expresa en la entrega del Hijo: la salvacion es una invitacion real para creer y vivir.</p>"
+    }
+  ]
+}
