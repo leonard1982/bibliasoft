@@ -2996,7 +2996,8 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     background: color-mix(in srgb, var(--panel) 88%, #000 12%);
 }
 
-.auth-field input {
+.auth-field input,
+.auth-field select {
     border: 0;
     outline: 0;
     background: transparent;
@@ -3006,7 +3007,8 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     min-width: 0;
 }
 
-.auth-field input::placeholder {
+.auth-field input::placeholder,
+.auth-field select::placeholder {
     color: color-mix(in srgb, var(--muted) 82%, #fff 18%);
 }
 
@@ -3072,6 +3074,23 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     align-items: center;
     gap: .45rem;
     color: var(--muted);
+}
+
+.auth-check-legal {
+    align-items: flex-start;
+    line-height: 1.45;
+    font-size: .88rem;
+}
+
+.auth-check-legal input {
+    margin-top: .2rem;
+}
+
+.auth-legal-note {
+    margin: -.15rem .2rem 0;
+    color: var(--muted);
+    font-size: .83rem;
+    line-height: 1.4;
 }
 
 .auth-meta {
@@ -4106,6 +4125,12 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     display: grid;
     gap: .22rem;
     margin-bottom: .06rem;
+    padding: .86rem .92rem;
+    border: 1px solid color-mix(in srgb, #cbdcea 72%, var(--line));
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at top right, rgba(73, 143, 188, .1), transparent 38%),
+        linear-gradient(160deg, rgba(252, 254, 255, .96), rgba(241, 247, 252, .92));
 }
 
 .marketing-kicker {
@@ -4125,6 +4150,8 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     font-family: "Fraunces", "Georgia", serif;
     font-size: clamp(1.12rem, 1.3vw, 1.38rem);
     line-height: 1.22;
+    color: #133145;
+    text-shadow: none;
 }
 
 .marketing-intro .muted {
@@ -4132,6 +4159,7 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     line-height: 1.42;
     font-size: .91rem;
     max-width: 88ch;
+    color: #456377;
 }
 
 .marketing-block {
@@ -4315,6 +4343,26 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     border-color: color-mix(in srgb, #32526a 64%, var(--line));
     background: linear-gradient(165deg, #1a2b39 0%, #142432 60%, #10202b 100%);
     box-shadow: 0 12px 26px rgba(0, 0, 0, .28);
+}
+
+.theme-dark .panel.marketing-grid {
+    background: linear-gradient(180deg, #10202b 0%, #132633 100%);
+    border-color: color-mix(in srgb, #355872 62%, var(--line));
+}
+
+.theme-dark .marketing-intro {
+    border-color: color-mix(in srgb, #375c75 60%, var(--line));
+    background:
+        radial-gradient(circle at top right, rgba(70, 141, 188, .16), transparent 38%),
+        linear-gradient(160deg, rgba(19, 41, 56, .96), rgba(16, 33, 45, .94));
+}
+
+.theme-dark .marketing-intro h3 {
+    color: #eff7fc;
+}
+
+.theme-dark .marketing-intro .muted {
+    color: color-mix(in srgb, #d6eaf7 84%, transparent);
 }
 
 .theme-dark .marketing-kicker {

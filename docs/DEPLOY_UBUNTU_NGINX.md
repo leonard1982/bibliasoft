@@ -45,12 +45,13 @@ Archivos de contenido que deben existir en la raiz del proyecto:
 
 Si usarás versiones adicionales, también copia los `.bbli` extra que ya tienes.
 
-## 3. Crear `.env`
+## 3. Crear `.env` y `.env.local`
 Desde la raiz del proyecto:
 
 ```bash
 cp .env.example .env
-nano .env
+cp .env.example .env.local
+nano .env.local
 ```
 
 Base recomendada:
@@ -73,9 +74,14 @@ MAIL_USERNAME=
 MAIL_PASSWORD=
 ```
 
+Deja `.env` como base del proyecto y guarda tus secretos reales en `.env.local`.
+
 Si usarás IA:
 - cambia `AI_ENABLED=1`
 - llena `OPENAI_API_KEY`
+
+Si usarás correo SMTP:
+- completa `MAIL_HOST`, `MAIL_USERNAME`, `MAIL_PASSWORD` y remitente
 
 ## 4. Preparar permisos
 El proyecto escribe en:

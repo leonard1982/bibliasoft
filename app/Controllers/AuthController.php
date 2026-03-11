@@ -35,7 +35,7 @@ class AuthController
         $password = isset($_POST['password']) ? (string) $_POST['password'] : '';
 
         if ($username === '' || $password === '') {
-            app_redirect('?route=login&error=' . urlencode('Completa usuario y contraseña.'));
+            app_redirect('?route=login&error=' . urlencode('Completa correo o usuario y contraseña.'));
         }
 
         $user = $this->users->verifyUser($username, $password);
@@ -44,34 +44,40 @@ class AuthController
         }
 
         $_SESSION['user_id'] = (int) $user['id'];
-        $_SESSION['username'] = (string) $user['username'];
+        $_SESSION['username'] = (string) ($user['display_name'] ?? $user['username']);
         app_redirect('?route=reader');
     }
 
     public function register()
     {
-        $username = isset($_POST['username']) ? trim((string) $_POST['username']) : '';
+        $email = isset($_POST['email']) ? trim((string) $_POST['email']) : '';
+        $fullName = isset($_POST['full_name']) ? trim((string) $_POST['full_name']) : '';
+        $ministry = isset($_POST['ministry']) ? trim((string) $_POST['ministry']) : '';
         $password = isset($_POST['password']) ? (string) $_POST['password'] : '';
         $password2 = isset($_POST['password_confirm']) ? (string) $_POST['password_confirm'] : '';
+        $consent = isset($_POST['data_consent']) ? (string) $_POST['data_consent'] : '';
 
-        if ($username === '' || $password === '') {
+        if ($email === '' || $fullName === '' || $password === '') {
             app_redirect('?route=register&error=' . urlencode('Completa todos los campos.'));
         }
         if ($password !== $password2) {
             app_redirect('?route=register&error=' . urlencode('Las contraseñas no coinciden.'));
         }
-        if ($this->users->getUserByUsername($username)) {
-            app_redirect('?route=register&error=' . urlencode('Ese usuario ya existe.'));
+        if ($consent !== '1') {
+            app_redirect('?route=register&error=' . urlencode('Debes autorizar el tratamiento de datos para registrarte.'));
+        }
+        if ($this->users->getUserByEmail($email) || $this->users->getUserByUsername($email)) {
+            app_redirect('?route=register&error=' . urlencode('Ese correo ya existe.'));
         }
 
         try {
-            $id = $this->users->createUser($username, $password);
+            $id = $this->users->createUser($email, $password, $fullName, $ministry, true);
         } catch (\Throwable $e) {
             app_redirect('?route=register&error=' . urlencode($e->getMessage()));
         }
 
         $_SESSION['user_id'] = (int) $id;
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $fullName;
         app_redirect('?route=reader');
     }
 

@@ -26,7 +26,21 @@
                 <span class="auth-field-ico-wrap">
                     <img src="assets/icons/user.svg" alt="" class="auth-field-ico">
                 </span>
-                <input type="text" name="username" required minlength="3" autocomplete="username" placeholder="Elige un usuario">
+                <input type="text" name="full_name" required minlength="3" autocomplete="name" placeholder="Nombre completo">
+            </label>
+
+            <label class="auth-field">
+                <span class="auth-field-ico-wrap">
+                    <img src="assets/icons/user.svg" alt="" class="auth-field-ico">
+                </span>
+                <input type="email" name="email" required autocomplete="email" placeholder="Correo electrónico">
+            </label>
+
+            <label class="auth-field">
+                <span class="auth-field-ico-wrap">
+                    <img src="assets/icons/settings.svg" alt="" class="auth-field-ico">
+                </span>
+                <input type="text" name="ministry" autocomplete="organization" placeholder="Ministerio o área de servicio (opcional)">
             </label>
 
             <label class="auth-field">
@@ -42,6 +56,12 @@
                 </span>
                 <input type="password" name="password_confirm" required minlength="6" autocomplete="new-password" placeholder="Confirmar contraseña">
             </label>
+
+            <label class="auth-check auth-check-legal">
+                <input type="checkbox" name="data_consent" value="1" required>
+                <span>Autorizo el tratamiento de mis datos personales para crear y administrar mi cuenta en BIBLIASOFT.</span>
+            </label>
+            <p class="auth-legal-note">El ministerio es opcional. El correo será el identificador principal de acceso.</p>
 
             <div class="auth-actions">
                 <button type="submit" class="btn-primary auth-submit">Crear cuenta</button>

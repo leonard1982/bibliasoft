@@ -1627,44 +1627,83 @@ class UserDataRepository
         return $filtered;
     }
 
-    public function createUser($username, $password)
+    public function createUser($email, $password, $fullName, $ministry = '', $dataConsent = false)
     {
-        $username = trim((string) $username);
-        if ($username === '' || strlen($username) < 3) {
-            throw new \InvalidArgumentException('Usuario inválido');
+        $email = trim((string) $email);
+        $fullName = trim((string) $fullName);
+        $ministry = trim((string) $ministry);
+        $dataConsent = $dataConsent ? 1 : 0;
+
+        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new \InvalidArgumentException('Correo electrónico inválido');
+        }
+        if ($fullName === '') {
+            throw new \InvalidArgumentException('El nombre es obligatorio');
         }
         if (strlen((string) $password) < 6) {
             throw new \InvalidArgumentException('La contraseña debe tener al menos 6 caracteres');
         }
+        if (!$dataConsent) {
+            throw new \InvalidArgumentException('Debes autorizar el tratamiento de datos para crear la cuenta');
+        }
+
+        $existing = $this->getUserByIdentity($email);
+        if ($existing) {
+            throw new \InvalidArgumentException('Ese correo ya está registrado');
+        }
 
         $stmt = $this->globalDb()->prepare(
-            'INSERT INTO users (username, password_hash, created_at)
-             VALUES (:username, :password_hash, CURRENT_TIMESTAMP)'
+            'INSERT INTO users (username, email, full_name, ministry, data_consent, data_consent_at, password_hash, created_at)
+             VALUES (:username, :email, :full_name, :ministry, :data_consent, :data_consent_at, :password_hash, CURRENT_TIMESTAMP)'
         );
         $stmt->execute([
-            ':username' => $username,
+            ':username' => $email,
+            ':email' => $email,
+            ':full_name' => $fullName,
+            ':ministry' => $ministry,
+            ':data_consent' => $dataConsent,
+            ':data_consent_at' => date('Y-m-d H:i:s'),
             ':password_hash' => password_hash((string) $password, PASSWORD_DEFAULT),
         ]);
 
         return (int) $this->globalDb()->lastInsertId();
     }
 
-    public function getUserByUsername($username)
+    public function getUserByIdentity($identity)
     {
+        $identity = trim((string) $identity);
         $stmt = $this->globalDb()->prepare(
-            'SELECT id, username, password_hash, created_at
+            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, password_hash, created_at
              FROM users
-             WHERE username = :username COLLATE NOCASE
+             WHERE username = :identity COLLATE NOCASE
+                OR email = :identity COLLATE NOCASE
              LIMIT 1'
         );
-        $stmt->execute([':username' => trim((string) $username)]);
+        $stmt->execute([':identity' => $identity]);
+        return $stmt->fetch();
+    }
+
+    public function getUserByUsername($username)
+    {
+        return $this->getUserByIdentity($username);
+    }
+
+    public function getUserByEmail($email)
+    {
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, password_hash, created_at
+             FROM users
+             WHERE email = :email COLLATE NOCASE
+             LIMIT 1'
+        );
+        $stmt->execute([':email' => trim((string) $email)]);
         return $stmt->fetch();
     }
 
     public function getUserById($id)
     {
         $stmt = $this->globalDb()->prepare(
-            'SELECT id, username, created_at
+            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, created_at
              FROM users
              WHERE id = :id
              LIMIT 1'
@@ -1675,7 +1714,7 @@ class UserDataRepository
 
     public function verifyUser($username, $password)
     {
-        $row = $this->getUserByUsername($username);
+        $row = $this->getUserByIdentity($username);
         if (!$row) {
             return null;
         }
@@ -1686,6 +1725,9 @@ class UserDataRepository
         return [
             'id' => (int) $row['id'],
             'username' => (string) $row['username'],
+            'email' => (string) ($row['email'] ?? ''),
+            'full_name' => (string) ($row['full_name'] ?? ''),
+            'display_name' => trim((string) ($row['full_name'] ?? '')) !== '' ? (string) $row['full_name'] : (string) $row['username'],
             'created_at' => (string) $row['created_at'],
         ];
     }

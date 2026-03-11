@@ -33,6 +33,7 @@ class SchemaManager
         self::migrateNotes($pdo);
         self::migrateLinks($pdo);
         self::migrateAiCache($pdo);
+        self::migrateUsers($pdo);
         self::migrateDailyCache($pdo);
         self::migrateDevotionals($pdo);
         self::migrateUserPrefs($pdo);
@@ -188,6 +189,47 @@ class SchemaManager
         $pdo->exec("UPDATE ai_cache SET mode = COALESCE(mode, 'resumen'), prompt_hash = COALESCE(prompt_hash, '')");
         $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_ai_cache_legacy_unique ON ai_cache(book, chapter, verse, context_hash)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_ai_cache_generation ON ai_cache(book, chapter, verse_start, verse_end, mode)');
+    }
+
+    private static function migrateUsers(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'users')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT NOT NULL UNIQUE,
+                email TEXT UNIQUE,
+                full_name TEXT NOT NULL DEFAULT \'\',
+                ministry TEXT NOT NULL DEFAULT \'\',
+                data_consent INTEGER NOT NULL DEFAULT 0,
+                data_consent_at TEXT,
+                password_hash TEXT NOT NULL,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+            $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email)');
+            return;
+        }
+
+        $columns = self::columns($pdo, 'users');
+        if (!isset($columns['email'])) {
+            $pdo->exec('ALTER TABLE users ADD COLUMN email TEXT');
+        }
+        if (!isset($columns['full_name'])) {
+            $pdo->exec("ALTER TABLE users ADD COLUMN full_name TEXT NOT NULL DEFAULT ''");
+        }
+        if (!isset($columns['ministry'])) {
+            $pdo->exec("ALTER TABLE users ADD COLUMN ministry TEXT NOT NULL DEFAULT ''");
+        }
+        if (!isset($columns['data_consent'])) {
+            $pdo->exec('ALTER TABLE users ADD COLUMN data_consent INTEGER NOT NULL DEFAULT 0');
+        }
+        if (!isset($columns['data_consent_at'])) {
+            $pdo->exec('ALTER TABLE users ADD COLUMN data_consent_at TEXT');
+        }
+
+        $pdo->exec("UPDATE users SET full_name = CASE WHEN TRIM(COALESCE(full_name, '')) = '' THEN username ELSE full_name END");
+        $pdo->exec("UPDATE users SET ministry = COALESCE(ministry, '')");
+        $pdo->exec('UPDATE users SET data_consent = CASE WHEN data_consent = 1 THEN 1 ELSE 0 END');
+        $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email)');
     }
 
     private static function migrateDailyCache(\PDO $pdo)

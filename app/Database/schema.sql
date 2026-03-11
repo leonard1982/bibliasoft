@@ -52,9 +52,16 @@ CREATE INDEX IF NOT EXISTS idx_ai_cache_ref ON ai_cache (book, chapter, verse_st
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
+    email TEXT UNIQUE,
+    full_name TEXT NOT NULL DEFAULT '',
+    ministry TEXT NOT NULL DEFAULT '',
+    data_consent INTEGER NOT NULL DEFAULT 0,
+    data_consent_at TEXT,
     password_hash TEXT NOT NULL,
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users (email);
 
 CREATE TABLE IF NOT EXISTS cloud_sync_backups (
     user_id INTEGER PRIMARY KEY,
