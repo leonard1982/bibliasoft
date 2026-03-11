@@ -1,4 +1,5 @@
 .vscode/
+.env
 storage/*
 !storage/.gitkeep
 tmp_*.json
