@@ -356,6 +356,94 @@ class ModuleCatalogService
         return array_slice($matches, 0, $limit);
     }
 
+    public function lookupMaps($query = '', $book = 0, $chapter = 0, $verseStart = 0, $verseEnd = 0, $limit = 10)
+    {
+        $needle = $this->normalizeToken($query);
+        $book = (int) $book;
+        $chapter = (int) $chapter;
+        $verseStart = max(1, (int) $verseStart);
+        $verseEnd = max(1, (int) $verseEnd);
+        if ($verseStart > $verseEnd) {
+            $tmp = $verseStart;
+            $verseStart = $verseEnd;
+            $verseEnd = $tmp;
+        }
+        $limit = max(1, min(30, (int) $limit));
+        $hasReference = $book > 0 && $chapter > 0;
+        if ($needle === '' && !$hasReference) {
+            return [];
+        }
+
+        $modules = $this->userDataRepository->getEnabledContentModulesByType('map');
+        if (empty($modules)) {
+            return [];
+        }
+
+        $matches = [];
+        foreach ($modules as $module) {
+            $moduleName = trim((string) ($module['name'] ?? 'Mapas'));
+            $payload = $this->loadInstalledPayload((string) ($module['file_path'] ?? ''));
+            $entries = isset($payload['entries']) && is_array($payload['entries']) ? $payload['entries'] : [];
+            foreach ($entries as $entry) {
+                if (!is_array($entry)) {
+                    continue;
+                }
+
+                $title = trim((string) ($entry['title'] ?? ''));
+                $summary = trim((string) ($entry['summary'] ?? ''));
+                $places = $this->normalizeStringList(isset($entry['places']) ? $entry['places'] : []);
+                $references = $this->normalizeStringList(isset($entry['references']) ? $entry['references'] : []);
+                $tags = $this->normalizeStringList(isset($entry['tags']) ? $entry['tags'] : []);
+                $coverage = $this->normalizeMapCoverage(isset($entry['coverage']) ? $entry['coverage'] : []);
+
+                $score = 0;
+                if ($needle !== '') {
+                    $score += $this->scoreMapQueryMatch($needle, $title, $summary, $places, $references, $tags);
+                }
+                if ($hasReference) {
+                    $score += $this->scoreMapCoverageMatch($coverage, $book, $chapter, $verseStart, $verseEnd);
+                }
+                if ($score < 1) {
+                    continue;
+                }
+
+                $matches[] = [
+                    'title' => $title !== '' ? $title : 'Mapa bíblico',
+                    'summary' => $summary,
+                    'places' => $places,
+                    'references' => $references,
+                    'tags' => $tags,
+                    'period' => trim((string) ($entry['period'] ?? '')),
+                    'source_name' => trim((string) ($entry['source_name'] ?? $moduleName)),
+                    'source_url' => trim((string) ($entry['source_url'] ?? '')),
+                    'map_url' => trim((string) ($entry['map_url'] ?? '')),
+                    'image_url' => trim((string) ($entry['image_url'] ?? '')),
+                    'license' => trim((string) ($entry['license'] ?? '')),
+                    'module_key' => (string) ($module['module_key'] ?? ''),
+                    'module_name' => $moduleName,
+                    'score' => $score,
+                ];
+            }
+        }
+
+        usort($matches, static function (array $a, array $b): int {
+            $scoreA = (int) ($a['score'] ?? 0);
+            $scoreB = (int) ($b['score'] ?? 0);
+            if ($scoreA === $scoreB) {
+                return strcasecmp((string) ($a['title'] ?? ''), (string) ($b['title'] ?? ''));
+            }
+            return $scoreB <=> $scoreA;
+        });
+
+        $matches = array_slice($matches, 0, $limit);
+        foreach ($matches as &$row) {
+            unset($row['score']);
+        }
+        unset($row);
+
+        return $matches;
+    }
+
     private function loadCatalog()
     {
         if (is_array($this->catalogCache)) {
@@ -489,10 +577,138 @@ class ModuleCatalogService
     private function normalizeType($type)
     {
         $value = strtolower(trim((string) $type));
-        if ($value === 'commentary' || $value === 'dictionary') {
+        if ($value === 'maps') {
+            $value = 'map';
+        }
+        if ($value === 'commentary' || $value === 'dictionary' || $value === 'map') {
             return $value;
         }
         return '';
+    }
+
+    private function normalizeStringList($value)
+    {
+        if (!is_array($value)) {
+            return [];
+        }
+
+        $items = [];
+        foreach ($value as $item) {
+            $text = trim((string) $item);
+            if ($text === '') {
+                continue;
+            }
+            $items[] = $text;
+            if (count($items) >= 12) {
+                break;
+            }
+        }
+
+        return $items;
+    }
+
+    private function normalizeMapCoverage($value)
+    {
+        if (!is_array($value)) {
+            return [];
+        }
+
+        $rows = [];
+        foreach ($value as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $book = (int) ($item['book'] ?? 0);
+            $chapter = (int) ($item['chapter'] ?? 0);
+            $verseStart = max(1, (int) ($item['verse_start'] ?? 1));
+            $verseEnd = max(1, (int) ($item['verse_end'] ?? $verseStart));
+            if ($book < 1 || $chapter < 1) {
+                continue;
+            }
+            if ($verseStart > $verseEnd) {
+                $tmp = $verseStart;
+                $verseStart = $verseEnd;
+                $verseEnd = $tmp;
+            }
+            $rows[] = [
+                'book' => $book,
+                'chapter' => $chapter,
+                'verse_start' => $verseStart,
+                'verse_end' => $verseEnd,
+            ];
+        }
+
+        return $rows;
+    }
+
+    private function scoreMapQueryMatch($needle, $title, $summary, array $places, array $references, array $tags)
+    {
+        if ($needle === '') {
+            return 0;
+        }
+
+        $score = 0;
+        $titleNorm = $this->normalizeToken($title);
+        if ($titleNorm !== '') {
+            if ($titleNorm === $needle) {
+                $score = max($score, 120);
+            } elseif (strpos($titleNorm, $needle) !== false || strpos($needle, $titleNorm) !== false) {
+                $score = max($score, 90);
+            }
+        }
+
+        foreach ([$places, $tags] as $pool) {
+            foreach ($pool as $item) {
+                $norm = $this->normalizeToken((string) $item);
+                if ($norm === '') {
+                    continue;
+                }
+                if ($norm === $needle) {
+                    $score = max($score, 110);
+                    continue;
+                }
+                if (strpos($norm, $needle) !== false || strpos($needle, $norm) !== false) {
+                    $score = max($score, 75);
+                }
+            }
+        }
+
+        foreach ($references as $reference) {
+            $norm = $this->normalizeToken((string) $reference);
+            if ($norm !== '' && strpos($norm, $needle) !== false) {
+                $score = max($score, 55);
+            }
+        }
+
+        $summaryNorm = $this->normalizeToken($summary);
+        if ($summaryNorm !== '' && strpos($summaryNorm, $needle) !== false) {
+            $score = max($score, 40);
+        }
+
+        return $score;
+    }
+
+    private function scoreMapCoverageMatch(array $coverage, $book, $chapter, $verseStart, $verseEnd)
+    {
+        $score = 0;
+        foreach ($coverage as $row) {
+            $entryBook = (int) ($row['book'] ?? 0);
+            $entryChapter = (int) ($row['chapter'] ?? 0);
+            $entryStart = (int) ($row['verse_start'] ?? 1);
+            $entryEnd = (int) ($row['verse_end'] ?? $entryStart);
+            if ($entryBook !== (int) $book) {
+                continue;
+            }
+            if ($entryChapter !== (int) $chapter) {
+                continue;
+            }
+            if ($entryStart <= (int) $verseEnd && $entryEnd >= (int) $verseStart) {
+                $score = max($score, 130);
+                continue;
+            }
+            $score = max($score, 65);
+        }
+        return $score;
     }
 
     private function normalizeToken($value)

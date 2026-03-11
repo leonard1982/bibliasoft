@@ -22,5 +22,13 @@
     "description": "Diccionario amplio generado desde Strong en espanol para cubrir miles de palabras del texto biblico.",
     "version": "1.0.1",
     "package": "diccionario_biblico_strong_es.json"
+  },
+  {
+    "key": "mapas_biblicos_basicos",
+    "type": "map",
+    "name": "Mapas Biblicos Basicos",
+    "description": "Banco inicial de mapas tematicos por pasaje, lugares y periodos clave para estudio guiado.",
+    "version": "1.0.0",
+    "package": "mapas_biblicos_basicos.json"
   }
 ]

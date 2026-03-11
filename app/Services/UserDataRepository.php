@@ -1240,7 +1240,7 @@ class UserDataRepository
     public function getEnabledContentModulesByType($type)
     {
         $type = trim((string) $type);
-        if (($type !== 'commentary' && $type !== 'dictionary') || !$this->hasTable('content_modules')) {
+        if (($type !== 'commentary' && $type !== 'dictionary' && $type !== 'map') || !$this->hasTable('content_modules')) {
             return [];
         }
 

@@ -20,6 +20,7 @@ Separar completamente:
 - `views/`: plantillas PHP.
 - `config/`: configuración global.
 - `scripts/`: utilidades CLI (inicialización DB e indexado FTS).
+- `scripts/import_biblical_maps.php`: conversión de CSV/JSON a módulos `map`.
 - `docs/`: bitácora, roadmap, instalación, licencia/distribución.
 - `data/anecdotas_seed.json`: banco inicial de anécdotas originales.
 
@@ -80,6 +81,7 @@ Rutas de UI nuevas:
 - `user_prefs`: preferencias persistidas (escala fuente, show_daily, tema, etc.).
 - `anecdotes`: banco local y contenido generado bajo demanda.
 - `anecdote_favorites`: favoritos de anécdotas por usuario.
+- `content_modules`: catálogo instalado para comentarios, diccionarios y mapas.
 
 ## Comentarios y licencias
 - Fuentes de comentarios configuradas en `config/sources.php`.

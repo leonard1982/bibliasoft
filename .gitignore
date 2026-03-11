@@ -1,6 +1,5 @@
+.vscode/
 .env
-storage/*.sqlite
-*.bbli
-*.cmti
-*.lexx
-*.devx
+storage/*
+!storage/.gitkeep
+tmp_*.json

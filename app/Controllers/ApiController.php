@@ -1455,6 +1455,22 @@ class ApiController
         ]);
     }
 
+    public function mapsLookup()
+    {
+        $query = isset($_GET['q']) ? trim((string) $_GET['q']) : '';
+        $book = isset($_GET['book']) ? (int) $_GET['book'] : 0;
+        $chapter = isset($_GET['chapter']) ? (int) $_GET['chapter'] : 0;
+        $verseStart = isset($_GET['verse_start']) ? (int) $_GET['verse_start'] : 0;
+        $verseEnd = isset($_GET['verse_end']) ? (int) $_GET['verse_end'] : 0;
+        $limit = isset($_GET['limit']) ? (int) $_GET['limit'] : 8;
+
+        app_json([
+            'ok' => true,
+            'query' => $query,
+            'rows' => $this->moduleCatalogService->lookupMaps($query, $book, $chapter, $verseStart, $verseEnd, $limit),
+        ]);
+    }
+
     public function statsPanel()
     {
         $days = isset($_GET['days']) ? (int) $_GET['days'] : 7;

@@ -296,6 +296,10 @@ try {
             $apiController->dictionaryLookup();
             break;
 
+        case 'api.maps.lookup':
+            $apiController->mapsLookup();
+            break;
+
         case 'api.stats.panel':
             $apiController->statsPanel();
             break;

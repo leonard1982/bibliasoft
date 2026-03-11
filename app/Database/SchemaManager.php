@@ -400,7 +400,12 @@ class SchemaManager
         }
 
         $pdo->exec('UPDATE content_modules SET enabled = CASE WHEN enabled = 0 THEN 0 ELSE 1 END');
-        $pdo->exec("UPDATE content_modules SET type = CASE WHEN LOWER(type) = 'dictionary' THEN 'dictionary' ELSE 'commentary' END");
+        $pdo->exec("UPDATE content_modules
+            SET type = CASE
+                WHEN LOWER(type) = 'dictionary' THEN 'dictionary'
+                WHEN LOWER(type) IN ('map', 'maps') THEN 'map'
+                ELSE 'commentary'
+            END");
         $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_content_modules_key ON content_modules (module_key)');
         $pdo->exec('DROP INDEX IF EXISTS idx_content_modules_type');
     }

@@ -1,0 +1,106 @@
+{
+  "module": {
+    "key": "mapas_biblicos_basicos",
+    "type": "map",
+    "name": "Mapas Biblicos Basicos",
+    "version": "1.0.0"
+  },
+  "entries": [
+    {
+      "title": "Llamado y recorrido de Abraham",
+      "summary": "Ubica el movimiento de Abraham desde Ur y Haran hasta Canaan, con estaciones clave para leer pacto, altar y promesa en su dimension geografica.",
+      "places": ["Ur", "Haran", "Siquem", "Betel", "Hebron", "Negev"],
+      "references": ["Genesis 12:1-9", "Genesis 13:1-18"],
+      "tags": ["abraham", "patriarcas", "canaan", "promesa", "viaje"],
+      "period": "Patriarcas",
+      "source_name": "Banco local BIBLIASOFT",
+      "license": "Uso interno de estudio",
+      "coverage": [
+        { "book": 1, "chapter": 12, "verse_start": 1, "verse_end": 9 },
+        { "book": 1, "chapter": 13, "verse_start": 1, "verse_end": 18 }
+      ]
+    },
+    {
+      "title": "Ruta del Exodo y el desierto",
+      "summary": "Mapa de lectura para seguir salida de Egipto, cruce, Sinaí y trayecto por el desierto, útil para clases sobre redencion, pacto y peregrinacion.",
+      "places": ["Rameses", "Sucot", "Mar Rojo", "Sinaí", "Cades-barnea", "Moab"],
+      "references": ["Exodo 12:37-42", "Exodo 14:21-31", "Numeros 14:1-25", "Deuteronomio 1:1-8"],
+      "tags": ["exodo", "desierto", "sinaí", "moises", "egipto"],
+      "period": "Exodo",
+      "source_name": "Banco local BIBLIASOFT",
+      "license": "Uso interno de estudio",
+      "coverage": [
+        { "book": 2, "chapter": 12, "verse_start": 37, "verse_end": 42 },
+        { "book": 2, "chapter": 14, "verse_start": 21, "verse_end": 31 },
+        { "book": 4, "chapter": 14, "verse_start": 1, "verse_end": 25 },
+        { "book": 5, "chapter": 1, "verse_start": 1, "verse_end": 8 }
+      ]
+    },
+    {
+      "title": "Conquista y reparto de la tierra",
+      "summary": "Resume entrada a Canaan, puntos de avance militar y distribucion tribal para leer Josue con orientacion espacial.",
+      "places": ["Jordan", "Jerico", "Hai", "Gabaon", "Hebron", "Silo"],
+      "references": ["Josue 3:14-17", "Josue 6:1-27", "Josue 11:16-23", "Josue 13:1-7"],
+      "tags": ["josue", "conquista", "tribus", "canaan", "reparto"],
+      "period": "Conquista",
+      "source_name": "Banco local BIBLIASOFT",
+      "license": "Uso interno de estudio",
+      "coverage": [
+        { "book": 6, "chapter": 3, "verse_start": 14, "verse_end": 17 },
+        { "book": 6, "chapter": 6, "verse_start": 1, "verse_end": 27 },
+        { "book": 6, "chapter": 11, "verse_start": 16, "verse_end": 23 },
+        { "book": 6, "chapter": 13, "verse_start": 1, "verse_end": 7 }
+      ]
+    },
+    {
+      "title": "Reino unido: David y Salomon",
+      "summary": "Permite visualizar Jerusalem, Hebron, territorios centrales y nodos comerciales del reino unido para leer expansion, culto y administracion.",
+      "places": ["Hebron", "Jerusalem", "Sion", "Gezer", "Tadmor", "Ezion-geber"],
+      "references": ["2 Samuel 5:1-10", "1 Reyes 4:20-25", "1 Reyes 9:15-19", "1 Reyes 10:26-29"],
+      "tags": ["david", "salomon", "reino unido", "jerusalem", "templo"],
+      "period": "Monarquia unida",
+      "source_name": "Banco local BIBLIASOFT",
+      "license": "Uso interno de estudio",
+      "coverage": [
+        { "book": 10, "chapter": 5, "verse_start": 1, "verse_end": 10 },
+        { "book": 11, "chapter": 4, "verse_start": 20, "verse_end": 25 },
+        { "book": 11, "chapter": 9, "verse_start": 15, "verse_end": 19 },
+        { "book": 11, "chapter": 10, "verse_start": 26, "verse_end": 29 }
+      ]
+    },
+    {
+      "title": "Ministerio de Jesus en Galilea y Judea",
+      "summary": "Señala Nazaret, Capernaum, mar de Galilea, Samaria, Jerico y Jerusalem para seguir el movimiento del ministerio publico de Jesus.",
+      "places": ["Nazaret", "Capernaum", "Mar de Galilea", "Samaria", "Jerico", "Jerusalem"],
+      "references": ["Mateo 4:12-25", "Marcos 1:14-39", "Lucas 9:51-56", "Juan 11:55-57"],
+      "tags": ["jesus", "galilea", "judea", "evangelios", "discipulos"],
+      "period": "Evangelios",
+      "source_name": "Banco local BIBLIASOFT",
+      "license": "Uso interno de estudio",
+      "coverage": [
+        { "book": 40, "chapter": 4, "verse_start": 12, "verse_end": 25 },
+        { "book": 41, "chapter": 1, "verse_start": 14, "verse_end": 39 },
+        { "book": 42, "chapter": 9, "verse_start": 51, "verse_end": 56 },
+        { "book": 43, "chapter": 11, "verse_start": 55, "verse_end": 57 }
+      ]
+    },
+    {
+      "title": "Viajes misioneros de Pablo",
+      "summary": "Orienta la lectura de Hechos mostrando Antioquia, Asia Menor, Macedonia, Grecia y Roma como ejes del avance del evangelio.",
+      "places": ["Antioquia", "Chipre", "Galacia", "Filipos", "Tesalonica", "Corinto", "Efeso", "Roma"],
+      "references": ["Hechos 13:1-4", "Hechos 16:6-10", "Hechos 17:1-15", "Hechos 18:1-11", "Hechos 27:1-28:16"],
+      "tags": ["pablo", "hechos", "mision", "roma", "iglesia primitiva"],
+      "period": "Iglesia primitiva",
+      "source_name": "Banco local BIBLIASOFT",
+      "license": "Uso interno de estudio",
+      "coverage": [
+        { "book": 44, "chapter": 13, "verse_start": 1, "verse_end": 4 },
+        { "book": 44, "chapter": 16, "verse_start": 6, "verse_end": 10 },
+        { "book": 44, "chapter": 17, "verse_start": 1, "verse_end": 15 },
+        { "book": 44, "chapter": 18, "verse_start": 1, "verse_end": 11 },
+        { "book": 44, "chapter": 27, "verse_start": 1, "verse_end": 44 },
+        { "book": 44, "chapter": 28, "verse_start": 1, "verse_end": 16 }
+      ]
+    }
+  ]
+}

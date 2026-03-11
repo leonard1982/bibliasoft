@@ -194,6 +194,10 @@
         modulesDictQuery: document.getElementById('modulesDictQuery'),
         modulesDictSearch: document.getElementById('modulesDictSearch'),
         modulesDictResults: document.getElementById('modulesDictResults'),
+        modulesMapsQuery: document.getElementById('modulesMapsQuery'),
+        modulesMapsSearch: document.getElementById('modulesMapsSearch'),
+        modulesMapsCurrent: document.getElementById('modulesMapsCurrent'),
+        modulesMapsResults: document.getElementById('modulesMapsResults'),
         quickSearchForm: document.getElementById('quickSearchForm'),
         qTheme: document.getElementById('qTheme'),
         qThemeSearch: document.getElementById('qThemeSearch'),
@@ -6106,6 +6110,27 @@
                 }
             });
         }
+        if (els.modulesMapsSearch && !els.modulesMapsSearch.dataset.bound) {
+            els.modulesMapsSearch.dataset.bound = '1';
+            els.modulesMapsSearch.addEventListener('click', function () {
+                runModuleMapsLookup(false);
+            });
+        }
+        if (els.modulesMapsCurrent && !els.modulesMapsCurrent.dataset.bound) {
+            els.modulesMapsCurrent.dataset.bound = '1';
+            els.modulesMapsCurrent.addEventListener('click', function () {
+                runModuleMapsLookup(true);
+            });
+        }
+        if (els.modulesMapsQuery && !els.modulesMapsQuery.dataset.bound) {
+            els.modulesMapsQuery.dataset.bound = '1';
+            els.modulesMapsQuery.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    runModuleMapsLookup(false);
+                }
+            });
+        }
     }
 
     function runModuleDictionaryLookup() {
@@ -6176,10 +6201,90 @@
         els.modulesDictResults.innerHTML = guideCard + resultCards;
     }
 
+    function runModuleMapsLookup(useCurrentPassageOnly) {
+        if (!els.modulesMapsResults) {
+            return;
+        }
+
+        var query = els.modulesMapsQuery ? String(els.modulesMapsQuery.value || '').trim() : '';
+        if (!query && !useCurrentPassageOnly) {
+            notify('Escribe un lugar o usa "Pasaje actual".');
+            return;
+        }
+
+        var range = selectedRange();
+        var params = new URLSearchParams({
+            route: 'api.maps.lookup',
+            q: query,
+            book: String(state.currentBook || 0),
+            chapter: String(state.currentChapter || 0),
+            verse_start: String(range.start || 1),
+            verse_end: String(range.end || 1),
+            limit: '8'
+        });
+
+        els.modulesMapsResults.innerHTML = '<p class="muted">Buscando mapas...</p>';
+        fetch('?' + params.toString())
+            .then(asJson)
+            .then(function (res) {
+                if (!res || res.error) {
+                    throw new Error((res && res.error) ? res.error : 'No se pudieron consultar los mapas.');
+                }
+                renderModuleMapResults(Array.isArray(res.rows) ? res.rows : []);
+            })
+            .catch(function (err) {
+                var msg = (err && err.message) ? err.message : 'No se pudieron consultar los mapas.';
+                els.modulesMapsResults.innerHTML = '<p class="muted">' + escapeHtml(msg) + '</p>';
+            });
+    }
+
+    function renderModuleMapResults(rows) {
+        if (!els.modulesMapsResults) {
+            return;
+        }
+        var list = Array.isArray(rows) ? rows : [];
+        if (!list.length) {
+            els.modulesMapsResults.innerHTML = '' +
+                '<article class="card module-dict-item module-dict-guide">' +
+                '<strong>Cómo aprovechar mapas bíblicos</strong>' +
+                '<small class="muted">1) Ubica el pasaje en su espacio real.</small>' +
+                '<small class="muted">2) Observa rutas, distancias y regiones vecinas.</small>' +
+                '<small class="muted">3) Relaciona geografía con argumento, conflicto y misión.</small>' +
+                '</article>' +
+                '<p class="muted">Sin resultados en módulos de mapas activos.</p>';
+            return;
+        }
+
+        els.modulesMapsResults.innerHTML = list.map(function (row) {
+            var refs = Array.isArray(row.references) ? row.references : [];
+            var places = Array.isArray(row.places) ? row.places : [];
+            var links = [];
+            if (row.map_url) {
+                links.push('<a class="btn-light" href="' + escapeHtml(row.map_url) + '" target="_blank" rel="noopener noreferrer">Abrir mapa</a>');
+            }
+            if (row.source_url) {
+                links.push('<a class="btn-light" href="' + escapeHtml(row.source_url) + '" target="_blank" rel="noopener noreferrer">Fuente</a>');
+            }
+            return '' +
+                '<article class="card module-dict-item">' +
+                '<strong>' + escapeHtml(row.title || 'Mapa bíblico') + '</strong>' +
+                (row.summary ? '<p>' + escapeHtml(row.summary) + '</p>' : '') +
+                (row.period ? '<small class="muted">Periodo: ' + escapeHtml(row.period) + '</small>' : '') +
+                (places.length ? '<small class="muted">Lugares: ' + escapeHtml(places.join(', ')) + '</small>' : '') +
+                (refs.length ? '<small class="muted">Referencias: ' + escapeHtml(refs.join(', ')) + '</small>' : '') +
+                '<small class="muted">Fuente: ' + escapeHtml(row.source_name || row.module_name || 'Mapas') + (row.license ? ' · ' + escapeHtml(row.license) : '') + '</small>' +
+                (links.length ? '<div class="toolbar module-actions">' + links.join('') + '</div>' : '') +
+                '</article>';
+        }).join('');
+    }
+
     function formatModuleTypeLabel(type) {
         var key = String(type || '').trim().toLowerCase();
         if (key === 'dictionary') {
             return 'Diccionario';
+        }
+        if (key === 'map') {
+            return 'Mapa';
         }
         return 'Comentario';
     }

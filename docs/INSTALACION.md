@@ -69,3 +69,7 @@ copy .env.example .env
   - `user_prefs`
   - `anecdotes`
   - `anecdote_favorites`
+
+## Despliegue en servidor
+Guía específica para Ubuntu Server 24 + Nginx:
+- `docs/DEPLOY_UBUNTU_NGINX.md`
