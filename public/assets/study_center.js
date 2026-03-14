@@ -34,6 +34,7 @@
             selectedTokens: [],
             explainHistory: []
         },
+        mainFontScale: 1,
         entryFormCollapsed: true,
         toastTimer: 0
     };
@@ -54,6 +55,8 @@
         projectDescriptionText: document.getElementById('studyProjectDescriptionText'),
         projectDelete: document.getElementById('studyProjectDelete'),
         projectEdit: document.getElementById('studyProjectEdit'),
+        mainFontDecrease: document.getElementById('studyMainFontDecrease'),
+        mainFontIncrease: document.getElementById('studyMainFontIncrease'),
         entryFormToggle: document.getElementById('studyEntryFormToggle'),
         entryForm: document.getElementById('studyEntryForm'),
         entryFormBody: document.getElementById('studyEntryFormBody'),
@@ -102,6 +105,7 @@
     bindEvents();
     restoreUiState();
     applyEntryFormState();
+    applyMainFontScale();
     refreshProjects(false);
 
     function bindEvents() {
@@ -204,6 +208,16 @@
                 state.entryFormCollapsed = !state.entryFormCollapsed;
                 applyEntryFormState();
                 saveUiState();
+            });
+        }
+        if (els.mainFontDecrease) {
+            els.mainFontDecrease.addEventListener('click', function () {
+                adjustMainFontScale(-0.2);
+            });
+        }
+        if (els.mainFontIncrease) {
+            els.mainFontIncrease.addEventListener('click', function () {
+                adjustMainFontScale(0.2);
             });
         }
 
@@ -391,10 +405,15 @@
             if (rawHelpScale !== null && rawHelpScale !== '') {
                 state.noteWorkspace.helpFontScale = clampFontScale(parseFloat(rawHelpScale));
             }
+            var rawMainScale = sessionStorage.getItem('bs_study_main_font_scale_v1');
+            if (rawMainScale !== null && rawMainScale !== '') {
+                state.mainFontScale = clampFontScale(parseFloat(rawMainScale));
+            }
         } catch (err) {
             state.entryFormCollapsed = true;
             state.noteWorkspace.fontScale = 1;
             state.noteWorkspace.helpFontScale = 1;
+            state.mainFontScale = 1;
         }
     }
 
@@ -403,6 +422,7 @@
             sessionStorage.setItem('bs_study_entry_form_collapsed_v1', state.entryFormCollapsed ? '1' : '0');
             sessionStorage.setItem('bs_study_note_font_scale_v1', String(state.noteWorkspace.fontScale || 1));
             sessionStorage.setItem('bs_study_note_help_font_scale_v1', String(state.noteWorkspace.helpFontScale || 1));
+            sessionStorage.setItem('bs_study_main_font_scale_v1', String(state.mainFontScale || 1));
         } catch (err) {
             // ignore
         }
@@ -451,6 +471,7 @@
         if (els.projectDescriptionText) {
             els.projectDescriptionText.textContent = active.description || 'Sin descripción.';
         }
+        applyMainFontScale();
     }
 
     function selectProject(projectId) {
@@ -883,6 +904,34 @@
         state.noteWorkspace.fontScale = clampFontScale((state.noteWorkspace.fontScale || 1) + delta);
         applyNoteFontScale();
         saveUiState();
+    }
+
+    function adjustMainFontScale(delta) {
+        state.mainFontScale = clampFontScale((state.mainFontScale || 1) + delta);
+        applyMainFontScale();
+        saveUiState();
+    }
+
+    function applyMainFontScale() {
+        var size = (state.mainFontScale || 1).toFixed(2) + 'rem';
+        if (els.projectDescriptionText) {
+            els.projectDescriptionText.style.fontSize = size;
+        }
+        if (els.entryForm) {
+            els.entryForm.style.fontSize = size;
+        }
+        if (els.entriesCount) {
+            els.entriesCount.style.fontSize = size;
+        }
+        if (els.entriesList) {
+            els.entriesList.style.fontSize = size;
+        }
+        if (els.mainFontDecrease) {
+            els.mainFontDecrease.disabled = state.mainFontScale <= 0.8;
+        }
+        if (els.mainFontIncrease) {
+            els.mainFontIncrease.disabled = state.mainFontScale >= 3;
+        }
     }
 
     function applyNoteFontScale() {

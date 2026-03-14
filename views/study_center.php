@@ -26,6 +26,8 @@ $studyPayload = [
                 <div class="study-section-head">
                     <h2 id="studyProjectTitle">Proyecto</h2>
                     <div class="toolbar study-project-actions">
+                        <button class="btn-light study-project-action-btn study-icon-font-btn" id="studyMainFontDecrease" type="button" aria-label="Hacer texto más pequeño" title="Hacer texto más pequeño"><span class="zoom-icon is-minus" aria-hidden="true"></span></button>
+                        <button class="btn-light study-project-action-btn study-icon-font-btn" id="studyMainFontIncrease" type="button" aria-label="Hacer texto más grande" title="Hacer texto más grande"><span class="zoom-icon is-plus" aria-hidden="true"></span></button>
                         <button class="btn-light study-project-action-btn" id="studyEntryFormToggle" type="button" aria-label="Ocultar formulario" title="Ocultar formulario">
                             <img src="assets/icons/text.svg" alt="" class="ico">
                         </button>
