@@ -1405,18 +1405,19 @@
     function renderContextPanel(payload) {
         var c = payload.context || {};
         var meta = c.study_meta && typeof c.study_meta === 'object' ? c.study_meta : {};
-        var keywords = Array.isArray(c.keywords) ? c.keywords : [];
-        var keywordInsights = Array.isArray(c.keyword_insights) ? c.keyword_insights : [];
-        var application = Array.isArray(c.application) ? c.application : [];
-        var observationGuide = Array.isArray(c.observation_guide) ? c.observation_guide : [];
-        var questions = Array.isArray(c.questions) ? c.questions : [];
-        var studyTips = Array.isArray(c.study_tips) ? c.study_tips : [];
         var sciences = Array.isArray(c.biblical_sciences) ? c.biblical_sciences : [];
         var customsNotes = Array.isArray(c.customs_notes) ? c.customs_notes : [];
-        var originalLanguage = Array.isArray(c.original_language) ? c.original_language : [];
+        var canonicalLinks = Array.isArray(c.canonical_links) ? c.canonical_links : [];
         var crossReferences = Array.isArray(payload.cross_references) ? payload.cross_references : [];
         var mainIdea = String(c.main_idea || '').trim();
         var referenceLabel = String((payload.reference && payload.reference.label) || '');
+        var historical = cleanText(c.historical || '');
+        var literary = cleanText(c.literary || '');
+        var canonical = cleanText(c.canonical || '');
+        var chapterFunction = String(meta.chapter_function || '').trim();
+        var bookTheme = String(meta.book_theme || '').trim();
+        var historyMatcher = /(fecha|siglo|periodo|reinado|reino|imperio|romano|roma|exilio|postexil|templo|cronolog|dominio|gobierno|provincia|histori)/i;
+        var archaeologyMatcher = /(arqueo|excava|inscrip|hallazgo|estela|tablilla|manuscrito|ruina|sitio|osario|sinagoga|templo|calzada|camino|puerto|ciudad|imperio|roma)/i;
 
         var quickPills = [];
         if (meta.corpus) {
@@ -1432,40 +1433,63 @@
             quickPills.push('<span class="context-pill">' + Number(meta.word_count || 0) + ' palabras aprox.</span>');
         }
 
-        var keywordHtml = keywords.length ? keywords.map(function (word) {
-            return '<span class="chip">' + escapeHtml(word) + '</span>';
-        }).join('') : '<span class="muted">Sin términos destacados.</span>';
-        var keywordInsightHtml = keywordInsights.length ? '<ul class="context-list">' + keywordInsights.map(function (item) {
-            var refs = Array.isArray(item.references) ? item.references.filter(Boolean) : [];
-            var refsHtml = refs.length ? ('<small class="muted"><strong>Referencias:</strong> ' + escapeHtml(refs.slice(0, 4).join(' · ')) + '</small>') : '';
-            var sourceHtml = item.source ? ('<small class="muted"><strong>Fuente:</strong> ' + escapeHtml(item.source) + '</small>') : '';
-            var cleanMeaning = stripDefinitionPrefix(item.meaning || '');
-            return '' +
-                '<li class="context-word-item">' +
-                '<strong>' + escapeHtml(item.term || '') + '</strong>' +
-                '<small><strong>Definición:</strong> ' + escapeHtml(cleanMeaning) + '</small>' +
-                (item.study_use ? '<small class="muted"><strong>Uso en estudio:</strong> ' + escapeHtml(item.study_use) + '</small>' : '') +
-                refsHtml +
-                sourceHtml +
-                '</li>';
-        }).join('') + '</ul>' : '<p class="muted">Sin desarrollo de términos para este pasaje.</p>';
+        var introNotes = [];
+        if (bookTheme) {
+            introNotes.push('<li><strong>Tema del libro:</strong> ' + escapeHtml(bookTheme) + '</li>');
+        }
+        if (chapterFunction) {
+            introNotes.push('<li><strong>Función del pasaje:</strong> ' + escapeHtml(chapterFunction) + '</li>');
+        }
+        if (literary) {
+            introNotes.push('<li><strong>Lectura de la unidad:</strong> ' + escapeHtml(literary) + '</li>');
+        }
+        if (canonical) {
+            introNotes.push('<li><strong>Ubicación en la historia bíblica:</strong> ' + escapeHtml(canonical) + '</li>');
+        }
+        var introHtml = '' +
+            '<div class="card context-hero-card">' +
+            '<strong>Introducción del pasaje y del libro</strong>' +
+            '<p>' + escapeHtml(referenceLabel || String(c.title || '')) + '</p>' +
+            '<div class="context-pill-wrap">' + (quickPills.join('') || '<span class="muted">Sin metadatos disponibles.</span>') + '</div>' +
+            '<p class="context-main-idea">' + escapeHtml(mainIdea || c.simple_version || 'Sin introducción disponible.') + '</p>' +
+            (introNotes.length ? '<ul class="context-list">' + introNotes.join('') + '</ul>' : '<p class="muted">Sin notas introductorias adicionales.</p>') +
+            '</div>';
 
-        var questionsHtml = questions.length ? '<ul class="context-list">' + questions.map(function (q) {
-            return '<li>' + escapeHtml(q) + '</li>';
-        }).join('') + '</ul>' : '<p class="muted">Sin preguntas sugeridas.</p>';
+        var historyRows = sciences.filter(function (row) {
+            var haystack = [
+                String((row && row.area) || ''),
+                String((row && row.note) || ''),
+                String((row && row.detail) || ''),
+                Array.isArray(row && row.examples) ? row.examples.join(' ') : ''
+            ].join(' ');
+            return historyMatcher.test(haystack);
+        });
+        var historicalHtml = '<div class="card"><strong>Fechas y marco histórico</strong>' +
+            '<p>' + escapeHtml(historical || 'Sin marco histórico disponible para este pasaje.') + '</p>';
+        if (historyRows.length) {
+            historicalHtml += '<ul class="context-list">' + historyRows.map(function (row) {
+                var detail = row && row.detail ? String(row.detail) : '';
+                var examples = row && Array.isArray(row.examples) ? row.examples.filter(Boolean).slice(0, 4) : [];
+                return '<li class="context-word-item">' +
+                    '<strong>' + escapeHtml(String((row && row.area) || 'Dato histórico')) + '</strong>' +
+                    '<small>' + escapeHtml(String((row && row.note) || '')) + '</small>' +
+                    (detail ? '<small class="muted">' + escapeHtml(detail) + '</small>' : '') +
+                    (examples.length ? '<small class="muted"><strong>Apoyos:</strong> ' + escapeHtml(examples.join(' | ')) + '</small>' : '') +
+                    '</li>';
+            }).join('') + '</ul>';
+        }
+        historicalHtml += '</div>';
 
-        var tipsHtml = studyTips.length ? '<ul class="context-list">' + studyTips.map(function (tip) {
-            return '<li>' + escapeHtml(tip) + '</li>';
-        }).join('') + '</ul>' : '<p class="muted">Sin recomendaciones adicionales.</p>';
-
-        var applicationHtml = application.length ? '<ol class="context-list">' + application.map(function (line) {
-            return '<li>' + escapeHtml(line) + '</li>';
-        }).join('') + '</ol>' : '<p class="muted">Sin aplicación sugerida.</p>';
-
-        var guideHtml = observationGuide.length ? '<ol class="context-list">' + observationGuide.map(function (line) {
-            return '<li>' + escapeHtml(line) + '</li>';
-        }).join('') + '</ol>' : '<p class="muted">Sin ruta de estudio sugerida.</p>';
-        var sciencesHtml = sciences.length ? '<ul class="context-list">' + sciences.map(function (row) {
+        var archaeologyRows = sciences.filter(function (row) {
+            var haystack = [
+                String((row && row.area) || ''),
+                String((row && row.note) || ''),
+                String((row && row.detail) || ''),
+                Array.isArray(row && row.examples) ? row.examples.join(' ') : ''
+            ].join(' ');
+            return archaeologyMatcher.test(haystack);
+        });
+        var archaeologyHtml = archaeologyRows.length ? '<ul class="context-list">' + archaeologyRows.map(function (row) {
             var area = row && row.area ? String(row.area) : '';
             var note = row && row.note ? String(row.note) : '';
             var detail = row && row.detail ? String(row.detail) : '';
@@ -1473,27 +1497,11 @@
             var detailHtml = detail ? ('<small class="muted"><strong>Detalle:</strong> ' + escapeHtml(detail) + '</small>') : '';
             var examplesHtml = examples.length ? ('<small class="muted"><strong>Ejemplos:</strong> ' + escapeHtml(examples.join(' | ')) + '</small>') : '';
             return '<li><strong>' + escapeHtml(area) + ':</strong> ' + escapeHtml(note) + detailHtml + examplesHtml + '</li>';
-        }).join('') + '</ul>' : '<p class="muted">Sin observaciones de ciencias bíblicas para este pasaje.</p>';
+        }).join('') + '</ul>' : '<p class="muted">No hay datos arqueológicos o históricos verificables destacados para esta selección.</p>';
         var customsHtml = customsNotes.length ? '<ul class="context-list">' + customsNotes.map(function (line) {
             return '<li>' + escapeHtml(line) + '</li>';
         }).join('') + '</ul>' : '<p class="muted">Sin notas de usos y costumbres detectadas.</p>';
-        var originalLanguageHtml = originalLanguage.length ? '<div class="lang-note-grid">' + originalLanguage.map(function (row) {
-            var language = String(row.language || '').trim();
-            var trans = String(row.transliteration || '').trim();
-            var code = String(row.strong_code || '').trim();
-            var source = String(row.source || '').trim();
-            return '' +
-                '<article class="card lang-note">' +
-                '<div class="lang-note-head">' +
-                '<strong>' + escapeHtml(String(row.term || '')) + '</strong>' +
-                (language ? '<span class="lang-badge">' + escapeHtml(language) + '</span>' : '') +
-                '</div>' +
-                (trans ? '<small class="muted"><strong>Translit.:</strong> ' + escapeHtml(trans) + '</small>' : '') +
-                '<p><strong>Sentido:</strong> ' + escapeHtml(String(row.meaning || '')) + '</p>' +
-                (row.nuance ? '<small class="muted"><strong>Matiz:</strong> ' + escapeHtml(String(row.nuance || '')) + '</small>' : '') +
-                ((code || source) ? '<small class="muted">' + (code ? ('<strong>' + escapeHtml(code) + '</strong> · ') : '') + escapeHtml(source) + '</small>' : '') +
-                '</article>';
-        }).join('') + '</div>' : '<p class="muted">Sin notas de idioma original para este pasaje.</p>';
+        var canonicalLinksHtml = canonicalLinks.length ? '<div class="context-word-item"><strong>Conexiones del mismo tema</strong><small>' + escapeHtml(canonicalLinks.join(' | ')) + '</small></div>' : '';
         var crossRefHtml = crossReferences.length
             ? '<ul class="context-list">' + crossReferences.map(function (row) {
                 var terms = Array.isArray(row.match_terms) ? row.match_terms.filter(Boolean) : [];
@@ -1512,33 +1520,12 @@
             }).join('') + '</ul>'
             : '<p class="muted">Sin referencias automáticas para este pasaje.</p>';
 
-        var chapterFunction = String(meta.chapter_function || '').trim();
-        var bookTheme = String(meta.book_theme || '').trim();
-        var methodHint = String(meta.method_hint || '').trim();
-
         els.contextPanel.innerHTML = '' +
-            '<div class="card context-hero-card">' +
-            '<strong>Panorama del pasaje</strong>' +
-            '<p>' + escapeHtml(referenceLabel) + '</p>' +
-            '<div class="context-pill-wrap">' + (quickPills.join('') || '<span class="muted">Sin metadatos disponibles.</span>') + '</div>' +
-            (chapterFunction ? '<small class="muted"><strong>Función del capítulo:</strong> ' + escapeHtml(chapterFunction) + '</small>' : '') +
-            (bookTheme ? '<small class="muted"><strong>Tema del libro:</strong> ' + escapeHtml(bookTheme) + '</small>' : '') +
-            (methodHint ? '<small class="muted"><strong>Método sugerido:</strong> ' + escapeHtml(methodHint) + '</small>' : '') +
-            '</div>' +
-            '<div class="card"><strong>Idea central</strong><p class="context-main-idea">' + escapeHtml(mainIdea || c.simple_version || '') + '</p></div>' +
-            '<div class="card"><strong>Aplicación práctica</strong>' + applicationHtml + '</div>' +
-            '<div class="card"><strong>Referencias cruzadas automáticas</strong>' + crossRefHtml + '</div>' +
-            '<div class="card"><strong>Ruta de estudio</strong>' + guideHtml + '</div>' +
-            '<div class="card"><strong>Idioma original (hebreo/griego)</strong>' + originalLanguageHtml + '</div>' +
-            '<div class="card"><strong>Ciencias bíblicas aplicadas</strong>' + sciencesHtml + '</div>' +
-            '<div class="card"><strong>Usos y costumbres del pasaje</strong>' + customsHtml + '</div>' +
-            '<div class="card"><strong>Términos clave</strong><div class="context-chip-wrap">' + keywordHtml + '</div></div>' +
-            '<div class="card"><strong>Significado de palabras clave</strong>' + keywordInsightHtml + '</div>' +
-            '<details class="card context-detail-card">' +
-            '<summary><strong>Preguntas y pistas de observación</strong></summary>' +
-            '<div><strong>Preguntas de estudio</strong>' + questionsHtml + '</div>' +
-            '<div><strong>Pistas de observación</strong>' + tipsHtml + '</div>' +
-            '</details>';
+            introHtml +
+            historicalHtml +
+            '<div class="card"><strong>Pruebas arqueológicas y datos históricos</strong>' + archaeologyHtml + '</div>' +
+            '<div class="card"><strong>Costumbres y usos bíblicos</strong>' + customsHtml + '</div>' +
+            '<div class="card"><strong>Referencias cruzadas del mismo tema</strong>' + canonicalLinksHtml + crossRefHtml + '</div>';
 
         els.contextPanel.querySelectorAll('.js-open-cross-ref').forEach(function (btn) {
             btn.addEventListener('click', function () {
