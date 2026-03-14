@@ -127,6 +127,140 @@ if (!function_exists('app_redirect')) {
     }
 }
 
+if (!function_exists('app_route_url')) {
+    function app_route_url($route, array $params = [])
+    {
+        $query = array_merge(['route' => trim((string) $route)], $params);
+        foreach ($query as $key => $value) {
+            if ($value === null) {
+                unset($query[$key]);
+                continue;
+            }
+            if (is_string($value) && trim($value) === '') {
+                unset($query[$key]);
+            }
+        }
+
+        return '?' . http_build_query($query);
+    }
+}
+
+if (!function_exists('app_current_relative_url')) {
+    function app_current_relative_url()
+    {
+        $query = $_GET;
+        if (!isset($query['route']) || trim((string) $query['route']) === '') {
+            $query['route'] = 'home_daily';
+        }
+
+        return '?' . http_build_query($query);
+    }
+}
+
+if (!function_exists('feature_access_catalog')) {
+    function feature_access_catalog()
+    {
+        static $catalog = null;
+        if ($catalog !== null) {
+            return $catalog;
+        }
+
+        $sharedBenefits = [
+            'Desbloquea gratis todas las funciones avanzadas de estudio, seguimiento y organización.',
+            'Recibe avisos de nuevos recursos bíblicos y de eventos online o presenciales en tu ciudad.',
+            'Tu registro ayuda a seguir impulsando el estudio de la Biblia y a llegar a más lugares con el evangelio.',
+        ];
+
+        $catalog = [
+            'advanced_tools' => [
+                'badge' => 'Acceso gratuito con registro',
+                'title' => 'Activa tus herramientas avanzadas de lectura',
+                'lead' => 'La lectura bíblica sigue abierta para todos. Para usar notas, vínculos, proyectos, subrayados, respaldo y demás ayudas personales, crea tu cuenta gratis o inicia sesión.',
+                'error' => 'Inicia sesión o regístrate gratis para usar esta herramienta.',
+                'feature_items' => [
+                    'Centro de estudio con proyectos y materiales guardados.',
+                    'Notas, vínculos, subrayados y respaldo por cuenta.',
+                    'Devocionales, anécdotas y recursos personalizados.',
+                    'Notificaciones de nuevos recursos y eventos.',
+                ],
+                'benefits' => $sharedBenefits,
+                'primary_cta' => 'Crear cuenta gratis',
+                'secondary_cta' => 'Ya tengo cuenta',
+            ],
+            'study_center' => [
+                'badge' => 'Centro de estudio',
+                'title' => 'Entra a tu centro de estudio personal',
+                'lead' => 'Aquí podrás organizar proyectos, guardar comentarios, términos Strong, notas de pasaje y materiales listos para enseñar. El acceso es gratuito con registro.',
+                'error' => 'Regístrate o inicia sesión para usar el Centro de estudio.',
+                'feature_items' => [
+                    'Proyectos de estudio por tema, serie o predicación.',
+                    'Guardado de notas, comentarios y términos clave.',
+                    'Organización del trabajo bíblico por pasaje y referencia.',
+                ],
+                'benefits' => $sharedBenefits,
+                'primary_cta' => 'Crear mi cuenta gratis',
+                'secondary_cta' => 'Ingresar',
+            ],
+            'devotional' => [
+                'badge' => 'Devocionales y recursos',
+                'title' => 'Recibe devocionales y recursos personalizados',
+                'lead' => 'Al iniciar sesión podrás guardar tu historial devocional, recibir nuevos recursos y mantener una experiencia personal de lectura y aplicación sin costo.',
+                'error' => 'Regístrate o inicia sesión para abrir Devocionales.',
+                'feature_items' => [
+                    'Historial devocional por cuenta.',
+                    'Aplicaciones prácticas y recursos nuevos.',
+                    'Avisos de eventos online y presenciales.',
+                ],
+                'benefits' => $sharedBenefits,
+                'primary_cta' => 'Quiero registrarme gratis',
+                'secondary_cta' => 'Ya tengo acceso',
+            ],
+            'anecdotes' => [
+                'badge' => 'Anécdotas y apoyo a enseñanza',
+                'title' => 'Abre las anécdotas y ayudas de predicación',
+                'lead' => 'Las anécdotas, apoyos para enseñanza y recursos complementarios requieren una cuenta gratuita para mantener tu historial y seguir fortaleciendo la expansión del estudio bíblico.',
+                'error' => 'Regístrate o inicia sesión para abrir Anécdotas.',
+                'feature_items' => [
+                    'Anécdotas listas para predicar y enseñar.',
+                    'Favoritos y seguimiento por cuenta.',
+                    'Nuevos recursos y avisos ministeriales.',
+                ],
+                'benefits' => $sharedBenefits,
+                'primary_cta' => 'Crear cuenta gratis',
+                'secondary_cta' => 'Ingresar ahora',
+            ],
+        ];
+
+        return $catalog;
+    }
+}
+
+if (!function_exists('feature_access_payload')) {
+    function feature_access_payload($featureKey = 'advanced_tools', $nextUrl = '')
+    {
+        $catalog = feature_access_catalog();
+        $featureKey = trim((string) $featureKey);
+        if ($featureKey === '' || !isset($catalog[$featureKey])) {
+            $featureKey = 'advanced_tools';
+        }
+
+        $payload = $catalog[$featureKey];
+        $nextUrl = trim((string) $nextUrl);
+
+        $payload['key'] = $featureKey;
+        $payload['next'] = $nextUrl;
+        $payload['login_url'] = app_route_url('login', $nextUrl !== '' ? ['next' => $nextUrl] : []);
+        $payload['register_url'] = app_route_url('register', $nextUrl !== '' ? ['next' => $nextUrl] : []);
+        $payload['reader_url'] = app_route_url('reader', ['skip_daily' => 1]);
+        $payload['website_url'] = (string) config('branding.website_url', 'https://www.laiglesiaenlacalle.co');
+        $payload['church_name'] = (string) config('branding.church_name', 'Fundación La Iglesia en la Calle');
+        $payload['app_name'] = (string) config('branding.app_name', 'Biblia para todos');
+        $payload['app_short'] = (string) config('branding.app_short', 'BIBLIASOFT');
+
+        return $payload;
+    }
+}
+
 if (!function_exists('auth_user_id')) {
     function auth_user_id()
     {

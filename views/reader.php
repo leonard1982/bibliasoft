@@ -15,6 +15,7 @@ $initial = [
     'auth' => [
         'is_logged' => auth_user_id() > 0,
         'username' => auth_username(),
+        'gate' => feature_access_payload('advanced_tools', app_current_relative_url()),
     ],
     'branding' => [
         'app_name' => (string) config('branding.app_name', 'Biblia para todos'),
@@ -136,6 +137,13 @@ $initial = [
     </section>
 
     <div id="mobileOverlay" class="overlay hidden"></div>
+    <div id="readerAuthGateModal" class="settings hidden auth-gate-modal" role="dialog" aria-modal="true" aria-label="Acceso requerido">
+        <header>
+            <h3><img src="assets/icons/register.svg" alt="" class="ico"> Accede gratis para continuar</h3>
+            <button class="btn-light" id="closeReaderAuthGate" type="button">Cerrar</button>
+        </header>
+        <div id="readerAuthGateBody" class="auth-gate-modal-body"></div>
+    </div>
     <div id="guideSpotlight" class="guide-spotlight hidden" aria-hidden="true">
         <div class="guide-spot-shadow guide-spot-top"></div>
         <div class="guide-spot-shadow guide-spot-left"></div>

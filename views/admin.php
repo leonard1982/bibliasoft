@@ -247,7 +247,7 @@ $buildAdminUrl = static function (array $overrides = []) use ($adminRoute, $user
                         <span>Evento</span>
                         <select name="etype">
                             <option value="all">Todos</option>
-                            <?php foreach (['page.view', 'auth.login', 'auth.register', 'admin.user.update', 'admin.user.toggle', 'admin.user.delete', 'admin.backup.create', 'admin.mail.template.save', 'admin.mail.list.save', 'admin.mail.campaign.send'] as $type): ?>
+                            <?php foreach (['page.view', 'auth.login', 'auth.register', 'admin.user.update', 'admin.user.toggle', 'admin.user.delete', 'admin.backup.create', 'admin.mail.template.save', 'admin.mail.template.generate', 'admin.mail.template.test', 'admin.mail.list.save', 'admin.mail.campaign.send'] as $type): ?>
                                 <option value="<?php echo e($type); ?>" <?php echo ((string) ($eventFilters['event_type'] ?? '') === $type) ? 'selected' : ''; ?>><?php echo e($type); ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -362,35 +362,126 @@ $buildAdminUrl = static function (array $overrides = []) use ($adminRoute, $user
 
         <section class="card admin-template-panel">
             <div class="admin-section-head">
-                <div><strong>Plantillas de correo</strong><small class="muted">Edita bienvenida y newsletters con HTML, CSS, texto plano y variables.</small></div>
+                <div><strong>Plantillas de correo</strong><small class="muted">Editor visual con HTML/CSS, imágenes, vista previa, IA y envío de prueba.</small></div>
             </div>
-            <div class="admin-template-tools">
-                <div class="admin-template-list">
-                    <?php foreach ($templatesRows as $template): ?>
-                        <button type="button" class="btn-light admin-template-load" data-template='<?php echo e(app_json_safe($template)); ?>'><?php echo e((string) ($template['name'] ?? 'Plantilla')); ?></button>
-                    <?php endforeach; ?>
-                </div>
-                <div class="admin-variable-list">
-                    <?php foreach ($mailTemplateVariables as $token): ?>
-                        <button type="button" class="btn-light admin-token-btn" data-token="<?php echo e($token); ?>"><?php echo e($token); ?></button>
-                    <?php endforeach; ?>
+            <div class="admin-template-workbench">
+                <aside class="admin-template-sidebar">
+                    <section class="admin-template-sidebar-card">
+                        <strong>Plantillas guardadas</strong>
+                        <div class="admin-template-list">
+                            <?php foreach ($templatesRows as $template): ?>
+                                <button type="button" class="btn-light admin-template-load" data-template='<?php echo e(app_json_safe($template)); ?>'><?php echo e((string) ($template['name'] ?? 'Plantilla')); ?></button>
+                            <?php endforeach; ?>
+                        </div>
+                    </section>
+                    <section class="admin-template-sidebar-card">
+                        <strong>Variables disponibles</strong>
+                        <div class="admin-variable-list">
+                            <?php foreach ($mailTemplateVariables as $token): ?>
+                                <button type="button" class="btn-light admin-token-btn" data-token="<?php echo e($token); ?>"><?php echo e($token); ?></button>
+                            <?php endforeach; ?>
+                        </div>
+                    </section>
+                    <section class="admin-template-sidebar-card">
+                        <strong>Bloques rápidos</strong>
+                        <div class="admin-variable-list">
+                            <button type="button" class="btn-light admin-block-btn" data-block="hero">Hero</button>
+                            <button type="button" class="btn-light admin-block-btn" data-block="card">Tarjeta</button>
+                            <button type="button" class="btn-light admin-block-btn" data-block="cta">Botón CTA</button>
+                            <button type="button" class="btn-light admin-block-btn" data-block="divider">Separador</button>
+                            <button type="button" class="btn-light admin-block-btn" data-block="events">Eventos</button>
+                        </div>
+                    </section>
+                </aside>
+
+                <div class="admin-template-main">
+                    <form method="post" action="?route=<?php echo e($adminActionRouteBase); ?>.mail.templates.save" class="admin-template-form" id="mailTemplateForm">
+                        <?php echo csrf_field(); ?>
+                        <input type="hidden" name="id" id="mailTemplateId" value="0">
+                        <input type="file" id="mailTemplateImageUpload" accept="image/*" class="hidden">
+
+                        <div class="settings-grid">
+                            <label><span>Clave</span><input type="text" name="template_key" id="mailTemplateKey" placeholder="welcome_default"></label>
+                            <label><span>Nombre</span><input type="text" name="name" id="mailTemplateName" placeholder="Nombre interno"></label>
+                            <label><span>Categoría</span><select name="category" id="mailTemplateCategory"><option value="welcome">Bienvenida</option><option value="campaign">Campaña / noticias</option></select></label>
+                            <label class="admin-checkline"><input type="checkbox" name="enabled" id="mailTemplateEnabled" checked><span>Habilitada</span></label>
+                        </div>
+
+                        <label><span>Asunto</span><input type="text" name="subject_template" id="mailTemplateSubject" placeholder="Asunto con variables"></label>
+
+                        <div class="admin-template-tabs" id="mailTemplateTabs">
+                            <button type="button" class="admin-template-tab is-active" data-tab="visual">Visual</button>
+                            <button type="button" class="admin-template-tab" data-tab="code">Código</button>
+                            <button type="button" class="admin-template-tab" data-tab="preview">Vista previa</button>
+                            <button type="button" class="admin-template-tab" data-tab="ai">IA y prueba</button>
+                        </div>
+
+                        <section class="admin-template-panel-body is-active" data-panel="visual">
+                            <div class="admin-editor-toolbar">
+                                <button type="button" class="btn-light admin-editor-cmd" data-cmd="bold"><strong>B</strong></button>
+                                <button type="button" class="btn-light admin-editor-cmd" data-cmd="italic"><em>I</em></button>
+                                <button type="button" class="btn-light admin-editor-cmd" data-cmd="underline"><u>U</u></button>
+                                <button type="button" class="btn-light admin-editor-block" data-block-tag="h1">H1</button>
+                                <button type="button" class="btn-light admin-editor-block" data-block-tag="h2">H2</button>
+                                <button type="button" class="btn-light admin-editor-block" data-block-tag="p">Párrafo</button>
+                                <button type="button" class="btn-light admin-editor-cmd" data-cmd="insertUnorderedList">Lista</button>
+                                <button type="button" class="btn-light admin-editor-cmd" data-cmd="insertOrderedList">1.2.3</button>
+                                <button type="button" class="btn-light" id="mailTemplateInsertLink">Enlace</button>
+                                <button type="button" class="btn-light" id="mailTemplateInsertImageUrl">Imagen URL</button>
+                                <button type="button" class="btn-light" id="mailTemplateInsertImageFile">Subir imagen</button>
+                                <button type="button" class="btn-light" id="mailTemplateClearFormat">Limpiar</button>
+                            </div>
+                            <div class="admin-template-visual-wrap">
+                                <div id="mailTemplateVisual" class="admin-template-visual" contenteditable="true"></div>
+                            </div>
+                        </section>
+
+                        <section class="admin-template-panel-body" data-panel="code">
+                            <div class="admin-template-code-grid">
+                                <label><span>CSS</span><textarea name="css_template" id="mailTemplateCss" rows="12" placeholder="CSS para el correo"></textarea></label>
+                                <label><span>HTML fuente</span><textarea name="html_template" id="mailTemplateHtml" rows="18" placeholder="HTML del correo"></textarea></label>
+                                <label class="admin-template-full"><span>Texto plano</span><textarea name="text_template" id="mailTemplateText" rows="10" placeholder="Versión texto"></textarea></label>
+                            </div>
+                        </section>
+
+                        <section class="admin-template-panel-body" data-panel="preview">
+                            <div class="admin-template-preview-wrap">
+                                <strong>Vista previa</strong>
+                                <iframe id="mailTemplatePreview" class="admin-template-preview" title="Vista previa de plantilla"></iframe>
+                            </div>
+                        </section>
+
+                        <section class="admin-template-panel-body" data-panel="ai">
+                            <div class="admin-template-ai-grid">
+                                <div class="settings-grid">
+                                    <label><span>Objetivo</span><input type="text" id="mailAiGoal" placeholder="Qué debe lograr este correo"></label>
+                                    <label><span>Audiencia</span><input type="text" id="mailAiAudience" placeholder="A quién va dirigido"></label>
+                                    <label><span>Tono</span><input type="text" id="mailAiTone" placeholder="Pastoral, cercano, institucional..."></label>
+                                    <label><span>CTA principal</span><input type="text" id="mailAiCta" placeholder="Entrar a BIBLIASOFT"></label>
+                                    <label class="admin-checkline"><input type="checkbox" id="mailAiIncludeEvents"><span>Incluir bloque de eventos</span></label>
+                                </div>
+                                <label><span>Instrucción adicional para IA</span><textarea id="mailAiPrompt" rows="5" placeholder="Ejemplo: usar tono familiar, resaltar discipulado, incluir invitación a evento presencial..."></textarea></label>
+                                <div class="settings-grid">
+                                    <label><span>Correo de prueba</span><input type="email" id="mailTemplateTestEmail" value="<?php echo e((string) $userEmail); ?>" placeholder="correo@dominio.com"></label>
+                                    <label><span>Nombre de prueba</span><input type="text" id="mailTemplateTestName" value="Juan Pérez"></label>
+                                    <label><span>Ministerio de prueba</span><input type="text" id="mailTemplateTestMinistry" value="Equipo pastoral"></label>
+                                </div>
+                                <div class="toolbar admin-template-ai-actions">
+                                    <button type="button" class="btn-light" id="mailTemplateGenerateAi">Crear con IA</button>
+                                    <button type="button" class="btn-light" id="mailTemplateSendTest">Enviar prueba</button>
+                                </div>
+                                <div id="mailTemplateStatus" class="admin-template-status muted">Desde aquí puedes generar un borrador completo con IA o enviar una prueba del diseño actual.</div>
+                            </div>
+                        </section>
+
+                        <div class="toolbar admin-template-footer">
+                            <button type="button" class="btn-light" id="mailTemplateReset">Nueva plantilla</button>
+                            <button type="button" class="btn-light" id="mailTemplateOpenPreview">Abrir vista previa</button>
+                            <button type="submit" class="btn-primary">Guardar plantilla</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <form method="post" action="?route=<?php echo e($adminActionRouteBase); ?>.mail.templates.save" class="admin-template-form">
-                <?php echo csrf_field(); ?><input type="hidden" name="id" id="mailTemplateId" value="0">
-                <div class="settings-grid">
-                    <label><span>Clave</span><input type="text" name="template_key" id="mailTemplateKey" placeholder="welcome_default"></label>
-                    <label><span>Nombre</span><input type="text" name="name" id="mailTemplateName" placeholder="Nombre interno"></label>
-                    <label><span>Categoría</span><select name="category" id="mailTemplateCategory"><option value="welcome">Bienvenida</option><option value="campaign">Campaña / noticias</option></select></label>
-                    <label class="admin-checkline"><input type="checkbox" name="enabled" id="mailTemplateEnabled" checked><span>Habilitada</span></label>
-                </div>
-                <label><span>Asunto</span><input type="text" name="subject_template" id="mailTemplateSubject" placeholder="Asunto con variables"></label>
-                <label><span>CSS</span><textarea name="css_template" id="mailTemplateCss" rows="8" placeholder="CSS inline para el correo"></textarea></label>
-                <label><span>HTML</span><textarea name="html_template" id="mailTemplateHtml" rows="12" placeholder="HTML del correo"></textarea></label>
-                <label><span>Texto plano</span><textarea name="text_template" id="mailTemplateText" rows="8" placeholder="Versión texto"></textarea></label>
-                <div class="toolbar"><button type="button" class="btn-light" id="mailTemplateReset">Nueva plantilla</button><button type="submit" class="btn-primary">Guardar plantilla</button></div>
-            </form>
-            <div class="admin-template-preview-wrap"><strong>Vista previa</strong><iframe id="mailTemplatePreview" class="admin-template-preview" title="Vista previa de plantilla"></iframe></div>
         </section>
     </div>
 
@@ -511,5 +602,383 @@ $buildAdminUrl = static function (array $overrides = []) use ($adminRoute, $user
     document.querySelectorAll('.admin-campaign-load').forEach(function (btn) { btn.addEventListener('click', function () { var row = {}; try { row = JSON.parse(this.getAttribute('data-campaign') || '{}'); } catch (err) {} campaignForm.id.value = row.id || 0; campaignForm.name.value = row.name || ''; campaignForm.templateId.value = row.template_id || ''; campaignForm.listId.value = row.list_id || ''; campaignForm.subject.value = row.subject_override || ''; campaignForm.html.value = row.content_html || ''; campaignForm.text.value = row.content_text || ''; }); });
     document.getElementById('campaignReset')?.addEventListener('click', resetCampaignForm);
     refreshTemplatePreview();
+})();
+</script>
+<script>
+(function () {
+    var csrfToken = <?php echo json_encode((string) $csrfToken); ?>;
+    var adminActionBase = <?php echo json_encode((string) $adminActionRouteBase); ?>;
+    var templateForm = {
+        form: document.getElementById('mailTemplateForm'),
+        id: document.getElementById('mailTemplateId'),
+        key: document.getElementById('mailTemplateKey'),
+        name: document.getElementById('mailTemplateName'),
+        category: document.getElementById('mailTemplateCategory'),
+        enabled: document.getElementById('mailTemplateEnabled'),
+        subject: document.getElementById('mailTemplateSubject'),
+        css: document.getElementById('mailTemplateCss'),
+        html: document.getElementById('mailTemplateHtml'),
+        text: document.getElementById('mailTemplateText'),
+        visual: document.getElementById('mailTemplateVisual'),
+        preview: document.getElementById('mailTemplatePreview'),
+        tabs: document.querySelectorAll('.admin-template-tab'),
+        panels: document.querySelectorAll('.admin-template-panel-body'),
+        status: document.getElementById('mailTemplateStatus'),
+        imageUpload: document.getElementById('mailTemplateImageUpload'),
+        aiGoal: document.getElementById('mailAiGoal'),
+        aiAudience: document.getElementById('mailAiAudience'),
+        aiTone: document.getElementById('mailAiTone'),
+        aiCta: document.getElementById('mailAiCta'),
+        aiPrompt: document.getElementById('mailAiPrompt'),
+        aiIncludeEvents: document.getElementById('mailAiIncludeEvents'),
+        testEmail: document.getElementById('mailTemplateTestEmail'),
+        testName: document.getElementById('mailTemplateTestName'),
+        testMinistry: document.getElementById('mailTemplateTestMinistry'),
+        reset: document.getElementById('mailTemplateReset'),
+        openPreview: document.getElementById('mailTemplateOpenPreview'),
+        generateAi: document.getElementById('mailTemplateGenerateAi'),
+        sendTest: document.getElementById('mailTemplateSendTest'),
+        insertLink: document.getElementById('mailTemplateInsertLink'),
+        insertImageUrl: document.getElementById('mailTemplateInsertImageUrl'),
+        insertImageFile: document.getElementById('mailTemplateInsertImageFile'),
+        clearFormat: document.getElementById('mailTemplateClearFormat')
+    };
+    var sample = {
+        '{{full_name}}': 'Juan Pérez',
+        '{{email}}': 'juan@example.com',
+        '{{ministry}}': 'Alabanza',
+        '{{ministry_line}}': 'Ministerio: Alabanza',
+        '{{campaign_name}}': 'Boletín semanal',
+        '{{content_html}}': '<p>Este es un bloque de prueba para el boletín.</p>',
+        '{{content_text}}': 'Este es un bloque de prueba para el boletín.',
+        '{{app_short}}': 'BIBLIASOFT',
+        '{{app_name}}': 'Biblia para todos',
+        '{{church_name}}': 'Fundación La Iglesia en la Calle',
+        '{{website_url}}': 'https://www.laiglesiaenlacalle.co',
+        '{{access_url}}': 'https://biblia.laiglesiaenlacalle.co'
+    };
+
+    if (!templateForm.form || !templateForm.visual || !templateForm.html) {
+        return;
+    }
+
+    function setStatus(message, tone) {
+        if (!templateForm.status) {
+            return;
+        }
+        templateForm.status.className = 'admin-template-status';
+        if (tone) {
+            templateForm.status.classList.add('is-' + tone);
+        } else {
+            templateForm.status.classList.add('muted');
+        }
+        templateForm.status.textContent = message || '';
+    }
+
+    function activateTab(name) {
+        Array.prototype.forEach.call(templateForm.tabs || [], function (tab) {
+            tab.classList.toggle('is-active', tab.getAttribute('data-tab') === name);
+        });
+        Array.prototype.forEach.call(templateForm.panels || [], function (panel) {
+            panel.classList.toggle('is-active', panel.getAttribute('data-panel') === name);
+        });
+        if (name === 'preview') {
+            refreshPreview();
+        }
+    }
+
+    function syncVisualFromSource() {
+        templateForm.visual.innerHTML = templateForm.html.value || '<p>Empieza aquí tu plantilla HTML.</p>';
+    }
+
+    function syncSourceFromVisual() {
+        templateForm.html.value = templateForm.visual.innerHTML || '';
+    }
+
+    function replaceTokens(raw) {
+        var result = String(raw || '');
+        Object.keys(sample).forEach(function (token) {
+            result = result.split(token).join(sample[token]);
+        });
+        return result;
+    }
+
+    function refreshPreview() {
+        if (!templateForm.preview) {
+            return;
+        }
+        syncSourceFromVisual();
+        var doc = templateForm.preview.contentDocument || templateForm.preview.contentWindow.document;
+        doc.open();
+        doc.write('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>' + (templateForm.subject.value || 'Vista previa') + '</title><style>' + (templateForm.css.value || '') + '</style></head><body>' + replaceTokens(templateForm.html.value || '') + '</body></html>');
+        doc.close();
+    }
+
+    function insertTextAtCursor(input, text) {
+        var value = input.value || '';
+        var start = input.selectionStart || 0;
+        var end = input.selectionEnd || 0;
+        input.value = value.slice(0, start) + text + value.slice(end);
+        input.focus();
+        input.selectionStart = input.selectionEnd = start + text.length;
+    }
+
+    function insertHtml(html) {
+        templateForm.visual.focus();
+        document.execCommand('insertHTML', false, html);
+        syncSourceFromVisual();
+        refreshPreview();
+    }
+
+    function adminPost(route, payload) {
+        return fetch('?route=' + encodeURIComponent(route), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+            body: new URLSearchParams(payload).toString()
+        }).then(function (res) { return res.json(); });
+    }
+
+    function collectPayload() {
+        syncSourceFromVisual();
+        return {
+            id: templateForm.id.value || '0',
+            template_key: templateForm.key.value || '',
+            name: templateForm.name.value || '',
+            category: templateForm.category.value || 'campaign',
+            enabled: templateForm.enabled.checked ? '1' : '',
+            subject_template: templateForm.subject.value || '',
+            css_template: templateForm.css.value || '',
+            html_template: templateForm.html.value || '',
+            text_template: templateForm.text.value || ''
+        };
+    }
+
+    function resetTemplate() {
+        templateForm.id.value = '0';
+        templateForm.key.value = '';
+        templateForm.name.value = '';
+        templateForm.category.value = 'campaign';
+        templateForm.enabled.checked = true;
+        templateForm.subject.value = '';
+        templateForm.css.value = '';
+        templateForm.html.value = '<div class="mail-wrap"><div class="mail-hero"><div class="mail-chip">Noticias y recursos</div><h1>{{campaign_name}}</h1><p>{{app_name}} · {{church_name}}</p></div><div class="mail-body"><p>Hola <strong>{{full_name}}</strong>,</p>{{content_html}}<p><a href="{{access_url}}" class="mail-cta">Entrar a {{app_short}}</a></p></div><div class="mail-footer">{{church_name}} · <a href="{{website_url}}">{{website_url}}</a></div></div>';
+        templateForm.text.value = 'Hola {{full_name}},\n\n{{content_text}}\n\n{{church_name}}\n{{website_url}}\n{{access_url}}';
+        templateForm.aiGoal.value = '';
+        templateForm.aiAudience.value = '';
+        templateForm.aiTone.value = '';
+        templateForm.aiCta.value = '';
+        templateForm.aiPrompt.value = '';
+        templateForm.aiIncludeEvents.checked = false;
+        syncVisualFromSource();
+        refreshPreview();
+        setStatus('Editor profesional listo. Puedes diseñar, generar con IA o enviar una prueba.', '');
+    }
+
+    function loadTemplate(row) {
+        templateForm.id.value = row.id || 0;
+        templateForm.key.value = row.template_key || '';
+        templateForm.name.value = row.name || '';
+        templateForm.category.value = row.category || 'campaign';
+        templateForm.enabled.checked = Number(row.enabled || 0) === 1;
+        templateForm.subject.value = row.subject_template || '';
+        templateForm.css.value = row.css_template || '';
+        templateForm.html.value = row.html_template || '';
+        templateForm.text.value = row.text_template || '';
+        syncVisualFromSource();
+        refreshPreview();
+        activateTab('visual');
+        setStatus('Plantilla cargada en el editor.', 'success');
+    }
+
+    function generateWithAi() {
+        setStatus('Generando borrador con IA...', 'loading');
+        adminPost(adminActionBase + '.mail.templates.generate', {
+            _csrf: csrfToken,
+            category: templateForm.category.value || 'campaign',
+            name: templateForm.name.value || '',
+            goal: templateForm.aiGoal.value || '',
+            audience: templateForm.aiAudience.value || '',
+            tone: templateForm.aiTone.value || '',
+            cta: templateForm.aiCta.value || '',
+            extra_prompt: templateForm.aiPrompt.value || '',
+            include_events: templateForm.aiIncludeEvents.checked ? '1' : ''
+        }).then(function (res) {
+            if (!res || res.error) {
+                throw new Error((res && res.error) ? res.error : 'No se pudo generar la plantilla.');
+            }
+            loadTemplate(res.template || {});
+            if (!templateForm.key.value && res.template && res.template.template_key) {
+                templateForm.key.value = res.template.template_key;
+            }
+            setStatus('Borrador generado. Revisa visual, código y vista previa antes de guardar.', 'success');
+        }).catch(function (err) {
+            setStatus((err && err.message) ? err.message : 'No se pudo generar la plantilla.', 'error');
+        });
+    }
+
+    function sendTest() {
+        var payload = collectPayload();
+        payload._csrf = csrfToken;
+        payload.test_email = templateForm.testEmail.value || '';
+        payload.test_name = templateForm.testName.value || '';
+        payload.test_ministry = templateForm.testMinistry.value || '';
+        setStatus('Enviando correo de prueba...', 'loading');
+        adminPost(adminActionBase + '.mail.templates.test', payload).then(function (res) {
+            if (!res || res.error) {
+                throw new Error((res && res.error) ? res.error : 'No se pudo enviar la prueba.');
+            }
+            setStatus(res.message || 'Correo de prueba enviado.', 'success');
+        }).catch(function (err) {
+            setStatus((err && err.message) ? err.message : 'No se pudo enviar la prueba.', 'error');
+        });
+    }
+
+    document.querySelectorAll('.admin-template-load').forEach(function (btn) {
+        btn.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            var row = {};
+            try {
+                row = JSON.parse(this.getAttribute('data-template') || '{}');
+            } catch (err) {
+                row = {};
+            }
+            loadTemplate(row);
+        }, true);
+    });
+
+    document.querySelectorAll('.admin-token-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            var token = this.getAttribute('data-token') || '';
+            var active = document.activeElement;
+            if (active && /^(INPUT|TEXTAREA)$/i.test(active.tagName)) {
+                insertTextAtCursor(active, token);
+                refreshPreview();
+                return;
+            }
+            insertHtml(token);
+        }, true);
+    });
+
+    document.querySelectorAll('.admin-block-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var block = this.getAttribute('data-block') || 'card';
+            var snippets = {
+                hero: '<section class="mail-card"><h2>{{campaign_name}}</h2><p>Resumen principal del mensaje, llamado pastoral y dirección clara para el lector.</p></section>',
+                card: '<div class="mail-card"><h3>Título del bloque</h3><p>Contenido destacado con enfoque claro y aplicable.</p></div>',
+                cta: '<p><a href="{{access_url}}" class="mail-cta">Ir ahora a {{app_short}}</a></p>',
+                divider: '<hr style="border:none;border-top:1px solid #d8e5ee;margin:24px 0;">',
+                events: '<div class="mail-card"><h3>Eventos y comunidad</h3><p>Próximamente compartiremos encuentros online y presenciales en tu ciudad.</p></div>'
+            };
+            insertHtml(snippets[block] || snippets.card);
+        });
+    });
+
+    document.querySelectorAll('.admin-template-tab').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            activateTab(this.getAttribute('data-tab') || 'visual');
+        });
+    });
+
+    document.querySelectorAll('.admin-editor-cmd').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            templateForm.visual.focus();
+            document.execCommand(this.getAttribute('data-cmd') || '', false, null);
+            syncSourceFromVisual();
+            refreshPreview();
+        });
+    });
+
+    document.querySelectorAll('.admin-editor-block').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            templateForm.visual.focus();
+            document.execCommand('formatBlock', false, this.getAttribute('data-block-tag') || 'p');
+            syncSourceFromVisual();
+            refreshPreview();
+        });
+    });
+
+    templateForm.insertLink?.addEventListener('click', function () {
+        var url = window.prompt('URL del enlace', 'https://');
+        if (!url) {
+            return;
+        }
+        var text = window.prompt('Texto del enlace', 'Abrir recurso');
+        insertHtml('<a href="' + String(url).replace(/"/g, '&quot;') + '">' + (text || url) + '</a>');
+    });
+
+    templateForm.insertImageUrl?.addEventListener('click', function () {
+        var url = window.prompt('URL de la imagen', 'https://');
+        if (!url) {
+            return;
+        }
+        var alt = window.prompt('Texto alternativo', 'Imagen del correo');
+        insertHtml('<p><img src="' + String(url).replace(/"/g, '&quot;') + '" alt="' + String(alt || '').replace(/"/g, '&quot;') + '" style="max-width:100%;border-radius:16px;display:block;"></p>');
+    });
+
+    templateForm.insertImageFile?.addEventListener('click', function () {
+        templateForm.imageUpload?.click();
+    });
+
+    templateForm.imageUpload?.addEventListener('change', function () {
+        var file = this.files && this.files[0] ? this.files[0] : null;
+        if (!file) {
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var src = event.target && event.target.result ? String(event.target.result) : '';
+            if (src) {
+                insertHtml('<p><img src="' + src + '" alt="Imagen del correo" style="max-width:100%;border-radius:16px;display:block;"></p>');
+            }
+        };
+        reader.readAsDataURL(file);
+        templateForm.imageUpload.value = '';
+    });
+
+    templateForm.clearFormat?.addEventListener('click', function () {
+        templateForm.visual.focus();
+        document.execCommand('removeFormat', false, null);
+        syncSourceFromVisual();
+        refreshPreview();
+    });
+
+    templateForm.visual.addEventListener('input', function () {
+        syncSourceFromVisual();
+        refreshPreview();
+    });
+
+    [templateForm.subject, templateForm.css, templateForm.html, templateForm.text, templateForm.category, templateForm.name].forEach(function (field) {
+        field?.addEventListener('input', function () {
+            if (field === templateForm.html) {
+                syncVisualFromSource();
+            }
+            refreshPreview();
+        });
+        field?.addEventListener('change', function () {
+            if (field === templateForm.html) {
+                syncVisualFromSource();
+            }
+            refreshPreview();
+        });
+    });
+
+    templateForm.form.addEventListener('submit', function () {
+        syncSourceFromVisual();
+    });
+
+    templateForm.reset?.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        resetTemplate();
+    }, true);
+    templateForm.openPreview?.addEventListener('click', function () { activateTab('preview'); });
+    templateForm.generateAi?.addEventListener('click', generateWithAi);
+    templateForm.sendTest?.addEventListener('click', sendTest);
+
+    resetTemplate();
+    activateTab('visual');
 })();
 </script>

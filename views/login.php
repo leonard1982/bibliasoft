@@ -1,10 +1,10 @@
 <section class="auth-shell">
     <article class="auth-card auth-card-pro">
         <header class="auth-switch" role="tablist" aria-label="Acceso">
-            <a class="auth-switch-item is-active" href="?route=login" role="tab" aria-selected="true" title="Iniciar sesión">
+            <a class="auth-switch-item is-active" href="<?php echo e(app_route_url('login', !empty($next) ? ['next' => $next] : [])); ?>" role="tab" aria-selected="true" title="Iniciar sesión">
                 <img src="assets/icons/login.svg" alt="" class="auth-switch-ico"> Iniciar sesión
             </a>
-            <a class="auth-switch-item" href="?route=register" role="tab" aria-selected="false" title="Crear cuenta">
+            <a class="auth-switch-item" href="<?php echo e(app_route_url('register', !empty($next) ? ['next' => $next] : [])); ?>" role="tab" aria-selected="false" title="Crear cuenta">
                 <img src="assets/icons/register.svg" alt="" class="auth-switch-ico"> Registro
             </a>
         </header>
@@ -23,6 +23,9 @@
 
         <form method="post" action="?route=login.submit" class="auth-row auth-form-pro" id="loginForm">
             <?php echo csrf_field(); ?>
+            <?php if (!empty($next)): ?>
+                <input type="hidden" name="next" value="<?php echo e($next); ?>">
+            <?php endif; ?>
             <label class="auth-field">
                 <span class="auth-field-ico-wrap">
                     <img src="assets/icons/user.svg" alt="" class="auth-field-ico">
@@ -44,7 +47,7 @@
                 <label class="auth-check">
                     <input type="checkbox" id="rememberUser"> Recordar usuario
                 </label>
-                <a class="auth-meta-link" href="?route=register">Crear cuenta nueva</a>
+                <a class="auth-meta-link" href="<?php echo e(app_route_url('register', !empty($next) ? ['next' => $next] : [])); ?>">Crear cuenta nueva</a>
             </div>
 
             <div class="auth-actions">

@@ -1,10 +1,10 @@
 <section class="auth-shell">
     <article class="auth-card auth-card-pro">
         <header class="auth-switch" role="tablist" aria-label="Acceso">
-            <a class="auth-switch-item" href="?route=login" role="tab" aria-selected="false" title="Iniciar sesión">
+            <a class="auth-switch-item" href="<?php echo e(app_route_url('login', !empty($next) ? ['next' => $next] : [])); ?>" role="tab" aria-selected="false" title="Iniciar sesión">
                 <img src="assets/icons/login.svg" alt="" class="auth-switch-ico"> Iniciar sesión
             </a>
-            <a class="auth-switch-item is-active" href="?route=register" role="tab" aria-selected="true" title="Crear cuenta">
+            <a class="auth-switch-item is-active" href="<?php echo e(app_route_url('register', !empty($next) ? ['next' => $next] : [])); ?>" role="tab" aria-selected="true" title="Crear cuenta">
                 <img src="assets/icons/register.svg" alt="" class="auth-switch-ico"> Registro
             </a>
         </header>
@@ -23,6 +23,9 @@
 
         <form method="post" action="?route=register.submit" class="auth-row auth-form-pro">
             <?php echo csrf_field(); ?>
+            <?php if (!empty($next)): ?>
+                <input type="hidden" name="next" value="<?php echo e($next); ?>">
+            <?php endif; ?>
             <div class="auth-honeypot" aria-hidden="true">
                 <label for="contact_website">Si eres humano deja este campo vacío</label>
                 <input type="text" id="contact_website" name="contact_website" value="" autocomplete="new-password" tabindex="-1">
@@ -85,7 +88,7 @@
 
             <div class="auth-actions">
                 <button type="submit" class="btn-primary auth-submit">Crear cuenta</button>
-                <a href="?route=login" class="btn-light auth-back-login">Ya tengo cuenta</a>
+                <a href="<?php echo e(app_route_url('login', !empty($next) ? ['next' => $next] : [])); ?>" class="btn-light auth-back-login">Ya tengo cuenta</a>
             </div>
         </form>
     </article>

@@ -4858,7 +4858,7 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
 .study-center-grid {
     display: grid;
     gap: .78rem;
-    grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 1fr);
     align-items: start;
 }
 
@@ -4881,12 +4881,17 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     flex: 0 0 auto;
 }
 
-.study-center-grid.is-projects-collapsed {
-    grid-template-columns: minmax(0, 1fr);
+.study-empty-actions {
+    margin-top: .55rem;
 }
 
-.study-center-grid.is-projects-collapsed .study-projects-panel {
-    display: none;
+.study-projects-modal-card {
+    width: min(620px, calc(100vw - 24px));
+}
+
+.study-projects-modal-panel {
+    display: grid;
+    gap: .75rem;
 }
 
 .study-section-head {
@@ -4938,6 +4943,26 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
 }
 
 .study-form input[type="color"]::-moz-color-swatch {
+    border: 0;
+    border-radius: 10px;
+}
+
+.study-modal-fields input[type="color"] {
+    width: 100%;
+    min-height: 48px;
+    padding: .28rem;
+    border-radius: 14px;
+    border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+    background: color-mix(in srgb, var(--panel) 95%, var(--bg) 5%);
+    cursor: pointer;
+}
+
+.study-modal-fields input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.study-modal-fields input[type="color"]::-webkit-color-swatch,
+.study-modal-fields input[type="color"]::-moz-color-swatch {
     border: 0;
     border-radius: 10px;
 }
@@ -5174,6 +5199,17 @@ body.study-modal-open {
 .theme-dark .study-entry-card {
     border-color: color-mix(in srgb, #3d5e75 58%, var(--line));
     background: color-mix(in srgb, #172a38 72%, var(--panel) 28%);
+}
+
+.theme-dark .study-projects-modal-card,
+.theme-dark .study-modal-card {
+    background: linear-gradient(160deg, color-mix(in srgb, #132330 86%, var(--panel) 14%), color-mix(in srgb, #0f1c27 84%, var(--panel) 16%));
+}
+
+.theme-dark .study-form input[type="color"],
+.theme-dark .study-modal-fields input[type="color"] {
+    border-color: color-mix(in srgb, #3d5e75 58%, var(--line));
+    background: color-mix(in srgb, #142533 74%, var(--panel) 26%);
 }
 
 .theme-dark .study-project-item {
@@ -6432,6 +6468,32 @@ body.spacing-normal .verse {
 .sermon-result-card textarea {
     min-height: 520px;
     resize: vertical;
+}
+
+.theme-dark .sermon-lab-hero {
+    background:
+        radial-gradient(circle at top right, rgba(57, 142, 201, .18), transparent 32%),
+        linear-gradient(135deg, rgba(12, 27, 38, .98), rgba(18, 46, 63, .96));
+    border-color: rgba(66, 133, 181, .28);
+}
+
+.theme-dark .sermon-lab-kicker {
+    background: rgba(92, 176, 233, .12);
+    color: #a9ddff;
+    border-color: rgba(125, 192, 236, .22);
+}
+
+.theme-dark .sermon-lab-hero h1,
+.theme-dark .sermon-lab-hero .muted,
+.theme-dark .sermon-lab-hero-copy,
+.theme-dark .sermon-lab-hero-copy strong,
+.theme-dark .sermon-lab-list li {
+    color: #eef7fd;
+}
+
+.theme-dark .sermon-lab-hero-copy {
+    background: rgba(10, 24, 34, .54);
+    border-color: rgba(94, 157, 201, .16);
 }
 
 @media (max-width: 1100px) {

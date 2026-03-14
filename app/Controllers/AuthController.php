@@ -24,19 +24,24 @@ class AuthController
 
     public function loginForm()
     {
+        $next = $this->requestedNextTarget($_GET);
+
         app_render('login', [
             'pageTitle' => 'Ingresar',
             'error' => isset($_GET['error']) ? trim((string) $_GET['error']) : '',
+            'next' => $next,
         ]);
     }
 
     public function registerForm()
     {
         $_SESSION['register_form_started_at'] = time();
+        $next = $this->requestedNextTarget($_GET);
 
         app_render('register', [
             'pageTitle' => 'Registro',
             'error' => isset($_GET['error']) ? trim((string) $_GET['error']) : '',
+            'next' => $next,
             'recaptchaEnabled' => $this->recaptcha->enabled(),
             'recaptchaProvider' => $this->recaptcha->provider(),
             'recaptchaMode' => $this->recaptcha->mode(),
@@ -95,7 +100,7 @@ class AuthController
             'target_user_id' => (int) $user['id'],
         ], (int) $user['id']);
 
-        app_redirect('?route=reader');
+        app_redirect($this->postAuthRedirectTarget());
     }
 
     public function register()
@@ -192,7 +197,7 @@ class AuthController
             'ministry' => $ministry,
         ], $id);
 
-        app_redirect('?route=reader');
+        app_redirect($this->postAuthRedirectTarget());
     }
 
     public function logout()
@@ -443,6 +448,90 @@ class AuthController
         }
     }
 
+    public function adminMailTemplateGenerate()
+    {
+        $this->requireSuperAdmin();
+        if (!$this->verifyCsrf()) {
+            app_json(['error' => 'Token de seguridad inválido.'], 422);
+        }
+
+        try {
+            $draft = $this->generateMailTemplateDraft([
+                'category' => isset($_POST['category']) ? (string) $_POST['category'] : 'campaign',
+                'name' => isset($_POST['name']) ? (string) $_POST['name'] : '',
+                'goal' => isset($_POST['goal']) ? (string) $_POST['goal'] : '',
+                'audience' => isset($_POST['audience']) ? (string) $_POST['audience'] : '',
+                'tone' => isset($_POST['tone']) ? (string) $_POST['tone'] : '',
+                'cta' => isset($_POST['cta']) ? (string) $_POST['cta'] : '',
+                'extra_prompt' => isset($_POST['extra_prompt']) ? (string) $_POST['extra_prompt'] : '',
+                'include_events' => isset($_POST['include_events']) ? 1 : 0,
+            ]);
+            $this->logSecurity('admin.mail.template.generate', 'success', auth_user_email(), [
+                'category' => (string) ($draft['category'] ?? 'campaign'),
+                'name' => (string) ($draft['name'] ?? ''),
+            ], auth_user_id());
+            app_json([
+                'ok' => true,
+                'template' => $draft,
+            ]);
+        } catch (\Throwable $e) {
+            $this->logSecurity('admin.mail.template.generate', 'failed', auth_user_email(), [
+                'message' => $e->getMessage(),
+            ], auth_user_id());
+            app_json(['error' => $e->getMessage()], 422);
+        }
+    }
+
+    public function adminMailTemplateTest()
+    {
+        $this->requireSuperAdmin();
+        if (!$this->verifyCsrf()) {
+            app_json(['error' => 'Token de seguridad inválido.'], 422);
+        }
+        if (!$this->mail->enabled()) {
+            app_json(['error' => 'El SMTP no está habilitado en esta instalación.'], 422);
+        }
+
+        $toEmail = trim((string) ($_POST['test_email'] ?? auth_user_email()));
+        if ($toEmail === '' || !filter_var($toEmail, FILTER_VALIDATE_EMAIL)) {
+            app_json(['error' => 'Correo de prueba inválido.'], 422);
+        }
+
+        $category = trim((string) ($_POST['category'] ?? 'campaign'));
+        $template = [
+            'subject_template' => (string) ($_POST['subject_template'] ?? ''),
+            'css_template' => (string) ($_POST['css_template'] ?? ''),
+            'html_template' => (string) ($_POST['html_template'] ?? ''),
+            'text_template' => (string) ($_POST['text_template'] ?? ''),
+        ];
+        $testName = trim((string) ($_POST['test_name'] ?? 'Juan Pérez'));
+        $testMinistry = trim((string) ($_POST['test_ministry'] ?? 'Equipo pastoral'));
+        $campaignName = $category === 'welcome' ? 'Bienvenida de prueba' : 'Boletín de prueba';
+        $contentHtml = trim((string) ($_POST['test_content_html'] ?? '<p>Este es un envío de prueba generado desde el panel de superadministración.</p><p>Úsalo para validar diseño, espaciado, tipografía y visualización móvil.</p>'));
+        $contentText = trim((string) ($_POST['test_content_text'] ?? 'Este es un envío de prueba generado desde el panel de superadministración. Úsalo para validar diseño, espaciado, tipografía y visualización móvil.'));
+
+        try {
+            $message = $this->mail->composeTemplateMessage($template, $this->buildMailVariablesForRecipient([
+                'email' => $toEmail,
+                'full_name' => $testName,
+                'ministry' => $testMinistry,
+            ], $campaignName, $contentHtml, $contentText));
+            $this->mail->sendMessage($toEmail, $testName, $message['subject'], $message['html'], $message['text']);
+            $this->logSecurity('admin.mail.template.test', 'sent', $toEmail, [
+                'category' => $category === 'welcome' ? 'welcome' : 'campaign',
+            ], auth_user_id());
+            app_json([
+                'ok' => true,
+                'message' => 'Correo de prueba enviado a ' . $toEmail . '.',
+            ]);
+        } catch (\Throwable $e) {
+            $this->logSecurity('admin.mail.template.test', 'failed', $toEmail, [
+                'message' => $e->getMessage(),
+            ], auth_user_id());
+            app_json(['error' => $e->getMessage()], 422);
+        }
+    }
+
     public function adminMailListSave()
     {
         $this->requireSuperAdmin();
@@ -646,7 +735,47 @@ class AuthController
 
     private function redirectWithError($route, $message)
     {
-        app_redirect('?route=' . urlencode($route) . '&error=' . urlencode(trim((string) $message)));
+        $params = [
+            'route' => trim((string) $route),
+            'error' => trim((string) $message),
+        ];
+        $next = $this->requestedNextTarget($_POST);
+        if ($next === '') {
+            $next = $this->requestedNextTarget($_GET);
+        }
+        if ($next !== '') {
+            $params['next'] = $next;
+        }
+        app_redirect('?' . http_build_query($params));
+    }
+
+    private function requestedNextTarget(array $source)
+    {
+        $next = isset($source['next']) ? (string) $source['next'] : '';
+        return $this->sanitizeNextTarget($next);
+    }
+
+    private function sanitizeNextTarget($target)
+    {
+        $target = trim((string) $target);
+        if ($target === '' || $target[0] !== '?') {
+            return '';
+        }
+        if (strpos($target, '//') !== false || preg_match('/[\r\n]/', $target)) {
+            return '';
+        }
+
+        return $target;
+    }
+
+    private function postAuthRedirectTarget()
+    {
+        $next = $this->requestedNextTarget($_POST);
+        if ($next !== '') {
+            return $next;
+        }
+
+        return app_route_url('reader');
     }
 
     private function adminUrl(array $params = [])
@@ -813,6 +942,221 @@ class AuthController
             '{{website_url}}',
             '{{access_url}}',
         ];
+    }
+
+    private function generateMailTemplateDraft(array $input)
+    {
+        $category = trim((string) ($input['category'] ?? 'campaign')) === 'welcome' ? 'welcome' : 'campaign';
+        $name = trim((string) ($input['name'] ?? ''));
+        $goal = trim((string) ($input['goal'] ?? ''));
+        $audience = trim((string) ($input['audience'] ?? ''));
+        $tone = trim((string) ($input['tone'] ?? 'cercano y esperanzador'));
+        $cta = trim((string) ($input['cta'] ?? 'Entrar a BIBLIASOFT'));
+        $extraPrompt = trim((string) ($input['extra_prompt'] ?? ''));
+        $includeEvents = !empty($input['include_events']);
+
+        if ($name === '') {
+            $name = $category === 'welcome' ? 'Bienvenida pastoral' : 'Boletín ministerial';
+        }
+        if ($goal === '') {
+            $goal = $category === 'welcome'
+                ? 'dar una bienvenida cálida, clara y pastoral a los nuevos registrados'
+                : 'informar noticias, recursos bíblicos, llamados pastorales y eventos de la comunidad';
+        }
+        if ($audience === '') {
+            $audience = $category === 'welcome'
+                ? 'nuevos usuarios que acaban de registrarse'
+                : 'usuarios registrados de BIBLIASOFT y miembros de la comunidad';
+        }
+
+        $draft = $this->fallbackMailTemplateDraft($category, $name, $goal, $audience, $tone, $cta, $includeEvents, $extraPrompt);
+        $ai = $this->generateMailTemplateWithAi($category, $name, $goal, $audience, $tone, $cta, $includeEvents, $extraPrompt);
+        if (is_array($ai)) {
+            $draft = array_merge($draft, array_filter($ai, function ($value) {
+                return is_string($value) && trim($value) !== '';
+            }));
+        }
+
+        $draft['category'] = $category;
+        $draft['name'] = trim((string) ($draft['name'] ?? $name));
+        $draft['subject_template'] = trim((string) ($draft['subject_template'] ?? ''));
+        $draft['css_template'] = (string) ($draft['css_template'] ?? '');
+        $draft['html_template'] = (string) ($draft['html_template'] ?? '');
+        $draft['text_template'] = (string) ($draft['text_template'] ?? '');
+        $draft['template_key'] = $this->suggestTemplateKey($draft['name'], $category);
+
+        return $draft;
+    }
+
+    private function generateMailTemplateWithAi($category, $name, $goal, $audience, $tone, $cta, $includeEvents, $extraPrompt)
+    {
+        $aiConfig = config('ai', []);
+        $enabled = !empty($aiConfig['enabled']);
+        $apiKey = trim((string) ($aiConfig['api_key'] ?? ''));
+        if (!$enabled || $apiKey === '' || !function_exists('curl_init')) {
+            return null;
+        }
+
+        $appShort = (string) config('branding.app_short', 'BIBLIASOFT');
+        $appName = (string) config('branding.app_name', 'Biblia para todos');
+        $churchName = (string) config('branding.church_name', 'Fundación La Iglesia en la Calle');
+        $websiteUrl = (string) config('branding.website_url', 'https://www.laiglesiaenlacalle.co');
+        $publicUrl = trim((string) config('app.public_url', ''));
+        $accessUrl = $publicUrl !== '' ? $publicUrl : $websiteUrl;
+        $model = (string) ($aiConfig['model'] ?? 'gpt-4.1-mini');
+
+        $prompt = "Eres un diseñador senior de emails HTML y copywriter pastoral en español.\n"
+            . "Genera SOLO un JSON válido con estas claves: name, subject_template, css_template, html_template, text_template.\n"
+            . "Marca: {$appShort} / {$appName}. Organización: {$churchName}. Sitio: {$websiteUrl}. Acceso: {$accessUrl}.\n"
+            . "Categoría: {$category}.\n"
+            . "Nombre de la plantilla: {$name}.\n"
+            . "Objetivo: {$goal}.\n"
+            . "Audiencia: {$audience}.\n"
+            . "Tono: {$tone}.\n"
+            . "CTA principal: {$cta}.\n"
+            . "Incluir eventos: " . ($includeEvents ? 'sí' : 'no') . ".\n"
+            . "Debe usar variables {{full_name}}, {{email}}, {{ministry}}, {{ministry_line}}, {{campaign_name}}, {{content_html}}, {{content_text}}, {{app_short}}, {{app_name}}, {{church_name}}, {{website_url}}, {{access_url}}.\n"
+            . "Si es bienvenida, el HTML debe ser utilizable como correo de registro. Si es campaña, debe dejar el bloque principal en {{content_html}}.\n"
+            . "El CSS debe ser profesional, responsive y apto para email. El HTML debe ser limpio, visual, sobrio y listo para inline CSS en <style>.\n"
+            . ($extraPrompt !== '' ? ("Instrucción adicional: {$extraPrompt}\n") : '')
+            . "No agregues markdown, no agregues explicación. Devuelve solo JSON.";
+
+        $payload = [
+            'model' => $model,
+            'input' => $prompt,
+        ];
+
+        $ch = curl_init('https://api.openai.com/v1/responses');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Authorization: Bearer ' . $apiKey,
+        ]);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+        curl_setopt($ch, CURLOPT_TIMEOUT, 35);
+        $raw = curl_exec($ch);
+        $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($status < 200 || $status >= 300 || !$raw) {
+            return null;
+        }
+
+        $json = json_decode($raw, true);
+        if (!is_array($json)) {
+            return null;
+        }
+
+        $output = '';
+        if (isset($json['output_text']) && is_string($json['output_text'])) {
+            $output = $json['output_text'];
+        } elseif (isset($json['output']) && is_array($json['output'])) {
+            foreach ($json['output'] as $block) {
+                if (!isset($block['content']) || !is_array($block['content'])) {
+                    continue;
+                }
+                foreach ($block['content'] as $part) {
+                    if (isset($part['text']) && is_string($part['text'])) {
+                        $output .= $part['text'];
+                    }
+                }
+            }
+        }
+
+        $output = trim((string) $output);
+        if ($output === '') {
+            return null;
+        }
+
+        $decoded = json_decode($output, true);
+        if (!is_array($decoded)) {
+            $start = strpos($output, '{');
+            $end = strrpos($output, '}');
+            if ($start !== false && $end !== false && $end > $start) {
+                $decoded = json_decode(substr($output, $start, $end - $start + 1), true);
+            }
+        }
+
+        return is_array($decoded) ? $decoded : null;
+    }
+
+    private function fallbackMailTemplateDraft($category, $name, $goal, $audience, $tone, $cta, $includeEvents, $extraPrompt)
+    {
+        $appShort = (string) config('branding.app_short', 'BIBLIASOFT');
+        $appName = (string) config('branding.app_name', 'Biblia para todos');
+        $churchName = (string) config('branding.church_name', 'Fundación La Iglesia en la Calle');
+        $websiteUrl = (string) config('branding.website_url', 'https://www.laiglesiaenlacalle.co');
+
+        $subject = $category === 'welcome'
+            ? 'Bienvenido a {{app_short}}, {{full_name}}'
+            : '{{campaign_name}} | {{app_short}}';
+        $chip = $category === 'welcome' ? 'Bienvenida' : 'Noticias y recursos';
+        $headline = $category === 'welcome'
+            ? 'Nos alegra recibirte en {{app_short}}'
+            : '{{campaign_name}}';
+        $subline = $category === 'welcome'
+            ? 'Tu acceso gratuito ya quedó activo para ayudarte a estudiar la Biblia con orden, profundidad y constancia.'
+            : 'Recursos, noticias y llamados pastorales desde {{church_name}}.';
+        $intro = $category === 'welcome'
+            ? '<p>Hola <strong>{{full_name}}</strong>,</p><p>Gracias por registrarte. Queremos servirte con una plataforma clara, práctica y completamente gratuita para impulsar el estudio de la Biblia y seguir llegando a más lugares con el evangelio.</p><p>{{ministry_line}}</p>'
+            : '<p>Hola <strong>{{full_name}}</strong>,</p><p>Compartimos contigo una actualización preparada para nuestra comunidad. Queremos mantenerte al tanto de nuevos recursos, noticias y espacios de encuentro que fortalezcan tu caminar con la Palabra.</p>';
+        $eventsBlock = $includeEvents
+            ? '<div class="mail-card"><h3>Eventos y comunidad</h3><p>También seguiremos compartiendo convocatorias online y presenciales en tu ciudad para seguir creciendo juntos en el estudio bíblico.</p></div>'
+            : '';
+        $extraBlock = $extraPrompt !== ''
+            ? '<div class="mail-card"><h3>Enfoque editorial</h3><p>' . $this->escape($extraPrompt) . '</p></div>'
+            : '';
+
+        $css = "body{margin:0;padding:0;background:#edf3f7;font-family:Verdana,Segoe UI,Arial,sans-serif;color:#163447}.mail-wrap{max-width:760px;margin:0 auto;background:#ffffff;border-radius:28px;overflow:hidden;box-shadow:0 18px 48px rgba(9,31,46,.14)}.mail-hero{padding:34px 36px;background:linear-gradient(135deg,#102a3c 0%,#1f5270 52%,#2a86ae 100%);color:#fff}.mail-chip{display:inline-block;padding:7px 13px;border-radius:999px;border:1px solid rgba(224,241,250,.35);color:#dceef8;font-size:12px;letter-spacing:.08em;text-transform:uppercase}.mail-hero h1{margin:18px 0 10px;font-size:34px;line-height:1.08;font-family:Georgia,Times New Roman,serif}.mail-hero p{margin:0;color:#d7ebf8;font-size:16px;line-height:1.7}.mail-body{padding:32px 36px}.mail-body p,.mail-body li{font-size:15px;line-height:1.75;color:#425b6d}.mail-card{margin:18px 0;padding:18px 20px;border-radius:20px;background:#f5fafc;border:1px solid #d8e7f0}.mail-card h3{margin:0 0 8px;color:#17384c}.mail-cta{display:inline-block;margin-top:8px;padding:14px 22px;border-radius:14px;background:#195f86;color:#fff;text-decoration:none;font-weight:700}.mail-footer{padding:22px 36px;background:#f2f7fa;border-top:1px solid #dde7ef;color:#688193;font-size:12px;line-height:1.7}.mail-meta{display:grid;gap:8px;margin:18px 0 10px}.mail-meta strong{color:#163447}@media only screen and (max-width:640px){.mail-hero,.mail-body,.mail-footer{padding:24px 20px}.mail-hero h1{font-size:28px}}";
+
+        $html = '<div class="mail-wrap">'
+            . '<div class="mail-hero">'
+            . '<div class="mail-chip">' . $chip . '</div>'
+            . '<h1>' . $headline . '</h1>'
+            . '<p>' . $subline . '</p>'
+            . '</div>'
+            . '<div class="mail-body">'
+            . $intro
+            . '<div class="mail-card"><h3>Propósito</h3><p>' . $this->escape($goal) . '</p></div>'
+            . '<div class="mail-card"><h3>Audiencia</h3><p>' . $this->escape($audience) . '</p><p>Tono sugerido: ' . $this->escape($tone) . '.</p></div>'
+            . '{{content_html}}'
+            . $eventsBlock
+            . $extraBlock
+            . '<p><a class="mail-cta" href="{{access_url}}">' . $this->escape($cta) . '</a></p>'
+            . '</div>'
+            . '<div class="mail-footer">Enviado por {{church_name}} · <a href="{{website_url}}">{{website_url}}</a><br>{{app_name}} · {{app_short}}</div>'
+            . '</div>';
+
+        $text = ($category === 'welcome' ? 'Hola {{full_name}}, bienvenido a {{app_short}}.' : 'Hola {{full_name}}, compartimos contigo {{campaign_name}}.')
+            . "\n\nObjetivo: " . $goal
+            . "\nAudiencia: " . $audience
+            . "\nTono: " . $tone
+            . "\n\n{{content_text}}\n\n"
+            . ($includeEvents ? "También recibirás noticias de eventos online y presenciales.\n\n" : '')
+            . $cta . ": {{access_url}}\n\n{{church_name}}\n{{website_url}}";
+
+        return [
+            'name' => $name,
+            'subject_template' => $subject,
+            'css_template' => $css,
+            'html_template' => $html,
+            'text_template' => $text,
+        ];
+    }
+
+    private function suggestTemplateKey($name, $category)
+    {
+        $raw = trim((string) $name);
+        if ($raw === '') {
+            return $category === 'welcome' ? 'welcome_draft' : 'campaign_draft';
+        }
+        $slug = preg_replace('/[^a-z0-9]+/i', '_', strtolower($raw));
+        $slug = trim((string) $slug, '_');
+        if ($slug === '') {
+            $slug = $category === 'welcome' ? 'welcome_draft' : 'campaign_draft';
+        }
+        return $slug;
     }
 
     private function logSecurity($eventType, $outcome, $email = '', array $meta = [], $userId = 0)

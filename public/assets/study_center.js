@@ -15,7 +15,6 @@
         projects: Array.isArray(payload.projects) ? payload.projects : [],
         books: Array.isArray(payload.books) ? payload.books : [],
         selectedProjectId: 0,
-        projectsCollapsed: false,
         entriesByProject: {},
         modal: {
             mode: '',
@@ -27,13 +26,15 @@
     };
 
     var els = {
-        grid: document.getElementById('studyCenterGrid'),
+        projectsOpenButtons: document.querySelectorAll('.js-study-projects-open'),
         projectsList: document.getElementById('studyProjectsList'),
         projectForm: document.getElementById('studyProjectForm'),
         projectName: document.getElementById('studyProjectName'),
         projectDescription: document.getElementById('studyProjectDescription'),
         projectColor: document.getElementById('studyProjectColor'),
-        projectsToggle: document.getElementById('studyProjectsToggle'),
+        projectsModal: document.getElementById('studyProjectsModal'),
+        projectsModalBackdrop: document.getElementById('studyProjectsModalBackdrop'),
+        projectsModalClose: document.getElementById('studyProjectsModalClose'),
         projectEmpty: document.getElementById('studyProjectEmpty'),
         projectContent: document.getElementById('studyProjectContent'),
         projectTitle: document.getElementById('studyProjectTitle'),
@@ -61,8 +62,6 @@
         toast: document.getElementById('studyToast')
     };
 
-    state.projectsCollapsed = readProjectsCollapsed();
-    applyProjectsCollapsedState();
     renderProjects();
     if (state.projects.length) {
         selectProject(Number(state.projects[0].id || 0));
@@ -86,10 +85,24 @@
         if (els.modalBackdrop) {
             els.modalBackdrop.addEventListener('click', closeModal);
         }
+        if (els.projectsModalBackdrop) {
+            els.projectsModalBackdrop.addEventListener('click', closeProjectsModal);
+        }
+        if (els.projectsModalClose) {
+            els.projectsModalClose.addEventListener('click', closeProjectsModal);
+        }
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape' && els.modal && !els.modal.classList.contains('hidden')) {
                 closeModal();
+                return;
             }
+            if (event.key === 'Escape' && els.projectsModal && !els.projectsModal.classList.contains('hidden')) {
+                closeProjectsModal();
+            }
+        });
+
+        Array.prototype.forEach.call(els.projectsOpenButtons || [], function (btn) {
+            btn.addEventListener('click', openProjectsModal);
         });
 
         if (els.projectForm) {
@@ -103,14 +116,6 @@
             els.entryForm.addEventListener('submit', function (event) {
                 event.preventDefault();
                 createEntry();
-            });
-        }
-
-        if (els.projectsToggle) {
-            els.projectsToggle.addEventListener('click', function () {
-                state.projectsCollapsed = !state.projectsCollapsed;
-                writeProjectsCollapsed(state.projectsCollapsed);
-                applyProjectsCollapsedState();
             });
         }
 
@@ -243,38 +248,36 @@
         els.projectsList.querySelectorAll('.study-project-item').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 selectProject(Number(this.getAttribute('data-id') || '0'));
+                closeProjectsModal();
             });
         });
     }
 
-    function applyProjectsCollapsedState() {
-        if (!els.grid || !els.projectsToggle) {
+    function openProjectsModal() {
+        if (!els.projectsModal) {
             return;
         }
-        els.grid.classList.toggle('is-projects-collapsed', !!state.projectsCollapsed);
-        var collapsed = !!state.projectsCollapsed;
-        var label = collapsed ? 'Mostrar proyectos' : 'Ocultar proyectos';
-        var icon = collapsed ? 'assets/icons/layers.svg' : 'assets/icons/columns.svg';
-        els.projectsToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-        els.projectsToggle.setAttribute('aria-label', label);
-        els.projectsToggle.setAttribute('title', label);
-        els.projectsToggle.innerHTML = '<img src="' + icon + '" alt="" class="ico">';
-    }
-
-    function readProjectsCollapsed() {
-        try {
-            return window.localStorage.getItem('bibliasoft.study.projectsCollapsed') === '1';
-        } catch (err) {
-            return false;
+        els.projectsModal.classList.remove('hidden');
+        refreshModalBodyLock();
+        if (els.projectName) {
+            window.setTimeout(function () {
+                els.projectName.focus();
+            }, 40);
         }
     }
 
-    function writeProjectsCollapsed(value) {
-        try {
-            window.localStorage.setItem('bibliasoft.study.projectsCollapsed', value ? '1' : '0');
-        } catch (err) {
-            // ignore storage errors
+    function closeProjectsModal() {
+        if (!els.projectsModal) {
+            return;
         }
+        els.projectsModal.classList.add('hidden');
+        refreshModalBodyLock();
+    }
+
+    function refreshModalBodyLock() {
+        var modalOpen = !!(els.modal && !els.modal.classList.contains('hidden'));
+        var projectsOpen = !!(els.projectsModal && !els.projectsModal.classList.contains('hidden'));
+        document.body.classList.toggle('study-modal-open', modalOpen || projectsOpen);
     }
 
     function renderProjectDetail() {
@@ -574,7 +577,7 @@
             els.modalConfirm.disabled = false;
         }
         els.modal.classList.remove('hidden');
-        document.body.classList.add('study-modal-open');
+        refreshModalBodyLock();
 
         var firstInput = els.modal.querySelector('input:not([readonly]), textarea, select');
         if (firstInput) {
@@ -605,7 +608,7 @@
         state.modal.projectId = 0;
         state.modal.submitHandler = null;
         els.modal.classList.add('hidden');
-        document.body.classList.remove('study-modal-open');
+        refreshModalBodyLock();
     }
 
     function collectModalFields() {

@@ -72,7 +72,8 @@
         },
         auth: {
             isLogged: false,
-            username: ''
+            username: '',
+            gate: null
         },
         branding: {
             appName: 'Biblia para todos',
@@ -143,6 +144,9 @@
         toggleHelp: document.getElementById('toggleHelp'),
         togglePreachMode: document.getElementById('togglePreachMode'),
         overlay: document.getElementById('mobileOverlay'),
+        readerAuthGateModal: document.getElementById('readerAuthGateModal'),
+        readerAuthGateBody: document.getElementById('readerAuthGateBody'),
+        closeReaderAuthGate: document.getElementById('closeReaderAuthGate'),
         guideSpotlight: document.getElementById('guideSpotlight'),
         notice: document.getElementById('readingNotice'),
         preachControls: document.getElementById('preachControls'),
@@ -380,11 +384,18 @@
         if (state.initial.auth && typeof state.initial.auth === 'object') {
             state.auth.isLogged = state.initial.auth.is_logged === true || Number(state.initial.auth.is_logged || 0) === 1;
             state.auth.username = String(state.initial.auth.username || '');
+            state.auth.gate = state.initial.auth.gate && typeof state.initial.auth.gate === 'object'
+                ? state.initial.auth.gate
+                : null;
         }
         if (state.initial.branding && typeof state.initial.branding === 'object') {
             state.branding.appName = String(state.initial.branding.app_name || state.branding.appName || 'Biblia para todos');
             state.branding.churchName = String(state.initial.branding.church_name || '');
             state.branding.logoPath = String(state.initial.branding.logo_public || state.branding.logoPath || 'assets/branding/logo_bibliasoft.png');
+        }
+        if (!state.auth.isLogged) {
+            state.settings.parallelMode = false;
+            state.settings.preachMode = false;
         }
 
         loadAudioPrefs();
@@ -443,7 +454,13 @@
 
         document.querySelectorAll('.tab').forEach(function (tab) {
             tab.addEventListener('click', function () {
-                activateTab(this.getAttribute('data-tab'));
+                var tabName = this.getAttribute('data-tab');
+                if (!state.auth.isLogged && (tabName === 'notas' || tabName === 'vincular' || tabName === 'herramientas')) {
+                    activateTab(tabName);
+                    openReaderAuthGate(tabName === 'herramientas' ? 'advanced_tools' : 'study_center');
+                    return;
+                }
+                activateTab(tabName);
             });
         });
 
@@ -467,6 +484,10 @@
 
         els.overlay.addEventListener('click', closeDrawers);
 
+        if (els.closeReaderAuthGate) {
+            els.closeReaderAuthGate.addEventListener('click', closeReaderAuthGate);
+        }
+
         [els.openSettingsTopbar, els.openSettingsInline].forEach(function (button) {
             if (!button) {
                 return;
@@ -477,35 +498,69 @@
             els.closeSettings.addEventListener('click', closeSettings);
         }
         if (els.openQuickSearch) {
-            els.openQuickSearch.addEventListener('click', openSearch);
+            els.openQuickSearch.addEventListener('click', function () {
+                if (!ensureAdvancedAccess('advanced_tools')) {
+                    return;
+                }
+                openSearch();
+            });
         }
         if (els.openReadingPlan) {
-            els.openReadingPlan.addEventListener('click', openPlan);
+            els.openReadingPlan.addEventListener('click', function () {
+                if (!ensureAdvancedAccess('advanced_tools')) {
+                    return;
+                }
+                openPlan();
+            });
         }
         if (els.openVersions) {
-            els.openVersions.addEventListener('click', openVersions);
+            els.openVersions.addEventListener('click', function () {
+                if (!ensureAdvancedAccess('advanced_tools')) {
+                    return;
+                }
+                openVersions();
+            });
         }
         if (els.openModules) {
             els.openModules.addEventListener('click', openModules);
         }
         if (els.openInterlinear) {
-            els.openInterlinear.addEventListener('click', openInterlinear);
+            els.openInterlinear.addEventListener('click', function () {
+                if (!ensureAdvancedAccess('advanced_tools')) {
+                    return;
+                }
+                openInterlinear();
+            });
         }
         if (els.openAudio) {
-            els.openAudio.addEventListener('click', openAudio);
+            els.openAudio.addEventListener('click', function () {
+                if (!ensureAdvancedAccess('advanced_tools')) {
+                    return;
+                }
+                openAudio();
+            });
         }
         if (els.openGuideTour) {
             els.openGuideTour.addEventListener('click', function () {
+                if (!ensureAdvancedAccess('advanced_tools')) {
+                    return;
+                }
                 openGuideModal(true);
             });
         }
         if (els.toggleParallel) {
             els.toggleParallel.addEventListener('click', function () {
+                if (!ensureAdvancedAccess('advanced_tools')) {
+                    return;
+                }
                 toggleParallelMode();
             });
         }
         if (els.togglePreachMode) {
             els.togglePreachMode.addEventListener('click', function () {
+                if (!ensureAdvancedAccess('advanced_tools')) {
+                    return;
+                }
                 setPreachMode(!state.settings.preachMode);
             });
         }
@@ -636,6 +691,9 @@
         document.addEventListener('keydown', function (event) {
             if (event.ctrlKey && event.key.toLowerCase() === 'k') {
                 event.preventDefault();
+                if (!ensureAdvancedAccess('advanced_tools')) {
+                    return;
+                }
                 openSearch();
             }
             if (event.ctrlKey && (event.key === '=' || event.key === '+')) {
@@ -656,6 +714,7 @@
                 closeAudio();
                 closeProjectSaveModal();
                 closeGuideModal();
+                closeReaderAuthGate();
             }
             if (state.settings.preachMode && !event.ctrlKey && !event.altKey && !event.metaKey) {
                 var target = event.target || null;
@@ -1738,6 +1797,10 @@
     }
 
     function renderNotesPanel(payload) {
+        if (!state.auth.isLogged) {
+            els.notesPanel.innerHTML = buildAccessPromptCardHtml('study_center', true);
+            return;
+        }
         var range = payload.reference || {};
         var notes = Array.isArray(payload.notes) ? payload.notes : [];
         var selected = selectedRange();
@@ -1865,6 +1928,10 @@
     }
 
     function renderLinksPanel(payload) {
+        if (!state.auth.isLogged) {
+            els.linksPanel.innerHTML = buildAccessPromptCardHtml('study_center', true);
+            return;
+        }
         var range = selectedRange();
         var links = payload.links || [];
         var currentBook = Number(state.currentBook || 1);
@@ -2039,6 +2106,10 @@
     }
 
     function renderToolsPanel(payload) {
+        if (!state.auth.isLogged) {
+            els.toolsPanel.innerHTML = buildAccessPromptCardHtml('advanced_tools', false);
+            return;
+        }
         var historyRows = payload.history || [];
         var smartHistory = payload.smart_history || {};
         var smartHistoryCard = buildSmartHistoryCardHtml(smartHistory, historyRows);
@@ -4220,6 +4291,9 @@
     }
 
     function toggleParallelMode() {
+        if (!ensureAdvancedAccess('advanced_tools')) {
+            return;
+        }
         state.settings.parallelMode = !state.settings.parallelMode;
         if (!state.settings.parallelMode) {
             state.parallelLoading = false;
@@ -5010,6 +5084,9 @@
             notify('Selecciona al menos un versículo.');
             return;
         }
+        if (!ensureAdvancedAccess('advanced_tools')) {
+            return;
+        }
         var range = selectedRange();
         postForm('api.highlight.set', {
             book: state.currentBook,
@@ -5065,6 +5142,9 @@
 
         if (els.saveSelectionProject) {
             els.saveSelectionProject.addEventListener('click', function () {
+                if (!ensureAdvancedAccess('study_center')) {
+                    return;
+                }
                 var rows = selectedRows();
                 if (!rows.length) {
                     notify('Selecciona al menos un versículo para guardarlo en proyecto.');
@@ -5656,6 +5736,9 @@
     }
 
     function openGuideModal(startFromFirstStep) {
+        if (!ensureAdvancedAccess('advanced_tools')) {
+            return;
+        }
         if (!els.guideModal) {
             return;
         }
@@ -6038,6 +6121,9 @@
     }
 
     function maybeAutoStartGuideTour() {
+        if (!state.auth.isLogged) {
+            return;
+        }
         var params = new URLSearchParams(window.location.search || '');
         var forceTour = params.get('tour') === '1';
         if (forceTour) {
@@ -6065,6 +6151,9 @@
     }
 
     function openSearch() {
+        if (!ensureAdvancedAccess('advanced_tools')) {
+            return;
+        }
         els.overlay.classList.remove('hidden');
         els.searchModal.classList.remove('hidden');
         var q = document.getElementById('qText');
@@ -6074,6 +6163,9 @@
     }
 
     function openPlan() {
+        if (!ensureAdvancedAccess('advanced_tools')) {
+            return;
+        }
         els.overlay.classList.remove('hidden');
         if (els.planModal) {
             els.planModal.classList.remove('hidden');
@@ -6089,6 +6181,9 @@
     }
 
     function openVersions() {
+        if (!ensureAdvancedAccess('advanced_tools')) {
+            return;
+        }
         if (!els.versionsModal) {
             return;
         }
@@ -6424,6 +6519,9 @@
     }
 
     function openInterlinear() {
+        if (!ensureAdvancedAccess('advanced_tools')) {
+            return;
+        }
         if (!els.interlinearModal || !els.interlinearModalBody) {
             return;
         }
@@ -6460,6 +6558,9 @@
     }
 
     function openAudio() {
+        if (!ensureAdvancedAccess('advanced_tools')) {
+            return;
+        }
         if (!els.audioModal) {
             return;
         }
@@ -6470,6 +6571,9 @@
     }
 
     function openProjectSaveModal(entry) {
+        if (!ensureAdvancedAccess('study_center')) {
+            return;
+        }
         if (!els.projectSaveModal || !els.projectSaveProject || !els.projectSaveSubmit) {
             return;
         }
@@ -8272,6 +8376,12 @@
                 els.projectSaveNote.value = '';
             }
         }
+        if (els.readerAuthGateModal && !els.readerAuthGateModal.classList.contains('hidden')) {
+            els.readerAuthGateModal.classList.add('hidden');
+            if (els.readerAuthGateBody) {
+                els.readerAuthGateBody.innerHTML = '';
+            }
+        }
         if (!keepGuide && els.guideModal && !els.guideModal.classList.contains('hidden')) {
             els.guideModal.classList.add('hidden');
             clearGuideFocus();
@@ -8295,7 +8405,8 @@
             (!els.audioModal || els.audioModal.classList.contains('hidden')) &&
             (keepGuide || !els.guideModal || els.guideModal.classList.contains('hidden')) &&
             (!els.modulesModal || els.modulesModal.classList.contains('hidden')) &&
-            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden'))) {
+            (!els.projectSaveModal || els.projectSaveModal.classList.contains('hidden')) &&
+            (!els.readerAuthGateModal || els.readerAuthGateModal.classList.contains('hidden'))) {
             els.overlay.classList.add('hidden');
         }
     }
@@ -8536,7 +8647,16 @@
     }
 
     function asJson(res) {
-        return res.json();
+        return res.json().then(function (payload) {
+            if (res.status === 401 && payload && payload.login_gate) {
+                openReaderAuthGate(String((payload.login_gate && payload.login_gate.key) || 'advanced_tools'), payload.login_gate);
+                var authError = new Error(String(payload.error || 'Inicia sesión para continuar.'));
+                authError.code = 'login_required';
+                authError.payload = payload;
+                throw authError;
+            }
+            return payload;
+        });
     }
 
     function cleanText(value) {
@@ -8627,6 +8747,9 @@
             history.replaceState(null, '', cleanUrl === '?' ? '?route=reader' : cleanUrl);
         }
         if (shouldOpen) {
+            if (!state.auth.isLogged) {
+                return;
+            }
             openSearch();
         }
     }
@@ -8731,6 +8854,149 @@
         notify.timer = setTimeout(function () {
             els.notice.classList.add('hidden');
         }, 2200);
+    }
+
+    function currentReaderNextUrl() {
+        var next = window.location.search || '';
+        if (!next) {
+            next = '?route=reader';
+        }
+        if (next.indexOf('?') !== 0) {
+            next = '?' + next;
+        }
+        return next;
+    }
+
+    function buildAuthGatePayload(featureKey, payload) {
+        var base = state.auth.gate && typeof state.auth.gate === 'object'
+            ? JSON.parse(JSON.stringify(state.auth.gate))
+            : {};
+        var nextUrl = currentReaderNextUrl();
+        var map = {
+            advanced_tools: {
+                badge: 'Acceso gratuito con registro',
+                title: 'Activa tus herramientas avanzadas de lectura',
+                lead: 'La lectura bíblica sigue abierta para todos. Para usar tus ayudas personales, crea tu cuenta gratis o inicia sesión.',
+                feature_items: [
+                    'Notas, vínculos, subrayados y respaldo por cuenta.',
+                    'Centro de estudio con proyectos y materiales guardados.',
+                    'Devocionales, anécdotas y funciones avanzadas.',
+                    'Avisos de nuevos recursos y eventos en tu ciudad.'
+                ]
+            },
+            study_center: {
+                badge: 'Centro de estudio',
+                title: 'Guarda este material en tu centro de estudio',
+                lead: 'Con una cuenta gratuita podrás organizar proyectos, comentarios, notas y recursos por pasaje.',
+                feature_items: [
+                    'Proyectos por tema, serie o predicación.',
+                    'Guardado de comentarios, Strong y notas.',
+                    'Material listo para retomar en otra sesión.'
+                ]
+            },
+            devotional: {
+                badge: 'Devocionales',
+                title: 'Activa devocionales y recursos personalizados',
+                lead: 'Al registrarte gratis tendrás historial, nuevos recursos y seguimiento personal de lectura.',
+                feature_items: [
+                    'Historial devocional por cuenta.',
+                    'Recursos nuevos y avisos ministeriales.',
+                    'Seguimiento personal gratuito.'
+                ]
+            },
+            anecdotes: {
+                badge: 'Anécdotas',
+                title: 'Abre anécdotas y apoyos para enseñar',
+                lead: 'Con tu cuenta gratuita podrás guardar favoritos y seguir enriqueciendo tu enseñanza bíblica.',
+                feature_items: [
+                    'Anécdotas listas para predicar y enseñar.',
+                    'Favoritos y seguimiento por cuenta.',
+                    'Avisos de recursos y eventos.'
+                ]
+            }
+        };
+        var feature = map[featureKey] || map.advanced_tools;
+        var registerUrl = '?route=register&next=' + encodeURIComponent(nextUrl);
+        var loginUrl = '?route=login&next=' + encodeURIComponent(nextUrl);
+
+        base.key = featureKey || 'advanced_tools';
+        base.badge = String((payload && payload.badge) || base.badge || feature.badge || 'Acceso gratuito');
+        base.title = String((payload && payload.title) || base.title || feature.title || 'Accede para continuar');
+        base.lead = String((payload && payload.lead) || base.lead || feature.lead || '');
+        base.feature_items = Array.isArray(payload && payload.feature_items) ? payload.feature_items : (Array.isArray(base.feature_items) && base.feature_items.length ? base.feature_items : feature.feature_items);
+        base.benefits = Array.isArray(payload && payload.benefits) ? payload.benefits : (Array.isArray(base.benefits) ? base.benefits : []);
+        base.login_url = loginUrl;
+        base.register_url = registerUrl;
+        base.reader_url = '?route=reader&skip_daily=1';
+        base.next = nextUrl;
+        return base;
+    }
+
+    function buildAccessPromptCardHtml(featureKey, compact) {
+        var gate = buildAuthGatePayload(featureKey);
+        var featureItems = Array.isArray(gate.feature_items) ? gate.feature_items : [];
+        var summary = compact ? featureItems.slice(0, 3) : featureItems;
+        return '' +
+            '<article class="card access-gate-card' + (compact ? ' is-compact' : '') + '">' +
+            '<span class="access-gate-kicker">' + escapeHtml(gate.badge || 'Acceso gratuito') + '</span>' +
+            '<strong>' + escapeHtml(gate.title || 'Accede para continuar') + '</strong>' +
+            (gate.lead ? '<p>' + escapeHtml(gate.lead) + '</p>' : '') +
+            (summary.length ? '<ul class="access-gate-list">' + summary.map(function (item) {
+                return '<li>' + escapeHtml(String(item || '')) + '</li>';
+            }).join('') + '</ul>' : '') +
+            '<div class="toolbar access-gate-actions">' +
+            '<a class="btn-primary" href="' + escapeHtml(gate.register_url || '?route=register') + '">Crear cuenta gratis</a>' +
+            '<a class="btn-light" href="' + escapeHtml(gate.login_url || '?route=login') + '">Iniciar sesión</a>' +
+            '</div>' +
+            '</article>';
+    }
+
+    function openReaderAuthGate(featureKey, payload) {
+        if (!els.readerAuthGateModal || !els.readerAuthGateBody) {
+            window.location.href = '?route=register&next=' + encodeURIComponent(currentReaderNextUrl());
+            return;
+        }
+
+        var gate = buildAuthGatePayload(featureKey, payload);
+        var benefits = Array.isArray(gate.benefits) ? gate.benefits.slice(0, 3) : [];
+        els.readerAuthGateBody.innerHTML = '' +
+            '<div class="access-gate-modal-copy">' +
+            '<span class="access-gate-kicker">' + escapeHtml(gate.badge || 'Acceso gratuito') + '</span>' +
+            '<h4>' + escapeHtml(gate.title || 'Accede para continuar') + '</h4>' +
+            '<p>' + escapeHtml(gate.lead || '') + '</p>' +
+            (Array.isArray(gate.feature_items) && gate.feature_items.length ? '<ul class="access-gate-list">' + gate.feature_items.map(function (item) {
+                return '<li>' + escapeHtml(String(item || '')) + '</li>';
+            }).join('') + '</ul>' : '') +
+            (benefits.length ? '<div class="access-gate-benefits">' + benefits.map(function (item) {
+                return '<small>' + escapeHtml(String(item || '')) + '</small>';
+            }).join('') + '</div>' : '') +
+            '<div class="toolbar access-gate-actions">' +
+            '<a class="btn-primary" href="' + escapeHtml(gate.register_url || '?route=register') + '">Crear cuenta gratis</a>' +
+            '<a class="btn-light" href="' + escapeHtml(gate.login_url || '?route=login') + '">Iniciar sesión</a>' +
+            '</div>' +
+            '</div>';
+
+        els.overlay.classList.remove('hidden');
+        els.readerAuthGateModal.classList.remove('hidden');
+    }
+
+    function closeReaderAuthGate() {
+        if (!els.readerAuthGateModal || els.readerAuthGateModal.classList.contains('hidden')) {
+            return;
+        }
+        els.readerAuthGateModal.classList.add('hidden');
+        if (els.readerAuthGateBody) {
+            els.readerAuthGateBody.innerHTML = '';
+        }
+        closeDrawers();
+    }
+
+    function ensureAdvancedAccess(featureKey) {
+        if (state.auth.isLogged) {
+            return true;
+        }
+        openReaderAuthGate(featureKey || 'advanced_tools');
+        return false;
     }
 
     function applyGlobalPrefsFromStorage() {

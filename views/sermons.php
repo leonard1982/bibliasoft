@@ -8,15 +8,15 @@ $sermonPayload = [
 <section id="sermonLabPage" class="sermon-lab-page" data-sermon="<?php echo e(app_json_safe($sermonPayload)); ?>">
     <header class="panel sermon-lab-hero">
         <div>
-            <span class="sermon-lab-kicker">PreparaciÃ³n ministerial</span>
+            <span class="sermon-lab-kicker">Preparaci&oacute;n ministerial</span>
             <h1>Sermones y mensajes</h1>
-            <p class="muted">Relaciona un pasaje bÃ­blico con tu encargo pastoral, genera un mensaje editable y guÃ¡rdalo de inmediato en el Centro de estudio con su referencia ya vinculada.</p>
+            <p class="muted">Relaciona un pasaje b&iacute;blico con tu encargo pastoral, genera un mensaje editable y gu&aacute;rdalo de inmediato en el Centro de estudio con su referencia ya vinculada.</p>
         </div>
         <div class="sermon-lab-hero-copy">
-            <strong>QuÃ© puedes hacer aquÃ­</strong>
+            <strong>Qu&eacute; puedes hacer aqu&iacute;</strong>
             <ul class="sermon-lab-list">
-                <li>Preparar sermones expositivos, mensajes pastorales o enseÃ±anzas breves.</li>
-                <li>Dar instrucciones concretas a la IA segÃºn el contexto de tu iglesia o ciudad.</li>
+                <li>Preparar sermones expositivos, mensajes pastorales o ense&ntilde;anzas breves.</li>
+                <li>Dar instrucciones concretas a la IA seg&uacute;n el contexto de tu iglesia o ciudad.</li>
                 <li>Guardar el resultado como entrada de proyecto con la referencia exacta del pasaje.</li>
             </ul>
         </div>
@@ -36,7 +36,7 @@ $sermonPayload = [
                             <?php endforeach; ?>
                         </select>
                     </label>
-                    <label>CapÃ­tulo
+                    <label>Cap&iacute;tulo
                         <input id="sermonChapter" type="number" min="1" value="<?php echo (int) (($sermonPayload['initial']['chapter'] ?? 1)); ?>" required>
                     </label>
                     <label>Verso inicio
@@ -49,23 +49,23 @@ $sermonPayload = [
 
                 <label>Tipo de pieza
                     <select id="sermonMessageType">
-                        <option value="sermon">SermÃ³n expositivo</option>
+                        <option value="sermon">Serm&oacute;n expositivo</option>
                         <option value="mensaje">Mensaje pastoral</option>
-                        <option value="ensenanza">EnseÃ±anza breve</option>
+                        <option value="ensenanza">Ense&ntilde;anza breve</option>
                         <option value="bosquejo">Bosquejo para predicar</option>
                     </select>
                 </label>
 
                 <label>Audiencia
-                    <input id="sermonAudience" type="text" value="<?php echo e((string) ($sermonPayload['initial']['audience'] ?? '')); ?>" placeholder="Iglesia local, jÃ³venes, liderazgo, grupo hogar...">
+                    <input id="sermonAudience" type="text" value="<?php echo e((string) ($sermonPayload['initial']['audience'] ?? '')); ?>" placeholder="Iglesia local, j&oacute;venes, liderazgo, grupo hogar...">
                 </label>
 
                 <label>Tono
-                    <input id="sermonTone" type="text" value="<?php echo e((string) ($sermonPayload['initial']['tone'] ?? '')); ?>" placeholder="Pastoral, cercano, confrontador, evangelÃ­stico...">
+                    <input id="sermonTone" type="text" value="<?php echo e((string) ($sermonPayload['initial']['tone'] ?? '')); ?>" placeholder="Pastoral, cercano, confrontador, evangel&iacute;stico...">
                 </label>
 
-                <label>InstrucciÃ³n pastoral / prompt
-                    <textarea id="sermonPrompt" rows="8" placeholder="Ejemplo: enfoca el mensaje en restauraciÃ³n familiar, incluye llamado a reconciliaciÃ³n y 3 aplicaciones concretas para una iglesia urbana."><?php echo e((string) ($sermonPayload['initial']['prompt'] ?? '')); ?></textarea>
+                <label>Instrucci&oacute;n pastoral / prompt
+                    <textarea id="sermonPrompt" rows="8" placeholder="Ejemplo: enfoca el mensaje en restauraci&oacute;n familiar, incluye llamado a reconciliaci&oacute;n y 3 aplicaciones concretas para una iglesia urbana."><?php echo e((string) ($sermonPayload['initial']['prompt'] ?? '')); ?></textarea>
                 </label>
 
                 <div class="sermon-reference-chip">
@@ -85,8 +85,8 @@ $sermonPayload = [
                         <option value="">Cargando proyectos...</option>
                     </select>
                 </label>
-                <label>Crear proyecto rÃ¡pido
-                    <input id="sermonQuickProject" type="text" maxlength="80" placeholder="Serie sobre Juan, Escuela bÃ­blica...">
+                <label>Crear proyecto r&aacute;pido
+                    <input id="sermonQuickProject" type="text" maxlength="80" placeholder="Serie sobre Juan, Escuela b&iacute;blica...">
                 </label>
                 <div class="toolbar">
                     <button id="sermonCreateProject" class="btn-light" type="button">Crear proyecto</button>
@@ -108,14 +108,14 @@ $sermonPayload = [
             </div>
 
             <div class="card sermon-result-card">
-                <label>TÃ­tulo del mensaje
-                    <input id="sermonResultTitle" type="text" placeholder="La IA sugerirÃ¡ un tÃ­tulo conectado al pasaje">
+                <label>T&iacute;tulo del mensaje
+                    <input id="sermonResultTitle" type="text" placeholder="La IA sugerir&aacute; un t&iacute;tulo conectado al pasaje">
                 </label>
                 <label>Desarrollo del mensaje
-                    <textarea id="sermonResultBody" rows="22" placeholder="AquÃ­ aparecerÃ¡ el sermÃ³n o mensaje generado."></textarea>
+                    <textarea id="sermonResultBody" rows="22" placeholder="Aqu&iacute; aparecer&aacute; el serm&oacute;n o mensaje generado."></textarea>
                 </label>
                 <div class="sermon-result-meta">
-                    <strong id="sermonResultMeta">AÃºn no se ha generado contenido.</strong>
+                    <strong id="sermonResultMeta">A&uacute;n no se ha generado contenido.</strong>
                 </div>
             </div>
         </section>
