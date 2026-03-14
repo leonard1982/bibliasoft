@@ -6604,10 +6604,26 @@ body.spacing-normal .verse {
     height: 15px;
 }
 
+.companion-action-text {
+    font-size: .72rem;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: .02em;
+}
+
 .companion-audio-btn.is-active {
     border-color: color-mix(in srgb, var(--accent) 74%, var(--line) 26%);
     background: color-mix(in srgb, var(--selection) 80%, var(--panel) 20%);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.companion-stop-btn {
+    border-color: color-mix(in srgb, #b44a40 34%, var(--line) 66%);
+}
+
+.companion-stop-btn:hover {
+    border-color: color-mix(in srgb, #b44a40 58%, var(--line) 42%);
+    background: color-mix(in srgb, #fdeceb 72%, var(--panel) 28%);
 }
 
 .companion-bubble-body ul,
@@ -7160,6 +7176,15 @@ body.spacing-normal .verse {
 
 .theme-dark .companion-audio-btn.is-active {
     box-shadow: 0 0 0 3px rgba(104, 188, 232, .16);
+}
+
+.theme-dark .companion-stop-btn {
+    border-color: rgba(180, 74, 64, .28);
+}
+
+.theme-dark .companion-stop-btn:hover {
+    background: rgba(96, 36, 34, .36);
+    border-color: rgba(208, 96, 86, .42);
 }
 
 .theme-dark .companion-launcher {

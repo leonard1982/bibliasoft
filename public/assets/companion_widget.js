@@ -26,6 +26,7 @@
         copyMap: {},
         audioContext: null,
         speakingKey: '',
+        speechPaused: false,
         speechSupported: typeof window.speechSynthesis !== 'undefined'
     };
 
@@ -440,17 +441,30 @@
             if (!row.typing && sender === 'assistant') {
                 var copyKey = 'copy_' + index;
                 state.copyMap[copyKey] = String(row.message_text || '');
-                var speakLabel = state.speakingKey === copyKey ? 'Detener lectura' : 'Leer respuesta';
+                var isSpeakingThis = state.speakingKey === copyKey;
+                var speakLabel = !isSpeakingThis
+                    ? 'Leer respuesta'
+                    : (state.speechPaused ? 'Reanudar lectura' : 'Pausar lectura');
                 var speakClass = state.speakingKey === copyKey ? ' is-active' : '';
+                var speakContent = !isSpeakingThis
+                    ? '<img src="assets/icons/audio.svg" alt="" class="ico">'
+                    : '<span class="companion-action-text" aria-hidden="true">' + (state.speechPaused ? '>' : '||') + '</span>';
                 var audioButton = state.speechSupported
                     ? '' +
                         '<button class="companion-action-btn companion-audio-btn' + speakClass + '" type="button" data-speak-key="' + escapeHtml(copyKey) + '" aria-label="' + escapeHtml(speakLabel) + '" title="' + escapeHtml(speakLabel) + '">' +
-                            '<img src="assets/icons/audio.svg" alt="" class="ico">' +
+                            speakContent +
+                        '</button>'
+                    : '';
+                var stopButton = state.speechSupported && isSpeakingThis
+                    ? '' +
+                        '<button class="companion-action-btn companion-stop-btn" type="button" data-stop-speech="1" aria-label="Detener lectura" title="Detener lectura">' +
+                            '<span class="companion-action-text" aria-hidden="true">x</span>' +
                         '</button>'
                     : '';
                 actions = '' +
                     '<div class="companion-bubble-actions">' +
                         audioButton +
+                        stopButton +
                         '<button class="companion-action-btn companion-copy-btn" type="button" data-copy-key="' + escapeHtml(copyKey) + '" aria-label="Copiar respuesta" title="Copiar respuesta">' +
                             '<img src="assets/icons/copy.svg" alt="" class="ico">' +
                         '</button>' +
@@ -467,6 +481,7 @@
 
         bindCopyButtons();
         bindSpeakButtons();
+        bindStopButtons();
         els.messages.scrollTop = els.messages.scrollHeight;
     }
 
@@ -651,11 +666,20 @@
                     return;
                 }
                 if (state.speakingKey === key) {
-                    stopSpeaking();
+                    toggleSpeechPause();
                     renderMessages();
                     return;
                 }
                 speakText(text, key);
+            });
+        });
+    }
+
+    function bindStopButtons() {
+        Array.prototype.slice.call(document.querySelectorAll('[data-stop-speech="1"]')).forEach(function (button) {
+            button.addEventListener('click', function () {
+                stopSpeaking();
+                renderMessages();
             });
         });
     }
@@ -750,6 +774,7 @@
             };
 
             state.speakingKey = key;
+            state.speechPaused = false;
             window.speechSynthesis.cancel();
             window.speechSynthesis.speak(utterance);
             renderMessages();
@@ -761,11 +786,32 @@
 
     function stopSpeaking() {
         state.speakingKey = '';
+        state.speechPaused = false;
         if (!state.speechSupported) {
             return;
         }
         try {
             window.speechSynthesis.cancel();
+        } catch (err) {
+            // ignore
+        }
+    }
+
+    function toggleSpeechPause() {
+        if (!state.speechSupported) {
+            return;
+        }
+        try {
+            if (!state.speakingKey) {
+                return;
+            }
+            if (state.speechPaused) {
+                window.speechSynthesis.resume();
+                state.speechPaused = false;
+            } else {
+                window.speechSynthesis.pause();
+                state.speechPaused = true;
+            }
         } catch (err) {
             // ignore
         }
