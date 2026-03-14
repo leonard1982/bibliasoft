@@ -58,6 +58,18 @@ $initial = [
                     <button id="openAudio" class="btn-light hide-in-preach btn-icon-quick" data-tip="Audio Biblia" type="button" aria-label="Audio Biblia"><img src="assets/icons/audio.svg" alt="" class="ico"></button>
                     <button id="copySelection" class="btn-light hide-in-preach btn-icon-quick" data-tip="Copiar selección" type="button" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"></button>
                     <button id="copyParagraph" class="btn-light hide-in-preach btn-icon-quick" data-tip="Copiar párrafo" type="button" aria-label="Copiar como párrafo"><img src="assets/icons/text.svg" alt="" class="ico"></button>
+                    <button id="readerFontDown" class="btn-light hide-in-preach btn-icon-quick reader-font-btn" data-tip="Texto más pequeño" type="button" aria-label="Texto más pequeño">
+                        <span class="icon-stack">
+                            <img src="assets/icons/text.svg" alt="" class="ico">
+                            <span class="icon-stack-badge">-</span>
+                        </span>
+                    </button>
+                    <button id="readerFontUp" class="btn-light hide-in-preach btn-icon-quick reader-font-btn" data-tip="Texto más grande" type="button" aria-label="Texto más grande">
+                        <span class="icon-stack">
+                            <img src="assets/icons/text.svg" alt="" class="ico">
+                            <span class="icon-stack-badge">+</span>
+                        </span>
+                    </button>
                     <button id="saveSelectionProject" class="btn-light hide-in-preach btn-icon-quick" data-tip="Agregar a proyecto" type="button" aria-label="Agregar a proyecto"><img src="assets/icons/bookmark.svg" alt="" class="ico"></button>
                     <button id="shareSelection" class="btn-light hide-in-preach btn-icon-quick" data-tip="Compartir" type="button" aria-label="Compartir"><img src="assets/icons/share.svg" alt="" class="ico"></button>
                     <button id="shareWhatsApp" class="btn-light hide-in-preach btn-icon-quick btn-share-quick btn-share-wa" data-tip="Compartir a WhatsApp" type="button" aria-label="Compartir a WhatsApp"><img src="assets/icons/whatsapp.svg" alt="" class="ico"></button>

@@ -5448,6 +5448,21 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     line-height: 1.55;
 }
 
+.study-note-ai-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+}
+
+.icon-stack {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+}
+
 .study-note-ai-card.is-current {
     border-color: color-mix(in srgb, var(--accent) 42%, var(--line) 58%);
 }
@@ -5462,6 +5477,37 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     font-weight: 700;
 }
 
+.study-note-ai-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: .14rem .56rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line) 76%);
+    background: color-mix(in srgb, var(--panel) 92%, var(--bg) 8%);
+    color: color-mix(in srgb, var(--ink) 82%, var(--accent) 18%);
+    font-size: .75rem;
+    font-weight: 600;
+}
+
+.icon-stack-badge {
+    position: absolute;
+    right: -4px;
+    bottom: -5px;
+    min-width: 12px;
+    height: 12px;
+    padding: 0 2px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--accent) 88%, #fff 12%);
+    color: #fff;
+    font-size: .58rem;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--panel) 90%, transparent);
+}
+
 .study-note-ai-section {
     display: grid;
     gap: .24rem;
@@ -5469,6 +5515,12 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
 
 .study-note-ai-actions {
     margin-top: .15rem;
+}
+
+.study-icon-font-btn,
+.reader-font-btn {
+    min-width: 40px;
+    padding-inline: .55rem;
 }
 
 .study-mark {
@@ -5618,6 +5670,17 @@ body.study-modal-open {
 .theme-dark .study-note-ai-badge {
     background: rgba(25, 62, 85, .72);
     color: #cde8f8;
+}
+
+.theme-dark .study-note-ai-pill {
+    background: rgba(22, 44, 58, .88);
+    border-color: rgba(90, 146, 181, .26);
+    color: #dceef9;
+}
+
+.theme-dark .icon-stack-badge {
+    background: color-mix(in srgb, var(--accent) 76%, #7fc3ee 24%);
+    box-shadow: 0 0 0 2px rgba(15, 30, 41, .88);
 }
 
 .theme-dark .study-note-token-chip {

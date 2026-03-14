@@ -1045,13 +1045,19 @@
         var definition = String(analysis.definition || 'No se pudo obtener una definición más detallada.').trim();
         var use = String(analysis.use || '').trim();
         var pastoral = String(analysis.pastoral_note || '').trim();
+        var originalLanguage = String(analysis.original_language || '').trim();
+        var transliteration = String(analysis.transliteration || '').trim();
+        var historicalMeaning = String(analysis.historical_meaning || '').trim();
         var historyItem = {
             id: 'explain_' + Date.now() + '_' + Math.floor(Math.random() * 100000),
             term: term,
             category: category,
             definition: definition,
             use: use,
-            pastoral_note: pastoral
+            pastoral_note: pastoral,
+            original_language: originalLanguage,
+            transliteration: transliteration,
+            historical_meaning: historicalMeaning
         };
 
         addExplainHistory(historyItem);
@@ -1062,8 +1068,17 @@
     }
 
     function renderExplainCard(item, isCurrent) {
+        var lexicalMeta = [];
+        if (item.original_language) {
+            lexicalMeta.push('<span class="study-note-ai-pill">' + escapeHtml(String(item.original_language || '')) + '</span>');
+        }
+        if (item.transliteration) {
+            lexicalMeta.push('<span class="study-note-ai-pill">' + escapeHtml(String(item.transliteration || '')) + '</span>');
+        }
         var actions = '' +
             '<div class="toolbar study-note-ai-actions">' +
+                (item.transliteration ? '<button type="button" class="btn-light js-study-note-copy-translit" data-transliteration="' + escapeAttr(String(item.transliteration || '')) + '">Copiar transliteración</button>' : '') +
+                '<button type="button" class="btn-light js-study-note-add-glossary" data-query-id="' + escapeAttr(String(item.id || '')) + '">Agregar glosario</button>' +
                 '<button type="button" class="btn-light js-study-note-add-query" data-query-id="' + escapeAttr(String(item.id || '')) + '">Agregar a la nota</button>' +
             '</div>';
 
@@ -1071,7 +1086,9 @@
             '<div class="study-note-ai-card' + (isCurrent ? ' is-current' : '') + '">' +
                 '<strong>' + escapeHtml(String(item.term || 'Consulta')) + '</strong>' +
                 '<span class="study-note-ai-badge">' + escapeHtml(String(item.category || 'Expresión bíblica')) + '</span>' +
+                (lexicalMeta.length ? ('<div class="study-note-ai-meta">' + lexicalMeta.join('') + '</div>') : '') +
                 '<p>' + escapeHtml(String(item.definition || '')) + '</p>' +
+                (item.historical_meaning ? ('<div class="study-note-ai-section"><strong>En ese entonces</strong><p>' + escapeHtml(String(item.historical_meaning || '')) + '</p></div>') : '') +
                 (item.use ? ('<div class="study-note-ai-section"><strong>En este contexto</strong><p>' + escapeHtml(String(item.use || '')) + '</p></div>') : '') +
                 (item.pastoral_note ? ('<div class="study-note-ai-section"><strong>Aplicación sencilla</strong><p>' + escapeHtml(String(item.pastoral_note || '')) + '</p></div>') : '') +
                 actions +
@@ -1179,6 +1196,16 @@
                 insertExplainHistoryIntoNote(String(button.getAttribute('data-query-id') || ''));
             });
         });
+        rootNode.querySelectorAll('.js-study-note-add-glossary[data-query-id]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                insertExplainGlossaryIntoNote(String(button.getAttribute('data-query-id') || ''));
+            });
+        });
+        rootNode.querySelectorAll('.js-study-note-copy-translit[data-transliteration]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                copyExplainTransliteration(String(button.getAttribute('data-transliteration') || ''));
+            });
+        });
     }
 
     function insertExplainHistoryIntoNote(queryId) {
@@ -1190,7 +1217,10 @@
         var html = '' +
             '<div><strong>' + escapeHtml(String(item.term || 'Consulta')) + '</strong></div>' +
             '<div><em>' + escapeHtml(String(item.category || 'Expresión bíblica')) + '</em></div>' +
+            (item.original_language ? ('<div>Idioma original: ' + escapeHtml(String(item.original_language || '')) + '</div>') : '') +
+            (item.transliteration ? ('<div>Transliteración: ' + escapeHtml(String(item.transliteration || '')) + '</div>') : '') +
             '<div>' + escapeHtml(String(item.definition || '')) + '</div>' +
+            (item.historical_meaning ? ('<div>En ese entonces: ' + escapeHtml(String(item.historical_meaning || '')) + '</div>') : '') +
             (item.use ? ('<div>En este contexto: ' + escapeHtml(String(item.use || '')) + '</div>') : '') +
             (item.pastoral_note ? ('<div>Aplicación: ' + escapeHtml(String(item.pastoral_note || '')) + '</div>') : '') +
             '<div><br></div>';
@@ -1203,6 +1233,43 @@
             els.noteEditor.innerHTML += html;
             showNotice('Consulta agregada a la nota.', 'success');
         }
+    }
+
+    function insertExplainGlossaryIntoNote(queryId) {
+        var item = findExplainHistoryItem(queryId);
+        if (!item || !els.noteEditor) {
+            return;
+        }
+
+        var html = '' +
+            '<div><strong>Glosario:</strong> ' + escapeHtml(String(item.term || 'Consulta')) + '</div>' +
+            (item.original_language ? ('<div>Idioma original: ' + escapeHtml(String(item.original_language || '')) + '</div>') : '') +
+            (item.transliteration ? ('<div>Transliteración: ' + escapeHtml(String(item.transliteration || '')) + '</div>') : '') +
+            '<div>Sentido: ' + escapeHtml(String(item.definition || '')) + '</div>' +
+            (item.historical_meaning ? ('<div>En ese entonces: ' + escapeHtml(String(item.historical_meaning || '')) + '</div>') : '') +
+            '<div><br></div>';
+
+        els.noteEditor.focus();
+        try {
+            document.execCommand('insertHTML', false, html);
+            showNotice('Glosario agregado a la nota.', 'success');
+        } catch (err) {
+            els.noteEditor.innerHTML += html;
+            showNotice('Glosario agregado a la nota.', 'success');
+        }
+    }
+
+    function copyExplainTransliteration(value) {
+        var text = String(value || '').trim();
+        if (!text) {
+            showNotice('No hay transliteración disponible para copiar.', 'info');
+            return;
+        }
+        copyText(text).then(function () {
+            showNotice('Transliteración copiada.', 'success');
+        }).catch(function () {
+            showNotice('No se pudo copiar la transliteración.', 'error');
+        });
     }
 
     function findExplainHistoryItem(queryId) {
@@ -1242,6 +1309,28 @@
 
     function getExplainHistoryKey(entryId) {
         return 'bs_study_note_explain_history_v1_' + String(entryId || '0');
+    }
+
+    function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(String(text || ''));
+        }
+        return new Promise(function (resolve, reject) {
+            try {
+                var area = document.createElement('textarea');
+                area.value = String(text || '');
+                area.style.position = 'fixed';
+                area.style.left = '-1000px';
+                document.body.appendChild(area);
+                area.focus();
+                area.select();
+                document.execCommand('copy');
+                document.body.removeChild(area);
+                resolve();
+            } catch (err) {
+                reject(err);
+            }
+        });
     }
 
     function applyHighlightToSelectedTokens(color) {

@@ -213,6 +213,9 @@ class GenerationService
                 $result['definition'] = trim((string) ($decoded['definition'] ?? $result['definition']));
                 $result['use'] = trim((string) ($decoded['use'] ?? $result['use']));
                 $result['pastoral_note'] = trim((string) ($decoded['pastoral_note'] ?? $result['pastoral_note']));
+                $result['original_language'] = trim((string) ($decoded['original_language'] ?? $result['original_language']));
+                $result['transliteration'] = trim((string) ($decoded['transliteration'] ?? $result['transliteration']));
+                $result['historical_meaning'] = trim((string) ($decoded['historical_meaning'] ?? $result['historical_meaning']));
                 $source = 'online';
             }
         }
@@ -270,7 +273,7 @@ class GenerationService
 
         return "Actua como un asistente biblico en espanol claro y sencillo.\n"
             . "Analiza SOLO el termino o frase seleccionada y responde SOLO con un JSON valido.\n"
-            . "Claves obligatorias: term, category, definition, use, pastoral_note.\n"
+            . "Claves obligatorias: term, category, definition, use, pastoral_note, original_language, transliteration, historical_meaning.\n"
             . "Seleccion: {$selectedText}\n"
             . "Referencia de la nota: {$reference}\n"
             . "Contexto de la nota: {$contextLine}\n\n"
@@ -279,6 +282,9 @@ class GenerationService
             . "- definition debe ser breve, simple y sin tecnicismos pesados.\n"
             . "- use debe explicar como se entiende dentro del contexto biblico o de la nota.\n"
             . "- pastoral_note debe dar una aplicacion corta y comprensible.\n"
+            . "- original_language debe ser Hebreo, Arameo, Griego o vacio si no es claro.\n"
+            . "- transliteration debe traer una forma sencilla del termino original si se puede inferir con suficiente claridad; si no, dejala vacia.\n"
+            . "- historical_meaning debe explicar que queria comunicar esa palabra o frase en ese entonces, dentro del mundo biblico, con lenguaje simple.\n"
             . "- No hables de probabilidades tecnicas ni de linguistica avanzada.\n"
             . "- No pongas markdown ni texto fuera del JSON.";
     }
@@ -499,6 +505,11 @@ class GenerationService
                 ? 'En la nota vinculada a ' . $reference . ', esta expresión ayuda a enfocar la idea principal del pasaje.'
                 : 'Dentro de tu nota, esta expresión parece resumir o destacar una idea importante.',
             'pastoral_note' => 'Llévala a una aplicación sencilla: pregunta qué revela de Dios, qué pide al creyente y cómo se vive hoy.',
+            'original_language' => '',
+            'transliteration' => '',
+            'historical_meaning' => $reference !== ''
+                ? 'En el contexto bíblico de ' . $reference . ', esta expresión debe leerse pensando en lo que comunicaba a los primeros oyentes.'
+                : 'Conviene leerla pensando en lo que comunicaba dentro del mundo bíblico original y no solo en su uso actual.',
         ];
     }
 

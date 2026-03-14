@@ -170,8 +170,18 @@ $studyPayload = [
                     </button>
                 </div>
                 <div class="toolbar study-note-font-actions">
-                    <button type="button" class="btn-light" id="studyNoteFontDecrease" aria-label="Hacer texto más pequeño" title="Hacer texto más pequeño">A-</button>
-                    <button type="button" class="btn-light" id="studyNoteFontIncrease" aria-label="Hacer texto más grande" title="Hacer texto más grande">A+</button>
+                    <button type="button" class="btn-light study-icon-font-btn" id="studyNoteFontDecrease" aria-label="Hacer texto más pequeño" title="Hacer texto más pequeño">
+                        <span class="icon-stack">
+                            <img src="assets/icons/text.svg" alt="" class="ico">
+                            <span class="icon-stack-badge">-</span>
+                        </span>
+                    </button>
+                    <button type="button" class="btn-light study-icon-font-btn" id="studyNoteFontIncrease" aria-label="Hacer texto más grande" title="Hacer texto más grande">
+                        <span class="icon-stack">
+                            <img src="assets/icons/text.svg" alt="" class="ico">
+                            <span class="icon-stack-badge">+</span>
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -186,8 +196,18 @@ $studyPayload = [
                         <small class="muted">Selecciona una palabra o frase y consulta una explicación sencilla.</small>
                     </div>
                     <div class="toolbar study-note-font-actions">
-                        <button type="button" class="btn-light" id="studyNoteHelpFontDecrease" aria-label="Hacer ayuda simple más pequeña" title="Hacer ayuda simple más pequeña">A-</button>
-                        <button type="button" class="btn-light" id="studyNoteHelpFontIncrease" aria-label="Hacer ayuda simple más grande" title="Hacer ayuda simple más grande">A+</button>
+                        <button type="button" class="btn-light study-icon-font-btn" id="studyNoteHelpFontDecrease" aria-label="Hacer ayuda simple más pequeña" title="Hacer ayuda simple más pequeña">
+                            <span class="icon-stack">
+                                <img src="assets/icons/text.svg" alt="" class="ico">
+                                <span class="icon-stack-badge">-</span>
+                            </span>
+                        </button>
+                        <button type="button" class="btn-light study-icon-font-btn" id="studyNoteHelpFontIncrease" aria-label="Hacer ayuda simple más grande" title="Hacer ayuda simple más grande">
+                            <span class="icon-stack">
+                                <img src="assets/icons/text.svg" alt="" class="ico">
+                                <span class="icon-stack-badge">+</span>
+                            </span>
+                        </button>
                     </div>
                 </div>
                 <div id="studyNoteSelectedTokens" class="study-note-selected-tokens hidden"></div>

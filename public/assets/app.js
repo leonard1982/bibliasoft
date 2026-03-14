@@ -191,6 +191,8 @@
         saveVersions: document.getElementById('saveVersions'),
         copySelection: document.getElementById('copySelection'),
         copyParagraph: document.getElementById('copyParagraph'),
+        readerFontDown: document.getElementById('readerFontDown'),
+        readerFontUp: document.getElementById('readerFontUp'),
         saveSelectionProject: document.getElementById('saveSelectionProject'),
         shareSelection: document.getElementById('shareSelection'),
         shareWhatsApp: document.getElementById('shareWhatsApp'),
@@ -5139,6 +5141,18 @@
                 notify('No se pudo copiar.');
             });
         });
+
+        if (els.readerFontUp) {
+            els.readerFontUp.addEventListener('click', function () {
+                changeFontScale(5);
+            });
+        }
+
+        if (els.readerFontDown) {
+            els.readerFontDown.addEventListener('click', function () {
+                changeFontScale(-5);
+            });
+        }
 
         if (els.saveSelectionProject) {
             els.saveSelectionProject.addEventListener('click', function () {
