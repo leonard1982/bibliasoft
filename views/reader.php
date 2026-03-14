@@ -53,7 +53,6 @@ $initial = [
                     <button id="openReadingPlan" class="btn-light hide-in-preach" type="button" title="Plan de lectura" aria-label="Plan de lectura"><img src="assets/icons/calendar.svg" alt="" class="ico"><span class="btn-label">Plan</span></button>
                     <button id="toggleParallel" class="btn-light hide-in-preach" type="button" title="Comparar versiones" aria-label="Comparar versiones"><img src="assets/icons/columns.svg" alt="" class="ico"><span class="btn-label">Comparar</span></button>
                     <button id="openVersions" class="btn-light hide-in-preach" type="button" title="Versiones" aria-label="Versiones"><img src="assets/icons/layers.svg" alt="" class="ico"><span class="btn-label">Versiones</span></button>
-                    <button id="openModules" class="btn-light hide-in-preach" type="button" title="Módulos" aria-label="Módulos"><img src="assets/icons/bookmark.svg" alt="" class="ico"><span class="btn-label">Módulos</span></button>
                     <button id="openInterlinear" class="btn-light hide-in-preach" type="button" title="Interlineal" aria-label="Interlineal"><img src="assets/icons/interlinear.svg" alt="" class="ico"><span class="btn-label">Interlineal</span></button>
                     <button id="openAudio" class="btn-light hide-in-preach btn-icon-quick" data-tip="Audio Biblia" type="button" aria-label="Audio Biblia"><img src="assets/icons/audio.svg" alt="" class="ico"></button>
                     <button id="copySelection" class="btn-light hide-in-preach btn-icon-quick" data-tip="Copiar selección" type="button" aria-label="Copiar selección"><img src="assets/icons/copy.svg" alt="" class="ico"></button>
@@ -295,34 +294,6 @@ $initial = [
             <small class="muted">Selecciona hasta 2 versiones extra para abrir lectura en 3 o 4 columnas.</small>
             <button class="btn-primary" type="button" id="saveVersions">Guardar versiones</button>
             <small class="muted">Al guardar, el lector recarga la vista con la nueva versión seleccionada.</small>
-        </div>
-    </div>
-
-    <div id="modulesModal" class="settings hidden" role="dialog" aria-modal="true">
-        <header>
-            <h3><img src="assets/icons/bookmark.svg" alt="" class="ico"> Módulos descargables</h3>
-            <button class="btn-light" id="closeModules">Cerrar</button>
-        </header>
-        <div class="modules-grid">
-            <div id="modulesList" class="stack">
-                <div class="card modules-help-card">
-                    <strong>Cómo usar módulos</strong>
-                    <small class="muted">1) Pulsa <b>Descargar</b>. 2) Pulsa <b>Activar</b>. 3) Cierra el modal y abre un pasaje para ver comentarios/diccionario.</small>
-                </div>
-                <p class="muted">Cargando módulos...</p>
-            </div>
-            <div class="card modules-dict-card">
-                <strong>Diccionario adicional</strong>
-                <small class="muted">Busca términos en los diccionarios activos y aterriza el significado al pasaje.</small>
-                <small class="muted">Flujo recomendado: término -> definición -> referencias -> aplicación.</small>
-                <div class="toolbar">
-                    <input id="modulesDictQuery" type="search" placeholder="Ejemplo: gracia, fe, redencion">
-                    <button id="modulesDictSearch" class="btn-primary" type="button">Buscar</button>
-                </div>
-                <div id="modulesDictResults" class="stack">
-                    <p class="muted">Sin resultados todavía.</p>
-                </div>
-            </div>
         </div>
     </div>
 

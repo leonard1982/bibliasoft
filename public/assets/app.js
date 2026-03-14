@@ -319,19 +319,11 @@
         },
         {
             title: 'Strong y diccionario',
-            text: 'Toca una palabra marcada con Strong para abrir su léxico, contexto bíblico y glosario morfológico.',
-            hint: 'Lee primero definición corta, luego contexto del pasaje y finalmente derivación.',
+            text: 'Toca una palabra marcada con Strong para abrir el significado en español, la definición del diccionario bíblico y guardarla en un proyecto.',
+            hint: 'Mantén el estudio corto y enfocado en el término clave del pasaje.',
             selector: '#versesContainer',
             desktop_targets: ['#versesContainer [data-strong]', '#versesContainer .verse', '#versesContainer'],
             mobile_targets: ['#versesContainer [data-strong]', '#versesContainer .verse', '#versesContainer']
-        },
-        {
-            title: 'Módulos y diccionario bíblico',
-            text: 'Desde Módulos puedes activar diccionarios/comentarios y buscar términos por palabra.',
-            hint: 'Flujo recomendado: término -> diccionario -> referencias -> aplicación.',
-            selector: '#openModules',
-            desktop_targets: ['#openModules'],
-            mobile_targets: ['#openModules']
         },
         {
             title: 'Generación y aplicación práctica',
@@ -1341,17 +1333,16 @@
             '</ul>' +
             '<div class="toolbar">' +
             '<button class="btn-primary js-open-guide-modal" type="button">Abrir tour guiado</button>' +
-            '<button class="btn-light js-open-guide-modules" type="button">Abrir módulos</button>' +
             '</div>' +
             '</article>' +
             '<article class="card guide-card">' +
             '<strong>Cómo usar Strong y diccionario bíblico</strong>' +
             '<ul class="guide-list">' +
             '<li>1) Toca una palabra con código Strong.</li>' +
-            '<li>2) Lee primero la definición corta y el primer contexto bíblico.</li>' +
-            '<li>3) Revisa “Comentarios bíblicos” y “Voces históricas”.</li>' +
-            '<li>4) Contrasta con “Diccionario adicional” si está disponible.</li>' +
-            '<li>5) Resume en una frase aplicada al pasaje actual.</li>' +
+            '<li>2) Lee el significado Strong en español.</li>' +
+            '<li>3) Contrasta con la definición del diccionario bíblico integrado.</li>' +
+            '<li>4) Guarda el hallazgo en un proyecto del Centro de estudio.</li>' +
+            '<li>5) Resume la aplicación al pasaje actual.</li>' +
             '</ul>' +
             '</article>' +
             '<article class="card guide-card">' +
@@ -1359,7 +1350,7 @@
             '<div class="learning-path-grid">' +
             '<div><small class="muted">Semanas 1-2</small><p>Lectura diaria, observación literal y palabras clave.</p></div>' +
             '<div><small class="muted">Semanas 3-4</small><p>Contexto del capítulo/libro, notas y vínculos cruzados.</p></div>' +
-            '<div><small class="muted">Semanas 5-6</small><p>Strong + diccionario modular para términos teológicos.</p></div>' +
+            '<div><small class="muted">Semanas 5-6</small><p>Strong + diccionario integrado para términos teológicos.</p></div>' +
             '<div><small class="muted">Semanas 7-8</small><p>Bosquejo, aplicación pastoral y material para enseñar.</p></div>' +
             '</div>' +
             '</article>';
@@ -1367,11 +1358,6 @@
         els.guidePanel.querySelectorAll('.js-open-guide-modal').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 openGuideModal(true);
-            });
-        });
-        els.guidePanel.querySelectorAll('.js-open-guide-modules').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                openModules();
             });
         });
     }
@@ -6356,7 +6342,10 @@
             verseEnd: Math.max(verseStart, verseEnd),
             reference: String(payload.reference || toReference(book, chapter, verseStart, verseEnd)).trim(),
             source: String(payload.source || 'Pasaje actual').trim(),
-            note: String(payload.note || '').trim()
+            note: String(payload.note || '').trim(),
+            strongCode: String(payload.strongCode || '').trim(),
+            strongTerm: String(payload.strongTerm || '').trim(),
+            commentaryExcerpt: String(payload.commentaryExcerpt || '').trim()
         };
 
         if (els.projectSaveReference) {
@@ -6459,7 +6448,10 @@
             chapter: draft.chapter,
             verse_start: draft.verseStart,
             verse_end: draft.verseEnd,
-            note: note
+            note: note,
+            strong_code: String(draft.strongCode || ''),
+            strong_term: String(draft.strongTerm || ''),
+            commentary_excerpt: String(draft.commentaryExcerpt || '')
         }).then(function (res) {
             if (!res || res.error) {
                 throw new Error((res && res.error) ? res.error : 'No se pudo guardar en el proyecto.');
@@ -6710,7 +6702,7 @@
                         merged.push(state.strongCache[key]);
                     }
                 });
-                renderStrongEntries(merged, codes, dictionaryRows);
+                renderStrongEntries(merged, codes, dictionaryRows, options || {});
             })
             .catch(function (err) {
                 var fallback = [];
@@ -6721,7 +6713,7 @@
                     }
                 });
                 if (fallback.length) {
-                    renderStrongEntries(fallback, codes, []);
+                    renderStrongEntries(fallback, codes, [], options || {});
                     return;
                 }
                 var msg = (err && err.message) ? err.message : 'No se pudo cargar Strong.';
@@ -6751,19 +6743,19 @@
         return Object.keys(map);
     }
 
-    function renderStrongEntries(entries, requestedCodes, dictionaryRows) {
+    function renderStrongEntries(entries, requestedCodes, dictionaryRows, options) {
         if (!els.strongModalBody) {
             return;
         }
 
         var list = Array.isArray(entries) ? entries : [];
         var dictionaryList = Array.isArray(dictionaryRows) ? dictionaryRows : [];
-        var guideHtml = buildStrongReferenceGuideHtml(list);
+        var lookupOptions = options && typeof options === 'object' ? options : {};
         if (!list.length) {
             if (dictionaryList.length) {
                 var onlyDictionaryHtml = '' +
                     '<article class="card strong-entry-card">' +
-                    '<strong>Diccionario adicional</strong>' +
+                    '<strong>Diccionario bíblico</strong>' +
                     '<ul class="context-list">' + dictionaryList.map(function (row) {
                         var refs = Array.isArray(row.references) ? row.references : [];
                         return '<li><strong>' + escapeHtml(row.term || '') + ':</strong> ' +
@@ -6773,7 +6765,7 @@
                             '<br><small class="muted">Fuente: ' + escapeHtml(row.module_name || 'Diccionario') + '</small></li>';
                     }).join('') + '</ul>' +
                     '</article>';
-                els.strongModalBody.innerHTML = '<div class="strong-entry-list">' + guideHtml + onlyDictionaryHtml + '</div>';
+                els.strongModalBody.innerHTML = '<div class="strong-entry-list">' + onlyDictionaryHtml + '</div>';
                 return;
             }
             var requested = Array.isArray(requestedCodes) ? requestedCodes.join(', ') : '';
@@ -6788,106 +6780,136 @@
             var lemma = escapeHtml(entry.lemma || '');
             var translit = escapeHtml(entry.translit || '');
             var pron = escapeHtml(entry.pron || '');
-            var shortDef = escapeHtml(entry.short_def || '');
-            var strongDef = escapeHtml(entry.strongs_def || '');
-            var kjvDef = escapeHtml(entry.kjv_def || '');
-            var derivation = escapeHtml(entry.derivation || '');
-            var usageTerms = Array.isArray(entry.usage_terms) ? entry.usage_terms : [];
-            var firstContext = entry.first_context && typeof entry.first_context === 'object' ? entry.first_context : null;
-            var commentary = Array.isArray(entry.commentary_samples) ? entry.commentary_samples : [];
-            var voices = Array.isArray(entry.theology_voices) ? entry.theology_voices : [];
+            var primaryDef = escapeHtml(entry.strongs_def || entry.short_def || '');
+            var relatedDictionary = filterDictionaryRowsForStrong(entry, dictionaryList);
+            var projectPayload = buildStrongProjectDraft(entry, relatedDictionary, lookupOptions);
 
             var meta = [lemma, translit, pron].filter(function (part) {
                 return String(part || '').trim() !== '';
             }).join(' · ');
-
-            var usageHtml = usageTerms.length
-                ? '<div class="strong-usage-list">' + usageTerms.map(function (term) {
-                    return '<span class="chip">' + escapeHtml(term) + '</span>';
-                }).join('') + '</div>'
-                : '<p class="muted">Sin usos destacados.</p>';
-
-            var contextHtml = '';
-            if (firstContext) {
-                var ctxBook = Number(firstContext.book || 0);
-                var ctxChapter = Number(firstContext.chapter || 0);
-                var ctxVerse = Number(firstContext.verse || 0);
-                var ctxRef = escapeHtml(firstContext.reference || '');
-                var ctxText = escapeHtml(firstContext.verse_text || '');
-                var ctxWords = Array.isArray(firstContext.matched_words) ? firstContext.matched_words : [];
-                var ctxWordsHtml = ctxWords.length
-                    ? '<small class="muted">Palabra(s): ' + escapeHtml(ctxWords.join(', ')) + '</small>'
-                    : '';
-                contextHtml = '' +
-                    '<div class="strong-context-block">' +
-                    '<p><strong>Primer contexto bíblico:</strong> ' + ctxRef + '</p>' +
-                    (ctxText ? '<p class="muted">' + ctxText + '</p>' : '') +
-                    ctxWordsHtml +
-                    (ctxBook > 0 && ctxChapter > 0 && ctxVerse > 0
-                        ? '<button class="btn-light js-open-strong-context" data-book="' + ctxBook + '" data-chapter="' + ctxChapter + '" data-verse="' + ctxVerse + '">Abrir contexto</button>'
-                        : '') +
-                    '</div>';
-            } else {
-                contextHtml = '<p class="muted">No se encontró contexto bíblico con este código.</p>';
-            }
-
-            var commentaryHtml = commentary.length ? '<ul class="context-list">' + commentary.map(function (row) {
-                var source = escapeHtml(row.source || 'Comentario');
-                var excerpt = escapeHtml(row.excerpt || '');
-                return '<li><strong>' + source + ':</strong> ' + excerpt + '</li>';
-            }).join('') + '</ul>' : '<p class="muted">Sin comentarios disponibles para este contexto.</p>';
-
-            var voicesHtml = voices.length ? '<ul class="context-list">' + voices.map(function (row) {
-                var author = escapeHtml(row.author || '');
-                var note = escapeHtml(row.note || '');
-                return '<li><strong>' + author + ':</strong> ' + note + '</li>';
-            }).join('') + '</ul>' : '<p class="muted">Sin notas históricas disponibles.</p>';
-
-            return '' +
-                '<article class="card strong-entry-card">' +
-                '<strong class="strong-entry-code">' + code + '</strong>' +
-                (meta ? '<p class="muted strong-entry-meta">' + meta + '</p>' : '') +
-                (shortDef ? '<p><strong>Definición corta:</strong> ' + shortDef + '</p>' : '') +
-                '<div class="strong-sub-block"><strong>Usos</strong>' + usageHtml + '</div>' +
-                '<div class="strong-sub-block">' + contextHtml + '</div>' +
-                '<div class="strong-sub-block"><strong>Comentarios bíblicos</strong>' + commentaryHtml + '</div>' +
-                '<div class="strong-sub-block"><strong>Voces históricas (resumen)</strong>' + voicesHtml + '</div>' +
-                (strongDef ? '<p><strong>Definición:</strong> ' + strongDef + '</p>' : '') +
-                (kjvDef ? '<p><strong>KJV:</strong> ' + kjvDef + '</p>' : '') +
-                (derivation ? '<p><strong>Derivación:</strong> ' + derivation + '</p>' : '') +
-                '</article>';
-        }).join('');
-
-        var dictionaryHtml = '';
-        if (dictionaryList.length) {
-            dictionaryHtml = '' +
-                '<article class="card strong-entry-card">' +
-                '<strong>Diccionario adicional</strong>' +
-                '<ul class="context-list">' + dictionaryList.map(function (row) {
+            var dictionaryHtml = relatedDictionary.length
+                ? '<ul class="context-list">' + relatedDictionary.map(function (row) {
                     var refs = Array.isArray(row.references) ? row.references : [];
                     return '<li><strong>' + escapeHtml(row.term || '') + ':</strong> ' +
                         escapeHtml(row.definition || '') +
                         (row.usage ? ' <span class="muted">(' + escapeHtml(row.usage) + ')</span>' : '') +
                         (refs.length ? '<br><small class="muted">Refs: ' + escapeHtml(refs.join(', ')) + '</small>' : '') +
                         '<br><small class="muted">Fuente: ' + escapeHtml(row.module_name || 'Diccionario') + '</small></li>';
-                }).join('') + '</ul>' +
-                '</article>';
-        }
+                }).join('') + '</ul>'
+                : '<p class="muted">Sin definición adicional en el diccionario bíblico integrado.</p>';
 
-        els.strongModalBody.innerHTML = '<div class="strong-entry-list">' + guideHtml + dictionaryHtml + html + '</div>';
-        els.strongModalBody.querySelectorAll('.js-open-strong-context').forEach(function (btn) {
+            return '' +
+                '<article class="card strong-entry-card">' +
+                '<strong class="strong-entry-code">' + code + '</strong>' +
+                (meta ? '<p class="muted strong-entry-meta">' + meta + '</p>' : '') +
+                (primaryDef ? '<p><strong>Strong en español:</strong> ' + primaryDef + '</p>' : '<p class="muted">Sin definición Strong disponible.</p>') +
+                '<div class="strong-sub-block"><strong>Diccionario bíblico</strong>' + dictionaryHtml + '</div>' +
+                '<div class="toolbar module-actions">' +
+                '<button class="btn-primary js-save-strong-project" type="button" ' +
+                'data-book="' + Number(projectPayload.book || 0) + '" ' +
+                'data-chapter="' + Number(projectPayload.chapter || 0) + '" ' +
+                'data-verse-start="' + Number(projectPayload.verseStart || 0) + '" ' +
+                'data-verse-end="' + Number(projectPayload.verseEnd || 0) + '" ' +
+                'data-reference="' + escapeHtml(projectPayload.reference || '') + '" ' +
+                'data-source="' + escapeHtml(projectPayload.source || '') + '" ' +
+                'data-note="' + escapeHtml(projectPayload.note || '') + '" ' +
+                'data-strong-code="' + escapeHtml(projectPayload.strongCode || '') + '" ' +
+                'data-strong-term="' + escapeHtml(projectPayload.strongTerm || '') + '" ' +
+                'data-commentary-excerpt="' + escapeHtml(projectPayload.commentaryExcerpt || '') + '"' +
+                (Number(projectPayload.book || 0) > 0 ? '' : ' disabled') +
+                '>Agregar a proyecto</button>' +
+                '</div>' +
+                '</article>';
+        }).join('');
+
+        els.strongModalBody.innerHTML = '<div class="strong-entry-list">' + html + '</div>';
+        els.strongModalBody.querySelectorAll('.js-save-strong-project').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var book = Number(this.getAttribute('data-book') || 0);
                 var chapter = Number(this.getAttribute('data-chapter') || 0);
-                var verse = Number(this.getAttribute('data-verse') || 0);
-                if (book < 1 || chapter < 1 || verse < 1) {
+                var verseStart = Number(this.getAttribute('data-verse-start') || 0);
+                var verseEnd = Number(this.getAttribute('data-verse-end') || verseStart || 0);
+                if (book < 1 || chapter < 1 || verseStart < 1 || verseEnd < 1) {
+                    notify('No se pudo resolver la referencia para guardar el término.');
                     return;
                 }
-                closeStrong();
-                state.pendingVerse = verse;
-                fetchChapter(book, chapter);
+                openProjectSaveModal({
+                    book: book,
+                    chapter: chapter,
+                    verseStart: verseStart,
+                    verseEnd: verseEnd,
+                    reference: String(this.getAttribute('data-reference') || ''),
+                    source: String(this.getAttribute('data-source') || 'Strong'),
+                    note: String(this.getAttribute('data-note') || ''),
+                    strongCode: String(this.getAttribute('data-strong-code') || ''),
+                    strongTerm: String(this.getAttribute('data-strong-term') || ''),
+                    commentaryExcerpt: String(this.getAttribute('data-commentary-excerpt') || '')
+                });
             });
         });
+    }
+
+    function filterDictionaryRowsForStrong(entry, rows) {
+        var list = Array.isArray(rows) ? rows : [];
+        if (!entry || !list.length) {
+            return [];
+        }
+        var code = String((entry && entry.code) || '').toUpperCase().trim();
+        var lemma = String((entry && entry.lemma) || '').trim().toLowerCase();
+        var translit = String((entry && entry.translit) || '').trim().toLowerCase();
+        var matches = list.filter(function (row) {
+            var aliases = Array.isArray(row && row.aliases) ? row.aliases : [];
+            for (var i = 0; i < aliases.length; i++) {
+                var alias = String(aliases[i] || '').trim();
+                var aliasUpper = alias.toUpperCase();
+                var aliasLower = alias.toLowerCase();
+                if ((code && aliasUpper === code) || (lemma && aliasLower === lemma) || (translit && aliasLower === translit)) {
+                    return true;
+                }
+            }
+            var termLower = String((row && row.term) || '').trim().toLowerCase();
+            return (lemma && termLower === lemma) || (translit && termLower === translit);
+        });
+        if (matches.length) {
+            return matches.slice(0, 2);
+        }
+        return list.slice(0, 2);
+    }
+
+    function buildStrongProjectDraft(entry, dictionaryRows, options) {
+        var lookupOptions = options && typeof options === 'object' ? options : {};
+        var book = Number(lookupOptions.book || state.currentBook || 0);
+        var chapter = Number(lookupOptions.chapter || state.currentChapter || 0);
+        var verse = Number(lookupOptions.verse || 0);
+        var verseStart = verse > 0 ? verse : Number((selectedRange() || {}).start || 0);
+        var verseEnd = verse > 0 ? verse : Number((selectedRange() || {}).end || verseStart || 0);
+        var code = String((entry && entry.code) || '').trim();
+        var word = String(lookupOptions.word || entry.lemma || entry.translit || code).trim();
+        var strongDef = String((entry && (entry.strongs_def || entry.short_def)) || '').trim();
+        var dict = Array.isArray(dictionaryRows) && dictionaryRows[0] ? dictionaryRows[0] : null;
+        var dictLine = dict && dict.definition ? String(dict.definition).trim() : '';
+        var noteParts = [];
+        if (code || word) {
+            noteParts.push('Strong ' + (code || '') + (word ? ' · ' + word : ''));
+        }
+        if (strongDef) {
+            noteParts.push('Significado: ' + strongDef);
+        }
+        if (dictLine) {
+            noteParts.push('Diccionario bíblico: ' + dictLine);
+        }
+        return {
+            book: book,
+            chapter: chapter,
+            verseStart: verseStart,
+            verseEnd: verseEnd > 0 ? verseEnd : verseStart,
+            reference: book > 0 && chapter > 0 && verseStart > 0 ? toReference(book, chapter, verseStart, verseEnd > 0 ? verseEnd : verseStart) : '',
+            source: 'Strong y diccionario integrado',
+            note: noteParts.join('\n\n'),
+            strongCode: code,
+            strongTerm: word,
+            commentaryExcerpt: dictLine
+        };
     }
 
     function buildStrongReferenceGuideHtml(entries) {

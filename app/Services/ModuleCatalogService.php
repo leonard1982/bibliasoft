@@ -155,8 +155,8 @@ class ModuleCatalogService
 
         $minVerse = min($verseStart, $verseEnd);
         $maxVerse = max($verseStart, $verseEnd);
-        $modules = $this->userDataRepository->getEnabledContentModulesByType('commentary');
-        if (empty($modules)) {
+        $sources = $this->getContentSourcesByType('commentary');
+        if (empty($sources)) {
             return ['book' => [], 'chapter' => [], 'verse' => []];
         }
 
@@ -164,10 +164,10 @@ class ModuleCatalogService
         $chapterRows = [];
         $verseRows = [];
 
-        foreach ($modules as $module) {
-            $moduleName = trim((string) ($module['name'] ?? 'Módulo'));
-            $sourceLabel = 'Módulo: ' . $moduleName;
-            $payload = $this->loadInstalledPayload((string) ($module['file_path'] ?? ''));
+        foreach ($sources as $source) {
+            $moduleName = trim((string) ($source['name'] ?? 'Recurso'));
+            $sourceLabel = !empty($source['built_in']) ? 'Integrado: ' . $moduleName : 'Módulo: ' . $moduleName;
+            $payload = isset($source['payload']) && is_array($source['payload']) ? $source['payload'] : [];
             $entries = isset($payload['entries']) && is_array($payload['entries']) ? $payload['entries'] : [];
 
             foreach ($entries as $entry) {
@@ -271,15 +271,15 @@ class ModuleCatalogService
             return [];
         }
 
-        $modules = $this->userDataRepository->getEnabledContentModulesByType('dictionary');
-        if (empty($modules)) {
+        $sources = $this->getContentSourcesByType('dictionary');
+        if (empty($sources)) {
             return [];
         }
 
         $matches = [];
-        foreach ($modules as $module) {
-            $moduleName = trim((string) ($module['name'] ?? 'Diccionario'));
-            $payload = $this->loadInstalledPayload((string) ($module['file_path'] ?? ''));
+        foreach ($sources as $source) {
+            $moduleName = trim((string) ($source['name'] ?? 'Diccionario'));
+            $payload = isset($source['payload']) && is_array($source['payload']) ? $source['payload'] : [];
             $entries = isset($payload['entries']) && is_array($payload['entries']) ? $payload['entries'] : [];
             foreach ($entries as $entry) {
                 if (!is_array($entry)) {
@@ -337,7 +337,7 @@ class ModuleCatalogService
                     'references' => array_values(array_filter(array_map('trim', $references))),
                     'word_type' => $wordType,
                     'word_type_note' => $wordTypeNote,
-                    'module_key' => (string) ($module['module_key'] ?? ''),
+                    'module_key' => (string) ($source['module_key'] ?? ''),
                     'module_name' => $moduleName,
                     'score' => $score,
                 ];
@@ -374,15 +374,15 @@ class ModuleCatalogService
             return [];
         }
 
-        $modules = $this->userDataRepository->getEnabledContentModulesByType('map');
-        if (empty($modules)) {
+        $sources = $this->getContentSourcesByType('map');
+        if (empty($sources)) {
             return [];
         }
 
         $matches = [];
-        foreach ($modules as $module) {
-            $moduleName = trim((string) ($module['name'] ?? 'Mapas'));
-            $payload = $this->loadInstalledPayload((string) ($module['file_path'] ?? ''));
+        foreach ($sources as $source) {
+            $moduleName = trim((string) ($source['name'] ?? 'Mapas'));
+            $payload = isset($source['payload']) && is_array($source['payload']) ? $source['payload'] : [];
             $entries = isset($payload['entries']) && is_array($payload['entries']) ? $payload['entries'] : [];
             foreach ($entries as $entry) {
                 if (!is_array($entry)) {
@@ -419,7 +419,7 @@ class ModuleCatalogService
                     'map_url' => trim((string) ($entry['map_url'] ?? '')),
                     'image_url' => trim((string) ($entry['image_url'] ?? '')),
                     'license' => trim((string) ($entry['license'] ?? '')),
-                    'module_key' => (string) ($module['module_key'] ?? ''),
+                    'module_key' => (string) ($source['module_key'] ?? ''),
                     'module_name' => $moduleName,
                     'score' => $score,
                 ];
@@ -442,6 +442,72 @@ class ModuleCatalogService
         unset($row);
 
         return $matches;
+    }
+
+    private function getContentSourcesByType($type)
+    {
+        $type = $this->normalizeType((string) $type);
+        if ($type === '') {
+            return [];
+        }
+
+        $sources = [];
+        $seen = [];
+
+        if (is_dir($this->packagesDir)) {
+            $paths = glob($this->packagesDir . DIRECTORY_SEPARATOR . '*.json');
+            if (is_array($paths)) {
+                sort($paths, SORT_NATURAL | SORT_FLAG_CASE);
+                foreach ($paths as $path) {
+                    $payload = $this->loadInstalledPayload((string) $path);
+                    if (!is_array($payload) || empty($payload)) {
+                        continue;
+                    }
+                    $moduleMeta = isset($payload['module']) && is_array($payload['module']) ? $payload['module'] : [];
+                    $moduleType = $this->normalizeType((string) ($moduleMeta['type'] ?? ''));
+                    if ($moduleType !== $type) {
+                        continue;
+                    }
+                    $moduleKey = $this->sanitizeModuleKey((string) ($moduleMeta['key'] ?? pathinfo((string) $path, PATHINFO_FILENAME)));
+                    if ($moduleKey === '' || isset($seen[$moduleKey])) {
+                        continue;
+                    }
+                    $seen[$moduleKey] = true;
+                    $sources[] = [
+                        'module_key' => $moduleKey,
+                        'type' => $moduleType,
+                        'name' => trim((string) ($moduleMeta['name'] ?? $moduleKey)),
+                        'file_path' => (string) $path,
+                        'payload' => $payload,
+                        'built_in' => true,
+                    ];
+                }
+            }
+        }
+
+        $installed = $this->userDataRepository->getEnabledContentModulesByType($type);
+        foreach ($installed as $module) {
+            $moduleKey = $this->sanitizeModuleKey((string) ($module['module_key'] ?? ''));
+            if ($moduleKey === '' || isset($seen[$moduleKey])) {
+                continue;
+            }
+            $filePath = trim((string) ($module['file_path'] ?? ''));
+            $payload = $this->loadInstalledPayload($filePath);
+            if (!is_array($payload) || empty($payload)) {
+                continue;
+            }
+            $seen[$moduleKey] = true;
+            $sources[] = [
+                'module_key' => $moduleKey,
+                'type' => $type,
+                'name' => trim((string) ($module['name'] ?? $moduleKey)),
+                'file_path' => $filePath,
+                'payload' => $payload,
+                'built_in' => false,
+            ];
+        }
+
+        return $sources;
     }
 
     private function loadCatalog()
