@@ -6,7 +6,6 @@
 
     var companionName = String(root.getAttribute('data-companion-name') || 'Alfonso');
     var draftKey = 'bs_companion_widget_draft_v1';
-    var hintKey = 'bs_companion_widget_hint_seen_v1';
     var openKey = 'bs_companion_widget_open_v1';
     var maximizeKey = 'bs_companion_widget_maximized_v1';
 
@@ -584,31 +583,19 @@
         if (!els.hint) {
             return;
         }
-        var seen = false;
-        try {
-            seen = sessionStorage.getItem(hintKey) === '1';
-        } catch (err) {
-            seen = false;
-        }
-        if (seen) {
-            els.hint.classList.add('hidden');
-            root.classList.remove('is-attention');
-            return;
-        }
+        els.hint.classList.remove('hidden');
+        els.hint.removeAttribute('hidden');
+        els.hint.setAttribute('aria-hidden', 'false');
         root.classList.add('is-attention');
-        window.setTimeout(dismissHint, 7000);
+        window.setTimeout(dismissHint, 9000);
     }
 
     function dismissHint() {
         if (els.hint) {
             els.hint.classList.add('hidden');
+            els.hint.setAttribute('aria-hidden', 'true');
         }
         root.classList.remove('is-attention');
-        try {
-            sessionStorage.setItem(hintKey, '1');
-        } catch (err) {
-            // ignore
-        }
     }
 
     function showNotice(text, type) {
