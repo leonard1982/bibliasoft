@@ -439,7 +439,7 @@
                 : formatMessage(String(row.message_text || ''));
             var actions = '';
             if (!row.typing && sender === 'assistant') {
-                var copyKey = 'copy_' + index;
+                var copyKey = buildMessageKey(row, index);
                 state.copyMap[copyKey] = String(row.message_text || '');
                 var isSpeakingThis = state.speakingKey === copyKey;
                 var speakLabel = !isSpeakingThis
@@ -824,6 +824,34 @@
             .replace(/^#{1,3}\s+/gm, '')
             .replace(/^>\s+/gm, '')
             .replace(/\r\n?/g, '\n');
+    }
+
+    function buildMessageKey(row, index) {
+        if (row && row.id !== undefined && row.id !== null && row.id !== '') {
+            return 'msg_' + String(row.id);
+        }
+
+        var base = [
+            String(row && row.sender ? row.sender : ''),
+            String(row && row.created_at ? row.created_at : ''),
+            String(row && row.message_text ? row.message_text : ''),
+            String(index)
+        ].join('|');
+
+        return 'msg_' + simpleHash(base);
+    }
+
+    function simpleHash(text) {
+        var input = String(text || '');
+        var hash = 0;
+        var i;
+
+        for (i = 0; i < input.length; i += 1) {
+            hash = ((hash << 5) - hash) + input.charCodeAt(i);
+            hash |= 0;
+        }
+
+        return String(Math.abs(hash));
     }
 
     function asJson(res) {
