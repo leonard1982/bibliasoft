@@ -421,7 +421,7 @@
             return '' +
                 '<article class="companion-bubble companion-bubble-' + escapeHtml(sender) + '">' +
                     '<strong>' + escapeHtml(label) + '</strong>' +
-                    '<div class="companion-bubble-body">' + body + '</div>' +
+                    '<div class="companion-bubble-body companion-bubble-body-' + escapeHtml(sender) + '">' + body + '</div>' +
                     '<small>' + escapeHtml(String(row.created_at || '')) + '</small>' +
                 '</article>';
         }).join('');
@@ -546,10 +546,8 @@
     }
 
     function formatMessage(text) {
-        var safe = escapeHtml(String(text || '').replace(/\r\n?/g, '\n'));
-        safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-        var lines = safe.split('\n');
+        var normalized = String(text || '').replace(/\r\n?/g, '\n');
+        var lines = normalized.split('\n');
         var html = [];
         var listType = '';
         var paragraph = [];
@@ -558,7 +556,8 @@
             if (!paragraph.length) {
                 return;
             }
-            html.push('<p>' + paragraph.join('<br>') + '</p>');
+            var content = paragraph.map(formatInline).join('<br>');
+            html.push('<p>' + content + '</p>');
             paragraph = [];
         }
 
@@ -582,7 +581,28 @@
             if (/^#{1,3}\s+/.test(line)) {
                 closeParagraph();
                 closeList();
-                html.push('<h4>' + line.replace(/^#{1,3}\s+/, '') + '</h4>');
+                html.push('<h4>' + formatInline(line.replace(/^#{1,3}\s+/, '')) + '</h4>');
+                return;
+            }
+
+            if (/^\*\*(.+)\*\*$/.test(line)) {
+                closeParagraph();
+                closeList();
+                html.push('<h4>' + formatInline(line.replace(/^\*\*(.+)\*\*$/, '$1')) + '</h4>');
+                return;
+            }
+
+            if (/^>\s+/.test(line)) {
+                closeParagraph();
+                closeList();
+                html.push('<blockquote>' + formatInline(line.replace(/^>\s+/, '')) + '</blockquote>');
+                return;
+            }
+
+            if (!/[.!?]$/.test(line) && /:\s*$/.test(line) && line.length < 90) {
+                closeParagraph();
+                closeList();
+                html.push('<h4>' + formatInline(line.replace(/:\s*$/, '')) + '</h4>');
                 return;
             }
 
@@ -593,7 +613,7 @@
                     listType = 'ul';
                     html.push('<ul>');
                 }
-                html.push('<li>' + line.replace(/^[-*]\s+/, '') + '</li>');
+                html.push('<li>' + formatInline(line.replace(/^[-*]\s+/, '')) + '</li>');
                 return;
             }
 
@@ -604,7 +624,7 @@
                     listType = 'ol';
                     html.push('<ol>');
                 }
-                html.push('<li>' + line.replace(/^\d+\.\s+/, '') + '</li>');
+                html.push('<li>' + formatInline(line.replace(/^\d+\.\s+/, '')) + '</li>');
                 return;
             }
 
@@ -616,6 +636,13 @@
         closeList();
 
         return html.join('');
+    }
+
+    function formatInline(text) {
+        var safe = escapeHtml(String(text || ''));
+        safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        safe = safe.replace(/==(.+?)==/g, '<mark>$1</mark>');
+        return safe;
     }
 
     function escapeHtml(value) {

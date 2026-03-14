@@ -6547,11 +6547,21 @@ body.spacing-normal .verse {
     color: color-mix(in srgb, var(--ink) 90%, var(--muted) 10%);
 }
 
+.companion-bubble-body-assistant {
+    padding: .15rem 0 0;
+}
+
+.companion-bubble-body-assistant > :where(p, ul, ol, blockquote, h4) {
+    position: relative;
+}
+
 .companion-bubble-body h4 {
     margin: .1rem 0 .45rem;
     font-size: .98rem;
     line-height: 1.3;
     color: color-mix(in srgb, var(--accent) 74%, var(--ink) 26%);
+    font-family: "Fraunces", "Georgia", serif;
+    letter-spacing: .01em;
 }
 
 .companion-bubble-body p {
@@ -6576,6 +6586,43 @@ body.spacing-normal .verse {
 
 .companion-bubble-body strong {
     color: color-mix(in srgb, var(--ink) 94%, var(--accent) 6%);
+}
+
+.companion-bubble-body mark {
+    background: linear-gradient(180deg, rgba(255, 219, 122, .18), rgba(255, 219, 122, .48));
+    color: inherit;
+    padding: .04rem .28rem;
+    border-radius: .42rem;
+}
+
+.companion-bubble-body blockquote {
+    margin: .15rem 0 .65rem;
+    padding: .58rem .75rem;
+    border-left: 4px solid color-mix(in srgb, var(--accent) 68%, var(--line) 32%);
+    border-radius: 0 14px 14px 0;
+    background: color-mix(in srgb, var(--selection) 74%, transparent);
+    color: color-mix(in srgb, var(--ink) 88%, var(--muted) 12%);
+}
+
+.companion-bubble-assistant {
+    background:
+        linear-gradient(180deg, color-mix(in srgb, #fafdff 92%, var(--panel) 8%), color-mix(in srgb, #f0f8fd 86%, var(--panel) 14%));
+    border-color: color-mix(in srgb, var(--accent) 28%, var(--line) 72%);
+}
+
+.companion-bubble-assistant .companion-bubble-body-assistant h4 {
+    padding-left: .72rem;
+}
+
+.companion-bubble-assistant .companion-bubble-body-assistant h4::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .18rem;
+    width: 4px;
+    height: calc(100% - .32rem);
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
 }
 
 .companion-typing {
@@ -7038,6 +7085,29 @@ body.spacing-normal .verse {
 .theme-dark .companion-thread-item.is-active,
 .theme-dark .companion-bubble-user {
     background: color-mix(in srgb, #17384f 80%, var(--panel) 20%);
+}
+
+.theme-dark .companion-bubble-assistant {
+    background:
+        linear-gradient(180deg, rgba(14, 34, 47, .98), rgba(17, 40, 56, .98));
+    border-color: rgba(94, 157, 201, .2);
+}
+
+.theme-dark .companion-bubble-body h4 {
+    color: #8cd2f5;
+}
+
+.theme-dark .companion-bubble-body strong {
+    color: #eef7fd;
+}
+
+.theme-dark .companion-bubble-body mark {
+    background: linear-gradient(180deg, rgba(255, 206, 84, .16), rgba(255, 206, 84, .34));
+}
+
+.theme-dark .companion-bubble-body blockquote {
+    background: rgba(21, 55, 76, .48);
+    border-left-color: #68bce8;
 }
 
 .theme-dark .companion-launcher {
