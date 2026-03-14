@@ -7,12 +7,12 @@
 ## Configuración técnica
 - Archivo: `config/sources.php`
 - Fuentes disponibles en esta versión:
-  - `cmti`: comentarios internos de `01RVR1960x.cmti` (licencia no verificada, desactivada por defecto).
-  - `generated`: comentario contextual original generado por la app (activada por defecto).
+  - `cmti`: notas y referencias integradas desde `01RVR1960x.cmti` (habilitada en esta instalación).
+  - `generated`: comentario expositivo integrado generado por la app (activada por defecto).
 
 ## Política por defecto
-- Solo se muestran fuentes libres/compatibles.
-- Cuando no hay fuente compatible, se presenta comentario con etiqueta: `Fuente: Generado`.
+- La aplicación muestra fuentes integradas del sistema.
+- El selector de comentarios prioriza el comentario expositivo integrado cuando está disponible.
 
 ## Nota operativa
 - Si se habilita una fuente externa, el responsable de despliegue debe documentar:

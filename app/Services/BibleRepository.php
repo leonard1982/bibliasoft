@@ -510,7 +510,7 @@ class BibleRepository
             }
         }
 
-        if (empty($bookRows) && empty($chapterRows) && empty($verseRows) && (bool) config('sources.comments.generated.enabled', true)) {
+        if ((bool) config('sources.comments.generated.enabled', true)) {
             $generatedHtml = $this->generatedCommentaryHtml($book, $chapter, $verse, $verse);
             if ($generatedHtml !== '') {
                 $verseRows[] = [
@@ -521,6 +521,7 @@ class BibleRepository
                     'html' => $generatedHtml,
                     'source' => 'generated',
                     'source_label' => $this->sourceLabel('generated'),
+                    'title' => $this->buildRangeLabel($book, $chapter, $verse, $verse),
                 ];
             }
         }
@@ -599,7 +600,7 @@ class BibleRepository
             }
         }
 
-        if (empty($bookRows) && empty($chapterRows) && empty($verseRows) && (bool) config('sources.comments.generated.enabled', true)) {
+        if ((bool) config('sources.comments.generated.enabled', true)) {
             $generatedHtml = $this->generatedCommentaryHtml($book, $chapter, $range['start'], $range['end']);
             if ($generatedHtml !== '') {
                 $verseRows[] = [
@@ -610,6 +611,7 @@ class BibleRepository
                     'html' => $generatedHtml,
                     'source' => 'generated',
                     'source_label' => $this->sourceLabel('generated'),
+                    'title' => $this->buildRangeLabel($book, $chapter, $range['start'], $range['end']),
                 ];
             }
         }
@@ -929,6 +931,7 @@ class BibleRepository
         $keywords = $this->extractCommentaryKeywords($joined, 4);
         $keywordLine = !empty($keywords) ? implode(', ', $keywords) : '';
         $pericope = trim((string) $this->getPericopeHint($book, $chapter, $range['start']));
+        $outlineHtml = $this->buildGeneratedCommentaryOutlineHtml($verses, $motif);
 
         $reference = $this->buildRangeLabel($book, $chapter, $range['start'], $range['end']);
         $excerpt = $this->commentaryClip($joined, 210);
@@ -937,15 +940,23 @@ class BibleRepository
             $opening .= ' Se mueve dentro de la unidad "' . $pericope . '".';
         }
 
-        $html = '<p><strong>' . e($reference) . '.</strong> ' . e($opening) . '</p>'
-            . '<p><strong>Observación textual:</strong> ' . e($motif['focus']) . ' Texto base: "' . e($excerpt) . '".</p>';
+        $html = '<p><strong>' . e($reference) . '.</strong> ' . e($opening) . '</p>';
+        if ($pericope !== '') {
+            $html .= '<p><strong>Introducción:</strong> La unidad "' . e($pericope) . '" concentra la atención del lector en un movimiento claro del texto y prepara la interpretación del bloque completo.</p>';
+        }
+
+        $html .= '<p><strong>Lectura inicial del pasaje:</strong> ' . e($motif['focus']) . ' Texto base: "' . e($excerpt) . '".</p>';
 
         if ($contextLine !== '') {
             $html .= '<p><strong>Contexto inmediato:</strong> ' . e($contextLine) . '</p>';
         }
 
-        $html .= '<p><strong>Lectura teológica:</strong> ' . e($motif['insight']) . '</p>'
-            . '<p><strong>Puente canónico:</strong> ' . e($corpusMeta['bridge']) . '</p>';
+        $html .= '<p><strong>Comentario del pasaje:</strong> ' . e($motif['insight']) . '</p>';
+        if ($outlineHtml !== '') {
+            $html .= '<p><strong>Desarrollo del argumento:</strong></p>' . $outlineHtml;
+        }
+
+        $html .= '<p><strong>Puente canónico:</strong> ' . e($corpusMeta['bridge']) . '</p>';
 
         if ($keywordLine !== '') {
             $html .= '<p><strong>Palabras eje:</strong> ' . e($keywordLine) . '.</p>';
@@ -957,6 +968,66 @@ class BibleRepository
         }
 
         return $html;
+    }
+
+    private function buildGeneratedCommentaryOutlineHtml(array $verses, array $motif)
+    {
+        if (empty($verses)) {
+            return '';
+        }
+
+        $total = count($verses);
+        $blocks = min(5, max(1, $total));
+        $chunkSize = (int) ceil($total / $blocks);
+        $items = [];
+
+        for ($offset = 0; $offset < $total; $offset += $chunkSize) {
+            $slice = array_slice($verses, $offset, $chunkSize);
+            if (empty($slice)) {
+                continue;
+            }
+
+            $first = $slice[0];
+            $last = $slice[count($slice) - 1];
+            $startVerse = (int) ($first['verse'] ?? 0);
+            $endVerse = (int) ($last['verse'] ?? $startVerse);
+            $texts = [];
+            foreach ($slice as $row) {
+                $texts[] = trim((string) ($row['scripture_text'] ?? ''));
+            }
+
+            $joined = $this->commentaryCompactText(implode(' ', $texts));
+            if ($joined === '') {
+                continue;
+            }
+
+            $summary = $this->commentaryClip($joined, 180);
+            $keywords = $this->extractCommentaryKeywords($joined, 3);
+            $keywordLine = !empty($keywords)
+                ? (' Sobresalen ' . implode(', ', $keywords) . '.')
+                : '';
+
+            $prefix = 'En este tramo';
+            if ($offset === 0) {
+                $prefix = 'El inicio del pasaje';
+            } elseif (($offset + $chunkSize) >= $total) {
+                $prefix = 'El cierre del pasaje';
+            }
+
+            $label = $startVerse === $endVerse
+                ? ('v. ' . $startVerse)
+                : ('vv. ' . $startVerse . '-' . $endVerse);
+
+            $items[] = '<li><strong>' . e($label) . ':</strong> '
+                . e($prefix . ' retoma "' . $summary . '". ' . $motif['insight'] . $keywordLine)
+                . '</li>';
+        }
+
+        if (empty($items)) {
+            return '';
+        }
+
+        return '<ol>' . implode('', $items) . '</ol>';
     }
 
     private function commentaryPlacementLabel($chapterTotal, $verseStart, $verseEnd)
@@ -1016,7 +1087,18 @@ class BibleRepository
         $application = 'Convierte esta verdad en una decisión puntual hoy: qué debes creer, qué debes confesar y qué acción concreta debes ajustar.';
         $misread = 'Reducir el pasaje a una frase motivacional aislada sin seguir su argumento inmediato. Léelo dentro del párrafo y verifica cómo cada oración desarrolla la idea central.';
 
-        if (preg_match('/(ira|enoj|indignaci|furor)/u', $lower) && preg_match('/(consuel|misericord|gracia|salvaci|piedad)/u', $lower)) {
+        if ((preg_match('/(lav|pies|toalla|siervo|servir|servicio)/u', $lower) && preg_match('/(amor|am[eé]is|mandamiento|discipul)/u', $lower))
+            || preg_match('/(mandamiento nuevo|amaos unos a otros)/u', $lower)) {
+            $focus = 'el pasaje presenta la grandeza de Jesús en forma de servicio humilde: el Maestro enseña amando, lavando, corrigiendo y dando ejemplo.';
+            $insight = 'La autoridad de Cristo no se expresa como dominio sino como entrega. El texto une amor, servicio y obediencia para mostrar que el discipulado verdadero se reconoce en una vida que sirve como Jesús sirvió.';
+            $application = 'Revisa hoy dónde esperas ser servido en vez de servir. Identifica una acción concreta de humildad, reconciliación o cuidado que refleje el amor de Cristo en tu casa, iglesia o ministerio.';
+            $misread = 'Reducir la escena a un gesto ceremonial aislado. El pasaje no solo describe una costumbre de hospitalidad; revela el carácter de Cristo y establece una forma concreta de vida para sus discípulos.';
+        } elseif (preg_match('/(traicion|entregar|judas|calcañar|negar|pedro)/u', $lower)) {
+            $focus = 'el texto expone la tensión entre la fidelidad de Jesús y la fragilidad del discípulo: en la misma mesa aparecen amor, traición y advertencia.';
+            $insight = 'La escena muestra que Cristo conoce el corazón humano sin retroceder en su misión. El pasaje desenmascara la falsa seguridad religiosa y lleva al lector a depender de la gracia y de la palabra de Jesús.';
+            $application = 'Examina hoy si hay doblez, autosuficiencia o lealtad superficial en tu caminar. Pide al Señor un corazón íntegro y responde con obediencia antes que con promesas impulsivas.';
+            $misread = 'Leer la traición o la negación solo como fallas ajenas. El texto invita a discernir la vulnerabilidad del propio corazón y a buscar permanencia real en Cristo.';
+        } elseif (preg_match('/(ira|enoj|indignaci|furor)/u', $lower) && preg_match('/(consuel|misericord|gracia|salvaci|piedad)/u', $lower)) {
             $focus = 'el pasaje describe el tránsito del juicio al consuelo: Dios confronta el pecado, pero no abandona al pueblo restaurado.';
             $insight = 'La secuencia teológica es clara: la disciplina divina tiene propósito redentor; la última palabra no es condena para siempre, sino restauración del vínculo con Dios.';
             $application = 'Examina hoy dónde necesitas arrepentimiento real y agradece explícitamente la misericordia que te reubica en obediencia.';

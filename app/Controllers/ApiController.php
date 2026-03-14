@@ -434,7 +434,7 @@ class ApiController
             (int) $chapter,
             (int) $verseStart,
             (int) $verseEnd,
-            'selection_payload_v1',
+            'selection_payload_v2',
             $promptHash
         );
         if (!is_array($row) || !$this->isFreshCacheRow($row, 43200)) {
@@ -479,7 +479,7 @@ class ApiController
                 (int) $chapter,
                 (int) $verseStart,
                 (int) $verseEnd,
-                'selection_payload_v1',
+                'selection_payload_v2',
                 $promptHash,
                 $encoded
             );
@@ -491,7 +491,7 @@ class ApiController
     private function buildSelectionPassagePromptHash($book, $chapter, $verseStart, $verseEnd, $text, $pericope = '')
     {
         $parts = [
-            'selection-v2',
+            'selection-v3',
             (int) $book,
             (int) $chapter,
             (int) $verseStart,

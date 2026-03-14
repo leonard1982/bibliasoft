@@ -1556,7 +1556,7 @@
         var sourceKeys = Object.keys(grouped);
         var selectedKey = normalizeCommentarySourceKey(state.commentarySourceKey || '');
         if (!selectedKey || !grouped[selectedKey]) {
-            selectedKey = sourceKeys[0];
+            selectedKey = pickPreferredCommentarySourceKey(grouped);
             state.commentarySourceKey = selectedKey;
         }
 
@@ -1670,6 +1670,20 @@
 
     function normalizeCommentarySourceKey(value) {
         return String(value || '').trim().toLowerCase();
+    }
+
+    function pickPreferredCommentarySourceKey(grouped) {
+        var keys = Object.keys(grouped || {});
+        if (!keys.length) {
+            return '';
+        }
+        var preferred = keys.find(function (key) {
+            var rows = Array.isArray(grouped[key]) ? grouped[key] : [];
+            return rows.some(function (row) {
+                return String((row && row.source) || '').trim().toLowerCase() === 'generated';
+            });
+        });
+        return preferred || keys[0];
     }
 
     function commentaryRangeTitle(row) {

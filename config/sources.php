@@ -3,16 +3,16 @@
 return [
     'comments' => [
         'cmti' => [
-            'name' => 'Comentario interno CMti',
-            'license' => 'Licencia no verificada',
-            'enabled' => false,
-            'ui_label' => 'No habilitada por licencia',
+            'name' => 'Comentario integrado CMti',
+            'license' => 'Integrado en la instalación; revisar redistribución si aplica',
+            'enabled' => true,
+            'ui_label' => 'Integrado: Notas y referencias CMti',
         ],
         'generated' => [
-            'name' => 'Comentario contextual generado',
+            'name' => 'Comentario expositivo integrado',
             'license' => 'Contenido original de la app',
             'enabled' => true,
-            'ui_label' => 'Generado (análisis contextual)',
+            'ui_label' => 'Integrado: Comentario expositivo',
         ],
     ],
 ];
