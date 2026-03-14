@@ -8,7 +8,17 @@ class MailService
 
     public function __construct(array $config = [])
     {
-        $this->config = $config;
+        $basePath = function_exists('config') ? (string) config('app.base_path', dirname(__DIR__, 2)) : dirname(__DIR__, 2);
+        $defaults = [
+            'timeout' => 20,
+            'ehlo_name' => 'bibliasoft.local',
+            'allow_self_signed' => false,
+            'log_path' => rtrim($basePath, DIRECTORY_SEPARATOR)
+                . DIRECTORY_SEPARATOR . 'storage'
+                . DIRECTORY_SEPARATOR . 'logs'
+                . DIRECTORY_SEPARATOR . 'mail.log',
+        ];
+        $this->config = array_merge($defaults, $config);
     }
 
     public function enabled()
@@ -44,12 +54,23 @@ class MailService
     public function sendMessage($toEmail, $toName, $subject, $htmlBody, $textBody = '')
     {
         if (!$this->enabled()) {
+            $this->log('warning', 'Mail disabled or incomplete configuration.', [
+                'host' => (string) ($this->config['host'] ?? ''),
+                'from_email' => (string) ($this->config['from_email'] ?? ''),
+            ]);
             return false;
         }
 
+        $toEmail = trim((string) $toEmail);
+        $toName = trim((string) $toName);
         $host = trim((string) ($this->config['host'] ?? ''));
         $port = max(1, (int) ($this->config['port'] ?? 587));
         $encryption = strtolower(trim((string) ($this->config['encryption'] ?? 'tls')));
+        $timeout = max(5, (int) ($this->config['timeout'] ?? 20));
+        $ehloName = trim((string) ($this->config['ehlo_name'] ?? 'bibliasoft.local'));
+        if ($ehloName === '') {
+            $ehloName = 'bibliasoft.local';
+        }
         $fromEmail = trim((string) ($this->config['from_email'] ?? ''));
         $fromName = trim((string) ($this->config['from_name'] ?? 'BIBLIASOFT'));
         $username = trim((string) ($this->config['username'] ?? ''));
@@ -79,39 +100,56 @@ class MailService
             . '--' . $boundary . "--\r\n";
         $message = implode("\r\n", $headers) . "\r\n\r\n" . $body;
 
-        $transport = $encryption === 'ssl' ? 'ssl://' . $host : $host;
-        $socket = @stream_socket_client($transport . ':' . $port, $errno, $errstr, 20, STREAM_CLIENT_CONNECT);
-        if (!is_resource($socket)) {
-            throw new \RuntimeException('No se pudo conectar al servidor SMTP: ' . $errstr);
-        }
+        $this->log('info', 'Starting SMTP send.', [
+            'to' => $toEmail,
+            'subject' => (string) $subject,
+            'host' => $host,
+            'port' => $port,
+            'encryption' => $encryption,
+            'auth' => $username !== '' ? 'yes' : 'no',
+        ]);
 
-        stream_set_timeout($socket, 20);
+        $socket = $this->openSocket($host, $port, $encryption, $timeout);
+        stream_set_timeout($socket, $timeout);
 
         try {
-            $this->expect($socket, [220]);
-            $this->command($socket, 'EHLO bibliasoft.local', [250]);
+            try {
+                $this->expect($socket, [220]);
+                $ehloResponse = $this->command($socket, 'EHLO ' . $ehloName, [250]);
+                $capabilities = $this->parseEhloCapabilities($ehloResponse);
 
-            if ($encryption === 'tls') {
-                $this->command($socket, 'STARTTLS', [220]);
-                $cryptoOk = @stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
-                if ($cryptoOk !== true) {
-                    throw new \RuntimeException('No se pudo iniciar TLS con el servidor SMTP');
+                if ($encryption === 'tls') {
+                    $this->command($socket, 'STARTTLS', [220]);
+                    $cryptoOk = @stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+                    if ($cryptoOk !== true) {
+                        throw new \RuntimeException('No se pudo iniciar TLS con el servidor SMTP');
+                    }
+                    $ehloResponse = $this->command($socket, 'EHLO ' . $ehloName, [250]);
+                    $capabilities = $this->parseEhloCapabilities($ehloResponse);
                 }
-                $this->command($socket, 'EHLO bibliasoft.local', [250]);
-            }
 
-            if ($username !== '') {
-                $this->command($socket, 'AUTH LOGIN', [334]);
-                $this->command($socket, base64_encode($username), [334]);
-                $this->command($socket, base64_encode($password), [235]);
-            }
+                if ($username !== '') {
+                    $this->authenticate($socket, $username, $password, $capabilities);
+                }
 
-            $this->command($socket, 'MAIL FROM:<' . $fromEmail . '>', [250]);
-            $this->command($socket, 'RCPT TO:<' . trim((string) $toEmail) . '>', [250, 251]);
-            $this->command($socket, 'DATA', [354]);
-            $this->write($socket, $this->escapeMessageData($message) . "\r\n.");
-            $this->expect($socket, [250]);
-            $this->command($socket, 'QUIT', [221]);
+                $this->command($socket, 'MAIL FROM:<' . $fromEmail . '>', [250]);
+                $this->command($socket, 'RCPT TO:<' . $toEmail . '>', [250, 251]);
+                $this->command($socket, 'DATA', [354]);
+                $this->write($socket, $this->escapeMessageData($message) . "\r\n.");
+                $this->expect($socket, [250]);
+                $this->command($socket, 'QUIT', [221]);
+                $this->log('info', 'SMTP send completed.', [
+                    'to' => $toEmail,
+                    'subject' => (string) $subject,
+                ]);
+            } catch (\Throwable $e) {
+                $this->log('error', 'SMTP send failed.', [
+                    'to' => $toEmail,
+                    'subject' => (string) $subject,
+                    'message' => $e->getMessage(),
+                ]);
+                throw $e;
+            }
         } finally {
             fclose($socket);
         }
@@ -236,6 +274,89 @@ class MailService
         return $this->expect($socket, $expectedCodes);
     }
 
+    private function openSocket($host, $port, $encryption, $timeout)
+    {
+        $allowSelfSigned = !empty($this->config['allow_self_signed']);
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => !$allowSelfSigned,
+                'verify_peer_name' => !$allowSelfSigned,
+                'allow_self_signed' => $allowSelfSigned,
+                'SNI_enabled' => true,
+            ],
+        ]);
+
+        $transport = $encryption === 'ssl' ? 'ssl://' . $host : $host;
+        $errno = 0;
+        $errstr = '';
+        $socket = @stream_socket_client(
+            $transport . ':' . $port,
+            $errno,
+            $errstr,
+            max(5, (int) $timeout),
+            STREAM_CLIENT_CONNECT,
+            $context
+        );
+        if (!is_resource($socket)) {
+            $message = 'No se pudo conectar al servidor SMTP';
+            if ($errstr !== '') {
+                $message .= ': ' . $errstr;
+            }
+            $this->log('error', $message, [
+                'host' => $host,
+                'port' => $port,
+                'encryption' => $encryption,
+                'errno' => $errno,
+            ]);
+            throw new \RuntimeException($message);
+        }
+
+        return $socket;
+    }
+
+    private function parseEhloCapabilities($response)
+    {
+        $capabilities = [];
+        $lines = preg_split('/\r\n|\r|\n/', (string) $response);
+        if (!is_array($lines)) {
+            return $capabilities;
+        }
+
+        foreach ($lines as $line) {
+            $line = trim((string) $line);
+            if ($line === '' || stripos($line, '250') !== 0) {
+                continue;
+            }
+            $feature = trim(substr($line, 4));
+            if ($feature === '') {
+                continue;
+            }
+            $upper = strtoupper($feature);
+            $parts = preg_split('/\s+/', $upper);
+            $name = trim((string) ($parts[0] ?? ''));
+            if ($name === '') {
+                continue;
+            }
+            $capabilities[$name] = $upper;
+        }
+
+        return $capabilities;
+    }
+
+    private function authenticate($socket, $username, $password, array $capabilities)
+    {
+        $authLine = isset($capabilities['AUTH']) ? (string) $capabilities['AUTH'] : '';
+        if ($authLine !== '' && strpos($authLine, 'PLAIN') !== false) {
+            $payload = base64_encode("\0" . $username . "\0" . $password);
+            $this->command($socket, 'AUTH PLAIN ' . $payload, [235]);
+            return;
+        }
+
+        $this->command($socket, 'AUTH LOGIN', [334]);
+        $this->command($socket, base64_encode($username), [334]);
+        $this->command($socket, base64_encode($password), [235]);
+    }
+
     private function write($socket, $line)
     {
         fwrite($socket, (string) $line . "\r\n");
@@ -253,6 +374,10 @@ class MailService
 
         $code = (int) substr($response, 0, 3);
         if (!in_array($code, $expectedCodes, true)) {
+            $this->log('error', 'Unexpected SMTP response.', [
+                'expected' => implode(',', $expectedCodes),
+                'response' => trim($response),
+            ]);
             throw new \RuntimeException('Respuesta SMTP inesperada: ' . trim($response));
         }
 
@@ -268,5 +393,29 @@ class MailService
     private function escape($value)
     {
         return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+    }
+
+    private function log($level, $message, array $context = [])
+    {
+        $path = trim((string) ($this->config['log_path'] ?? ''));
+        if ($path === '') {
+            return;
+        }
+
+        $dir = dirname($path);
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0777, true);
+        }
+
+        $line = '[' . date('Y-m-d H:i:s') . '] [' . strtoupper(trim((string) $level)) . '] ' . trim((string) $message);
+        if (!empty($context)) {
+            $encoded = json_encode($context, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            if (is_string($encoded) && $encoded !== '') {
+                $line .= ' ' . $encoded;
+            }
+        }
+        $line .= PHP_EOL;
+
+        @file_put_contents($path, $line, FILE_APPEND);
     }
 }
