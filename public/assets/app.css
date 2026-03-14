@@ -6572,6 +6572,37 @@ body.spacing-normal .verse {
     margin-bottom: 0;
 }
 
+.companion-bubble-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .08rem;
+}
+
+.companion-copy-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line) 72%);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--panel) 84%, var(--selection) 16%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    transition: transform .14s ease, border-color .14s ease, background .14s ease;
+}
+
+.companion-copy-btn:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--accent) 58%, var(--line) 42%);
+    background: color-mix(in srgb, var(--selection) 72%, var(--panel) 28%);
+}
+
+.companion-copy-btn .ico {
+    width: 15px;
+    height: 15px;
+}
+
 .companion-bubble-body ul,
 .companion-bubble-body ol {
     margin: .1rem 0 .7rem 1.1rem;
@@ -7108,6 +7139,16 @@ body.spacing-normal .verse {
 .theme-dark .companion-bubble-body blockquote {
     background: rgba(21, 55, 76, .48);
     border-left-color: #68bce8;
+}
+
+.theme-dark .companion-copy-btn {
+    background: color-mix(in srgb, #122c3d 80%, var(--panel) 20%);
+    border-color: rgba(94, 157, 201, .22);
+}
+
+.theme-dark .companion-copy-btn:hover {
+    background: color-mix(in srgb, #173a52 78%, var(--panel) 22%);
+    border-color: rgba(120, 191, 234, .34);
 }
 
 .theme-dark .companion-launcher {

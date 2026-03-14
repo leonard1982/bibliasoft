@@ -7,6 +7,8 @@
     var companionName = String(root.getAttribute('data-companion-name') || 'Alfonso');
     var draftKey = 'bs_companion_widget_draft_v1';
     var hintKey = 'bs_companion_widget_hint_seen_v1';
+    var openKey = 'bs_companion_widget_open_v1';
+    var maximizeKey = 'bs_companion_widget_maximized_v1';
 
     var state = {
         open: false,
@@ -20,7 +22,9 @@
         pendingUserMessage: '',
         threads: [],
         selectedThread: null,
-        messages: []
+        messages: [],
+        copyMap: {},
+        audioContext: null
     };
 
     var els = {
@@ -46,10 +50,12 @@
 
     bindEvents();
     restoreDraft();
+    restorePanelPrefs();
     initHint();
     renderThreads();
     renderMessages();
     syncPanelState();
+    maybeRestoreOpenPanel();
 
     function bindEvents() {
         if (els.launcher) {
@@ -58,7 +64,7 @@
                     closePanel();
                     return;
                 }
-                openPanel();
+                openPanel({ focus: true });
             });
         }
 
@@ -112,15 +118,19 @@
         });
     }
 
-    function openPanel() {
+    function openPanel(options) {
+        options = options || {};
         state.open = true;
-        state.maximized = true;
+        if (typeof options.maximized === 'boolean') {
+            state.maximized = options.maximized;
+        }
         syncPanelState();
+        savePanelPrefs();
         dismissHint();
         if (!state.loaded) {
             loadThreads();
         }
-        if (els.message) {
+        if (els.message && options.focus !== false) {
             window.setTimeout(function () {
                 els.message.focus();
             }, 80);
@@ -131,11 +141,13 @@
         state.open = false;
         syncPanelState();
         saveDraft();
+        savePanelPrefs();
     }
 
     function toggleMaximize() {
         state.maximized = !state.maximized;
         syncPanelState();
+        savePanelPrefs();
     }
 
     function toggleHistory() {
@@ -308,6 +320,7 @@
             state.showTypingIndicator = false;
             renderThreads();
             renderMessages();
+            playReplySound();
             if (res.prayer_request && res.prayer_request.id) {
                 showNotice('Tu petición de oración quedó registrada para seguimiento pastoral.', 'success');
                 notify('Tu petición de oración fue recibida.', 'success');
@@ -412,20 +425,35 @@
             return;
         }
 
-        els.messages.innerHTML = rows.map(function (row) {
+        state.copyMap = {};
+
+        els.messages.innerHTML = rows.map(function (row, index) {
             var sender = String(row.sender || 'user');
             var label = sender === 'assistant' ? companionName : 'Tú';
             var body = row.typing
                 ? '<div class="companion-typing" aria-label="' + escapeHtml(companionName) + ' está escribiendo"><span></span><span></span><span></span></div>'
                 : formatMessage(String(row.message_text || ''));
+            var actions = '';
+            if (!row.typing && sender === 'assistant') {
+                var copyKey = 'copy_' + index;
+                state.copyMap[copyKey] = String(row.message_text || '');
+                actions = '' +
+                    '<div class="companion-bubble-actions">' +
+                        '<button class="companion-copy-btn" type="button" data-copy-key="' + escapeHtml(copyKey) + '" aria-label="Copiar respuesta" title="Copiar respuesta">' +
+                            '<img src="assets/icons/copy.svg" alt="" class="ico">' +
+                        '</button>' +
+                    '</div>';
+            }
             return '' +
                 '<article class="companion-bubble companion-bubble-' + escapeHtml(sender) + '">' +
                     '<strong>' + escapeHtml(label) + '</strong>' +
                     '<div class="companion-bubble-body companion-bubble-body-' + escapeHtml(sender) + '">' + body + '</div>' +
+                    actions +
                     '<small>' + escapeHtml(String(row.created_at || '')) + '</small>' +
                 '</article>';
         }).join('');
 
+        bindCopyButtons();
         els.messages.scrollTop = els.messages.scrollHeight;
     }
 
@@ -477,6 +505,43 @@
             sessionStorage.removeItem(draftKey);
         } catch (err) {
             // ignore
+        }
+    }
+
+    function restorePanelPrefs() {
+        try {
+            state.open = sessionStorage.getItem(openKey) === '1';
+            var savedMaximized = sessionStorage.getItem(maximizeKey);
+            if (savedMaximized === '0' || savedMaximized === '1') {
+                state.maximized = savedMaximized === '1';
+            }
+        } catch (err) {
+            state.open = false;
+            state.maximized = true;
+        }
+    }
+
+    function savePanelPrefs() {
+        try {
+            sessionStorage.setItem(openKey, state.open ? '1' : '0');
+            sessionStorage.setItem(maximizeKey, state.maximized ? '1' : '0');
+        } catch (err) {
+            // ignore
+        }
+    }
+
+    function maybeRestoreOpenPanel() {
+        if (!state.open) {
+            return;
+        }
+        dismissHint();
+        if (!state.loaded) {
+            loadThreads();
+        }
+        if (els.message) {
+            window.setTimeout(function () {
+                els.message.focus();
+            }, 80);
         }
     }
 
@@ -538,6 +603,91 @@
     function notify(message, type) {
         if (typeof window.appNotify === 'function') {
             window.appNotify(message, type);
+        }
+    }
+
+    function bindCopyButtons() {
+        Array.prototype.slice.call(document.querySelectorAll('.companion-copy-btn[data-copy-key]')).forEach(function (button) {
+            button.addEventListener('click', function () {
+                var key = String(button.getAttribute('data-copy-key') || '');
+                var text = state.copyMap[key] || '';
+                if (!text) {
+                    return;
+                }
+                copyText(text)
+                    .then(function () {
+                        notify('Respuesta copiada.', 'success');
+                    })
+                    .catch(function () {
+                        showNotice('No se pudo copiar la respuesta.', 'error');
+                    });
+            });
+        });
+    }
+
+    function copyText(text) {
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+            return navigator.clipboard.writeText(text);
+        }
+
+        return new Promise(function (resolve, reject) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', 'readonly');
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+
+            try {
+                if (document.execCommand('copy')) {
+                    resolve();
+                } else {
+                    reject(new Error('copy_failed'));
+                }
+            } catch (err) {
+                reject(err);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        });
+    }
+
+    function playReplySound() {
+        var AudioCtor = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtor) {
+            return;
+        }
+
+        try {
+            if (!state.audioContext) {
+                state.audioContext = new AudioCtor();
+            }
+
+            var context = state.audioContext;
+            if (context.state === 'suspended' && typeof context.resume === 'function') {
+                context.resume();
+            }
+
+            var oscillator = context.createOscillator();
+            var gain = context.createGain();
+            var startAt = context.currentTime;
+
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(880, startAt);
+            oscillator.frequency.exponentialRampToValueAtTime(660, startAt + 0.16);
+
+            gain.gain.setValueAtTime(0.0001, startAt);
+            gain.gain.exponentialRampToValueAtTime(0.055, startAt + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, startAt + 0.22);
+
+            oscillator.connect(gain);
+            gain.connect(context.destination);
+            oscillator.start(startAt);
+            oscillator.stop(startAt + 0.24);
+        } catch (err) {
+            // ignore
         }
     }
 
