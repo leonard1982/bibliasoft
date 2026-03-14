@@ -150,6 +150,8 @@ class CompanionChatService
         $prompt = "Actúa como {$companionName}, un creyente maduro con tono pastoral, bíblico, claro y compasivo.\n"
             . "Tienes criterio amplio en Biblia, teología, historia, arqueología, cultura, acompañamiento humano y formación ministerial, pero no afirmas sustituir profesionales clínicos, médicos o legales.\n"
             . "Responde en español sencillo, útil para personas muy simples de leer. Máximo 320 palabras.\n"
+            . "Usa formato visual amigable: títulos cortos, listas breves, negritas con **texto** cuando ayude, y 1 a 3 emojis relevantes si aportan calidez.\n"
+            . "Evita bloques largos. Prefiere párrafos cortos y pasos concretos.\n"
             . "Si el usuario expresa una petición de oración, responde con empatía, una breve oración y menciona que el equipo pastoral puede dar seguimiento.\n"
             . "Si percibes ansiedad, duelo o crisis, habla con prudencia, anima a buscar apoyo humano cercano y no hagas diagnósticos.\n"
             . "Nombre del usuario: " . ($userName !== '' ? $userName : 'hermano(a)') . ".\n"
@@ -210,23 +212,30 @@ class CompanionChatService
         $name = $name !== '' ? $name : 'hermano(a)';
 
         if ($intent['intent'] === 'prayer') {
-            return "Claro, {$name}. Gracias por abrir tu corazón. Ya quedó registrada tu petición para seguimiento pastoral.\n\n"
-                . "Te acompaño con esta oración:\n"
+            return "🙏 **Estoy contigo, {$name}.**\n\n"
+                . "Tu petición ya quedó registrada para seguimiento pastoral.\n\n"
+                . "**Oremos:**\n"
                 . "\"Señor Jesús, mira con gracia la necesidad de {$name}, fortalece su fe, trae paz a su corazón, dirección para este momento y sostén a su familia. Danos tu consuelo y tu ayuda concreta. Amén.\"\n\n"
-                . "Si quieres, puedes contarme un poco más para orar de manera más específica.";
+                . "🕊️ Si quieres, cuéntame un poco más para orar de manera más específica.";
         }
 
         if (!empty($intent['flags']['crisis'])) {
-            return "{$name}, gracias por decirlo con sinceridad. Lo que expresas merece cuidado real y cercano. Puedo acompañarte con orientación bíblica y oración, pero también te recomiendo buscar hoy mismo a un pastor de confianza, un familiar cercano o ayuda profesional presencial en tu ciudad.\n\n"
-                . "Si quieres, cuéntame qué está pasando y te ayudo a ordenar el tema con calma.";
+            return "⚠️ **Gracias por decirlo con sinceridad, {$name}.**\n\n"
+                . "Lo que expresas merece cuidado real y cercano.\n\n"
+                . "**Te recomiendo hoy mismo:**\n"
+                . "- Buscar a un pastor de confianza.\n"
+                . "- Hablar con un familiar o amigo cercano.\n"
+                . "- Buscar ayuda profesional presencial en tu ciudad.\n\n"
+                . "🙏 Yo puedo acompañarte con orientación bíblica y oración. Si quieres, cuéntame qué está pasando y te ayudo a ordenarlo con calma.";
         }
 
-        return "{$name}, con gusto te ayudo.\n\n"
-            . "Voy a responderte como Alfonso: de forma bíblica, clara y práctica. Por lo que escribes, conviene mirar tres cosas:\n"
+        return "📖 **Con gusto te ayudo, {$name}.**\n\n"
+            . "Vamos a verlo de forma bíblica, clara y práctica.\n\n"
+            . "**Miremos tres cosas:**\n"
             . "1. Qué enseña realmente la Escritura sobre este tema.\n"
-            . "2. Cómo aplicarlo a tu situación de hoy sin complicarlo.\n"
+            . "2. Cómo aplicarlo hoy sin complicarlo.\n"
             . "3. Qué siguiente paso concreto puedes dar.\n\n"
-            . "Si quieres una respuesta más exacta, escríbeme tu duda completa o menciona el pasaje bíblico que estás considerando.";
+            . "✨ Si quieres una respuesta más exacta, escríbeme tu duda completa o menciona el pasaje bíblico que estás considerando.";
     }
 
     private function detectIntent($message)

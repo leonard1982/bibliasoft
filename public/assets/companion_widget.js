@@ -547,10 +547,75 @@
 
     function formatMessage(text) {
         var safe = escapeHtml(String(text || '').replace(/\r\n?/g, '\n'));
-        var paragraphs = safe.split(/\n{2,}/);
-        return paragraphs.map(function (paragraph) {
-            return '<p>' + paragraph.replace(/\n/g, '<br>') + '</p>';
-        }).join('');
+        safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+        var lines = safe.split('\n');
+        var html = [];
+        var listType = '';
+        var paragraph = [];
+
+        function closeParagraph() {
+            if (!paragraph.length) {
+                return;
+            }
+            html.push('<p>' + paragraph.join('<br>') + '</p>');
+            paragraph = [];
+        }
+
+        function closeList() {
+            if (!listType) {
+                return;
+            }
+            html.push(listType === 'ol' ? '</ol>' : '</ul>');
+            listType = '';
+        }
+
+        lines.forEach(function (rawLine) {
+            var line = String(rawLine || '').trim();
+
+            if (line === '') {
+                closeParagraph();
+                closeList();
+                return;
+            }
+
+            if (/^#{1,3}\s+/.test(line)) {
+                closeParagraph();
+                closeList();
+                html.push('<h4>' + line.replace(/^#{1,3}\s+/, '') + '</h4>');
+                return;
+            }
+
+            if (/^[-*]\s+/.test(line)) {
+                closeParagraph();
+                if (listType !== 'ul') {
+                    closeList();
+                    listType = 'ul';
+                    html.push('<ul>');
+                }
+                html.push('<li>' + line.replace(/^[-*]\s+/, '') + '</li>');
+                return;
+            }
+
+            if (/^\d+\.\s+/.test(line)) {
+                closeParagraph();
+                if (listType !== 'ol') {
+                    closeList();
+                    listType = 'ol';
+                    html.push('<ol>');
+                }
+                html.push('<li>' + line.replace(/^\d+\.\s+/, '') + '</li>');
+                return;
+            }
+
+            closeList();
+            paragraph.push(line);
+        });
+
+        closeParagraph();
+        closeList();
+
+        return html.join('');
     }
 
     function escapeHtml(value) {
