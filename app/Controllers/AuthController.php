@@ -33,7 +33,11 @@ class AuthController
             'pageTitle' => 'Registro',
             'error' => isset($_GET['error']) ? trim((string) $_GET['error']) : '',
             'recaptchaEnabled' => $this->recaptcha->enabled(),
+            'recaptchaProvider' => $this->recaptcha->provider(),
+            'recaptchaMode' => $this->recaptcha->mode(),
             'recaptchaSiteKey' => $this->recaptcha->siteKey(),
+            'recaptchaScriptUrl' => $this->recaptcha->scriptUrl(),
+            'recaptchaAction' => $this->recaptcha->expectedAction(),
         ]);
     }
 
@@ -135,7 +139,9 @@ class AuthController
             $this->redirectWithError('register', 'Debes autorizar el tratamiento de datos para registrarte.');
         }
 
-        $captchaResult = $this->recaptcha->verify($recaptchaToken, $ipAddress);
+        $captchaResult = $this->recaptcha->verify($recaptchaToken, $ipAddress, [
+            'expected_action' => 'register',
+        ]);
         if (empty($captchaResult['success'])) {
             $this->logSecurity('auth.register', 'captcha_failed', $email, [
                 'errors' => isset($captchaResult['errors']) ? $captchaResult['errors'] : [],

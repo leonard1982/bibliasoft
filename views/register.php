@@ -66,8 +66,17 @@
             <p class="auth-legal-note">El ministerio es opcional. El correo será el identificador principal de acceso.</p>
 
             <?php if (!empty($recaptchaEnabled) && !empty($recaptchaSiteKey)): ?>
-                <div class="auth-recaptcha-wrap">
-                    <div class="g-recaptcha" data-sitekey="<?php echo e($recaptchaSiteKey); ?>"></div>
+                <div class="auth-recaptcha-wrap" data-provider="<?php echo e($recaptchaProvider ?? 'legacy'); ?>" data-mode="<?php echo e($recaptchaMode ?? 'checkbox'); ?>">
+                    <?php if (($recaptchaMode ?? 'checkbox') === 'score' && ($recaptchaProvider ?? 'legacy') === 'cloud'): ?>
+                        <input type="hidden" name="g-recaptcha-response" value="" data-recaptcha-token>
+                        <p class="auth-legal-note">Validaremos el registro con Google reCAPTCHA antes de enviar el formulario.</p>
+                    <?php else: ?>
+                        <div
+                            class="g-recaptcha"
+                            data-sitekey="<?php echo e($recaptchaSiteKey); ?>"
+                            data-action="<?php echo e($recaptchaAction ?? 'register'); ?>"
+                        ></div>
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
 
@@ -78,6 +87,37 @@
         </form>
     </article>
 </section>
-<?php if (!empty($recaptchaEnabled) && !empty($recaptchaSiteKey)): ?>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<?php if (!empty($recaptchaEnabled) && !empty($recaptchaSiteKey) && !empty($recaptchaScriptUrl)): ?>
+    <script src="<?php echo e($recaptchaScriptUrl); ?>" async defer></script>
+    <?php if (($recaptchaMode ?? 'checkbox') === 'score' && ($recaptchaProvider ?? 'legacy') === 'cloud'): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var form = document.querySelector('.auth-form-pro');
+                var tokenInput = document.querySelector('[data-recaptcha-token]');
+                if (!form || !tokenInput) {
+                    return;
+                }
+
+                form.addEventListener('submit', function (event) {
+                    if (tokenInput.value) {
+                        return;
+                    }
+
+                    if (!window.grecaptcha || !grecaptcha.enterprise) {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    grecaptcha.enterprise.ready(function () {
+                        grecaptcha.enterprise.execute('<?php echo e($recaptchaSiteKey); ?>', {
+                            action: '<?php echo e($recaptchaAction ?? 'register'); ?>'
+                        }).then(function (token) {
+                            tokenInput.value = token || '';
+                            form.submit();
+                        });
+                    });
+                });
+            });
+        </script>
+    <?php endif; ?>
 <?php endif; ?>

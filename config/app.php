@@ -49,8 +49,15 @@ return [
     ],
     'recaptcha' => [
         'enabled' => getenv('RECAPTCHA_ENABLED') === '1',
+        'provider' => getenv('RECAPTCHA_PROVIDER') ?: 'legacy',
+        'mode' => getenv('RECAPTCHA_MODE') ?: 'checkbox',
         'site_key' => getenv('RECAPTCHA_SITE_KEY') ?: '',
         'secret_key' => getenv('RECAPTCHA_SECRET_KEY') ?: '',
+        'project_id' => getenv('RECAPTCHA_PROJECT_ID') ?: '',
+        'api_key' => getenv('RECAPTCHA_API_KEY') ?: '',
+        'expected_action' => getenv('RECAPTCHA_EXPECTED_ACTION') ?: 'register',
+        'min_score' => (float) (getenv('RECAPTCHA_MIN_SCORE') ?: 0.5),
+        'verify_hostname' => getenv('RECAPTCHA_VERIFY_HOSTNAME') !== '0',
         'timeout' => (int) (getenv('RECAPTCHA_TIMEOUT') ?: 10),
     ],
     'security' => [
