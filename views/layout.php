@@ -11,6 +11,7 @@ $sideMenuItems = [
     ['route' => 'anecdotes', 'label' => 'Anécdotas', 'icon' => 'bookmark.svg', 'href' => '?route=anecdotes', 'open_tab' => true],
 ];
 if (auth_user_id() > 0) {
+    $sideMenuItems[] = ['route' => 'sermons', 'label' => 'Sermones', 'icon' => 'list.svg', 'href' => '?route=sermons', 'open_tab' => true];
     $sideMenuItems[] = ['route' => 'logout', 'label' => 'Salir', 'icon' => 'lock.svg', 'href' => '?route=logout', 'open_tab' => false];
 } else {
     $sideMenuItems[] = ['route' => 'login', 'label' => 'Ingresar', 'icon' => 'login.svg', 'href' => '?route=login', 'open_tab' => true];
@@ -102,6 +103,9 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
                                         <a class="user-menu-item" href="?route=study_center">
                                             <img src="assets/icons/layers.svg" alt="" class="ico"> Centro de estudio
                                         </a>
+                                        <a class="user-menu-item" href="?route=sermons">
+                                            <img src="assets/icons/list.svg" alt="" class="ico"> Sermones y mensajes
+                                        </a>
                                         <a class="user-menu-item" href="?route=reader&skip_daily=1">
                                             <img src="assets/icons/eye.svg" alt="" class="ico"> Ir al lector
                                         </a>
@@ -149,6 +153,7 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
                                         <a href="?route=reader&amp;skip_daily=1">Lector</a>
                                         <a href="?route=devotional">Devocionales</a>
                                         <a href="?route=study_center">Centro de estudio</a>
+                                        <?php if (auth_user_id() > 0): ?><a href="?route=sermons">Sermones</a><?php endif; ?>
                                         <a href="?route=anecdotes">Anécdotas</a>
                                     </nav>
                                     <div class="site-links">
@@ -198,6 +203,7 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
                     <a href="?route=reader&amp;skip_daily=1">Lector</a>
                     <a href="?route=devotional">Devocionales</a>
                     <a href="?route=study_center">Centro de estudio</a>
+                    <?php if (auth_user_id() > 0): ?><a href="?route=sermons">Sermones</a><?php endif; ?>
                     <a href="?route=anecdotes">Anécdotas</a>
                 </nav>
                 <div class="site-links">

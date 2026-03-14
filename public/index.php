@@ -10,6 +10,7 @@ use App\Controllers\DevotionalController;
 use App\Controllers\HomeController;
 use App\Controllers\HomeDailyController;
 use App\Controllers\ReaderController;
+use App\Controllers\SermonController;
 use App\Controllers\ShareController;
 use App\Controllers\StudyCenterController;
 use App\Services\AIService;
@@ -134,6 +135,7 @@ $devotionalController = new DevotionalController($devotionalService, $imageCardS
 $authController = new AuthController($userDataRepository, $mailService, $recaptchaService, $backupService);
 $shareController = new ShareController();
 $studyCenterController = new StudyCenterController($bibleRepository, $userDataRepository);
+$sermonController = new SermonController($bibleRepository, $userDataRepository);
 $anecdoteController = new AnecdoteController($anecdoteService);
 $apiController = new ApiController(
     $bibleRepository,
@@ -146,7 +148,8 @@ $apiController = new ApiController(
     $readingPlanService,
     $strongLexiconService,
     $documentExportService,
-    $moduleCatalogService
+    $moduleCatalogService,
+    $generationService
 );
 
 $requestedRoute = isset($_GET['route']) ? (string) $_GET['route'] : 'home_daily';
@@ -182,6 +185,66 @@ if ($requestMethod === 'GET' && strpos((string) $route, 'api.') !== 0) {
             'requested_route' => $requestedRoute,
         ],
     ]);
+}
+
+$protectedGuestPages = [
+    'devotional' => 'devotional',
+    'study_center' => 'study_center',
+    'sermons' => 'advanced_tools',
+    'anecdotes' => 'anecdotes',
+];
+
+$protectedGuestApis = [
+    'api.devotional.generate' => 'devotional',
+    'api.devotional.history' => 'devotional',
+    'api.anecdotes.list' => 'anecdotes',
+    'api.anecdotes.generate' => 'anecdotes',
+    'api.anecdotes.favorite' => 'anecdotes',
+    'api.note.create' => 'advanced_tools',
+    'api.note.update' => 'advanced_tools',
+    'api.note.delete' => 'advanced_tools',
+    'api.link.create' => 'advanced_tools',
+    'api.link.delete' => 'advanced_tools',
+    'api.favorite.toggle' => 'advanced_tools',
+    'api.favorite.snapshot' => 'advanced_tools',
+    'api.favorite.save' => 'advanced_tools',
+    'api.favorite.remove' => 'advanced_tools',
+    'api.favorite.folder.create' => 'advanced_tools',
+    'api.study.projects.list' => 'study_center',
+    'api.study.projects.create' => 'study_center',
+    'api.study.projects.update' => 'study_center',
+    'api.study.projects.delete' => 'study_center',
+    'api.study.entries.list' => 'study_center',
+    'api.study.entries.create' => 'study_center',
+    'api.study.entries.update' => 'study_center',
+    'api.study.entries.delete' => 'study_center',
+    'api.sermons.generate' => 'advanced_tools',
+    'api.highlight.set' => 'advanced_tools',
+    'api.plan.start' => 'advanced_tools',
+    'api.plan.today' => 'advanced_tools',
+    'api.plan.chapter' => 'advanced_tools',
+    'api.sync.status' => 'advanced_tools',
+    'api.sync.push' => 'advanced_tools',
+    'api.sync.pull' => 'advanced_tools',
+    'api.ai.refresh' => 'advanced_tools',
+];
+
+if (auth_user_id() < 1 && isset($protectedGuestPages[$route])) {
+    $gate = feature_access_payload($protectedGuestPages[$route], app_current_relative_url());
+    app_render('auth_gate', [
+        'pageTitle' => $gate['title'] ?? 'Acceso gratuito',
+        'gate' => $gate,
+    ]);
+    exit;
+}
+
+if (auth_user_id() < 1 && isset($protectedGuestApis[$route])) {
+    $gate = feature_access_payload($protectedGuestApis[$route], app_current_relative_url());
+    app_json([
+        'error' => $gate['error'] ?? 'Inicia sesión o regístrate gratis para continuar.',
+        'login_required' => true,
+        'login_gate' => $gate,
+    ], 401);
 }
 
 try {
@@ -221,6 +284,10 @@ try {
 
         case 'study_center':
             $studyCenterController->index();
+            break;
+
+        case 'sermons':
+            $sermonController->index();
             break;
 
         case 'anecdotes':
@@ -273,6 +340,14 @@ try {
 
         case 'admin.mail.templates.save':
             $authController->adminMailTemplateSave();
+            break;
+
+        case 'admin.mail.templates.generate':
+            $authController->adminMailTemplateGenerate();
+            break;
+
+        case 'admin.mail.templates.test':
+            $authController->adminMailTemplateTest();
             break;
 
         case 'admin.mail.lists.save':
@@ -489,6 +564,10 @@ try {
 
         case 'api.study.entries.delete':
             $apiController->studyEntryDelete();
+            break;
+
+        case 'api.sermons.generate':
+            $apiController->sermonGenerate();
             break;
 
         case 'api.highlight.set':

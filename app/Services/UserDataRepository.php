@@ -2389,7 +2389,7 @@ class UserDataRepository
                     note, strong_code, strong_term, commentary_excerpt, created_at, updated_at
              FROM study_project_entries
              WHERE project_id = :project_id
-             ORDER BY updated_at DESC, id DESC
+             ORDER BY created_at ASC, id ASC
              LIMIT ' . $limit
         );
         $stmt->execute([':project_id' => $projectId]);

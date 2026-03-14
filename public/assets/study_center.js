@@ -15,6 +15,7 @@
         projects: Array.isArray(payload.projects) ? payload.projects : [],
         books: Array.isArray(payload.books) ? payload.books : [],
         selectedProjectId: 0,
+        projectsCollapsed: false,
         entriesByProject: {},
         modal: {
             mode: '',
@@ -26,11 +27,13 @@
     };
 
     var els = {
+        grid: document.getElementById('studyCenterGrid'),
         projectsList: document.getElementById('studyProjectsList'),
         projectForm: document.getElementById('studyProjectForm'),
         projectName: document.getElementById('studyProjectName'),
         projectDescription: document.getElementById('studyProjectDescription'),
         projectColor: document.getElementById('studyProjectColor'),
+        projectsToggle: document.getElementById('studyProjectsToggle'),
         projectEmpty: document.getElementById('studyProjectEmpty'),
         projectContent: document.getElementById('studyProjectContent'),
         projectTitle: document.getElementById('studyProjectTitle'),
@@ -58,6 +61,8 @@
         toast: document.getElementById('studyToast')
     };
 
+    state.projectsCollapsed = readProjectsCollapsed();
+    applyProjectsCollapsedState();
     renderProjects();
     if (state.projects.length) {
         selectProject(Number(state.projects[0].id || 0));
@@ -98,6 +103,14 @@
             els.entryForm.addEventListener('submit', function (event) {
                 event.preventDefault();
                 createEntry();
+            });
+        }
+
+        if (els.projectsToggle) {
+            els.projectsToggle.addEventListener('click', function () {
+                state.projectsCollapsed = !state.projectsCollapsed;
+                writeProjectsCollapsed(state.projectsCollapsed);
+                applyProjectsCollapsedState();
             });
         }
 
@@ -234,6 +247,36 @@
         });
     }
 
+    function applyProjectsCollapsedState() {
+        if (!els.grid || !els.projectsToggle) {
+            return;
+        }
+        els.grid.classList.toggle('is-projects-collapsed', !!state.projectsCollapsed);
+        var collapsed = !!state.projectsCollapsed;
+        var label = collapsed ? 'Mostrar proyectos' : 'Ocultar proyectos';
+        var icon = collapsed ? 'assets/icons/layers.svg' : 'assets/icons/columns.svg';
+        els.projectsToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        els.projectsToggle.setAttribute('aria-label', label);
+        els.projectsToggle.setAttribute('title', label);
+        els.projectsToggle.innerHTML = '<img src="' + icon + '" alt="" class="ico">';
+    }
+
+    function readProjectsCollapsed() {
+        try {
+            return window.localStorage.getItem('bibliasoft.study.projectsCollapsed') === '1';
+        } catch (err) {
+            return false;
+        }
+    }
+
+    function writeProjectsCollapsed(value) {
+        try {
+            window.localStorage.setItem('bibliasoft.study.projectsCollapsed', value ? '1' : '0');
+        } catch (err) {
+            // ignore storage errors
+        }
+    }
+
     function renderProjectDetail() {
         var active = getSelectedProject();
         if (!active) {
@@ -310,14 +353,20 @@
             var ref = bookLabel(book) + ' ' + chapter + ':' + verseStart + (verseEnd !== verseStart ? '-' + verseEnd : '');
             var readerHref = '?route=reader&book=' + book + '&chapter=' + chapter + '&verse=' + verseStart + '&skip_daily=1';
             var note = String(row.note || '');
+            var createdAt = String(row.created_at || '');
+            var updatedAt = String(row.updated_at || '');
+            var metaLine = createdAt ? ('Creado: ' + createdAt) : '';
+            if (updatedAt && createdAt && updatedAt !== createdAt) {
+                metaLine += ' · Editado: ' + updatedAt;
+            }
 
             return '' +
                 '<article class="study-entry-card" data-id="' + Number(row.id || 0) + '">' +
                 '<div class="study-entry-head">' +
                 '<strong>' + escapeHtml(ref) + '</strong>' +
-                '<small class="muted">' + escapeHtml(String(row.updated_at || row.created_at || '')) + '</small>' +
+                '<small class="muted">' + escapeHtml(metaLine) + '</small>' +
                 '</div>' +
-                '<p>' + (note ? escapeHtml(note) : '<span class="muted">Sin nota en esta entrada.</span>') + '</p>' +
+                '<div class="study-entry-note">' + (note ? formatStudyNoteHtml(note) : '<span class="muted">Sin nota en esta entrada.</span>') + '</div>' +
                 '<div class="toolbar">' +
                 '<a class="btn-light" href="' + readerHref + '"><img src="assets/icons/book.svg" alt="" class="ico"> Abrir</a>' +
                 '<button type="button" class="btn-light js-study-entry-edit">Editar nota</button>' +
@@ -647,6 +696,30 @@
     function showError(err) {
         var message = err && err.message ? err.message : 'No se pudo completar la acción.';
         showNotice(message, 'error');
+    }
+
+    function formatStudyNoteHtml(note) {
+        var text = String(note || '').replace(/\r\n?/g, '\n').trim();
+        if (!text) {
+            return '<span class="muted">Sin nota en esta entrada.</span>';
+        }
+
+        return text.split(/\n{2,}/).map(function (block) {
+            var lines = block.split('\n').map(function (line) {
+                return String(line || '').trim();
+            }).filter(Boolean);
+            if (!lines.length) {
+                return '';
+            }
+
+            var first = lines[0];
+            var rest = lines.slice(1);
+            var heading = /^\d+\.\s+/.test(first)
+                ? '<strong class="study-entry-note-title">' + escapeHtml(first) + '</strong>'
+                : '<span>' + escapeHtml(first) + '</span>';
+            var body = rest.length ? ('<div class="study-entry-note-body">' + rest.map(escapeHtml).join('<br>') + '</div>') : '';
+            return '<div class="study-entry-note-block">' + heading + body + '</div>';
+        }).join('');
     }
 
     function escapeHtml(value) {

@@ -95,6 +95,89 @@ class GenerationService
         ];
     }
 
+    public function generateSermonMessage(array $input)
+    {
+        $book = isset($input['book']) ? (int) $input['book'] : 0;
+        $chapter = isset($input['chapter']) ? (int) $input['chapter'] : 0;
+        $verseStart = isset($input['verse_start']) ? (int) $input['verse_start'] : 0;
+        $verseEnd = isset($input['verse_end']) ? (int) $input['verse_end'] : 0;
+        $messageType = trim((string) ($input['message_type'] ?? 'sermon'));
+        $promptText = trim((string) ($input['prompt'] ?? ''));
+        $audience = trim((string) ($input['audience'] ?? ''));
+        $tone = trim((string) ($input['tone'] ?? ''));
+
+        if ($book < 1 || $chapter < 1 || $verseStart < 1 || $verseEnd < 1) {
+            throw new \InvalidArgumentException('ParÃ¡metros invÃ¡lidos');
+        }
+
+        if ($verseStart > $verseEnd) {
+            $tmp = $verseStart;
+            $verseStart = $verseEnd;
+            $verseEnd = $tmp;
+        }
+
+        $verses = $this->bibleRepository->getVersesInRange($book, $chapter, $verseStart, $verseEnd);
+        if (empty($verses)) {
+            throw new \InvalidArgumentException('No se encontrÃ³ el pasaje solicitado.');
+        }
+
+        $messageType = in_array($messageType, ['sermon', 'mensaje', 'ensenanza', 'bosquejo'], true)
+            ? $messageType
+            : 'sermon';
+        $prompt = $this->buildSermonPrompt($book, $chapter, $verseStart, $verseEnd, $messageType, $promptText, $audience, $tone, $verses);
+        $promptHash = hash('sha256', $prompt);
+        $cached = $this->userDataRepository->getGenerationCache($book, $chapter, $verseStart, $verseEnd, 'sermon_message', $promptHash);
+        if ($cached && !$this->isBadPlaceholder((string) $cached['response'])) {
+            $decoded = $this->extractJsonObject((string) $cached['response']);
+            if (is_array($decoded)) {
+                return [
+                    'cached' => true,
+                    'source' => 'cache',
+                    'reference' => $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd),
+                    'title' => trim((string) ($decoded['title'] ?? '')),
+                    'content' => trim((string) ($decoded['content'] ?? '')),
+                ];
+            }
+        }
+
+        $draft = $this->fallbackSermonMessage($book, $chapter, $verseStart, $verseEnd, $messageType, $promptText, $audience, $tone, $verses);
+        $source = 'stub';
+        $enabled = !empty($this->config['enabled']);
+        $apiKey = isset($this->config['api_key']) ? trim((string) $this->config['api_key']) : '';
+        $model = isset($this->config['model']) ? (string) $this->config['model'] : 'gpt-4.1-mini';
+
+        if ($enabled && $apiKey !== '' && function_exists('curl_init')) {
+            $real = $this->callOpenAI($apiKey, $model, $prompt);
+            $decoded = $this->extractJsonObject((string) $real);
+            if (is_array($decoded) && trim((string) ($decoded['content'] ?? '')) !== '') {
+                $draft['title'] = trim((string) ($decoded['title'] ?? $draft['title']));
+                $draft['content'] = trim((string) ($decoded['content'] ?? $draft['content']));
+                $source = 'online';
+            }
+        }
+
+        $this->userDataRepository->saveGenerationCache(
+            $book,
+            $chapter,
+            $verseStart,
+            $verseEnd,
+            'sermon_message',
+            $promptHash,
+            json_encode([
+                'title' => $draft['title'],
+                'content' => $draft['content'],
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+        );
+
+        return [
+            'cached' => false,
+            'source' => $source,
+            'reference' => $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd),
+            'title' => $draft['title'],
+            'content' => $draft['content'],
+        ];
+    }
+
     private function buildPrompt($book, $chapter, $verseStart, $verseEnd, $mode, array $verses)
     {
         $lines = [];
@@ -108,6 +191,33 @@ class GenerationService
             "Referencia: {$reference}\n" .
             "Texto:\n" . implode("\n", $lines) . "\n\n" .
             "Responde en español claro, directo y breve (máx. 220 palabras).";
+    }
+
+    private function buildSermonPrompt($book, $chapter, $verseStart, $verseEnd, $messageType, $promptText, $audience, $tone, array $verses)
+    {
+        $lines = [];
+        foreach ($verses as $row) {
+            $lines[] = $row['verse'] . '. ' . trim((string) ($row['scripture_text'] ?? ''));
+        }
+        $reference = $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd);
+        $bookName = $this->bibleRepository->getBookName($book);
+        $audience = $audience !== '' ? $audience : 'iglesia local, grupos de hogar y personas nuevas en la fe';
+        $tone = $tone !== '' ? $tone : 'pastoral, bÃ­blico, claro y aplicable';
+        $focus = $promptText !== '' ? $promptText : 'resaltar la idea central del pasaje y aplicarla con fidelidad';
+
+        return "Eres un pastor y redactor bÃ­blico senior en espaÃ±ol.\n"
+            . "Genera SOLO un JSON vÃ¡lido con las claves title y content.\n"
+            . "Tipo de pieza: {$messageType}.\n"
+            . "Referencia base: {$reference}.\n"
+            . "Libro: {$bookName}. CapÃ­tulo: {$chapter}. Rango: {$verseStart}-{$verseEnd}.\n"
+            . "Audiencia: {$audience}.\n"
+            . "Tono: {$tone}.\n"
+            . "Encargo pastoral del usuario: {$focus}.\n"
+            . "Texto bÃ­blico:\n" . implode("\n", $lines) . "\n\n"
+            . "El campo title debe ser breve, memorable y conectado al pasaje.\n"
+            . "El campo content debe ser texto plano, sin HTML, con estructura larga y Ãºtil para predicar o enseÃ±ar.\n"
+            . "Incluye estas secciones dentro de content: Idea central, IntroducciÃ³n, Desarrollo en 3 movimientos o puntos, Aplicaciones concretas, Llamado final y OraciÃ³n sugerida.\n"
+            . "No inventes detalles ajenos al pasaje. No uses markdown complicado. No agregues explicaciones fuera del JSON.";
     }
 
     private function callOpenAI($apiKey, $model, $prompt)
@@ -259,6 +369,64 @@ class GenerationService
 
         $line .= ' Recomendación exegética: identifica repetición de términos clave, estructura del párrafo y relación con el contexto canónico del libro.';
         return $line;
+    }
+
+    private function fallbackSermonMessage($book, $chapter, $verseStart, $verseEnd, $messageType, $promptText, $audience, $tone, array $verses)
+    {
+        $reference = $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd);
+        $summary = $this->buildSummary($this->collectText($verses), $reference);
+        $audienceLine = $audience !== '' ? $audience : 'la iglesia y quienes estÃ¡n creciendo en la Palabra';
+        $toneLine = $tone !== '' ? $tone : 'pastoral y claro';
+        $promptLine = $promptText !== '' ? $promptText : 'mostrar con fidelidad el mensaje del pasaje y llevarlo a la prÃ¡ctica';
+        $titlePrefixMap = [
+            'sermon' => 'SermÃ³n',
+            'mensaje' => 'Mensaje',
+            'ensenanza' => 'EnseÃ±anza',
+            'bosquejo' => 'Bosquejo',
+        ];
+        $titlePrefix = isset($titlePrefixMap[$messageType]) ? $titlePrefixMap[$messageType] : 'Mensaje';
+        $title = $titlePrefix . ': ' . $reference;
+        $content = "Idea central\n"
+            . "El pasaje {$reference} llama a mirar con atenciÃ³n el obrar de Dios y responder con obediencia concreta.\n\n"
+            . "IntroducciÃ³n\n"
+            . "{$summary} Este {$titlePrefix} estÃ¡ pensado para {$audienceLine}, con un tono {$toneLine}.\n\n"
+            . "Desarrollo\n"
+            . "1. Observa lo que el texto revela de Dios y de su carÃ¡cter.\n"
+            . "2. Identifica cÃ³mo el pasaje confronta el corazÃ³n humano y corrige prioridades.\n"
+            . "3. Lleva la verdad bÃ­blica a una respuesta visible en la vida diaria y en la comunidad.\n\n"
+            . "Aplicaciones concretas\n"
+            . "- Ora el pasaje y conviÃ©rtelo en una decisiÃ³n prÃ¡ctica para esta semana.\n"
+            . "- Comparte el mensaje con claridad y sin perder la fidelidad al texto.\n"
+            . "- Usa esta orientaciÃ³n pastoral: {$promptLine}.\n\n"
+            . "Llamado final\n"
+            . "Invita a la congregaciÃ³n a volver al texto, creerlo, obedecerlo y permitir que transforme la manera de vivir.\n\n"
+            . "OraciÃ³n sugerida\n"
+            . "SeÃ±or, afÃ­rmanos en tu Palabra y danos gracia para vivir lo que hoy hemos entendido en {$reference}. AmÃ©n.";
+
+        return [
+            'title' => $title,
+            'content' => $content,
+        ];
+    }
+
+    private function extractJsonObject($raw)
+    {
+        $raw = trim((string) $raw);
+        if ($raw === '') {
+            return null;
+        }
+        $decoded = json_decode($raw, true);
+        if (is_array($decoded)) {
+            return $decoded;
+        }
+        $start = strpos($raw, '{');
+        $end = strrpos($raw, '}');
+        if ($start === false || $end === false || $end <= $start) {
+            return null;
+        }
+        $candidate = substr($raw, $start, $end - $start + 1);
+        $decoded = json_decode($candidate, true);
+        return is_array($decoded) ? $decoded : null;
     }
 
     private function bookStudyMeta($book)

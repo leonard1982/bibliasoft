@@ -8,6 +8,7 @@ use App\Services\BibleRepository;
 use App\Services\DailyVerseService;
 use App\Services\DevotionalService;
 use App\Services\DocumentExportService;
+use App\Services\GenerationService;
 use App\Services\ModuleCatalogService;
 use App\Services\ReadingPlanService;
 use App\Services\SearchService;
@@ -27,6 +28,7 @@ class ApiController
     private $strongLexiconService;
     private $documentExportService;
     private $moduleCatalogService;
+    private $generationService;
 
     public function __construct(
         BibleRepository $bibleRepository,
@@ -39,7 +41,8 @@ class ApiController
         ReadingPlanService $readingPlanService,
         StrongLexiconService $strongLexiconService,
         DocumentExportService $documentExportService,
-        ModuleCatalogService $moduleCatalogService
+        ModuleCatalogService $moduleCatalogService,
+        GenerationService $generationService
     ) {
         $this->bibleRepository = $bibleRepository;
         $this->userDataRepository = $userDataRepository;
@@ -52,6 +55,7 @@ class ApiController
         $this->strongLexiconService = $strongLexiconService;
         $this->documentExportService = $documentExportService;
         $this->moduleCatalogService = $moduleCatalogService;
+        $this->generationService = $generationService;
     }
 
     public function verse()
@@ -1746,6 +1750,51 @@ class ApiController
 
         $ai = $this->aiService->cardsForVerse($book, $chapter, $verse, $context, true);
         app_json(['ok' => true, 'ai' => $ai]);
+    }
+
+    public function sermonGenerate()
+    {
+        $input = $this->requestData();
+        $book = isset($input['book']) ? (int) $input['book'] : 0;
+        $chapter = isset($input['chapter']) ? (int) $input['chapter'] : 0;
+        $verseStart = isset($input['verse_start']) ? (int) $input['verse_start'] : (isset($input['verse']) ? (int) $input['verse'] : 0);
+        $verseEnd = isset($input['verse_end']) ? (int) $input['verse_end'] : $verseStart;
+        $messageType = isset($input['message_type']) ? trim((string) $input['message_type']) : 'sermon';
+        $prompt = isset($input['prompt']) ? trim((string) $input['prompt']) : '';
+        $audience = isset($input['audience']) ? trim((string) $input['audience']) : '';
+        $tone = isset($input['tone']) ? trim((string) $input['tone']) : '';
+
+        if ($book < 1 || $chapter < 1 || $verseStart < 1 || $verseEnd < 1) {
+            app_json(['error' => 'Referencia bÃ­blica invÃ¡lida.'], 422);
+        }
+
+        try {
+            $generated = $this->generationService->generateSermonMessage([
+                'book' => $book,
+                'chapter' => $chapter,
+                'verse_start' => $verseStart,
+                'verse_end' => $verseEnd,
+                'message_type' => $messageType,
+                'prompt' => $prompt,
+                'audience' => $audience,
+                'tone' => $tone,
+            ]);
+        } catch (\InvalidArgumentException $e) {
+            app_json(['error' => $e->getMessage()], 422);
+        }
+
+        app_json([
+            'ok' => true,
+            'message' => $generated,
+            'reference' => [
+                'book' => $book,
+                'book_name' => $this->bibleRepository->getBookName($book),
+                'chapter' => $chapter,
+                'verse_start' => $verseStart,
+                'verse_end' => $verseEnd,
+                'label' => $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd),
+            ],
+        ]);
     }
 
     private function historicalContextText($book, $chapter, $reference, $pericope, $text, array $signals = [])

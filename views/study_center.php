@@ -11,7 +11,7 @@ $studyPayload = [
     </header>
     <div id="studyCenterNotice" class="study-center-notice hidden" aria-live="polite"></div>
 
-    <div class="study-center-grid">
+    <div id="studyCenterGrid" class="study-center-grid">
         <aside class="panel study-projects-panel">
             <div class="study-section-head">
                 <h2><img src="assets/icons/layers.svg" alt="" class="ico"> Proyectos</h2>
@@ -45,9 +45,16 @@ $studyPayload = [
             <div id="studyProjectContent" class="hidden">
                 <div class="study-section-head">
                     <h2 id="studyProjectTitle">Proyecto</h2>
-                    <div class="toolbar">
-                        <button class="btn-light" id="studyProjectEdit" type="button">Editar</button>
-                        <button class="btn-light" id="studyProjectDelete" type="button">Eliminar</button>
+                    <div class="toolbar study-project-actions">
+                        <button class="btn-light study-project-action-btn" id="studyProjectsToggle" type="button" aria-expanded="true" aria-label="Ocultar proyectos" title="Ocultar proyectos">
+                            <img src="assets/icons/columns.svg" alt="" class="ico">
+                        </button>
+                        <button class="btn-light study-project-action-btn" id="studyProjectEdit" type="button" aria-label="Editar proyecto" title="Editar proyecto">
+                            <img src="assets/icons/settings.svg" alt="" class="ico">
+                        </button>
+                        <button class="btn-light study-project-action-btn" id="studyProjectDelete" type="button" aria-label="Eliminar proyecto" title="Eliminar proyecto">
+                            <img src="assets/icons/trash.svg" alt="" class="ico">
+                        </button>
                     </div>
                 </div>
                 <p id="studyProjectDescriptionText" class="muted"></p>
