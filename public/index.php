@@ -224,6 +224,7 @@ $protectedGuestApis = [
     'api.study.entries.create' => 'study_center',
     'api.study.entries.update' => 'study_center',
     'api.study.entries.delete' => 'study_center',
+    'api.study.notes.explain' => 'study_center',
     'api.sermons.generate' => 'advanced_tools',
     'api.companion.threads' => 'advanced_tools',
     'api.companion.thread.create' => 'advanced_tools',
@@ -582,6 +583,10 @@ try {
 
         case 'api.study.entries.delete':
             $apiController->studyEntryDelete();
+            break;
+
+        case 'api.study.notes.explain':
+            $apiController->studyNoteExplain();
             break;
 
         case 'api.sermons.generate':

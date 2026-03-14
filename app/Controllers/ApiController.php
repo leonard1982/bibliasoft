@@ -930,6 +930,34 @@ class ApiController
         app_json(['ok' => $ok]);
     }
 
+    public function studyNoteExplain()
+    {
+        $this->requireAuthJson();
+        $input = $this->requestData();
+        $selectedText = isset($input['selected_text']) ? trim((string) $input['selected_text']) : '';
+        $reference = isset($input['reference']) ? trim((string) $input['reference']) : '';
+        $noteContext = isset($input['note_context']) ? trim((string) $input['note_context']) : '';
+
+        if ($selectedText === '') {
+            app_json(['error' => 'Selecciona primero una palabra o frase.'], 422);
+        }
+
+        try {
+            $analysis = $this->generationService->explainStudySelection([
+                'selected_text' => $selectedText,
+                'reference' => $reference,
+                'note_context' => $noteContext,
+            ]);
+        } catch (\InvalidArgumentException $e) {
+            app_json(['error' => $e->getMessage()], 422);
+        }
+
+        app_json([
+            'ok' => true,
+            'analysis' => $analysis,
+        ]);
+    }
+
     public function highlightSet()
     {
         $input = $this->requestData();

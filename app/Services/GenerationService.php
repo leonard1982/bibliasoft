@@ -178,6 +178,49 @@ class GenerationService
         ];
     }
 
+    public function explainStudySelection(array $input)
+    {
+        $selectedText = trim((string) ($input['selected_text'] ?? ''));
+        $reference = trim((string) ($input['reference'] ?? ''));
+        $noteContext = trim((string) ($input['note_context'] ?? ''));
+
+        if ($selectedText === '') {
+            throw new \InvalidArgumentException('Selecciona primero una palabra o frase.');
+        }
+
+        if ((function_exists('mb_strlen') ? mb_strlen($selectedText, 'UTF-8') : strlen($selectedText)) > 240) {
+            throw new \InvalidArgumentException('La selección es demasiado extensa para analizarla.');
+        }
+
+        if ((function_exists('mb_strlen') ? mb_strlen($noteContext, 'UTF-8') : strlen($noteContext)) > 1800) {
+            $noteContext = function_exists('mb_substr') ? mb_substr($noteContext, 0, 1800, 'UTF-8') : substr($noteContext, 0, 1800);
+        }
+
+        $prompt = $this->buildStudySelectionPrompt($selectedText, $reference, $noteContext);
+        $result = $this->fallbackStudySelection($selectedText, $reference);
+        $source = 'stub';
+
+        $enabled = !empty($this->config['enabled']);
+        $apiKey = isset($this->config['api_key']) ? trim((string) $this->config['api_key']) : '';
+        $model = isset($this->config['model']) ? (string) $this->config['model'] : 'gpt-4.1-mini';
+
+        if ($enabled && $apiKey !== '' && function_exists('curl_init')) {
+            $real = $this->callOpenAI($apiKey, $model, $prompt);
+            $decoded = $this->extractJsonObject((string) $real);
+            if (is_array($decoded) && trim((string) ($decoded['definition'] ?? '')) !== '') {
+                $result['term'] = trim((string) ($decoded['term'] ?? $selectedText));
+                $result['category'] = trim((string) ($decoded['category'] ?? $result['category']));
+                $result['definition'] = trim((string) ($decoded['definition'] ?? $result['definition']));
+                $result['use'] = trim((string) ($decoded['use'] ?? $result['use']));
+                $result['pastoral_note'] = trim((string) ($decoded['pastoral_note'] ?? $result['pastoral_note']));
+                $source = 'online';
+            }
+        }
+
+        $result['source'] = $source;
+        return $result;
+    }
+
     private function buildPrompt($book, $chapter, $verseStart, $verseEnd, $mode, array $verses)
     {
         $lines = [];
@@ -218,6 +261,26 @@ class GenerationService
             . "El campo content debe ser texto plano, sin HTML, con estructura larga y util para predicar o ensenar.\n"
             . "Incluye estas secciones dentro de content: Idea central, Introduccion, Desarrollo en 3 movimientos o puntos, Aplicaciones concretas, Llamado final y Oracion sugerida.\n"
             . "No inventes detalles ajenos al pasaje. No uses markdown complicado. No agregues explicaciones fuera del JSON.";
+    }
+
+    private function buildStudySelectionPrompt($selectedText, $reference, $noteContext)
+    {
+        $reference = $reference !== '' ? $reference : 'nota de estudio sin referencia precisa';
+        $contextLine = $noteContext !== '' ? $noteContext : 'Sin contexto adicional.';
+
+        return "Actua como un asistente biblico en espanol claro y sencillo.\n"
+            . "Analiza SOLO el termino o frase seleccionada y responde SOLO con un JSON valido.\n"
+            . "Claves obligatorias: term, category, definition, use, pastoral_note.\n"
+            . "Seleccion: {$selectedText}\n"
+            . "Referencia de la nota: {$reference}\n"
+            . "Contexto de la nota: {$contextLine}\n\n"
+            . "Reglas:\n"
+            . "- category debe decir algo como Sustantivo, Verbo, Imperativo, Expresion, Imagen biblica, Titulo o Idea clave.\n"
+            . "- definition debe ser breve, simple y sin tecnicismos pesados.\n"
+            . "- use debe explicar como se entiende dentro del contexto biblico o de la nota.\n"
+            . "- pastoral_note debe dar una aplicacion corta y comprensible.\n"
+            . "- No hables de probabilidades tecnicas ni de linguistica avanzada.\n"
+            . "- No pongas markdown ni texto fuera del JSON.";
     }
 
     private function callOpenAI($apiKey, $model, $prompt)
@@ -407,6 +470,35 @@ class GenerationService
         return [
             'title' => $title,
             'content' => $content,
+        ];
+    }
+
+    private function fallbackStudySelection($selectedText, $reference)
+    {
+        $term = trim((string) $selectedText);
+        $clean = function_exists('mb_strtolower') ? mb_strtolower($term, 'UTF-8') : strtolower($term);
+        $words = preg_split('/\s+/u', $clean);
+        $singleWord = is_array($words) ? count(array_filter($words, 'strlen')) === 1 : false;
+        $category = 'Expresión bíblica';
+
+        if ($singleWord) {
+            if (preg_match('/(ad|ed|id)$/u', $clean)) {
+                $category = 'Posible imperativo';
+            } elseif (preg_match('/(ar|er|ir)$/u', $clean)) {
+                $category = 'Verbo';
+            } else {
+                $category = 'Término clave';
+            }
+        }
+
+        return [
+            'term' => $term,
+            'category' => $category,
+            'definition' => 'Se refiere a una idea importante dentro del lenguaje bíblico y conviene leerla con atención dentro de su contexto.',
+            'use' => $reference !== ''
+                ? 'En la nota vinculada a ' . $reference . ', esta expresión ayuda a enfocar la idea principal del pasaje.'
+                : 'Dentro de tu nota, esta expresión parece resumir o destacar una idea importante.',
+            'pastoral_note' => 'Llévala a una aplicación sencilla: pregunta qué revela de Dios, qué pide al creyente y cómo se vive hoy.',
         ];
     }
 

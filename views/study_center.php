@@ -135,5 +135,47 @@ $studyPayload = [
     </div>
 </div>
 
+<div id="studyNoteModal" class="study-modal study-note-modal hidden" role="dialog" aria-modal="true" aria-labelledby="studyNoteModalTitle">
+    <button type="button" class="study-modal-backdrop" id="studyNoteModalBackdrop" aria-label="Cerrar"></button>
+    <div class="study-modal-card study-note-modal-card">
+        <header class="study-modal-head study-note-modal-head">
+            <div>
+                <h3 id="studyNoteModalTitle">Nota ampliada</h3>
+                <small id="studyNoteModalReference" class="muted">Referencia</small>
+            </div>
+            <div class="toolbar study-note-modal-head-actions">
+                <button type="button" class="btn-light" id="studyNoteModalClose">Cerrar</button>
+                <button type="button" class="btn-primary" id="studyNoteModalSave">Guardar nota</button>
+            </div>
+        </header>
+        <div class="study-note-modal-toolbar">
+            <strong>Resaltar selección</strong>
+            <div class="toolbar study-note-color-actions">
+                <button type="button" class="study-note-color-btn is-yellow" data-highlight-color="yellow" aria-label="Resaltar en amarillo" title="Resaltar en amarillo"></button>
+                <button type="button" class="study-note-color-btn is-blue" data-highlight-color="blue" aria-label="Resaltar en azul" title="Resaltar en azul"></button>
+                <button type="button" class="study-note-color-btn is-green" data-highlight-color="green" aria-label="Resaltar en verde" title="Resaltar en verde"></button>
+                <button type="button" class="study-note-color-btn is-rose" data-highlight-color="rose" aria-label="Resaltar en rosa" title="Resaltar en rosa"></button>
+                <button type="button" class="btn-light" id="studyNoteClearHighlight">Quitar resaltado</button>
+                <button type="button" class="btn-light" id="studyNoteExplainSelection">
+                    <img src="assets/icons/help.svg" alt="" class="ico"> Consultar selección
+                </button>
+            </div>
+        </div>
+        <div class="study-note-modal-body">
+            <section class="study-note-editor-card">
+                <div id="studyNoteEditor" class="study-note-editor" contenteditable="true" spellcheck="true"></div>
+            </section>
+            <aside class="study-note-insight-card">
+                <div class="study-section-head">
+                    <h3><img src="assets/icons/text.svg" alt="" class="ico"> Ayuda simple</h3>
+                    <small class="muted">Selecciona una palabra o frase y consulta una explicación sencilla.</small>
+                </div>
+                <div id="studyNoteExplainState" class="study-note-explain-state muted">Aún no has consultado ninguna selección.</div>
+                <div id="studyNoteExplainResult" class="study-note-explain-result hidden"></div>
+            </aside>
+        </div>
+    </div>
+</div>
+
 <div id="studyToast" class="study-toast hidden" role="status" aria-live="polite"></div>
 <script src="<?php echo e(app_asset('assets/study_center.js')); ?>"></script>
