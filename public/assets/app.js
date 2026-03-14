@@ -114,7 +114,8 @@
             reminderEnabled: false,
             reminderTime: '07:00',
             preachMode: false,
-            parallelMode: false
+            parallelMode: false,
+            readerNavVisible: true
         },
         guide: {
             activeStep: 0,
@@ -133,6 +134,7 @@
         booksPane: document.getElementById('booksPane'),
         chaptersPane: document.getElementById('chaptersPane'),
         openNavigator: document.getElementById('openNavigator'),
+        toggleReaderSidebar: document.getElementById('toggleReaderSidebar'),
         openQuickSearch: document.getElementById('openQuickSearch'),
         openReadingPlan: document.getElementById('openReadingPlan'),
         openVersions: document.getElementById('openVersions'),
@@ -481,6 +483,25 @@
                 els.booksPane.classList.add('is-open');
                 els.chaptersPane.classList.add('is-open');
                 els.overlay.classList.remove('hidden');
+            });
+        }
+
+        if (els.toggleReaderSidebar) {
+            els.toggleReaderSidebar.addEventListener('click', function () {
+                if (window.matchMedia('(max-width: 980px)').matches) {
+                    var isOpen = els.booksPane.classList.contains('is-open') || els.chaptersPane.classList.contains('is-open');
+                    if (isOpen) {
+                        closeDrawers();
+                    } else {
+                        els.booksPane.classList.add('is-open');
+                        els.chaptersPane.classList.add('is-open');
+                        els.overlay.classList.remove('hidden');
+                    }
+                    return;
+                }
+                state.settings.readerNavVisible = state.settings.readerNavVisible === false ? true : false;
+                saveSettings();
+                applySettings();
             });
         }
 
@@ -7887,6 +7908,17 @@
         }
         if (els.readerShell) {
             els.readerShell.classList.toggle('help-hidden', !state.settings.showHelp);
+            els.readerShell.classList.toggle('nav-hidden', state.settings.readerNavVisible === false);
+        }
+        if (els.toggleReaderSidebar) {
+            var navVisible = state.settings.readerNavVisible !== false;
+            els.toggleReaderSidebar.classList.toggle('is-active', navVisible);
+            els.toggleReaderSidebar.setAttribute('title', navVisible ? 'Ocultar navegación' : 'Mostrar navegación');
+            els.toggleReaderSidebar.setAttribute('aria-label', navVisible ? 'Ocultar navegación' : 'Mostrar navegación');
+            var navLabel = els.toggleReaderSidebar.querySelector('.btn-label');
+            if (navLabel) {
+                navLabel.textContent = navVisible ? 'Navegación' : 'Mostrar';
+            }
         }
         var reminderTimeInput = document.getElementById('optReminderTime');
         if (reminderTimeInput) {
@@ -7919,6 +7951,7 @@
             state.settings.autoTourOnStart = state.settings.autoTourOnStart !== false && Number(state.settings.autoTourOnStart) !== 0;
             state.settings.preachMode = state.settings.preachMode === true || Number(state.settings.preachMode) === 1;
             state.settings.parallelMode = state.settings.parallelMode === true || Number(state.settings.parallelMode) === 1;
+            state.settings.readerNavVisible = state.settings.readerNavVisible !== false && Number(state.settings.readerNavVisible) !== 0;
         } catch (err) {
             // ignore
         }

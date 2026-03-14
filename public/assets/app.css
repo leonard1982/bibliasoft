@@ -974,6 +974,21 @@ body.sidebar-collapsed .side-brand {
     grid-template-columns: 184px 116px minmax(420px, 1fr);
 }
 
+@media (min-width: 981px) {
+    .reader-shell.nav-hidden {
+        grid-template-columns: minmax(420px, 1fr) 410px;
+    }
+
+    .reader-shell.nav-hidden.help-hidden {
+        grid-template-columns: minmax(420px, 1fr);
+    }
+
+    .reader-shell.nav-hidden .pane-books,
+    .reader-shell.nav-hidden .pane-chapters {
+        display: none;
+    }
+}
+
 .pane {
     background: var(--panel);
     border: 1px solid var(--line);
@@ -1202,7 +1217,6 @@ body.theme-dark img.auth-field-ico {
 .verses-area {
     overflow: auto;
     padding: .7rem .95rem 1.4rem;
-    font-size: var(--reader-font-scale);
 }
 
 .verse {
@@ -5454,13 +5468,42 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     gap: .35rem;
 }
 
-.icon-stack {
+.zoom-icon {
     position: relative;
     display: inline-flex;
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    box-sizing: border-box;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
+}
+
+.zoom-icon::after,
+.zoom-icon::before {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    border-radius: 999px;
+}
+
+.zoom-icon::after {
+    width: 8px;
+    height: 2px;
+}
+
+.zoom-icon::before {
+    width: 2px;
+    height: 8px;
+}
+
+.zoom-icon.is-minus::before {
+    display: none;
+}
+
+.zoom-icon.is-plus::before {
+    display: block;
 }
 
 .study-note-ai-card.is-current {
@@ -5487,25 +5530,6 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     color: color-mix(in srgb, var(--ink) 82%, var(--accent) 18%);
     font-size: .75rem;
     font-weight: 600;
-}
-
-.icon-stack-badge {
-    position: absolute;
-    right: -4px;
-    bottom: -5px;
-    min-width: 12px;
-    height: 12px;
-    padding: 0 2px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: color-mix(in srgb, var(--accent) 88%, #fff 12%);
-    color: #fff;
-    font-size: .58rem;
-    font-weight: 800;
-    line-height: 1;
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--panel) 90%, transparent);
 }
 
 .study-note-ai-section {
@@ -5676,11 +5700,6 @@ body.study-modal-open {
     background: rgba(22, 44, 58, .88);
     border-color: rgba(90, 146, 181, .26);
     color: #dceef9;
-}
-
-.theme-dark .icon-stack-badge {
-    background: color-mix(in srgb, var(--accent) 76%, #7fc3ee 24%);
-    box-shadow: 0 0 0 2px rgba(15, 30, 41, .88);
 }
 
 .theme-dark .study-note-token-chip {
@@ -6025,15 +6044,15 @@ body.mode-preach .verses-area {
 }
 
 body.font-sm .verse {
-    font-size: .94rem;
+    font-size: calc(.94rem * (var(--reader-font-scale) / 100%));
 }
 
 body.font-md .verse {
-    font-size: 1.02rem;
+    font-size: calc(1.02rem * (var(--reader-font-scale) / 100%));
 }
 
 body.font-lg .verse {
-    font-size: 1.14rem;
+    font-size: calc(1.14rem * (var(--reader-font-scale) / 100%));
 }
 
 body.spacing-compact .verse {
