@@ -22,6 +22,8 @@
         <?php endif; ?>
 
         <form method="post" action="?route=register.submit" class="auth-row auth-form-pro">
+            <?php echo csrf_field(); ?>
+            <input type="text" name="company" value="" autocomplete="off" tabindex="-1" class="auth-honeypot" aria-hidden="true">
             <label class="auth-field">
                 <span class="auth-field-ico-wrap">
                     <img src="assets/icons/user.svg" alt="" class="auth-field-ico">
@@ -63,6 +65,12 @@
             </label>
             <p class="auth-legal-note">El ministerio es opcional. El correo será el identificador principal de acceso.</p>
 
+            <?php if (!empty($recaptchaEnabled) && !empty($recaptchaSiteKey)): ?>
+                <div class="auth-recaptcha-wrap">
+                    <div class="g-recaptcha" data-sitekey="<?php echo e($recaptchaSiteKey); ?>"></div>
+                </div>
+            <?php endif; ?>
+
             <div class="auth-actions">
                 <button type="submit" class="btn-primary auth-submit">Crear cuenta</button>
                 <a href="?route=login" class="btn-light auth-back-login">Ya tengo cuenta</a>
@@ -70,3 +78,6 @@
         </form>
     </article>
 </section>
+<?php if (!empty($recaptchaEnabled) && !empty($recaptchaSiteKey)): ?>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<?php endif; ?>

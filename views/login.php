@@ -22,6 +22,7 @@
         <?php endif; ?>
 
         <form method="post" action="?route=login.submit" class="auth-row auth-form-pro" id="loginForm">
+            <?php echo csrf_field(); ?>
             <label class="auth-field">
                 <span class="auth-field-ico-wrap">
                     <img src="assets/icons/user.svg" alt="" class="auth-field-ico">

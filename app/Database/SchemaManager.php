@@ -34,6 +34,7 @@ class SchemaManager
         self::migrateLinks($pdo);
         self::migrateAiCache($pdo);
         self::migrateUsers($pdo);
+        self::migrateSecurityEvents($pdo);
         self::migrateDailyCache($pdo);
         self::migrateDevotionals($pdo);
         self::migrateUserPrefs($pdo);
@@ -272,6 +273,63 @@ class SchemaManager
             $pdo->exec("ALTER TABLE daily_cache ADD COLUMN created_at TEXT");
         }
         $pdo->exec("UPDATE daily_cache SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP)");
+    }
+
+    private static function migrateSecurityEvents(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'security_events')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS security_events (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                event_type TEXT NOT NULL,
+                route TEXT NOT NULL DEFAULT \'\',
+                request_method TEXT NOT NULL DEFAULT \'GET\',
+                outcome TEXT NOT NULL DEFAULT \'\',
+                ip_address TEXT NOT NULL DEFAULT \'\',
+                email TEXT NOT NULL DEFAULT \'\',
+                user_id INTEGER NOT NULL DEFAULT 0,
+                referrer TEXT NOT NULL DEFAULT \'\',
+                user_agent TEXT NOT NULL DEFAULT \'\',
+                meta_json TEXT NOT NULL DEFAULT \'{}\',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'security_events');
+            if (!isset($columns['route'])) {
+                $pdo->exec("ALTER TABLE security_events ADD COLUMN route TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['request_method'])) {
+                $pdo->exec("ALTER TABLE security_events ADD COLUMN request_method TEXT NOT NULL DEFAULT 'GET'");
+            }
+            if (!isset($columns['outcome'])) {
+                $pdo->exec("ALTER TABLE security_events ADD COLUMN outcome TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['ip_address'])) {
+                $pdo->exec("ALTER TABLE security_events ADD COLUMN ip_address TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['email'])) {
+                $pdo->exec("ALTER TABLE security_events ADD COLUMN email TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['user_id'])) {
+                $pdo->exec('ALTER TABLE security_events ADD COLUMN user_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['referrer'])) {
+                $pdo->exec("ALTER TABLE security_events ADD COLUMN referrer TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['user_agent'])) {
+                $pdo->exec("ALTER TABLE security_events ADD COLUMN user_agent TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['meta_json'])) {
+                $pdo->exec("ALTER TABLE security_events ADD COLUMN meta_json TEXT NOT NULL DEFAULT '{}'");
+            }
+            if (!isset($columns['created_at'])) {
+                $pdo->exec('ALTER TABLE security_events ADD COLUMN created_at TEXT');
+            }
+        }
+
+        $pdo->exec("UPDATE security_events SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP), route = COALESCE(route, ''), request_method = COALESCE(request_method, 'GET'), outcome = COALESCE(outcome, ''), ip_address = COALESCE(ip_address, ''), email = COALESCE(email, ''), user_id = COALESCE(user_id, 0), referrer = COALESCE(referrer, ''), user_agent = COALESCE(user_agent, ''), meta_json = COALESCE(meta_json, '{}')");
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_security_events_type_time ON security_events (event_type, created_at DESC)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_security_events_route_time ON security_events (route, created_at DESC)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_security_events_ip_time ON security_events (ip_address, created_at DESC)');
     }
 
     private static function migrateDevotionals(\PDO $pdo)

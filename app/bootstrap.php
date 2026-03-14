@@ -175,6 +175,50 @@ if (!function_exists('auth_is_superadmin')) {
     }
 }
 
+if (!function_exists('csrf_token')) {
+    function csrf_token()
+    {
+        if (!isset($_SESSION['_csrf_token']) || !is_string($_SESSION['_csrf_token']) || strlen($_SESSION['_csrf_token']) < 32) {
+            $_SESSION['_csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['_csrf_token'];
+    }
+}
+
+if (!function_exists('csrf_field')) {
+    function csrf_field()
+    {
+        return '<input type="hidden" name="_csrf" value="' . e(csrf_token()) . '">';
+    }
+}
+
+if (!function_exists('csrf_verify_request')) {
+    function csrf_verify_request($token)
+    {
+        $sessionToken = isset($_SESSION['_csrf_token']) ? (string) $_SESSION['_csrf_token'] : '';
+        $token = trim((string) $token);
+        return $sessionToken !== '' && $token !== '' && hash_equals($sessionToken, $token);
+    }
+}
+
+if (!function_exists('request_client_ip')) {
+    function request_client_ip()
+    {
+        $candidates = [
+            isset($_SERVER['HTTP_CF_CONNECTING_IP']) ? $_SERVER['HTTP_CF_CONNECTING_IP'] : '',
+            isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? explode(',', (string) $_SERVER['HTTP_X_FORWARDED_FOR'])[0] : '',
+            isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '',
+        ];
+        foreach ($candidates as $candidate) {
+            $ip = trim((string) $candidate);
+            if ($ip !== '') {
+                return $ip;
+            }
+        }
+        return '';
+    }
+}
+
 if (!function_exists('app_asset')) {
     function app_asset($path)
     {

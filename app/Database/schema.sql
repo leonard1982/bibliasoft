@@ -64,6 +64,25 @@ CREATE TABLE IF NOT EXISTS users (
     last_login_at TEXT
 );
 
+CREATE TABLE IF NOT EXISTS security_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_type TEXT NOT NULL,
+    route TEXT NOT NULL DEFAULT '',
+    request_method TEXT NOT NULL DEFAULT 'GET',
+    outcome TEXT NOT NULL DEFAULT '',
+    ip_address TEXT NOT NULL DEFAULT '',
+    email TEXT NOT NULL DEFAULT '',
+    user_id INTEGER NOT NULL DEFAULT 0,
+    referrer TEXT NOT NULL DEFAULT '',
+    user_agent TEXT NOT NULL DEFAULT '',
+    meta_json TEXT NOT NULL DEFAULT '{}',
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_security_events_type_time ON security_events (event_type, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_security_events_route_time ON security_events (route, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_security_events_ip_time ON security_events (ip_address, created_at DESC);
+
 CREATE TABLE IF NOT EXISTS cloud_sync_backups (
     user_id INTEGER PRIMARY KEY,
     payload_json TEXT NOT NULL,

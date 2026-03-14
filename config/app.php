@@ -47,6 +47,18 @@ return [
         'user_id' => (int) (getenv('SUPERADMIN_USER_ID') ?: 1),
         'email' => getenv('SUPERADMIN_EMAIL') ?: '',
     ],
+    'recaptcha' => [
+        'enabled' => getenv('RECAPTCHA_ENABLED') === '1',
+        'site_key' => getenv('RECAPTCHA_SITE_KEY') ?: '',
+        'secret_key' => getenv('RECAPTCHA_SECRET_KEY') ?: '',
+        'timeout' => (int) (getenv('RECAPTCHA_TIMEOUT') ?: 10),
+    ],
+    'security' => [
+        'login_window_seconds' => 900,
+        'login_max_attempts' => 10,
+        'register_window_seconds' => 3600,
+        'register_max_attempts' => 8,
+    ],
     'search' => [
         'default_limit' => 60,
         'use_fts_preferred' => true,

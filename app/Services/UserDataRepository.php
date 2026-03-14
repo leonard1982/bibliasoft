@@ -1762,16 +1762,54 @@ class UserDataRepository
         return (int) $stmt->fetchColumn();
     }
 
-    public function getUsersForAdmin($limit = 250)
+    public function getUsersForAdminPage(array $filters = [], $page = 1, $perPage = 20)
     {
-        $limit = max(1, min(500, (int) $limit));
-        $stmt = $this->globalDb()->query(
-            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, active, created_at, updated_at, last_login_at
-             FROM users
-             ORDER BY id DESC
-             LIMIT ' . $limit
-        );
-        return $stmt->fetchAll();
+        $page = max(1, (int) $page);
+        $perPage = max(10, min(100, (int) $perPage));
+        $where = [];
+        $params = [];
+
+        $q = trim((string) ($filters['q'] ?? ''));
+        if ($q !== '') {
+            $where[] = '(email LIKE :q OR full_name LIKE :q OR ministry LIKE :q OR username LIKE :q)';
+            $params[':q'] = '%' . $q . '%';
+        }
+
+        $status = trim((string) ($filters['status'] ?? 'all'));
+        if ($status === 'active') {
+            $where[] = 'active = 1';
+        } elseif ($status === 'inactive') {
+            $where[] = 'active = 0';
+        }
+
+        $baseSql = 'FROM users';
+        if (!empty($where)) {
+            $baseSql .= ' WHERE ' . implode(' AND ', $where);
+        }
+
+        $countStmt = $this->globalDb()->prepare('SELECT COUNT(*) ' . $baseSql);
+        $countStmt->execute($params);
+        $total = (int) $countStmt->fetchColumn();
+
+        $offset = ($page - 1) * $perPage;
+        if ($offset >= $total && $total > 0) {
+            $page = max(1, (int) ceil($total / $perPage));
+            $offset = ($page - 1) * $perPage;
+        }
+
+        $sql = 'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, active, created_at, updated_at, last_login_at '
+            . $baseSql
+            . ' ORDER BY id DESC LIMIT ' . $perPage . ' OFFSET ' . $offset;
+        $stmt = $this->globalDb()->prepare($sql);
+        $stmt->execute($params);
+
+        return [
+            'rows' => $stmt->fetchAll(),
+            'total' => $total,
+            'page' => $page,
+            'per_page' => $perPage,
+            'pages' => max(1, (int) ceil(max(1, $total) / $perPage)),
+        ];
     }
 
     public function updateUserForAdmin($id, $email, $fullName, $ministry = '', $password = '')
@@ -1861,6 +1899,226 @@ class UserDataRepository
         $stmt = $this->globalDb()->prepare('DELETE FROM users WHERE id = :id');
         $stmt->execute([':id' => (int) $id]);
         return $stmt->rowCount() > 0;
+    }
+
+    public function logSecurityEvent($eventType, array $payload = [])
+    {
+        $eventType = trim((string) $eventType);
+        if ($eventType === '') {
+            return 0;
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO security_events (
+                event_type, route, request_method, outcome, ip_address, email, user_id, referrer, user_agent, meta_json, created_at
+             ) VALUES (
+                :event_type, :route, :request_method, :outcome, :ip_address, :email, :user_id, :referrer, :user_agent, :meta_json, CURRENT_TIMESTAMP
+             )'
+        );
+        $meta = isset($payload['meta']) && is_array($payload['meta']) ? $payload['meta'] : [];
+        $stmt->execute([
+            ':event_type' => $eventType,
+            ':route' => trim((string) ($payload['route'] ?? '')),
+            ':request_method' => strtoupper(trim((string) ($payload['request_method'] ?? 'GET'))),
+            ':outcome' => trim((string) ($payload['outcome'] ?? '')),
+            ':ip_address' => trim((string) ($payload['ip_address'] ?? '')),
+            ':email' => trim((string) ($payload['email'] ?? '')),
+            ':user_id' => (int) ($payload['user_id'] ?? 0),
+            ':referrer' => trim((string) ($payload['referrer'] ?? '')),
+            ':user_agent' => trim((string) ($payload['user_agent'] ?? '')),
+            ':meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE),
+        ]);
+
+        return (int) $this->globalDb()->lastInsertId();
+    }
+
+    public function countRecentSecurityEventsByIp($ipAddress, array $eventTypes, $windowSeconds = 900, $outcome = '', $excludeOutcome = '')
+    {
+        $ipAddress = trim((string) $ipAddress);
+        if ($ipAddress === '' || empty($eventTypes)) {
+            return 0;
+        }
+
+        $params = [
+            ':ip_address' => $ipAddress,
+            ':window_start' => date('Y-m-d H:i:s', time() - max(60, (int) $windowSeconds)),
+        ];
+        $placeholders = [];
+        foreach (array_values($eventTypes) as $index => $type) {
+            $key = ':type_' . $index;
+            $placeholders[] = $key;
+            $params[$key] = trim((string) $type);
+        }
+
+        $sql = 'SELECT COUNT(*) FROM security_events
+                WHERE ip_address = :ip_address
+                  AND created_at >= :window_start
+                  AND event_type IN (' . implode(',', $placeholders) . ')';
+        if ($outcome !== '') {
+            $sql .= ' AND outcome = :outcome';
+            $params[':outcome'] = trim((string) $outcome);
+        }
+        if ($excludeOutcome !== '') {
+            $sql .= ' AND outcome <> :exclude_outcome';
+            $params[':exclude_outcome'] = trim((string) $excludeOutcome);
+        }
+
+        $stmt = $this->globalDb()->prepare($sql);
+        $stmt->execute($params);
+        return (int) $stmt->fetchColumn();
+    }
+
+    public function getSecurityDashboard($days = 14)
+    {
+        $days = max(3, min(60, (int) $days));
+        $since = date('Y-m-d H:i:s', strtotime('-' . ($days - 1) . ' days'));
+
+        $dailyStmt = $this->globalDb()->prepare(
+            'SELECT substr(created_at, 1, 10) AS day, COUNT(*) AS total
+             FROM security_events
+             WHERE created_at >= :since
+             GROUP BY substr(created_at, 1, 10)
+             ORDER BY day ASC'
+        );
+        $dailyStmt->execute([':since' => $since]);
+        $dailyMap = [];
+        foreach ($dailyStmt->fetchAll() as $row) {
+            $dailyMap[(string) $row['day']] = (int) $row['total'];
+        }
+
+        $daily = [];
+        for ($i = $days - 1; $i >= 0; $i--) {
+            $day = date('Y-m-d', strtotime('-' . $i . ' days'));
+            $daily[] = [
+                'day' => $day,
+                'total' => isset($dailyMap[$day]) ? (int) $dailyMap[$day] : 0,
+            ];
+        }
+
+        $routeStmt = $this->globalDb()->prepare(
+            'SELECT route, COUNT(*) AS total
+             FROM security_events
+             WHERE created_at >= :since
+               AND event_type = :event_type
+             GROUP BY route
+             ORDER BY total DESC
+             LIMIT 8'
+        );
+        $routeStmt->execute([
+            ':since' => $since,
+            ':event_type' => 'page.view',
+        ]);
+
+        $sourceStmt = $this->globalDb()->prepare(
+            'SELECT
+                CASE
+                    WHEN TRIM(referrer) = \'\' THEN \'directo\'
+                    ELSE referrer
+                END AS source_label,
+                COUNT(*) AS total
+             FROM security_events
+             WHERE created_at >= :since
+               AND event_type = :event_type
+             GROUP BY source_label
+             ORDER BY total DESC
+             LIMIT 6'
+        );
+        $sourceStmt->execute([
+            ':since' => $since,
+            ':event_type' => 'page.view',
+        ]);
+
+        $totalsStmt = $this->globalDb()->prepare(
+            'SELECT
+                SUM(CASE WHEN event_type = \'auth.login\' AND outcome = \'success\' THEN 1 ELSE 0 END) AS login_success,
+                SUM(CASE WHEN event_type = \'auth.login\' AND outcome <> \'success\' THEN 1 ELSE 0 END) AS login_fail,
+                SUM(CASE WHEN event_type = \'auth.register\' AND outcome = \'success\' THEN 1 ELSE 0 END) AS register_success,
+                SUM(CASE WHEN event_type = \'auth.register\' AND outcome <> \'success\' THEN 1 ELSE 0 END) AS register_fail,
+                SUM(CASE WHEN event_type LIKE \'admin.%\' THEN 1 ELSE 0 END) AS admin_events,
+                COUNT(*) AS total
+             FROM security_events
+             WHERE created_at >= :since'
+        );
+        $totalsStmt->execute([':since' => $since]);
+        $totals = $totalsStmt->fetch() ?: [];
+
+        return [
+            'days' => $days,
+            'daily' => $daily,
+            'routes' => $routeStmt->fetchAll(),
+            'sources' => $sourceStmt->fetchAll(),
+            'totals' => [
+                'total' => (int) ($totals['total'] ?? 0),
+                'login_success' => (int) ($totals['login_success'] ?? 0),
+                'login_fail' => (int) ($totals['login_fail'] ?? 0),
+                'register_success' => (int) ($totals['register_success'] ?? 0),
+                'register_fail' => (int) ($totals['register_fail'] ?? 0),
+                'admin_events' => (int) ($totals['admin_events'] ?? 0),
+            ],
+        ];
+    }
+
+    public function getSecurityEventsPage(array $filters = [], $page = 1, $perPage = 20)
+    {
+        $page = max(1, (int) $page);
+        $perPage = max(10, min(100, (int) $perPage));
+        $where = [];
+        $params = [];
+
+        $q = trim((string) ($filters['q'] ?? ''));
+        if ($q !== '') {
+            $where[] = '(event_type LIKE :q OR route LIKE :q OR ip_address LIKE :q OR email LIKE :q OR referrer LIKE :q)';
+            $params[':q'] = '%' . $q . '%';
+        }
+
+        $eventType = trim((string) ($filters['event_type'] ?? 'all'));
+        if ($eventType !== '' && $eventType !== 'all') {
+            $where[] = 'event_type = :event_type';
+            $params[':event_type'] = $eventType;
+        }
+
+        $outcome = trim((string) ($filters['outcome'] ?? 'all'));
+        if ($outcome !== '' && $outcome !== 'all') {
+            $where[] = 'outcome = :outcome';
+            $params[':outcome'] = $outcome;
+        }
+
+        $baseSql = 'FROM security_events';
+        if (!empty($where)) {
+            $baseSql .= ' WHERE ' . implode(' AND ', $where);
+        }
+
+        $countStmt = $this->globalDb()->prepare('SELECT COUNT(*) ' . $baseSql);
+        $countStmt->execute($params);
+        $total = (int) $countStmt->fetchColumn();
+
+        $offset = ($page - 1) * $perPage;
+        if ($offset >= $total && $total > 0) {
+            $page = max(1, (int) ceil($total / $perPage));
+            $offset = ($page - 1) * $perPage;
+        }
+
+        $sql = 'SELECT id, event_type, route, request_method, outcome, ip_address, email, user_id, referrer, user_agent, meta_json, created_at '
+            . $baseSql
+            . ' ORDER BY id DESC LIMIT ' . $perPage . ' OFFSET ' . $offset;
+        $stmt = $this->globalDb()->prepare($sql);
+        $stmt->execute($params);
+        $rows = $stmt->fetchAll();
+        foreach ($rows as &$row) {
+            $row['meta'] = json_decode((string) ($row['meta_json'] ?? '{}'), true);
+            if (!is_array($row['meta'])) {
+                $row['meta'] = [];
+            }
+        }
+        unset($row);
+
+        return [
+            'rows' => $rows,
+            'total' => $total,
+            'page' => $page,
+            'per_page' => $perPage,
+            'pages' => max(1, (int) ceil(max(1, $total) / $perPage)),
+        ];
     }
 
     public function getAnecdotes(array $filters = [], $limit = 60)

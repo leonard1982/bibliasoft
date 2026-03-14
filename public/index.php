@@ -23,6 +23,7 @@ use App\Services\HtmlSanitizer;
 use App\Services\ImageCardService;
 use App\Services\MailService;
 use App\Services\ModuleCatalogService;
+use App\Services\RecaptchaService;
 use App\Services\ReadingPlanService;
 use App\Services\SearchService;
 use App\Services\StrongLexiconService;
@@ -91,6 +92,7 @@ $aiService = new AIService(config('ai', []), $userDataRepository);
 $readingPlanService = new ReadingPlanService($bibleRepository, $userDataRepository);
 $moduleCatalogService = new ModuleCatalogService($userDataRepository, $sanitizer);
 $mailService = new MailService(config('mail', []));
+$recaptchaService = new RecaptchaService(config('recaptcha', []));
 $strongLexiconService = new StrongLexiconService(
     config('paths.lexicon'),
     config('app.base_path') . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'strong.sqlite'
@@ -123,7 +125,7 @@ $bibleController = new BibleController($bibleRepository, $searchService);
 $readerController = new ReaderController($bibleRepository, $imageCardService, $userDataRepository);
 $homeDailyController = new HomeDailyController($dailyVerseService, $imageCardService, $userDataRepository, $readingPlanService);
 $devotionalController = new DevotionalController($devotionalService, $imageCardService);
-$authController = new AuthController($userDataRepository, $mailService);
+$authController = new AuthController($userDataRepository, $mailService, $recaptchaService);
 $shareController = new ShareController();
 $studyCenterController = new StudyCenterController($bibleRepository, $userDataRepository);
 $anecdoteController = new AnecdoteController($anecdoteService);
@@ -141,16 +143,39 @@ $apiController = new ApiController(
     $moduleCatalogService
 );
 
-$route = isset($_GET['route']) ? $_GET['route'] : 'home_daily';
+$requestedRoute = isset($_GET['route']) ? (string) $_GET['route'] : 'home_daily';
+$route = $requestedRoute;
 $superadminRoute = superadmin_route();
+$superadminActionPrefix = $superadminRoute . '.';
 if ($route === $superadminRoute) {
     $route = 'admin';
+} elseif (strpos((string) $route, $superadminActionPrefix) === 0) {
+    $route = 'admin.' . substr((string) $route, strlen($superadminActionPrefix));
 } elseif ($route === 'admin' && $superadminRoute !== 'admin') {
     if (auth_is_superadmin()) {
         app_redirect('?route=' . urlencode($superadminRoute));
     }
     http_response_code(404);
     exit('Not found');
+}
+
+$requestMethod = strtoupper((string) ($_SERVER['REQUEST_METHOD'] ?? 'GET'));
+if ($requestMethod === 'GET' && strpos((string) $route, 'api.') !== 0) {
+    $userDataRepository->logSecurityEvent('page.view', [
+        'route' => (string) $route,
+        'request_method' => $requestMethod,
+        'outcome' => 'view',
+        'ip_address' => request_client_ip(),
+        'email' => auth_user_email(),
+        'user_id' => auth_user_id(),
+        'referrer' => isset($_SERVER['HTTP_REFERER']) ? (string) $_SERVER['HTTP_REFERER'] : '',
+        'user_agent' => isset($_SERVER['HTTP_USER_AGENT']) ? (string) $_SERVER['HTTP_USER_AGENT'] : '',
+        'meta' => [
+            'host' => isset($_SERVER['HTTP_HOST']) ? (string) $_SERVER['HTTP_HOST'] : '',
+            'query' => isset($_SERVER['QUERY_STRING']) ? (string) $_SERVER['QUERY_STRING'] : '',
+            'requested_route' => $requestedRoute,
+        ],
+    ]);
 }
 
 try {
