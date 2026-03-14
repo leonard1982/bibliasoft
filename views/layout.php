@@ -191,6 +191,9 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
                     <img src="assets/icons/help.svg" alt="" class="ico">
                     <span><?php echo e((string) config('pastoral.companion_name', 'Alfonso')); ?></span>
                 </button>
+                <div id="companionHint" class="companion-launcher-hint" aria-hidden="true">
+                    ¿Tienes dudas? Escríbeme aquí.
+                </div>
 
                 <div id="companionBackdrop" class="companion-backdrop hidden" hidden></div>
 

@@ -6,13 +6,18 @@
 
     var companionName = String(root.getAttribute('data-companion-name') || 'Alfonso');
     var draftKey = 'bs_companion_widget_draft_v1';
+    var hintKey = 'bs_companion_widget_hint_seen_v1';
+
     var state = {
         open: false,
-        maximized: false,
+        maximized: true,
         historyOpen: false,
         loaded: false,
         loadingThreads: false,
         sending: false,
+        showTypingIndicator: false,
+        typingTimer: 0,
+        pendingUserMessage: '',
         threads: [],
         selectedThread: null,
         messages: []
@@ -20,6 +25,7 @@
 
     var els = {
         launcher: document.getElementById('companionLauncher'),
+        hint: document.getElementById('companionHint'),
         backdrop: document.getElementById('companionBackdrop'),
         panel: document.getElementById('companionPanel'),
         close: document.getElementById('companionPanelClose'),
@@ -40,6 +46,7 @@
 
     bindEvents();
     restoreDraft();
+    initHint();
     renderThreads();
     renderMessages();
     syncPanelState();
@@ -88,11 +95,10 @@
 
         els.quickButtons.forEach(function (button) {
             button.addEventListener('click', function () {
-                var prompt = button.getAttribute('data-prompt') || '';
                 if (!els.message) {
                     return;
                 }
-                els.message.value = prompt;
+                els.message.value = String(button.getAttribute('data-prompt') || '');
                 saveDraft();
                 openPanel();
                 els.message.focus();
@@ -108,7 +114,9 @@
 
     function openPanel() {
         state.open = true;
+        state.maximized = true;
         syncPanelState();
+        dismissHint();
         if (!state.loaded) {
             loadThreads();
         }
@@ -157,8 +165,8 @@
         }
 
         if (els.maximize) {
-            els.maximize.setAttribute('aria-label', isMaximized ? 'Restaurar chat' : 'Maximizar chat');
-            els.maximize.setAttribute('title', isMaximized ? 'Restaurar chat' : 'Maximizar chat');
+            els.maximize.setAttribute('aria-label', isMaximized ? 'Minimizar chat' : 'Maximizar chat');
+            els.maximize.setAttribute('title', isMaximized ? 'Minimizar chat' : 'Maximizar chat');
         }
 
         if (els.historyToggle) {
@@ -184,7 +192,6 @@
             return;
         }
         state.loadingThreads = true;
-        showLoading('Abriendo chat', 'Estamos cargando tus conversaciones...');
 
         fetch('?route=api.companion.threads')
             .then(asJson)
@@ -196,7 +203,7 @@
                 state.loaded = true;
                 renderThreads();
                 if (!state.selectedThread && state.threads.length) {
-                    return loadThread(Number(state.threads[0].id || 0), true);
+                    return loadThread(Number(state.threads[0].id || 0));
                 }
                 renderMessages();
                 return null;
@@ -206,16 +213,12 @@
             })
             .finally(function () {
                 state.loadingThreads = false;
-                hideLoading();
             });
     }
 
-    function loadThread(threadId, silent) {
+    function loadThread(threadId) {
         if (threadId < 1) {
             return Promise.resolve();
-        }
-        if (!silent) {
-            showLoading('Cargando conversación', 'Estamos trayendo el historial...');
         }
         return fetch('?route=api.companion.messages&thread_id=' + encodeURIComponent(threadId))
             .then(asJson)
@@ -230,16 +233,10 @@
             })
             .catch(function (err) {
                 showNotice(err && err.message ? err.message : 'No se pudo cargar la conversación.', 'error');
-            })
-            .finally(function () {
-                if (!silent) {
-                    hideLoading();
-                }
             });
     }
 
     function createThread() {
-        showLoading('Nueva conversación', 'Estamos preparando un espacio nuevo...');
         postForm('api.companion.thread.create', {})
             .then(function (res) {
                 if (res.error) {
@@ -253,32 +250,47 @@
                     state.loaded = true;
                     renderThreads();
                     renderMessages();
+                    syncPanelState();
                     showNotice('Nueva conversación lista.', 'success');
                 }
             })
             .catch(function (err) {
                 showNotice(err && err.message ? err.message : 'No se pudo crear la conversación.', 'error');
-            })
-            .finally(function () {
-                hideLoading();
             });
     }
 
     function sendMessage() {
+        var message = els.message ? String(els.message.value || '').trim() : '';
         if (state.sending) {
             return;
         }
-        var message = els.message ? String(els.message.value || '').trim() : '';
         if (!message) {
             showNotice('Escribe tu mensaje antes de enviarlo.', 'error');
             return;
         }
 
         state.sending = true;
+        state.pendingUserMessage = message;
+        state.showTypingIndicator = false;
+        clearTypingTimer();
+
         if (els.send) {
             els.send.disabled = true;
         }
-        showLoading('Consultando a ' + companionName, 'Estamos generando la respuesta. Espera por favor...');
+        if (els.message) {
+            els.message.value = '';
+        }
+
+        clearDraft();
+        renderMessages();
+
+        state.typingTimer = window.setTimeout(function () {
+            if (!state.sending) {
+                return;
+            }
+            state.showTypingIndicator = true;
+            renderMessages();
+        }, 2000);
 
         postForm('api.companion.send', {
             thread_id: state.selectedThread ? Number(state.selectedThread.id || 0) : 0,
@@ -292,12 +304,10 @@
                 upsertThread(res.thread);
             }
             state.messages = Array.isArray(res.messages) ? res.messages : [];
+            state.pendingUserMessage = '';
+            state.showTypingIndicator = false;
             renderThreads();
             renderMessages();
-            clearDraft();
-            if (els.message) {
-                els.message.value = '';
-            }
             if (res.prayer_request && res.prayer_request.id) {
                 showNotice('Tu petición de oración quedó registrada para seguimiento pastoral.', 'success');
                 notify('Tu petición de oración fue recibida.', 'success');
@@ -305,13 +315,20 @@
                 showNotice(companionName + ' ya respondió.', 'success');
             }
         }).catch(function (err) {
+            state.pendingUserMessage = '';
+            state.showTypingIndicator = false;
+            if (els.message) {
+                els.message.value = message;
+            }
+            saveDraft();
+            renderMessages();
             showNotice(err && err.message ? err.message : 'No se pudo procesar el mensaje.', 'error');
         }).finally(function () {
             state.sending = false;
+            clearTypingTimer();
             if (els.send) {
                 els.send.disabled = false;
             }
-            hideLoading();
         });
     }
 
@@ -325,10 +342,7 @@
                     '<p>No tienes conversaciones todavía.</p>' +
                     '<button class="btn-primary" type="button" data-companion-create="1">Empezar ahora</button>' +
                 '</div>';
-            var createButton = els.threads.querySelector('[data-companion-create="1"]');
-            if (createButton) {
-                createButton.addEventListener('click', createThread);
-            }
+            bindCreateThreadButton();
             return;
         }
 
@@ -347,9 +361,16 @@
             button.addEventListener('click', function () {
                 state.historyOpen = false;
                 syncPanelState();
-                loadThread(Number(button.getAttribute('data-thread-id') || 0), false);
+                loadThread(Number(button.getAttribute('data-thread-id') || 0));
             });
         });
+    }
+
+    function bindCreateThreadButton() {
+        var createButton = els.threads ? els.threads.querySelector('[data-companion-create="1"]') : null;
+        if (createButton) {
+            createButton.addEventListener('click', createThread);
+        }
     }
 
     function renderMessages() {
@@ -359,13 +380,30 @@
         if (els.threadMeta) {
             els.threadMeta.textContent = state.selectedThread
                 ? ('Última actividad: ' + String(state.selectedThread.last_message_at || 'hoy'))
-                : ('Pregunta sobre un pasaje, busca consejo bíblico o pide oración.');
+                : ('Pregunta sobre un pasaje, pide oración o busca una orientación clara.');
         }
         if (!els.messages) {
             return;
         }
 
-        if (!state.messages.length) {
+        var rows = Array.isArray(state.messages) ? state.messages.slice() : [];
+        if (state.pendingUserMessage) {
+            rows.push({
+                sender: 'user',
+                message_text: state.pendingUserMessage,
+                created_at: 'Ahora'
+            });
+        }
+        if (state.showTypingIndicator) {
+            rows.push({
+                sender: 'assistant',
+                message_text: '',
+                created_at: 'Escribiendo...',
+                typing: true
+            });
+        }
+
+        if (!rows.length) {
             els.messages.innerHTML = '' +
                 '<div class="companion-empty muted">' +
                     '<p>Puedes pedir una explicación sencilla, una aplicación práctica o una oración.</p>' +
@@ -374,13 +412,16 @@
             return;
         }
 
-        els.messages.innerHTML = state.messages.map(function (row) {
+        els.messages.innerHTML = rows.map(function (row) {
             var sender = String(row.sender || 'user');
             var label = sender === 'assistant' ? companionName : 'Tú';
+            var body = row.typing
+                ? '<div class="companion-typing" aria-label="' + escapeHtml(companionName) + ' está escribiendo"><span></span><span></span><span></span></div>'
+                : formatMessage(String(row.message_text || ''));
             return '' +
                 '<article class="companion-bubble companion-bubble-' + escapeHtml(sender) + '">' +
                     '<strong>' + escapeHtml(label) + '</strong>' +
-                    '<div class="companion-bubble-body">' + formatMessage(String(row.message_text || '')) + '</div>' +
+                    '<div class="companion-bubble-body">' + body + '</div>' +
                     '<small>' + escapeHtml(String(row.created_at || '')) + '</small>' +
                 '</article>';
         }).join('');
@@ -439,6 +480,44 @@
         }
     }
 
+    function clearTypingTimer() {
+        if (state.typingTimer) {
+            window.clearTimeout(state.typingTimer);
+            state.typingTimer = 0;
+        }
+    }
+
+    function initHint() {
+        if (!els.hint) {
+            return;
+        }
+        var seen = false;
+        try {
+            seen = sessionStorage.getItem(hintKey) === '1';
+        } catch (err) {
+            seen = false;
+        }
+        if (seen) {
+            els.hint.classList.add('hidden');
+            root.classList.remove('is-attention');
+            return;
+        }
+        root.classList.add('is-attention');
+        window.setTimeout(dismissHint, 7000);
+    }
+
+    function dismissHint() {
+        if (els.hint) {
+            els.hint.classList.add('hidden');
+        }
+        root.classList.remove('is-attention');
+        try {
+            sessionStorage.setItem(hintKey, '1');
+        } catch (err) {
+            // ignore
+        }
+    }
+
     function showNotice(text, type) {
         if (!els.notice) {
             return;
@@ -454,18 +533,6 @@
             headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
             body: new URLSearchParams(data).toString()
         }).then(asJson);
-    }
-
-    function showLoading(title, text) {
-        if (window.BIBLIASOFT_UI && typeof window.BIBLIASOFT_UI.showLoading === 'function') {
-            window.BIBLIASOFT_UI.showLoading(title, text);
-        }
-    }
-
-    function hideLoading() {
-        if (window.BIBLIASOFT_UI && typeof window.BIBLIASOFT_UI.hideLoading === 'function') {
-            window.BIBLIASOFT_UI.hideLoading();
-        }
     }
 
     function notify(message, type) {
