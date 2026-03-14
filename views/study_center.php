@@ -180,10 +180,17 @@ $studyPayload = [
                 <div id="studyNoteEditor" class="study-note-editor" contenteditable="true" spellcheck="true"></div>
             </section>
             <aside class="study-note-insight-card">
-                <div class="study-section-head">
-                    <h3><img src="assets/icons/text.svg" alt="" class="ico"> Ayuda simple</h3>
-                    <small class="muted">Selecciona una palabra o frase y consulta una explicación sencilla.</small>
+                <div class="study-section-head study-note-insight-head">
+                    <div>
+                        <h3><img src="assets/icons/text.svg" alt="" class="ico"> Ayuda simple</h3>
+                        <small class="muted">Selecciona una palabra o frase y consulta una explicación sencilla.</small>
+                    </div>
+                    <div class="toolbar study-note-font-actions">
+                        <button type="button" class="btn-light" id="studyNoteHelpFontDecrease" aria-label="Hacer ayuda simple más pequeña" title="Hacer ayuda simple más pequeña">A-</button>
+                        <button type="button" class="btn-light" id="studyNoteHelpFontIncrease" aria-label="Hacer ayuda simple más grande" title="Hacer ayuda simple más grande">A+</button>
+                    </div>
                 </div>
+                <div id="studyNoteSelectedTokens" class="study-note-selected-tokens hidden"></div>
                 <div id="studyNoteExplainState" class="study-note-explain-state muted">Aún no has consultado ninguna selección.</div>
                 <div id="studyNoteExplainResult" class="study-note-explain-result hidden"></div>
             </aside>

@@ -29,7 +29,9 @@
             initialNote: '',
             selectedText: '',
             lastRange: null,
-            fontScale: 1
+            fontScale: 1,
+            helpFontScale: 1,
+            selectedTokens: []
         },
         entryFormCollapsed: true,
         toastTimer: 0
@@ -80,10 +82,13 @@
         noteEditor: document.getElementById('studyNoteEditor'),
         noteFontDecrease: document.getElementById('studyNoteFontDecrease'),
         noteFontIncrease: document.getElementById('studyNoteFontIncrease'),
+        noteHelpFontDecrease: document.getElementById('studyNoteHelpFontDecrease'),
+        noteHelpFontIncrease: document.getElementById('studyNoteHelpFontIncrease'),
         noteExplainSelection: document.getElementById('studyNoteExplainSelection'),
         noteClearHighlight: document.getElementById('studyNoteClearHighlight'),
         noteExplainState: document.getElementById('studyNoteExplainState'),
         noteExplainResult: document.getElementById('studyNoteExplainResult'),
+        noteSelectedTokens: document.getElementById('studyNoteSelectedTokens'),
         noteColorButtons: document.querySelectorAll('[data-highlight-color]'),
         toast: document.getElementById('studyToast')
     };
@@ -143,17 +148,28 @@
             });
         });
         if (els.noteEditor) {
+            els.noteEditor.addEventListener('click', handleEditorClickSelection);
             els.noteEditor.addEventListener('mouseup', rememberEditorSelection);
             els.noteEditor.addEventListener('keyup', rememberEditorSelection);
         }
         if (els.noteFontDecrease) {
             els.noteFontDecrease.addEventListener('click', function () {
-                adjustNoteFontScale(-0.1);
+                adjustNoteFontScale(-0.2);
             });
         }
         if (els.noteFontIncrease) {
             els.noteFontIncrease.addEventListener('click', function () {
-                adjustNoteFontScale(0.1);
+                adjustNoteFontScale(0.2);
+            });
+        }
+        if (els.noteHelpFontDecrease) {
+            els.noteHelpFontDecrease.addEventListener('click', function () {
+                adjustHelpFontScale(-0.2);
+            });
+        }
+        if (els.noteHelpFontIncrease) {
+            els.noteHelpFontIncrease.addEventListener('click', function () {
+                adjustHelpFontScale(0.2);
             });
         }
         document.addEventListener('keydown', function (event) {
@@ -369,9 +385,14 @@
             if (rawScale !== null && rawScale !== '') {
                 state.noteWorkspace.fontScale = clampFontScale(parseFloat(rawScale));
             }
+            var rawHelpScale = sessionStorage.getItem('bs_study_note_help_font_scale_v1');
+            if (rawHelpScale !== null && rawHelpScale !== '') {
+                state.noteWorkspace.helpFontScale = clampFontScale(parseFloat(rawHelpScale));
+            }
         } catch (err) {
             state.entryFormCollapsed = true;
             state.noteWorkspace.fontScale = 1;
+            state.noteWorkspace.helpFontScale = 1;
         }
     }
 
@@ -379,6 +400,7 @@
         try {
             sessionStorage.setItem('bs_study_entry_form_collapsed_v1', state.entryFormCollapsed ? '1' : '0');
             sessionStorage.setItem('bs_study_note_font_scale_v1', String(state.noteWorkspace.fontScale || 1));
+            sessionStorage.setItem('bs_study_note_help_font_scale_v1', String(state.noteWorkspace.helpFontScale || 1));
         } catch (err) {
             // ignore
         }
@@ -768,9 +790,12 @@
         state.noteWorkspace.initialNote = normalizeEditorHtml(noteToEditorHtml(note));
         state.noteWorkspace.selectedText = '';
         state.noteWorkspace.lastRange = null;
+        state.noteWorkspace.selectedTokens = [];
 
         els.noteEditor.innerHTML = state.noteWorkspace.initialNote;
         applyNoteFontScale();
+        applyHelpFontScale();
+        renderSelectedTokens();
         if (els.noteModalReference) {
             els.noteModalReference.textContent = reference;
         }
@@ -797,6 +822,7 @@
         state.noteWorkspace.initialNote = '';
         state.noteWorkspace.selectedText = '';
         state.noteWorkspace.lastRange = null;
+        state.noteWorkspace.selectedTokens = [];
         resetExplainPanel();
         refreshModalBodyLock();
     }
@@ -845,7 +871,32 @@
             els.noteFontDecrease.disabled = state.noteWorkspace.fontScale <= 0.8;
         }
         if (els.noteFontIncrease) {
-            els.noteFontIncrease.disabled = state.noteWorkspace.fontScale >= 1.5;
+            els.noteFontIncrease.disabled = state.noteWorkspace.fontScale >= 3;
+        }
+    }
+
+    function adjustHelpFontScale(delta) {
+        state.noteWorkspace.helpFontScale = clampFontScale((state.noteWorkspace.helpFontScale || 1) + delta);
+        applyHelpFontScale();
+        saveUiState();
+    }
+
+    function applyHelpFontScale() {
+        var size = (state.noteWorkspace.helpFontScale || 1).toFixed(2) + 'rem';
+        if (els.noteExplainState) {
+            els.noteExplainState.style.fontSize = size;
+        }
+        if (els.noteExplainResult) {
+            els.noteExplainResult.style.fontSize = size;
+        }
+        if (els.noteSelectedTokens) {
+            els.noteSelectedTokens.style.fontSize = size;
+        }
+        if (els.noteHelpFontDecrease) {
+            els.noteHelpFontDecrease.disabled = state.noteWorkspace.helpFontScale <= 0.8;
+        }
+        if (els.noteHelpFontIncrease) {
+            els.noteHelpFontIncrease.disabled = state.noteWorkspace.helpFontScale >= 3;
         }
     }
 
@@ -909,12 +960,14 @@
         }
 
         var range = getEditorSelectionRange();
-        var selectedText = range ? String(range.toString() || '').trim() : '';
+        var selectedText = buildExplainSelectionText(range);
         if (!selectedText) {
             showNotice('Selecciona una palabra o frase de la nota antes de consultar.', 'info');
             return;
         }
-        restoreEditorSelection(range);
+        if (range) {
+            restoreEditorSelection(range);
+        }
 
         state.noteWorkspace.selectedText = selectedText;
         if (els.noteExplainState) {
@@ -983,6 +1036,48 @@
         if (els.noteExplainSelection) {
             els.noteExplainSelection.disabled = false;
         }
+    }
+
+    function buildExplainSelectionText(range) {
+        var parts = [];
+        (state.noteWorkspace.selectedTokens || []).forEach(function (item) {
+            var value = String(item && item.text ? item.text : '').trim();
+            if (value !== '' && parts.indexOf(value) === -1) {
+                parts.push(value);
+            }
+        });
+        var rangeText = range ? String(range.toString() || '').trim() : '';
+        if (rangeText !== '' && parts.indexOf(rangeText) === -1) {
+            parts.push(rangeText);
+        }
+        return parts.join(', ');
+    }
+
+    function renderSelectedTokens() {
+        if (!els.noteSelectedTokens) {
+            return;
+        }
+
+        var tokens = Array.isArray(state.noteWorkspace.selectedTokens) ? state.noteWorkspace.selectedTokens : [];
+        if (!tokens.length) {
+            els.noteSelectedTokens.innerHTML = '';
+            els.noteSelectedTokens.classList.add('hidden');
+            return;
+        }
+
+        els.noteSelectedTokens.innerHTML = tokens.map(function (item) {
+            return '' +
+                '<button type="button" class="study-note-token-chip" data-token-id="' + escapeAttr(String(item.id || '')) + '" title="Quitar de la consulta">' +
+                    escapeHtml(String(item.text || '')) +
+                '</button>';
+        }).join('');
+        els.noteSelectedTokens.classList.remove('hidden');
+
+        els.noteSelectedTokens.querySelectorAll('[data-token-id]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                removeSelectedToken(String(button.getAttribute('data-token-id') || ''));
+            });
+        });
     }
 
     function collectModalFields() {
@@ -1220,13 +1315,148 @@
         selection.addRange(range);
     }
 
+    function handleEditorClickSelection(event) {
+        if (!els.noteEditor) {
+            return;
+        }
+
+        var target = event.target;
+        if (target && target.nodeType === 1 && target.closest('.study-click-select')) {
+            toggleSelectedNode(target.closest('.study-click-select'));
+            return;
+        }
+
+        var selection = window.getSelection ? window.getSelection() : null;
+        if (selection && !selection.isCollapsed && String(selection.toString() || '').trim() !== '') {
+            rememberEditorSelection();
+            return;
+        }
+
+        var wordRange = getWordRangeFromPoint(event.clientX, event.clientY);
+        if (!wordRange || wordRange.collapsed) {
+            return;
+        }
+
+        var text = String(wordRange.toString() || '').trim();
+        if (!text || !/[A-Za-zÁÉÍÓÚáéíóúÑñ0-9]/.test(text)) {
+            return;
+        }
+
+        wrapSelectedWord(wordRange, text);
+    }
+
+    function getWordRangeFromPoint(clientX, clientY) {
+        var range = null;
+        if (document.caretRangeFromPoint) {
+            range = document.caretRangeFromPoint(clientX, clientY);
+        } else if (document.caretPositionFromPoint) {
+            var pos = document.caretPositionFromPoint(clientX, clientY);
+            if (pos) {
+                range = document.createRange();
+                range.setStart(pos.offsetNode, pos.offset);
+                range.collapse(true);
+            }
+        }
+        if (!range || !els.noteEditor.contains(range.startContainer)) {
+            return null;
+        }
+        return expandRangeToWord(range.startContainer, range.startOffset);
+    }
+
+    function expandRangeToWord(node, offset) {
+        var textNode = node && node.nodeType === 3 ? node : null;
+        if (!textNode && node && node.nodeType === 1 && node.childNodes.length) {
+            var candidate = node.childNodes[Math.max(0, Math.min(offset, node.childNodes.length - 1))];
+            if (candidate && candidate.nodeType === 3) {
+                textNode = candidate;
+                offset = 0;
+            }
+        }
+        if (!textNode) {
+            return null;
+        }
+
+        var value = String(textNode.nodeValue || '');
+        if (!value) {
+            return null;
+        }
+
+        var start = Math.max(0, Math.min(offset, value.length));
+        var end = start;
+
+        while (start > 0 && isWordChar(value.charAt(start - 1))) {
+            start -= 1;
+        }
+        while (end < value.length && isWordChar(value.charAt(end))) {
+            end += 1;
+        }
+        if (start === end) {
+            return null;
+        }
+
+        var range = document.createRange();
+        range.setStart(textNode, start);
+        range.setEnd(textNode, end);
+        return range;
+    }
+
+    function isWordChar(char) {
+        return /[A-Za-zÁÉÍÓÚáéíóúÑñ0-9]/.test(String(char || ''));
+    }
+
+    function wrapSelectedWord(range, text) {
+        var tokenId = 'token_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+        var wrapper = document.createElement('span');
+        wrapper.className = 'study-click-select';
+        wrapper.setAttribute('data-token-id', tokenId);
+        wrapper.setAttribute('data-token-text', text);
+
+        try {
+            range.surroundContents(wrapper);
+            state.noteWorkspace.selectedTokens.push({
+                id: tokenId,
+                text: text
+            });
+            renderSelectedTokens();
+            showNotice('Palabra agregada a la consulta.', 'success');
+        } catch (err) {
+            showError(err);
+        }
+    }
+
+    function toggleSelectedNode(node) {
+        if (!node) {
+            return;
+        }
+        removeSelectedToken(String(node.getAttribute('data-token-id') || ''));
+    }
+
+    function removeSelectedToken(tokenId) {
+        if (!tokenId) {
+            return;
+        }
+
+        state.noteWorkspace.selectedTokens = (state.noteWorkspace.selectedTokens || []).filter(function (item) {
+            return String(item.id || '') !== tokenId;
+        });
+
+        Array.prototype.slice.call(els.noteEditor ? els.noteEditor.querySelectorAll('.study-click-select[data-token-id]') : []).forEach(function (node) {
+            if (String(node.getAttribute('data-token-id') || '') === tokenId) {
+                unwrapNode(node);
+            }
+        });
+
+        renderSelectedTokens();
+        showNotice('Palabra quitada de la consulta.', 'info');
+    }
+
     function clampFontScale(value) {
         var numeric = isNaN(value) ? 1 : value;
         if (numeric < 0.8) {
             return 0.8;
         }
-        if (numeric > 1.5) {
-            return 1.5;
+        if (numeric > 3) {
+            return 3;
         }
         return Math.round(numeric * 100) / 100;
     }
