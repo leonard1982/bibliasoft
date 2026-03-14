@@ -1653,8 +1653,8 @@ class UserDataRepository
         }
 
         $stmt = $this->globalDb()->prepare(
-            'INSERT INTO users (username, email, full_name, ministry, data_consent, data_consent_at, password_hash, created_at)
-             VALUES (:username, :email, :full_name, :ministry, :data_consent, :data_consent_at, :password_hash, CURRENT_TIMESTAMP)'
+            'INSERT INTO users (username, email, full_name, ministry, data_consent, data_consent_at, active, password_hash, created_at, updated_at)
+             VALUES (:username, :email, :full_name, :ministry, :data_consent, :data_consent_at, 1, :password_hash, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
         );
         $stmt->execute([
             ':username' => $email,
@@ -1673,7 +1673,7 @@ class UserDataRepository
     {
         $identity = trim((string) $identity);
         $stmt = $this->globalDb()->prepare(
-            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, password_hash, created_at
+            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, active, password_hash, created_at, updated_at, last_login_at
              FROM users
              WHERE username = :identity COLLATE NOCASE
                 OR email = :identity COLLATE NOCASE
@@ -1691,7 +1691,7 @@ class UserDataRepository
     public function getUserByEmail($email)
     {
         $stmt = $this->globalDb()->prepare(
-            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, password_hash, created_at
+            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, active, password_hash, created_at, updated_at, last_login_at
              FROM users
              WHERE email = :email COLLATE NOCASE
              LIMIT 1'
@@ -1703,7 +1703,7 @@ class UserDataRepository
     public function getUserById($id)
     {
         $stmt = $this->globalDb()->prepare(
-            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, created_at
+            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, active, created_at, updated_at, last_login_at
              FROM users
              WHERE id = :id
              LIMIT 1'
@@ -1718,15 +1718,33 @@ class UserDataRepository
         if (!$row) {
             return null;
         }
+        if ((int) ($row['active'] ?? 1) !== 1) {
+            return [
+                'blocked' => true,
+                'id' => (int) $row['id'],
+                'username' => (string) $row['username'],
+                'email' => (string) ($row['email'] ?? ''),
+                'full_name' => (string) ($row['full_name'] ?? ''),
+            ];
+        }
         if (!password_verify((string) $password, (string) $row['password_hash'])) {
             return null;
         }
+
+        $stmt = $this->globalDb()->prepare(
+            'UPDATE users
+             SET last_login_at = CURRENT_TIMESTAMP,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = :id'
+        );
+        $stmt->execute([':id' => (int) $row['id']]);
 
         return [
             'id' => (int) $row['id'],
             'username' => (string) $row['username'],
             'email' => (string) ($row['email'] ?? ''),
             'full_name' => (string) ($row['full_name'] ?? ''),
+            'active' => (int) ($row['active'] ?? 1),
             'display_name' => trim((string) ($row['full_name'] ?? '')) !== '' ? (string) $row['full_name'] : (string) $row['username'],
             'created_at' => (string) $row['created_at'],
         ];
@@ -1735,6 +1753,114 @@ class UserDataRepository
     public function countUsers()
     {
         return (int) $this->globalDb()->query('SELECT COUNT(*) FROM users')->fetchColumn();
+    }
+
+    public function countUsersByActive($active = 1)
+    {
+        $stmt = $this->globalDb()->prepare('SELECT COUNT(*) FROM users WHERE active = :active');
+        $stmt->execute([':active' => (int) ($active ? 1 : 0)]);
+        return (int) $stmt->fetchColumn();
+    }
+
+    public function getUsersForAdmin($limit = 250)
+    {
+        $limit = max(1, min(500, (int) $limit));
+        $stmt = $this->globalDb()->query(
+            'SELECT id, username, email, full_name, ministry, data_consent, data_consent_at, active, created_at, updated_at, last_login_at
+             FROM users
+             ORDER BY id DESC
+             LIMIT ' . $limit
+        );
+        return $stmt->fetchAll();
+    }
+
+    public function updateUserForAdmin($id, $email, $fullName, $ministry = '', $password = '')
+    {
+        $id = (int) $id;
+        $email = trim((string) $email);
+        $fullName = trim((string) $fullName);
+        $ministry = trim((string) $ministry);
+        $password = (string) $password;
+
+        if ($id < 1) {
+            throw new \InvalidArgumentException('Usuario inválido.');
+        }
+        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new \InvalidArgumentException('Correo electrónico inválido.');
+        }
+        if ($fullName === '') {
+            throw new \InvalidArgumentException('El nombre es obligatorio.');
+        }
+        if ($password !== '' && strlen($password) < 6) {
+            throw new \InvalidArgumentException('La contraseña debe tener al menos 6 caracteres.');
+        }
+
+        $existing = $this->getUserByEmail($email);
+        if ($existing && (int) ($existing['id'] ?? 0) !== $id) {
+            throw new \InvalidArgumentException('Ese correo ya está registrado por otro usuario.');
+        }
+
+        if ($password !== '') {
+            $stmt = $this->globalDb()->prepare(
+                'UPDATE users
+                 SET username = :username,
+                     email = :email,
+                     full_name = :full_name,
+                     ministry = :ministry,
+                     password_hash = :password_hash,
+                     updated_at = CURRENT_TIMESTAMP
+                 WHERE id = :id'
+            );
+            $stmt->execute([
+                ':id' => $id,
+                ':username' => $email,
+                ':email' => $email,
+                ':full_name' => $fullName,
+                ':ministry' => $ministry,
+                ':password_hash' => password_hash($password, PASSWORD_DEFAULT),
+            ]);
+        } else {
+            $stmt = $this->globalDb()->prepare(
+                'UPDATE users
+                 SET username = :username,
+                     email = :email,
+                     full_name = :full_name,
+                     ministry = :ministry,
+                     updated_at = CURRENT_TIMESTAMP
+                 WHERE id = :id'
+            );
+            $stmt->execute([
+                ':id' => $id,
+                ':username' => $email,
+                ':email' => $email,
+                ':full_name' => $fullName,
+                ':ministry' => $ministry,
+            ]);
+        }
+
+        return $stmt->rowCount() > 0;
+    }
+
+    public function setUserActive($id, $active)
+    {
+        $stmt = $this->globalDb()->prepare(
+            'UPDATE users
+             SET active = :active,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = :id'
+        );
+        $stmt->execute([
+            ':id' => (int) $id,
+            ':active' => $active ? 1 : 0,
+        ]);
+        return $stmt->rowCount() > 0;
+    }
+
+    public function deleteUser($id)
+    {
+        $stmt = $this->globalDb()->prepare('DELETE FROM users WHERE id = :id');
+        $stmt->execute([':id' => (int) $id]);
+        return $stmt->rowCount() > 0;
     }
 
     public function getAnecdotes(array $filters = [], $limit = 60)

@@ -42,6 +42,11 @@ return [
         'username' => getenv('MAIL_USERNAME') ?: '',
         'password' => getenv('MAIL_PASSWORD') ?: '',
     ],
+    'admin' => [
+        'route' => getenv('SUPERADMIN_ROUTE') ?: 'superadmin',
+        'user_id' => (int) (getenv('SUPERADMIN_USER_ID') ?: 1),
+        'email' => getenv('SUPERADMIN_EMAIL') ?: '',
+    ],
     'search' => [
         'default_limit' => 60,
         'use_fts_preferred' => true,

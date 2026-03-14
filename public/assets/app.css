@@ -3121,6 +3121,162 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     margin-bottom: .8rem;
 }
 
+.admin-console {
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.admin-head h1 {
+    margin: 0 0 .18rem;
+}
+
+.admin-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .8rem;
+}
+
+.admin-metric-card {
+    display: grid;
+    gap: .24rem;
+}
+
+.admin-metric-card p {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(320px, .82fr);
+    gap: 1rem;
+}
+
+.admin-users-panel,
+.admin-logs-panel {
+    display: grid;
+    gap: .8rem;
+    align-content: start;
+}
+
+.admin-section-head {
+    display: flex;
+    justify-content: space-between;
+    gap: .8rem;
+}
+
+.admin-section-head strong,
+.admin-section-head small {
+    display: block;
+}
+
+.admin-user-list {
+    display: grid;
+    gap: .75rem;
+}
+
+.admin-user-card {
+    border: 1px solid color-mix(in srgb, var(--line) 84%, transparent);
+    border-radius: 18px;
+    padding: .9rem;
+    background: color-mix(in srgb, var(--panel) 96%, var(--bg) 4%);
+    display: grid;
+    gap: .72rem;
+}
+
+.admin-user-card.is-inactive {
+    border-color: color-mix(in srgb, #b44a40 40%, var(--line));
+    background: color-mix(in srgb, #fdeceb 32%, var(--panel) 68%);
+}
+
+.admin-user-summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .8rem;
+}
+
+.admin-user-summary p {
+    margin: .16rem 0 0;
+}
+
+.admin-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: .2rem .62rem;
+    font-size: .78rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+}
+
+.admin-status.is-active {
+    border-color: color-mix(in srgb, #2d8f5f 52%, var(--line));
+    background: color-mix(in srgb, #e8f8f0 84%, var(--panel) 16%);
+    color: #1f6342;
+}
+
+.admin-status.is-inactive {
+    border-color: color-mix(in srgb, #b44a40 58%, var(--line));
+    background: color-mix(in srgb, #fdeceb 88%, var(--panel) 12%);
+    color: #8e2f29;
+}
+
+.admin-user-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .38rem .75rem;
+    font-size: .84rem;
+    color: var(--muted);
+}
+
+.admin-user-form .admin-user-toolbar {
+    grid-column: 1 / -1;
+}
+
+.admin-user-actions {
+    gap: .5rem;
+}
+
+.admin-user-actions form {
+    margin: 0;
+}
+
+.admin-log-form .toolbar {
+    align-self: end;
+}
+
+.admin-log-meta {
+    display: grid;
+    gap: .2rem;
+    font-size: .84rem;
+    color: var(--muted);
+}
+
+.admin-log-view {
+    margin: 0;
+    min-height: 560px;
+    max-height: 70vh;
+    overflow: auto;
+    border-radius: 16px;
+    padding: .9rem;
+    background: color-mix(in srgb, var(--panel) 90%, var(--bg) 10%);
+    border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+    font-size: .8rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
 .panel {
     border: 1px solid var(--line);
     border-radius: 16px;
@@ -5390,6 +5546,17 @@ body.spacing-normal .verse {
 
     .auth-meta {
         align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-metrics,
+    .admin-grid,
+    .admin-user-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-head,
+    .admin-user-summary {
         flex-direction: column;
     }
 }

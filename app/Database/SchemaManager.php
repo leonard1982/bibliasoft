@@ -202,10 +202,14 @@ class SchemaManager
                 ministry TEXT NOT NULL DEFAULT \'\',
                 data_consent INTEGER NOT NULL DEFAULT 0,
                 data_consent_at TEXT,
+                active INTEGER NOT NULL DEFAULT 1,
                 password_hash TEXT NOT NULL,
-                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                last_login_at TEXT
             )');
             $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email)');
+            $pdo->exec('CREATE INDEX IF NOT EXISTS idx_users_active ON users(active, created_at)');
             return;
         }
 
@@ -225,11 +229,23 @@ class SchemaManager
         if (!isset($columns['data_consent_at'])) {
             $pdo->exec('ALTER TABLE users ADD COLUMN data_consent_at TEXT');
         }
+        if (!isset($columns['active'])) {
+            $pdo->exec('ALTER TABLE users ADD COLUMN active INTEGER NOT NULL DEFAULT 1');
+        }
+        if (!isset($columns['updated_at'])) {
+            $pdo->exec("ALTER TABLE users ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+        if (!isset($columns['last_login_at'])) {
+            $pdo->exec('ALTER TABLE users ADD COLUMN last_login_at TEXT');
+        }
 
         $pdo->exec("UPDATE users SET full_name = CASE WHEN TRIM(COALESCE(full_name, '')) = '' THEN username ELSE full_name END");
         $pdo->exec("UPDATE users SET ministry = COALESCE(ministry, '')");
         $pdo->exec('UPDATE users SET data_consent = CASE WHEN data_consent = 1 THEN 1 ELSE 0 END');
+        $pdo->exec('UPDATE users SET active = CASE WHEN active = 0 THEN 0 ELSE 1 END');
+        $pdo->exec('UPDATE users SET updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)');
         $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_users_active ON users(active, created_at)');
     }
 
     private static function migrateDailyCache(\PDO $pdo)

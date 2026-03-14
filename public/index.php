@@ -142,6 +142,16 @@ $apiController = new ApiController(
 );
 
 $route = isset($_GET['route']) ? $_GET['route'] : 'home_daily';
+$superadminRoute = superadmin_route();
+if ($route === $superadminRoute) {
+    $route = 'admin';
+} elseif ($route === 'admin' && $superadminRoute !== 'admin') {
+    if (auth_is_superadmin()) {
+        app_redirect('?route=' . urlencode($superadminRoute));
+    }
+    http_response_code(404);
+    exit('Not found');
+}
 
 try {
     switch ($route) {
@@ -208,6 +218,18 @@ try {
 
         case 'admin':
             $authController->admin();
+            break;
+
+        case 'admin.users.update':
+            $authController->adminUserUpdate();
+            break;
+
+        case 'admin.users.toggle':
+            $authController->adminUserToggle();
+            break;
+
+        case 'admin.users.delete':
+            $authController->adminUserDelete();
             break;
 
         case 'api.chapter':

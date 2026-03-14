@@ -11,7 +11,6 @@ $sideMenuItems = [
     ['route' => 'anecdotes', 'label' => 'Anécdotas', 'icon' => 'bookmark.svg', 'href' => '?route=anecdotes', 'open_tab' => true],
 ];
 if (auth_user_id() > 0) {
-    $sideMenuItems[] = ['route' => 'admin', 'label' => auth_username() !== '' ? auth_username() : 'Perfil', 'icon' => 'user.svg', 'href' => '?route=admin', 'open_tab' => true];
     $sideMenuItems[] = ['route' => 'logout', 'label' => 'Salir', 'icon' => 'lock.svg', 'href' => '?route=logout', 'open_tab' => false];
 } else {
     $sideMenuItems[] = ['route' => 'login', 'label' => 'Ingresar', 'icon' => 'login.svg', 'href' => '?route=login', 'open_tab' => true];
@@ -106,8 +105,8 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
                                         <a class="user-menu-item" href="?route=reader&skip_daily=1">
                                             <img src="assets/icons/eye.svg" alt="" class="ico"> Ir al lector
                                         </a>
-                                        <?php if ((int) auth_user_id() === 1): ?>
-                                            <a class="user-menu-item" href="?route=admin">
+                                        <?php if (auth_is_superadmin()): ?>
+                                            <a class="user-menu-item" href="?route=<?php echo e(urlencode(superadmin_route())); ?>">
                                                 <img src="assets/icons/settings.svg" alt="" class="ico"> Administración
                                             </a>
                                         <?php endif; ?>

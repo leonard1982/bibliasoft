@@ -141,6 +141,40 @@ if (!function_exists('auth_username')) {
     }
 }
 
+if (!function_exists('auth_user_email')) {
+    function auth_user_email()
+    {
+        return isset($_SESSION['user_email']) ? (string) $_SESSION['user_email'] : '';
+    }
+}
+
+if (!function_exists('superadmin_route')) {
+    function superadmin_route()
+    {
+        $route = trim((string) config('admin.route', 'superadmin'));
+        return $route !== '' ? $route : 'superadmin';
+    }
+}
+
+if (!function_exists('auth_is_superadmin')) {
+    function auth_is_superadmin()
+    {
+        $userId = auth_user_id();
+        if ($userId < 1) {
+            return false;
+        }
+
+        $configEmail = trim((string) config('admin.email', ''));
+        $sessionEmail = trim((string) auth_user_email());
+        if ($configEmail !== '' && $sessionEmail !== '' && strcasecmp($configEmail, $sessionEmail) === 0) {
+            return true;
+        }
+
+        $configUserId = (int) config('admin.user_id', 1);
+        return $configUserId > 0 && $userId === $configUserId;
+    }
+}
+
 if (!function_exists('app_asset')) {
     function app_asset($path)
     {

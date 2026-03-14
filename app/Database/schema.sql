@@ -57,9 +57,14 @@ CREATE TABLE IF NOT EXISTS users (
     ministry TEXT NOT NULL DEFAULT '',
     data_consent INTEGER NOT NULL DEFAULT 0,
     data_consent_at TEXT,
+    active INTEGER NOT NULL DEFAULT 1,
     password_hash TEXT NOT NULL,
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_login_at TEXT
 );
+
+CREATE INDEX IF NOT EXISTS idx_users_active ON users (active, created_at);
 
 CREATE TABLE IF NOT EXISTS cloud_sync_backups (
     user_id INTEGER PRIMARY KEY,
