@@ -6575,10 +6575,11 @@ body.spacing-normal .verse {
 .companion-bubble-actions {
     display: flex;
     justify-content: flex-end;
+    gap: .38rem;
     margin-top: .08rem;
 }
 
-.companion-copy-btn {
+.companion-action-btn {
     width: 32px;
     height: 32px;
     border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line) 72%);
@@ -6592,15 +6593,21 @@ body.spacing-normal .verse {
     transition: transform .14s ease, border-color .14s ease, background .14s ease;
 }
 
-.companion-copy-btn:hover {
+.companion-action-btn:hover {
     transform: translateY(-1px);
     border-color: color-mix(in srgb, var(--accent) 58%, var(--line) 42%);
     background: color-mix(in srgb, var(--selection) 72%, var(--panel) 28%);
 }
 
-.companion-copy-btn .ico {
+.companion-action-btn .ico {
     width: 15px;
     height: 15px;
+}
+
+.companion-audio-btn.is-active {
+    border-color: color-mix(in srgb, var(--accent) 74%, var(--line) 26%);
+    background: color-mix(in srgb, var(--selection) 80%, var(--panel) 20%);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
 .companion-bubble-body ul,
@@ -7141,14 +7148,18 @@ body.spacing-normal .verse {
     border-left-color: #68bce8;
 }
 
-.theme-dark .companion-copy-btn {
+.theme-dark .companion-action-btn {
     background: color-mix(in srgb, #122c3d 80%, var(--panel) 20%);
     border-color: rgba(94, 157, 201, .22);
 }
 
-.theme-dark .companion-copy-btn:hover {
+.theme-dark .companion-action-btn:hover {
     background: color-mix(in srgb, #173a52 78%, var(--panel) 22%);
     border-color: rgba(120, 191, 234, .34);
+}
+
+.theme-dark .companion-audio-btn.is-active {
+    box-shadow: 0 0 0 3px rgba(104, 188, 232, .16);
 }
 
 .theme-dark .companion-launcher {

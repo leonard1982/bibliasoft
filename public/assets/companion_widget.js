@@ -24,7 +24,9 @@
         selectedThread: null,
         messages: [],
         copyMap: {},
-        audioContext: null
+        audioContext: null,
+        speakingKey: '',
+        speechSupported: typeof window.speechSynthesis !== 'undefined'
     };
 
     var els = {
@@ -139,6 +141,7 @@
 
     function closePanel() {
         state.open = false;
+        stopSpeaking();
         syncPanelState();
         saveDraft();
         savePanelPrefs();
@@ -437,9 +440,18 @@
             if (!row.typing && sender === 'assistant') {
                 var copyKey = 'copy_' + index;
                 state.copyMap[copyKey] = String(row.message_text || '');
+                var speakLabel = state.speakingKey === copyKey ? 'Detener lectura' : 'Leer respuesta';
+                var speakClass = state.speakingKey === copyKey ? ' is-active' : '';
+                var audioButton = state.speechSupported
+                    ? '' +
+                        '<button class="companion-action-btn companion-audio-btn' + speakClass + '" type="button" data-speak-key="' + escapeHtml(copyKey) + '" aria-label="' + escapeHtml(speakLabel) + '" title="' + escapeHtml(speakLabel) + '">' +
+                            '<img src="assets/icons/audio.svg" alt="" class="ico">' +
+                        '</button>'
+                    : '';
                 actions = '' +
                     '<div class="companion-bubble-actions">' +
-                        '<button class="companion-copy-btn" type="button" data-copy-key="' + escapeHtml(copyKey) + '" aria-label="Copiar respuesta" title="Copiar respuesta">' +
+                        audioButton +
+                        '<button class="companion-action-btn companion-copy-btn" type="button" data-copy-key="' + escapeHtml(copyKey) + '" aria-label="Copiar respuesta" title="Copiar respuesta">' +
                             '<img src="assets/icons/copy.svg" alt="" class="ico">' +
                         '</button>' +
                     '</div>';
@@ -454,6 +466,7 @@
         }).join('');
 
         bindCopyButtons();
+        bindSpeakButtons();
         els.messages.scrollTop = els.messages.scrollHeight;
     }
 
@@ -625,6 +638,28 @@
         });
     }
 
+    function bindSpeakButtons() {
+        if (!state.speechSupported) {
+            return;
+        }
+
+        Array.prototype.slice.call(document.querySelectorAll('.companion-audio-btn[data-speak-key]')).forEach(function (button) {
+            button.addEventListener('click', function () {
+                var key = String(button.getAttribute('data-speak-key') || '');
+                var text = state.copyMap[key] || '';
+                if (!text) {
+                    return;
+                }
+                if (state.speakingKey === key) {
+                    stopSpeaking();
+                    renderMessages();
+                    return;
+                }
+                speakText(text, key);
+            });
+        });
+    }
+
     function copyText(text) {
         if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
             return navigator.clipboard.writeText(text);
@@ -689,6 +724,60 @@
         } catch (err) {
             // ignore
         }
+    }
+
+    function speakText(text, key) {
+        if (!state.speechSupported || typeof window.SpeechSynthesisUtterance === 'undefined') {
+            showNotice('La lectura en voz alta no está disponible en este navegador.', 'error');
+            return;
+        }
+
+        stopSpeaking();
+
+        try {
+            var utterance = new window.SpeechSynthesisUtterance(stripMessageText(text));
+            utterance.lang = 'es-CO';
+            utterance.rate = 1;
+            utterance.pitch = 1;
+            utterance.onend = function () {
+                state.speakingKey = '';
+                renderMessages();
+            };
+            utterance.onerror = function () {
+                state.speakingKey = '';
+                renderMessages();
+                showNotice('No se pudo reproducir la respuesta.', 'error');
+            };
+
+            state.speakingKey = key;
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utterance);
+            renderMessages();
+        } catch (err) {
+            state.speakingKey = '';
+            showNotice('No se pudo reproducir la respuesta.', 'error');
+        }
+    }
+
+    function stopSpeaking() {
+        state.speakingKey = '';
+        if (!state.speechSupported) {
+            return;
+        }
+        try {
+            window.speechSynthesis.cancel();
+        } catch (err) {
+            // ignore
+        }
+    }
+
+    function stripMessageText(text) {
+        return String(text || '')
+            .replace(/\*\*(.+?)\*\*/g, '$1')
+            .replace(/==(.+?)==/g, '$1')
+            .replace(/^#{1,3}\s+/gm, '')
+            .replace(/^>\s+/gm, '')
+            .replace(/\r\n?/g, '\n');
     }
 
     function asJson(res) {
