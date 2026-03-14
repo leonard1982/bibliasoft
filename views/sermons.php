@@ -51,10 +51,35 @@ $sermonPayload = [
                     <select id="sermonMessageType">
                         <option value="sermon">Serm&oacute;n expositivo</option>
                         <option value="mensaje">Mensaje pastoral</option>
+                        <option value="evangelistico">Mensaje evangel&iacute;stico</option>
                         <option value="ensenanza">Ense&ntilde;anza breve</option>
                         <option value="bosquejo">Bosquejo para predicar</option>
                     </select>
                 </label>
+
+                <section class="sermon-help-card" aria-labelledby="sermonTypeHelpTitle">
+                    <div class="sermon-help-head">
+                        <div>
+                            <strong id="sermonTypeHelpTitle">Gu&iacute;a para este tipo de pieza</strong>
+                            <p id="sermonTypeHelpText" class="muted">Expone el pasaje verso a verso, resaltando idea central, estructura y aplicaciones fieles al texto.</p>
+                        </div>
+                    </div>
+                    <div class="sermon-help-pills">
+                        <button class="btn-light sermon-help-pill js-sermon-help-fill" type="button" data-message-type="sermon" data-audience="Congregaci&oacute;n general" data-tone="B&iacute;blico, claro y pastoral" data-prompt="Desarrolla el pasaje de forma expositiva, mostrando la idea central, el flujo del texto y tres aplicaciones concretas para la iglesia local.">Expositivo</button>
+                        <button class="btn-light sermon-help-pill js-sermon-help-fill" type="button" data-message-type="mensaje" data-audience="Iglesia local en tiempo de cuidado pastoral" data-tone="Cercano, pastoral y esperanzador" data-prompt="Enfoca el mensaje en consolar, corregir y fortalecer a la iglesia con aplicaciones concretas para la vida diaria.">Pastoral</button>
+                        <button class="btn-light sermon-help-pill js-sermon-help-fill" type="button" data-message-type="evangelistico" data-audience="Personas nuevas, invitados y no creyentes" data-tone="Claro, compasivo y directo al evangelio" data-prompt="Presenta el evangelio con claridad desde este pasaje, llama al arrepentimiento y a la fe en Cristo, y termina con una invitaci&oacute;n concreta.">Evangel&iacute;stico</button>
+                        <button class="btn-light sermon-help-pill js-sermon-help-fill" type="button" data-audience="J&oacute;venes y adolescentes" data-tone="Cercano, directo y aplicable" data-prompt="Conecta el pasaje con retos reales de los j&oacute;venes y deja ejemplos concretos de obediencia esta semana.">Para j&oacute;venes</button>
+                        <button class="btn-light sermon-help-pill js-sermon-help-fill" type="button" data-audience="Grupo hogar o c&eacute;lula" data-tone="Conversacional, pastoral y participativo" data-prompt="Prepara un mensaje pensado para grupo peque&ntilde;o, con preguntas, aplicaci&oacute;n en comunidad y llamado a la oraci&oacute;n.">Grupo hogar</button>
+                    </div>
+                    <div class="sermon-help-tip">
+                        <strong>C&oacute;mo llenar el formulario</strong>
+                        <ul class="sermon-lab-list">
+                            <li><strong>Audiencia:</strong> escribe para qui&eacute;n predicas o ense&ntilde;as.</li>
+                            <li><strong>Tono:</strong> describe el estilo deseado, por ejemplo pastoral, confrontador o evangel&iacute;stico.</li>
+                            <li><strong>Instrucci&oacute;n pastoral:</strong> especifica qu&eacute; quieres lograr con el mensaje.</li>
+                        </ul>
+                    </div>
+                </section>
 
                 <label>Audiencia
                     <input id="sermonAudience" type="text" value="<?php echo e((string) ($sermonPayload['initial']['audience'] ?? '')); ?>" placeholder="Iglesia local, j&oacute;venes, liderazgo, grupo hogar...">
@@ -121,5 +146,7 @@ $sermonPayload = [
         </section>
     </div>
 </section>
+
+<div id="sermonToast" class="study-toast hidden" role="status" aria-live="polite"></div>
 
 <script src="<?php echo e(app_asset('assets/sermons.js')); ?>"></script>

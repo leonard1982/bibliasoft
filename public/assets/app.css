@@ -2142,6 +2142,61 @@ body.theme-dark img.auth-field-ico {
     display: none !important;
 }
 
+.app-loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 220;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    background: rgba(7, 18, 28, .54);
+    backdrop-filter: blur(5px);
+}
+
+.app-loading-card {
+    width: min(420px, calc(100vw - 24px));
+    display: grid;
+    gap: .5rem;
+    justify-items: center;
+    text-align: center;
+    padding: 1.1rem 1rem;
+    border-radius: 22px;
+    border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+    background: linear-gradient(180deg, color-mix(in srgb, #f8fcff 95%, var(--panel) 5%), color-mix(in srgb, #edf5fb 88%, var(--panel) 12%));
+    box-shadow: 0 28px 70px rgba(8, 25, 38, .28);
+}
+
+.app-loading-card strong {
+    font-size: 1.02rem;
+}
+
+.app-loading-card p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.app-loading-spinner {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 4px solid color-mix(in srgb, var(--line) 72%, transparent);
+    border-top-color: var(--accent);
+    animation: app-loading-spin .85s linear infinite;
+}
+
+body.app-loading {
+    overflow: hidden;
+}
+
+@keyframes app-loading-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .settings {
     position: fixed;
     z-index: 120;
@@ -6435,6 +6490,44 @@ body.spacing-normal .verse {
     gap: 1rem;
 }
 
+.sermon-help-card {
+    display: grid;
+    gap: .85rem;
+    padding: .95rem 1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(24, 86, 124, .12);
+    background:
+        linear-gradient(180deg, rgba(242, 248, 252, .98), rgba(249, 252, 255, .98));
+}
+
+.sermon-help-head p {
+    margin: .3rem 0 0;
+}
+
+.sermon-help-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.sermon-help-pill {
+    min-height: 36px;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.sermon-help-tip {
+    padding: .85rem .95rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .7);
+    border: 1px solid rgba(24, 86, 124, .08);
+}
+
+.sermon-help-tip .sermon-lab-list {
+    margin-top: .55rem;
+    gap: .4rem;
+}
+
 .sermon-reference-chip,
 .sermon-result-meta {
     padding: .9rem 1rem;
@@ -6494,6 +6587,22 @@ body.spacing-normal .verse {
 .theme-dark .sermon-lab-hero-copy {
     background: rgba(10, 24, 34, .54);
     border-color: rgba(94, 157, 201, .16);
+}
+
+.theme-dark .sermon-help-card {
+    background:
+        linear-gradient(180deg, rgba(12, 28, 39, .95), rgba(16, 36, 50, .95));
+    border-color: rgba(94, 157, 201, .18);
+}
+
+.theme-dark .sermon-help-tip {
+    background: rgba(8, 20, 29, .58);
+    border-color: rgba(94, 157, 201, .14);
+}
+
+.theme-dark .app-loading-card {
+    background: linear-gradient(180deg, rgba(10, 24, 34, .98), rgba(15, 34, 48, .96));
+    border-color: rgba(94, 157, 201, .2);
 }
 
 @media (max-width: 1100px) {

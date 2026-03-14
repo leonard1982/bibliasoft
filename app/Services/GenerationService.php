@@ -107,7 +107,7 @@ class GenerationService
         $tone = trim((string) ($input['tone'] ?? ''));
 
         if ($book < 1 || $chapter < 1 || $verseStart < 1 || $verseEnd < 1) {
-            throw new \InvalidArgumentException('ParÃ¡metros invÃ¡lidos');
+            throw new \InvalidArgumentException('Parametros invalidos');
         }
 
         if ($verseStart > $verseEnd) {
@@ -118,10 +118,10 @@ class GenerationService
 
         $verses = $this->bibleRepository->getVersesInRange($book, $chapter, $verseStart, $verseEnd);
         if (empty($verses)) {
-            throw new \InvalidArgumentException('No se encontrÃ³ el pasaje solicitado.');
+            throw new \InvalidArgumentException('No se encontro el pasaje solicitado.');
         }
 
-        $messageType = in_array($messageType, ['sermon', 'mensaje', 'ensenanza', 'bosquejo'], true)
+        $messageType = in_array($messageType, ['sermon', 'mensaje', 'evangelistico', 'ensenanza', 'bosquejo'], true)
             ? $messageType
             : 'sermon';
         $prompt = $this->buildSermonPrompt($book, $chapter, $verseStart, $verseEnd, $messageType, $promptText, $audience, $tone, $verses);
@@ -202,21 +202,21 @@ class GenerationService
         $reference = $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd);
         $bookName = $this->bibleRepository->getBookName($book);
         $audience = $audience !== '' ? $audience : 'iglesia local, grupos de hogar y personas nuevas en la fe';
-        $tone = $tone !== '' ? $tone : 'pastoral, bÃ­blico, claro y aplicable';
+        $tone = $tone !== '' ? $tone : 'pastoral, biblico, claro y aplicable';
         $focus = $promptText !== '' ? $promptText : 'resaltar la idea central del pasaje y aplicarla con fidelidad';
 
-        return "Eres un pastor y redactor bÃ­blico senior en espaÃ±ol.\n"
-            . "Genera SOLO un JSON vÃ¡lido con las claves title y content.\n"
+        return "Eres un pastor y redactor biblico senior en espanol.\n"
+            . "Genera SOLO un JSON valido con las claves title y content.\n"
             . "Tipo de pieza: {$messageType}.\n"
             . "Referencia base: {$reference}.\n"
-            . "Libro: {$bookName}. CapÃ­tulo: {$chapter}. Rango: {$verseStart}-{$verseEnd}.\n"
+            . "Libro: {$bookName}. Capitulo: {$chapter}. Rango: {$verseStart}-{$verseEnd}.\n"
             . "Audiencia: {$audience}.\n"
             . "Tono: {$tone}.\n"
             . "Encargo pastoral del usuario: {$focus}.\n"
-            . "Texto bÃ­blico:\n" . implode("\n", $lines) . "\n\n"
+            . "Texto biblico:\n" . implode("\n", $lines) . "\n\n"
             . "El campo title debe ser breve, memorable y conectado al pasaje.\n"
-            . "El campo content debe ser texto plano, sin HTML, con estructura larga y Ãºtil para predicar o enseÃ±ar.\n"
-            . "Incluye estas secciones dentro de content: Idea central, IntroducciÃ³n, Desarrollo en 3 movimientos o puntos, Aplicaciones concretas, Llamado final y OraciÃ³n sugerida.\n"
+            . "El campo content debe ser texto plano, sin HTML, con estructura larga y util para predicar o ensenar.\n"
+            . "Incluye estas secciones dentro de content: Idea central, Introduccion, Desarrollo en 3 movimientos o puntos, Aplicaciones concretas, Llamado final y Oracion sugerida.\n"
             . "No inventes detalles ajenos al pasaje. No uses markdown complicado. No agregues explicaciones fuera del JSON.";
     }
 
@@ -375,33 +375,34 @@ class GenerationService
     {
         $reference = $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd);
         $summary = $this->buildSummary($this->collectText($verses), $reference);
-        $audienceLine = $audience !== '' ? $audience : 'la iglesia y quienes estÃ¡n creciendo en la Palabra';
+        $audienceLine = $audience !== '' ? $audience : 'la iglesia y quienes estan creciendo en la Palabra';
         $toneLine = $tone !== '' ? $tone : 'pastoral y claro';
-        $promptLine = $promptText !== '' ? $promptText : 'mostrar con fidelidad el mensaje del pasaje y llevarlo a la prÃ¡ctica';
+        $promptLine = $promptText !== '' ? $promptText : 'mostrar con fidelidad el mensaje del pasaje y llevarlo a la practica';
         $titlePrefixMap = [
-            'sermon' => 'SermÃ³n',
+            'sermon' => 'Sermon',
             'mensaje' => 'Mensaje',
-            'ensenanza' => 'EnseÃ±anza',
+            'evangelistico' => 'Mensaje evangelistico',
+            'ensenanza' => 'Ensenanza',
             'bosquejo' => 'Bosquejo',
         ];
         $titlePrefix = isset($titlePrefixMap[$messageType]) ? $titlePrefixMap[$messageType] : 'Mensaje';
         $title = $titlePrefix . ': ' . $reference;
         $content = "Idea central\n"
-            . "El pasaje {$reference} llama a mirar con atenciÃ³n el obrar de Dios y responder con obediencia concreta.\n\n"
-            . "IntroducciÃ³n\n"
-            . "{$summary} Este {$titlePrefix} estÃ¡ pensado para {$audienceLine}, con un tono {$toneLine}.\n\n"
+            . "El pasaje {$reference} llama a mirar con atencion el obrar de Dios y responder con obediencia concreta.\n\n"
+            . "Introduccion\n"
+            . "{$summary} Este {$titlePrefix} esta pensado para {$audienceLine}, con un tono {$toneLine}.\n\n"
             . "Desarrollo\n"
-            . "1. Observa lo que el texto revela de Dios y de su carÃ¡cter.\n"
-            . "2. Identifica cÃ³mo el pasaje confronta el corazÃ³n humano y corrige prioridades.\n"
-            . "3. Lleva la verdad bÃ­blica a una respuesta visible en la vida diaria y en la comunidad.\n\n"
+            . "1. Observa lo que el texto revela de Dios y de su caracter.\n"
+            . "2. Identifica como el pasaje confronta el corazon humano y corrige prioridades.\n"
+            . "3. Lleva la verdad biblica a una respuesta visible en la vida diaria y en la comunidad.\n\n"
             . "Aplicaciones concretas\n"
-            . "- Ora el pasaje y conviÃ©rtelo en una decisiÃ³n prÃ¡ctica para esta semana.\n"
+            . "- Ora el pasaje y conviertelo en una decision practica para esta semana.\n"
             . "- Comparte el mensaje con claridad y sin perder la fidelidad al texto.\n"
-            . "- Usa esta orientaciÃ³n pastoral: {$promptLine}.\n\n"
+            . "- Usa esta orientacion pastoral: {$promptLine}.\n\n"
             . "Llamado final\n"
-            . "Invita a la congregaciÃ³n a volver al texto, creerlo, obedecerlo y permitir que transforme la manera de vivir.\n\n"
-            . "OraciÃ³n sugerida\n"
-            . "SeÃ±or, afÃ­rmanos en tu Palabra y danos gracia para vivir lo que hoy hemos entendido en {$reference}. AmÃ©n.";
+            . "Invita a la congregacion a volver al texto, creerlo, obedecerlo y permitir que transforme la manera de vivir.\n\n"
+            . "Oracion sugerida\n"
+            . "Senor, afirmanos en tu Palabra y danos gracia para vivir lo que hoy hemos entendido en {$reference}. Amen.";
 
         return [
             'title' => $title,

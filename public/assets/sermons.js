@@ -15,7 +15,8 @@
         books: Array.isArray(payload.books) ? payload.books : [],
         projects: Array.isArray(payload.projects) ? payload.projects : [],
         initial: payload.initial && typeof payload.initial === 'object' ? payload.initial : {},
-        generated: null
+        generated: null,
+        toastTimer: 0
     };
 
     var els = {
@@ -26,6 +27,7 @@
         verseStart: document.getElementById('sermonVerseStart'),
         verseEnd: document.getElementById('sermonVerseEnd'),
         messageType: document.getElementById('sermonMessageType'),
+        typeHelpText: document.getElementById('sermonTypeHelpText'),
         audience: document.getElementById('sermonAudience'),
         tone: document.getElementById('sermonTone'),
         prompt: document.getElementById('sermonPrompt'),
@@ -38,14 +40,37 @@
         copyResult: document.getElementById('sermonCopyResult'),
         resultTitle: document.getElementById('sermonResultTitle'),
         resultBody: document.getElementById('sermonResultBody'),
-        resultMeta: document.getElementById('sermonResultMeta')
+        resultMeta: document.getElementById('sermonResultMeta'),
+        toast: document.getElementById('sermonToast'),
+        helpButtons: Array.prototype.slice.call(document.querySelectorAll('.js-sermon-help-fill'))
+    };
+
+    var messageTypeHelp = {
+        sermon: 'Expone el pasaje verso a verso, resaltando idea central, estructura y aplicaciones fieles al texto.',
+        mensaje: 'Prioriza el cuidado de la iglesia, la exhortacion, el consuelo y la aplicacion pastoral del pasaje.',
+        evangelistico: 'Presenta a Cristo con claridad para invitados o personas nuevas, llamando al arrepentimiento y a la fe.',
+        ensenanza: 'Resume el texto de forma didactica, clara y util para clases, discipulado o grupos pequenos.',
+        bosquejo: 'Entrega una estructura breve para predicar con puntos, transiciones y direccion practica.'
     };
 
     hydrateInitial();
     renderProjects();
     bindEvents();
     refreshReferencePreview();
+    refreshTypeHelp();
     refreshProjects();
+
+    function showLoading(title, text) {
+        if (window.BIBLIASOFT_UI && typeof window.BIBLIASOFT_UI.showLoading === 'function') {
+            window.BIBLIASOFT_UI.showLoading(title, text);
+        }
+    }
+
+    function hideLoading() {
+        if (window.BIBLIASOFT_UI && typeof window.BIBLIASOFT_UI.hideLoading === 'function') {
+            window.BIBLIASOFT_UI.hideLoading();
+        }
+    }
 
     function hydrateInitial() {
         if (els.book && state.initial.book) {
@@ -68,6 +93,14 @@
                 field.addEventListener('input', refreshReferencePreview);
                 field.addEventListener('change', refreshReferencePreview);
             }
+        });
+        if (els.messageType) {
+            els.messageType.addEventListener('change', refreshTypeHelp);
+        }
+        els.helpButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                applyHelpFill(button);
+            });
         });
         if (els.createProject) {
             els.createProject.addEventListener('click', createQuickProject);
@@ -114,6 +147,44 @@
         }
     }
 
+    function refreshTypeHelp() {
+        if (!els.typeHelpText || !els.messageType) {
+            return;
+        }
+        var type = String(els.messageType.value || 'sermon');
+        els.typeHelpText.textContent = messageTypeHelp[type] || messageTypeHelp.sermon;
+    }
+
+    function applyHelpFill(button) {
+        if (!button) {
+            return;
+        }
+
+        var messageType = button.getAttribute('data-message-type') || '';
+        var audience = button.getAttribute('data-audience') || '';
+        var tone = button.getAttribute('data-tone') || '';
+        var prompt = button.getAttribute('data-prompt') || '';
+
+        if (messageType && els.messageType) {
+            els.messageType.value = messageType;
+            refreshTypeHelp();
+        }
+        if (audience && els.audience && String(els.audience.value || '').trim() === '') {
+            els.audience.value = audience;
+        } else if (audience && els.audience) {
+            els.audience.value = audience;
+        }
+        if (tone && els.tone && String(els.tone.value || '').trim() === '') {
+            els.tone.value = tone;
+        } else if (tone && els.tone) {
+            els.tone.value = tone;
+        }
+        if (prompt && els.prompt) {
+            els.prompt.value = prompt;
+            els.prompt.focus();
+        }
+    }
+
     function renderProjects() {
         if (!els.projectSelect) {
             return;
@@ -143,13 +214,14 @@
     function generateMessage() {
         var ref = currentReference();
         if (ref.book < 1 || ref.chapter < 1 || ref.verseStart < 1 || ref.verseEnd < 1) {
-            showNotice('Completa una referencia bÃ­blica vÃ¡lida.', 'error');
+            showNotice('Completa una referencia biblica valida.', 'error');
             return;
         }
 
         if (els.submit) {
             els.submit.disabled = true;
         }
+        showLoading('Generando con IA', 'Estamos preparando tu mensaje. Espera por favor...');
         if (els.resultMeta) {
             els.resultMeta.textContent = 'Generando mensaje para ' + ref.label + '...';
         }
@@ -188,13 +260,14 @@
             if (els.submit) {
                 els.submit.disabled = false;
             }
+            hideLoading();
         });
     }
 
     function createQuickProject() {
         var name = els.quickProject ? String(els.quickProject.value || '').trim() : '';
         if (!name) {
-            showNotice('Escribe un nombre para el proyecto rÃ¡pido.', 'error');
+            showNotice('Escribe un nombre para el proyecto rapido.', 'error');
             return;
         }
         postForm('api.study.projects.create', {
@@ -295,7 +368,7 @@
             document.execCommand('copy');
             showNotice('Mensaje copiado al portapapeles.', 'success');
         } catch (err) {
-            showNotice('No se pudo copiar automÃ¡ticamente. Copia manualmente el texto.', 'error');
+            showNotice('No se pudo copiar automaticamente. Copia manualmente el texto.', 'error');
         }
     }
 
@@ -320,12 +393,42 @@
     }
 
     function showNotice(text, type) {
-        if (!els.notice) {
+        var message = String(text || '').trim();
+        if (!message) {
             return;
         }
-        els.notice.textContent = text;
-        els.notice.classList.remove('hidden', 'is-success', 'is-error', 'is-info');
-        els.notice.classList.add(type === 'error' ? 'is-error' : (type === 'success' ? 'is-success' : 'is-info'));
+
+        if (!els.notice) {
+            if (els.toast) {
+                els.toast.textContent = message;
+            }
+        } else {
+            els.notice.textContent = message;
+            els.notice.classList.remove('hidden', 'is-success', 'is-error', 'is-info');
+            els.notice.classList.add(type === 'error' ? 'is-error' : (type === 'success' ? 'is-success' : 'is-info'));
+            if (type === 'success') {
+                els.notice.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        if (els.toast) {
+            els.toast.textContent = message;
+            els.toast.classList.remove('hidden', 'is-success', 'is-error', 'is-info');
+            els.toast.classList.add(type === 'error' ? 'is-error' : (type === 'success' ? 'is-success' : 'is-info'));
+        }
+
+        if (state.toastTimer) {
+            window.clearTimeout(state.toastTimer);
+        }
+        state.toastTimer = window.setTimeout(function () {
+            if (els.notice) {
+                els.notice.classList.add('hidden');
+            }
+            if (els.toast) {
+                els.toast.classList.add('hidden');
+            }
+            state.toastTimer = 0;
+        }, 4200);
     }
 
     function escapeHtml(value) {

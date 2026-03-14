@@ -14,10 +14,14 @@
     var mobileToggle = document.getElementById('mobileSidebarToggle');
     var reloadActiveBtn = document.getElementById('workspaceReloadActive');
     var topbarThemeToggle = document.getElementById('topbarThemeToggle');
+    var loadingOverlay = document.getElementById('globalLoadingOverlay');
+    var loadingTitle = document.getElementById('globalLoadingTitle');
+    var loadingText = document.getElementById('globalLoadingText');
     var sideItems = toArray(document.querySelectorAll('.side-menu-item'));
     var baseRoute = String(workspaceShell.getAttribute('data-active-route') || appShell.getAttribute('data-active-route') || 'home_daily');
     var currentHref = toRelativeUrl(window.location.href);
     var SETTINGS_KEY = 'biblia_settings';
+    var DRAFT_KEY_PREFIX = 'bs_form_drafts_v1:';
 
     var state = {
         tabs: [],
@@ -31,10 +35,15 @@
         bindTabEvents();
         bindRouteOpeners();
         bindTopActions();
+        bindGlobalLoadingLinks();
+        exposeGlobalUi();
         restoreSidebarState();
         hydrateTabs();
         renderTabs();
         updateSidebarActive(baseRoute);
+        setupDraftPersistence();
+        hideLoadingOverlay();
+        window.addEventListener('pageshow', hideLoadingOverlay);
     }
 
     function hydrateTabs() {
@@ -143,6 +152,7 @@
     function bindTopActions() {
         if (reloadActiveBtn) {
             reloadActiveBtn.addEventListener('click', function () {
+                showLoadingOverlay('Recargando', 'Estamos actualizando esta vista. Espera por favor.');
                 window.location.reload();
             });
         }
@@ -157,6 +167,47 @@
                 }
             });
         }
+    }
+
+    function bindGlobalLoadingLinks() {
+        document.addEventListener('click', function (event) {
+            var link = closestTag(event.target, 'a');
+            if (!link || event.defaultPrevented) {
+                return;
+            }
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+                return;
+            }
+            if (typeof event.button === 'number' && event.button !== 0) {
+                return;
+            }
+            if (String(link.getAttribute('target') || '') === '_blank' || link.hasAttribute('download')) {
+                return;
+            }
+
+            var href = String(link.getAttribute('href') || '').trim();
+            if (!href || href.charAt(0) === '#' || String(link.getAttribute('data-no-loader') || '') === '1') {
+                return;
+            }
+
+            var relativeHref = toRelativeUrl(href);
+            if (!relativeHref || relativeHref === currentHref) {
+                return;
+            }
+
+            if (!isAppRoute(relativeHref)) {
+                return;
+            }
+
+            showLoadingOverlay('Cargando', 'Espera por favor mientras abrimos la siguiente seccion.');
+        }, true);
+    }
+
+    function exposeGlobalUi() {
+        window.BIBLIASOFT_UI = window.BIBLIASOFT_UI || {};
+        window.BIBLIASOFT_UI.showLoading = showLoadingOverlay;
+        window.BIBLIASOFT_UI.hideLoading = hideLoadingOverlay;
+        window.BIBLIASOFT_UI.clearDrafts = clearDraftsForRoute;
     }
 
     function openRouteInTab(href, sourceItem) {
@@ -182,6 +233,7 @@
             updateSidebarActive(route);
             return;
         }
+        showLoadingOverlay('Cargando pestaña', 'Estamos abriendo la vista seleccionada.');
         window.location.href = cleanHref;
     }
 
@@ -200,6 +252,7 @@
             updateSidebarActive(tab.route);
             return;
         }
+        showLoadingOverlay('Cambiando de pestaña', 'Espera por favor mientras cargamos la vista.');
         window.location.href = tab.href;
     }
 
@@ -209,9 +262,11 @@
             return;
         }
         if (isCurrentUrl(tab.href)) {
+            showLoadingOverlay('Recargando pestaña', 'Estamos actualizando esta vista.');
             window.location.reload();
             return;
         }
+        showLoadingOverlay('Cargando pestaña', 'Estamos cargando la pestaña seleccionada.');
         window.location.href = tab.href;
     }
 
@@ -249,8 +304,182 @@
         renderTabs();
 
         if (closingCurrent && nextActive) {
+            showLoadingOverlay('Cerrando pestaña', 'Espera por favor mientras cambiamos a la siguiente vista.');
             window.location.href = nextActive.href;
         }
+    }
+
+    function setupDraftPersistence() {
+        var fields = toArray(document.querySelectorAll('.main-content input, .main-content textarea, .main-content select'));
+        if (!fields.length) {
+            return;
+        }
+
+        var draft = readDraftState();
+        fields.forEach(function (field, index) {
+            if (!isDraftEligible(field)) {
+                return;
+            }
+            var fieldKey = buildDraftFieldKey(field, index);
+            if (!fieldKey) {
+                return;
+            }
+            restoreDraftField(field, draft[fieldKey]);
+            var save = function () {
+                persistDraftField(fieldKey, field);
+            };
+            field.addEventListener('input', save);
+            field.addEventListener('change', save);
+        });
+    }
+
+    function showLoadingOverlay(title, text) {
+        if (!loadingOverlay) {
+            return;
+        }
+        if (loadingTitle) {
+            loadingTitle.textContent = String(title || 'Cargando...');
+        }
+        if (loadingText) {
+            loadingText.textContent = String(text || 'Espera por favor mientras preparamos la siguiente vista.');
+        }
+        loadingOverlay.classList.remove('hidden');
+        loadingOverlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('app-loading');
+    }
+
+    function hideLoadingOverlay() {
+        if (!loadingOverlay) {
+            return;
+        }
+        loadingOverlay.classList.add('hidden');
+        loadingOverlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('app-loading');
+    }
+
+    function readDraftState() {
+        try {
+            var raw = sessionStorage.getItem(DRAFT_KEY_PREFIX + baseRoute);
+            if (!raw) {
+                return {};
+            }
+            var parsed = JSON.parse(raw);
+            return parsed && typeof parsed === 'object' ? parsed : {};
+        } catch (err) {
+            return {};
+        }
+    }
+
+    function writeDraftState(next) {
+        try {
+            sessionStorage.setItem(DRAFT_KEY_PREFIX + baseRoute, JSON.stringify(next || {}));
+        } catch (err) {
+            // ignore
+        }
+    }
+
+    function clearDraftsForRoute(route) {
+        var key = DRAFT_KEY_PREFIX + String(route || baseRoute || '');
+        try {
+            sessionStorage.removeItem(key);
+        } catch (err) {
+            // ignore
+        }
+    }
+
+    function persistDraftField(fieldKey, field) {
+        var draft = readDraftState();
+        var value = readFieldValue(field);
+        if (value === '' || value === null || typeof value === 'undefined') {
+            delete draft[fieldKey];
+        } else {
+            draft[fieldKey] = value;
+        }
+        writeDraftState(draft);
+    }
+
+    function restoreDraftField(field, value) {
+        if (typeof value === 'undefined' || value === null) {
+            return;
+        }
+        var tag = String(field.tagName || '').toLowerCase();
+        var type = String(field.type || '').toLowerCase();
+        if (type === 'checkbox') {
+            field.checked = value === true || value === '1' || value === 'true';
+            return;
+        }
+        if (type === 'radio') {
+            field.checked = String(field.value || '') === String(value || '');
+            return;
+        }
+        if (tag === 'select') {
+            if (field.multiple) {
+                var selectedMap = {};
+                String(value || '').split('|').forEach(function (item) {
+                    if (item !== '') {
+                        selectedMap[item] = true;
+                    }
+                });
+                toArray(field.options).forEach(function (option) {
+                    option.selected = !!selectedMap[String(option.value || '')];
+                });
+                return;
+            }
+            field.value = String(value);
+            return;
+        }
+        field.value = String(value);
+    }
+
+    function readFieldValue(field) {
+        var tag = String(field.tagName || '').toLowerCase();
+        var type = String(field.type || '').toLowerCase();
+        if (type === 'checkbox') {
+            return field.checked ? '1' : '';
+        }
+        if (type === 'radio') {
+            return field.checked ? String(field.value || '') : '';
+        }
+        if (tag === 'select' && field.multiple) {
+            var selected = [];
+            toArray(field.options).forEach(function (option) {
+                if (option.selected) {
+                    selected.push(String(option.value || ''));
+                }
+            });
+            return selected.length ? selected.join('|') : '';
+        }
+        return String(field.value || '');
+    }
+
+    function isDraftEligible(field) {
+        if (!field || field.disabled) {
+            return false;
+        }
+        var type = String(field.type || '').toLowerCase();
+        if (field.hasAttribute('data-no-draft')) {
+            return false;
+        }
+        if (type === 'hidden' || type === 'password' || type === 'file' || type === 'submit' || type === 'button' || type === 'reset') {
+            return false;
+        }
+        if (type === 'email' && String(field.name || '').toLowerCase().indexOf('g-recaptcha') !== -1) {
+            return false;
+        }
+        if (String(field.name || '').toLowerCase().indexOf('g-recaptcha') !== -1) {
+            return false;
+        }
+        return true;
+    }
+
+    function buildDraftFieldKey(field, index) {
+        var form = field.form;
+        var formId = form && form.id ? String(form.id) : 'page';
+        var identity = String(field.id || field.name || ('field-' + index));
+        if (!identity) {
+            return '';
+        }
+        return formId + '::' + identity;
     }
 
     function renderTabs() {
@@ -520,6 +749,18 @@
         return Array.prototype.slice.call(list || []);
     }
 
+    function closestTag(target, tagName) {
+        var expected = String(tagName || '').toUpperCase();
+        var node = target;
+        while (node && node !== document.body) {
+            if (String(node.tagName || '').toUpperCase() === expected) {
+                return node;
+            }
+            node = node.parentNode;
+        }
+        return null;
+    }
+
     function closestByClass(target, className) {
         var node = target;
         while (node && node !== document.body) {
@@ -529,6 +770,15 @@
             node = node.parentNode;
         }
         return null;
+    }
+
+    function isAppRoute(href) {
+        try {
+            var url = new URL(String(href || ''), window.location.href);
+            return url.origin === window.location.origin && String(url.searchParams.get('route') || '').trim() !== '';
+        } catch (err) {
+            return false;
+        }
     }
 
     function readThemePreference() {

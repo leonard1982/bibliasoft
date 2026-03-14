@@ -34,6 +34,13 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
     <link rel="stylesheet" href="<?php echo e(app_asset('assets/app.css')); ?>">
 </head>
 <body class="<?php echo e($bodyClassAttr); ?>">
+    <div id="globalLoadingOverlay" class="app-loading-overlay hidden" aria-hidden="true">
+        <div class="app-loading-card" role="status" aria-live="polite" aria-busy="true">
+            <div class="app-loading-spinner" aria-hidden="true"></div>
+            <strong id="globalLoadingTitle">Cargando...</strong>
+            <p id="globalLoadingText">Espera por favor mientras preparamos la siguiente vista.</p>
+        </div>
+    </div>
     <?php if (!$isEmbed): ?>
         <div id="appShell" class="app-shell" data-active-route="<?php echo e($activeRoute); ?>">
             <aside id="sideMenu" class="side-menu">
