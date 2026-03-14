@@ -6558,6 +6558,175 @@ body.spacing-normal .verse {
     background: color-mix(in srgb, var(--panel) 95%, var(--bg) 5%);
 }
 
+.companion-widget {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 165;
+}
+
+.companion-launcher {
+    border: 1px solid color-mix(in srgb, var(--accent) 46%, var(--line));
+    border-radius: 999px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 90%, #0f3a52 10%), color-mix(in srgb, var(--accent-2) 84%, #184763 16%));
+    color: #fff;
+    min-height: 54px;
+    padding: .76rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .58rem;
+    box-shadow: 0 16px 34px rgba(7, 24, 38, .24);
+    cursor: pointer;
+}
+
+.companion-launcher .ico {
+    filter: brightness(0) invert(1);
+}
+
+.companion-launcher span {
+    font-weight: 700;
+    letter-spacing: .01em;
+}
+
+.companion-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 18, 27, .5);
+    backdrop-filter: blur(4px);
+}
+
+.companion-panel {
+    position: fixed;
+    right: 18px;
+    bottom: 84px;
+    width: min(390px, calc(100vw - 24px));
+    height: min(680px, calc(100vh - 110px));
+    border: 1px solid color-mix(in srgb, var(--line) 84%, transparent);
+    border-radius: 24px;
+    background: linear-gradient(180deg, color-mix(in srgb, #fbfdff 96%, var(--panel) 4%), color-mix(in srgb, #f2f8fc 88%, var(--panel) 12%));
+    box-shadow: 0 28px 56px rgba(7, 24, 38, .24);
+    display: grid;
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    overflow: hidden;
+}
+
+.companion-panel.is-maximized {
+    right: 50%;
+    bottom: 50%;
+    width: min(840px, calc(100vw - 28px));
+    height: min(820px, calc(100vh - 28px));
+    transform: translate(50%, 50%);
+}
+
+.companion-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .8rem;
+    padding: .92rem 1rem .72rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+}
+
+.companion-panel-head strong {
+    display: block;
+    font-size: 1rem;
+}
+
+.companion-panel-head small {
+    color: var(--muted);
+}
+
+.companion-panel-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+}
+
+.companion-panel-btn {
+    min-width: 38px;
+    min-height: 38px;
+    justify-content: center;
+    padding: .48rem;
+}
+
+.companion-panel-close {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.companion-panel #companionPanelNotice {
+    margin: .72rem .9rem 0;
+}
+
+.companion-panel-history {
+    margin: .72rem .9rem 0;
+    padding: .8rem;
+    border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--panel) 95%, var(--bg) 5%);
+    display: grid;
+    gap: .7rem;
+    max-height: 190px;
+    overflow: auto;
+}
+
+.companion-panel-main {
+    min-height: 0;
+    padding: .9rem;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    gap: .65rem;
+}
+
+.companion-panel-section-head {
+    display: grid;
+    gap: .18rem;
+}
+
+.companion-panel-main-head {
+    padding-bottom: .15rem;
+}
+
+.companion-panel-section-head small {
+    color: var(--muted);
+    line-height: 1.35;
+}
+
+.companion-widget-messages {
+    min-height: 0;
+    max-height: none;
+    padding-right: .15rem;
+}
+
+.companion-widget-form {
+    border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--panel) 94%, var(--bg) 6%);
+    padding: .72rem;
+}
+
+.companion-widget-shortcuts {
+    gap: .42rem;
+}
+
+.companion-widget-shortcuts .btn-light {
+    min-height: 34px;
+    border-radius: 999px;
+    font-size: .82rem;
+    padding: .38rem .7rem;
+}
+
+.companion-widget-input span {
+    display: none;
+}
+
+.companion-widget-form textarea {
+    min-height: 94px;
+    resize: vertical;
+    border-radius: 14px;
+}
+
 .sermon-lab-hero {
     display: grid;
     gap: 1rem;
@@ -6745,6 +6914,22 @@ body.spacing-normal .verse {
     background: color-mix(in srgb, #17384f 80%, var(--panel) 20%);
 }
 
+.theme-dark .companion-launcher {
+    border-color: color-mix(in srgb, #5da9d7 56%, var(--line));
+    box-shadow: 0 18px 36px rgba(0, 0, 0, .34);
+}
+
+.theme-dark .companion-panel {
+    background: linear-gradient(180deg, rgba(11, 24, 34, .98), rgba(15, 33, 46, .98));
+    border-color: rgba(94, 157, 201, .18);
+}
+
+.theme-dark .companion-panel-history,
+.theme-dark .companion-widget-form {
+    background: color-mix(in srgb, #102230 82%, var(--panel) 18%);
+    border-color: rgba(94, 157, 201, .16);
+}
+
 .theme-dark .sermon-help-card {
     background:
         linear-gradient(180deg, rgba(12, 28, 39, .95), rgba(16, 36, 50, .95));
@@ -6776,6 +6961,15 @@ body.spacing-normal .verse {
     .companion-grid {
         grid-template-columns: 1fr;
     }
+
+    .companion-panel,
+    .companion-panel.is-maximized {
+        right: 12px;
+        bottom: 78px;
+        width: min(620px, calc(100vw - 24px));
+        height: min(88vh, calc(100vh - 96px));
+        transform: none;
+    }
 }
 
 @media (max-width: 860px) {
@@ -6793,6 +6987,29 @@ body.spacing-normal .verse {
 }
 
 @media (max-width: 720px) {
+    .companion-widget {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .companion-launcher {
+        min-height: 50px;
+        padding: .72rem .88rem;
+    }
+
+    .companion-launcher span {
+        display: none;
+    }
+
+    .companion-panel,
+    .companion-panel.is-maximized {
+        left: 12px;
+        right: 12px;
+        bottom: 72px;
+        width: auto;
+        height: calc(100vh - 92px);
+    }
+
     .auth-gate-hero {
         padding: 1.15rem;
     }

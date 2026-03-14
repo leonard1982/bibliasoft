@@ -12,7 +12,6 @@ $sideMenuItems = [
 ];
 if (auth_user_id() > 0) {
     $sideMenuItems[] = ['route' => 'sermons', 'label' => 'Sermones', 'icon' => 'list.svg', 'href' => '?route=sermons', 'open_tab' => true];
-    $sideMenuItems[] = ['route' => 'companion', 'label' => 'Alfonso IA', 'icon' => 'help.svg', 'href' => '?route=companion', 'open_tab' => true];
     $sideMenuItems[] = ['route' => 'logout', 'label' => 'Salir', 'icon' => 'lock.svg', 'href' => '?route=logout', 'open_tab' => false];
 } else {
     $sideMenuItems[] = ['route' => 'login', 'label' => 'Ingresar', 'icon' => 'login.svg', 'href' => '?route=login', 'open_tab' => true];
@@ -114,9 +113,6 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
                                         <a class="user-menu-item" href="?route=sermons">
                                             <img src="assets/icons/list.svg" alt="" class="ico"> Sermones y mensajes
                                         </a>
-                                        <a class="user-menu-item" href="?route=companion">
-                                            <img src="assets/icons/help.svg" alt="" class="ico"> Alfonso IA
-                                        </a>
                                         <a class="user-menu-item" href="?route=reader&skip_daily=1">
                                             <img src="assets/icons/eye.svg" alt="" class="ico"> Ir al lector
                                         </a>
@@ -165,7 +161,6 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
                                         <a href="?route=devotional">Devocionales</a>
                                         <a href="?route=study_center">Centro de estudio</a>
                                         <?php if (auth_user_id() > 0): ?><a href="?route=sermons">Sermones</a><?php endif; ?>
-                                        <?php if (auth_user_id() > 0): ?><a href="?route=companion">Alfonso IA</a><?php endif; ?>
                                         <a href="?route=anecdotes">Anécdotas</a>
                                     </nav>
                                     <div class="site-links">
@@ -181,6 +176,87 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
                 </section>
             </div>
         </div>
+
+        <?php if (auth_user_id() > 0): ?>
+            <section
+                id="companionWidget"
+                class="companion-widget"
+                data-companion-name="<?php echo e((string) config('pastoral.companion_name', 'Alfonso')); ?>">
+                <button
+                    id="companionLauncher"
+                    class="companion-launcher"
+                    type="button"
+                    aria-label="Abrir chat con <?php echo e((string) config('pastoral.companion_name', 'Alfonso')); ?>"
+                    aria-expanded="false">
+                    <img src="assets/icons/help.svg" alt="" class="ico">
+                    <span><?php echo e((string) config('pastoral.companion_name', 'Alfonso')); ?></span>
+                </button>
+
+                <div id="companionBackdrop" class="companion-backdrop hidden" hidden></div>
+
+                <section
+                    id="companionPanel"
+                    class="companion-panel hidden"
+                    hidden
+                    aria-hidden="true"
+                    aria-label="Chat con <?php echo e((string) config('pastoral.companion_name', 'Alfonso')); ?>">
+                    <header class="companion-panel-head">
+                        <div>
+                            <strong><?php echo e((string) config('pastoral.companion_name', 'Alfonso')); ?></strong>
+                            <small>Acompañamiento bíblico y pastoral</small>
+                        </div>
+                        <div class="companion-panel-actions">
+                            <button id="companionPanelNew" class="btn-light companion-panel-btn" type="button" aria-label="Nueva conversación">
+                                <img src="assets/icons/reload.svg" alt="" class="ico">
+                            </button>
+                            <button id="companionPanelHistoryToggle" class="btn-light companion-panel-btn" type="button" aria-label="Ver conversaciones">
+                                <img src="assets/icons/list.svg" alt="" class="ico">
+                            </button>
+                            <button id="companionPanelMaximize" class="btn-light companion-panel-btn" type="button" aria-label="Maximizar chat">
+                                <img src="assets/icons/columns.svg" alt="" class="ico">
+                            </button>
+                            <button id="companionPanelClose" class="btn-light companion-panel-btn companion-panel-close" type="button" aria-label="Cerrar chat">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                    </header>
+
+                    <div id="companionPanelNotice" class="study-center-notice hidden" aria-live="polite"></div>
+
+                    <div id="companionPanelHistory" class="companion-panel-history hidden" hidden>
+                        <div class="companion-panel-section-head">
+                            <strong>Conversaciones</strong>
+                            <small>Tu historial reciente</small>
+                        </div>
+                        <div id="companionPanelThreads" class="companion-thread-list"></div>
+                    </div>
+
+                    <div class="companion-panel-main">
+                        <div class="companion-panel-section-head companion-panel-main-head">
+                            <strong id="companionPanelThreadTitle">Nueva conversación</strong>
+                            <small id="companionPanelThreadMeta">Pregunta algo de la Biblia, pide oración o busca una orientación clara.</small>
+                        </div>
+
+                        <div id="companionPanelMessages" class="companion-messages companion-widget-messages"></div>
+
+                        <div class="companion-quick-actions companion-widget-shortcuts">
+                            <button class="btn-light js-companion-widget-prompt" type="button" data-prompt="Explícame este tema bíblico de manera sencilla.">Explícamelo fácil</button>
+                            <button class="btn-light js-companion-widget-prompt" type="button" data-prompt="Ayúdame a aplicar esto hoy a mi vida y familia.">Aplicarlo hoy</button>
+                            <button class="btn-light js-companion-widget-prompt" type="button" data-prompt="Quiero pedir oración por esta situación: ">Pedir oración</button>
+                        </div>
+
+                        <form id="companionPanelForm" class="companion-form companion-widget-form">
+                            <label class="companion-widget-input">
+                                <textarea id="companionPanelMessage" rows="4" placeholder="Escribe aquí tu inquietud o petición..."></textarea>
+                            </label>
+                            <div class="toolbar">
+                                <button id="companionPanelSend" class="btn-primary" type="submit">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </section>
+        <?php endif; ?>
 
         <section id="cookieConsentBanner" class="cookie-consent hidden" role="dialog" aria-live="polite" aria-label="Consentimiento de cookies">
             <div class="cookie-consent-inner">
@@ -216,7 +292,6 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
                     <a href="?route=devotional">Devocionales</a>
                     <a href="?route=study_center">Centro de estudio</a>
                     <?php if (auth_user_id() > 0): ?><a href="?route=sermons">Sermones</a><?php endif; ?>
-                    <?php if (auth_user_id() > 0): ?><a href="?route=companion">Alfonso IA</a><?php endif; ?>
                     <a href="?route=anecdotes">Anécdotas</a>
                 </nav>
                 <div class="site-links">
@@ -240,6 +315,9 @@ $bodyClassAttr = trim(implode(' ', $bodyClasses));
     <script src="<?php echo e(app_asset('assets/reminders.js')); ?>"></script>
     <?php if (!$isEmbed): ?>
         <script src="<?php echo e(app_asset('assets/workspace.js')); ?>"></script>
+        <?php if (auth_user_id() > 0): ?>
+            <script src="<?php echo e(app_asset('assets/companion_widget.js')); ?>"></script>
+        <?php endif; ?>
         <script>
             (function () {
                 if (!('serviceWorker' in navigator)) {
