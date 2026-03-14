@@ -26,6 +26,9 @@ $studyPayload = [
                 <div class="study-section-head">
                     <h2 id="studyProjectTitle">Proyecto</h2>
                     <div class="toolbar study-project-actions">
+                        <button class="btn-light study-project-action-btn" id="studyEntryFormToggle" type="button" aria-label="Ocultar formulario" title="Ocultar formulario">
+                            <img src="assets/icons/text.svg" alt="" class="ico">
+                        </button>
                         <button class="btn-light study-project-action-btn js-study-projects-open" type="button" aria-label="Ver proyectos" title="Ver proyectos">
                             <img src="assets/icons/eye.svg" alt="" class="ico">
                         </button>
@@ -40,30 +43,35 @@ $studyPayload = [
                 <p id="studyProjectDescriptionText" class="muted"></p>
 
                 <form id="studyEntryForm" class="card study-form">
-                    <strong>Agregar pasaje al proyecto</strong>
-                    <div class="study-entry-grid">
-                        <label>Libro
-                            <select id="studyEntryBook">
-                                <?php foreach ($studyPayload['books'] as $book): ?>
-                                    <option value="<?php echo (int) ($book['id'] ?? 0); ?>"><?php echo e((string) ($book['name'] ?? '')); ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </label>
-                        <label>Capítulo
-                            <input id="studyEntryChapter" type="number" min="1" value="1" required>
-                        </label>
-                        <label>Verso inicio
-                            <input id="studyEntryVerseStart" type="number" min="1" value="1" required>
-                        </label>
-                        <label>Verso fin
-                            <input id="studyEntryVerseEnd" type="number" min="1" value="1" required>
-                        </label>
+                    <div class="study-entry-form-head">
+                        <strong>Agregar pasaje al proyecto</strong>
+                        <small class="muted" id="studyEntryFormStateText">Formulario visible</small>
                     </div>
-                    <label>Nota de estudio
-                        <textarea id="studyEntryNote" rows="4" maxlength="5000" placeholder="Observación, aplicación, preguntas o estructura de enseñanza"></textarea>
-                    </label>
-                    <div class="toolbar">
-                        <button class="btn-primary" type="submit">Guardar pasaje</button>
+                    <div id="studyEntryFormBody" class="study-entry-form-body">
+                        <div class="study-entry-grid">
+                            <label>Libro
+                                <select id="studyEntryBook">
+                                    <?php foreach ($studyPayload['books'] as $book): ?>
+                                        <option value="<?php echo (int) ($book['id'] ?? 0); ?>"><?php echo e((string) ($book['name'] ?? '')); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </label>
+                            <label>Capítulo
+                                <input id="studyEntryChapter" type="number" min="1" value="1" required>
+                            </label>
+                            <label>Verso inicio
+                                <input id="studyEntryVerseStart" type="number" min="1" value="1" required>
+                            </label>
+                            <label>Verso fin
+                                <input id="studyEntryVerseEnd" type="number" min="1" value="1" required>
+                            </label>
+                        </div>
+                        <label>Nota de estudio
+                            <textarea id="studyEntryNote" rows="4" maxlength="5000" placeholder="Observación, aplicación, preguntas o estructura de enseñanza"></textarea>
+                        </label>
+                        <div class="toolbar">
+                            <button class="btn-primary" type="submit">Guardar pasaje</button>
+                        </div>
                     </div>
                 </form>
 
@@ -150,15 +158,21 @@ $studyPayload = [
         </header>
         <div class="study-note-modal-toolbar">
             <strong>Resaltar selección</strong>
-            <div class="toolbar study-note-color-actions">
-                <button type="button" class="study-note-color-btn is-yellow" data-highlight-color="yellow" aria-label="Resaltar en amarillo" title="Resaltar en amarillo"></button>
-                <button type="button" class="study-note-color-btn is-blue" data-highlight-color="blue" aria-label="Resaltar en azul" title="Resaltar en azul"></button>
-                <button type="button" class="study-note-color-btn is-green" data-highlight-color="green" aria-label="Resaltar en verde" title="Resaltar en verde"></button>
-                <button type="button" class="study-note-color-btn is-rose" data-highlight-color="rose" aria-label="Resaltar en rosa" title="Resaltar en rosa"></button>
-                <button type="button" class="btn-light" id="studyNoteClearHighlight">Quitar resaltado</button>
-                <button type="button" class="btn-light" id="studyNoteExplainSelection">
-                    <img src="assets/icons/help.svg" alt="" class="ico"> Consultar selección
-                </button>
+            <div class="study-note-toolbar-actions">
+                <div class="toolbar study-note-color-actions">
+                    <button type="button" class="study-note-color-btn is-yellow" data-highlight-color="yellow" aria-label="Resaltar en amarillo" title="Resaltar en amarillo"></button>
+                    <button type="button" class="study-note-color-btn is-blue" data-highlight-color="blue" aria-label="Resaltar en azul" title="Resaltar en azul"></button>
+                    <button type="button" class="study-note-color-btn is-green" data-highlight-color="green" aria-label="Resaltar en verde" title="Resaltar en verde"></button>
+                    <button type="button" class="study-note-color-btn is-rose" data-highlight-color="rose" aria-label="Resaltar en rosa" title="Resaltar en rosa"></button>
+                    <button type="button" class="btn-light" id="studyNoteClearHighlight">Quitar resaltado</button>
+                    <button type="button" class="btn-light" id="studyNoteExplainSelection">
+                        <img src="assets/icons/help.svg" alt="" class="ico"> Consultar selección
+                    </button>
+                </div>
+                <div class="toolbar study-note-font-actions">
+                    <button type="button" class="btn-light" id="studyNoteFontDecrease" aria-label="Hacer texto más pequeño" title="Hacer texto más pequeño">A-</button>
+                    <button type="button" class="btn-light" id="studyNoteFontIncrease" aria-label="Hacer texto más grande" title="Hacer texto más grande">A+</button>
+                </div>
             </div>
         </div>
         <div class="study-note-modal-body">

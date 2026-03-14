@@ -28,8 +28,10 @@
             reference: '',
             initialNote: '',
             selectedText: '',
-            lastRange: null
+            lastRange: null,
+            fontScale: 1
         },
+        entryFormCollapsed: true,
         toastTimer: 0
     };
 
@@ -49,7 +51,10 @@
         projectDescriptionText: document.getElementById('studyProjectDescriptionText'),
         projectDelete: document.getElementById('studyProjectDelete'),
         projectEdit: document.getElementById('studyProjectEdit'),
+        entryFormToggle: document.getElementById('studyEntryFormToggle'),
         entryForm: document.getElementById('studyEntryForm'),
+        entryFormBody: document.getElementById('studyEntryFormBody'),
+        entryFormStateText: document.getElementById('studyEntryFormStateText'),
         entryBook: document.getElementById('studyEntryBook'),
         entryChapter: document.getElementById('studyEntryChapter'),
         entryVerseStart: document.getElementById('studyEntryVerseStart'),
@@ -73,6 +78,8 @@
         noteModalSave: document.getElementById('studyNoteModalSave'),
         noteModalReference: document.getElementById('studyNoteModalReference'),
         noteEditor: document.getElementById('studyNoteEditor'),
+        noteFontDecrease: document.getElementById('studyNoteFontDecrease'),
+        noteFontIncrease: document.getElementById('studyNoteFontIncrease'),
         noteExplainSelection: document.getElementById('studyNoteExplainSelection'),
         noteClearHighlight: document.getElementById('studyNoteClearHighlight'),
         noteExplainState: document.getElementById('studyNoteExplainState'),
@@ -86,6 +93,8 @@
         selectProject(Number(state.projects[0].id || 0));
     }
     bindEvents();
+    restoreUiState();
+    applyEntryFormState();
     refreshProjects(false);
 
     function bindEvents() {
@@ -137,6 +146,16 @@
             els.noteEditor.addEventListener('mouseup', rememberEditorSelection);
             els.noteEditor.addEventListener('keyup', rememberEditorSelection);
         }
+        if (els.noteFontDecrease) {
+            els.noteFontDecrease.addEventListener('click', function () {
+                adjustNoteFontScale(-0.1);
+            });
+        }
+        if (els.noteFontIncrease) {
+            els.noteFontIncrease.addEventListener('click', function () {
+                adjustNoteFontScale(0.1);
+            });
+        }
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape' && els.modal && !els.modal.classList.contains('hidden')) {
                 closeModal();
@@ -159,6 +178,14 @@
             els.projectForm.addEventListener('submit', function (event) {
                 event.preventDefault();
                 createProject();
+            });
+        }
+
+        if (els.entryFormToggle) {
+            els.entryFormToggle.addEventListener('click', function () {
+                state.entryFormCollapsed = !state.entryFormCollapsed;
+                applyEntryFormState();
+                saveUiState();
             });
         }
 
@@ -329,6 +356,51 @@
         var projectsOpen = !!(els.projectsModal && !els.projectsModal.classList.contains('hidden'));
         var noteOpen = !!(els.noteModal && !els.noteModal.classList.contains('hidden'));
         document.body.classList.toggle('study-modal-open', modalOpen || projectsOpen || noteOpen);
+    }
+
+    function restoreUiState() {
+        try {
+            var rawCollapsed = sessionStorage.getItem('bs_study_entry_form_collapsed_v1');
+            if (rawCollapsed === '0' || rawCollapsed === '1') {
+                state.entryFormCollapsed = rawCollapsed === '1';
+            }
+
+            var rawScale = sessionStorage.getItem('bs_study_note_font_scale_v1');
+            if (rawScale !== null && rawScale !== '') {
+                state.noteWorkspace.fontScale = clampFontScale(parseFloat(rawScale));
+            }
+        } catch (err) {
+            state.entryFormCollapsed = true;
+            state.noteWorkspace.fontScale = 1;
+        }
+    }
+
+    function saveUiState() {
+        try {
+            sessionStorage.setItem('bs_study_entry_form_collapsed_v1', state.entryFormCollapsed ? '1' : '0');
+            sessionStorage.setItem('bs_study_note_font_scale_v1', String(state.noteWorkspace.fontScale || 1));
+        } catch (err) {
+            // ignore
+        }
+    }
+
+    function applyEntryFormState() {
+        if (els.entryForm) {
+            els.entryForm.classList.toggle('is-collapsed', !!state.entryFormCollapsed);
+        }
+        if (els.entryFormBody) {
+            els.entryFormBody.classList.toggle('hidden', !!state.entryFormCollapsed);
+            els.entryFormBody.toggleAttribute('hidden', !!state.entryFormCollapsed);
+        }
+        if (els.entryFormStateText) {
+            els.entryFormStateText.textContent = state.entryFormCollapsed ? 'Formulario oculto' : 'Formulario visible';
+        }
+        if (els.entryFormToggle) {
+            var title = state.entryFormCollapsed ? 'Mostrar formulario' : 'Ocultar formulario';
+            els.entryFormToggle.setAttribute('title', title);
+            els.entryFormToggle.setAttribute('aria-label', title);
+            els.entryFormToggle.classList.toggle('is-active', !state.entryFormCollapsed);
+        }
     }
 
     function renderProjectDetail() {
@@ -698,6 +770,7 @@
         state.noteWorkspace.lastRange = null;
 
         els.noteEditor.innerHTML = state.noteWorkspace.initialNote;
+        applyNoteFontScale();
         if (els.noteModalReference) {
             els.noteModalReference.textContent = reference;
         }
@@ -755,6 +828,25 @@
                 els.noteModalSave.disabled = false;
             }
         });
+    }
+
+    function adjustNoteFontScale(delta) {
+        state.noteWorkspace.fontScale = clampFontScale((state.noteWorkspace.fontScale || 1) + delta);
+        applyNoteFontScale();
+        saveUiState();
+    }
+
+    function applyNoteFontScale() {
+        if (!els.noteEditor) {
+            return;
+        }
+        els.noteEditor.style.fontSize = (state.noteWorkspace.fontScale || 1).toFixed(2) + 'rem';
+        if (els.noteFontDecrease) {
+            els.noteFontDecrease.disabled = state.noteWorkspace.fontScale <= 0.8;
+        }
+        if (els.noteFontIncrease) {
+            els.noteFontIncrease.disabled = state.noteWorkspace.fontScale >= 1.5;
+        }
     }
 
     function applyHighlight(color) {
@@ -1126,6 +1218,17 @@
         }
         selection.removeAllRanges();
         selection.addRange(range);
+    }
+
+    function clampFontScale(value) {
+        var numeric = isNaN(value) ? 1 : value;
+        if (numeric < 0.8) {
+            return 0.8;
+        }
+        if (numeric > 1.5) {
+            return 1.5;
+        }
+        return Math.round(numeric * 100) / 100;
     }
 
     function escapeHtml(value) {

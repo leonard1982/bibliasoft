@@ -4942,6 +4942,29 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     flex: 0 0 auto;
 }
 
+.study-project-action-btn.is-active {
+    border-color: color-mix(in srgb, var(--accent) 58%, var(--line));
+    background: color-mix(in srgb, var(--selection) 74%, transparent);
+    color: var(--accent);
+}
+
+.study-entry-form-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .65rem;
+    flex-wrap: wrap;
+}
+
+.study-entry-form-body {
+    display: grid;
+    gap: .75rem;
+}
+
+.study-form.is-collapsed {
+    gap: .4rem;
+}
+
 .study-empty-actions {
     margin-top: .55rem;
 }
@@ -5253,8 +5276,25 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     padding: .72rem .82rem 0;
 }
 
+.study-note-toolbar-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
 .study-note-color-actions {
     gap: .42rem;
+}
+
+.study-note-font-actions {
+    gap: .38rem;
+}
+
+.study-note-font-actions .btn-light {
+    min-width: 48px;
+    font-weight: 800;
 }
 
 .study-note-color-btn {
@@ -5459,6 +5499,10 @@ body.study-modal-open {
 .theme-dark .study-section-head h2,
 .theme-dark .study-section-head h3 {
     color: color-mix(in srgb, var(--ink) 94%, #fff 6%);
+}
+
+.theme-dark .study-project-action-btn.is-active {
+    color: #cfe9fb;
 }
 
 .theme-dark .study-center-notice,
@@ -5923,6 +5967,10 @@ body.spacing-normal .verse {
 
     .study-note-modal-body {
         grid-template-columns: 1fr;
+    }
+
+    .study-note-toolbar-actions {
+        justify-content: flex-start;
     }
 
     .study-projects-panel,
