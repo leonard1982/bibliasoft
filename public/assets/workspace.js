@@ -44,6 +44,8 @@
         setupDraftPersistence();
         hideLoadingOverlay();
         window.addEventListener('pageshow', hideLoadingOverlay);
+        window.addEventListener('beforeunload', persistAllDraftFields);
+        window.addEventListener('pagehide', persistAllDraftFields);
     }
 
     function hydrateTabs() {
@@ -199,6 +201,7 @@
                 return;
             }
 
+            persistAllDraftFields();
             showLoadingOverlay('Cargando', 'Espera por favor mientras abrimos la siguiente seccion.');
         }, true);
     }
@@ -233,6 +236,7 @@
             updateSidebarActive(route);
             return;
         }
+        persistAllDraftFields();
         showLoadingOverlay('Cargando pestaña', 'Estamos abriendo la vista seleccionada.');
         window.location.href = cleanHref;
     }
@@ -252,6 +256,7 @@
             updateSidebarActive(tab.route);
             return;
         }
+        persistAllDraftFields();
         showLoadingOverlay('Cambiando de pestaña', 'Espera por favor mientras cargamos la vista.');
         window.location.href = tab.href;
     }
@@ -262,10 +267,12 @@
             return;
         }
         if (isCurrentUrl(tab.href)) {
+            persistAllDraftFields();
             showLoadingOverlay('Recargando pestaña', 'Estamos actualizando esta vista.');
             window.location.reload();
             return;
         }
+        persistAllDraftFields();
         showLoadingOverlay('Cargando pestaña', 'Estamos cargando la pestaña seleccionada.');
         window.location.href = tab.href;
     }
@@ -304,6 +311,7 @@
         renderTabs();
 
         if (closingCurrent && nextActive) {
+            persistAllDraftFields();
             showLoadingOverlay('Cerrando pestaña', 'Espera por favor mientras cambiamos a la siguiente vista.');
             window.location.href = nextActive.href;
         }
@@ -395,6 +403,30 @@
         } else {
             draft[fieldKey] = value;
         }
+        writeDraftState(draft);
+    }
+
+    function persistAllDraftFields() {
+        var fields = toArray(document.querySelectorAll('.main-content input, .main-content textarea, .main-content select'));
+        if (!fields.length) {
+            return;
+        }
+        var draft = readDraftState();
+        fields.forEach(function (field, index) {
+            if (!isDraftEligible(field)) {
+                return;
+            }
+            var fieldKey = buildDraftFieldKey(field, index);
+            if (!fieldKey) {
+                return;
+            }
+            var value = readFieldValue(field);
+            if (value === '' || value === null || typeof value === 'undefined') {
+                delete draft[fieldKey];
+            } else {
+                draft[fieldKey] = value;
+            }
+        });
         writeDraftState(draft);
     }
 
