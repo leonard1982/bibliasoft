@@ -31,7 +31,8 @@
             lastRange: null,
             fontScale: 1,
             helpFontScale: 1,
-            selectedTokens: []
+            selectedTokens: [],
+            explainHistory: []
         },
         entryFormCollapsed: true,
         toastTimer: 0
@@ -88,6 +89,7 @@
         noteClearHighlight: document.getElementById('studyNoteClearHighlight'),
         noteExplainState: document.getElementById('studyNoteExplainState'),
         noteExplainResult: document.getElementById('studyNoteExplainResult'),
+        noteExplainHistory: document.getElementById('studyNoteExplainHistory'),
         noteSelectedTokens: document.getElementById('studyNoteSelectedTokens'),
         noteColorButtons: document.querySelectorAll('[data-highlight-color]'),
         toast: document.getElementById('studyToast')
@@ -791,11 +793,13 @@
         state.noteWorkspace.selectedText = '';
         state.noteWorkspace.lastRange = null;
         state.noteWorkspace.selectedTokens = [];
+        state.noteWorkspace.explainHistory = loadExplainHistory(state.noteWorkspace.entryId);
 
         els.noteEditor.innerHTML = state.noteWorkspace.initialNote;
         applyNoteFontScale();
         applyHelpFontScale();
         renderSelectedTokens();
+        renderExplainHistory();
         if (els.noteModalReference) {
             els.noteModalReference.textContent = reference;
         }
@@ -823,6 +827,7 @@
         state.noteWorkspace.selectedText = '';
         state.noteWorkspace.lastRange = null;
         state.noteWorkspace.selectedTokens = [];
+        state.noteWorkspace.explainHistory = [];
         resetExplainPanel();
         refreshModalBodyLock();
     }
@@ -832,7 +837,7 @@
             return;
         }
 
-        var note = normalizeEditorHtml(els.noteEditor.innerHTML);
+        var note = prepareNoteHtmlForSave();
         if (els.noteModalSave) {
             els.noteModalSave.disabled = true;
         }
@@ -854,6 +859,24 @@
                 els.noteModalSave.disabled = false;
             }
         });
+    }
+
+    function prepareNoteHtmlForSave() {
+        if (!els.noteEditor) {
+            return '';
+        }
+
+        var clone = els.noteEditor.cloneNode(true);
+        Array.prototype.slice.call(clone.querySelectorAll('.study-click-select')).forEach(function (node) {
+            node.removeAttribute('data-token-id');
+            node.removeAttribute('data-token-text');
+            var keepColored = /\bstudy-click-select-color-/.test(node.className || '');
+            if (!keepColored) {
+                unwrapNode(node);
+            }
+        });
+
+        return normalizeEditorHtml(clone.innerHTML);
     }
 
     function adjustNoteFontScale(delta) {
@@ -905,6 +928,11 @@
             return;
         }
 
+        if (applyHighlightToSelectedTokens(color)) {
+            showNotice('Color aplicado a la selección marcada.', 'success');
+            return;
+        }
+
         var range = getEditorSelectionRange();
         if (!range || range.collapsed) {
             showNotice('Selecciona primero una palabra o frase dentro de la nota.', 'info');
@@ -932,6 +960,11 @@
 
     function clearSelectionHighlight() {
         if (!els.noteEditor) {
+            return;
+        }
+
+        if (clearHighlightFromSelectedTokens()) {
+            showNotice('Color quitado de la selección marcada.', 'success');
             return;
         }
         var range = getEditorSelectionRange();
@@ -1012,16 +1045,37 @@
         var definition = String(analysis.definition || 'No se pudo obtener una definición más detallada.').trim();
         var use = String(analysis.use || '').trim();
         var pastoral = String(analysis.pastoral_note || '').trim();
+        var historyItem = {
+            id: 'explain_' + Date.now() + '_' + Math.floor(Math.random() * 100000),
+            term: term,
+            category: category,
+            definition: definition,
+            use: use,
+            pastoral_note: pastoral
+        };
 
-        els.noteExplainResult.innerHTML = '' +
-            '<div class="study-note-ai-card">' +
-                '<strong>' + escapeHtml(term) + '</strong>' +
-                '<span class="study-note-ai-badge">' + escapeHtml(category) + '</span>' +
-                '<p>' + escapeHtml(definition) + '</p>' +
-                (use ? ('<div class="study-note-ai-section"><strong>En este contexto</strong><p>' + escapeHtml(use) + '</p></div>') : '') +
-                (pastoral ? ('<div class="study-note-ai-section"><strong>Aplicación sencilla</strong><p>' + escapeHtml(pastoral) + '</p></div>') : '') +
-            '</div>';
+        addExplainHistory(historyItem);
+
+        els.noteExplainResult.innerHTML = renderExplainCard(historyItem, true);
         els.noteExplainResult.classList.remove('hidden');
+        bindExplainActionButtons(els.noteExplainResult);
+    }
+
+    function renderExplainCard(item, isCurrent) {
+        var actions = '' +
+            '<div class="toolbar study-note-ai-actions">' +
+                '<button type="button" class="btn-light js-study-note-add-query" data-query-id="' + escapeAttr(String(item.id || '')) + '">Agregar a la nota</button>' +
+            '</div>';
+
+        return '' +
+            '<div class="study-note-ai-card' + (isCurrent ? ' is-current' : '') + '">' +
+                '<strong>' + escapeHtml(String(item.term || 'Consulta')) + '</strong>' +
+                '<span class="study-note-ai-badge">' + escapeHtml(String(item.category || 'Expresión bíblica')) + '</span>' +
+                '<p>' + escapeHtml(String(item.definition || '')) + '</p>' +
+                (item.use ? ('<div class="study-note-ai-section"><strong>En este contexto</strong><p>' + escapeHtml(String(item.use || '')) + '</p></div>') : '') +
+                (item.pastoral_note ? ('<div class="study-note-ai-section"><strong>Aplicación sencilla</strong><p>' + escapeHtml(String(item.pastoral_note || '')) + '</p></div>') : '') +
+                actions +
+            '</div>';
     }
 
     function resetExplainPanel() {
@@ -1033,9 +1087,45 @@
             els.noteExplainResult.innerHTML = '';
             els.noteExplainResult.classList.add('hidden');
         }
+        renderExplainHistory();
         if (els.noteExplainSelection) {
             els.noteExplainSelection.disabled = false;
         }
+    }
+
+    function renderExplainHistory() {
+        if (!els.noteExplainHistory) {
+            return;
+        }
+
+        var history = Array.isArray(state.noteWorkspace.explainHistory) ? state.noteWorkspace.explainHistory : [];
+        if (!history.length) {
+            els.noteExplainHistory.innerHTML = '';
+            els.noteExplainHistory.classList.add('hidden');
+            return;
+        }
+
+        els.noteExplainHistory.innerHTML = '' +
+            '<div class="study-section-head">' +
+                '<h3>Consultas realizadas</h3>' +
+                '<small class="muted">Puedes volver a insertar cualquiera en la nota.</small>' +
+            '</div>' +
+            history.map(function (item) {
+                return renderExplainCard(item, false);
+            }).join('');
+        els.noteExplainHistory.classList.remove('hidden');
+        bindExplainActionButtons(els.noteExplainHistory);
+    }
+
+    function addExplainHistory(item) {
+        var history = Array.isArray(state.noteWorkspace.explainHistory) ? state.noteWorkspace.explainHistory.slice() : [];
+        history = history.filter(function (row) {
+            return String(row.term || '').trim() !== String(item.term || '').trim();
+        });
+        history.unshift(item);
+        state.noteWorkspace.explainHistory = history.slice(0, 12);
+        saveExplainHistory(state.noteWorkspace.entryId, state.noteWorkspace.explainHistory);
+        renderExplainHistory();
     }
 
     function buildExplainSelectionText(range) {
@@ -1078,6 +1168,140 @@
                 removeSelectedToken(String(button.getAttribute('data-token-id') || ''));
             });
         });
+    }
+
+    function bindExplainActionButtons(rootNode) {
+        if (!rootNode) {
+            return;
+        }
+        rootNode.querySelectorAll('.js-study-note-add-query[data-query-id]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                insertExplainHistoryIntoNote(String(button.getAttribute('data-query-id') || ''));
+            });
+        });
+    }
+
+    function insertExplainHistoryIntoNote(queryId) {
+        var item = findExplainHistoryItem(queryId);
+        if (!item || !els.noteEditor) {
+            return;
+        }
+
+        var html = '' +
+            '<div><strong>' + escapeHtml(String(item.term || 'Consulta')) + '</strong></div>' +
+            '<div><em>' + escapeHtml(String(item.category || 'Expresión bíblica')) + '</em></div>' +
+            '<div>' + escapeHtml(String(item.definition || '')) + '</div>' +
+            (item.use ? ('<div>En este contexto: ' + escapeHtml(String(item.use || '')) + '</div>') : '') +
+            (item.pastoral_note ? ('<div>Aplicación: ' + escapeHtml(String(item.pastoral_note || '')) + '</div>') : '') +
+            '<div><br></div>';
+
+        els.noteEditor.focus();
+        try {
+            document.execCommand('insertHTML', false, html);
+            showNotice('Consulta agregada a la nota.', 'success');
+        } catch (err) {
+            els.noteEditor.innerHTML += html;
+            showNotice('Consulta agregada a la nota.', 'success');
+        }
+    }
+
+    function findExplainHistoryItem(queryId) {
+        var history = Array.isArray(state.noteWorkspace.explainHistory) ? state.noteWorkspace.explainHistory : [];
+        var found = history.find(function (item) {
+            return String(item.id || '') === String(queryId || '');
+        });
+        return found || null;
+    }
+
+    function loadExplainHistory(entryId) {
+        if (!entryId) {
+            return [];
+        }
+        try {
+            var raw = sessionStorage.getItem(getExplainHistoryKey(entryId)) || '[]';
+            var parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (err) {
+            return [];
+        }
+    }
+
+    function saveExplainHistory(entryId, history) {
+        if (!entryId) {
+            return;
+        }
+        try {
+            sessionStorage.setItem(
+                getExplainHistoryKey(entryId),
+                JSON.stringify(Array.isArray(history) ? history : [])
+            );
+        } catch (err) {
+            // ignore
+        }
+    }
+
+    function getExplainHistoryKey(entryId) {
+        return 'bs_study_note_explain_history_v1_' + String(entryId || '0');
+    }
+
+    function applyHighlightToSelectedTokens(color) {
+        var tokens = Array.isArray(state.noteWorkspace.selectedTokens) ? state.noteWorkspace.selectedTokens : [];
+        if (!tokens.length || !els.noteEditor) {
+            return false;
+        }
+
+        var changed = false;
+        tokens.forEach(function (item) {
+            var tokenId = String(item && item.id ? item.id : '');
+            if (!tokenId) {
+                return;
+            }
+            var node = els.noteEditor.querySelector('.study-click-select[data-token-id="' + cssEscape(tokenId) + '"]');
+            if (!node) {
+                return;
+            }
+            removeTokenColorClasses(node);
+            node.classList.add('study-click-select-color-' + color);
+            changed = true;
+        });
+        return changed;
+    }
+
+    function clearHighlightFromSelectedTokens() {
+        var tokens = Array.isArray(state.noteWorkspace.selectedTokens) ? state.noteWorkspace.selectedTokens : [];
+        if (!tokens.length || !els.noteEditor) {
+            return false;
+        }
+
+        var changed = false;
+        tokens.forEach(function (item) {
+            var tokenId = String(item && item.id ? item.id : '');
+            if (!tokenId) {
+                return;
+            }
+            var node = els.noteEditor.querySelector('.study-click-select[data-token-id="' + cssEscape(tokenId) + '"]');
+            if (!node) {
+                return;
+            }
+            if (removeTokenColorClasses(node)) {
+                changed = true;
+            }
+        });
+        return changed;
+    }
+
+    function removeTokenColorClasses(node) {
+        if (!node || !node.classList) {
+            return false;
+        }
+        var before = node.className;
+        node.classList.remove(
+            'study-click-select-color-yellow',
+            'study-click-select-color-blue',
+            'study-click-select-color-green',
+            'study-click-select-color-rose'
+        );
+        return before !== node.className;
     }
 
     function collectModalFields() {
@@ -1251,6 +1475,19 @@
         }
         if (tag === 'strong' || tag === 'em' || tag === 'p' || tag === 'div') {
             return '<' + tag + '>' + inner + '</' + tag + '>';
+        }
+        if (tag === 'span') {
+            var spanClass = String(node.getAttribute('class') || '');
+            if (/\bstudy-click-select\b/.test(spanClass)) {
+                var allowed = ['study-click-select'];
+                ['yellow', 'blue', 'green', 'rose'].forEach(function (color) {
+                    if (spanClass.indexOf('study-click-select-color-' + color) !== -1) {
+                        allowed.push('study-click-select-color-' + color);
+                    }
+                });
+                return '<span class="' + allowed.join(' ') + '">' + inner + '</span>';
+            }
+            return '<span>' + inner + '</span>';
         }
         if (tag === 'mark') {
             var className = String(node.getAttribute('class') || '');
@@ -1459,6 +1696,14 @@
             return 3;
         }
         return Math.round(numeric * 100) / 100;
+    }
+
+    function cssEscape(value) {
+        var text = String(value || '');
+        if (window.CSS && typeof window.CSS.escape === 'function') {
+            return window.CSS.escape(text);
+        }
+        return text.replace(/["\\]/g, '\\$&');
     }
 
     function escapeHtml(value) {

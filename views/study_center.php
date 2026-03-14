@@ -193,6 +193,7 @@ $studyPayload = [
                 <div id="studyNoteSelectedTokens" class="study-note-selected-tokens hidden"></div>
                 <div id="studyNoteExplainState" class="study-note-explain-state muted">Aún no has consultado ninguna selección.</div>
                 <div id="studyNoteExplainResult" class="study-note-explain-result hidden"></div>
+                <div id="studyNoteExplainHistory" class="study-note-explain-history hidden"></div>
             </aside>
         </div>
     </div>
