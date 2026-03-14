@@ -47,6 +47,10 @@ return [
         'user_id' => (int) (getenv('SUPERADMIN_USER_ID') ?: 1),
         'email' => getenv('SUPERADMIN_EMAIL') ?: '',
     ],
+    'pastoral' => [
+        'prayer_email' => getenv('PRAYER_ALERT_EMAIL') ?: 'pastorgeneral@laiglesiaenlacalle.co',
+        'companion_name' => getenv('COMPANION_NAME') ?: 'Alfonso',
+    ],
     'recaptcha' => [
         'enabled' => getenv('RECAPTCHA_ENABLED') === '1',
         'provider' => getenv('RECAPTCHA_PROVIDER') ?: 'legacy',

@@ -241,6 +241,24 @@ class AuthController
             $selectedCampaignId = (int) ($mailCampaigns[0]['id'] ?? 0);
         }
         $campaignLogs = $selectedCampaignId > 0 ? $this->users->getMailCampaignLogs($selectedCampaignId, 40) : [];
+        $chatFilters = [
+            'q' => isset($_GET['cq']) ? trim((string) $_GET['cq']) : '',
+            'status' => isset($_GET['cstatus']) ? trim((string) $_GET['cstatus']) : 'all',
+        ];
+        $chatPage = isset($_GET['cpage']) ? (int) $_GET['cpage'] : 1;
+        $chatThreadsPage = $this->users->getCompanionThreadsAdminPage($chatFilters, $chatPage, 10);
+        $selectedChatThreadId = isset($_GET['cthread']) ? (int) $_GET['cthread'] : 0;
+        if ($selectedChatThreadId < 1 && !empty($chatThreadsPage['rows'])) {
+            $selectedChatThreadId = (int) ($chatThreadsPage['rows'][0]['id'] ?? 0);
+        }
+        $selectedChatThread = $selectedChatThreadId > 0 ? $this->users->getCompanionThreadById($selectedChatThreadId) : null;
+        $selectedChatMessages = $selectedChatThread ? $this->users->getCompanionMessages((int) ($selectedChatThread['id'] ?? 0), 120) : [];
+        $prayerFilters = [
+            'q' => isset($_GET['pq']) ? trim((string) $_GET['pq']) : '',
+            'status' => isset($_GET['pstatus']) ? trim((string) $_GET['pstatus']) : 'all',
+        ];
+        $prayerPage = isset($_GET['ppage']) ? (int) $_GET['ppage'] : 1;
+        $prayerRequestsPage = $this->users->getPrayerRequestsPage($prayerFilters, $prayerPage, 10);
 
         app_render('admin', [
             'pageTitle' => 'Superadministración',
@@ -248,6 +266,8 @@ class AuthController
             'activeUsersCount' => $this->users->countUsersByActive(1),
             'inactiveUsersCount' => $this->users->countUsersByActive(0),
             'anecdotesCount' => $this->users->countAnecdotes(),
+            'companionThreadsCount' => $this->users->countCompanionThreads(),
+            'prayerRequestsOpenCount' => $this->users->countPrayerRequestsByStatus('new'),
             'username' => isset($_SESSION['username']) ? (string) $_SESSION['username'] : 'superadmin',
             'userEmail' => auth_user_email(),
             'usersPage' => $usersPage,
@@ -264,6 +284,13 @@ class AuthController
             'mailCampaigns' => $mailCampaigns,
             'selectedCampaignId' => $selectedCampaignId,
             'campaignLogs' => $campaignLogs,
+            'chatThreadsPage' => $chatThreadsPage,
+            'chatFilters' => $chatFilters,
+            'selectedChatThreadId' => $selectedChatThreadId,
+            'selectedChatThread' => $selectedChatThread,
+            'selectedChatMessages' => $selectedChatMessages,
+            'prayerRequestsPage' => $prayerRequestsPage,
+            'prayerFilters' => $prayerFilters,
             'mailTemplateVariables' => $this->mailTemplateVariables(),
             'notice' => isset($_GET['notice']) ? trim((string) $_GET['notice']) : '',
             'error' => isset($_GET['error']) ? trim((string) $_GET['error']) : '',
@@ -271,6 +298,36 @@ class AuthController
             'adminActionRouteBase' => $adminRoute,
             'csrfToken' => csrf_token(),
         ]);
+    }
+
+    public function adminPrayerUpdate()
+    {
+        $this->requireSuperAdmin();
+        if (!$this->verifyCsrf()) {
+            $this->redirectAdminWithError('Token de seguridad inválido.');
+        }
+
+        $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+        $status = isset($_POST['status']) ? (string) $_POST['status'] : 'new';
+        $adminNote = isset($_POST['admin_note']) ? (string) $_POST['admin_note'] : '';
+        if ($id < 1) {
+            $this->redirectAdminWithError('Petición de oración inválida.');
+        }
+
+        try {
+            $this->users->updatePrayerRequest($id, $status, $adminNote);
+            $this->logSecurity('admin.prayer.update', 'success', auth_user_email(), [
+                'prayer_request_id' => $id,
+                'status' => $status,
+            ], auth_user_id());
+            $this->redirectAdminWithNotice('Petición de oración actualizada.');
+        } catch (\Throwable $e) {
+            $this->logSecurity('admin.prayer.update', 'failed', auth_user_email(), [
+                'prayer_request_id' => $id,
+                'message' => $e->getMessage(),
+            ], auth_user_id());
+            $this->redirectAdminWithError($e->getMessage());
+        }
     }
 
     public function adminUserUpdate()

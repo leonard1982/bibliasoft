@@ -12,6 +12,13 @@ $templatesRows = isset($mailTemplates) && is_array($mailTemplates) ? $mailTempla
 $mailingListsRows = isset($mailingLists) && is_array($mailingLists) ? $mailingLists : [];
 $campaignRows = isset($mailCampaigns) && is_array($mailCampaigns) ? $mailCampaigns : [];
 $campaignLogsRows = isset($campaignLogs) && is_array($campaignLogs) ? $campaignLogs : [];
+$chatThreadsRows = isset($chatThreadsPage['rows']) && is_array($chatThreadsPage['rows']) ? $chatThreadsPage['rows'] : [];
+$chatThreadsCurrentPage = isset($chatThreadsPage['page']) ? (int) $chatThreadsPage['page'] : 1;
+$chatThreadsPagesTotal = isset($chatThreadsPage['pages']) ? (int) $chatThreadsPage['pages'] : 1;
+$selectedChatMessagesRows = isset($selectedChatMessages) && is_array($selectedChatMessages) ? $selectedChatMessages : [];
+$prayerRows = isset($prayerRequestsPage['rows']) && is_array($prayerRequestsPage['rows']) ? $prayerRequestsPage['rows'] : [];
+$prayerCurrentPage = isset($prayerRequestsPage['page']) ? (int) $prayerRequestsPage['page'] : 1;
+$prayerPagesTotal = isset($prayerRequestsPage['pages']) ? (int) $prayerRequestsPage['pages'] : 1;
 $mailTemplateVariables = isset($mailTemplateVariables) && is_array($mailTemplateVariables) ? $mailTemplateVariables : [];
 $dailyRows = isset($dashboard['daily']) && is_array($dashboard['daily']) ? $dashboard['daily'] : [];
 $routeRows = isset($dashboard['routes']) && is_array($dashboard['routes']) ? $dashboard['routes'] : [];
@@ -21,7 +28,7 @@ $maxDaily = 1;
 foreach ($dailyRows as $row) {
     $maxDaily = max($maxDaily, (int) ($row['total'] ?? 0));
 }
-$buildAdminUrl = static function (array $overrides = []) use ($adminRoute, $userFilters, $eventFilters, $selectedLog, $usersCurrentPage, $eventsCurrentPage, $backupsCurrentPage, $selectedCampaignId) {
+$buildAdminUrl = static function (array $overrides = []) use ($adminRoute, $userFilters, $eventFilters, $selectedLog, $usersCurrentPage, $eventsCurrentPage, $backupsCurrentPage, $selectedCampaignId, $chatFilters, $chatThreadsCurrentPage, $selectedChatThreadId, $prayerFilters, $prayerCurrentPage) {
     $params = [
         'route' => $adminRoute,
         'uq' => (string) ($userFilters['q'] ?? ''),
@@ -33,6 +40,13 @@ $buildAdminUrl = static function (array $overrides = []) use ($adminRoute, $user
         'epage' => $eventsCurrentPage,
         'bpage' => $backupsCurrentPage,
         'campaign_log' => $selectedCampaignId,
+        'cq' => (string) ($chatFilters['q'] ?? ''),
+        'cstatus' => (string) ($chatFilters['status'] ?? 'all'),
+        'cpage' => $chatThreadsCurrentPage,
+        'cthread' => $selectedChatThreadId,
+        'pq' => (string) ($prayerFilters['q'] ?? ''),
+        'pstatus' => (string) ($prayerFilters['status'] ?? 'all'),
+        'ppage' => $prayerCurrentPage,
         'log' => (string) $selectedLog,
     ];
     foreach ($overrides as $key => $value) {
@@ -82,9 +96,9 @@ $buildAdminUrl = static function (array $overrides = []) use ($adminRoute, $user
             <small class="muted">Respaldos diarios de la base interna.</small>
         </article>
         <article class="card admin-metric-card">
-            <strong>Eventos 14 días</strong>
-            <p><?php echo (int) ($dashboardTotals['total'] ?? 0); ?></p>
-            <small class="muted">Login OK: <?php echo (int) ($dashboardTotals['login_success'] ?? 0); ?> · Registro OK: <?php echo (int) ($dashboardTotals['register_success'] ?? 0); ?></small>
+            <strong>Chat Alfonso</strong>
+            <p><?php echo (int) ($companionThreadsCount ?? 0); ?></p>
+            <small class="muted">Peticiones nuevas: <?php echo (int) ($prayerRequestsOpenCount ?? 0); ?></small>
         </article>
     </div>
 
@@ -247,7 +261,7 @@ $buildAdminUrl = static function (array $overrides = []) use ($adminRoute, $user
                         <span>Evento</span>
                         <select name="etype">
                             <option value="all">Todos</option>
-                            <?php foreach (['page.view', 'auth.login', 'auth.register', 'admin.user.update', 'admin.user.toggle', 'admin.user.delete', 'admin.backup.create', 'admin.mail.template.save', 'admin.mail.template.generate', 'admin.mail.template.test', 'admin.mail.list.save', 'admin.mail.campaign.send'] as $type): ?>
+                            <?php foreach (['page.view', 'auth.login', 'auth.register', 'companion.thread.create', 'companion.message', 'admin.user.update', 'admin.user.toggle', 'admin.user.delete', 'admin.backup.create', 'admin.mail.template.save', 'admin.mail.template.generate', 'admin.mail.template.test', 'admin.mail.list.save', 'admin.mail.campaign.send', 'admin.prayer.update'] as $type): ?>
                                 <option value="<?php echo e($type); ?>" <?php echo ((string) ($eventFilters['event_type'] ?? '') === $type) ? 'selected' : ''; ?>><?php echo e($type); ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -538,6 +552,137 @@ $buildAdminUrl = static function (array $overrides = []) use ($adminRoute, $user
                         <?php if (!empty($row['error_message'])): ?><small class="muted"><?php echo e((string) $row['error_message']); ?></small><?php endif; ?>
                     </article>
                 <?php endforeach; ?>
+            </div>
+        </section>
+    </div>
+
+    <div class="admin-grid admin-mail-grid">
+        <section class="card admin-list-panel">
+            <div class="admin-section-head">
+                <div><strong>Conversaciones con Alfonso</strong><small class="muted">Historial para seguimiento pastoral y revisión administrativa.</small></div>
+            </div>
+            <form method="get" class="settings-grid admin-filter-form">
+                <input type="hidden" name="route" value="<?php echo e($adminRoute); ?>">
+                <input type="hidden" name="uq" value="<?php echo e((string) ($userFilters['q'] ?? '')); ?>">
+                <input type="hidden" name="ustatus" value="<?php echo e((string) ($userFilters['status'] ?? 'all')); ?>">
+                <input type="hidden" name="eq" value="<?php echo e((string) ($eventFilters['q'] ?? '')); ?>">
+                <input type="hidden" name="etype" value="<?php echo e((string) ($eventFilters['event_type'] ?? 'all')); ?>">
+                <input type="hidden" name="eoutcome" value="<?php echo e((string) ($eventFilters['outcome'] ?? 'all')); ?>">
+                <input type="hidden" name="log" value="<?php echo e((string) $selectedLog); ?>">
+                <input type="hidden" name="campaign_log" value="<?php echo (int) $selectedCampaignId; ?>">
+                <input type="hidden" name="pq" value="<?php echo e((string) ($prayerFilters['q'] ?? '')); ?>">
+                <input type="hidden" name="pstatus" value="<?php echo e((string) ($prayerFilters['status'] ?? 'all')); ?>">
+                <label><span>Buscar</span><input type="text" name="cq" value="<?php echo e((string) ($chatFilters['q'] ?? '')); ?>" placeholder="Usuario, correo o resumen"></label>
+                <label><span>Estado</span><select name="cstatus"><option value="all" <?php echo ((string) ($chatFilters['status'] ?? 'all') === 'all') ? 'selected' : ''; ?>>Todos</option><option value="open" <?php echo ((string) ($chatFilters['status'] ?? '') === 'open') ? 'selected' : ''; ?>>Abiertas</option><option value="flagged" <?php echo ((string) ($chatFilters['status'] ?? '') === 'flagged') ? 'selected' : ''; ?>>Marcadas</option><option value="prayer" <?php echo ((string) ($chatFilters['status'] ?? '') === 'prayer') ? 'selected' : ''; ?>>Con oración</option></select></label>
+                <div class="toolbar"><button type="submit" class="btn-primary">Filtrar</button><a class="btn-light" href="<?php echo e($buildAdminUrl(['cq' => '', 'cstatus' => 'all', 'cpage' => 1])); ?>">Limpiar</a></div>
+            </form>
+            <div class="admin-events-list">
+                <?php foreach ($chatThreadsRows as $row): ?>
+                    <article class="admin-event-card">
+                        <div class="admin-event-head">
+                            <strong><?php echo e((string) ($row['title'] ?? 'Conversación')); ?></strong>
+                            <span class="admin-outcome-pill"><?php echo !empty($row['prayer_flag']) ? 'Oración' : e((string) ($row['status'] ?? 'open')); ?></span>
+                        </div>
+                        <small class="muted"><?php echo e((string) ($row['user_name'] ?? '')); ?> · <?php echo e((string) ($row['user_email'] ?? '')); ?></small>
+                        <small class="muted"><?php echo e((string) ($row['summary'] ?? 'Sin resumen')); ?></small>
+                        <div class="toolbar"><a class="btn-light" href="<?php echo e($buildAdminUrl(['cthread' => (int) ($row['id'] ?? 0)])); ?>">Ver detalle</a></div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+            <div class="admin-pagination">
+                <?php for ($page = 1; $page <= $chatThreadsPagesTotal; $page++): ?>
+                    <?php if ($page === $chatThreadsCurrentPage): ?>
+                        <span class="admin-page-pill is-active"><?php echo $page; ?></span>
+                    <?php elseif ($page === 1 || $page === $chatThreadsPagesTotal || abs($page - $chatThreadsCurrentPage) <= 1): ?>
+                        <a class="admin-page-pill" href="<?php echo e($buildAdminUrl(['cpage' => $page])); ?>"><?php echo $page; ?></a>
+                    <?php elseif ($page === 2 && $chatThreadsCurrentPage > 3): ?>
+                        <span class="admin-page-gap">...</span>
+                    <?php elseif ($page === $chatThreadsPagesTotal - 1 && $chatThreadsCurrentPage < $chatThreadsPagesTotal - 2): ?>
+                        <span class="admin-page-gap">...</span>
+                    <?php endif; ?>
+                <?php endfor; ?>
+            </div>
+        </section>
+
+        <section class="card admin-campaign-panel">
+            <div class="admin-section-head">
+                <div><strong>Detalle de conversación</strong><small class="muted">Contenido completo para acompañamiento y seguimiento.</small></div>
+            </div>
+            <?php if (!empty($selectedChatThread)): ?>
+                <div class="admin-event-card">
+                    <div class="admin-event-head">
+                        <strong><?php echo e((string) ($selectedChatThread['title'] ?? 'Conversación')); ?></strong>
+                        <span class="admin-outcome-pill"><?php echo !empty($selectedChatThread['prayer_flag']) ? 'Oración' : e((string) ($selectedChatThread['status'] ?? 'open')); ?></span>
+                    </div>
+                    <small class="muted"><?php echo e((string) ($selectedChatThread['user_name'] ?? '')); ?> · <?php echo e((string) ($selectedChatThread['user_email'] ?? '')); ?></small>
+                    <small class="muted">Última actividad: <?php echo e((string) ($selectedChatThread['last_message_at'] ?? '')); ?></small>
+                </div>
+                <div class="admin-events-list">
+                    <?php foreach ($selectedChatMessagesRows as $row): ?>
+                        <article class="admin-event-card">
+                            <div class="admin-event-head">
+                                <strong><?php echo ((string) ($row['sender'] ?? '') === 'assistant') ? 'Alfonso' : 'Usuario'; ?></strong>
+                                <span class="admin-outcome-pill"><?php echo e((string) ($row['detected_intent'] ?? '')); ?></span>
+                            </div>
+                            <small class="muted"><?php echo e((string) ($row['created_at'] ?? '')); ?></small>
+                            <div class="admin-chat-body"><?php echo nl2br(e((string) ($row['message_text'] ?? ''))); ?></div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p class="muted">Selecciona una conversación para ver el detalle.</p>
+            <?php endif; ?>
+        </section>
+    </div>
+
+    <div class="admin-grid">
+        <section class="card admin-users-panel">
+            <div class="admin-section-head">
+                <div><strong>Peticiones de oración</strong><small class="muted">Casos detectados desde Alfonso con seguimiento pastoral.</small></div>
+            </div>
+            <form method="get" class="settings-grid admin-filter-form">
+                <input type="hidden" name="route" value="<?php echo e($adminRoute); ?>">
+                <input type="hidden" name="cq" value="<?php echo e((string) ($chatFilters['q'] ?? '')); ?>">
+                <input type="hidden" name="cstatus" value="<?php echo e((string) ($chatFilters['status'] ?? 'all')); ?>">
+                <input type="hidden" name="cthread" value="<?php echo (int) $selectedChatThreadId; ?>">
+                <input type="hidden" name="campaign_log" value="<?php echo (int) $selectedCampaignId; ?>">
+                <label><span>Buscar</span><input type="text" name="pq" value="<?php echo e((string) ($prayerFilters['q'] ?? '')); ?>" placeholder="Nombre, correo o petición"></label>
+                <label><span>Estado</span><select name="pstatus"><option value="all" <?php echo ((string) ($prayerFilters['status'] ?? 'all') === 'all') ? 'selected' : ''; ?>>Todos</option><option value="new" <?php echo ((string) ($prayerFilters['status'] ?? '') === 'new') ? 'selected' : ''; ?>>Nuevas</option><option value="in_progress" <?php echo ((string) ($prayerFilters['status'] ?? '') === 'in_progress') ? 'selected' : ''; ?>>En seguimiento</option><option value="prayed" <?php echo ((string) ($prayerFilters['status'] ?? '') === 'prayed') ? 'selected' : ''; ?>>Oradas</option><option value="closed" <?php echo ((string) ($prayerFilters['status'] ?? '') === 'closed') ? 'selected' : ''; ?>>Cerradas</option></select></label>
+                <div class="toolbar"><button type="submit" class="btn-primary">Filtrar</button><a class="btn-light" href="<?php echo e($buildAdminUrl(['pq' => '', 'pstatus' => 'all', 'ppage' => 1])); ?>">Limpiar</a></div>
+            </form>
+            <div class="admin-events-list">
+                <?php foreach ($prayerRows as $row): ?>
+                    <article class="admin-event-card">
+                        <div class="admin-event-head">
+                            <strong><?php echo e((string) ($row['full_name'] ?? 'Usuario')); ?></strong>
+                            <span class="admin-outcome-pill"><?php echo e((string) ($row['status'] ?? 'new')); ?></span>
+                        </div>
+                        <small class="muted"><?php echo e((string) ($row['email'] ?? '')); ?> · <?php echo e((string) ($row['ministry'] ?? '')); ?></small>
+                        <div class="admin-chat-body"><?php echo nl2br(e((string) ($row['request_text'] ?? ''))); ?></div>
+                        <form method="post" action="?route=<?php echo e($adminActionRouteBase); ?>.prayer.update" class="admin-template-form">
+                            <?php echo csrf_field(); ?>
+                            <input type="hidden" name="id" value="<?php echo (int) ($row['id'] ?? 0); ?>">
+                            <div class="settings-grid">
+                                <label><span>Estado</span><select name="status"><option value="new" <?php echo ((string) ($row['status'] ?? '') === 'new') ? 'selected' : ''; ?>>Nueva</option><option value="in_progress" <?php echo ((string) ($row['status'] ?? '') === 'in_progress') ? 'selected' : ''; ?>>En seguimiento</option><option value="prayed" <?php echo ((string) ($row['status'] ?? '') === 'prayed') ? 'selected' : ''; ?>>Orada</option><option value="closed" <?php echo ((string) ($row['status'] ?? '') === 'closed') ? 'selected' : ''; ?>>Cerrada</option></select></label>
+                            </div>
+                            <label><span>Nota interna</span><textarea name="admin_note" rows="3" placeholder="Llamado, seguimiento, observaciones..."><?php echo e((string) ($row['admin_note'] ?? '')); ?></textarea></label>
+                            <div class="toolbar"><button type="submit" class="btn-primary">Actualizar seguimiento</button></div>
+                        </form>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+            <div class="admin-pagination">
+                <?php for ($page = 1; $page <= $prayerPagesTotal; $page++): ?>
+                    <?php if ($page === $prayerCurrentPage): ?>
+                        <span class="admin-page-pill is-active"><?php echo $page; ?></span>
+                    <?php elseif ($page === 1 || $page === $prayerPagesTotal || abs($page - $prayerCurrentPage) <= 1): ?>
+                        <a class="admin-page-pill" href="<?php echo e($buildAdminUrl(['ppage' => $page])); ?>"><?php echo $page; ?></a>
+                    <?php elseif ($page === 2 && $prayerCurrentPage > 3): ?>
+                        <span class="admin-page-gap">...</span>
+                    <?php elseif ($page === $prayerPagesTotal - 1 && $prayerCurrentPage < $prayerPagesTotal - 2): ?>
+                        <span class="admin-page-gap">...</span>
+                    <?php endif; ?>
+                <?php endfor; ?>
             </div>
         </section>
     </div>

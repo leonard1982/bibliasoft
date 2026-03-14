@@ -37,6 +37,7 @@ class SchemaManager
         self::migrateSecurityEvents($pdo);
         self::migrateSystemBackups($pdo);
         self::migrateMailing($pdo);
+        self::migrateCompanion($pdo);
         self::migrateDailyCache($pdo);
         self::migrateDevotionals($pdo);
         self::migrateUserPrefs($pdo);
@@ -654,6 +655,176 @@ class SchemaManager
             ':manual_emails' => '',
             ':active_only' => 1,
         ]);
+    }
+
+    private static function migrateCompanion(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'companion_threads')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS companion_threads (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL DEFAULT 0,
+                user_email TEXT NOT NULL DEFAULT \'\',
+                user_name TEXT NOT NULL DEFAULT \'\',
+                title TEXT NOT NULL DEFAULT \'Nueva conversación\',
+                status TEXT NOT NULL DEFAULT \'open\',
+                summary TEXT NOT NULL DEFAULT \'\',
+                prayer_flag INTEGER NOT NULL DEFAULT 0,
+                last_message_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'companion_threads');
+            if (!isset($columns['user_id'])) {
+                $pdo->exec('ALTER TABLE companion_threads ADD COLUMN user_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['user_email'])) {
+                $pdo->exec("ALTER TABLE companion_threads ADD COLUMN user_email TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['user_name'])) {
+                $pdo->exec("ALTER TABLE companion_threads ADD COLUMN user_name TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['title'])) {
+                $pdo->exec("ALTER TABLE companion_threads ADD COLUMN title TEXT NOT NULL DEFAULT 'Nueva conversación'");
+            }
+            if (!isset($columns['status'])) {
+                $pdo->exec("ALTER TABLE companion_threads ADD COLUMN status TEXT NOT NULL DEFAULT 'open'");
+            }
+            if (!isset($columns['summary'])) {
+                $pdo->exec("ALTER TABLE companion_threads ADD COLUMN summary TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['prayer_flag'])) {
+                $pdo->exec('ALTER TABLE companion_threads ADD COLUMN prayer_flag INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['last_message_at'])) {
+                $pdo->exec('ALTER TABLE companion_threads ADD COLUMN last_message_at TEXT');
+            }
+            if (!isset($columns['created_at'])) {
+                $pdo->exec('ALTER TABLE companion_threads ADD COLUMN created_at TEXT');
+            }
+            if (!isset($columns['updated_at'])) {
+                $pdo->exec('ALTER TABLE companion_threads ADD COLUMN updated_at TEXT');
+            }
+        }
+        $pdo->exec("UPDATE companion_threads
+            SET user_email = COALESCE(user_email, ''),
+                user_name = COALESCE(user_name, ''),
+                title = COALESCE(NULLIF(title, ''), 'Nueva conversación'),
+                status = COALESCE(NULLIF(status, ''), 'open'),
+                summary = COALESCE(summary, ''),
+                prayer_flag = CASE WHEN prayer_flag = 1 THEN 1 ELSE 0 END,
+                last_message_at = COALESCE(last_message_at, CURRENT_TIMESTAMP),
+                created_at = COALESCE(created_at, CURRENT_TIMESTAMP),
+                updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_companion_threads_user ON companion_threads (user_id, last_message_at DESC)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_companion_threads_status ON companion_threads (status, prayer_flag, last_message_at DESC)');
+
+        if (!self::tableExists($pdo, 'companion_messages')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS companion_messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                thread_id INTEGER NOT NULL,
+                sender TEXT NOT NULL DEFAULT \'user\',
+                message_text TEXT NOT NULL,
+                detected_intent TEXT NOT NULL DEFAULT \'\',
+                meta_json TEXT NOT NULL DEFAULT \'{}\',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'companion_messages');
+            if (!isset($columns['thread_id'])) {
+                $pdo->exec('ALTER TABLE companion_messages ADD COLUMN thread_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['sender'])) {
+                $pdo->exec("ALTER TABLE companion_messages ADD COLUMN sender TEXT NOT NULL DEFAULT 'user'");
+            }
+            if (!isset($columns['message_text'])) {
+                $pdo->exec("ALTER TABLE companion_messages ADD COLUMN message_text TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['detected_intent'])) {
+                $pdo->exec("ALTER TABLE companion_messages ADD COLUMN detected_intent TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['meta_json'])) {
+                $pdo->exec("ALTER TABLE companion_messages ADD COLUMN meta_json TEXT NOT NULL DEFAULT '{}'");
+            }
+            if (!isset($columns['created_at'])) {
+                $pdo->exec('ALTER TABLE companion_messages ADD COLUMN created_at TEXT');
+            }
+        }
+        $pdo->exec("UPDATE companion_messages
+            SET sender = COALESCE(NULLIF(sender, ''), 'user'),
+                message_text = COALESCE(message_text, ''),
+                detected_intent = COALESCE(detected_intent, ''),
+                meta_json = COALESCE(meta_json, '{}'),
+                created_at = COALESCE(created_at, CURRENT_TIMESTAMP)");
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_companion_messages_thread ON companion_messages (thread_id, id ASC)');
+
+        if (!self::tableExists($pdo, 'prayer_requests')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS prayer_requests (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                thread_id INTEGER NOT NULL DEFAULT 0,
+                user_id INTEGER NOT NULL DEFAULT 0,
+                email TEXT NOT NULL DEFAULT \'\',
+                full_name TEXT NOT NULL DEFAULT \'\',
+                ministry TEXT NOT NULL DEFAULT \'\',
+                request_text TEXT NOT NULL,
+                status TEXT NOT NULL DEFAULT \'new\',
+                admin_note TEXT NOT NULL DEFAULT \'\',
+                notified_to TEXT NOT NULL DEFAULT \'\',
+                notified_at TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'prayer_requests');
+            if (!isset($columns['thread_id'])) {
+                $pdo->exec('ALTER TABLE prayer_requests ADD COLUMN thread_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['user_id'])) {
+                $pdo->exec('ALTER TABLE prayer_requests ADD COLUMN user_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['email'])) {
+                $pdo->exec("ALTER TABLE prayer_requests ADD COLUMN email TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['full_name'])) {
+                $pdo->exec("ALTER TABLE prayer_requests ADD COLUMN full_name TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['ministry'])) {
+                $pdo->exec("ALTER TABLE prayer_requests ADD COLUMN ministry TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['request_text'])) {
+                $pdo->exec("ALTER TABLE prayer_requests ADD COLUMN request_text TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['status'])) {
+                $pdo->exec("ALTER TABLE prayer_requests ADD COLUMN status TEXT NOT NULL DEFAULT 'new'");
+            }
+            if (!isset($columns['admin_note'])) {
+                $pdo->exec("ALTER TABLE prayer_requests ADD COLUMN admin_note TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['notified_to'])) {
+                $pdo->exec("ALTER TABLE prayer_requests ADD COLUMN notified_to TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['notified_at'])) {
+                $pdo->exec('ALTER TABLE prayer_requests ADD COLUMN notified_at TEXT');
+            }
+            if (!isset($columns['created_at'])) {
+                $pdo->exec('ALTER TABLE prayer_requests ADD COLUMN created_at TEXT');
+            }
+            if (!isset($columns['updated_at'])) {
+                $pdo->exec('ALTER TABLE prayer_requests ADD COLUMN updated_at TEXT');
+            }
+        }
+        $pdo->exec("UPDATE prayer_requests
+            SET email = COALESCE(email, ''),
+                full_name = COALESCE(full_name, ''),
+                ministry = COALESCE(ministry, ''),
+                request_text = COALESCE(request_text, ''),
+                status = COALESCE(NULLIF(status, ''), 'new'),
+                admin_note = COALESCE(admin_note, ''),
+                notified_to = COALESCE(notified_to, ''),
+                created_at = COALESCE(created_at, CURRENT_TIMESTAMP),
+                updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_prayer_requests_status ON prayer_requests (status, updated_at DESC)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_prayer_requests_thread ON prayer_requests (thread_id, created_at DESC)');
     }
 
     private static function migrateDevotionals(\PDO $pdo)

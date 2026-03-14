@@ -6,6 +6,7 @@ use App\Controllers\ApiController;
 use App\Controllers\AnecdoteController;
 use App\Controllers\AuthController;
 use App\Controllers\BibleController;
+use App\Controllers\CompanionController;
 use App\Controllers\DevotionalController;
 use App\Controllers\HomeController;
 use App\Controllers\HomeDailyController;
@@ -17,6 +18,7 @@ use App\Services\AIService;
 use App\Services\AnecdoteService;
 use App\Services\BibleRepository;
 use App\Services\BackupService;
+use App\Services\CompanionChatService;
 use App\Services\DailyVerseService;
 use App\Services\DevotionalService;
 use App\Services\DocumentExportService;
@@ -114,6 +116,7 @@ $dailyVerseService = new DailyVerseService(
     $imageCardService
 );
 $generationService = new GenerationService(config('ai', []), $userDataRepository, $bibleRepository);
+$companionChatService = new CompanionChatService(config('ai', []), $userDataRepository, $bibleRepository, $mailService);
 $anecdoteService = new AnecdoteService(
     $userDataRepository,
     config('app.base_path') . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'anecdotas_seed.json',
@@ -136,6 +139,7 @@ $authController = new AuthController($userDataRepository, $mailService, $recaptc
 $shareController = new ShareController();
 $studyCenterController = new StudyCenterController($bibleRepository, $userDataRepository);
 $sermonController = new SermonController($bibleRepository, $userDataRepository);
+$companionController = new CompanionController($userDataRepository);
 $anecdoteController = new AnecdoteController($anecdoteService);
 $apiController = new ApiController(
     $bibleRepository,
@@ -149,7 +153,8 @@ $apiController = new ApiController(
     $strongLexiconService,
     $documentExportService,
     $moduleCatalogService,
-    $generationService
+    $generationService,
+    $companionChatService
 );
 
 $requestedRoute = isset($_GET['route']) ? (string) $_GET['route'] : 'home_daily';
@@ -191,6 +196,7 @@ $protectedGuestPages = [
     'devotional' => 'devotional',
     'study_center' => 'study_center',
     'sermons' => 'advanced_tools',
+    'companion' => 'advanced_tools',
     'anecdotes' => 'anecdotes',
 ];
 
@@ -219,6 +225,10 @@ $protectedGuestApis = [
     'api.study.entries.update' => 'study_center',
     'api.study.entries.delete' => 'study_center',
     'api.sermons.generate' => 'advanced_tools',
+    'api.companion.threads' => 'advanced_tools',
+    'api.companion.thread.create' => 'advanced_tools',
+    'api.companion.messages' => 'advanced_tools',
+    'api.companion.send' => 'advanced_tools',
     'api.highlight.set' => 'advanced_tools',
     'api.plan.start' => 'advanced_tools',
     'api.plan.today' => 'advanced_tools',
@@ -288,6 +298,10 @@ try {
 
         case 'sermons':
             $sermonController->index();
+            break;
+
+        case 'companion':
+            $companionController->index();
             break;
 
         case 'anecdotes':
@@ -360,6 +374,10 @@ try {
 
         case 'admin.mail.campaigns.send':
             $authController->adminMailCampaignSend();
+            break;
+
+        case 'admin.prayer.update':
+            $authController->adminPrayerUpdate();
             break;
 
         case 'api.chapter':
@@ -568,6 +586,22 @@ try {
 
         case 'api.sermons.generate':
             $apiController->sermonGenerate();
+            break;
+
+        case 'api.companion.threads':
+            $apiController->companionThreads();
+            break;
+
+        case 'api.companion.thread.create':
+            $apiController->companionThreadCreate();
+            break;
+
+        case 'api.companion.messages':
+            $apiController->companionMessages();
+            break;
+
+        case 'api.companion.send':
+            $apiController->companionSend();
             break;
 
         case 'api.highlight.set':

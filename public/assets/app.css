@@ -3534,6 +3534,12 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     background: color-mix(in srgb, var(--panel) 95%, var(--bg) 5%);
 }
 
+.admin-chat-body {
+    white-space: normal;
+    line-height: 1.65;
+    color: color-mix(in srgb, var(--ink) 90%, var(--muted) 10%);
+}
+
 .admin-event-head {
     display: flex;
     justify-content: space-between;
@@ -6427,6 +6433,131 @@ body.spacing-normal .verse {
     gap: 1.25rem;
 }
 
+.companion-page {
+    display: grid;
+    gap: 1.1rem;
+}
+
+.companion-hero {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, .85fr);
+    align-items: start;
+    background:
+        radial-gradient(circle at top right, rgba(44, 129, 187, .16), transparent 30%),
+        linear-gradient(135deg, rgba(249, 252, 255, .98), rgba(240, 247, 251, .98));
+}
+
+.companion-hero-copy {
+    padding: 1rem 1.1rem;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, .78);
+    border: 1px solid rgba(30, 89, 130, .1);
+}
+
+.companion-grid {
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    align-items: start;
+}
+
+.companion-sidebar,
+.companion-main,
+.companion-form {
+    display: grid;
+    gap: .9rem;
+}
+
+.companion-thread-list {
+    display: grid;
+    gap: .55rem;
+}
+
+.companion-thread-item {
+    width: 100%;
+    text-align: left;
+    display: grid;
+    gap: .22rem;
+    padding: .8rem .85rem;
+    border-radius: 16px;
+    border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+    background: color-mix(in srgb, var(--panel) 94%, var(--bg) 6%);
+}
+
+.companion-thread-item.is-active {
+    border-color: color-mix(in srgb, var(--accent) 52%, var(--line));
+    background: color-mix(in srgb, var(--selection) 76%, transparent);
+}
+
+.companion-thread-badge {
+    width: fit-content;
+    padding: .12rem .5rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, #e7f3fc 82%, var(--panel) 18%);
+    color: #1d5f87;
+    font-size: .72rem;
+    font-weight: 700;
+}
+
+.companion-messages {
+    min-height: 420px;
+    max-height: 70vh;
+    overflow: auto;
+    display: grid;
+    gap: .75rem;
+    padding: .2rem;
+}
+
+.companion-bubble {
+    max-width: min(760px, 92%);
+    display: grid;
+    gap: .35rem;
+    padding: .9rem 1rem;
+    border-radius: 20px;
+    border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+    background: color-mix(in srgb, var(--panel) 96%, var(--bg) 4%);
+    box-shadow: 0 10px 24px rgba(8, 24, 37, .08);
+}
+
+.companion-bubble-user {
+    justify-self: end;
+    background: color-mix(in srgb, var(--selection) 76%, transparent);
+}
+
+.companion-bubble-assistant {
+    justify-self: start;
+}
+
+.companion-bubble-body {
+    line-height: 1.7;
+    color: color-mix(in srgb, var(--ink) 90%, var(--muted) 10%);
+}
+
+.companion-quick-card,
+.companion-form {
+    display: grid;
+    gap: .7rem;
+}
+
+.companion-quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.companion-form textarea {
+    width: 100%;
+    min-height: 150px;
+}
+
+.companion-empty {
+    padding: 1rem;
+    border-radius: 16px;
+    border: 1px dashed color-mix(in srgb, var(--line) 76%, transparent);
+    background: color-mix(in srgb, var(--panel) 95%, var(--bg) 5%);
+}
+
 .sermon-lab-hero {
     display: grid;
     gap: 1rem;
@@ -6589,6 +6720,31 @@ body.spacing-normal .verse {
     border-color: rgba(94, 157, 201, .16);
 }
 
+.theme-dark .companion-hero {
+    background:
+        radial-gradient(circle at top right, rgba(57, 142, 201, .18), transparent 32%),
+        linear-gradient(135deg, rgba(12, 27, 38, .98), rgba(18, 46, 63, .96));
+    border-color: rgba(66, 133, 181, .28);
+}
+
+.theme-dark .companion-hero-copy {
+    background: rgba(10, 24, 34, .54);
+    border-color: rgba(94, 157, 201, .16);
+    color: #eef7fd;
+}
+
+.theme-dark .companion-thread-item,
+.theme-dark .companion-empty,
+.theme-dark .companion-bubble {
+    background: color-mix(in srgb, #122533 80%, var(--panel) 20%);
+    border-color: rgba(94, 157, 201, .16);
+}
+
+.theme-dark .companion-thread-item.is-active,
+.theme-dark .companion-bubble-user {
+    background: color-mix(in srgb, #17384f 80%, var(--panel) 20%);
+}
+
 .theme-dark .sermon-help-card {
     background:
         linear-gradient(180deg, rgba(12, 28, 39, .95), rgba(16, 36, 50, .95));
@@ -6615,7 +6771,9 @@ body.spacing-normal .verse {
     }
 
     .sermon-lab-hero,
-    .sermon-lab-grid {
+    .sermon-lab-grid,
+    .companion-hero,
+    .companion-grid {
         grid-template-columns: 1fr;
     }
 }

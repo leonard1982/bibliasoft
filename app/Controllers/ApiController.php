@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Services\AIService;
 use App\Services\AnecdoteService;
 use App\Services\BibleRepository;
+use App\Services\CompanionChatService;
 use App\Services\DailyVerseService;
 use App\Services\DevotionalService;
 use App\Services\DocumentExportService;
@@ -29,6 +30,7 @@ class ApiController
     private $documentExportService;
     private $moduleCatalogService;
     private $generationService;
+    private $companionChatService;
 
     public function __construct(
         BibleRepository $bibleRepository,
@@ -42,7 +44,8 @@ class ApiController
         StrongLexiconService $strongLexiconService,
         DocumentExportService $documentExportService,
         ModuleCatalogService $moduleCatalogService,
-        GenerationService $generationService
+        GenerationService $generationService,
+        CompanionChatService $companionChatService
     ) {
         $this->bibleRepository = $bibleRepository;
         $this->userDataRepository = $userDataRepository;
@@ -56,6 +59,7 @@ class ApiController
         $this->documentExportService = $documentExportService;
         $this->moduleCatalogService = $moduleCatalogService;
         $this->generationService = $generationService;
+        $this->companionChatService = $companionChatService;
     }
 
     public function verse()
@@ -1795,6 +1799,101 @@ class ApiController
                 'label' => $this->bibleRepository->buildRangeLabel($book, $chapter, $verseStart, $verseEnd),
             ],
         ]);
+    }
+
+    public function companionThreads()
+    {
+        $this->requireAuthJson();
+        app_json([
+            'ok' => true,
+            'threads' => $this->userDataRepository->getCompanionThreadsForUser(auth_user_id(), 50),
+        ]);
+    }
+
+    public function companionThreadCreate()
+    {
+        $this->requireAuthJson();
+        $thread = $this->companionChatService->startThread(auth_user_id(), $this->requireCurrentUser());
+        $this->userDataRepository->logSecurityEvent('companion.thread.create', [
+            'route' => 'api.companion.thread.create',
+            'request_method' => isset($_SERVER['REQUEST_METHOD']) ? (string) $_SERVER['REQUEST_METHOD'] : 'POST',
+            'outcome' => 'success',
+            'ip_address' => request_client_ip(),
+            'email' => auth_user_email(),
+            'user_id' => auth_user_id(),
+        ]);
+        app_json([
+            'ok' => true,
+            'thread' => $thread,
+            'messages' => [],
+        ]);
+    }
+
+    public function companionMessages()
+    {
+        $this->requireAuthJson();
+        $threadId = isset($_GET['thread_id']) ? (int) $_GET['thread_id'] : 0;
+        if ($threadId < 1) {
+            app_json(['error' => 'Conversación inválida.'], 422);
+        }
+        $thread = $this->userDataRepository->getCompanionThreadByIdForUser($threadId, auth_user_id());
+        if (!$thread) {
+            app_json(['error' => 'Conversación no encontrada.'], 404);
+        }
+        app_json([
+            'ok' => true,
+            'thread' => $thread,
+            'messages' => $this->userDataRepository->getCompanionMessages($threadId, 120),
+        ]);
+    }
+
+    public function companionSend()
+    {
+        $this->requireAuthJson();
+        $input = $this->requestData();
+        $threadId = isset($input['thread_id']) ? (int) $input['thread_id'] : 0;
+        $message = isset($input['message']) ? trim((string) $input['message']) : '';
+        if ($message === '') {
+            app_json(['error' => 'Escribe tu mensaje antes de enviar.'], 422);
+        }
+
+        try {
+            $response = $this->companionChatService->respond(auth_user_id(), $threadId, $message);
+            $this->userDataRepository->logSecurityEvent('companion.message', [
+                'route' => 'api.companion.send',
+                'request_method' => isset($_SERVER['REQUEST_METHOD']) ? (string) $_SERVER['REQUEST_METHOD'] : 'POST',
+                'outcome' => 'success',
+                'ip_address' => request_client_ip(),
+                'email' => auth_user_email(),
+                'user_id' => auth_user_id(),
+                'meta' => [
+                    'thread_id' => (int) (($response['thread']['id'] ?? 0)),
+                    'intent' => (string) (($response['reply']['intent'] ?? 'general')),
+                    'source' => (string) (($response['reply']['source'] ?? 'stub')),
+                    'prayer_request' => !empty($response['prayer_request']) ? 1 : 0,
+                ],
+            ]);
+            app_json([
+                'ok' => true,
+                'thread' => $response['thread'],
+                'messages' => $response['messages'],
+                'reply' => $response['reply'],
+                'prayer_request' => $response['prayer_request'],
+            ]);
+        } catch (\Throwable $e) {
+            $this->userDataRepository->logSecurityEvent('companion.message', [
+                'route' => 'api.companion.send',
+                'request_method' => isset($_SERVER['REQUEST_METHOD']) ? (string) $_SERVER['REQUEST_METHOD'] : 'POST',
+                'outcome' => 'failed',
+                'ip_address' => request_client_ip(),
+                'email' => auth_user_email(),
+                'user_id' => auth_user_id(),
+                'meta' => [
+                    'message' => $e->getMessage(),
+                ],
+            ]);
+            app_json(['error' => $e->getMessage()], 422);
+        }
     }
 
     private function historicalContextText($book, $chapter, $reference, $pericope, $text, array $signals = [])
@@ -4471,6 +4570,23 @@ class ApiController
 
         parse_str($raw, $form);
         return is_array($form) ? $form : [];
+    }
+
+    private function requireAuthJson()
+    {
+        if (auth_user_id() > 0) {
+            return;
+        }
+        app_json(['error' => 'Inicia sesión para continuar.'], 401);
+    }
+
+    private function requireCurrentUser()
+    {
+        $user = $this->userDataRepository->getUserById(auth_user_id());
+        if (!$user) {
+            app_json(['error' => 'Usuario no encontrado.'], 404);
+        }
+        return $user;
     }
 
     private function enrichStrongEntry(array $entry, $hintBook = 0, $hintChapter = 0, $hintVerse = 0, $hintWord = '')

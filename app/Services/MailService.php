@@ -65,6 +65,44 @@ class MailService
         return $this->sendMessage($toEmail, $fullName, $subject, $html, $text);
     }
 
+    public function sendPrayerRequestNotification($toEmail, array $payload = [])
+    {
+        $toEmail = trim((string) $toEmail);
+        if (!$this->enabled() || $toEmail === '') {
+            return false;
+        }
+
+        $fullName = trim((string) ($payload['full_name'] ?? ''));
+        $email = trim((string) ($payload['email'] ?? ''));
+        $ministry = trim((string) ($payload['ministry'] ?? ''));
+        $requestText = trim((string) ($payload['request_text'] ?? ''));
+        $threadId = (int) ($payload['thread_id'] ?? 0);
+        $subject = 'Nueva petición de oración en BIBLIASOFT';
+        $html = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body style="margin:0;padding:24px;background:#eef4f8;font-family:Verdana,Segoe UI,Arial,sans-serif;color:#17384c;">'
+            . '<div style="max-width:720px;margin:0 auto;background:#fff;border-radius:20px;overflow:hidden;border:1px solid #d8e6ef;box-shadow:0 18px 44px rgba(9,31,47,.12);">'
+            . '<div style="padding:26px 30px;background:linear-gradient(135deg,#12313f,#1f678f);color:#fff;"><div style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.9;">Seguimiento pastoral</div><h1 style="margin:10px 0 0;font-size:28px;line-height:1.1;">Nueva petición de oración</h1></div>'
+            . '<div style="padding:26px 30px;">'
+            . '<p style="margin:0 0 14px;font-size:15px;line-height:1.7;">Se registró una nueva petición desde el chat pastoral de BIBLIASOFT.</p>'
+            . '<p style="margin:0 0 8px;"><strong>Nombre:</strong> ' . $this->escape($fullName !== '' ? $fullName : 'No especificado') . '</p>'
+            . '<p style="margin:0 0 8px;"><strong>Correo:</strong> ' . $this->escape($email !== '' ? $email : 'No especificado') . '</p>'
+            . '<p style="margin:0 0 8px;"><strong>Ministerio:</strong> ' . $this->escape($ministry !== '' ? $ministry : 'No especificado') . '</p>'
+            . '<p style="margin:0 0 18px;"><strong>Conversación:</strong> #' . (int) $threadId . '</p>'
+            . '<div style="padding:18px 20px;border-radius:16px;background:#f5fafc;border:1px solid #d8e6ef;white-space:pre-wrap;font-size:15px;line-height:1.7;">' . $this->escape($requestText) . '</div>'
+            . '</div></div></body></html>';
+        $text = implode("\n", [
+            'Nueva petición de oración en BIBLIASOFT',
+            '',
+            'Nombre: ' . ($fullName !== '' ? $fullName : 'No especificado'),
+            'Correo: ' . ($email !== '' ? $email : 'No especificado'),
+            'Ministerio: ' . ($ministry !== '' ? $ministry : 'No especificado'),
+            'Conversación: #' . $threadId,
+            '',
+            $requestText,
+        ]);
+
+        return $this->sendMessage($toEmail, 'Equipo pastoral', $subject, $html, $text);
+    }
+
     public function composeTemplateMessage(array $template, array $variables = [], array $overrides = [])
     {
         $subjectTemplate = isset($overrides['subject_template']) && trim((string) $overrides['subject_template']) !== ''

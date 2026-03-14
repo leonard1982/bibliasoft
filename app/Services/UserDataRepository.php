@@ -3090,6 +3090,349 @@ class UserDataRepository
         return is_array($rows) ? $rows : [];
     }
 
+    public function countCompanionThreads()
+    {
+        if (!$this->globalHasTable('companion_threads')) {
+            return 0;
+        }
+        return (int) $this->globalDb()->query('SELECT COUNT(*) FROM companion_threads')->fetchColumn();
+    }
+
+    public function countPrayerRequestsByStatus($status = '')
+    {
+        if (!$this->globalHasTable('prayer_requests')) {
+            return 0;
+        }
+
+        $status = trim((string) $status);
+        if ($status === '') {
+            return (int) $this->globalDb()->query('SELECT COUNT(*) FROM prayer_requests')->fetchColumn();
+        }
+
+        $stmt = $this->globalDb()->prepare('SELECT COUNT(*) FROM prayer_requests WHERE status = :status');
+        $stmt->execute([':status' => $status]);
+        return (int) $stmt->fetchColumn();
+    }
+
+    public function createCompanionThread($userId, $userEmail, $userName, $title = '')
+    {
+        $userId = (int) $userId;
+        $userEmail = trim((string) $userEmail);
+        $userName = trim((string) $userName);
+        $title = trim((string) $title);
+        if ($title === '') {
+            $title = 'Nueva conversación';
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO companion_threads
+             (user_id, user_email, user_name, title, status, summary, prayer_flag, last_message_at, created_at, updated_at)
+             VALUES
+             (:user_id, :user_email, :user_name, :title, :status, :summary, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':user_id' => $userId,
+            ':user_email' => $userEmail,
+            ':user_name' => $userName,
+            ':title' => $title,
+            ':status' => 'open',
+            ':summary' => '',
+        ]);
+
+        return (int) $this->globalDb()->lastInsertId();
+    }
+
+    public function getCompanionThreadsForUser($userId, $limit = 30)
+    {
+        if (!$this->globalHasTable('companion_threads')) {
+            return [];
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, user_id, user_email, user_name, title, status, summary, prayer_flag, last_message_at, created_at, updated_at
+             FROM companion_threads
+             WHERE user_id = :user_id
+             ORDER BY last_message_at DESC, id DESC
+             LIMIT ' . max(5, min(100, (int) $limit))
+        );
+        $stmt->execute([':user_id' => (int) $userId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return is_array($rows) ? $rows : [];
+    }
+
+    public function getCompanionThreadByIdForUser($threadId, $userId)
+    {
+        if (!$this->globalHasTable('companion_threads')) {
+            return null;
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, user_id, user_email, user_name, title, status, summary, prayer_flag, last_message_at, created_at, updated_at
+             FROM companion_threads
+             WHERE id = :id AND user_id = :user_id
+             LIMIT 1'
+        );
+        $stmt->execute([
+            ':id' => (int) $threadId,
+            ':user_id' => (int) $userId,
+        ]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return is_array($row) ? $row : null;
+    }
+
+    public function getCompanionThreadById($threadId)
+    {
+        if (!$this->globalHasTable('companion_threads')) {
+            return null;
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, user_id, user_email, user_name, title, status, summary, prayer_flag, last_message_at, created_at, updated_at
+             FROM companion_threads
+             WHERE id = :id
+             LIMIT 1'
+        );
+        $stmt->execute([':id' => (int) $threadId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return is_array($row) ? $row : null;
+    }
+
+    public function updateCompanionThread($threadId, array $updates = [])
+    {
+        if (!$this->globalHasTable('companion_threads')) {
+            return false;
+        }
+
+        $allowed = [
+            'title' => 'title',
+            'status' => 'status',
+            'summary' => 'summary',
+            'prayer_flag' => 'prayer_flag',
+            'last_message_at' => 'last_message_at',
+        ];
+        $set = [];
+        $params = [':id' => (int) $threadId];
+        foreach ($allowed as $key => $column) {
+            if (!array_key_exists($key, $updates)) {
+                continue;
+            }
+            $set[] = $column . ' = :' . $key;
+            $params[':' . $key] = $key === 'prayer_flag'
+                ? (!empty($updates[$key]) ? 1 : 0)
+                : trim((string) $updates[$key]);
+        }
+        if (empty($set)) {
+            return false;
+        }
+
+        $set[] = 'updated_at = CURRENT_TIMESTAMP';
+        $stmt = $this->globalDb()->prepare(
+            'UPDATE companion_threads SET ' . implode(', ', $set) . ' WHERE id = :id'
+        );
+        $stmt->execute($params);
+        return $stmt->rowCount() > 0;
+    }
+
+    public function addCompanionMessage($threadId, $sender, $messageText, $detectedIntent = '', array $meta = [])
+    {
+        if (!$this->globalHasTable('companion_messages')) {
+            return 0;
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO companion_messages
+             (thread_id, sender, message_text, detected_intent, meta_json, created_at)
+             VALUES
+             (:thread_id, :sender, :message_text, :detected_intent, :meta_json, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':thread_id' => (int) $threadId,
+            ':sender' => trim((string) $sender),
+            ':message_text' => trim((string) $messageText),
+            ':detected_intent' => trim((string) $detectedIntent),
+            ':meta_json' => json_encode($meta, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+        ]);
+
+        $this->globalDb()->prepare(
+            'UPDATE companion_threads
+             SET last_message_at = CURRENT_TIMESTAMP, updated_at = CURRENT_TIMESTAMP
+             WHERE id = :id'
+        )->execute([':id' => (int) $threadId]);
+
+        return (int) $this->globalDb()->lastInsertId();
+    }
+
+    public function getCompanionMessages($threadId, $limit = 120)
+    {
+        if (!$this->globalHasTable('companion_messages')) {
+            return [];
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, thread_id, sender, message_text, detected_intent, meta_json, created_at
+             FROM companion_messages
+             WHERE thread_id = :thread_id
+             ORDER BY id ASC
+             LIMIT ' . max(10, min(300, (int) $limit))
+        );
+        $stmt->execute([':thread_id' => (int) $threadId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return is_array($rows) ? $rows : [];
+    }
+
+    public function createPrayerRequest($threadId, $userId, $email, $fullName, $ministry, $requestText, $notifiedTo = '', $adminNote = '')
+    {
+        if (!$this->globalHasTable('prayer_requests')) {
+            return 0;
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO prayer_requests
+             (thread_id, user_id, email, full_name, ministry, request_text, status, admin_note, notified_to, notified_at, created_at, updated_at)
+             VALUES
+             (:thread_id, :user_id, :email, :full_name, :ministry, :request_text, :status, :admin_note, :notified_to, :notified_at, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':thread_id' => (int) $threadId,
+            ':user_id' => (int) $userId,
+            ':email' => trim((string) $email),
+            ':full_name' => trim((string) $fullName),
+            ':ministry' => trim((string) $ministry),
+            ':request_text' => trim((string) $requestText),
+            ':status' => 'new',
+            ':admin_note' => trim((string) $adminNote),
+            ':notified_to' => trim((string) $notifiedTo),
+            ':notified_at' => trim((string) $notifiedTo) !== '' ? date('Y-m-d H:i:s') : null,
+        ]);
+        return (int) $this->globalDb()->lastInsertId();
+    }
+
+    public function updatePrayerRequest($id, $status, $adminNote = '')
+    {
+        if (!$this->globalHasTable('prayer_requests')) {
+            return false;
+        }
+
+        $status = trim((string) $status);
+        if (!in_array($status, ['new', 'in_progress', 'prayed', 'closed'], true)) {
+            $status = 'new';
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'UPDATE prayer_requests
+             SET status = :status,
+                 admin_note = :admin_note,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = :id'
+        );
+        $stmt->execute([
+            ':id' => (int) $id,
+            ':status' => $status,
+            ':admin_note' => trim((string) $adminNote),
+        ]);
+        return $stmt->rowCount() > 0;
+    }
+
+    public function getPrayerRequestsPage(array $filters = [], $page = 1, $perPage = 12)
+    {
+        if (!$this->globalHasTable('prayer_requests')) {
+            return ['rows' => [], 'page' => 1, 'pages' => 1, 'total' => 0];
+        }
+
+        $page = max(1, (int) $page);
+        $perPage = max(5, min(100, (int) $perPage));
+        $where = [];
+        $params = [];
+
+        $q = trim((string) ($filters['q'] ?? ''));
+        if ($q !== '') {
+            $where[] = '(email LIKE :q OR full_name LIKE :q OR ministry LIKE :q OR request_text LIKE :q OR admin_note LIKE :q)';
+            $params[':q'] = '%' . $q . '%';
+        }
+
+        $status = trim((string) ($filters['status'] ?? 'all'));
+        if ($status !== '' && $status !== 'all') {
+            $where[] = 'status = :status';
+            $params[':status'] = $status;
+        }
+
+        $sqlWhere = empty($where) ? '' : (' WHERE ' . implode(' AND ', $where));
+        $countStmt = $this->globalDb()->prepare('SELECT COUNT(*) FROM prayer_requests' . $sqlWhere);
+        $countStmt->execute($params);
+        $total = (int) $countStmt->fetchColumn();
+        $pages = max(1, (int) ceil($total / $perPage));
+        $page = min($page, $pages);
+        $offset = ($page - 1) * $perPage;
+
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, thread_id, user_id, email, full_name, ministry, request_text, status, admin_note, notified_to, notified_at, created_at, updated_at
+             FROM prayer_requests'
+            . $sqlWhere
+            . ' ORDER BY updated_at DESC, id DESC
+                LIMIT ' . $perPage . ' OFFSET ' . $offset
+        );
+        $stmt->execute($params);
+
+        return [
+            'rows' => $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [],
+            'page' => $page,
+            'pages' => $pages,
+            'total' => $total,
+        ];
+    }
+
+    public function getCompanionThreadsAdminPage(array $filters = [], $page = 1, $perPage = 12)
+    {
+        if (!$this->globalHasTable('companion_threads')) {
+            return ['rows' => [], 'page' => 1, 'pages' => 1, 'total' => 0];
+        }
+
+        $page = max(1, (int) $page);
+        $perPage = max(5, min(100, (int) $perPage));
+        $where = [];
+        $params = [];
+
+        $q = trim((string) ($filters['q'] ?? ''));
+        if ($q !== '') {
+            $where[] = '(user_email LIKE :q OR user_name LIKE :q OR title LIKE :q OR summary LIKE :q)';
+            $params[':q'] = '%' . $q . '%';
+        }
+
+        $status = trim((string) ($filters['status'] ?? 'all'));
+        if ($status !== '' && $status !== 'all') {
+            if ($status === 'prayer') {
+                $where[] = 'prayer_flag = 1';
+            } else {
+                $where[] = 'status = :status';
+                $params[':status'] = $status;
+            }
+        }
+
+        $sqlWhere = empty($where) ? '' : (' WHERE ' . implode(' AND ', $where));
+        $countStmt = $this->globalDb()->prepare('SELECT COUNT(*) FROM companion_threads' . $sqlWhere);
+        $countStmt->execute($params);
+        $total = (int) $countStmt->fetchColumn();
+        $pages = max(1, (int) ceil($total / $perPage));
+        $page = min($page, $pages);
+        $offset = ($page - 1) * $perPage;
+
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, user_id, user_email, user_name, title, status, summary, prayer_flag, last_message_at, created_at, updated_at
+             FROM companion_threads'
+            . $sqlWhere
+            . ' ORDER BY last_message_at DESC, id DESC
+                LIMIT ' . $perPage . ' OFFSET ' . $offset
+        );
+        $stmt->execute($params);
+
+        return [
+            'rows' => $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [],
+            'page' => $page,
+            'pages' => $pages,
+            'total' => $total,
+        ];
+    }
+
     private function studyProjectExists($projectId)
     {
         $projectId = (int) $projectId;
@@ -3516,6 +3859,15 @@ class UserDataRepository
     private function hasTable($table)
     {
         $stmt = $this->db()->prepare(
+            "SELECT name FROM sqlite_master WHERE type = 'table' AND name = :table LIMIT 1"
+        );
+        $stmt->execute([':table' => trim((string) $table)]);
+        return (bool) $stmt->fetchColumn();
+    }
+
+    private function globalHasTable($table)
+    {
+        $stmt = $this->globalDb()->prepare(
             "SELECT name FROM sqlite_master WHERE type = 'table' AND name = :table LIMIT 1"
         );
         $stmt->execute([':table' => trim((string) $table)]);
