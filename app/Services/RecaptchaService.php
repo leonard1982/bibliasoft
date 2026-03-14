@@ -107,15 +107,27 @@ class RecaptchaService
     private function verifyCloud($token, $remoteIp, array $options)
     {
         $expectedAction = trim((string) ($options['expected_action'] ?? $this->expectedAction()));
+        $event = [
+            'token' => $token,
+            'siteKey' => $this->siteKey(),
+            'userIpAddress' => trim((string) $remoteIp),
+            'userAgent' => isset($_SERVER['HTTP_USER_AGENT']) ? (string) $_SERVER['HTTP_USER_AGENT'] : '',
+        ];
+        if ($this->mode() !== 'checkbox' && $expectedAction !== '') {
+            $event['expectedAction'] = $expectedAction;
+        }
+
         $payload = [
             'event' => [
-                'token' => $token,
-                'siteKey' => $this->siteKey(),
-                'userIpAddress' => trim((string) $remoteIp),
-                'userAgent' => isset($_SERVER['HTTP_USER_AGENT']) ? (string) $_SERVER['HTTP_USER_AGENT'] : '',
-                'expectedAction' => $expectedAction,
+                'token' => $event['token'],
+                'siteKey' => $event['siteKey'],
+                'userIpAddress' => $event['userIpAddress'],
+                'userAgent' => $event['userAgent'],
             ],
         ];
+        if (isset($event['expectedAction'])) {
+            $payload['event']['expectedAction'] = $event['expectedAction'];
+        }
 
         $url = 'https://recaptchaenterprise.googleapis.com/v1/projects/'
             . rawurlencode($this->projectId())
@@ -154,7 +166,7 @@ class RecaptchaService
             $errors[] = $invalidReason !== '' ? $invalidReason : 'invalid-token';
         }
 
-        if ($expectedAction !== '' && $action !== '' && strcasecmp($expectedAction, $action) !== 0) {
+        if ($this->mode() !== 'checkbox' && $expectedAction !== '' && $action !== '' && strcasecmp($expectedAction, $action) !== 0) {
             $errors[] = 'action-mismatch';
         }
 
