@@ -115,7 +115,9 @@
             reminderTime: '07:00',
             preachMode: false,
             parallelMode: false,
-            readerNavVisible: true
+            readerNavVisible: true,
+            strongFontScale: 100,
+            interlinearFontScale: 100
         },
         guide: {
             activeStep: 0,
@@ -185,6 +187,10 @@
         closeModules: document.getElementById('closeModules'),
         closeInterlinear: document.getElementById('closeInterlinear'),
         closeStrong: document.getElementById('closeStrong'),
+        interlinearFontDown: document.getElementById('interlinearFontDown'),
+        interlinearFontUp: document.getElementById('interlinearFontUp'),
+        strongFontDown: document.getElementById('strongFontDown'),
+        strongFontUp: document.getElementById('strongFontUp'),
         closeAudio: document.getElementById('closeAudio'),
         closeProjectSave: document.getElementById('closeProjectSave'),
         versionPrimarySelect: document.getElementById('versionPrimarySelect'),
@@ -655,6 +661,26 @@
         }
         if (els.closeStrong) {
             els.closeStrong.addEventListener('click', closeStrong);
+        }
+        if (els.interlinearFontUp) {
+            els.interlinearFontUp.addEventListener('click', function () {
+                changeInterlinearFontScale(10);
+            });
+        }
+        if (els.interlinearFontDown) {
+            els.interlinearFontDown.addEventListener('click', function () {
+                changeInterlinearFontScale(-10);
+            });
+        }
+        if (els.strongFontUp) {
+            els.strongFontUp.addEventListener('click', function () {
+                changeStrongFontScale(10);
+            });
+        }
+        if (els.strongFontDown) {
+            els.strongFontDown.addEventListener('click', function () {
+                changeStrongFontScale(-10);
+            });
         }
         if (els.closeAudio) {
             els.closeAudio.addEventListener('click', closeAudio);
@@ -7897,10 +7923,12 @@
         document.body.classList.toggle('theme-dark', state.settings.theme === 'dark');
         if (state.settings.fontScale < 85) {
             state.settings.fontScale = 85;
-        } else if (state.settings.fontScale > 150) {
-            state.settings.fontScale = 150;
+        } else if (state.settings.fontScale > 300) {
+            state.settings.fontScale = 300;
         }
         document.documentElement.style.setProperty('--reader-font-scale', String(state.settings.fontScale) + '%');
+        document.documentElement.style.setProperty('--strong-font-scale', String(state.settings.strongFontScale || 100) + '%');
+        document.documentElement.style.setProperty('--interlinear-font-scale', String(state.settings.interlinearFontScale || 100) + '%');
         if (state.settings.showHelp) {
             els.helpPane.classList.remove('hidden');
         } else {
@@ -7927,6 +7955,18 @@
         if (els.toggleParallel) {
             els.toggleParallel.classList.toggle('is-active', state.settings.parallelMode === true);
         }
+        if (els.strongFontDown) {
+            els.strongFontDown.disabled = Number(state.settings.strongFontScale || 100) <= 85;
+        }
+        if (els.strongFontUp) {
+            els.strongFontUp.disabled = Number(state.settings.strongFontScale || 100) >= 300;
+        }
+        if (els.interlinearFontDown) {
+            els.interlinearFontDown.disabled = Number(state.settings.interlinearFontScale || 100) <= 85;
+        }
+        if (els.interlinearFontUp) {
+            els.interlinearFontUp.disabled = Number(state.settings.interlinearFontScale || 100) >= 300;
+        }
         syncPreachUi();
     }
 
@@ -7952,6 +7992,8 @@
             state.settings.preachMode = state.settings.preachMode === true || Number(state.settings.preachMode) === 1;
             state.settings.parallelMode = state.settings.parallelMode === true || Number(state.settings.parallelMode) === 1;
             state.settings.readerNavVisible = state.settings.readerNavVisible !== false && Number(state.settings.readerNavVisible) !== 0;
+            state.settings.strongFontScale = clampModalFontScale(state.settings.strongFontScale || 100);
+            state.settings.interlinearFontScale = clampModalFontScale(state.settings.interlinearFontScale || 100);
         } catch (err) {
             // ignore
         }
@@ -8663,12 +8705,40 @@
         if (state.settings.fontScale < 85) {
             state.settings.fontScale = 85;
         }
-        if (state.settings.fontScale > 150) {
-            state.settings.fontScale = 150;
+        if (state.settings.fontScale > 300) {
+            state.settings.fontScale = 300;
         }
         applySettings();
         saveSettings();
         notify('Tamaño ' + state.settings.fontScale + '%');
+    }
+
+    function clampModalFontScale(value) {
+        var scale = Number(value || 100);
+        if (!Number.isFinite(scale)) {
+            scale = 100;
+        }
+        if (scale < 85) {
+            scale = 85;
+        }
+        if (scale > 300) {
+            scale = 300;
+        }
+        return Math.round(scale);
+    }
+
+    function changeStrongFontScale(delta) {
+        state.settings.strongFontScale = clampModalFontScale(Number(state.settings.strongFontScale || 100) + Number(delta || 0));
+        applySettings();
+        saveSettings();
+        notify('Strong ' + state.settings.strongFontScale + '%');
+    }
+
+    function changeInterlinearFontScale(delta) {
+        state.settings.interlinearFontScale = clampModalFontScale(Number(state.settings.interlinearFontScale || 100) + Number(delta || 0));
+        applySettings();
+        saveSettings();
+        notify('Interlineal ' + state.settings.interlinearFontScale + '%');
     }
 
     function copyText(text) {
@@ -9057,16 +9127,32 @@
         var scale = Number(settings.fontScale || 100);
         if (scale < 85) {
             scale = 85;
-        } else if (scale > 150) {
-            scale = 150;
+        } else if (scale > 300) {
+            scale = 300;
         }
         document.documentElement.style.setProperty('--reader-font-scale', String(scale) + '%');
+        document.documentElement.style.setProperty('--strong-font-scale', String(clampModalScaleForBoot(settings.strongFontScale || 100)) + '%');
+        document.documentElement.style.setProperty('--interlinear-font-scale', String(clampModalScaleForBoot(settings.interlinearFontScale || 100)) + '%');
 
         if (settings.theme === 'dark') {
             document.body.classList.add('theme-dark');
         } else {
             document.body.classList.remove('theme-dark');
         }
+    }
+
+    function clampModalScaleForBoot(value) {
+        var scale = Number(value || 100);
+        if (!Number.isFinite(scale)) {
+            scale = 100;
+        }
+        if (scale < 85) {
+            scale = 85;
+        }
+        if (scale > 300) {
+            scale = 300;
+        }
+        return Math.round(scale);
     }
 
     function escapeHtml(value) {

@@ -311,6 +311,10 @@ $initial = [
     <div id="interlinearModal" class="settings hidden" role="dialog" aria-modal="true">
         <header>
             <h3><img src="assets/icons/interlinear.svg" alt="" class="ico"> Interlineal</h3>
+            <div class="toolbar modal-font-tools">
+                <button class="btn-light reader-font-btn" id="interlinearFontDown" type="button" aria-label="Texto más pequeño en interlineal" title="Texto más pequeño"><span class="zoom-icon is-minus" aria-hidden="true"></span></button>
+                <button class="btn-light reader-font-btn" id="interlinearFontUp" type="button" aria-label="Texto más grande en interlineal" title="Texto más grande"><span class="zoom-icon is-plus" aria-hidden="true"></span></button>
+            </div>
             <button class="btn-light" id="closeInterlinear">Cerrar</button>
         </header>
         <div id="interlinearModalBody" class="stack">
@@ -344,6 +348,10 @@ $initial = [
     <div id="strongModal" class="settings hidden" role="dialog" aria-modal="true">
         <header>
             <h3><img src="assets/icons/help.svg" alt="" class="ico"> Strong</h3>
+            <div class="toolbar modal-font-tools">
+                <button class="btn-light reader-font-btn" id="strongFontDown" type="button" aria-label="Texto más pequeño en Strong" title="Texto más pequeño"><span class="zoom-icon is-minus" aria-hidden="true"></span></button>
+                <button class="btn-light reader-font-btn" id="strongFontUp" type="button" aria-label="Texto más grande en Strong" title="Texto más grande"><span class="zoom-icon is-plus" aria-hidden="true"></span></button>
+            </div>
             <button class="btn-light" id="closeStrong">Cerrar</button>
         </header>
         <div id="strongModalBody" class="stack">

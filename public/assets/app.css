@@ -11,6 +11,8 @@
     --selection: #e2f4ff;
     --shadow: 0 8px 24px rgba(13, 24, 35, 0.08);
     --reader-font-scale: 100%;
+    --strong-font-scale: 100%;
+    --interlinear-font-scale: 100%;
     --tooltip-bg: #10202c;
     --tooltip-ink: #f4f9fd;
     --tooltip-line: #2a4b61;
@@ -2288,10 +2290,24 @@ body.app-loading {
     overflow: auto;
 }
 
+#interlinearModalBody {
+    font-size: calc(1rem * (var(--interlinear-font-scale) / 100%));
+}
+
 #strongModal {
     width: min(760px, 94vw);
     max-height: 88vh;
     overflow: auto;
+}
+
+#strongModalBody {
+    font-size: calc(1rem * (var(--strong-font-scale) / 100%));
+}
+
+.modal-font-tools {
+    margin-left: auto;
+    margin-right: .45rem;
+    gap: .28rem;
 }
 
 #audioModal {
