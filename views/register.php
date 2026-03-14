@@ -23,7 +23,10 @@
 
         <form method="post" action="?route=register.submit" class="auth-row auth-form-pro">
             <?php echo csrf_field(); ?>
-            <input type="text" name="company" value="" autocomplete="off" tabindex="-1" class="auth-honeypot" aria-hidden="true">
+            <div class="auth-honeypot" aria-hidden="true">
+                <label for="contact_website">Si eres humano deja este campo vacío</label>
+                <input type="text" id="contact_website" name="contact_website" value="" autocomplete="new-password" tabindex="-1">
+            </div>
             <label class="auth-field">
                 <span class="auth-field-ico-wrap">
                     <img src="assets/icons/user.svg" alt="" class="auth-field-ico">

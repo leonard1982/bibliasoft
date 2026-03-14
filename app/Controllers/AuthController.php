@@ -29,6 +29,8 @@ class AuthController
 
     public function registerForm()
     {
+        $_SESSION['register_form_started_at'] = time();
+
         app_render('register', [
             'pageTitle' => 'Registro',
             'error' => isset($_GET['error']) ? trim((string) $_GET['error']) : '',
@@ -356,8 +358,24 @@ class AuthController
 
     private function verifyHoneypot()
     {
-        $trap = isset($_POST['company']) ? trim((string) $_POST['company']) : '';
-        return $trap === '';
+        $trapFields = [
+            isset($_POST['company']) ? trim((string) $_POST['company']) : '',
+            isset($_POST['contact_website']) ? trim((string) $_POST['contact_website']) : '',
+        ];
+
+        foreach ($trapFields as $trap) {
+            if ($trap !== '') {
+                return false;
+            }
+        }
+
+        $startedAt = isset($_SESSION['register_form_started_at']) ? (int) $_SESSION['register_form_started_at'] : 0;
+        unset($_SESSION['register_form_started_at']);
+        if ($startedAt > 0 && (time() - $startedAt) < 1) {
+            return false;
+        }
+
+        return true;
     }
 
     private function isRateLimited($ipAddress, $channel)
