@@ -3532,6 +3532,60 @@ body.guide-tour-active.guide-step-pulse .guide-spot-hole {
     justify-content: flex-end;
 }
 
+.admin-mail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-backups-panel,
+.admin-template-panel,
+.admin-list-panel,
+.admin-campaign-panel {
+    display: grid;
+    gap: .8rem;
+}
+
+.admin-template-tools {
+    display: grid;
+    gap: .55rem;
+}
+
+.admin-template-list,
+.admin-variable-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+}
+
+.admin-template-list .btn-light,
+.admin-variable-list .btn-light {
+    min-height: 34px;
+}
+
+.admin-template-form {
+    display: grid;
+    gap: .65rem;
+}
+
+.admin-checkline {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    min-height: 42px;
+}
+
+.admin-template-preview-wrap {
+    display: grid;
+    gap: .45rem;
+}
+
+.admin-template-preview {
+    width: 100%;
+    min-height: 360px;
+    border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+    border-radius: 12px;
+    background: #fff;
+}
+
 .panel {
     border: 1px solid var(--line);
     border-radius: 16px;
@@ -5807,6 +5861,7 @@ body.spacing-normal .verse {
     .admin-metrics,
     .admin-insights-grid,
     .admin-grid,
+    .admin-mail-grid,
     .admin-user-meta {
         grid-template-columns: 1fr;
     }

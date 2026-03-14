@@ -1,0 +1,103 @@
+{
+  "module": {
+    "key": "comentario_expositivo_enriquecido",
+    "type": "commentary",
+    "name": "Comentario Expositivo Enriquecido",
+    "version": "1.0.0"
+  },
+  "entries": [
+    {
+      "scope": "book",
+      "book": 43,
+      "title": "Juan",
+      "html": "<p><strong>Introduccion del libro:</strong> Juan presenta a Jesus como el Hijo eterno hecho carne para que el lector crea y tenga vida en su nombre. El evangelio no solo informa hechos; interpreta señales, discursos y encuentros para mostrar que la fe verdadera produce permanencia, obediencia y amor.</p><p><strong>Claves de lectura:</strong> gloria, vida, verdad, creer, permanecer, amor y testimonio. Cada escena empuja al lector a decidir si solo admirara a Jesus o si confiara realmente en el.</p>"
+    },
+    {
+      "scope": "chapter",
+      "book": 43,
+      "chapter": 13,
+      "title": "Juan 13",
+      "html": "<p><strong>Marco del capitulo:</strong> Juan 13 abre el discurso del aposento alto. Jesus sabe que va a la cruz y, precisamente desde esa conciencia, sirve, interpreta la traicion, forma a sus discipulos y deja el mandamiento del amor mutuo.</p><p><strong>Idea central:</strong> la grandeza del Reino se expresa en servicio humilde, pureza relacional y amor visible entre los discipulos.</p>"
+    },
+    {
+      "scope": "verse",
+      "book": 43,
+      "chapter_begin": 13,
+      "chapter_end": 13,
+      "verse_begin": 1,
+      "verse_end": 5,
+      "title": "Juan 13:1-5",
+      "html": "<p><strong>Jesus ama hasta el extremo.</strong> El texto une dos realidades: Jesus conoce que su hora ha llegado y, en lugar de cerrarse sobre si mismo, se inclina para servir. El lavamiento de pies no es una simple leccion moral; anticipa en forma visible la logica de la cruz.</p><p><strong>Observacion pastoral:</strong> el servicio de Jesus nace de identidad segura, no de inferioridad. El que vino del Padre y vuelve al Padre puede agacharse sin perder dignidad.</p><p><strong>Aplicacion:</strong> cuando el liderazgo cristiano olvida servir, deja de parecerse a Cristo. La pregunta del pasaje no es si conocemos la doctrina del servicio, sino si estamos dispuestos a tomar la toalla.</p>"
+    },
+    {
+      "scope": "verse",
+      "book": 43,
+      "chapter_begin": 13,
+      "chapter_end": 13,
+      "verse_begin": 6,
+      "verse_end": 17,
+      "title": "Juan 13:6-17",
+      "html": "<p><strong>Pedro resiste una gracia que no controla.</strong> Su objecion parece reverente, pero en el fondo quiere fijar los terminos del discipulado. Jesus deja claro que sin limpieza recibida no hay comunion real.</p><p><strong>Sentido del signo:</strong> el lavamiento apunta a la obra purificadora de Cristo y tambien a la forma de vida de la comunidad cristiana. Los discipulos no deben competir por rango sino reproducir el patron del Maestro.</p><p><strong>Aplicacion:</strong> primero deja que Cristo te lave; despues sirve a otros desde gratitud, no desde exibicion espiritual.</p>"
+    },
+    {
+      "scope": "verse",
+      "book": 43,
+      "chapter_begin": 13,
+      "chapter_end": 13,
+      "verse_begin": 18,
+      "verse_end": 30,
+      "title": "Juan 13:18-30",
+      "html": "<p><strong>La traicion no sorprende a Jesus.</strong> Judas no toma el control de la historia; su pecado ya esta bajo la mirada del Senor. El pasaje es sobrio: se puede estar cerca del circulo visible de discipulos y aun asi endurecer el corazon.</p><p><strong>Advertencia biblica:</strong> la proximidad externa a lo santo no reemplaza la rendicion interior. Compartir la mesa no es lo mismo que pertenecer de verdad a Cristo.</p><p><strong>Aplicacion:</strong> examina si tu relacion con Jesus es de apariencia, conveniencia o entrega real.</p>"
+    },
+    {
+      "scope": "verse",
+      "book": 43,
+      "chapter_begin": 13,
+      "chapter_end": 13,
+      "verse_begin": 31,
+      "verse_end": 35,
+      "title": "Juan 13:31-35",
+      "html": "<p><strong>La gloria de Jesus y el mandamiento nuevo.</strong> Cuando Judas sale, la cruz ya domina el horizonte. En ese contexto Jesus manda a sus discipulos amarse como el los ha amado.</p><p><strong>Novedad del mandamiento:</strong> no es que el amor fuera desconocido, sino que ahora tiene medida, forma y modelo definitivo en Cristo. La comunidad cristiana debe ser reconocible por un amor visible, sacrificial y perseverante.</p><p><strong>Aplicacion:</strong> la ortodoxia sin amor hiere el testimonio; el amor sin verdad pierde centro. Jesus une ambas cosas en su propia entrega.</p>"
+    },
+    {
+      "scope": "verse",
+      "book": 43,
+      "chapter_begin": 13,
+      "chapter_end": 13,
+      "verse_begin": 36,
+      "verse_end": 38,
+      "title": "Juan 13:36-38",
+      "html": "<p><strong>Pedro promete mas de lo que puede sostener.</strong> Su celo es real, pero su autoconfianza es mayor que su madurez. Jesus no humilla por crueldad; revela la verdad para preparar futura restauracion.</p><p><strong>Lectura pastoral:</strong> el discipulo sincero tambien necesita ser quebrantado en su confianza propia. La fidelidad no nace de impulsos nobles, sino de gracia sostenedora.</p><p><strong>Aplicacion:</strong> antes de decirle a Cristo todo lo que haras por el, recuerda depender de todo lo que el hace por ti.</p>"
+    },
+    {
+      "scope": "book",
+      "book": 45,
+      "title": "Romanos",
+      "html": "<p><strong>Introduccion del libro:</strong> Romanos desarrolla el evangelio con profundidad doctrinal y proyeccion comunitaria. Pablo muestra la necesidad universal de justicia, la justificacion por fe, la nueva vida en el Espiritu y la formacion de una iglesia que vive para la gloria de Dios.</p>"
+    },
+    {
+      "scope": "chapter",
+      "book": 45,
+      "chapter": 8,
+      "title": "Romanos 8",
+      "html": "<p><strong>Resumen del capitulo:</strong> Romanos 8 contrasta condenacion y libertad, carne y Espiritu, sufrimiento presente y gloria futura. Aqui la seguridad del creyente no descansa en autosuficiencia sino en la accion perseverante de Dios.</p>"
+    },
+    {
+      "scope": "chapter",
+      "book": 19,
+      "chapter": 23,
+      "title": "Salmo 23",
+      "html": "<p><strong>Resumen del capitulo:</strong> Salmo 23 retrata al Senor como pastor y anfitrion. La confianza del salmista no niega el valle oscuro; afirma que la presencia de Dios convierte el camino dificil en trayecto acompañado.</p>"
+    },
+    {
+      "scope": "verse",
+      "book": 43,
+      "chapter_begin": 3,
+      "chapter_end": 3,
+      "verse_begin": 16,
+      "verse_end": 17,
+      "title": "Juan 3:16-17",
+      "html": "<p><strong>Centro del mensaje:</strong> el amor de Dios se manifiesta en la entrega del Hijo para salvar, no para condenar. La fe no es admiracion distante; es confianza que recibe vida.</p><p><strong>Aplicacion:</strong> el evangelio llama tanto a descansar en la gracia como a anunciarla con urgencia.</p>"
+    }
+  ]
+}

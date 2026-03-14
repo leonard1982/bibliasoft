@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Services\BackupService;
 use App\Services\MailService;
 use App\Services\RecaptchaService;
 use App\Services\UserDataRepository;
@@ -11,12 +12,14 @@ class AuthController
     private $users;
     private $mail;
     private $recaptcha;
+    private $backups;
 
-    public function __construct(UserDataRepository $users, MailService $mail, RecaptchaService $recaptcha)
+    public function __construct(UserDataRepository $users, MailService $mail, RecaptchaService $recaptcha, BackupService $backups)
     {
         $this->users = $users;
         $this->mail = $mail;
         $this->recaptcha = $recaptcha;
+        $this->backups = $backups;
     }
 
     public function loginForm()
@@ -85,6 +88,8 @@ class AuthController
         $_SESSION['user_id'] = (int) $user['id'];
         $_SESSION['username'] = (string) ($user['display_name'] ?? $user['username']);
         $_SESSION['user_email'] = (string) ($user['email'] ?? '');
+
+        $this->runDailyBackupSafely('login', (int) $user['id'], (string) ($user['email'] ?? ''));
 
         $this->logSecurity('auth.login', 'success', (string) ($user['email'] ?? $username), [
             'target_user_id' => (int) $user['id'],
@@ -180,6 +185,8 @@ class AuthController
         $_SESSION['username'] = $fullName;
         $_SESSION['user_email'] = $email;
 
+        $this->runDailyBackupSafely('register', (int) $id, $email);
+
         $this->logSecurity('auth.register', 'success', $email, [
             'full_name' => $fullName,
             'ministry' => $ministry,
@@ -219,6 +226,16 @@ class AuthController
         ];
         $eventPage = isset($_GET['epage']) ? (int) $_GET['epage'] : 1;
         $eventsPage = $this->users->getSecurityEventsPage($eventFilters, $eventPage, 18);
+        $backupPage = isset($_GET['bpage']) ? (int) $_GET['bpage'] : 1;
+        $backupsPage = $this->users->getSystemBackupsPage($backupPage, 12);
+        $mailTemplates = $this->users->getMailTemplates();
+        $mailingLists = $this->users->getMailingLists();
+        $mailCampaigns = $this->users->getMailCampaigns(20);
+        $selectedCampaignId = isset($_GET['campaign_log']) ? (int) $_GET['campaign_log'] : 0;
+        if ($selectedCampaignId < 1 && !empty($mailCampaigns)) {
+            $selectedCampaignId = (int) ($mailCampaigns[0]['id'] ?? 0);
+        }
+        $campaignLogs = $selectedCampaignId > 0 ? $this->users->getMailCampaignLogs($selectedCampaignId, 40) : [];
 
         app_render('admin', [
             'pageTitle' => 'Superadministración',
@@ -232,10 +249,17 @@ class AuthController
             'userFilters' => $userFilters,
             'eventsPage' => $eventsPage,
             'eventFilters' => $eventFilters,
+            'backupsPage' => $backupsPage,
             'dashboard' => $this->users->getSecurityDashboard(14),
             'logs' => $logFiles,
             'selectedLog' => $selectedLog,
             'logContent' => $this->readLogTail($selectedLog, 250),
+            'mailTemplates' => $mailTemplates,
+            'mailingLists' => $mailingLists,
+            'mailCampaigns' => $mailCampaigns,
+            'selectedCampaignId' => $selectedCampaignId,
+            'campaignLogs' => $campaignLogs,
+            'mailTemplateVariables' => $this->mailTemplateVariables(),
             'notice' => isset($_GET['notice']) ? trim((string) $_GET['notice']) : '',
             'error' => isset($_GET['error']) ? trim((string) $_GET['error']) : '',
             'adminRoute' => $adminRoute,
@@ -340,6 +364,202 @@ class AuthController
         $this->redirectAdminWithNotice('Usuario eliminado.');
     }
 
+    public function adminBackupCreate()
+    {
+        $this->requireSuperAdmin();
+        if (!$this->verifyCsrf()) {
+            $this->redirectAdminWithError('Token de seguridad inválido.');
+        }
+
+        try {
+            $backup = $this->backups->createBackup('manual', auth_user_id(), auth_user_email());
+            $this->logSecurity('admin.backup.create', 'success', auth_user_email(), [
+                'backup_id' => (int) ($backup['id'] ?? 0),
+                'file_name' => (string) ($backup['file_name'] ?? ''),
+            ], auth_user_id());
+            $this->redirectAdminWithNotice('Backup manual generado correctamente.');
+        } catch (\Throwable $e) {
+            $this->logSecurity('admin.backup.create', 'failed', auth_user_email(), [
+                'message' => $e->getMessage(),
+            ], auth_user_id());
+            $this->redirectAdminWithError('No se pudo generar el backup: ' . $e->getMessage());
+        }
+    }
+
+    public function adminBackupDownload()
+    {
+        $this->requireSuperAdmin();
+        $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+        $backup = $this->users->getSystemBackupById($id);
+        if (!$backup) {
+            http_response_code(404);
+            exit('Backup no encontrado');
+        }
+
+        $path = trim((string) ($backup['file_path'] ?? ''));
+        $realFile = $path !== '' ? realpath($path) : false;
+        $realDir = realpath(rtrim((string) config('app.base_path', dirname(__DIR__, 2)), DIRECTORY_SEPARATOR)
+            . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'backups');
+        if ($realFile === false || $realDir === false || strpos($realFile, $realDir) !== 0 || !is_file($realFile)) {
+            http_response_code(404);
+            exit('Archivo de backup no disponible');
+        }
+
+        header('Content-Type: application/octet-stream');
+        header('Content-Length: ' . (string) filesize($realFile));
+        header('Content-Disposition: attachment; filename="' . basename($realFile) . '"');
+        readfile($realFile);
+        exit;
+    }
+
+    public function adminMailTemplateSave()
+    {
+        $this->requireSuperAdmin();
+        if (!$this->verifyCsrf()) {
+            $this->redirectAdminWithError('Token de seguridad inválido.');
+        }
+
+        try {
+            $id = $this->users->saveMailTemplate(
+                isset($_POST['id']) ? (int) $_POST['id'] : 0,
+                isset($_POST['template_key']) ? (string) $_POST['template_key'] : '',
+                isset($_POST['name']) ? (string) $_POST['name'] : '',
+                isset($_POST['category']) ? (string) $_POST['category'] : 'campaign',
+                isset($_POST['subject_template']) ? (string) $_POST['subject_template'] : '',
+                isset($_POST['css_template']) ? (string) $_POST['css_template'] : '',
+                isset($_POST['html_template']) ? (string) $_POST['html_template'] : '',
+                isset($_POST['text_template']) ? (string) $_POST['text_template'] : '',
+                isset($_POST['enabled']) ? 1 : 0
+            );
+            $this->logSecurity('admin.mail.template.save', 'success', auth_user_email(), [
+                'template_id' => $id,
+            ], auth_user_id());
+            $this->redirectAdminWithNotice('Plantilla guardada correctamente.');
+        } catch (\Throwable $e) {
+            $this->logSecurity('admin.mail.template.save', 'failed', auth_user_email(), [
+                'message' => $e->getMessage(),
+            ], auth_user_id());
+            $this->redirectAdminWithError($e->getMessage());
+        }
+    }
+
+    public function adminMailListSave()
+    {
+        $this->requireSuperAdmin();
+        if (!$this->verifyCsrf()) {
+            $this->redirectAdminWithError('Token de seguridad inválido.');
+        }
+
+        try {
+            $id = $this->users->saveMailingList(
+                isset($_POST['id']) ? (int) $_POST['id'] : 0,
+                isset($_POST['name']) ? (string) $_POST['name'] : '',
+                isset($_POST['description']) ? (string) $_POST['description'] : '',
+                isset($_POST['list_type']) ? (string) $_POST['list_type'] : 'all_active',
+                isset($_POST['ministry_filter']) ? (string) $_POST['ministry_filter'] : '',
+                isset($_POST['manual_emails']) ? (string) $_POST['manual_emails'] : '',
+                isset($_POST['active_only']) ? 1 : 0
+            );
+            $this->logSecurity('admin.mail.list.save', 'success', auth_user_email(), [
+                'list_id' => $id,
+            ], auth_user_id());
+            $this->redirectAdminWithNotice('Lista de envío guardada correctamente.');
+        } catch (\Throwable $e) {
+            $this->logSecurity('admin.mail.list.save', 'failed', auth_user_email(), [
+                'message' => $e->getMessage(),
+            ], auth_user_id());
+            $this->redirectAdminWithError($e->getMessage());
+        }
+    }
+
+    public function adminMailCampaignSave()
+    {
+        $this->requireSuperAdmin();
+        if (!$this->verifyCsrf()) {
+            $this->redirectAdminWithError('Token de seguridad inválido.');
+        }
+
+        try {
+            $id = $this->persistMailCampaignFromRequest();
+            $this->logSecurity('admin.mail.campaign.save', 'success', auth_user_email(), [
+                'campaign_id' => $id,
+            ], auth_user_id());
+            $this->redirectAdminWithNotice('Campaña guardada correctamente.');
+        } catch (\Throwable $e) {
+            $this->logSecurity('admin.mail.campaign.save', 'failed', auth_user_email(), [
+                'message' => $e->getMessage(),
+            ], auth_user_id());
+            $this->redirectAdminWithError($e->getMessage());
+        }
+    }
+
+    public function adminMailCampaignSend()
+    {
+        $this->requireSuperAdmin();
+        if (!$this->verifyCsrf()) {
+            $this->redirectAdminWithError('Token de seguridad inválido.');
+        }
+        if (!$this->mail->enabled()) {
+            $this->redirectAdminWithError('El correo SMTP no está habilitado en esta instalación.');
+        }
+
+        try {
+            $campaignId = $this->persistMailCampaignFromRequest();
+            $campaign = $this->users->getMailCampaignById($campaignId);
+            if (!$campaign) {
+                throw new \RuntimeException('No se encontró la campaña.');
+            }
+            $template = $this->users->getMailTemplateById((int) ($campaign['template_id'] ?? 0));
+            if (!$template) {
+                throw new \RuntimeException('No se encontró la plantilla seleccionada.');
+            }
+            $recipients = $this->users->resolveMailingListRecipients((int) ($campaign['list_id'] ?? 0), 2500);
+            if (empty($recipients)) {
+                throw new \RuntimeException('La lista seleccionada no tiene destinatarios válidos.');
+            }
+
+            $success = 0;
+            $failed = 0;
+            foreach ($recipients as $recipient) {
+                $email = trim((string) ($recipient['email'] ?? ''));
+                if ($email === '') {
+                    continue;
+                }
+
+                $message = $this->mail->composeTemplateMessage($template, $this->buildMailVariablesForRecipient(
+                    $recipient,
+                    (string) ($campaign['name'] ?? 'Campaña'),
+                    (string) ($campaign['content_html'] ?? ''),
+                    (string) ($campaign['content_text'] ?? '')
+                ), [
+                    'subject_template' => trim((string) ($campaign['subject_override'] ?? '')),
+                ]);
+
+                try {
+                    $this->mail->sendMessage($email, (string) ($recipient['full_name'] ?? ''), $message['subject'], $message['html'], $message['text']);
+                    $this->users->logMailCampaignDelivery($campaignId, (int) ($recipient['id'] ?? 0), $email, 'sent', '');
+                    $success++;
+                } catch (\Throwable $e) {
+                    $this->users->logMailCampaignDelivery($campaignId, (int) ($recipient['id'] ?? 0), $email, 'failed', $e->getMessage());
+                    $failed++;
+                }
+            }
+
+            $this->users->markMailCampaignSent($campaignId, $failed > 0 ? 'sent_with_errors' : 'sent');
+            $this->logSecurity('admin.mail.campaign.send', 'success', auth_user_email(), [
+                'campaign_id' => $campaignId,
+                'sent' => $success,
+                'failed' => $failed,
+            ], auth_user_id());
+            $this->redirectAdminWithNotice('Campaña enviada. OK: ' . $success . ' · Fallidos: ' . $failed);
+        } catch (\Throwable $e) {
+            $this->logSecurity('admin.mail.campaign.send', 'failed', auth_user_email(), [
+                'message' => $e->getMessage(),
+            ], auth_user_id());
+            $this->redirectAdminWithError($e->getMessage());
+        }
+    }
+
     private function requireSuperAdmin()
     {
         if (auth_user_id() < 1) {
@@ -354,6 +574,28 @@ class AuthController
     {
         $token = isset($_POST['_csrf']) ? (string) $_POST['_csrf'] : '';
         return csrf_verify_request($token);
+    }
+
+    private function runDailyBackupSafely($triggerType, $userId, $email)
+    {
+        try {
+            $this->backups->ensureDailyBackup((string) $triggerType, (int) $userId, (string) $email);
+        } catch (\Throwable $e) {
+            $this->users->logSecurityEvent('system.backup', [
+                'route' => isset($_GET['route']) ? (string) $_GET['route'] : '',
+                'request_method' => isset($_SERVER['REQUEST_METHOD']) ? (string) $_SERVER['REQUEST_METHOD'] : 'GET',
+                'outcome' => 'failed',
+                'ip_address' => request_client_ip(),
+                'email' => (string) $email,
+                'user_id' => (int) $userId,
+                'referrer' => isset($_SERVER['HTTP_REFERER']) ? (string) $_SERVER['HTTP_REFERER'] : '',
+                'user_agent' => isset($_SERVER['HTTP_USER_AGENT']) ? (string) $_SERVER['HTTP_USER_AGENT'] : '',
+                'meta' => [
+                    'trigger_type' => (string) $triggerType,
+                    'message' => $e->getMessage(),
+                ],
+            ]);
+        }
     }
 
     private function verifyHoneypot()
@@ -516,6 +758,61 @@ class AuthController
         $currentEmail = trim((string) ($user['email'] ?? ''));
         $newEmail = trim((string) $newEmail);
         return $currentEmail !== '' && strcasecmp($currentEmail, $configEmail) === 0 && strcasecmp($currentEmail, $newEmail) !== 0;
+    }
+
+    private function persistMailCampaignFromRequest()
+    {
+        return $this->users->saveMailCampaign(
+            isset($_POST['campaign_id']) ? (int) $_POST['campaign_id'] : 0,
+            isset($_POST['campaign_name']) ? (string) $_POST['campaign_name'] : '',
+            isset($_POST['template_id']) ? (int) $_POST['template_id'] : 0,
+            isset($_POST['list_id']) ? (int) $_POST['list_id'] : 0,
+            isset($_POST['subject_override']) ? (string) $_POST['subject_override'] : '',
+            isset($_POST['content_html']) ? (string) $_POST['content_html'] : '',
+            isset($_POST['content_text']) ? (string) $_POST['content_text'] : ''
+        );
+    }
+
+    private function buildMailVariablesForRecipient(array $recipient, $campaignName, $contentHtml, $contentText)
+    {
+        $fullName = trim((string) ($recipient['full_name'] ?? ''));
+        $email = trim((string) ($recipient['email'] ?? ''));
+        $ministry = trim((string) ($recipient['ministry'] ?? ''));
+        $websiteUrl = trim((string) config('branding.website_url', 'https://www.laiglesiaenlacalle.co'));
+        $publicUrl = trim((string) config('app.public_url', ''));
+
+        return [
+            'app_short' => (string) config('branding.app_short', 'BIBLIASOFT'),
+            'app_name' => (string) config('branding.app_name', 'Biblia para todos'),
+            'church_name' => (string) config('branding.church_name', 'Fundación La Iglesia en la Calle'),
+            'website_url' => $websiteUrl,
+            'access_url' => $publicUrl !== '' ? $publicUrl : $websiteUrl,
+            'full_name' => $fullName !== '' ? $fullName : 'hermano(a)',
+            'email' => $email,
+            'ministry' => $ministry,
+            'ministry_line' => $ministry !== '' ? 'Ministerio: ' . $ministry : 'Ministerio: No especificado',
+            'campaign_name' => trim((string) $campaignName) !== '' ? trim((string) $campaignName) : 'Noticias',
+            'content_html' => trim((string) $contentHtml),
+            'content_text' => trim((string) $contentText),
+        ];
+    }
+
+    private function mailTemplateVariables()
+    {
+        return [
+            '{{full_name}}',
+            '{{email}}',
+            '{{ministry}}',
+            '{{ministry_line}}',
+            '{{campaign_name}}',
+            '{{content_html}}',
+            '{{content_text}}',
+            '{{app_short}}',
+            '{{app_name}}',
+            '{{church_name}}',
+            '{{website_url}}',
+            '{{access_url}}',
+        ];
     }
 
     private function logSecurity($eventType, $outcome, $email = '', array $meta = [], $userId = 0)

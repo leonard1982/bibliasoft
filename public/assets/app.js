@@ -1677,6 +1677,16 @@
         if (!keys.length) {
             return '';
         }
+        var preferredModule = keys.find(function (key) {
+            var rows = Array.isArray(grouped[key]) ? grouped[key] : [];
+            return rows.some(function (row) {
+                var label = String((row && row.source_label) || '').trim().toLowerCase();
+                return label.indexOf('expositivo enriquecido') !== -1;
+            });
+        });
+        if (preferredModule) {
+            return preferredModule;
+        }
         var preferred = keys.find(function (key) {
             var rows = Array.isArray(grouped[key]) ? grouped[key] : [];
             return rows.some(function (row) {

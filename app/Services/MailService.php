@@ -5,8 +5,9 @@ namespace App\Services;
 class MailService
 {
     private $config;
+    private $repository;
 
-    public function __construct(array $config = [])
+    public function __construct(array $config = [], UserDataRepository $repository = null)
     {
         $basePath = function_exists('config') ? (string) config('app.base_path', dirname(__DIR__, 2)) : dirname(__DIR__, 2);
         $defaults = [
@@ -19,6 +20,7 @@ class MailService
                 . DIRECTORY_SEPARATOR . 'mail.log',
         ];
         $this->config = array_merge($defaults, $config);
+        $this->repository = $repository;
     }
 
     public function enabled()
@@ -37,18 +39,61 @@ class MailService
             return false;
         }
 
+        $template = $this->repository ? $this->repository->getMailTemplateByKey('welcome_default') : null;
+        if (is_array($template)) {
+            $message = $this->composeTemplateMessage($template, $this->baseTemplateVariables([
+                'full_name' => $fullName !== '' ? $fullName : 'hermano(a)',
+                'email' => $toEmail,
+                'ministry' => $ministry,
+                'ministry_line' => $ministry !== '' ? 'Ministerio registrado: <strong>' . $this->escape($ministry) . '</strong>' : 'Ministerio registrado: <em>No especificado</em>',
+                'campaign_name' => 'Bienvenida',
+                'content_html' => '',
+                'content_text' => '',
+            ]));
+            return $this->sendMessage($toEmail, $fullName, $message['subject'], $message['html'], $message['text']);
+        }
+
         $appName = (string) config('branding.app_short', 'BIBLIASOFT');
         $platformName = (string) config('branding.app_name', 'Biblia para todos');
         $churchName = (string) config('branding.church_name', 'Fundación La Iglesia en la Calle');
         $siteUrl = trim((string) config('branding.website_url', 'https://www.laiglesiaenlacalle.co'));
         $publicUrl = trim((string) config('app.public_url', ''));
         $accessUrl = $publicUrl !== '' ? $publicUrl : $siteUrl;
-
         $subject = 'Bienvenido a ' . $appName;
         $html = $this->buildWelcomeHtml($fullName, $ministry, $appName, $platformName, $churchName, $siteUrl, $accessUrl);
         $text = $this->buildWelcomeText($fullName, $ministry, $appName, $platformName, $churchName, $siteUrl, $accessUrl);
-
         return $this->sendMessage($toEmail, $fullName, $subject, $html, $text);
+    }
+
+    public function composeTemplateMessage(array $template, array $variables = [], array $overrides = [])
+    {
+        $subjectTemplate = isset($overrides['subject_template']) && trim((string) $overrides['subject_template']) !== ''
+            ? trim((string) $overrides['subject_template'])
+            : trim((string) ($template['subject_template'] ?? ''));
+        $cssTemplate = isset($overrides['css_template']) ? (string) $overrides['css_template'] : (string) ($template['css_template'] ?? '');
+        $htmlTemplate = isset($overrides['html_template']) && trim((string) $overrides['html_template']) !== ''
+            ? (string) $overrides['html_template']
+            : (string) ($template['html_template'] ?? '');
+        $textTemplate = isset($overrides['text_template']) && trim((string) $overrides['text_template']) !== ''
+            ? (string) $overrides['text_template']
+            : (string) ($template['text_template'] ?? '');
+
+        $subject = $this->replaceTemplateVariables($subjectTemplate, $variables);
+        $htmlBody = $this->replaceTemplateVariables($htmlTemplate, $variables);
+        $textBody = $this->replaceTemplateVariables($textTemplate, $variables);
+
+        $html = '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>'
+            . $this->escape($subject) . '</title>';
+        if (trim($cssTemplate) !== '') {
+            $html .= '<style>' . $cssTemplate . '</style>';
+        }
+        $html .= '</head><body>' . $htmlBody . '</body></html>';
+
+        return [
+            'subject' => $subject,
+            'html' => $html,
+            'text' => trim($textBody) !== '' ? $textBody : strip_tags($htmlBody),
+        ];
     }
 
     public function sendMessage($toEmail, $toName, $subject, $htmlBody, $textBody = '')
@@ -157,6 +202,46 @@ class MailService
         return true;
     }
 
+    private function baseTemplateVariables(array $extra = [])
+    {
+        $appShort = (string) config('branding.app_short', 'BIBLIASOFT');
+        $appName = (string) config('branding.app_name', 'Biblia para todos');
+        $churchName = (string) config('branding.church_name', 'Fundación La Iglesia en la Calle');
+        $websiteUrl = trim((string) config('branding.website_url', 'https://www.laiglesiaenlacalle.co'));
+        $publicUrl = trim((string) config('app.public_url', ''));
+        $accessUrl = $publicUrl !== '' ? $publicUrl : $websiteUrl;
+
+        $base = [
+            'app_short' => $appShort,
+            'app_name' => $appName,
+            'church_name' => $churchName,
+            'website_url' => $websiteUrl,
+            'access_url' => $accessUrl,
+            'full_name' => '',
+            'email' => '',
+            'ministry' => '',
+            'ministry_line' => '',
+            'campaign_name' => 'Boletín',
+            'content_html' => '',
+            'content_text' => '',
+        ];
+
+        foreach ($extra as $key => $value) {
+            $base[(string) $key] = (string) $value;
+        }
+        return $base;
+    }
+
+    private function replaceTemplateVariables($template, array $variables)
+    {
+        $result = (string) $template;
+        foreach ($variables as $key => $value) {
+            $token = '{{' . trim((string) $key) . '}}';
+            $result = str_replace($token, (string) $value, $result);
+        }
+        return $result;
+    }
+
     private function buildWelcomeHtml($fullName, $ministry, $appName, $platformName, $churchName, $siteUrl, $accessUrl)
     {
         $name = $this->escape($fullName !== '' ? $fullName : 'hermano(a)');
@@ -209,12 +294,6 @@ class MailService
               </table>
               <p style="margin:0 0 10px;color:#4d6577;font-size:14px;line-height:1.7;">Este correo fue enviado por <strong style="color:#163447;">' . $this->escape($churchName) . '</strong>.</p>
               <p style="margin:0 0 22px;color:#4d6577;font-size:14px;line-height:1.7;">Visítanos en <a href="' . $this->escape($siteUrl) . '" style="color:#195e86;text-decoration:none;">' . $this->escape($siteUrl) . '</a></p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:22px 38px 28px;background:#f4f8fb;border-top:1px solid #dde8f0;">
-              <p style="margin:0 0 8px;font-size:13px;color:#3f6177;font-weight:bold;">' . $this->escape($appName) . ' · ' . $this->escape($churchName) . '</p>
-              <p style="margin:0;font-size:12px;line-height:1.6;color:#6b8394;">FUNDACIÓN LA IGLESIA EN LA CALLE · <a href="' . $this->escape($siteUrl) . '" style="color:#195e86;text-decoration:none;">www.laiglesiaenlacalle.co</a></p>
             </td>
           </tr>
         </table>

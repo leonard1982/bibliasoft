@@ -15,6 +15,7 @@ use App\Controllers\StudyCenterController;
 use App\Services\AIService;
 use App\Services\AnecdoteService;
 use App\Services\BibleRepository;
+use App\Services\BackupService;
 use App\Services\DailyVerseService;
 use App\Services\DevotionalService;
 use App\Services\DocumentExportService;
@@ -91,7 +92,12 @@ $searchService = new SearchService($bibleRepository, $userDataRepository, $sanit
 $aiService = new AIService(config('ai', []), $userDataRepository);
 $readingPlanService = new ReadingPlanService($bibleRepository, $userDataRepository);
 $moduleCatalogService = new ModuleCatalogService($userDataRepository, $sanitizer);
-$mailService = new MailService(config('mail', []));
+$mailService = new MailService(config('mail', []), $userDataRepository);
+$backupService = new BackupService(
+    $userDataRepository,
+    (string) config('paths.app_db'),
+    (string) config('app.base_path') . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'backups'
+);
 $recaptchaService = new RecaptchaService(config('recaptcha', []));
 $strongLexiconService = new StrongLexiconService(
     config('paths.lexicon'),
@@ -125,7 +131,7 @@ $bibleController = new BibleController($bibleRepository, $searchService);
 $readerController = new ReaderController($bibleRepository, $imageCardService, $userDataRepository);
 $homeDailyController = new HomeDailyController($dailyVerseService, $imageCardService, $userDataRepository, $readingPlanService);
 $devotionalController = new DevotionalController($devotionalService, $imageCardService);
-$authController = new AuthController($userDataRepository, $mailService, $recaptchaService);
+$authController = new AuthController($userDataRepository, $mailService, $recaptchaService, $backupService);
 $shareController = new ShareController();
 $studyCenterController = new StudyCenterController($bibleRepository, $userDataRepository);
 $anecdoteController = new AnecdoteController($anecdoteService);
@@ -255,6 +261,30 @@ try {
 
         case 'admin.users.delete':
             $authController->adminUserDelete();
+            break;
+
+        case 'admin.backups.create':
+            $authController->adminBackupCreate();
+            break;
+
+        case 'admin.backups.download':
+            $authController->adminBackupDownload();
+            break;
+
+        case 'admin.mail.templates.save':
+            $authController->adminMailTemplateSave();
+            break;
+
+        case 'admin.mail.lists.save':
+            $authController->adminMailListSave();
+            break;
+
+        case 'admin.mail.campaigns.save':
+            $authController->adminMailCampaignSave();
+            break;
+
+        case 'admin.mail.campaigns.send':
+            $authController->adminMailCampaignSend();
             break;
 
         case 'api.chapter':

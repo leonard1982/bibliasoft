@@ -83,11 +83,85 @@ CREATE INDEX IF NOT EXISTS idx_security_events_type_time ON security_events (eve
 CREATE INDEX IF NOT EXISTS idx_security_events_route_time ON security_events (route, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_security_events_ip_time ON security_events (ip_address, created_at DESC);
 
+CREATE TABLE IF NOT EXISTS system_backups (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    backup_date TEXT NOT NULL,
+    file_name TEXT NOT NULL,
+    file_path TEXT NOT NULL,
+    size_bytes INTEGER NOT NULL DEFAULT 0,
+    checksum TEXT NOT NULL DEFAULT '',
+    trigger_type TEXT NOT NULL DEFAULT 'login',
+    triggered_by_user_id INTEGER NOT NULL DEFAULT 0,
+    triggered_by_email TEXT NOT NULL DEFAULT '',
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_system_backups_day_file ON system_backups (backup_date, file_name);
+CREATE INDEX IF NOT EXISTS idx_system_backups_created_at ON system_backups (created_at DESC);
+
 CREATE TABLE IF NOT EXISTS cloud_sync_backups (
     user_id INTEGER PRIMARY KEY,
     payload_json TEXT NOT NULL,
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS mail_templates (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    template_key TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL,
+    category TEXT NOT NULL DEFAULT 'campaign',
+    subject_template TEXT NOT NULL DEFAULT '',
+    css_template TEXT NOT NULL DEFAULT '',
+    html_template TEXT NOT NULL DEFAULT '',
+    text_template TEXT NOT NULL DEFAULT '',
+    enabled INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_mail_templates_category ON mail_templates (category, updated_at DESC);
+
+CREATE TABLE IF NOT EXISTS mailing_lists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE,
+    description TEXT NOT NULL DEFAULT '',
+    list_type TEXT NOT NULL DEFAULT 'all_active',
+    ministry_filter TEXT NOT NULL DEFAULT '',
+    manual_emails TEXT NOT NULL DEFAULT '',
+    active_only INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_mailing_lists_type ON mailing_lists (list_type, updated_at DESC);
+
+CREATE TABLE IF NOT EXISTS mail_campaigns (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    template_id INTEGER NOT NULL DEFAULT 0,
+    list_id INTEGER NOT NULL DEFAULT 0,
+    subject_override TEXT NOT NULL DEFAULT '',
+    content_html TEXT NOT NULL DEFAULT '',
+    content_text TEXT NOT NULL DEFAULT '',
+    status TEXT NOT NULL DEFAULT 'draft',
+    last_sent_at TEXT,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_mail_campaigns_status ON mail_campaigns (status, updated_at DESC);
+
+CREATE TABLE IF NOT EXISTS mail_campaign_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    campaign_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL DEFAULT 0,
+    email TEXT NOT NULL,
+    outcome TEXT NOT NULL DEFAULT '',
+    error_message TEXT NOT NULL DEFAULT '',
+    sent_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_mail_campaign_logs_campaign ON mail_campaign_logs (campaign_id, sent_at DESC);
 
 CREATE TABLE IF NOT EXISTS favorite_folders (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

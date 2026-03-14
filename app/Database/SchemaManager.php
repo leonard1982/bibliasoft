@@ -35,6 +35,8 @@ class SchemaManager
         self::migrateAiCache($pdo);
         self::migrateUsers($pdo);
         self::migrateSecurityEvents($pdo);
+        self::migrateSystemBackups($pdo);
+        self::migrateMailing($pdo);
         self::migrateDailyCache($pdo);
         self::migrateDevotionals($pdo);
         self::migrateUserPrefs($pdo);
@@ -330,6 +332,328 @@ class SchemaManager
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_security_events_type_time ON security_events (event_type, created_at DESC)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_security_events_route_time ON security_events (route, created_at DESC)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_security_events_ip_time ON security_events (ip_address, created_at DESC)');
+    }
+
+    private static function migrateSystemBackups(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'system_backups')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS system_backups (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                backup_date TEXT NOT NULL,
+                file_name TEXT NOT NULL,
+                file_path TEXT NOT NULL,
+                size_bytes INTEGER NOT NULL DEFAULT 0,
+                checksum TEXT NOT NULL DEFAULT \'\',
+                trigger_type TEXT NOT NULL DEFAULT \'login\',
+                triggered_by_user_id INTEGER NOT NULL DEFAULT 0,
+                triggered_by_email TEXT NOT NULL DEFAULT \'\',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'system_backups');
+            if (!isset($columns['backup_date'])) {
+                $pdo->exec("ALTER TABLE system_backups ADD COLUMN backup_date TEXT");
+            }
+            if (!isset($columns['file_name'])) {
+                $pdo->exec("ALTER TABLE system_backups ADD COLUMN file_name TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['file_path'])) {
+                $pdo->exec("ALTER TABLE system_backups ADD COLUMN file_path TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['size_bytes'])) {
+                $pdo->exec('ALTER TABLE system_backups ADD COLUMN size_bytes INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['checksum'])) {
+                $pdo->exec("ALTER TABLE system_backups ADD COLUMN checksum TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['trigger_type'])) {
+                $pdo->exec("ALTER TABLE system_backups ADD COLUMN trigger_type TEXT NOT NULL DEFAULT 'login'");
+            }
+            if (!isset($columns['triggered_by_user_id'])) {
+                $pdo->exec('ALTER TABLE system_backups ADD COLUMN triggered_by_user_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['triggered_by_email'])) {
+                $pdo->exec("ALTER TABLE system_backups ADD COLUMN triggered_by_email TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['created_at'])) {
+                $pdo->exec('ALTER TABLE system_backups ADD COLUMN created_at TEXT');
+            }
+        }
+
+        $pdo->exec("UPDATE system_backups
+            SET backup_date = COALESCE(NULLIF(backup_date, ''), substr(COALESCE(created_at, CURRENT_TIMESTAMP), 1, 10)),
+                file_name = COALESCE(file_name, ''),
+                file_path = COALESCE(file_path, ''),
+                size_bytes = COALESCE(size_bytes, 0),
+                checksum = COALESCE(checksum, ''),
+                trigger_type = COALESCE(trigger_type, 'login'),
+                triggered_by_user_id = COALESCE(triggered_by_user_id, 0),
+                triggered_by_email = COALESCE(triggered_by_email, ''),
+                created_at = COALESCE(created_at, CURRENT_TIMESTAMP)");
+        $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_system_backups_day_file ON system_backups (backup_date, file_name)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_system_backups_created_at ON system_backups (created_at DESC)');
+    }
+
+    private static function migrateMailing(\PDO $pdo)
+    {
+        if (!self::tableExists($pdo, 'mail_templates')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS mail_templates (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                template_key TEXT NOT NULL UNIQUE,
+                name TEXT NOT NULL,
+                category TEXT NOT NULL DEFAULT \'campaign\',
+                subject_template TEXT NOT NULL DEFAULT \'\',
+                css_template TEXT NOT NULL DEFAULT \'\',
+                html_template TEXT NOT NULL DEFAULT \'\',
+                text_template TEXT NOT NULL DEFAULT \'\',
+                enabled INTEGER NOT NULL DEFAULT 1,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'mail_templates');
+            if (!isset($columns['template_key'])) {
+                $pdo->exec("ALTER TABLE mail_templates ADD COLUMN template_key TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['name'])) {
+                $pdo->exec("ALTER TABLE mail_templates ADD COLUMN name TEXT NOT NULL DEFAULT 'Plantilla'");
+            }
+            if (!isset($columns['category'])) {
+                $pdo->exec("ALTER TABLE mail_templates ADD COLUMN category TEXT NOT NULL DEFAULT 'campaign'");
+            }
+            if (!isset($columns['subject_template'])) {
+                $pdo->exec("ALTER TABLE mail_templates ADD COLUMN subject_template TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['css_template'])) {
+                $pdo->exec("ALTER TABLE mail_templates ADD COLUMN css_template TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['html_template'])) {
+                $pdo->exec("ALTER TABLE mail_templates ADD COLUMN html_template TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['text_template'])) {
+                $pdo->exec("ALTER TABLE mail_templates ADD COLUMN text_template TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['enabled'])) {
+                $pdo->exec('ALTER TABLE mail_templates ADD COLUMN enabled INTEGER NOT NULL DEFAULT 1');
+            }
+            if (!isset($columns['created_at'])) {
+                $pdo->exec('ALTER TABLE mail_templates ADD COLUMN created_at TEXT');
+            }
+            if (!isset($columns['updated_at'])) {
+                $pdo->exec('ALTER TABLE mail_templates ADD COLUMN updated_at TEXT');
+            }
+        }
+        $pdo->exec("UPDATE mail_templates
+            SET template_key = COALESCE(template_key, ''),
+                name = COALESCE(name, 'Plantilla'),
+                category = COALESCE(category, 'campaign'),
+                subject_template = COALESCE(subject_template, ''),
+                css_template = COALESCE(css_template, ''),
+                html_template = COALESCE(html_template, ''),
+                text_template = COALESCE(text_template, ''),
+                enabled = CASE WHEN enabled = 0 THEN 0 ELSE 1 END,
+                created_at = COALESCE(created_at, CURRENT_TIMESTAMP),
+                updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
+        $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_mail_templates_key ON mail_templates (template_key)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_mail_templates_category ON mail_templates (category, updated_at DESC)');
+
+        if (!self::tableExists($pdo, 'mailing_lists')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS mailing_lists (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL UNIQUE,
+                description TEXT NOT NULL DEFAULT \'\',
+                list_type TEXT NOT NULL DEFAULT \'all_active\',
+                ministry_filter TEXT NOT NULL DEFAULT \'\',
+                manual_emails TEXT NOT NULL DEFAULT \'\',
+                active_only INTEGER NOT NULL DEFAULT 1,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'mailing_lists');
+            if (!isset($columns['name'])) {
+                $pdo->exec("ALTER TABLE mailing_lists ADD COLUMN name TEXT NOT NULL DEFAULT 'Lista'");
+            }
+            if (!isset($columns['description'])) {
+                $pdo->exec("ALTER TABLE mailing_lists ADD COLUMN description TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['list_type'])) {
+                $pdo->exec("ALTER TABLE mailing_lists ADD COLUMN list_type TEXT NOT NULL DEFAULT 'all_active'");
+            }
+            if (!isset($columns['ministry_filter'])) {
+                $pdo->exec("ALTER TABLE mailing_lists ADD COLUMN ministry_filter TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['manual_emails'])) {
+                $pdo->exec("ALTER TABLE mailing_lists ADD COLUMN manual_emails TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['active_only'])) {
+                $pdo->exec('ALTER TABLE mailing_lists ADD COLUMN active_only INTEGER NOT NULL DEFAULT 1');
+            }
+            if (!isset($columns['created_at'])) {
+                $pdo->exec('ALTER TABLE mailing_lists ADD COLUMN created_at TEXT');
+            }
+            if (!isset($columns['updated_at'])) {
+                $pdo->exec('ALTER TABLE mailing_lists ADD COLUMN updated_at TEXT');
+            }
+        }
+        $pdo->exec("UPDATE mailing_lists
+            SET description = COALESCE(description, ''),
+                list_type = COALESCE(list_type, 'all_active'),
+                ministry_filter = COALESCE(ministry_filter, ''),
+                manual_emails = COALESCE(manual_emails, ''),
+                active_only = CASE WHEN active_only = 0 THEN 0 ELSE 1 END,
+                created_at = COALESCE(created_at, CURRENT_TIMESTAMP),
+                updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
+        $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_mailing_lists_name ON mailing_lists (name)');
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_mailing_lists_type ON mailing_lists (list_type, updated_at DESC)');
+
+        if (!self::tableExists($pdo, 'mail_campaigns')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS mail_campaigns (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                template_id INTEGER NOT NULL DEFAULT 0,
+                list_id INTEGER NOT NULL DEFAULT 0,
+                subject_override TEXT NOT NULL DEFAULT \'\',
+                content_html TEXT NOT NULL DEFAULT \'\',
+                content_text TEXT NOT NULL DEFAULT \'\',
+                status TEXT NOT NULL DEFAULT \'draft\',
+                last_sent_at TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'mail_campaigns');
+            if (!isset($columns['name'])) {
+                $pdo->exec("ALTER TABLE mail_campaigns ADD COLUMN name TEXT NOT NULL DEFAULT 'Campaña'");
+            }
+            if (!isset($columns['template_id'])) {
+                $pdo->exec('ALTER TABLE mail_campaigns ADD COLUMN template_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['list_id'])) {
+                $pdo->exec('ALTER TABLE mail_campaigns ADD COLUMN list_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['subject_override'])) {
+                $pdo->exec("ALTER TABLE mail_campaigns ADD COLUMN subject_override TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['content_html'])) {
+                $pdo->exec("ALTER TABLE mail_campaigns ADD COLUMN content_html TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['content_text'])) {
+                $pdo->exec("ALTER TABLE mail_campaigns ADD COLUMN content_text TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['status'])) {
+                $pdo->exec("ALTER TABLE mail_campaigns ADD COLUMN status TEXT NOT NULL DEFAULT 'draft'");
+            }
+            if (!isset($columns['last_sent_at'])) {
+                $pdo->exec('ALTER TABLE mail_campaigns ADD COLUMN last_sent_at TEXT');
+            }
+            if (!isset($columns['created_at'])) {
+                $pdo->exec('ALTER TABLE mail_campaigns ADD COLUMN created_at TEXT');
+            }
+            if (!isset($columns['updated_at'])) {
+                $pdo->exec('ALTER TABLE mail_campaigns ADD COLUMN updated_at TEXT');
+            }
+        }
+        $pdo->exec("UPDATE mail_campaigns
+            SET subject_override = COALESCE(subject_override, ''),
+                content_html = COALESCE(content_html, ''),
+                content_text = COALESCE(content_text, ''),
+                status = COALESCE(status, 'draft'),
+                created_at = COALESCE(created_at, CURRENT_TIMESTAMP),
+                updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_mail_campaigns_status ON mail_campaigns (status, updated_at DESC)');
+
+        if (!self::tableExists($pdo, 'mail_campaign_logs')) {
+            $pdo->exec('CREATE TABLE IF NOT EXISTS mail_campaign_logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                campaign_id INTEGER NOT NULL,
+                user_id INTEGER NOT NULL DEFAULT 0,
+                email TEXT NOT NULL,
+                outcome TEXT NOT NULL DEFAULT \'\',
+                error_message TEXT NOT NULL DEFAULT \'\',
+                sent_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )');
+        } else {
+            $columns = self::columns($pdo, 'mail_campaign_logs');
+            if (!isset($columns['campaign_id'])) {
+                $pdo->exec('ALTER TABLE mail_campaign_logs ADD COLUMN campaign_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['user_id'])) {
+                $pdo->exec('ALTER TABLE mail_campaign_logs ADD COLUMN user_id INTEGER NOT NULL DEFAULT 0');
+            }
+            if (!isset($columns['email'])) {
+                $pdo->exec("ALTER TABLE mail_campaign_logs ADD COLUMN email TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['outcome'])) {
+                $pdo->exec("ALTER TABLE mail_campaign_logs ADD COLUMN outcome TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['error_message'])) {
+                $pdo->exec("ALTER TABLE mail_campaign_logs ADD COLUMN error_message TEXT NOT NULL DEFAULT ''");
+            }
+            if (!isset($columns['sent_at'])) {
+                $pdo->exec('ALTER TABLE mail_campaign_logs ADD COLUMN sent_at TEXT');
+            }
+        }
+        $pdo->exec("UPDATE mail_campaign_logs
+            SET email = COALESCE(email, ''),
+                outcome = COALESCE(outcome, ''),
+                error_message = COALESCE(error_message, ''),
+                sent_at = COALESCE(sent_at, CURRENT_TIMESTAMP)");
+        $pdo->exec('CREATE INDEX IF NOT EXISTS idx_mail_campaign_logs_campaign ON mail_campaign_logs (campaign_id, sent_at DESC)');
+
+        self::seedDefaultMailData($pdo);
+    }
+
+    private static function seedDefaultMailData(\PDO $pdo)
+    {
+        $welcomeSubject = 'Bienvenido a {{app_short}}';
+        $welcomeCss = "body{margin:0;padding:0;background:#eef4f8;font-family:Verdana,Segoe UI,Arial,sans-serif;color:#163447}.wrap{max-width:720px;margin:0 auto;background:#fff;border-radius:26px;overflow:hidden;box-shadow:0 20px 50px rgba(12,38,55,.14)}.hero{padding:34px 38px 28px;background:linear-gradient(135deg,#0f2431 0%,#18405a 55%,#1f6a94 100%)}.tag{display:inline-block;padding:8px 14px;border:1px solid rgba(220,240,252,.35);border-radius:999px;color:#dcedf8;font-size:12px;letter-spacing:.12em;text-transform:uppercase}.hero h1{margin:20px 0 10px;font-size:34px;line-height:1.08;color:#fff;font-family:Georgia,Times New Roman,serif}.hero p{margin:0;color:#d8ebf7;font-size:17px;line-height:1.6}.body{padding:34px 38px 18px}.body p{color:#4d6577;font-size:15px;line-height:1.7}.body .hello{margin:0 0 16px;font-size:18px;line-height:1.6;color:#163447}.box{border:1px solid #d6e5ef;border-radius:18px;background:linear-gradient(180deg,#f7fbfe,#eef5fa);padding:20px 22px;margin:10px 0 24px}.meta{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#507089;margin-bottom:10px}.cta{display:inline-block;padding:14px 22px;border-radius:14px;background:#195e86;color:#fff;text-decoration:none;font-size:15px;font-weight:bold}.footer{padding:22px 38px 28px;background:#f4f8fb;border-top:1px solid #dde8f0}.footer p{margin:0 0 8px;font-size:13px;color:#3f6177;font-weight:bold}.footer small{font-size:12px;line-height:1.6;color:#6b8394}.muted{color:#4d6577}";
+        $welcomeHtml = "<div class=\"wrap\"><div class=\"hero\"><div class=\"tag\">Plataforma de estudio bíblico</div><h1>Bienvenido a {{app_short}}</h1><p>Tu cuenta ya quedó activa en {{app_name}}. Nos alegra servirte en tu crecimiento bíblico, devocional y ministerial.</p></div><div class=\"body\"><p class=\"hello\">Hola <strong>{{full_name}}</strong>,</p><p>Gracias por registrarte en <strong>{{app_short}}</strong>. Desde ahora puedes estudiar la Palabra con lectura guiada, herramientas de apoyo, notas, favoritos, planes y recursos para tu servicio.</p><p>{{ministry_line}}</p><div class=\"box\"><div class=\"meta\">Siguiente paso</div><div>Ingresa a tu cuenta y comienza por tu lectura diaria, un plan de estudio o la preparación de tus enseñanzas.</div></div><p><a class=\"cta\" href=\"{{access_url}}\">Entrar a {{app_short}}</a></p><p>Este correo fue enviado por <strong>{{church_name}}</strong>.</p><p>Visítanos en <a href=\"{{website_url}}\">{{website_url}}</a></p></div><div class=\"footer\"><p>{{app_short}} · {{church_name}}</p><small>FUNDACIÓN LA IGLESIA EN LA CALLE · <a href=\"{{website_url}}\">www.laiglesiaenlacalle.co</a></small></div></div>";
+        $welcomeText = "Bienvenido a {{app_short}}\n\nHola {{full_name}},\n\nTu cuenta ya quedó activa en {{app_name}}.\nMinisterio: {{ministry}}\nIngresa aquí: {{access_url}}\n\n{{church_name}}\n{{website_url}}";
+        $campaignSubject = '{{campaign_name}} | {{app_short}}';
+        $campaignCss = "body{margin:0;padding:0;background:#eef4f8;font-family:Verdana,Segoe UI,Arial,sans-serif;color:#163447}.wrap{max-width:760px;margin:0 auto;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 20px 50px rgba(12,38,55,.14)}.hero{padding:28px 34px;background:linear-gradient(135deg,#133247 0%,#1d5c7d 55%,#2b86b1 100%);color:#fff}.hero h1{margin:0 0 8px;font-size:30px;line-height:1.12;font-family:Georgia,Times New Roman,serif}.hero p{margin:0;color:#d9eef8;font-size:16px;line-height:1.6}.body{padding:30px 34px}.body p,.body li{color:#425b6d;font-size:15px;line-height:1.7}.footer{padding:20px 34px;background:#f4f8fb;border-top:1px solid #dde8f0;color:#6b8394;font-size:12px;line-height:1.6}.chip{display:inline-block;padding:6px 12px;border:1px solid #b9d6ea;border-radius:999px;color:#1d5c7d;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}";
+        $campaignHtml = "<div class=\"wrap\"><div class=\"hero\"><div class=\"chip\">Noticias y actualizaciones</div><h1>{{campaign_name}}</h1><p>{{app_name}} · {{church_name}}</p></div><div class=\"body\"><p>Hola <strong>{{full_name}}</strong>,</p>{{content_html}}<p>Puedes seguir creciendo y estudiando en <a href=\"{{access_url}}\">{{access_url}}</a>.</p></div><div class=\"footer\">Correo enviado por {{church_name}} · <a href=\"{{website_url}}\">{{website_url}}</a></div></div>";
+        $campaignText = "{{campaign_name}}\n\nHola {{full_name}},\n\n{{content_text}}\n\n{{church_name}}\n{{website_url}}\n{{access_url}}";
+
+        $stmt = $pdo->prepare(
+            'INSERT OR IGNORE INTO mail_templates
+             (template_key, name, category, subject_template, css_template, html_template, text_template, enabled, created_at, updated_at)
+             VALUES
+             (:template_key, :name, :category, :subject_template, :css_template, :html_template, :text_template, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':template_key' => 'welcome_default',
+            ':name' => 'Bienvenida principal',
+            ':category' => 'welcome',
+            ':subject_template' => $welcomeSubject,
+            ':css_template' => $welcomeCss,
+            ':html_template' => $welcomeHtml,
+            ':text_template' => $welcomeText,
+        ]);
+        $stmt->execute([
+            ':template_key' => 'news_default',
+            ':name' => 'Noticias general',
+            ':category' => 'campaign',
+            ':subject_template' => $campaignSubject,
+            ':css_template' => $campaignCss,
+            ':html_template' => $campaignHtml,
+            ':text_template' => $campaignText,
+        ]);
+
+        $listStmt = $pdo->prepare(
+            'INSERT OR IGNORE INTO mailing_lists
+             (name, description, list_type, ministry_filter, manual_emails, active_only, created_at, updated_at)
+             VALUES
+             (:name, :description, :list_type, :ministry_filter, :manual_emails, :active_only, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $listStmt->execute([
+            ':name' => 'Todos los activos',
+            ':description' => 'Todos los usuarios activos del sistema.',
+            ':list_type' => 'all_active',
+            ':ministry_filter' => '',
+            ':manual_emails' => '',
+            ':active_only' => 1,
+        ]);
     }
 
     private static function migrateDevotionals(\PDO $pdo)

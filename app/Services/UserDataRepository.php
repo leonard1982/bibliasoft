@@ -2542,6 +2542,554 @@ class UserDataRepository
         return $ok;
     }
 
+    public function getLatestSystemBackupForDate($backupDate)
+    {
+        if (!$this->hasTable('system_backups')) {
+            return null;
+        }
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, backup_date, file_name, file_path, size_bytes, checksum, trigger_type, triggered_by_user_id, triggered_by_email, created_at
+             FROM system_backups
+             WHERE backup_date = :backup_date
+             ORDER BY id DESC
+             LIMIT 1'
+        );
+        $stmt->execute([':backup_date' => trim((string) $backupDate)]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return is_array($row) ? $row : null;
+    }
+
+    public function createSystemBackupRecord(array $payload)
+    {
+        if (!$this->hasTable('system_backups')) {
+            return 0;
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO system_backups
+             (backup_date, file_name, file_path, size_bytes, checksum, trigger_type, triggered_by_user_id, triggered_by_email, created_at)
+             VALUES
+             (:backup_date, :file_name, :file_path, :size_bytes, :checksum, :trigger_type, :triggered_by_user_id, :triggered_by_email, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':backup_date' => trim((string) ($payload['backup_date'] ?? '')),
+            ':file_name' => trim((string) ($payload['file_name'] ?? '')),
+            ':file_path' => trim((string) ($payload['file_path'] ?? '')),
+            ':size_bytes' => max(0, (int) ($payload['size_bytes'] ?? 0)),
+            ':checksum' => trim((string) ($payload['checksum'] ?? '')),
+            ':trigger_type' => trim((string) ($payload['trigger_type'] ?? 'login')),
+            ':triggered_by_user_id' => (int) ($payload['triggered_by_user_id'] ?? 0),
+            ':triggered_by_email' => trim((string) ($payload['triggered_by_email'] ?? '')),
+        ]);
+        return (int) $this->globalDb()->lastInsertId();
+    }
+
+    public function getSystemBackupsPage($page = 1, $perPage = 15)
+    {
+        if (!$this->hasTable('system_backups')) {
+            return ['rows' => [], 'total' => 0, 'page' => 1, 'per_page' => $perPage, 'pages' => 1];
+        }
+
+        $page = max(1, (int) $page);
+        $perPage = max(5, min(50, (int) $perPage));
+        $total = (int) $this->globalDb()->query('SELECT COUNT(*) FROM system_backups')->fetchColumn();
+        $offset = ($page - 1) * $perPage;
+        if ($offset >= $total && $total > 0) {
+            $page = max(1, (int) ceil($total / $perPage));
+            $offset = ($page - 1) * $perPage;
+        }
+
+        $stmt = $this->globalDb()->query(
+            'SELECT id, backup_date, file_name, file_path, size_bytes, checksum, trigger_type, triggered_by_user_id, triggered_by_email, created_at
+             FROM system_backups
+             ORDER BY id DESC
+             LIMIT ' . $perPage . ' OFFSET ' . $offset
+        );
+        $rows = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
+        return [
+            'rows' => is_array($rows) ? $rows : [],
+            'total' => $total,
+            'page' => $page,
+            'per_page' => $perPage,
+            'pages' => max(1, (int) ceil(max(1, $total) / $perPage)),
+        ];
+    }
+
+    public function getSystemBackupById($id)
+    {
+        if (!$this->hasTable('system_backups')) {
+            return null;
+        }
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, backup_date, file_name, file_path, size_bytes, checksum, trigger_type, triggered_by_user_id, triggered_by_email, created_at
+             FROM system_backups
+             WHERE id = :id
+             LIMIT 1'
+        );
+        $stmt->execute([':id' => (int) $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return is_array($row) ? $row : null;
+    }
+
+    public function getMailTemplates($category = 'all')
+    {
+        if (!$this->hasTable('mail_templates')) {
+            return [];
+        }
+
+        $params = [];
+        $sql = 'SELECT id, template_key, name, category, subject_template, css_template, html_template, text_template, enabled, created_at, updated_at
+                FROM mail_templates';
+        $category = trim((string) $category);
+        if ($category !== '' && $category !== 'all') {
+            $sql .= ' WHERE category = :category';
+            $params[':category'] = $category;
+        }
+        $sql .= ' ORDER BY category ASC, updated_at DESC, id DESC';
+        $stmt = $this->globalDb()->prepare($sql);
+        $stmt->execute($params);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return is_array($rows) ? $rows : [];
+    }
+
+    public function getMailTemplateById($id)
+    {
+        if (!$this->hasTable('mail_templates')) {
+            return null;
+        }
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, template_key, name, category, subject_template, css_template, html_template, text_template, enabled, created_at, updated_at
+             FROM mail_templates
+             WHERE id = :id
+             LIMIT 1'
+        );
+        $stmt->execute([':id' => (int) $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return is_array($row) ? $row : null;
+    }
+
+    public function getMailTemplateByKey($key)
+    {
+        if (!$this->hasTable('mail_templates')) {
+            return null;
+        }
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, template_key, name, category, subject_template, css_template, html_template, text_template, enabled, created_at, updated_at
+             FROM mail_templates
+             WHERE template_key = :template_key
+             LIMIT 1'
+        );
+        $stmt->execute([':template_key' => $this->normalizeTemplateKey($key)]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return is_array($row) ? $row : null;
+    }
+
+    public function saveMailTemplate($id, $key, $name, $category, $subjectTemplate, $cssTemplate, $htmlTemplate, $textTemplate, $enabled = 1)
+    {
+        if (!$this->hasTable('mail_templates')) {
+            throw new \RuntimeException('La tabla de plantillas de correo no existe.');
+        }
+
+        $id = (int) $id;
+        $key = $this->normalizeTemplateKey($key);
+        $name = trim((string) $name);
+        $category = trim((string) $category) === 'welcome' ? 'welcome' : 'campaign';
+        $subjectTemplate = trim((string) $subjectTemplate);
+        $cssTemplate = trim((string) $cssTemplate);
+        $htmlTemplate = trim((string) $htmlTemplate);
+        $textTemplate = trim((string) $textTemplate);
+        $enabled = $enabled ? 1 : 0;
+
+        if ($key === '') {
+            throw new \InvalidArgumentException('La clave de plantilla es obligatoria.');
+        }
+        if ($name === '') {
+            throw new \InvalidArgumentException('El nombre de la plantilla es obligatorio.');
+        }
+        if ($subjectTemplate === '') {
+            throw new \InvalidArgumentException('El asunto de la plantilla es obligatorio.');
+        }
+        if ($htmlTemplate === '') {
+            throw new \InvalidArgumentException('El HTML de la plantilla es obligatorio.');
+        }
+
+        $existing = $this->getMailTemplateByKey($key);
+        if ($existing && (int) ($existing['id'] ?? 0) !== $id) {
+            throw new \InvalidArgumentException('Ya existe una plantilla con esa clave.');
+        }
+
+        if ($id > 0) {
+            $stmt = $this->globalDb()->prepare(
+                'UPDATE mail_templates
+                 SET template_key = :template_key,
+                     name = :name,
+                     category = :category,
+                     subject_template = :subject_template,
+                     css_template = :css_template,
+                     html_template = :html_template,
+                     text_template = :text_template,
+                     enabled = :enabled,
+                     updated_at = CURRENT_TIMESTAMP
+                 WHERE id = :id'
+            );
+            $stmt->execute([
+                ':id' => $id,
+                ':template_key' => $key,
+                ':name' => $name,
+                ':category' => $category,
+                ':subject_template' => $subjectTemplate,
+                ':css_template' => $cssTemplate,
+                ':html_template' => $htmlTemplate,
+                ':text_template' => $textTemplate,
+                ':enabled' => $enabled,
+            ]);
+            return $id;
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO mail_templates
+             (template_key, name, category, subject_template, css_template, html_template, text_template, enabled, created_at, updated_at)
+             VALUES
+             (:template_key, :name, :category, :subject_template, :css_template, :html_template, :text_template, :enabled, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':template_key' => $key,
+            ':name' => $name,
+            ':category' => $category,
+            ':subject_template' => $subjectTemplate,
+            ':css_template' => $cssTemplate,
+            ':html_template' => $htmlTemplate,
+            ':text_template' => $textTemplate,
+            ':enabled' => $enabled,
+        ]);
+        return (int) $this->globalDb()->lastInsertId();
+    }
+
+    public function getMailingLists()
+    {
+        if (!$this->hasTable('mailing_lists')) {
+            return [];
+        }
+        $stmt = $this->globalDb()->query(
+            'SELECT id, name, description, list_type, ministry_filter, manual_emails, active_only, created_at, updated_at
+             FROM mailing_lists
+             ORDER BY updated_at DESC, id DESC'
+        );
+        $rows = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
+        return is_array($rows) ? $rows : [];
+    }
+
+    public function getMailingListById($id)
+    {
+        if (!$this->hasTable('mailing_lists')) {
+            return null;
+        }
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, name, description, list_type, ministry_filter, manual_emails, active_only, created_at, updated_at
+             FROM mailing_lists
+             WHERE id = :id
+             LIMIT 1'
+        );
+        $stmt->execute([':id' => (int) $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return is_array($row) ? $row : null;
+    }
+
+    public function saveMailingList($id, $name, $description, $listType, $ministryFilter = '', $manualEmails = '', $activeOnly = 1)
+    {
+        if (!$this->hasTable('mailing_lists')) {
+            throw new \RuntimeException('La tabla de listas de correo no existe.');
+        }
+
+        $id = (int) $id;
+        $name = trim((string) $name);
+        $description = trim((string) $description);
+        $listType = $this->normalizeMailingListType($listType);
+        $ministryFilter = trim((string) $ministryFilter);
+        $manualEmails = $this->normalizeManualEmails($manualEmails);
+        $activeOnly = $activeOnly ? 1 : 0;
+
+        if ($name === '') {
+            throw new \InvalidArgumentException('El nombre de la lista es obligatorio.');
+        }
+        if ($listType === 'ministry' && $ministryFilter === '') {
+            throw new \InvalidArgumentException('Debes indicar el ministerio para esa lista.');
+        }
+        if ($listType === 'manual' && $manualEmails === '') {
+            throw new \InvalidArgumentException('Debes indicar al menos un correo para la lista manual.');
+        }
+
+        $lookup = $this->globalDb()->prepare(
+            'SELECT id FROM mailing_lists WHERE name = :name COLLATE NOCASE LIMIT 1'
+        );
+        $lookup->execute([':name' => $name]);
+        $existingId = (int) $lookup->fetchColumn();
+        if ($existingId > 0 && $existingId !== $id) {
+            throw new \InvalidArgumentException('Ya existe una lista con ese nombre.');
+        }
+
+        if ($id > 0) {
+            $stmt = $this->globalDb()->prepare(
+                'UPDATE mailing_lists
+                 SET name = :name,
+                     description = :description,
+                     list_type = :list_type,
+                     ministry_filter = :ministry_filter,
+                     manual_emails = :manual_emails,
+                     active_only = :active_only,
+                     updated_at = CURRENT_TIMESTAMP
+                 WHERE id = :id'
+            );
+            $stmt->execute([
+                ':id' => $id,
+                ':name' => $name,
+                ':description' => $description,
+                ':list_type' => $listType,
+                ':ministry_filter' => $ministryFilter,
+                ':manual_emails' => $manualEmails,
+                ':active_only' => $activeOnly,
+            ]);
+            return $id;
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO mailing_lists
+             (name, description, list_type, ministry_filter, manual_emails, active_only, created_at, updated_at)
+             VALUES
+             (:name, :description, :list_type, :ministry_filter, :manual_emails, :active_only, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':name' => $name,
+            ':description' => $description,
+            ':list_type' => $listType,
+            ':ministry_filter' => $ministryFilter,
+            ':manual_emails' => $manualEmails,
+            ':active_only' => $activeOnly,
+        ]);
+        return (int) $this->globalDb()->lastInsertId();
+    }
+
+    public function resolveMailingListRecipients($listId, $limit = 2500)
+    {
+        $list = $this->getMailingListById($listId);
+        if (!$list) {
+            return [];
+        }
+
+        $limit = max(1, min(5000, (int) $limit));
+        $type = $this->normalizeMailingListType((string) ($list['list_type'] ?? 'all_active'));
+        $activeOnly = (int) ($list['active_only'] ?? 1) === 1;
+        $rows = [];
+
+        if ($type === 'manual') {
+            $emails = preg_split('/[\s,;\r\n]+/', (string) ($list['manual_emails'] ?? ''));
+            $seen = [];
+            foreach ((array) $emails as $email) {
+                $email = trim((string) $email);
+                if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    continue;
+                }
+                $key = strtolower($email);
+                if (isset($seen[$key])) {
+                    continue;
+                }
+                $seen[$key] = true;
+                $user = $this->getUserByEmail($email);
+                if ($activeOnly && $user && (int) ($user['active'] ?? 1) !== 1) {
+                    continue;
+                }
+                $rows[] = [
+                    'id' => (int) ($user['id'] ?? 0),
+                    'email' => $email,
+                    'full_name' => trim((string) ($user['full_name'] ?? '')),
+                    'ministry' => trim((string) ($user['ministry'] ?? '')),
+                    'active' => $user ? (int) ($user['active'] ?? 1) : 1,
+                ];
+                if (count($rows) >= $limit) {
+                    break;
+                }
+            }
+            return $rows;
+        }
+
+        $where = ['email <> \'\''];
+        $params = [];
+        if ($activeOnly) {
+            $where[] = 'active = 1';
+        }
+        if ($type === 'ministry') {
+            $where[] = 'ministry LIKE :ministry';
+            $params[':ministry'] = '%' . trim((string) ($list['ministry_filter'] ?? '')) . '%';
+        }
+        $sql = 'SELECT id, email, full_name, ministry, active
+                FROM users
+                WHERE ' . implode(' AND ', $where) . '
+                ORDER BY id DESC
+                LIMIT ' . $limit;
+        $stmt = $this->globalDb()->prepare($sql);
+        $stmt->execute($params);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return is_array($rows) ? $rows : [];
+    }
+
+    public function getMailCampaigns($limit = 30)
+    {
+        if (!$this->hasTable('mail_campaigns')) {
+            return [];
+        }
+        $limit = max(5, min(100, (int) $limit));
+        $stmt = $this->globalDb()->query(
+            'SELECT c.id, c.name, c.template_id, c.list_id, c.subject_override, c.content_html, c.content_text, c.status, c.last_sent_at, c.created_at, c.updated_at,
+                    t.name AS template_name, l.name AS list_name
+             FROM mail_campaigns c
+             LEFT JOIN mail_templates t ON t.id = c.template_id
+             LEFT JOIN mailing_lists l ON l.id = c.list_id
+             ORDER BY c.updated_at DESC, c.id DESC
+             LIMIT ' . $limit
+        );
+        $rows = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
+        return is_array($rows) ? $rows : [];
+    }
+
+    public function getMailCampaignById($id)
+    {
+        if (!$this->hasTable('mail_campaigns')) {
+            return null;
+        }
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, name, template_id, list_id, subject_override, content_html, content_text, status, last_sent_at, created_at, updated_at
+             FROM mail_campaigns
+             WHERE id = :id
+             LIMIT 1'
+        );
+        $stmt->execute([':id' => (int) $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return is_array($row) ? $row : null;
+    }
+
+    public function saveMailCampaign($id, $name, $templateId, $listId, $subjectOverride = '', $contentHtml = '', $contentText = '')
+    {
+        if (!$this->hasTable('mail_campaigns')) {
+            throw new \RuntimeException('La tabla de campañas no existe.');
+        }
+
+        $id = (int) $id;
+        $name = trim((string) $name);
+        $templateId = (int) $templateId;
+        $listId = (int) $listId;
+        $subjectOverride = trim((string) $subjectOverride);
+        $contentHtml = trim((string) $contentHtml);
+        $contentText = trim((string) $contentText);
+
+        if ($name === '') {
+            throw new \InvalidArgumentException('El nombre de la campaña es obligatorio.');
+        }
+        if ($templateId < 1 || !$this->getMailTemplateById($templateId)) {
+            throw new \InvalidArgumentException('La plantilla de campaña es inválida.');
+        }
+        if ($listId < 1 || !$this->getMailingListById($listId)) {
+            throw new \InvalidArgumentException('La lista de envío es inválida.');
+        }
+
+        if ($id > 0) {
+            $stmt = $this->globalDb()->prepare(
+                'UPDATE mail_campaigns
+                 SET name = :name,
+                     template_id = :template_id,
+                     list_id = :list_id,
+                     subject_override = :subject_override,
+                     content_html = :content_html,
+                     content_text = :content_text,
+                     updated_at = CURRENT_TIMESTAMP
+                 WHERE id = :id'
+            );
+            $stmt->execute([
+                ':id' => $id,
+                ':name' => $name,
+                ':template_id' => $templateId,
+                ':list_id' => $listId,
+                ':subject_override' => $subjectOverride,
+                ':content_html' => $contentHtml,
+                ':content_text' => $contentText,
+            ]);
+            return $id;
+        }
+
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO mail_campaigns
+             (name, template_id, list_id, subject_override, content_html, content_text, status, created_at, updated_at)
+             VALUES
+             (:name, :template_id, :list_id, :subject_override, :content_html, :content_text, \'draft\', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':name' => $name,
+            ':template_id' => $templateId,
+            ':list_id' => $listId,
+            ':subject_override' => $subjectOverride,
+            ':content_html' => $contentHtml,
+            ':content_text' => $contentText,
+        ]);
+        return (int) $this->globalDb()->lastInsertId();
+    }
+
+    public function markMailCampaignSent($id, $status = 'sent')
+    {
+        if (!$this->hasTable('mail_campaigns')) {
+            return false;
+        }
+        $stmt = $this->globalDb()->prepare(
+            'UPDATE mail_campaigns
+             SET status = :status,
+                 last_sent_at = CURRENT_TIMESTAMP,
+                 updated_at = CURRENT_TIMESTAMP
+             WHERE id = :id'
+        );
+        $stmt->execute([
+            ':id' => (int) $id,
+            ':status' => trim((string) $status),
+        ]);
+        return $stmt->rowCount() > 0;
+    }
+
+    public function logMailCampaignDelivery($campaignId, $userId, $email, $outcome, $errorMessage = '')
+    {
+        if (!$this->hasTable('mail_campaign_logs')) {
+            return 0;
+        }
+        $stmt = $this->globalDb()->prepare(
+            'INSERT INTO mail_campaign_logs
+             (campaign_id, user_id, email, outcome, error_message, sent_at)
+             VALUES
+             (:campaign_id, :user_id, :email, :outcome, :error_message, CURRENT_TIMESTAMP)'
+        );
+        $stmt->execute([
+            ':campaign_id' => (int) $campaignId,
+            ':user_id' => (int) $userId,
+            ':email' => trim((string) $email),
+            ':outcome' => trim((string) $outcome),
+            ':error_message' => trim((string) $errorMessage),
+        ]);
+        return (int) $this->globalDb()->lastInsertId();
+    }
+
+    public function getMailCampaignLogs($campaignId, $limit = 60)
+    {
+        if (!$this->hasTable('mail_campaign_logs')) {
+            return [];
+        }
+        $limit = max(5, min(200, (int) $limit));
+        $stmt = $this->globalDb()->prepare(
+            'SELECT id, campaign_id, user_id, email, outcome, error_message, sent_at
+             FROM mail_campaign_logs
+             WHERE campaign_id = :campaign_id
+             ORDER BY id DESC
+             LIMIT ' . $limit
+        );
+        $stmt->execute([':campaign_id' => (int) $campaignId]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return is_array($rows) ? $rows : [];
+    }
+
     private function studyProjectExists($projectId)
     {
         $projectId = (int) $projectId;
@@ -2591,6 +3139,45 @@ class UserDataRepository
             return strtolower($color);
         }
         return '#1d6a8f';
+    }
+
+    private function normalizeTemplateKey($value)
+    {
+        $value = strtolower(trim((string) $value));
+        if ($value === '') {
+            return '';
+        }
+        $value = preg_replace('/[^a-z0-9_\-]/', '_', $value);
+        $value = preg_replace('/_+/', '_', (string) $value);
+        return trim((string) $value, '_');
+    }
+
+    private function normalizeMailingListType($value)
+    {
+        $value = strtolower(trim((string) $value));
+        if ($value === 'ministry' || $value === 'manual') {
+            return $value;
+        }
+        return 'all_active';
+    }
+
+    private function normalizeManualEmails($value)
+    {
+        $tokens = preg_split('/[\s,;\r\n]+/', trim((string) $value));
+        if (!is_array($tokens)) {
+            return '';
+        }
+
+        $emails = [];
+        foreach ($tokens as $token) {
+            $email = trim((string) $token);
+            if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                continue;
+            }
+            $emails[strtolower($email)] = $email;
+        }
+
+        return implode("\n", array_values($emails));
     }
 
     private function resolveFavoriteFolderId($folderId)
