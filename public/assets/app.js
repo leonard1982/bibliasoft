@@ -55,6 +55,7 @@
         versionPrimaryFile: '',
         versionCompareFile: '',
         versionCompareFiles: [],
+        commentarySourceKey: '',
         strongCache: {},
         generatedByMode: {},
         latestDevotionalExport: null,
@@ -1554,32 +1555,97 @@
     }
 
     function renderCommentsPanel(commentary) {
-        var cards = [];
-        (commentary.book || []).forEach(function (row) {
-            cards.push('<div class="card"><strong>Comentario de libro</strong>' +
-                (row.title ? '<small class="muted">' + escapeHtml(row.title) + '</small>' : '') +
-                renderSourceTag(row) +
-                '<div>' + (row.html || '') + '</div></div>');
-        });
-        (commentary.chapter || []).forEach(function (row) {
-            cards.push('<div class="card"><strong>Comentario de capítulo</strong>' +
-                (row.title ? '<small class="muted">' + escapeHtml(row.title) + '</small>' : '') +
-                renderSourceTag(row) +
-                '<div>' + (row.html || '') + '</div></div>');
-        });
-        (commentary.verse || []).forEach(function (row) {
-            cards.push(
-                '<div class="card"><strong>Rango ' +
-                row.chapter_begin + ':' + row.verse_begin + ' - ' + row.chapter_end + ':' + row.verse_end +
-                '</strong>' +
-                (row.title ? '<small class="muted">' + escapeHtml(row.title) + '</small>' : '') +
-                renderSourceTag(row) + '<div>' + (row.html || '') + '</div></div>'
-            );
-        });
-        if (!cards.length) {
-            cards.push('<p class="muted">Sin comentarios para esta selección.</p>');
+        if (!els.commentsPanel) {
+            return;
         }
-        els.commentsPanel.innerHTML = cards.join('');
+
+        var rows = collectCommentaryRows(commentary);
+        if (!rows.length) {
+            els.commentsPanel.innerHTML = '<p class="muted">Sin comentarios para esta selección.</p>';
+            return;
+        }
+
+        var grouped = groupCommentaryRowsBySource(rows);
+        var sourceKeys = Object.keys(grouped);
+        var selectedKey = normalizeCommentarySourceKey(state.commentarySourceKey || '');
+        if (!selectedKey || !grouped[selectedKey]) {
+            selectedKey = sourceKeys[0];
+            state.commentarySourceKey = selectedKey;
+        }
+
+        var sourceRows = grouped[selectedKey] || [];
+        var selectorHtml = '';
+        if (sourceKeys.length > 1) {
+            selectorHtml = '' +
+                '<label class="commentary-source-picker">Comentario' +
+                '<select id="commentarySourceSelect">' +
+                sourceKeys.map(function (key) {
+                    var meta = grouped[key] && grouped[key][0] ? grouped[key][0] : null;
+                    var label = meta ? String(meta.source_label || 'Comentario') : 'Comentario';
+                    var count = Array.isArray(grouped[key]) ? grouped[key].length : 0;
+                    return '<option value="' + escapeHtml(key) + '"' + (key === selectedKey ? ' selected' : '') + '>' +
+                        escapeHtml(label + ' (' + count + ')') +
+                        '</option>';
+                }).join('') +
+                '</select>' +
+                '</label>';
+        }
+
+        var cards = sourceRows.map(function (row) {
+            var title = escapeHtml(row.title || commentaryRangeTitle(row));
+            var excerpt = trimCommentaryExcerpt(cleanText(row.html || ''), 1400);
+            return '' +
+                '<article class="card commentary-card">' +
+                '<strong>' + title + '</strong>' +
+                renderSourceTag(row) +
+                '<div>' + (row.html || '') + '</div>' +
+                '<div class="toolbar module-actions">' +
+                '<button class="btn-light js-save-commentary-project" type="button" ' +
+                'data-book="' + Number(state.currentBook || 0) + '" ' +
+                'data-chapter="' + Number(state.currentChapter || 0) + '" ' +
+                'data-verse-start="' + Number(commentaryRowVerseStart(row) || 0) + '" ' +
+                'data-verse-end="' + Number(commentaryRowVerseEnd(row) || 0) + '" ' +
+                'data-reference="' + escapeHtml(toReference(Number(state.currentBook || 0), Number(state.currentChapter || 0), Number(commentaryRowVerseStart(row) || 0), Number(commentaryRowVerseEnd(row) || 0))) + '" ' +
+                'data-source="' + escapeHtml(String(row.source_label || 'Comentario bíblico')) + '" ' +
+                'data-note="' + escapeHtml((row.title ? row.title + '\n\n' : '') + excerpt) + '" ' +
+                'data-commentary-excerpt="' + escapeHtml(excerpt) + '"' +
+                '>Agregar a proyecto</button>' +
+                '</div>' +
+                '</article>';
+        });
+
+        els.commentsPanel.innerHTML = selectorHtml + cards.join('');
+
+        var sourceSelect = document.getElementById('commentarySourceSelect');
+        if (sourceSelect) {
+            sourceSelect.addEventListener('change', function () {
+                state.commentarySourceKey = normalizeCommentarySourceKey(String(this.value || ''));
+                renderCommentsPanel(commentary);
+            });
+        }
+
+        els.commentsPanel.querySelectorAll('.js-save-commentary-project').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var book = Number(this.getAttribute('data-book') || 0);
+                var chapter = Number(this.getAttribute('data-chapter') || 0);
+                var verseStart = Number(this.getAttribute('data-verse-start') || 0);
+                var verseEnd = Number(this.getAttribute('data-verse-end') || verseStart || 0);
+                if (book < 1 || chapter < 1 || verseStart < 1 || verseEnd < 1) {
+                    notify('No se pudo resolver la referencia del comentario.');
+                    return;
+                }
+                openProjectSaveModal({
+                    book: book,
+                    chapter: chapter,
+                    verseStart: verseStart,
+                    verseEnd: verseEnd,
+                    reference: String(this.getAttribute('data-reference') || ''),
+                    source: String(this.getAttribute('data-source') || 'Comentario bíblico'),
+                    note: String(this.getAttribute('data-note') || ''),
+                    commentaryExcerpt: String(this.getAttribute('data-commentary-excerpt') || '')
+                });
+            });
+        });
     }
 
     function renderSourceTag(row) {
@@ -1587,6 +1653,77 @@
             return '';
         }
         return '<small class="muted">Fuente: ' + escapeHtml(row.source_label) + '</small>';
+    }
+
+    function collectCommentaryRows(commentary) {
+        var rows = [];
+        (commentary.book || []).forEach(function (row) {
+            rows.push(Object.assign({ commentary_scope: 'book' }, row || {}));
+        });
+        (commentary.chapter || []).forEach(function (row) {
+            rows.push(Object.assign({ commentary_scope: 'chapter' }, row || {}));
+        });
+        (commentary.verse || []).forEach(function (row) {
+            rows.push(Object.assign({ commentary_scope: 'verse' }, row || {}));
+        });
+        return rows;
+    }
+
+    function groupCommentaryRowsBySource(rows) {
+        var map = {};
+        (Array.isArray(rows) ? rows : []).forEach(function (row) {
+            var key = normalizeCommentarySourceKey(String((row && row.source_label) || 'Comentario'));
+            if (!map[key]) {
+                map[key] = [];
+            }
+            map[key].push(row);
+        });
+        return map;
+    }
+
+    function normalizeCommentarySourceKey(value) {
+        return String(value || '').trim().toLowerCase();
+    }
+
+    function commentaryRangeTitle(row) {
+        var scope = String((row && row.commentary_scope) || '').trim().toLowerCase();
+        if (scope === 'book') {
+            return 'Comentario de libro';
+        }
+        if (scope === 'chapter') {
+            return 'Comentario de capítulo';
+        }
+        return 'Pasaje ' +
+            Number(row && row.chapter_begin || state.currentChapter || 0) + ':' + Number(row && row.verse_begin || 0) +
+            ' - ' +
+            Number(row && row.chapter_end || state.currentChapter || 0) + ':' + Number(row && row.verse_end || 0);
+    }
+
+    function commentaryRowVerseStart(row) {
+        var scope = String((row && row.commentary_scope) || '').trim().toLowerCase();
+        if (scope === 'book' || scope === 'chapter') {
+            var range = selectedRange();
+            return Number(range.start || 0);
+        }
+        return Number((row && row.verse_begin) || 0);
+    }
+
+    function commentaryRowVerseEnd(row) {
+        var scope = String((row && row.commentary_scope) || '').trim().toLowerCase();
+        if (scope === 'book' || scope === 'chapter') {
+            var range = selectedRange();
+            return Number(range.end || 0);
+        }
+        return Number((row && row.verse_end) || (row && row.verse_begin) || 0);
+    }
+
+    function trimCommentaryExcerpt(value, maxLen) {
+        var text = String(value || '').trim();
+        var limit = Math.max(120, Number(maxLen || 1200));
+        if (!text || text.length <= limit) {
+            return text;
+        }
+        return text.slice(0, limit - 1).trim() + '…';
     }
 
     function renderNotesPanel(payload) {
