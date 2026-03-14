@@ -60,12 +60,13 @@ class SchemaManager
         } else {
             $folderColumns = self::columns($pdo, 'favorite_folders');
             if (!isset($folderColumns['created_at'])) {
-                $pdo->exec("ALTER TABLE favorite_folders ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE favorite_folders ADD COLUMN created_at TEXT");
             }
             if (!isset($folderColumns['updated_at'])) {
-                $pdo->exec("ALTER TABLE favorite_folders ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE favorite_folders ADD COLUMN updated_at TEXT");
             }
         }
+        $pdo->exec("UPDATE favorite_folders SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP), updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
 
         $seedDefaultFolder = $pdo->prepare(
             'INSERT OR IGNORE INTO favorite_folders (id, name, created_at, updated_at)
@@ -100,11 +101,12 @@ class SchemaManager
                 $pdo->exec('ALTER TABLE favorites ADD COLUMN folder_id INTEGER NOT NULL DEFAULT 1');
             }
             if (!isset($favoriteColumns['created_at'])) {
-                $pdo->exec("ALTER TABLE favorites ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE favorites ADD COLUMN created_at TEXT");
             }
         }
 
         $pdo->exec('UPDATE favorites SET folder_id = COALESCE(NULLIF(folder_id, 0), 1)');
+        $pdo->exec("UPDATE favorites SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_favorites_folder ON favorites (folder_id, book, chapter, verse)');
     }
 
@@ -233,7 +235,7 @@ class SchemaManager
             $pdo->exec('ALTER TABLE users ADD COLUMN active INTEGER NOT NULL DEFAULT 1');
         }
         if (!isset($columns['updated_at'])) {
-            $pdo->exec("ALTER TABLE users ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE users ADD COLUMN updated_at TEXT");
         }
         if (!isset($columns['last_login_at'])) {
             $pdo->exec('ALTER TABLE users ADD COLUMN last_login_at TEXT');
@@ -267,8 +269,9 @@ class SchemaManager
             $pdo->exec("ALTER TABLE daily_cache ADD COLUMN image_path TEXT DEFAULT ''");
         }
         if (!isset($columns['created_at'])) {
-            $pdo->exec("ALTER TABLE daily_cache ADD COLUMN created_at TEXT DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE daily_cache ADD COLUMN created_at TEXT");
         }
+        $pdo->exec("UPDATE daily_cache SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP)");
     }
 
     private static function migrateDevotionals(\PDO $pdo)
@@ -293,8 +296,9 @@ class SchemaManager
             $pdo->exec('UPDATE devotionals SET content_json = content WHERE content_json IS NULL');
         }
         if (!isset($columns['created_at'])) {
-            $pdo->exec("ALTER TABLE devotionals ADD COLUMN created_at TEXT DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE devotionals ADD COLUMN created_at TEXT");
         }
+        $pdo->exec("UPDATE devotionals SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_devotionals_date ON devotionals(date)');
     }
 
@@ -335,9 +339,10 @@ class SchemaManager
             $pdo->exec("ALTER TABLE user_prefs ADD COLUMN theme TEXT NOT NULL DEFAULT 'light'");
         }
         if (!isset($columns['updated_at'])) {
-            $pdo->exec("ALTER TABLE user_prefs ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE user_prefs ADD COLUMN updated_at TEXT");
         }
 
+        $pdo->exec("UPDATE user_prefs SET updated_at = COALESCE(updated_at, CURRENT_TIMESTAMP)");
         $pdo->exec("INSERT OR IGNORE INTO user_prefs (id, font_scale, show_daily, auto_devotional, weekly_goal_days, reminder_enabled, reminder_time, theme, updated_at) VALUES (1, 100, 1, 0, 5, 0, '07:00', 'light', CURRENT_TIMESTAMP)");
     }
 
@@ -363,12 +368,13 @@ class SchemaManager
             $pdo->exec("ALTER TABLE highlights ADD COLUMN color TEXT NOT NULL DEFAULT 'yellow'");
         }
         if (!isset($columns['created_at'])) {
-            $pdo->exec("ALTER TABLE highlights ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE highlights ADD COLUMN created_at TEXT");
         }
         if (!isset($columns['updated_at'])) {
-            $pdo->exec("ALTER TABLE highlights ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE highlights ADD COLUMN updated_at TEXT");
         }
         $pdo->exec("UPDATE highlights SET color = COALESCE(NULLIF(color, ''), 'yellow')");
+        $pdo->exec("UPDATE highlights SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP), updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_highlights_ref ON highlights(book, chapter, verse)');
     }
 
@@ -384,9 +390,10 @@ class SchemaManager
         } else {
             $historyColumns = self::columns($pdo, 'history');
             if (!isset($historyColumns['visited_at'])) {
-                $pdo->exec("ALTER TABLE history ADD COLUMN visited_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE history ADD COLUMN visited_at TEXT");
             }
         }
+        $pdo->exec("UPDATE history SET visited_at = COALESCE(visited_at, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_history_recent ON history (id DESC)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_history_ref ON history (book, chapter, visited_at)');
 
@@ -407,10 +414,11 @@ class SchemaManager
                 $pdo->exec('ALTER TABLE passage_history ADD COLUMN hits INTEGER NOT NULL DEFAULT 1');
             }
             if (!isset($passageColumns['last_viewed'])) {
-                $pdo->exec("ALTER TABLE passage_history ADD COLUMN last_viewed TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE passage_history ADD COLUMN last_viewed TEXT");
             }
         }
         $pdo->exec('UPDATE passage_history SET hits = CASE WHEN hits < 1 THEN 1 ELSE hits END');
+        $pdo->exec("UPDATE passage_history SET last_viewed = COALESCE(last_viewed, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_passage_history_hits ON passage_history (hits DESC, last_viewed DESC)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_passage_history_recent ON passage_history (last_viewed DESC)');
     }
@@ -450,14 +458,15 @@ class SchemaManager
                 $pdo->exec('ALTER TABLE content_modules ADD COLUMN enabled INTEGER NOT NULL DEFAULT 1');
             }
             if (!isset($columns['installed_at'])) {
-                $pdo->exec("ALTER TABLE content_modules ADD COLUMN installed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE content_modules ADD COLUMN installed_at TEXT");
             }
             if (!isset($columns['updated_at'])) {
-                $pdo->exec("ALTER TABLE content_modules ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE content_modules ADD COLUMN updated_at TEXT");
             }
         }
 
         $pdo->exec('UPDATE content_modules SET enabled = CASE WHEN enabled = 0 THEN 0 ELSE 1 END');
+        $pdo->exec("UPDATE content_modules SET installed_at = COALESCE(installed_at, CURRENT_TIMESTAMP), updated_at = COALESCE(updated_at, installed_at, CURRENT_TIMESTAMP)");
         $pdo->exec("UPDATE content_modules
             SET type = CASE
                 WHEN LOWER(type) = 'dictionary' THEN 'dictionary'
@@ -488,13 +497,14 @@ class SchemaManager
                 $pdo->exec("ALTER TABLE study_projects ADD COLUMN color TEXT NOT NULL DEFAULT '#1d6a8f'");
             }
             if (!isset($columns['created_at'])) {
-                $pdo->exec("ALTER TABLE study_projects ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE study_projects ADD COLUMN created_at TEXT");
             }
             if (!isset($columns['updated_at'])) {
-                $pdo->exec("ALTER TABLE study_projects ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE study_projects ADD COLUMN updated_at TEXT");
             }
         }
         $pdo->exec("UPDATE study_projects SET color = CASE WHEN color IS NULL OR TRIM(color) = '' THEN '#1d6a8f' ELSE color END");
+        $pdo->exec("UPDATE study_projects SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP), updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_study_projects_name ON study_projects(name)');
 
         if (!self::tableExists($pdo, 'study_project_entries')) {
@@ -524,13 +534,14 @@ class SchemaManager
                 $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN commentary_excerpt TEXT NOT NULL DEFAULT ''");
             }
             if (!isset($entryColumns['created_at'])) {
-                $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN created_at TEXT");
             }
             if (!isset($entryColumns['updated_at'])) {
-                $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE study_project_entries ADD COLUMN updated_at TEXT");
             }
         }
 
+        $pdo->exec("UPDATE study_project_entries SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP), updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_study_entries_project ON study_project_entries(project_id, updated_at DESC, id DESC)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_study_entries_ref ON study_project_entries(book, chapter, verse_start, verse_end)');
     }
@@ -563,11 +574,12 @@ class SchemaManager
             $pdo->exec('ALTER TABLE reading_plans ADD COLUMN active INTEGER NOT NULL DEFAULT 1');
         }
         if (!isset($planColumns['created_at'])) {
-            $pdo->exec("ALTER TABLE reading_plans ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE reading_plans ADD COLUMN created_at TEXT");
         }
         if (!isset($planColumns['updated_at'])) {
-            $pdo->exec("ALTER TABLE reading_plans ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE reading_plans ADD COLUMN updated_at TEXT");
         }
+        $pdo->exec("UPDATE reading_plans SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP), updated_at = COALESCE(updated_at, created_at, CURRENT_TIMESTAMP)");
 
         if (!self::tableExists($pdo, 'reading_plan_progress')) {
             $pdo->exec('CREATE TABLE IF NOT EXISTS reading_plan_progress (
@@ -593,8 +605,9 @@ class SchemaManager
             $pdo->exec('ALTER TABLE reading_plan_progress ADD COLUMN chapter INTEGER NOT NULL DEFAULT 1');
         }
         if (!isset($progressColumns['completed_at'])) {
-            $pdo->exec("ALTER TABLE reading_plan_progress ADD COLUMN completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE reading_plan_progress ADD COLUMN completed_at TEXT");
         }
+        $pdo->exec("UPDATE reading_plan_progress SET completed_at = COALESCE(completed_at, CURRENT_TIMESTAMP)");
 
         if (!self::tableExists($pdo, 'reading_plan_chapter_progress')) {
             $pdo->exec('CREATE TABLE IF NOT EXISTS reading_plan_chapter_progress (
@@ -620,8 +633,9 @@ class SchemaManager
             $pdo->exec('ALTER TABLE reading_plan_chapter_progress ADD COLUMN chapter INTEGER NOT NULL DEFAULT 1');
         }
         if (!isset($chapterProgressColumns['completed_at'])) {
-            $pdo->exec("ALTER TABLE reading_plan_chapter_progress ADD COLUMN completed_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE reading_plan_chapter_progress ADD COLUMN completed_at TEXT");
         }
+        $pdo->exec("UPDATE reading_plan_chapter_progress SET completed_at = COALESCE(completed_at, CURRENT_TIMESTAMP)");
 
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_plans_active ON reading_plans(active, updated_at)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_progress_plan ON reading_plan_progress(plan_id, day_index)');
@@ -643,10 +657,11 @@ class SchemaManager
                 $pdo->exec('ALTER TABLE reading_sessions ADD COLUMN seconds INTEGER NOT NULL DEFAULT 0');
             }
             if (!isset($columns['updated_at'])) {
-                $pdo->exec("ALTER TABLE reading_sessions ADD COLUMN updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE reading_sessions ADD COLUMN updated_at TEXT");
             }
         }
         $pdo->exec('UPDATE reading_sessions SET seconds = CASE WHEN seconds < 0 THEN 0 ELSE seconds END');
+        $pdo->exec("UPDATE reading_sessions SET updated_at = COALESCE(updated_at, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_reading_sessions_date ON reading_sessions(date DESC)');
 
         if (!self::tableExists($pdo, 'theme_study_log')) {
@@ -664,10 +679,11 @@ class SchemaManager
                 $pdo->exec('ALTER TABLE theme_study_log ADD COLUMN hits INTEGER NOT NULL DEFAULT 1');
             }
             if (!isset($columns['last_studied'])) {
-                $pdo->exec("ALTER TABLE theme_study_log ADD COLUMN last_studied TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+                $pdo->exec("ALTER TABLE theme_study_log ADD COLUMN last_studied TEXT");
             }
         }
         $pdo->exec('UPDATE theme_study_log SET hits = CASE WHEN hits < 1 THEN 1 ELSE hits END');
+        $pdo->exec("UPDATE theme_study_log SET last_studied = COALESCE(last_studied, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_theme_study_hits ON theme_study_log(hits DESC, last_studied DESC)');
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_theme_study_date ON theme_study_log(date DESC)');
     }
@@ -700,8 +716,9 @@ class SchemaManager
             $pdo->exec("ALTER TABLE anecdotes ADD COLUMN source TEXT NOT NULL DEFAULT 'seed'");
         }
         if (!isset($columns['created_at'])) {
-            $pdo->exec("ALTER TABLE anecdotes ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP");
+            $pdo->exec("ALTER TABLE anecdotes ADD COLUMN created_at TEXT");
         }
+        $pdo->exec("UPDATE anecdotes SET created_at = COALESCE(created_at, CURRENT_TIMESTAMP)");
         $pdo->exec('CREATE INDEX IF NOT EXISTS idx_anecdotes_topic ON anecdotes(topic)');
     }
 
