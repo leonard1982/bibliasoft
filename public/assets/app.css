@@ -6512,12 +6512,25 @@ body.spacing-normal .verse {
 .companion-bubble {
     max-width: min(760px, 92%);
     display: grid;
-    gap: .35rem;
-    padding: .9rem 1rem;
+    gap: .18rem;
+    padding: .82rem .92rem;
     border-radius: 20px;
     border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
     background: color-mix(in srgb, var(--panel) 96%, var(--bg) 4%);
     box-shadow: 0 10px 24px rgba(8, 24, 37, .08);
+}
+
+.companion-bubble > strong {
+    font-size: .76rem;
+    line-height: 1.1;
+    color: color-mix(in srgb, var(--muted) 78%, var(--ink) 22%);
+}
+
+.companion-bubble > small {
+    font-size: .67rem;
+    line-height: 1.1;
+    color: color-mix(in srgb, var(--muted) 92%, transparent);
+    opacity: .9;
 }
 
 .companion-bubble-user {
@@ -6530,7 +6543,7 @@ body.spacing-normal .verse {
 }
 
 .companion-bubble-body {
-    line-height: 1.7;
+    line-height: 1.55;
     color: color-mix(in srgb, var(--ink) 90%, var(--muted) 10%);
 }
 
@@ -6542,7 +6555,7 @@ body.spacing-normal .verse {
 }
 
 .companion-bubble-body p {
-    margin: 0 0 .6rem;
+    margin: 0 0 .38rem;
 }
 
 .companion-bubble-body p:last-child {
