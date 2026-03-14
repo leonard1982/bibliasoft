@@ -2,15 +2,18 @@
 
 namespace App\Controllers;
 
+use App\Services\MailService;
 use App\Services\UserDataRepository;
 
 class AuthController
 {
     private $users;
+    private $mail;
 
-    public function __construct(UserDataRepository $users)
+    public function __construct(UserDataRepository $users, MailService $mail)
     {
         $this->users = $users;
+        $this->mail = $mail;
     }
 
     public function loginForm()
@@ -74,6 +77,14 @@ class AuthController
             $id = $this->users->createUser($email, $password, $fullName, $ministry, true);
         } catch (\Throwable $e) {
             app_redirect('?route=register&error=' . urlencode($e->getMessage()));
+        }
+
+        if ($this->mail->enabled()) {
+            try {
+                $this->mail->sendWelcomeEmail($email, $fullName, $ministry);
+            } catch (\Throwable $e) {
+                error_log('BIBLIASOFT mail error: ' . $e->getMessage());
+            }
         }
 
         $_SESSION['user_id'] = (int) $id;

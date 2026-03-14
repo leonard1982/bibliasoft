@@ -60,6 +60,11 @@ Base recomendada:
 APP_ENV=production
 APP_TZ=America/Bogota
 APP_PUBLIC_URL=https://tu-dominio.com/
+APP_BRAND_NAME=Biblia para todos
+APP_BRAND_SHORT=BIBLIASOFT
+APP_BRAND_SLOGAN=Biblia para todos
+APP_BRAND_CHURCH=Fundación La Iglesia en la Calle
+APP_BRAND_WEBSITE=https://www.laiglesiaenlacalle.co
 AI_ENABLED=0
 OPENAI_MODEL=gpt-4.1-mini
 OPENAI_API_KEY=
@@ -69,7 +74,7 @@ MAIL_HOST=
 MAIL_PORT=587
 MAIL_ENCRYPTION=tls
 MAIL_FROM_EMAIL=
-MAIL_FROM_NAME="Biblia para todos"
+MAIL_FROM_NAME="BIBLIASOFT"
 MAIL_USERNAME=
 MAIL_PASSWORD=
 ```
@@ -82,6 +87,7 @@ Si usarás IA:
 
 Si usarás correo SMTP:
 - completa `MAIL_HOST`, `MAIL_USERNAME`, `MAIL_PASSWORD` y remitente
+- si quieres correo de bienvenida al registrarse, deja `MAIL_ENABLED=1`
 
 ## 4. Preparar permisos
 El proyecto escribe en:

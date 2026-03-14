@@ -21,6 +21,7 @@ use App\Services\DocumentExportService;
 use App\Services\GenerationService;
 use App\Services\HtmlSanitizer;
 use App\Services\ImageCardService;
+use App\Services\MailService;
 use App\Services\ModuleCatalogService;
 use App\Services\ReadingPlanService;
 use App\Services\SearchService;
@@ -89,6 +90,7 @@ $searchService = new SearchService($bibleRepository, $userDataRepository, $sanit
 $aiService = new AIService(config('ai', []), $userDataRepository);
 $readingPlanService = new ReadingPlanService($bibleRepository, $userDataRepository);
 $moduleCatalogService = new ModuleCatalogService($userDataRepository, $sanitizer);
+$mailService = new MailService(config('mail', []));
 $strongLexiconService = new StrongLexiconService(
     config('paths.lexicon'),
     config('app.base_path') . DIRECTORY_SEPARATOR . 'storage' . DIRECTORY_SEPARATOR . 'strong.sqlite'
@@ -121,7 +123,7 @@ $bibleController = new BibleController($bibleRepository, $searchService);
 $readerController = new ReaderController($bibleRepository, $imageCardService, $userDataRepository);
 $homeDailyController = new HomeDailyController($dailyVerseService, $imageCardService, $userDataRepository, $readingPlanService);
 $devotionalController = new DevotionalController($devotionalService, $imageCardService);
-$authController = new AuthController($userDataRepository);
+$authController = new AuthController($userDataRepository, $mailService);
 $shareController = new ShareController();
 $studyCenterController = new StudyCenterController($bibleRepository, $userDataRepository);
 $anecdoteController = new AnecdoteController($anecdoteService);
