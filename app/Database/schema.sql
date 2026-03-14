@@ -64,8 +64,6 @@ CREATE TABLE IF NOT EXISTS users (
     last_login_at TEXT
 );
 
-CREATE INDEX IF NOT EXISTS idx_users_active ON users (active, created_at);
-
 CREATE TABLE IF NOT EXISTS cloud_sync_backups (
     user_id INTEGER PRIMARY KEY,
     payload_json TEXT NOT NULL,
